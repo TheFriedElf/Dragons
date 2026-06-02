@@ -289,6 +289,16 @@
 					CloseUI("FRM_MYHOME_CHAT_COLOR")
 					CallUI("FRM_CHAT_COLOR")
 				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					local kChatColor = GetUIWnd("FRM_CHAT_COLOR")
+					if false == kChatColor:IsNil() then
+						local kPos = UISelf:GetTotalLocation()
+						local kSize = kChatColor:GetSize()
+						kPos:SetX(kPos:GetX() + UISelf:GetSize():GetX() + 4)
+						kPos:SetY(kPos:GetY() + UISelf:GetSize():GetY() - kSize:GetY() + 8)
+						kChatColor:SetLocation(kPos)
+					end
+				</SCRIPT>
 				<HOTKEY ID="1"> 
 					local kChatColor = GetUIWnd("FRM_CHAT_COLOR")
 					if kChatColor:IsNil() == false then
