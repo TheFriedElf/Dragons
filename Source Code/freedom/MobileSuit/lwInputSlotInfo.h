@@ -1,0 +1,13 @@
+#ifndef FREEDOM_DRAGONICA_SCRIPTING_WORLDOBEJCT_ACTOR_LWINPUTSLOTINFO_H
+#define FREEDOM_DRAGONICA_SCRIPTING_WORLDOBEJCT_ACTOR_LWINPUTSLOTINFO_H
+
+#include "PgScripting.h"
+
+LW_CLASS(PgInputSlotInfo, InputSlotInfo)
+	const	char*	GetActionID()const;
+	unsigned	int	GetUKey();
+	bool	IsRecord();
+	char const*	GetUserDataAsString()const;
+LW_CLASS_END;
+
+#endif // FREEDOM_DRAGONICA_SCRIPTING_WORLDOBEJCT_ACTOR_LWINPUTSLOTINFO_H

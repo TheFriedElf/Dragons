@@ -1,0 +1,8 @@
+<ACTION ID="a_gold_rush" NEXT="a_trace_ground2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="idle_01" LOOP="TRUE"/>
+  <SLOT NAME="dash_01"/>
+  <FSM SCRIPT="Act_Pet_Melee_Default" 
+       FIRE_CASTER_EFFECT_ID="ef_Pet_dash_01_p_ef_attk_02"
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_ef_dash_01"
+       DETACH_FIRE_EFFECT_AT_FINISH="TRUE"/>
+</ACTION>

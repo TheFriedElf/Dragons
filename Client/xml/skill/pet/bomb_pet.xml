@@ -1,0 +1,18 @@
+<ACTION ID="a_bomb_pet" NEXT="a_trace_ground2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE" USE_CFUNC="TRUE">
+  <SLOT NAME="idle_01" LOOP="TRUE"/>
+  <!--SLOT NAME="btlidle_01_shot_start"/-->
+  <SLOT NAME="shot_01"/>
+  <FSM SCRIPT="CommonSkillAction"
+       USE_PROJECTILE="TRUE"
+
+	   	WHEN_START_DIRECTION="TARGET"
+		PRE_FIND_TARGET_RANGE="140"
+		
+		FIRE_PROJECTILE_ID_1 = "Projectile_WildBomb_shot_01"
+		FIRE_PROJECTILE_START_NODE_POS_1 = "p_ef_fire"
+		FIRE_PROJECTILE_ARRIVE_POS_TYPE_1 = "0"
+		FIRE_PROJECTILE_MOVE_TYPE_1="0"
+		
+	/>
+</ACTION>
+

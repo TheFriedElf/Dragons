@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4123</ID> <!--T.T.10412301 화암산호족의 제사장 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	광부 터너와 대화-->
+<!--[완료NPC]	악마의 숨결 - 터너-->
+<!--[내용]	사라진 상인들이 구조신호를 보냈을 것이라 추리한 제이드는 화암산호족의 거처를 찾기로 결심한다. 광부 터너에게 화암산호족의 본거지에 대한 정보를 물어보자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</CLIENT> <!--시작NPC 악마의 숨결 - 제이드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2c58cea2-c807-4491-ad32-d6e26d65fca4</PAYER> <!--완료NPC 악마의 숨결 - 터너 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 11 악마의 숨결 - 제이드 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2c58cea2-c807-4491-ad32-d6e26d65fca4</AGENT> <!--진행NPC 12 악마의 숨결 - 터너 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10412311"/> <!--터너와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10412321" FACE="Walter_normal"/> <!--이거… 정말 두다리가 후덜거리는군…
+이건 틀림 없이 실종된 상인들이 보내는 메시지야.%%
+그렇다면... 이 횃불자루를 훔쳐간 스켈레톤 엉클은 
+사라진 상인들이 있는 곳에 간적이 있다는 것인데…%%
+갇혀있는 걸까? 그런 거겠지?%%
+내 생각엔 틀림 없이 이 일은 스켈레톤을 다루는 
+화암산호 부족과 관련이 있어.  그 골치 아픈 붐붐 
+녀석들 말이다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10412326" FACE="tourneur_smile"/> <!--뭐요? 화암산호족의 본거지라구요?
+흠... 안됩니다. 안되구 말구요.%%
+화암산호족은 보기엔 멍청하고 둔해보이지만,
+오랜 세월 동안 주술을 익혀왔던 부족이에요.%%
+화암산호족의 제사장은 마력도 강한데다가,
+일전에 말했던 것처럼 왠일인지 최근에는 붐붐들의 
+눈빛도 예전 같지 않습니다.%%
+그래도 반드시 가야한다면 어쩔 수 없지요. 
+바로 이곳 악마의 숨결 부근에 그들의 본거지로 갈 수 있는
+장소가 있습니다. %%
+그곳을 통과하면 화암산호 부족의 족장인 로커를 
+만날 수 있을 겁니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10412323" FACE="Walter_normal"/> <!--이 부근 어딘가에 분명히 녀석들의 거처가 있을테니까… 
+흩어져서 찾아봐…%% 
+흠.. 솔직히 말하지만… 난 몸 쓰는 건 자신이 없어. 
+그러니까 일단 니가 이 근방에서 화암산호족에 대한
+정보를 캐와야 할 듯 싶다.%% 
+니가 날 호위해준다면 아주 좋았을 타이밍인데... 
+자존심이 허락칠 않는구나. 헤헤헤~%%
+어쨌거나 여기 있는 이 터너씨가 우리 중에는 가장
+이 부근의 지리에 대해 잘 알고 있는 사람이니까,%%
+일단 화암산호족의 거처에 대해 물어보는 것이 좋지
+않을까 싶다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10412324" FACE="Walter_angly"/> <!--뭐야, 아직 제대로 된 의견도 안 꺼냈는데, 무조건 부정적으로 보는 거냐?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10412325" FACE="Walter_angly"/> <!--빨리 터너씨에게 물어봐. 솔직히 지금은 일찍 퇴근하고 싶은 심정 뿐이니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10412302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

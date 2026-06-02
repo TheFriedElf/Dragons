@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="SFRM_OTHER_CharInfo2" X="233" Y="91" W="296" H="509" CAN_DRAG="1" STATIC_NUM="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+			DeleteMyActor(UISelf, "CHAROTHERINFO")
+			CloseUI("SFRM_CHARINFO_POPUP")
+		</SCRIPT>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="294" H="36" Z="-1" STATIC_NUM="4">
+			<STATIC_FORM ID="CBTN_TAB_CHAR" X="7" Y="4" W="84" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG X="266" Y="6" W="20" H="20" Z="-1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="20" IMG_H="20" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE" X="264" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_OTHER_CharInfo")</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<FORM ID="FRM_BG" X="0" Y="0" W="296" H="485" Z="-2">
+			<FORM ID="FRM_UIMODEL" X="60" Y="100" W="176" H="192">
+				<SCRIPT ID="ON_CREATE">
+					InitMyActorView(UISelf, "CHAROTHERINFO", true)
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK"> DrawMyActorView(UISelf, "CHAROTHERINFO") </SCRIPT>
+				<SCRIPT ID="ON_DISPLAY"> AddToDrawListMyActorView(UISelf, "CHAROTHERINFO") </SCRIPT>
+			</FORM>
+			<SCRIPT ID="ON_CALL">EquipUIIconDefaultInitialize(UISelf)</SCRIPT>
+			<FORM ID="FRM_CHAR_BG" X="56" Y="35" W="186" H="262" Z="-1" IMG="../Data/6_ui/info/infoChaBg.tga" IMG_W="186" IMG_H="262"/>
+			<FORM ID="FRM_INFO1_BG" X="88" Y="42" W="56" H="18" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="56" IMG_H="18" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<FORM ID="FRM_INFO2_BG" X="150" Y="42" W="56" H="18" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="56" IMG_H="18" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<STATIC_FORM ID="FRM_POINT_BG" X="9" Y="344" W="277" H="129" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="FRM_POINT_BG_SD" X="9" Y="344" W="277" H="129" STATIC_NUM="3"/>
+			<BUILD ID="BLD_ICON_BG" X="10" Y="35" TARGET_ID="FRM_ICON_BG" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+			<FORM ID="FRM_ICON_BG" X="0" Y="0" W="42" H="42" IMG="../Data/6_ui/info/ifIconBg.tga" IMG_W="42" IMG_H="42"/>
+			<FORM ID="FRM_ICON_BG14" X="54" Y="299" W="42" H="42" IMG="../Data/6_ui/info/ifIconBg.tga" IMG_W="42" IMG_H="42"/>
+			<FORM ID="FRM_ICON_BG15" X="200" Y="299" W="42" H="42" IMG="../Data/6_ui/info/ifIconBg.tga" IMG_W="42" IMG_H="42"/>
+
+			<BUILD ID="BLD_ICON_OUTLINE" X="11" Y="36" TARGET_ID="FRM_ICON_OUTLINE" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+			<FORM ID="FRM_ICON_OUTLINE" X="0" Y="0" W="40" H="40" Z="3" U="3" V="2" UV_INDEX="1" IMG="../Data/6_ui/info/ifItemCrBx.tga" IMG_W="120" IMG_H="80"/>
+			<FORM ID="FRM_ICON_OUTLINE14" X="55" Y="300" W="40" H="40" Z="3" U="3" V="2" UV_INDEX="1" IMG="../Data/6_ui/info/ifItemCrBx.tga" IMG_W="120" IMG_H="80"/>
+			<FORM ID="FRM_ICON_OUTLINE15" X="201" Y="300" W="40" H="40" Z="3" U="3" V="2" UV_INDEX="1" IMG="../Data/6_ui/info/ifItemCrBx.tga" IMG_W="120" IMG_H="80"/>
+
+			<BUILD ID="BLD_ICON_NAME" X="11" Y="36" TARGET_ID="FRM_ICON_NAME" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+			<FORM ID="FRM_ICON_NAME" X="0" Y="0" W="40" H="40" Z="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER="1" T_X="20" T_Y="12" IMG="" IMG_W="40" IMG_H="40"/>
+			<FORM ID="FRM_ICON_NAME14" X="55" Y="300" W="40" Z="1" H="40" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER="1" T_X="20" T_Y="12" IMG="" IMG_W="40" IMG_H="40"/>
+			<FORM ID="FRM_ICON_NAME15" X="201" Y="300" W="40" Z="1" H="40" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER="1" T_X="20" T_Y="12" IMG="" IMG_W="40" IMG_H="40"/>	
+			<BUILD ID="BLD_LINE" X="16" Y="397" TARGET_ID="FRM_LINE" X_COUNT="2" Y_COUNT="3" X_GAB="135" Y_GAB="24"/>
+			<FORM ID="FRM_LINE" X="0" Y="0" W="129" H="2">
+				<IMG ID="IMG_UP" X="0" Y="0" W="129" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="129" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_DN" X="0" Y="1" W="129" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="129" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			</FORM>
+		</FORM>
+		<CHECK_BUTTON ID="CBTN_TAB_CHAR" X="8" Y="4" W="84" H="24" TEXT="400131" FONT="FTcts_13" T_X="30" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48">
+			<SCRIPT ID="ON_CALL">
+				UISelf:CheckState(true)
+				UISelf:LockClick(true)
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<!--CHECK_BUTTON ID="CBTN_TAB_PET" X="95" Y="4" W="84" H="24" TEXT="400132" FONT="FTcts_13" T_X="30" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48">
+			<SCRIPT ID="ON_CALL">
+				UISelf:CheckState(false)
+				UISelf:LockClick(true)
+			</SCRIPT>
+		</CHECK_BUTTON-->
+		<FORM ID="FRM_CHAR_ICON" X="69" Y="65" W="26" H="26" U="6" V="6" UV_INDEX="1" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156">
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local idx = UISelf:GetUVIndex()
+				if idx > 28 then
+					idx = idx + 22
+				end
+				CallMutableToolTipText(GetTT(30000 + idx), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_CHAR_TEXT" X="95" Y="62" W="132" H="26" TEXT="" FONT="Font_Text" T_X="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+		</FORM>
+		<FORM ID="FRM_GUILD_ICON" X="69" Y="65" W="26" H="26" U="16" V="16" UV_INDEX="1" IMG="../Data/6_ui/guild/GuildIcon01.tga" IMG_W="512" IMG_H="512"/>
+		<FORM ID="FRM_GUILD_TEXT" X="95" Y="62" W="132" H="26" TEXT="" FONT="Font_Text" T_X="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+		</FORM>
+		<CHECK_BUTTON ID="CBTN_MY_INFO" X="86" Y="39" W="60" H="21" TEXT="5998" FONT="Font_Text" T_X="30" T_Y="4" T_CENTER="1" T_OUTLINE="1" BTN_T_INVERTBOLD="1" BTN_IMG="../Data/6_ui/main/mnChatTab2.tga" BTN_IMG_W="120" BTN_IMG_H="42">
+			<SCRIPT ID="ON_GET_FOCUS">
+				SetCharInfo(UISelf:GetParent(), 0)
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_GUILD_INFO" X="148" Y="39" W="60" H="21" TEXT="5999" FONT="Font_Text" T_X="30" T_Y="4" T_CENTER="1" T_OUTLINE="1" BTN_T_INVERTBOLD="1" BTN_IMG="../Data/6_ui/main/mnChatTab2.tga" BTN_IMG_W="120" BTN_IMG_H="42">
+			<SCRIPT ID="ON_GET_FOCUS">
+				SetCharInfo(UISelf:GetParent(), 1)
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<BUILD ID="BLD_ICON" X="11" Y="36" TARGET_ID="FRM_EQUIP_ICON" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+		<ICON ID="FRM_EQUIP_ICON" X="0" Y="0" W="40" H="40" Z="1">
+			<SCRIPT ID="ON_BUILD"></SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+		</ICON>
+		<ICON ID="FRM_EQUIP_ICON14" X="55" Y="300" W="40" H="40" Z="5">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+		</ICON>
+		<ICON ID="FRM_EQUIP_ICON15" X="201" Y="300" W="40" H="40" Z="5">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_TURN_LT" X="64" Y="250" W="40" H="37" BTN_IMG="../Data/6_ui/info/ifArwL.tga" BTN_IMG_W="80" BTN_IMG_H="74">
+			<SCRIPT ID="ON_TICK">
+				if UISelf:IsMouseDown() then
+					RotateMyActorView("CHAROTHERINFO", 0.08)
+				end
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_TURN_RT" X="193" Y="250" W="40" H="37" BTN_IMG="../Data/6_ui/info/ifArwR.tga" BTN_IMG_W="80" BTN_IMG_H="74">
+			<SCRIPT ID="ON_TICK">
+				if UISelf:IsMouseDown() then
+					RotateMyActorView("CHAROTHERINFO", -0.08)
+				end
+			</SCRIPT>						
+		</BUTTON>
+		<CHECK_BUTTON ID="BTN_DEFAULT_VIEW" X="109" Y="299" W="78" H="20" U="1" V="4" TEXT="5996" FONT="FTcts_13" T_X="39" T_Y="1" T_CENTER="1" T_OUTLINE="1" BTN_IMG="../Data/6_ui/info/ifChaBt.tga" BTN_IMG_W="78" BTN_IMG_H="80" BTN_T_INVERTBOLD="1">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if ViewEquipIconInitialize(UISelf:GetParent(), 201) then
+					EquipUIIconDefaultInitialize(UISelf:GetParent():GetControl("FRM_BG"))
+				end
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="BTN_CASH_VIEW" X="109" Y="321" W="78" H="20" U="1" V="4" TEXT="5997" FONT="FTcts_13" T_X="39" T_Y="1" T_CENTER="1" T_OUTLINE="1" BTN_IMG="../Data/6_ui/info/ifChaBt.tga" BTN_IMG_W="78" BTN_IMG_H="80" BTN_T_INVERTBOLD="1">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if ViewEquipIconInitialize(UISelf:GetParent(), 202) then
+					EquipUIIconCashInitialize(UISelf:GetParent():GetControl("FRM_BG"))
+				end
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<STATIC_FORM ID="FRM_INFO_TYPE_L" X="15" Y="350" W="131" H="24" TEXT="5995" FONT="FTcts_13" T_X="5" T_Y="2" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<BUTTON ID="BTN_DROP_L" X="127" Y="353" W="15" H="17" BTN_IMG="../Data/6_ui/community/ptDropB.tga" BTN_IMG_W="30" BTN_IMG_H="34">
+			<SCRIPT ID="ON_L_BTN_DOWN">CallInfoDrop(UISelf:GetParent(), "L", "SFRM_OTHER_CharInfo")</SCRIPT>
+		</BUTTON>
+		<STATIC_FORM ID="FRM_INFO_TYPE_R" X="149" Y="350" W="131" H="24" TEXT="5995" FONT="FTcts_13" T_X="5" T_Y="2" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<BUTTON ID="BTN_DROP_R" X="261" Y="353" W="15" H="17" BTN_IMG="../Data/6_ui/community/ptDropB.tga" BTN_IMG_W="30" BTN_IMG_H="34">
+			<SCRIPT ID="ON_L_BTN_DOWN">CallInfoDrop(UISelf:GetParent(), "R", "SFRM_OTHER_CharInfo")</SCRIPT>
+		</BUTTON>
+		<BUILD ID="BLD_INFO_L" X="15" Y="376" TARGET_ID="FRM_INFO_L" X_COUNT="1" Y_COUNT="4" Y_GAB="24"/>
+		<FORM ID="FRM_INFO_L" X="0" Y="0" W="131" H="19" TEXT="" FONT="Font_Text" T_X="5" T_Y="1" FONT_COLOR_HEX="0xFF4D3413">
+			<STATIC_FORM ID="FRM_VALUE" X="83" Y="0" W="48" H="19" TEXT="" FONT="Font_Text" T_X="24" T_Y="1" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local Str = ViewPlusAbilValue(UISelf)
+					if Str:IsNil() then
+						return
+					end
+					CallMutableToolTipText(Str, GetUIWnd("Cursor"):GetLocation())
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</STATIC_FORM>
+		</FORM>
+		<BUILD ID="BLD_INFO_R" X="149" Y="376" TARGET_ID="FRM_INFO_R" X_COUNT="1" Y_COUNT="4" Y_GAB="24"/>	
+		<FORM ID="FRM_INFO_R" X="0" Y="376" W="131" H="19" TEXT="" FONT="Font_Text" T_X="5" T_Y="1" FONT_COLOR_HEX="0xFF4D3413">
+			<STATIC_FORM ID="FRM_VALUE" X="83" Y="0" W="48" H="19" TEXT="" FONT="Font_Text" T_X="24" T_Y="1" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local Str = ViewPlusAbilValue(UISelf)
+					if Str:IsNil() then
+						return
+					end
+					CallMutableToolTipText(Str, GetUIWnd("Cursor"):GetLocation())
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</STATIC_FORM>
+		</FORM>
+	</STATIC_FORM>
+	
+	
+	
+	<STATIC_FORM ID="SFRM_OTHER_CharInfo" X="525" Y="91" W="296" H="509" CAN_DRAG="1" STATIC_NUM="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+		<SCRIPT ID="ON_CLOSE">
+			local kSelf = UISelf
+			CloseToolTip()
+			DeleteMyActor(kSelf, "CHAROTHERINFO")
+			CloseUI("SFRM_CHARINFO_POPUP")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterR(UISelf, 525, 91)</SCRIPT>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="294" H="36" Z="9" STATIC_NUM="4">
+			<IMG X="266" Y="6" W="20" H="20" Z="-1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="20" IMG_H="20" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE" X="264" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():CloseParent()</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<LOCAL>
+			<NAME ID="JAPAN">
+				<BUILD ID="BLD_TABBTN" X="7" Y="4" X_COUNT="1" Y_COUNT="1" X_GAB="85" TARGET_ID="SFRM_TAB"/>
+				<STATIC_FORM ID="SFRM_TAB" X="7" Y="4" W="82" H="24" Z="10" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<SCRIPT ID="ON_BUILD">
+						local kSelf = UISelf
+						local kBtn = kSelf:GetControl("CBTN_TAB")
+						if  kBtn:IsNil() == false then
+							local Index = kSelf:GetBuildIndex()
+							if Index == 0 then
+								kBtn:SetStaticTextW(GetTT(400131))
+							else
+								kBtn:SetStaticTextW(GetTT(51015))
+							end
+						end
+					</SCRIPT>
+					<CHECK_BUTTON ID="CBTN_TAB" X="-1" Y="0" W="84" H="24" TEXT="400131" FONT="FTtitle_14" T_X="35" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48">
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							if 0 ~= kSelf:GetParent():GetBuildIndex() then
+								UISelf:CheckState(false)
+								UISelf:LockClick(false)
+							else
+								UISelf:CheckState(true)
+								UISelf:LockClick(true)
+							end
+						</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN">ChangeOtherInfoTab(UISelf, UISelf:GetParent():GetBuildIndex())</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>		
+			</NAME>
+			<NAME ID="DEFAULT">
+				<BUILD ID="BLD_TABBTN" X="7" Y="4" X_COUNT="2" Y_COUNT="1" X_GAB="85" TARGET_ID="SFRM_TAB"/>
+				<STATIC_FORM ID="SFRM_TAB" X="7" Y="4" W="82" H="24" Z="10" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<SCRIPT ID="ON_BUILD">
+						local kSelf = UISelf
+						local kBtn = kSelf:GetControl("CBTN_TAB")
+						if  kBtn:IsNil() == false then
+							local Index = kSelf:GetBuildIndex()
+							if Index == 0 then
+								kBtn:SetStaticTextW(GetTT(400131))
+							else
+								kBtn:SetStaticTextW(GetTT(51015))
+							end
+						end
+					</SCRIPT>
+					<CHECK_BUTTON ID="CBTN_TAB" X="-1" Y="0" W="84" H="24" TEXT="400131" FONT="FTtitle_14" T_X="35" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48">
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							if 0 ~= kSelf:GetParent():GetBuildIndex() then
+								UISelf:CheckState(false)
+								UISelf:LockClick(false)
+							else
+								UISelf:CheckState(true)
+								UISelf:LockClick(true)
+							end
+						</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN">ChangeOtherInfoTab(UISelf, UISelf:GetParent():GetBuildIndex())</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>		
+			</NAME>
+		</LOCAL>
+		<FORM ID="FRM_CHAR_INFO" X="0" Y="0" W="296" H="509" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+			<FORM ID="FRM_BG" X="0" Y="0" W="296" H="485" Z="-2">
+				<FORM ID="FRM_UIMODEL" X="60" Y="100" W="176" H="192">
+					<SCRIPT ID="ON_CREATE">
+						InitMyActorView(UISelf, "CHAROTHERINFO", true)
+					</SCRIPT>
+					<SCRIPT ID="ON_TICK"> DrawMyActorView(UISelf, "CHAROTHERINFO") </SCRIPT>
+					<SCRIPT ID="ON_DISPLAY"> AddToDrawListMyActorView(UISelf, "CHAROTHERINFO") </SCRIPT>
+				</FORM>
+				<SCRIPT ID="ON_CALL">EquipUIIconDefaultInitialize(UISelf)</SCRIPT>
+				<FORM ID="FRM_CHAR_BG" X="56" Y="35" W="186" H="262" Z="-1" IMG="../Data/6_ui/info/infoChaBg.tga" IMG_W="186" IMG_H="262"/>
+				<FORM ID="FRM_INFO1_BG" X="88" Y="42" W="56" H="18" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="56" IMG_H="18" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<FORM ID="FRM_INFO2_BG" X="150" Y="42" W="56" H="18" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="56" IMG_H="18" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<STATIC_FORM ID="FRM_POINT_BG" X="9" Y="344" W="277" H="153" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="FRM_POINT_BG_SD" X="9" Y="344" W="277" H="153" STATIC_NUM="3"/>
+				<BUILD ID="BLD_ICON_BG" X="10" Y="35" TARGET_ID="FRM_ICON_BG" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+				<FORM ID="FRM_ICON_BG" X="0" Y="0" W="42" H="42" IMG="../Data/6_ui/info/ifIconBg.tga" IMG_W="42" IMG_H="42"/>
+				<FORM ID="FRM_ICON_BG14" X="54" Y="299" W="42" H="42" IMG="../Data/6_ui/info/ifIconBg.tga" IMG_W="42" IMG_H="42"/>
+				<FORM ID="FRM_ICON_BG15" X="200" Y="299" W="42" H="42" IMG="../Data/6_ui/info/ifIconBg.tga" IMG_W="42" IMG_H="42"/>
+
+				<BUILD ID="BLD_ICON_OUTLINE" X="11" Y="36" TARGET_ID="FRM_ICON_OUTLINE" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+				<FORM ID="FRM_ICON_OUTLINE" X="0" Y="0" W="40" H="40" Z="3" U="3" V="2" UV_INDEX="1" IMG="../Data/6_ui/info/ifItemCrBx.tga" IMG_W="120" IMG_H="80"/>
+				<FORM ID="FRM_ICON_OUTLINE14" X="55" Y="300" W="40" H="40" Z="3" U="3" V="2" UV_INDEX="1" IMG="../Data/6_ui/info/ifItemCrBx.tga" IMG_W="120" IMG_H="80"/>
+				<FORM ID="FRM_ICON_OUTLINE15" X="201" Y="300" W="40" H="40" Z="3" U="3" V="2" UV_INDEX="1" IMG="../Data/6_ui/info/ifItemCrBx.tga" IMG_W="120" IMG_H="80"/>
+
+				<BUILD ID="BLD_ICON_NAME" X="11" Y="36" TARGET_ID="FRM_ICON_NAME" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+				<FORM ID="FRM_ICON_NAME" X="0" Y="0" W="40" H="40" Z="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER="1" T_X="20" T_Y="12" IMG="" IMG_W="40" IMG_H="40"/>
+				<FORM ID="FRM_ICON_NAME14" X="55" Y="300" W="40" Z="1" H="40" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER="1" T_X="20" T_Y="12" IMG="" IMG_W="40" IMG_H="40"/>
+				<FORM ID="FRM_ICON_NAME15" X="201" Y="300" W="40" Z="1" H="40" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER="1" T_X="20" T_Y="12" IMG="" IMG_W="40" IMG_H="40"/>	
+				<BUILD ID="BLD_LINE" X="16" Y="397" TARGET_ID="FRM_LINE" X_COUNT="2" Y_COUNT="4" X_GAB="135" Y_GAB="24"/>
+				<FORM ID="FRM_LINE" X="0" Y="0" W="129" H="2">
+					<IMG ID="IMG_UP" X="0" Y="0" W="129" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="129" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+					<IMG ID="IMG_DN" X="0" Y="1" W="129" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="129" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				</FORM>
+			</FORM>
+			<FORM ID="FRM_CHAR_ICON" X="69" Y="65" W="26" H="26" U="6" V="6" UV_INDEX="1" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156">
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local idx = UISelf:GetUVIndex()
+					if idx > 28 then
+						idx = idx + 22
+					end
+					CallMutableToolTipText(GetTT(30000 + idx), GetUIWnd("Cursor"):GetLocation())
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_CHAR_TEXT" X="95" Y="62" W="132" H="26" TEXT="" FONT="Font_Text" T_X="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			</FORM>
+			<FORM ID="FRM_GUILD_ICON" X="69" Y="65" W="26" H="26" U="16" V="16" UV_INDEX="1" IMG="../Data/6_ui/guild/GuildIcon01.tga" IMG_W="512" IMG_H="512"/>
+			<FORM ID="FRM_GUILD_TEXT" X="95" Y="62" W="132" H="26" TEXT="" FONT="Font_Text" T_X="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			</FORM>
+			<CHECK_BUTTON ID="CBTN_MY_INFO" X="86" Y="39" W="60" H="21" TEXT="5998" FONT="Font_Text" T_X="30" T_Y="4" T_CENTER="1" T_OUTLINE="1" BTN_T_INVERTBOLD="1" BTN_IMG="../Data/6_ui/main/mnChatTab2.tga" BTN_IMG_W="120" BTN_IMG_H="42">
+				<SCRIPT ID="ON_GET_FOCUS">
+					SetCharInfo(UISelf:GetParent(), 0)
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="CBTN_GUILD_INFO" X="148" Y="39" W="60" H="21" TEXT="5999" FONT="Font_Text" T_X="30" T_Y="4" T_CENTER="1" T_OUTLINE="1" BTN_T_INVERTBOLD="1" BTN_IMG="../Data/6_ui/main/mnChatTab2.tga" BTN_IMG_W="120" BTN_IMG_H="42">
+				<SCRIPT ID="ON_GET_FOCUS">
+					SetCharInfo(UISelf:GetParent(), 1)
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<BUILD ID="BLD_ICON" X="11" Y="36" TARGET_ID="FRM_EQUIP_ICON" X_COUNT="2" Y_COUNT="7" X_GAB="234" Y_GAB="44"/>
+			<ICON ID="FRM_EQUIP_ICON" X="0" Y="0" W="40" H="40" Z="1">
+				<SCRIPT ID="ON_BUILD"></SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			</ICON>
+			<ICON ID="FRM_EQUIP_ICON14" X="55" Y="300" W="40" H="40" Z="5">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			</ICON>
+			<ICON ID="FRM_EQUIP_ICON15" X="201" Y="300" W="40" H="40" Z="5">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			</ICON>
+			<BUTTON ID="BTN_TURN_LT" X="64" Y="250" W="40" H="37" BTN_IMG="../Data/6_ui/info/ifArwL.tga" BTN_IMG_W="80" BTN_IMG_H="74">
+				<SCRIPT ID="ON_TICK">
+					if UISelf:IsMouseDown() then
+						RotateMyActorView("CHAROTHERINFO", 0.08)
+					end
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_TURN_RT" X="193" Y="250" W="40" H="37" BTN_IMG="../Data/6_ui/info/ifArwR.tga" BTN_IMG_W="80" BTN_IMG_H="74">
+				<SCRIPT ID="ON_TICK">
+					if UISelf:IsMouseDown() then
+						RotateMyActorView("CHAROTHERINFO", -0.08)
+					end
+				</SCRIPT>						
+			</BUTTON>
+			<CHECK_BUTTON ID="BTN_DEFAULT_VIEW" X="109" Y="299" W="78" H="20" U="1" V="4" TEXT="5996" FONT="FTcts_13" T_X="39" T_Y="1" T_CENTER="1" T_OUTLINE="1" BTN_IMG="../Data/6_ui/info/ifChaBt.tga" BTN_IMG_W="78" BTN_IMG_H="80" BTN_T_INVERTBOLD="1">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if ViewEquipIconInitialize(UISelf:GetParent(), 201) then
+						EquipUIIconDefaultInitialize(UISelf:GetParent():GetControl("FRM_BG"))
+					end
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="BTN_CASH_VIEW" X="109" Y="321" W="78" H="20" U="1" V="4" TEXT="5997" FONT="FTcts_13" T_X="39" T_Y="1" T_CENTER="1" T_OUTLINE="1" BTN_IMG="../Data/6_ui/info/ifChaBt.tga" BTN_IMG_W="78" BTN_IMG_H="80" BTN_T_INVERTBOLD="1">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if ViewEquipIconInitialize(UISelf:GetParent(), 202) then
+						EquipUIIconCashInitialize(UISelf:GetParent():GetControl("FRM_BG"))
+					end
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<STATIC_FORM ID="FRM_INFO_TYPE_L" X="15" Y="350" W="131" H="24" TEXT="5995" FONT="FTcts_13" T_X="5" T_Y="2" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<BUTTON ID="BTN_DROP_L" X="127" Y="353" W="15" H="17" BTN_IMG="../Data/6_ui/community/ptDropB.tga" BTN_IMG_W="30" BTN_IMG_H="34">
+				<SCRIPT ID="ON_L_BTN_DOWN">CallInfoDrop(UISelf:GetParent(), "L", "SFRM_OTHER_CharInfo")</SCRIPT>
+			</BUTTON>
+			<STATIC_FORM ID="FRM_INFO_TYPE_R" X="149" Y="350" W="131" H="24" TEXT="5995" FONT="FTcts_13" T_X="5" T_Y="2" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<BUTTON ID="BTN_DROP_R" X="261" Y="353" W="15" H="17" BTN_IMG="../Data/6_ui/community/ptDropB.tga" BTN_IMG_W="30" BTN_IMG_H="34">
+				<SCRIPT ID="ON_L_BTN_DOWN">CallInfoDrop(UISelf:GetParent(), "R", "SFRM_OTHER_CharInfo")</SCRIPT>
+			</BUTTON>
+			<BUILD ID="BLD_INFO_L" X="15" Y="376" TARGET_ID="FRM_INFO_L" X_COUNT="1" Y_COUNT="5" Y_GAB="24"/>
+			<FORM ID="FRM_INFO_L" X="0" Y="0" W="131" H="19" TEXT="" FONT="Font_Text" T_X="5" T_Y="1" FONT_COLOR_HEX="0xFF4D3413">
+				<STATIC_FORM ID="FRM_VALUE" X="83" Y="0" W="48" H="19" TEXT="" FONT="Font_Text" T_X="24" T_Y="1" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<SCRIPT ID="ON_MOUSE_OVER">
+						local Str = ViewPlusAbilValue(UISelf)
+						if Str:IsNil() then
+							return
+						end
+						CallMutableToolTipText(Str, GetUIWnd("Cursor"):GetLocation())
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</STATIC_FORM>
+			</FORM>
+			<BUILD ID="BLD_INFO_R" X="149" Y="376" TARGET_ID="FRM_INFO_R" X_COUNT="1" Y_COUNT="5" Y_GAB="24"/>	
+			<FORM ID="FRM_INFO_R" X="0" Y="376" W="131" H="19" TEXT="" FONT="Font_Text" T_X="5" T_Y="1" FONT_COLOR_HEX="0xFF4D3413">
+				<STATIC_FORM ID="FRM_VALUE" X="83" Y="0" W="48" H="19" TEXT="" FONT="Font_Text" T_X="24" T_Y="1" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<SCRIPT ID="ON_MOUSE_OVER">
+						local Str = ViewPlusAbilValue(UISelf)
+						if Str:IsNil() then
+							return
+						end
+						CallMutableToolTipText(Str, GetUIWnd("Cursor"):GetLocation())
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</STATIC_FORM>
+			</FORM>
+		</FORM>
+		<FORM ID="FRM_CHAR_CARD" X="0" Y="35" W="296" H="509" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<FORM ID="FRM_BG" X="0" Y="0" W="296" H="473" Z="-1">
+				<IMG ID="IMG_LINE" X="5" Y="248" W="286" H="2" IMG="../Data/6_ui/Pvp/pvLine.tga" IMG_W="286" IMG_H="2"/>
+				<STATIC_FORM ID="FRM_MATCH_INFO_BG" X="10" Y="252" W="277" H="153" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="FRM_MATCH_INFO_BG_SD" X="10" Y="252" W="277" H="153" Z="1" STATIC_NUM="3">
+				</STATIC_FORM>
+			</FORM>
+			<FORM ID="FRM_NOCARD" X="8" Y="-1" W="280" H="223" Z="10" IMG="../Data/6_ui/info/ifCardNo.tga" IMG_W="280" IMG_H="243" IS_VISIBLE="0">
+				<ATTR TEXT="51037" T_X="140" T_Y="100" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</FORM>
+			<FORM ID="FRM_CARD_INFO" X="8" Y="-1" W="280" H="248">
+				<FORM ID="FRM_BG" X="0" Y="0" W="280" H="223" Z="-1" IMG="../Data/6_ui/card/infoCdbs.tga" IMG_W="280" IMG_H="243">
+					<FORM ID="FRM_TEXT1" X="125" Y="15" W="120" H="17" TEXT="51001" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+					<FORM ID="FRM_TEXT2" X="10" Y="57" W="160" H="17" TEXT="51013" T_X="160" T_RIGHT="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+					<FORM ID="FRM_TEXT3" X="10" Y="144" W="160" H="17" TEXT="51014" T_X="160" T_RIGHT="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+				</FORM>
+				<FORM ID="FRM_NAME" X="125" Y="30" W="145" H="17" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1"/>
+				<FORM ID="FRM_SEX" X="170" Y="57" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1"/>
+				<FORM ID="FRM_AGE" X="170" Y="72" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1"/>
+				<FORM ID="FRM_REGION" X="170" Y="88" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1"/>
+				<FORM ID="FRM_TOTAL_POPULAR" X="170" Y="104" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1"/>
+				<FORM ID="FRM_POPULAR" X="170" Y="120" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1"/>
+				<FORM ID="FRM_BLOOD" X="170" Y="144" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFC8DDFD" T_OUTLINE="1"/>
+				<FORM ID="FRM_CONSTELLATION" X="170" Y="159" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFC8DDFD" T_OUTLINE="1"/>
+				<FORM ID="FRM_INTEREST" X="170" Y="175" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFC8DDFD" T_OUTLINE="1"/>
+				<FORM ID="FRM_STYLE" X="170" Y="191" W="100" H="17" FONT="Font_Text" FONT_COLOR_HEX="0xFFC8DDFD" T_OUTLINE="1"/>
+				<FORM ID="FRM_COMMENT" X="8" Y="214" W="204" H="17" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_SEX" X="10" Y="408" W="73" H="23" Z="1" STATIC_NUM="34"/>
+			<STATIC_FORM ID="SFRM_REGION" X="157" Y="408" W="130" H="23" STATIC_NUM="34"/>
+			<STATIC_FORM ID="SFRM_AGE" X="83" Y="408" W="73" H="23" STATIC_NUM="34"/>
+			<BUTTON ID="BTN_ACTION" X="104" Y="238" W="177" H="28" BTN_IMG="../Data/6_ui/info/infoCdvtBt2.tga" BTN_IMG_W="177" BTN_IMG_H="112" BTN_VERTICAL_IMG="1" T_OUTLINE="1" T_CENTER="1" TEXT="51020" T_X="95" T_Y="4" FONT="Font_Text">
+				<SCRIPT ID="ON_L_BTN_DOWN">ChangeCardOpenState(UISelf)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_SEARCH" X="62" Y="435" W="84" H="26" TEXT="51021" FONT="FTbt_12" T_CENTER="1" T_X="42" T_Y="4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+				<SCRIPT ID="ON_CALL">UISelf:Disable(true)</SCRIPT>
+				<!--SCRIPT ID="ON_L_BTN_DOWN">SendMatchUser(UISelf)</SCRIPT-->
+			</BUTTON>
+			<BUTTON ID="BTN_REQ_TALK" X="149" Y="435" W="84" H="26" TEXT="51022" FONT="FTbt_12" T_CENTER="1" T_X="42" T_Y="4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+				<SCRIPT ID="ON_CALL">UISelf:Disable(true)</SCRIPT>
+				<!--SCRIPT ID="ON_L_BTN_DOWN">OnClickManToManTalk(UISelf)</SCRIPT-->
+			</BUTTON>
+		</FORM>
+	</STATIC_FORM>	
+</XUI>

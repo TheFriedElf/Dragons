@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>35</ID> <!--T.T.10003501 10000번의 프로포즈 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람의 항구의 월터와 이야기 해보자.-->
+<!--[완료NPC]	바람항구 - 월터-->
+<!--[내용]	고든은 필리아가 너무 외로워서 초코장인 진저맨을 괴롭혔을 것이라고 한다. 필리아의 외로움을 달래 줄 남자를 찾아서, 친구가 많다고 자랑하는 월터에게 가보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</CLIENT> <!--시작NPC 바람항구(발렌타인) - 고든 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">922256EB-5BF6-4B25-BC1A-8B378FC002E6</PAYER> <!--완료NPC 바람항구 - 월터 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 11 바람항구(발렌타인) - 고든 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">922256EB-5BF6-4B25-BC1A-8B378FC002E6</AGENT> <!--진행NPC 12 바람항구 - 월터 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10003511"/> <!--월터와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10003521" FACE="Goden_normal"/> <!--이렇게 된 거, 어쩔 수 없지.
+필리아가 저렇게 발렌타인 데이를 증오하는 건 남자들의 잘못도 크니깐 말일세.
+그런 필리아를 진정시킬 묘안이 있는데 들어 볼 텐가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10003526" FACE="Walter_smile"/> <!--네? 애정파괴단의 보스 필리아를 소개해 줄 친구를 아느냐고요?
+무슨 이야긴가요? 제가 말한 친구들은 집에서 키우고 있는 고양이들을 말한 거에요.
+안타깝게도 말주변이 없어서 진짜 친구들은 한 명도 없답니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10003523" FACE="Goden_normal"/> <!--그 묘안이란, 자네도 지금까지의 흐름으로 보아 잘 알고 있을 테지만, 필리아에게 남자를 소개해 주는 거지.%%
+다행히 바람의 항구에 월터라는 친구가 자신에겐 친구들이 많다고 떠들어 대더군.
+월터와 이야기하면 필리아를 소개해 줄 만한 친구 한둘은 소개받을 수 있을 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10003524" FACE="Goden_angly"/> <!--알았네. 그럼 필리아가 지금처럼 멋대로 날뛰도록 내버려 두게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10003525" FACE="Goden_normal"/> <!--나도 눈이 높아서 나를 사모하는 여인들을 꽤 많이 울렸었지.
+뭔가 그런 의심쩍은 눈빛은 저리 치우게. 엄연한 사실을 말한 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10003502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

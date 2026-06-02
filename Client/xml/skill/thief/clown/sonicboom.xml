@@ -1,0 +1,11 @@
+<ACTION ID="a_Sonic Boom" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="charge_02" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_Ground_01"/>
+  <FSM SCRIPT="Projectile_Default" PROJECTILE_ID="Projectile_Boomerang" ATTACH_NODE_ID="Bip01 L Hand"
+       FIRE_CASTER_EFFECT_ID="ef_SonicBoom_01_p_wp_l_hand"
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_wp_r_hand"
+       DETACH_FIRE_CASTER_EFFECT_AT_HIT="TRUE"
+       HIDE_WEAPON="TRUE"
+       HIT_SOUND_ID="SonicBoom"
+       />
+</ACTION>

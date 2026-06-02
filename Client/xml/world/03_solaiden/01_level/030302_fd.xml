@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030302_FD" >
+  <GSAPATH>../Data/3_World/03_Solaiden/01_Level/030302_FD.gsa</GSAPATH>
+  <MINIMAP Y="164" H="192">../Data/3_World/03_Solaiden/01_Level/030302_MM.dds</MINIMAP>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+ 
+   <!--용의탑 1층-->
+  <TRIGGER ID="gate_030301_base" TYPE="PORTAL" TITLE_TEXT_ID="800066" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030301" PARAM2="3" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!--용의탑 3층-->
+  <TRIGGER ID="gate_030303_base" TYPE="PORTAL" TITLE_TEXT_ID="800068" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030303" PARAM2="1" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!-- 엔터던전-->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <!--텔레점프-->
+ <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="200"/>
+ </TRIGGER>
+  <!--트리거점프-->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="750" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_3" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="280" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_4" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_6" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="280" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_7" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_8" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="600" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_9" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_10" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="600" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_11" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="280" />
+  </TRIGGER>
+  <FOG DENSITY="0.050000" START="135.000000" END="3315.000000" COLOR="0.023000,0.044000,0.134001" />
+</WORLD>

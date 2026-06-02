@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5091</ID> <!--T.T.10509101 뛰어난 걸작(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 시진과 이야기 하자-->
+<!--[완료NPC]	스티븐 무역항 - 시진-->
+<!--[내용]	바람항구의 빅터는 시진과 서로 친한 사이라고 한다. 그냥 단순한 친구사이가 아니라 예술가로서 서로 통하는 점이 많다는 것이다. 한 달에 한 번씩 서로의 예술품을 1주일 정도 맡겨놓고 그것을 돌려주면서 비평을 하는데, 이제 곧 그날이 다가온다고 한다. 빅터는 시진이 건망증이 심해서 혹시나 비평하는 것을 잃어버리지 않게 이야기를 전해달라고 한다. 혹시 비평하는 것을 잊어버리지 않도록 스티븐 무역항의 시진과 이야기를 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</CLIENT> <!--시작NPC 바람항구 - 빅터 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">116A12AC-D98A-483a-A1E9-3392632B7CDE</PAYER> <!--완료NPC 스티븐 무역항 - 시진 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</AGENT> <!--진행NPC 11 바람항구 - 빅터 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 12 스티븐 무역항 - 시진 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10509111"/> <!--시진과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509121" FACE="Walter_normal"/> <!--%class%님 혹시 예술에 관심이 있으신가요?
+전 스티븐 무역항의 시진과 상당히 친한 사이입니다.
+그냥 단순한 친구 사이가 아니라 서로의 예술품을 비평하는 예술적 동지에요.%%
+이번에 제가 심혈을 기울여 만든 걸작을 시진에게 맡겨놨는데, 시진이 건망증이 심해서요.
+혹시 그쪽으로 지나가는 길이시라면 시진에게 제 예술품을 돌려달라고 이야기 해 주실 수 있겠습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509126" FACE="Walter_normal"/> <!--네? 시진이 저에게 예술품을 맡겨놨다고요?
+응? 예술품? 앗, 이런 깜빡 잊어버리고 있었네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509123" FACE="Walter_normal"/> <!--예술에 대한 비평은 그냥 단순히 막 나오는 것은 아니에요.
+그렇기 때문에 저희는 언제나 1주일 정도 시간을 두고 감상을 한 뒤 비평을 합니다.%%
+예술품을 한 순간에 판단할 수 있을 것이라고 저는 생각하지 않습니다.
+예술품이란 안정된 감정으로 차분하게 감상해야지 진가를 발휘하는 법이니까요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509124" FACE="Walter_normal"/> <!--네. 뭐 바쁘시다면 어쩔 수가 없겠군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509125" FACE="Walter_normal"/> <!--전 시진이 저의 작품을 어떻게 평가할지 내심 기대하고 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5120</ID> <!--T.T.10512001 패션의 미학 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전(아케이드 모드5)- 망각의 철퇴 미라로부터 망각의 구슬 15개 획득-->
+<!--[완료NPC]	바람항구 - 신디-->
+<!--[내용]	소피아는 바람의 항구 신디로부터 옷 제작 의뢰를 받고 옷을 제작했다고 한다. 이미 옷은 완성했지만, 처음이라 그런지 생각보다 괜찮지 않은 것 같다고 한다. 조금이라도 소피아의 맘에 들기 위해선 장식을 해야 할 것 같다고 한다. 스카이피 신전에서 망각의 철퇴 미라를 잡고 망각의 구슬을 모아 옷을 장식해 신디에게 가져다 주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 달빛해안 마을 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</PAYER> <!--완료NPC 바람항구 - 신디 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 달빛해안 마을 - 소피아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</AGENT> <!--진행NPC 12 바람항구 - 신디 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010215/10000/3000/1/1/160512000">6008300</MONSTER> 
+ <!--MON_NO=6008300/망각의 철퇴 미라,MAP_NO=9010215/스카이피 신전 아케이드 5,Item_NO=160512000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160512000</ITEM> 
+ <!--Item_NO=160512000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10512011"/> <!--망각의 구슬 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10512021" FACE="Sopia_normal"/> <!--%class%님! 잠시만요. 드디어 옷이 완성되었어요.
+바로 보여 드릴게요. 자! 하나 ~ 둘 ~ 셋 !! 쨘!!!! 어때요?
+... ... ... ... ....%%
+이... 이... 이상한가요? 헤헷.
+처음인데 누구라도 잘할 수 없을 거에요. 그렇죠?%%
+제 생각엔 약간만 손 보면 정말 괜찮아 질 것 같은데, 제 부탁 하나만 더 들어주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10512026" FACE="Cindy_normal"/> <!--이게 뭐지? 내가 말한, 청순하고 귀여운 부분이 어디 있다는 거지?
+설마 이걸 만들어서 가져온 거야?%%
+내가 괜한 의뢰를 한 모양이군.
+휴...  상처받을지도 모르니 내가 만족한다고 전해 줘.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10512023" FACE="Sopia_normal"/> <!--여기 이 부분에 구슬로 살짝 포인트만 주면 정말 엘레강스할 것 같아요.
+마치 빨간 들판의 한 송이 국화꽃이라고나 할까?  
+네? 무슨 소리냐고요? 몰라도 돼요.%%
+중요한 건 포인트가 주고 싶으니까 좀 구해주세요.
+스카이피신전에서 망각의 복서 미라를 처리하고 망각의 구슬 15개로 장식해 주세요.%%
+그 구슬로 장식하면 분명히 옷에서 빛이 날 거에요.
+그 구슬을 달아서 신디에게 가져다주세요. 부탁할게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10512024" FACE="Sopia_angly"/> <!--아... 패션을 아시는 분이라고 생각했는데... 정말 이 옷의 가치를 모르시나요? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10512025" FACE="Sopia_normal"/> <!--저는 옷을 정말 잘 만드는 것 같아요. 너무너무 잘 만든다고요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10512002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

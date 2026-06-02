@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!-- /////////////////////////// Auto Match Couple /////////////////////////// --> 
+<LOCAL>
+	<NAME ID="DEFAULT">
+	<STATIC_FORM ID="SFRM_COUPLE_AUTO_MATCH" ALIGN_X="20" ALIGN_Y="30" W="278" H="253" STATIC_NUM="1">
+		<FORM ID="FRM_TITLE" X="10" Y="-1" Z="-1" W="260" H="41">
+			<ATTR IMG="../Data/6_ui/Community/cpImg.tga" IMG_W="260" IMG_H="41"/>
+			<ATTR TEXT="450023" T_X="50" T_Y="15" T_OUTLINE="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_BG_COLOR" X="9" Y="37" Z="-2" W="260" H="171" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BG_SHADOW" X="0" Y="0" W="260" H="171" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_INFO_TITLE" X="15" Y="43" W="105" H="25">
+			<STATIC_FORM ID="SFRM_LOCATION" X="0" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="400316" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_NAME" X="107" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="400317" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_LEVEL" X="214" Y="0" W="34" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="46" T_X="17" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+		</FORM>
+		
+		<BUILD ID="BUILD_INFO1" TARGET_ID="FRM_INFO_" X="15" Y="70" X_COUNT="1" Y_COUNT="5" X_GAB="0" Y_GAB="27" START_INDEX="0"/>
+		<FORM ID="FRM_INFO_" X="15" Y="70" Z="1" W="105" H="25">
+			<STATIC_FORM ID="SFRM_LOCATION" X="0" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_NAME" X="107" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_LEVEL" X="214" Y="0" W="34" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="17" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+		</FORM>
+		
+		<BUILD ID="BUILD_INFO2" TARGET_ID="BTN_INFO_BTN_" X="13" Y="67" X_COUNT="1" Y_COUNT="5" X_GAB="0" Y_GAB="27" START_INDEX="0"/>
+		<BUTTON ID="BTN_INFO_BTN_" X="13" Y="67" Z="2" W="254" H="31" IS_VISIBLE="0">
+			<ATTR BTN_IMG="../Data/6_ui/Community/cpListOver.tga" BTN_IMG_W="508" BTN_IMG_H="62"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CallCouplePopup(UISelf)
+			</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_REQ_COUPLE" X="54" Y="214" Z="1" W="84" H="26" IS_VISIBLE="0">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="450036" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="97" Y="214" Z="1" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400542	" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1"> 
+			UISelf:Close()
+			return true 
+		</HOTKEY>
+	</STATIC_FORM>
+	</NAME>
+	<NAME ID="JAPAN">
+	<STATIC_FORM ID="SFRM_COUPLE_AUTO_MATCH" ALIGN_X="20" ALIGN_Y="30" W="278" H="273" STATIC_NUM="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" Z="-1" W="260" H="61">
+			<IMG ID="IMG_ICON" X="13" Y="13" IMG="../Data/6_ui/Community/cpMWImg.tga" IMG_W="45" IMG_H="41"/>
+			<STATIC_FORM ID="SFRM_TITLE" X="9" Y="8" W="262" H="43" STATIC_NUM="34">
+				<ATTR TEXT="450023" T_X="50" T_Y="5" T_OUTLINE="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</STATIC_FORM>
+		</FORM>
+		<STATIC_FORM ID="SFRM_BG_COLOR" X="9" Y="57" Z="-2" W="260" H="171" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BG_SHADOW" X="0" Y="0" W="260" H="171" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_INFO_TITLE" X="15" Y="63" W="105" H="25">
+			<STATIC_FORM ID="SFRM_LOCATION" X="0" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="400316" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_NAME" X="107" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="400317" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_LEVEL" X="214" Y="0" W="34" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="46" T_X="17" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+		</FORM>
+		
+		<BUILD ID="BUILD_INFO1" TARGET_ID="FRM_INFO_" X="15" Y="90" X_COUNT="1" Y_COUNT="5" X_GAB="0" Y_GAB="27" START_INDEX="0"/>
+		<FORM ID="FRM_INFO_" X="15" Y="70" Z="1" W="105" H="25">
+			<STATIC_FORM ID="SFRM_LOCATION" X="0" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_NAME" X="107" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_LEVEL" X="214" Y="0" W="34" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="17" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+		</FORM>
+		
+		<BUILD ID="BUILD_INFO2" TARGET_ID="BTN_INFO_BTN_" X="13" Y="87" X_COUNT="1" Y_COUNT="5" X_GAB="0" Y_GAB="27" START_INDEX="0"/>
+		<BUTTON ID="BTN_INFO_BTN_" X="13" Y="67" Z="2" W="254" H="31" IS_VISIBLE="0">
+			<ATTR BTN_IMG="../Data/6_ui/Community/cpListOver.tga" BTN_IMG_W="508" BTN_IMG_H="62"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CallCouplePopup(UISelf)
+			</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_REQ_COUPLE" X="54" Y="234" Z="1" W="84" H="26" IS_VISIBLE="0">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="450036" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="97" Y="234" Z="1" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400542	" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1"> 
+			UISelf:Close()
+			return true 
+		</HOTKEY>
+	</STATIC_FORM>
+	</NAME>
+</LOCAL>
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ SFRM_COUPLE_FIND ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<STATIC_FORM ID="SFRM_COUPLE_FIND" ALIGN_X="50" ALIGN_Y="35" W="278" H="418" STATIC_NUM="1">
+		<FORM ID="FRM_TITLE" X="10" Y="-1" Z="-1" W="260" H="41">
+			<ATTR IMG="../Data/6_ui/Community/cpImg.tga" IMG_W="260" IMG_H="41"/>
+			<ATTR TEXT="450024" T_X="50" T_Y="15" T_OUTLINE="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_BG_COLOR" X="9" Y="37" Z="-2" W="260" H="336" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BG_SHADOW" X="0" Y="0" W="260" H="336" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_INFO_TITLE" X="15" Y="43" W="105" H="25">
+			<STATIC_FORM ID="SFRM_LOCATION" X="0" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="400316" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_NAME" X="107" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="400317" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_LEVEL" X="214" Y="0" W="34" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+				<ATTR TEXT="46" T_X="17" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+		</FORM>
+		
+		<BUILD ID="BUILD_INFO1" TARGET_ID="FRM_INFO_" X="15" Y="70" X_COUNT="1" Y_COUNT="10" X_GAB="0" Y_GAB="27" START_INDEX="0"/>
+		<FORM ID="FRM_INFO_" X="15" Y="70" Z="1" W="105" H="25">
+			<STATIC_FORM ID="SFRM_LOCATION" X="0" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_NAME" X="107" Y="0" W="105" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="53" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_LEVEL" X="214" Y="0" W="34" H="25" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="17" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			</STATIC_FORM>
+		</FORM>
+		
+		<BUILD ID="BUILD_INFO2" TARGET_ID="BTN_INFO_BTN_" X="13" Y="67" X_COUNT="1" Y_COUNT="10" X_GAB="0" Y_GAB="27" START_INDEX="0"/>
+		<BUTTON ID="BTN_INFO_BTN_" X="13" Y="67" Z="2" W="254" H="31" IS_VISIBLE="0">
+			<ATTR BTN_IMG="../Data/6_ui/Community/cpListOver.tga" BTN_IMG_W="508" BTN_IMG_H="62"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CallFindCouplePopup(UISelf)
+			</SCRIPT>
+		</BUTTON>
+		
+		<IMG ID="IMG_LINE_01" X="17" Y="340" W="244" H="1" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="244" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_LINE_02" X="17" Y="341" W="244" H="1" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="244" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		
+		<BUTTON ID="BTN_BACK" X="88" Y="346" W="15" H="19">
+			<ATTR BTN_IMG="../Data/6_UI/Pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> Couple_FindPrevPage() </SCRIPT>
+		</BUTTON>
+		<STATIC_FORM ID="SFRM_PAGE_NO" X="106" Y="345" W="66" H="21" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+			<ATTR TEXT="" T_X="32" T_Y="3" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_NEXT" X="175" Y="346" W="15" H="19">
+			<ATTR BTN_IMG="../Data/6_UI/Pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> Couple_FindNextPage() </SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_REQ_COUPLE" X="54" Y="214" Z="1" W="84" H="26" IS_VISIBLE="0">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="450036" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="97" Y="379" Z="1" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400542	" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+	</STATIC_FORM>
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ SFRM_SWEETHEART_IF ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<STATIC_FORM ID="SFRM_SWEETHEART_IF" X="832" Y="91" W="256" H="440" STATIC_NUM="30">
+		<STATIC_FORM ID="SFRM_BG_COLOR1" X="10" Y="10" Z="-2" W="238" H="29" CAN_COLOR_CHANGE="1" STATIC_NUM="34" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BG_SHADOW" X="0" Y="0" W="238" H="29" />
+			<ATTR TEXT="450082" T_X="118" T_Y="4" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		</STATIC_FORM>	
+		
+		<STATIC_FORM ID="SFRM_BG_COLOR" X="10" Y="41" Z="-2" W="236" H="360" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BG_SHADOW" X="0" Y="0" W="236" H="360" STATIC_NUM="3"/>
+		</STATIC_FORM>	
+		
+		<SCRIPT ID="ON_TICK">
+			local MainFrm = GetUIWnd("SFRM_COMMUNITY")
+			local MainLocation = MainFrm:GetLocation()
+			local MainSizeX = MainFrm:GetSize():GetX()
+			local MyLocation = UISelf:GetLocation()
+			
+			if MainSizeX > MainLocation:GetX() then
+				UISelf:SetLocation( Point2(MainLocation:GetX()+MainSizeX, MainLocation:GetY()) )
+			else
+				UISelf:SetLocation( Point2(MainLocation:GetX()-UISelf:GetSize():GetX(), MainLocation:GetY()) )
+			end	
+		</SCRIPT>
+
+		<BUTTON ID="BTN_SWEETHEART_QUEST" X="56" Y="404" Z="1" W="144" H="104">
+			<ATTR BTN_IMG="../Data/6_ui/community/cpBtLong.tga" BTN_IMG_W="144" BTN_IMG_H="104"/>
+			<ATTR TEXT="915" T_X="72" T_Y="4" FONT="Font_Text" T_CENTER="1" U = "1" V = "4" UV_INDEX = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:GetParent():Close() return true
+			</SCRIPT>
+		</BUTTON>
+
+		<FORM ID="FRM_SWEETHEART_TEXT1" X="10" Y="50" W="230" H="30">
+			<ATTR TEXT="450084" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+
+		<STATIC_FORM ID="FRM_SWEETHEART_TEXT2" X="18" Y="110" W="220" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="450085" FONT="FTcts_13" T_X="10" T_Y="4" FONT_COLOR_HEX="0xFF9e0b0f"/>
+		</STATIC_FORM>			
+		<FORM ID="FRM_SWEETHEART_TEXT3" X="10" Y="140" W="230" H="30">
+			<ATTR TEXT="450086" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+
+		<STATIC_FORM ID="FRM_SWEETHEART_TEXT4" X="18" Y="204" W="220" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="450087" FONT="FTcts_13" T_X="10" T_Y="4" FONT_COLOR_HEX="0xFF9e0b0f"/>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_SWEETHEART_TEXT5" X="18" Y="230" W="200" H="30">
+			<ATTR TEXT="450088" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF9e0b0f"/>
+			<IMG ID="IMG_CURSOR" X="0" Y="9" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+		</FORM>				
+		<FORM ID="FRM_SWEETHEART_TEXT6" X="18" Y="250" W="250" H="30">
+			<ATTR TEXT="450089" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>	
+		
+		<IMG ID="IMG_LINE01" X="16" Y="275" W="220" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="220" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_LINE02" X="16" Y="275" W="220" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="220" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		
+		<FORM ID="FRM_SWEETHEART_TEXT7" X="18" Y="280" W="200" H="30">
+			<ATTR TEXT="450090" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF9e0b0f"/>
+			<IMG ID="IMG_CURSOR" X="0" Y="9" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+		</FORM>			
+		<FORM ID="FRM_SWEETHEART_TEXT8" X="18" Y="300" W="250" H="30">
+			<ATTR TEXT="450091" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>	
+
+		<IMG ID="IMG_LINE03" X="16" Y="344" W="220" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="220" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_LINE04" X="16" Y="344" W="220" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="220" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+
+		<FORM ID="FRM_SWEETHEART_TEXT9" X="18" Y="350" W="200" H="30">
+			<ATTR TEXT="" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF9e0b0f"/>
+			<IMG ID="IMG_CURSOR" X="0" Y="9" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+		</FORM>			
+		<FORM ID="FRM_SWEETHEART_TEXT10" X="18" Y="370" W="250" H="30">
+			<ATTR TEXT="" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>					
+	</STATIC_FORM>	
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ FRM_SWEETHEART_PLAYTIME ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<FORM ID="FRM_SWEETHEART_PLAYTIME" IS_ABSOLUTE_Y="1" X="650" Y="100" W="127" H="48" CAN_DRAG="1">
+		<ATTR IMG="../Data/6_ui/community/cpTimeBg.tga" IMG_W = "127" IMG_H = "48"/>
+		<FORM ID = "FRM_TITLE">
+			<ATTR X = "0" Y = "24" W = "127" H = "20" FONT = "Font_Chat" T_OUTLINE="1" TEXT = "450094" T_X = "64" T_Y = "6" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFF0ba"/>
+		</FORM>
+
+		<FORM ID="FRM_HOUR10" X="32" Y="2" Z="0" W="20" H="24" >
+			<ATTR IMG="../Data/6_ui/community/cpTimeNum.tga" IMG_W="100" IMG_H="48" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_HOUR1" X="41" Y="2" Z="0" W="20" H="24" >
+			<ATTR IMG="../Data/6_ui/community/cpTimeNum.tga" IMG_W="100" IMG_H="48" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_MIN10" X="62" Y="2" Z="0" W="20" H="24" >
+			<ATTR IMG="../Data/6_ui/community/cpTimeNum.tga" IMG_W="100" IMG_H="48" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_MIN1" X="71" Y="2" Z="0" W="20" H="24" >
+			<ATTR IMG="../Data/6_ui/community/cpTimeNum.tga" IMG_W="100" IMG_H="48" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC10" X="92" Y="2" Z="0" W="20" H="24" >
+			<ATTR IMG="../Data/6_ui/community/cpTimeNum.tga" IMG_W="100" IMG_H="48" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC1" X="101" Y="2" Z="0" W="20" H="24" >
+			<ATTR IMG="../Data/6_ui/community/cpTimeNum.tga" IMG_W="100" IMG_H="48" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+
+		<SCRIPT ID = "ON_DISPLAY"> OnDisplayer_CoupleTime(UISelf) </SCRIPT>
+	</FORM>
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ FRM_SWEETHEART_PLAYTIME _COMPLETE▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<FORM ID="FRM_SWEETHEART_PLAYTIME_COMPLETE" X="650" Y="0" W="127" H="48" CAN_DRAG="1">
+		<ATTR X="650" Y = "0" W = "127" H = "48" IMG="../Data/6_ui/community/cpTimeBg.tga" IMG_W = "127" IMG_H = "48" PASS_EVENT = "1"/>
+		<FORM ID = "FRM_TITLE">
+			<ATTR X = "0" Y = "24" W = "127" H = "26" FONT = "Font_Chat" T_OUTLINE="1" TEXT = "450095" T_X = "64" T_Y = "6" T_CENTER = "1" FONT_COLOR_HEX="0xFF00ff00"/>
+		</FORM>		
+		
+		<BUTTON ID="BTN_SWEETHEART_COMPLETE" X="-1" Y="0" Z="1" W="129" H="30">
+			<ATTR BTN_IMG="../Data/6_ui/community/cpTimeBt.tga" BTN_IMG_W="258" BTN_IMG_H="90"/>
+			<ATTR TEXT="450096" T_X="64" T_Y="4" FONT="FTbt_12" T_CENTER="1" U = "2" V = "3" UV_INDEX = "1" FONT_COLOR_HEX="0xFF393713" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				SweetHeartQuestCompleteBtn(586)
+			</SCRIPT>
+		</BUTTON>		
+	</FORM>	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ FRM_SWEETHEART_PLAY ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<FORM ID="FRM_SWEETHEART_PLAY" ALIGN_X="50" ALIGN_Y="50" W="1024" H="134">	
+		<IMG ID="IMG_LINE01" X="0" Y="50" W="512" H="134" IMG="../Data/6_ui/community/cpRtBg01.tga" IMG_W="512" IMG_H="134" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_LINE02" X="512" Y="50" W="512" H="134" IMG="../Data/6_ui/community/cpRtBg02.tga" IMG_W="512" IMG_H="134" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>		
+		
+		<FORM ID="FRM_SWEETHEART_TEXT1" X="0" Y="106" W="250" H="30">
+			<ATTR TEXT="" T_X="0" T_Y="0" T_RIGHT="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF6aeae5"/>
+		</FORM>
+		<FORM ID="FRM_SWEETHEART_TEXT2" X="1024" Y="106" W="250" H="30">
+			<ATTR TEXT="" T_X="0" T_Y="0" T_LEFT="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFff82c0"/>
+		</FORM>
+		
+		<FORM ID="FRM_SWEETHEART_TEXT3" X="512" Y="290" W="250" H="30">
+			<ATTR TEXT="450103" T_X="0" T_Y="4" T_CENTER="1"/>
+		</FORM>		
+		
+		<IMG ID="IMG_CHA1" X="313" Y="290" W="129" H="166" IMG="../Data/6_ui/community/cpRtCha01.tga" IMG_W="129" IMG_H="166" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_CHA2" X="582" Y="290" W="129" H="166" IMG="../Data/6_ui/community/cpRtCha02.tga" IMG_W="129" IMG_H="166" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		
+		<IMG ID="IMG_HEART" X="460" Y="26" Z="2" W="101" H="90" IMG="../Data/6_ui/community/cpRtHt.tga" IMG_W="101" IMG_H="90" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" IS_VISIBLE="0"/>
+		
+		<SCRIPT ID="ON_CALL">
+			g_fMarryColseTime = GetAccumTime() + 4.0
+			
+			UISelf:GetControl("IMG_CHA1"):SetMaxAlpha(1)
+			UISelf:GetControl("IMG_CHA2"):SetMaxAlpha(1)
+			UISelf:GetControl("IMG_CHA1"):SetAlpha(0)
+			UISelf:GetControl("IMG_CHA2"):SetAlpha(0)
+			UISelf:GetControl("IMG_CHA1"):SetCustomDataAsInt(0)
+			UISelf:GetControl("IMG_CHA2"):SetCustomDataAsInt(0)
+			
+			UISelf:GetControl("FRM_SWEETHEART_TEXT1"):SetLocation(Point2(0, 106))
+			UISelf:GetControl("FRM_SWEETHEART_TEXT2"):SetLocation(Point2(1024, 106))
+			UISelf:GetControl("FRM_SWEETHEART_TEXT3"):SetLocation(Point2(512,290))
+
+			UISelf:GetControl("IMG_CHA1"):SetLocation(Point2(313, 290))
+			UISelf:GetControl("IMG_CHA2"):SetLocation(Point2(582, 290))			
+		</SCRIPT>
+		<SCRIPT ID="ON_DISPLAY"> UpdateSweetHeartPlayUI(UISelf) </SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			if GetAccumTime() > g_fMarryColseTime then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ SFRM_SWEETHEART_MSG_IF ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<STATIC_FORM ID="SFRM_SWEETHEART_MSG_IF" PRIORITY="10">	
+		<ATTR ALIGN_X="50" Y="180" W="248" H="157" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="230" H="105" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="230" H="105" STATIC_NUM="3" />
+				<ATTR TEXT="450106" FONT="Font_Text" T_X="115" T_Y="22" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK">
+			<ATTR X="83" Y="118" W="79" H="28" />
+			<ATTR TEXT="400002" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true;
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true;
+			</HOTKEY>
+			<HOTKEY ID="28">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true;
+			</HOTKEY>
+			<HOTKEY ID="59">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true;
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID = "ON_CLOSE">
+			OnMsgBoxClose(UISelf)
+		</SCRIPT>
+	</STATIC_FORM>
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ SFRM_SWEETHEART_MSG_MARRY ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<STATIC_FORM ID="SFRM_SWEETHEART_MSG_MARRY" PRIORITY="10">	
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="293" H="266" CAN_DRAG="1" STATIC_NUM="1"/>
+		
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR TEXT="450115" FONT="FTTitle_14" X="10" Y="8" W="275" H="29" T_X="12" T_Y="4" FONT_COLOR_HEX = "0xFFFFFFFF" CAN_COLOR_CHANGE="1" STATIC_NUM="34"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="8" Y="37" W="275" H="186" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="270" H="186" STATIC_NUM="3" />
+				<ATTR TEXT="450116" FONT="Font_Text" T_X="10" T_Y="8" T_LEFT="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK">
+			<ATTR X="105" Y="227" W="79" H="28" />
+			<ATTR TEXT="400002" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true;
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true;
+			</HOTKEY>
+			<HOTKEY ID="28">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true;
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID = "ON_CLOSE">
+			OnMsgBoxClose(UISelf)
+		</SCRIPT>
+	</STATIC_FORM>		
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ SFRM_SWEETHEART_REQ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<STATIC_FORM ID="SFRM_SWEETHEART_REQ" ALIGN_X="50" ALIGN_Y="30" W="297" H="414" STATIC_NUM="1" CAN_DRAG = "0" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" W="295" H="36" STATIC_NUM="4">			
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			
+			<CHECK_BUTTON ID="CBTN_PEOPLE_SEARCH" X="7" Y="4" Z="1" W="104" H="24" BTN_T_INVERTBOLD="1" T_OUTLINE="1">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48"/>
+				<ATTR TEXT="450107" FONT="FTtitle_14" T_X="46" T_Y="4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_CALL">
+					if not UISelf:GetCheckState() then
+						UISelf:CheckState(true)
+					end
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<STATIC_FORM ID="SFRM_BG_2" X="264" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BNT_CLOSE" X="264" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("SFRM_SWEETHEART_REQ") </SCRIPT>
+				<HOTKEY ID="1">CloseUI("SFRM_SWEETHEART_REQ") return true</HOTKEY>
+			</BUTTON>
+			<FORM ID="FRM_ITEM" X="9" Y="35" W="280" H="554" IS_VISIBLE="1">
+				<STATIC_FORM ID="SFRM_BG_COLOR_1" X="0" Y="0" Z="-2" W="279" H="334" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="0" Y="0" Z="-1" W="279" H="334" STATIC_NUM="3"/>	
+			</FORM>				
+		</STATIC_FORM>
+	
+		<SCRIPT ID="ON_CALL">
+			g_kSweetHeartMoney = 10
+			UISelf:GetControl("SFRM_BG_MONEY"):SetStaticText(tostring(g_kSweetHeartMoney))
+		</SCRIPT>
+		
+		<!-- 스크롤 -->
+		<LIST ID="LST_SWEETHEART_LIST" X="20" Y="43" W="300" H="220">
+			<IMG ID="IMG_BG" X="246" Y="15" W="13" H="220">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="220"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="244" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="244" Y="206" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="246" Y="15" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+		
+			<ATTR ELEMENT_ID="FRM_SWEETHEART_LIST_ITEM"/>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR="IMG_BG"/>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:ClearAllListItem()
+				kSelf:AddNewListItemChar(GetTT(450108):GetStr())
+			</SCRIPT>
+		</LIST>	
+		
+		<IMG ID="IMG_LINE_01" X="14" Y="266" W="272" H="1" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="272" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_LINE_02" X="14" Y="267" W="272" H="1" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="272" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+	
+		<BUTTON ID="BTN_SEND" X="61" Y="375" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(450111, 2200) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="450111" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP">		
+				OnSelectSendMarry(g_kSweetHeartMoney)
+				UISelf:GetParent():Close()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				OnSelectSendMarry(g_kSweetHeartMoney)
+				UISelf:GetParent():Close()
+				return true
+			</HOTKEY>
+		</BUTTON>	
+		<BUTTON ID="BTN_CLOSE" X="148" Y="375" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(450112, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="450112" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				CallUI("SFRM_SWEETHEART_REQ")					
+			</SCRIPT>
+			<HOTKEY ID="60">
+				CallUI("SFRM_SWEETHEART_REQ")	return true
+			</HOTKEY>
+		</BUTTON>			
+		
+		<FORM ID="FRM_TEXT1" X="14" Y="272" W="280" H="30">
+			<ATTR TEXT="450109" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		
+		<STATIC_FORM ID="SFRM_TEXT2" X="18" Y="330" W="264" H="30" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+			<ATTR TEXT="450110" T_X="12" T_Y="6" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			<IMG ID="IMG_CURSOR" X="4" Y="12" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>	
+		</STATIC_FORM>	
+			
+		<STATIC_FORM ID="SFRM_BG_COLOR_2" X="150" Y="332" Z="-2" W="134" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<FORM ID="SFRM_BG_MONEY" X="150" Y="332" W="134" H="24" IMG="../Data/6_ui/myhome/mhMnyBg2.tga" IMG_W="116" IMG_H="24" T_X="80" T_Y="2" T_RIGHT="1" FONT="FT15" FONT_COLOR_HEX="0xFFfff568"/>
+		<IMG ID="IMG_GOLD" X="236" Y="336" W="20" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16"/>
+			
+		<BUTTON ID="CBTN_MONEY" X="258" Y="332" Z="1" W="23" H="24">
+			<ATTR BTN_IMG="../Data/6_ui/Pvp/pvDropArrow.tga" BTN_IMG_W="46" BTN_IMG_H="48"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				local slf = UISelf
+				ClearEditFocus() 
+				local money = CallUI("FRM_SWEETHEART_MONEY") 
+				if false==money:IsNil() then
+					local slfLoc = slf:GetTotalLocation()
+					slfLoc:SetX(slfLoc:GetX()-105)
+					money:SetLocation(slfLoc)
+				end
+			</SCRIPT>
+		</BUTTON>			
+	</STATIC_FORM>
+	<FORM ID="FRM_SWEETHEART_LIST_ITEM" X="16" Y="44" W="240" H="300">
+		<ATTR TEXT="450116" T_X="0" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFF2E1809"/>
+	</FORM>		
+	
+	<STATIC_FORM ID="FRM_SWEETHEART_MONEY" X="516" Y="438" W="105" H="122" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+		<LIST ID="LST_SWEETHEART_MONEY_INTER" X="0" Y="0" Z="3" W="105" H="142" ITEM_X="0" ITEM_Y="0" NO_FOCUS="1">
+			<ATTR ELEMENT_ID="FRM_SWEETHEART_MONEY_INTER_CMB"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:ClearAllListItem()
+				UISelf:AddNewListItemChar("10"):GetWnd():SetCustomDataAsInt(10)
+				UISelf:AddNewListItemChar("20"):GetWnd():SetCustomDataAsInt(20)
+				UISelf:AddNewListItemChar("30"):GetWnd():SetCustomDataAsInt(30)
+				UISelf:AddNewListItemChar("40"):GetWnd():SetCustomDataAsInt(40)
+				UISelf:AddNewListItemChar("50"):GetWnd():SetCustomDataAsInt(50)
+			</SCRIPT>
+		</LIST>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+		<HOTKEY ID="-4">UISelf:Close() return true</HOTKEY>
+		<HOTKEY ID="-5">UISelf:Close() return true</HOTKEY>
+		<SCRIPT ID="ON_LOSE_FOCUS">UISelf:Close() return true</SCRIPT>
+	</STATIC_FORM>
+	<FORM ID="FRM_SWEETHEART_MONEY_INTER_CMB" X="0" Y="0" Z="3" W="135" H="23">
+		<ATTR IMG="../Data/6_ui/common/cmDropB04.tga" IMG_X="4" IMG_Y="3" IMG_W="194" IMG_H="44" U="2" V="2" UV_INDEX="1"/>	
+		<ATTR TEXT="" FONT="Font_Text" T_X="14" T_Y="6" FONT_COLOR_HEX="0xFF4D3413" NO_FOCUS="1"/>
+		<IMG ID="IMG_GOLD" X="40" Y="6" W="20" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16">
+			<SCRIPT ID="ON_L_BTN_UP">
+				OnSelectSweetHeart_Money(UISelf:GetParent():GetCustomDataAsInt())
+				CloseUI("FRM_SWEETHEART_MONEY")
+			</SCRIPT>		
+		</IMG>
+		<SCRIPT ID="ON_L_BTN_UP">
+			OnSelectSweetHeart_Money(UISelf:GetCustomDataAsInt())
+			CloseUI("FRM_SWEETHEART_MONEY")
+		</SCRIPT>
+		<SCRIPT ID="ON_R_BTN_UP">CloseUI("FRM_SWEETHEART_MONEY") return true </SCRIPT>
+	</FORM>		
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ SFRM_SWEETHEART_REQ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<STATIC_FORM ID="SFRM_SWEETHEART_MONEY" ALIGN_X="50" ALIGN_Y="50" W="295" H="268" STATIC_NUM="1" CAN_DRAG = "1">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" W="295" H="36" STATIC_NUM="4">			
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			
+			<CHECK_BUTTON ID="CBTN_PEOPLE_SEARCH" X="7" Y="4" Z="1" W="104" H="24" BTN_T_INVERTBOLD="1" T_OUTLINE="1">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48"/>
+				<ATTR TEXT="450117" FONT="FTtitle_14" T_X="46" T_Y="4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_CALL">
+					if not UISelf:GetCheckState() then
+						UISelf:CheckState(true)
+					end
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<STATIC_FORM ID="SFRM_BG_2" X="264" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BNT_CLOSE" X="264" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("SFRM_SWEETHEART_MONEY") </SCRIPT>
+				<HOTKEY ID="1">CloseUI("SFRM_SWEETHEART_MONEY") return true</HOTKEY>
+			</BUTTON>			
+			<FORM ID="FRM_ITEM1" X="9" Y="94" W="276" H="131" IS_VISIBLE="1">
+				<STATIC_FORM ID="SFRM_BG_COLOR_1" X="0" Y="0" Z="-2" W="276" H="131" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="0" Y="0" Z="-1" W="276" H="131" STATIC_NUM="3"/>	
+			</FORM>				
+		</STATIC_FORM>
+
+		<SCRIPT ID="ON_CALL">
+			UISelf:GetControl("FRM_TOTAL_MONEY"):GetControl("SFRM_BG_TOTAL_MONEY"):SetStaticText(tostring(0))
+			UISelf:GetControl("EDT_MONEY"):SetEditText("0")
+		</SCRIPT>
+
+		<FORM ID="FRM_TOTAL_MONEY" X="9" Y="35" W="276" H="57" IS_VISIBLE="1">
+			<ATTR TEXT="450118" T_X="10" T_Y="4" FONT="Ftcts_13" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<STATIC_FORM ID="SFRM_BG_COLOR_1" X="0" Y="0" Z="-2" W="276" H="57" STATIC_NUM="24" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			
+			<STATIC_FORM ID="SFRM_BG_TOTAL_MONEY" X="7" Y="26" W="265" H="26" STATIC_NUM="34" T_X="226" T_Y="2" T_RIGHT="1" FONT="FT15" FONT_COLOR_HEX="0xFFfff568"/>
+			<IMG ID="IMG_GOLD" X="240" Y="30" W="20" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16"/>			
+		</FORM>
+		
+		<STATIC_FORM ID="SFRM_TEXT2" X="16" Y="100" W="264" H="30" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+			<ATTR TEXT="450119" T_X="12" T_Y="6" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			<IMG ID="IMG_CURSOR" X="4" Y="12" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>	
+		</STATIC_FORM>			
+
+		<FORM ID="FRM_TEXT1" X="14" Y="133" W="280" H="30">
+			<ATTR TEXT="450120" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		
+		<STATIC_FORM ID="SFRM_BG_MONEY" X="18" Y="196" W="261" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<!--FORM ID="SFRM_BG_MONEY" X="18" Y="196" W="261" H="24" IMG="../Data/6_ui/myhome/mhMnyBg.tga" IMG_W="261" IMG_H="24" T_X="30" T_Y="2" T_LEFT="1" FONT="FT15" FONT_COLOR_HEX="0xFFfff568"/-->
+		<IMG ID="IMG_GOLD" X="22" Y="200" W="20" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16"/>
+		
+		<EDIT ID="EDT_MONEY" X="50" Y="194" Z="2" W="60" H="24">
+			<ATTR EDIT_BLOCK_IMG="../Data/6_UI/01_main/bgWarn.tga" EDIT_CAROT_IMG="../Data/6_UI/Carot.tga"/>
+			<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="FT15" EDIT_PREVIEW="" FONT_COLOR_HEX="0xFFfff568"/>
+			<ATTR EDIT_LIMIT_LENGTH="3" TEXT="" EDIT_DONT_LOSTFOCUS="0" EDIT_ONLY_NUM="1" T_OUTLINE="1"/>
+			<HOTKEY ID="1">	if UISelf:IsFocus() then ClearEditFocus() return true end	</HOTKEY>
+			<HOTKEY ID="59"> SendScriptEvent("SFRM_SWEETHEART_MONEY", "BTN_SEND", "ON_L_BTN_UP") </HOTKEY>
+			<HOTKEY ID="60"> SendScriptEvent("SFRM_SWEETHEART_MONEY", "BTN_CLOSE", "ON_L_BTN_UP") </HOTKEY>	
+			
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetEditText("0")
+			</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">
+				UISelf:SetEditText("0")
+			</SCRIPT>			
+		</EDIT>
+		
+		<BUTTON ID="BTN_SEND" X="61" Y="229" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(450121, 2200) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="450121" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				local kSelf = UISelf
+				local kEditBox = kSelf:GetParent():GetControl("EDT_MONEY")
+				if nil == kEditBox or kEditBox:IsNil() then return end
+
+				local kInputText = kEditBox:GetEditText()
+				OnSelectSendMoney(tonumber(kInputText:GetStr()))
+				kSelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local kSelf = UISelf
+				local kEditBox = kSelf:GetParent():GetControl("EDT_MONEY")
+				if nil == kEditBox or kEditBox:IsNil() then return end
+
+				local kInputText = kEditBox:GetEditText()
+				OnSelectSendMoney(tonumber(kInputText:GetStr()))
+				kSelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="148" Y="229" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(450112, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="450112" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP">	UISelf:GetParent():Close()	</SCRIPT>
+			<HOTKEY ID="60"> UISelf:GetParent():Close() return true </HOTKEY>
+		</BUTTON>			
+	</STATIC_FORM>	
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ FRM_SWEETHEART_PLAYEND ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<FORM ID="FRM_SWEETHEART_PLAYEND" ALIGN_X="50" ALIGN_Y="50" W="1024" H="134">	
+		<IMG ID="IMG_LINE01" X="0" Y="50" W="512" H="134" IMG="../Data/6_ui/community/cpRtBg01.tga" IMG_W="512" IMG_H="134" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_LINE02" X="512" Y="50" W="512" H="134" IMG="../Data/6_ui/community/cpRtBg02.tga" IMG_W="512" IMG_H="134" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>		
+
+		<FORM ID="FRM_SWEETHEART_TEXT1" X="0" Y="100" W="1024" H="30">
+			<ATTR TEXT="450136" T_X="512" T_Y="4" T_CENTER="1" FONT="Font_QuestWarn" FONT_COLOR_HEX="0xFFffeb99"/>
+		</FORM>		
+		<FORM ID="FRM_SWEETHEART_TEXT2" X="0" Y="130" W="1024" H="30" FONT="Ftcts_16" FONT_COLOR_HEX="0xFFffffff">
+			<ATTR TEXT="450137" T_X="512" T_Y="4" T_CENTER="1"/>
+		</FORM>		
+		<SCRIPT ID="ON_TICK">
+			if GetAccumTime() > g_fMarryColseTime then
+				UISelf:Close()
+			end
+		</SCRIPT>	
+		<SCRIPT ID="ON_CALL">
+			g_fMarryColseTime = GetAccumTime() + 5.0
+		</SCRIPT>		
+	</FORM>	
+</XUI>

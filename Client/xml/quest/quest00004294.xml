@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4294</ID> <!--T.T.10429400 흑룡왕의 정수 -->
+
+
+<!-- 작성자 : 김효중-->
+<!--[완료조건]	암흑 흑룡왕의 날개-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	암흑 흑룡왕의 날개를 가져오면 흑룡왕의 정수를 추출 하는 방법을 알려준다.-->
+
+
+<LIMITS>
+
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">119300000</ITEM> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10429411"/> <!--암흑 흑룡왕의 날개-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">82000820</ITEM><!--전체지급/전체/1)/82000820(봉인아님)1개-[13_07 별자리] 흑룡왕의 정수(날개) -->
+		</SELECT1>
+
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10429421" FACE="Crete_normal"/> <!--흑룡왕을 처치하시고 그 증거로 암흑 흑룡왕의 날개를 가져다 주세요-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10429426" FACE="Crete_smile"/> <!--휴…흑룡왕의 마력이 이 정수에 온전하게 담겼습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10429423" FACE="Crete_normal"/> <!--잠시만 기다려 주세요. 직접 해보는 것은 처음이라서 정신집중이 필요 하답니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10429424" FACE="Crete_normal"/> <!--언제든 절 찾아오시면 보답을 해 드리겠습니다.
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10429425" FACE="Crete_normal"/> <!-- 흑룡왕을 처치하시고 증거를 가져 오셨나요? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10429402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

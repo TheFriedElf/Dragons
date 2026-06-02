@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5017</ID> <!--T.T.10501701 공포의 상어 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 상어 20마리 처리-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비에게 어느 날 자꾸 상어가 찾아와서 공짜로 무기를 만들어달라고 한다. 아직도 개념을 찾지 못하는 상어들에게 정의의 철퇴를 내리기 위해, 수염고래 해안가의 상어 20마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010100/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010100/수염고래 해안가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10501711"/> <!--상어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501721" FACE="Darby_normal"/> <!--그만 찾아 오라니까!
+앗, 이런 미안.
+난 또 상어들이 찾아온 줄 알고 말이야.%%
+에휴. 정말 그것 때문에 미칠 것 같다니까.
+흠, 그러고 보니 너 상당히 강한 것 같은데 맞지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501726" FACE="Darby_smile"/> <!--고마워. 이제 날 귀찮게 하는 상어로부터 해방이군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501723" FACE="Darby_normal"/> <!--상어들이 찾아온 이유는 자신들이 쓸 무기를 만들어 달라는 거였어.
+물론 해적질을 일삼는 상어에게 무기를 만들어 줄 이유도 없지만, 이 녀석들이 공짜를 원하는 거야.%%
+정말 기가 찰 노릇이지. 당연히 안 된다고 했지만. 
+이 녀석들은 줄기차제 찾아 오더군.%%
+물론 항구 내의 경비병에게도 이야기 했지만, 약삭빠른 녀석들이 경비병이 나타나면 도망가 버려서. 
+나 혼자 골머리를 앓고 있었어.
+미안한데 그 녀석들이 다시는 찾아오지 못하도록 좀 혼내 주지 않을래?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501724" FACE="Darby_angly"/> <!--한 사람이 핍박받고 있는 걸 모른척하다니! 넌 용사가 되기는 틀려먹었어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501725" FACE="Darby_angly"/> <!--저기, 너무 여유 부리는 것 아니야? 그 녀석들이 언제 찾아올지 모른다고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

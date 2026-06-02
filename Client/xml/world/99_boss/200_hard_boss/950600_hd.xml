@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_950600_HD" DESCRIPTION="90206000">
+	<DISABLE_RANDOM_ANI>
+		<ITEM OBJECT_NAME ="B_aram_Mutisha_opening 01"/>
+	</DISABLE_RANDOM_ANI>
+	<GSAPATH>../Data/3_World/99_Boss/200_Hard_Boss/950600/950600_HD.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Kundara_Dungeon.mp3</BGSOUND>
+	<SCRIPT INIT="Init_020600" READY="Ready_020600" UPDATE="Update_020600" START="Start_020600">World/99_Boss/020600_DG.lua</SCRIPT>
+	<OPENING_MOVIE NAME="B_aram_Mutisha_opening 01"/>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.75" GLOW="0.25" HIGHLIGHT="0" />
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 --> 
+	<MAPVALUE PLAYERKILL="0" TYPE="1"/>
+		<CAMERA_ADJUST UP="17" ZOOM="0" TARGET_Z="30"/>
+  <!--변경될 카메라 위치 CAMERA_ADJUST UP="143" ZOOM="-96" TARGET_Z="50"/--> 
+	<CAMERA_ADJUST MAX_ZOOM="0" />
+	<VIEW_DISTANCE USE="1" HIGH_END="10000"/>
+	
+	<COMPLETE_PATH>
+		<ITEM ID = "0" PATH = "../Data/6_UI/mission/msRtAram000.tga"/>
+		<ITEM ID = "1" PATH = "../Data/6_UI/mission/msRtAram001.tga"/>
+		<ITEM ID = "2" PATH = "../Data/6_UI/mission/msRtAram002.tga"/>
+		<ITEM ID = "3" PATH = "../Data/6_UI/mission/msRtAram003.tga"/>
+	</COMPLETE_PATH>
+</WORLD>

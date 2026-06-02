@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_034138_DF">
+	<GSAPATH>../Data/3_World/03_Solaiden/500_Defense_Mode/034138_DF.gsa</GSAPATH>
+		<MINIMAP Y="135" H="180">../Data/3_World/03_Solaiden/500_Defense_Mode/034138_MM.dds</MINIMAP>
+	<!-- 두번째 미니맵
+	<MINIMAP Y="135" H="180">../Data/3_World/03_Solaiden/500_Defense_Mode/034138_2_MM.dds</MINIMAP>
+	-->
+	<BGSOUND VOLUME="1.0">../BGM/defencemode.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="400"/>
+	</TRIGGER>
+
+	<WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1" />
+    <FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="12292" COLOR="0.6431373,0.7607843,0.7764706"/>
+
+</WORLD>

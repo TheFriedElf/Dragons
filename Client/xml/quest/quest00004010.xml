@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4010</ID> <!--T.T.10401001 작전명령서의 전달 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	카즈라의 작전명령서 전달-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	몸이 불편한 전령 가누를 대신하여 수염고래 해안가의 마이트리에게 카즈라의 작전명령서를 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C021FDA9-4516-4076-8305-CEE6BD133408</CLIENT> <!--시작NPC 톱날꽃게 해변 - 가누 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C021FDA9-4516-4076-8305-CEE6BD133408</AGENT> <!--진행NPC 11 톱날꽃게 해변 - 가누 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 12 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160400900/1">10011</NPC> 
+ <!--Item_NO=160400900/[Q.ID:04009] 카즈라의 작전명령서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160400900/1/511">10011</NPC> 
+ <!--Item_NO=160400900/[Q.ID:04009] 카즈라의 작전명령서,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160400900/1">10011</NPC> 
+ <!--Item_NO=160400900/[Q.ID:04009] 카즈라의 작전명령서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160400900/1/512">10012</NPC> 
+ <!--Item_NO=160400900/[Q.ID:04009] 카즈라의 작전명령서,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160400900/1">10012</NPC> 
+ <!--Item_NO=160400900/[Q.ID:04009] 카즈라의 작전명령서,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10401011"/> <!--카즈라의 작전명령서 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10401021" FACE="Ganu_normal"/> <!--아, 작전명령서를 되찾다니…
+이 모든 것이 꿈만 같구만.%%
+흠.. 그러나 문제가 또 있다네. 다크하운드에게 공격 받은 상처 때문에
+지금 내 몸 상태가 말이 아니라네.%%
+그래, 너무 걱정하진 말게나. 이 늙은이 한 목숨은 그다지 중요하지 않다네.
+다만, 한시라도 빨리 마이트리 사제님께 이 문서를 쿨럭쿨럭…%%
+쿨럭! 절대… 쿨럭! 혼날까봐…. 쿨럭, 쿨럭… 그러는 게 아닐세... -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10401026" FACE="Maitri_smile"/> <!--다시 만나게 되어 반갑군요.
+아니… 그것은…!%%
+카즈라에서 보낸 중요 서찰 아닙니까?
+가누님은 무사하신지요?%%
+덕분에 소중한 물건을 찾게되는군요.
+바람의 사제 마이트리… 용사님께, 공손히 감사의 예를 표하고자 합니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10401023" FACE="Ganu_normal"/> <!--정말인가!
+정말.. 자네 밖에 없구만… 크흐흑… 감동이야.%%
+자, 그렇다면 한시라도 빨리.. 마이트리님을 만나 이 작전명령서를 전해주게나! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10401024" FACE="Ganu_angry"/> <!--자네의 뜻은 내 잘 알겠네. 자네는 자네의 길을 가게나…%%
+아.. 그런데 혹시 방향이 맞다면 나도 좀 데려갔음 싶은데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10401025" FACE="Ganu_angry"/> <!--어허… 아직도 지체할 시간이 남았는가? 마이트리님이 기다리고 있단 말일세!
+난, 그럼 꼬깨잡이 때문에 바빠서 이만…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10401002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10401025" FACE="Ganu_angry"/> <!--어허… 아직도 지체할 시간이 남았는가? 마이트리님이 기다리고 있단 말일세!
+난, 그럼 꼬깨잡이 때문에 바빠서 이만…-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10401052" FACE="Maitri_normal"/> <!--전령 가누는 만나고 왔나요? 뭔가 주지 않던가요?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

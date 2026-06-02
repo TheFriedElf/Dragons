@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2240</ID> <!--T.T.10224001 친하게 지냅시다. (4) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 헌터G에게 배달-->
+<!--[완료NPC]	달빛해안 마을 - 헌터G-->
+<!--[내용]	묘지기 라르엘은 친구 없이 혼자 지내는 게 익숙하지만 가끔은 외롭다고 한다. 그런 라르엘에게 헌터G는 라르엘과 친구가 되어 주겠다고 한다. 라르엘은 고마운 헌터G에게 줄 선물을 만들었다고 한다. 메르곤에게 얻은 썩은 갑옷으로 만든 선물을 헌터G에게 전해주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4A7BAF7A-1593-42e8-902E-A95CB08AEA63</PAYER> <!--완료NPC 달빛해안 마을 - 헌터G -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012"  MARK="END">4A7BAF7A-1593-42e8-902E-A95CB08AEA63</AGENT> <!--진행NPC 12 달빛해안 마을 - 헌터G -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160223820/1">10011</NPC> 
+ <!--Item_NO=160223820/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160223820/1/511">10011</NPC> 
+ <!--Item_NO=160223820/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160223820/1">10011</NPC> 
+ <!--Item_NO=160223820/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160223820/1/512">10012</NPC> 
+ <!--Item_NO=160223820/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160223820/1">10012</NPC> 
+ <!--Item_NO=160223820/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10224011"/> <!--헌터G에게 배달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10224021" FACE="Larel_normal"/> <!--네가 저번에 구해다 준 썩은 갑옷으로 선물을 만들었어.
+이번 선물은 기대해도 될 거야.%%
+정성을 다해 만들었으니 네가 좀 전해줘. 알았지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10224026" FACE="HunterG_smile"/> <!--라르엘군이 나에게 선물을 보내왔단 건가?
+이건가? 뭔가 궁금하군.%%
+(상자를 열었다.)%%
+이게...대체...뭔가? 썩은 내가 진동하는군.
+나랑 지금 장난하는 건가?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10224023" FACE="Larel_smile"/> <!--이걸 가지고 가도록 해.
+부탁할게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10224024" FACE="Larel_angly"/> <!--너는 왜 끝까지 책임지지 않는 거지?
+난 너의 그 태도가 마음에 들지 않아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10224025" FACE="Larel_normal"/> <!--조심히 들고 가.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10224002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10224051" FACE="Larel_angly"/> <!--그거 만들기 얼마나 어려었는지 알아?!! 잃어버리면 어떻게 해.
+조금만 기다려 봐. 다시 만들어서 줄게. %%
+이번에는 잃어버리지 마.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10224052" FACE="HunterG_normal"/> <!--나에게 용건이라도 있는 건가?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>112</ID> <!--T.T.10011201 이론의 문제점 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크 필드의 오크 히어로를 조사하자.-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	클라인 박사가 만든, 이론의 문제점을 찾기 위해서 에너지체의 결정을 찾아야 한다. 오크 필드의 오크 히어로를 조사하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</CLIENT> <!--시작NPC 게펜 - 테일링 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 11 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">4702300</MONSTER> 
+ <!--MON_NO=4702300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10011211"/> <!--오크 히어로 조사-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">99622540</ITEM><!--전체지급/전체/1)/99622540(봉인아님) 1개-라그나로크 노비스 백팩-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10011221" FACE="Tailing_normal"/> <!--흠, 클라인 박사님의 이론에 문제점이 생겼어요.
+클라인 박사님은 거대한 에너지체가 몇 개의 작은 덩어리로 분열되어 몬스터와 결합했다고 생각하셨거든요.%%
+그리고 그게 결합체의 핵이 되었다고 생각하셨는데, 그게 아니었데요.
+결합체의 핵은 박사님의 생각과 달리 전이해서 몬스터를 변하게 하는 성질이 없다고 말이에요.
+무슨 말인지 아시겠어요? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10011226" FACE="Tailing_normal"/> <!--음, 클라인 박사님이 틀리셨군요.
+오크 히어로에게 없다면 도대체 에너지체의 결정은 어디에 있는 걸까요?%%
+(테일링이 주머니를 뒤적인다.)
+혹시 내 주머니에 넣어뒀었나?%%
+흠, 주머니엔 없네요. 어쨌거나 수고하셨으니까. 선물을 드릴게요.
+한참 전에 저희 세계에 유행하던 백팩이에요. 
+%name%님은 유행에 뒤떨어져 보이니까 백팩이 잘 어울릴 거에요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10011223" FACE="Tailing_normal"/> <!--그렇게 아는 척 안 하셔도 돼요.
+%name%이 똑똑하셨다면, 몬스터를 잡으러 돌아다니지 않고, 저기 안에서 연구하고 있었겠죠.
+(무...무시하는 거냐?)%%
+하여간, 클라인 박사님은 몬스터의 성질을 변화시키는 에너지체의 결정이 있다고 생각하고 계세요.
+에너지체는 강한 에너지를 가진 생명체에게 이동하려는 성질이 있다고 하네요.%%
+그래서 가장 강한 에너지를 가지고 있는 오크 필드의 오크 히어로에게 에너지체의 결정이 있을 가능성이 많데요.
+오크 필드의 오크 히어로를 조사해 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10011224" FACE="Tailing_angly"/> <!--그것도 모를 수가 있어요?
+전 그래도 용사님이 똑똑한 줄 알았단 말이에요.
+얼굴이 재미있게 생기면 다들 똑똑한 법이잖아요?
+(이 세계에서 테일링이 제일 똑똑한 것 같다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10011225" FACE="Tailing_normal"/> <!--오크 필드의 오크 히어로는 정말 강해요.
+왜 인상을 보면 그 사람을 알 수 있다고 하잖아요.
+아마 용사님의 강함도, 오크 히어로와 같은 강한 인상이 있기 때문일지도 모르겠네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10011202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

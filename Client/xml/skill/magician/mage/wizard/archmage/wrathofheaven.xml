@@ -1,0 +1,15 @@
+<ACTION ID="a_WrathOfHeaven" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE" ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="skill_RaceOfHeaven_01"/>
+  <FSM SCRIPT="Skill_Arcmage_WrathOfHeaven"
+		CASTING_EFFECT_EFFECT_ID="ef_skill_lightingmagnet_02_char_root"
+		CASTING_EFFECT_TARGET_NODE="char_root"
+		FIRE_CASTER_EFFECT_ID=""
+		FIRE_CASTER_EFFECT_TARGET_NODE=""
+		HIT_CASTER_EFFECT_ID=""
+		HIT_CASTER_EFFECT_TARGET_NODE=""
+		HIT_TARGET_EFFECT_ID="ef_skill_lightingstorm_02_char_root"
+		HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+		MULTI_HIT_NUM="5"
+		FIRE_SOUND_ID="WrathOfHeaven"
+       />
+</ACTION>

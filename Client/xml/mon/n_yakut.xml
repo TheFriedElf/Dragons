@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Yakut" DIE_PARTICLE_ID="ef_Yakut_die_01_char_root">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Yakut"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Yakut/N_Yakut.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="12"/>
+			<SPHERE TO="p_hit_point_02" SIZE="11"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000063" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000064" RANDOM="100"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051" SPEED="150"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

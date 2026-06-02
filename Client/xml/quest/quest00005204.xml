@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5204</ID> <!--T.T.10520401 불경기라 진귀한 물건이 필요해 -->
+
+
+<!-- 작성자 : jinsol7980-->
+<!--[완료조건]	보물 주머니 30개 수집 (칼리곤 선단)-->
+<!--[완료NPC]	달빛해안 마을 - 프랑크-->
+<!--[내용]	장비상인 프랑크가 불경기를 타파하기 위해 진귀한 물건들을 구해 달라고 한다. 확보한 정보로는 칼리곤 선단의 보물을 근처 몬스터에게 탈취 당했다는데, 몬스터들을 척살해서 보물주머니를 획득 프랑크에게 가져다 주고 보상을 받자.-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">33FAB5CE-50F9-407E-807C-5F32FA202064</CLIENT> <!--시작NPC 바람항구 마을 - 크리스핀 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">33FAB5CE-50F9-407E-807C-5F32FA202064</PAYER> <!--완료NPC 바람항구 마을 - 크리스핀 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">33FAB5CE-50F9-407E-807C-5F32FA202064</AGENT> <!--진행NPC 11 바람항구 마을 - 크리스핀 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/0/1/1/160520410">9010150</GROUND> 
+ <!--MAP_NO=9010150/칼리곤 선단,Item_NO=160520410/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160520410</ITEM> 
+ <!--Item_NO=160520410/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10520411"/> <!--보물 주머니 30개 수집-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10520421" FACE="crispin_normal"/> <!--불경기야 불경기, 사람들이 도무질 물건을 살 생각을 안하는군
+역시 눈에 확 들어오는 진귀한 물건이 좀 있어야, 바람잡이 역할도 하고 할텐데.
+도무지 좋은 아이템이 없단 말이야. %% 죄송한데 %name%님 저좀 도와 주실수 있으신가요? 좀 어려운 부탁일수 있는데,
+ 소문을 듣자하니 칼리곤 선단의 해적의 비밀 창고가 몬스터의 습격을 받아 
+보관용으로 포장되어있는 보물 주머니를 대량으로 잃어 버렸다고 하네요. %% 뭐 어찌되었든 칼리곤 선단의 몬스터를 잡아 그 보물을 확보할수 있다면,
+정말 장사를 활성화 하는데 많은 도움이 될꺼라고 생각합니다. 제발 도와 주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10520426" FACE="crispin_smile"/> <!--감사합니다. 정말 살았습니다, 이정도의 물품이면 사람들의 시선을 끄는데 충분 할듯 합니다.
+정말 감사 드립니다. 용자님.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10520423" FACE="crispin_normal"/> <!--감사 합니다. 귀찮은 일일텐데 이렇게 신경을 써주시다니요.
+사례는 섭섭지 않게 하겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10520424" FACE="crispin_angly"/> <!--예! 잘 알겠습니다, 저희가계가 망하든 말든 모르겠다는 말씀이신 거군요.
+다음부턴 저희가계에 들리셔도 모른체 하겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10520425" FACE="crispin_angly"/> <!--아직인가요? 시간이 갈수록 매출이 떨어지고 있단 말입니다 서둘러 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10520411" FACE="None_None"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10520402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5157</ID> <!--T.T.10515701 도전장(4) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	벨칸신전 - 그리드 적기사로부터 빨간 허브 30개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	하임과 프랑크의 대결은 이제 마무리가 되어가고 있다고 한다. 프랑크는 자존심을 상하게 하는 프랑크를 상대로 이번 경기를 꼭 이기고 싶다며, 특제 포션을 만들기 위한 재료를 모으고 있다고 한다. 하지만 그리드 적기사가 빨간 허브를 모두 가져갔다고 한다. 벨칸신전에 그리드 적기사를 처리하고 빨간 허브30개를 모아 하임에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3CD863C-444D-40ee-B976-083D98067B1B</CLIENT> <!--시작NPC 달빛해안 마을 - 하임 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 11 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010220/10000/5000/1/1/160515700">6009200</MONSTER> 
+ <!--MON_NO=6009200/그리드 적기사,MAP_NO=9010220/벨칸 신전,Item_NO=160515700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160515700</ITEM> 
+ <!--Item_NO=160515700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10515711"/> <!--빨간 허브-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10515721" FACE="Coneil_normal"/> <!--왔어? 친구!
+이번 주 포션이 잘 팔려 정말 바쁘군.%%
+이 정도로만 팔린다면 프랑크 아저씨도 어쩌지 못할 거야.
+하지만 문제가 하나 있어. 네가 좀 도와줘야 할 것 같아.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10515726" FACE="Coneil_normal"/> <!--좋아. 역시 너라면 내가 믿고 맡길 수 있을 것 같아. 얼마 안되지만 받아 둬.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10515723" FACE="Coneil_normal"/> <!--역시 너 밖에 없어.
+이번에 팔리는 특제포션이 반응이 아주 괜찮아. 
+향이 조금 나쁘다는 반응이긴 하지만 원래 약은 쓴 게 정상이지. %%
+그래도 소비자 말을 철칙이기도 하니까 향을 조금 개선 할 필요가 있을 것 같아.
+그래서 빨간 허브로 향을 좀 달래고 싶어.%%
+벨칸신전으로 가서 빨간 허브 30개만 구해줘. 그리드 적기사한테 구할 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10515724" FACE="Coneil_angly"/> <!--안 된다고? 너라면 믿을 수 있다고 생각했는데 실망인 걸-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10515725" FACE="Coneil_normal"/> <!--다른 건 다 완성됐는데, 허브가 없단 말이야. 네가 허브 좀 구해다 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10515702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

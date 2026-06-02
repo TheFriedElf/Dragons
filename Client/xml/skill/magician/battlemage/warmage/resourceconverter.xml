@@ -1,0 +1,9 @@
+<ACTION ID="a_Resource Converter" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_01"/>
+  <FSM SCRIPT="Act_Melee_Default" 
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root" 
+       FIRE_CASTER_EFFECT_ID="ef_Resoruceconverter_01_char_root"
+       HIT_SOUND_ID="ResourceCoverter"
+       />
+</ACTION>

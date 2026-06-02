@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_HarpyBlon">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Griffon_rock"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/95_Dungeon/01_BasicMon/050601/HarpyBlon/HarpyBlon.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="22"/>
+			<SPHERE TO="p_hit_point_02" SIZE="13"/>
+		</ABV>
+		<SLOT>
+
+			<!--근거리 1-할퀴기-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+
+			<!--근거리 2_뺨 때리기-->
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000207"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000209"/>
+
+			<!-- 브래스_음파 공격-->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1001121"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1001122"/>
+            <ITEM NAME="breath_01" ANIMATION="1001123" USE_ABIL_TIME="FALSE"/>
+			<ITEM NAME="breath_01_finish" ANIMATION="1001124"/>
+
+			<!--점프해서 내려찍기 -->
+			<ITEM NAME="attk_05_01_start" ANIMATION="1000731"/>
+			<ITEM NAME="attk_05_01" ANIMATION="1000734"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000732"/>
+
+
+			<!-- 대쉬 피어싱
+		  <ITEM NAME="dash_piercing_attk_btlidle_01_start" ANIMATION="1000511"/>
+		  <ITEM NAME="dash_piercing_attk_btlidle_01" ANIMATION="1000512" LOOP="TRUE"/>
+		  <ITEM NAME="dash_piercing_attk_rush" ANIMATION="1000513" LOOP="TRUE" FIRE_EFFECT="NONE"/>
+		  <ITEM NAME="dash_piercing_attk_finish" ANIMATION="1000514"/> -->
+
+
+			<!--깃털 여러번 던지기
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000401"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000402"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000403" FIRE_START_NODE="p_ef_fire" PROJECTILE_ID="Peojectile_Porch_Shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000404" FIRE_START_NODE="p_ef_fire" PROJECTILE_ID="Peojectile_Porch_Shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000405"/> -->
+
+
+			<!--피격패턴 및 사망-->
+            <ITEM NAME="dmg_01" ANIMATION="1000011"/>
+            <ITEM NAME="dmg_02" ANIMATION="1000012"/>
+            <ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+            <ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+            <ITEM NAME="StandUp" ANIMATION="1000024"/>
+            <ITEM NAME="stun" ANIMATION="1000025"/>
+	        <ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>		
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+		
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

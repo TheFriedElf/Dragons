@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020430_FD" DESCRIPTION="90204300">
+	<GSAPATH>../Data/3_World/02_ChaosArea/01_Level/020430_FD.gsa</GSAPATH>
+	<MINIMAP Y="100" H="285">../Data/3_World/02_ChaosArea/01_Level/020430_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="0.8">../BGM/SilentForest.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+
+	<!-- 안개내린 오솔길 포탈 -->
+	<TRIGGER ID="gate_020420_base" TYPE="PORTAL" TITLE_TEXT_ID="800049" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9020420" PARAM2="3">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 무너진 성지 포탈 -->
+	<TRIGGER ID="gate_020510_base" TYPE="PORTAL" TITLE_TEXT_ID="800051" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9020510" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 라미에타 포탈 -->
+	<TRIGGER ID="gate_050110_base" TYPE="PORTAL" TITLE_TEXT_ID="800076" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9050110" PARAM2="3">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 솔방울 언덕 미션포탈 -->
+	<TRIGGER ID="gate_020431_base" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,70" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal" PARAM="90243" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms020430_0" MISSION_DISCRIPTION_TEXT_NUM="9020430"/>
+	</TRIGGER>
+
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="450"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="250"/>
+	</TRIGGER>
+
+	<!-- 텔레포트 엔터던전 -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="2" PARAM2="1"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="2" PARAM2="1"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_03" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" PARAM="1" PARAM2="1"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" PARAM="2" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_05" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" PARAM="4" PARAM2="8"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_06" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" PARAM="4" PARAM2="8"/>
+	</TRIGGER>
+	<!-- 텔레포트 데미지 이동 -->
+	<TRIGGER ID="Touch_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="Touch_target_02" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02"/>
+	</TRIGGER>
+
+	<!-- 포 그 -->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="5134" COLOR="0.2431373,0.509804,0.3686275"/>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="2000" LOW_END="3000" USE="1"/>
+</WORLD>

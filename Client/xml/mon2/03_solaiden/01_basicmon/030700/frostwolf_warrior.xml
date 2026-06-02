@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Frostwolf_Warrior" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Frostwolf_Warrior"/>
+		<KFMPATH SCALE="0.8">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Frostwolf_Warrior/Frostwolf_Warrior.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+	<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			<!-- 도끼 내려치기 -->
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000203"/>
+			
+			<!-- 도끼 크게치기 -->
+
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+			
+
+		
+			<!-- 브레스 -->
+
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347"/>
+			<ITEM NAME="breath_01_finish" ANIMATION="1000348"/>
+		
+			
+
+			
+
+
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010140_FD" DESCRIPTION="90101400">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/010140_FD.gsa</GSAPATH>
+	<MINIMAP Y="210" H="155">../Data/3_World/01_Ingrid/01_Level/010140_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Beach.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!--칼리곤 선단 게이트-->
+	<TRIGGER ID="gate_010150_base" TYPE="PORTAL" TITLE_TEXT_ID="800016" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010150" PARAM2="4">
+			<ACCESS>
+				<!-- LEVEL MIN= "22"/ -->
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!--이벤트 포탈 -->
+	<TRIGGER ID="Event_title_01" TITLE_TEXT_ID="" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1"/>
+	<!-- 텔 레 포 트 -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM="4" PARAM2="2" ERROR_MSG="503135" PARAM_STRING_QUEST1="4103/teleport_zone_01" PARAM_STRING_QUEST2="4107/teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="1" PARAM2="8"/>
+	</TRIGGER>
+
+	<!-- 텔 레 점 프 -->
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="600"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="200"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_11" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_11" PARAM="200"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_12" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_13" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="600"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_14" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_15" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="400"/>
+	</TRIGGER>
+	<!-- 퀘스트 -->
+	<TRIGGER ID="Quest_010150_Location1" TYPE="LOCATION">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoSimpleLocation" PARAM="2" PARAM2="312"/>
+	</TRIGGER>
+	<!-- 퀘스트 -->
+	<TRIGGER ID="Quest_010150_Location2" TYPE="LOCATION">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="374"/>
+	</TRIGGER>
+
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="4449" END="13136" COLOR="0,0,0.2509804"/>
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="1"/>
+</WORLD>

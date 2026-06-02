@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Squirrel_flying" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Squirrel_flying"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Squirrel_flying_base/N_Squirrel_flying.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="10"/>
+			<SPHERE TO="p_hit_point_02" SIZE="17"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- 대쉬02 -->
+			<ITEM NAME="dash_after_attk_btlidle_02_start" ANIMATION="1000204"/>
+			<ITEM NAME="dash_after_attk_btlidle_02" ANIMATION="1000205"/>
+			<ITEM NAME="dash_after_attk_rush_02" ANIMATION="1000206" FIRE_EFFECT="ef_PumpkinHead_skill_01_char_root" FIRE_EFFECT_NODE="char_root"/>
+			<ITEM NAME="dash_after_attk_02_02" ANIMATION="1000207"/>
+			<!-- 휠윈드 이동 공용 사용-->
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000201"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000202"/>
+			<ITEM NAME="whirlwind_01_finish" ANIMATION="1000203"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

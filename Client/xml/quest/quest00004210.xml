@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4210</ID> <!--T.T.10421001 빛을 발하는 현자의 정령석 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바론과 대화-->
+<!--[완료NPC]	잿빛 안개마을 - 바론-->
+<!--[내용]	바론은 자신이 파타누스의 정령석으로부터 시간의 제단에 대한 정보를 얻게 되자 흥분을 금치 못한다. 시간의 제단은 역사 상 가장 특별한 유적으로, 과거, 현재, 미래의 방에서 시험을 통과하면 시간을 제어할 수 있는 힘이 생긴다고 한다. 바론의 이야기를 들어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">337D7112-C2B0-4627-AA27-B01BDB357FC8</CLIENT> <!--시작NPC 잿빛 안개마을 - 바론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">337D7112-C2B0-4627-AA27-B01BDB357FC8</PAYER> <!--완료NPC 잿빛 안개마을 - 바론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">337D7112-C2B0-4627-AA27-B01BDB357FC8</AGENT> <!--진행NPC 11 잿빛 안개마을 - 바론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10421011"/> <!--바론과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10421021" FACE="Waren_normal"/> <!--자네가 지난 번 맡겨두었던 정령석을 기억하나?
+자네의 말로는 시간의 제단을 찾을 수 있는 
+지도가 들어있다고 했지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10421026" FACE="Waren_smile"/> <!--자네의 얘기를 듣고 반드시 해주고 싶은 조언이 생겼어.
+시간의 제단으로 가면 분명히 자네에게 엄청난 시련이 
+주어질 것이네.%%
+하지만 반드시 시련을 이겨내고, 이 세계를 멸망시키려는
+검은 마녀의 음모를 분쇄해 주게.%%
+그럼 건투를 빌겠네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10421023" FACE="Waren_normal"/> <!--드디어 그 비밀을 밝혀내고 말았네. 만약 이 지도가
+사실이라면 자네는 역사 상 최고의 유적을 발견하게 될 거야.%%
+이곳은 바로 에아가 만든 시간이동장치가 숨겨진 곳이라네.
+초마법 시간이동장치의 이름은 키오네스크…
+그래 어렸을 적, 그 이름을 듣고 나도 잠시 시간여행을
+하는 꿈을 꾼 적이 있었지.%%
+쉽게 말해 키오네스크는 타임머신이라 말할 수 있다네.
+그 초마법 장치를 숨겨둔 시간의 제단은 
+과거, 현재, 미래의 방... 모두 세곳으로 되어 있네.%%
+이곳의 시험을 통과하면 시간을 제어할 수 있는
+능력을 얻는다고 전해지지. 초마법은 연금술사의 
+꿈과 다름 없어. 나도 이곳을 보는 것이 평생의 소원이야. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10421024" FACE="Waren_angly"/> <!--지금은 시간의 제단을 찾을 생각이 사라진 모양이군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10421025" FACE="Waren_angly"/> <!--(없음)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10421002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

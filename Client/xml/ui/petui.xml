@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_RENAME_PET_CHECK" ALIGN_X="50" ALIGN_Y="25" W="247" H="158" CAN_DRAG="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<STATIC_FORM ID="SFRM_BG" Z="-1" W="247" H="158" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_BG_COLOR" X="8" Y="8" Z="0" W="231" H="108" STATIC_NUM="2"  CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="8" Y="8" Z="1" W="231" H="108" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<FORM ID="FRM_MESSAGE" X="8" Y="8" Z="0" W="231" H="108">
+			<ATTR TEXT="7500" FONT="Font_Text" T_X="116" T_Y ="40" T_CENTER="1" T_OUTLINE="0" FONT_COLOR_HEX="0xFF482e26"/>
+			<SCRIPT ID="ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+		</FORM>
+		<BUTTON ID="BTN_OK" X="41" Y="121" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="3163" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CallPetRename(UISelf)
+			</SCRIPT>
+			<HOTKEY ID="59">
+				CallPetRename(UISelf)
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="121" W="79" H="28">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="3164" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</FORM>
+	
+	<STATIC_FORM ID="SFRM_RENAME_PET">	
+		<ATTR ALIGN_X="50" ALIGN_Y="25" W="248" H="127" CAN_DRAG="0" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR TEXT="" X="9" Y="7" W="230" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW" X="0" Y="0" W="230" H="75" STATIC_NUM="3"/>
+			<FORM ID="SFRM_PASSWD_TITLE" X="5" Y="5" W="220" H="25">
+				<ATTR TEXT="7501" T_X="10" T_Y="3" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_INPUT" X="5" Y="44" W="220" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		</STATIC_FORM>
+		
+		<EDIT ID="EDIT_NAME" X="19" Y="52" W="210" H="25" Z="1">
+			<ATTR EDIT_T_X="15" EDIT_T_Y="4" EDIT_LIMIT_LENGTH="16" EDIT_FONT="Font_Text" EDIT_PREVIEW="" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID = "ON_TICK">
+				local cust = UISelf:GetCustomDataAsInt()
+				if cust == 0 then
+					UISelf:SetEditFocus(true)
+					UISelf:SetCustomDataAsInt(1)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL"> 
+				UISelf:SetEditText("") 
+				UISelf:SetCustomDataAsInt(0)
+			</SCRIPT>
+			<HOTKEY ID="59"> SendScriptEvent("SFRM_RENAME_PET", "BTN_OK", "ON_L_BTN_DOWN") </HOTKEY>
+			<HOTKEY ID="60"> SendScriptEvent("SFRM_RENAME_PET", "BTN_CANCLE", "ON_L_BTN_DOWN") </HOTKEY>
+			<HOTKEY ID="1"> SendScriptEvent("SFRM_RENAME_PET", "BTN_CANCLE", "ON_L_BTN_DOWN") </HOTKEY>
+		</EDIT>
+
+		<BUTTON ID="BTN_OK">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400533, 2200) </SCRIPT>
+			<ATTR X="40" Y="88" W="79" H="28"/>
+			<ATTR TEXT="400533" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CheckPetRename(UISelf:GetParent(), g_UseItemForChangeName)
+			</SCRIPT>			
+			<HOTKEY ID="59">
+				CheckPetRename(UISelf:GetParent(), g_UseItemForChangeName)
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCLE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400534, 2201) </SCRIPT>
+			<ATTR X="129" Y="88" W="79" H="28"/>
+			<ATTR TEXT="400534" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60">				
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	<FORM ID = "FRM_PET_COLOR_TYPE" ALIGN_X = "50" ALIGN_Y = "10" W="113" H="103" IMG="../Data/6_ui/info/ifPetColor.tga" IMG_W="113" IMG_H="103" CAN_DRAG="1">
+		<BUTTON ID="BTN_OK" X="7" Y="74" W="49" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/cashShop/csBt01.tga" BTN_IMG_W = "98" BTN_IMG_H = "40" TEXT = "400002" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR FONT = "FTbt_12" T_CENTER = "1" T_X = "24" T_Y = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local iData = UISelf:GetParent():GetCustomDataAsInt()
+				CallPetDyeingChk(iData, g_UseItemForChangeColor)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCLE" X="57" Y="74" W="49" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/cashShop/csBt01.tga" BTN_IMG_W = "98" BTN_IMG_H = "40" TEXT = "400003" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR FONT = "FTbt_12" T_CENTER = "1" T_X = "24" T_Y = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+		<FORM ID = "FRM_COLOR_SELECT" X="16" Y="8" NO_FOCUS="1" PASS_EVENT="1" W="20" H="20">
+			<ATTR IMG="../Data/6_ui/main/mnColorOver.tga" IMG_W="20" IMG_H="20"/>
+			<SCRIPT ID = "ON_CALL"> --UISelf:SetLocation(Point2(16,8))</SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_BACK" X="16" Y="8" Z="1" W="80" H="60">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UI_PetColorClick(UISelf) </SCRIPT>
+		</FORM>
+		<SCRIPT ID = "ON_CALL">UISelf:SetCustomDataAsInt(1) UI_PetColorClick(UISelf:GetControl("FRM_BACK"), true) </SCRIPT>
+	</FORM>
+
+	<FORM ID="FRM_PET_COLOR_CHANGE_CHECK" ALIGN_X="50" ALIGN_Y="25" W="247" H="158" CAN_DRAG="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID="ON_CLOSE"> UISelf:SetCustomDataAsInt(0) CloseUI("FRM_PET_COLOR_TYPE") </SCRIPT>
+		<STATIC_FORM ID="SFRM_BG" Z="-1" W="247" H="158" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_BG_COLOR" X="8" Y="8" Z="0" W="231" H="108" STATIC_NUM="2"  CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="8" Y="8" Z="1" W="231" H="108" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<FORM ID="FRM_MESSAGE" X="8" Y="8" Z="0" W="231" H="108">
+			<ATTR TEXT="7507" FONT="Font_Text" T_X="116" T_CENTER="1" T_OUTLINE="0" FONT_COLOR_HEX="0xFF482e26"/>
+			<SCRIPT ID="ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+		</FORM>
+		<BUTTON ID="BTN_OK" X="41" Y="121" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="3163" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local iData = UISelf:GetParent():GetCustomDataAsInt()
+				if GetPetDyeingRandColorMax() > 0 then
+					iData = GetPetDyeingRandColorIndex()
+				end				
+				Net_PT_C_M_REQ_ITEM_CHANGE_TO_PET(iData, g_UseItemForChangeColor)
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local iData = UISelf:GetParent():GetCustomDataAsInt()
+				if GetPetDyeingRandColorMax() > 0 then
+					iData = GetPetDyeingRandColorIndex()
+				end				
+				Net_PT_C_M_REQ_ITEM_CHANGE_TO_PET(iData, g_UseItemForChangeColor)
+				UISelf:CloseParent()
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="121" W="79" H="28">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="3164" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</FORM>
+	<FORM ID="FRM_PET_RAND_COLOR_CHANGE_CHECK" ALIGN_X="50" ALIGN_Y="25" W="247" H="158" CAN_DRAG="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID="ON_CLOSE"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+		<STATIC_FORM ID="SFRM_BG" Z="-1" W="247" H="158" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_BG_COLOR" X="8" Y="8" Z="0" W="231" H="108" STATIC_NUM="2"  CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="8" Y="8" Z="1" W="231" H="108" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<FORM ID="FRM_MESSAGE" X="8" Y="8" Z="0" W="231" H="108">
+			<ATTR TEXT="7519" FONT="Font_Text" T_X="116" T_CENTER="1" T_OUTLINE="0" FONT_COLOR_HEX="0xFF482e26"/>
+			<SCRIPT ID="ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+		</FORM>
+		<BUTTON ID="BTN_OK" X="41" Y="121" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="3163" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local iData = UISelf:GetParent():GetCustomDataAsInt()
+				Net_PT_C_M_REQ_ITEM_CHANGE_TO_PET(iData, g_UseItemForChangeColor)
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local iData = UISelf:GetParent():GetCustomDataAsInt()
+				Net_PT_C_M_REQ_ITEM_CHANGE_TO_PET(iData, g_UseItemForChangeColor)
+				UISelf:CloseParent()
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="121" W="79" H="28">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="3164" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</FORM>
+	<STATIC_FORM ID="SFRM_BUY_PET_FEED" PRIORITY="90" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="150" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR" X="9" Y="7" W="190" H="98" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFR_SDW" X="9" Y="7" Z="1" W="190" H="98" STATIC_NUM="3">
+			<ATTR TEXT="132" FONT="FTbt_12" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			<SCRIPT ID="ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+			<SCRIPT ID="ON_CALL"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK" X="20" Y= "111" W="79" H="28" TEXT="96" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" >
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				SendReqFeedPet(true, UISelf:GetParent():GetCustomDataAsInt())
+				UISelf:CloseParent()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="59">
+				SendReqFeedPet(true, UISelf:GetParent():GetCustomDataAsInt())
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+		</BUTTON>
+
+		<BUTTON ID="BTN_CANCEL" X="106" Y="111" W="79" H="28" TEXT="97" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" >
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="60">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID = "SFRM_USE_PET_FEED" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR ALIGN_X="50" Y = "91" W ="255" H ="210" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<!--<FORM ID = "SFRM_TITLE_VIEW" TEXT="790108" X="54" Y="40" W="196" H="70" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413"/>-->
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="253" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="222" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			</STATIC_FORM>
+			
+			<CHECK_BUTTON ID="CBTN_COLOR" X="7" Y="4" Z="1" W="104" H="24" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48"/>
+				<ATTR TEXT="130" FONT="FTtitle_14" T_X="46" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+			</CHECK_BUTTON>			
+		</STATIC_FORM>
+		<STATIC_FORM ID="ICN_RIGHT_BG">
+			<ATTR X="105" Y="49" W="42" H="42" Z="-1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		</STATIC_FORM>		
+		<ICON ID = "ICN_RIGHT" X="106" Y="50" W="40" H="40" ICON_GRP ="199">
+			<SCRIPT ID="ON_DISPLAY">DisplayPetIconForFeed(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"></SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>			
+			<SCRIPT ID = "ON_L_BTN_UP">	UISelf:CursorToIcon() </SCRIPT>
+		</ICON>		
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="35" Z="-2" W="234" H="132" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID = "SFRM_SHADOW" X = "9" Y = "35" Z="-1" W="234" H="132" STATIC_NUM = "3" />
+		
+		<STATIC_FORM ID = "SFRM_COLOR_TEXT" X="18" Y="99" W="216" H="61" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT = "131" FONT = "Font_Text" T_X="108" T_Y ="20" T_CENTER = "1"/>
+			<SCRIPT ID = "ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+		</STATIC_FORM>
+		
+		<BUTTON ID = "BTN_TRY_REFINE">
+			<ATTR X="41" Y="172" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "134" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				SendReqFeedPet(false, UISelf:GetParent():GetCustomDataAsInt())
+				CloseUI("SFRM_USE_PET_FEED")
+			</SCRIPT>
+			<HOTKEY ID="59">
+				SendReqFeedPet(false, UISelf:GetParent():GetCustomDataAsInt())
+				CloseUI("SFRM_USE_PET_FEED")
+			</HOTKEY>		
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR X="127" Y="172" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>	
+	
+	<STATIC_FORM ID="SFRM_PET_FEED_RESULT" PRIORITY="90" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="150" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR" X="9" Y="7" W="190" H="98" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFR_SDW" X="9" Y="7" Z="1" W="190" H="98" STATIC_NUM="3">
+			<ATTR TEXT="133" FONT="FTbt_12" T_X="95" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			<SCRIPT ID="ON_CALL"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK" X="65" Y= "111" W="79" H="28" TEXT="96" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" >
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="59">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>	
+	<STATIC_FORM ID="SFRM_PET_FEED_INFO" PRIORITY="90" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="200" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR" X="9" Y="7" W="190" H="148" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFR_SDW" X="9" Y="7" Z="1" W="190" H="148" STATIC_NUM="3">
+			<ATTR TEXT="124" FONT="FTbt_12" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			<SCRIPT ID="ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_CASH" X="110" Y= "161" W="79" H="28" TEXT="790213" T_X="42" T_Y="3" T_CENTER="1" >
+			<LOCAL>
+				<NAME ID="DEFAULT">
+					<ATTR  FONT="FTbt_12"/>
+				</NAME>				
+				<NAME ID="AMERICA/EUROPE/GERMANY/FRANCE/SINGAPORE/RUSSIA">
+					<ATTR  FONT="Font_Text"/>
+				</NAME>
+			</LOCAL>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if(true == IsOnMacroCheck()) then  
+					return	
+				end
+				UISelf:CloseParent()
+				CallCashShop() 
+			</SCRIPT>
+			<HOTKEY ID="60">
+				if(true == IsOnMacroCheck()) then  
+					return	
+				end
+				UISelf:CloseParent()
+				CallCashShop() 
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+			<SCRIPT ID="ON_CREATE">
+				UISelf:SetStaticText(GetTextW(790213):GetStr()..GetTextW(2201):GetStr())
+			</SCRIPT>
+		</BUTTON>
+
+		<BUTTON ID="BTN_OK" X="14" Y= "161" W="79" H="28" TEXT="96" T_X="42" T_Y="3" T_CENTER="1" >
+			<LOCAL>
+				<NAME ID="DEFAULT">
+					<ATTR  FONT="FTbt_12"/>
+				</NAME>				
+				<NAME ID="AMERICA/EUROPE/GERMANY/FRANCE/SINGAPORE/RUSSIA">
+					<ATTR  FONT="Font_Text"/>
+				</NAME>
+			</LOCAL>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="59">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_PET_INV" W="296" H="244" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="294" H="36" STATIC_NUM="4">
+			<BUTTON ID="BTN_CLOSE" X="262" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					CloseToolTip()
+					UISelf:SetCursorState(0)	
+					CloseUI("SFRM_PET_INV")
+					</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_TAB" X="9" Y="4" W="84" H="24" U="2" V="2" UV_INDEX="3" IMG="../Data/6_ui/common/cmTabB.tga" IMG_W="168" IMG_H="48">
+				<ATTR TEXT="201060" FONT_COLOR_HEX="0xff4d3413" FONT="FTcts_13" T_CENTER="1" T_X="36"/>
+				<SCRIPT ID="ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+			</IMG>
+			<STATIC_FORM ID="SFRM_BTN_BG" X="9" Y="4" W="84" H="24" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="277" H="142" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SD" X="9" Y="35" W="277" H="142" STATIC_NUM="3">
+				<BUILD X="8" Y="7" X_COUNT="6" Y_COUNT="3" X_GAB="44" Y_GAB="44" TARGET_ID="SFRM_ICON_BG"/>
+				<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" NO_FOCUS="1"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_ITEM_DISASS" X="0" Y="180" W="82" H="10">
+			<ATTR TEXT="5103" FONT="Font_Text" T_CENTER="1" T_X="41" FONT_COLOR_HEX="0xFFFFFF00" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_CURSOR_STATE_CHANGE_TO_CS_TR" X="24" Y="197" W="27" H="26" >
+			<ATTR BTN_IMG="../Data/6_ui/common/cmDisjointB2.tga" BTN_IMG_W="68" BTN_IMG_H="68"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				UISelf:SetCursorState(2) 
+				ChangeInvViewGroup(4)
+				local InvUI = GetUIWnd("Inv")
+				if false == InvUI:IsNil() then
+					local InvTitle = InvUI:GetControl("SFRM_TITLE")
+					if false == InvTitle:IsNil() then
+						local CashUI = InvTitle:GetControl("SFRM_CASH_BG")
+						if false == CashUI:IsNil() then
+							local CashBtn = CashUI:GetControl("CBTN_CASH")
+							if false == CashBtn:IsNil() then
+								PreChangeInvViewGroup(4, CashBtn)
+							end
+						end
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, GetTT(5112), UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>		
+		<BUILD ID="BLD_INV_ICON" X="18" Y="43" X_COUNT="6" Y_COUNT="3" X_GAB="44" Y_GAB="44" TARGET_ID="InvIcon"/>
+		<ICON ID="InvIcon"  X="0" Y="0" Z="100" W="40" H="40" ICON_GRP ="15" ICON_KEY="0">
+			<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+				UISelf:CursorToIconFast(1)
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+			<SCRIPT ID="ON_R_BTN_DOWN">UISelf:IconDoAction() CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local self = UISelf
+				self:CallIconToolTip()
+				local b = true
+				local cur = self:GetParent():GetControl("IMG_CURSOR")
+				if false == cur:IsNil() then
+					cur:Visible(b)
+					if b then
+						local pos = self:GetLocation()
+						pos:SetX(pos:GetX()-1)
+						pos:SetY(pos:GetY())
+						cur:SetLocation(pos)
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<SCRIPT ID="ON_CALL">UI_SetPosBeside(UISelf, "CharInfo")</SCRIPT>
+		<FORM ID="FRM_GUIDE_TEXT" Z="3" X="0" Y="204" W="220" H="50" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR TEXT="5111" FONT="Font_Text" T_CENTER="1" T_X="173" T_Y="-6" FONT_COLOR_HEX="0xFFFFFDD4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_SKILLSET_PET" X="300" Y="100" W="346" H="481" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="344" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="401601" T_X="10" T_Y="4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="144" H="24" STATIC_NUM="3"/>
+				<FORM ID="FRM_TAB_IMG" X="0" Y="0" W="144" H="24" U="1" V="4" UV_INDEX="3" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" />
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_3" X="293" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE" X="293" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():CloseParent()</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID="SFRM_BG" X="9" Y="114" Z="-10" W="328" H="323" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<STATIC_FORM ID="SFRM_BG_SD" X="9" Y="114" Z="-5" W="328" H="323" STATIC_NUM="3"/>
+
+		<BUTTON ID="BTN_SAVE" X="131" Y="441" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="51012" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<SCRIPT ID="ON_CALL">SetTextOnThisUI(51012, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">--SkillSetSave()</SCRIPT>
+			<HOTKEY ID="59">--SaveSkillSet() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL"> UI_SetPosBeside(UISelf, "CharInfo")</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID = "SFRM_CHANGE_EXP_POTION" ALIGN_X="50" ALIGN_Y="50" W="309" H="363" STATIC_NUM="1" CAN_DRAG="1">
+		<SCRIPT ID="ON_CALL">SendChangeExpItem(UISelf, false, true)</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="307" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="387" T_CENTER="1" T_X="65" T_Y="4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="144" H="24" STATIC_NUM="3"/>
+				<FORM ID="FRM_TAB_IMG" X="0" Y="0" W="144" H="24" U="1" V="4" UV_INDEX="3" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" />
+			</STATIC_FORM>
+			<BUTTON ID="BTN_CLOSE" X="276" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():CloseParent()</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID="SFRM_NOTICE" X="10" Y="36" W="289" H="62" STATIC_NUM="34" FONT="Font_Text" TEXT="388" T_X="2" T_Y="3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		
+		<STATIC_FORM ID="SFRM_BG" X="9" Y="101" W="291" H="216" Z="-10" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<IMG ID="IMG_ARROW" X="122" Y="81" W="48" H="55" IMG="../Data/6_ui/etc/etcPetexpArw.tga" IMG_W="48" IMG_H="55"/>
+			<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="291" H="216" STATIC_NUM="3"/>
+			<STATIC_FORM ID="SFRM_BG_SD1" X="7" Y="8" W="278" H="73" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="389" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_X="3" T_Y="3"/>
+				<BUILD ID="BLD_ICON_BG" X="6" Y="24" X_COUNT="6" Y_COUNT="1" X_GAB="45" Y_GAB="0" TARGET_ID="SFRM_ICON_BG"/>
+				<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_SD2" X="7" Y="136" W="278" H="73" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="390" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_X="3" T_Y="3"/>
+				<BUILD ID="BLD_ICON_BG" X="6" Y="24" X_COUNT="6" Y_COUNT="1" X_GAB="45" Y_GAB="0" TARGET_ID="SFRM_ICON_BG"/>
+				<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUILD ID="BLD_ICON_EXP_PC" X="23" Y="134" X_COUNT="6" Y_COUNT="1" X_GAB="45" Y_GAB="0" TARGET_ID="ICN_EXP_PC"/>
+		<ICON ID="ICN_EXP_PC" X="0" Y="0" W="40" H="40" ICON_GRP="190">
+			<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">DisplayPetExpIconSrc(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">	UISelf:CursorToIcon() </SCRIPT>
+		</ICON>
+
+		<BUILD ID="BLD_ICON_EXP_PET" X="23" Y="262" X_COUNT="6" Y_COUNT="1" X_GAB="45" Y_GAB="0" TARGET_ID="ICN_EXP_PET"/>
+		<ICON ID="ICN_EXP_PET" X="0" Y="0" W="40" H="40" ICON_GRP="191">
+			<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">DisplayPetExpIconResult(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+
+		<BUTTON ID="BTN_OK" X="69" Y="322" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="391" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">SendChangeExpItem(UISelf:GetParent(), false)</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="155" Y="322" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="3164" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_PET_UPGRADE" X="100" Y="100" W="255" H="360" STATIC_NUM="1" CAN_DRAG="1" >
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="253" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="213" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="3414" T_X="10" T_Y="4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="213" H="24" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_CLOSE" X="223" Y="4" Z="1" W="24" H="24">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		
+		<FORM ID="FRM_ICON_BG" X="10" Y="36" Z="2" W="235" H="235" TICK_TIME="80">
+			<ATTR TEXT="3416" T_CENTER="1" T_X="117" T_Y="180" FONT="Font_Text" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+			<ATTR IMG="../Data/6_ui/info/ifPetCcBg.tga" IMG_W="235" IMG_H="235" />
+			<FORM ID="FRM_ICON_SLOT" X="90" Y="58" Z="3" W="52" H="52">
+				<ATTR IMG="../Data/6_ui/cashShop/csCtSlotAni.tga" IMG_W="216" IMG_H="162" U="4" V="3" UV_INDEX="1"/>
+				<SCRIPT ID="ON_TICK">
+					local iCurIndex = UISelf:GetUVIndex()
+					iCurIndex = iCurIndex + 1
+					if iCurIndex > 12 then
+						iCurIndex = 1
+					end
+					UISelf:SetUVIndex(iCurIndex)
+				</SCRIPT>
+			</FORM>
+			
+			<ICON ID="ICN_REGICON" X="97" Y="65" Z="4" W="40" H="40" ICON_GRP="126">
+				<SCRIPT ID="ON_CALL"> UISelf:ClearCustomData() </SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor()</SCRIPT>
+			</ICON>
+			
+		</FORM>
+		<FORM ID="FRM_EFFECT_MODEL" X="10" Y="36" W="235" H="235" PASS_EVENT="1" NO_FOCUS="1" Z="5">
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("REDICE_EFFECT_VIEW", false, false)
+				kSelf:AddRenderModelNIFByPath("REDICE_EFFECT_VIEW", "Progress", "../Data/5_Effect/4_UI/ef_UImix_01_spin.nif", false, true)
+				kSelf:AddRenderModelNIFByPath("REDICE_EFFECT_VIEW", "Success", "../Data/5_Effect/4_UI/ef_UImix_02_succ.nif", false, true)				
+				kSelf:SetRenderModelCameraZoomMinMax("REDICE_EFFECT_VIEW", -300, 300);
+				kSelf:RenderModelCameraZoom("REDICE_EFFECT_VIEW", 210.0);
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("REDICE_EFFECT_VIEW") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("REDICE_EFFECT_VIEW") </SCRIPT>
+		</FORM>
+		<SCRIPT ID="ON_TICK"> UpdateDyeingEffect() </SCRIPT>
+		
+		<IMG ID="IMG_LINE1" X="5" Y="275" W="245" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="245" IMG_H="2"/>
+		
+		<STATIC_FORM ID="SFRM_PRICE_BG" X="9" Y="280" W="237" H="35" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR T_X="230" T_Y_CENTER="1" T_RIGHT="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<FORM ID="FRM_LAVEL" X="0" Y="0" W="100" H="35" TEXT="3415" T_X="10" T_Y_CENTER="1" T_LEFT="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="237" H="35" STATIC_NUM="3"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetStaticText("")
+			</SCRIPT>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_OK" X="43" Y="320" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="3421" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				RequestPetUpgrade()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="59">
+				RequestPetUpgrade()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="129" Y="320" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="3164" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent() return true</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			local kBtnOK = UISelf:GetControl("BTN_OK")
+			if kBtnOK:IsNil() == false then
+				kBtnOK:Disable(true)
+			end
+			
+			RegistUIAction(UISelf, "CloseUI")
+		</SCRIPT>
+	</STATIC_FORM>
+</XUI>

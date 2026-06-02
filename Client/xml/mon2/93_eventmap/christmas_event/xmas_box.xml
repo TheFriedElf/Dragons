@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_xmas_box" >
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Ryvius"/>
+				<KFMPATH SCALE="1.0">../Data/3_World/00_Object/breakObject/Break/Bk_BoxSteel3002_01/Bk_BoxSteel3002_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="67,95,70" />
+		</ABV>
+		<SLOT>
+			<!-- Basic Action -->
+			<ITEM NAME="die_01" ANIMATION="1000030"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

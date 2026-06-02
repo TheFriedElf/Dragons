@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 아르카 엔딩 -->
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD type="WaitTime" time="4"/>
+    <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    <CMD type="CallUI" UIWndName="FRM_MISSION_END"/>
+    <CMD TYPE="PlaySound" SpecialActor="ME"  SlotNumber="1" SoundID="Guild_LV_UP"/>
+    <CMD type="WaitTime" time="4"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/>
+    
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="false"/>
+	<CMD type="WaitFade" time="1"/>
+    <CMD type="WaitTime" time="1"/>
+    
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    <CMD TYPE="SetActorPosition" SpecialActor="ME" TargetPos ="119.625771,122.156898,904.283508"/>
+    <CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2"/>
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    
+    <CMD TYPE="ShowActor" ClassNo="6023900" Show="false"/>
+    <CMD TYPE="RemoveActor" ClassNo="6023900"/>
+    <CMD TYPE="ShowActor" ActorGUID="864C2692-8395-4294-B199-5DC77831EE4A" Show="true"/>
+    <CMD type="WaitTime" time="1"/>
+    
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+    
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5074</ID> <!--T.T.10507401 무서운 알요리 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	물의 신전의 청년 복어, 산란기 복어, 싱글 복어에게서 복어알 20개를 구하자-->
+<!--[완료NPC]	바람항구 - 혜나-->
+<!--[내용]	혜나는 무서운 알요리에 대해서 들었다면서 그것을 함부로 먹으면 위험하다고 말한다. 그런 위험한 알은 반드시 자신이 가지고 있다가 조사를 해봐야 겠다고 한다. 그리고 복어알은 산란기 복어뿐만 아니라, 복어알을 보호하기 위해서 청년 복어와, 싱글 복어도 같이 나눠 가지고 있다고 한다. 하지만 연약한 소녀가 조사하기에는 너무 힘든 일이라면서 혜나는 한숨을 쉰다. 위험한 복어알을 연구하기 위해서 물의 신전에 있는 청년 복어, 산란기 복어, 싱글 복어에게서 복어알 20개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">975FD858-1F6E-447e-9EED-C83158EC72FC</CLIENT> <!--시작NPC 바람항구 - 혜나 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">975FD858-1F6E-447e-9EED-C83158EC72FC</PAYER> <!--완료NPC 바람항구 - 혜나 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">975FD858-1F6E-447e-9EED-C83158EC72FC</AGENT> <!--진행NPC 11 바람항구 - 혜나 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010701/10000/5000/1/1/160507400">6119100</MONSTER> 
+ <!--MON_NO=6119100/청년 복어,MAP_NO=9010701/물의신전,Item_NO=160507400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160507400</ITEM> 
+ <!--Item_NO=160507400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010701/10000/5000/1/1/160507400">6119200</MONSTER> 
+ <!--MON_NO=6119200/산란기 복어,MAP_NO=9010701/물의신전,Item_NO=160507400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160507400</ITEM> 
+ <!--Item_NO=160507400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010701/10000/5000/1/1/160507400">6119300</MONSTER> 
+ <!--MON_NO=6119300/싱글 복어,MAP_NO=9010701/물의신전,Item_NO=160507400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160507400</ITEM> 
+ <!--Item_NO=160507400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10507411"/> <!--복어알-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10507421" FACE="Hyena_normal"/> <!--나 있잖아. 무서운 요리에 대해서 들었어. 
+물의 신전에 살고 있는 복어의 알로 만든 요리인데. 
+잘못 먹으면 죽을 수도 있다는 거야.
+그런 요리는 누군가 잘못 먹지 않도록 어서 빨리 조사를 해야 한다고 생각해.%%
+하지만 물의 신전을 조사하기에는 난 너무 연약한 소녀야.
+괜찮다면 복어알을 조사할 수 있도록 좀 구해주지 않을래?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10507426" FACE="Hyena_smile"/> <!--이게 복어알이군. 이야기를 듣는 순간 가지고 싶었어. 
+걱정하지마 먹지는 않을 거니까. 그저 가지고 싶었을 뿐이야. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10507423" FACE="Hyena_normal"/> <!--복어알은 산란기의 복어뿐만 아니라, 복어알을 보호하기 위해서 청년 복어와, 싱글 복어도 같이 나눠 가지고 있다고 해.
+아마도 혼자서 가지고 있는 것보다 여럿이서 가지고 있는 게 더 안전해서 그런가봐.%%
+물의 신전의 산란기 복어와 청년 복어 그리고 싱글 복어를 잘 기억해 둬야 해.
+아참 가장 중요한 복어알은 절대로 잊어버리면 안 돼!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10507424" FACE="Hyena_angly"/> <!--연약한 소녀의 부탁을 이렇게 매몰차게 거절할 줄이야. 흥!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10507425" FACE="Hyena_normal"/> <!--복어는 생각보다 거치니까 조심해서 갔다와.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10507402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

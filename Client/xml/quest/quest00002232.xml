@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2232</ID> <!--T.T.10223201 챤피오 달래기(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지(Lv35) - 카지모도로부터 카지모도 이빨 획득-->
+<!--[완료NPC]	달빛해안 마을 - 챤피오-->
+<!--[내용]	이상한 소문으로 짜증이 나 있는 챤피오는 그 소문을 내고 다니는 범인을 찾았다고 한다. 몇 달 전에 챤피오에게 얻어터진 적 있는 지하묘지(Lv35) 카지모도가 그 범인이라고 한다. 카지모도를 두들겨 패고 카지모도의 이빨을 얻어 챤피오에게 전해주자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</CLIENT> <!--시작NPC 달빛해안 마을 - 챤피오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</PAYER> <!--완료NPC 달빛해안 마을 - 챤피오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</AGENT> <!--진행NPC 11 달빛해안 마을 - 챤피오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010920/10000/0/5/5/160518600">4602100</MONSTER> 
+ <!--MON_NO=4602100/카지모도,MAP_NO=9010920/Lv.35 지하묘지,Item_NO=160518600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160518600</ITEM> 
+ <!--Item_NO=160518600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10223211"/> <!--카지모도 이빨 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10223221" FACE="Campiu_normal"/> <!--급해!! 너 빨리 이리로 와봐.
+드디어 범인을 찾았어.
+범인을 찾았다고!!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10223226" FACE="Campiu_smile"/> <!--이빨을 가져왔어?
+어디 보자.
+이거 확실하군. 정말 고마워.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10223223" FACE="Campiu_smile"/> <!--나에 대한 헛소문을 내고 다닌 녀석을 찾았어.
+가만두지 않을 거야.
+물론 네가 가만두지 않을 거야.%%
+난 계속 바빠서 말이지.
+지하묘지(Lv35)로 가면 카지모도라는 녀석이 있을 거야.%%
+두들겨 패고 그 녀석 이빨을 구해다 줘.
+부탁할게.
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10223224" FACE="Campiu_angry"/> <!--뭐야? 안 된다고? 
+너 일로와. 내가 가만 두지 않을거야. 으악!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10223225" FACE="Campiu_normal"/> <!--봐주지 말고 확실히 해. 
+알겠어?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10223202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

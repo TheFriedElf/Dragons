@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Hades" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+	<KFMPATH SCALE="1.4">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Hades/Hades.kfm</KFMPATH>
+	<SUB_KFMPATH SCALE="1.4">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Hades/Hades_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+             <SPHERE TO="p_hit_point_01" SIZE="40"/>
+             <SPHERE TO="p_hit_point_02" SIZE="38"/>
+		</ABV>
+		<SLOT>
+		
+			
+			
+			<!--원거리 1 -->
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1000250"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000251"/>
+			<ITEM NAME="shot_02" ANIMATION="1000252" FIRE_START_NODE="Bip01 R Hand" PROJECTILE_ID="Projectile_hades_darkball_01"/>
+
+			<!--원거리 1 -->
+			<ITEM NAME="btlidle_03_shot_start" ANIMATION="1000301"/>
+			<ITEM NAME="btlidle_03_shot" ANIMATION="1000302"/>
+			<ITEM NAME="shot_03" ANIMATION="1000303" FIRE_START_NODE="Bip01 R Hand" PROJECTILE_ID="Projectile_hades_kerberos_01"/>
+
+			<!-- 기를 모으면 돌 무데기가 빨려와서 8방향 향해 날아간다 -->
+			<ITEM NAME="shot_around_01_start" ANIMATION="1001121" CAST_EFFECT="ef_Mutisha_skill_02_01_char_root"/>
+			<ITEM NAME="shot_around_01" ANIMATION="1001122"/>
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1001123" FIRE_START_NODE="pf_ef_shot" FIRE_START_NODE1="pf_ef_shot" FIRE_START_NODE2="pf_ef_shot" PROJECTILE_ID="Projectile_hades_spiderball_01" PROJECTILE_ID1="Projectile_hades_spiderball_01" PROJECTILE_ID2="Projectile_hades_spiderball_01" PROJECTILE_SPEED="250" PROJECTILE_SCALE="1.0" PROJECTILE_SCALE1="1.0" PROJECTILE_SCALE2="1.0"/>
+			
+			<!-- 뱀비 내리기 -->
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000611" CAST_EFFECT="efk_hades_jumpattk_01" RANGE_EFFECT="ef_Mutisha_skill_01_04_char_root" />
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000612"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000613" DETACH_RANGE_EFFECT="TRUE" PROJECTILE_ID="PROJECTILE_fios_skillshot_01"
+				PROJECTILE_SPEED="400" FIRE_TERM="0.02" PROJECTILE_COUNT="6" QUAKE_TIME="2" QUAKE_FACTOR="3"
+				FIRE_SOUND_ID="elga_meteor"  ARRIVED_EFFECT="efk_hades_jumpattk_02"/>
+			<ITEM NAME="massive_projectile_finish" ANIMATION="1000614"/>
+			
+			<!--버프-->
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000259"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000260"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000261"/>
+
+
+            <!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"  DIE_ACTOR="1029545"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000018" />
+			<ITEM NAME="die_blending_01" ANIMATION="1000018" DYING_TIME = "3600"/>
+
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000044" QUAKE_TIME="1.5" QUAKE_FACTOR="2" CAMERA_ZOOM_OUT="600" CAMERA_ZOOM_IN_SPEED="0"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		
+			<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000005" HIT_SOUND_ID="pattern-brake"/>
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000044" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

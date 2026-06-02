@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4117</ID> <!--T.T.10411701 행방불명된 상인들 (4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	용암붐붐의 멜빵 10개 습득-->
+<!--[완료NPC]	악마의 숨결 - 제이드-->
+<!--[내용]	병사 제이드가 용암붐붐의 멜빵을 가져오라 말한다. 화암 산호지대에서 용암붐붐을 퇴치하고 용암붐붐의 멜빵을 10개 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</CLIENT> <!--시작NPC 악마의 숨결 - 제이드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</PAYER> <!--완료NPC 악마의 숨결 - 제이드 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 11 악마의 숨결 - 제이드 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/6000/1/1/160411700">6015200</MONSTER> 
+ <!--MON_NO=6015200/용암붐붐,Item_NO=160411700/[Q.ID:04117] 용암붐붐의 멜빵40%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160411700</ITEM> 
+ <!--Item_NO=160411700/[Q.ID:04117] 용암붐붐의 멜빵,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10411711"/> <!--용암붐붐의 멜빵-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411721" FACE="Walter_normal"/> <!--아니 넌 어떻게 이렇게 태연한 얼굴로 공갈을 치는 거야?
+너 진짜로 솔직하게 말해라. 안 그러면 몇 대 맞는 수가 있다.
+허허.. 넌 내가 성격이 좋은 걸 아주 다행으로 여겨야 할 걸.%%
+난 세상에서 거짓말 잘하는 그런 놈을 제일 싫어한다구.
+솔직한 게 죄야? 호프먼 대장이 얼간이 같다고 말한 게 무슨 죄냐고! 
+그게 이렇게 외진 데로 보내져야 할 정도로 못된 일은 아니잖냐.%%
+이런... 
+나도 모르게 그만... 흥분해버리고 말았네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411726" FACE="Walter_smile"/> <!--이건 뭐야?
+헉! 이거 용암붐붐의 멜빵이잖아!%%
+야! 너 어쩌자고 이런 걸 훔쳐온거야!
+뭐, 붐붐을 때려눕히고 가져왔다고…
+허어.. 이 짜식 아직 정신을 못차렸네.%% 
+아유 이 쬐그만 녀석을 그냥... 확 패버리면 아동학대 조장한다고
+좋은엄마모임에서 들고일어설테고…%%
+빨랑 붐붐이 알아차리기 전에 제 자리에 갖다두고와.   -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411723" FACE="Walter_normal"/> <!--암튼 난 그래. 어른으로서 너 같은 꼬마가 거짓말에 물드는 것을 
+지켜볼 수만은 없다.%% 
+당장 저기 저 아주 무시무시해보이는 용암 붐붐의 멜빵을 
+가져와봐!%% 
+헤헤헤헤! 못하겠지? 못하겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411724" FACE="Walter_angly"/> <!--거봐 내 그럴 줄 알았다. 요 양치기 소년 같은 녀석아~-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411725" FACE="Walter_angly"/> <!--용암붐붐도 퇴치하고 멜빵을 가져와 보지 왜 그러고 있니? 크헤헤헤!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>298</ID> <!--T.T.10029801 검은 발톱 둥지의 정수 -->
+
+
+<!-- 작성자 : 손동준-->
+<!--[완료조건]	검은발톱 전초기지에 무카파와 이야기 해보자-->
+<!--[완료NPC]	검은발톱 전초기지 - 무카파-->
+<!--[내용]	검은 발톱 둥지의 몬스터들에게 정수를 모아와 엘가를 잡는데 도움이 되는 아이템을 교환 할 수 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6CF9206A-F578-436c-BC14-07B50AC1DC12</CLIENT> <!--시작NPC 검은발톱 전초기지 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6CF9206A-F578-436c-BC14-07B50AC1DC12</PAYER> <!--완료NPC 검은발톱 전초기지 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6CF9206A-F578-436c-BC14-07B50AC1DC12</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10029811"/> <!--무카파와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="10">160029800</ITEM><!--전체지급/전체/1)/160029800(봉인아님) 10개-아이템없음-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10029821" FACE="Mukapa_normal"/> <!--이봐 엘가를 물리치는데 힘든점은 없나?
+이리와보게 좋은 정보를 알려주지-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10029826" FACE="Mukapa_angry"/> <!--이 검은발톱 둥지의 정수를 모아오면 엘가를 물리칠때 유용한 아이템으로 교환을 해주지. 일단 정수10개를 줄테니 어디 한번 힘내보게!! -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10029823" FACE="Mukapa_normal"/> <!--검은발톱 둥지의 정수는 검은발톱 둥지의 일반 몬스터들에게도 얻을수 있네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10029824" FACE="Mukapa_angry"/> <!--아니 내 도움을 무시하다니!! 나중에 후회할거네!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10029825" FACE="Mukapa_angry"/> <!--번역불필요-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10029802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

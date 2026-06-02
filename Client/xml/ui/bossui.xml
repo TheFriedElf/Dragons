@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_Gremgris">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "45" W ="489" H ="217"/>
+		<ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+		<ATTR IMG = "../Data/6_ui/boss/BossGremgris.tga" IMG_W = "489" IMG_H = "217"/>
+	</FORM> 
+	<FORM ID = "FRM_Parel">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "50" W ="489" H ="244"/>
+		<ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+		<ATTR IMG = "../Data/6_ui/boss/BossParel.tga" IMG_W = "489" IMG_H = "244"/>
+	</FORM> 
+	<FORM ID = "FRM_Lavalon">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "45" W ="489" H ="295"/>
+		<ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+		<ATTR IMG = "../Data/6_ui/boss/BossLavalon.tga" IMG_W = "489" IMG_H = "295"/>
+	</FORM> 
+	<FORM ID = "FRM_Aram">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "50" W ="489" H ="300"/>
+		<ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+		<ATTR IMG = "../Data/6_ui/boss/BossMutisha.tga" IMG_W = "489" IMG_H = "300"/>
+	</FORM>
+  <FORM ID = "FRM_Lost">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "50" W ="489" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/bossLost.tga" IMG_W = "489" IMG_H = "300"/>
+  </FORM>
+  <FORM ID = "FRM_TowerTruth">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "25" W ="489" H ="300"/>
+    <ATTR ALIVE_TIME = "10000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/bossTowerTruth.tga" IMG_W = "489" IMG_H = "300"/>
+	<SCRIPT ID="ON_CALL">
+		local kDescUI = CallUI("FRM_TRUTH_TOWER_DESC")
+		if not kDescUI:IsNil() then
+			local kPos = kDescUI:GetLocation()
+			kPos:SetY( UISelf:GetLocation():GetY() + UISelf:GetSize():GetY() + 5 )
+			kDescUI:SetLocation(kPos)
+		end
+	</SCRIPT>
+  </FORM>
+  <FORM ID = "ModelTest">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "45" W ="489" H ="295"/>
+		<SCRIPT ID = "ON_DISPLAY">
+			UISelf:DrawModel(GetPlayer():GetPilotGuid(), 0)
+		</SCRIPT>
+	</FORM> 
+
+ <FORM ID = "FRM_Paris">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossParis.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>
+	
+  <FORM ID = "FRM_Arkah">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossArkah.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>	
+  
+  <FORM ID = "FRM_Pythanous">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossPythanous.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>
+
+  <FORM ID = "FRM_Karkharous">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossKarkharous.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>
+  
+  <FORM ID = "FRM_PaulBurnaun">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossPaulBurnaun.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>  
+  
+  <FORM ID = "FRM_Elluman">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossElluman.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>  
+  
+  <FORM ID = "FRM_Vella">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossVella.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>
+  
+  <FORM ID = "FRM_Artis">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossArtis.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>  
+  
+  <FORM ID = "FRM_Rokko">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossRokko.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>  
+  
+  <FORM ID = "FRM_LordofNight">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossLordofNight.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>  
+  
+  <FORM ID = "FRM_Paris">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "5000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/BossParis.tga" IMG_W = "512" IMG_H = "300"/>
+  </FORM>
+  
+  <FORM ID = "FRM_SpectersTower">
+    <ATTR ALIGN_X = "50" ALIGN_Y = "15" W ="512" H ="300"/>
+    <ATTR ALIVE_TIME = "10000" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+    <ATTR IMG = "../Data/6_ui/boss/SpectersTower.tga" IMG_W = "512" IMG_H = "300"/>
+	<SCRIPT ID="ON_CALL">
+		local kDescUI = CallUI("FRM_TRUTH_TOWER_DESC")
+		if not kDescUI:IsNil() then
+			local kPos = kDescUI:GetLocation()
+			kPos:SetY( UISelf:GetLocation():GetY() + UISelf:GetSize():GetY() + 5 )
+			kDescUI:SetLocation(kPos)
+		end
+	</SCRIPT>	
+  </FORM>
+  
+  <FORM ID="FRM_ELGA_ROOM_OF_HEART" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1" TICK_TIME="300">
+		<ATTR ALIGN_X="45" Y="75" Z="0" W="290" H="40" CAN_DRAG="0"/>
+		<ATTR ALIVE_TIME_IGNORE_MOUSE_OVER="1"/>
+		<IMG ID="IMG_ICON" X="0" Y="30" Z="0" W="68" H="65" IMG="../Data/6_ui/expedition/epLftHt.tga" IMG_W="68" IMG_H="65"/>
+		<IMG ID="IMG_BG" X="29" Y="43" Z="0" W="290" H="40" IMG="../Data/6_ui/mission/msDfsBarBg.tga" IMG_W="290" IMG_H="40"/>
+		<ANI_BAR ID="BAR_HP">
+			<ATTR X="43" Y="54" W="265" H="18"/>
+			<ATTR U="1" V="10" UV_INDEX="10"/>
+			<ATTR BAR_COUNT="10" BAR_TYPE="3"/>
+			<ATTR BAR_IMG="../Data/6_ui/mission/msDfsBarImg.tga" BAR_IMG_W="265" BAR_IMG_H="180"/>
+			<ATTR TEXT="" FONT="Font_Text" T_X="132" T_Y="1" T_OUTLINE="1" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:BarNow( 0 )
+				UISelf:BarMax( 0 )
+			</SCRIPT>
+		</ANI_BAR>
+		<SCRIPT ID="ON_TICK">DisplayElgaRoomOfHeart(UISelf)</SCRIPT>
+	</FORM>
+</XUI>

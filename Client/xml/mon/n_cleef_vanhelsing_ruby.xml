@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_cleef_VanHelsing_ruby" INIT_ACTION="a_idle">
+<TEXTURE SRC="ef_arrow.tga">../Data/5_Effect/9_Tex/ef_arrow.tga</TEXTURE>
+<TEXTURE SRC="Van_Hellsingruby1001_01.dds">../Data/3_World/Map_Textures/Van_Hellsingruby1001_01.dds</TEXTURE>
+<TEXTURE SRC="Van_Prop1001_01.dds">../Data/3_World/Map_Textures/Van_Prop1001_01.dds</TEXTURE>
+	<WORLDOBJECT>
+		<KFMPATH>../Data/2_Mon/N_Cleef_VanHelsing/Van_Hellsingruby1001_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="28"/>
+		</ABV>
+		<SLOT>
+			<ITEM NAME="btlidle_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000000"/>
+			<ITEM NAME="shot_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000020"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>
+

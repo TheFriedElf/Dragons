@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5018</ID> <!--T.T.10501801 외상 사절 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 갑판상어가 가져간 작살촉 15개 회수-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	어느날 다비에게 갑판상어가 찾아와 해적질 말고 물고기를 사냥해서 먹겠다며 작살촉 15개를 가져갔다고 한다. 하지만 갑판상어는 작살촉을 사용해 해적질을 계속하고 외상값도 갚지 않는다. 갑판상어가 해적질을 더 이상 하지 못하도록, 외상으로 가져간 작살 15개를 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/0/1/1/160501800">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010100/수염고래 해안가,Item_NO=160501800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160501800</ITEM> 
+ <!--Item_NO=160501800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10501811"/> <!--작살촉-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501821" FACE="Darby_normal"/> <!--정말, 왜 이렇게 안 좋은 일이 연속으로 일어나는 거야.
+앗. 얼마 전에 날 도와줬던 %name%?
+글쎄 이야기 좀 들어줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501826" FACE="Darby_smile"/> <!--고마워. 이제 녀석들도 해적질 하기가 조금 더 힘들어졌을 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501823" FACE="Darby_normal"/> <!--상어에 이어 이번엔 갑판상어 마저 날 괴롭히고 있어.
+얼마 전 찾아 온 갑판상어가 이제 해적질을 그만하고 싶다며 나에게 말했어.%%
+그리고 물고기를 잡고 살고 싶다며 작살촉 20개를 외상으로 달라는 거야.
+난 그 녀석이 개과천선했나 싶어서 외상으로 작살촉을 줬지.%%
+그런데 알고보니 이 녀석 작살촉을 사용해서 계속 해적질을 하는 거야.
+물론 외상값도 아직 갑지 않고 말이야.
+갑판상어로부터 내 작살촉을 되찾고 싶어. 도와줄 거지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501824" FACE="Darby_normal"/> <!--그래. 나도 염치가 없지. 저번에 도와달라고 하고 또 도와달라고 하다니.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501825" FACE="Darby_normal"/> <!--갑판상어가 내가 만든 작살촉을 사용해서 사람들에게 해코지를 할지도 몰라. 빨리 좀 해결해 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

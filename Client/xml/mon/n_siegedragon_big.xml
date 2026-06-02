@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_SiegeDragon_Big">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Algon_Kimat"/>
+		<KFMPATH SCALE="1.3">../Data/2_Mon/N_SiegeDragon_Big/N_SiegeDragon_Big.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="50"/>
+			<SPHERE TO="p_hit_point_02" SIZE="90"/>
+			<!--    	<CAPSULE TO="p_hit_point_03" SIZE="30,41"/>-->
+			<!--      <CAPSULE TO="p_hit_point_04" SIZE="19,40"/>-->
+			<!--      <CAPSULE TO="p_hit_point_05" SIZE="19,17"/>-->
+		</ABV>
+		<SLOT>
+			<!-- 기본 스킬 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>SCALE="2"
+			<!-- 입으로 브레스 스킬 -->
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000201"/>
+			<ITEM NAME="breath_01" ANIMATION="1000203"/>
+			<!--발사체 낙하-->
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000201" RANGE_EFFECT="ef_Siegedragon_Big_skill_05_pattern_char_root"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000202"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000211" PROJECTILE_ID="PROJECTILE_Big_Siege_Shot" FIRE_TERM="0.03" PROJECTILE_COUNT="30" QUAKE_TIME="1" QUAKE_FACTOR="2" PROJECTILE_SCALE="0.3"/>
+
+			<!-- 레이져쏘기 -->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000204"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000205"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000210" FIRE_START_NODE="p_ef_mouth" SHOT_INTER_TIME="0.3" GROUND_EFFECT="" />
+			<ITEM NAME="shot_return_01" ANIMATION="1000212"/>
+
+			<!-- 광역공격 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+			<!-- 힐 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000207"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000209"/>
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000012"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000021" DIE_ALPHA="1"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000015" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000023"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

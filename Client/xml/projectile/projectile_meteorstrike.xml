@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_MeteorStrike">
+
+  <TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+  <NIF_PATH SCALE="1.0">../Data/5_Effect/7_Projectile/efx_Meteorstrike_shot_01.nif</NIF_PATH>
+  <SCRIPT>Projectile_MeteorStrike</SCRIPT>
+  <PARAM SPEED="1200" ACCEL="110" MASS="0.5"/>
+  <SCRIPT_CALL_EVENT>
+    <EVENT TYPE="FLYING_START"/>
+    <EVENT TYPE="ARIVED_AT_TARGET"/>
+    <EVENT TYPE="UPDATE"/>    
+  </SCRIPT_CALL_EVENT>
+  
+</PROJECTILE>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_DarkElemental_SoulDrain" ALWAYS_GLOWMAP="TRUE">
+	<TEXTURE SRC="Magma_Piston_001.dds">../Data/1_Cha/9_SSkill/MagmaPiston/Magma_Piston_001.dds </TEXTURE>
+	<TEXTURE SRC="Magma_Piston_001_A.dds">../Data/1_Cha/9_SSkill/MagmaPiston/Magma_Piston_001_A.dds</TEXTURE>
+	<TEXTURE SRC="Magma_Piston_002.dds">../Data/1_Cha/9_SSkill/MagmaPiston/Magma_Piston_002.dds</TEXTURE>
+	<TEXTURE SRC="Magma_Piston_002_A.dds">../Data/1_Cha/9_SSkill/MagmaPiston/Magma_Piston_002_A.dds</TEXTURE>
+	<TEXTURE SRC="Magma_Piston_003.dds">../Data/1_Cha/9_SSkill/MagmaPiston/Magma_Piston_003.dds</TEXTURE>
+	<TEXTURE SRC="Magma_Piston_Glow.dds">../Data/1_Cha/9_SSkill/MagmaPiston/Magma_Piston_Glow.dds</TEXTURE>
+	<TEXTURE SRC="Magma_Piston_Glow_01.dds">../Data/1_Cha/9_SSkill/MagmaPiston/Magma_Piston_Glow_01.dds</TEXTURE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.2">../Data/1_Cha/9_SSKill/SoulDrain/SoulDrain.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="SoulDrain_Skill_01_start" ANIMATION="1000000" />
+      <ITEM NAME="SoulDrain_Skill_01_attack" ANIMATION="1000001" />
+	  <ITEM NAME="SoulDrain_Skill_01_finish" ANIMATION="1000002" />
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

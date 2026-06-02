@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4168</ID> <!--T.T.10416801 물의 시험 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	아키아 동굴의 박쥐 거미 퇴치-->
+<!--[완료NPC]	아키아 동굴(아카나이 근처) - 루-->
+<!--[내용]	%name%을 인정할 수 없다던 루는 바티 사제를 대신해 물의 시험을 시작한다. 물의 시험을 통과하기 위해 아키아 동굴심층부에 있는 박쥐 거미를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">0C51E6F8-3DB9-42fe-98B8-E71496F62510</CLIENT> <!--시작NPC 아키아 동굴(박쥐 거미 근처) - 루 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">A2967241-19A9-4292-A2C0-D28C152AE2A4</PAYER> <!--완료NPC 아키아 동굴(아카나이 근처) - 루 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">0C51E6F8-3DB9-42fe-98B8-E71496F62510</AGENT> <!--진행NPC 11 아키아 동굴(박쥐 거미 근처) - 루 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">A2967241-19A9-4292-A2C0-D28C152AE2A4</AGENT> <!--진행NPC 12 아키아 동굴(아카나이 근처) - 루 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3530700</MONSTER> 
+ <!--MON_NO=3530700/박쥐 거미,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416811"/> <!--박쥐 거미-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416821" FACE="Lwu_normal"/> <!--만약 물의 시험까지 통과한다면... 
+널 인정할 수 있을 것 같구나. 
+그럼 시험의 조건에 대해 잘 들어봐.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416826" FACE="Lwu_normal"/> <!--네 실력도 그렇게 엉망진창이진 않은 것 같구나.
+박쥐 거미를 처리한 걸 보니 말이야.
+부상이 심한 것 같으니 우선 몸을 추스리도록 해.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416823" FACE="Lwu_angry"/> <!--이 시험의 목표는 상당히 위험한 녀석이야.
+위험한 동굴 심층부에 살고있는 박쥐 거미라고 하는
+무시무시한 녀석이지.%%
+방심하면 바로 목숨을 빼앗길 수 있으니 조심해.
+그럼 출발해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416824" FACE="Lwu_normal"/> <!--마지막 테스트인데 그래도 한번 도전해보는 게 낫지 않을까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416825" FACE="Lwu_normal"/> <!--이곳을 통과한다면 아카나이가 있는 곳을 찾는 일이 수월해질 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,11 @@
+<ACTION ID="a_Death Snatch" NEXT="a_Death Snatch_Finish" CHECK_CAN_ENTER="TRUE" USE-EVENT="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Twohand_skill_DeathSnatch_01_01" />
+  <SLOT NAME="Twohand_skill_DeathSnatch_01_02" />
+  <SLOT NAME="Twohand_skill_DeathSnatch_01_03" />
+  <FSM SCRIPT="Skill_DeathSnatch" FLY_ANGLE="45" HAND_CLASS_NO="900016" HIDE_WEAPON="TRUE"
+		FIRE_CASTER_EFFECT_ID="ef_skill_death_snatch_02_char_root"
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+  />
+</ACTION>

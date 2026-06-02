@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Master_machine_NoEvent" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Master_machine"/>
+		<KFMPATH SCALE="0.5">../Data/2_Mon/B_Master_machine/B_Master_machine.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="0.5">../Data/2_Mon/B_Master_machine/B_Master_machine_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="0.1"/>
+		<ATTACH TYPE="effect" SLOT="53911" EFFECT="ef_Master_machine_idle_01_p_ef_heart" TO="p_ef_heart"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="46"/>
+			<SPHERE TO="p_hit_point_02" SIZE="42"/>
+			<SPHERE TO="p_hit_point_03" SIZE="25"/>
+			<SPHERE TO="p_hit_point_04" SIZE="25"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!-- 입에서 발사 -->
+			<ITEM NAME="shot_around2_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="shot_around2_01" ANIMATION="1000202"/>
+			<ITEM NAME="shot_around2_01_fire" ANIMATION="1000203" PROJECTILE_ID="PROJECTILE_Big_Master_machine_shot_01"/>
+			<!-- 발에서 발사  -->
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000201" RANGE_EFFECT="ef_Porkyking_skill_05_01_char_root"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000202"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000206" PROJECTILE_ID="PROJECTILE_Big_Master_machine_shot_02" RANDOM_SCALE="2.0" PROJECTILE_COUNT="12" QUAKE_TIME="3" QUAKE_FACTOR="1.2" FIRE_TERM="0.2"/>
+			<!-- 체에서 발사  -->
+			<ITEM NAME="whirlwind_btlidle_01_start" ANIMATION="1000207"/>
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000208"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000209" FIRE_EFFECT="NONE"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000022"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000022" DIE_ALPHA="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+													<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

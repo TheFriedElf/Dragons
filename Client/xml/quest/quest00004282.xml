@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4282</ID> <!--T.T.10428200 녹색성좌의 열쇠 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	전갈자리 던전에서 녹색성좌의 열쇠 얻어오기-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	페가수스의 깃털이면 독무를 피해서 목요일에 열리는 전갈자리에 들어 갈 수 있다. 이제 괴물전갈 킹스피온을 처치하여 녹색성좌의 열쇠를 얻어 오자-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000180</ITEM> 
+ <!--Item_NO=82000180/[13_01 별자리] 녹생성좌의 열쇠,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">7281900</MONSTER> 
+ <!--MON_NO=7281900/괴물전갈 킹스피온,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10428211"/> <!--녹색성좌의 열쇠-->
+		<OBJECT2 COUNT="1" TEXT="10428212"/> <!--전갈자리던전 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10428221" FACE="Crete_normal"/> <!--전갈자리의 괴물전갈 킹스피온이 네번째 열쇠인 녹색성좌의 열쇠를 가지고 있답니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10428226" FACE="Crete_smile"/> <!--드디어 네번재 열쇠를 얻으셨네요. 이제 1개만 더 얻으시면 됩니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10428223" FACE="Crete_normal"/> <!--페가수스의 깃털은 몸을 가볍게 해주기 때문에 전갈자리를 둘러 싸고 있는 독무를 넘어갈 수 있게 해줄 겁니다. 하지만 괴물전갈을 만나러가는 길은 독충들이 우글대니까 조심하셔야 되요. 그럼 녹색성좌의 열쇠를 부탁드려요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10428224" FACE="Crete_cry"/> <!--전갈이 무서우신가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10428225" FACE="Crete_normal"/> <!--%name%님 독충들을 조심하세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10428202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구에서 용아와 대화-->
+<!--[완료NPC]	바람항구 - 용아-->
+<!--[내용]	용아가 New Origin 업데이트에 대해 새로운 정보를 전해준다.. 바람항구에서 용아의 이야기를 들어보자.-->
+<QUEST>
+<ID>224</ID> <!--T.T.10022401 New Origin! 숨겨진 비밀! -->
+<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="523343">New Origin! 숨겨진 비밀!</TITLE>
+	<GROUPNAME TEXT="500009">바람항구 브리즈</GROUPNAME>
+	<LIMITS>
+		<DAYOFWEEK>6/7</DAYOFWEEK>
+		<LEVEL MIN="20" MAX="99"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</CLIENT> <!--시작NPC 바람항구 - 용아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</PAYER> <!--완료NPC 바람항구 - 용아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</AGENT> <!--진행NPC 11 바람항구 - 용아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="0" TEXT="523345"/> <!--용아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+	<SELECT1 COUNT="0">
+	<ITEM COUNT="1">231001090</ITEM>
+	</SELECT1>		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="523346" FACE="DragonBaby_normal"/> <!--후후, 카즈라의 드라칸 전사들에게는 
+아주 특별한 직업이 존재한다는 거 아시나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="523350" FACE="DragonBaby_smile"/> <!--아마 다음 주면 이곳에 도착하지 않을까 싶은데…
+궁금하지? 헤헤헤~ 다음 주에 직접 마중 나와 보는 건 어때?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="523347" FACE="DragonBaby_smile"/> <!--New origin 업데이트에서는 아직까지 경험해보지 못한 
+드라칸의 독창적인 직업들이 존재한다고! -->
+			<SELECT ID="601"  TEXT="500002">계속</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="523348" FACE="DragonBaby_angly"/> <!--이, 이, 이봐… 아직 이야기 안 끝났어!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="523349" FACE="DragonBaby_normal"/> <!--(없음, test)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="523344" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5153</ID> <!--T.T.10515301 마을을 지키다(5) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	미리내 신전 - 아티스로부터 작전지령서 획득 -->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	달빛해안 마을 괴물들과 전투중인 토마스는 성공적인 작전으로 여러 차례 승리로 이끌고 있다고 한다. 토마스는 마지막 작전을 사용할 것이라고 한다. 괴물들의 보스 아티스를 처리하고 작전지령서를 빼앗아 공격을 완전히 봉쇄하도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010209/10000/0/1/1/160515300">6066200</MONSTER> 
+ <!--MON_NO=6066200/아티스,MAP_NO=9010209/원령 아티스,Item_NO=160515300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160515300</ITEM> 
+ <!--Item_NO=160515300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10515311"/> <!--아티스로부터 작전 지령서 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10515321" FACE="Thomas_normal"/> <!--우하하 !
+슬슬 싸움이 재미있어 지는군. 자 ! 이제 거의 다 끝났네. 모두 자네 덕분이지.%%
+자네 같은 용감한 %class%를 정말 오랜만에 보는군. 확실히 자네는 세상을 구할 수 
+있을 것 같은 예감이 들어. 
+자! 이제 마지막이네. 물론 자네가 해줘야겠지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10515326" FACE="Thomas_smile"/> <!--완벽해! 우리의 공격은 완벽했네. 나의 완벽한 지시와 자네에 몸을 아끼지 않는 공격으로 마을을 지켜낼 수 있었던 것 같네. %%
+우리가 뒤에서 마을을 구한 건 자네와 나만 알고 있었으면 좋겠네. 마을 사람들이 이런 사실을 알고 겁내 하거나, 두려워하는 건 보기가 싫으니 말일세. 
+내 말 무슨 말인지 알겠지? 고생했으니 사례금을 많이 주겠네. 수고했네 우하하.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10515323" FACE="Thomas_normal"/> <!--정보의 의하면 미리내 신전안에 있는 아티스가 그들의 대장이라더군. 
+원래 전략의 기본은 대장만 잡으면 부하들은 알아서 무너지는 법이네. %%
+뭐 물론 내가 직접 가서 처리할 수도 있지만, 내일 마침 집안에 밀린 빨래가 있어서 
+말이야. 자네가 수고를 좀 해줘야 하겠어. 아티스를 처리하고 작전지령서를 가져오게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10515324" FACE="Thomas_angly"/> <!--뭐라고? 자네가 없어도 우리 최고의 용병들이 처리할걸세. 흥!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10515325" FACE="Thomas_normal"/> <!--아티스는 미리내 신전 깊숙한 곳에 있을 걸세. 가서 처리하고 오게!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10515302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

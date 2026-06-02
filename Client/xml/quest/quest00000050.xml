@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>50</ID> <!--T.T.10005001 더블 파이터, 트윈스로 전직! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	수염고래 해안가에서 꼬깨 5마리 처치-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	마이트리는 몸이 완전히 회복된 것인지 관찰하기 위해서 몸을 풀어보라 한다. 회복된 것을 확인한 후 마이트리가 상급 격투가로 전직을 시켜주려 한다. 수염고래 해안가에서 꼬깨 5마리를 시험 삼아 퇴치하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">13D42615-B039-43f4-B6EB-28918778D237</CLIENT> <!--시작NPC 수염고래 해안가 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 11 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10005011"/> <!--꼬깨-->
+		
+	</OBJECTS>
+<LOCAL>
+    <NAME ID="DEFAULT">
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">330010450</ITEM><!--전체지급/전체/1)/(봉인아님) 1개-초보 무도가의 투구 -->
+			<ITEM COUNT="1">330060340</ITEM><!--전체지급/전체/2)/(봉인아님) 1개-초보 무도가의 장갑 -->
+			<ITEM COUNT="1">330040340</ITEM><!--전체지급/전체/3)/(봉인아님) 1개-초보 무도가의 신발 -->
+			<ITEM COUNT="1">20202050</ITEM><!--전체지급/전체/5)/(봉인아님) 1개-스킬 초기화(퀘스트 보상)-->
+		</SELECT1>
+		<CHANGECLASS PREVCLASS="52" MINLEVEL="20">54</CHANGECLASS>
+	</REWARD>
+ </NAME>
+ <NAME ID="KOREA">
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">330010450</ITEM><!--전체지급/전체/1)/(봉인아님) 1개-초보 무도가의 투구 -->
+			<ITEM COUNT="1">330060340</ITEM><!--전체지급/전체/2)/(봉인아님) 1개-초보 무도가의 장갑 -->
+			<ITEM COUNT="1">330040340</ITEM><!--전체지급/전체/3)/(봉인아님) 1개-초보 무도가의 신발 -->
+			<ITEM COUNT="1">20202050</ITEM><!--전체지급/전체/5)/(봉인아님) 1개-스킬 초기화(퀘스트 보상)-->
+			<ITEM COUNT="1">98009810</ITEM><!--한국오픈 기념 소비인벤토리 확장-->
+		</SELECT1>
+		<CHANGECLASS PREVCLASS="52" MINLEVEL="20">54</CHANGECLASS>
+	</REWARD>
+ </NAME>
+</LOCAL>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10005021" FACE="Maitri_normal"/> <!--아아… 다행히도 기력은 돌아온 듯 보이는군요.%%
+그런데… 
+당신은 어떤 이유로 이런 곳에서… 
+야나이 사제의 비룡과 함께 떨어진 거죠?%%
+아무리 봐도 당신은 경험 많은 신관 전사로 보이지 않아요.
+내게 자초지종을 설명해주지 않겠어요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10005026" FACE="Maitri_smile"/> <!--좋아요. 이제 보니 당신은 격투에 재능이 있군요. 원래 상급 격투가를 맡기로 한 것은 바람 항구의 파이지만… 이번만 특별히 제가 상급의 격투술을 가르쳐 드리기로 하지요.%% 그럼 트윈스로의 전직을 시작하겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10005023" FACE="Maitri_normal"/> <!--(자초지종을 들은 마이트리가 고개를 끄덕였다.)%%
+그렇군요….%%
+당신은 우연히 오염된 신보의 일에 휘말려 고향 카즈라로부터
+멀리 떨어진 이곳까지 오게 된 거에요. 맞죠?%%
+그렇다면 우선 우리 드라칸들의 집결지인 바람의 항구로 가야 할텐데...
+지금은 몸상태도 몸상태지만, 전투를 위한 준비가 부족하군요.
+만약 이대로 길을 나선다면 목숨이 위험할 수 있습니다..%%
+그러니 당신의 몸상태를 점검해보도록 하죠.
+우선 가까운 곳에 있는 꼬깨들을 공격해보시겠어요?%%
+다섯마리 정도가 적당할 것 같은데 말이에요.%%
+당신은 주술사니까, 기초적인 소환술을 이용할 수 있어요. 
+소환체로 별가사리들의 주의를 끌 수 있다면... 
+훨씬 더 수월한 싸움이 될 거에요.%%
+보아 하니 당신은 상급 격투가로서의 자격이 있어 보이네요. 몸이 완전히 회복된 것이 확인되면 제가 당신을 상급 격투가로 전직 시켜 드리겠습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10005024" FACE="Maitri_angry"/> <!--아쉽군요. 하지만 지금이 아니라도 언젠가 저를 찾게 되실 겁니다.
+물론 그 때에도  목숨이 붙어있으시다면 말이지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10005025" FACE="Maitri_angry"/> <!--꼬깨들은 해변 곳곳에 있답니다. 잘 찾아보세요.
+%name%님의 몸 상태를 확인하기 위해서는 꼭 필요한 절차랍니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10005002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

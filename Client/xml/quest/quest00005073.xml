@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5073</ID> <!--T.T.10507301 입 큰 녀석! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	물의 신전의 펑크 하마, 폭주족 하마, 제비족 하마 30마리를 처리하자-->
+<!--[완료NPC]	바람항구 - 혜나-->
+<!--[내용]	혜나는 물의신전에 온갖 희귀한 물고기들이 있다는 소문을 듣고 몰래 갔다고 한다. 물의 신전에 각종 낚시용 미끼를 가지고 갔는데 거기에 갑자기 하마들이 나타나 혜나가 가지고 있던 모든 미끼를 먹어치웠다고 한다. 물의 신전에서 혜나의 미끼를 먹어치운 펑크 하마, 폭주족 하마, 제비족 하마 30마리를 처리하자 -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">975FD858-1F6E-447e-9EED-C83158EC72FC</CLIENT> <!--시작NPC 바람항구 - 혜나 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">975FD858-1F6E-447e-9EED-C83158EC72FC</PAYER> <!--완료NPC 바람항구 - 혜나 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">975FD858-1F6E-447e-9EED-C83158EC72FC</AGENT> <!--진행NPC 11 바람항구 - 혜나 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010701/1">6121100</MONSTER> 
+ <!--MON_NO=6121100/펑크 하마,MAP_NO=9010701/물의신전,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010701/1">6121200</MONSTER> 
+ <!--MON_NO=6121200/폭주족 하마,MAP_NO=9010701/물의신전,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010701/1">6121300</MONSTER> 
+ <!--MON_NO=6121300/제비족 하마,MAP_NO=9010701/물의신전,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10507311"/> <!--펑크 하마, 폭주족 하마, 제비족 하마-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10507321" FACE="Hyena_normal"/> <!--있지. 혹시 물의 신전에 엄청난 낚시터가 있다는 소문 알아?
+그 소식을 듣고 혜나도 몰래 갔어.
+갔는데 정말 물이 맑고 처음보는 물고기도 많았어.
+정신없이 예쁜 물고기들을 구경하다가 막상 물의 신전에 온 목적이 떠오른 거야.%%
+그래서 내가 이때까지 모아둔 각종 낚시용 미끼들을 꺼내놨어.
+그때 갑자기 하마들이 나타난 거야. 하마들은 순식간에 내 낚시용 미끼들을 모두 먹어치웠어.%%
+아마 하마들이 뚱뚱해서 배가 고파서 그랬을 거야. 
+하마들이 살을 뺄 수 있도록 좀 도와줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10507326" FACE="Hyena_smile"/> <!--고마워. 이제 기분이 좀 좋아진 거 같아.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10507323" FACE="Hyena_normal"/> <!--살을 빼는데 가장 필요한 것은 운동이지.
+하지만 하마들은 그냥 운동하려고 하진 않을 거야.
+그러니까 하마들을 때리려고 하면 하마들도 깜짝 놀라서 도망가겠지.%%
+그런 식으로 하마들을 운동시켜 주면 될 거야.
+도망가지 않는 하마들은 가볍게 몸에 자극을 주면 운동이 될 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10507324" FACE="Hyena_normal"/> <!--그래? 혜나의 부탁을 들어 주지 않는구나. 혜나는 조금 슬퍼졌어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10507325" FACE="Hyena_normal"/> <!--하마가 밉진 않지만, 왠지 만나면 꼬집어 줄 거 같아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10507302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

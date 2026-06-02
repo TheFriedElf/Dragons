@@ -1,0 +1,11 @@
+<ACTION ID="a_Claw Fishing" NEXT="a_Claw Fishing_Finish" CHECK_CAN_ENTER="TRUE" USE-EVENT="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Claw_skill_ClowFishing_01_01" />
+  <SLOT NAME="Claw_skill_ClowFishing_01_02" />
+  <SLOT NAME="Claw_skill_ClowFishing_01_03" />
+  <FSM SCRIPT="Skill_DeathSnatch" FLY_ANGLE="0" HAND_CLASS_NO="900017" HIDE_HAND_CREATION_ANIMATION="TRUE"
+		FIRE_CASTER_EFFECT_ID="ef_skill_wire_action_02_char_root"
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+  />
+</ACTION>

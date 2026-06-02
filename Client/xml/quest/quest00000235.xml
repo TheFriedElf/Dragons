@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구에서 용아와 대화-->
+<!--[완료NPC]	바람항구 - 바티-->
+<!--[내용]	용아가 라이딩펫 시스템에 대해 좀 더 자세히 설명한다. 바람항구에서 용아와 대화하자.-->
+<QUEST>
+	<ID>235</ID> <!-- 펫시스템도 업데이트! 라이딩펫 -->
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="523471">펫시스템도 업데이트! 라이딩펫</TITLE>
+	<GROUPNAME TEXT="500009">바람항구 브리즈</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="20" MAX="99"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+		</LIMITS>
+	
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</CLIENT> <!--시작NPC 바람항구 - 용아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</PAYER> <!--완료NPC 바람항구 - 용아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</AGENT> <!--진행NPC 11 바람항구 - 용아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ 
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ 
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="0" TEXT="523473"/> <!--용아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+		<ITEM COUNT="1">231001090</ITEM>
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="523474" FACE="DragonBaby_normal"/> <!--음하하! 라이딩펫에 흥미를 가진 사람들이 많은 것 같군. 그렇다면 오늘은 신규 등장하는 펫이 라이딩펫으로 성장하는 것에 대해 알려주도록 하지. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="523478" FACE="DragonBaby_smile"/> <!--모든 유져들은 앞으로 라이딩펫 퀘스트라는 것을 통해서 
+아직 플레이어를 태울 수 없는 어린 펫을 받게 될 거야.%% 
+이 신규 펫도 처음엔 이전의 전투펫들과 다름 없어 보일 수 있지만, 
+함께 전투를 치루다 보면 약간 다른 차이점을 발견하게 될 거야.%%
+이 신규 펫들은 플레이어의 경험치를 약간 나누어 받아 성장하게 돼. 
+그리고 얼마 뒤엔 라이딩펫이 되는 최종 퀘스트를 받게 되지.%%
+이 퀘스트가 제법 혹독한 데다가, 설사 라이딩펫이 되었다고 하더라도 
+특정한 방법을 통해서만 마련할 수 있는 '고급사료'가 필요하니까... 
+애정과 책임을 갖지 못할 바엔 차라리 도전하지 않는 편이 나을지도...%%
+하지만 바람을 가르며 달리고 싶은 사람에게 라이딩펫은 유일무이한 
+상큼한 대안이니까, 꼭 도전해보길 바랄게!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="523475" FACE="DragonBaby_normal"/> <!--우선 주의사항을 하나 전하도록 할게. 
+지금부터 말하는 것은 어디까지나 New Origin 업데이트 서비스가 시작된 이후에 적용되는 것이니, 벌써부터 라이딩펫이나
+신종족을 플레이 해보겠다고 시간 낭비하는 일이 없길 바라~-->
+			<SELECT ID="601"  TEXT="500002">계속</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="523476" FACE="DragonBaby_angry"/> <!--흥, 그냥 이야기만 듣기만 해도 카즈라 코인이 생기는데 말이지…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="523477" FACE="DragonBaby_angry"/> <!--(없음, test)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" />
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" />
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="523472" />
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+	</DIALOGS>
+</QUEST>

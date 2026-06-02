@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4113</ID> <!--T.T.10411301 적군 침공! (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	파블로, 노엘박사와 대화한 후 호프먼 대장에게 보고-->
+<!--[완료NPC]	상인의 마을 - 호프먼-->
+<!--[내용]	호프먼 대장은 마을로 침공한 마물들 때문에 고민한다. 마물을 막기 위한 대책을 대마법사 파블로와 노엘 박사에게 들은 뒤 호프먼 대장에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2880301C-3CF8-455c-BE54-227116F7914C</CLIENT> <!--시작NPC 상인의 마을 - 호프먼 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2880301C-3CF8-455c-BE54-227116F7914C</PAYER> <!--완료NPC 상인의 마을 - 호프먼 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021">30B65084-661B-41bc-AB4B-D5CC8A113ADE</AGENT> <!--진행NPC 1 상인의 마을 - 파블로 -->
+		<AGENT TYPE="NPC" EVENTNO="10022">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 2 상인의 마을 - 노엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">2880301C-3CF8-455c-BE54-227116F7914C</AGENT> <!--진행NPC 11 상인의 마을 - 호프먼 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10411311"/> <!--파블로와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10411312"/> <!--노엘과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411321" FACE="Hopeman_normal"/> <!--오! 맙소사!
+보다시피 이곳의 상황은 악화일로에 치닫고 있네!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411326" FACE="Hopeman_smile"/> <!--뭐라고? 가디언?
+기계로 만든 대몬스터 방어장치라니…
+좀 터무니 없는 듯 느껴지는군.%%
+어쨌거나 본국에 지원병력을 요청했으니
+자네는 원정대원으로서, 마을의 수비에
+특별한 신경을 써주기 바란다네. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411323" FACE="Hopeman_normal"/> <!--듣자하니… 마을로 침공한 몬스터들이 검은 마녀 파리스가 
+부활시킨 천년 전의 유령이라고 들었네.%% 
+우리는 한도 끝도 없이 쏟아져 나오는 저들의 기세에 
+두손두발 다들었다네. 부디 이 일에 대해 파블로님과 
+노엘박사에게 조언을 구해주게나. %%
+저 몬스터 부대를 확실하게 무력화 시킬 수 있는 방법을 
+찾아내지 못한다면, 번영했던 이 상인의 마을도 결국…%% 
+유령 도시가 되고 말 것이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411324" FACE="Hopeman_angly"/> <!--자네 같은 자를 기회주의자라고 부르지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411325" FACE="Hopeman_angly"/> <!--마을로 쳐들어온 몬스터들에 대한 조치라…%%
+최근에 몬스터들이 극성을 부리는 이유는 근방의 
+마그마 던젼과 관련이 깊은 것으로 보이네.%%
+만약 그곳에서 몬스터들을 자극하는 무언가를 
+찾아낼 수 있으면 좋으련만…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10411351" FACE="Pablo_normal"/> <!--마을로 쳐들어온 몬스터들에 대한 조치라…%%
+최근에 몬스터들이 극성을 부리는 이유는 근방의 
+마그마 던젼과 관련이 깊은 것으로 보이네.%%
+만약 그곳에서 몬스터들을 자극하는 무언가를 
+찾아낼 수 있으면 좋으련만…-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10411352" FACE="noel_normal"/> <!--내가 지금 정령석을 이용해서 연구중인 
+대단위 자동 공격 장치가 있네. %%
+이름은 아직 짓지 앟았네만, 그냥 편하게 
+가디언이라고 부르고 있지.%%
+간단한 구동은 할 수 있네만, 아직 동력 제공의 
+문제점이 해결되지 않아서 고민이네. %%
+지금으로썬 커다란 마법 에너지를 저장할 수 있는 
+특별한 정령석을 찾지 못했다네. -->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

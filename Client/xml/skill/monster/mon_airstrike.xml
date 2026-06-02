@@ -1,0 +1,8 @@
+<ACTION ID="a_mon_air_strike" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" BIDIRECTION="TRUE">
+	<SLOT NAME="air_strike_start"/>
+	<SLOT NAME="air_strike_idle" LOOP="TRUE"/>
+	<SLOT NAME="air_strike_fire"/>
+	<SLOT NAME="btlidle_01"/>
+	<SLOT NAME="air_strike_finish"/>
+	<FSM SCRIPT="Act_Mon_AirStrike"/>
+</ACTION>

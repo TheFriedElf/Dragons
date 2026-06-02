@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_Dancer_Female">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSKill/Change_bboy_F/Change_bboy_F.kfm</KFMPATH>
+    <SCRIPT SRC="Actor/pc_base.lua">
+      <ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+    </SCRIPT>
+    <ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+      <ITEM NAME="battle_idle" ANIMATION="1000005"/>
+
+      <ITEM NAME="melee_01" ANIMATION="1000061"/>
+      <ITEM NAME="melee_02" ANIMATION="1000062"/>
+      <ITEM NAME="melee_03" ANIMATION="1000063"/>
+      <ITEM NAME="melee_04" ANIMATION="1000064"/>
+      <ITEM NAME="melee_05" ANIMATION="1000065"/>
+
+      <ITEM NAME="dash_attk_01" ANIMATION="1000211"/>
+      
+      <ITEM NAME="jump_attk_01" ANIMATION="1000106"/>
+      <ITEM NAME="jump_attk_02" ANIMATION="1000107"/>
+      
+      <ITEM NAME="melee_blow_up" ANIMATION="1000068"/>
+      <ITEM NAME="melee_knock_back" ANIMATION="1000066"/>
+
+      <ITEM NAME="jump_down_attk" ANIMATION="1000110"/>
+      <ITEM NAME="jump_down_attk_up" ANIMATION="1000111"/>
+
+      <ITEM NAME="attk_down_01" ANIMATION="1000065"/>
+      <ITEM NAME="attk_down_02" ANIMATION="1000066"/>
+      <ITEM NAME="attk_down_03" ANIMATION="1000067"/>
+      <ITEM NAME="attk_down_fly" ANIMATION="1000068"/>
+
+      <ITEM NAME="dmg_01" ANIMATION="1000011"/>
+      <ITEM NAME="dmg_02" ANIMATION="1000012"/>
+
+      <ITEM NAME="idle_01" ANIMATION="1000000" />
+
+      <ITEM NAME="ladder_up" ANIMATION="1000301"/>
+      <ITEM NAME="ladder_down" ANIMATION="1000303"/>
+      <ITEM NAME="ladder_idle" ANIMATION="1000302"/>
+
+      <ITEM NAME="knockdown_01" ANIMATION="1000045"/>
+      <ITEM NAME="knockdown_idle" ANIMATION="1000046"/>
+      <ITEM NAME="knockdown_up" ANIMATION="1000047"/>
+
+      <ITEM NAME="run" ANIMATION="1000055"/>
+      <ITEM NAME="dash" ANIMATION="1000210"/>
+      <ITEM NAME="back_step" ANIMATION="1000043"/>
+
+      <ITEM NAME="jump_01" ANIMATION="1000101"/>
+      <ITEM NAME="jump_02" ANIMATION="1000102"/>
+      <ITEM NAME="jump_03" ANIMATION="1000103"/>
+      <ITEM NAME="jump_04" SPEED="0.7" ANIMATION="1000104"/>
+      <ITEM NAME="dash_jump_01" ANIMATION="1000101"/>
+      <ITEM NAME="dash_jump_02" SPEED="0.7" ANIMATION="1000104"/>
+      <ITEM NAME="dash_jump_idle" ANIMATION="1000112"/>
+
+      <ITEM NAME="BlowUp_Down" ANIMATION="1000042"/>
+      <ITEM NAME="BlowUp_Loop" ANIMATION="1000041"/>
+      <ITEM NAME="StandUp" ANIMATION="1000047"/>
+
+      <ITEM NAME="Com_Skill_NineteenNine_01_01" ANIMATION="1000201"/>
+      <ITEM NAME="Com_Skill_NineteenNine_01_02" ANIMATION="1000202"/>
+      <ITEM NAME="Com_Skill_NineteenNine_01_03" ANIMATION="1000203"/>
+      <ITEM NAME="Com_skill_Seven_01" ANIMATION="1000204"/>
+      <ITEM NAME="Com_skill_wind_mill_01_01" ANIMATION="1000205"/>
+      <ITEM NAME="Com_skill_wind_mill_01_02" ANIMATION="1000206"/>
+      <ITEM NAME="Com_skill_wind_mill_01_03" ANIMATION="1000207"/>
+
+    </SLOT>
+  </WORLDOBJECT>
+</ACTOR>

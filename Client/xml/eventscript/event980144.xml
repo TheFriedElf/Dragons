@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+<CMD TYPE="EscScript" EventID="980112"/>
+
+<!-- 포트레이트 연출 시작-->
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801433" FaceID="User_normal"/><!-- 주인공 -->
+	  <CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801059" TextTTID="99801434" FaceID="Hercules_confuse"/><!-- 헤라클레스 눈물 -->
+	  <CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	
+    <!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980112"/>
+
+	
+</EVENT_SCRIPT>

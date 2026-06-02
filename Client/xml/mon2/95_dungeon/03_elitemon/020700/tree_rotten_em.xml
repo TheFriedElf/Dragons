@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Tree_Rotten_em" SHOW_WARNING="FALSE">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Tree_Rotten"/>
+		<KFMPATH SCALE="1.5">../Data/2_Mon2/95_Dungeon/03_EliteMon/020700/Tree_Rotten/Tree_Rotten.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="40"/>
+			<SPHERE TO="p_hit_point_02" SIZE="40"/>
+		</ABV>
+		<SLOT>
+			
+			
+				<!-- 기본치기 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206" QUAKE_TIME="0.5" QUAKE_FACTOR="0.7"/>
+			
+			     <!-- 크게 내려치기 -->
+		   <ITEM NAME="earthquake_battleidle_start" ANIMATION="1000301"/>
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000302"/>
+			<ITEM NAME="earthquake_fire" ANIMATION="1000303" FIRE_EFFECT="efx_tree_rotten_attk_03_02"/>
+
+
+			<!-- 브래스 소리지르기 -->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347"/>
+	
+
+
+			<!-- 쏘기 -->
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000214"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000215" FIRE_START_NODE="p_ef_breath" PROJECTILE_ID="Peojectile_tree_rotten_shot"/>
+		
+	        <!-- 검은기둥소환 -->
+		
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000211"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000210"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000212" FIRE_EFFECT="efx_tree_rotten_attk_03_02"/>
+			
+			
+	        <!--대쉬공격 베어슬래쉬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000328" FIRE_EFFECT="NONE"/>
+
+		
+
+
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000900"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+		
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<!-- 다이-->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		
+	
+				<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000001" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

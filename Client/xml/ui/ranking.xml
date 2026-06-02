@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="SFRM_RANKING" ALIGN_X="50" ALIGN_Y="50" W="518" H="729" STATIC_NUM="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" W="516" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CREATEROOM" X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+				<CHECK_BUTTON ID="CBTN_CREATEROOM" X="0" Y="0" W="84" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+					<ATTR TEXT = "300000" FONT="FTtitle_14" T_X="36" T_Y ="5" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_BTN_CLOSE" X="486" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<BUTTON ID="BNT_CLOSE" X="0" Y="0" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_RANKING")</SCRIPT>
+				<HOTKEY ID="1">CloseUI("SFRM_RANKING") return true</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_BOX" X="6" Y="32" Z="-2" W="508" H="33" STATIC_NUM="34"/>
+		<STATIC_FORM ID="SFRM_SELECT_TYPE" X="55" Y="37" Z="-1" W="235" H="21" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR TEXT="" T_X="10" T_Y="3" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_CALL">UISelf:SetStaticText(GetTT(301204):GetStr())</SCRIPT>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_SEARCH_TYPE" X="10" Y="37" W="40" H="21">
+			<ATTR TEXT="300007" T_X="20" T_Y="2" T_CENTER="1" T_OUTLINE="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_SELECT_TYPE_SHADOW" X="55" Y="37" W="235" H="21" STATIC_NUM="3">
+			<BUTTON ID = "BTN_DROPDOWN" X ="214" Y="0" W="21" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/post/psDropB.tga" BTN_IMG_W="42" BTN_IMG_H="42"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kParent = UISelf:GetParent():GetParent()
+					if false == kParent:IsNil() then
+						local kList = kParent:GetControl("SFRM_SELECT_TYPE_LIST")
+						if false == kList:IsNil() then
+							kList:Visible(true)
+						end
+					end
+				</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<LOCAL>
+			<NAME ID="JAPAN">
+				<STATIC_FORM ID="SFRM_SELECT_TYPE_LIST" X="55" Y="58" Z="5" W="214" H="285" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<LIST ID="LST_SELECT_TYPE" X="0" Y="0" W="214" H="285" ITEM_X="0" ITEM_Y="0">
+						<ATTR ELEMENT_ID="FRM_SELECT_TYPE_LIST"/>
+						<SCRIPT ID="ON_CALL">
+							UISelf:ClearAllListItem()
+							UISelf:AddNewListItemChar(GetTextW(301014):GetStr()):GetWnd():SetCustomDataAsInt(1014)
+							UISelf:AddNewListItemChar(GetTextW(301002):GetStr()):GetWnd():SetCustomDataAsInt(1002)
+							UISelf:AddNewListItemChar(GetTextW(301003):GetStr()):GetWnd():SetCustomDataAsInt(1003)
+							UISelf:AddNewListItemChar(GetTextW(301004):GetStr()):GetWnd():SetCustomDataAsInt(1004)
+							UISelf:AddNewListItemChar(GetTextW(301011):GetStr()):GetWnd():SetCustomDataAsInt(1011)
+							UISelf:AddNewListItemChar(GetTextW(301012):GetStr()):GetWnd():SetCustomDataAsInt(1012)
+							UISelf:AddNewListItemChar(GetTextW(301006):GetStr()):GetWnd():SetCustomDataAsInt(1006)
+							UISelf:AddNewListItemChar(GetTextW(301008):GetStr()):GetWnd():SetCustomDataAsInt(1008)
+							UISelf:AddNewListItemChar(GetTextW(301009):GetStr()):GetWnd():SetCustomDataAsInt(1009)
+							UISelf:AddNewListItemChar(GetTextW(301018):GetStr()):GetWnd():SetCustomDataAsInt(1018)
+							UISelf:AddNewListItemChar(GetTextW(301019):GetStr()):GetWnd():SetCustomDataAsInt(1019)
+							UISelf:AddNewListItemChar(GetTextW(301020):GetStr()):GetWnd():SetCustomDataAsInt(1020)
+						</SCRIPT>
+					</LIST>
+					<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+					<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Visible(false) return true  </SCRIPT>
+				</STATIC_FORM>
+			</NAME>
+			<NAME ID="KOREA">
+				<STATIC_FORM ID="SFRM_SELECT_TYPE_LIST" X="55" Y="58" Z="5" W="214" H="306" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<LIST ID="LST_SELECT_TYPE" X="0" Y="0" W="214" H="306" ITEM_X="0" ITEM_Y="0">
+						<ATTR ELEMENT_ID="FRM_SELECT_TYPE_LIST"/>
+						<SCRIPT ID="ON_CALL">
+							UISelf:ClearAllListItem()
+							UISelf:AddNewListItemChar(GetTextW(301014):GetStr()):GetWnd():SetCustomDataAsInt(1014)
+							UISelf:AddNewListItemChar(GetTextW(301002):GetStr()):GetWnd():SetCustomDataAsInt(1002)
+							UISelf:AddNewListItemChar(GetTextW(301003):GetStr()):GetWnd():SetCustomDataAsInt(1003)
+							UISelf:AddNewListItemChar(GetTextW(301004):GetStr()):GetWnd():SetCustomDataAsInt(1004)
+							UISelf:AddNewListItemChar(GetTextW(301011):GetStr()):GetWnd():SetCustomDataAsInt(1011)
+							UISelf:AddNewListItemChar(GetTextW(301012):GetStr()):GetWnd():SetCustomDataAsInt(1012)
+							UISelf:AddNewListItemChar(GetTextW(301006):GetStr()):GetWnd():SetCustomDataAsInt(1006)
+							UISelf:AddNewListItemChar(GetTextW(301008):GetStr()):GetWnd():SetCustomDataAsInt(1008)
+							UISelf:AddNewListItemChar(GetTextW(301009):GetStr()):GetWnd():SetCustomDataAsInt(1009)
+							UISelf:AddNewListItemChar(GetTextW(301021):GetStr()):GetWnd():SetCustomDataAsInt(1021)
+							UISelf:AddNewListItemChar(GetTextW(301018):GetStr()):GetWnd():SetCustomDataAsInt(1018)
+							UISelf:AddNewListItemChar(GetTextW(301019):GetStr()):GetWnd():SetCustomDataAsInt(1019)
+							UISelf:AddNewListItemChar(GetTextW(301020):GetStr()):GetWnd():SetCustomDataAsInt(1020)
+						</SCRIPT>
+					</LIST>
+					<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+					<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Visible(false) return true  </SCRIPT>
+				</STATIC_FORM>
+			</NAME>
+			<NAME ID="DEFAULT">
+				<STATIC_FORM ID="SFRM_SELECT_TYPE_LIST" X="55" Y="58" Z="5" W="214" H="330" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<LIST ID="LST_SELECT_TYPE" X="0" Y="0" W="214" H="330" ITEM_X="0" ITEM_Y="0">
+						<ATTR ELEMENT_ID="FRM_SELECT_TYPE_LIST"/>
+						<SCRIPT ID="ON_CALL">
+							UISelf:ClearAllListItem()
+							UISelf:AddNewListItemChar(GetTextW(301014):GetStr()):GetWnd():SetCustomDataAsInt(1014)
+							UISelf:AddNewListItemChar(GetTextW(301002):GetStr()):GetWnd():SetCustomDataAsInt(1002)
+							UISelf:AddNewListItemChar(GetTextW(301003):GetStr()):GetWnd():SetCustomDataAsInt(1003)
+							UISelf:AddNewListItemChar(GetTextW(301004):GetStr()):GetWnd():SetCustomDataAsInt(1004)
+							UISelf:AddNewListItemChar(GetTextW(301011):GetStr()):GetWnd():SetCustomDataAsInt(1011)
+							UISelf:AddNewListItemChar(GetTextW(301012):GetStr()):GetWnd():SetCustomDataAsInt(1012)
+							UISelf:AddNewListItemChar(GetTextW(301005):GetStr()):GetWnd():SetCustomDataAsInt(1005)
+							UISelf:AddNewListItemChar(GetTextW(301006):GetStr()):GetWnd():SetCustomDataAsInt(1006)
+							UISelf:AddNewListItemChar(GetTextW(301008):GetStr()):GetWnd():SetCustomDataAsInt(1008)
+							UISelf:AddNewListItemChar(GetTextW(301009):GetStr()):GetWnd():SetCustomDataAsInt(1009)
+							UISelf:AddNewListItemChar(GetTextW(301021):GetStr()):GetWnd():SetCustomDataAsInt(1021)
+							UISelf:AddNewListItemChar(GetTextW(301018):GetStr()):GetWnd():SetCustomDataAsInt(1018)
+							UISelf:AddNewListItemChar(GetTextW(301019):GetStr()):GetWnd():SetCustomDataAsInt(1019)
+							UISelf:AddNewListItemChar(GetTextW(301020):GetStr()):GetWnd():SetCustomDataAsInt(1020)
+						</SCRIPT>
+					</LIST>
+					<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+					<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Visible(false) return true  </SCRIPT>
+				</STATIC_FORM>
+			</NAME>
+		</LOCAL>
+		
+		<FORM ID="FRM_CLASS_TYPE" Y="37" H="21" >
+<LOCAL>
+	<NAME ID="DEFAULT">
+			<ATTR X="310" W="50" T_X="25"/>
+	</NAME>
+	<NAME ID="JAPAN">
+			<ATTR X="295" W="65" T_X="32"/>
+	</NAME>
+</LOCAL>
+			<ATTR TEXT="300009" T_Y="2" T_CENTER="1" T_OUTLINE="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		<STATIC_FORM ID="SFRM_SELECT_CLASS" X="366" Y="37" Z="1" W="138" H="21" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SELECT_CLASS_SHADOW" X="366" Y="37" Z="3" W="138" H="21" STATIC_NUM="3">
+			<ATTR TEXT="30000" FONT="Font_Text" T_X="5" T_Y="2"/>
+			<BUTTON ID="BTN_DROPDOWN" X ="117" Y="0" W="21" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/post/psDropB.tga" BTN_IMG_W="42" BTN_IMG_H="42"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kParent = UISelf:GetParent():GetParent()
+					if false == kParent:IsNil() then
+						local kList = kParent:GetControl("SFRM_SELECT_CLASS_TYPE_LIST")
+						if false == kList:IsNil() then
+							kList:Visible(true)
+						end
+					end
+				</SCRIPT>
+			</BUTTON>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SELECT_CLASS_TYPE_LIST" X="369" Y="57" Z="5" W="114" H="23" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<LIST ID="LST_SELECT_TYPE" X="0" Y="0" W="114" H="23" ITEM_X="0" ITEM_Y="0">
+				<ATTR ELEMENT_ID="FRM_SELECT_TYPE_CLASS_LIST"/>
+			</LIST>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Visible(false) return true  </SCRIPT>
+		</STATIC_FORM>
+		
+		
+		
+		
+		<STATIC_FORM ID="SFRM_MAIN_COLOR_BG" X="14" Y="70" Z="-2" W="490" H="569" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_MAIN_SHADOW_BG" X="14" Y="70" Z="-1" W="490" H="569" STATIC_NUM="3"/>
+		
+		<!--  Room list' Title -->
+		<STATIC_FORM ID="SFRM_ORDER_NO" X="20" Y="76" Z="3" W="48" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="300001" T_X="24" T_Y="6" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_NAME" X="70" Y="76" Z="3" W="124" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="300002" T_X="62" T_Y="6" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_LEVEL" X="196" Y="76" Z="3" W="40" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="300003" T_X="20" T_Y="6" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_GUILD" X="238" Y="76" Z="3" W="124" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="300004" T_X="62" T_Y="6" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_POINT" X="364" Y="76" Z="3" W="84" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="300005" T_X="42" T_Y="6" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_CLASS" X="450" Y="76" Z="3" W="48" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="300006" T_X="24" T_Y="6" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+
+		<BUILD ID="BUILD_RANK_LIST" TARGET_ID="FRM_RANK_ITEM" X="14" Y="108" X_COUNT="1" Y_COUNT="18" X_GAB="0" Y_GAB="29" START_INDEX="0" TRG_CUSTOME_ID="FRM_ITEM_"/>
+		<FORM ID="FRM_RANK_ITEM" X="0" Y="0" Z="3" W="599" H="26">
+			<STATIC_FORM ID="FRM_ORDER_NO" X="6" Y="0" W="48" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="" FONT="Font_Text" T_X="24" T_Y="6" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="FRM_NAME" X="56" Y="0" W="124" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="" FONT="Font_Text" T_X="62" T_Y="6" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="FRM_LEVEL" X="182" Y="0" W="40" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="" FONT="Font_Text" T_X="20" T_Y="6" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="FRM_GUILD" X="224" Y="0" W="124" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="" FONT="Font_Text" T_X="62" T_Y="6" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="FRM_POINT" X="350" Y="0" W="84" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="" FONT="Font_Text" T_X="80" T_Y="6" T_RIGHT="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="FRM_CLASS" X="436" Y="0" W="48" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<IMG ID="IMG_CLASS" X="11" Y="0" Z="1" W="26" H="26" IS_VISIBLE="1">
+					<ATTR IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1"/>
+				</IMG>
+			</STATIC_FORM>
+			<CHECK_BUTTON ID="CBTN_ITEM_SELECT">
+				<ATTR X="4" Y="-2" W="480" H="30" Z="5"/>
+				<IMG ID="IMG_SELECT" X="0" Y="0" W="500" H="30" IMG="../Data/6_ui/common/cmRankSlt.tga" IMG_W="480" IMG_H="30" IS_VISIBLE="0" IGNORE_PARENT_RECT="1"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:CheckState(false)
+					UISelf:LockClick(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					RankingSelectedSet(UISelf)
+				</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER">
+					local kSelf = UISelf
+					CallToolTipText(0, kSelf:GetCustomDataAsStr(), GetUIWnd("Cursor"):GetLocation())
+				</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</CHECK_BUTTON>
+			<FORM ID="FRM_DUMMY" X="6" Y="-1" Z="4" W="587" H="28">
+				<SCRIPT ID="ON_L_BTN_DOWN"></SCRIPT>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		
+		<!-- Page Control -->
+		<FORM ID="FRM_PAGE_CONTROL" X="0" Y="645" Z="2" W="518" H="79">
+			<BUTTON ID="BTN_TO_FIRST" X="123" Y="0" W="23" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvBack2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(1)</SCRIPT>
+				<SCRIPT ID="ON_CALL">UISelf:SetClose(true)</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_BG_FIRST" X="142" Y="7" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="IMG_LINE_FIRST" X="153" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_TO_PREV" X="161" Y="0" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">UISelf:SetClose(true)</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_BG_PREV" X="171" Y="7" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="IMG_LINE_PREV" X="183" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_NUM_0" X="190" Y="3" W="20" H="19">
+				<ATTR TEXT="" FONT="Font_Text" T_X="10" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/_NumFrame.tga" BTN_IMG_W="34" BTN_IMG_H="28"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetStaticText("")
+					UISelf:SetClose(true)
+				</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_LINE_NUM_0" X="213" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_NUM_1" X="220" Y="3" W="20" H="19">
+				<ATTR TEXT="" FONT="Font_Text" T_X="10" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/_NumFrame.tga" BTN_IMG_W="34" BTN_IMG_H="28"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetStaticText("")
+					UISelf:SetClose(true)
+				</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_LINE_NUM_1" X="243" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_NUM_2" X="250" Y="3" W="20" H="19">
+				<ATTR TEXT="" FONT="Font_Text" T_X="10" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/_NumFrame.tga" BTN_IMG_W="34" BTN_IMG_H="28"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetStaticText("")
+					UISelf:SetClose(true)
+				</SCRIPT>
+			</BUTTON>
+				<IMG ID="IMG_LINE_NUM_2" X="273" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_NUM_3" X="280" Y="3" W="20" H="19">
+				<ATTR TEXT="" FONT="Font_Text" T_X="10" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/_NumFrame.tga" BTN_IMG_W="34" BTN_IMG_H="28"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetStaticText("")
+					UISelf:SetClose(true)
+				</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_LINE_NUM_3" X="303" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_NUM_4" X="310" Y="3" W="20" H="19">
+				<ATTR TEXT="" FONT="Font_Text" T_X="10" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/_NumFrame.tga" BTN_IMG_W="34" BTN_IMG_H="28"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetStaticText("")
+					UISelf:SetClose(true)
+				</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_LINE_NUM_4" X="333" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_TO_NEXT" X="342" Y="0" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">UISelf:SetClose(true)</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_BG_NEXT" X="342" Y="7" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="IMG_LINE_NEXT" X="363" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+				
+			<BUTTON ID="BTN_TO_END" X="372" Y="0" W="23" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">RefreshRanking(UISelf:GetCustomDataAsInt())</SCRIPT>
+				<SCRIPT ID="ON_CALL">UISelf:SetClose(true)</SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_BG_END" X="372" Y="7" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		</FORM>
+		
+		<IMG ID="IMG_LINE" X="5" Y="676" W="508" H="2" IMG="../Data/6_Ui/Pvp/pvLine.tga" IMG_W="508" IMG_H="2"/>
+		
+		<BUTTON ID="BTN_MYRANK" X="14" Y="684" Z="3" W="82" H="29">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58"/>
+			<ATTR TEXT="300008" T_X="41" T_Y="7" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if false == FindRank(g_pilotMan:GetPlayerPilotGuid()) then
+					CommonMsgBoxByTextTable(301203,true)
+				end
+			</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_CLOSE" X="422" Y="684" Z="3" W="82" H="29">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58"/>
+			<ATTR TEXT="" T_X="41" T_Y="7" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(403040, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent() return true</SCRIPT>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+
+		<SCRIPT ID="ON_CALL">InitRanking(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">ClearRanking()</SCRIPT>
+	</STATIC_FORM>
+	
+	<!-- Select Type -->
+	<FORM ID="FRM_SELECT_TYPE_LIST" X="0" Y="0" W="211" H="23">
+		<ATTR TEXT="" FONT="Font_Text" T_X="14" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			CallRanking(UISelf:GetCustomDataAsInt())
+			UISelf:GetParent():GetParent():Visible(false)
+			UpDateClassType(UISelf:GetParent():GetParent():GetParent(), UISelf:GetCustomDataAsInt())
+			local pWnd = UISelf:GetParent():GetParent():GetParent():GetControl("SFRM_SELECT_CLASS_SHADOW")
+			if false == pWnd:IsNil() then
+				pWnd:SetStaticText(GetTT(30000):GetStr())
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_SELECT_TYPE_CLASS_LIST" X="0" Y="0" W="114" H="23">
+		<ATTR TEXT="" FONT="Font_Text" T_X="14" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			DivideClass(UISelf:GetCustomDataAsInt())
+			UISelf:GetParent():GetParent():Visible(false)
+			local pWnd = UISelf:GetParent():GetParent():GetParent():GetControl("SFRM_SELECT_CLASS_SHADOW")
+			if false == pWnd:IsNil() then
+				pWnd:SetStaticText(UISelf:GetStaticText():GetStr())
+			end
+		</SCRIPT>
+	</FORM>	
+</XUI>

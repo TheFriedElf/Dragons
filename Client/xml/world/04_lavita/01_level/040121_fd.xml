@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="040121_FD" DESCRIPTION="90401100">
+  <GSAPATH>../Data/3_World/04_Lavita/01_Level/040121_FD.gsa</GSAPATH>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!-- 포탈-->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+ 
+  <!-- 엔터 던전 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" HIDE_MINIMAP="1">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+ 
+</WORLD>

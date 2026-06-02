@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_DragonLord" INIT_ACTION="a_idle">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/1_Cha/8_Etc/Dragon_Lord/Dragon_Lord.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="intro_idle_01" ANIMATION="1000000" LOOP="TRUE"/>
+			<ITEM NAME="intro_idle_02" ANIMATION="1000001" LOOP="TRUE"/>
+			<ITEM NAME="intro_select_01" ANIMATION="1000002" LOOP="TRUE"/>
+			<ITEM NAME="intro_select_02" ANIMATION="1000003" LOOP="TRUE"/>
+			<ITEM NAME="intro_select_idle_01" ANIMATION="1000004" LOOP="TRUE"/>
+			<ITEM NAME="intro_select_idle_02" ANIMATION="1000005" LOOP="TRUE"/>
+			<ITEM NAME="intro_select_back_02" ANIMATION="1000006" LOOP="TRUE"/>
+			<ITEM NAME="intro_select_back_01" ANIMATION="1000007" LOOP="TRUE"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

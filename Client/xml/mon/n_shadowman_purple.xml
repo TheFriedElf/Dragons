@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_shadowman_purple" INIT_ACTION="a_opening">
+	<TEXTURE SRC="n_shadowman_body.dds">../Data/2_Mon/N_Shadow Man/n_shadowman_purple_body.dds</TEXTURE>
+	<TEXTURE SRC="n_shadowman_glow.dds">../Data/2_Mon/N_Shadow Man/n_shadowman_purple_glow.dds</TEXTURE>
+	<TEXTURE SRC="n_shadowman_body_glow.dds">../Data/2_Mon/N_Shadow Man/n_shadowman_purple_body_glow.dds</TEXTURE>
+	<TEXTURE SRC="n_shadowman_glow_glow.dds">../Data/2_Mon/N_Shadow Man/n_shadowman_purple_glow_glow.dds</TEXTURE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Shadow Man/N_Shadow Man.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="8"/>
+			<SPHERE TO="p_hit_point_02" SIZE="3"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="attk_01_02" ANIMATION="1000064" RANDOM="100"/>
+			<ITEM NAME="shot_01" ANIMATION="1000065" RANDOM="100"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="close_01" ANIMATION="1000085"/>
+			<ITEM NAME="close_idle_01" ANIMATION="1000086"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="Standup" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

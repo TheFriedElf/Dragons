@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5097</ID> <!--T.T.10509701 슬픈 진실(4) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단 [아케이드 모드(F1)]의 칼리곤으로부터 사건일지 1개를 구하자-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	레오는 부모님의 편지에 사건에 대한 자세한 상황이 적혀 있지는 않았다고 한다. 아마도 자신이 사건의 진실을 알면 안 되기 때문일지도 모른다고 레오는 생각한다. 당시 레오가 타고 있던 선박의 선장님이 무언가 적고 있었는데, 아마도 사건에 대해서 간략하게 적혀 있는 사건일지일지도 모른다. 칼리곤 선단 근처에서 발견한 물건은 모두 칼리곤에게 가기 때문에 사건일지도 칼리곤에게 있을지 모른다고 한다. 칼리곤 선단 [아케이드 모드(F1)]의 칼리곤으로부터 사건일지 1개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010159/10000/0/1/1/160509700">3000300</MONSTER> 
+ <!--MON_NO=3000300/정신나간 칼리곤,MAP_NO=9010159/정신나간 칼리곤선장,Item_NO=160509700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160509700</ITEM> 
+ <!--Item_NO=160509700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10509711"/> <!--사건일지-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509721" FACE="Leo_normal"/> <!--부모님이 당시 일어났던 사건에 대해서 자세히 적어 놓지 않은 것 같습니다.
+그저 편지에는 저를 얼마나 사랑하는지만 적혀 있었습니다.
+아마도 제가 사건의 진실을 알면 안 되기 때문일지도 모릅니다.%%
+그때 당시 배의 선장님이 무언가 적고 계셨던걸로 기억이 납니다.
+아마도 당시의 상황을 적은 사건일지라고 생각합니다.
+%name%님 당시의 사건에 대해 적혀 있는 사건일지를 가져다 주실 수 있겠습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509726" FACE="Leo_normal"/> <!--감사합니다. 이로서 저를 괴롭히던 과거를 모두 알 수 있게 되었습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509723" FACE="Leo_normal"/> <!--당시 선장님은 항상 무슨일이 일어나면 무언가를 적고 있었습니다.
+아마 사건이 일어났을 때도 적고 계셨던 걸로 기억이 납니다.%%
+칼리곤 선단 근처에서 발견한 모든 물건은 칼리곤에게 간다고 합니다.
+아마도 사건일지 역시 칼리곤 선단 [아케이드 모드(F1)]의 칼리곤에게 있을 것입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509724" FACE="Leo_normal"/> <!--잘 알겠습니다. 이제는 제 힘으로 진실을 알아야 될 때라고 생각합니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509725" FACE="Leo_normal"/> <!--사건의 진실을 알아도 섣부르게 행동하지 않을 겁니다. 
+부모님은 저에게 훌륭한 용자가 되라고 하셨습니다.
+전 그 길을 갈 생각입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

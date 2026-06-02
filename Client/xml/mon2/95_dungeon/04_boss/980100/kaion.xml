@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Kaion" INIT_ACTION="a_opening"EVENT_SCRIPT_ON_DIE="980155">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+	<KFMPATH SCALE="1.5">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Kaion/Kaion.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+             <SPHERE TO="p_hit_point_01" SIZE="40"/>
+             <SPHERE TO="p_hit_point_02" SIZE="25"/>
+
+		</ABV>
+		<SLOT>
+			<!--근거리 1-할퀴기-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+
+
+
+
+			<!-- 브래스_음파 공격-->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347" USE_ABIL_TIME="FALSE"/>
+			<ITEM NAME="breath_01_finish" ANIMATION="1000348"/>
+
+
+
+			<!-- 대쉬공격-->
+	  	  <ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000414"/>
+     	  <ITEM NAME="dashattk_btlidle_01" ANIMATION="1000415" LOOP="TRUE"/>
+	   	  <ITEM NAME="dashattk_rush" ANIMATION="1000416" LOOP="TRUE" FIRE_EFFECT="efk_kaion_dash_01" FIRE_EFFECT_NODE="char_root"/>
+	   	  <ITEM NAME="dashattk_finish" ANIMATION="1000417"/>
+
+
+            <!-- 물어뜯기-->
+			<ITEM NAME="btlidle_loop_01_start" ANIMATION="1000331"/>
+			<ITEM NAME="btlidle_loop_01" ANIMATION="1000332"/>
+			<ITEM NAME="attk_loop_01" ANIMATION="1000333"/>
+			<ITEM NAME="attk_after_loop_01" ANIMATION="1000334"/>
+			<ITEM NAME="finish_loop_01" ANIMATION="1000335"/>
+
+
+			<!--점프해서 내려찍기-->
+			<ITEM NAME="jumpdowncrash_up" ANIMATION="1000361"/>
+			<ITEM NAME="jumpdowncrash_down" ANIMATION="1000362"/>
+			<ITEM NAME="jumpdowncrash_getup" ANIMATION="1000363"/>
+
+
+
+
+            <!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000044" QUAKE_TIME="1.5" QUAKE_FACTOR="2" CAMERA_ZOOM_OUT="600" CAMERA_ZOOM_IN_SPEED="0"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		
+			<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000005" HIT_SOUND_ID="pattern-brake"/>
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000044" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

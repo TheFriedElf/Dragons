@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5031</ID> <!--T.T.10503101 심장마비의 근원 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 쇠망치 미라 30마리 처리-->
+<!--[완료NPC]	바람항구 - 신디-->
+<!--[내용]	신디는 어느 날 밤에 산책을 하다가 굉장히 무시무시한 것을 봤다고 한다. 뭔가 하얗고 검은 것이 시청 지하수로 앞에서 돌아다니고 있었던 것이다. 유령을 무서워하는 신디는 그날 이후 잠을 못자서 피부가 거칠어졌다고 한다. 신디의 피부를 회복시키기 위해서 시청 지하수로에서 쇠망치 미라 30마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</CLIENT> <!--시작NPC 바람항구 - 신디 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</PAYER> <!--완료NPC 바람항구 - 신디 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</AGENT> <!--진행NPC 11 바람항구 - 신디 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010502/1">6008600</MONSTER> 
+ <!--MON_NO=6008600/쇠 망치 미라,MAP_NO=9010502/파렐 대저택,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10503111"/> <!--쇠망치 미라-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503121" FACE="Cindy_normal"/> <!--우왓! 날 놀래킬 생각 하지마.
+뭐라고 안 놀래켰다고?
+지금 심장이 상당히 약해진 상태야.%% 
+조금만 다가와도 심장이 두근거린다고.
+좋아 너에겐 특별히 이야기 해 주지. 시청 지하수로에 얽힌 공포를 말이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503126" FACE="Cindy_smile"/> <!--잘했어. 이제는 내 피부도 안정을 되찾을 수 있겠지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503123" FACE="Cindy_normal"/> <!--사실 얼마 전에 산책을 나갔었어. 그래서 여기 저기 거닐다가 시청 지하수로 근처로 오게 된 거야.
+그런데 뭔가 하얗고 검은 물체가 그곳에 돌아다니고 있는 거야.%%
+우오오오. 이런 이상한 소리를 내고 말이야. 
+그 녀석들 때문에 난 심장이 멎을 뻔 했어.
+단순한 몬스터라면 쉽게 상대하겠지만, 난 유령 같은 이야기는 질색이야.%%
+그래서 얼른 도망갔지. 문제는 그 뒤에도 시청 지하수로 쪽만 지나면 가슴이 두근댄다는 거지. 
+너에게 그 녀석들을 소탕할 수 있는 영광을 줄 게. 해줄 거지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503124" FACE="Cindy_angly"/> <!--관심이 없으면 그만둬. 너 말고 내 이야기에 관심을 가질 사람은 많으니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503125" FACE="Cindy_angly"/> <!--유령을 무서워하지 않는 녀석들은 없을 거야.
+내가 무서워하기 때문은 절대로 아니야!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

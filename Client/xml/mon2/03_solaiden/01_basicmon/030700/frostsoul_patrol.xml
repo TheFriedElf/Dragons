@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Frostsoul_Patrol" INIT_ACTION="a_opening">
+
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Frostsoul_Patrol"/>
+		<KFMPATH SCALE="0.5">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Frostsoul_Patrol/Frostsoul_Patrol.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="0.5">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Frostsoul_Patrol/Frostsoul_Patrol_die.kfm</SUB_KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			
+			<!-- 기본공격 배치기-->
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000203"/>
+		
+			<!-- 180도 빔 -->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000213"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000214"/>
+			<ITEM NAME="breath_01" ANIMATION="1000215" QUAKE_TIME="1" QUAKE_FACTOR="3" GROUND_EFFECT=""/>
+			<!--ITEM NAME="btlidle_01_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000214"/>
+		    <ITEM NAME="skill_shot_01" ANIMATION="1000215" GROUND_EFFECT=""/-->
+		
+
+			
+			<!-- 마법진 생기고 소환한발-->
+
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000349" RANGE_EFFECT="EF_Pattern_BlizzardRing"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000350" RANGE_EFFECT="EF_Pattern_BlizzardRing"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000351" RANGE_EFFECT="EF_Pattern_BlizzardRing" PROJECTILE_ID="PROJECTILE_Blizzard_mon" PROJECTILE_SCALE="2.5" PROJECTILE_COUNT="30" FIRE_TERM="0.2" PROJECTILE_QUAKE_FACTOR="0.5" ARRIVED_EFFECT="ef_Blizzard_00002" ARRIVED_EFFECT_SCALE="1.5"/>
+
+				<!-- 마법진 생기고 소환한발-->
+
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000349" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000350" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000351" FIRE_START_NODE="p_ef_heart" PROJECTILE_ID="PROJECTILE_m_IceGrenade" Z_FACTOR="1.0"/>
+			
+			
+			<!-- 테스트용 샷스킬-->
+
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000349" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000350" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="shot_01" ANIMATION="1000351" FIRE_START_NODE="p_ef_heart" PROJECTILE_ID="PROJECTILE_m_IceGrenade" Z_FACTOR="1.0"/>
+		
+		
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+				<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!-- ITEM NAME="die_01" ANIMATION="1000020"/ -->
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000001"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

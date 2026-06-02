@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>74</ID> <!--T.T.10007401 모험에 필요한 기술 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구의 무카파와 이야기해 보자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 그동안 모험하느라고 힘들었을 거라고 한다. 모험을 조금 더 즐겁게 하기 위해서 필요한 3가지가 있는데, 즉석요리와 간단세공, 마력추출이라고 한다. 즉석요리는 바람항구의 요리사 부루투스에게 배울 수 있고, 간단세공은 장비상인 다비가 가르쳐 준다. 마지막으로 마력추출을 배우기 위해서는 소울크래프트 상인 쥴리가 가르쳐 준다고 한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10007411"/> <!--무카파와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10007421" FACE="Mukapa_normal"/> <!--오! %name%. 요즘 들어 많이 힘들어 보이는군.
+아마도 요즘들어 부쩍 많아진 몬스터 때문이겠지.
+그런 그대에게 도움이 될만한 이야기를 해줄까 하네만.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10007426" FACE="Mukapa_smile"/> <!--먼저 요리사 부루투스에게서 몬스터들에게서 얻은 재료로 요리를 할 수 있는 즉석요리를 배울 수 있지.%%
+장비상인인 다비는 몬스터에게서 얻은 재료로 전투아이템을 만들 수 있는 간단세공을 가르쳐 줄 거네.%%
+마지막으로 소울크래프트 상인인 쥴리는 몬스터들에게서 가끔 얻을 수 있는 마력이 담긴 아이템에서 마력을 추출할 수 있는 마력추출 스킬을 배울 수 있을 걸세.%%
+하지만 자신들의 기술을 쉽게 가르쳐 주지는 않겠지. 각 기술들을 얻기 위해 그 세 사람의 마음을 두드려 보기 바라네. 
+우선은 쥴리에게 먼저 가보도록 하게.
+ -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10007423" FACE="Mukapa_smile"/> <!--모험가란 생각보다 이것 저것 필요한 것이 많은 법이지. 하지만 모험으로 얻기에는 부족한 것이 많은 형편이네. 
+그래서 필요한 것이 모험 중에 재료를 이용할 수 있는 기술들이지. %%
+이러한 기술들을 가르쳐주는 사람들이 바로 바람항구에 있다는 것은 정말 고마운 일이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10007424" FACE="Mukapa_angry"/> <!--흠, 자네는 타인의 조언에 대해 고마워할 줄 모르는군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10007425" FACE="Mukapa_normal"/> <!--그럼, 그 사람들이 누구인지 알려주도록 하지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10007402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

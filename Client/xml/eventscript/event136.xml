@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+	<CMD TYPE="EscScript" EventID="140"/>
+
+	<CMD TYPE="CameraAdjust" WIDTH="0" ZOOM="0" UP="1" TARGET_X="0" TARGET_Y="0" TARGET_Z="440"/>
+	<CMD TYPE="Balloon" Show="false"/>
+	<!--용족 프롤로그 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.01" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade" Time="11"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="2"/> <!-- 신 카메라를 켠다.-->
+	<CMD TYPE="stopBGM" SoundNo = "0"/> <!-- BGM 끄기 -->
+	<!--CMD TYPE="SetCameraModeEvent"/--><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="false"/> <!--나를 지운다 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<!-- <CMD TYPE="HideUI" enable="true"/>  전체 UI 숨기기 -->
+
+
+	<CMD TYPE="WaitTime" Time="2"/>
+
+	<CMD TYPE="Dialogue" NameTTID="503035" TextTTID="502359" /><!-- 단쿠 대사 -->
+	<CMD TYPE="WaitTime" Time="4.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="503035" TextTTID="502364" /><!-- 단쿠 대사 -->
+	<CMD TYPE="WaitTime" Time="4.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<!-- 프롤로그 1번-->
+	<CMD TYPE="AddActorFilter" ClassNo="1028908"/>
+	<CMD TYPE="AddNPC" ClassNo="1028908" NameTTID="521238" SpawnPos="1976.87, -2172.207, 9421.296"/><!-- 프롤로그 1번-->
+	<CMD TYPE="PlayAnimation" ClassNo="1028908" SlotName="Sequence_01"/><!-- 프롤로그 1-1번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" /><!--프롤로그 카메라로 변경 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="6"/> <!-- 프롤로그 시간을 기다림-->
+	
+	<CMD TYPE="PlayAnimation" ClassNo="1028908" SlotName="Sequence_02"/><!-- 프롤로그 1-2번-->
+	
+	<CMD TYPE="Dialogue" NameTTID="503036" TextTTID="502366" /><!-- 야나이 대사 -->
+	<CMD TYPE="WaitTime" Time="4.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>	
+	<CMD TYPE="WaitTime" Time="6.2"/><!-- 프롤로그 시간을 기다림-->
+
+	<CMD TYPE="PlayAnimation" ClassNo="1028908" SlotName="Sequence_03"/><!-- 프롤로그 1-3번-->
+
+	<CMD TYPE="Dialogue" NameTTID="503036" TextTTID="502369" /><!-- 야나이 대사 -->
+	<CMD TYPE="WaitTime" Time="5.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="4"/>
+	<CMD TYPE="Dialogue" NameTTID="503036" TextTTID="502548" /><!-- 야나이 대사 -->
+	<CMD TYPE="WaitTime" Time="3.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="503036" TextTTID="502371" /><!-- 야나이 대사 -->
+	<CMD TYPE="WaitTime" Time="4.5"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="0.3"/>
+	<CMD TYPE="Dialogue" TextTTID="502549" /><!-- 캐릭터 대사 -->
+	<CMD TYPE="WaitTime" Time="2.5"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="ActivateEvent" EventId="140"/>
+
+
+</EVENT_SCRIPT>
+

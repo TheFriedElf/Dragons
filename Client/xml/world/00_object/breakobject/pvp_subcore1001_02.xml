@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="PVP_Subcore1001_02">
+
+<APPEARANCE_CHANGE>
+    <CONDITION HP_MIN="70" HP_MAX="100">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Collapse/PVP_Subcore1001_02/PVP_Subcore1001_02.kfm"/>
+    </CONDITION>
+    <CONDITION HP_MIN="30" HP_MAX="70">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Collapse/PVP_Subcore1001_02/PVP_Subcore1001_02_02.kfm"/>
+    </CONDITION>
+    <CONDITION HP_MIN="0" HP_MAX="30">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Collapse/PVP_Subcore1001_02/PVP_Subcore1001_02_03.kfm"/>
+    </CONDITION>
+  </APPEARANCE_CHANGE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1">../Data/3_World/00_Object/breakObject/Collapse/PVP_Subcore1001_02/PVP_Subcore1001_02.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="25,25,20"/>
+			<BOX TO="p_hit_point_02" SIZE="25,25,20"/>
+		</ABV>
+<!--			<ATTACH TYPE="effect" SLOT="53912" EFFECT="ef_PVP_Subcore1001_01_char_root" TO="p_ef_center"/>-->
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="appearance_change_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

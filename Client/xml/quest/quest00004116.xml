@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4116</ID> <!--T.T.10411601 행방불명된 상인들 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	스켈레통 뼈조각 10개 습득-->
+<!--[완료NPC]	악마의 숨결 - 제이드-->
+<!--[내용]	병사 제이드는 조사를 빨리 끝마치고 싶어, 굴러다니는 스켈레통 뼈조각을 단서로 주워오라고 한다. 그러나 뼈조각이 쉽게 땅에 굴러다닐 리는 없는 법! 악마의 숨결에서 스켈레통을 퇴치하고 스켈레통 뼈조각을 10개 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</CLIENT> <!--시작NPC 악마의 숨결 - 제이드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</PAYER> <!--완료NPC 악마의 숨결 - 제이드 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 11 악마의 숨결 - 제이드 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/5000/1/1/160411600">6014200</MONSTER> 
+ <!--MON_NO=6014200/스켈레통,Item_NO=160411600/[Q.ID:04116] 스켈레통 뼈조각50%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160411600</ITEM> 
+ <!--Item_NO=160411600/[Q.ID:04116] 스켈레통 뼈조각,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10411611"/> <!--스켈레통 뼈조각-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411621" FACE="Walter_normal"/> <!--야! 꼬마… 잘 듣고 내 말을 따라라. 
+제대로 주의사항을 듣지 않는다면 
+크게 다친다고 해도 내 책임은 없는 거야.%% 
+우린 지금 이 곳 악마의 숨결 부근에서 사라진 상인들을 찾아야만 한다. 
+하지만… 내 생각에 이렇게 위험한 곳에서 너랑 나랑 둘이 뭔가 특별한 
+단서를 찾아낼 거라 기대하지는 않는다.%% 
+그러니 대충 시간이나 떼우다 귀환하는 것이 속편한 법이다. 알겠나!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411626" FACE="Walter_smile"/> <!--뭐야 이건.. 어떻게 이렇게 빨리 뼈다귀들을 주워 온거야? 
+너... 설마 저기 어슬렁거리는 스켈레통들과 싸운거냐?%%
+뭐, 싸웠다고?%%
+헤에이~
+햐.. 이거 쬐끄만 게 거짓말 치는 거 봐라…%% 
+나도 1대1 아니면 이 해골놈들한테 자신이 없는데... 
+이거 아주 양치기 소년일세…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411623" FACE="Walter_normal"/> <!--쩝.. 그래도 빈손으로 갈 수는 없으니 이 근방에 굴러다니는 
+뼈조각 몇개나 줏어가도록 하자.%%
+뭘 멍하니 쳐다보고만 있나! 빨랑 스켈레통 뼈조각이나 주워와!%%
+(스켈레통을 퇴치하고 스켈레통 뼈조각을 가져와야겠어.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411624" FACE="Walter_angly"/> <!--뭐야? 너, 너 이 자식 내말에 불복하는 거냐!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411625" FACE="Walter_angly"/> <!--뭘 멍하니 쳐다보고만 있나! 빨랑 스켈레통 뼈조각이나 가져와!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 베가본드 오프닝 2 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	<!-- 화면을 와이드 화면으로 출력하고 3초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	
+    <CMD TYPE="AddNPC" ClassNo ="1028162" NameTTID ="502921" SpawnPos = "-1370.422, 884.8857,35.077579" />
+    <CMD TYPE="MoveCamToActor" NameTTID="502921"  MoveTime="0" CamActorDistance = "350" CamMoveUpDistance = "-25"/>
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="SetActorDirection" NameTTID="502921"  Direction="0" />
+    <CMD TYPE="PlayAnimation" NameTTID="502921" SlotName="OPENING_02_01"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="502921" CameraID="Camera01"/>
+    <CMD TYPE="WaitTime" Time="5"/>
+    
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="2"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="ShowActor" NameTTID ="502921" Show="false"/>
+    <CMD TYPE="RemoveActor" NameTTID ="502921"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1" />
+	<CMD type="waittime" time="0"/>
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	
+    <CMD TYPE="ShowActor" ActorGUID="F9980AC7-E5B3-4b71-96F6-928B0DF8A239" Show = "true"/>
+   
+	<!-- 플레이어 이동 가능 -->
+    <CMD TYPE="EnableTrigger" TriggerID = "Event_Quest00002" Enable="FALSE"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

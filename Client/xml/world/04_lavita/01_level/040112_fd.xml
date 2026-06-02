@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="040112_FD" DESCRIPTION="90401100">
+  <GSAPATH>../Data/3_World/04_Lavita/01_Level/040112_FD.gsa</GSAPATH>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!-- 포탈-->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+  <!--트리거 점프-->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="450" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="450" />
+  </TRIGGER>
+  <!-- 엘리베이터-->
+  <STONES />
+  <OBJECT GUID="d6234319-5af0-46df-a6c1-427c16efc90b" RIDABLE="TRUE" SPEED="120" CLASS_NO="5000542">
+    <WayPoint POINT="-3752.839, -1467.164, 679.7733" TIME="1" />
+    <WayPoint POINT="-4012.828, -1467.164, 679.7733" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="fa3ec080-3116-4db0-982a-76c45b80d301" RIDABLE="TRUE" SPEED="120" CLASS_NO="5000542">
+    <WayPoint POINT="-3525.261, -1467.164, 679.7733" TIME="1" />
+    <WayPoint POINT="-3267.094, -1467.164, 679.7733" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="a265b48c-dc12-40c6-b27f-6dcd780b5265" RIDABLE="TRUE" SPEED="120" CLASS_NO="5000542">
+    <WayPoint POINT="-909.1536, -1474.097, 712.8928" TIME="1" />
+    <WayPoint POINT="-909.1536, -1474.097, 376.643" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="e49f870a-8031-4b87-b97d-e1a34244f6e9" RIDABLE="TRUE" SPEED="120" CLASS_NO="5000542">
+    <WayPoint POINT="-2135.515, -1483.866, 308.4678" TIME="1" />
+    <WayPoint POINT="-2135.515, -1483.866, -21.64953" TIME="1" />
+  </OBJECT>
+</WORLD>

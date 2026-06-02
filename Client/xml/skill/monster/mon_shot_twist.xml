@@ -1,0 +1,8 @@
+<ACTION ID="a_mon_twist" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" BIDIRECTION="TRUE">
+	<SLOT NAME="twist_start"/>
+	<SLOT NAME="twist_idle" LOOP="TRUE"/>
+	<SLOT NAME="twist_fire"/>
+	<SLOT NAME="idle_01"/>
+	<SLOT NAME="twist_finish"/>
+	<FSM SCRIPT="Act_Mon_Shot_Twist"/>
+</ACTION>

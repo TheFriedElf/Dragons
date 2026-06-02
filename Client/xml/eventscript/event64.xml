@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 강아지 구출 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    
+	<CMD TYPE="SetCameraModeEvent"/>
+	
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505392" TextTTID="508355" FaceID="Helper_surprise"/>
+	<CMD TYPE="WaitDialogue"/>
+    
+    <CMD TYPE="MoveCamToPos" TargetPos="-1963.9773,801.9171,29.4677" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitTime" Time="2"/>
+    
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505392" TextTTID="508356" FaceID="Helper_surprise"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	
+    <CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	
+	<CMD TYPE="EnableTrigger" TriggerID="Quest_Event64" Enable="FALSE"/> 
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    
+    <CMD TYPE="BalloonDialogue" SpecialActor="ME" TextTableID="508359"/>
+</EVENT_SCRIPT>

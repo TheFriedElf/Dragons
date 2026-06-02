@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020440_FD" DESCRIPTION="90204400">
+	<GSAPATH>../Data/3_World/02_ChaosArea/01_Level/020440_FD.gsa</GSAPATH>
+	<MINIMAP Y="70" H="360">../Data/3_World/02_ChaosArea/01_Level/020440_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="0.8">../BGM/SilentForest.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+	<MAPVALUE PLAYERKILL="0" TYPE="1"/>
+	<!-- 포털 -->
+	<!-- 솔방울 언덕 포탈 -->
+	<TRIGGER ID="gate_020430_base" TYPE="PORTAL" TITLE_TEXT_ID="800047" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9020430" PARAM2="4">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+	<!--오크벌목장 히든
+	<TRIGGER ID="gate_023400_base" TYPE="HIDDEN_PORTAL" TITLE_TEXT_ID="830007" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Net_ReqEnterHidden_Npc" PARAM="51100380" PARAM2="1"/>
+	</TRIGGER> -->
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="200"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="200"/>
+	</TRIGGER>
+	<!-- 텔레포트 데미지 이동  -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_02"/>
+	</TRIGGER>
+	<!-- 엔터던전  -->
+	<TRIGGER ID="teleport_target_11" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_11"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_12" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_12"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_13" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_13"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_14" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_14"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_15" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_15"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_16" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_16"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_17" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_17"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_18" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_18"/>
+	</TRIGGER>
+	<!-- 움직이는 오브젝트 -->
+	<OBJECT GUID="a72dd89c-b0b1-46d7-aede-900490bdf828" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000522">
+		<WayPoint POINT="1534.598, 5226.684, 1655.08" TIME="1"/>
+		<WayPoint POINT="934.4637, 5226.684, 1655.08" TIME="1"/>
+	</OBJECT>
+	<!-- 포 그 -->
+	<!--NPC NAME="1028440" ACTOR="c_Orha" SCRIPT="NPC_Click" GUID="1394F78B-CF1A-4fa3-B7CE-039585625C17" TYPE="FIXED" KID="1028440" LOCATION="-1962.581, 1840.411, 1026.62">
+		<SAY TYPE="IDLE" TTW="523144" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND=""/>
+	</NPC-->
+	<!--<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="64F3E880-4ACF-4edc-B83A-F5A8DAE062D1" TYPE="FIXED" LOCATION="-323.6685, 5237.437, 1728.216"/>
+	<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="F65317FF-1818-4adc-941F-A748AD9B8EFD" TYPE="FIXED" LOCATION="3298.045, 2336.366, 911.5114"/>
+	<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="7760A860-0379-4298-947A-871CE005CEAC" TYPE="FIXED" LOCATION="-494.9249, 2710.682, 1070.481"/>
+    <NPC NAME="1028277" ACTOR="c_Hidden_Guide_Board" SCRIPT="NPC_HIDDEN" KID="1028277" GUID="989EF013-F1E8-49a8-946D-E6936D80FBEB" TYPE="FIXED" LOCATION="3880.2839,4953.0566,1576.3916"/>-->
+	<FOG DENSITY="0.050000" FUNC="Z_LINEAR" START="358" END="5007" COLOR="0.6235294,0.6392157,0.9019608"/>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="2000" LOW_END="3000" USE="1"/>
+</WORLD>

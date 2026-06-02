@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "SFRM_SMS" ALIGN_X = "50" ALIGN_Y = "40" W = "455" H = "99" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<ATTR IMG="../Data/6_ui/main/mnShoutBg.tga" IMG_W = "455" IMG_H = "99" CAN_DRAG = "1"/>
+		<IMG ID = "IMG_MEGA" X = "-6" Y = "-18" W = "67" H = "57" IMG="../Data/6_ui/main/mnShoutImg.tga" IMG_W="67" IMG_H="114" U="1" V="2" UV_INDEX = "1" IGNORE_PARENT_RECT = "1"/>
+		<IMG ID = "IMG_BTN_BG" X = "428" Y="14" Z="-1" W="12" H="11" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="12" IMG_H="11"/> 
+		<ATTR TEXT = "150" T_X = "155" T_Y = "14" FONT = "FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX = "0xFFFCF2B2"/>
+		<FORM ID = "FRM_CHAR_COUNT" X = "369" Y = "15" W = "50" H = "20" T_X="50" T_RIGHT="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_TICK">
+				local wndMemo = UISelf:GetParent():GetControl("EDT_MEMO")
+				if wndMemo:IsNil() == false then
+					local eText = wndMemo:GetEditText()
+					UISelf:SetStaticText("(" .. eText:Length() .. "/40)")
+				end
+			</SCRIPT>
+		</FORM>
+		<ICON ID = "ICON_CHAT" X="12" Y="40" Z="2" W="434" H="22" ICON_GRP ="255" ICON_KEY = "0">
+			<SCRIPT ID = "ON_L_BTN_UP"> 
+				local bRet = UISelf:CursorToIcon()
+			</SCRIPT>		
+		</ICON>	
+		<EDIT ID = "EDT_MEMO" X = "12" Y = "40" W = "434" H = "22" Z="1">
+			<ATTR EDIT_FONT="Font_Text"/>
+			<ATTR EDIT_LIMIT_LENGTH = "40" EDIT_PREVIEW="404950" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<ATTR EDIT_DONT_LOSTFOCUS = "1" />
+			<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+			<HOTKEY ID="28"> DoSMSAction(UISelf:GetParent()) </HOTKEY>
+			<HOTKEY ID="106"> DoSMSAction(UISelf:GetParent()) </HOTKEY>
+			<HOTKEY ID="1"> UISelf:CloseParent() </HOTKEY>
+
+		</EDIT>
+		<BUTTON ID="BNT_CLOSE" X="422" Y="8" W="24" H="24" >
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_REWRITE" X = "228" Y = "65" W = "84" H = "26" >
+			<ATTR TEXT = "152" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:GetParent():GetControl("EDT_MEMO"):SetEditText("") </SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_OK" X = "142" Y = "65" W = "84" H = "26">
+			<ATTR TEXT = "153" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> DoSMSAction(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<SCRIPT ID = "ON_CALL">CloseToolTip()</SCRIPT>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+	</FORM>
+	<FORM ID="FRM_EVT_SMS" ALIGN_X="50" ALIGN_Y="50" W="507" H="84" TEXT="2112" FONT="Font_Text" T_X="44" T_Y="21" FONT_COLOR_HEX="0xFFFFF799" IMG="../Data/6_ui/event/evtHtBg.tga" IMG_W="507" IMG_H="84">
+		<EDIT ID="EDT_NAME" X="100" Y="17" W="196" H="24">
+			<ATTR EDIT_LIMIT_LENGTH="10" EDIT_PREVIEW="404951" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5A1219"/>
+			<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text"/>
+			<HOTKEY ID="1">	UISelf:CloseParent() </HOTKEY>			
+			<HOTKEY ID="28">
+				if UISelf:IsEditFocus() then
+					ClearEditFocus()
+					
+					local UITemp = UISelf:GetParent():GetControl("EDT_MEMO")
+					if not UITemp:IsNil() then
+						UITemp:SetEditFocus(true)
+					end
+				end
+			</HOTKEY>
+			<HOTKEY ID="106">
+				if UISelf:IsEditFocus() then
+					ClearEditFocus()
+					
+					local UITemp = UISelf:GetParent():GetControl("EDT_MEMO")
+					if not UITemp:IsNil() then
+						UITemp:SetEditFocus(true)
+					end
+				end
+			</HOTKEY>
+		</EDIT>
+		<EDIT ID="EDT_MEMO" X="20" Y="43" W="466" H="24">
+			<ATTR EDIT_LIMIT_LENGTH="40" EDIT_PREVIEW="404952" FONT_COLOR_HEX="0xFFFFFFFC" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5A1219"/>
+			<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text"/>
+			<HOTKEY ID="28"> DoSMSAction(UISelf:GetParent()) </HOTKEY>
+			<HOTKEY ID="106"> DoSMSAction(UISelf:GetParent()) </HOTKEY>
+			<HOTKEY ID="1">	UISelf:CloseParent()	</HOTKEY>			
+		</EDIT>
+		<BUTTON ID="BNT_CLOSE" X="466" Y="15" W="24" H="24" BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_SEND" X="298" Y="17" W="84" H="23" FONT="FTcts_13" TEXT="2113" T_X="42" T_Y="3" T_CENTER="1" BTN_IMG="../Data/6_ui/event/evtHtBt.tga" BTN_IMG_W="168" BTN_IMG_H="46" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_L_BTN_DOWN">DoSMSAction(UISelf:GetParent())</SCRIPT>
+			<HOTKEY ID="28"> DoSMSAction(UISelf:GetParent()) </HOTKEY>
+			<HOTKEY ID="106"> DoSMSAction(UISelf:GetParent()) </HOTKEY>
+		</BUTTON>
+	</FORM>
+	<FORM ID="FRM_EVT_SMS_MSG" ALIGN_X="50" IS_ABSOLUTE_Y="1" Y="160" W="507" H="79" TEXT="21" FONT="Font_Text" T_X="44" T_Y="17" FONT_COLOR_HEX="0xFFFFF799" IMG="../Data/6_ui/event/evtHtBgAni.tga" IMG_W="507" IMG_H="158" U="1" V="2" UV_INDEX="1" NO_FOCUS="1" TICK_TIME="100">
+		<SCRIPT ID="ON_TICK">
+			local UVInfo = UISelf:GetUVIndex()
+			if 2 == UVInfo then
+				UISelf:SetUVIndex(1)
+			else
+				UISelf:SetUVIndex(2)
+			end
+		</SCRIPT>
+		<FORM ID="FRM_TEXT" X="20" Y="38" W="466" H="24" TEXT="21" FONT="Font_Text" T_X="233" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFC" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5A1219" NO_FOCUS="1"/>
+	</FORM>
+	<FORM ID="FRM_MEGAPHONE_MSG" ALIGN_X="47" IS_ABSOLUTE_Y="1" Y="100" Z="1" W="623" H="43" U="1" V="9" TICK_TIME="80" NO_FOCUS="1">
+		<FORM ID="FRM_CH_MEGAPHONE" X="0" Y="0" W="623" H="43" IS_VISIBLE="1" >
+			<FORM ID="FRM_MEGAPHONE0" X="0" Y="0" W="512" H="43" IMG="../Data/6_ui/main/mnSutBg02.tga" IMG_W="512" IMG_H="387" U="1" V="9" UV_INDEX="1" NO_FOCUS="1"/>
+			<FORM ID="FRM_MEGAPHONE1" X="512" Y="0" W="111" H="43" IMG="../Data/6_ui/main/mnSutBg02_2.tga" IMG_W="111" IMG_H="387" U="1" V="9" UV_INDEX="1" NO_FOCUS="1"/>
+			<SCRIPT ID="ON_TICK">
+				local UILeft = UISelf:GetControl("FRM_MEGAPHONE0")
+				local UIRight = UISelf:GetControl("FRM_MEGAPHONE1")
+				if UILeft:IsNil() or UIRight:IsNil() then
+					return
+				end
+				local UVIndex = UILeft:GetUVIndex()
+				if UVIndex == 9 then
+					UVIndex = 1
+				else
+					UVIndex = UVIndex + 1
+				end
+				UILeft:SetUVIndex(UVIndex)
+				UIRight:SetUVIndex(UVIndex)
+			</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_SV_MEGAPHONE" X="0" Y="0" W="623" H="43" IS_VISIBLE="0">
+			<FORM ID="FRM_MEGAPHONE0" X="0" Y="0" W="512" H="43" IMG="../Data/6_ui/main/mnSutBg01.tga" IMG_W="512" IMG_H="387" U="1" V="9" UV_INDEX="1" NO_FOCUS="1"/>
+			<FORM ID="FRM_MEGAPHONE1" X="512" Y="0" W="111" H="43" IMG="../Data/6_ui/main/mnSutBg01_2.tga" IMG_W="111" IMG_H="387" U="1" V="9" UV_INDEX="1" NO_FOCUS="1"/>
+			<SCRIPT ID="ON_TICK">
+				local UILeft = UISelf:GetControl("FRM_MEGAPHONE0")
+				local UIRight = UISelf:GetControl("FRM_MEGAPHONE1")
+				if UILeft:IsNil() or UIRight:IsNil() then
+					return
+				end
+				local UVIndex = UILeft:GetUVIndex()
+				if UVIndex == 9 then
+					UVIndex = 1
+				else
+					UVIndex = UVIndex + 1
+				end
+				UILeft:SetUVIndex(UVIndex)
+				UIRight:SetUVIndex(UVIndex)
+			</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_TEXT" X="0" Y="0" W="623" H="43" Z="1" TEXT="" T_X="321" T_CENTER="1" T_Y="13" FONT="Font_Text" FONT_COLOR_HEX="0xFFFEF546" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" NO_FOCUS="1"/>
+	</FORM>
+	<STATIC_FORM ID="FRM_GACHA_MSG" ALIGN_X="40" Y="143" W="653" H="20" TEXT="699980" T_X="326" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFEF546" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" NO_FOCUS="1" PASS_EVENT="1" ALIVE_TIME="5000" STATIC_NUM="36"/>
+	<STATIC_FORM ID="FRM_CASH_GACHA_MSG" ALIGN_X="40" Y="143" W="653" H="35" TEXT="699980" T_X="326" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFEF546" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" NO_FOCUS="1" PASS_EVENT="1" ALIVE_TIME="5000" STATIC_NUM="36"/>
+	
+	<STATIC_FORM ID="FRM_EVENT_ITEM_MSG" ALIGN_X="40" Y="143" W="653" H="20" TEXT="699980" T_X="326" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFEF546" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" NO_FOCUS="1" PASS_EVENT="1" ALIVE_TIME="5000" STATIC_NUM="36"/>
+	
+	<STATIC_FORM ID="SFRM_FIRE_OF_LOVE_SMS">
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="223" H="206" STATIC_NUM="1" CAN_DRAG="1"/>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+		<STATIC_FORM ID="SFRM_TITLEBAR">
+			<ATTR X="1" Y="0" W="221" H="36" Z="1" STATIC_NUM="4"/>
+			<STATIC_FORM ID="SFRM_NAME_BG">
+				<ATTR X="7" Y="4" W="181" H="24" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<ATTR TEXT="790570" T_X="10" T_Y="4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>				
+				<STATIC_FORM ID="SFRM_SHADOW_BG">
+					<ATTR X="0" Y="0" W="181" H="24" Z="0" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>					
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_CLOSE">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48" X="190" Y="4" W="24" H="24"/>
+				<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_FIRE_OF_LOVE_SMS") </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_BG">
+			<ATTR X="9" Y="35" W="205" H="126" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="205" H="126" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			</STATIC_FORM>
+			<IMG ID="IMG_BOY"  X="6" Y="10" W="10" H="1" IMG="../Data/6_ui/myhome/mhMW.tga" IMG_W="56" IMG_H="28" U="2" V="1" UV_INDEX="2"/>
+			<FORM ID="FRM_BOY_NAME" X="35" Y="15" W="150" H="24" TEXT="790571" FONT_COLOR_HEX = "0xFF0054A6" FONT="Font_Text"/>
+			
+			<IMG ID="IMG_GIRL" X="6" Y="67" W="10" H="1" IMG="../Data/6_ui/myhome/mhMW.tga" IMG_W="56" IMG_H="28" U="2" V="1" UV_INDEX="1"/>
+			<FORM ID="FRM_GIRL_NAME" X="35" Y="72" W="150" H="24" TEXT="790572" FONT_COLOR_HEX = "0xFFEA3247" FONT="Font_Text"/>
+			
+			<IMG ID="IMG_LINE1" X="8" Y="62" W="187" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="187" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE2" X="8" Y="63" W="187" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="187" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			
+			<STATIC_FORM ID="SFRM_BOY_EDIT_BG" X="13" Y="35" W="183" H="24" STATIC_NUM="3">
+				<STATIC_FORM ID="SFRM_SHADOW" X="0" Y="0" W="183" H="24" STATIC_NUM="6" COLOR_TYPE="3" CAN_COLOR_CHANGE="1"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_GIRL_EDIT_BG" X="13" Y="92" W="183" H="24" STATIC_NUM="3">
+				<STATIC_FORM ID="SFRM_SHADOW" X="0" Y="0" W="183" H="24" STATIC_NUM="6" COLOR_TYPE="3" CAN_COLOR_CHANGE="1"/>
+			</STATIC_FORM>		
+		</STATIC_FORM>
+		
+		<EDIT ID="EDIT_BOY_NAME" X="30" Y="74" W="183" H="24" FONT_COLOR_HEX = "0xFF4D3413" EDIT_PREVIEW="0">
+			<ATTR EDIT_LIMIT_LENGTH="10"/>
+			<ATTR EDIT_FONT="Font_Text"/>
+			<ATTR EDIT_BLOCK_IMG = "../Data/6_UI/01_main/bgWarn.tga" />
+			<ATTR EDIT_CAROT_IMG = "../Data/6_UI/Carot.tga" />
+			<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+			<HOTKEY ID="59"> SendFireOfLoveSMS(UISelf:GetParent()) return true</HOTKEY>
+			<HOTKEY ID="60"> UISelf:GetParent():Close() return true </HOTKEY>
+			<HOTKEY ID="1"> UISelf:GetParent():Close() return true</HOTKEY>			
+			<HOTKEY ID="28"> UISelf:GetParent():GetControl("EDIT_GIRL_NAME"):SetEditFocus(UISelf:GetParent()) return true</HOTKEY>			
+		</EDIT>
+		<EDIT ID="EDIT_GIRL_NAME" X="30" Y="132" W="183" H="24" FONT_COLOR_HEX = "0xFF4D3413" EDIT_PREVIEW="0">
+			<ATTR EDIT_LIMIT_LENGTH="10"/>
+			<ATTR EDIT_FONT="Font_Text"/>
+			<ATTR EDIT_BLOCK_IMG = "../Data/6_UI/01_main/bgWarn.tga" />
+			<ATTR EDIT_CAROT_IMG = "../Data/6_UI/Carot.tga" />
+			<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+			<HOTKEY ID="59"> SendFireOfLoveSMS(UISelf:GetParent()) return true</HOTKEY>
+			<HOTKEY ID="60"> UISelf:GetParent():Close() return true </HOTKEY>
+			<HOTKEY ID="1"> UISelf:GetParent():Close() return true </HOTKEY>			
+			<HOTKEY ID="28"> SendFireOfLoveSMS(UISelf:GetParent()) return true</HOTKEY>			
+		</EDIT>
+				
+		<BUTTON ID="BTN_OK">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(153, 2200) </SCRIPT>
+			<ATTR X="26" Y="167" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">  SendFireOfLoveSMS(UISelf:GetParent()) </SCRIPT>
+			<HOTKEY ID="59"> SendFireOfLoveSMS(UISelf:GetParent()) return true </HOTKEY>			
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR X="112" Y="167" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:GetParent():Close() </SCRIPT>
+			<HOTKEY ID="60"> UISelf:GetParent():Close() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_EVT_FIRELOVE_MSG" ALIGN_X="50" ALIGN_Y="5" W="512" H="256" PRIORITY="1" NO_FOCUS="1" PASS_EVENT="1" ALIVE_TIME_IGNORE_MOUSE_OVER="1">
+		<ATTR ALIVE_TIME="5000"/>
+		<SCRIPT ID="ON_CALL">
+			local kSelf = UISelf
+			kSelf:GetControl("IMG_HEART"):Visible(true)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK"> 
+			local kSelf = UISelf 
+			if( kSelf:GetAliveTime() > 5000) then
+				kSelf:GetControl("FRM_NIF1"):Visible(false)
+				kSelf:GetControl("FRM_NIF2"):Visible(true)
+			else
+				kSelf:GetControl("FRM_NIF1"):Visible(true)
+				kSelf:GetControl("FRM_NIF2"):Visible(false)
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> Show_FireLoveRemainSMS() </SCRIPT>
+		
+		<FORM ID="FRM_BOY_NAME" X="208" Y="149" W="400" H="24" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="152" T_X="45" T_Y="34" T_CENTER="1" FONT="QTtext_Title" FONT_COLOR_HEX="0xFF00FFFF"/>
+		</FORM>
+		<FORM ID="FRM_GIRL_NAME" X="208" Y="200" W="400" H="24" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="152" T_X="45" T_Y="15" T_CENTER="1" FONT="QTtext_Title" FONT_COLOR_HEX = "0xFFFF93C6"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_RECV_TIME">
+			<ATTR TEXT="152" X="0" Y="363" W="512" H="40" T_CENTER="1" T_X="256" T_Y="0" FONT="Font_Warn" FONT_COLOR_HEX="0xFFFF93C6" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" IGNORE_PARENT_RECT="1" NO_FOCUS="1" PASS_EVENT="1"/>			
+		</STATIC_FORM>
+		<IMG ID="IMG_BG" X="0" Y="360" W="512" H="32" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="32" Z="-2"/>
+		<IMG ID="IMG_HEART" X="13" Y="-54" IMG="../Data/5_Effect/9_Tex/ef_whiteday_bg_01.tga" IMG_W="128" IMG_H="128" IS_SCALINGCENTER="1" NO_FOCUS="1" PASS_EVENT="1">
+			<SCRIPT ID="ON_CALL"> 
+				local kSelf = UISelf
+				kSelf:SetAlpha(0)
+				kSelf:SetCustomDataAsFloat(GetWorldAccumTime())
+				kSelf:SetSizeScale(3.8,false)
+				PlaySoundByID("Emotion_Couple_FireOfLove")
+			</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> OnDisplayFireLove(UISelf) </SCRIPT>			
+		</IMG>
+		<FORM ID="FRM_NIF1" X="0" W="512" H="512" IGNORE_PARENT_RECT="1" NO_FOCUS="1" PASS_EVENT="1">
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("FireLoveEffect", true, true)
+				kSelf:SetRenderModelCameraZoomMinMax("FireLoveEffect", 0.1, 1.0)
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:UpdateOrthoZoomOldVer("FireLoveEffect", 0.22, 0, 30)
+				kSelf:AddRenderModelNIFByPath("FireLoveEffect", "FireLoveEffect", "../Data/5_Effect/4_UI/ef_couple_whiteday_01.nif", false, true, false, true)
+				kSelf:SetRenderModelNIFRotate("FireLoveEffect", "FireLoveEffect", 0,0,-18)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("FireLoveEffect") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("FireLoveEffect")</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">UISelf:ClearRenderModel("FireLoveEffect")</SCRIPT>			
+		</FORM>
+		<FORM ID="FRM_NIF2" X="0" W="512" H="512" IGNORE_PARENT_RECT="1" NO_FOCUS="1" PASS_EVENT="1" IS_VISIBLE="0">
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("FireLoveEffect2", true, true)
+				kSelf:SetRenderModelCameraZoomMinMax("FireLoveEffect2", 0.1, 1.0)
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:UpdateOrthoZoomOldVer("FireLoveEffect2", 0.22, 0, 30)
+				kSelf:AddRenderModelNIFByPath("FireLoveEffect2", "FireLoveEffect2", "../Data/5_Effect/4_UI/ef_couple_whiteday_02.nif", false, true, false, true)
+				kSelf:SetRenderModelNIFRotate("FireLoveEffect2", "FireLoveEffect2", 0,0,-18)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("FireLoveEffect2") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("FireLoveEffect2")</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">UISelf:ClearRenderModel("FireLoveEffect2")</SCRIPT>			
+		</FORM>
+	</FORM>	
+</XUI>

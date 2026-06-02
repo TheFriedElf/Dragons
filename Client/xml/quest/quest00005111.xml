@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5111</ID> <!--T.T.10511101 스미스의 틀니 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지 - 메르곤으로부터 강철이빨 15개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 스미스-->
+<!--[내용]	스미스는 새로운 무기를 만들기 시작했다고 한다. 
+그 무기는 강한턱을 이용해 모조리 씹어 버릴 수 있는 강력한 강철틀니라고 한다. 그 강철틀니를 만들기 위해 재료가 필요한데, 그 재료를 구해달라고 한다. 지하묘지에서 메르곤을 잡고 강철틀니의 재료인 강철이빨 15개를 구해 스미스에게 갖다주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B62D7CB2-0B35-402f-9117-43AA95707E9E</CLIENT> <!--시작NPC 달빛해안 마을 - 스미스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B62D7CB2-0B35-402f-9117-43AA95707E9E</PAYER> <!--완료NPC 달빛해안 마을 - 스미스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B62D7CB2-0B35-402f-9117-43AA95707E9E</AGENT> <!--진행NPC 11 달빛해안 마을 - 스미스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010910/10000/6000/1/1/160511000">4600400</MONSTER> 
+ <!--MON_NO=4600400/메르곤,MAP_NO=9010910/Lv.30 지하묘지,Item_NO=160511000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160511000</ITEM> 
+ <!--Item_NO=160511000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10511111"/> <!--강철 이빨 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10511121" FACE="Darby_normal"/> <!--요즘 난 새로운 무기를 만들고 있어.
+어제 우연히 바다에서 마주친 상어를 보고 영감을 얻었지.
+그 무기가 궁금하다고?%%
+너만 살짝 알려줄게.
+그 무기는 강한 턱을 이용한 강철틀니야! 이빨에 장착하고 물어서 공격하는 거지.
+마침 잘 됐다. 그 무기를 만들려면 재료가 조금 필요한데 도와줄 수 있어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10511126" FACE="Darby_normal"/> <!--오! 좋아. 당장 무기를 만들어야지. 
+너도 이를 모두 빼고 오면 강철틀니를 100골드에 만들어줄게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10511123" FACE="Darby_normal"/> <!--지하묘지로 가서 메르곤에게서 이빨을 좀 구해다 줘.
+소문으로는 메르곤이빨이 아주 날카롭고 튼튼하다고 하던걸.
+강철 이빨 15개니까 부탁 좀 할게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10511124" FACE="Darby_normal"/> <!--구해줄 수 없다고? 너랑 나랑 맞지 않는군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10511125" FACE="Darby_normal"/> <!--강철 ~ 무적 ~ 강 처 얼 이 빠 알 ~ 어때? 내가 지은 노래야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10511102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

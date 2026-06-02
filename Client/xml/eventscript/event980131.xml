@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1.0" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+
+	<CMD TYPE="ShowActor" ClassNo="1029500" Show="false"/><!-- 오프닝 삭제-->
+	<CMD TYPE="RemoveActor" ClassNo="1029500"/><!-- 오프닝 삭제-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_BOSSMONSTER" Show="true"/><!--보스몬스터 감추기-->
+
+
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="0.5"/><!--  시간을 기다림-->
+
+
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980112"/>
+
+
+
+</EVENT_SCRIPT>

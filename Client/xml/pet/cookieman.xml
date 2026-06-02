@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="p_Cookieman">
+	<RESERVED_ACTION OPENING="a_trace_ground"/>
+	<TEXTURE SRC="N_Cookieman_base.dds">../Data/2_Mon/N_Cookieman_base/N_Cookieman_base.dds</TEXTURE> 
+	<WORLDOBJECT>
+		<KFMPATH SCALE="0.7">../Data/1_Cha/3_PET/Cookieman/P_Cookieman.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="0.7"/>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/> 
+			<ITEM NAME="idle_02" ANIMATION="1000001" RANDOM="20"/> 
+			<ITEM NAME="idle_03" ANIMATION="1000002" RANDOM="10"/> 
+			<ITEM NAME="run" ANIMATION="1000051" SPEED="3"/> 
+			<ITEM NAME="walk" ANIMATION="1000055" SPEED="1.5"/> 
+  			<ITEM NAME="opening" ANIMATION="1000000" /> 
+			<ITEM NAME="jump_01" ANIMATION="1000101" /> 
+			<ITEM NAME="jump_02" ANIMATION="1000102" /> 
+			<ITEM NAME="jump_03" ANIMATION="1000103" /> 
+			<!-- 점프아이들 --> 
+			<ITEM NAME="jump_04" SPEED="0.7" ANIMATION="1000104" /> 
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

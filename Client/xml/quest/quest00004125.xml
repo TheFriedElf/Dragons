@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4125</ID> <!--T.T.10412501 엘가의 부활을 믿는 자들 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	파블로와 대화-->
+<!--[완료NPC]	상인의 마을 - 파블로-->
+<!--[내용]	제이드는 자신이 보관하고 있던 화암산호족의 물건이 상인들의 실종 사건에 중요한 증거품이라고 생각한다. 제이드를 위해 쐐기문자판을 상인의 마을에 있는 대마법사 파블로에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</CLIENT> <!--시작NPC 악마의 숨결 - 제이드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">30B65084-661B-41bc-AB4B-D5CC8A113ADE</PAYER> <!--완료NPC 상인의 마을 - 파블로 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 11 악마의 숨결 - 제이드 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">30B65084-661B-41bc-AB4B-D5CC8A113ADE</AGENT> <!--진행NPC 12 상인의 마을 - 파블로 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160412500/1">10011</NPC> 
+ <!--Item_NO=160412500/[Q.ID:04125] 쐐기 문자판,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160412500/1/511">10011</NPC> 
+ <!--Item_NO=160412500/[Q.ID:04125] 쐐기 문자판,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160412500/1">10011</NPC> 
+ <!--Item_NO=160412500/[Q.ID:04125] 쐐기 문자판,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160412500/1/512">10012</NPC> 
+ <!--Item_NO=160412500/[Q.ID:04125] 쐐기 문자판,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160412500/1">10012</NPC> 
+ <!--Item_NO=160412500/[Q.ID:04125] 쐐기 문자판,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/160412500">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10412511"/> <!--쐐기 문자판 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10412521" FACE="Walter_normal"/> <!--이 쐐기문자판은 터너씨가 며칠 전 찾아냈다면서 신고한 물건인데…
+화암산호족이 제사를 지낼 때 쓰는 거라고 하더라고…%%
+어차피 호위대에 가져가봤자, 관심도 주지 않을거라 생각해서...
+그냥 가지고만 있던 거야.%%
+생각해보니, 상인들의 실종이 화암산호족과 관련이 있다면 
+이 쐐기 문자판에 뭔가 중요한 내용이 담겨 있을 것 같아서 말이지.%%
+이걸.. 그나마 말이 통하는 파블로님에게 전달해줬으면 한다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10412526" FACE="Pablo_smile"/> <!--아.. 이건 오래간만에 보는 문서로군 그래…
+악마의 숨결에서 이걸 줍게되었다고….?%%
+이건 화암산호족이 제사에 쓰는 일종의 주문서일세. 
+흠… 살펴볼테니 기다려 주게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10412523" FACE="Walter_normal"/> <!--아마도 저 화암산호족들이 상인들을 잡아들였다면... 
+그걸 증명할 수 있는 단서는 이게 유일하니까. 한번 부딛혀 봐야지.
+그럼 부탁해. %name%!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10412524" FACE="Walter_angly"/> <!--이건 명령불복종이야 임마! 전쟁 때였으면 넌…! 
+휴우… 관두자.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10412525" FACE="Walter_angly"/> <!--파블로님한테 보여드렸어? 아직 안 간 거야? 뭐야? 응? 뭐야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10412502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10412551" FACE="Walter_angly"/> <!--파블로님한테 보여드렸어? 아직 안 간 거야? 뭐야? 응? 뭐야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10412552" FACE="Pablo_normal"/> <!--제이드를 만나고 오는 길인가? 제이드가 뭔가 주지 않았나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

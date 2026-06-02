@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5044</ID> <!--T.T.10504401 레오의 작은 선물(4) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)] - 캡틴 후커에게서 바다의 심장 습득-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	레오는 최후로 완성한 요리를 자신이 사랑하는 사람과 비슷한 취향인 제시에게 맛보여줬다고 한다. 하지만 제시는 음식맛은 훌륭하지만 마음을 울리진 않는다며 안타까워 한다. 마음을 울리는 요리를 만들기 위해서는 캡틴 후커가 가지고 있는 바다의 심장이라는 게 필요하다. 레오가 마음을 울리는 요리를 완성할수 있도록 수염고래 해안가 [아케이드 모드(F1)]의 캡틴 후커에게서 바다의 심장을 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010109/10000/0/1/1/160504400">6013900</MONSTER> 
+ <!--MON_NO=6013900/캡틴 후커,MAP_NO=9010109/캡틴후커 별장,Item_NO=160504400/[Q.ID:05044] 바다의 심장,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160504400</ITEM> 
+ <!--Item_NO=160504400/[Q.ID:05044] 바다의 심장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10504411"/> <!--바다의 심장-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10504421" FACE="Leo_normal"/> <!--아! 정말 요리라는 건 힘든 것 같아요.
+저희 엄마가 살아 계실 때도 이렇게 힘드셨을 거에요.
+그때 괜히 투정부렸나 싶네요.%%
+제가 사랑하는 사람에 대해서 이야기 해 드렸나요?
+제가 사랑하는 사람은 엄마도 아빠도 아니에요.%%
+네? 여자친구냐고요?
+%name%님 전 아직 여자에게 흥미가 없을 나이라고요.
+어쨌든 제가 지금 가장 사랑하는 사람은 제레미 할아버지에요.%%
+바람의 항구로 몰려든 몬스터들 때문에 부모님… 
+절 돌봐줄 사람이 없어진 이후에도 제레미 할아버지만은 절 보살펴 줬거든요.%%
+%name%님 요리의 완성을 위해 마지막으로 부탁드릴 게요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10504426" FACE="Leo_smile"/> <!--와! 이게 바다의 심장이군요. 
+역시 바다와는 전혀 관계없게 생겼어요.
+하지만 %name%님 덕분에 제레미 할아버지의 기뻐하는 모습을 볼 수 있을 거에요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10504423" FACE="Leo_normal"/> <!--전 이제는 요리를 완성했다고 생각하고 제레미 할아버지와 가장 비슷한 입맛을 가지고 있는 제시 할아버지에게 갔어요.%% 
+제시 할아버지는 사실 할아버지라고 부르는 걸 싫어하지만 어쨌든 맛은 제법 훌륭하다고 칭찬해줬어요.
+하지만 중요한 게 하나 빠졌데요.%%
+바로 모든 해산물 요리를 신이 만든 요리로 바꿔줄 수 있는 전설의 향신료 바다의 심장이에요.%%
+과거에는 제법 바다의 심장이 수입되었지만, 캡틴 후커가 나타난 이후로 바람의 항구에서는 볼 수가 없데요.
+제시 할아버지는 캡틴 후커가 모두 가로챘을 거라고 해요.%%
+%name%님 후커가 가져간 바다의 심장을 꼭 부탁드려요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10504424" FACE="Leo_normal"/> <!--이제까지 고생하셨으니 제가 더 이상 부탁드릴 수 없겠군요.
+어쩔 수 없이 캡틴 후커에게 부탁하러 가야겠네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10504425" FACE="Leo_normal"/> <!--제레미 할아버지의 기뻐하는 얼굴을 빨리 보고 싶어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10504402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

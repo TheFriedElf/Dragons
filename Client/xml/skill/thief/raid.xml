@@ -1,0 +1,10 @@
+<ACTION ID="a_Raid" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+	<SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+	<SLOT NAME="Claw_Skill_Raid_01"/>
+	<FSM SCRIPT="Skill_Raid" 
+		FIRE_CASTER_EFFECT_ID="ef_Claw_Skill_Raid_01_char_root" 
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		NO_WEAPON_TRAIL="FALSE"
+		HIT_SOUND_ID="Raid"
+       /> 
+</ACTION>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4235</ID> <!--T.T.10423501 흑룡왕의 신발 제조서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	검은 발톱의 파편 입수-->
+<!--[완료NPC]	검은발톱 전초기지 - 호프먼-->
+<!--[내용]	호프만 대장은 토마스 용병대장을 의식해서인지, 검은발톱 파편을 구해오는 자에게
+흑룡왕의 신발을 지급하는 대회를 연다고 한다. 엘가를 무찌르고 얻은 검은 발톱의 파편을 호프만 대장에게 전해주면 흑룡왕의 신발 제조서를 얻을 수 있을 것이다.  -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6422F667-FEAD-4059-827D-0F16FEA7CCB8</CLIENT> <!--시작NPC 검은발톱 전초기지 - 호프먼 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6422F667-FEAD-4059-827D-0F16FEA7CCB8</PAYER> <!--완료NPC 검은발톱 전초기지 - 호프먼 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6422F667-FEAD-4059-827D-0F16FEA7CCB8</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 호프먼 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/0/1/1/160422900">3542120</MONSTER> 
+ <!--MON_NO=3542120/흑룡왕 엘가,Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160422900</ITEM> 
+ <!--Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10423511"/> <!--검은 발톱의 파편 입수-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300422</ITEM><!--전체지급/기사/1)/119300372(봉인아님) 1개-(일반) 흑룡왕의 신발 (용기사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>5/13/21</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300562</ITEM><!--전체지급/투사/1)/119300512(봉인아님) 1개-(일반) 흑룡왕의 신발 (파괴자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>6/14/22</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300352</ITEM><!--전체지급/메이지/1)/119300302(봉인아님) 1개-(일반) 흑룡왕의 신발 (아크메이지) 제조서(필요)[Elements],[Count]-->
+			<CLASS>7/15/23</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300492</ITEM><!--전체지급/전투법사/1)/119300442(봉인아님) 1개-(일반) 흑룡왕의 신발 (워로드) 제조서(필요)[Elements],[Count]-->
+			<CLASS>8/16/24</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300142</ITEM><!--전체지급/사냥꾼/1)/119300092(봉인아님) 1개-(일반) 흑룡왕의 신발 (수호자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>9/17/25</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300282</ITEM><!--전체지급/레인저/1)/119300232(봉인아님) 1개-(일반) 흑룡왕의 신발 (스트라이커) 제조서(필요)[Elements],[Count]-->
+			<CLASS>10/18/26</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300072</ITEM><!--전체지급/광대/1)/119300022(봉인아님) 1개-(일반) 흑룡왕의 신발 (매니악) 제조서(필요)[Elements],[Count]-->
+			<CLASS>11/19/27</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300212</ITEM><!--전체지급/암살자/1)/119300162(봉인아님) 1개-(일반) 흑룡왕의 신발 (쉐도우) 제조서(필요)[Elements],[Count]-->
+			<CLASS>12/20/28</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">340351062</ITEM><!--전체지급/소환사/1)/340351012(봉인아님) 1개-(일반) 흑룡왕의 신발 (소환사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>51/53/55/57</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">330351062</ITEM><!--전체지급/쌍둥이/1)/330351012(봉인아님) 1개-(일반) 흑룡왕의 신발 (격투가) 제조서(필요)[Elements],[Count]-->
+			<CLASS>52/54/56/58</CLASS>
+		</SELECT1>	
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10423521" FACE="Hopeman_normal"/> <!--토마스 녀석…
+용병대 대장이 되고나선 격이 떨어지게 구는군.
+병사들과 내기나 하고 말이야. 이건 말도 안돼. %%
+흠, 어쨌거나 나는 저런 싸구려 용병대와는 달리
+대회를 열 생각이야. 상품은 흑룡왕의 신발 제조서다!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10423526" FACE="Hopeman_smile"/> <!--흠… 어쨌거나 순위권 안에 들었으니
+상품으로 흑룡왕의 신발 제조서를 지급하겠네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10423523" FACE="Hopeman_smile"/> <!--누구 보다 빠른 작전수행 능력을 가진 자만이
+이 신발의 제조서를 가질 기회를 가질 거야.%%
+그런 이제 대회 시작을 하도록 하겠다.
+검은 발톱의 파편을 남들 보다 빨리 구해 온 상위권의
+병사들에게 상품을 지급할 것이다!
+(토마스 대장의 내기와 크게 다른 건 없는 것 같은데…)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10423524" FACE="Hopeman_angly"/> <!--뭐, 뭐야? 이제 와서 거절하겠다고?
+흑룡왕의 신발 제조서는 나 밖에 가지고 있질 않으니
+나중에 가서 매달리지 말아주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10423525" FACE="Hopeman_normal"/> <!--지금부터라도 서두른다면 순위권에 들 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10423502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

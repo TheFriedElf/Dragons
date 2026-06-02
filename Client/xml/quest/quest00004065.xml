@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4065</ID> <!--T.T.10406501 하늘과 번개와 물과 불(3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	벨칸신전에서 정령신화 3페이지 습득-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	라르엘은 나머지 두루마리를 벨칸신전에서 몬스터들에게 빼앗겼다. 벨칸신전의 몬스터들로부터 정령신화 3페이지를 찾아오자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/9800/1/1/160406500">9010220</GROUND> 
+ <!--MAP_NO=9010220/벨칸 신전,Item_NO=160406500/[Q.ID:04065] 정령신화 3페이지2%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160406500</ITEM> 
+ <!--Item_NO=160406500/[Q.ID:04065] 정령신화 3페이지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10406511"/> <!--정령신화 3페이지-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10406521" FACE="Larel_normal"/> <!--파리스는 그러니까 처음엔 못된 마녀가 아니었다는 얘기지…
+오히려 동생의 병을 치료하려고 목숨을 걸고 노력했던 거야.%%
+흠… 여기까진 착한데… 그녀는 결국… 
+헉.. 스포일러할 뻔 했잖아. 내가 자네한테 큰 실례를 저지를 뻔 했어.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10406526" FACE="Larel_smile"/> <!--오오! %name%! 세번째 두루마리를 찾은 거야? 
+역시 믿었던 대로군. 자 그럼 한번 읽어볼까나?%%
+파리스라는 마녀가 있었다.  
+그녀는 동생의 병을 치료하기 위해 영혼의 돌을 찾아다녔다.%%
+파리스는 여행 중에 용을 잡으려는 용사들을 만났다.
+그들은 영혼의 돌을 찾아 용에 맞섰다.%%
+꿀꺽… 아 미안.. 나도 모르게 그만… 자 계속 새로운 부분을 읽을게..
+용사와 마녀는 치열한 사투 끝에 용을 잡았다.%%
+마녀는 영혼의 돌을 독차지 하려 했다.%%
+흠… 나라도 동생의 병을 고치기 위해 영혼의 돌을 혼자 차지…
+아.. 에아님.. 용서하소서. 내가 무슨 말을 하는 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10406523" FACE="Larel_smile"/> <!--그나저나.. 어째서 달랑 두번째 두루마리만 구해온거지?
+분명히 두루마리 몇 개를 더 가지고 있었을텐데 말이지…%%
+자, 서두르라고! 여기서 이러고 있을 시간이 어딨어.
+아! 맞다. 몬스터들은 벨칸신전에도 많이 있지… 아마 나머지는 그쪽에 있지 않을까 생각되네. 시간이 없으니 빨리 그쪽에서 나머지 두루마리도 찾아다 주게-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10406524" FACE="Larel_angly"/> <!--흥, 너도 여기가 한계구나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10406525" FACE="Larel_normal"/> <!--벨칸신전의 몬스터들이 분명히 가지고 있을 거라고-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10406502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_032360_CF">
+  <GSAPATH>../Data/3_World/03_Solaiden/100_Chaos/032360_CF.gsa</GSAPATH>
+  <MINIMAP>../Data/3_World/03_Solaiden/100_Chaos/032360_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Vally.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+
+  <!--대미궁 2층 카오스 필드 게이트-->
+  <TRIGGER ID="gate_032330_base" TYPE="PORTAL" TITLE_TEXT_ID="830000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9038200" PARAM2="3" />
+  </TRIGGER>
+  <!--대미궁 3층 카오스 미션 게이트-->
+  <TRIGGER ID="gate_032361_base" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal" PARAM="93236" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms032360_0" MISSION_DISCRIPTION_TEXT_NUM="9032360" />
+  </TRIGGER>
+
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="80" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="80" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_11" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_11" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_12" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_13" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="100" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="250" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="250" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_01" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <!-- 가시봉트렙 -->
+  <TRIGGER ID="DU_GT_MTA3001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA3001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA3001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA3001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA3001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!-- 가시트렙 -->
+  <TRIGGER ID="DU_GT_MTA2001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />&gt;
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_02 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_02 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_02 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_02 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+
+  <TRIGGER ID="DU_GT_MTA2001_03 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_03 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_03 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA2001_03 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500" />
+  </TRIGGER>
+
+  <!--불트렙-->
+  <TRIGGER ID="Art_FireTrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="4" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0.0" EMIT_END="4" />
+  </TRIGGER>
+  <TRIGGER ID="Art_FireTrap1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="2" ACTIVE_END="6.666666" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="2.0" EMIT_END="6.666666" />
+  </TRIGGER>
+  
+  <CAMERA_ADJUST MAX_ZOOM="330" />
+	<SPOTLIGHT BGCOLOR="70,8,80"/>
+	<FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="50.000000" END="6000.000000" COLOR="0.001,0.001,0.008"/>
+</WORLD>

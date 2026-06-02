@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_trasformtonurse" INIT_ACTION="a_idle">
+  <WORLDOBJECT>
+    <KFMPATH SCALE="1.4">../Data/1_Cha/9_SSKill/Nurse_Call/Nurse_Call.kfm</KFMPATH>
+    <SCRIPT SRC="SkillActor/BeautifulGirl.lua">
+      <ITEM NAME="BeautifulGirl_OnInit" TYPE="INIT"/>
+      <ITEM NAME="BeautifulGirl_OnUpdate" TYPE="COMMON"/>
+    </SCRIPT>
+    <ABV>
+      <BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+    </ABV>
+    <SLOT>
+      <!-- Basic Movement -->
+      <ITEM NAME="idle_01" ANIMATION="1000000"/>
+    </SLOT>
+  </WORLDOBJECT>
+</ACTOR>

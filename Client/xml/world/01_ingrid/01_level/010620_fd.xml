@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010620_FD" DESCRIPTION="90106200">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/010620_FD.gsa</GSAPATH>
+	<MINIMAP Y="150" H="210">../Data/3_World/01_Ingrid/01_Level/010620_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DangerousCave.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!--위험한 동굴 게이트-->
+	<TRIGGER ID="gate_010600_base" TYPE="PORTAL" TITLE_TEXT_ID="800026" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010600" PARAM2="4"/>
+	</TRIGGER>
+
+	<!-- 엔터던전 -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_05" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_06" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_07" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_08" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08"/>
+	</TRIGGER>
+
+	<!-- 엔터던전 2 -->
+	<TRIGGER ID="teleport_target_09" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM="4" PARAM2="2" ERROR_MSG="503137" PARAM_STRING_QUEST1="4104/teleport_zone_09" PARAM_STRING_QUEST2="4108/teleport_zone_09"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_10" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10" PARAM="4" PARAM2="2"/>
+	</TRIGGER>
+
+	<!--이벤트 포탈 -->
+	<TRIGGER ID="Event_title_01" TITLE_TEXT_ID="" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1"/>
+
+	<TRIGGER ID="Quest_Trigger1700" TYPE="LOCATION">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="1699"/>
+	</TRIGGER>
+
+	<FOG DENSITY="0.24" FUNC="Z_LINEAR" START="630" END="6373" COLOR="0.2509804,0,0"/>
+	<WORLD_QUALITY HIGH_END="300" MID_END="1500" LOW_END="3000" USE="1"/>
+</WORLD>

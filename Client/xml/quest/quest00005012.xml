@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5012</ID> <!--T.T.10501201 위험한 독소 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	갑판상어 부둣가 - 붉은 안테나 몽글과 몽글 30마리 처리-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 붉은 안테나 몽글이 사람들에게 치명적인 독을 쏘아댄다고 한다. 무카파는 사람들에게 더욱 많은 피해를 입히기 전에 그것을 처리해 줄 것을 부탁한다. 피해를 입는 평범한 사람들을 위해 갑판상어 부둣가에서 붉은 안테나 몽글 30마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010120/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010120/갑판상어 부둣가,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010120/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010120/갑판상어 부둣가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10501211"/> <!--몽글과 붉은 안테나 몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501221" FACE="Mukapa_normal"/> <!--흠. 이건 상당한 문제가 되겠군. 혹시 자네는 들은 적이 있나?
+붉은 안테나 몽글에 대해서 말일세.%% 
+요즘 사람들을 붉은 안테나 몽글이 공격하고 있어서 말인데만, 자네가 혹시 좀 도와주지 않을텐가?
+-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501226" FACE="Mukapa_smile"/> <!--잘해줬네! 이제 사람들도 편안한게 그쪽 지역을 지나갈 수 있을 걸세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501223" FACE="Mukapa_normal"/> <!--과거 붉은 안테나 몽글은 드문드문 사람을 공격하기는 했었지.
+하지만 지금처럼 사납지는 않았다고 하네.%%  
+모르는 새 지금 같이 사나워졌다고 하지. 
+그뿐만 아니라, 예전에 없던 강한 독성이 생겨서 보통 사람들이 닿으면 생명이 위험할지도 모른다네.%%
+아무래도 이 근처의 몬스터들이 사나워진 것과 관계가 있을지도 모르겠군.
+붉은 안테나 몽글은 갑판상어 부둣가에서 사납게 날뛰고 있으니 처리를 부탁하네.
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501224" FACE="Mukapa_angry"/> <!--자네는 지금 자네의 안위를 돌보고자 다른 사람의 괴로움을 못본 체 할 텐가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501225" FACE="Mukapa_normal"/> <!--어서 빨리 가게나. 지금도 사람들이 공격을 받고 있을지도 모르네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

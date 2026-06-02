@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4030</ID> <!--T.T.10403001 용궁에서 온 선물(2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	해골무늬 반다나 10개 획득(수염고래 해안가)-->
+<!--[완료NPC]	수염고래 해안가 - 프리모-->
+<!--[내용]	프리모의 의심을 풀기 위해 해적이 아님을 증명해야 한다. 수염고래 해안가에서 갑판상어, 상어를 퇴치하여 해골무늬 반다나 10개를 구해오자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D9D4C750-7AE1-4084-B14A-770E1D304FA1</CLIENT> <!--시작NPC 수염고래 해안가 - 프리모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D9D4C750-7AE1-4084-B14A-770E1D304FA1</PAYER> <!--완료NPC 수염고래 해안가 - 프리모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D9D4C750-7AE1-4084-B14A-770E1D304FA1</AGENT> <!--진행NPC 11 수염고래 해안가 - 프리모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160403000">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,Item_NO=160403000/[Q.ID:04030] 해골무늬 반다나60%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160403000">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,Item_NO=160403000/[Q.ID:04030] 해골무늬 반다나60%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160403000</ITEM> 
+ <!--Item_NO=160403000/[Q.ID:04030] 해골무늬 반다나,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10403011"/> <!--해골무늬 반다나-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403021" FACE="Primo_normal"/> <!--엥?
+아니 근데… 당신은 누구요?%%
+깜짝 놀랐잖수… 해적인줄 알고….-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403026" FACE="Primo_smile"/> <!--헐…
+설마 하니 이렇게까지 할 줄은 몰랐는데…%%
+당신이 해적 보다 더 무서운 사람이잖아! 후덜덜덜…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403023" FACE="Primo_normal"/> <!--용궁? 보물?
+내 아들이 그런 말을 떠벌였다고요?%%
+쩝… 
+이걸 얘기해야 하나 잘 모르겠구만.%%
+만약 이야기를 듣고 싶다면…
+당신이 해적이 아니란 걸 증명해 보인다면 생각해보도록 하지.%%
+방법? 방법은 간단하죠. 
+해적을 때려 잡기만 하면 되는 거요.%%
+가서 해적들을 훔씬 두들겨주고 머리 두건을 빼앗아 오시오.
+그것도 아주 많이!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403024" FACE="Primo_smile"/> <!--헤헤… 해적이라면 모두들 겁부터 집어먹는단 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403025" FACE="Primo_angly"/> <!--이 수염고래 해안가에서 활개치는 해적들의 머리두건 외에는 관심 없소. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

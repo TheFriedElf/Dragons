@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="c_Clytie" INIT_ACTION="a_idle">
+	<NPCMARK NAME="e_ef_colorshadow_npc" ATTATCH_TO="char_root"/>
+	<TEXTURE SRC="reflection_metal.dds">../Data/2_Mon/N_Bumblow/n_bumblow_reflection.dds</TEXTURE>
+	<TEXTURE SRC="ladder_shadow.dds">../Data/1_Cha/2_NPC/Amy/ladder_shadow.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_n_Clytie"/>
+		<KFMPATH SCALE="1.1">../Data/1_Cha/2_NPC/Clytie/Clytie.kfm</KFMPATH>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="emotion_talk_01" ANIMATION="1000005" RANDOM="100"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5149</ID> <!--T.T.10514901 마을을 지키다(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 토마스와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	좀 도둑 제스는 괴물들의 수상한 움직임을 포착했다고 한다. 곧 마을의 몬스터들이 공격해 올 것이라는 생각이 들은 제스는 이 사실을 마을의 믿을만한 사람에게 알려야 한다고 한다. 용병단 대장 토마스에게 알려 마을을 지키도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">89F4650C-E372-4716-B958-5C321BB62C51</CLIENT> <!--시작NPC 달빛해안 마을 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 11 달빛해안 마을 - 제스 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 12 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10514911"/> <!--토마스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10514921" FACE="Jess_angly"/> <!--이봐! 큰일이야!
+뒤쪽 산에서 이상한 움직임을 포착했어. 
+그곳에 있는 괴물들이 일사불란하게 움직이던데.%%
+내가 볼 때 당장 어디라도 처들어갈 것 같았어.
+이 사실을 누군가에게 알려야 해.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10514926" FACE="Thomas_normal"/> <!--뭐라고? 괴물들이?
+알았네. 그렇다면 가만히 있을 수 없겠군.
+서둘러 준비해야겠네. 알려줘서 고맙네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10514923" FACE="Jess_normal"/> <!--서둘러야 해. 당장 내일이라도 공격해 올 것 같은 분위기였어.
+토마스아저씨에게 알려!
+토마스아저씨는 다리 위에 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10514924" FACE="Jess_angly"/> <!--안 된다고? 무슨 소리야? 이 바보!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10514925" FACE="Jess_normal"/> <!--아이들을 빨리 모아야겠어. 너도 조금만 서둘러 줘!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10514902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

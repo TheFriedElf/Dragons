@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Mong_geul_Sarasvatl" INIT_ACTION="a_opening">
+	<TEXTURE SRC="n_escargoon_reflection.dds">../Data/2_Mon/N_Escargoon/n_escargoon_reflection.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Mong_geul_Sarasvatl"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Mong_geul_Sarasvatl/N_Mong_geul_Sarasvatl.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Mong_geul_Sarasvatl/N_Mong_geul_Sarasvatl_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="45,14" ROTATE="1,0,0,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

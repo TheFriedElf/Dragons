@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4169</ID> <!--T.T.10416901 고군분투 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	퀘차 사제와 대화-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	루는 %name%이 신관의 신성한 시험을 통과했다고 말한다. 카즈라 마을로 돌아가 퀘차 사제를 만나자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">A2967241-19A9-4292-A2C0-D28C152AE2A4</CLIENT> <!--시작NPC 아키아 동굴(아카나이 근처) - 루 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">A2967241-19A9-4292-A2C0-D28C152AE2A4</AGENT> <!--진행NPC 11 아키아 동굴(아카나이 근처) - 루 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 12 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416911"/> <!--퀘차 사제와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416921" FACE="Lwu_angry"/> <!--널 통과시키긴 하겠지만, 넌 아직 수련이 부족해.
+덤벙거리는 바람에 박쥐 거미의 독에 중독되어버렸잖아.%% 
+넌 바로 앞에 바로 위험이 닥쳐오는 데도 
+스스로를 돌보지 않는 것 같아.%%
+목숨이 소중한 걸 모르는 전사에겐 
+단 한번의 패배 만이 전적으로 남는 거야.%%
+그 단 한번의 실전에서 목숨을 잃어버릴 테니까…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416926" FACE="Quecua_smile"/> <!--드디어 시험을 끝마치고 돌아왔구나.
+이제 곧 있을 신관의 즉위식에서 오추쿠님이 널 정식으로
+신관전사로 임명하실 거란다. 축하한다! %name%-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416923" FACE="Lwu_smile"/> <!--신보를 지키는 사제들은 브라이님이 고안한 특수 마법 
+가루다의 술법 덕분에 죽음을 통해 신보의 오염을 
+막아낼 수 있지만...%%
+넌 벌써부터 죽으면 아무런 의미도 없어.
+언젠가 혹독한 수련을 받아야 할 거야.
+안 그러면 아카나이에게 의미 없는 죽음을 당할테니까.%%
+이제 이런 우울한 얘기는 그만하자. 
+너를 신관 전사로 허락한다고 퀘차님에게 말해둘게. %%
+지금 바로 카즈라 마을의 퀘차님에게 돌아가도록 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416924" FACE="Lwu_angry"/> <!--여기서 포기한다니 넌 정신적으로도 뭔가 문제가 있구나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416925" FACE="Lwu_angry"/> <!--퀘차님에게 돌아가. 이제 네 얼굴 보는 것도 지겨우니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	<!--
+	<ACCEPT_EVENT_SCRIPT_ID>4169</ACCEPT_EVENT_SCRIPT_ID>
+	-->
+	
+		
+</QUEST>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010158_FD">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/010158_FD.gsa</GSAPATH>
+	<MINIMAP Y="165" H="205">../Data/3_World/01_Ingrid/01_Level/010158_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--// 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+    <!-- 엔 터 던 전 -->
+	<TRIGGER ID="EnterDungeon_target_01" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_02" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_02"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_03" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_03"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_04"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_05" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_06" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_06"/>
+	</TRIGGER>
+    <FOG DENSITY="0" FUNC="Z_LINEAR" START="2543" END="7206" COLOR="0,0.09411765,0.1333333"/>
+</WORLD>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by dd (dd) -->
+<QUEST>
+	<ID>1196</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="507630">헬 크라우저의 마음을 사자 (1)</TITLE>
+	<GROUPNAME TEXT="507681">솔방울 언덕</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="1" MAX="999"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<QUESTS>
+			<QUEST>1195</QUEST>
+		</QUESTS>
+		<LOCATIONS/>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">5E95E33F-4210-4db9-A879-D75E5B765CA3</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10002">5E95E33F-4210-4db9-A879-D75E5B765CA3</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10003">5E95E33F-4210-4db9-A879-D75E5B765CA3</PAYER>
+	</PAYERS>
+	<EVENTS>
+		<!--NPC와 대화-->
+		<!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049143</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049144</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049146</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049147</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049148</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049149</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049150</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049151</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049152</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049159</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6049160</MONSTER>
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="507637"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+	</OBJECTS>
+	<DIALOGS>
+		<!--101번은 퀘스트 의뢰 정보창-->
+		<!--MEMO=201번은 퀘스트 수락/거부 여부창-->
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="507631" FACE="Rudaelra_normal"/>
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="301">
+			<BODY TEXT="507632" FACE="Rudaelra_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="401">
+			<BODY TEXT="507633" FACE="Rudaelra_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="507634" FACE="Rudaelra_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="507635" FACE="Rudaelra_smile"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<!--701번은 완료를 허락 하였을 때 뜰창-->
+		<DIALOG ID="701">
+			<BODY TEXT="500017"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--801번은 완료를 거부 하였을 때 뜰창-->
+		<DIALOG ID="801">
+			<BODY TEXT="500018"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="507636"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="502048"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+	</DIALOGS>
+</QUEST>

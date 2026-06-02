@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030601_DG">
+	<GSAPATH>../Data/3_World/95_Dungeon/400_InDun/030601_DG.gsa</GSAPATH>
+	<MINIMAP Y="190" H="110">../Data/3_World/95_Dungeon/400_InDun/030601_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DragonMage.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!--카즈라 마을 게이트-->
+	<TRIGGER ID="gate_058100_base" TYPE="PORTAL" TITLE_TEXT_ID="800012" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010110" PARAM2="4">
+			<ACCESS>
+				<!-- LEVEL MIN= "0"/ -->
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!--오염된 신보 아카나이 게이트-->
+	<TRIGGER ID="gate_050300_base" TYPE="PORTAL" TITLE_TEXT_ID="800012" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010110" PARAM2="1">
+			<ACCESS>
+				<!-- LEVEL MIN= "0"/ -->
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<WORLD_QUALITY HIGH_END="600" MID_END="1000" LOW_END="1500" USE="1"/>
+</WORLD>

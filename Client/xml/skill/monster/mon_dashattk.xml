@@ -1,0 +1,8 @@
+<ACTION ID="a_mon_dashattk" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" CAN_CHANGE_ACTOR_POS="TRUE" DONT_LOOK_TARGET="TRUE" NO_SET_WALKING_TARGET_LOC = "TRUE">
+  <SLOT NAME="dashattk_btlidle_01_start"/>
+  <SLOT NAME="dashattk_btlidle_01" LOOP="TRUE"/>
+  <SLOT NAME="dashattk_rush" LOOP="TRUE"/>
+  <SLOT NAME="idle_01"/>
+  <SLOT NAME="dashattk_finish"/>
+  <FSM SCRIPT="Act_Mon_Rush"/>
+</ACTION>

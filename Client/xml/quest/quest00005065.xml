@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5065</ID> <!--T.T.10506501 사랑의 묘약(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항 [아케이드 모드(F1)]의 상어에게서 마력의 흑진주 15개를 구하자-->
+<!--[완료NPC]	바람항구 - 데이지-->
+<!--[내용]	데이지는 드디어 마지막 재료만 남았다며 흥분해 한다. 데이지는 이때까지의 재료와는 다른 무언가 마법의 힘이 물씬 풍기는 재료라고 한다. 그 재료는 바로 마력의 흑진주. 마력의 흑진주는 상어의 몸 안에서 난 상처가 아물면서 가끔씩 만들어지는 것이라고 한다. 하지만 포악한 상어에게서 마력의 흑진주를 얻는 게 쉽지는 않을 것이라고 한다. 스티븐 무역항 [아케이드 모드(F1)]의 상어에게서 마력의 흑진주 15개를 구하자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">928106B8-8596-4E9C-B89A-87772C71A749</CLIENT> <!--시작NPC 바람항구 - 데이지 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">928106B8-8596-4E9C-B89A-87772C71A749</PAYER> <!--완료NPC 바람항구 - 데이지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">928106B8-8596-4E9C-B89A-87772C71A749</AGENT> <!--진행NPC 11 바람항구 - 데이지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010133/10000/5000/1/1/160506500">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010133/스티븐 무역항 아케이드 3,Item_NO=160506500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160506500</ITEM> 
+ <!--Item_NO=160506500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010135/10000/5000/1/1/160506500">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010135/스티븐 무역항 아케이드 5,Item_NO=160506500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160506500</ITEM> 
+ <!--Item_NO=160506500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010139/10000/5000/1/1/160506500">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010139/분노의 캡틴 알비다,Item_NO=160506500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160506500</ITEM> 
+ <!--Item_NO=160506500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10506511"/> <!--마력의 흑진주-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10506521" FACE="Huerin_normal"/> <!--드디어 마지막 재료만 남았어.
+이름도 왠지 마법의 재료에 잘 어울리는 마력의 흑진주야.
+여기 나온 설명에 따르면 상어의 내부에 상처가 생겼을 때 그것이 아무는 과정에서 가끔 만들어진다고 해.%%
+어쨌거나 중요한 것은 마력의 흑진주만 있으면 사랑의 묘약을 만들 수 있다는 거야.
+자, 마지막까지 힘내서 할 거지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10506526" FACE="Huerin_normal"/> <!--좋아, 잠깐만 있어봐. 흑진주만 넣으면 바로 완성이야.
+흐음. 됐다. 어디 한번 먹어볼까?
+음 의외로 산뜻하고 맛있는 걸. 어때 나한테 묘한 매력을 느끼는 것 같아. 
+(고개를 강하게 젓는다)%%
+이상한데. 책에 나온데로 다 했는데. 응 뒷장에 뭐라고 써 있네.
+"사랑의 묘약은 없다. 내가 인기 있었던 건 내가 잘났기 때문이다. - 챠밍"-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10506523" FACE="Huerin_normal"/> <!--마력의 흑진주는 생각보다 구하기 힘든 곳에 있어.
+그래도 넌 강하니까 상관없겠지?%%
+마력의 흑진주가 발견되는 곳은 스티븐 무역항 [아케이드 모드(F1)]의 상어들한테서야.
+녀석들은 상당히 포악하니까 조심해야 할 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10506524" FACE="Huerin_angly"/> <!--이제 곧 약을 만들 수 있다고. 그러지말고 내게 협력하도록 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10506525" FACE="Huerin_normal"/> <!--마력의 흑진주 자체도 상당한 가격에 팔 수 있겠는 걸. 앗! 혼잣말이니까 못 들은 척해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10506502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

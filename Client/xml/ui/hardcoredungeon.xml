@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+
+	<STATIC_FORM ID="SFRM_HCD_VOTE" ALIGN_X="50" ALIGN_Y="50" W="295" H="372" STATIC_NUM="1" CAN_DRAG="0">
+		<SCRIPT ID="ON_CALL">SetPvPLock( true )</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">SetPvPLock( false )</SCRIPT>
+		<STATIC_FORM ID="SFRM_TOP" X="1" Y="0" W="293" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_TOP_TITLE" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<IMG ID="IMG_TAB" X="0" Y="0" W="144" H="24" IMG="../Data/6_ui/Common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<FORM ID="FRM_TEXT" X="0" Y="0" W="144" H="24">
+					<ATTR TEXT="402000" T_X="72" T_Y="5" T_CENTER="1" FONT="FTtitle_14" T_OUTLINE="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</STATIC_FORM>
+			<BUTTON ID="BNT_CLOSE" X="262" Y="4" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					SetHardCoreDungeonVoteResult( 2, 402008 )
+				</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_CONTENTS" X="9" Y="35" W="277" H="151" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BOTTOM_SHADOW" X="0" Y="0" W="277" H="151" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<FORM ID="FRM_TEXT" X="0" Y="0" W="277" H="151">
+				<ATTR TEXT="402001" T_X="10" T_Y="10" FONT="Font_Text" T_OUTLINE="0" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_VOTE_BG" X="10" Y="188" W="276" H="141" STATIC_NUM="24" CAN_COLOR_CHANGE="1"/>
+		
+		<BUILD ID="BUILD_SFRM_VOTE" TARGET_ID="SFRM_VOTE" X="16" Y="194" Z="1" X_COUNT="1" Y_COUNT="4" X_GAB="0" Y_GAB="33" START_INDEX="1" TRG_CUSTOME_ID="SFRM_VOTE_"/>
+		<STATIC_FORM ID="SFRM_VOTE" X="0" Y="0" Z="1" W="265" H="31" STATIC_NUM="34" CAN_COLOR_CHANGE="1">
+			<ATTR TEXT="" T_X="9" T_Y="6" FONT="FTcts_13" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="IMG_OK" X="177" Y="2" W="41" H="25" IMG="../Data/6_ui/battle/bsOBt.tga" IMG_W="82" IMG_H="50" U="2" V="2" UV_INDEX="4">
+				<SCRIPT ID="ON_MOUSE_OVER">OnVoteUp(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">OnVoteOut(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnVoteDown(UISelf,"IMG_CANCEL")</SCRIPT>
+			</FORM>
+			<FORM ID="IMG_CANCEL" X="220" Y="2" W="41" H="25" IMG="../Data/6_ui/battle/bsXBt.tga" IMG_W="82" IMG_H="50" U="2" V="2" UV_INDEX="4">
+				<SCRIPT ID="ON_MOUSE_OVER">OnVoteUp(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">OnVoteOut(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnVoteDown(UISelf,"IMG_OK")</SCRIPT>
+			</FORM>
+			<SCRIPT ID="ON_MOUSE_OVER">OnVoteState(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip( nil, 11 )</SCRIPT>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_OK" X="63" Y="333" W="84" H="26">
+			<ATTR TEXT="799216" T_X="42" T_Y="4" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR BTN_IMG="../Data/6_UI/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">SetHardCoreDungeonVoteResultUI( UISelf:GetParent() )</SCRIPT>
+			<HOTKEY ID="59">SetHardCoreDungeonVoteResultUI( UISelf:GetParent() )</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="149" Y="333" W="84" H="26">
+			<ATTR TEXT="799217" T_X="42" T_Y="4" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR BTN_IMG="../Data/6_UI/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				SetHardCoreDungeonVoteResult( 2, 402008 )
+			</SCRIPT>
+			<HOTKEY ID="60">
+				SetHardCoreDungeonVoteResult( 2, 402008 )
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<MSG_BOX ID="BOX_HCD_IF" ALIGN_X="50" ALIGN_Y="50" Y="180" W="228" H="158" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_BG" Z="-1" W="247" H="158" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_BG_COLOR" X="8" Y="8" Z="0" W="231" H="108" STATIC_NUM="2"  CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="8" Y="8" Z="1" W="231" H="108" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<FORM ID="FRM_MESSAGE" X="8" Y="8" Z="0" W="212" H="108">
+			<ATTR TEXT="" FONT="Font_Text" T_CENTER="1" T_X="106" T_Y ="40" T_OUTLINE="0" FONT_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_OK" X="41" Y="121" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400536" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">OnVoteIF(UISelf)</SCRIPT>
+			<HOTKEY ID="59">OnVoteIF(UISelf)</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="121" W="79" H="28">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400537" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60">UISelf:CloseParent()</HOTKEY>
+		</BUTTON>
+	</MSG_BOX>
+	
+	<FORM ID="FRM_HCD_ING" X="807" Y="0" W="217" H="68" TICK_TIME="500" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_ui/battle/bsRBg01.tga" IMG_W="217" IMG_H="68"/>
+		<ATTR TEXT="402002" T_X="108" T_Y="8" T_CENTER="1" FONT="FTslot" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFCD4"/> 
+		<IMG ID="IMG_HOUR_10" X="47" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumYs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+		<IMG ID="IMG_HOUR_1" X="67" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumYs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+		<IMG ID="IMG_DOT" X="90" Y="29" W="10" H="20" IMG="../Data/6_ui/mission/msTimeYdot2.tga" IMG_W="10" IMG_H="20" NO_FOCUS="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_MIN_10" X="93" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumYs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+		<IMG ID="IMG_MIN_1" X="113" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumYs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+		<IMG ID="IMG_SEC_10" X="133" Y="32" W="25" H="25" IMG="../Data/6_ui/mission/msNumTmYs2.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+		<IMG ID="IMG_SEC_1" X="148" Y="32" W="25" H="25" IMG="../Data/6_ui/mission/msNumTmYs2.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+		<SCRIPT ID="ON_TICK">OnTickHCDTime( UISelf, true )</SCRIPT>
+		<FORM ID="FRM_MSG" X="0" Y="0" W="0" H="0" TICK_TIME="180000">
+			<SCRIPT ID="ON_TICK">OnTickHCDMsg( UISelf )</SCRIPT>
+		</FORM>
+	</FORM>
+	
+	<FORM ID="FRM_HCD_BOSS_ING" X="807" Y="73" W="217" H="98" NO_FOCUS="1">
+		<FORM ID="FRM_DUMMY" X="0" Y="0" W="217" H="62" TICK_TIME="500" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_ui/battle/bsRBg02.tga" IMG_W="217" IMG_H="98"/>
+			<ATTR TEXT="402002" T_X="108" T_Y="8" T_CENTER="1" FONT="FTslot" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFCD4"/> 
+			<IMG ID="IMG_HOUR_10" X="47" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumRs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+			<IMG ID="IMG_HOUR_1" X="67" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumRs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+			<IMG ID="IMG_DOT" X="90" Y="29" W="10" H="20" IMG="../Data/6_ui/mission/msTimeRdot.tga" IMG_W="10" IMG_H="20" NO_FOCUS="1">
+				<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+			</IMG>
+			<IMG ID="IMG_MIN_10" X="93" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumRs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+			<IMG ID="IMG_MIN_1" X="113" Y="23" W="35" H="35" IMG="../Data/6_ui/mission/msNumRs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+			<IMG ID="IMG_SEC_10" X="133" Y="32" W="25" H="25" IMG="../Data/6_ui/mission/msNumTmRs.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+			<IMG ID="IMG_SEC_1" X="148" Y="32" W="25" H="25" IMG="../Data/6_ui/mission/msNumTmRs.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1" NO_FOCUS="1"/>
+			<SCRIPT ID="ON_TICK">OnTickHCDTime( UISelf, false )</SCRIPT>
+		</FORM>
+		
+		<FORM ID="FRM_TEXT" X="0" Y="62" Z="1" W="217" H="30" NO_FOCUS="1">
+			<ATTR TEXT="402003" T_X="108" T_Y="5" T_CENTER="1" FONT="FT15" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFF568"/>
+			<IMG ID="IMG_MAN" X="170" Y="0" W="30" H="30" IMG="../Data/6_ui/community/ptMan.tga" IMG_W="90" IMG_H="90" U="3" V="3" UV_INDEX="1" TICK_TIME="100" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK">OnTickMan(UISelf)</SCRIPT>
+			</IMG>
+		</FORM>
+	</FORM>
+	
+	<FORM ID="FRM_HCD_EXIT" X="807" Y="175" W="217" H="28">
+		<BUTTON ID="BTN_CANCLE" X="69" Y="0" W="79" H="28">
+			<ATTR TEXT="400338" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">Net_RecentMapMove()</SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+</XUI>

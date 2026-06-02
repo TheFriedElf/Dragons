@@ -1,0 +1,8 @@
+<ACTION ID="a_taunt" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+	<SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+	<SLOT NAME="Com_shot_04" LOOP="TRUE"/>
+	<FSM SCRIPT="Act_Melee_Default"
+		FIRE_CASTER_EFFECT_TARGET_NODE=""
+		FIRE_CASTER_EFFECT_ID=""
+		HIT_SOUND_ID="buff_prov"/>
+</ACTION>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 후커 오프닝 1 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="setmoviescene" enable="TRUE" Time="0"/>    
+	<CMD TYPE="Dialogue" NameTTID="521965" TitleTTID="521910" TextTTID="521917" FaceID="Hooker_smile"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>   
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다. -->
+    <CMD type="AddActorFilter" ClassNo="1028170"/>
+    <CMD TYPE="AddNPC" ClassNo ="1028170" NameTTID ="505659" SpawnPos = "54.398628,177.395798,322.672852"/>
+    <CMD TYPE="MoveCamToActor" NameTTID ="505659" MoveTime="0"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="SetActorDirection" NameTTID="505659"  Direction="1" />
+    <CMD TYPE="PlayAnimation" NameTTID="505659" SlotName="action_01"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="505659" CameraID="Camera01" UseActorPositionAsSoundListener="true"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="WaitTime" Time="9"/>
+    <CMD TYPE="ShowActor" NameTTID="505659" Show="false"/>
+    <CMD TYPE="RemoveActor" NameTTID ="505659"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    <CMD TYPE="WaitCamera"/>
+    
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	 <CMD type="ClearActorFilter"/>
+    <CMD type="CallUI" UIWndName = "FRM_MISSION_START"/>
+	<!-- 플레이어 이동 가능 -->
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

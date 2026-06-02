@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010801_DG" DESCRIPTION="90108010">
+	<GSAPATH>../Data/3_World/95_Dungeon/400_InDun/010802_DG.gsa</GSAPATH>
+	<MINIMAP Y="133" H="250">../Data/3_World/95_Dungeon/400_InDun/010802_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/sneartrail_bg.mp3</BGSOUND>
+	<SCRIPT START="START_010801">World/95_Dungeon/010801_DG.lua</SCRIPT>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+	<MAP_MOVE_COMPLETE_FADE FADE_COLOR="0,0,0" FADE_TIME="0.01" FADE_IN="FALSE"/><!--맵로딩후 Fade 상태-->
+	<!--카메라 이벤트 신-->
+	<EVENT_SCRIPT_ON_ENTER ID="79"/>
+	<!-- 나가지 버튼 -->
+    <DUNGEON_EXIT_UI/>
+	<!-- 석상 불트렙 -->
+	<TRIGGER ID="Veta_Trap1001_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 08">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 09">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 10">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 11">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 12">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 13">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 14">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1001_01 15">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842502"/>
+	</TRIGGER>
+	<!-- 창 트렙 -->
+	<TRIGGER ID="Veta_Trap1002_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 08">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 09">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 10">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 11">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 12">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 13">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 14">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 16">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 18">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 19">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 20">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 21">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 22">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 23">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1002_01 24">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!-- 2단봉 트렙 -->
+	<TRIGGER ID="Veta_Trap1003_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1003_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1003_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1003_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1003_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!--벽가시 3 트렙 -->
+	<TRIGGER ID="Veta_Trap1004_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1004_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1004_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1004_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1004_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1004_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!--바닥가시 3 트렙 -->
+	<TRIGGER ID="Veta_Trap1005_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842402"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1005_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842402"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1005_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842402"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1005_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842402"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1005_01 14">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842402"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1005_01 17">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+		<SKILL ID="5842402"/>
+	</TRIGGER>
+	<!--바닥통가시 트렙 -->
+	<TRIGGER ID="Veta_Trap1006_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 09">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 10">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 11">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 12">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 13">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 14">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 15">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 16">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 17">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 18">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 19">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 20">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 21">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 22">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 23">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 24">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 25">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1006_01 26">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!--긴 통가시 트렙 -->
+	<TRIGGER ID="Veta_Trap1007_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1007_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!--굴러 가시 트렙 -->
+	<TRIGGER ID="Veta_Trap1008_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1008_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1008_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1008_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1008_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!--굴러 돌 트렙 -->
+	<TRIGGER ID="Veta_Trap1009_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1009_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1009_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!--도끼 트렙 -->
+	<TRIGGER ID="Art_Trap1001_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 08">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 09">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 10">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 11">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 12">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 13">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 14">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 15">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 16">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Art_Trap1001_01 17">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<!--톱날 트렙 -->
+	<TRIGGER ID="Veta_Trap1011_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 08">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 09">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 10">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	<TRIGGER ID="Veta_Trap1011_01 11">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="1"/>
+</WORLD>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!-- ================ FRM_COMMON_POPUP ====================== -->
+	<FORM ID="FRM_COMMON_POPUP" W="129" H="220">
+		<ATTR TEXT="19942" FONT="Font_Text" T_X="65" T_CENTER="1" T_Y ="4" T_OUTLINE="1" PASS_EVENT="0" NO_WORD_WRAP="1"/>
+		<ATTR FONT_COLOR_HEX="0xFFE1E1E1" OUTLINE_COLOR_HEX="0xFF3D3D3D" />
+		<ATTR IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+		<!--ATTR ALIVE_TIME="7000"/-->
+		
+		<STATIC_FORM ID="FRM_BG1" X="2" Y="20" Z="-2" W="125" H="196" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="FRM_BG2" X="1" Y="19" Z="-1" W="127" H="198" STATIC_NUM="33"/>
+		<BUTTON ID="BTN_CUR" X="0" Y="18" Z="2" W="126" H="34" IS_VISIBLE="1" NO_FOCUS="1">
+			<ATTR BTN_IMG="../Data/6_ui/Community/ptUpImg01.tga" BTN_IMG_W="252" BTN_IMG_H="68"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">				
+				OnEnter_CommonPopup(UISelf:GetParent())
+				CloseUI("FRM_COMMON_POPUP")
+				return true
+			</SCRIPT>
+		</BUTTON>
+		
+		<LIST ID="QUEST_LIST" NO_FOCUS="1">
+			<ATTR X="6" Y="24" W="117" H="180" CAN_SELECT="1"/>
+			<ATTR ELEMENT_ID="FRM_CMN_POPUP_ITEM"/>
+			<SCRIPT ID="ON_CALL">
+			</SCRIPT>
+		</LIST>
+		
+		<SCRIPT ID="ON_CALL"> LockPlayerInputMove(16) LockPlayerInput(16)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> UnLockPlayerInputMove(16) UnLockPlayerInput(16)</SCRIPT>
+		<HOTKEY ID="121"> OnUp_CommonPopup(UISelf) </HOTKEY>
+		<HOTKEY ID="126"> OnDown_CommonPopup(UISelf) </HOTKEY>
+		<HOTKEY ID="28"> OnEnter_CommonPopup(UISelf) return true </HOTKEY>
+		<HOTKEY ID="106"> OnEnter_CommonPopup(UISelf) return true </HOTKEY>
+		<HOTKEY ID="57"> OnEnter_CommonPopup(UISelf) return true </HOTKEY>
+
+		<HOTKEY ID="1"> 			
+			UISelf:Close() return true 
+		</HOTKEY>
+		<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Close() return true  </SCRIPT>
+	</FORM>
+	<FORM ID="FRM_CMN_POPUP_ITEM" W="117" H="24" NO_FOCUS="1">
+		<BUTTON ID="BTN_1" X="0" Y="0" W="117" H="22" NO_FOCUS="1">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmDropB03.tga" BTN_IMG_W="234" BTN_IMG_H="44" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="" T_X="58" T_Y="4" FONT="Font_Text" T_OUTLINE="0" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">				
+				local iCommandType = UISelf:GetCustomDataAsInt()
+				local kGuid = UISelf:GetOwnerGuid()
+				CloseUI("FRM_COMMON_POPUP")
+				ProcessCommonPopupMessage(iCommandType, kGuid)
+				return true
+			</SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+	<FORM ID="FRM_NAME_CMD_POPUP" W="129" H="220">
+		<ATTR TEXT="19942" FONT="Font_Text" T_X="2" T_Y ="4" T_OUTLINE="1" PASS_EVENT="0"/>
+		<ATTR FONT_COLOR_HEX="0xFFE1E1E1" OUTLINE_COLOR_HEX="0xFF3D3D3D" />
+		<ATTR ALIGN_X="50" ALIGN_Y="50"/>
+		<!--ATTR ALIVE_TIME="7000"/-->
+		
+		<STATIC_FORM ID="FRM_BG1" X="2" Y="20" Z="-2" W="125" H="196" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="FRM_BG2" X="1" Y="19" Z="-1" W="127" H="198" STATIC_NUM="33"/>
+		<BUTTON ID="BTN_CUR" X="0" Y="18" Z="2" W="126" H="34" IS_VISIBLE="1" NO_FOCUS="1">
+			<ATTR BTN_IMG="../Data/6_ui/Community/ptUpImg01.tga" BTN_IMG_W="252" BTN_IMG_H="68"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				OnEnter_CommonPopupToName(UISelf:GetParent())
+				return true
+			</SCRIPT>
+		</BUTTON>
+		
+		<LIST ID="QUEST_LIST" NO_FOCUS="1">
+			<ATTR X="6" Y="24" W="117" H="180" CAN_SELECT="1"/>
+			<ATTR ELEMENT_ID="FRM_NAME_CMD_POPUP_ITEM"/>
+			<SCRIPT ID="ON_CALL">
+			</SCRIPT>
+		</LIST>
+		
+		<SCRIPT ID="ON_CALL"> LockPlayerInputMove(17) LockPlayerInput(17)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> UnLockPlayerInputMove(17) UnLockPlayerInput(17)</SCRIPT>
+		<HOTKEY ID="121"> OnUp_CommonPopup(UISelf) </HOTKEY>
+		<HOTKEY ID="126"> OnDown_CommonPopup(UISelf) </HOTKEY>
+		<HOTKEY ID="28"> OnEnter_CommonPopupToName(UISelf) return true </HOTKEY>
+		<HOTKEY ID="106"> OnEnter_CommonPopupToName(UISelf) return true </HOTKEY>
+		<HOTKEY ID="57"> OnEnter_CommonPopupToName(UISelf) return true </HOTKEY>
+
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+		<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Close() return true  </SCRIPT>
+	</FORM>
+	<FORM ID="FRM_NAME_CMD_POPUP_ITEM" W="117" H="24" NO_FOCUS="1">
+		<BUTTON ID="BTN_1" X="0" Y="0" W="117" H="22" NO_FOCUS="1">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmDropB03.tga" BTN_IMG_W="234" BTN_IMG_H="44" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="" T_X="58" T_Y="4" FONT="Font_Text" T_OUTLINE="0" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local iCommandType = UISelf:GetCustomDataAsInt()
+				local kOwnerName = UISelf:GetParent():GetParent():GetParent():GetStaticText():GetStr()
+				CloseUI("FRM_NAME_CMD_POPUP")
+				ProcessNamePopupMessage(iCommandType, kOwnerName)
+				return true
+			</SCRIPT>
+		</BUTTON>
+	</FORM>
+</XUI>

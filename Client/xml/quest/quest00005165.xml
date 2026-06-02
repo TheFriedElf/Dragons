@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5165</ID> <!--T.T.10516501 이어진 마음 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	바람항구 - 레오와 대화-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	바람항구의 현자 제레미는 자신이 사랑으로 돌봐온 레오로부터 사랑한다는 말을 들었다고 한다. 그래서 제레미는 레오에게 역시 사랑한다는 말을 전하고 싶어한다. 레오에게 가서 사랑한다는 말을 전해주자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</CLIENT> <!--시작NPC 바람항구 - 제레미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 11 바람항구 - 제레미 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 12 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10516511"/> <!--레오와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10516521" FACE="Jeremy_normal"/> <!--또 보는군.
+젊은이. 내 부탁 하나 들어주면 안되겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10516526" FACE="Leo_smile"/> <!--할아버지가요? 할아버지도 절 사랑하고 계셨군요.
+할아버지는 정말 고마우신 분이에요. 
+%name%님도 저처럼 후회하지 말고 꼭 표현하세요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10516523" FACE="Jeremy_smile"/> <!--내게 레오는 눈에 넣어도 안 아픈 소중한 보물일세.
+레오에게 하고 싶은 말이 있네. 그 말을 자네가 전해줬음 좋겠어.%%
+나야 늙고 병 들어 이제 그런 말 하기 여간 부끄러운게 아니야.
+자네가 전해주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10516524" FACE="Jeremy_normal"/> <!--이 늙은이 부탁을 거절 하는건가?그러지 말고 한번 해줘잉~-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10516525" FACE="Jeremy_normal"/> <!--레오에게 가슴 따뜻한 얘기를 전해주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10516502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

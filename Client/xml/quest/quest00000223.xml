@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구에서 카즈라의 사절단으로 파견된 드라칸 전사 자둠, 로푸, 마르후와 대화하자.-->
+<!--[완료NPC]	바람항구 - 라노타-->
+<!--[내용]	드라칸의 전사장인 라노타는 자신이 인솔하는 전사들과 인사를 나누어 보라 한다. 바람항구를 찾아온 드라칸 전사 자둠, 로푸, 마르후와 대화하자.-->
+<QUEST>
+<ID>223</ID> <!--T.T.10022301 베일에 가려진 카즈라 마을 -->
+<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="523330">베일에 가려진 카즈라 마을</TITLE>
+	<GROUPNAME TEXT="500009">바람항구 브리즈</GROUPNAME>
+	<LIMITS>
+		<DAYOFWEEK>5/6</DAYOFWEEK>
+		<LEVEL MIN="20" MAX="99"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D66550AB-63CC-4ea1-881C-0EBB953E2D94</CLIENT> <!--시작NPC 바람항구 - 라노타 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D66550AB-63CC-4ea1-881C-0EBB953E2D94</PAYER> <!--완료NPC 바람항구 - 라노타 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D66550AB-63CC-4ea1-881C-0EBB953E2D94</AGENT> <!--진행NPC 11 바람항구 - 라노타 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">2155FBEA-4B51-4137-8566-67F27CACC1B7</AGENT> <!--진행NPC 11 바람항구 - 마르후 -->
+		<AGENT TYPE="NPC" EVENTNO="10013">BBF32D5D-6D04-4ff9-9A8A-98DEDD03D4C0</AGENT> <!--진행NPC 11 바람항구 - 로푸 -->
+		<AGENT TYPE="NPC" EVENTNO="10014">DB2FBC8C-5C65-483e-8FF8-6582CBD7B87C</AGENT> <!--진행NPC 11 바람항구 - 자둠 -->
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<!--첫 번째 NPC-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10012</NPC>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10012</NPC>
+		<!--두 번째 NPC-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10013</NPC>
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10013</NPC>
+		<!--세 번째 NPC-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="513">10014</NPC>
+		<NPC OBJECTNO="3" TYPE="INCPARAM" VALUE="513/1">10014</NPC>
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="523334"/> <!--마르후와 대화-->
+		<OBJECT2 COUNT="1" TEXT="523333"/> <!--로푸와 대화-->
+		<OBJECT3 COUNT="1" TEXT="523332"/> <!--자둠과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+	<SELECT1 COUNT="0">
+	<ITEM COUNT="1">231001090</ITEM>
+	</SELECT1>	
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="523335" FACE="Lanota_normal"/> <!--나는 부관 라노타라고 하네. 
+자네의 이름은 무엇인가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="523339" FACE="Lanota_normal"/> <!--그래, 우리 카즈라에 대한 궁금증이 해소됐나?%%
+우리 마을은 경치 하나는 정말 끝내주는 곳이니 
+언제 한번 찾아주길 바라네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="523336" FACE="Lanota_normal"/> <!--%name%? %name%이라... 흠… 그 거 참 기이한 이름이로군.
+인간과 우리 드라칸은 하나부터 열까지 모든 것이 다른 것 같네.%%
+만약 우리 드라칸에게 궁금한 것이 있다면 병사들에게 물어보도록. 
+다들 인간들에게 호기심이 많으니 자네를 반겨 줄 것이네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="523337" FACE="Lanota_angry"/> <!--무례하군! 쳇!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="523338" FACE="Lanota_angry"/> <!--무카파님은 신보를 지키는 사제들을 책임지는 사제장이시다. 
+이번 일에 책임을 느끼고 직접 인간들의 세계를 찾으신 거라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="523331" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--기타-->
+			<BODY TEXT="523340" FACE="Marhoo_smile"/> <!--우리가 사는 카즈라 마을은 
+달만큼 거대한 전설 속의 신조 카즈라가 알을 낳던 장소라고 하지요.%% 
+우리 고향은 카즈라의 둥지라고 불리우는 안개에 둘러쌓인 덕분에 
+세상으로부터 완벽하게 감쳐져 있습니다. 
+그래서 더욱 고요한 삶을 살아왔지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--기타-->
+			<BODY TEXT="523341" FACE="Rofu_smile" /> <!--카즈라에 살고 있는 우리 드라칸들은 평화를 사랑합니다.
+우리는 무기를 들고 있지만, 전쟁을 위한 군대가 아니에요.%%
+우린 단지 신보를 지키기 위한 감시자라고 할 수 있지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="513" > <!--기타-->
+			<BODY TEXT="523342" FACE="Zadoom_angry" /> <!--카즈라에는 모두 일곱개의 신보가 있었지만…
+지금은 그 중 여섯개를 도둑 맞고 말았습니다.%% 
+왜냐면 빛의 신보에서 아카나이라는 사악한 정령이 깨어 나와 
+난동을 피우는 바람에....%%
+그 소동을 진정시키는 데에 주의가 쏠려있는 동안
+어느 괘씸한 녀석들이 신보를 모조리 훔쳐가고 만 거지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

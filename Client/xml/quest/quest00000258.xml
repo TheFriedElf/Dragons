@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>258</ID> <!--T.T.10025801 직업기술을 배우자 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	채집농장의 최고의 장인 베시와 이야기 하자-->
+<!--[완료NPC]	바람항구 - 마이스터-->
+<!--[내용]	마이스터는 채집생산을 위해 필요한 도구를 줬지만, 아직은 채집생산 활동을 할 수 없다고 한다. 채집생산을 하기 위해서는 그에 맞는 직업기술을 자신에게 배워야 한다고 말한다. 물론 세상에 공짜는 없기 때문에 직업기술을 배우기 위해서는 마이스터와 이야기 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2913D89A-651D-488d-8C45-8BE6DD37BADE</CLIENT> <!--시작NPC 바람항구 - 마이스터 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2913D89A-651D-488d-8C45-8BE6DD37BADE</PAYER> <!--완료NPC 바람항구 - 마이스터 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">2913D89A-651D-488d-8C45-8BE6DD37BADE</AGENT> <!--진행NPC 11 바람항구 - 마이스터 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10025811"/> <!--마이스터와 이야기-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+				<SELECT1 COUNT="0">
+					<ITEM COUNT="1">52000100</ITEM><!--전체지급/전체/1)/52000100(봉인아님) 1개-직업기술백서-->
+				</SELECT1>
+
+
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10025821" FACE="meister_normal"/> <!--자! 이제 모든 게 끝났어라고 하면 너무 편하겠지?
+그래. 자네가 생각하다시피 직업생산이 이렇게 간단하기 된다면 너무 허무하겠지.%%
+어때? 직업생산에 대해서 더 들어 볼 생각이 있나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10025826" FACE="meister_smile"/> <!--직업기술은 여러 가지를 배울 수 있지만, 다른 직업기술을 배우게 되면 여러 가지 제약이 뒤따르게 되지. 
+믈론 여러 가지 직업기술을 가지게 되면 그만큼 시간도 많이 걸리게 되고 말이지.%%
+그러니 신중하게 직업기술을 선택하는 게 좋을 거야.
+만약 다른 직업기술을 배우고 싶다면 기술을 익히고, 내가 팔고 있는 장비를 구입하면 될 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10025823" FACE="meister_smile"/> <!--직업생산에 필요한 장비를 분명 자네는 얻었어, 하지만 진짜 필요한 직업기술을 아직 익히지 못한 상태지. 그렇다면 직업기술은 어디서 얻을 수 있을까?%%
+훗. 자네 직감이 맞을 거야. 채집생산에 필요한 도구를 팔고 있는, 내가 직업기술 역시 가르쳐 주고 있지.%%
+하지만 그냥 가르쳐 줄 수는 없지. 왜냐하면 쉽게 얻은 능력은 그만큼 쉽게 포기하기도 쉽기 때문이지.%%
+그래서 안타깝지만 돈을 받고 직업기술을 가르쳐 주고 있지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10025824" FACE="meister_angly"/> <!--허, 설마 직업생산이 자네가 얻은 장비 하나로 가능하다고 생각하는 건가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10025825" FACE="meister_normal"/> <!--직업기술은 한 번 익히면 다른 직업기술을 익힐 때, 제약을 받기도 하니까 신중하게 고르라는 의미도 포함되어 있어.%%
+그러니 날 그렇게 시커먼 장삿속을 가진 인물로 생각하지 않았으면 좋겠군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10025802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

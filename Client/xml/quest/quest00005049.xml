@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5049</ID> <!--T.T.10504901 모자란 건 몸으로(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [카오스모드(F2)] - 꼬깨, 별가사리 루루루 10마리씩 처치-->
+<!--[완료NPC]	수염고래 해안가 - 제스-->
+<!--[내용]	제스는 용서의 대가로 1억 골드를 요구한다. 하지만 돈이 없다고 하자 모자란 부분은 몸으로 때우라고 말한다. 우선 몸으로 때우기에 앞서 얼마나 몸이 튼튼한 지 알아보겠다면서 수염고래 해안가 [카오스모드(F2)]에서 꼬깨, 별가사리 루루루 10마리씩 처치해 보라고 한다. 꼬깨, 별가사리 루루루는 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6A425910-8CB2-4711-900E-254F95866BDD</CLIENT> <!--시작NPC 수염고래 해안가 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6A425910-8CB2-4711-900E-254F95866BDD</PAYER> <!--완료NPC 수염고래 해안가 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6A425910-8CB2-4711-900E-254F95866BDD</AGENT> <!--진행NPC 11 수염고래 해안가 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012102/1">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9012102/수염고래 해안가 카오스 2,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012109/1">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9012109/캡틴후커 별장,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9012101/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9012101/수염고래 해안가 카오스 1,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9012104/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9012104/수염고래 해안가 카오스 4,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10504911"/> <!--꼬깨-->
+		<OBJECT2 COUNT="10" TEXT="10504912"/> <!--별가사리 루루루-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10504921" FACE="Jess_normal"/> <!--난 아무래도 쉽게 분노를 가라앉힐 수 없을 거 같은데.
+뭐 그래도 내 분노를 가라앉히고 싶다면 현금을 내놔.%%
+많이는 안 바랄게. 1억골드면 돼.
+뭐야 없어? 쳇 그러면 할 수 없지. 모자란 건 몸으로 때워야지 뭐.
+어때 몸으로 때울 자신이 있어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10504926" FACE="Jess_smile"/> <!--잘했어. 하지만 잃어버린 내 물건값을 해내려면 상당히 많은 일을 해내야 할 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10504923" FACE="Jess_normal"/> <!--우선 네가 얼마나 일을 잘할 수 있는지 내가 정확히 모르니까 우선 너의 능력을 시험해 보겠어.
+수염고래 해안가에는 [카오스모드(F2)]이라는 아주 무시무시한 곳이 있지.%%
+그곳은 다른 곳보다 강한 몬스터들이 득실댄다고 해.
+넌 [카오스모드(F2)]에 가서 꼬깨, 별가사리 루루루를 20마리씩 잡아봐. 그럼 너의 능력이 어느 정도 된다는 것을 내가 인정해 줄게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10504924" FACE="Jess_angly"/> <!--뭐야 거절하는 거야?
+그럼 제스가 1억골드를 갚을 때까지 내 밑에서 일해도 좋다는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10504925" FACE="Jess_normal"/> <!--빨리 갈수록 좋을 걸. 왜냐면 갈수록 피곤해질테니 말야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10504902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

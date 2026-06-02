@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4274</ID> <!--T.T.10427400 성좌의 고리 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	크레테와 대화-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	11번째 별자리 뱀주인자리에 들어가기 위해서는 성좌의 고리가 필요한데 그것은 각 별자리에서 얻은 5개의 열쇠를 합쳐서 얻을 수 있다. 각 별자리는 요일과 상응하는 특징이 있기 때문에 입장하기 위해서는 맞는 요일이 될 때 까지 기다려야 한다. 뱀주인자리는 토요일과 일요일에만 열리기 때문에 평소에 열쇠를 모아놓고, 토요일과 일요일에 피오스를 찾도록 하자.( 성좌의 고리는 크레테에게 있는 합성이란 메뉴에서 얻을 수 있다. )-->
+
+
+<LIMITS>
+
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" Mark="END">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427411"/> <!--크레테의 설명듣기-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427421" FACE="Crete_normal"/> <!--피오스님이 계신 뱀주인자리에 들어가려면 성좌의 고리라는 아이템이 필요합니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427426" FACE="Crete_smile"/> <!--그러면 이제부터 제가 알려드리는 순서대로 별자리를 방문해 주세요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427423" FACE="Crete_normal"/> <!--그 아이템은 각 별자리에서 얻은 열쇠들로 만들 수가 있답니다.
+
+5개의 열쇠 중 첫번째인 달빛 성좌의 열쇠는 월요일에 열리는 황소자리.
+불꽃성좌의 열쇠는 화요일에 열리는 게자리.
+물빛성좌의 열쇠는 수요일에 열리는 처녀자리.
+녹색성좌의 열쇠는 목요일에 열리는 전갈자리.
+금빛성좌의 열쇠는 금요일에 열리는 바다뱀자리에서 각각 얻을 수 있다고 합니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427424" FACE="Crete_cry"/> <!--제 설명을 듣지 않으시면 뱀주인자리로 갈 수가 없답니다. 다시 한번 생각해 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427425" FACE="Crete_normal"/> <!--없음-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

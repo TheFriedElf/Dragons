@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_015721_DG">
+  <GSAPATH>../Data/3_World/93_EventMap/300_Scenario/015721_DG.gsa</GSAPATH>
+  <MINIMAP Y="84" H="376">../Data/3_World/93_EventMap/300_Scenario/015721_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Chrismas.wav</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+	
+	<!-- 타이틀 얼음 성  -->
+	<TRIGGER ID="gate_015721_base" TYPE="PORTAL" TITLE_TEXT_ID="851103" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,65" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1"/>
+
+	  
+
+
+    <!--8방향 설정-->
+	<FREE_DIRECTION ALL="TRUE"/>
+
+	 
+	 	<!--카메라-->
+    <CAMERA_ADJUST ZOOM="130" UP="15" TARGET_Z="70" />
+	<CAMERA_ADJUST WHEEL_MIN_ZOOM="0" WHEEL_MAX_ZOOM="1.5"/>
+
+	<!--카메라 연출
+	<TRIGGER ID="camera_in" CAMERA_TYPE = "in">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH = "0" ZOOM="0" UP="0" TARGET_X="0" TARGET_Y="0" TARGET_Z="0"  GROUP="1"/>
+	</TRIGGER>
+	<TRIGGER ID="camera_out" CAMERA_TYPE = "out">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH = "-16" ZOOM="130" UP="15" TARGET_X="0" TARGET_Y="0" TARGET_Z="70"  GROUP="1"/>
+	</TRIGGER-->
+
+
+	<WORLD_QUALITY HIGH_END="500" MID_END="1000" LOW_END="1500" USE="1" />
+  
+
+
+</WORLD>

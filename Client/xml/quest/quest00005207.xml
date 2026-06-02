@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5207</ID> <!--T.T.10520701 용병의 건강식. (1) -->
+
+
+<!-- 작성자 : jinsol7980-->
+<!--[완료조건]	영양만점 해골 10개 수집 (미리내 신전)-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	토마스가 용병의 건강식에대해 이야기 해줬다 용사라면 와일드 라이프라나? 직접 구한 스프의 재료를 푹 끓여 먹으면 더욱 힘이 난다고 하니 한번 믿어보고 재료를 구해다 주자. 그런데 재료가 해골이라구?!-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010200/10000/6500/1/1/160520710">6014600</MONSTER> 
+ <!--MON_NO=6014600/스켈레톤 투척병 ,MAP_NO=9010200/미리내 신전,Item_NO=160520710/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160520710</ITEM> 
+ 
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10520711"/> <!--영양만점 해골 10개 수집 (미리내 신전)-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10520721" FACE="thomas_normal"/> <!--껄껄껄 어때 내 피부 반딱이지 않나? 근육은 또 기가 막히지, 캬캬캬 비결이 궁금하지?
+그건 바로 용병의 건강식을 먹기 때문이야.
+자고로 용자라면 와일드 라이프를 즐겨야 하지 않겠나? 
+전시에는 언제 식량이 부족할지 몰르잖아? 용병의 건강식이 궁금하지 않나? 
+%%그렇지 않아도 재료를 구해와야 하는데 자네가 구해다 주면 비밀을 말해 주도록 하지.
+어때 솔깃하지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10520726" FACE="thomas_smile"/> <!--오 바로 이거지 보기엔 좀 그래 보일지 몰라도 이게 와일드 라이프라네.
+수고했네, 맛있겠어. (음 재료가 신선한걸? 이건 누구 해골일까?)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10520723" FACE="thomas_normal"/> <!--하하하 호쾌하게 대답해줘서 고맙네, 미리내 신전에 가 보면 스켈레톤 투척병과, 
+스케레톤 엉클 이라는 몬스터가 있지 이들을 처치하고 
+영양만점 해골을 10개 구해다 주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10520724" FACE="thomas_angly"/> <!--뭐라고?! 어허 아쉬운걸? 이 좋은걸 마다 하다니 자네는 구리빛 근육질을 싫어하는 모양이군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10520725" FACE="thomas_angly"/> <!--아직 안 구해 왔나? 벌써 국물이 끓고 있다고, 이러면 곤란해. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10520711" FACE="None_None"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10520702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

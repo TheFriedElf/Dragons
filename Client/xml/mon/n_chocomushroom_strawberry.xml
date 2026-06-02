@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_N_N_Chocomushroom_strawberry" INIT_ACTION="a_idle">
+	<TEXTURE SRC="113_1003_reflection_metal.dds">../Data/4_Item/1_Armor/1_Male/01_Helm/113_1003_reflection_metal.dds</TEXTURE>
+	<TEXTURE SRC="N_WoodyEye.dds">../Data/2_Mon/N_Woody/N_WoodyEye.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Woody"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Chocomushroom_strawberry/N_Chocomushroom_strawberry.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="5"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" SOUND="../Data/2_Mon/M_Sound/n_Woody_attk_01.wav" VOLUME="0.2, 50, 250"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100" SOUND="../Data/2_Mon/M_Sound/n_Woody_dmg_01.wav" VOLUME="0.2, 50, 250"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100" SOUND="../Data/2_Mon/M_Sound/n_Woody_dmg_01.wav" VOLUME="0.2, 50, 250"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<!--<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>-->
+			<ITEM NAME="walk" ANIMATION="1000051" SPEED="42"/>
+			<ITEM NAME="die_01" ANIMATION="1000020" RANDOM="100" SEE_FRONT="TRUE"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025" RANDOM="100"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023" RANDOM="100"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022" RANDOM="100"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

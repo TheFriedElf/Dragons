@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+
+	<!--케이론 엔딩-->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="WaitTime" Time="4.0"/><!-- 오프닝 시간을 기다림-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1.0" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade"/>
+
+
+
+	<CMD TYPE="HideUI" enable="true"/>
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->	
+
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD TYPE="AddActorFilter" ClassNo="1029565"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--소환체를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/> <!--몬스터를 숨기기 -->
+
+	<CMD TYPE="AddNPC" ClassNo="1029565" NameTTID="521238" SpawnPos="11098, 3854, -124.89"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" />
+	<CMD TYPE="PlayAnimation" ClassNo="1029565" SlotName="ending_movie"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1.0" FadeIn="TRUE"/><!-- 화면 밝게-->
+
+	<CMD TYPE="WaitFade" Time="1"/>
+
+	<CMD TYPE="EscScript" EventID="980197"/>
+
+	<CMD TYPE="WaitTime" Time="10.0"/><!-- 오프닝 시간을 기다림-->
+	
+	<CMD TYPE="ClearEscScript"/>
+	<CMD TYPE="ActivateEvent" EventId="980197"/>
+
+	
+
+	
+</EVENT_SCRIPT>
+

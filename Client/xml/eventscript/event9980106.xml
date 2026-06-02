@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+<!-- PC로 돌아오기 -->
+
+	<CMD TYPE="EscScript" EventID="9980107"/>
+
+	<CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="2" />
+	<CMD type="waittime" time="3"/>    	
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="2"/>    
+
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="9980107"/>
+
+	
+	
+	</EVENT_SCRIPT>

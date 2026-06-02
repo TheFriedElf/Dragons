@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4067</ID> <!--T.T.10406701 하늘과 번개와 물과 불(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	달빛해안 마을에서 라르엘과 대화-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	라르엘은 마지막 두루마리의 행방을 알 수는 없지만, 만약 마지막 양피지 두루마리를 구하게 된다면 언제라도 자신을 찾아달라고 말한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10406711"/> <!--라르엘과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10406721" FACE="Larel_normal"/> <!--신성제국의 대주교가 말년에 정신이 이상해져서는... 
+정령의 수호석을 찾아서 영생을 얻으려고 했다는 말 했었나?%%
+대주교 때문에 용의 무덤인 드래곤계곡으로 간 3대 기사단은 전멸해버렸어.
+오랫동안 검은 발톱 둥지에 잠들어 있던 흑룡왕 엘가의 잠을 깨운 거지.%%
+대주교가 엘가를 깨우면서까지 손에 넣으려 했던 정령의 수호석은 
+공교롭게도 엘가의 공격이 시작되자 세상에 나타났어.%%
+눈치가 빠르다면 벌써 그게 무엇을 말하는 지 알고 있겠지?
+바로 파리스가 동생의 병을 치료하기 위해 차지했던 그...%%
+영혼의 돌이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10406726" FACE="Larel_smile"/> <!--그나저나 마지막 두루마리는 어디서 찾아내야 하는 걸까.
+이봐 %name%! 만에 하나라도 이 근방을 조사하다가 말이야... 
+마지막 두루마리인 정령신화 5페이지를 발견하게 된다면 
+주저하지 말고 내게 와주지 않을래?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10406723" FACE="Larel_smile"/> <!--당시 세상에는 이런 소문이 돌았다고 하더라구.%%
+정신 나간 대주교가 정령의 수호석을 가로채기 위해서
+영웅들을 해치우고, 파리스에게 누명을 씌웠노라고…%%
+어디까지나 속설에 불과한 거지만… 
+납득이 가는 구석도 있는 게 사실이지.%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10406724" FACE="Larel_angly"/> <!--아니, 제대로 물음표 붙여서 부탁도 하지 않았는데, 벌써부터 거절을 하고 그러나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10406725" FACE="Larel_normal"/> <!--없음(테스트)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10406702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

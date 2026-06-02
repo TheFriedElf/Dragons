@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_015722_DG">
+  <GSAPATH>../Data/3_World/93_EventMap/300_Scenario/015722_DG.gsa</GSAPATH>
+  <MINIMAP Y="172" H="176">../Data/3_World/93_EventMap/300_Scenario/015722_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Chrismas.wav</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+
+  	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!-- 타이틀 얼음 성  -->
+	<TRIGGER ID="gate_015722_base" TYPE="PORTAL" TITLE_TEXT_ID="851104" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,65" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1"/>
+
+	    <!-- 엔터 던전 -->
+    <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" HIDE_MINIMAP="1" SOUND_ID="Tunnel_01">
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="2" PARAM2="2"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" SOUND_ID="Tunnel_01">
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="1" PARAM2="1"/>
+    </TRIGGER>
+	    <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" HIDE_MINIMAP="1" SOUND_ID="Tunnel_01">
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" PARAM="1" PARAM2="8"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" SOUND_ID="Tunnel_01">
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" PARAM="4" PARAM2="2"/>
+    </TRIGGER>
+
+		<!-- 트리거 점프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_1" PARAM="250"/>
+	</TRIGGER> 
+ 	<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_1" PARAM="250"/>
+	</TRIGGER>
+	
+
+	  
+	<FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="1300" END="4600" COLOR="0.748000,0.965990,0.962999"/>
+	<WORLD_QUALITY HIGH_END="500" MID_END="1000" LOW_END="1500" USE="1" />
+  
+</WORLD>

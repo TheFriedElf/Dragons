@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>46</ID> <!--T.T.10004601 부활절 액세서리를 모으자! (2/3) -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	토끼그림 부활절달걀 7개 - 모든 미션맵(F4)-->
+<!--[완료NPC]	행사도우미 <가토>-->
+<!--[내용]	아직도 달걀이 부족하다. 절구 토끼가 숨겨놓은 달걀이 더 있다고 하니 다시 절구 토끼를 찾아서 달걀을 찾아와야 한다. 어떤 미션맵(F4)에 가더라도 절구 토끼를 만날수 있으니 녀석을 혼내주고 달걀을 찾아 오자.-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 행사도우미 <가토> -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 행사도우미 <가토> -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 행사도우미 <가토> -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">291300030</ITEM> 
+ <!--Item_NO=291300030/토끼 그림 부활절 달걀(공속+10%10뷴),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="7" TEXT="10004611"/> <!--토끼그림 부활절달걀 수집-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">291300060</ITEM><!--전체지급/전체/1)/291300060(봉인아님) 1개-부활절 백합 팔찌-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10004621" FACE="gatto_normal"/> <!-- 이거 행사가 대만원이 났다옹. 아이들이 엄청 몰려 오고 있다옹. 달걀이 다시 부족해 졌다옹. %name%님 한번만 더 수고 좀 해주면 안되겠냐옹? %%이번에도 충분한 보답을 해주겠다옹. 부활절을 기념해서 특별히 만든 [부활절 백합팔찌]다옹. 토끼그림 부활절달걀을 7개만 모아다 주면 된다옹.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10004626" FACE="gatto_normal"/> <!--%name%님 덕분에 이제 달걀이 부족하지는 않다옹.. 여기 약속대로 [부활절 백합팔찌]다옹. 잘 착용하고 다녀다옹..-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10004623" FACE="gatto_normal"/> <!--정말 고맙다옹.. 그럼 %name%님만 믿고 있겠다옹. 절구 토끼 녀석이 이만저만 성가신게 아니다옹.. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10004624" FACE="gatto_normal"/> <!--정말로 거절한 셈이냐옹? 이거 큰일이다옹~~ 이제 누구에게 부탁을 하냐옹….-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10004625" FACE="gatto_normal"/> <!--아직 달걀이 부족하다옹. 빨리 더 모아 다옹. 아이들이 실망하는 모습은 정말 슬프다옹… -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10004602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

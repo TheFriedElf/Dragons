@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="AuthFailDlg">
+		<ATTR ALIGN_X="50" ALIGN_Y="30" W="198" H="114" CAN_DRAG = "1"/>		
+		<ATTR IMG = "../Data/6_ui/01_main/msg06_loginfail.tga" IMG_W = "198" IMG_H = "114"/>
+		<BUTTON ID="Close">
+			<ATTR X="179" Y="0" W="20" H="20" />
+			<ATTR BTN_IMG = "../Data/6_ui/01_main/Bclose.tga" BTN_IMG_W = "40" BTN_IMG_H = "40"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+
+		<BUTTON ID="OK">
+			<ATTR X="71" Y="83" W="55" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/01_main/Bok.tga" BTN_IMG_W = "110" BTN_IMG_H = "52"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+		<HOTKEY ID="28">UISelf:Close() return true</HOTKEY>
+		<HOTKEY ID="106">UISelf:Close() return true</HOTKEY>
+	</FORM>
+
+
+	<FORM ID="FRM_GAME_LOGO">
+		<ATTR W="381" H="154" CAN_DRAG = "0" IS_ABSOLUTE_Y="1"/>		
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big.tga" ALIGN_X="50" Y="50" IMG_W ="381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="KOREA">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_kr.tga"  ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="JAPAN">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_jp.tga"  ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_tw.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="CHINA">
+				<ATTR IMG = "../Data\6_UI\loading\logo_cn.tga"  ALIGN_X="1" Y="5" IMG_W = "257" IMG_H = "102"/>
+				<ATTR W="257" H="102"/>
+			</NAME>
+			<NAME ID="EUROPE">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_eu.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_ru.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_sg.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_in.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_ph.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="THAILAND">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_thai.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_vt.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+			<NAME ID="AMERICA">
+				<ATTR IMG = "../Data/6_ui/loading/logo_big_na.tga" ALIGN_X="50" Y="50" IMG_W = "381" IMG_H = "154"/>
+			</NAME>
+		</LOCAL>	
+	</FORM>
+	<FULL_FORM ID="LoginBg" IS_VISIBLE="0" USE_ALPHA_ANI="0" PRIORITY="-1" >
+		<ATTR X="0" Y="0" W="1600" H="1200" CAN_DRAG = "0" CAN_CLIP="0"/>
+		<SCRIPT ID="ON_CALL">
+			local kGameLogo = GetUIWnd("FRM_GAME_LOGO")
+			if kGameLogo:IsNil() then
+				ActivateUI("FRM_GAME_LOGO")
+			end		
+--			local kWnd = UISelf
+			local kScreenSize = GetScreenSize()
+			local kPos = kWnd:GetLocation()
+			kPos:SetX( (kScreenSize:GetX() - kWnd:GetSize():GetX() ) / 2 )
+			kPos:SetY( (kScreenSize:GetY() - kWnd:GetSize():GetY() ) / 2 )
+			kWnd:SetLocation( kPos )
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseUI("FRM_GAME_LOGO")
+		</SCRIPT>		
+		<FULL_FORM ID="FRM_000">
+			<ATTR X="0" Y="0" Z="-1" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login000.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_001">
+			<ATTR X="512" Y="0" Z="1" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login001.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_002">
+			<ATTR X="1024" Y="0" Z="2" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login002.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_003">
+			<ATTR X="1536" Y="0" Z="3" W="64" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login003.dds" IMG_W = "64" IMG_H = "512"/>
+		</FULL_FORM>
+		
+		<FULL_FORM ID="FRM_004">
+			<ATTR X="0" Y="512" Z="4" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login004.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_005">
+			<ATTR X="512" Y="512" Z="5" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login005.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_006">
+			<ATTR X="1024" Y="512" Z="6" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login006.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_007">
+			<ATTR X="1536" Y="512" Z="7" W="64" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login007.dds" IMG_W = "64" IMG_H = "512"/>
+		</FULL_FORM>
+		
+		<FULL_FORM ID="FRM_008">
+			<ATTR X="0" Y="1024" Z="8" W="512" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login008.dds" IMG_W = "512" IMG_H = "176"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_009">
+			<ATTR X="512" Y="1024" Z="9" W="512" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login009.dds" IMG_W = "512" IMG_H = "176"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_010">
+			<ATTR X="1024" Y="1024" Z="10" W="512" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login010.dds" IMG_W = "512" IMG_H = "176"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_011">
+			<ATTR X="1536" Y="1024" Z="11" W="64" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/loading/login011.dds" IMG_W = "64" IMG_H = "176"/>
+		</FULL_FORM>
+	</FULL_FORM>
+	<FORM ID="FRM_SERVERBG_MOVE_LEFT01">
+		<ATTR ALIGN_X="0" ALIGN_Y="100" W="500" Z="1" H="512" CAN_DRAG = "0" PASS_EVENT="1"/>
+		<ATTR IMG = "../Data/6_ui/server/svBgimgL.tga" IMG_W = "500" IMG_H = "512"/>
+	</FORM>
+	<FORM ID="FRM_SERVERBG_MOVE_LEFT02">
+		<ATTR ALIGN_X="0" ALIGN_Y="100" W="500" Z="1" H="188" CAN_DRAG = "0" PASS_EVENT="1"/>
+		<ATTR IMG = "../Data/6_ui/server/svBgimgL2.tga" IMG_W = "500" IMG_H = "188"/>
+	</FORM>
+	<FORM ID="FRM_SERVERBG_MOVE_RIGHT01">
+		<ATTR ALIGN_X="0" ALIGN_Y="100" W="510" Z="1" H="512" CAN_DRAG = "0" PASS_EVENT="1"/>
+		<ATTR IMG = "../Data/6_ui/server/svBgImgR.tga" IMG_W = "510" IMG_H = "512"/>
+	</FORM>
+	<FORM ID="FRM_SERVERBG_MOVE_RIGHT02">
+		<ATTR ALIGN_X="100" ALIGN_Y="100" W="510" Z="1" H="48" CAN_DRAG = "0" PASS_EVENT="1"/>
+		<ATTR IMG = "../Data/6_ui/server/svBgImgR2.tga" IMG_W = "510" IMG_H = "48"/>
+	</FORM>
+	<FORM ID="FRM_GAME_LOGO2">
+		<LOCAL>
+			<NAME ID="DEFAULT/DEVELOP">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="KOREA">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_kr.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="JAPAN">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_jp.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_tw.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="CHINA">
+				<ATTR ALIGN_X="1" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_cn.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="EUROPE">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_eu.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_ru.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_sg.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_ph.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="THAILAND">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_thai.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_in.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="AMERICA">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_na.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<ATTR X="20" Y="5" W="257" Z="1" H="102" CAN_DRAG = "0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/logo_vt.tga" IMG_W = "257" IMG_H = "102"/>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	<FORM ID="FRM_MARK" X="948" Y="10" IS_ABSOLUTE_Y="1">
+		<LOCAL>
+			<NAME ID="KOREA">
+				<IMG ID = "IMG_MARK" X ="0" Y = "0" W = "70" H = "83" IMG = "../Data/6_ui/Mark.tga" IMG_W ="70" IMG_H ="83"/>
+			</NAME>
+			<NAME ID="JAPAN">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_jp.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_tw.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="CHINA">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_cn.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="EUROPE">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_eu.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_ru.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_sg.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_in.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_ph.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="THAILAND">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_thai.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="AMERICA">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_na.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<FORM ID="GameName">
+					<ATTR X="30" Y="7" W="257" Z="1" H="102" CAN_DRAG = "0" />
+					<ATTR IMG = "../Data/6_ui/loading/logo_vt.tga" IMG_W = "257" IMG_H = "102"/>
+				</FORM>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	<FULL_FORM ID="FRM_SERVER_BG" PRIORITY="-1" X="0" Y="0" W="1600" H="1200" CAN_DRAG ="0" CAN_CLIP="0">
+	    <SCRIPT ID="ON_CALL">
+		local kWnd = UISelf
+		local kScreenSize = GetScreenSize()
+		local kPos = kWnd:GetLocation()
+		kPos:SetX( (kScreenSize:GetX() - kWnd:GetSize():GetX() ) / 2 )
+		kPos:SetY( (kScreenSize:GetY() - kWnd:GetSize():GetY() ) / 2 )
+		
+		
+		local kGameLogo = GetUIWnd("FRM_GAME_LOGO2")
+		if kGameLogo:IsNil() then
+			ActivateUI("FRM_GAME_LOGO2")
+		end
+		if LOCALE.NC_KOREA == GetLocale() then
+			local kMark = GetUIWnd("FRM_NOTICE_MARK")
+			if kMark:IsNil() then
+				CallUI("FRM_NOTICE_MARK")
+			end
+		end
+
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseUI("FRM_GAME_LOGO2")
+			CloseUI("FRM_SERVERBG_MOVE_LEFT01")
+			CloseUI("FRM_SERVERBG_MOVE_LEFT02")
+			CloseUI("FRM_SERVERBG_MOVE_RIGHT01")
+			CloseUI("FRM_SERVERBG_MOVE_RIGHT02")
+		</SCRIPT>
+		<FULL_FORM ID="FRM_000">
+			<ATTR X="0" Y="0" Z="0" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg000.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_001">
+			<ATTR X="512" Y="0" Z="1" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg001.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_002">
+			<ATTR X="1024" Y="0" Z="2" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg002.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_003">
+			<ATTR X="1536" Y="0" Z="3" W="64" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg003.dds" IMG_W = "64" IMG_H = "512"/>
+		</FULL_FORM>
+		
+		<FULL_FORM ID="FRM_004">
+			<ATTR X="0" Y="512" Z="4" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg004.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_005">
+			<ATTR X="512" Y="512" Z="5" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg005.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_006">
+			<ATTR X="1024" Y="512" Z="6" W="512" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg006.dds" IMG_W = "512" IMG_H = "512"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_007">
+			<ATTR X="1536" Y="512" Z="7" W="64" H="512" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg007.dds" IMG_W = "64" IMG_H = "512"/>
+		</FULL_FORM>
+		
+		<FULL_FORM ID="FRM_008">
+			<ATTR X="0" Y="1024" Z="8" W="512" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg008.dds" IMG_W = "512" IMG_H = "176"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_009">
+			<ATTR X="512" Y="1024" Z="9" W="512" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg009.dds" IMG_W = "512" IMG_H = "176"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_010">
+			<ATTR X="1024" Y="1024" Z="10" W="512" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg010.dds" IMG_W = "512" IMG_H = "176"/>
+		</FULL_FORM>
+		<FULL_FORM ID="FRM_011">
+			<ATTR X="1536" Y="1024" Z="11" W="64" H="176" CAN_DRAG = "0" />
+			<ATTR IMG = "../Data/6_ui/server/svBg011.dds" IMG_W = "64" IMG_H = "176"/>
+		</FULL_FORM>		
+	</FULL_FORM>
+
+	<STATIC_FORM ID="LoginDlg" IS_VISIBLE="0" CAN_DRAG="0">
+		<ATTR ALIGN_X="50" ALIGN_Y="90" W="249" H="169" STATIC_NUM = "1" CAN_DRAG = "0" PRIORITY="1"/>
+		<SCRIPT ID = "ON_ACTIVATE">
+			OnCallOnLoginDlg(UISelf)
+		</SCRIPT>
+		<SCRIPT ID = "ON_CALL">
+			OnCallLoginDlg(UISelf)
+			for i=0,3 do
+				CloseUI("WarnOut_" .. i)
+			end
+			IgnoreChannelUI(true, false)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+		</SCRIPT>
+		<BUTTON ID="TRY_LOGIN">
+			<ATTR X="39" Y="131" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "9998" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_CALL">
+				fTryLoginTime = 0
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				g_bIgnoreCombine = false
+				for i=0,3 do
+					CloseUI("WarnOut_" .. i)
+				end
+				OnClick_TryLogin(UISelf) 
+				fTryLoginTime = GetAccumTime()
+				
+				local kEditID = UISelf:GetParent():GetControl("ID")
+				if not kEditID:IsNil() then
+					kEditID:SetEditTextW( GetAccountID() )					
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				g_bIgnoreCombine = false
+				for i=0,3 do
+					CloseUI("WarnOut_" .. i)
+				end
+				OnClick_TryLogin(UISelf) 
+				fTryLoginTime = GetAccumTime()
+				
+				local kEditID = UISelf:GetParent():GetControl("ID")
+				if not kEditID:IsNil() then
+					kEditID:SetEditTextW( GetAccountID() )					
+				end
+				
+				return true
+			</HOTKEY>			
+			<ATTR TOOL_TIP_TEXT = "10003" />
+		</BUTTON>
+		<BUTTON ID="CANCEL">
+			<ATTR X="125" Y="131" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "9999" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				CallUI("QuitMessageBox", true) 
+			</SCRIPT>
+			<HOTKEY ID="60"> CallUI("QuitMessageBox", true)  return true </HOTKEY>
+		</BUTTON>
+		
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="247" H="36" STATIC_NUM = "4" />
+			<STATIC_FORM ID="SFRM_COLOR1">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1" />
+				<CHECK_BUTTON ID="CBTN_TITLE">
+					<ATTR X="0" Y="0" W="84" H="24" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmTabB.tga" BTN_IMG_W = "168" BTN_IMG_H = "48"/>
+					<ATTR TEXT = "400101" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL">
+						UISelf:CheckState(true)
+						UISelf:LockClick(true)
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_COLOR4">
+				<ATTR X="216" Y="4" W="24" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1"/>
+				<BUTTON ID="BNT_CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W = "48" BTN_IMG_H = "48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> 
+						CallUI("QuitMessageBox", true) 
+					</SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="35" W="231" H="91" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1" />
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="231" H="91" STATIC_NUM = "3"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_ID">
+				<ATTR X="6" Y="6" W="219" H="24" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3"/>
+				<STATIC_FORM ID="SFRM_ID_TITLE">
+					<ATTR X="0" Y="0" W="69" H="25" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" />
+					<ATTR TEXT = "400102" FONT = "Font_Text" T_X="34" T_Y ="4" T_CENTER = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_PW">
+				<ATTR X="6" Y="33" W="219" H="24" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" />
+				<STATIC_FORM ID="SFRM_PW_TITLE">
+					<ATTR X="0" Y="0" W="69" H="25" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" />
+					<ATTR TEXT = "400103" FONT = "Font_Text" T_X="34" T_Y ="4" T_CENTER = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<IMG ID="IMG_LINE1" X="6" Y="61" W="219" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="219" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE1" X="6" Y="62" W="219" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="219" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+		</STATIC_FORM>
+		<EDIT ID="ID">
+			<ATTR EDIT_BLOCK_IMG = "../Data/6_UI/01_main/bgWarn.tga" />
+			<ATTR EDIT_CAROT_IMG = "../Data/6_UI/Carot.tga" />
+			<ATTR X="88" Y="40" W="145" H="16"/>
+			<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text" />
+			<ATTR EDIT_PREVIEW="10001" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID = "ON_TICK">
+				local cust = UISelf:GetCustomDataAsInt()
+				if cust == 0 then
+					UISelf:SetEditFocus(true)
+					UISelf:SetCustomDataAsInt(1)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_FOCUS"> 
+				OnKey_Set_Tab(1) 
+			</SCRIPT>
+
+			<SCRIPT ID="ON_CALL"> 
+				UISelf:CursorToThis()
+			</SCRIPT>
+			<!--
+			<SCRIPT ID="ON_KEY_ENTER">return OnKey_Login_Enter(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_KEY_TAB">OnKey_Login_Tab() return true</SCRIPT>
+			-->
+			<HOTKEY ID="28">return OnKey_Login_Enter(UISelf)</HOTKEY>
+			<HOTKEY ID="106">return OnKey_Login_Enter(UISelf)</HOTKEY>			
+			<HOTKEY ID="59"> SendScriptEvent("LoginDlg", "TRY_LOGIN", "ON_L_BTN_UP") </HOTKEY>
+			<HOTKEY ID="60"> SendScriptEvent("LoginDlg", "CANCEL", "ON_L_BTN_DOWN") </HOTKEY>
+		</EDIT>
+		<FORM ID="FRM_SAVE_TEXT" X="100" Y="101" W="119" H="20" TEXT="400435" T_X="110" T_RIGHT="1" T_Y="2" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		<CHECK_BUTTON ID="CBTN_ID_SAVE">
+			<ATTR X="213" Y="101" W="20" H="20"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(84), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</CHECK_BUTTON>
+		<EDIT ID="PW">
+			<ATTR X="88" Y="68" W="145" H="20" />
+			<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text" EDIT_IS_SECRET="1"/>
+			<LOCAL>
+				<NAME ID="VIETNAM">
+					<ATTR EDIT_PREVIEW="10004" FONT_COLOR_HEX="0xFF4D3413" EDIT_LIMIT_LENGTH="64"/>
+				</NAME>
+				<NAME ID="DEFAULT">
+					<ATTR EDIT_PREVIEW="10004" FONT_COLOR_HEX="0xFF4D3413" EDIT_LIMIT_LENGTH="20"/>
+				</NAME>
+			</LOCAL>
+			<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+			<SCRIPT ID = "ON_TICK">
+				local cust = UISelf:GetCustomDataAsInt()
+				if cust == 1 then
+					UISelf:SetEditFocus(true)
+					UISelf:SetCustomDataAsInt(0)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_FOCUS">OnKey_Set_Tab(2) </SCRIPT>
+			<!--
+			<SCRIPT ID="ON_KEY_ENTER">return OnKey_Login_Enter(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_KEY_TAB">OnKey_Login_Tab() return true</SCRIPT>
+			-->
+			<HOTKEY ID="28">return OnKey_Login_Enter(UISelf)</HOTKEY>
+			<HOTKEY ID="106">return OnKey_Login_Enter(UISelf)</HOTKEY>			
+			<HOTKEY ID="59"> SendScriptEvent("LoginDlg", "TRY_LOGIN", "ON_L_BTN_UP") </HOTKEY>
+			<HOTKEY ID="60"> SendScriptEvent("LoginDlg", "CANCEL", "ON_L_BTN_DOWN") </HOTKEY>
+		</EDIT>
+		
+		<HOTKEY ID="28"> return OnKey_Login_ExternTab() </HOTKEY>
+		<HOTKEY ID="106"> return OnKey_Login_ExternTab() </HOTKEY>		
+		<HOTKEY ID="1"> OnKey_Login_Esc() return true </HOTKEY>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_CONTRACT" ALIGN_X="50" ALIGN_Y="50" W="521" H="536" STATIC_NUM="1">
+		<STATIC_FORM ID="SFRM_TITLEBAR" X="1" Y="0" W="521" H="36" Z="1" STATIC_NUM="4">
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="142" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<IMG ID="IMG_TITLE_TAB" X="7" Y="4" Z="1" W="450" H="24" NO_FOCUS="1" T_CENTER = "1" T_X = "67" T_Y = "4">
+				<ATTR FONT="FTbt_12" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" TEXT="799001" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+			</IMG>
+		</STATIC_FORM>
+		<FORM ID="FRM_SHADOW_BG" X="0" Y="0" W="503" H="427" Z="-1" STATIC_NUM = "3"/>
+		<STATIC_FORM ID="SFRM_BG" X="9" Y="36" W="503" H="427" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_SHADOW_BG" X="9" Y="36" W="503" H="427" Z="1" STATIC_NUM="3" />
+		<IMG ID="IMG_LINE1" X="10" Y="489" W="501" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="501" IMG_H="2"/>				
+		<BUTTON ID="BTN_CONTRACT_OK" X="219" Y="495" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="50601" T_X="41" T_Y="5"  FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0xFF2A0F0B" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_CALL">UISelf:SetEnable(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():Close() CallUI("LoginDlg")</SCRIPT>
+		</BUTTON>
+		<FORM ID="FRM_AGREE_TEXT" X="206" Y="467" W="100" H="20" TEXT="799002" T_X="30" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<CHECK_BUTTON ID="BTN_CHECK" X="206" Y="467" W="100" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local bCheck = UISelf:GetCheckState()
+				if bCheck == true then
+					bCheck = false
+				else
+					bCheck = true
+				end	
+				UISelf:CheckState(bCheck)				
+				local kOk = UISelf:GetParent():GetControl("BTN_CONTRACT_OK")
+				if kOk ~= nil and kOk:IsNil() == false then
+					kOk:SetEnable(bCheck)
+				end
+			</SCRIPT>
+		</CHECK_BUTTON>			
+		<LIST ID="LST_CONTRACT_CONTENT" X="5" Y="39" Z="1"W="530" H="427" ITEM_X="0" ITEM_Y="0">
+			<ATTR ELEMENT_ID="FRM_CONTRACT_TEXT" />
+			<IMG ID="ScrollBg" X="485" Y="20" Z="-1" W="13" H="387" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="387"/>
+			<BUTTON ID="ScrUp" X="481" Y="5" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>			
+			<BUTTON ID="ScrDown" X="481" Y="408" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>			
+			<BUTTON ID="ScrMiddle" X="483" Y="21" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>			
+			<ATTR WND_BAR="ScrollBg" BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle"/>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:ClearAllListItem()				
+				local Item = kSelf:AddNewListItemChar("")
+				if false == Item:IsNil() then
+					local ItemWnd = Item:GetWnd()
+					local TextWnd = ItemWnd:GetControl("FRM_TEXT")
+					if false == TextWnd:IsNil() then						
+						TextWnd:SetStaticText(GetTT(799000):GetStr())
+						SetUISizeForTextY(TextWnd)
+						local kSize = TextWnd:GetSize()
+						kSize:SetY(kSize:GetY()+50)
+						ItemWnd:SetSize(kSize)
+						ItemWnd:SetInvalidate()
+					end
+				end
+			</SCRIPT>
+		</LIST>
+	</STATIC_FORM>		
+	<FORM ID="FRM_CONTRACT_TEXT" X="0" Y="0" W="450" H="1000">
+		<FORM ID="FRM_TEXT" TEXT="799000" FONT = "Font_Text" T_X="15" T_Y ="15" W="450" H="5500" FONT_COLOR_HEX="0xFF4D3413"/>
+	</FORM>
+</XUI>

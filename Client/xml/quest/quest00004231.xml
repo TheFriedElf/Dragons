@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4231</ID> <!--T.T.10423101 흑룡왕의 상의 제조서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	검은 발톱의 파편 입수-->
+<!--[완료NPC]	검은발톱 전초기지 - 무카파-->
+<!--[내용]	엘가의 망령이 아직도 검은 발톱 둥지를 맴돌고 있다고 한다. 무카파 사제장은 흑룡왕 엘가를 퇴치하고 그 증표로 검은 발톱의 파편을 가져오면 그 대가로 흑룡왕의 상의 제조서를 주겠다고 말한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6CF9206A-F578-436c-BC14-07B50AC1DC12</CLIENT> <!--시작NPC 검은발톱 전초기지 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6CF9206A-F578-436c-BC14-07B50AC1DC12</PAYER> <!--완료NPC 검은발톱 전초기지 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6CF9206A-F578-436c-BC14-07B50AC1DC12</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/0/1/1/160422900">3542120</MONSTER> 
+ <!--MON_NO=3542120/흑룡왕 엘가,Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160422900</ITEM> 
+ <!--Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10423111"/> <!--검은발톱의 파편 입수-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300382</ITEM><!--전체지급/기사/1)/119300372(봉인아님) 1개-(일반) 흑룡왕의 상의 (용기사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>5/13/21</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300522</ITEM><!--전체지급/투사/1)/119300512(봉인아님) 1개-(일반) 흑룡왕의 상의 (파괴자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>6/14/22</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300312</ITEM><!--전체지급/메이지/1)/119300302(봉인아님) 1개-(일반) 흑룡왕의 상의 (아크메이지) 제조서(필요)[Elements],[Count]-->
+			<CLASS>7/15/23</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300452</ITEM><!--전체지급/전투법사/1)/119300442(봉인아님) 1개-(일반) 흑룡왕의 상의 (워로드) 제조서(필요)[Elements],[Count]-->
+			<CLASS>8/16/24</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300102</ITEM><!--전체지급/사냥꾼/1)/119300092(봉인아님) 1개-(일반) 흑룡왕의 상의 (수호자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>9/17/25</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300242</ITEM><!--전체지급/레인저/1)/119300232(봉인아님) 1개-(일반) 흑룡왕의 상의 (스트라이커) 제조서(필요)[Elements],[Count]-->
+			<CLASS>10/18/26</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300032</ITEM><!--전체지급/광대/1)/119300022(봉인아님) 1개-(일반) 흑룡왕의 상의 (매니악) 제조서(필요)[Elements],[Count]-->
+			<CLASS>11/19/27</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300172</ITEM><!--전체지급/암살자/1)/119300162(봉인아님) 1개-(일반) 흑룡왕의 상의 (쉐도우) 제조서(필요)[Elements],[Count]-->
+			<CLASS>12/20/28</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">340351022</ITEM><!--전체지급/소환사/1)/340351012(봉인아님) 1개-(일반) 흑룡왕의 상의 (소환사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>51/53/55/57</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">330351022</ITEM><!--전체지급/쌍둥이/1)/330351012(봉인아님) 1개-(일반) 흑룡왕의 상의 (격투가) 제조서(필요)[Elements],[Count]-->
+			<CLASS>52/54/56/58</CLASS>
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10423121" FACE="Mukapa_normal"/> <!--흠… 이거 어떻게 된 영문인지 모르겠네.
+흑룡왕의 망령이 아직도 검은발톱둥지를 맴돌고 있다니…%%
+어쨌거나 이 흑룡왕 엘가의 망령을 퇴치하고 난 후
+얻을 수 있다는 특별한 재료 아이템에 대해 들어 보았는가?%%
+재료들을 모아 강력한 흑룡왕의 장비를 만들 수 있다고 하더군.
+나도 그 중 흑룡왕의 상의를 만들 수 있는 제조서를 가지고 있다네.%%
+나는 이 제조서를 흑룡왕 엘가의 망령을 무찌른 용기있는 자에게
+선물하고 싶다네. %name%, 자네라면 충분히 가능한 이야기지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10423126" FACE="Mukapa_smile"/> <!--그래, 역시 자넨 흑룡왕의 장비를 차지할만한 담력을 가진 친구야.
+이 제조서를 줄테니 제조서에 적혀진 재료를 모아 흑룡왕의 상의를
+완성시켜보게나. %%
+부지런히 엘가를 공략하다 보면 분명히 노력의 대가가 보일걸세.
+물론 엘가원정대에 들어가기 위해 원정대 코인을 모으는 일도
+게을리 해선 안될 일이지.%%
+행운을 비네!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10423123" FACE="Mukapa_normal"/> <!--엘가의 망령을 쓰러트린 자는 검은 발톱의 파편이라는 아이템을
+얻을 수 있다고 들었네. 내게 이것을 증표로 가지고 온다면
+자네에게 흑룡왕의 상의를 만들 수 있는 제조서를 선사하겠네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10423124" FACE="Mukapa_normal"/> <!--흠, 이 제조서에 대해 별로 관심이 없는 것인가…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10423125" FACE="Mukapa_normal"/> <!--흑룡왕의 상의는 방어구 중에서 가장 강력한 방어력을 가지고 있으나, 
+그만큼 필요한 재료 아이템의 수가 다른 장비에 비해 많다고 하더군.%%
+어쨌거나 어서 검은 발톱의 파편을 가져오게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10423102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

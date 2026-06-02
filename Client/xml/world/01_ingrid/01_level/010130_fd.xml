@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010130_FD" DESCRIPTION="90101300">
+  <GSAPATH>../Data/3_World/01_Ingrid/01_Level/010130_FD.gsa</GSAPATH>
+  <MINIMAP Y="155" H="225">../Data/3_World/01_Ingrid/01_Level/010130_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Beach.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+
+ <!-- 바람의 항구 브리즈  -->
+	<TRIGGER ID="gate_018100_base" TYPE="PORTAL" TITLE_TEXT_ID="801001" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018100" PARAM2="8">
+			<ACCESS>
+				<LEVEL MIN= "10"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+  <!--칼리곤 선단 게이트-->
+  <TRIGGER ID="gate_010150_base" TYPE="PORTAL" TITLE_TEXT_ID="800016" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9010150" PARAM2="1">
+      <ACCESS>
+        <!-- LEVEL MIN= "22"/ -->
+      </ACCESS>
+    </ACTION>
+  </TRIGGER>
+
+  <!--갑판상어 부둣가 게이트-->
+  <TRIGGER ID="gate_010120_base" TYPE="PORTAL" TITLE_TEXT_ID="800013" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9010120" PARAM2="1" />
+  </TRIGGER>
+
+  <!-- 미션이동 포탈 -->
+  <TRIGGER ID="gate_010131_base" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="-5,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal" PARAM="91013" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms010150_0" MISSION_DISCRIPTION_TEXT_NUM="9010130" />
+  </TRIGGER>
+
+  <!-- 텔레점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump" >
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="200" />
+  </TRIGGER>
+    <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump" HIDE_MINIMAP="1">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_13" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="500" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_14" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="250" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_15" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_16" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_16" PARAM="300" />
+  </TRIGGER>
+  
+  <!-- 퀘스트 -->
+  <TRIGGER ID="Qust_Trigger_312_3" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="3" PARAM2="312" />
+  </TRIGGER>
+ 
+  <FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="1500" END="12000" COLOR="0.748000,0.965990,0.962999"/>
+  <WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="1" />
+</WORLD>

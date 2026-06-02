@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_BUFF" PASS_EVENT="1" USE_OFFSCREEN="1" NO_FOCUS="1">
+		<ATTR X ="0" Y = "0" W ="203" H ="250" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"/>
+ 		<BUILD ID = "BLD_BUF" TARGET_ID = "BuffIcon" X = "3" Y = "0" X_COUNT = "5" Y_COUNT = "4" X_GAB = "38" Y_GAB = "50"/>
+		<ICON ID = "BuffIcon">
+			<ATTR X = "0" Y = "0" W ="32" H ="32" ICON_GRP ="104" ICON_KEY = "0" ICON_STATIC="1"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "15" T_Y ="30" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" NO_WORD_WRAP="1"/>
+			<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_R_BTN_DOWN">RemoveBuffEffect(UISelf)</SCRIPT>
+		</ICON>
+		<SCRIPT ID = "ON_TICK"> UpdateBuffWnd() </SCRIPT>
+		<SCRIPT ID = "ON_ACTIVATE"> SetBuffWnd(UISelf) </SCRIPT>
+
+ 		<BUILD ID = "BLD_BUF_TEXT" TARGET_ID = "FRM_BUFF_TEXT" X = "3" Y = "0" X_COUNT = "5" Y_COUNT = "4" X_GAB = "38" Y_GAB = "50"/>
+		<FORM ID = "FRM_BUFF_TEXT" PASS_EVENT="1" USE_OFFSCREEN="1" NO_FOCUS="1">
+			<ATTR X = "0" Y = "0" Z="10" W ="38" H ="62"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "15" T_Y ="13" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" NO_WORD_WRAP="1"/>
+		</FORM>
+	</FORM> 
+</XUI>

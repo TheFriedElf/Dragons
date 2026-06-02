@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4115</ID> <!--T.T.10411501 행방불명된 상인들 (2) -->
+
+
+<!-- 작성자 : 김광중-->
+<!--[완료조건]	병사 제이드와 대화-->
+<!--[완료NPC]	악마의 숨결 - 제이드-->
+<!--[내용]	용암 지역의 조사를 위해 악마의 숨결로 파견된 병사 제이드를 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2880301C-3CF8-455c-BE54-227116F7914C</CLIENT> <!--시작NPC 상인의 마을 - 호프먼 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</PAYER> <!--완료NPC 악마의 숨결 - 제이드 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2880301C-3CF8-455c-BE54-227116F7914C</AGENT> <!--진행NPC 11 상인의 마을 - 호프먼 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 12 악마의 숨결 - 제이드 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10411511"/> <!--제이드와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411521" FACE="Hopeman_normal"/> <!--설마 이렇게 조그만 어린 애가 원정대의 일에 참견하겠다는 건가?%% 
+허!
+이거 부탁을 무를 수도 없는 일이고.. 이거 상당히 귀찮게 됐는데... -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411526" FACE="Walter_smile"/> <!--엥! 머라고 네가 지원병이라고!
+아니 마물들이 침입해서 아무리 병사가 부족하다고 해도 그렇지…%% 
+어떻게 이런 꼬마를 지원병으로 보낼 수 있는 거야!?
+히야… 마을에까지 마물들이 들이닥친다고 하는데…
+완전 재앙일세 그래!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411523" FACE="Hopeman_normal"/> <!--어쩔 수 없군.
+자... 자넨 이제부터 내가 하는 말을 듣고 그대로 따르게.%%
+이 마을 인근에는 용암지역이 존재하네.  그 중 악마의 숨결이라는 
+지역에 가면 제이드라는 병사가 기다리고 있을 거야.,%%
+그 녀석을 찾아 도와주도록 하게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411524" FACE="Hopeman_angly"/> <!--제이드를 아직 못 찾은 거건가? 악마의 숨결은 한번이라도 가봤는지 모르겠군. 흐유..-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411525" FACE="Hopeman_angly"/> <!--악마의 숨결에 제이드라는 병사가 있다네. 그를 찾아가보게-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10411511" FACE="Walter_angly"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

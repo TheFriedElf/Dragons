@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 아카나이 엔딩 -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade" time="1"/>
+    <CMD TYPE="waittime" time="4"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD TYPE="AddActorFilter" ClassNo="1028902"/>
+	<CMD TYPE="AddNPC" ClassNo="1028902" NameTTID="521238" SpawnPos="2368.438, -8476.925, 604.455"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1028902" SlotName="ending_01"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" />
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="waittime" time="3.5"/>
+
+	<CMD TYPE="Dialogue" NameTTID="503038" TextTTID="503028" /><!-- 루 대사 -->
+	<CMD TYPE="WaitTime" Time="3.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="WaitTime" Time="2"/>
+	<CMD TYPE="Dialogue" NameTTID="503038" TextTTID="503029" /><!-- 루 대사 -->
+	<CMD TYPE="WaitTime" Time="2.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="WaitTime" Time="0.3"/>
+	<CMD TYPE="Dialogue" NameTTID="503038" TextTTID="503032" /><!-- 루 대사 -->
+	<CMD TYPE="WaitTime" Time="3.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="1.5"/>
+	<CMD TYPE="Dialogue" NameTTID="503037" TextTTID="503033" /><!-- 용아 대사 -->
+	<CMD TYPE="WaitTime" Time="2.5"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="503037" TextTTID="503034" /><!-- 용아 대사 -->
+	<CMD TYPE="WaitTime" Time="5"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="1"/><!-- 오프닝 시간을 기다림-->
+
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="Fade" FadeColor="255,255,255" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="2"/>
+	<CMD TYPE="WaitTime" Time="3"/>
+	<CMD TYPE="ShowActor" ClassNo="1028902" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1028902"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오세 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="Fade" FadeColor="255,255,255" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+    <CMD TYPE="setmoviescene" enable="false" Time="0"/>     
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--모든 플레이어 보이기 -->
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+
+</EVENT_SCRIPT>
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4033</ID> <!--T.T.10403301 용궁에서 온 선물(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	마이트리에게 끊어진 장신구의 끈 전달-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	낚시꾼 프리모는 수염고래 해안가의 마이트리 사제에게 끊어진 장신구의 끈을 전해 달라고 한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D9D4C750-7AE1-4084-B14A-770E1D304FA1</CLIENT> <!--시작NPC 수염고래 해안가 - 프리모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D9D4C750-7AE1-4084-B14A-770E1D304FA1</AGENT> <!--진행NPC 11 수염고래 해안가 - 프리모 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 12 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160403300/1">10011</NPC> 
+ <!--Item_NO=160403300/[Q.ID:04033] 끊어진 장신구의 끈,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160403300/1/511">10011</NPC> 
+ <!--Item_NO=160403300/[Q.ID:04033] 끊어진 장신구의 끈,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160403300/1">10011</NPC> 
+ <!--Item_NO=160403300/[Q.ID:04033] 끊어진 장신구의 끈,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160403300/1/502">10012</NPC> 
+ <!--Item_NO=160403300/[Q.ID:04033] 끊어진 장신구의 끈,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160403300/1">10012</NPC> 
+ <!--Item_NO=160403300/[Q.ID:04033] 끊어진 장신구의 끈,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10403311"/> <!--끊어진 장신구의 끈 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403321" FACE="Primo_normal"/> <!--나도 바다 사나이니까, 
+약속한 대로 보물에 대한 이야기를 들려드리리다.%% 
+사실은... 
+얼마 전에 이 근방에서 낚시를 하다가 커다란 생선을 잡았는데…%%
+생선을 낚아올리자마자 아주 커다란 보석을 하나 토해내는 게 아니겠습니까...
+그래서 용궁에서 보내 준 선물이란 이야기가 나왔던 겁니다.%%
+하지만…
+보석을 가지고 집으로 가는 도중에 캡틴 후커에게 보석을 강탈당했습니다.%%
+그래서 어떻게든 그 보석을 찾을 방법이 없을가 싶어서…
+이 해안가를 맴돌았던 거죠.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403326" FACE="Maitri_normal"/> <!--아아!
+이건!%%
+신보를 묶어둔 노리개 줄입니다!
+이… 이 것을 어디서 구하신 겁니까?%%
+제가 이것을 자세히 조사해 보겠습니다. 이 주변을 좀 더 수색해 주십시요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403323" FACE="Primo_normal"/> <!--후아~! 
+이야기를 하고 나니 속이 후련해지는구만…%%
+제 아들을 도와줬다는 이야기도 믿음이 가는군요.
+마지막으로 작은 부탁이 하나 있습니다.%% 
+그 드라칸족의 사제라는 여자에게 이것을 좀 전해주십시오.
+빼앗겼던 보석에 묶여있던 장신구의 끈입니다.%%
+보석을 처음 봤을 때부터 그 드라칸이라는 종족의 물건 같아 보였습니다.
+그들이 애타게 찾는 물건이란 소문을 들었지만, 욕심에 눈이 멀었던 거죠. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403324" FACE="Primo_smile"/> <!--엥? 보물 이야기를 들을려고 지금까지 내 부탁을 들어준 거잖소?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403325" FACE="Primo_angly"/> <!--노리개줄을 마이트리라는 사제에게 전달해주십시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10403327" FACE="Maitri_normal"/> <!--무슨 일이시죠? 뭔가 두고 오신 건가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10403351" FACE="primo_angly"/> <!--노리개줄을 마이트리라는 사제에게 전달해주십시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

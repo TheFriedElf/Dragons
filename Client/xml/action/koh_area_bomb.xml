@@ -1,0 +1,8 @@
+<ACTION ID="a_KOH_area_bomb" TYPE="IDLE" NEXT="a_battle_idle" LOOP="TRUE" CAN_FOLLOW="TRUE" NO_RANDOM_ANIMATION="TRUE" USE_CFUNC="TRUE" USE-EVENT="TRUE">
+	<SLOT NAME="casting01" LOOP="TRUE"/>
+	<SLOT NAME="KOH_area_bomb_start"/>
+  	<FSM SCRIPT="Skill_KOH_area_bomb" 
+		USE_TLM="FALSE"
+		CANCEL_TYPE="0"	
+	/>
+</ACTION>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 파렐 처리 후 -->
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="2"/>
+  <CMD TYPE="stopBGM" SoundNo = "0"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  <CMD TYPE="setmoviescene" enable="true"/>
+  <CMD TYPE="playBGM" SoundNo = "1"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "false"/>  
+  <CMD type="WaitFade" time="2"/>
+  
+ 
+  
+  <CMD TYPE="Dialogue" NameTTID="506155" TitleTTID="502947" TextTTID="505341" StitchImageID="parel_ending01"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="3"/>
+
+  <CMD TYPE="Dialogue" NameTTID="506155" TitleTTID="502947" TextTTID="505342" StitchImageID="parel_ending02"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="3"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="506155" TitleTTID="502947" TextTTID="505343" StitchImageID="parel_ending03"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="3"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="506155" TitleTTID="502947" TextTTID="505344" StitchImageID="parel_ending04"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="3"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="506155" TitleTTID="502947" TextTTID="505345" StitchImageID="parel_ending05"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="3"/>
+
+  <CMD TYPE="CLOSE_DAILOGUE"/>
+    
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "true"/>  
+  <CMD type="WaitFade" time="2"/>
+  
+  <CMD type="waittime" time="1"/>
+  <CMD TYPE="stopBGM" SoundNo = "1"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2"/>
+  <CMD TYPE="setmoviescene" enable="false"/>
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+  <CMD TYPE="playBGM" SoundNo = "0"/>
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

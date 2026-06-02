@@ -1,0 +1,11 @@
+<ACTION ID="a_Aiming" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="com_skill_spell_01" LOOP="true"/>
+  <SLOT NAME="Com_shot_02"/>
+  <FSM SCRIPT="Act_Melee_Default" FIND_TARGET_TYPE="SPHERE"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_Eiming_02_char_root"       
+       HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+       HIT_CASTER_EFFECT_ID="ef_Eiming_01_char_root"
+       HIT_SOUND_ID="Aeming"
+       />
+</ACTION>

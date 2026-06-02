@@ -1,0 +1,1363 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_CONSTELLATION_DUNGEON" ALIGN_X="50" ALIGN_Y="50" W="1024" H="768">
+		<SCRIPT ID="ON_CALL">
+			LockMyInputForWorldMap(true)
+			InitConstellationUI(UISelf)
+			g_ConstellationUIAnimationState = 0
+			PlaySoundByID("04.rareitem")
+			InitConstellationCashItem()
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			LockMyInputForWorldMap(false)
+			CloseUI("FRM_BTNSET_DIFFICULTY")
+			CloseUI("FRM_BTNSET_DIFFICULTY_LEGEND")
+			CloseUI("SFRM_CONSTELLATION_STORY")
+			GetEventScriptSystem():ActivateEvent(20000002)
+		</SCRIPT>
+		
+		<IMG ID="IMG_BG0" X="0" Y="0" Z="-1" W="512" H="512" IMG="../Data/6_ui/constellation/ctsign00.tga" IMG_W="512" IMG_H="512" PASS_EVENT="1"/>
+		<IMG ID="IMG_BG1" X="512" Y="0" Z="-1" W="512" H="512" IMG="../Data/6_ui/constellation/ctsign01.tga" IMG_W="512" IMG_H="512" PASS_EVENT="1"/>
+		<IMG ID="IMG_BG2" X="0" Y="512" Z="-1" W="512" H="256" IMG="../Data/6_ui/constellation/ctsign02.tga" IMG_W="512" IMG_H="256" PASS_EVENT="1"/>
+		<IMG ID="IMG_BG3" X="512" Y="512" Z="-1" W="512" H="256" IMG="../Data/6_ui/constellation/ctsign03.tga" IMG_W="512" IMG_H="256" PASS_EVENT="1"/>
+		<STATIC_FORM ID="SFRM_TOP_NOTICE" ALIGN_X="50" Y="5" W="738" H="26" STATIC_NUM="42" PASS_EVENT="1">
+			<ATTR TEXT="798823" FONT="FTctsBig_14" T_X="369" T_Y="3" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFAF0A1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_CLOSE" X="988" Y="7" W="21" H="20" BTN_IMG="../Data/6_UI/info/infoCdclsBt.tga" BTN_IMG_W="60" BTN_IMG_H="60">
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+		
+		<FORM ID="FRM_DUNGEON_NAME" X="135" Y="416" W="300" H="50">
+			<ATTR TEXT="" FONT="Font_GuildName" T_X="0" T_Y="0" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_DUNGEON_INFO" X="133" Y="448" W="339" H="287" STATIC_NUM="41">
+			<ATTR TEXT="401251" FONT="FTctsBig_14" T_X="13" T_Y="7" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFF8AFF00"/>
+			
+			<FORM ID="FRM_TEXT_NOT_OPEN" X="0" Y="0" W="339" H="287" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR TEXT="798826" FONT="Font_Text_Big" T_X="169" T_Y="143" T_CENTER="1" T_Y_CENTER="1" FONT_COLOR_HEX="0xFFFF0000"/>
+				<SCRIPT ID="ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</FORM>
+			
+			<STATIC_FORM ID="SFRM_BOX_INFO" X="4" Y="27" W="327" H="155" STATIC_NUM="43"/>
+			<STATIC_FORM ID="SFRM_BOX_MONSTER" X="75" Y="205" W="256" H="71" STATIC_NUM="43">
+				<BUILD ID="BLD_MON" TARGET_ID="ICN_MON" X="4" Y="5" Z="1" X_COUNT="4" Y_COUNT="1" X_GAB="62" Y_GAB="0"/>
+				<ICON ID="ICN_MON" ICON_GRP="228" ICON_STATIC="1">
+					<ATTR X="0" Y="0" W="62" H="62" IMG_W="62" IMG_H="62"/>
+					<SCRIPT ID="ON_CALL">
+						UISelf:SetCustomDataAsInt(0)
+					</SCRIPT>
+					<SCRIPT ID="ON_DISPLAY">
+						if 0 ~= UISelf:GetCustomDataAsInt() then
+							UISelf:DrawIcon()
+						end
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">
+						if 0 ~= UISelf:GetCustomDataAsInt() then
+							UISelf:CallIconToolTip()
+						end
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				</ICON>
+			</STATIC_FORM>
+			
+			<STATIC_FORM ID="SFRM_DAY" X="11" Y="36" W="313" H="24" STATIC_NUM="44">
+				<ATTR TEXT="798811" FONT="Font_Text" T_X="8" T_Y="4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFF799"/>
+				<FORM ID="FRM_TEXT" X="77" Y="0" W="253" H="24">
+					<ATTR TEXT="" FONT="Font_Text" T_X="0" T_Y="4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</FORM>
+			</STATIC_FORM>
+			
+			<FORM ID="FRM_TEXT_QUEST" X="11" Y="75" W="313" H="50">
+				<ATTR TEXT="798817" FONT="Font_Text" T_X="8" T_Y="4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFF799"/>
+				<FORM ID="FRM_TEXT" X="77" Y="0" W="253" H="50">
+					<ATTR TEXT="" FONT="Font_Text" T_X="0" T_Y="4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</FORM>
+			</FORM>
+			
+			<FORM ID="FRM_TEXT_ITEM" X="11" Y="110" W="80" H="24">
+				<ATTR TEXT="798812" FONT="Font_Text" T_X="8" T_Y="4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFF799"/>
+			</FORM>
+			
+			<STATIC_FORM ID="SFRM_KEY_ITEM" X="86" Y="110" Z="10" W="47" H="47" STATIC_NUM="43">
+				<ICON ID="ICN_ITEM" X="4" Y="4" Z="10" W="40" H="40" ICON_GRP="254">
+					<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				</ICON>
+			</STATIC_FORM>
+			
+			<BUTTON ID="BTN_REG" X="308" Y="140" W="14" H="14" Z="20" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+				<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if UseConstellationCashItem(UISelf:GetParent(), true) then
+						g_ConstellationUIAnimationState = 4
+						g_ConstellationUIAnimationFrame = 0
+					end
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_DEREG" X="281" Y="140" W="14" H="14" Z="20" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+				<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if UseConstellationCashItem(UISelf:GetParent(), false) then
+						g_ConstellationUIAnimationState = 5
+						g_ConstellationUIAnimationFrame = 0
+					end
+					CloseUI("FRM_BTNSET_DIFFICULTY")
+					CloseUI("FRM_BTNSET_DIFFICULTY_LEGEND")
+				</SCRIPT>
+			</BUTTON>
+			
+			<FORM ID="FRM_TEXT_CASH_ITEM" X="180" Y="110" W="80" H="24">
+				<ATTR TEXT="798829" FONT="Font_Text" T_X="8" T_Y="4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFF799"/>
+				<SCRIPT ID="ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</FORM>
+			
+			<STATIC_FORM ID="SFRM_CASH_KEY_ITEM" X="278" Y="110" Z="10" W="47" H="47" STATIC_NUM="43">
+				<ICON ID="ICN_ITEM" X="4" Y="4" Z="10" W="40" H="40" ICON_GRP="254">
+					<SCRIPT ID="ON_CALL"> UISelf:SetGrayScale(true) </SCRIPT>
+					<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				</ICON>
+				<SCRIPT ID="ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</STATIC_FORM>
+			
+			<FORM ID="FRM_NEED_ITEM_INFO" ALIGN_X="50" Y="160" W="300" H="24">
+				<ATTR TEXT="798828" FONT="Font_Text" T_X="150" T_Y="0" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			</FORM>
+			
+			<FORM ID="FRM_REWARD" X="4" Y="183" W="70" H="74">
+				<STATIC_FORM ID="SFRM_REWARD_ITEM" ALIGN_X="50" Y="32" W="47" H="47" STATIC_NUM="43">
+					<ICON ID="ICN_ITEM" X="4" Y="4" Z="10" W="40" H="40" ICON_GRP="254">
+						<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+						<SCRIPT ID="ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+						<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<ATTR TEXT="19931" FONT="FTctsBig_14" T_X="35" T_Y="0" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFF8AFF00"/>
+			</FORM>
+			
+			<FORM ID="FRM_TEXT_MONSTER" X="80" Y="183" W="100" H="24">
+				<ATTR TEXT="401258" FONT="FTctsBig_14" T_X="0" T_Y="0" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFF8AFF00"/>
+			</FORM>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_TIMER" TICK_TIME="100" PASS_EVENT="1">
+			<SCRIPT ID="ON_CALL">
+				g_ConstellationUIAnimationState = 1
+				g_ConstellationUIAnimationFrame = -4
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				CountConstellationUIAnimationFrame(UISelf:GetParent())
+				if 0 > g_ConstellationUIAnimationState then
+					if false == IsMouseOverConstellationUI() then
+						UpdateConstellationInfo(g_SelectedConstellationPosition, 1)
+					end
+				end
+			</SCRIPT>
+		</FORM>
+		
+		<BUILD ID="BLD_CONSTELLATION_STAR_ANI" TARGET_ID="FRM_STAR_ANI_" X="0" Y="0" X_COUNT="11" Y_COUNT="1" X_GAB="0" Y_GAB="0" START_INDEX="1"/>
+		<FORM ID="FRM_STAR_ANI_" X="0" Y="0" Z="5" ALPHA="0" USE_ALPHA_ANI="0" PASS_EVENT="1">
+			<SCRIPT ID="ON_BUILD">
+				UISelf:SetCustomDataAsInt(UISelf:GetBuildIndex())
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetAlpha(0)
+				UISelf:SetMaxAlpha(0)
+				
+				SetConstellationUI_StarAni(UISelf)
+				g_ConstellationStarAniReverse = false
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				if UISelf:GetUVIndex() == 5 then
+					g_ConstellationStarAniReverse = true
+				elseif UISelf:GetUVIndex() == 1 then
+					g_ConstellationStarAniReverse = false
+				end
+				local value =  0.2 + (UISelf:GetCustomDataAsInt() * 0.01);
+				if g_ConstellationStarAniReverse then
+					UVAnimationRevers(UISelf, 0.2, 5, 1, 1)
+				else
+					UVAnimation(UISelf, 0.2, 1, 5, 1)
+				end
+			</SCRIPT>
+		</FORM>
+		
+		<BUILD ID="BLD_CONSTELLATION" TARGET_ID="FRM_CONSTELLATION_" X="0" Y="0" X_COUNT="11" Y_COUNT="1" X_GAB="0" Y_GAB="0" START_INDEX="1"/>
+		<FORM ID="FRM_CONSTELLATION_" TICK_TIME="100" PASS_EVENT="1">
+			<SCRIPT ID="ON_BUILD">
+				UISelf:SetCustomDataAsInt(UISelf:GetBuildIndex())
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				SetConstellationUI(UISelf)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				if g_ConstellationUIAnimationState > 0 then
+					AnimateConstellationUI(UISelf, 6, 3)
+				elseif 0 > g_ConstellationUIAnimationState then
+					MouseOverConstellation(UISelf)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if 0 > g_ConstellationUIAnimationState then
+					ClickConstellation(UISelf)
+				end
+			</SCRIPT>
+			<FORM ID="FRM_ACTIVE" X="0" Y="0" Z="1" ALPHA="0" USE_ALPHA_ANI="0" PASS_EVENT="1">
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetAlpha(0)
+					UISelf:SetMaxAlpha(0)
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_OVER" X="0" Y="0" Z="2" ALPHA="0" USE_ALPHA_ANI="0" PASS_EVENT="1">
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetAlpha(0)
+					UISelf:SetMaxAlpha(0)
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_OVER_NOTACTIVE" X="0" Y="0" Z="2" ALPHA="0" USE_ALPHA_ANI="0" PASS_EVENT="1">
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetAlpha(0)
+					UISelf:SetMaxAlpha(0)
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_SELECT" X="0" Y="0" Z="3" ALPHA="0" USE_ALPHA_ANI="0" PASS_EVENT="1">
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetAlpha(0)
+					UISelf:SetMaxAlpha(0)
+				</SCRIPT>
+			</FORM>
+		</FORM>
+
+		<FORM ID="FRM_PARTY_NOTICE" X="485" Y="425" W="400" H="33">
+			<ATTR TEXT="401271" T_X="0" T_Y="0" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFF799"/>
+		</FORM>
+		
+		<STATIC_FORM ID="FRM_CONSTELLATION_PARTY" X="472" Y="448" W="425" H="283" STATIC_NUM="48" TICK_TIME="100">
+			<SCRIPT ID="ON_CALL">
+				if GetAccumTime() - g_RefreshConstellationPartyTime >= 3.0 then
+					ReqConstellationPartyList(UISelf)
+					g_RefreshConstellationPartyTime = GetAccumTime()
+				else
+					FakeUpdateConstellationPartyList(UISelf)
+				end
+			</SCRIPT>
+			<FORM ID="FRM_PARTY_MISSION" X="13" Y="7" W="393" H="500">
+				<ATTR TEXT="798816" T_X="10" T_Y="3" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR IMG="../Data/6_ui/constellation/ctEtab02.tga" IMG_W="203" IMG_H="26"/>
+			</FORM>
+			<FORM ID="FRM_PARTY_NAME" X="218" Y="7" W="128" H="26">
+				<ATTR TEXT="401212" T_X="10" T_Y="3" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR IMG="../Data/6_ui/constellation/ctEtab01.tga" IMG_W="122" IMG_H="26"/>
+			</FORM>
+			
+			<BUTTON ID="BTN_SORT_DESC" X="342" Y="7" W="52" H="26">
+				<ATTR BTN_IMG="../Data/6_ui/constellation/ctEtabBt01.tga" BTN_IMG_W="52" BTN_IMG_H="104" U="1" V="4"/>
+				<ATTR TEXT="401336" T_X="17" T_Y="4" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					UISelf:Visible(false)
+					UISelf:GetParent():GetControl("BTN_SORT_ASC"):Visible(true)
+					OnSort_DungeonPartyList(UISelf, 2)
+				</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(true)
+					UISelf:SetCustomDataAsInt(0)
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_SORT_ASC" X="342" Y="7" W="52" H="26">
+				<ATTR BTN_IMG="../Data/6_ui/constellation/ctEtabBt02.tga" BTN_IMG_W="52" BTN_IMG_H="104" U="1" V="4"/>
+				<ATTR TEXT="401336" T_X="17" T_Y="4" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					UISelf:Visible(false)
+					UISelf:GetParent():GetControl("BTN_SORT_DESC"):Visible(true)
+					OnSort_DungeonPartyList(UISelf, 2)
+				</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(false)
+					UISelf:SetCustomDataAsInt(1)
+				</SCRIPT>
+			</BUTTON>
+		
+			<FORM ID="FRM_LOADING" X="167" Y="112" Z="2" W="73" H="86">
+				<ATTR IMG="../Data/6_ui/14_indun/idWheel.tga" IMG_W="146" IMG_H="172" U="2" V="2"/>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.09) </SCRIPT>
+			</FORM>
+			
+			<STATIC_FORM ID="SFRM_COLOR" X="8" Y="32" W="393" H="217" STATIC_NUM="49" COLOR_TYPE="1"/>
+						
+			<LIST ID="LST_PARTY" X="8" Y="36" Z="100" W="390" H="210">
+				<ATTR ELEMENT_ID="SFRM_CONSTELLATION_PARTY_ITEM" ITEM_X="5" ITEM_Y="0"/>
+				<IMG ID="ScrBg" X="394" Y="-23" Z="-1" W="13" H="210" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="280" IGNORE_PARENT_RECT="1"/>
+				<BUTTON ID="ScrUp" 	   X="392" Y="-20"  W="19" H="15" BTN_IMG="../Data/6_ui/cashShop/csGcScrollUp.tga"  BTN_IMG_W="38" BTN_IMG_H="30"/>
+				<BUTTON ID="ScrDown"   X="392" Y="210" W="19" H="15" BTN_IMG="../Data/6_ui/cashShop/csGcScrollDn.tga"  BTN_IMG_W="38" BTN_IMG_H="30"/>
+				<BUTTON ID="ScrMiddle" X="394" Y="-10"  W="15" H="21" BTN_IMG="../Data/6_ui/cashShop/csGcScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+				<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="ScrBg"/>
+			</LIST>
+			
+			<BUTTON ID="BTN_REFRESH" X="370" Y="249" W="30" H="30">
+				<ATTR BTN_IMG="../Data/6_ui/constellation/ctSwitchB.tga" BTN_IMG_W="60" BTN_IMG_H="60"/>
+				<SCRIPT ID="ON_L_BTN_UP">
+					if GetAccumTime() - g_RefreshConstellationPartyTime >= 3.0 then
+						ReqConstellationPartyList(UISelf:GetParent())
+						g_RefreshConstellationPartyTime = GetAccumTime()
+					else
+						FakeUpdateConstellationPartyList(UISelf:GetParent())
+					end
+				</SCRIPT>
+			</BUTTON>
+			
+			<BUTTON ID="BTN_ENTER" ALIGN_X="50" Y="252" W="84" H="26">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR TEXT="" FONT="FTctsBig_14" T_X="42" T_Y="13" T_CENTER="1" T_Y_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID="ON_CALL">SetTextOnThisUI(400579,2200)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_UP">OnEnter_ConstellationParty(UISelf:GetParent())</SCRIPT>
+				<HOTKEY ID="61">OnEnter_ConstellationParty(UISelf:GetParent()) return true</HOTKEY>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					CallToolTipText(0, GetTextW(401362), GetUIWnd("Cursor"):GetLocation(), "ToolTip2", 11 )
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip(nil, 11) </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+	</FORM>
+		
+	<FORM ID="FRM_BTNSET_DIFFICULTY" ALIGN_X="50" ALIGN_Y="55" Z="99" W="305" H="195"  PRIORITY="10" IMG="../Data/6_ui/constellation/ctLvStPn.tga" IMG_W="305" IMG_H="195">
+		<SCRIPT ID="ON_TICK">
+			DifficultyName(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+		</SCRIPT>
+		<SCRIPT ID="ON_CALL">
+			g_IsMouseOverConstellationEnterBtn = true
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			g_IsMouseOverConstellationEnterBtn = false
+			ResetConstellation()
+		</SCRIPT>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+		
+		<IMG ID="MOUSE_OVER_NORMAL" X="0" Y="25" W="111" H="162" Z="100" IMG="../Data/6_ui/constellation/ctLvStBt_over.tga" IMG_W="444" IMG_H="162" U="4" V="1" UV_INDEX="2" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1"/>
+		<IMG ID="MOUSE_OVER_RARE" X="95" Y="25" W="111" H="162" Z="100" IMG="../Data/6_ui/constellation/ctLvStBt_over.tga" IMG_W="444" IMG_H="162" U="4" V="1" UV_INDEX="3" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1"/>
+		<IMG ID="MOUSE_OVER_HERO" X="192" Y="25" W="111" H="162" Z="100" IMG="../Data/6_ui/constellation/ctLvStBt_over.tga" IMG_W="444" IMG_H="162" U="4" V="1" UV_INDEX="4" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1"/>
+		<BUTTON ID="BTN_NOTICE_DIFFICULTY" ALIGN_X="88" ALIGN_Y="3" Z="10" W="24" H="24" PRIORITY="10" BTN_IMG="../Data/6_ui/constellation/ctHelpBt.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+			<SCRIPT ID="ON_L_BTN_UP">
+				CallUI("SFRM_CONSTELLATION_STORY")
+				DifficultyStory(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE_DIFFICULTY" ALIGN_X="96" ALIGN_Y="4" W="20" H="20" PRIORITY="10" BTN_IMG="../Data/6_UI/constellation/ctEmotcX.tga" BTN_IMG_W="40" BTN_IMG_H="40">
+			<SCRIPT ID="ON_L_BTN_UP">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+		<FORM ID="BTN_NORMAL" X="10" Y="35" W="92" H="144" IMG="../Data/6_ui/constellation/ctLvStBt.tga" IMG_W="372" IMG_H="144" U="4" V="1" UV_INDEX="2">
+			<ATTR TEXT="3315" FONT="FTctsBig_14" T_X="46" T_Y="17" T_CENTER="1" BTN_T_COLOR_TYPE="11"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local Difficulty = 1
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_NORMAL")
+				overWnd:Visible(true)
+				if g_SelectedConstellationDifficulty ~= Difficulty then
+					g_SelectedConstellationDifficulty = Difficulty
+					UpdateConstellationInfo(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+				end
+				g_ConstellationUIMouseOver[12] = true
+				PlaySoundByID("cha-cursor07")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_NORMAL")
+				overWnd:Visible(false)
+				g_ConstellationUIMouseOver[12] = false
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CreateEnterIndunParty()
+				PlaySoundByID("cha-cursor08")
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				ReqEnterConstellationDungeon()
+			</SCRIPT>
+		</FORM>
+		
+		<FORM ID="BTN_RARE" X="105" Y="35" W="92" H="144" IMG="../Data/6_ui/constellation/ctLvStBt.tga" IMG_W="372" IMG_H="144" U="4" V="1" UV_INDEX="3">
+			<ATTR TEXT="403278" FONT="FTctsBig_14" T_X="46" T_Y="17" T_CENTER="1" BTN_T_COLOR_TYPE="11"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local Difficulty = 2
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_RARE")
+				overWnd:Visible(true)
+				if g_SelectedConstellationDifficulty ~= Difficulty then
+					g_SelectedConstellationDifficulty = Difficulty
+					UpdateConstellationInfo(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+				end
+				g_ConstellationUIMouseOver[12] = true
+				PlaySoundByID("cha-cursor07")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_RARE")
+				overWnd:Visible(false)
+				g_ConstellationUIMouseOver[12] = false
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CreateEnterIndunParty()
+				PlaySoundByID("cha-cursor08")
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				ReqEnterConstellationDungeon()
+			</SCRIPT>
+		</FORM>
+		
+		<FORM ID="BTN_HERO" X="200" Y="35" W="92" H="144" IMG="../Data/6_ui/constellation/ctLvStBt.tga" IMG_W="372" IMG_H="144" U="4" V="1" UV_INDEX="4">
+			<ATTR TEXT="3031" FONT="FTctsBig_14" T_X="46" T_Y="17" T_CENTER="1" BTN_T_COLOR_TYPE="11"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local Difficulty = 3
+				if g_SelectedConstellationDifficulty ~= Difficulty then
+					g_SelectedConstellationDifficulty = Difficulty
+					UpdateConstellationInfo(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+				end
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_HERO")
+				overWnd:Visible(true)
+				g_ConstellationUIMouseOver[12] = true
+				PlaySoundByID("cha-cursor07")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_HERO")
+				overWnd:Visible(false)
+				g_ConstellationUIMouseOver[12] = false
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CreateEnterIndunParty()
+				PlaySoundByID("cha-cursor08")
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				ReqEnterConstellationDungeon()
+			</SCRIPT>
+		</FORM>
+		
+		<BUILD ID="BLD_SECLECT_LEVEL" TARGET_ID="FRM_LEVEL" X="9" Y="150" Z="99" X_COUNT="3" Y_COUNT="1" X_GAB="95"/>
+		<FORM ID="FRM_LEVEL" X="10" Y="150" W="110" H="20" Z="99">
+			<ATTR TEXT="" FONT="FTbt_12" T_X="23" T_Y="10" T_Y_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID = "ON_BUILD">
+				local index = UISelf:GetBuildIndex()
+				if 2 == index then
+					UISelf:SetLocation(Point2(UISelf:GetLocation():GetX()+25, UISelf:GetLocation():GetY()))
+				else if 3 == index then
+					UISelf:SetLocation(Point2(UISelf:GetLocation():GetX()+55, UISelf:GetLocation():GetY()))
+				end				
+			</SCRIPT>
+		</FORM>
+			
+		<FORM ID="FRM_DUNGEON_NAME_DIFFICULTY" X="13" Y="10" Z="200" W="300" H="50" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="" FONT="FTctsBig_14" T_X="0" T_Y="0" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFF8AFF00"/>
+		</FORM>
+	</FORM>
+	
+		
+	<FORM ID="FRM_BTNSET_DIFFICULTY_LEGEND" ALIGN_X="50" ALIGN_Y="55" Z="99" W="398" H="195"  PRIORITY="10" IMG="../Data/6_ui/constellation/ctLvStPn_b.tga" IMG_W="398" IMG_H="195">
+		<SCRIPT ID="ON_TICK">
+			DifficultyName(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+		</SCRIPT>
+		<SCRIPT ID="ON_CALL">
+			g_IsMouseOverConstellationEnterBtn = true
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			g_IsMouseOverConstellationEnterBtn = false
+			ResetConstellation()
+		</SCRIPT>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+		
+		<IMG ID="MOUSE_OVER_NORMAL" X="0" Y="25" W="111" H="162" Z="100" IMG="../Data/6_ui/constellation/ctLvStBt_over.tga" IMG_W="555" IMG_H="162" U="5" V="1" UV_INDEX="2" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1"/>
+		<IMG ID="MOUSE_OVER_RARE" X="95" Y="25" W="111" H="162" Z="100" IMG="../Data/6_ui/constellation/ctLvStBt_over.tga" IMG_W="555" IMG_H="162" U="5" V="1" UV_INDEX="3" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1"/>
+		<IMG ID="MOUSE_OVER_HERO" X="192" Y="25" W="111" H="162" Z="100" IMG="../Data/6_ui/constellation/ctLvStBt_over.tga" IMG_W="555" IMG_H="162" U="5" V="1" UV_INDEX="4" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1"/>
+		<IMG ID="MOUSE_OVER_LEGEND" X="285" Y="25" W="111" H="162" Z="100" IMG="../Data/6_ui/constellation/ctLvStBt_over.tga" IMG_W="555" IMG_H="162" U="5" V="1" UV_INDEX="5" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1"/>
+		<BUTTON ID="BTN_NOTICE_DIFFICULTY" ALIGN_X="90" ALIGN_Y="3" Z="10" W="24" H="24" PRIORITY="10" BTN_IMG="../Data/6_ui/constellation/ctHelpBt.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+			<SCRIPT ID="ON_L_BTN_UP">
+				CallUI("SFRM_CONSTELLATION_STORY")
+				DifficultyStory(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE_DIFFICULTY" ALIGN_X="96" ALIGN_Y="4" W="20" H="20" PRIORITY="10" BTN_IMG="../Data/6_UI/constellation/ctEmotcX.tga" BTN_IMG_W="40" BTN_IMG_H="40">
+			<SCRIPT ID="ON_L_BTN_UP">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+		<FORM ID="BTN_NORMAL" X="10" Y="35" W="92" H="144" IMG="../Data/6_ui/constellation/ctLvStBt.tga" IMG_W="465" IMG_H="144" U="5" V="1" UV_INDEX="2">
+			<ATTR TEXT="3315" FONT="FTctsBig_14" T_X="46" T_Y="17" T_CENTER="1" BTN_T_COLOR_TYPE="11"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local Difficulty = 1
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_NORMAL")
+				overWnd:Visible(true)
+				if g_SelectedConstellationDifficulty ~= Difficulty then
+					g_SelectedConstellationDifficulty = Difficulty
+					UpdateConstellationInfo(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+				end
+				g_ConstellationUIMouseOver[12] = true
+				PlaySoundByID("cha-cursor07")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_NORMAL")
+				overWnd:Visible(false)
+				g_ConstellationUIMouseOver[12] = false
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CreateEnterIndunParty()
+				PlaySoundByID("cha-cursor08")
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				ReqEnterConstellationDungeon()
+			</SCRIPT>
+		</FORM>
+		
+		<FORM ID="BTN_RARE" X="105" Y="35" W="92" H="144" IMG="../Data/6_ui/constellation/ctLvStBt.tga" IMG_W="465" IMG_H="144" U="5" V="1" UV_INDEX="3">
+			<ATTR TEXT="403278" FONT="FTctsBig_14" T_X="46" T_Y="17" T_CENTER="1" BTN_T_COLOR_TYPE="11"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local Difficulty = 2
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_RARE")
+				overWnd:Visible(true)
+				if g_SelectedConstellationDifficulty ~= Difficulty then
+					g_SelectedConstellationDifficulty = Difficulty
+					UpdateConstellationInfo(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+				end
+				g_ConstellationUIMouseOver[12] = true
+				PlaySoundByID("cha-cursor07")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_RARE")
+				overWnd:Visible(false)
+				g_ConstellationUIMouseOver[12] = false
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CreateEnterIndunParty()
+				PlaySoundByID("cha-cursor08")
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				ReqEnterConstellationDungeon()
+			</SCRIPT>
+		</FORM>
+		
+		<FORM ID="BTN_HERO" X="200" Y="35" W="92" H="144" IMG="../Data/6_ui/constellation/ctLvStBt.tga" IMG_W="465" IMG_H="144" U="5" V="1" UV_INDEX="4">
+			<ATTR TEXT="3031" FONT="FTctsBig_14" T_X="46" T_Y="17" T_CENTER="1" BTN_T_COLOR_TYPE="11"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local Difficulty = 3
+				if g_SelectedConstellationDifficulty ~= Difficulty then
+					g_SelectedConstellationDifficulty = Difficulty
+					UpdateConstellationInfo(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+				end
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_HERO")
+				overWnd:Visible(true)
+				g_ConstellationUIMouseOver[12] = true
+				PlaySoundByID("cha-cursor07")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_HERO")
+				overWnd:Visible(false)
+				g_ConstellationUIMouseOver[12] = false
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CreateEnterIndunParty()
+				PlaySoundByID("cha-cursor08")
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				ReqEnterConstellationDungeon()
+			</SCRIPT>
+		</FORM>
+		
+		<FORM ID="BTN_LEGEND" X="295" Y="35" W="92" H="144" IMG="../Data/6_ui/constellation/ctLvStBt.tga" IMG_W="465" IMG_H="144" U="5" V="1" UV_INDEX="5">
+			<ATTR TEXT="50304" FONT="FTctsBig_14" T_X="46" T_Y="17" T_CENTER="1" BTN_T_COLOR_TYPE="11"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local Difficulty = 4
+				if g_SelectedConstellationDifficulty ~= Difficulty then
+					g_SelectedConstellationDifficulty = Difficulty
+					UpdateConstellationInfo(g_SelectedConstellationPosition, g_SelectedConstellationDifficulty)
+				end
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_LEGEND")
+				overWnd:Visible(true)
+				g_ConstellationUIMouseOver[12] = true
+				PlaySoundByID("cha-cursor07")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local Wnd = UISelf:GetParent()
+				local overWnd = Wnd:GetControl("MOUSE_OVER_LEGEND")
+				overWnd:Visible(false)
+				g_ConstellationUIMouseOver[12] = false
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CreateEnterIndunParty()
+				PlaySoundByID("cha-cursor08")
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				ReqEnterConstellationDungeon()
+			</SCRIPT>
+		</FORM>
+		
+		<BUILD ID="BLD_SECLECT_LEVEL" TARGET_ID="FRM_LEVEL" X="9" Y="150" Z="99" X_COUNT="4" Y_COUNT="1" X_GAB="95"/>
+		<FORM ID="FRM_LEVEL" X="10" Y="150" W="110" H="20" Z="99">
+			<ATTR TEXT="" FONT="FTbt_12" T_X="23" T_Y="10" T_Y_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID = "ON_BUILD">
+				local index = UISelf:GetBuildIndex()
+				if 2 == index then
+					UISelf:SetLocation(Point2(UISelf:GetLocation():GetX()+25, UISelf:GetLocation():GetY()))
+				else if 3 == index then
+					UISelf:SetLocation(Point2(UISelf:GetLocation():GetX()+55, UISelf:GetLocation():GetY()))
+				else
+					UISelf:SetLocation(Point2(UISelf:GetLocation():GetX()+80, UISelf:GetLocation():GetY()))
+				end				
+			</SCRIPT>
+		</FORM>
+			
+		<FORM ID="FRM_DUNGEON_NAME_DIFFICULTY" X="13" Y="10" Z="200" W="300" H="50" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="" FONT="FTctsBig_14" T_X="0" T_Y="0" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFF8AFF00"/>
+		</FORM>
+	</FORM>
+		
+	<STATIC_FORM ID="SFRM_CONSTELLATION_PARTY_ITEM" X="0" Y="0" W="383" H="30" STATIC_NUM="48" COLOR_TYPE="2">
+		<STATIC_FORM ID="SFRM_PARTY_MISSION" X="4" Y="3" W="198" H="22" STATIC_NUM="49" COLOR_TYPE="3">
+			<ATTR TEXT="" FONT="Font_Text" T_X="5" T_Y="13" T_Y_CENTER="1" FONT_COLOR_HEX="0xFF3ba0ff"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_PARTY_NAME" X="205" Y="3" W="121" H="22" STATIC_NUM="49" COLOR_TYPE="3">
+			<ATTR TEXT="" FONT="Font_Text" T_X="5" T_Y="13" T_Y_CENTER="1" FONT_COLOR_HEX="0xFFFAEBDD"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_PARTY_PEOPLE" X="329" Y="3" W="50" H="22" STATIC_NUM="49" COLOR_TYPE="3">
+			<ATTR TEXT="" FONT="Font_Text" T_X="25" T_Y="13" T_CENTER="1" T_Y_CENTER="1" FONT_COLOR_HEX="0xFFFFFF11"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_MOUSE_OVER" X="0" Y="0" Z="4" W="383" H="30" STATIC_NUM="45">
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(false)
+			</SCRIPT>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SELECT" X="0" Y="0" Z="5" W="383" H="30" STATIC_NUM="46">
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(false)
+			</SCRIPT>
+		</STATIC_FORM>
+		<FORM ID="FRM_DUMMY" X="0" Y="0" Z="5" W="383" H="32">
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local ListWnd = UISelf:GetParent():GetParent()
+				if false == ListWnd:IsNil() then
+					local Item = ListWnd:ListFirstItem()
+					while false == Item:IsNil() do
+						local ItemWnd = Item:GetWnd()
+						if false == ItemWnd:IsNil() then
+							local sWnd = ItemWnd:GetControl("SFRM_MOUSE_OVER")
+							if false == sWnd:IsNil() then
+								sWnd:Visible(false)
+							end
+						end
+						Item = ListWnd:ListNextItem(Item)
+					end
+				end
+				local Wnd = UISelf:GetParent()
+				if false == Wnd:IsNil() then
+					local overWnd = Wnd:GetControl("SFRM_MOUSE_OVER")
+					if false == overWnd:IsNil() then
+						local sWnd = Wnd:GetControl("SFRM_SELECT")
+						if false == sWnd:IsNil() then
+							if false == sWnd:IsVisible() then
+								overWnd:Visible(true)
+							end
+						end
+					end
+				end
+				
+				local guid = UISelf:GetParent():GetOwnerGuid();
+				CallConstellationPartyListToolTip(guid);
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local ListWnd = UISelf:GetParent():GetParent()
+				if false == ListWnd:IsNil() then
+					local Item = ListWnd:ListFirstItem()
+					while false == Item:IsNil() do
+						local ItemWnd = Item:GetWnd()
+						if false == ItemWnd:IsNil() then
+							local sWnd = ItemWnd:GetControl("SFRM_SELECT")
+							if false == sWnd:IsNil() then
+								sWnd:Visible(false)
+							end
+						end
+						Item = ListWnd:ListNextItem(Item)
+					end
+				end
+				local Wnd = UISelf:GetParent()
+				if false == Wnd:IsNil() then
+					local sWnd = Wnd:GetControl("SFRM_SELECT")
+					if false == sWnd:IsNil() then
+						sWnd:Visible(true)
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				CloseToolTip()
+			</SCRIPT>
+		</FORM>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_CONSTELLATION_MISSION" ALIGN_X="100" IS_ABSOLUTE_Y="1" Y="190" W="214" H="1" STATIC_NUM="47">
+		<LIST ID="LST_MISSION" X="5" Y="3" Z="1" W="207" H="190">
+			<ATTR ELEMENT_ID="FRM_CONSTELLATION_MISSION_ITEM" ITEM_X="0" ITEM_Y="0"/>
+		</LIST>
+		<SCRIPT ID="ON_ACTIVATE">
+			local Loc = UISelf:GetLocation()
+			if IsDefenceMode() then
+				Loc:SetY(228)
+			elseif IsDefenceMode7() then
+				Loc:SetY(135)
+			else
+				Loc:SetY(190)
+			end
+			UISelf:SetLocation(Loc)
+		</SCRIPT>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_CONSTELLATION_MISSION_ITEM" X="0" Y="0" W="204" H="18">
+		<ATTR TEXT="" FONT="FONT_TEXT" T_X="25" T_Y="0" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<FORM ID="FRM_CLEAR" X="5" Y="0" W="15" H="15">
+			<ATTR IMG="../Data/6_ui/constellation/ctOXbox.tga" IMG_W="30" IMG_H="30" U="2" V="2" UV_INDEX="1"/>
+		</FORM>
+	</FORM>
+	
+	<STATIC_FORM ID="SFRM_CONSTELLATION_EXIT" ALIGN_X="100" ALIGN_Y="0" W="214" H="100" STATIC_NUM="47">
+		<ATTR TEXT="" T_X="108" T_Y="6" FONT="Font_GuildName" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		<IMG ID="IMG_LINE" X="5" Y="63" W="204" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="204" IMG_H="2"/>
+		<FORM ID="FRM_DIFFICULTY" X="0" Y="40" W="150" H="20">
+			<ATTR TEXT="" FONT="FTctsBig_14" T_X="10" T_Y="10" T_Y_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		</FORM>
+		<FORM ID="FRM_LEVEL" X="90" Y="40" W="110" H="20">
+			<ATTR TEXT="" FONT="FTbt_12" T_X="23" T_Y="10" T_Y_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		</FORM>
+		<BUTTON ID="BTN_LEAVE" X="66" Y="68" Z="3" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400305" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP="1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> ReqExitInstanceDungeon() </SCRIPT>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			UISelf:SetStaticTextW( GetMapNameW(g_world:GetMapNo()) )
+		</SCRIPT>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_CONSTELLATION_DEFENCE_EXIT" ALIGN_X="100" ALIGN_Y="0" W="214" H="134" STATIC_NUM="47">
+		<ATTR TEXT="" T_X="108" T_Y="6" FONT="Font_GuildName" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		<IMG ID="IMG_LINE" X="5" Y="63" W="204" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="204" IMG_H="2"/>
+		<FORM ID="FRM_DIFFICULTY" X="0" Y="40" W="60" H="20">
+			<ATTR TEXT="" FONT="FTctsBig_14" T_X="30" T_Y="10" T_Y_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		</FORM>
+		<FORM ID="FRM_LEVEL" X="60" Y="40" W="110" H="20">
+			<ATTR TEXT="" FONT="FTbt_12" T_X="23" T_Y="10" T_Y_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		</FORM>
+		<FORM ID="FRM_TEXT_STAGE" X="0" Y="60" W="200" H="28">
+			<ATTR T_X="107" T_Y="13" T_CENTER="1"  FONT="Font_Text" FONT_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<IMG ID="IMG_LINE2" X="5" Y="94" W="204" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="204" IMG_H="2"/>
+		<BUTTON ID="BTN_LEAVE" X="66" Y="102" Z="3" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400305" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP="1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> ReqExitInstanceDungeon() </SCRIPT>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			UISelf:SetStaticTextW( GetMapNameW(g_world:GetMapNo()) )
+		</SCRIPT>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_CONSTELLATION_TIMER" ALIGN_X="100" IS_ABSOLUTE_Y="1" Y="98" Z="1" W="214" H="53" STATIC_NUM="47">
+		<FORM ID="FRM_MIN10" X="52" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_MIN1" X="75" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<IMG ID="IMG_TIMER_SEP" X="107" Y="15" Z="0" W="11" H="25" IMG="../Data/6_ui/mission/msTimeYdot.tga" IMG_W="11" IMG_H="25" />
+		<FORM ID="FRM_SEC10" X="112" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_UI/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC1" X="135" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<SCRIPT ID="ON_DISPLAY"> DisplayMissionTimer(UISelf) </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> 
+			g_iMissionTime = 0
+			g_iMissionTotalTime = 0
+		</SCRIPT>
+		<SCRIPT ID="ON_CALL"> g_fMissionStartTime = GetCurrentTimeInSec() </SCRIPT>
+	</STATIC_FORM>
+	
+	<FORM ID = "FRM_CONSTELLATION_FAILED" IS_ABSOLUTE_Y="1">
+		<ATTR ALIGN_X="50" Y="78" W="1023" H="550" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_BG" X = "265" Y="0" Z="2" W="475" H="163" IMG = "../Data/6_ui/constellation/ctStartBg.tga" IMG_W = "475" IMG_H = "163">
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(false)
+			</SCRIPT>
+		</IMG>
+		<IMG ID = "IMG_FAILED" X = "1023" Y="42" Z="3" W="272" H="79" IMG = "../Data/6_ui/constellation/ctFailed.tga" IMG_W = "272" IMG_H = "79"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<SCRIPT ID = "ON_CALL">
+			local st = UISelf:GetControl("IMG_FAILED")
+			st:SetLocation( Point2(1023, st:GetLocation():GetY()) )
+			g_StartUIState = 0
+			g_StartUITimeStamp = GetAccumTime()
+		</SCRIPT>
+		<SCRIPT ID = "ON_TICK">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local st = UISelf:GetControl("IMG_FAILED")
+			local stLoc = st:GetLocation()
+			
+			if g_StartUIState == 0 then
+				if iDelta > 6.0 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+					UISelf:GetControl("IMG_BG"):Visible(true)
+				end
+			elseif g_StartUIState == 1 then
+				local iX = 370
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 1023 - iDelta/0.3*653
+				end
+				stLoc:SetX(iX)
+				st:SetLocation(stLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 3.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = 1023
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 370 - iDelta/0.3*671
+				end
+				stLoc:SetX(iX)
+				st:SetLocation(stLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID = "FRM_CONSTELLATION_CLEAR" IS_ABSOLUTE_Y="1" CAN_CLIP="1">
+		<ATTR ALIGN_X="50" Y="78" W="1024" H="550" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_BG" ALIGN_X="50" Y="0" Z="2" W="475" H="163" IMG = "../Data/6_ui/constellation/ctStartBg.tga" IMG_W = "475" IMG_H = "163">
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(false)
+			</SCRIPT>
+		</IMG>
+		<IMG ID = "IMG_CLEAR" X="1024" Y="42" Z="3" W="258" H="81" IMG="../Data/6_ui/constellation/ctClear.tga" IMG_W="258" IMG_H="81"/>
+		<SCRIPT ID = "ON_CALL">
+			local st = UISelf:GetControl("IMG_CLEAR")
+			st:SetLocation( Point2(1024, st:GetLocation():GetY()) )
+			g_StartUIState = 0
+			g_StartUITimeStamp = GetAccumTime()
+		</SCRIPT>
+		<SCRIPT ID = "ON_TICK">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local st = UISelf:GetControl("IMG_CLEAR")
+			local stLoc = st:GetLocation()
+			local iHafe = 512 - (st:GetSize():GetX()/2)
+			
+			if g_StartUIState == 0 then
+				if iDelta > 6.0 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+					UISelf:GetControl("IMG_BG"):Visible(true)
+					PlaySoundByID("Mission_Clear01")
+				end
+			elseif g_StartUIState == 1 then
+				local iX = iHafe
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 1024 - (iDelta/0.3*(1024-iHafe))
+				end
+				stLoc:SetX(iX)
+				st:SetLocation(stLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 3.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = -st:GetSize():GetX()
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = iHafe - (iDelta/0.3*(iHafe + st:GetSize():GetX()))
+				end
+				stLoc:SetX(iX)
+				st:SetLocation(stLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<!--start-->
+	<FORM ID = "FRM_CONSTELLATION_START" PRIORITY="99" IS_ABSOLUTE_Y="1">
+		<ATTR ALIGN_X="50" Y="78" W="1023" H="550" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_START" X = "1023" Y="118" Z ="3" W="258" H="83" IMG = "../Data/6_ui/constellation/ctStart.tga" IMG_W = "258" IMG_H = "83"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<IMG ID = "IMG_START_BG" X = "285" Y="85" Z ="2" W="475" H="163" IMG = "../Data/6_ui/constellation/ctStartBg.tga" IMG_W = "475" IMG_H = "163" />
+		<FORM ID="FRM_DUNGEON_START_NAME" ALIGN_X="50" Y="198" Z="5" W="258" H="83">
+			<ATTR TEXT="" FONT="Font_GuildName" T_X="129" T_Y="0" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFF6D676"/>
+		<SCRIPT ID="ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			UISelf:SetStaticTextW( GetMapNameW(g_world:GetMapNo()) )
+			Send_PT_C_M_NFY_DEFENCE_STAGE()
+		</SCRIPT>
+		</FORM>
+		<SCRIPT ID = "ON_CALL">
+			local ms = UISelf:GetControl("IMG_START")
+			ms:SetLocation( Point2(ms:GetLocation(), ms:GetLocation():GetY()) )
+			g_StartUIState = 1
+			g_StartUITimeStamp = GetAccumTime()
+
+			CloseUI("FRM_DEFENCE_NEXT_DELAY")
+
+			if 0 ~= GetCopyPointChargeCount() then
+				GetUIWnd("FRM_POINT_COPY_MACHINE"):GetControl("FRM_KILL_MONSTER"):Disable(false)
+			end
+		</SCRIPT>
+		<SCRIPT ID = "ON_TICK">
+			AnimateConstellationStartUI(UISelf)
+		</SCRIPT>
+		<SCRIPT ID ="ON_CLOSE">
+			CloseUI("IMG_DEFENCE_REWARD_STAGE")
+		</SCRIPT>
+	</FORM>
+	
+	<!--스테이지 방어 실패-->
+	<FORM ID = "FRM_CONSTELLATION_STAGE_FAILED" PRIORITY="99" NO_FOCUS="1">
+		<ATTR ALIGN_X="50" Y="78" W="1023" H="550" PASS_EVENT = "1"/>
+		<FORM ID = "FRM_TEXT">
+			<ATTR X = "0" Y = "155" W = "1023" H = "38" FONT = "Font_GuildName" T_CENTER="1" T_X="512" TEXT = "400964" FONT_COLOR_HEX="0xFFFFF97B" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<IMG ID = "IMG_BG" X = "285" Y="0" W="475" H="163" IMG = "../Data/6_ui/constellation/ctStartBg.tga" IMG_W = "475" IMG_H = "163"/>
+		<IMG ID = "IMG_FAILED" X = "-330" Y="40" Z="1" W="331" H="91" IMG = "../Data/6_ui/mission/msFailedT.tga" IMG_W = "331" IMG_H = "91"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<SCRIPT ID = "ON_CALL">
+			local ms = UISelf:GetControl("IMG_FAILED")
+			ms:SetLocation( Point2(-330, ms:GetLocation():GetY()) )
+			g_StartUIState = 1
+			g_StartUITimeStamp = GetAccumTime()
+			local kTextWnd = UISelf:GetControl("FRM_TEXT")
+			if not kTextWnd:IsNil() then
+				kTextWnd:SetStaticTextW(GetTT(400964))
+			end
+			CloseUI("FRM_MISSION_DEFENCE_TIMER")
+			CloseUI("FRM_DEFENCE_TIMELIMIT")
+			PlaySoundByID("defence-missionfail")
+		</SCRIPT>
+		<SCRIPT ID = "ON_DISPLAY">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local ms = UISelf:GetControl("IMG_FAILED")
+			local msLoc = ms:GetLocation()
+
+			if g_StartUIState == 1 then
+				local iX = 349
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = -330 + iDelta/0.3*600
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 7.2 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = -330
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 349 + iDelta/0.3*754
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseUI("FRM_MISSION_STAGE_SUBINFO")</SCRIPT>
+	</FORM>
+	
+	<!-- /CallUI("FRM_CONSTELLATION_RESULT") -->
+	<FORM ID = "FRM_CONSTELLATION_RESULT_TITLE" ALIGN_X="50" ALIGN_Y="50" Z ="5" W="320" H="108" IMG = "../Data/6_ui/constellation/ctResulttitle.tga" IMG_W = "320" IMG_H = "108" CAN_CLIP="1" PRIORITY="11"/>
+	<FORM ID = "FRM_CONSTELLATION_RESULT" PRIORITY="10"> 
+		<ATTR ALIGN_X="50" ALIGN_Y = "50" W = "512" H = "512" IMG="../Data/6_ui/constellation/ctResultbox.tga" IMG_W = "512" IMG_H = "512" CAN_CLIP="1"/>
+		
+		<BUTTON ID="BTN_CANCLE" X="335" Y="428" W="79" H="28">
+			<ATTR TEXT="400338" FONT="FTbt_12" T_X="42" T_Y="5" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				if g_world:IsHaveWorldAttr(GATTR_FLAG_MISSION) and false==IsMissionLastStage() then
+					UISelf:CloseParent()
+					CMP_STATE_CHANGE(13)
+				else
+					ReqExitInstanceDungeon()
+				end
+			</SCRIPT>
+		</BUTTON>
+		
+		<FORM ID="FRM_MY_ID" X="80" Y="65" Z="2" W="200" H="20" TEXT="" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<FORM ID="FRM_MY_PARTY_MEMBER0" X="71" Y="236" Z="2" W="200" H="20" TEXT="" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<FORM ID="FRM_MY_PARTY_MEMBER1" X="71" Y="324" Z="2" W="200" H="20" TEXT="" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<FORM ID="FRM_MY_PARTY_MEMBER2" X="71" Y="412" Z="2" W="200" H="20" TEXT="" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+		
+		<!--
+		<BUILD ID="BLD_MY_ICON" TARGET_ID="ICON_MY_ITEM" X="83" Y="91" X_COUNT="2" Y_COUNT="2" X_GAB="61" Y_GAB="64"/>
+		<ICON ID="ICON_MY_ITEM" X="0" Y="0" Z="10" W="48" H="48" ICON_GRP="254">
+		-->
+		<BUILD ID="BLD_MY_ICON" TARGET_ID="ICON_MY_ITEM" X="87" Y="95" X_COUNT="2" Y_COUNT="2" X_GAB="61" Y_GAB="64"/>
+		<ICON ID="ICON_MY_ITEM" X="0" Y="0" Z="10" W="48" H="48" ICON_GRP="254">
+			<SCRIPT ID="ON_CALL"> UISelf:ClearCustomData() </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">
+					local iItemNo = UISelf:GetCustomDataAsInt()
+					if iItemNo ~= 0 then
+						UISelf:CallIconToolTip()
+					end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		
+		<BUILD ID="BLD_PARTY_ICON1" TARGET_ID="ICON_ITEM_PARTY_MEMBER0" X="69" Y="258" X_COUNT="3" Y_COUNT="1" X_GAB="48"/>
+		<ICON ID="ICON_ITEM_PARTY_MEMBER0" X="0" Y="0" Z="10" W="48" H="48" ICON_GRP="254">
+			<SCRIPT ID="ON_CALL"> UISelf:ClearCustomData() </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">
+					local iItemNo = UISelf:GetCustomDataAsInt()
+					if iItemNo ~= 0 then
+						UISelf:CallIconToolTip()
+					end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		
+		<BUILD ID="BLD_PARTY_ICON2" TARGET_ID="ICON_ITEM_PARTY_MEMBER1" X="69" Y="346" X_COUNT="3" Y_COUNT="1" X_GAB="48"/>
+		<ICON ID="ICON_ITEM_PARTY_MEMBER1" X="0" Y="0" Z="10" W="48" H="48" ICON_GRP="254">
+			<SCRIPT ID="ON_CALL"> UISelf:ClearCustomData() </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">
+					local iItemNo = UISelf:GetCustomDataAsInt()
+					if iItemNo ~= 0 then
+						UISelf:CallIconToolTip()
+					end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		
+		<BUILD ID="BLD_PARTY_ICON3" TARGET_ID="ICON_ITEM_PARTY_MEMBER2" X="69" Y="434" X_COUNT="3" Y_COUNT="1" X_GAB="48"/>
+		<ICON ID="ICON_ITEM_PARTY_MEMBER2" X="0" Y="0" Z="10" W="48" H="48" ICON_GRP="254">
+			<SCRIPT ID="ON_CALL"> UISelf:ClearCustomData() </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">
+					local iItemNo = UISelf:GetCustomDataAsInt()
+					if iItemNo ~= 0 then
+						UISelf:CallIconToolTip()
+					end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		
+		<!-- 연출(룰렛) 아이콘 3x3 -->
+		<BUILD ID="BLD_SECLECT_ICON" TARGET_ID="ICON_SECLECT_ITEM" X="308" Y="104" X_COUNT="3" Y_COUNT="3" X_GAB="48" Y_GAB="48"/>
+		<ICON ID="ICON_SECLECT_ITEM" X="0" Y="0" Z="10" W="40" H="40" ICON_GRP="254">
+			<SCRIPT ID="ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">
+					local iItemNo = UISelf:GetCustomDataAsInt()
+					if iItemNo ~= 0 then
+						UISelf:CallIconToolTip()
+					end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		
+		<!-- 연출 커서 -->
+		<BUILD ID="BLD_SLOT" X="301" Y="98" X_COUNT="3" Y_COUNT="3" X_GAB="48" Y_GAB="48" TARGET_ID="FRM_C_RESULT_SLOT"/>
+		<FORM ID="FRM_C_RESULT_SLOT" X="0" Y="0" Z="15" W="54" H="54" IS_VISIBLE="0" PASS_EVENT="1">
+			<IMG ID="IMG_SELECT_ANI" X="0" Y="0" W="54" H="54" Z="16" IMG="../Data/6_UI/constellation/cticonselectAni.tga">
+				<ATTR IMG_W="162" IMG_H="108" U="3" V="2" UV_INDEX="1" PASS_EVENT="1"/>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.2, 1, 6, 1)</SCRIPT>
+			</IMG>
+		</FORM>
+		
+		<!-- 돌리기 아이콘 -->
+		<ICON ID="ICON_BONUS_ITEM" X="292" Y="291" Z="10" W="40" H="40" ICON_GRP="254">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				UISelf:CallIconToolTip()
+
+				if false == UISelf:IsGrayScale() then
+					PlaySound("../Sound/U_Sound/button(rollover).wav")
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if 0 ~= UISelf:GetCustomDataAsInt() and false == UISelf:IsGrayScale() then
+					RequestAddReward()
+					PlaySound("../Sound/U_Sound/button(click).wav")
+					GetEventTimer():Add("CONSTELLATION_RESULT_BONUS_ITEM", 0.1, "GetUIWnd('FRM_CONSTELLATION_RESULT'):GetControl('ICON_BONUS_ITEM'):SetCustomDataAsInt("..tostring(UISelf:GetCustomDataAsInt())..")", 1, false)
+					UISelf:ClearCustomData()
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">GetEventTimer():Del("CONSTELLATION_RESULT_BONUS_ITEM")</SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_CURSOR" X="290" Y="290" W="42" H="42" Z="4" BTN_IMG="../Data/6_ui/common/cmIconOver02.tga"  BTN_IMG_W="84" BTN_IMG_H="84" PASS_EVENT="1" NO_FOCUS="1" BTN_DOWN_IDX="0"/>
+
+		<FORM ID="FRM_NEED" X="340" Y="294" Z="2" W="140" H="47" TEXT="798821" T_X="0" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<FORM ID="FRM_HAVE" X="340" Y="311" Z="2" W="140" H="47" TEXT="798822" T_X="0" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+		
+		<FORM ID="FRM_HELP_TOOLTIP" X="271" Y="330" W="211" H="96">
+			<ATTR IMG="../Data/6_ui/constellation/ctresultinfo.tga" IMG_W="211" IMG_H="96"/>
+			<ATTR TEXT="798825" FONT ="Font_Text" T_X ="18" T_Y="30" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_ARROW" X="266" Y="301" W="25" H="24" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_ui/mission/msDfsArwAni.tga" IMG_W="50" IMG_H="48" U="2" V="2" UV_INDEX="2"/>
+			<SCRIPT ID="ON_DISPLAY">
+				UVAnimation(UISelf, 0.05)
+			</SCRIPT>
+		</FORM>
+		
+		<SCRIPT ID="ON_CLOSE">
+			UISelf:CloseParent()
+			CloseToolTip()
+			ConstellationResultClose()
+			local kWndTitle = GetUIWnd("FRM_CONSTELLATION_RESULT_TITLE")
+			if kWndTitle:IsNil() == false then
+				kWndTitle:Close()
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">UpdateResult()</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_CONSTELLATION_ROADSIGN" ALIGN_X="50" ALIGN_Y="50" Z="-1" TICK_TIME="100" ALIVE_TIME="10000" PASS_EVENT="1">
+		<SCRIPT ID="ON_CALL">
+			InitConstellationRoadSign(UISelf)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			UpdateConstellationRoadSign(UISelf)
+		</SCRIPT>
+
+		<BUILD ID="BLD_ARROW_NORMAL" X="0" Y="0" X_COUNT="8" Y_COUNT="1" TARGET_ID="FRM_ARROW_NORMAL_" START_INDEX="1"/>
+		<FORM ID="FRM_ARROW_NORMAL_" X="0" Y="0" W="90" H="90"
+				IMG="../Data/6_UI/constellation/ctarrow_normal.tga"	IMG_W="360" IMG_H="720" U="4" V="8" UV_INDEX="1"/>
+
+		<BUILD ID="BLD_ARROW_BOSS" X="0" Y="50" X_COUNT="8" Y_COUNT="1" TARGET_ID="FRM_ARROW_BOSS_" START_INDEX="1"/>
+		<FORM ID="FRM_ARROW_BOSS_" X="0" Y="0" W="90" H="90"
+				IMG="../Data/6_UI/constellation/ctarrow_boss.tga" IMG_W="360" IMG_H="720" U="4" V="8" UV_INDEX="1"/>
+				
+		<BUILD ID="BLD_ARROW_BONUS" X="0" Y="100" X_COUNT="8" Y_COUNT="1" TARGET_ID="FRM_ARROW_BONUS_" START_INDEX="1"/>
+		<FORM ID="FRM_ARROW_BONUS_" X="0" Y="0" W="90" H="90"
+				IMG="../Data/6_UI/constellation/ctarrow_bonus.tga" IMG_W="360" IMG_H="720" U="4" V="8" UV_INDEX="1"/>
+	</FORM>
+	
+	<STATIC_FORM ID="SFRM_CONSTELLATION_STORY" ALIGN_X="50" ALIGN_Y="60" Z="101" W="426" H="442" PRIORITY="11" STATIC_NUM="35" COLOR_TYPE="2" IS_VISIBLE="1">
+		<BUTTON ID="BTN_CONTELLATION_STORY_EXIT" X="400" Y="7" W="20" H="20" PRIORITY="2" BTN_IMG="../Data/6_UI/constellation/ctEmotcX.tga" BTN_IMG_W="40" BTN_IMG_H="40">
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		<IMG ID="STORY_BG" X="2" Y="2" W="426" H="239" IMG="../Data/6_ui/Constellation/ctStoryImage_01.tga" IMG_W="426" IMG_H="239" IGNORE_PARENT_RECT="1"/>
+		
+		<LIST ID="LST_CONSTELLATION_STORY" X="0" Y="150" Z="2" W="420" H="260">
+			<ATTR ELEMENT_ID="FRM_CONSTELLATION_INFO_DIALOG" ITEM_X="5" ITEM_Y="5"/>
+			<IMG ID="ScrBg" X="400" Y="-9" Z="-1" W="13" H="260" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="280" IGNORE_PARENT_RECT="1"/>
+			<BUTTON ID="ScrUp" 	   X="398" Y="-10"  W="19" H="15" BTN_IMG="../Data/6_ui/cashShop/csGcScrollUp.tga"  BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrDown"   X="398" Y="260" W="19" H="15" BTN_IMG="../Data/6_ui/cashShop/csGcScrollDn.tga"  BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrMiddle" X="400" Y="0"  W="15" H="21" BTN_IMG="../Data/6_ui/cashShop/csGcScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="ScrBg"/>
+		</LIST>
+		<HOTKEY ID="1">
+			UISelf:Close()
+			return true
+		</HOTKEY>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_CONSTELLATION_INFO_DIALOG" X="0" Y="0" Z="102" W="390" H="30" >
+		<ATTR TEXT="" FONT="QTtext" T_X="15" T_Y="0" T_BOLD="0" FONT_COLOR_HEX="0xFFFFFFFF"/>
+	</FORM>
+	
+	<!-- GemStore -->
+	<STATIC_FORM ID="SFRM_JEWEL_CONSTELLATION" ALIGN_X="80" ALIGN_Y="50" W="401" H="562" STATIC_NUM="1" CAN_DRAG="1" NO_FOCUS="1">
+		<!-- expression Owned Gems /CallUI("SFRM_JEWEL_CONSTELLATION") -->
+		<STATIC_FORM ID="SFRM_TITLEBAR" X="1" Y="0" W="397" H="36" Z="0" STATIC_NUM="4"/>
+		<STATIC_FORM ID ="SFRM_TAB_BG" X="10" Y="5" W="300" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" T_LEFT = "1" T_X = "5" T_Y = "4" >
+			<ATTR TEXT="" FONT="FTbt_12" FONT_COLOR_HEX="0xFF4D3413" />
+				<FORM ID="FRM_TITLE_TAB" X="290" Y="0" Z="1" W="298" H="24" NO_FOCUS="1" >
+					<ATTR IMG="../Data/6_ui/constellation/ctTabCorner.tga" IMG_W="14" IMG_H="24"/>
+				</FORM>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_CLOSE" X="368" Y="3" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" PASS_EVENT="1" NO_FOCUS="1" BTN_IMG_W="48" BTN_IMG_H="48">
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		
+		<BUILD ID="BLD_HISTORY_SLOT_BG" TARGET_ID="SFRM_HISTORY_SLOT_BG" X="30" Y="50" Z="2" X_COUNT="7" Y_COUNT="1" X_GAB="50"/>
+		<STATIC_FORM ID="SFRM_HISTORY_SLOT_BG" X="0" Y="0" Z="1" W="46" H="46" ICON_GRP ="254" STATIC_NUM="48" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" IS_VISIBLE = "1">
+			<BUTTON ID="BTN_CURSOR" X = "2" Y = "2" W ="42" H ="42" Z="4" BTN_IMG="../Data/6_ui/common/cmIconOver02.tga"  IGNORE_PARENT_RECT="1" BTN_IMG_W="84" BTN_IMG_H="84" IS_VISIBLE="1" PASS_EVENT = "1" NO_FOCUS = "1"/>
+			<ICON ID="ICON_JEWEL" X="3" Y="3" Z="1" W="42" H="43" ICON_GRP="254">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kWnd = UISelf
+					local iSeletedItemNo = kWnd:GetCustomDataAsInt()
+					local iOrderIdx = kWnd:GetControl("FRM_ORDER_INDEX"):GetCustomDataAsInt()
+					if iSeletedItemNo > 0 then
+						SetItemTreeTime(iSeletedItemNo,iOrderIdx)
+					end
+				</SCRIPT>
+				<FORM ID="FRM_ORDER_INDEX" X="0" Y="0" W="0" H="0" PASS_EVENT="1" NO_FOCUS="1"/>
+			</ICON>
+		</STATIC_FORM>
+
+		
+		<BUILD ID="BLD_SLOT_BG" TARGET_ID="ICON_SLOT_BG" X="40" Y="110" Z="1" X_COUNT="5" Y_COUNT="5" X_GAB="70" Y_GAB="83" />
+		<STATIC_FORM ID="ICON_SLOT_BG" X="0" Y="0" Z="1" W="46" H="62" ICON_GRP ="254" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" IS_VISIBLE = "0">
+			<STATIC_FORM ID="ICON_SLOT_BG_SHADOWN" X="2" Y="2" Z="0" W="42" H="42" ICON_GRP ="254" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" IS_VISIBLE = "0"/>
+		</STATIC_FORM>
+		
+		<BUILD ID="BLD_ICON_ARROW" TARGET_ID="FRM_ARROW" X="55" Y="88" Z="3" X_COUNT="5" Y_COUNT="5" X_GAB="70" Y_GAB="83"/>
+		<FORM ID="FRM_ARROW" X="0" Y="0" Z="3" H="16" PASS_EVENT="1" NO_FOCUS="1">	
+			<IMG ID="IMG_UP_ARROW" X="0" Y="0" Z="3" W="12" H="24" NO_FOCUS="1" PASS_EVENT="1" IMG="../Data/6_ui/constellation/ctitemarrow01.tga" IMG_W="12" IMG_H="24" IS_VISIBLE ="0" />					
+			<IMG ID="IMG_SIDE_ARROW" X="7" Y="10" Z="2" W="73" H="13" NO_FOCUS="1" PASS_EVENT="1" IMG="../Data/6_ui/constellation/ctitemarrow02.tga" IMG_W="73" IMG_H="13" IS_VISIBLE ="0" />					
+		</FORM>
+			
+		<FORM ID="FRM_HISTORY_ITEM_TEXT" X="54" Y="5" Z="2"  W="200" H="40" TEXT="798827" T_X="30" T_Y="27" T_CENTER="1">
+			<ATTR FONT="FTbt_12" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF" PASS_EVENT="1" NO_FOCUS="1"/>
+		</FORM>
+				
+		<FORM ID="FRM_UI" X="9" Y="98" Z="-1" W="384" H="413" USE_DRAW_RECT="1">
+			<STATIC_FORM ID="SFRM_BG_COLOR_1" X="0" Y="-2" Z="-2" W="384" H="416" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IGNORE_PARENT_RECT="1" CAN_CLIP="0"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="0" Y="-2" Z="-1" W="384" H="416" STATIC_NUM="3" IGNORE_PARENT_RECT="1" CAN_CLIP="0"/>
+
+			<FORM ID="FRM_CENTER_ITEM" X="24" Y="281" Z="4" W="40" H="40" PASS_EVENT="1" NO_FOCUS="1" PRIORITY="10" IGNORE_PARENT_RECT="1" CAN_CLIP="0">
+				<IMG ID="IMG_SELECT_ANI" X="0" Y="-22" W="60" H="75" Z="0" PASS_EVENT="1" NO_FOCUS="1" IMG="../Data/6_UI/constellation/cticonselectEF.tga" IMG_W="180" IMG_H="150">
+					<ATTR U="3" V="2" IGNORE_PARENT_RECT="1" CAN_CLIP="0"/>
+					<SCRIPT ID="ON_CALL">
+						UISelf:SetUVIndex(1)
+					</SCRIPT>
+					<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.2, 1, 6, 1)</SCRIPT>
+				</IMG>
+			</FORM>
+
+			<BUILD ID="BLD_SLOT_BG" TARGET_ID="ICON_SLOT_BG" X="31" Y="10" Z="1" X_COUNT="5" Y_COUNT="5" X_GAB="70" Y_GAB="83"/>
+			<STATIC_FORM ID="ICON_SLOT_BG" X="0" Y="0" Z="-1" W="47" H="47" ICON_GRP ="254" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" IS_VISIBLE = "0">
+				<STATIC_FORM ID="ICON_SLOT_BG_SHADOWN" X="2" Y="2" Z="1" W="43" H="43" ICON_GRP ="254" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" IS_VISIBLE = "1"/>
+			</STATIC_FORM>
+
+			<FORM ID="ICON_SLOT_TOP_BG" X="29" Y="9" Z="1" W="48" H="63" ICON_GRP ="254" IMG="../Data/6_ui/constellation/ctDefaultitem.tga"  IGNORE_PARENT_RECT="1" IMG_W="48" IMG_H="63" IS_VISIBLE="0" PASS_EVENT = "1" NO_FOCUS = "1"/> 
+			<FORM ID="FRM_TOP_JEWEL" X="33" Y="18" Z="3" W="50" H="57" PASS_EVENT="1" NO_FOCUS="1">
+				<BUTTON ID="BTN_CURSOR" X = "-1" Y = "0" W ="42" H ="42" Z="4" BTN_IMG="../Data/6_ui/common/cmIconOver02.tga"  IGNORE_PARENT_RECT="1" BTN_IMG_W="84" BTN_IMG_H="84" IS_VISIBLE="0" PASS_EVENT = "1" NO_FOCUS = "1"/>
+				<ICON ID="ICON_JEWEL" X="0" Y="0" Z="0" W="42" H="43" ICON_GRP ="254" CAN_CLIP="1">
+					<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">
+						UISelf:CallIconToolTip()
+						PlaySound("../Sound/U_Sound/button(rollover).wav")
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kWnd = UISelf
+						local iSeletedItemNo = kWnd:GetCustomDataAsInt()
+						local iOrderIdx = kWnd:GetControl("FRM_ORDER_INDEX"):GetCustomDataAsInt()
+						if iSeletedItemNo > 0 then
+							SetItemTreeTime(iSeletedItemNo,iOrderIdx)
+						end
+						PlaySound("../Sound/U_Sound/button(click).wav")
+					</SCRIPT>
+					<FORM ID="FRM_ORDER_INDEX" X="0" Y="0" W="0" H="0" PASS_EVENT="1" NO_FOCUS="1"/>
+				</ICON>
+			</FORM>
+			
+			<BUILD ID="BLD_ICON_JEWEL" TARGET_ID="FRM_JEWEL" X="33" Y="12" Z="1" X_COUNT="5" Y_COUNT="5" X_GAB="70" Y_GAB="83"/>
+			<FORM ID="FRM_JEWEL" X="0" Y="0" Z="2" W="42" H="57" PASS_EVENT="1" NO_FOCUS="1">
+				<BUTTON ID="BTN_CURSOR" X = "0" Y = "0" W ="42" H ="42" Z="4" BTN_IMG="../Data/6_ui/common/cmIconOver02.tga"  IGNORE_PARENT_RECT="1" BTN_IMG_W="84" BTN_IMG_H="84" IS_VISIBLE="0" PASS_EVENT = "1" NO_FOCUS = "1"/>
+				<FORM ID="FRM_COUNT_TEXT" X="1" Y="15" W="41" H="42" Z="3" TEXT="" T_X="18" T_Y="27" T_CENTER="1" PASS_EVENT="1" NO_FOCUS="1" />
+				<IMG ID="IMG_NUM_BG" X="0" Y="44" Z="2" W="40" H="14" NO_FOCUS="1" PASS_EVENT="1" IMG="../Data/6_UI/constellation/ctPitBg.tga" IMG_W="40" IMG_H="14" IS_VISIBLE ="0" />
+				<IMG ID="IMG_NO_ITEM" X="0" Y="0" Z="2" W="42" H="42" NO_FOCUS="1" PASS_EVENT="1"IMG="../Data/6_ui/constellation/ctNoitem.tga" IMG_W="42" IMG_H="42" IS_VISIBLE ="0" />
+				<ICON ID="ICON_JEWEL" X="0" Y="0" Z="1" W="42" H="43" ICON_GRP ="254" CAN_CLIP="1">
+					<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">
+						if UISelf:GetParent():GetControl("IMG_NUM_BG"):IsVisible() then
+							UISelf:CallIconToolTip()
+							PlaySound("../Sound/U_Sound/button(rollover).wav")
+						end
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kWnd = UISelf
+						local iSeletedItemNo = kWnd:GetCustomDataAsInt()
+						local iOrderIdx = kWnd:GetControl("FRM_ORDER_INDEX"):GetCustomDataAsInt()
+						if iSeletedItemNo > 0 then
+							SetItemTreeTime(iSeletedItemNo,iOrderIdx)
+						end
+						PlaySound("../Sound/U_Sound/button(click).wav")
+					</SCRIPT>
+					<FORM ID="FRM_ORDER_INDEX" X="0" Y="0" W="0" H="0" PASS_EVENT="1" NO_FOCUS="1"/>
+				</ICON>
+			</FORM>
+			
+			<BUILD ID="BLD_ICON_ARROW" TARGET_ID="FRM_ARROW" X="46" Y="-12" Z="3" X_COUNT="5" Y_COUNT="6" X_GAB="70" Y_GAB="83"/>
+			<FORM ID="FRM_ARROW" X="0" Y="0" Z="3" W="80" H="24" PASS_EVENT="1" NO_FOCUS="1">	
+				<IMG ID="IMG_UP_ARROW" X="0" Y="0" Z="3" W="12" H="24" NO_FOCUS="1" PASS_EVENT="1" IMG="../Data/6_ui/constellation/ctitemarrow01.tga" IMG_W="12" IMG_H="24" IS_VISIBLE ="0" />
+				<IMG ID="IMG_SIDE_ARROW" X="7" Y="10" Z="2" W="73" H="13" NO_FOCUS="1" PASS_EVENT="1" IMG="../Data/6_ui/constellation/ctitemarrow02.tga" IMG_W="73" IMG_H="13" IS_VISIBLE ="0" />
+			</FORM>
+		</FORM>
+		
+		<STATIC_FORM ID="SFRM_TOOL_TIP" X="4" Y="561" Z="1" W="392" H="31" ICON_GRP ="254" STATIC_NUM="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" IS_VISIBLE = "1">
+			<ATTR TEXT="798832" T_X="68" T_Y="7" T_LEFT="1" FONT="FTbt_12" OUTLINE_COLOR_HEX="0xFF000000" FONT_COLOR_HEX="0xFFFFFFFF" PASS_EVENT="1" NO_FOCUS="1"/>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_OK" X = "153" Y = "521" W ="84" H ="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(50716, 2202) </SCRIPT>
+			<ATTR FONT = "FTbt_12" T_X = "42" T_Y ="6" T_CENTER = "1" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> 
+				SendReqGemTradeTree()
+			</SCRIPT>
+			<HOTKEY ID = "61">
+				SendReqGemTradeTree()
+			</HOTKEY>
+		</BUTTON>
+		
+		<HOTKEY ID="1">
+			UISelf:Close()
+			return true
+		</HOTKEY>
+		
+	</STATIC_FORM>	
+	
+	
+	
+	<FORM ID="FRM_CONSTELLATION_MINIMAP_THUMBNAIL" ALIGN_X="50" Y="48" W="480" H="160">
+		<ATTR IMG="../Data/6_UI/dungeon/dgMapLn019_a.tga" IMG_W="480" IMG_H="160" TICK_TIME="100"/>
+		<SCRIPT ID="ON_CALL">
+			InitConstellationMinimapThumbnail(UISelf)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			UpdateConstellationMinimapThumbnail(UISelf)
+		</SCRIPT>
+		<HOTKEY ID="1">
+			UISelf:Close()
+			return true
+		</HOTKEY>
+	</FORM>
+
+</XUI>

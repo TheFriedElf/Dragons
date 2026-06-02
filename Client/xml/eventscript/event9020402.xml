@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+<!-- 플레이어 이동을 막는다. -->
+    <!--CMD TYPE="PlayAnimation" ClassNo ="5006901" SlotName="opening_idle"/-->
+    <CMD TYPE="WaitCamera"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <!--CMD TYPE="ShowActor" ClassNo ="5006901" Show="false"/-->
+<!-- 화면을 와이드 화면으로 출력하고 2초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+<!-- 수호석 줌인 레드-->
+    <CMD type="waittime" time="1"/>
+    <CMD TYPE="MoveCamToActor" ClassNo ="5006904" MoveTime="1" CamActorDistance="250" CamMoveUpDistance="5"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD type="waittime" time="3"/>
+    <CMD TYPE="WaitCamera"/>
+<!-- 몬스터줌업 레드-->
+	<CMD TYPE="MoveCamToTrigger" Target="R_Mon_5" MoveTime="2" CamActorDistance="300" CamMoveUpDistance="-30"/>
+    <CMD type="waittime" time="1"/>
+    <CMD TYPE="WaitCamera"/>
+	<CMD type="waittime" time="3"/>
+<!-- PC로 돌아오기 -->
+	<CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="2" />
+	<CMD type="waittime" time="2"/>    
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+<!-- PC이동가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	
+	<CMD type="Text" UIWndName="SFRM_EVENT_SCRIPT_TEXT" TextTTID="401166" AlignX="50" AlignY="50" WaitTime="4"/>
+	<CMD type="waittime" time="5"/>
+	<CMD type="Text" UIWndName="SFRM_EVENT_SCRIPT_TEXT" TextTTID="401167" AlignX="50" AlignY="50" WaitTime="4"/>
+	<CMD type="waittime" time="5"/>
+	
+	<CMD type="CallUI" UIWndName = "FRM_MISSION_START_F7"/>
+</EVENT_SCRIPT>

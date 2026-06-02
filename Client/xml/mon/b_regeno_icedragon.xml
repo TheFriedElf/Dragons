@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="B_Regeno_IceDragon" INIT_ACTION="a_opening">
+	<TEXTURE SRC="reflection_metal.dds">../Data/2_Mon/N_Bumblow/reflection_metal.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_B_Aram_Mutisha"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/B_Regeno_IceDragon/B_Regeno_IceDragon.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="110"/>
+			<SPHERE TO="p_hit_point_02" SIZE="78"/>
+			<!--SPHERE TO="p_hit_point_01" SIZE="10"/-->
+		</ABV>
+		<SLOT>
+			<!-- 냉기 브레스 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!-- 전방으로 양손을 뻗으면 검은 기가 몰아치며 앞으로 나간다 -->
+      <ITEM NAME="breath_btlidle_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="breath_01" ANIMATION="1000202"/>
+			<!--광파 공격 -->
+      <ITEM NAME="btlidle_01_start" ANIMATION="1000203"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000204"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000205"/>
+			<!--얼음떨구기-->
+      <ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000206"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000207"/>
+			<!--혼란-->
+      <ITEM NAME="attk_02_01_start" ANIMATION="1000208"/>
+      <ITEM NAME="attk_02_01" ANIMATION="1000209"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000210"/>			
+			<!--pc 날리기-->
+      <ITEM NAME="attk_03_01_start" ANIMATION="1000211"/>
+      <ITEM NAME="attk_03_01" ANIMATION="1000212"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000213"/>
+			<!--힐-->
+      <ITEM NAME="attk_04_01_start" ANIMATION="1000214"/>
+      <ITEM NAME="attk_04_01" ANIMATION="1000215"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000216"/>			
+			<!--얼음 유도탄-->
+      <ITEM NAME="shot_around_02_start" ANIMATION="1000217"/>
+      <ITEM NAME="shot_around_02" ANIMATION="1000218"/>
+			<ITEM NAME="shot_around_02_fire" ANIMATION="1000219" FIRE_START_NODE="p_hit_point_01" FIRE_START_NODE1="p_hit_point_01" FIRE_START_NODE2="p_hit_point_01" PROJECTILE_ID="PROJECTILE_Mutisha_shot_06" PROJECTILE_ID1="PROJECTILE_Mutisha_shot_07" PROJECTILE_ID2="PROJECTILE_Mutisha_shot_08" PROJECTILE_SPEED="250" PROJECTILE_SCALE="2.0" PROJECTILE_SCALE1="2.0" PROJECTILE_SCALE2="2.0"/>
+			<!-- 네브여왕으로 변신 -->
+      <ITEM NAME="attk_05_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000204"/>	
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="Opening" ANIMATION="1000055" />
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

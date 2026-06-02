@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Maid_menial_Halloween_eft" DIE_PARTICLE_ID="ef_monster_die_04_B" DIE_PARTICLE_NODE="p_ef_die" INIT_ACTION="a_opening">
+	<TEXTURE SRC="N_maid_menial_1_01.dds">../Data/2_Mon/N_Maid_menial_1/N_maid_menial_1_01.dds</TEXTURE>
+	<TEXTURE SRC="N_maid_menial_1_02.dds">../Data/2_Mon/N_Maid_menial_1/N_maid_menial_1_02.dds</TEXTURE>
+	<TEXTURE SRC="N_maid_menial_1_face.dds">../Data/2_Mon/N_Maid_menial_1/N_maid_menial_1_face.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Maid_menial_Halloween"/>
+		<KFMPATH SCALE="2.0">../Data/2_Mon/N_Maid_menial_Halloween/N_Maid_menial_Halloween.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="2.0">../Data/2_Mon/N_Maid_menial_Halloween/N_Maid_menial_Halloween_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="13"/>
+			<CAPSULE TO="p_hit_point_02" SIZE="15,51.0" ROTATE="1,0,0,90"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본 치기 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- 입을 벌려 토 한다 (범위) -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000201"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000202"/>
+			<!-- 소리를 지른다 (범위) -->
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000203"/>
+			<ITEM NAME="breath_01" ANIMATION="1000204"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021" DONT_RELEASE_PARTICLE="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<!--ITEM NAME="walk" ANIMATION="1000050"/-->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000055"/-->
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

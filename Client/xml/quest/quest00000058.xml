@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>58</ID> <!--T.T.10005801 초콜릿단? -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	과자공장 초콜릿 보관소(F7)의 초코송이류 몬스터를 조사하자.-->
+<!--[완료NPC]	바람항구(발렌타인) - 고든-->
+<!--[내용]	고든은 애정파괴단도 문제지만 현재 초콜릿단이라는 이상한 단체가 나타나 조사하고 있다고 한다. 고든은 초콜릿단의 정체를 알기 위해서 초코송이류 몬스터를 조사해 보자. 초콜릿단을 조사하기 위해서는 과자공장의 초콜릿 보관소(F7)로 가야 한다. 고든 옆의 야마키에게 이야기해서 과자공장으로 들어가 보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</CLIENT> <!--시작NPC 바람항구(발렌타인) - 고든 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</PAYER> <!--완료NPC 바람항구(발렌타인) - 고든 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 11 바람항구(발렌타인) - 고든 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">35727061</MONSTER> 
+ <!--MON_NO=35727061/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">35727081</MONSTER> 
+ <!--MON_NO=35727081/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">35727441</MONSTER> 
+ <!--MON_NO=35727441/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">35727541</MONSTER> 
+ <!--MON_NO=35727541/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">35727161</MONSTER> 
+ <!--MON_NO=35727161/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">35727181</MONSTER> 
+ <!--MON_NO=35727181/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="50" TEXT="10005811"/> <!--초코송이 류 몬스터-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10005821" FACE="Goden_normal"/> <!--조사에 의하면 초콜릿 보관소에 드나들고 있는 녀석들은 초콜릿단이라는 이상한 녀석들이더군.
+요즘 왜 이렇게 이상한 단체가 출몰하는지 모르겠군.%%
+어쨌거나 그 단체가 나타난 이후, 과자공장에서 초콜릿이 제대로 배달되지 못하고 있네.
+자네가 그 초콜릿단을 조사해 줬으면 좋겠네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10005826" FACE="Goden_normal"/> <!--이런, 역시 녀석들이 초콜릿 상자들을 훔쳐가고 있었군.
+의심은 하고 있었지만 이렇게 확실하게 밝혀질 줄은 몰랐군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10005823" FACE="Goden_normal"/> <!--초콜릿단이라, 왠지 애정파괴단과 비슷한 느낌이군.
+녀석들이 도대체 초콜릿 보관소에 왜 기웃거리는지 확실하지는 않지.
+그래서 자네의 도움이 절실히 필요한 거야.%%
+초콜릿단에서 초코송이류 몬스터가 활발하게 움직이더군.
+그 녀석들 50마리만 조사해 주길 바라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10005824" FACE="Goden_angly"/> <!--흠, 이 늙은이에게 조사를 맡기겠다는 이야긴가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10005825" FACE="Goden_normal"/> <!--설마! 선물이라도 놔두고 가는 건 아니겠지? 너무 긍정적인 생각인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10005802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

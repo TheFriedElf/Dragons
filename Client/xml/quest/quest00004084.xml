@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4084</ID> <!--T.T.10408401 조이스 해적단의 비밀(2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	지하수로에서 도둑 펑프 *20 퇴치-->
+<!--[완료NPC]	위험한 동굴 - 칼리곤-->
+<!--[내용]	조이스 해적단의 보물을 구하러 온 칼리곤을 위해, 지하수로의 도둑 펑프 20마리를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</CLIENT> <!--시작NPC 위험한 동굴 - 칼리곤 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER> <!--완료NPC 위험한 동굴 - 칼리곤 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT> <!--진행NPC 11 위험한 동굴 - 칼리곤 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010610/1">6024300</MONSTER> 
+ <!--Mission_Key=6024300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10408411"/> <!--도둑 펑프 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10408421" FACE="Kalligon_normal"/> <!--그 동안 찾아다녔던 보물이 그냥 보물이라면 
+조이스해적단의 보물은 TOP이라고 해야 할까?%%
+야비함이면 야비함, 악랄함이면 악랄함, 역사상 가장 흉악했던 해적- 
+조이스와 뮤르달이 은퇴하면서 숨겨둔 어마어마한 보물들이지.%%
+그 둘은 굉장한 명콤비로 죠니와 나의 롤모델이기도 해.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10408426" FACE="Kalligon_smile"/> <!--이번에 한건 제대로 건지게 되면 죠니와 나는 커다란 해적선을 살거야. 
+만약 우릴 도와준다면 너에게 부선장 자리를 줄게. 크하핫!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10408423" FACE="Kalligon_smile"/> <!--어째서 이곳에 그 보물이 숨겨져 있는 거냐고?
+뭐야, 너 설마... 조이스해적단의 보물에 대해 전혀 모르고 있었어?%%
+아무리 아는 것이 없다 해도... 이 근방에 파리스라는 마녀가 
+흑마술로 부활시킨 망자들이 넘쳐나고 있다는 사실은 알지?%%
+바로 그렇게 살아난 망자들 중에 뮤르달이 존재한다는 정보를 입수했어. 
+게다가 그 뮤르달이 이 위험한 동굴 근방을 떠돌고 있다고.%%
+그게 바로 무슨 뜻이겠어? 뮤르달이 죽어서도 보물에 대한 
+미련을 버리지 못해서 그 근방을 떠돈다는 이야기 아니겠냐구?%%
+하지만 뮤르달의 보물을 찾는 건 우리만이 아닌 것 같아.
+바로 지하수로를 조사하고 있는 저 도둑 펑프 녀석들을 말하는 거지.%%
+가서 도둑 펑프 녀석들 20마리만 해치워죠.
+우리가 먼저 뮤르달을 찾아내야 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10408424" FACE="Kalligon_angly"/> <!--에이… 조금만 내 이야기를 들어봐. 이건 정말 흔치 않은 기회야!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10408425" FACE="Kalligon_normal"/> <!--도둑 펑프는 은밀한 녀석들이니 만만치 않은 일이 될거야. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10408402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

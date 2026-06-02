@@ -1,0 +1,9 @@
+<ACTION ID="a_Haphazard" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_RollingStinger_01"/>
+  <SLOT NAME="Com_skill_RollingStinger_02"  LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_RollingStinger_03"/>
+  <FSM SCRIPT="Skill_Haphazard" 
+       NO_WEAPON_TRAIL="TRUE"
+      />
+</ACTION>

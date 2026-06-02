@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Peojectile_Bear_honey_Shot_01">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="1.6">../Data/5_Effect/2_Mon2/01_Felloruss/01_BasicMon/050100/Bear/efx_bear_honey_shot_01.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_Parabola</SCRIPT>
+	<PARAM SPEED="200.0" ACCEL="0" MASS="0.5"/>
+	<SCRIPT_CALL_EVENT>
+    <EVENT TYPE="FLYING_START"/>
+    <EVENT TYPE="ARIVED_AT_TARGET"/>
+    <EVENT TYPE="ARIVED_AT_TARGET_COLLISION"/>
+	</SCRIPT_CALL_EVENT>
+</PROJECTILE>

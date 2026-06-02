@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Lesath_Shaula" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Lesath_Shaula"/>
+		<KFMPATH>../Data/2_Mon/N_Stone_Scorpion_Shaula/N_Stone_Scorpion_Shaula.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Stone_Scorpion_Shaula/N_Stone_Scorpion_Shaula_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="30"/>
+			<SPHERE TO="p_hit_point_02" SIZE="30"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000071" RANDOM="100" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="PROJECTILE_nothing"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_02" ANIMATION="1000072" RANDOM="100" FIRE_START_NODE="p_wp_l_hand" PROJECTILE_ID="PROJECTILE_magic_ball_blue_01"/>
+			<ITEM NAME="shot_02" ANIMATION="1000073" RANDOM="100" FIRE_START_NODE="p_wp_r_hand" PROJECTILE_ID="PROJECTILE_magic_ball_blue_01"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

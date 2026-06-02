@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_TyphoonWave">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="0.5">../Data/5_Effect/2_Mon2/95_Dungeon/efk_typoon/efk_typoon_wave_01.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_ARROW</SCRIPT>
+	<PARAM SPEED="350.0" ACCEL="80" MASS="0.5"/>
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+	</SCRIPT_CALL_EVENT>
+		  	<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="Scene Root" RANGE="70"/>
+	</COLLISION_SPHERE> 
+</PROJECTILE>
+

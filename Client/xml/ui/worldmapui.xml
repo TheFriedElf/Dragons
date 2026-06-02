@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_WORLDMAP">
+		<ATTR X = "0" Y = "0" W ="1023" H ="767" USE_ALPHA_ANI = "0"/>
+		<SCRIPT ID ="ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetActivaingWorldMap(true)
+			UISelf:InitWorldMap()
+		</SCRIPT>
+		<SCRIPT ID = "ON_DISPLAY">
+			UISelf:DrawWorldMap()
+			UISelf:MouseOverWorldMap(GetCursorPos())
+		</SCRIPT>
+		<SCRIPT ID = "ON_TICK"> 
+			UISelf:PulseWorldMap()
+		</SCRIPT>
+		<SCRIPT ID ="ON_CLOSE">
+			UISelf:TermWorldMap()
+			CloseToolTip()
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetActivaingWorldMap(false)
+			local kMapInfo = GetUIWnd("FRM_WORLDMAP_INFORMATION")
+			if kMapInfo:IsNil() == false then
+				kMapInfo:Close()
+			end
+		</SCRIPT>
+		<SCRIPT ID = "ON_L_BTN_UP">
+			UISelf:InSideWorldMap()
+			UISelf:MouseClickWorldMap(GetCursorPos())
+		</SCRIPT>
+		<SCRIPT ID = "ON_R_BTN_UP">	UISelf:OutSideWorldMap() </SCRIPT>
+		<HOTKEY ID = "1"> UISelf:Close() return true </HOTKEY>
+		<FORM ID="FRM_TEXT" X="535" Y="45" Z="6" W="212" H="108" IGNORE_PARENT_RECT = "1">
+			<ATTR TEXT="700" FONT="FTtext_25" FONT_COLOR_HEX="0xFFfae7cf" T_OUTLINE="1" T_CENTER="1" />
+		</FORM>
+
+		<FORM ID="FRM_SUB_WORLDMAP" X = "0" Y = "0" Z="5" W ="1023" H ="767" PASS_EVENT="1" IS_VISIBLE="1"/>
+		<BUTTON ID = "Close" X = "958" Y = "11" Z="6" W ="76" H ="27">
+			<ATTR BTN_IMG = "../Data/6_ui/map/mapBclose.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "39" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1"/>
+			<SCRIPT ID = "ON_L_BTN_UP"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		
+		<!--
+		<BUTTON ID = "BTN_GO_INSIDE">
+			<ATTR X = "958" Y = "650" W ="56" H ="27" />
+			<ATTR BTN_IMG = "../Data/6_ui/map/mapBplus.tga" BTN_IMG_W = "112" BTN_IMG_H = "54"/>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				UISelf:InSideWorldMap()
+			</SCRIPT>
+		</BUTTON>
+
+		<BUTTON ID = "BTN_GO_OUTSIDE">
+			<ATTR X = "958" Y = "680" W ="56" H ="27" />
+			<ATTR BTN_IMG = "../Data/6_ui/map/mapBminus.tga" BTN_IMG_W = "112" BTN_IMG_H = "54"/>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				UISelf:OutSideWorldMap()
+			</SCRIPT>
+		</BUTTON>
+		-->
+	</FORM>
+
+	<!-- WorldMap, 소스 코드에서 쓰는 디폴트 State. -->
+	<FORM ID="FRM_WORLDMAP_ICON_STATE" X="200" Y="200" W="1" H="1" >
+		<ATTR IS_VISIBLE="0" IMG="" IMG_W="1" IMG_H="1"/>
+		<ATTR TEXT="" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFfae7cf" T_OUTLINE="1" T_CENTER="1"/>
+		<SCRIPT ID = "ON_L_BTN_UP"> UISelf:MouseClickWorldMap(GetCursorPos()) </SCRIPT>
+		<SCRIPT ID = "ON_R_BTN_UP"> UISelf:OutSideWorldMap() </SCRIPT>
+		<FORM ID="OVER_IMG" X="0" Y="0" Z="0" W="1" H="1" IS_VISIBLE="0" PASS_EVENT="1" IMG="" IMG_W="1" IMG_H="1" />
+	</FORM>
+	
+	<!-- WorldMapPopUp, 소스 코드에서 쓰는 디폴트 State. -->
+	<FORM ID="FRM_WORLDMAP_POPUP_ICON_STATE" X="0" Y="0" W="40" H="40" CAN_CLIP="1" >
+		<ATTR IMG="" IMG_W="40" IMG_H="40"/>
+		<ICON ID = "MAIN_ICON" X = "0" Y = "0" W ="40" H ="40" ICON_GRP ="225" ICON_KEY = "3" >
+			<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP"> </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+	</FORM>
+
+	<FORM ID="FRM_WORLDMAP_POPUP_FORM_STATE" X="0" Y="0" W="1" H="1" CAN_CLIP="1" IMG="" IMG_W="1" IMG_H="1" />
+
+	<FORM ID="FRM_WORLDMAP_INFORMATION" X = "0" Y = "0" W ="1023" H ="767"  CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID ="ON_CALL">
+			CallUI("FRM_WORLDMAP_POPUP_ICON_STATE")
+			CallUI("FRM_WORLDMAP_POPUP_FORM_STATE")
+			kIconState = GetUIWnd("FRM_WORLDMAP_POPUP_ICON_STATE")
+			kFormState = GetUIWnd("FRM_WORLDMAP_POPUP_FORM_STATE")
+			UISelf:InitWorldMapPopUp(kIconState, kFormState)
+		</SCRIPT>
+		<SCRIPT ID ="ON_CLOSE">
+			UISelf:TermWorldMapPopUp()
+			CloseToolTip()
+		</SCRIPT>
+		<HOTKEY ID = "1"> UISelf:Close() return true </HOTKEY>
+		
+		<FORM ID="FRM_SUB_WORLDMAP" X = "37" Y = "50" W ="950" H ="668" >
+			<BUTTON ID = "Close" X = "871" Y = "42" Z="5" W ="35" H ="34">
+				<ATTR BTN_IMG = "../Data/6_ui/map/popClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "68"/>
+				<SCRIPT ID = "ON_L_BTN_UP">
+					UISelf:GetParent():CloseParent()
+					UISelf:Close() return true
+				</SCRIPT>
+			</BUTTON>			
+			<BUTTON ID = "BTN_PREV" X = "190" Y = "593" Z="5" W ="27" H ="26" >
+				<ATTR BTN_IMG = "../Data/6_ui/msbook/mbLeftB.tga" BTN_IMG_W = "54" BTN_IMG_H = "52"/>
+				<SCRIPT ID = "ON_L_BTN_UP"> ShowNpcIcon(UISelf) </SCRIPT>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(447>=UISelf:GetParent():GetSize():GetX()) </SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_NEXT" X = "233" Y = "593" Z="5" W ="27" H ="26" >
+				<ATTR BTN_IMG = "../Data/6_ui/msbook/mbRightB.tga" BTN_IMG_W = "54" BTN_IMG_H = "52"/>
+				<SCRIPT ID = "ON_L_BTN_UP"> ShowNpcIcon(UISelf, true) </SCRIPT>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(447>=UISelf:GetParent():GetSize():GetX()) </SCRIPT>
+			</BUTTON>
+		</FORM>
+
+		<FORM ID="FRM_SUB_FIELD" X = "37" Y = "50" W ="950" Z="-1" H ="668" IS_VISIBLE="0">
+			<FORM ID = "FRM_00" X = "0" Y = "0" Z="-1" W ="512" H ="512" CAN_DRAG = "0" >
+				<ATTR IMG = "../Data/6_ui/map/popBbg01.tga" IMG_W = "512" IMG_H = "512" USE_ALPHA_ANI = "0"/>
+			</FORM>
+			<FORM ID = "FRM_10" X = "512" Y = "0" Z="-1" W ="438" H ="512" CAN_DRAG = "0" >
+				<ATTR IMG = "../Data/6_ui/map/popBbg02.tga" IMG_W = "438" IMG_H = "512" USE_ALPHA_ANI = "0"/>
+			</FORM>
+			<FORM ID = "FRM_01" X = "0" Y = "512" Z="-1" W ="512" H ="156" CAN_DRAG = "0" >
+				<ATTR IMG = "../Data/6_ui/map/popBbg03.tga" IMG_W = "512" IMG_H = "156" USE_ALPHA_ANI = "0"/>
+			</FORM>
+			<FORM ID = "FRM_11" X = "512" Y = "512" Z="-1" W ="438" H ="156" CAN_DRAG = "0" >
+				<ATTR IMG = "../Data/6_ui/map/popBbg04.tga" IMG_W = "438" IMG_H = "156" USE_ALPHA_ANI = "0"/>
+			</FORM>
+			<IMG ID = "IMG_GAGE" X = "165" Y= "299" Z="3" W ="164" H ="12" >
+				<ATTR IMG = "../Data/6_ui/map/popBarG.tga" IMG_W = "164" IMG_H = "12"/>
+			</IMG>
+
+			<!-- 맵이름 -->
+			<FORM ID="FRM_TEXT01" X="96" Y="217" Z="3" W="212" H="108" TEXT="400314" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<FORM ID="FRM_TEXT_MAPNAME" X="163" Y="217" Z="3" W="212" H="108" TEXT="19943" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f"/>
+			<!-- 위치 -->
+			<FORM ID="FRM_TEXT02" X="96" Y="246" Z="3" W="212" H="108" TEXT="400316" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<FORM ID="FRM_TEXT_POSITION" X="163" Y="246" Z="3" W="212" H="108" TEXT="19943" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f"/>
+			<!-- 맵성취율 -->
+			<FORM ID="FRM_TEXT03" X="96" Y="276" Z="3" W="212" H="108" TEXT="400260" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+
+			<!--
+			<FORM ID="FRM_TEXT_PERCENT" X="163" Y="276" Z="3" W="212" H="108">
+				<ATTR TEXT="19943" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f"/>
+			</FORM>
+			-->
+
+			<!-- 등장 몬스터 -->
+			<FORM ID="FRM_TEXT04" X="97" Y="338" Z="3" W="212" H="108" TEXT="400261" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<!-- 정예 몬스터 -->
+			<FORM ID="FRM_TEXT05" X="97" Y="495" Z="3" W="212" H="108" TEXT="400262" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<!-- 미션맵  -->
+			<FORM ID="FRM_TEXT06" X="426" Y="93" Z="3" W="212" H="108" TEXT="400263" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<!-- 난이도 4종류 -->
+			<FORM ID="FRM_TEXT07" X="476" Y="93" Z="3" W="212" H="108" TEXT="400264" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f"/>
+			<!-- 난이도1 -->
+			<FORM ID="FRM_TEXT08" X="425" Y="251" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFFfffbb8"/>
+			<FORM ID="FRM_TEXT09" X="534" Y="251" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFFfffbb8"/>
+			<FORM ID="FRM_TEXT10" X="640" Y="251" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFFfffbb8"/>
+			<FORM ID="FRM_TEXT11" X="748" Y="251" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFFfffbb8"/>
+			<!-- 별 -->
+			<IMG ID = "POPSTAR_UP_01" X = "460" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_02" X = "569" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_03" X = "584" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_04" X = "675" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_05" X = "690" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_06" X = "705" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_07" X = "784" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_08" X = "800" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_09" X = "816" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<IMG ID = "POPSTAR_UP_10" X = "832" Y= "251" W ="14" H ="14" >
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</IMG>
+			<!-- 미션맵 등장몬스터 -->
+			<FORM ID="FRM_TEXT12" X="426" Y="300" Z="3" W="212" H="108" TEXT="400265" FONT="Font_Text" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			<!-- 난이도2 -->
+			<FORM ID="FRM_TEXT13" X="441" Y="358" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			<FORM ID="FRM_TEXT14" X="441" Y="414" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			<FORM ID="FRM_TEXT15" X="441" Y="470" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			<FORM ID="FRM_TEXT16" X="441" Y="526" Z="3" W="212" H="108" TEXT="400266" FONT="Font_Text" FONT_COLOR_HEX="0xFF4e1d0e"/>
+
+			<FORM ID = "FRM_POPSTAR" X = "483" Y= "358" Z="4" W ="600" H ="600" >
+				<IMG ID = "POPSTAR11" X = "0" Y= "0" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<IMG ID = "POPSTAR21" X = "0" Y= "56" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<IMG ID = "POPSTAR22" X = "20" Y= "56" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+
+				<IMG ID = "POPSTAR31" X = "0" Y= "112" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<IMG ID = "POPSTAR32" X = "20" Y= "112" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<IMG ID = "POPSTAR33" X = "40" Y= "112" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+
+				<IMG ID = "POPSTAR41" X = "0" Y= "168" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<IMG ID = "POPSTAR42" X = "20" Y= "168" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<IMG ID = "POPSTAR43" X = "40" Y= "168" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<IMG ID = "POPSTAR44" X = "60" Y= "168" W ="14" H ="14" IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+			</FORM>
+		</FORM>
+
+		<FORM ID="FRM_SUB_TOWN" X = "288" Y = "50" Z="-1" W ="447" H ="668" IS_VISIBLE="0">
+			<FORM ID = "FRM_00" X = "0" Y = "0" W ="447" H ="512" Z="-1" CAN_DRAG = "0" IMG = "../Data/6_ui/map/popSbg01.tga" IMG_W = "447" IMG_H = "512"/>
+			<FORM ID = "FRM_10" X = "0" Y = "512" Z="-1" W ="447" H ="156" CAN_DRAG = "0" IMG = "../Data/6_ui/map/popSbg02.tga" IMG_W = "447" IMG_H = "156"/>
+			<FORM ID = "FRM_CELL" X = "80" Y = "359" Z="0" W ="289" H ="230" CAN_DRAG = "0" IMG = "../Data/6_ui/map/popImgBg03.tga" IMG_W = "289" IMG_H = "230"/>
+			<!--IMG ID = "IMG_GAGE">
+				<ATTR X = "165" Y= "299" Z="3" W ="164" H ="12" NO_OFFSCREEN="1"/>
+				<ATTR IMG = "../Data/6_ui/map/popBarG.tga" IMG_W = "164" IMG_H = "12"/>
+			</IMG-->
+			<!-- 맵이름 -->
+			<FORM ID="FRM_TEXT01" X="96" Y="217" Z="3" W="212" H="108" TEXT="400314" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<FORM ID="FRM_TEXT_MAPNAME" X="163" Y="217" Z="3" W="212" H="108" TEXT="" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f"/>
+			<!-- 위치 -->
+			<FORM ID="FRM_TEXT02" X="96" Y="246" Z="3" W="212" H="108" TEXT="400316" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<FORM ID="FRM_TEXT_POSITION" X="163" Y="246" Z="3" W="212" H="108" TEXT="" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f"/>
+			<!-- 맵성취율 -->
+			<FORM ID="FRM_TEXT03" X="96" Y="276" Z="3" W="212" H="108" TEXT="400260" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			<!--
+			<FORM ID="FRM_TEXT_PERCENT" X="163" Y="276" Z="3" W="212" H="108">
+				<ATTR TEXT="19943" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f"/>
+			</FORM>
+			-->
+			<!-- 지역NPC -->
+			<FORM ID="FRM_TEXT04" X="98" Y="337" Z="3" W="212" H="108" TEXT="400267" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E"/>
+
+			<BUTTON ID = "Close" X = "369" Y = "43" Z="5" W ="35" H ="34" >
+				<ATTR BTN_IMG = "../Data/6_ui/map/popClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "68"/>
+				<SCRIPT ID = "ON_L_BTN_UP">
+					UISelf:GetParent():CloseParent()
+					UISelf:Close() return true
+				</SCRIPT>
+			</BUTTON>
+		</FORM>
+
+	</FORM>
+
+	<FORM ID = "FRM_ELGREGO" ALIGN_X = "50" ALIGN_Y = "50" W = "1024" H = "768" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID = "ON_CALL">  CloseToolTip() OnTitleCall(UISelf) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> </SCRIPT>
+		<FORM ID="FRM_TITLE" X="0" Y="45" Z="6" W="212" H="70" IGNORE_PARENT_RECT = "1" T_X = "106" T_CENTER = "1">
+			<ATTR TEXT="700" FONT="FTtext_25" FONT_COLOR_HEX="0xFF4d0d08" STATIC_NUM = "1"/>
+		</FORM>
+		<IMG ID = "IMG_1" X = "0" Y = "0" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/map01_001.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_2" X = "512" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/map01_002.tga" IMG_W = "513" IMG_H = "512"/>
+		<IMG ID = "IMG_3" Y = "512" Z = "-2" W = "512" H = "256" IMG = "../Data/6_ui/map/map01_003.tga" IMG_W = "512" IMG_H = "257"/>
+		<IMG ID = "IMG_4" X = "512" Z = "-2" Y = "512" W = "512" H = "256" IMG = "../Data/6_ui/map/map01_004.tga" IMG_W = "513" IMG_H = "257"/>
+
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "937" Y = "19" Z="6" W ="76" H ="27" BTN_IMG = "../Data/6_ui/map/mapBclose.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF5b2815"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> CloseAllContMapUI() CallLocalMap(UISelf:GetParent():GetID():GetStr()) </SCRIPT>
+			<HOTKEY ID = "1"> CloseAllContMapUI() CallLocalMap(UISelf:GetParent():GetID():GetStr()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_WORLD_MAP">
+			<ATTR X = "795" Y = "20" Z="6" W ="137" H ="27" BTN_IMG = "../Data/6_ui/map/mapBtotal.tga" BTN_IMG_W = "274" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "654" FONT = "FTctsBig_14" T_X = "79" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" OUTLINE_COLOR_HEX = "0xFF5b2815" T_CENTER="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> CallUI("FRM_WORLD_MAP") </SCRIPT>
+		</BUTTON>
+		
+		<!--BUILD TARGET_ID = "IMG_MAP_PIECE" X = "0" Y = "0" X_COUNT = "31" Y_COUNT = "1" X_GAB = "44" Y_GAB = "44"/>
+		<IMG ID = "IMG_MAP_PIECE" Z = "1" NO_WORD_WRAP = "1" FONT_COLOR_HEX="FFFFFFFF" T_CENTER = "1" T_X = "15">
+			<SCRIPT ID = "ON_BUILD"> OnMapPieceBuild(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_CALL"> OnMapPieceCall(UISelf) </SCRIPT>
+		</IMG>
+		<FORM ID = "FRM_TEXT">
+			<ATTR X="0" Y="0" Z = "100" W = "1023" H = "767" PASS_EVENT = "1"/>
+			<BUILD TARGET_ID = "FRM_ELE" X = "0" Y = "0" X_COUNT = "1" Y_COUNT = "31" X_GAB = "0" Y_GAB = "44"/>
+			<FORM ID = "FRM_ELE"  NO_WORD_WRAP = "1" STATIC_NUM = "1">
+				<ATTR X = "0" Y = "0" W = "30" H = "50" PASS_EVENT = "1" TEXT = "" FONT = "FTctsBig_14" FONT_COLOR_HEX = "0xFFFFF4E3" T_OUTLINE = "1" OUTLINE_COLOR_HEX = "0xFF321307" T_CENTER = "1"/>
+				<SCRIPT ID = "ON_BUILD"> OnMapTitleBuild(UISelf) </SCRIPT>
+				<SCRIPT ID = "ON_CALL"> OnMapTitleCall(UISelf) </SCRIPT>
+				<IMG ID = "IMG_ICON">
+					<ATTR W = "30" H = "30" U = "2" V = "2" IMG_W = "60" IMG_H = "60" />
+					<SCRIPT ID = "ON_L_BTN_DOWN"> OnWorldMapIconClick(UISelf) </SCRIPT>
+				</IMG>
+			</FORM>
+			<IMG ID = "IMG_RUN">
+				<ATTR W = "70" H = "76" IMG = "../Data/6_ui/map/mapGoMan.tga" IMG_W = "210" IMG_H = "228" U = "3" V = "3" IGNORE_PARENT_RECT = "1"/>
+				<SCRIPT ID = "ON_DISPLAY">
+					local time = GetAccumTime()*10
+					local idx = math.floor(time)%8+1
+					UISelf:SetUVIndex(math.floor(time)%8+1)
+				</SCRIPT>
+			</IMG>
+		</FORM>
+		<FORM ID = "FRM_ACHIEVE" X ="785" Y = "689" W = "223" H = "62" IMG = "../Data/6_ui/map/mapBarBg.tga" IMG_W = "223" IMG_H = "62" T_RIGHT = "1" T_X = "145" T_Y = "4" FONT = "FTlevel" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1" OUTLINE_COLOR_HEX = "0xFF471800" >
+			<ANI_BAR ID = "BAR_ACHIEVE" X = "11" Y="33" W="199" H = "16" BAR_IMG="../Data/6_ui/map/mapBarY.tga" BAR_IMG_W="199" BAR_IMG_H="16" />
+			<FORM ID ="FRM_TOTAL" X = "154" Y = "0" W="64" H="29" T_Y = "4" FONT = "FTlevel" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1" OUTLINE_COLOR_HEX = "0xFF471800"/>
+			<FORM ID ="FRM_TEXT" X="11" Y="8" W="139" H="23" TEXT="400260" FONT = "FTctsBig_14" FONT_COLOR_HEX = "0xFF4e1d0e"/>
+			<SCRIPT ID = "ON_CALL"> OnMapBarCall(UISelf) </SCRIPT>
+		</FORM-->
+	</FORM>
+	<FORM ID = "FRM_PARMINOLE" ALIGN_X = "50" ALIGN_Y = "50" W = "1024" H = "768"  CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID = "ON_CALL">  CloseToolTip()  OnTitleCall(UISelf) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> </SCRIPT>
+		<FORM ID="FRM_TITLE" X="48" Y="45" Z="6" W="212" H="108" IGNORE_PARENT_RECT = "1" T_X = "106" T_CENTER = "1">
+			<ATTR TEXT="700" FONT="FTtext_25" FONT_COLOR_HEX="0xFF4d0d08"/>
+		</FORM>
+		<IMG ID = "IMG_1" X = "0" Y = "0" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/map02_001.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_2" X = "512" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/map02_002.tga" IMG_W = "513" IMG_H = "512"/>
+		<IMG ID = "IMG_3" Y = "512" Z = "-2" W = "512" H = "256" IMG = "../Data/6_ui/map/map02_003.tga" IMG_W = "512" IMG_H = "257"/>
+		<IMG ID = "IMG_4" X = "512" Z = "-2" Y = "512" W = "512" H = "256" IMG = "../Data/6_ui/map/map02_004.tga" IMG_W = "513" IMG_H = "257"/>
+
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "937" Y = "19" Z="6" W ="76" H ="27" BTN_IMG = "../Data/6_ui/map/mapBclose.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF5b2815"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> CloseAllContMapUI() CallLocalMap(UISelf:GetParent():GetID():GetStr()) </SCRIPT>
+			<HOTKEY ID = "1"> CloseAllContMapUI() CallLocalMap(UISelf:GetParent():GetID():GetStr()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_WORLD_MAP">
+			<ATTR X = "795" Y = "20" Z="6" W ="137" H ="27" BTN_IMG = "../Data/6_ui/map/mapBtotal.tga" BTN_IMG_W = "274" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "654" FONT = "FTctsBig_14" T_X = "79" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" OUTLINE_COLOR_HEX = "0xFF5b2815" T_CENTER="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">  CallUI("FRM_WORLD_MAP") </SCRIPT>
+		</BUTTON>
+		
+		<!--BUILD TARGET_ID = "IMG_MAP_PIECE" X = "0" Y = "0" X_COUNT = "29" Y_COUNT = "1" X_GAB = "44" Y_GAB = "44"/>
+		<IMG ID = "IMG_MAP_PIECE" Z = "1" NO_WORD_WRAP = "1" FONT_COLOR_HEX="FFFFFFFF" T_CENTER = "1" T_X = "15">
+			<SCRIPT ID = "ON_BUILD"> OnMapPieceBuild(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_CALL"> OnMapPieceCall(UISelf) </SCRIPT>
+		</IMG>
+
+		<FORM ID = "FRM_TEXT">
+			<ATTR X="0" Y="0" Z = "100" W = "1023" H = "767" PASS_EVENT = "1"/>
+			<BUILD TARGET_ID = "FRM_ELE" X = "0" Y = "0" X_COUNT = "1" Y_COUNT = "29" X_GAB = "0" Y_GAB = "44"/>
+			<FORM ID = "FRM_ELE"  NO_WORD_WRAP = "1" STATIC_NUM = "1">
+				<ATTR X = "0" Y = "0" W = "30" H = "50" PASS_EVENT = "1" TEXT = "" FONT = "FTctsBig_14" FONT_COLOR_HEX = "0xFFFFF4E3" T_OUTLINE = "1" OUTLINE_COLOR_HEX = "0xFF321307" T_CENTER = "1"/>
+				<SCRIPT ID = "ON_BUILD"> OnMapTitleBuild(UISelf) </SCRIPT>
+				<SCRIPT ID = "ON_CALL"> OnMapTitleCall(UISelf) </SCRIPT>
+				<IMG ID = "IMG_ICON">
+					<ATTR W = "30" H = "30" U = "2" V = "2" IMG_W = "60" IMG_H = "60" />
+					<SCRIPT ID = "ON_L_BTN_DOWN"> OnWorldMapIconClick(UISelf) </SCRIPT>
+				</IMG>
+			</FORM>
+			<IMG ID = "IMG_RUN">
+				<ATTR W = "70" H = "76" IMG = "../Data/6_ui/map/mapGoMan.tga" IMG_W = "210" IMG_H = "228" U = "3" V = "3" IGNORE_PARENT_RECT = "1"/>
+				<SCRIPT ID = "ON_DISPLAY">
+					local time = GetAccumTime()*10
+					local idx = math.floor(time)%8+1
+					UISelf:SetUVIndex(math.floor(time)%8+1)
+				</SCRIPT>
+			</IMG>
+		</FORM>
+		<FORM ID = "FRM_ACHIEVE" X ="785" Y = "689" W = "223" H = "62" IMG = "../Data/6_ui/map/mapBarBg.tga" IMG_W = "223" IMG_H = "62" T_RIGHT = "1" T_X = "145" T_Y = "4" FONT = "FTlevel" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1" OUTLINE_COLOR_HEX = "0xFF471800" >
+			<ANI_BAR ID = "BAR_ACHIEVE" X = "11" Y="33" W="199" H = "16" BAR_IMG="../Data/6_ui/map/mapBarY.tga" BAR_IMG_W="199" BAR_IMG_H="16" />
+			<FORM ID ="FRM_TOTAL" X = "154" Y = "0" W="64" H="29" T_Y = "4" FONT = "FTlevel" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1" OUTLINE_COLOR_HEX = "0xFF471800"/>
+			<FORM ID ="FRM_TEXT" X="11" Y="8" W="139" H="23" TEXT="400260" FONT = "FTctsBig_14" FONT_COLOR_HEX = "0xFF4e1d0e" />
+			<SCRIPT ID = "ON_CALL"> OnMapBarCall(UISelf) </SCRIPT>
+		</FORM-->
+	</FORM>
+	<FORM ID = "FRM_SILENTISLAND" ALIGN_X = "50" ALIGN_Y = "50" W = "1024" H = "768"  CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID = "ON_CALL">  CloseToolTip()  OnTitleCall(UISelf) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> </SCRIPT>
+		<FORM ID="FRM_TITLE" X="48" Y="45" Z="6" W="212" H="108" IGNORE_PARENT_RECT = "1" T_X = "106" T_CENTER = "1">
+			<ATTR TEXT="700" FONT="FTtext_25" FONT_COLOR_HEX="0xFF4d0d08"/>
+		</FORM>
+		<IMG ID = "IMG_1" X = "0" Y = "0" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/map03_001.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_2" X = "512" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/map03_002.tga" IMG_W = "513" IMG_H = "512"/>
+		<IMG ID = "IMG_3" Y = "512" Z = "-2" W = "512" H = "256" IMG = "../Data/6_ui/map/map03_003.tga" IMG_W = "512" IMG_H = "257"/>
+		<IMG ID = "IMG_4" X = "512" Z = "-2" Y = "512" W = "512" H = "256" IMG = "../Data/6_ui/map/map04_004.tga" IMG_W = "513" IMG_H = "257"/>
+
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "937" Y = "19" Z="6" W ="76" H ="27" BTN_IMG = "../Data/6_ui/map/mapBclose.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF5b2815"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> CloseAllContMapUI() CallLocalMap(UISelf:GetParent():GetID():GetStr()) </SCRIPT>
+			<HOTKEY ID = "1"> CloseAllContMapUI() CallLocalMap(UISelf:GetParent():GetID():GetStr()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_WORLD_MAP">
+			<ATTR X = "795" Y = "20" Z="6" W ="137" H ="27" BTN_IMG = "../Data/6_ui/map/mapBtotal.tga" BTN_IMG_W = "274" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "654" FONT = "FTctsBig_14" T_X = "79" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" OUTLINE_COLOR_HEX = "0xFF5b2815" T_CENTER="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">  CallUI("FRM_WORLD_MAP") </SCRIPT>
+		</BUTTON>
+	</FORM>
+	<!--FORM ID = "FRM_WORLD_MAP" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" ALIGN_X = "50" ALIGN_Y = "50" W = "1024" H = "768">
+		<SCRIPT ID = "ON_CALL"> CloseToolTip() OnWorldMapCall(UISelf) </SCRIPT>
+		<FORM ID="FRM_TITLE" X="428" Y="43" Z="100" W="212" H="80" IGNORE_PARENT_RECT = "1" T_X = "106" T_CENTER = "1">
+			<ATTR TEXT="699" FONT="FTtext_25" FONT_COLOR_HEX="0xFF4d0d08"/>
+		</FORM>
+		<IMG ID = "IMG_1" X = "0" Y = "0" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/Wmap001.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_2" X = "512" Z = "-2" W = "512" H = "512" IMG = "../Data/6_ui/map/Wmap002.tga" IMG_W = "513" IMG_H = "512"/>
+		<IMG ID = "IMG_3" Y = "512" Z = "-2" W = "512" H = "256" IMG = "../Data/6_ui/map/Wmap003.tga" IMG_W = "512" IMG_H = "257"/>
+		<IMG ID = "IMG_4" X = "512" Z = "-2" Y = "512" W = "512" H = "256" IMG = "../Data/6_ui/map/Wmap004.tga" IMG_W = "513" IMG_H = "257"/>
+		<FORM ID = "FRM_OVER_1" X = "59" Y = "0" Z = "10" W = "512" H = "650"  PASS_EVENT="1">
+			<IMG ID = "IMG_OVER0" X = "0" Y = "0" W = "512" H = "512" IMG = "../Data/6_ui/map/wmapNallOv02_01.tga" IMG_W = "512" IMG_H = "512">
+				<SCRIPT ID = "ON_L_BTN_DOWN"> CallContinentUI(UISelf,"FRM_ELGREGO")</SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_OVER1" X = "0" Y = "512" W = "512" H = "138" IMG = "../Data/6_ui/map/wmapNallOv02_02.tga" IMG_W = "512" IMG_H = "138">
+				<SCRIPT ID = "ON_L_BTN_DOWN"> CallContinentUI(UISelf,"FRM_ELGREGO")</SCRIPT>
+			</IMG>
+			<SCRIPT ID = "ON_DISPLAY"> 
+				 OnContinentDisplayNew("IMG_OVER", UISelf, 2)
+			</SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_OVER_2" X = "540" Y = "291" Z = "10" W = "433" H = "432"  PASS_EVENT="1">
+			<IMG ID = "IMG_OVER" X = "0" Y = "0" W = "433" H = "432" IMG = "../Data/6_ui/map/WmapLine02.tga" IMG_W = "433" IMG_H = "432">
+				<SCRIPT ID = "ON_L_BTN_DOWN"> CallContinentUI(UISelf,"FRM_PARMINOLE") </SCRIPT>
+			</IMG>
+			<SCRIPT ID = "ON_DISPLAY"> OnContinentDisplay("../Data/6_ui/map/Wmap02.tga", UISelf) </SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_OVER_3" X = "549" Y = "72" Z = "10" W = "412" H = "272"  PASS_EVENT="1">
+			<IMG ID = "IMG_OVER" X = "0" Y = "0" W = "412" H = "272" IMG = "../Data/6_ui/map/WmapLine03.tga" IMG_W = "412" IMG_H = "272">
+				<SCRIPT ID = "ON_L_BTN_DOWN">  </SCRIPT>
+			</IMG>
+			<SCRIPT ID = "ON_DISPLAY"> OnContinentDisplay("../Data/6_ui/map/Wmap03.tga", UISelf) </SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_OVER_4" X = "113" Y = "67" Z = "10" W = "489" H = "313"  PASS_EVENT="1">
+			<IMG ID = "IMG_OVER" X = "0" Y = "0" W = "489" H = "313" IMG = "../Data/6_ui/map/WmapLine04.tga" IMG_W = "489" IMG_H = "313">
+				<SCRIPT ID = "ON_L_BTN_DOWN"> </SCRIPT>
+			</IMG>
+			<SCRIPT ID = "ON_DISPLAY"> OnContinentDisplay("../Data/6_ui/map/Wmap04.tga", UISelf) </SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_OVER_5" X = "388" Y = "326" Z = "10" W = "216" H = "143" PASS_EVENT="1">
+			<IMG ID = "IMG_OVER" X = "0" Y = "0" W = "216" H = "143" IMG = "../Data/6_ui/map/WmapLine05.tga" IMG_W = "216" IMG_H = "143">
+				<SCRIPT ID = "ON_L_BTN_DOWN"> CallContinentUI(UISelf,"FRM_SILENTISLAND")</SCRIPT>
+			</IMG>
+			<SCRIPT ID = "ON_DISPLAY"> OnContinentDisplay("../Data/6_ui/map/Wmap05.tga", UISelf) </SCRIPT>
+		</FORM>
+
+		<FORM ID = "FRM_HERE" Z = "100" W = "70" H = "110">
+			<IMG ID = "IMG_RUN" W = "70" H = "76" IMG = "../Data/6_ui/map/mapGoMan.tga" IMG_W = "210" IMG_H = "228" U = "3" V = "3" IGNORE_PARENT_RECT = "1">
+				<SCRIPT ID = "ON_DISPLAY">
+					local time = GetAccumTime()*10
+					local idx = math.floor(time)%8+1
+					UISelf:SetUVIndex(math.floor(time)%8+1)
+				</SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_ICON" X = "20" Y = "73" W = "30" H = "28" IMG = "../Data/6_ui/map/mapAicon.tga" IMG_W = "60" IMG_H = "28" U = "2" V = "1"/>
+		</FORM>
+		<BUTTON ID = "BTN_CLOSE" X = "937" Y = "20" Z="6" W ="76" H ="27">
+			<ATTR BTN_IMG = "../Data/6_ui/map/mapBclose.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF5b2815"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> CloseAllContMapUI() CloseToolTip() UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID = "1"> CloseAllContMapUI() CloseToolTip() UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID = "28"> return true </HOTKEY>
+		</BUTTON>
+	</FORM-->
+	<!--FORM ID = "FRM_LOCAL_MAP" ALIGN_X="50" ALIGN_Y="50" W="1024" H="768">
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "937" Y = "20" Z="6" W ="76" H ="27" BTN_IMG = "../Data/6_ui/map/mapBclose.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF5b2815"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() return true </SCRIPT>
+			<HOTKEY ID = "1"> 
+				local wndBigMap = UISelf:GetParent():GetControl("SFRM_BIG_MAP")
+				if false == wndBigMap:IsNil() and wndBigMap:IsVisible() then
+					wndBigMap:Visible(false)
+					return true
+				else
+					UISelf:CloseParent() return true 
+				end
+			</HOTKEY>
+		</BUTTON>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<BUTTON ID = "BTN_WORLD_MAP">
+					<ATTR X = "795" Y = "20" Z="6" W ="137" H ="27" BTN_IMG = "../Data/6_ui/map/mapBtotal.tga" BTN_IMG_W = "274" BTN_IMG_H = "54"/>
+					<ATTR FONT="FTctsBig_14" T_X="79" T_Y="4"/>
+					<ATTR TEXT = "657" T_CENTER="1" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" OUTLINE_COLOR_HEX = "0xFF5b2815" />
+					<SCRIPT ID = "ON_L_BTN_DOWN"> CallImageMap() </SCRIPT>
+				</BUTTON>
+			</NAME>
+			<NAME ID="JAPAN">
+					<BUTTON ID = "BTN_WORLD_MAP">
+					<ATTR X = "795" Y = "20" Z="6" W ="137" H ="27" BTN_IMG = "../Data/6_ui/map/mapBtotal.tga" BTN_IMG_W = "274" BTN_IMG_H = "54"/>
+					<ATTR FONT="FTcts_13" T_X="80" T_Y="5"/>
+					<ATTR TEXT = "657" T_CENTER="1" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" OUTLINE_COLOR_HEX = "0xFF5b2815" />
+					<SCRIPT ID = "ON_L_BTN_DOWN"> CallImageMap() </SCRIPT>
+				</BUTTON>
+			</NAME>
+		</LOCAL>
+		<IMG ID = "IMG_BG1" X="0" Y="0" W="512" H="512" IMG = "../Data/6_ui/map/mapBg01.tga" IMG_W="512" IMG_H="512">
+			<ATTR T_X="116" T_Y="124" FONT="Font_Warn" FONT_COLOR_HEX="0xff29180a" TEXT="526"/>
+			<FORM ID = "FRM_TEXT" X="50" Y="372" W="100" H="20" TEXT="400260" FONT="FTctsBig_14" FONT_COLOR_HEX="0xfffef9de" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff502b16"/>
+			<FORM ID = "FRM_TEXT_FIND"  X="41" Y="450" W="100" H="20" TEXT="524" FONT="FTcts_13" FONT_COLOR_HEX="0xFFffefe1" T_OUTLINE="1"/>
+			<FORM ID = "FRM_TEXT_WORLDMAP" X="37" Y="35" W="450" H="100" FONT="FT30" TEXT="529"/>
+		</IMG>
+		<IMG ID = "IMG_BG2" X="512" Y="0" W="512" H="512" IMG = "../Data/6_ui/map/mapBg02.tga" IMG_W="512" IMG_H="512">
+			<FORM ID = "FRM_TEXT_RUN" X="60" Y="450" W="61" H="17" TEXT="520" FONT="Font_Text" FONT_COLOR_HEX="0xFF46241d"/>
+			<FORM ID = "FRM_TEXT_PARTY" X="146" Y="450" W="118" H="17" TEXT="521" FONT="Font_Text" FONT_COLOR_HEX="0xFF46241d"/>
+			<FORM ID = "FRM_TEXT_COUPLE" X="284" Y="450" W="78" H="17" TEXT="522" FONT="Font_Text" FONT_COLOR_HEX="0xFF46241d"/>
+			<FORM ID = "FRM_TEXT_FOCUS" X="383" Y="450" W="87" H="17" TEXT="523" FONT="Font_Text" FONT_COLOR_HEX="0xFF46241d"/>	
+		</IMG>
+		<IMG ID = "IMG_BG3" X="0" Y="512" W="512" H="512" IMG = "../Data/6_ui/map/mapBg03.tga" IMG_W="512" IMG_H="256"/>
+		<IMG ID = "IMG_BG4" X="512" Y="512" W="512" H="512" IMG = "../Data/6_ui/map/mapBg04.tga" IMG_W="512" IMG_H="256"/>
+		<IMG ID = "IMG_BG_LEFT" X="0" Y="478" Z="1" W="66" H="262" IMG = "../Data/6_ui/map/mapBgimg01.tga" IMG_W="66" IMG_H="262"/>
+		<IMG ID = "IMG_BG_RIGHT" X="958" Y="478" Z="1" W="66" H="262" IMG = "../Data/6_ui/map/mapBgimg02.tga" IMG_W="66" IMG_H="262"/>
+		<ANI_BAR ID = "BAR_ACHIEVE" X = "49" Y="398" W="164" H = "12" BAR_IMG="../Data/6_ui/map/popBarG.tga" BAR_IMG_W="164" BAR_IMG_H="12" />
+		<FORM ID = "FRM_ARCHIEVE" X="119" Y="373" W="100" H="20" FONT="FTctsBig_14" FONT_COLOR_HEX="0xfffef9de" TEXT="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff502b16"/>
+		<FORM ID = "FRM_ROUTE_MAP" X="77" Y="478" W="905" H="260" CAN_CLIP = "1" IGNORE_PARENT_RECT="1">
+			<IMG ID = "IMG_ARROW" X="0" Y="0" Z="2" W="24" H="24" U="1" V="2" UV_INDEX="1" IS_VISIBLE = "0">
+				<ATTR IMG="../Data/6_ui/book/bkArrow.tga" IMG_W = "24" IMG_H = "40"/>
+			</IMG>
+			<IMG ID = "IMG_RUN" Z="1" W = "70" H = "76" IS_VISIBLE = "0">
+				<ATTR IMG = "../Data/6_ui/map/mapGoMan.tga" IMG_W = "210" IMG_H = "228" U = "3" V = "3" IGNORE_PARENT_RECT = "1" NO_FOCUS="1" PASS_EVENT="1"/>
+				<SCRIPT ID = "ON_TICK">
+					local time = GetAccumTime()*10
+					local idx = math.floor(time)%8+1
+					UISelf:SetUVIndex(math.floor(time)%8+1)
+				</SCRIPT>
+			</IMG>
+			<BUILD ID = "BLD_ICON" TARGET_ID = "FRM_MAP" X = "0" Y = "0" X_COUNT = "70" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0" START_INDEX="1"/>
+			<FORM ID = "FRM_MAP" X="0" Y="0" W="80" H="70" T_CENTER="1" T_X="40" T_Y="26" IS_VISIBLE="0" PASS_EVENT="1" IGNORE_PARENT_RECT="1">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xff29180a"/>
+				<IMG ID = "IMG_ICON" X="25" Y="0" W="30" H="30" IMG_W="48" IMG_H="48" U="2" V="2" UV_INDEX="1">
+					<SCRIPT ID = "ON_L_BTN_DOWN"> OnWorldMapIconClickNew(UISelf) </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER"> CallMapTooltip(UISelf) </SCRIPT>
+				</IMG>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			</FORM>
+			<BUILD ID = "BLD_BG" TARGET_ID = "IMG_BG" X = "0" Y = "0" X_COUNT = "5" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0"/>
+			<IMG ID = "IMG_BG" X="0" Y="0" Z="-1" W="1" H="1" IS_VISIBLE="0"/>
+			<IMG ID = "IMG_COUPLE" X="0" Y="0" Z="10" W="16" H="16" IMG = "../Data/6_ui/map/mapIconCP.tga" IMG_W = "16" IMG_H = "16" PASS_EVENT="1" IS_VISIBLE="0"/>
+
+			<BUILD ID = "BLD_PARTY" TARGET_ID = "IMG_PARTY" X = "0" Y = "0" X_COUNT = "3" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0"/>
+			<IMG ID = "IMG_PARTY" X="0" Y="0" Z="10" W="16" H="16" IMG = "../Data/6_ui/map/iconParty.tga" IMG_W = "16" IMG_H = "16" PASS_EVENT="1" IS_VISIBLE="1">
+				<SCRIPT ID = "ON_MOUSE_OVER"> CallToolTipText(0, UISelf:GetCustomDataAsStr(), GetCursorPos()) </SCRIPT>
+			</IMG>
+		</FORM>
+		<IMG ID = "IMG_MAP_BG0" X="234" Y="77" Z="1" W="512" H="345" IMG_W="512" IMG_H="345"/>
+		<IMG ID = "IMG_MAP_BG1" X="746" Y="77" Z="1" W="238" H="345" IMG_W="238" IMG_H="345"/>
+		<FORM ID = "FRM_MAP_NAME" X="38" Y="185" Z="1" W="184" H="25" T_CENTER="1" T_X="92" T_Y="4" FONT="FTctsBig_14" FONT_COLOR_HEX="0xff29180a"/>
+		<FORM ID = "FRM_CONT_NAME" X="43" Y="146" Z="1" W="154" H="26" T_CENTER="1" T_X="77" T_Y="4" FONT="FTctsBig_14" FONT_COLOR_HEX="0xfffff0aa"/>
+		<BUTTON ID = "BTN_LEFT" X="26" Y="592" Z="2" W="32" H="31">
+			<ATTR BTN_IMG = "../Data/6_ui/map/mapArwL.tga" BTN_IMG_W = "64" BTN_IMG_H = "62"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> OnMapLeftScrBtnClick(UISelf)	</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_RIGHT" X="965" Y="592" Z="2" W="32" H="31">
+			<ATTR BTN_IMG = "../Data/6_ui/map/mapArwR.tga" BTN_IMG_W = "64" BTN_IMG_H = "62"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> OnMapRightScrBtnClick(UISelf)	</SCRIPT>
+		</BUTTON>
+
+		<STATIC_FORM ID = "SFRM_BIG_MAP" X="253" Y="48" Z="4" W="518" H="390" STATIC_NUM = "30" IS_VISIBLE = "0">
+			<FORM ID = "FRM_MAP" X = "3" Y = "3" W ="512" H ="384" />
+			<BUTTON ID = "BTN_CLOSE" X = "482" Y = "8" Z="6" W ="28" H ="28">
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnMMclose.tga" BTN_IMG_W = "56" BTN_IMG_H = "56"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:GetParent():Visible(false) return true </SCRIPT>
+				<HOTKEY ID = "1"> UISelf:GetParent():Visible(false) return true </HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<BUTTON ID = "BTN_DROP" X="196" Y="148" W="21" H="21" BTN_IMG = "../Data/6_ui/map/mapBtDrop.tga" BTN_IMG_W = "42" BTN_IMG_H = "42">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> OnContDropBtnClick(UISelf) return true </SCRIPT>
+		</BUTTON>
+		<STATIC_FORM ID = "SFRM_LIST_BOX" X="40" Y="172" Z="2" W="183" H="24" STATIC_NUM="38" IS_VISIBLE="0">
+			<LIST ID="LST_CONT_CANDI" X="2" Y="2" W="141" H="20" ELEMENT_ID="BTN_CONT_ELE"/>
+			<SCRIPT ID = "ON_LOSE_FOCUS"> UISelf:Visible(false) return true </SCRIPT>
+		</STATIC_FORM>
+		<EDIT ID = "EDT_NPC_NAME" X="137" Y="450" Z="1" W="148" H="22" EDIT_PREVIEW="400036" FONT_COLOR_HEX = "0xFFfff0aa" EDIT_LIMIT_LENGTH = "12">
+			<ATTR EDIT_FONT="Font_Text"/>
+			<HOTKEY ID = "28">OnFindNpcClick(UISelf) return true</HOTKEY>
+		</EDIT>
+		<BUTTON ID = "BTN_FIND" X="284" Y="448" W="71" H="21" BTN_IMG = "../Data/6_ui/map/mapBtSearch.tga" BTN_IMG_W = "142" BTN_IMG_H = "42">
+			<ATTR T_CENTER="1" T_X="35" T_Y="2" TEXT="525" FONT="FTcts_13" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="12"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> OnFindNpcClick(UISelf) return true </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID = "28"> return true </HOTKEY>
+		<HOTKEY ID = "50"> CloseAllContMapUI() CloseToolTip() UISelf:Close() return true </HOTKEY>
+		<SCRIPT ID = "ON_CALL"> LockMyInputForWorldMap(true) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> LockMyInputForWorldMap(false) </SCRIPT>
+	</FORM-->
+	<BUTTON ID = "BTN_CONT_ELE" X="0" Y="0" W="179" H="27" BTN_VERTICAL_IMG="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1">
+		<ATTR BTN_IMG = "../Data/6_ui/map/mapDropBg.tga" BTN_IMG_W = "179" BTN_IMG_H = "108" T_CENTER="1" T_X="89" T_Y="5"/>
+		<SCRIPT ID = "ON_L_BTN_DOWN"> OnContEleClick(UISelf) </SCRIPT>
+	</BUTTON>
+
+	<FORM ID="FRM_LOCAL_MAP" ALIGN_X="50" ALIGN_Y="50" W="1024" H="768">
+		<FORM ID="FRM_BG0" X="0" Y="0" Z="-1" W="512" H="512" IMG_W="512" IMG_H="512" PASS_EVENT="1"/>
+		<FORM ID="FRM_BG1" X="512" Y="0" Z="-1" W="512" H="512" IMG_W="512" IMG_H="512" PASS_EVENT="1"/>
+		<FORM ID="FRM_BG2" X="0" Y="512" Z="-1" W="512" H="256" IMG_W="512" IMG_H="256" PASS_EVENT="1"/>
+		<FORM ID="FRM_BG3" X="512" Y="512" Z="-1" W="512" H="256" IMG_W="512" IMG_H="256" PASS_EVENT="1"/>
+		<FORM ID="FRM_ROUTE_MAP" Z="1" W="512" H="512" PASS_EVENT="1"/>
+		<FORM ID="FRM_OVER_BG" X="0" Y="0" Z="4" W="10" H="10" PASS_EVENT="1"/>
+		<FORM ID="FRM_TITLE" X="50" Y="33" Z="1" W="194" H="43" IGNORE_PARENT_RECT = "1" T_X = "97" T_CENTER = "1" PASS_EVENT="1">
+			<ATTR TEXT="699" FONT="FTtext_25" FONT_COLOR_HEX="0xFF4d0d08"/>
+		</FORM>
+		<BUILD ID = "BLD_ICON" TARGET_ID = "FRM_MAP" X = "0" Y = "0" X_COUNT = "14" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0" START_INDEX="1"/>
+		<FORM ID = "FRM_MAP" X="0" Y="0" Z="6" W="80" H="70" IS_VISIBLE="0" PASS_EVENT="1">
+			<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xfff4f3f3" T_CENTER="1" T_X="40" T_Y="26" IGNORE_PARENT_RECT="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff392d07"/>
+			<FORM ID = "IMG_ICON" X="25" Y="0" W="30" H="30" IMG_W="48" IMG_H="48" U="2" V="2" UV_INDEX="1">
+				<SCRIPT ID = "ON_L_BTN_DOWN"> OnWorldMapIconClickNew(UISelf) </SCRIPT>
+				<SCRIPT ID = "ON_R_BTN_DOWN">CallContinentUI(GetUIWnd("FRM_LOCAL_MAP"):GetControl("BTN_CONT_MAP"))</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> CallMapTooltip(UISelf) </SCRIPT>
+			</FORM>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</FORM>
+		<BUILD ID = "BLD_PARTY" TARGET_ID = "IMG_PARTY" X = "0" Y = "0" X_COUNT = "3" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0"/>
+		<IMG ID = "IMG_PARTY" X="0" Y="0" Z="10" W="16" H="16" IMG = "../Data/6_ui/map/iconParty.tga" IMG_W = "16" IMG_H = "16" PASS_EVENT="1" IS_VISIBLE="1">
+			<SCRIPT ID = "ON_MOUSE_OVER"> CallToolTipText(0, UISelf:GetCustomDataAsStr(), GetCursorPos()) </SCRIPT>
+		</IMG>
+		<IMG ID = "IMG_COUPLE" X="0" Y="0" Z="10" W="16" H="16" IMG = "../Data/6_ui/map/mapIconCP.tga" IMG_W = "16" IMG_H = "16" PASS_EVENT="1" IS_VISIBLE="0"/>
+		<STATIC_FORM ID = "SFRM_BIG_MAP" ALIGN_X="50" Y="128" Z="20" W="518" H="390" STATIC_NUM = "30" IS_VISIBLE = "0">
+			<FORM ID = "FRM_MAP" X = "3" Y = "3" W ="512" H ="384" />
+			<BUTTON ID = "BTN_CLOSE" X = "482" Y = "8" Z="6" W ="28" H ="28">
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnMMclose.tga" BTN_IMG_W = "56" BTN_IMG_H = "56"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:GetParent():Visible(false) return true </SCRIPT>
+				<HOTKEY ID = "1"> UISelf:GetParent():Visible(false) return true </HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "927" Y = "20" Z="6" W ="76" H ="27" BTN_IMG = "../Data/6_ui/map/wmapNcloseB.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF3d2015"/>
+			<SCRIPT ID = "ON_L_BTN_UP"> CloseAllContMapUI() CloseToolTip() UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_CONT_MAP">
+			<ATTR X = "785" Y = "20" Z="6" W ="137" H ="27" BTN_IMG = "../Data/6_ui/map/wmapNbackB.tga" BTN_IMG_W = "274" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "657" FONT = "FTctsBig_14" T_X = "79" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" OUTLINE_COLOR_HEX = "0xFF3d2015" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">CallContinentUI(UISelf)</SCRIPT>
+		</BUTTON>
+		
+		<BUILD ID = "BLD_ARROW" TARGET_ID = "BTN_ARROW" X = "0" Y = "0" X_COUNT = "2" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0" START_INDEX="1" PASS_EVENT="1" NO_FOCUS="1"/>
+		<BUTTON ID = "BTN_ARROW" X="0" Y="0" Z="10" W="60" H="50" IS_VISIBLE="0" PASS_EVENT="1">
+			<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xfff4f3f3" T_CENTER="1" T_X="15" T_Y="25" IGNORE_PARENT_RECT="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff392d07"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> OnClickWorldMapArrow(UISelf) </SCRIPT>
+		</BUTTON>
+		
+		<HOTKEY ID = "28"> return true </HOTKEY>
+		<HOTKEY ID = "50"> CloseAllContMapUI() CloseToolTip() return true </HOTKEY>
+		<HOTKEY ID = "1"> CloseAllContMapUI() CloseToolTip() return true </HOTKEY>
+		<SCRIPT ID = "ON_CALL"> LockMyInputForWorldMap(true) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> LockMyInputForWorldMap(false) </SCRIPT>
+		<SCRIPT ID = "ON_R_BTN_DOWN">CallContinentUI(UISelf:GetControl("BTN_CONT_MAP"))</SCRIPT>
+	</FORM>	
+
+	<FORM ID="FRM_CONT_MAP" ALIGN_X="50" ALIGN_Y="50" W="1024" H="768">
+		<FORM ID="FRM_BG0" X="0" Y="0" W="512" H="512" IMG_W="512" IMG_H="512" PASS_EVENT="1"/>
+		<FORM ID="FRM_BG1" X="512" Y="0" W="512" H="512" IMG_W="512" IMG_H="512" PASS_EVENT="1"/>
+		<FORM ID="FRM_BG2" X="0" Y="512" W="512" H="256" IMG_W="512" IMG_H="256" PASS_EVENT="1"/>
+		<FORM ID="FRM_BG3" X="512" Y="512" W="512" H="256" IMG_W="512" IMG_H="256" PASS_EVENT="1"/>
+		<FORM ID="FRM_TITLE" X="50" Y="33" Z="1" W="194" H="43" IGNORE_PARENT_RECT = "1" T_X = "97" T_CENTER = "1" PASS_EVENT="1">
+			<ATTR TEXT="699" FONT="FTtext_25" FONT_COLOR_HEX="0xFF4d0d08"/>
+		</FORM>
+
+		<BUILD ID="BLD_OVER" TARGET_ID = "FRM_OVER" X = "0" Y = "0" X_COUNT = "4" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0" START_INDEX="1"/>
+		<FORM ID = "FRM_OVER" X = "59" Y = "0" Z = "10" W = "512" H = "650"  PASS_EVENT="1" >
+			<ATTR T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xfff4f3f3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff392d07"/>
+			<IMG ID = "IMG_OVER1" X = "0" Y = "0" W = "512" H = "512"  IMG_W = "512" IMG_H = "512" PASS_EVENT="1">
+				<ATTR T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xfff4f3f3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff392d07"/>
+				<SCRIPT ID = "ON_L_BTN_UP"> CallLocalMap(UISelf:GetCustomDataAsStr():GetStr()) UISelf:GetParent():CloseParent()  return true</SCRIPT>
+			</IMG>
+			<SCRIPT ID = "ON_DISPLAY"> OnContinentDisplayNew("IMG_OVER", UISelf, 1)</SCRIPT>
+		</FORM>
+
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "927" Y = "20" Z="6" W ="76" H ="27" BTN_IMG = "../Data/6_ui/map/wmapNcloseB.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF3d2015"/>
+			<SCRIPT ID = "ON_L_BTN_UP"> CloseAllContMapUI() CloseToolTip() return true </SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_WORLD_MAP">
+			<ATTR X = "785" Y = "20" Z="6" W ="137" H ="27" BTN_IMG = "../Data/6_ui/map/wmapNbackB.tga" BTN_IMG_W = "274" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "654" FONT = "FTctsBig_14" T_X = "79" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" OUTLINE_COLOR_HEX = "0xFF3d2015" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">CallWorldUI(UISelf)</SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_ARROW" X="0" Y="0" Z="11" W="24" H="24" U="1" V="2" UV_INDEX="2" IS_VISIBLE = "0">
+			<ATTR IMG="../Data/6_ui/book/bkArrow.tga" IMG_W = "24" IMG_H = "40"/>
+			<SCRIPT ID="ON_TICK">UISelf:SetLocation(Point2( UISelf:GetLocation():GetX(), g_MapArrowY + math.sin(GetAccumTime()*5)*5))</SCRIPT>
+		</IMG>
+		<HOTKEY ID = "1"> CloseAllContMapUI() CloseToolTip() return true </HOTKEY>
+		<HOTKEY ID = "50"> CloseAllContMapUI() CloseToolTip() return true </HOTKEY>
+		<SCRIPT ID="ON_R_BTN_DOWN">CallWorldUI(UISelf:GetControl("BTN_WORLD_MAP"))</SCRIPT>
+	</FORM>
+
+	<FORM ID = "FRM_WORLD_MAP" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" ALIGN_X = "50" ALIGN_Y = "50" W = "1024" H = "768">
+		<FORM ID="FRM_TITLE" X="50" Y="33" Z="1" W="194" H="43" IGNORE_PARENT_RECT = "1" T_X = "97" T_CENTER = "1">
+			<ATTR TEXT="699" FONT="FTtext_25" FONT_COLOR_HEX="0xFF4d0d08"/>
+		</FORM>
+		<FORM ID="FRM_BG0" X="0" Y="0" W="512" H="512" IMG_W="512" IMG_H="512"/>
+		<FORM ID="FRM_BG1" X="512" Y="0" W="512" H="512" IMG_W="512" IMG_H="512"/>
+		<FORM ID="FRM_BG2" X="0" Y="512" W="512" H="256" IMG_W="512" IMG_H="256"/>
+		<FORM ID="FRM_BG3" X="512" Y="512" W="512" H="256" IMG_W="512" IMG_H="256"/>
+		<BUILD ID="BLD_OVER" TARGET_ID = "FRM_OVER" X = "0" Y = "0" X_COUNT = "10" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0" START_INDEX="1"/>
+		<FORM ID="FRM_OVER" X = "59" Y = "0" Z = "10" W = "512" H = "650" PASS_EVENT="1">
+			<IMG ID = "IMG_OVER1" X = "0" Y = "0" W = "512" H = "512" IMG_W = "512" IMG_H = "512" PASS_EVENT="1">
+				<SCRIPT ID = "ON_L_BTN_UP"> CallContinentUI(UISelf:GetParent()) UISelf:GetParent():CloseParent()</SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_OVER2" X = "0" Y = "512" W = "512" H = "138" IMG_W = "512" IMG_H = "138" PASS_EVENT="1">
+				<SCRIPT ID = "ON_L_BTN_UP"> CallContinentUI(UISelf:GetParent()) UISelf:GetParent():CloseParent()</SCRIPT>
+			</IMG>
+			<SCRIPT ID = "ON_DISPLAY"> 
+				 OnContinentDisplayNew("IMG_OVER", UISelf, 2)
+			</SCRIPT>
+		</FORM>
+
+		<BUILD ID="BLD_NAME" TARGET_ID = "FRM_NAME" X = "0" Y = "0" X_COUNT = "10" Y_COUNT = "1" X_GAB = "0" Y_GAB = "0" START_INDEX="1"/>
+		<FORM ID="FRM_NAME" X="0" Y="0" Z="10" W="400" H="100" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR T_CENTER="1" FONT="FTtext_25" FONT_COLOR_HEX="0xFFf4f3f3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff392d07" T_X="200"/>
+		</FORM>
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "927" Y = "20" Z="6" W ="76" H ="27" BTN_IMG = "../Data/6_ui/map/wmapNcloseB.tga" BTN_IMG_W = "152" BTN_IMG_H = "54"/>
+			<ATTR TEXT = "400542" FONT = "FTctsBig_14" T_X = "49" T_Y ="4" FONT_COLOR_HEX="FFf8e6c3" T_OUTLINE="1" T_CENTER = "1" OUTLINE_COLOR_HEX = "0xFF3d2015"/>
+			<SCRIPT ID = "ON_L_BTN_UP"> CloseAllContMapUI() CloseToolTip() return true </SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_ARROW" X="0" Y="0" Z="11" W="24" H="24" U="1" V="2" UV_INDEX="2" IS_VISIBLE = "0">
+			<ATTR IMG="../Data/6_ui/book/bkArrow.tga" IMG_W = "24" IMG_H = "40"/>
+			<SCRIPT ID="ON_TICK">UISelf:SetLocation(Point2( UISelf:GetLocation():GetX(), g_MapArrowY + math.sin(GetAccumTime()*5)*5))</SCRIPT>
+		</IMG>
+		<SCRIPT ID = "ON_CALL"> CloseToolTip() OnWorldMapCall(UISelf) </SCRIPT>
+		<HOTKEY ID = "1"> CloseAllContMapUI() CloseToolTip() return true </HOTKEY>
+		<HOTKEY ID = "50"> CloseAllContMapUI() CloseToolTip() return true </HOTKEY>
+	</FORM>
+</XUI>

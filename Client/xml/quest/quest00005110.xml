@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5110</ID> <!--T.T.10511001 진짜 범인은 누구?(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 제스, 헌터G, 라르엘과 대화-->
+<!--[완료NPC]	달빛해안 마을 - 스웰-->
+<!--[내용]	클레아 아줌마는 스웰에게 반지를 잠시 맡겨놓았다고 한다. 스웰은 반지를 집에다 보관 했는데, 집을 잠시 비운 사이 반지가 없어졌다고 한다. 스웰은 평소 가난한 세명을 의심스러워 한다고 한다. 의심스러운 그들은 제스, 헌터G, 라르엘이라고 한다. 이 세명중에 범인이 있다고 생각하는 스웰을 대신하여, 제스, 헌터G, 라르엘과 대화를 나누고, 조금이라도 수상한 사람을 찾아 얘기해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DB9DFA7F-7F14-4530-A367-DCA447537B2F</CLIENT> <!--시작NPC 달빛해안 마을 - 스웰 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DB9DFA7F-7F14-4530-A367-DCA447537B2F</PAYER> <!--완료NPC 달빛해안 마을 - 스웰 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 1 달빛해안 마을 - 제스 -->
+		<AGENT TYPE="NPC" EVENTNO="10022">4A7BAF7A-1593-42e8-902E-A95CB08AEA63</AGENT> <!--진행NPC 2 달빛해안 마을 - 헌터G -->
+		<AGENT TYPE="NPC" EVENTNO="10023">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 3 달빛해안 마을 - 라르엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">DB9DFA7F-7F14-4530-A367-DCA447537B2F</AGENT> <!--진행NPC 11 달빛해안 마을 - 스웰 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="3" TYPE="INCPARAM" VALUE="513/1">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="513">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10511011"/> <!--제스와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10511012"/> <!--헌터G와 대화-->
+		<OBJECT3 COUNT="1" TEXT="10511013"/> <!--라르엘과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10511021" FACE="Walter_normal"/> <!--%name%님 큰일입니다. 
+클레아 아주머니가 저에게 잠시 맡겨놨던 반지가 없어졌어요.
+서랍에 넣어놨는데, 잠시 집을 비운 사이 누가 가져간 것 같아요.%%
+제발 저 좀 도와주세요. 
+%name%은 알아낼 수 있다고 생각해요. 제발 부탁해요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10511026" FACE="Walter_normal"/> <!--모두 다 아닌 것 같다고요? 그럴 리가 없을 텐데...
+제가 다시 한번 알아봐야겠어요.
+아무튼, 신경 써주셔서 감사해요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10511023" FACE="Walter_normal"/> <!--저는 제스, 헌터G, 라르엘 중 한 명이 범인이라고 생각해요.
+그들은 평소에도 조금 수상했어요. %%
+제스는 도둑이니 충분히 가능성이 있고, 헌터G는 요즘 생활이 어렵다고 하더라고요. 
+라르엘 역시 정체를 알 수 없으니 그 세 명이 확실히 의심스럽네요.
+이들과 얘기해보고 조금이라도 의심 드는 부분이 있을 시 저한테 꼭 전해주세요!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10511024" FACE="Walter_normal"/> <!--바쁘신가요? 그렇다면 어쩔 수 없네요.
+좀 도와주시면 좋을 텐데...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10511025" FACE="Walter_normal"/> <!--반지를 꼭 찾아야만 할 텐데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10511002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10511051" /> <!--뭐? 스웰녀석의 반지를 봤냐고? 왜 나한테 묻지? 엥? 뭐야 그 눈초리는?
+설마 날 의심하는거야? 아무리 내가 좀도둑이라지만,
+그딴 싸구려 반지를 내가 눈독 들일리가 없다구!!-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10511052" /> <!--반지? 무슨 반지를 말하는건가?
+내가 아무리 배가 고파도 반지에 신경 쓸 틈이 없다네. 
+요즘 일이 많거든.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="513" > <!--진행중-->
+			<BODY TEXT="10511053" /> <!--반지? 나는 액세서리에 관심이 없어. 너도 잘 알잖아.
+너까지 왜 날 귀찮게 구는거야? 난 지금 피곤해. 그러니까 나중에 다시 얘기하자.-->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

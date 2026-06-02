@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4088</ID> <!--T.T.10408801 의미심장한 우연(1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	팔미르 신전에서 잭과 대화-->
+<!--[완료NPC]	팔미르 신전 - 잭-->
+<!--[내용]	드래곤의 탑의 위치에 대해 궁금해하는 에델린은 우연히 만난 잭에게 드래곤의 탑에 대해서 알아보라고 부탁한다. 팔미르 신전의 잭과 대화하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">199A0D0F-7991-483e-A812-8F8143F35C26</CLIENT> <!--시작NPC 팔미르 신전 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">A3ABB6F9-B7A2-49c5-B526-862E9A5A5A80</PAYER> <!--완료NPC 팔미르 신전 - 잭 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">199A0D0F-7991-483e-A812-8F8143F35C26</AGENT> <!--진행NPC 11 팔미르 신전 - 에델린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">A3ABB6F9-B7A2-49c5-B526-862E9A5A5A80</AGENT> <!--진행NPC 12 팔미르 신전 - 잭 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10408811"/> <!--잭과 대화 (팔미르 신전)-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10408821" FACE="Edeline_normal"/> <!--정령신화가 담긴 이 두루마리에 의하면 마녀 파리스가 
+엘가와의 마지막 결전의 순간에 영웅들을 배신했다는 거죠.%% 
+만약 초마법으로 과거를 체험할 수 있다면…
+파리스의 정체에 대해서 단서를 찾을 수 있을텐데 말이죠.%% -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10408826" FACE="Jack_smile"/> <!--혹시 저 여자애가 드래곤의 탑이라고 말한 거야?
+헛… 쟤는 왜 여기서 드래곤의 탑을 찾고 있는 거지!!%%
+혹시 저 여자애도 우리처럼 벨칸의 보물을 노리는 거 아냐?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10408823" FACE="Edeline_smile"/> <!--그런데 문제가 있어요. 초마법을 사용하려면 예전에 말했던 것처럼
+체험하고 싶은 과거 장소에서 마법이 시전되야 하는데…%%
+이 근방에 드래곤의 탑이 있다는 이야기는 들어보지 못했어요.
+우선 그 탑의 위치를 찾아봐야 해요.%%
+이 옆에 있는 아이가 이 근처 지리에 대해서 알지 모르니
+드래곤의 탑에 대해 한번 물어봐 주시겠어요? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10408824" FACE="Edeline_angly"/> <!--무슨 문제라도 있는 건가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10408825" FACE="Edeline_normal"/> <!--드래곤의 탑에 대해서 물어봤나요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10408802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

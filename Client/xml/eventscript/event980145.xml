@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+    <CMD TYPE="WaitTime" Time="3"/>
+
+	<!-- 전체 UI 숨기기 -->
+	<CMD TYPE="HideUI" enable="true"/><!--UI가리기 -->
+	
+
+	<!-- 연출 준비-->
+
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+
+    <CMD TYPE="IngQuestDoEvent" SpecialActor="ME" QUEST="4278" Event ="980146"/>
+
+	<CMD TYPE="EscScript" EventID="980117"/>
+   
+   <!-- 포르레이트 연출 -->
+   
+	<CMD TYPE="Dialogue" NameTTID="99801059" TextTTID="99801451" FaceID="Hercules_smile" /><!-- 헤라클래스 웃음-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801452" FaceID="User_normal" /><!-- 주인공-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980117"/>
+
+	
+</EVENT_SCRIPT>
+

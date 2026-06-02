@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!-- Fight Effect -->
+	<FORM ID="FRM_DUEL_START" ALIGN_X="50" ALIGN_Y="50" W="512" H="102" TICK_TIME="1000">
+		<SCRIPT ID="ON_CALL">
+			PlaySoundByID("battle_fight")
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			CloseUI("FRM_DUEL_START")
+		</SCRIPT>			
+		<ATTR IMG="../Data/6_ui/duel/deTxtFight.tga" IMG_W="512" IMG_H="102"/>
+	</FORM>
+	<!-- Finish Effect -->
+	
+	<FORM ID="FRM_DUEL_END" ALIGN_X="50" ALIGN_Y="50" W="512" H="102" TICK_TIME="1500">
+		<SCRIPT ID="ON_TICK">
+			CloseUI("FRM_DUEL_END")
+		</SCRIPT>			
+		<ATTR IMG="../Data/6_ui/duel/deTxtFinish.tga" IMG_W="512" IMG_H="102"/>
+	</FORM>
+
+	<FORM ID="FRM_DUEL_WIN" ALIGN_X="50" ALIGN_Y="50" W="251" H="102" TICK_TIME="1500">
+		<SCRIPT ID="ON_TICK">
+			CloseUI("FRM_DUEL_WIN")
+		</SCRIPT>			
+		<ATTR IMG="../Data/6_ui/pvp/WarRTwin.tga" IMG_W="251" IMG_H="102"/>
+	</FORM>
+
+	<FORM ID="FRM_DUEL_LOSE" ALIGN_X="50" ALIGN_Y="50" W="286" H="106" TICK_TIME="1500">
+		<SCRIPT ID="ON_TICK">
+			CloseUI("FRM_DUEL_LOSE")
+		</SCRIPT>			
+		<ATTR IMG="../Data/6_ui/pvp/WarRTlose.tga" IMG_W="286" IMG_H="106"/>
+	</FORM>
+
+	<FORM ID="FRM_DUEL_DRAW" ALIGN_X="50" ALIGN_Y="50" W="331" H="102" TICK_TIME="1500">
+		<SCRIPT ID="ON_TICK">
+			CloseUI("FRM_DUEL_DRAW")
+		</SCRIPT>			
+		<ATTR IMG="../Data/6_ui/pvp/WarRTdraw.tga" IMG_W="331" IMG_H="102"/>
+	</FORM>
+
+
+	<!-- CountDown-->
+	<FORM ID="FRM_DUEL_START_COUNTDOWN" ALIGN_X="50" ALIGN_Y="50" W="100" H="100" TICK_TIME="1000">
+		<IMG ID="IMG_COUNT_DOWN" X="0" Y="0" W="100" H="100">
+			<ATTR IMG="../Data/6_ui/duel/deNum.tga" IMG_W="300" IMG_H="200" U="3" V="2" UV_INDEX="5"/>
+			<SCRIPT ID="ON_TICK">UpdateDuelStartCountDown(UISelf)</SCRIPT>
+		</IMG>
+	</FORM>
+
+	<FORM ID="FRM_DUEL_FINISH_COUNTDOWN" ALIGN_X="50" ALIGN_Y="50" W="100" H="100" TICK_TIME="1000">
+		<IMG ID="IMG_COUNT_DOWN" X="0" Y="0" W="100" H="100">
+			<ATTR IMG="../Data/6_ui/duel/deNum.tga" IMG_W="300" IMG_H="200" U="3" V="2" UV_INDEX="5"/>
+			<SCRIPT ID="ON_TICK">UpdateDuelFinishCountDown(UISelf)</SCRIPT>
+		</IMG>
+	</FORM>
+
+	<FORM ID="FRM_DUEL_AREAOUT_COUNTDOWN" ALIGN_X="50" ALIGN_Y="50" W="100" H="100" TICK_TIME="1000">
+		<IMG ID="IMG_COUNT_DOWN" X="0" Y="0" W="100" H="100">
+			<ATTR IMG="../Data/6_ui/duel/deNum.tga" IMG_W="300" IMG_H="200" U="3" V="2" UV_INDEX="5"/>
+			<SCRIPT ID="ON_TICK">UpdateDuelAreaOutCountDown(UISelf)</SCRIPT>
+		</IMG>
+	</FORM>
+
+	
+</XUI>

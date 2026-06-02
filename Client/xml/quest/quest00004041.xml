@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4041</ID> <!--T.T.10404101 그 해적 선원, 참 이상하다. -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	칼리곤선단[아케이드 모드(F1)] 정예방 입장-->
+<!--[완료NPC]	칼리곤 선단 - 죠니-->
+<!--[내용]	해적상어 죠니의 부탁은 단순히 칼리곤의 상태를 살펴보는 것 뿐이다. 칼리곤 선단[아케이드 모드(F1)]의 정예방에 다녀오자. 칼리곤과 싸울 필요는 없다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">98B00461-1DCF-4215-B7DB-FD8344F891BE</CLIENT> <!--시작NPC 칼리곤 선단 - 죠니 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">98B00461-1DCF-4215-B7DB-FD8344F891BE</PAYER> <!--완료NPC 칼리곤 선단 - 죠니 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">98B00461-1DCF-4215-B7DB-FD8344F891BE</AGENT> <!--진행NPC 11 칼리곤 선단 - 죠니 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<LOCATION OBJECTNO="1" TYPE="LOCATION_ENTER" VALUE="9010159">1</LOCATION> 
+ <!--MAP_NO=9010159/정신나간 칼리곤선장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10404111"/> <!--칼리곤의 상태를 살펴보기-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10404121" FACE="Johny_normal"/> <!--왜?%%
+뭘 쳐다봐!?
+때릴려고 했는데, 퀘스트 주니까 놀란 거지?%%
+그래 나는 언제나 놀라움을 추구하는 해적,
+규칙과 전통을 파괴하는 캐릭터를 가진 죠니님이시다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10404126" FACE="Johny_normal"/> <!--그래, 보고 왔나?
+흠… 아직 살아있었군.%%
+정신은 말짱해 보이던가?
+어땠어? 녀석에 대해 말 좀 해보라고!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10404123" FACE="Johny_normal"/> <!--후후…
+내가 무슨 부탁을 할 것 같아?%%
+모르겠지?%%
+막… 대충 늘어서서 지루한 부탁이나 하다가 
+보스를 잡아달라는 그런 부탁… 많이 봐왔을 거야.%%
+그런 건 절대 아니야. 내 부탁은 심플해. 다이렉트해.
+내 친구를 찾아줘. 친구의 이름은 칼리곤 선장이다.%%
+그 녀석을 만나게 된다면 바로 이곳으로 달려오라고…
+어때? 무지 쉬운 부탁이지? 예상을 화악 깼지?%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10404124" FACE="Johny_normal"/> <!--후후…
+당황했구나… 짜식…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10404125" FACE="Johny_normal"/> <!--내 이름이 유독 평범한 건 내 탓이 아닌 거고…
+아직도 여기서 얼쩡거리고 있는 너도 내 탓은 아니겠지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10404102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

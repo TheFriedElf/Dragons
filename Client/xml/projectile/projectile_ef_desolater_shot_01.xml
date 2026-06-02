@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="PROJECTILE_ef_desolater_shot_01">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="1.5">../Data/5_Effect/7_Projectile/ef_desolater_shot_01.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_BOOMERANG</SCRIPT>
+	<PARAM SPEED="600.0" ACCEL="2" MASS="0.5"/>
+		<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="ef_linker" RANGE="80"/>
+	</COLLISION_SPHERE>
+
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+	</SCRIPT_CALL_EVENT>
+</PROJECTILE>

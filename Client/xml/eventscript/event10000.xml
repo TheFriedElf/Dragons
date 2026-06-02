@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="SlowMotion" From="0.004" To="1" Time="2.7"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="MoveCamToActor" Func="GetEliteMonGuid()" MoveTime="0.2" CamActorDistance="240" CamMoveUpDistance="-10"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="WaitTime" Time="0.7"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="0.8"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+</EVENT_SCRIPT>

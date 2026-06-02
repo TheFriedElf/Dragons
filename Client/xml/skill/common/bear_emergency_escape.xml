@@ -1,0 +1,16 @@
+<ACTION ID="a_bear_emergency_escape" NEXT="a_idle" USE_CFUNC_ONTARGET="TRUE"  USE_CFUNC="TRUE" USE-EVENT="TRUE">
+	<SLOT NAME="casting01" LOOP="TRUE"/>
+	<SLOT NAME="carry_shot"/>
+  	<FSM SCRIPT="CommonSkillAction" 
+		USE_TLM="TRUE"
+		NO_DAMAGE_HOLD ="TRUE"
+		USE_DMG_EFFECT="FALSE"
+		
+		EFFECT_CNT_WHEN_ANI_SLOT1="1"
+		EFFECT_TYPE_WHEN_ANI_SLOT1_1="2"
+		EFFECT_ID_WHEN_ANI_SLOT1_1="efx_ctf_bear_explosion_01"
+		EFFECT_TARGET_NODE_WHEN_ANI_SLOT1_1="char_root"
+		
+		FIRE_SOUND_ID="love_bear_explosion_01"
+	/>
+</ACTION>

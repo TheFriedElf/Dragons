@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4278</ID> <!--T.T.10427800 불꽃성좌의 열쇠 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	게자리 던전에서 불꽃성좌의 열쇠 구하기-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	불꽃성좌의 열쇠는 게자리의 괴물게 키랩에게 얻을 수 있다. 쌍둥이자리에서 얻은 인도하는 나침반이 있으면 게자리를 찾아가는데는 문제가 없다. 키랩을 처치하고 두번째 열쇠인 불꽃성좌의 열쇠를 얻도록 하자-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000140</ITEM> 
+ <!--Item_NO=82000140/[13_01 별자리] 불꽃성좌의 열쇠,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">7281400</MONSTER> 
+ <!--MON_NO=7281400/괴물게 키랩,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427811"/> <!--불꽃성좌의 열쇠-->
+		<OBJECT2 COUNT="1" TEXT="10427812"/> <!--게자리던전 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427821" FACE="Crete_normal"/> <!--인도하는 나침반이 있다면 게자리에 들어가는 것은 문제가 없습니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427826" FACE="Crete_smile"/> <!--두번째 열쇠를 구하셨군요. 
+주인공님 정말 대단하세요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427823" FACE="Crete_normal"/> <!--괴물게 키랩이 두번째 열쇠인 불꽃성좌의 열쇠를 가지고 있거든요. 
+하지만 괴물게는 덩치가 크고 집게발이 날카로운 괴물입니다. 왠만해서는 근거지에서 잘 나오지는 않지만, 한번 건드리면 화가 나서 주변을 완전히 파괴시켜 버린답니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427824" FACE="Crete_cry"/> <!--… 정말 이러실 건가요???-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427825" FACE="Crete_normal"/> <!--%name%님 제발 부탁드립니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

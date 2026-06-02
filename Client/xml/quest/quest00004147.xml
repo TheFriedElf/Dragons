@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4147</ID> <!--T.T.10414701 무릉도원 (5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샬바론의 쿰바들로부터 독성진단부적을 10개 회수-->
+<!--[완료NPC]	카즈라 마을 - 라노타-->
+<!--[내용]	라노타 전사장의 말에 의하면 바람의 사제 퀘차가 쿰바들을 중독시킨 독에 대해 조사하기 위해 독성진단부적을 쿰바들 몸에 붙여두었다고 한다. 샬바론의 쿰바들을 퇴치하고 이 독성진단부적을 10개 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D66550AB-63CC-4ea1-881C-0EBB953E2D94</CLIENT> <!--시작NPC 카즈라 마을 - 라노타 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D66550AB-63CC-4ea1-881C-0EBB953E2D94</PAYER> <!--완료NPC 카즈라 마을 - 라노타 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D66550AB-63CC-4ea1-881C-0EBB953E2D94</AGENT> <!--진행NPC 11 카즈라 마을 - 라노타 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/6000/1/1/160414700">3523000</MONSTER> 
+ <!--MON_NO=3523000/검은 쿰바 ,Item_NO=160414700/[Q.ID:04147] 독성진단 부적40%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160414700</ITEM> 
+ <!--Item_NO=160414700/[Q.ID:04147] 독성진단 부적,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/6000/1/1/160414700">3523200</MONSTER> 
+ <!--MON_NO=3523200/허니 쿰바 ,Item_NO=160414700/[Q.ID:04147] 독성진단 부적40%,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10414711"/> <!--독성진단부적 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10414721" FACE="Lanota_normal"/> <!--샬바론… 
+예전에는 신선들이 살았다고 전해질 정도로 아름다운 곳이지.%% 
+허나 그만큼 접근하기 어려울 정도로 가파르고 위험한 곳일세. 
+이 곳에 서식하는 쿰바는 영리하고, 강한 영물이야.%%
+녀석들은 원래 경계심이 없고, 우리와 친밀감을 나누는 존재였어. 
+우리 신관의 전사들은 이 영리한 쿰바들에게 무예를 알려주기도 
+했을 정도라네.%% 
+그러나 동물들이 난폭해지기 시작한 이후부터 쿰바도 예외가 
+아니었네. 가능하다면, 이들을 다시 원래대로 되돌리고 싶은 것이 
+우리 드라칸들의 진심이라네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10414726" FACE="Lanota_smile"/> <!--쿰바들을 이렇게 손쉽게 처리하다니... 
+자넨 대단한 실력을 가진 고수였군. 그래.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10414723" FACE="Lanota_normal"/> <!--얼마 전부터 우리들은 바람의 신관사제이신 퀘차님이 특별히 만든 
+부적을 쿰바들에게 붙여두었다네. 
+아주 강한 고약으로 단단히 붙여둔 이 부적은 중독된 독의 종류를 
+알려준다고 하더군.%% 
+이들이 어떤 이유로 난폭해졌는지를 알려면 이 부적의 회수가 
+필요하다네.%% 
+샬바론의 쿰바들 몸에 붙여둔 독성진단부적을 떼어내 회수해 오게. 
+하루가 다르게 몬스터들이 흉폭해지고 있으니, 부디 서둘러야 하네!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10414724" FACE="Lanota_angry"/> <!--이 일에 관심이 없는 것을 보니 다른 꿍꿍이가 있는 것 같군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10414725" FACE="Lanota_angry"/> <!--쿰바들을 퇴치하고 독성진단부적은 가져왔나? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10414702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

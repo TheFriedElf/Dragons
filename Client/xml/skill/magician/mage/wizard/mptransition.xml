@@ -1,0 +1,10 @@
+<ACTION ID="a_MP Transition" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_01"/>
+  <FSM SCRIPT="Act_Melee_Default" FIND_TARGET_TYPE="SPHERE"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID ="ef_MPtransition_01_char_root"
+       NO_DEFAULT_HIT_EFFECT ="TRUE"
+       HIT_SOUND_ID="MP_Transition"
+       />
+</ACTION>

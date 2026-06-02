@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4032</ID> <!--T.T.10403201 용궁에서 온 선물(4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	후커의 캡틴모자 습득(수염고래 해안가[아케이드 모드(F1)])-->
+<!--[완료NPC]	수염고래 해안가 - 프리모-->
+<!--[내용]	프리모의 마지막 시험인듯 하다. 수염고래 해안가[아케이드 모드(F1)]의 캡틴 후커를 퇴치한 뒤, 낚시꾼 프리모에게 후커의 캡틴 모자를 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D9D4C750-7AE1-4084-B14A-770E1D304FA1</CLIENT> <!--시작NPC 수염고래 해안가 - 프리모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D9D4C750-7AE1-4084-B14A-770E1D304FA1</PAYER> <!--완료NPC 수염고래 해안가 - 프리모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D9D4C750-7AE1-4084-B14A-770E1D304FA1</AGENT> <!--진행NPC 11 수염고래 해안가 - 프리모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_M" VALUE="4/0/10000/0/1/1/160403200">6013900</MONSTER> 
+ <!--MON_NO=6013900/캡틴 후커,Mission_Key=4/수염고래 해안가 ,Item_NO=160403200/[Q.ID:04032] 후커의 캡틴 모자,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160403200</ITEM> 
+ <!--Item_NO=160403200/[Q.ID:04032] 후커의 캡틴 모자,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10403211"/> <!--후커의 캡틴 모자-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403221" FACE="Primo_normal"/> <!--점점 더 당신에게 의심이 가는군요!
+이 별가사리들은 장정 여럿이 달려들어도 겨우 잡을까 말까 한 놈들인데…%%
+뭐? 더 많이 잡아올 수도 있다구?
+흐이구… 거짓말도 작작 하쇼!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403226" FACE="Primo_smile"/> <!--헉!
+이건 후커의 모자가 맞는데…%%
+쩝… 인정할 수 밖에 없겠군요.
+해적 부하 따위가 두목의 모자를 가져올 순 없는 법이니.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403223" FACE="Primo_normal"/> <!--좋소. 거두절미하고 말하지. 
+이번엔 그 누구도 부인하지 못할 결과가 나오는 부탁을 하리다.%%
+당신의 실력이 사실이라면 이곳 수염고래 해안가를 주름 잡는
+후커라는 해적 두목과 겨뤄 보시오.%% 
+만약 그 녀석과 승부에서 이긴다면 그의 트레이드 마크인 
+캡틴모자를 빼앗아 오는 일도 가능할테죠?%%
+그의 보기만해도 기분 나빠지는 캡틴모자를 빼앗아 온다면
+내 두 말 하지 않겠소. 바로 내 비밀을 알려드리지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403224" FACE="Primo_smile"/> <!--크하하… 후커의 모자라니… 당치도 않지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403225" FACE="Primo_angly"/> <!--캡틴 후커의 본거지로 잠입하여 후커의 캡틴모자를 가져오시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

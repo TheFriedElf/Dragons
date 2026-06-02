@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_012407_CF">
+	<GSAPATH>../Data/3_World/01_Ingrid/100_Chaos/012407_CF.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/ForgottenHill.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--// 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+	
+<SPOTLIGHT BGCOLOR="70,8,80"/>
+<FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="50.000000" END="6000.000000" COLOR="0.001,0.001,0.008"/>
+
+</WORLD>

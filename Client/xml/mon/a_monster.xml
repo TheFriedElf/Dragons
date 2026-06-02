@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Woody" INIT_ACTION="a_idle">   <!-- ACTOR NAME='클래스 아이디"-->
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Woody"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Woody/N_Woody.kfm</KFMPATH> 
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/> <!--KFM에 물려있는 이팩트 크기조정"-->
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="5"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본공격 (기본공격은 최대 8개까지 가능하다)-->
+			<ITEM NAME="btlidle_01_start" ANIMATION=" "/> <!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="btlidle_01" ANIMATION=" " LOOP="TRUE" /> <!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="attk_01_02" ANIMATION=" "/>             <!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<!-- 기본공격2 --> 
+			<ITEM NAME="attk_02_01_start" ANIMATION=" "/> 
+			<ITEM NAME="attk_02_01" ANIMATION=" " LOOP="TRUE" />
+			<ITEM NAME="attk_02_02" ANIMATION=" "/>            
+			<!-- 기본공격3 --> 
+			<ITEM NAME="attk_03_01_start" ANIMATION=" "/>  
+			<ITEM NAME="attk_03_01"  ANIMATION=" " LOOP="TRUE"/>
+			<ITEM NAME="attk_03_02" ANIMATION=" "/>            
+			<!-- 기본 원거리공격1 (원거리공격은 최대 3개까지 가능하다) --> 		
+
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION=" "/> <!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="btlidle_01_shot"  ANIMATION=" " LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="shot_01" ANIMATION=" " /> <!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="btlidle_01_shot_middle" ANIMATION=" " LOOP="TRUE"/> <!-- 해당동작의 공격 모션 중간에 변화될 아이들번호를 입력해준다 생략가능하다-->
+			<!-- 기본 원거리공격2--> 
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION=" "/>
+			<ITEM NAME="btlidle_02_shot"  ANIMATION=" "LOOP="TRUE"/>
+			<ITEM NAME="shot_02" ANIMATION=" " />
+
+			<!-- 근접 스킬 (기본공격이아닌 스킬로되어있는 근접공격에쓰인다) -->
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION=" "/><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION=" " LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="skill_attk_01" ANIMATION=" "/><!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다 -->
+
+			<!-- 근접 스킬 02 -->
+			<ITEM NAME="btlidle_02_skill_attk_start" ANIMATION=" "/>
+			<ITEM NAME="btlidle_02_skill_attk"  ANIMATION=" "  LOOP="TRUE"/>
+			<ITEM NAME="skill_attk_02"  ANIMATION=" " />	
+
+		
+			<!-- 샷 스킬 (기본 샷이아닌 스킬로 제작된 원거리공격에 쓰인다)-->
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION=" " /><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="btlidle_01_skill_shot"  ANIMATION=" " LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="skill_shot_01" ANIMATION=" " /><!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다 -->
+			<ITEM NAME="btlidle_01_skill_shot_middle"  ANIMATION=" " LOOP="TRUE"/> <!-- 해당동작의 공격 모션 중간에 변화될 아이들번호를 입력해준다 생략가능하다 -->
+			<ITEM NAME="shot_return_01"  ANIMATION=" "  /><!-- 발사체가 돌아올때의 공격모션을 지정해준다 생략가능하다 -->
+
+  			<!-- 대쉬 스킬 -->
+			<ITEM NAME="dashattk_btlidle_01_start"  ANIMATION=" " /><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION=" " LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="dashattk_rush" ANIMATION=" " LOOP="TRUE"/> <!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="dashattk_finish" ANIMATION=" " /><!-- 대쉬어택 동작의 마무리 모션 아이들번호를 입력해준다 생략가능하다-->
+			
+			<!-- 대쉬 스킬 피어싱 (대쉬경로에 있는적을 지속적으로 타격입힌다 )-->
+			<ITEM NAME="dash_piercing_attk_btlidle_01_start" ANIMATION=" " /><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="dash_piercing_attk_btlidle_01"  ANIMATION=" " LOOP="TRUE"/>><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="dash_piercing_attk_rush" ANIMATION=" "  LOOP="TRUE"/> <!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="dash_piercing_attk_finish" ANIMATION=" " /><!-- 대쉬어택 동작의 마무리 모션 아이들번호를 입력해준다 생략가능하다-->
+		
+			<!-- 하늘에서 발사체 떨어트림(작은 발사체 여러개) ex)괴물 백과사전류의 스킬 불덩어리 비 소환-->
+			<ITEM NAME="massive_projectile_btlidle_start"  ANIMATION=" " /><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION=" " LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="massive_projectile_fire" ANIMATION=" " /><!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="massive_projectile_finish" ANIMATION=" " />><!-- 동작의 마무리 모션 아이들번호를 입력해준다 생략가능하다-->
+			
+			<!-- 초목이 소환해서 떨어트리는 스킬과 같이 큰물체 하나를 떨어 트리는 스킬-->
+		    <ITEM NAME="drop_projectile_btlidle_start" ANIMATION=" " />
+			<ITEM NAME="drop_projectile_btlidle" ANIMATION=" " LOOP="TRUE"/>
+			<ITEM NAME="drop_projectile_fire" ANIMATION=" " />
+
+    		<!-- 휠 윈드 스킬 -->
+			 <ITEM NAME="whirlwind_btlidle_01_start" ANIMATION=" " /><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			 <ITEM NAME="whirlwind_btlidle_01" ANIMATION=" " /><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			 <ITEM NAME="whirlwind_01" ANIMATION=" " /><!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+	
+			<!-- 브레스 스킬 -->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION=" " /><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="breath_btlidle_01" LOOP="TRUE" ANIMATION=" " /><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="breath_01" ANIMATION=" " /><!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="breath_01_finish" ANIMATION=" " /><!-- 대쉬어택 동작의 마무리 모션 아이들번호를 입력해준다 생략가능하다-->
+			
+			<!--바닥 마법진 에서 무엇인가를 소환해 피해를 주는 스킬 -->
+			<ITEM NAME="summon_thorn_btlidle_start" ANIMATION=" "/><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="summon_thorn_btlidle" ANIMATION=" " LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="summon_thorn_fire" ANIMATION=" "/><!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+
+			<!-- 점프해서 바닥 내려 찍기 -->
+			<ITEM NAME="jumpdowncrash_up" ANIMATION="1000201"/><!--- 점프시 상승할때 애니메이션 아이디-->
+			<ITEM NAME="jumpdowncrash_down" ANIMATION="1000202"/><!--- 점프시 하강할때 애니메이션 아이디-->
+			<ITEM NAME="jumpdowncrash_getup" ANIMATION="1000203"/><!--- 점프시 하강하고 일어날때 애니메이션 아이디-->
+
+			<!--지진 스킬-->
+		    <ITEM NAME="earthquake_battleidle_start" ANIMATION=" " /><!-- 해당동작의 시작 모션 아이들번호를 입력해준다 준비동작이 없을시 생략가능하다-->
+			<ITEM NAME="earthquake_battleidle" ANIMATION=" " LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="earthquake_fire" ANIMATION=" "/><!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			
+			 
+			 <!-- 참고 \SFreedom_Dev\XML\Skill\Monster -->
+			<!-- 해당 스킬이 따로 이팩트를 필요로 하는  경우 다음과 같은 항목이 필요하며 해당 이팩트가 Path.xml or effect.xml에 정의되있을때 사용가능하다>
+			 FIRE_START_NODE="p_ef_l_hand" 발사체가 발사될 노드 아이디
+			 FIRE_EFFECT_NODE="char_root" 파이어 이펙트 노드아이디 
+			 PROJECTILE_TYPE="BOOMERANG" 발사체가 되돌아오는 경우에 쓴다
+			 PROJECTILE_ID="Projectile_BigWoody" 발사체아이디 
+			 EFFECT_TO_GROUND="ef_woody_attk" 바닥에 표현될 마법진 이펙트아이디  
+			 QUAKE_TIME="0.6" 진동 시간 
+			 QUAKE_FACTOR="6.2" 진동 크기
+			 PROJECTILE_SPEED="800" 발사체의 속도
+			 SOUND_ID="Dark_Chef" 해당 동작에 사운드가 들어갈때 사운드아이디를 입력한다.
+			 FIRE_EFFECT="NONE" 해당동작에 쓰일 파이어 이팩트아이디를 입력해준다.
+        	<!---->
+								
+			
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100" SOUND="../Data/2_Mon/M_Sound/n_Woody_dmg_01.wav" VOLUME="0.2, 50, 250"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100" SOUND="../Data/2_Mon/M_Sound/n_Woody_dmg_01.wav" VOLUME="0.2, 50, 250"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051" SPEED="42"/>
+			<ITEM NAME="die_01" ANIMATION="1000020" RANDOM="100" SEE_FRONT="TRUE"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025" RANDOM="100"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023" RANDOM="100"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022" RANDOM="100"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

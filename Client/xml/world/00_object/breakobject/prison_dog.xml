@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Prison_Dog">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1">../Data/3_World/00_Object/breakObject/Quest/Prison_Dog/Prison_Dog.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="38"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

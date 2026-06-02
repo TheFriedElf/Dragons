@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4188</ID> <!--T.T.10418801 숲의 내일을 위해 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	나무꾼 폴 버나언 퇴치-->
+<!--[완료NPC]	솔방울 언덕 - 오르하-->
+<!--[내용]	무녀 오르하의 부탁 대로 나무꾼 무리들에게 선제공격을 감행할 것이다. 솔방울언덕[시나리오 모드(F5)]에서 총공격을 준비하고 있는 나무꾼 폴 버나언을 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">1394F78B-CF1A-4fa3-B7CE-039585625C17</CLIENT> <!--시작NPC 솔방울 언덕 - 오르하 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">1394F78B-CF1A-4fa3-B7CE-039585625C17</PAYER> <!--완료NPC 솔방울 언덕 - 오르하 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">1394F78B-CF1A-4fa3-B7CE-039585625C17</AGENT> <!--진행NPC 11 솔방울 언덕 - 오르하 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="121/5/1">6017700</MONSTER> 
+ <!--MON_NO=6017700/나무꾼 폴 버나언,Mission_Key=121/솔방울언덕 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10418811"/> <!--나무꾼 폴 버나언 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418821" FACE="Orha_normal"/> <!--드디어, 나무꾼 폴 버나언과 결전을 벌여야 할 때가 
+찾아왔습니다. 미카족의 전사들을 모두 모아 출진할
+준비를 하겠습니다. 전사님도 부디 저희를 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418826" FACE="Orha_smile"/> <!--아아, 오늘은 영광스러운 날입니다!%%
+우리 미카족을 도와주셨으니… 
+신록의 숲에 대한 이야기를 들려드리지요.%%
+저 신성한 숲 속에는 신록의 제단이라는 비밀스런
+장소가 있습니다. 이곳에는 신들의 안식처에 있는
+쿤다라 동굴의 결계를 푸는 비밀장치가 있다고 합니다.%%
+아마도 버나언들은 이 신록의 제단으로 가는 길을
+내기 위해 신의 나무를 베어냈던 것입니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418823" FACE="Orha_normal"/> <!--신록의 나무들과 정령들을 해치려 하는 
+저 잔혹한 무리들에게 신성한 자연을 훼손한 대가가
+어떠한 것인지 똑똑히 알려줄 때가 찾아왔습니다.
+솔방울언덕[시나리오 모드(F5)]로 가주세요.
+반드시 나무꾼 폴 버나언을 퇴치하고 돌아와 주십시오. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418824" FACE="Orha_normal"/> <!--아직 준비가 부족하신 건가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418825" FACE="Orha_normal"/> <!--솔방울언덕[시나리오모드(F5)]에서 반드시 나무꾼 폴 버나언을 퇴치해 주십시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

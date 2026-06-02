@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Aram_Creta_5" INIT_ACTION="a_opening" ALWAYS_GLOWMAP="TRUE">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Aram_Creta"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Aram_Creta/N_Aram_Creta.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Aram_Creta/N_Aram_Creta_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="30,23" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_02" SIZE="30,23" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+		</ABV>
+		<SLOT>
+			<!-- 박수쳐서 때리기 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000061"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062"/>
+			<!-- 휠윈드 사용-->
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000063" RANDOM="100"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000064"/>
+			<!-- PC 묵기 -->
+			<ITEM NAME="attk_fin_01" ANIMATION="1000066"/>
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1000067"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000068"/>
+			<ITEM NAME="attk_fin_01_fin_02" ANIMATION="1000069"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

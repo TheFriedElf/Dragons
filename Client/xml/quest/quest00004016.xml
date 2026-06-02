@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4016</ID> <!--T.T.10401601 알뜰한 고양이 사료 제조 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	지하수로의 몬스터로 부터 먹다 남은 빵 10개 수집-->
+<!--[완료NPC]	시청 지하수로 - 오토런치5-->
+<!--[내용]	오토런치5를 위해 지하수로 몬스터를 종류에 상관 없이 퇴치하여, 먹다 남은 빵 10개를 구해주자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">16B185BF-31BE-4048-9070-3C5868FECAE2</CLIENT> <!--시작NPC 시청 지하수로 - 오토런치5 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">16B185BF-31BE-4048-9070-3C5868FECAE2</PAYER> <!--완료NPC 시청 지하수로 - 오토런치5 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">16B185BF-31BE-4048-9070-3C5868FECAE2</AGENT> <!--진행NPC 11 시청 지하수로 - 오토런치5 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/7000/1/1/160401600">9010502</GROUND> 
+ <!--MAP_NO=9010502/파렐 대저택,Item_NO=160401600/[Q.ID:04016] 먹다 남은 빵30%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160401600</ITEM> 
+ <!--Item_NO=160401600/[Q.ID:04016] 먹다 남은 빵,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10401611"/> <!--먹다 남은 빵-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10401621" FACE="autolunch_normal"/> <!--시작 대사 "삐릭!
+식재료를 넣어주십시오.
+삐리비리삡…%%
+먹을 것을 주란 말이야!%%
+(음 아무래도 이 기계는 고장난 것 같아.)
+-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10401626" FACE="autolunch_normal"/> <!--인공지능 프로그램! 작동 개시!
+알뜰한 고양이사료 제작 공정을 시작합니다.%%
+먹을 것을 줘…
+먹을 것을…. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10401623" FACE="autolunch_normal"/> <!--나는 인공지능을 가진 자동 사료 공급 장치.
+알뜰한 고양이 사료 레시피 분석중… 
+삐리비리삡!%%
+사료 재료를 공급해주십시오. 삐이-%%
+재료명 : 먹다 남은 빵%%
+(기계에 재료들을 넣으면 사료들을 만들어 주는구나.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10401624" FACE="autolunch_normal"/> <!--삐릿!
+알았어... 됐다. 인공지능 빈정 상했음.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10401625" FACE="autolunch_normal"/> <!--빨랑… 먹을 것을 줘… 빨랑…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10401602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030530_DG" DESCRIPTION="90206010">
+  <GSAPATH>../Data/3_World/95_Dungeon/01_Level/030530_DG.gsa</GSAPATH>
+  <MINIMAP Y="246" H="110">../Data/3_World/95_Dungeon/01_Level/030501_DG.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Van_Cliff.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+  <FREE_DIRECTION ALL="TRUE"/><!--8방향-->
+  <!-- 지하 6층 -->
+  <TRIGGER ID="gate_030529_base" TYPE="PORTAL" TITLE_TEXT_ID="802018" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030520" PARAM2="3" />
+  </TRIGGER>
+  <!-- 포털 -->
+  <TRIGGER ID="gate_030500_base" TYPE="PORTAL" TITLE_TEXT_ID="802022" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,80" TITLE_TEXT_SCALE="2" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030500" PARAM2="1" MOVETYPE="3">
+	<ACCESS ERROR_MSG="509692">
+		<LEVEL MIN="63" MAX="100" PARTY="1"/>
+            <USEITEM INV="3" NO="20310310" COUNT="1" CONSUME="1" PARTY="1" GROUP="1"/>
+            <USEITEM INV="3" NO="20310320" COUNT="1" CONSUME="1" PARTY="1" GROUP="2"/>
+	        <USEITEM INV="3" NO="20310330" COUNT="1" CONSUME="1" PARTY="1" GROUP="3"/>
+	        <USEITEM INV="3" NO="20310340" COUNT="1" CONSUME="1" PARTY="1" GROUP="4"/>
+        </ACCESS>
+    </ACTION>
+
+    
+  </TRIGGER>
+  <!-- 8층 -->
+  <TRIGGER ID="gate_title_01" TITLE_TEXT_ID="802020" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1" />
+  <!-- 9층 -->
+  <TRIGGER ID="gate_title_02" TITLE_TEXT_ID="802021" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1" />
+<!-- 월드 이벤트 오브젝트 정의 -->
+  <WORLDEVENT_OBJECT_LIST>
+    <!--스위치 -->
+    <WORLDEVENT_OBJECT ID="1" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 01" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="2" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 02" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="3" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 03" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="4" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 04" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="5" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 05" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="6" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 06" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="7" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 07" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="8" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 08" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="9" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 09" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="10" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 10" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="11" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 11" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="12" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 12" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="13" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 13" />    <!--위로항한/ 스위치/ -->
+	<!--정예스위치/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="14" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 14" />    <!--위로항한/ 스위치/ -->
+    <!--추가/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="15" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 15" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="16" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 16" />    <!--위로항한/ 스위치/ -->
+	<WORLDEVENT_OBJECT ID="17" INIT_STATE="0" TYPE="PUPPET" NAME="Van_testswich1001_01 17" />    <!--위로항한/ 스위치/ -->
+	
+	<!--문 -->
+	<WORLDEVENT_OBJECT ID="21" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 01" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="22" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 02" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="23" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 03" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="24" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 04" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="25" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 05" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="26" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 06" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="27" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 07" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="28" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 08" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="29" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 09" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="30" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 10" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="31" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 11" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="32" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 12" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="33" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonWall1003_03 01" />    <!--문/ 닫힌 -->
+	<!--정예문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="34" INIT_STATE="0" TYPE="PUPPET" NAME="Van_Ruindoor2004_01 01" />    <!--문/ 닫힌 -->
+	<!--추가/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="35" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 15" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="36" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 16" />    <!--문/ 닫힌 -->
+	<WORLDEVENT_OBJECT ID="37" INIT_STATE="0" TYPE="PUPPET" NAME="Van_PrisonDoor1003_01 17" />    <!--문/ 닫힌 -->
+    
+  </WORLDEVENT_OBJECT_LIST>
+  <!-- 문열기 1 -->
+  <WORLD_EVENT ID="1" RESET_TIME="25000" ENABLE="1"><!-- 10초 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_01" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="21" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="21" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기2 -->
+  <WORLD_EVENT ID="2" RESET_TIME="10000" ENABLE="1"><!-- 10초 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_02" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="22" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="22" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기3 -->
+  <WORLD_EVENT ID="3" RESET_TIME="600000" ENABLE="1"><!-- 10분 --> 
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_03" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="23" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="23" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기4 -->
+  <WORLD_EVENT ID="4" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_04" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="4" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="24" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="4" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="24" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기5 -->
+  <WORLD_EVENT ID="5" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_05" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="5" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="25" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="5" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="25" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기6 -->
+  <WORLD_EVENT ID="6" RESET_TIME="10000" ENABLE="1"><!-- 10초 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_06" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="6" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="26" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="6" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="26" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기7 -->
+  <WORLD_EVENT ID="7" RESET_TIME="20000" ENABLE="1"><!-- 20초 --> 
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_07" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="7" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="27" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="7" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="27" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기8 -->
+  <WORLD_EVENT ID="8" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_08" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="8" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="28" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="8" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="28" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기9 -->
+  <WORLD_EVENT ID="9" RESET_TIME="600000" ENABLE="1"><!-- 10분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_09" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="9" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="29" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="9" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="29" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기10 -->
+  <WORLD_EVENT ID="10" RESET_TIME="20000" ENABLE="1"><!-- 20초 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_10" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="10" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="30" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="10" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="30" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기11 -->
+  <WORLD_EVENT ID="11" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_11" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="31" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="31" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기12 -->
+  <WORLD_EVENT ID="12" RESET_TIME="6000" ENABLE="1"><!-- 6초 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_12" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="32" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="32" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기 13 -->
+  <WORLD_EVENT ID="13" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_13" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="13" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="33" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="13" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="33" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기 14 -->
+  <WORLD_EVENT ID="14" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_14" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="14" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="34" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="14" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="34" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기 15 -->
+  <WORLD_EVENT ID="15" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_15" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="15" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="35" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="15" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="35" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기 16 -->
+  <WORLD_EVENT ID="16" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_16" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="16" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="36" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="16" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="36" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 문열기 17 -->
+  <WORLD_EVENT ID="17" RESET_TIME="300000" ENABLE="1"><!-- 5분 -->
+    <CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="swich_17" EVENT="ACTION" />
+    <!--트리거 정의 -->
+    <ACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="17" EVENT="STATUS" VALUE="1" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="37" EVENT="STATUS" VALUE="1" />
+    </ACTIVATE_ACTION>
+    <DEACTIVATE_ACTION>
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="17" EVENT="STATUS" VALUE="0" />
+      <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="37" EVENT="STATUS" VALUE="0" />
+    </DEACTIVATE_ACTION>
+  </WORLD_EVENT>
+  <!-- 이벤트 트리거 -->
+  <TRIGGER ID="swich_01">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_02">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_03">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_04">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_05">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_06">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_07">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_08">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_09">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_10">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_11">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_12">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_13">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_14">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_15">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_16">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  <TRIGGER ID="swich_17">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="Map_WorldEventTrigger" />
+  </TRIGGER>
+  
+  <!-- 텔 레 포 트 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_05" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_06" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_07" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_08" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_09" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_10" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_11" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_11" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_12" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_12" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_13" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_13" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_14" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_14" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_15" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_15" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_16" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_16" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_17" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_17" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_18" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_18" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_19" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_19" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_20" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_20" />
+  </TRIGGER>
+  <!-- 텔레포트 데미지 이동 -->
+  <TRIGGER ID="teleport_target_31" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_31" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_32" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_32" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_33" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_33" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_34" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_34" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_35" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_35" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_36" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_36" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_37" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_37" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_38" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_38" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_39" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_39" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_40" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_40" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_41" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_41" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_42" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_42" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_43" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_44" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_45" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_46" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_47" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_48" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_49" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_50" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_49" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_51" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_51" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_52" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_52" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_53" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_52" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_54" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_52" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_55" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_55" />
+  </TRIGGER>
+  <!-- 트랩 -->
+  <TRIGGER ID="Van_AxTrap 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 21">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 22">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 23">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 24">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+ 
+  <TRIGGER ID="Van_AxTrap 26">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 27">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 28">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 29">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 30">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 37">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_AxTrap 38">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 13">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 14">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  
+  <TRIGGER ID="Van_BallTrap 16">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 17">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 18">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 19">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 20">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BallTrap 21">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!-- 톱날-->
+  <TRIGGER ID="Van_BladeTrap 35">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--세워진 톱날-->
+  <TRIGGER ID="Van_BladeTrap03 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BladeTrap03 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BladeTrap03 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BladeTrap03 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BladeTrap03 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_BladeTrap03 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--번개-->
+  <TRIGGER ID="Van_lightningTrap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--1개 번개-->
+  <TRIGGER ID="Van_lightningTrap1001_02 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_02 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--1개 번개-->
+  <TRIGGER ID="Van_lightningTrap1001_05 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Van_lightningTrap1001_05 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+   <!--이동 톱니 트랩 일시 보류
+  <OBJECT GUID="1dfa42d6-0051-4dd8-a8c3-03470589b74e" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="-5858.316, -1730.531, 148.1286" TIME="1" />
+    <WayPoint POINT="-5854.758, -2102.94, 148.2158" TIME="1" />
+    <WayPoint POINT="-3144.485, -2112.997, 148.0456" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="2f8ce17a-622a-4ed6-82a5-04aac349e922" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="-5703.226, -1734.901, 148.1286" TIME="1" />
+    <WayPoint POINT="-5502.883, -1734.901, 148.1285" TIME="1" />
+    <WayPoint POINT="-5504.747, -2019.043, 148.1286" TIME="1" />
+    <WayPoint POINT="-3142.563, -2018.106, 153.1327" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="932397fb-17ad-47c6-9f57-f768638bbcf9" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="-2221.555, -598.1221, 147.0564" TIME="1" />
+    <WayPoint POINT="-1615.274, -596.4191, 147.0564" TIME="1" />
+    <WayPoint POINT="-1622.086, -1197.591, 147.0564" TIME="1" />
+    <WayPoint POINT="-1019.211, -1206.106, 147.0564" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="68e84e9d-5120-4f31-9c5f-5c8aab486635" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="-1284.476, -586.0782, 148.1288" TIME="1" />
+    <WayPoint POINT="-1012.758, -598.1545, 148.0456" TIME="1" />
+    <WayPoint POINT="-1006.72, 35.85474, 148.1287" TIME="1" />
+    <WayPoint POINT="-419.5066, 22.26883, 148.1286" TIME="1" />
+    <WayPoint POINT="-424.0351, -578.5305, 148.1288" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="0961c900-ee5a-4ca7-9b0c-aeccf88f5ff8" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="2245.025, -2925.159, 153.1327" TIME="1" />
+    <WayPoint POINT="2852.762, -2922.616, 149.6916" TIME="1" />
+    <WayPoint POINT="2875.647, -2014.824, 149.5213" TIME="1" />
+    <WayPoint POINT="3691.897, -2017.367, 149.5213" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="5840ad9e-2183-4fe6-8233-7679a799ec35" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="6975.153, -1381.001, 148.2874" TIME="1" />
+    <WayPoint POINT="7298.198, -1388.339, 148.288" TIME="1" />
+    <WayPoint POINT="6972.443, -1742.516, 148.2881" TIME="1" />
+    <WayPoint POINT="7294.919, -1738.143, 153.1327" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="3cc48a50-a1e0-4226-9147-e52298460bf3" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="2519.765, -7087.715, 151.6796" TIME="1" />
+    <WayPoint POINT="2877.102, -7083.608, 151.6796" TIME="1" />
+    <WayPoint POINT="2872.995, -7761.316, 151.6796" TIME="1" />
+    <WayPoint POINT="2514.289, -7743.518, 151.6796" TIME="1" />
+    <WayPoint POINT="2526.611, -7397.134, 151.6796" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="91d0c6b1-8af8-4e77-848d-21851f459361" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="6190.742, 1967.598, 148.1296" TIME="1" />
+    <WayPoint POINT="6182.76, 1356.983, 148.0466" TIME="1" />
+    <WayPoint POINT="6797.367, 1347.005, 148.1297" TIME="1" />
+    <WayPoint POINT="6805.349, 2306.829, 148.0465" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="92d3c785-32dc-476a-a842-bc7c58c1125f" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="6486.727, 2853.33, 148.0464" TIME="1" />
+    <WayPoint POINT="6476.114, 2531.416, 148.0464" TIME="1" />
+    <WayPoint POINT="7102.255, 2524.341, 148.3017" TIME="1" />
+    <WayPoint POINT="7088.105, 3177.013, 148.3015" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="6de5ce7e-75c6-4011-9bcb-de15e57c3676" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="5298.698, 6805.068, 148.0459" TIME="1" />
+    <WayPoint POINT="5883.488, 6801.932, 148.046" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="0619b0ac-3f40-4025-84a6-165712d99a5f" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="2016.507, 7458.211, 148.1295" TIME="1" />
+    <WayPoint POINT="2365.715, 7452.225, 148.1295" TIME="1" />
+    <WayPoint POINT="2367.71, 7162.618, 148.2185" TIME="1" />
+    <WayPoint POINT="2012.516, 7162.881, 148.3019" TIME="1" />
+    <WayPoint POINT="2010.52, 6866.873, 148.1296" TIME="1" />
+    <WayPoint POINT="2355.738, 6869.282, 148.3019" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="0978b439-1cd9-42a2-9c6f-c74886b83084" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="192.4849, 4397.18, 148.1294" TIME="1" />
+    <WayPoint POINT="813.0778, 4381.216, 148.046" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="051e7e3c-098a-4307-897e-0568c251db89" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="1409.191, 4679.753, 148.1292" TIME="1" />
+    <WayPoint POINT="1105.914, 4680.787, 148.046" TIME="1" />
+    <WayPoint POINT="1099.571, 4070.955, 148.0461" TIME="1" />
+    <WayPoint POINT="495.7972, 4067.926, 149.517" TIME="1" />
+    <WayPoint POINT="491.8062, 3475.98, 148.0461" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="16968177-bf6a-441a-8c29-7b4d600a5d66" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="793.123, 3776.587, 148.046" TIME="1" />
+    <WayPoint POINT="1398.073, 3772.418, 148.0461" TIME="1" />
+    <WayPoint POINT="1411.186, 4389.341, 148.1292" TIME="1" />
+  </OBJECT> -->
+    <NPC NAME="1028236" ACTOR="c_Veronica_IN" SCRIPT="NPC_Click" KID="1028236" GUID="2DAA2D7A-9615-4bf9-BF10-64ED704A6AF5" TYPE="FIXED" LOCATION="-3314.1821,836.7284,-2.9351" DIRECTION="-1,-1,0">
+    </NPC>
+ 
+  <!--포그-->
+  <SPOTLIGHT BGCOLOR="70,8,80" FORCE_SPOT="TRUE" />
+  <FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="50.000000" END="6000.000000" COLOR="0.0,0.0,0.0" />
+  <!-- 기존 카메라
+  <CAMERA_ADJUST ZOOM="-20" UP="280" TARGET_Z="-45" />-->
+  <!--카메라-->
+  <CAMERA_ADJUST ZOOM="20" UP="215" TARGET_Z="-40" />
+  <!-- L.O.D -->
+  <WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1" />
+  <!-- 샤인스톤 -->
+  <STONES />
+</WORLD>

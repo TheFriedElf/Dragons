@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4243</ID> <!--T.T.10424301 강화형 백팩 시그너스 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	백팩 업그레이드 키트 습득-->
+<!--[완료NPC]	밴시협곡 - 모하모-->
+<!--[내용]	모하모는 백팩 업그레이드 키트라는 아이템을 가져오면 부스터 백팩의 업그레이드를 시켜주겠다고 말한다. 백팩 업그레이드 키트는 붉은여우 삼각지의 세티로스가 가지고 있을 것 같지만, 워낙 희귀한 아이템이기 때문에 쉽게 구할 수가 없다고 한다. 백팩 업그레이드 키트를 구하기 위해서 세티로스가 준다는 백팩 업그레이드 키트를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</CLIENT> <!--시작NPC 밴시협곡 - 모하모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</PAYER> <!--완료NPC 밴시협곡 - 모하모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</AGENT> <!--진행NPC 11 밴시협곡 - 모하모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160424300</ITEM> 
+ <!--Item_NO=160424300/백팩 업그레이드 키트,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">299602650</ITEM> 
+ <!--Item_NO=299602650/부스터 백팩 [페리] -붉은여우 삼각지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10424311"/> <!--백팩 업그레이드 키트 습득-->
+		<OBJECT2 COUNT="1" TEXT="10424312"/> <!--백팩 페리 -->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10424321" FACE="Mohamo_normal"/> <!--아람 던젼에서 얻은 케케묵은 낡은 책에서 읽은 사실인데, 
+너에게 준 부스터 백팩 [페리]는 원초적인 기능만 가지고 있는
+기본형 백팩이야.%%
+오래 전 천상에 살고 있던 고대인들은 훨씬 더 다양하고
+화려한 백팩을 사용했던 것 같아. 아마도 이곳에서 부품을
+구할 수 있다면 보다 업그레이드된 부스터 백팩으로 확장이
+가능할 것 같아.%% 
+어때? 관심 가지 않아?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10424326" FACE="Mohamo_smile"/> <!--이건 너무 낡은 것 같아. 미카족의 대장장이 르고르에게 
+점검을 부탁해야 할 듯 한데… 이 업그레이드 키트를
+손보는 동안 조금 기다려 줘야 할 것 같아.  -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10424323" FACE="Mohamo_normal"/> <!--솜씨 좋은 미카족의 대장장이에게 미리 말해두었더니, 
+백팩 업그레이드 키트라고 불리우는 아이템을 가져 오면
+부스터 백팩을 업그레이드 시켜주겠다 하더라고…%%
+하지만 백팩 업그레이드 키트를 구하기는 쉽지가 않아. 
+붉은여우 삼각지의 무서운 몬서터인 세티로스에게서 구할 수 있다고 하기 때문이야.
+문제는 세티로스가 쉽게 주지 않는다는 거지. 아마 수십 번의 노력을 해야 얻을 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10424324" FACE="Mohamo_normal"/> <!--뭐야, 기껏 생각해줬더니 거절하는 거야? 쳇…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10424325" FACE="Mohamo_normal"/> <!--백팩 업그레이드 키트를 미카족의 여자아이가 가지고 있다는
+소문이 있던데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10424302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

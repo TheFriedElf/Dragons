@@ -1,0 +1,9 @@
+<ACTION ID="a_HE Granade" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP = "TRUE"/>
+  <SLOT NAME="Com_shot_05"/>
+  <FSM SCRIPT="Projectile_HandGrenade" PROJECTILE_ID ="PROJECTILE_HEGrenade"
+       USE_MULTI_SHOT="TRUE"
+       HIT_SOUND_ID="He_Granade"
+       ATTACH_NODE_ID="p_wp_r_hand"
+       HIDE_WEAPON="TRUE"/>
+</ACTION>

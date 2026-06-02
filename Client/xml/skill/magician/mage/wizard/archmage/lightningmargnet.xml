@@ -1,0 +1,8 @@
+<ACTION ID="a_LightningMargnet" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+	<SLOT NAME="spell_01" LOOP="TRUE"/>
+	<SLOT NAME="skill_lightning_margnet"/>
+	<FSM SCRIPT="Skill_InstallDefault"
+      CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+      CASTING_EFFECT_EFFECT_ID="ef_skill_lightingmagnet_02_char_root"
+      DETACH_CASTING_EFFECT_AT_FINISH="TRUE"/>
+</ACTION>

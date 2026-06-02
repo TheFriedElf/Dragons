@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="R_Sunflower03" INIT_ACTION="a_trace_ground2">
+
+
+	<RESERVED_ACTION OPENING="a_trace_fly"/>
+		<UIMODEL DRAW_HEIGHT="140" INCREASE_CAM_RADIUS="-41"/>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/1_Cha/3_PET/Sunflower03/Sunflower03.kfm</KFMPATH>
+		<!--SCRIPT SRC="Actor/pet_base.lua">
+			<ITEM NAME="Act_Pet_Follow" TYPE="COMMON"/>
+		</SCRIPT-->
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="10"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="5"/>
+			<ITEM NAME="walk" ANIMATION="1000001"/>
+			<ITEM NAME="run" ANIMATION="1000001" SPEED="1" /> 
+			<ITEM NAME="opening" ANIMATION="1000001"/>
+
+
+
+
+			<!--아이템 드랍및 버프 스킬-->
+			<ITEM NAME="ItemProduce_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="ItemProduce_01_idle" ANIMATION="1000202"/>
+			<ITEM NAME="ItemProduce_01_shot" ANIMATION="1000203"/>
+
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

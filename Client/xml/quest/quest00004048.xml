@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4048</ID> <!--T.T.10404801 첫번째 신보의 정화 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	물의 신전에서 물의 신보를 정화-->
+<!--[완료NPC]	바람항구 - 바티-->
+<!--[내용]	물의 신전에서 정화를 위한 주문서를 사용하여 물의 신보를 정화하자.  -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">42530F97-3737-47d0-9A00-C0AC94AB5A43</CLIENT> <!--시작NPC 바람항구 - 바티 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">42530F97-3737-47d0-9A00-C0AC94AB5A43</PAYER> <!--완료NPC 바람항구 - 바티 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021" MARK="END">EDBF1EE2-4D96-477f-B692-5A323336FA61</AGENT> <!--진행NPC 1 물의 신전 - 물의 신보 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">42530F97-3737-47d0-9A00-C0AC94AB5A43</AGENT> <!--진행NPC 11 바람항구 - 바티 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160404800/1">10011</NPC> 
+ <!--Item_NO=160404800/[Q.ID:04048] 정화를 위한 주문서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160404800/1/511">10011</NPC> 
+ <!--Item_NO=160404800/[Q.ID:04048] 정화를 위한 주문서,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160404800/1">10011</NPC> 
+ <!--Item_NO=160404800/[Q.ID:04048] 정화를 위한 주문서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="512/160404800/1/513">10021</NPC> 
+ <!--Item_NO=160404800/[Q.ID:04048] 정화를 위한 주문서,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="512/160404800/1">10021</NPC> 
+ <!--Item_NO=160404800/[Q.ID:04048] 정화를 위한 주문서,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="512/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10404811"/> <!--물의 신보 정화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10404821" FACE="Valti_normal"/> <!--그럴 리 없겠지만…
+만에 하나라도 자네가 엔다이론을 퇴치하게 된다면...%%
+이 주문서에 적힌 주문을 이용해 엔다이론을 정화시켜야 해..
+사악한 엔다이론의 정령을 다시금 신보 속에 봉인시키는 것이지.   -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10404826" FACE="Valti_normal"/> <!--그 동안…
+자네에 대해 오해가 있었던 것 같아.%%
+앞으로도 카즈라의 미래를 위해 힘을 보태주길 바란다.
+이번 자네의 활약에 대해 신관사제의 한명으로써…%%
+진심으로 감사를 표한다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10404823" FACE="Valti_normal"/> <!--준비되었는가?
+이번 만큼은 사사로운 감정을 버리고 자네를 응원하도록 하겠네.%%
+부탁이야…
+목숨을 바친 야나이를 위해 부디 최선을 다해주지 않겠나...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10404824" FACE="Valti_normal"/> <!--조금이나마 기대를 품었던 내가 잘못이지. 후후…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10404825" FACE="Valti_normal"/> <!--엔다이론의 정화는 사악한 엔다이론의 정령을 퇴치한 뒤에야만 비로서 가능해질거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10404802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10404851" FACE="Valti_normal"/> <!--엔다이론의 정화는 사악한 엔다이론의 정령을 퇴치한 뒤에야만 비로서 가능해질거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10404852" FACE="cintamani3_normal"/> <!--(신보가 정화되고 있구나..)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="513" > <!--진행중-->
+			<BODY TEXT="10404853" FACE="cintamani3_normal"/> <!--(뭔가 빠트리고 온거 같은데. 혹시 주문서를 놓고 왔나???)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

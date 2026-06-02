@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5059</ID> <!--T.T.10505901 제스의 보물(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [카오스 모드(F2)]의 캡틴 후커에게 제스의 보물열쇠 1개를 회수하자-->
+<!--[완료NPC]	수염고래 해안가 - 제스-->
+<!--[내용]	열쇠를 잃어버리고 제스는 당황해 한다. 제스는 자신이 도대체 어디서 보물열쇠를 잃어버렸는지 곰곰히 생각한다. 그러다 얼마 전 캡틴 후커가 있는 곳에 접근하다가 부하들에게 발각되어서 급하게 도망쳐 나왔던 일을 생각해낸다. 제스는 그때 멀리서 후커가 무언가 반짝이는 것을 줍고 있었는데 아마 그게 열쇠인 것 같다고 한다. 울부짖는 제스의 비명이 더 이상 듣기 싫으면 수염고래 해안가 [카오스 모드(F2)]의 캡틴 후커에게서 제스의 보물열쇠 1개를 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6A425910-8CB2-4711-900E-254F95866BDD</CLIENT> <!--시작NPC 수염고래 해안가 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6A425910-8CB2-4711-900E-254F95866BDD</PAYER> <!--완료NPC 수염고래 해안가 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6A425910-8CB2-4711-900E-254F95866BDD</AGENT> <!--진행NPC 11 수염고래 해안가 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9012109/10000/0/1/1/160505900">6013900</MONSTER> 
+ <!--MON_NO=6013900/캡틴 후커,MAP_NO=9012109/캡틴후커 별장,Item_NO=160505900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505900</ITEM> 
+ <!--Item_NO=160505900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10505911"/> <!--제스의 보물열쇠-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10505921" FACE="Jess_normal"/> <!--우아아아~ 도대체 어디로 가버린 거지.
+혹시 화장실 갈 때 떨어뜨렸나? 우왁, 그럼 안 되는데.
+목욕할 때 떨어뜨렸나? 난 목욕을 안 하잖아.
+크으. 아무리 생각해도 생각이 나지 않네.
+앗! 설마? 아무래도 캡틴 후커 그 녀석에게 있는 거 같아. 
+내 보물이 뭔지 보고 싶다면 내 보물열쇠를 찾는 걸 도와줘야 겠어.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10505926" FACE="Jess_smile"/> <!--아! 내 예쁜 보물열쇠가 드디어 다시 내 품에 돌아왔구나.
+좋아 특별히 보여줄 게. 내 보물상자 안에 뭐가 들어 있는지.
+응? 뭐야 안이 텅텅 비었잖아.%%
+아! 생각해보니까. 내가 가지고 있던 물건은 전부 보물상자와 바꿔 버렸어.
+우선 상자부터 좋은 걸 가지고 있자는 생각에 그만.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10505923" FACE="Jess_normal"/> <!--얼마 전에 캡틴 후커가 뭔가 좋은 걸 가지고 있나 싶어서 그 녀석이 있는 곳으로 갔어.
+그래서 캡틴 후커의 주변을 기웃거리다가 그만 녀석의 부하들을 만나버린 거야. 
+정신없이 도망가다가 뒤를 보니까, 후커 녀석이 반짝이는 무언가를 줍고 있더라고.
+아무래도 그게 내 보물열쇠인 거 같아. 
+캡틴 후커는 수염고래 해안가 [카오스 모드(F2)]에 있어. 
+내 보물열쇠를 안전하게 가져다 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10505924" FACE="Jess_angly"/> <!--도대체 열 수 없는 보물상자로 뭘 어떻게 하라는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10505925" FACE="Jess_normal"/> <!--내 보물이 보고 싶다면 얼른 갔다오도록 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10505902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

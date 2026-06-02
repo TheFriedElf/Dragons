@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_paris_laser">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSkill/Claymore/Claymore.kfm</KFMPATH>
+		<SCRIPT SRC="SkillActor/SummonThorn.lua">
+			<ITEM NAME="Paris_Laser_Initialize" TYPE="INIT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="Dummy01" SIZE="265,10" ROTATE="1,0,0,90" LOCATE="0,0,130"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000000" />
+			<ITEM NAME="attk_01_02" ANIMATION="1000001" />
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

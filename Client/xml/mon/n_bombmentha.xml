@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_BombMentha">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Mentha_Longifolia_Mission04/N_BombMentha.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<ITEM NAME="castani_01" ANIMATION="1000201" CAST_ANI_NUM="4" CAST_EFFECT1="ef_BomeMentha_burner_01_char_root" SLOT1="9898"/>
+			<ITEM NAME="btlidle_cast_02" ANIMATION="1000202"/>
+			<ITEM NAME="castani_02" ANIMATION="1000203" CAST_EFFECT1="ef_BomeMentha_burner_02_char_root" SLOT1="9898" CAST_EFFECT2="ef_BomeMentha_eye_02_p_ef_head" SLOT2="9897" EFFECT_NODE2="p_ef_head"/>
+			<ITEM NAME="btlidle_cast_03" ANIMATION="1000204"/>
+			<ITEM NAME="castani_03" ANIMATION="1000205" CAST_EFFECT1="ef_BomeMentha_eye_03_p_ef_head" SLOT1="9897" EFFECT_NODE1="p_ef_head"/>
+			<ITEM NAME="btlidle_cast_04" ANIMATION="1000206"/>
+			<ITEM NAME="castani_04" ANIMATION="1000207"/>
+			<ITEM NAME="btlidle_cast_05" ANIMATION="1000208"/>
+			<ITEM NAME="attk_castani_01" ANIMATION="1000021"/>
+
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

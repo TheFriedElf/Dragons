@@ -1,0 +1,8 @@
+<ACTION ID="a_Barrier" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_05"/>
+  <FSM SCRIPT="Act_Melee_Default" FIND_TARGET_TYPE="SPHERE"
+       NO_DEFAULT_HIT_EFFECT ="TRUE"
+       HIT_SOUND_ID="Barrier"
+       />
+</ACTION>

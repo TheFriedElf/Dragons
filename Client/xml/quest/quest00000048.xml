@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>48</ID> <!--T.T.10004801 기력의 회복 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	마이트리와 대화-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	드라칸 사제 마이트리는 수염고래 해안가에 불시착한 %name%을 발견한다. 마이트리와 대화하여 그녀에게 기력을 치료받도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">13D42615-B039-43f4-B6EB-28918778D237</CLIENT> <!--시작NPC 수염고래 해안가 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 11 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10004811"/> <!--마이트리와 대화-->
+		
+	</OBJECTS>
+
+<LOCAL>
+    <NAME ID="DEFAULT">
+
+
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">340100430</ITEM><!--전체지급/소환사/1)/(봉인아님) 1개-초보 주술사의 건 스테프-->
+				<ITEM COUNT="1">340020450</ITEM><!--전체지급/소환사/2)/(봉인아님) 1개-초보 주술사 의 상의 -->
+				<ITEM COUNT="1">340030450</ITEM><!--전체지급/소환사/3)/(봉인아님) 1개-초보 주술사 의 하의 -->
+				<ITEM COUNT="5">50130110</ITEM><!--전체지급/소환사/4)/(봉인아님) 5개-중급 체력 회복 포션-->
+				<ITEM COUNT="5">50130120</ITEM><!--전체지급/소환사/5)/(봉인아님) 5개-중급 마나 회복 포션-->
+				<CLASS>51/53/55/57</CLASS>
+			</SELECT1>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">330020450</ITEM><!--전체지급/쌍둥이/1)/(봉인아님) 1개-초보 무도가의 상의 -->
+				<ITEM COUNT="1">330030450</ITEM><!--전체지급/쌍둥이/2)/(봉인아님) 1개-초보 무도가의 하의 -->
+				<ITEM COUNT="1">330100430</ITEM><!--전체지급/쌍둥이/3)/(봉인아님) 1개-초보 무도가의 건틀렛-->
+				<ITEM COUNT="5">50130110</ITEM><!--전체지급/쌍둥이/4)/(봉인아님) 5개-중급 체력 회복 포션-->
+				<ITEM COUNT="5">50130120</ITEM><!--전체지급/쌍둥이/5)/(봉인아님) 5개-중급 마나 회복 포션-->
+				<CLASS>52/54/56/58</CLASS>
+				
+			</SELECT1>
+		 <CHANGE_LEVEL>20</CHANGE_LEVEL>
+		</REWARD>
+    </NAME>
+
+	<NAME ID="RUSSIA/DEVELOP"><!-- 2주년이벤트 -->
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">340100430</ITEM><!--전체지급/소환사/1)/(봉인아님) 1개-초보 주술사의 건 스테프-->
+				<ITEM COUNT="1">340020450</ITEM><!--전체지급/소환사/2)/(봉인아님) 1개-초보 주술사 의 상의 -->
+				<ITEM COUNT="1">340030450</ITEM><!--전체지급/소환사/3)/(봉인아님) 1개-초보 주술사 의 하의 -->
+				<ITEM COUNT="5">50130050</ITEM><!--전체지급/소환사/4)/50130050(봉인아님) 5개-중급 체력 회복 포션-->
+				<ITEM COUNT="1">291302940</ITEM><!--전체지급/소환사/5)/291302940 (봉인아님) 1개-선물상자--><!-- 2주년 이벤트 -->
+
+				<CLASS>51/53/55/57</CLASS>
+			</SELECT1>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">330020450</ITEM><!--전체지급/쌍둥이/1)/(봉인아님) 1개-초보 무도가의 상의 -->
+				<ITEM COUNT="1">330030450</ITEM><!--전체지급/쌍둥이/2)/(봉인아님) 1개-초보 무도가의 하의 -->
+				<ITEM COUNT="1">330100430</ITEM><!--전체지급/쌍둥이/3)/(봉인아님) 1개-초보 무도가의 건틀렛-->
+				<ITEM COUNT="5">50130050</ITEM><!--전체지급/쌍둥이/4)/50130050(봉인아님) 5개-중급 체력 회복 포션-->
+				<ITEM COUNT="1">291302940</ITEM><!--전체지급/쌍둥이/5)/291302940 (봉인아님) 1개-선물상자--><!-- 2주년 이벤트 -->
+				<CLASS>52/54/56/58</CLASS>
+				
+			</SELECT1>
+			 <CHANGE_LEVEL>20</CHANGE_LEVEL>
+		</REWARD>
+    </NAME>    
+
+</LOCAL>
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10004821" FACE="Maitri_normal"/> <!--이제 정신이 든 모양이군요.
+나는 신보를 찾아 카즈라에서 온 신관 사제 마이트리입니다.%%
+잠깐, 잠깐만 기다려주세요. 
+아직 몸을 움직이는 건 무리에요.%%
+정신을 잃었을 때 맥을 짚어보았는데
+추락하면서 입은 충격 때문에 몸이 정상이 아니더군요.%%
+반드시 치료가 필요해요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10004826" FACE="Maitri_smile"/> <!--휴우…. 이제 기력 회복이 모두 끝났습니다.
+어때요 몸 상태는?
+회복이 된것 같으니, %name%님께 필요한 무기와 방어구, 그리고 약간의 선물을 주겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10004823" FACE="Maitri_normal"/> <!--기력을 회복시켜 주는 치료를 시작하겠습니다.
+잠시 그대로 있어 주세요.
+… %%
+… …%%
+조금만 늦었더라면 회복시키기 어려웠을 지도 몰라요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10004824" FACE="Maitri_angry"/> <!--이런 몸상태로 움직였다간 몇 발자국도 못 가 쓰러지고 말 거에요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10004825" FACE="Maitri_angry"/> <!--(없음)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10004802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_Dragon_Rush">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSKill/Dragon_Rush/Dragon_Rush.kfm</KFMPATH>
+    <SCRIPT SRC="Actor/pc_base.lua">
+      <ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+    </SCRIPT>
+    <ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+      <ITEM NAME="battle_idle" ANIMATION="1000000"/>
+      <ITEM NAME="idle_01" ANIMATION="1000000"/>
+      <ITEM NAME="btlidle_01" ANIMATION="1000000"/>
+      
+      <ITEM NAME="melee_01" ANIMATION="1000000"/>
+    </SLOT>
+  </WORLDOBJECT>
+</ACTOR>

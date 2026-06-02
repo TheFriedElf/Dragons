@@ -1,0 +1,9 @@
+<ACTION ID="a_mon_patrol" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" DONT_LOOK_TARGET="TRUE" NO_SET_WALKING_TARGET_LOC = "TRUE" USE-EVENT="TRUE" BIDIRECTION="TRUE" NO_CHANGE_TELEPORT_ACTOR_POS="TRUE">
+	<SLOT NAME="patrol_btlidle_start"/>
+	<SLOT NAME="patrol_btlidle" LOOP="TRUE"/>
+	<SLOT NAME="patrol_attack"/>
+	<SLOT NAME="patrol_finish_01"/>
+	<SLOT NAME="patrol_finish_02"/>
+	<SLOT NAME="idle_01"/>
+	<FSM SCRIPT="Act_Mon_PATROL_SHOT"/>
+</ACTION>

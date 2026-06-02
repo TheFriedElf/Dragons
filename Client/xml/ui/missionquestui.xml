@@ -1,0 +1,141 @@
+<!--?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_MISSION_QUEST">
+		<ATTR X="0" Y="0" W="1024" H="768" CAN_DRAG="0"/>	
+		<IMG ID="IMG_SELECT_BG1" X="171" Y="306" W="109" H="62" Z="0" IMG="../Data/6_ui/quest/qsMarBgL.tga" IMG_W="109" IMG_H="62" IS_VISIBLE="1"/>
+		<IMG ID="IMG_SELECT_BG2" X="744" Y="306" W="109" H="62" Z="0" IMG="../Data/6_ui/quest/qsMarBgR.tga" IMG_W="109" IMG_H="62" IS_VISIBLE="1"/>
+		<BUTTON ID="BTN_SELECT_ARROW_LEFT" X="235" Y="320" Z="1" W="33" H="30" IS_VISIBLE="1">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsMarL.tga" BTN_IMG_W="66" BTN_IMG_H="60"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				ODS("dddddd\n")
+				FMQ_Card_Num = FMQ_Card_Num - 1
+				MQCard_Update(FMQ_Card_Num)
+			</SCRIPT>
+			<HOTKEY ID="123">
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_SELECT_ARROW_RIGHT" X="755" Y="320" Z="1" W="33" H="30" IS_VISIBLE="1">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsMarR.tga" BTN_IMG_W="66" BTN_IMG_H="60"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				ODS("dddddd\n")
+				FMQ_Card_Num = FMQ_Card_Num + 1
+				MQCard_Update(FMQ_Card_Num)
+			</SCRIPT>
+			<HOTKEY ID="124">
+			</HOTKEY>
+		</BUTTON>
+		<FORM ID="FRM_BIG_TEXT">
+			<ATTR X="275" Y="175" W="474" H="20" CAN_DRAG="0" ALIGN_X="50"/>
+			<ATTR TEXT="8001" FONT="FTtext_25" T_X="237" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFF783" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF312A23"/>
+		</FORM>
+		<FORM ID="FRM_SMALL_TEXT">
+			<ATTR X="275" Y="215" W="474" H="20" CAN_DRAG="0" ALIGN_X="50"/>
+			<ATTR TEXT="8002" FONT="FTcts_16" T_X="237" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFF6C990" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF312A23"/>
+		</FORM>
+		<BUILD ID = "BLD_CARD" TARGET_ID = "FRM_CARD" X="275" Y="229" X_COUNT="4" Y_COUNT="1" X_GAB="117" Y_GAB="0"/>
+		<FORM ID="FRM_CARD" X="275" Y="229" W="123" H="220" Z="0" CAN_DRAG="0" IMG="../Data/6_ui/quest/qsMcard01.tga" IMG_W="123" IMG_H="220" IS_VISIBLE="1">
+			<IMG ID="IMG_CARD_BACK">
+				<ATTR X="5" Y="18" W="113" H="179" Z="1" U="4" V="1" IMG="../Data/6_ui/quest/qsMcardBg2.tga" IMG_W="452" IMG_H="179" IS_VISIBLE="1"/>
+			</IMG>
+			<IMG ID="IMG_CARD_ILLU">
+				<ATTR X="16" Y="65" W="91" H="114" Z="1" IMG="../Data/6_ui/msbook/mbImg01_02.tga" IMG_W="91" IMG_H="114" IS_VISIBLE="1" PASS_EVENT="1"/>
+			</IMG>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				MQCard_Select(UISelf)
+			</SCRIPT>
+			<HOTKEY ID="">
+				MQCard_Select(UISelf)
+			</HOTKEY>
+		</FORM>
+		<STATIC_FORM ID="SFRM_BTN_BG" X="448" Y="438" W="129" H="56" STATIC_NUM="7" />	
+		<BUTTON ID="BTN_CLOSE" X="457" Y="447" Z="2" W="111" H="41" IS_VISIBLE="1">
+			<ATTR TEXT="400542" T_X="55" T_Y="12" T_CENTER="1" FONT="FTtitle_14" T_OUTLINE="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtLong.tga" BTN_IMG_W="222" BTN_IMG_H="82"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CloseUI("FRM_MISSION_QUEST")
+			</SCRIPT>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			FMQ_Card_Num = 0;
+			FMQ_StartTime = g_world:GetAccumTime()
+		</SCRIPT>
+		<SCRIPT ID="ON_DISPLAY">
+			local FMQ_TickTime = g_world:GetAccumTime() - FMQ_StartTime
+			if FMQ_TickTime > 5 then
+				CallUI("FRM_MISSION_START")
+				CloseUI("FRM_MISSION_QUEST")
+			end
+			local TextWnd = UISelf:GetControl("FRM_SMALL_TEXT")
+			if TextWnd ~= nil then
+				MQCard_TimeText(TextWnd, (5 - FMQ_TickTime))
+			end
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_MISSION_QUEST_TURN">
+		<ATTR X="0" Y="0" W="123" H="220" IS_VISIBLE="1"/>
+		<ATTR IMG="../Data/6_ui/quest/qsMcardAni.tga" IMG_W="492" IMG_H="440" U="4" V="2"/>
+		<SCRIPT ID="ON_CALL">
+			FMQTTime = g_world:GetAccumTime()
+			UISelf:SetUVIndex(1)
+		</SCRIPT>
+		<SCRIPT ID="ON_DISPLAY">
+			local UVIndex = UISelf:GetUVIndex()
+			if UVIndex == 8 then
+				UISelf:SetUVIndex(1)
+			else
+				UISelf:SetUVIndex(UVIndex + 1)
+			end
+			if g_world:GetAccumTime() - FMQTTime > 0.8 then
+				if MQCard_ForwardID(UISelf, "FRM_MISSION_QUEST_SCALE") == true then
+					CloseUI("FRM_MISSION_QUEST_TURN")
+				end
+			end
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_MISSION_QUEST_SCALE">
+		<ATTR X="0" Y="0" W="123" H="220"/>
+		<ATTR IMG="../Data/6_ui/quest/qsMcardFront.tga" IMG_W="123" IMG_H="220"/>
+		<SCRIPT ID="ON_CALL">
+			g_kFMQLTime = g_world:GetAccumTime()
+			FMQLScale = 1.0
+		</SCRIPT>
+		<SCRIPT ID="ON_DISPLAY">
+			FMQLScale = FMQLScale + 0.15
+			MQCard_Scale(UISelf, g_kFMQLTime, FMQLScale)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_MISSION_QUEST_INFO">
+		<ATTR X="0" Y="0" W="1024" H="768" CAN_DRAG="0" IS_VISIBLE="0"/>
+		<IMG ID="IMG_CARD_BG" X="378" Y="175" W="269" H="419" Z="0" IMG="../Data/6_ui/quest/qsMcardBig.tga" IMG_W="269" IMG_H="419"/>
+		<IMG ID="IMG_CARD_ILLU" X="469" Y="248" W="91" H="114" Z="1" IMG="../Data/6_ui/msbook/mbImg01_02.tga" IMG_W="91" IMG_H="114"/>		
+		<FORM ID="FRM_TEXT_TITLE">
+			<ATTR X="378" Y="240" W="269" H="10" CAN_DRAG="0"/>
+			<ATTR TEXT="8004" T_X="134" T_CENTER="1" FONT="QTtext_Name" FONT_COLOR_HEX="0xFF903701"/>
+		</FORM>
+		<FORM ID="FRM_TEXT">
+			<ATTR X="407" Y="355" W="212" H="105" CAN_DRAG="0"/>
+			<ATTR TEXT="" T_X="106" T_Y="10" T_CENTER="1" FONT="FT15" FONT_COLOR_HEX="0xFF3D290F"/>
+		</FORM>
+		<FORM ID="FRM_REWORD_TITLE">
+			<ATTR X="378" Y="474" W="269" H="10" CAN_DRAG="0"/>
+			<ATTR TEXT="8003" T_X="134" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFEEBCB"/>
+		</FORM>
+		<FORM ID="FRM_REWORD">
+			<ATTR X="407" Y="495" W="212" H="70" CAN_DRAG="0"/>
+			<ATTR TEXT="" T_X="106" T_Y="10" T_CENTER="1" FONT="FT15" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5C2514"/>
+		</FORM>
+		<SCRIPT ID="ON_CALL">
+			g_kMQCDisableTime = g_world:GetAccumTime()
+			QuakeCamera(0.3, 1.5)
+		</SCRIPT>
+		<SCRIPT ID="ON_DISPLAY">
+			if g_world:GetAccumTime() - g_kMQCDisableTime > 10.0 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CallUI("FRM_MISSION_START")
+			--CallUI("FRM_MISSION_TIMER")
+		</SCRIPT>
+	</FORM>
+</XUI-->

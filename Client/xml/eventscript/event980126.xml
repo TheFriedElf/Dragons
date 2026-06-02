@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="EscScript" EventID="980117"/>
+
+	<!-- 포트레이트 연출 시작-->
+
+	
+	<CMD TYPE="Dialogue" NameTTID="99801055" TextTTID="99801241" FaceID="NEurope_angry" /><!-- 유로페 슬픔-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801242" FaceID="User_normal"/><!-- 주인공-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801055" TextTTID="99801243" FaceID="NEurope_smile" /><!-- 유로페 놀람 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801244" FaceID="User_normal" /><!-- 주인공-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801055" TextTTID="99801245" FaceID="NEurope_normal" /><!-- 유로페 일반-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980117"/>
+
+	
+</EVENT_SCRIPT>
+

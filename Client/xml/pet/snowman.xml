@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="p_snowman" INIT_ACTION="a_trace_ground">
+	<RESERVED_ACTION OPENING="a_trace_ground"/>
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/3_PET/P04_Snowman/P04_C01.kfm</KFMPATH>
+		<!--SCRIPT SRC="Actor/pet_base.lua">
+			<ITEM NAME="Act_Pet_Follow" TYPE="COMMON"/>
+		</SCRIPT-->
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+      <ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="20"/>
+      <ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100" EFFECT_ID="EF_Fire3001_R" ATTACH_NODE ="p_ef_bonfire" SCALE="1.0"/> 
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+			<ITEM NAME="run" ANIMATION="1000050" SPEED="2" /> 
+			<ITEM NAME="opening" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

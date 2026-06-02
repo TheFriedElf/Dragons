@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4249</ID> <!--T.T.10424901 공과 사 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	제스와 대화-->
+<!--[완료NPC]	밴시협곡 - 제스-->
+<!--[내용]	프린세시아는 잭과 제스가 모나드론 공작을 돕고 있다는 소식을 듣고, 그들을 설득하기 위해 따라왔지만 모나드론 공작의 술수로 접근이 여의치 않자, 자신을 대신하여 제스를 설득해달라고 부탁한다. 제스는 모나드론 공작과 함께 밴시 협곡에 나와있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">EBB8ABF8-FB31-4a6c-AE59-112091F16472</CLIENT> <!--시작NPC 밴시협곡 - 프린세시아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">668EEA35-D03A-4890-9624-22D3ED0A7ECA</PAYER> <!--완료NPC 밴시협곡 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">EBB8ABF8-FB31-4a6c-AE59-112091F16472</AGENT> <!--진행NPC 11 밴시협곡 - 프린세시아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">668EEA35-D03A-4890-9624-22D3ED0A7ECA</AGENT> <!--진행NPC 12 밴시협곡 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10424911"/> <!--제스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10424921" FACE="Princessia_normal"/> <!--망자의 탑에서 초마법을 체험한 이후로도, 에델린과는
+계속해서 만나고 있어. 하지만 제스는 왠지 더 삐딱해져서
+최근엔 모나드론의 도굴팀에 들어갔다는 소문이 들렸지.%%
+모나드론 공작은 왕궁 내에서도 소문이 좋지 않아. 
+부하들을 위험한 곳으로 내 모는 데다가 이상한 독약들을 
+구해서 나쁜 일을 벌인다고 해.%% 
+그런데 잭과 제스가 모나드론의 일을 돕고 있더라고..
+그래서 여기까지 따라오게 된 거야.
+그 바보 형제들이 위험에 처할 지도 모르니까.%%
+제스를 만나게 되면 전해줘. 제발 모나드론 공작 밑에서 
+바보 같은 짓을 저지르지 말라고 말이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10424926" FACE="Jess_angly"/> <!--뭐야! 넌 그 사기꾼 마도사 계집애의 친구잖아! 
+검은 마녀처럼 사람을 혼란시켜서 조종하려고 했어...
+그 공주후보도, 너도... 모두 정신이 이상한 녀석들이야!%%
+저리 비켜! 난 바빠서 널 상대해 줄 시간 없어!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10424923" FACE="Princessia_normal"/> <!--에델린에게 들은 이야기인데…
+이곳엔 고대의 기계들로 된 폐허들이 존재한다고 해.
+원래 이름은 하이드론 코어라고 하는데, 세상 사람들에겐
+천공계단으로 알려진 곳이야.%%
+그게 뭘하는 장치냐면 말이지. 태고에 에아가 살았다고 
+전해지는 천공인들의 세상... 
+'하늘사원'으로 데려다 주는 장치라고 들었어.%%
+모나드론은 하이드론 코어를 통해서 하늘사원으로 건너가
+그곳에 있는 보물들을 훔쳐내려고 할 거야. 
+어리숙한 잭과 제스는 그 일을 돕고 있는 거겠지.%%
+그러니까 네가 잭과 제스를 설득해줬으면 좋겠어. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10424924" FACE="Princessia_normal"/> <!--이대로 잭과 제스가 위험해지는 걸 두고 보겠다는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10424925" FACE="Princessia_normal"/> <!--제스를 만나서 모나드론 공작의 일을 돕는 것을 관두라고 전해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10424902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

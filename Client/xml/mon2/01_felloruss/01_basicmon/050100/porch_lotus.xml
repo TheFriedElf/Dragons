@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Porch_Lotus">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Porch_Lotus"/>
+		<KFMPATH SCALE="1.4">../Data/2_Mon2/01_Felloruss/01_BasicMon/050100/Porch_Lotus/Porch_Lotus.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+					<SPHERE TO="p_hit_point_01" SIZE="10"/>
+		</ABV>
+		<SLOT>
+				<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!--근거리 1-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000203"/>
+			
+	
+			<!--원거리 1-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000311"/>
+			<ITEM NAME="shot_01" ANIMATION="1000312" FIRE_START_NODE="p_ef_fire" PROJECTILE_ID="Peojectile_Porch_Shot_01"/>
+
+	<!--던지기-->
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000311"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000312" FIRE_START_NODE="p_ef_fire" PROJECTILE_ID="Peojectile_Porch_Shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000313" FIRE_START_NODE="p_ef_fire" PROJECTILE_ID="Peojectile_Porch_Shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000314"/>
+
+			<!--피격패턴 및 사망-->
+                 <ITEM NAME="dmg_01" ANIMATION="1000011"/>
+            <ITEM NAME="dmg_02" ANIMATION="1000012"/>
+            <ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+            <ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+            <ITEM NAME="StandUp" ANIMATION="1000024"/>
+           
+            <ITEM NAME="stun" ANIMATION="1000025"/>
+
+	        <ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+		
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

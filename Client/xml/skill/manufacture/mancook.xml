@@ -1,0 +1,35 @@
+<ACTION ID="a_Man_Cook" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" MONITOR="TRUE" >	
+	<SLOT NAME="Common_Com_Work_Cook_Start"/>	
+	<SLOT NAME="Common_Com_Work_Cook_Work"/>
+	<SLOT NAME="Common_Com_Work_Cook_Success"/>
+	<SLOT NAME="Common_Com_Work_Cook_Fail"/>
+	<FSM SCRIPT="Manufacture"
+		MANUFACTURE_TOOL_EFFECT_ID1="eff_com_work_cook_02_all"
+		MANUFACTURE_TOOL_TARGET_NODE1="p_pt_r_hand"
+		MANUFACTURE_TOOL_SOUND1="work_cook_start"
+		MANUFACTURE_EFFECT_ID1="eff_com_work_cook_03_start"
+		MANUFACTURE_EFFECT_TARGET_NODE1="char_root"
+		
+		MANUFACTURE_TOOL_EFFECT_ID2="eff_com_work_cook_02_all"
+		MANUFACTURE_TOOL_TARGET_NODE2="p_pt_r_hand"
+		MANUFACTURE_TOOL_SOUND2="work_cook_ing"
+		MANUFACTURE_EFFECT_ID2="eff_com_work_cook_03_work"
+		MANUFACTURE_EFFECT_TARGET_NODE2="char_root"
+
+		MANUFACTURE_TOOL_EFFECT_ID3="eff_com_work_cook_02_all"
+		MANUFACTURE_TOOL_TARGET_NODE3="p_pt_r_hand"
+		MANUFACTURE_TOOL_SOUND3="work_success"
+		MANUFACTURE_EFFECT_ID3="eff_com_work_cook_03_work"
+		MANUFACTURE_EFFECT_TARGET_NODE3="char_root"
+
+		MANUFACTURE_TOOL_EFFECT_ID4="eff_com_work_cook_02_all"
+		MANUFACTURE_TOOL_TARGET_NODE4="p_pt_r_hand"
+		MANUFACTURE_TOOL_SOUND4="work_fail"
+		MANUFACTURE_EFFECT_ID4="eff_com_work_cook_03_work"
+		MANUFACTURE_EFFECT_TARGET_NODE4="char_root"
+
+
+		HIDE_WEAPON="TRUE"
+		NO_WEAPON_TRAIL="TRUE"
+	/>
+</ACTION>

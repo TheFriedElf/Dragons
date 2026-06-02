@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2242</ID> <!--T.T.10224201 챤피오의 부상 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지(Lv35) - 카틀라를 처리하고 만병연고 획득-->
+<!--[완료NPC]	달빛해안 마을 - 챤피오-->
+<!--[내용]	상급 격투가 챤피오는 전투기술을 연마하던 중 넘어져 팔꿈치를 다쳤다고 한다. 팔꿈치를 다친 챤피오는 하루빨리 나아야 한다고 한다. 효과가 좋기로 소문난 만병연고를 지하묘지(Lv35) 카틀라로부터 얻어 챤피오에게 전해 주도록 하자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</CLIENT> <!--시작NPC 달빛해안 마을 - 챤피오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</PAYER> <!--완료NPC 달빛해안 마을 - 챤피오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</AGENT> <!--진행NPC 11 달빛해안 마을 - 챤피오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010920/10000/0/1/1/160224200">4601200</MONSTER> 
+ <!--MON_NO=4601200/카틀라,MAP_NO=9010920/Lv.35 지하묘지,Item_NO=160224200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160224200</ITEM> 
+ <!--Item_NO=160224200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10224211"/> <!--만병연고 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10224221" FACE="Campiu_normal"/> <!--아야... 내 팔꿈치...
+그쪽은 건들지 마. 아파서 눈물이 날 지경이야.
+나는 아파서 움직일 수가 없어.
+네가 좀 도와줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10224226" FACE="Campiu_smile"/> <!--고마워. 이걸 바르면 금방 나을 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10224223" FACE="Campiu_smile"/> <!--수련하다가 넘어졌는데 팔꿈치로 떨어진 게 화근이었나 봐.
+팔꿈치가 너무 아파.
+약을 발라 치료 해야하는데 팔꿈치가 아파서 꼼짝도 할 수가 없어.%%
+네가 약을 구해 다 줬으면 좋겠어.
+카틀라가 사용하는 만병연고가 필요해. 그게 뼈에 아주 좋거든.
+지하묘지(Lv35)에서 좀 구해다 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10224224" FACE="Campiu_angry"/> <!--너는 정말 매정하군. 팔꿈치가 다 나으면 혼내주겠어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10224225" FACE="Campiu_normal"/> <!--아야... 내 팔꿈치...
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10224202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

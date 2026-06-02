@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구에서 바티와 대화-->
+<!--[완료NPC]	바람항구 - 바티-->
+<!--[내용]	드라칸의 상급 소환사 바티가 소환사의 전투 운영에 대해 설명한다. 바람항구에서 바티와 대화하자.-->
+<QUEST>
+	<ID>230</ID> <!-- 소환사의 핵심은 아웃파이팅! -->
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="523411">소환사의 핵심은 아웃파이팅!</TITLE>
+	<GROUPNAME TEXT="500009">바람항구 브리즈</GROUPNAME>
+	<LIMITS>
+	<DAYOFWEEK>5/6</DAYOFWEEK>
+		<LEVEL MIN="20" MAX="99"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">42530F97-3737-47d0-9A00-C0AC94AB5A43</CLIENT> <!--시작NPC 바람항구 - 바티 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">42530F97-3737-47d0-9A00-C0AC94AB5A43</PAYER> <!--완료NPC 바람항구 - 바티 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">42530F97-3737-47d0-9A00-C0AC94AB5A43</AGENT> <!--진행NPC 11 바람항구 - 바티 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="0" TEXT="523413"/> <!--바티와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+		<ITEM COUNT="1">231001090</ITEM>
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="523414" FACE="Valti_normal"/> <!--소환사는 통상적인 몬스터와 대결에서 원거리 공격 마법을 
+주무기로 삼고 있어. 소환사의 기력을 직접 방출하는 공격 스킬은 
+상당히 강력하지만 시전이 되기까지 딜레이가 길어 주의가 필요하지.%%
+암울하다고? 하하하!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="523418" FACE="Valti_smile"/> <!--소환사의 PVP 전투 방식은 디버프를 활용한 접근 방지 기술의 사용 
+이후에 빈틈을 이용한 원거리 스트라이킹이 주요 패턴이야.%% 
+철저한 아웃파이팅이라 할 수 있으니 잘 기억해둬.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="523415" FACE="Valti_normal"/> <!--하지만 소환사에게는 소환체라는 특별한 요소가 있으니 안심이지.%% 
+소환해낸 소환체를 전방에 배치시켜 주의를 끄는 동안... 
+자신은 뒤에서 기력 방출 스킬을 시전하는 방식이야 말로 
+소환사 전투 패턴의 꽃이라 할 수 있어.%%
+자신의 전투 패턴에 따라 공격 마법에 모든 스킬 포인트를 투자하여 
+직접적인 전투를 하거나, 반대로 소환체에 모든 포인트를 투자하여 
+전투를 행할 수도 있어.%%
+하지만 소환체만을 이용하면 효율이 낮고, 원거리 공격마법을 
+사용한 전투는 위험도가 높으니 양자 간의 황금비율을 찾아내야 해.%%-->
+			<SELECT ID="601" TEXT="500002">다음</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="523416" FACE="Valti_angry"/> <!--이벤트를 지나치는 녀석들이 많아져서, 카즈라 코인이 남아도는군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="523417" FACE="Valti_angry"/> <!--(없음, test)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" />
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" />
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="523412" />
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>	
+	</DIALOGS>		
+</QUEST>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4021</ID> <!--T.T.10402101 에델린의 고민 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 펫상인 에이미와 대화-->
+<!--[완료NPC]	바람항구 - 에이미-->
+<!--[내용]	바람항구의 펫상인 에이미를 만나보자. 에델린은 펫상점을 운영하는 그녀가 파렐박사에 대한 밝혀지지 않은 정보를 가지고 있을 것이라고 생각한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT> <!--시작NPC 바람항구 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</PAYER> <!--완료NPC 바람항구 - 에이미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 11 바람항구 - 에델린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 12 바람항구 - 에이미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10402111"/> <!--에이미와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10402121" FACE="Edeline_normal"/> <!--복잡하게 꼬여있던 실타래들이 한번에 풀려나가는 것 같아요.
+그동안 우리는…%% 
+종소리마을에서 일어난 끔찍한 동물실험이 단지 파렐박사에 의한 것이라고 
+단정 짓고 있었어요.%%
+하지만 내가 알고 있는 파렐박사님은 장난이 심한 괴짜이긴 해도,
+남을 해칠 사람은 아니라고 생각했지요.%%
+아무래도 이 일에 대해 더 깊이 조사를 해봐야 할 것 같아요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10402126" FACE="Amy_smile"/> <!--안녕하세요! 펫상점의 에이미입니다!
+어랏? 무슨 일로 찾아오셨나요?%%
+파렐…%%
+파렐박사 말인가요?
+흠.. 그닥 특별히 말씀 드릴 것이 없는데…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10402123" FACE="Edeline_normal"/> <!--이곳 바람항구에서 파렐박사와 교류가 가장 많았던 사람은
+펫상점을 운영하는 에이미씨에요.%%
+용사님이 에이미씨를 한번 만나봐주세요. 분명히 파렐박사에 대한
+정보를 얻을 수 있을 거에요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10402124" FACE="Edeline_angly"/> <!--흠.. 일단 조사는 여기서 마무리를 짓게 되는군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10402125" FACE="Edeline_angly"/> <!--에이미씨는 바람항구에서 펫상점을 운영하는 펫상인이에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10402102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

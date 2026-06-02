@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>192</ID> <!--T.T.10019201 사라진 산타클로스! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구의 루돌와 이야기 해보자.-->
+<!--[완료NPC]	바람항구 - 산타의 조수 루돌프-->
+<!--[내용]	루돌프가 사라진 산타클로스 때문에 두통이 생겼다고 한다. 루돌프와 이야기해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4B90A0ED-46FD-4379-8266-F9C4C9A825C3</CLIENT> <!--시작NPC 바람항구 - 산타의 조수 루돌프 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4B90A0ED-46FD-4379-8266-F9C4C9A825C3</PAYER> <!--완료NPC 바람항구 - 산타의 조수 루돌프 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">4B90A0ED-46FD-4379-8266-F9C4C9A825C3</AGENT> <!--진행NPC 11 바람항구 - 산타의 조수 루돌프 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10019211"/> <!--루돌프와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10019221" FACE="Event_Rudolph_normal"/> <!--도대체, 산타 이 인간이 어디로 간 거야?
+크아! 크리스마스까지 얼마 남지도 않았는데.%%
+앗! 혹시 요즘 소문이 자자한 %name%님 맞으신가요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10019226" FACE="Event_Rudolph_angly"/> <!--전 처음엔 산타가 혼자서 선물 배달을 간 줄 알았어요.
+그런데 선물이 사라진 곳에 쪽지가 남겨진 거에요.%%
+- 사랑하는 그녀를 위해 이 선물을 가져간다. 미안하다. 빨간코야 -%%
+이런 거지 같은 양반이 자기 썰매 끌어주는 제 이름을 아직도 못 외우고 빨간코라고 부르고 있어요.%%
+하여간 추적 끝에 이곳 바람항구에서 자취가 사라진 걸 알게 됐어요. 하지만 문제가 있어요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10019223" FACE="Event_Rudolph_normal"/> <!--맞군요. 그럼 제발 좀 도와주세요.
+산타클로스가 늦바람이 나서 어디론가 도망가버렸어요.%%
+최근에 늦바람이 불어서 상기된 얼굴로 어디론가 싸돌아다니는 건 알고 있었어요.%%
+하지만, 크리스마스가 얼마 남지 않은 지금 이 순간에. 선물 보따리를 들고 사라진 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10019224" FACE="Event_Rudolph_angly"/> <!--아니라구요?%%
+형아가 말이지 썰매 끌기 전에 좀 놀았거든?
+헷갈리게 하지 말고 저기 구석에서 놀아라. 앙?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10019225" FACE="Event_Rudolph_angly"/> <!--해석 불필요(x)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10019202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

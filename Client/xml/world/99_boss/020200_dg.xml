@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020200_DG" DESCRIPTION="90202000">
+	<GSAPATH>../Data/3_World/99_Boss/01_Level/020200/020200_DG.gsa</GSAPATH>
+	<!--DECORATOR>./XML/Monster/Boss/Lavalon.xml</DECORATOR-->
+	<BGSOUND VOLUME="1.0">../BGM/MagmaDrake.mp3</BGSOUND>	
+	<SCRIPT INIT="Init_020200" START="Start_020200">World/99_Boss/020200_DG.lua</SCRIPT>
+	<FREE_DIRECTION ALL="TRUE"/>
+
+	<CAMERA_KFMPATH>../Data/2_Mon/B_FossilEarth/cam/B_FossilEarth_cam.kfm</CAMERA_KFMPATH>
+
+	<!--WorldAction-->
+	<WORLD_ACTION_SETTING>
+		<WORLD_ACTION ID="200" SCRIPT="WA_METEOR" DURATION="2500"/>
+		<WORLD_ACTION ID="201" SCRIPT="WA_METEOR_BLUE" DURATION="2500"/>
+	</WORLD_ACTION_SETTING>
+
+	<COMPLETE_PATH>
+		<ITEM ID = "0" PATH = "../Data/6_UI/mission/msRtDragon000.tga"/>
+		<ITEM ID = "1" PATH = "../Data/6_UI/mission/msRtDragon001.tga"/>
+		<ITEM ID = "2" PATH = "../Data/6_UI/mission/msRtDragon002.tga"/>
+		<ITEM ID = "3" PATH = "../Data/6_UI/mission/msRtDragon003.tga"/>
+	</COMPLETE_PATH>
+	<VIEW_DISTANCE USE="0"/> 
+	<TRIGGER ID="activeMagicCannon">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="DoTrigger_AutoUserItem_InPlayerInven" PARAM="60001040"/>
+	</TRIGGER>
+</WORLD>

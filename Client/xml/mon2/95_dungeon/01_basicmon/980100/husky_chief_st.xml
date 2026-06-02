@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Husky_Chief_st" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_dail"/>
+			<KFMPATH SCALE="1.3">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Husky_Chief_ST/Husky_Chief_ST.kfm</KFMPATH>
+
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="22"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+
+		<!-- 근거리-->
+		<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+		<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+		<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+
+		<!-- 근거리-->
+		<ITEM NAME="attk_03_01_start" ANIMATION="1000207"/>
+		<ITEM NAME="attk_03_01" ANIMATION="1000208"/>
+		<ITEM NAME="attk_03_02" ANIMATION="1000209"/>
+
+		<!-- 근거리-->
+		<ITEM NAME="attk_04_01_start" ANIMATION="1000211"/>
+		<ITEM NAME="attk_04_01" ANIMATION="1000210"/>
+		<ITEM NAME="attk_04_02" ANIMATION="1000212"/>
+
+		<!-- 근거리-->
+		<ITEM NAME="attk_05_01_start" ANIMATION="1000213"/>
+		<ITEM NAME="attk_05_01" ANIMATION="1000214"/>
+		<ITEM NAME="attk_05_02" ANIMATION="1000215"/>
+
+
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100" />
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="run_01" ANIMATION="1000055"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

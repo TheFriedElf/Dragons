@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4321</ID> <!--T.T.10432100 크레테의 연인 피오스 -->
+
+
+<!-- 작성자 : 김효중-->
+<!--[완료조건]	피오스 회복-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	크레테가 피오스님이 다시 사라졌다고 한다. 아무래도 뱀주인자리에 연구를 위해서 다시 간것 같다. 뱀주인자리로 가서 피오스를 찾아보자.-->
+
+
+<LIMITS>
+<DAYOFWEEK>1</DAYOFWEEK>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">7282500</MONSTER> 
+ <!--MON_NO=7282500/사악한 뱀 서펜즈,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10432111"/> <!--피오스 회복-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">82000940</ITEM>
+			<ITEM COUNT="1">82000980</ITEM>
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10432121" FACE="Crete_normal"/> <!--피오스님이 연구자료를 가지러 뱀주인자리에 가셨어요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10432126" FACE="Crete_smile"/> <!--피오스님을 찾아주셔서 감사합니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10432123" FACE="Crete_normal"/> <!--연구자료를 가지러 가신다고 하시던 피오스님이 아직까지 돌아오고 계시질 않는 답니다. 뱀주인자리로가서 피오스님을 찾아주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10432124" FACE="Crete_cry"/> <!--피오스님이 걱정이 됩니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10432125" FACE="Crete_normal"/> <!--아직 뱀주인자리에 안가신건가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10432102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

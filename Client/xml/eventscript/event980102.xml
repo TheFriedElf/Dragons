@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 별자리 일반 입장 3 -->
+
+	<!-- 유닛 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/><!---->
+
+	<!-- 로켓타고 내려오기 -->
+	<CMD TYPE="PlayAction" SpecialActor="ME" ActionName="a_teleport_rocket_out" IPARAM_1="100" IVALUE_1="6" />
+	<CMD TYPE="setmoviescene" enable="false" Time="0.0"/>
+
+	<!-- 카메라로 연출 -->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/><!---->
+
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다--><!---->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다--><!---->
+
+	<!-- 별자리 던전 시작 UI 출력 -->
+	<CMD type="CallUI" UIWndName="FRM_CONSTELLATION_START"/>
+
+	
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/><!---->
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="true"/><!---->
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="true"/><!---->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/><!---->
+
+	<!-- 전체 UI 보이기 -->
+	<CMD TYPE="HideUI" enable="false"/>
+
+	
+</EVENT_SCRIPT>

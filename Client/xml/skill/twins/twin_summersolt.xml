@@ -1,0 +1,8 @@
+<ACTION ID="a_twin_summersolt" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="casting01" LOOP="TRUE"/>
+  <SLOT NAME="attk_charge_03"/>
+  <FSM SCRIPT="CommonSkillAction" 
+	USE_TLM="TRUE"
+	NO_DAMAGE_HOLD="TRUE"
+  />
+</ACTION>

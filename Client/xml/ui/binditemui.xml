@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="SFRM_ITEM_BINDING" ALIGN_X="50" ALIGN_Y="30" W="312" H="339" STATIC_NUM="1" CAN_DRAG = "1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_CLOSE"> ItemBindClearAll() StopSoundByID("Item_Binding") </SCRIPT>		
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" W="310" H="36" Z="1" STATIC_NUM="4">
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="142" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<IMG ID="TITLE" X="7" Y="4" Z="1" W="114" H="24" NO_FOCUS="1" T_CENTER = "1" T_X = "67" T_Y = "4">
+				<ATTR FONT="FTbt_12" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" TEXT="790299" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+			</IMG>			
+			<BUTTON ID="BNT_CLOSE" X="279" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("SFRM_ITEM_BINDING")</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_BG_COLOR" X="9" Y="32" Z="-2" W="294" H="259" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="9" Y="32" Z="-1" W="294" H="259" STATIC_NUM="3">
+			<IMG ID="IMG_LOCK_SLOT" X="9" Y="7" W="42" H="42" IMG="../Data/6_ui/common/cmBnditem.tga" IMG_W="42" IMG_H="42"/>
+			<IMG ID="IMG_LOCK_POINT" X="9" Y="7" W="42" H="42" Z="1" IMG="../Data/6_ui/icon/IconType.tga" IMG_W="480" IMG_H="480" U = "12" V = "12" UV_INDEX = "2" NO_FOCUS="1" IS_ENABLE = "0" IGNORE_PARENT_RECT = "1" PASS_EVENT = "1"/>
+			<ICON ID="ICN_SRC">
+				<ATTR X="9" Y="7" W="42" H="42"/>
+				<ATTR ICON_GRP ="140" ICON_KEY = "0"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> 	ItemBindClearTargetItemInfo() 	</SCRIPT>
+				<SCRIPT ID = "ON_R_BTN_DOWN"> 	ItemBindClearTargetItemInfo() 	</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_UP"> 	UISelf:CursorToIcon() 			</SCRIPT>
+				<SCRIPT ID = "ON_DISPLAY"> 		ItemBindDisplaySrcIcon(UISelf) 	</SCRIPT>
+				<SCRIPT ID = "ON_CALL"> 		UISelf:SetCustomDataAsInt(0) 	</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> 	UISelf:CallIconToolTip() 		</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> 	CloseToolTip() 					</SCRIPT>
+			</ICON>
+			
+			<FORM ID="FRM_PUTON_TEXT" X="65" Z="1" Y="7" W="300" H="40">
+				<ATTR TEXT="790301" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			
+			<IMG ID="IMG_LINE1" X="9" Y="55" W="276" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="276" IMG_H="1"CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE2" X="9" Y="56" W="276" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="276" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>			
+			
+	
+			<STATIC_FORM ID="SFRM_GUAGE" X="9" Y="63" W="276" H="16" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<!--IMG ID="IMG_BAR" X="2" Y="2" W="272" H="12" IMG="../Data/6_ui/common/cmBndbar.tga" IMG_W="272" IMG_H="12"/-->
+			</STATIC_FORM>
+			
+			<STATIC_FORM ID="SFRM_GUIDE_FORM1" TEXT="790301" X="60" Y="7" W="256" H="161" />
+			<STATIC_FORM ID="SFRM_GUIDE_FORM" X="9" Y="90" W="256" H="161" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT=""/>
+			</STATIC_FORM>			
+		</STATIC_FORM>
+		
+		
+		<LIST ID = "LIST_TEXT" X="18" Y="125" W="280" H="151">			
+			<BUTTON ID="ScrUp" X="258" Y="0" W="19" H="15" BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrDown" X="258" Y="135" W="19" H="15" BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="191" Y="90" Z="-1" W="13" H="180" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="180"/>
+			<BUTTON ID="ScrMiddle" X="260" Y="15" W="13" H="21" BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown"  BTN_MIDDLE="ScrMiddle" WND_BAR="IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BIND_TEXT"/>
+			<SCRIPT ID="ON_CREATE">
+				UISelf:ClearAllListItem()
+				UISelf:AddNewListItemChar("")
+			</SCRIPT>
+		</LIST>
+		
+		<BUTTON ID="BTN_OK" X="71" Y="300" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400533" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				if( true == ItemBindCheckOK()) then
+					local kWnd = UISelf:GetParent()
+					local kTimer = kWnd:GetControl("BAR_TIMER")
+					kTimer:SetStartTime(5000)
+					PlaySoundByID("Item_Binding")					
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				if( true == ItemBindCheckOK()) then
+					local kWnd = UISelf:GetParent()
+					local kTimer = kWnd:GetControl("BAR_TIMER")
+					kTimer:SetStartTime(5000)
+					PlaySoundByID("Item_Binding")					
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="157" Y="300" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400534" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent()	</SCRIPT>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		
+		<!-- 게이지 바 -->
+		<ANI_BAR ID="BAR_TIMER" X="20" Y="97" Z="2" W="276" H="16">
+			<ATTR BAR_COUNT = "1"/>
+			<ATTR BAR_TYPE = "0"/>
+			<ATTR BAR_IMG = "../Data/6_ui/common/cmBndbar.tga" BAR_IMG_W = "272" BAR_IMG_H = "12"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "138" T_Y ="-2" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_DISPLAY">
+				UISelf:DisplayPerBarMsg(GetTextW(790310):GetStr(), 50, false )
+				CheckTimeItemBindReq()
+			</SCRIPT>			
+			<SCRIPT ID="ON_CREATE">UISelf:SetStartTime(0)</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">UISelf:SetStartTime(0)</SCRIPT>
+		</ANI_BAR>
+	</STATIC_FORM>
+	<!---------------------------------------------------------------------------------------------------------------------->
+	<STATIC_FORM ID="SFRM_ITEM_UNBINDING" ALIGN_X="50" ALIGN_Y="30" W="312" H="339" STATIC_NUM="1" CAN_DRAG = "1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_CLOSE"> ItemUnbindClearAll() StopSoundByID("Item_Binding") </SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" W="310" H="36" Z="1" STATIC_NUM="4">
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="142" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<IMG ID="TITLE" X="7" Y="4" Z="1" W="114" H="24" NO_FOCUS="1" T_CENTER = "1" T_X = "67" T_Y = "4">
+				<ATTR FONT="FTbt_12" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" TEXT="790300" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+			</IMG>			
+			<BUTTON ID="BNT_CLOSE" X="279" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("SFRM_ITEM_UNBINDING")</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+				
+		<STATIC_FORM ID="SFRM_BG_COLOR" X="9" Y="32" Z="-2" W="294" H="259" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="9" Y="32" Z="-1" W="294" H="259" STATIC_NUM="3">
+			<IMG ID="IMG_LOCK_SLOT" X="9" Y="7" W="42" H="42" IMG="../Data/6_ui/common/cmBnditem.tga" IMG_W="42" IMG_H="42"/>
+			<IMG ID="IMG_LOCK_POINT" X="9" Y="7" W="42" H="42" Z="1" IMG="../Data/6_ui/icon/IconType.tga" IMG_W="480" IMG_H="480" U = "12" V = "12" UV_INDEX = "2" NO_FOCUS="1" IS_ENABLE = "0" IGNORE_PARENT_RECT = "1" PASS_EVENT = "1"/>
+			<ICON ID="ICN_SRC">
+				<ATTR X="9" Y="7" W="42" H="42"/>
+				<ATTR ICON_GRP ="141" ICON_KEY = "0"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> 	ItemUnbindClearTargetItemInfo() 	</SCRIPT>
+				<SCRIPT ID = "ON_R_BTN_DOWN"> 	ItemUnbindClearTargetItemInfo() 	</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_UP"> 	UISelf:CursorToIcon() 			</SCRIPT>
+				<SCRIPT ID = "ON_DISPLAY"> 		ItemUnbindDisplaySrcIcon(UISelf) 	</SCRIPT>
+				<SCRIPT ID = "ON_CALL"> 		UISelf:SetCustomDataAsInt(0) 	</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> 	UISelf:CallIconToolTip() 		</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> 	CloseToolTip() 					</SCRIPT>
+			</ICON>
+			
+			<FORM ID="FRM_PUTON_TEXT" X="65" Z="1" Y="7" W="300" H="40">
+				<ATTR TEXT="790305" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			
+			<IMG ID="IMG_LINE1" X="9" Y="55" W="276" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="276" IMG_H="1"CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE2" X="9" Y="56" W="276" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="276" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>			
+			
+	
+			<STATIC_FORM ID="SFRM_GUAGE" X="9" Y="63" W="276" H="16" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<!--IMG ID="IMG_BAR" X="2" Y="2" W="272" H="12" IMG="../Data/6_ui/common/cmBndbar.tga" IMG_W="272" IMG_H="12"/-->
+			</STATIC_FORM>
+			
+			<STATIC_FORM ID="SFRM_GUIDE_FORM1" TEXT="790301" X="60" Y="7" W="256" H="161" />
+			<STATIC_FORM ID="SFRM_GUIDE_FORM" X="9" Y="90" W="256" H="161" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT=""/>
+			</STATIC_FORM>			
+		</STATIC_FORM>
+		
+		
+		<LIST ID = "LIST_TEXT" X="18" Y="125" W="280" H="151">			
+			<BUTTON ID="ScrUp" X="258" Y="0" W="19" H="15" BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrDown" X="258" Y="135" W="19" H="15" BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="191" Y="90" Z="-1" W="13" H="180" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="180"/>
+			<BUTTON ID="ScrMiddle" X="260" Y="15" W="13" H="21" BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown"  BTN_MIDDLE="ScrMiddle" WND_BAR="IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BIND_TEXT"/>
+			<SCRIPT ID="ON_CREATE">
+				UISelf:ClearAllListItem()
+				UISelf:AddNewListItemChar("")
+			</SCRIPT>
+		</LIST>
+		
+		<BUTTON ID="BTN_OK" X="71" Y="300" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400533" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				if( true == ItemUnbindCheckOK()) then
+					local kWnd = UISelf:GetParent()
+					local kTimer = kWnd:GetControl("BAR_TIMER")
+					kTimer:SetStartTime(5000)
+					PlaySoundByID("Item_Binding")
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				if(true == ItemUnbindCheckOK()) then
+					local kWnd = UISelf:GetParent()
+					local kTimer = kWnd:GetControl("BAR_TIMER")
+					kTimer:SetStartTime(5000)
+					PlaySoundByID("Item_Binding")
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="157" Y="300" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400534" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent()	</SCRIPT>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		
+		<!-- 게이지 바 -->
+		<ANI_BAR ID="BAR_TIMER" X="20" Y="97" Z="2" W="276" H="16">
+			<ATTR BAR_COUNT = "1"/>
+			<ATTR BAR_TYPE = "0"/>
+			<ATTR BAR_IMG = "../Data/6_ui/common/cmBndbar.tga" BAR_IMG_W = "272" BAR_IMG_H = "12"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "138" T_Y ="-2" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_DISPLAY">
+				UISelf:DisplayPerBarMsg(GetTextW(790310):GetStr(), 50, false )
+				CheckTimeItemUnbindReq()
+			</SCRIPT>
+			<SCRIPT ID="ON_CREATE">UISelf:SetStartTime(0)</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">UISelf:SetStartTime(0)</SCRIPT>
+		</ANI_BAR>
+	</STATIC_FORM>	
+	
+	<FORM ID="FRM_BIND_TEXT" X="0" Y="0" W="255" H="10" TEXT="" T_X="3" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+</XUI>

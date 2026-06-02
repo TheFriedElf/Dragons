@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>59</ID> <!--T.T.10005901 달콤한 회수 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	과자공장의 초콜릿 보관소(F7)의 초콜릿 상자 20개를 회수하자.-->
+<!--[완료NPC]	바람항구(발렌타인) - 고든-->
+<!--[내용]	고든은 초콜릿단이 훔쳐간 초콜릿 상자를 회수해야 한다고 말한다. 초콜릿이 사라져 발을 동동 구르고 있을 여성들과 월터를 위해서 초콜릿 상자 20개를 회수하자. 초콜릿 상자는  푸딩류 몬스터가 가지고 있다고 한다. 초콜릿단은 과자공장의 초콜릿 보관소(F7)에 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</CLIENT> <!--시작NPC 바람항구(발렌타인) - 고든 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</PAYER> <!--완료NPC 바람항구(발렌타인) - 고든 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 11 바람항구(발렌타인) - 고든 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/7000/1/1/160005900">35727041</MONSTER> 
+ <!--MON_NO=35727041/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160005900/[Q.ID:00059] 초콜릿 상자30%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/7000/1/1/160005900">35727141</MONSTER> 
+ <!--MON_NO=35727141/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160005900/[Q.ID:00059] 초콜릿 상자30%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/7000/1/1/160005900">35727221</MONSTER> 
+ <!--MON_NO=35727221/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160005900/[Q.ID:00059] 초콜릿 상자30%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/7000/1/1/160005900">35727221</MONSTER> 
+ <!--MON_NO=35727221/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160005900/[Q.ID:00059] 초콜릿 상자30%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/7000/1/1/160005900">35727301</MONSTER> 
+ <!--MON_NO=35727301/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160005900/[Q.ID:00059] 초콜릿 상자30%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/7000/1/1/160005900">35727321</MONSTER> 
+ <!--MON_NO=35727321/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160005900/[Q.ID:00059] 초콜릿 상자30%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160005900</ITEM>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10005911"/> <!--초콜릿 상자-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10005921" FACE="Goden_normal"/> <!--이런! 이런! 오늘 아침에 초콜릿을 잃어버린 여성들이 찾아와서 아우성이었네.
+하지만 아직 범인의 윤곽이 확실하게 잡히지 않았어.%%
+그래서 우선 초콜릿단이 가져간 초콜릿을 회수해야 할 거 같네.
+자네에게 미안하지만 도움을 좀 받았으면 좋겠네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10005926" FACE="Goden_smile"/> <!--고맙네. 덕분에 이걸로 여성들의 분노를 조금은 잠재울 수 있겠군.
+물론 월터의 분노도 말일세. 사실 월터가 제일 시끄러웠네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10005923" FACE="Goden_normal"/> <!--초콜릿단이 가져간 초콜릿 덕분에, 이렇게 속이 타긴 정말 처음이었어.
+그중에서 월터 녀석이 가장 시끄럽게 떠들어 대더군.
+사건의 해결이 지체되는 것은 둘째 치더라도 우선 초콜릿을 받지 못한 사람들을 조금 진정시킬 필요가 있는 것 같군.%%
+현재 초콜릿 상자들은 푸딩류 몬스터가 가지고 있다고 하더군.
+자네가 그 초콜릿 상자들을 꼭 되찾아 주길 바라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10005924" FACE="Goden_angly"/> <!--자네는 지금 나를 사지로 몰아넣을 셈인가? 그 여성들의 원성을 나 혼자 어떻게 감당하란 말인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10005925" FACE="Goden_normal"/> <!--여성들 가운데 월터만큼 분노한 사람은 없던 것 같더군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10005902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

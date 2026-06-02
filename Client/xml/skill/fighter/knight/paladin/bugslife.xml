@@ -1,0 +1,9 @@
+<ACTION ID="a_Bugs Life" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_04"/>
+  <FSM SCRIPT="Skill_Bugs_Life"
+       HIT_SOUND_ID="Bugs_Life"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Bugslife_01_char_root"
+       NO_WEAPON_TRAIL="TRUE" />
+</ACTION>

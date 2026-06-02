@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_Moai_01">
+	
+	<TEXTURE SRC="Magic_Stone01.dds">../Data/1_Cha/9_SSkill/Magic_Stone/Magic_Stone01.dds</TEXTURE>
+
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/1_Cha/9_SSkill/Magic_Stone/Magic_Stone.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/pc_base.lua">
+			<ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="opening" ANIMATION="1000081" />
+      <ITEM NAME="idle_01" ANIMATION="1000001" />
+	     <ITEM NAME="die_01" ANIMATION="1000020" />
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5087</ID> <!--T.T.10508701 갈 수 없는 고향(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 크로키와 이야기 하자-->
+<!--[완료NPC]	스티븐 무역항 - 크로키-->
+<!--[내용]	크리스핀은 자신의 승선증에 대한 정보를 수집하기 위해서 알아보던 중 스티븐 무역항에서 수행을 하고 있는 크로키에 대해서 이야기 해준다. 스티븐 무역항에서 계속 수행을 하던 크로키라면 혹시 승선증의 행방에 대해서 알지도 모른다면서 자신은 다른 곳에서 승선증을 찾아보겠다고 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">33FAB5CE-50F9-407E-807C-5F32FA202064</CLIENT> <!--시작NPC 바람항구 - 크리스핀 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</PAYER> <!--완료NPC 스티븐 무역항 - 크로키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">33FAB5CE-50F9-407E-807C-5F32FA202064</AGENT> <!--진행NPC 11 바람항구 - 크리스핀 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 12 스티븐 무역항 - 크로키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10508711"/> <!--크로키와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508721" FACE="Crispin_normal"/> <!--아무래도 스티븐 무역항을 다시 한번 찾아봐야 겠군.
+그런데 혹시 스티븐 무역항에서 수행을 하고 있다는 크로키에 대해서 알고 있나?
+크로키는 용족인데 수행을 위해서 스티븐 무역항에 계속 지내고 있다고 들었네.%%
+혹시 크로키라면 승선증에 대해서 알지도 모르지.
+크로키에게 승선증의 행방에 대해서 좀 물어봐 주지 않겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508726" FACE="Kroki_normal"/> <!--무슨 일이오? 소자 크로키라 하오만.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508723" FACE="Crispin_normal"/> <!--스티븐 무역항을 샅샅이 돌아봤지만, 역시 승선증은 보이지 않았어. 
+설마 다른 사람의 손에 넘어 간 것은 아닌지 걱정이 되는군.%%
+승선증을 해적들이 가진다고 하더라도 군선에 타는 바보같은 짓을 하지는 않겠지. 
+스티븐 무역항에서 오랫동안 있던 크로키에게 마지막 희망을 걸어볼 수밖에.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508724" FACE="Crispin_normal"/> <!--계속 부탁을 해서 이제 귀찮아졌다고 해도 이해하네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508725" FACE="Crispin_normal"/> <!--크로키는 용족이네. 용족은 친분이 없는 사람의 질문에는 대답을 하지 않는다고 들었네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

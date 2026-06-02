@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_01546_EM">
+  <GSAPATH>../Data/3_World/93_EventMap/01_Level/015406_EM.gsa</GSAPATH>
+ <MINIMAP Y="220" H="85">../Data/3_World/93_EventMap/01_Level/015406_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Event_JP_Field.mp3</BGSOUND>
+  <BGSOUND VOLUME="1.0">../BGM/Event_JP_Defence.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  
+  
+  <!-- 포탈이동 -->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+
+  <!-- 월드 이벤트 오브젝트 정의 -->
+	<WORLDEVENT_OBJECT_LIST>
+		<!--문 /열린 -->
+		<WORLDEVENT_OBJECT ID="1" INIT_STATE="0" TYPE="PUPPET" NAME="JPS_Gate1001_01 01"/> <!--문/ 닫힌 -->
+		<!--이펙트 제어-->
+		<WORLDEVENT_OBJECT ID="11" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="KeyGide_Z_Jump 01"/>	<!--이펙트/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="12" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="EF_Acc_hilight_001 01"/>	<!--이펙트/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="13" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_sunshine_01 01"/>	<!--이펙트/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="14" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_Ice_SlidingRoomObj1001_01 01"/> <!--이펙트/ 게이트 -->
+	</WORLDEVENT_OBJECT_LIST>
+
+	<!--모든 몬스터 죽은 후 문열기 -->
+	<WORLD_EVENT ID="1" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="0" EVENT="EQUAL" VALUE="0"/><!--모든 몬스터가 죽으면 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="1"/> <!--정예방 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="13" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="14" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+   <FOG DENSITY="0.04" FUNC="RANGE_SQ" START="3500" END="5297" COLOR="0.9372549,0.7372549,0.854902"/> 
+   <WORLD_QUALITY HIGH_END="500" MID_END="1000" LOW_END="1500" USE="1" />
+  <STONES />
+</WORLD>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5057</ID> <!--T.T.10505701 제스의 보물(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)]의 꼬깨로부터 나무상자 10개를 구하자-->
+<!--[완료NPC]	수염고래 해안가 - 제스-->
+<!--[내용]	제스는 자신이 몰래 모아둔 물건들을 넣어둔 상자들을 잃어버렸다고 한다. 아무래도 자신이 예전에 물건을 훔쳤던 것을 눈치챈 캡틴 후커의 부하들 소행인 것 같다며 화를 낸다. 제스는 자신의 나무상자를 꼬깨들이 가지고 있는 것 같다며 도와달라고 한다. 수염고래 해안가 [아케이드 모드(F1)]의 꼬깨로부터 나무상자 10개를 구하자.
+ -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6A425910-8CB2-4711-900E-254F95866BDD</CLIENT> <!--시작NPC 수염고래 해안가 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6A425910-8CB2-4711-900E-254F95866BDD</PAYER> <!--완료NPC 수염고래 해안가 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6A425910-8CB2-4711-900E-254F95866BDD</AGENT> <!--진행NPC 11 수염고래 해안가 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010102/10000/6000/1/1/160505700">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9010102/수염고래 해안가 아케이드 2,Item_NO=160505700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505700</ITEM> 
+ <!--Item_NO=160505700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010103/10000/6000/1/1/160505700">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9010103/수염고래 해안가 아케이드 3,Item_NO=160505700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505700</ITEM> 
+ <!--Item_NO=160505700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010109/10000/6000/1/1/160505700">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9010109/캡틴후커 별장,Item_NO=160505700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505700</ITEM> 
+ <!--Item_NO=160505700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10505711"/> <!--나무상자-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10505721" FACE="Jess_normal"/> <!--정말 열받는 일이 아닐 수가 없어. 
+내가 해안가 이곳저곳에 몰래 숨겨 놓은 상자들을 어떤 녀석이 가져가 버렸어.
+사실 감이 좀 잡히긴 한데. 정확한 증거가 없어서 고민 중이야.%% 
+아무래도 내가 과거에 캡틴 후커의 물건을 좀 가져가서 후커 녀석이 복수를 하는 것인지도 모르겠군.
+우선 당장 급한건 내 나무상자를 찾아야 된다는 거야.%% 
+나무상자는 부숴서 열기도 쉽고 열쇠도 걸려 있지 않기 때문에 누구든지 열어보려고 한다면 충분히 열 수가 있어.
+미안하지만 나 좀 도와줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10505726" FACE="Jess_normal"/> <!--잘했어. 안에 뭔가 특별한 거 들어 있는 거 혹시 느꼈어?
+(제스는 서둘러 나무상자를 열어본다)
+역시 이 녀석들이 내 상자를 곱게 나눴을리 없지.
+생각대로 처음처럼 텅텅 비어 있군.%%
+뭐? 처음부터 아무것도 안 들어 있다면 빈 게 당연하다고?
+무슨 소리야? 빈 상자를 가져가면 당연히 안을 채워놔야 하는 거라고.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10505723" FACE="Jess_normal"/> <!--후커 녀석의 물건을 가져온 건 얼마 안 됐어. 
+하지만 안에는 생선만 가득 들어 있을 뿐 뭔가 특별한 건 없었지. 
+뭐 사실 그녀석의 물건이라고 보기도 힘들지만 말이야.%% 
+하여간 후커 녀석이 부하들을 시켜서 내 물건을 가져갈 줄이야. 
+여기 저기 발자국이 남은 것을 보니 꼬깨가 가져간 게 틀림 없어. 
+수염고래 해안가 [아케이드 모드(F1)]의 꼬깨로부터 내 나무상자 10개를 구해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10505724" FACE="Jess_angly"/> <!--정말 정중하게 거절을 하는군. 정중하게 내 부탁을 들어 줄 수도 있잖아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10505725" FACE="Jess_angly"/> <!--녀석들이 내 물건들을 몽땅 가져가기 전에 가져 갔으면 하는데. 
+이렇게 농땡이 피우지 말고 말이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10505702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4152</ID> <!--T.T.10415201 마술피리 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	거친 흑단 지팡이 10개 습득-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	퀘차는 루에게 흑단목이라는 나무로 새 그림자 피리를 만들어주겠다고 한다. 퀘차 사제를 위해 에르다 협곡의 검은 쿰바를 퇴치하고 거친 흑단 지팡이를 습득하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/6000/1/1/160415200">3523000</MONSTER> 
+ <!--MON_NO=3523000/검은 쿰바 ,Item_NO=160415200/[Q.ID:04152] 거친 흑단목 지팡이40%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160415200</ITEM> 
+ <!--Item_NO=160415200/[Q.ID:04152] 거친 흑단목 지팡이,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10415211"/> <!--거친 흑단 지팡이-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10415221" FACE="Quecua_normal"/> <!--특별히 네가 잘못한 일은 없지만,
+그 예민한 아이에게 미움을 샀으니 고생 좀 하게 생겼구나. 
+그래도… 어쩌겠니. 그 아이가 유별나게 아끼는 물건이니.%%
+이 일을 어쩐다…
+… ...%%
+오호라 그렇구나. 방법이 아예 없는 건 아니니까
+걱정말거라.
+너 혹시 에르다 협곡에 다녀올 수 있겠니?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10415226" FACE="Quecua_smile"/> <!--가져왔구나. 기특한 녀석…
+흠… 그런데…%%
+이건 검은색 나무 지팡이긴 하지만,
+흑단목이 아닌 평범한 떡갈나무 같구나.%%
+하기사 그 희귀한 나무를 쿰바들이 떼로 들고 
+다닐 리는 없겠지.%% 
+이걸 가지고 대충 피리를 만들어 가지고 갔다간
+루가 널 피리처럼 두동강 내버릴 지 모르겠다. 흘흘.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10415223" FACE="Quecua_normal"/> <!--이 부러진 피리는 흑단목이라는 특별한 나무로 만들어져 있으니,
+재료를 구해 똑같은 모양으로 다시 만들어 보자꾸나.
+에르다 협곡으로 가면, 검은 쿰바 녀석들이 검은색 지팡이를 들고
+지나가는 모험자들을 공격한다는구나.
+녀석들 몇놈을 혼내주고, 거친 흑단 지팡이를 가져오거라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10415224" FACE="Quecua_angry"/> <!--루가 단단히 삐친 모양인데… 뒷일을 어찌 감당하려누…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10415225" FACE="Quecua_angry"/> <!--거친 흑단 지팡이는 가져왔느냐?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10415202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

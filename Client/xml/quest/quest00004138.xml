@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4138</ID> <!--T.T.10413801 불의 신보의 정화 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	불의 신보의 정화-->
+<!--[완료NPC]	불의 신보-->
+<!--[내용]	사제 바티는 드레이크 라발론이 만들어지는 데에 쓰인 것이 불의 신보임을 알아내고, 신보의 정화를 부탁한다. 마그마 던전의 드레이크 라발론을 퇴치하고 난 후 불의 신보를 정화하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">080AFFE7-9CB0-43f2-B284-65610EE35A48</CLIENT> <!--시작NPC 상인의 마을 - 바티 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81C80FDE-BC0E-4bae-B3CF-778F8C35E513</PAYER> <!--완료NPC 불의 신보 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">080AFFE7-9CB0-43f2-B284-65610EE35A48</AGENT> <!--진행NPC 11 상인의 마을 - 바티 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">81C80FDE-BC0E-4bae-B3CF-778F8C35E513</AGENT> <!--진행NPC 12 불의 신보 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10413811"/> <!--불의 신보를 정화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10413821" FACE="Valti_normal"/> <!--여기서 만나다니... 질긴 악연이다.%%
+이곳에 인간계에 머무는 동안, 난 인간들과 접촉해서 
+신보에 대한 중요한 정보를 입수했어.%% 
+잃어버린 신보를 훔친 것은 검은 마녀 파리스다.%%
+이 파리스란 마녀는 신보를 훔쳐낸 후 
+파렐박사에게 맡겨 연구를 의뢰했지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10413826" FACE="cintamani4_normal"/> <!--(신보 앞에서 정화를 위한 주문서의 주문을 외우자, 
+서서히 불의 신보가 가진 어두운 힘이 정화되기 시작한다.)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10413823" FACE="Valti_normal"/> <!--그 파렐 박사의 연구일지와 
+일기장을 보며 알게된 것이지만....%%
+그들은 신보 속에 들어있는 파멸의 정령들이 가진 
+힘을 이용해서 악룡의 동력원을 만들었다 하더군.%%
+만약 드레이크 라발론을 무찌르게 된다면, 
+신보를 되찾을 가능성이 있을 것이라 들었다.%%
+그러니 무슨 수를 써서라도 라발론을 무찌르고 신보를 
+되찾아 정화시켜야 해!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10413824" FACE="Valti_angry"/> <!--넌 역시 생각했던 대로 드라칸으로서 자격이 없는 녀석이었어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10413825" FACE="Valti_angry"/> <!--신보는 드레이크 라발론의 소굴에 있을 것으로 예상하고 있어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10413811" FACE="cintamani4_normal"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10413802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

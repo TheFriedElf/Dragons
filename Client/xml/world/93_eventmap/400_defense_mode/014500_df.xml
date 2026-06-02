@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_014500_DF">
+	<GSAPATH>../Data/3_World/93_EventMap/400_Defense_Mode/014500_DF.gsa</GSAPATH>
+	<MINIMAP Y="124" H="290">../Data/3_World/93_EventMap/400_Defense_Mode/014500_MM.dds</MINIMAP>
+
+	<BGSOUND VOLUME="1.0">../BGM/defencemode.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!--8방향-->
+    <FREE_DIRECTION ALL="TRUE"/> 
+
+     <!--카메라-->
+     <CAMERA_ADJUST ZOOM="-50" UP="200" TARGET_Z="-45" />
+	<CAMERA_ADJUST WHEEL_MIN_ZOOM="0" WHEEL_MAX_ZOOM="1.5" NOT_CULLING="1"/>
+
+	<WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1" /> 
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="6976" COLOR="0.6941177,0.2078431,0.04705882"/>
+
+	<!-- 전략스킬마스터 Blue -->
+	<NPC NAME="1028350" ACTOR="c_Noel" KID="1028350" SCRIPT="NPC_SKILL_MASTER" GUID="1FF29BA2-3866-4ec9-9453-C47DCDCE8E48" TYPE="FIXED" LOCATION="-740.8, 656.7, 58.2" DIRECTION="0,0,0" DESCRIPTION="507249"/>
+
+
+
+	<!-- 더블업 -->
+       <TRIGGER ID="DOUBLE_UP_1" TYPE="DOUBLE_UP"> 
+          <CONDITION TYPE="action" ACTION="a_act"/>
+          <ACTION SCRIPT="" PARAM="0"/>
+       </TRIGGER>
+       <TRIGGER ID="DOUBLE_UP_2" TYPE="DOUBLE_UP"> 
+          <CONDITION TYPE="action" ACTION="a_act"/>
+          <ACTION SCRIPT="" PARAM="0"/>
+       </TRIGGER>
+       <TRIGGER ID="DOUBLE_UP_3" TYPE="DOUBLE_UP"> 
+          <CONDITION TYPE="action" ACTION="a_act"/>
+          <ACTION SCRIPT="" PARAM="0"/>
+       </TRIGGER>
+
+	<!-- 가디언 설치 -->
+
+      <TRIGGER ID="Guardian_00">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_01">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_02">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_03">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_04">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_05">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_06">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_07">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_08">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_09">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_10">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_11">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_12">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_13">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_14">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_15">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_16">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_17">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_18">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_19">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_20">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_21">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_22">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_23">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_24">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_25">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_26">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_27">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_28">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_29">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_30">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_31">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_32">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_33">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_34">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_35">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_36">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_37">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_38">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_39">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_40">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_41">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_42">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_43">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_44">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_45">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_46">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_47">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+      <TRIGGER ID="Guardian_48">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="GuardianInstall"/>
+      </TRIGGER>
+
+
+
+
+
+</WORLD>

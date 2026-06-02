@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="o_SandBag">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_SandBag/N_SandBag.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg" ANIMATION="0" SPEED="1.2"/>
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

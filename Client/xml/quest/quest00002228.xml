@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2228</ID> <!--T.T.10222801 여자 마음은 갈대(4) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지(Lv35) - 카틀라로부터 용사의 검 획득-->
+<!--[완료NPC]	달빛해안 마을 - 스웰-->
+<!--[내용]	소피아는 우왕 청심환을 먹고 마음이 조금 진정되었다고 한다. 마음이 진정된 소피아는 스웰에게 감사의 선물을 전하고자 한다. 지하묘지(Lv35)로 가서 스웰에게 선물로 전해 줄 용사의 검을 획득해 스웰에게 전해주자. 용사의 검은 카틀라로부터 얻을 수 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 달빛해안 마을 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DB9DFA7F-7F14-4530-A367-DCA447537B2F</PAYER> <!--완료NPC 달빛해안 마을 - 스웰 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 달빛해안 마을 - 소피아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">DB9DFA7F-7F14-4530-A367-DCA447537B2F</AGENT> <!--진행NPC 12 달빛해안 마을 - 스웰 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010920/10000/0/1/1/160518200">4601200</MONSTER> 
+ <!--MON_NO=4601200/카틀라,MAP_NO=9010920/Lv.35 지하묘지,Item_NO=160518200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160518200</ITEM> 
+ <!--Item_NO=160518200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10222811"/> <!--카틀라로부터 용사의 검 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10222821" FACE="Sopia_normal"/> <!--안녕하세요. 용사님.
+요즘 자주 뵙네요. 요즘 하루가 어떻게 돌아가는지 모르겠어요.
+정신이 다른 곳에 있다 보니 업무를 보면서도 자꾸만 실수하네요.
+이대로 있다간 정말 안 되겠어요. 저 좀 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10222826" FACE="Walter_smile"/> <!--네? 소피아가 저에게 이걸 저에게 전해주라고 했단 말인가요?
+이유는 모르겠지만, 감사의 말을 전해야겠네요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10222823" FACE="Sopia_smile"/> <!--제 생각에 스웰님에게 감사의 인사를 전하지 않아서 이러는 것 같아요.
+그래서 스웰님에게 선물을 해 드려야겠어요. %%
+제가 듣기로는 지하묘지(Lv35)에서 듀라만이 처리하면 용사의 검을 주는 것 같아요. 
+그 검이 경비병이 사용하기엔 좋은 검이라고 들었어요.%%
+꼭 구해서 스웰님에게 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10222824" FACE="Sopia_angly"/> <!--바쁘세요? 그렇다면 어쩔 수 없네요. 흥!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10222825" FACE="Sopia_normal"/> <!--막상 선물을 준다니 마음이 가라앉는 것 같기도 해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10222811" FACE="Walter_normal"/> <!--음.. 날씨가 좋은데요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10222802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

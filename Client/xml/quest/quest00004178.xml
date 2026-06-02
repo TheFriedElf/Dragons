@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4178</ID> <!--T.T.10417801 고대의 숲이 부른다. (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	무녀 나오이와 대화-->
+<!--[완료NPC]	솔방울 언덕 - 나오이-->
+<!--[내용]	샹도르는 자신의 일족을 책임지는 무녀 중 한명인 나오이를 소개시켜 준다. 그녀는 꿈을 통해 미래를 예측하는 예지몽을 꾸는 존재이다. 솔방울 언덕의 미카족 무녀 나오이와 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C9AAFA6C-C0F3-4afe-A775-67E66989B1FC</CLIENT> <!--시작NPC 솔방울 언덕 - 샹도르 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DD8F04C8-7041-4c0b-86D2-A7DC6A523E01</PAYER> <!--완료NPC 솔방울 언덕 - 나오이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C9AAFA6C-C0F3-4afe-A775-67E66989B1FC</AGENT> <!--진행NPC 11 솔방울 언덕 - 샹도르 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">DD8F04C8-7041-4c0b-86D2-A7DC6A523E01</AGENT> <!--진행NPC 12 솔방울 언덕 - 나오이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10417811"/> <!--나오이와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10417821" FACE="Syangdoreu_normal"/> <!--허! 나오이도 정말 대단하다니까…
+실력이 뛰어난 이방인이 찾아오는 꿈을 꿨다더만…
+꿈에서 꿨다는 것과 똑같잖아. 역시…%%
+우리 미카족에 나오이님이라는 무녀가 있어.
+미래를 예지하는 꿈을 꾸는 사람이지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10417826" FACE="Naoi_normal"/> <!--오셨군요.
+미카족의 무녀 나오이에요.%%
+어제 꿈에서 본 그 분이군요.
+아, 당황스러우시겠지만… 이야기 들으셨겠지만…
+전 미래를 예지하는 꿈을 꾼답니다.%%
+당신이 헬크라우져님을 만나러 신록의 숲으로
+향하고 있는 것도 알고 있지요. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10417823" FACE="Syangdoreu_normal"/> <!--나오이님이 이방인 전사가 찾아올테니 자기에게
+보내라고 하더군. 어제 꿈을 꿨다고 말이야.%%
+우리 모두는 그녀가 꿈에서 받은 게시에 의해 움직이고 있어.
+일족에게 있어 특별한 존재라 할 수 있지.%%
+하지만 신성한 존재라 하더라도, 기본적으론 한 명의 
+예민한 소녀이니까, 언행에 주의를 하도록 해.%%
+나오이님을 울리면, 내 주먹이 가만 있지 않을 거다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10417824" FACE="Syangdoreu_angly"/> <!--뭐야, 너 이 녀석 감히 나오이님 얘기를 무시해!?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10417825" FACE="Syangdoreu_angly"/> <!--나오이님에게 어서 인사를 드려!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10417811" FACE="Naoi_angly"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10417802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

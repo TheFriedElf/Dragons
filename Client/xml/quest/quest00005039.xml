@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5039</ID> <!--T.T.10503901 프리모의 점심식사 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)] - 상어가 가져간 점심식사 15개 회수-->
+<!--[완료NPC]	수염고래 해안가 - 프리모-->
+<!--[내용]	프리모가 열심히 만들어 놓은 점심식사를 상어가 빼앗아 갔다. 밥을 든든하게 먹지 않으면 하루종일 아무 일도 할 수 없다며 프리모는 슬퍼한다. 프리모의 힘의 원천을 되찾기 위해 수염고래 해안가 [아케이드 모드(F1)]에서 상어가 가져간 점심식사 15개를 되찾자. 상어는 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D9D4C750-7AE1-4084-B14A-770E1D304FA1</CLIENT> <!--시작NPC 수염고래 해안가 - 프리모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D9D4C750-7AE1-4084-B14A-770E1D304FA1</PAYER> <!--완료NPC 수염고래 해안가 - 프리모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D9D4C750-7AE1-4084-B14A-770E1D304FA1</AGENT> <!--진행NPC 11 수염고래 해안가 - 프리모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010103/10000/5000/1/1/160503900">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010103/수염고래 해안가 아케이드 3,Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503900</ITEM> 
+ <!--Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010104/10000/5000/1/1/160503900">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010104/수염고래 해안가 아케이드 4,Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503900</ITEM> 
+ <!--Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010105/10000/5000/1/1/160503900">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010105/수염고래 해안가 아케이드 5,Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503900</ITEM> 
+ <!--Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010109/10000/5000/1/1/160503900">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010109/캡틴후커 별장,Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503900</ITEM> 
+ <!--Item_NO=160503900/[Q.ID:05039] 점심식사,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10503911"/> <!--점심식사-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503921" FACE="Primo_normal"/> <!--컹컹. 내 점심식사~
+이제 난 삶의 의욕을 잃었다.
+왜냐고 묻지 마라. 지금 대답할 힘도 없다.
+하지만 날 도와줄 것 같이 생겼으니 말해 주겠다.%%
+허브와 소스를 이용해 양념한 나의 점심식사를 잃었다.
+제발 날 좀 도와 주길 바란다. 컹컹-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503926" FACE="Primo_smile"/> <!--고맙다. 혼자 먹기엔 많은 양이 아니냐고?
+난 요즘 다이어트를 위해서 딱 적당량만 먹는다. 컹컹.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503923" FACE="Primo_normal"/> <!--나는 덩치에 비해 음식을 상당히 적게 먹는 편이다. 
+그래서 음식을 맛있게 해먹으려고 하고 있다.%%
+오늘도 에르실에게 받은 물고기 15마리를 맛있는 점심식사로 만들었다.
+그런데 어떻게 알고 왔는지 상어가 나타나 내 점심식사를 모두 가져가 버렸다.%%
+난 점심식사를 제대로 먹지 않으면 아무 힘도 나지 않는다. 
+수염고래 해안가 [아케이드 모드(F1)]의 상어가 가져간 점심식사 15개를 꼭 찾아 주길 바란다. 컹컹.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503924" FACE="Primo_normal"/> <!--다시 물고기를 잡을 힘도 없는데, 너무한다. 컹컹-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503925" FACE="Primo_normal"/> <!--난 지금 너무 배가 고프다.
+내 낚시대라도 씹어먹을 수 있을 것 같다. 컹~-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

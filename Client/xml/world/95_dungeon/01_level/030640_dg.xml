@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030640_DG">
+  <GSAPATH>../Data/3_World/95_Dungeon/01_Level/030600/030640_DG.gsa</GSAPATH>  
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+  <!--MAP TYPE설정-->
+  <!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+  <MAPVALUE PLAYERKILL="0" TYPE="2" />
+  <!-- 얼음미로 -->
+  <TRIGGER ID="gate_030630_base" TYPE="PORTAL" TITLE_TEXT_ID="802025" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030630" PARAM2="3"/>
+  </TRIGGER>
+  <!-- 아이스드래곤 -->
+  <TRIGGER ID="gate_020600_base" TYPE="PORTAL" TITLE_TEXT_ID="802027" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="920600" PARAM2="1" />
+  </TRIGGER>
+  <!-- 정예 -->
+  <TRIGGER ID="gate_030639_base" TYPE="PORTAL" TITLE_TEXT_ID="800014" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030639" PARAM2="1" />
+  </TRIGGER>
+
+  <!-- 텔레포트 데미지 이동 -->
+ <TRIGGER ID="Touch_target_01" TYPE="TELEPORT"  >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_02" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_03" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_04" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_05" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_06" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_07" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_08" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_09" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_10" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_11" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+ </TRIGGER>
+ <TRIGGER ID="Touch_target_12" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+ </TRIGGER>
+  <!-- 텔레점프 -->
+ <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_10" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_11" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_12" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_13" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_14" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_15" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_16" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_17" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_18" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_19" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_10" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_20" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_10" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_21" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_11" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_22" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_23" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_24" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_25" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_26" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_18" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_27" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_28" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_29" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_30" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_31" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_32" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_33" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_34" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_16" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_35" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_16" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_36" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_37" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_17" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_38" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_19" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_39" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_19" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_40" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_19" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_41" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_20" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_42" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_20" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_43" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_20" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_44" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_21" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_45" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_21" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_46" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_22" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_47" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_48" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_49" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_50" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_18" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_51" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_23" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_52" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_53" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_54" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_55" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_56" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_16" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_57" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_17" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_58" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_17" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_59" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_30" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_60" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_29" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_61" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_29" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_62" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_20" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_63" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_20" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_64" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_20" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_65" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_24" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_66" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_24" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_67" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_25" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_68" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_26" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_69" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_26" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_70" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_27" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_71" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_28" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_72" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_32" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_73" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_23" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_74" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_23" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_75" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_35" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_76" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_35" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_77" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_37" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_78" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_36" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_79" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_30" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_80" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_29" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_81" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_29" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_82" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_33" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_83" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_33" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_84" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_34" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_85" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_34" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_86" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_34" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_90" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_38" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_91" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_38" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_92" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_31" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_93" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_31" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_94" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_32" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_95" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_32" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_96" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_32" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_97" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_35" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_98" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_35" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_99" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_35" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_100" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_42" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_101" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_42" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_102" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_42" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_103" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_39" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_104" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_39" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_105" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_40" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_106" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_40" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_107" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_41" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_108" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_41" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_109" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_33" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_110" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_47" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_111" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_47" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_112" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_48" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_113" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_38" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_114" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_43" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_115" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_43" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_116" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_44" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_117" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_44" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_118" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_45" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_119" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_45" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_120" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_55" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_121" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_55" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_122" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_46" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_123" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_49" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_124" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_42" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_125" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_42" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_126" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_42" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_127" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_54" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_128" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_54" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_129" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_54" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_130" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_51" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_131" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_51" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_132" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_50" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_133" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_47" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_134" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_48" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_135" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_48" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_136" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_58" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_137" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_58" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_138" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_59" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_139" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_52" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_140" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_53" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_141" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_62" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_142" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_62" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_143" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_55" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_144" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_55" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_145" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_56" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_146" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_56" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_147" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_57" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_148" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_57" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_149" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_49" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_150" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_67" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_151" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_68" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_152" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_68" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_153" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_54" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_154" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_54" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_155" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_61" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_156" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_63" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_157" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_63" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_158" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_64" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_159" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_60" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_160" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_58" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_161" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_58" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_162" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_59" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_163" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_62" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_164" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_62" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_165" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_65" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_166" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_65" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_167" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_66" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_170" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_67" PARAM="200"/>
+ </TRIGGER>
+  <TRIGGER ID="telejump_target_171" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_67" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_172" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_68" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_173" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_68" PARAM="200"/>
+ </TRIGGER>
+ <TRIGGER ID="telejump_target_174" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_68" PARAM="200"/>
+ </TRIGGER>
+  <!-- L.O.D -->
+ <WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="8000" USE="1" />
+ <FOG DENSITY="0.005000" START="50.000000" END="8000.000000" COLOR="0.4000000,0.560000,0.630000" />
+</WORLD>

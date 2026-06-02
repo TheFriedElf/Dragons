@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5163</ID> <!--T.T.10516301 부모의 마음(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	바람항구 - 레오와 대화-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	은행원 소피아는 바람항구의 가슴 따뜻한 레오의 얘기를 들었다고 한다. 바람항구 레오에게 안부와 소피아의 응원을 전해주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 달빛해안 마을 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 달빛해안 마을 - 소피아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012"  MARK="END">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 12 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10516311"/> <!--레오와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10516321" FACE="Sopia_normal"/> <!--안녕하세요. %name%님!
+바람항구에 누구보다 씩씩한 아이, 레오의 얘기를 아시나요?%%
+저는 그 얘기를 듣고 너무나 가슴이 아팠어요.
+혹시 괜찮으시면 레오에게 제가 응원하고 있다고 전해주시면 안 될까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10516326" FACE="Leo_smile"/> <!--%class%님 안녕하세요.
+정말 오랜만이에요. 저한테 무슨 볼일이 있으신가요? %%
+정말이에요? 소피아 누나가 절 응원한다고요?
+그 누나한테 고맙다고 전해주세요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10516323" FACE="Sopia_normal"/> <!--고마워요. 부디 이 세상에 가난한 자가 없기를 빌게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10516324" FACE="Sopia_angly"/> <!--바람항구 가실 일이 없나 봐요. 어쩔 수 없죠. 알겠어요-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10516325" FACE="Sopia_normal"/> <!--이 세상에 가난한 자가 없기를 기도해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10516302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

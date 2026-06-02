@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030600_DG" DESCRIPTION="90202000">
+  <GSAPATH>../Data/3_World/99_Boss/01_Level/030600/030693_DG.gsa</GSAPATH>
+  <!--8방향-->
+  <FREE_DIRECTION ALL="TRUE" />
+  <!-- 트리거 점프-->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="320" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="150" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_3" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_4" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_5" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_6" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="150" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_7" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_8" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="310" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_9" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="320" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_10" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="430" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_11" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="270" />
+  </TRIGGER>
+
+  <!-- 텔 레 점 프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="450" />
+  </TRIGGER>
+
+  <!-- 데미지 이동-->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_04" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_05" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_06" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_07" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_08" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_09" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_10" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_11" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+
+  <!-- 엔터던전  -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+
+  <!-- 이동오브젝트 -->
+  <OBJECT GUID="04ad7494-0022-4881-a3f8-df9e6e5a2e54" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000552">
+    <WayPoint POINT="5849.597, -1653.942, 4057.664" TIME="1" />
+    <WayPoint POINT="6142.265, -1654.697, 4057.664" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="231f7986-57ed-4e86-9ab7-e405bc51453b" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000552">
+    <WayPoint POINT="5849.597, -1653.942, 4699.771" TIME="1" />
+    <WayPoint POINT="6142.265, -1654.697, 4699.771" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="dfa4b1ca-68a2-468e-82ed-76d386480de8" RIDABLE="TRUE" SPEED="300" CLASS_NO="5008001">
+    <WayPoint POINT="15076.44, -3008.916, 3.354759" TIME="2" />
+    <WayPoint POINT="15069.33, -8949.04, 4.953762" TIME="0" />
+    <WayPoint POINT="15069.33, -9017.032, -1495.046" TIME="500" />
+  </OBJECT>
+
+  <!-- 포그 -->
+  <FOG DENSITY="0.64" FUNC="RANGE_SQ" START="306" END="7351" COLOR="0.5019608,0.5019608,0.7529412" />
+
+  <STONES />
+</WORLD>

@@ -1,0 +1,11 @@
+<ACTION ID="a_mon_darkbreath" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" DONT_LOOK_TARGET="TRUE" CAN_CHANGE_ACTOR_POS="TRUE" NO_CHANGE_TELEPORT_ACTOR_POS="TRUE" NO_SET_WALKING_TARGET_LOC="TRUE" IGNORE_PHYSX="TRUE">
+  <SLOT NAME="darkbreath_start"/>
+  <SLOT NAME="darkbreath_idle" LOOP="TRUE"/>
+  <SLOT NAME="darkbreath_run"/>
+  <SLOT NAME="darkbreath_fire_ready"/>
+  <SLOT NAME="darkbreath_battleidle"/>
+  <SLOT NAME="darkbreath_finish"/>
+  <SLOT NAME="idle_01"/>
+  <SLOT NAME="darkbreath_fire"/>
+  <FSM SCRIPT="Act_Mon_DarkBreath" MOVE="TRUE"/>
+</ACTION>

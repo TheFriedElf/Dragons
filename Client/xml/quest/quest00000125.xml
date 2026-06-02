@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>125</ID> <!--T.T.10012501 글레스트 헤임의 결계 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	글레스트 헤임의 좀비와 구울로부터 결합체의 조각 10개, 레이쓰와 헌터 플라이로부터 결합체의 핵 3개를 구하자.-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	글레스트 헤임의 좀비와 구울로부터 결합체의 조각 10개, 레이쓰와 헌터 플라이로부터 결합체의 핵 3개를 구하자. 현재 글레스트 헤임은 차원저항이 더욱 심해져 있어서 몬스터들이 기존의 20%밖에 타격을 입지 않는다. 하지만 오크 필드의 아바타 세트(상의/하의/신발/장갑)를 입으면 이를 중화할 수 있다고 한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</CLIENT> <!--시작NPC 게펜 - 테일링 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 11 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/7000/1/1/160012500">4702400</MONSTER> 
+ <!--MON_NO=4702400/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160012500/[Q.ID:00125] 결합체의 조각(글레스트 헤임)30%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/7000/1/1/160012500">4702500</MONSTER> 
+ <!--MON_NO=4702500/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160012500/[Q.ID:00125] 결합체의 조각(글레스트 헤임)30%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160012500</ITEM> 
+ <!--Item_NO=160012500/[Q.ID:00125] 결합체의 조각(글레스트 헤임),-->
+		<MONSTER OBJECTNO="2" TYPE="INSTDROP100" VALUE="10000/9000/1/1/160012510">4702700</MONSTER> 
+ <!--MON_NO=4702700/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160012510/[Q.ID:00125] 결합체의 핵(글레스트 헤임)10%,-->
+		<MONSTER OBJECTNO="2" TYPE="INSTDROP100" VALUE="10000/9000/1/1/160012510">4702800</MONSTER> 
+ <!--MON_NO=4702800/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160012510/[Q.ID:00125] 결합체의 핵(글레스트 헤임)10%,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">160012510</ITEM> 
+ <!--Item_NO=160012510/[Q.ID:00125] 결합체의 핵(글레스트 헤임),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10012511"/> <!--결합체의 조각-->
+		<OBJECT2 COUNT="3" TEXT="10012512"/> <!--결합체의 핵-->
+		
+	</OBJECTS>
+
+
+<LOCAL>
+	<NAME ID="DEFAULT">
+		<REWARD>
+		</REWARD>
+	</NAME>
+	<NAME ID="KOREA">
+
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">99622740</ITEM><!--전체지급/전체/1)/99622740(봉인아님) 1개-레드 젬스톤-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+</LOCAL>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10012521" FACE="Tailing_normal"/> <!--큰일이네. 지금 과격파들이 본격적으로 움직이는 모양이에요.
+빨리 클라인 박사님의 연구를 끝마쳐야 하는데.%%
+클라인 박사님은 글레스트 헤임에도 결합체의 조각과 결합체의 핵이 있을 거라고 하셨어요.%%
+도와주세요. 여기서 시간을 지체했다가는 %name%님의 세계도 위험해질지 몰라요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10012526" FACE="Tailing_smile"/> <!--이제 클라인 박사님이 연구를 계속할 수 있겠네요.
+하지만 과격파의 움직임이 더 활발해졌어요.
+%name%님도 조심하세요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10012523" FACE="Tailing_normal"/> <!--글레스트 헤임은 발키리의 유물이 묻혀 있다고 알려졌어요.
+하지만 발키리의 유물을 탐내는 다른 차원의 사람을 경계해서 강력한 결계가 만들어졌죠.%%
+결계 때문에 다른 차원의 사람은 20%의 힘밖에는 쓸 수가 없어요.
+결계를 중화하기 위해서는 오크 필드에 전승자들이 남겨 놓은 아바타 세트를 입어야 해요. 전승자들의 아바타 세트가 결계를 중화시켜 줄 거에요.%%
+박사님은 좀비와 구울로부터 결합체의 조각 10개, 레이쓰와 헌터 플라이로부터 결합체의 핵 5개를 구해야 한다고 말씀하셨어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10012524" FACE="Tailing_angly"/> <!--설마! %name%님의 세계에 별로 신경 안 쓰실 줄이야.
+저 때문이에요? 저 때문에 우리 세계가 더 좋은 거에요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10012525" FACE="Tailing_normal"/> <!--꼭, 오크 필드의 전승자들이 남겨 놓은 아바타 세트를 입으세요.
+아니면, 글레스트 헤임의 몬스터들에게 얻어맞고 울면서 돌아올지도 몰라요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10012502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+
+	
+		
+</QUEST>

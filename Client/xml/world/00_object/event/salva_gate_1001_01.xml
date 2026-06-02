@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<PUPPET NAME="Salva_gate_1001_01" USE_PHYSX="1">
+  <WORLDOBJECT>
+    <KFMPATH SCALE="1">../Data/3_World/00_Object/Gate/Salva_gate_1001_01/Salva_gate_1001_01.kfm</KFMPATH>
+    <SLOT>
+      <!-- Basic Movement -->
+      <ITEM NAME="close_01" ANIMATION="1000011"/>
+      <ITEM NAME="close_idle_01" ANIMATION="1000000"/>
+
+	  <ITEM NAME="open_01" ANIMATION="1000030"/>
+	  <ITEM NAME="open_idle_01" ANIMATION="1000020"/>
+	 </SLOT>
+  </WORLDOBJECT>
+
+  <WORLD_EVENT_STATE_INFO>
+
+    <STATE ID="0" SLOT="close_idle_01" />
+    <STATE ID="1" SLOT="open_idle_01"/>
+
+    <TRANSIT FROM="0" TO="1" SLOT="open_01"/>
+    <TRANSIT FROM="1" TO="0" SLOT="close_01"/>
+
+  </WORLD_EVENT_STATE_INFO>
+
+</PUPPET>
+	
+	  

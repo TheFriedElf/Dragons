@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<WORLD ID="W_910100_TU" DESCRIPTION="9101000">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/910100_TU.gsa</GSAPATH>
+    <SCRIPT ADD_SCENE ="InitializeTutorialMap" REMOVE_SCENE="CleanUpTutorialMap">World/01_Ingrid/910100_TU.lua</SCRIPT>
+	<BGSOUND VOLUME="1.0">../BGM/wind.mp3</BGSOUND>
+    <BGSOUND_SUB VOLUME="1.0">../BGM/bosssapphire_bg.mp3</BGSOUND_SUB>
+    <BGSOUND_SUB VOLUME="1.0">../BGM/FightingSpirit.mp3</BGSOUND_SUB>
+    <BGSOUND_SUB VOLUME="1.0">../BGM/odelia_bg.mp3</BGSOUND_SUB>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+	<MAPVALUE PLAYERKILL="0" TYPE="8"/>
+	<!-- Mood -->
+	
+    <!-- MOOD BASE="day" TIME="5">
+		<SLOT NAME="day" ROOT="light_day" AMBIENT="1.0, 0.9608, 0.8431" DIMMER="1.0" SKYBOX="sky_day"/>
+		<SLOT NAME="night" ROOT="light_night" AMBIENT="0.1137, 0.2275, 0.2745" DIMMER="1.0" SKYBOX="sky_night"/>
+	</MOOD -->
+	
+    <!-- 포털 
+	<TRIGGER ID="gate_018210_base" TYPE="PORTAL" TITLE_TEXT_ID="800026" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018210" PARAM2="1"/>
+	</TRIGGER>
+	-->
+    
+    <TRIGGER ID="gate_018210_base" TYPE="PORTAL" TITLE_TEXT_ID="801000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018200" PARAM2="50"/>
+	</TRIGGER>
+    
+    <!--TRIGGER ID="gate_018210_base" TYPE="PORTAL" >
+        <CONDITION TYPE="action" ACTION="a_act" />
+        <ACTION SCRIPT="World_Portal_ByClassNo">
+			<ITEM NAME="0" PARAM="9018210" PARAM2="4"/>
+			<ITEM NAME="0" PARAM="9018220" PARAM2="4"/>
+			<ITEM NAME="0" PARAM="9018230" PARAM2="4"/>
+			<ITEM NAME="0" PARAM="9018240" PARAM2="4"/>
+		</ACTION>
+	</TRIGGER-->
+    <!-- 트 리 거 점 프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="200"/>
+	</TRIGGER>
+
+    <!--  헬퍼 등장 씬 -->
+    <EVENT_SCRIPT_ON_ENTER ID="1"/>
+    <!--  튜토리얼 헬프 -->
+    
+    <TRIGGER ID="trigger_quest01">
+    <CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest02">
+    <CONDITION TYPE="touch"/>
+	</TRIGGER>
+  
+    <TRIGGER ID="trigger_quest03">
+    <CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest04">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+     
+    <TRIGGER ID="trigger_quest05">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest06">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest08">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest09">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest10">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest11">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest12">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest13">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest14">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="trigger_quest18">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    
+     <TRIGGER ID="trigger_quest19">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+
+    <!--  튜토리얼 퀘스트 -->
+   <TRIGGER ID="Event_Quest_TU01" TYPE="EVENT">
+   <CONDITION TYPE="touch"/>
+   <ACTION SCRIPT="ActivateEventEx" EventID="2"/>  
+   </TRIGGER>
+    
+    <TRIGGER ID="Event_Quest_TU02" TYPE="EVENT">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="ActivateEventEx" EventID="3"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="Event_Quest_TU05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoBeginQuestDialog" PARAM="901" PARAM2="101" NPC_GUID="97DE8BD3-47E5-4731-8F51-3A8B91FB0177"/>
+	</TRIGGER>
+    
+    
+    <TRIGGER ID="Event_Quest_TU07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoEndQuestDialog" PARAM="901" PARAM2="601" NPC_GUID="BDA836DA-188A-4cef-A202-08D6B31CF7CF"/>
+	</TRIGGER>
+    
+      <TRIGGER ID="Event_Quest_TU06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoBeginQuestDialog" PARAM="903" PARAM2="101" NPC_GUID="BDA836DA-188A-4cef-A202-08D6B31CF7CF"/>
+	</TRIGGER>
+    
+
+  <!-- All_NPC
+
+    <NPC NAME="1028149" ACTOR="c_Gina" SCRIPT="NPC_Click" KID="1028149" GUID="97DE8BD3-47E5-4731-8F51-3A8B91FB0177" TYPE="FIXED" LOCATION="2914.406, 28.55699, 65.22841" HIDDEN = "TRUE">
+    <SAY TYPE="CLICK" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Gina_Click1"/>
+		<SAY TYPE="CLICK" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Gina_Click2"/>
+		<SAY TYPE="IDLE" TTW="" UPTIME="7" DELAY="25" ACTION="a_talk" SOUND="Gina_Say1"/>
+		<SAY TYPE="IDLE" TTW="" UPTIME="7" DELAY="25" ACTION="a_talk" SOUND="Gina_Say2"/>
+    </NPC>
+    
+    <NPC NAME="1028156" ACTOR="c_Soldier_1rd" SCRIPT="NPC_Click" KID="1028156" GUID="BDA836DA-188A-4cef-A202-08D6B31CF7CF" TYPE="FIXED"  LOCATION="7653.012, 1878.731, 62.05396" HIDDEN = "false"/>
+    <NPC NAME="1028156" ACTOR="c_Soldier_1rd" SCRIPT="NPC_Click" KID="1028156" GUID="AD83B4F6-4332-4009-8850-EC2F59728478" TYPE="FIXED"  LOCATION="4312.002441, 125.867233,86.297112" HIDDEN = "true"/>
+    
+    <NPC NAME="1028157" ACTOR="c_Soldier_2rd" SCRIPT="NPC_Click" KID="1028157" GUID="E18A8472-C3D4-46a0-83E9-AC293455ABF1" TYPE="FIXED"  LOCATION="7597.678, 1901.306, 62.05396" HIDDEN = "FALSE" />
+    <NPC NAME="1028157" ACTOR="c_Soldier_2rd" SCRIPT="NPC_Click" KID="1028157" GUID="FC1866DD-6148-4e01-96A4-2059D9E31FED" TYPE="FIXED"  LOCATION="4236.585449, 149.466095,86.297112" HIDDEN = "TRUE" />
+   -->
+
+   
+	<!--포그-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="1434" END="8009" COLOR="0.2352941,0.3568628,0.1568628"/>
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="1"/>
+	<STONES/>
+</WORLD>

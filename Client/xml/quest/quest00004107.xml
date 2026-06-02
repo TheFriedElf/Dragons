@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4107</ID> <!--T.T.10410701 파멸의 중장 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	나이트 스케일 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 타루부-->
+<!--[내용]	파리스는 흑마술로 나이트 스케일이라는 악마를 만들었다고 한다. 앵무조개 선착장에서 나이트 스케일을 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</CLIENT> <!--시작NPC 카즈라 마을 - 타루부 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</PAYER> <!--완료NPC 카즈라 마을 - 타루부 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</AGENT> <!--진행NPC 11 카즈라 마을 - 타루부 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010140/1">3550300</MONSTER> 
+ <!--MON_NO=3550300/나이트 스케일,MAP_NO=9010140/앵무조개 선착장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10410711"/> <!--나이트 스케일-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10410721" FACE="Tarubu_normal"/> <!--오염된 신보가 우리 평화로운 용족의 젊은이들에게 
+악영향을 끼친다는 것을 알고 있는냐?%%
+파리스가 만든 이 악귀의 소혼강령체들도 마찬가지니라.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10410726" FACE="Tarubu_smile"/> <!--하루하루 실력이 일취월장하는구나.
+덩달아 이 노인네 소시적이 떠오른다. 이 할애비도 오래 전…%%
+에이… 그만 두련다. 젊은 놈들한테는 다 잔소리인 법이지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10410723" FACE="Tarubu_smile"/> <!--근래에 바람항구 주변에 출현한 사악한 몬스터들은 
+모두 이 악귀의 힘에 지배 당하고 있는 것이라 할 수 있으니....%%
+파리스가 흑마술로 불러낸 나이트스케일을 이대로 내버려 둔다면
+머지않아 저승으로부터 다른 악령들을 불러들일 것이니라..%%
+그러니 %name%아, 어서 바람항구의 앵무조개 선착장으로 가서
+녀석들을 무찌르거라.%%
+네가 만약 지금의 지위에 걸맞는 수련을 했다면 
+이 악귀를 수월히 무찌를 수 있을것이나, 그렇지 못하였다 하면,%%
+필히 봉변을 당할 것이니 명심하거라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10410724" FACE="Tarubu_angry"/> <!--허허.. 보기보다 겁이 많은 녀석이로구나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10410725" FACE="Tarubu_normal"/> <!--바람항구 주변에 가면 앵무조개 선착장이 있으며,. 이 앵무조개 선착장 어딘가에 나이트 스케일의 은신처가 보일 것이니라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10410702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

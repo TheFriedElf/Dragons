@@ -1,0 +1,10 @@
+<ACTION ID="a_Gatling Rush" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP = "TRUE"/>
+  <SLOT NAME="Csb_skill_GatlingRush_01_01"/>
+  <FSM SCRIPT="Skill_Gatling_Rush"
+       FIRE_CASTER_EFFECT_ID="ef_GatlingRush_01_02_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+       HIT_SOUND_ID="GatlingRush"
+       MULTI_HIT_NUM="10"/>
+</ACTION>

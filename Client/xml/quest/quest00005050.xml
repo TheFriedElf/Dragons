@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5050</ID> <!--T.T.10505001 모자란 건 몸으로(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [카오스모드(F2)] - 몽글과 상어 20마리씩 처리-->
+<!--[완료NPC]	수염고래 해안가 - 제스-->
+<!--[내용]	제스는 아직 실력을 다 보지 못했다면서 조금 더 보여주길 원한다고 말한다. 실력이란 들쭉날쭉한 거라서 사람을 한번에 파악하긴 힘들다는 것이다. 제스에게 실력을 더 보여주기 위해 수염고래 해안가 [카오스모드(F2)]에서 상어와 몽글을 20마리씩 처처해 보자. 상어와 몽글은 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6A425910-8CB2-4711-900E-254F95866BDD</CLIENT> <!--시작NPC 수염고래 해안가 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6A425910-8CB2-4711-900E-254F95866BDD</PAYER> <!--완료NPC 수염고래 해안가 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6A425910-8CB2-4711-900E-254F95866BDD</AGENT> <!--진행NPC 11 수염고래 해안가 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012103/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9012103/수염고래 해안가 카오스 3,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012104/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9012104/수염고래 해안가 카오스 4,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9012101/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9012101/수염고래 해안가 카오스 1,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012109/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9012109/캡틴후커 별장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10505011"/> <!--상어-->
+		<OBJECT2 COUNT="20" TEXT="10505012"/> <!--몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10505021" FACE="Jess_normal"/> <!--이봐, 아직 다 끝난 게 아니라고.
+실력이란 말이지 들쭉날쭉한 거야.
+자신의 몸상태에 따라서 좋을 수도 있고 나쁠 수도 있어.%%
+그런 점에서 난 아직 네 실력을 모르겠어.
+그래서 말인데 저번과 비슷한 녀석들에게 너의 실력을 실험해 봐도 되겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10505026" FACE="Jess_smile"/> <!--헷. 생각보다 실력이 있나본데.
+좋아 그럼 본격적으로 몸으로 때우는 일을 시작해 볼까?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10505023" FACE="Jess_normal"/> <!--수염고래 해안가에는 언제나 사고를 치는 못된 녀석들이 돌아다니지.
+그 중에서도 특히 문제인 녀석들은 [카오스모드(F2)]에 있는 녀석들이야.
+도대체 그런 문제아들이 왜 그런데 모여 있는지 모르겠어.%%
+그 중에서도 상어와 몽글이 녀석은 딱 질색이야. 
+그 끈적이는 모습은 왠지 소름끼치게 만든다니까.%%
+ [카오스모드(F2)]의 상어와 몽글이 녀석을 상대해봐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10505024" FACE="Jess_angly"/> <!--흐응. 이렇게 거절하겠다 이거지. 
+어차피 네 실력도 형편없을 게 뻔하겠지 뭐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10505025" FACE="Jess_normal"/> <!--자, 여기서 놀지 몰고 어서 실력을 보여줘 봐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10505002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

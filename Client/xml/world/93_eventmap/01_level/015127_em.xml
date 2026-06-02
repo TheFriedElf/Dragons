@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_015127_EM">
+  <GSAPATH>../Data/3_World/93_EventMap/01_Level/015127_EM.gsa</GSAPATH>
+  <MINIMAP Y="165" H="215">../Data/3_World/93_EventMap/01_Level/015127_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Event_CookieFactory.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  
+  
+  <!-- 마스터 머신 방 -->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+    
+  <!--이벤트 포탈 -->
+  <TRIGGER ID="Event_Trigger_01" TITLE_TEXT_ID="810015" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,78" TITLE_TEXT_SCALE="2" TITLE_TEXT_COLOR="1,1,1,1" />
+
+	 
+
+  <!-- 빼빼로 트랩 -->
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 01">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 02">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 03">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 04">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+  <!-- 뽕망치 트랩 -->
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 15">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 16">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 17">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 18">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 19">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 20">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 21">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 22">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+	  <!-- 데미지 텔레포트 이동 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+
+  <FOG DENSITY="0" FUNC="Z_LINEAR" START="636" END="6356" COLOR="0.7529412,0.7529412,0.7529412"/>
+  <WORLD_QUALITY HIGH_END="500" MID_END="1000" LOW_END="1500" USE="1" />
+  <STONES />
+</WORLD>

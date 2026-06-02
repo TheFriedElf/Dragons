@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<WORLD ID="032333_CF">
+	<GSAPATH>../Data/3_World/03_Solaiden/100_Chaos/032333_CF.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/whitecliff_bg.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="2"/>
+	</TRIGGER>
+
+<TRIGGER ID="Art_FireTrap1001_01 01">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+	<PHYSX ACTIVE_TOTAL="6.666666" />
+	<PHYSX ACTIVE_START="0" ACTIVE_END="4" />
+	<PARTICLE EMIT_TOTAL="6.666666" />
+	<PARTICLE EMIT_START="0.0" EMIT_END="4" />
+</TRIGGER>
+
+<TRIGGER ID="Art_StoneHandTrap1001_01 01">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+</TRIGGER>
+<TRIGGER ID="Art_StoneHandTrap1001_01 02">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+</TRIGGER>
+<TRIGGER ID="Art_StoneHandTrap1001_01 03">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+</TRIGGER>
+
+<TRIGGER ID="DU_GT_MTA3001_01 01">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+</TRIGGER>
+
+<TRIGGER ID="DU_GT_MTA2001_03 01">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+		<PHYSX ACTIVE_TOTAL="4.667" />
+	    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500"/>
+</TRIGGER>
+<TRIGGER ID="DU_GT_MTA2001_03 02">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+		<PHYSX ACTIVE_TOTAL="4.667" />
+	    <PHYSX ACTIVE_START="0" ACTIVE_END="2.4500"/>
+</TRIGGER>
+
+<TRIGGER ID="Art_StoneHandTrap3001_01 03">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+</TRIGGER>
+<TRIGGER ID="Art_StoneHandTrap3001_01 02">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+</TRIGGER>
+<TRIGGER ID="Art_StoneHandTrap3001_01 01">
+	<CONDITION TYPE="touch" />
+	<ACTION SCRIPT="DoTrap"/>
+</TRIGGER>
+	<SPOTLIGHT BGCOLOR="70,8,80"/>
+<FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="50.000000" END="6000.000000" COLOR="0.001,0.001,0.008"/>
+
+</WORLD>

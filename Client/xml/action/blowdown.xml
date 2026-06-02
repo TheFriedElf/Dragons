@@ -1,0 +1,6 @@
+<ACTION ID="a_blow_down"  TYPE="EFFECT" NEXT="a_stand_up" CAN_CHANGE_ACTOR_POS="TRUE" BREAK_FALL="TRUE">
+  <SLOT NAME="BlowUp_Start" />
+  <SLOT NAME="BlowUp_Loop" LOOP="TRUE"/>
+  <SLOT NAME="BlowUp_Down"/>
+  <FSM SCRIPT="Act_BlowUp" VELOCITY="10"/>
+</ACTION>

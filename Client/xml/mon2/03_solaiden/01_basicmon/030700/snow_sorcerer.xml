@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Snow_Sorcerer" INIT_ACTION="a_opening" DIE_PARTICLE_ID="ef_monster_die">
+
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Snow_Sorcerer"/>
+		<KFMPATH SCALE="2.5">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Snow_Sorcerer/Snow_Sorcerer.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+	<EFFECT SCALE="0.7"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="15"/>
+		</ABV>
+		<SLOT>
+		
+			  
+			 <!-- 부채꼴 발사-->
+
+			
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000214"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000215" FIRE_START_NODE0="p_ef_shot_01_01" SHOT_INTER_TIME="3.1" PROJECTILE_ID="Projectile_IcePick_01_shot_01"/>
+		
+				<!-- 메테오 -->
+		    <ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000333" RANGE_EFFECT="ef_Blizzard_mon"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000334" RANGE_EFFECT="ef_Blizzard_mon"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000335" PROJECTILE_ID="PROJECTILE_Blizzard_mon" PROJECTILE_SCALE="4" PROJECTILE_COUNT="4" FIRE_TERM="0.2" PROJECTILE_QUAKE_FACTOR="0.5" ARRIVED_EFFECT="ef_Blizzard_00002" ARRIVED_EFFECT_SCALE="2"/>
+			<ITEM NAME="massive_projectile_finish" ANIMATION="1000336"/>
+			
+				<!-- 소환 -->
+			<ITEM NAME="summon_thorns_btlidle_start" ANIMATION="1000349" RANGE_EFFECT="EF_Pattern_BlizzardRing" CAST_EFFECT="EF_Pattern_BlizzardRing"/>
+			<ITEM NAME="summon_thorns_btlidle" ANIMATION="1000350" RANGE_EFFECT="EF_Pattern_BlizzardRing" CAST_EFFECT="EF_Pattern_BlizzardRing"/>
+		    <ITEM NAME="summon_thorns_fire" ANIMATION="1000351" RANGE_EFFECT="EF_Pattern_BlizzardRing" CAST_EFFECT="EF_Pattern_BlizzardRing"/>
+		
+		
+			
+			
+	        <!--유도1-->
+
+			
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000418"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000419"/>
+            <ITEM NAME="shot_01" ANIMATION="1000420" FIRE_START_NODE="p_ef_Weapon" FIRE_TERM="0.6" PROJECTILE_ID="PROJECTILE_ef_wizard_shot" PROJECTILE_SCALE="0.7" />
+
+
+
+					
+			<!--회오리유도-->
+
+			
+			<ITEM NAME="btlidle_03_skill_shot_start" ANIMATION="1000421"/>
+			<ITEM NAME="btlidle_03_skill_shot" ANIMATION="1000422"/>
+            <ITEM NAME="skill_shot_03" ANIMATION="1000423" FIRE_START_NODE="char_root" PROJECTILE_ID="Projectile_HommingTwist_shot" PROJECTILE_SCALE="1.0"/>
+					
+		
+			
+		    <!--악령소환-->
+
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000438"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000439"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000440"/>
+
+			
+			<!--포인트버스터-->
+		
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000349"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000350" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000351" FIRE_EFFECT_FRONT="60" FIRE_EFFECT_SCALE="1.0" FIRE_EFFECT="EF_Common_Mon_IcePick_02"  QUAKE_TIME="1" QUAKE_FACTOR="3" HIT_SOUND_ID="Aram_Skill02"/>
+					
+		
+				
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

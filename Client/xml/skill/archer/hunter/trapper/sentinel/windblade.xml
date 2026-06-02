@@ -1,0 +1,13 @@
+<ACTION ID="a_WindBlade" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE" ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+	<SLOT NAME="csb_skill_PinpointShot_01_01"/>
+	<FSM SCRIPT="Skill_Sentinel_WindBlade"
+		CASTING_EFFECT_EFFECT_ID="ef_skill_iceshower_01_char_root"
+		CASTING_EFFECT_TARGET_NODE="char_root"
+		FIRE_CASTER_EFFECT_ID="ef_skill_iceshower_02_char_root"
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		FIRE_CASTER_EFFECT_ID2="ef_skill_wind_blade_04_char_root"
+		FIRE_CASTER_EFFECT_TARGET_NODE2="char_root"
+		MULTI_HIT_NUM="10"
+		FIRE_SOUND_ID="WindBlade_1"
+	/>
+</ACTION>

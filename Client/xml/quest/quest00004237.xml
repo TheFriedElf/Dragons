@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4237</ID> <!--T.T.10423701 카즈라의 은밀한 지령 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	치치와 대화-->
+<!--[완료NPC]	바티카 구릉 - 치치-->
+<!--[내용]	오래간만에 만난 드라칸의 모험가 크로키는 %name%을 만난 반가움에
+선물을 주려한다. 크로키의 친구라는 잡화상인 치치와 대화하면, 크로키의
+선물을 받을 수 있다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 바티카 구릉 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DF5F598B-5CD5-40a1-9B5F-81ED1B018872</PAYER> <!--완료NPC 바티카 구릉 - 치치 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 바티카 구릉 - 크로키 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">DF5F598B-5CD5-40a1-9B5F-81ED1B018872</AGENT> <!--진행NPC 12 바티카 구릉 - 치치 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10423711"/> <!--치치와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="5">160423700</ITEM><!--전체지급/전체/1)/160423700(봉인아님) 5개-드라칸 모험가의 주먹밥-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10423721" FACE="Kroki_normal"/> <!--아, 당신은 %name%!
+이런 곳에서 만나다니 우린 인연이 있나 봅니다. 
+그런데 이곳은 어떤 일로…?%%
+하… 그러하군요. 흑룡왕 엘가를 물리칠 수 있는 유일한 무기를
+검은 마녀가 모두 부숴버렸다는 이야기는 이미 카즈라에서도
+널리 퍼진 사실이지요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10423726" FACE="Cici_smile"/> <!--여! 자네가 크로키가 가끔 얘기하던 용자로군 그래.
+반갑네, 크로키가 자네에게 한턱 쏜다며 이걸 맞겨 두었어.
+받아두라고~-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10423723" FACE="Kroki_normal"/> <!--옷깃만 스쳐도 인연이라는데… 더 많은 이야길 나누고 싶소만,
+지금은 오추쿠 장로님의 심부름을 긴급히 처리해야 하는 때라서…%%
+허나 이대로 그대를 보내기엔 아쉬운 감이 있으니, 이곳까지 따라온
+내 친구 치치에게 조그만 선물을 마련해두라 하겠소.
+그러니 사양말고 치치에게 가보십시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10423724" FACE="Kroki_normal"/> <!--어허.. 부디 사양하지 말아주시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10423725" FACE="Kroki_normal"/> <!--치치에게 들러보십시오. 제가 부탁해둔 물건을 줄 것입니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10423702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

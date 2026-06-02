@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4279</ID> <!--T.T.10427900 순수함의 상징 유니콘의 뿔 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	사자자리 던전에서 유니콘의 뿔 구하기-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	3번째 열쇠인 물빛성좌의 열쇠는 수요일에 열리는 처녀자리에서 얻을 수가 있다. 하지만 그곳은 결계로 봉인되어 아무나 들어 올 수 없다. 그 결계를 뚫고 가기 위해서는 순수함의 상징인 유니콘의 뿔이 필요하다. 수요일에 열리는 사자자리에서 그 뿔을 지키고 있는 거대사자 카이온을 물리치고, 유니콘의 뿔을 얻어 오자 .-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000150</ITEM> 
+ <!--Item_NO=82000150/[13_01 별자리] 유니콘의 뿔,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">7281500</MONSTER> 
+ <!--MON_NO=7281500/거대사자 카이온,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427911"/> <!--유니콘의 뿔-->
+		<OBJECT2 COUNT="1" TEXT="10427912"/> <!--사자자리던전 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427921" FACE="Crete_normal"/> <!--세번째 열쇠는 수요일에 열리는 처녀자리에서 얻을 수 있는 물빛성좌의 열쇠랍니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427926" FACE="Crete_smile"/> <!--유니콘의 뿔이 있다면 처녀자리에 가는 건 문제없습니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427923" FACE="Crete_normal"/> <!-- 물빛성좌의 열쇠는 봄의 여신 페르세포네가 가지고 있다고 하네요. 그런데 페르세포네는 지금 지옥의 신 하데스 때문에 상당히 불안해 하고 있답니다. 
+ 하데스는 워낙 바람기가 많아서 유로페 뿐만 아니라 봄의 여신 페르세포네에게도 구애를 하고 있다고 하더군요. ( 약혼자가 있어서 정말 다행이야.. ) 그래서 그의 어머니인 대지의 여신 데메테르가 하데스로 부터 그녀를 지키기 위해 강력한 결계를 쳐놨다고 합니다. 그래서 그곳에 가기 위해서는 순수함의 상징인 유니콘의 뿔이 필요한데 그 뿔은 거대사자 카이온이 지키고 있어요.  먼저 사자자리에서 유니콘의 뿔을 얻어 오세요. 그럼 처녀자리로 갈 수 있을 겁니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427924" FACE="Crete_cry"/> <!--%name%님은 순수하지 못하신 분이라 겁을 먹으신 건가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427925" FACE="Crete_normal"/> <!--별자리는 지금도 혼돈에 침식당하고 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<CONFIG ID="Config">
+		<HOTKEY_MODIFIER ID="29" ADD_STR="LC" MEMO="L Control"/>
+		<HOTKEY_MODIFIER ID="56" ADD_STR="LA" MEMO="L Alt"/>
+		<!--HOTKEY_MODIFIER ID="42" ADD_STR="LS" MEMO="L Shift"/-->
+		<!--HOTKEY_MODIFIER ID="54" ADD_STR="RS" MEMO="R Shift"/-->
+		<!--HOTKEY_MODIFIER ID="107" ADD_STR="RC" MEMO="R Control"/-->
+		<!--HOTKEY_MODIFIER ID="118" ADD_STR="RA" MEMO="R Alt"/-->
+		
+		<UNIQUE_UI_TYPE_TO_ERRNO ID="ITEM_MODIFY" ERR_NO="1151" ERR_SOUND="../Sound/U_Sound/button(click).wav"/>
+		<!--UNIQUE_UI_TYPE_TO_ERRNO ID="NO_DUPLICATE" ERR_NO="1152" ERR_SOUND="../Sound/U_Sound/button(click).wav"/-->
+		
+
+		<ATTR SOUND_L_BTN_DOWN_0="../Sound/U_Sound/button(click).wav"/>
+		<ATTR SOUND_R_BTN_DOWN_0="../Sound/U_Sound/button(click).wav"/>
+		<ATTR SOUND_MOUSE_OVER_0="../Sound/U_Sound/button(rollover).wav"/>
+
+		<ATTR SOUND_L_BTN_DOWN_1="../Sound/U_Sound/button(confirm).wav"/>
+		<ATTR SOUND_R_BTN_DOWN_1="../Sound/U_Sound/button(confirm).wav"/>
+		<ATTR SOUND_MOUSE_OVER_1="../Sound/U_Sound/button(rollover).wav"/>
+
+		<ATTR SOUND_L_BTN_DOWN_2="../Sound/U_Sound/button(deny).wav"/>
+		<ATTR SOUND_R_BTN_DOWN_2="../Sound/U_Sound/button(deny).wav"/>
+		<ATTR SOUND_MOUSE_OVER_2="../Sound/U_Sound/button(rollover).wav"/>
+
+		<ATTR SOUND_L_BTN_DOWN_3="../Sound/U_Sound/button(server).wav"/>
+		<ATTR SOUND_R_BTN_DOWN_3="../Sound/U_Sound/button(server).wav"/>
+		<ATTR SOUND_MOUSE_OVER_3="../Sound/U_Sound/button(rollover).wav"/>
+
+		<ATTR SOUND_L_BTN_DOWN_4="../Sound/U_Sound/button(start).wav"/>
+		<ATTR SOUND_R_BTN_DOWN_4="../Sound/U_Sound/button(start).wav"/>
+		<ATTR SOUND_MOUSE_OVER_4="../Sound/U_Sound/button(rollover).wav"/>
+
+		<ATTR SOUND_L_BTN_DOWN_5="../Sound/U_Sound/button(create).wav"/>
+		<ATTR SOUND_R_BTN_DOWN_5="../Sound/U_Sound/button(create).wav"/>
+		<ATTR SOUND_MOUSE_OVER_5="../Sound/U_Sound/button(rollover).wav"/>
+
+		<ATTR TOOL_TIP_IMG_BODY="../Data/6_UI/common/BoxBody.tga"/>
+		<ATTR TOOL_TIP_IMG_TOP_BOTTOM="../Data/6_UI/common/BoxTB.tga"/>
+		<ATTR TOOL_TIP_IMG_LEFR_RIGHT="../Data/6_UI/common/BoxLR.tga"/>
+		<ATTR TOOL_TIP_IMG_CORNER="../Data/6_UI/common/BoxCorner.tga"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_DFT="0xFFE1E1E1"/>
+		<ATTR BTN_OVER_TEXT_COLOR_DFT="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_DFT="0xFF4D3413"/>
+		<ATTR BTN_DIS_TEXT_COLOR_DFT="0xFF898989"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_0="0xFFE1E1E1"/>
+		<ATTR BTN_OVER_TEXT_COLOR_0="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_0="0xFF4D3413"/>
+		<ATTR BTN_DIS_TEXT_COLOR_0="0xFF898989"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_1="0xFFE1E1E1"/>
+		<ATTR BTN_OVER_TEXT_COLOR_1="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_1="0xFFf7ea96"/>
+		<ATTR BTN_DIS_TEXT_COLOR_1="0xFF898989"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_2="0xFF393713"/>
+		<ATTR BTN_OVER_TEXT_COLOR_2="0xFF393713"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_2="0xFF393713"/>
+		<ATTR BTN_DIS_TEXT_COLOR_2="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_3="0xFFFFF4C8"/>
+		<ATTR BTN_OVER_TEXT_COLOR_3="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_3="0xFF4D3413"/>
+		<ATTR BTN_DIS_TEXT_COLOR_3="0xFF898989"/>
+	
+		<ATTR BTN_UP_TEXT_COLOR_4="0xFF52322e"/>
+		<ATTR BTN_OVER_TEXT_COLOR_4="0xFF52322e"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_4="0xFFfff1b2"/>
+		<ATTR BTN_DIS_TEXT_COLOR_4="0xFF898989"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_5="0xFFf5e3c4"/>
+		<ATTR BTN_OVER_TEXT_COLOR_5="0xFF52322e"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_5="0xFF4e1d0e"/>
+		<ATTR BTN_DIS_TEXT_COLOR_5="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_6="0xFF393713"/>
+		<ATTR BTN_OVER_TEXT_COLOR_6="0xFF393713"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_6="0xFF393713"/>
+		<ATTR BTN_DIS_TEXT_COLOR_6="0xFF393713"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_7="0xFFFFF8CB"/>
+		<ATTR BTN_OVER_TEXT_COLOR_7="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_7="0xFF4D3413"/>
+		<ATTR BTN_DIS_TEXT_COLOR_7="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_8="0xFFFFF4C8"/>
+		<ATTR BTN_OVER_TEXT_COLOR_8="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_8="0xFF0000FF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_8="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_9="0xFFFFFCEA"/>
+		<ATTR BTN_OVER_TEXT_COLOR_9="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_9="0xFF0000FF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_9="0xFF898989"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_10="0xFF2A0F0B"/>
+		<ATTR BTN_OVER_TEXT_COLOR_10="0xFF2A0F0B"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_10="0xFF2A0F0B"/>
+		<ATTR BTN_DIS_TEXT_COLOR_10="0xFF898989"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_11="0xFF2A0F0B"/>
+		<ATTR BTN_OVER_TEXT_COLOR_11="0xFF2A0F0B"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_11="0xFF4D3413"/>
+		<ATTR BTN_DIS_TEXT_COLOR_11="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_12="0xFF141C00"/>
+		<ATTR BTN_OVER_TEXT_COLOR_12="0xFF141C00"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_12="0xFF141C00"/>
+		<ATTR BTN_DIS_TEXT_COLOR_12="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_13="0xFF2FE4FF"/>
+		<ATTR BTN_OVER_TEXT_COLOR_13="0xFF2FE4FF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_13="0xFF2FE4FF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_13="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_14="0xFFFF8BED"/>
+		<ATTR BTN_OVER_TEXT_COLOR_14="0xFFFF8BED"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_14="0xFFFF8BED"/>
+		<ATTR BTN_DIS_TEXT_COLOR_14="0xFF898989"/>	
+		
+		<ATTR BTN_UP_TEXT_COLOR_15="0xFFFFFCEA"/>
+		<ATTR BTN_OVER_TEXT_COLOR_15="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_15="0xFF000000"/>
+		<ATTR BTN_DIS_TEXT_COLOR_15="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_16="0xFF2A0F0B"/>
+		<ATTR BTN_OVER_TEXT_COLOR_16="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_16="0xFFFFFFFF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_16="0xFFFFFFFF"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_17="0xFFFFFFFF"/>
+		<ATTR BTN_OVER_TEXT_COLOR_17="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_17="0xFFFFFFFF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_17="0xFFFFFFFF"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_18="0xFF790000"/>
+		<ATTR BTN_OVER_TEXT_COLOR_18="0xFF790000"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_18="0xFF790000"/>
+		<ATTR BTN_DIS_TEXT_COLOR_18="0xFF707070"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_19="0xFFFFFFFF"/>
+		<ATTR BTN_OVER_TEXT_COLOR_19="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_19="0xFFFEFB2A"/>
+		<ATTR BTN_DIS_TEXT_COLOR_19="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_20="0xFFFFFCEA"/>
+		<ATTR BTN_OVER_TEXT_COLOR_20="0xFF000000"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_20="0xFFFFFFFF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_20="0xFF898989"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_21="0xFFFEA34B"/>
+		<ATTR BTN_OVER_TEXT_COLOR_21="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_21="0xFFFFFFFF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_21="0xFFFFFFFF"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_22="0xFF00FFFF"/>
+		<ATTR BTN_OVER_TEXT_COLOR_22="0xFF00FFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_22="0xFF00FFFF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_22="0xFF00FFFF"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_23="0xFFFFFFFF"/>
+		<ATTR BTN_OVER_TEXT_COLOR_23="0xFFFFFFFF"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_23="0xFF2A0F0B"/>
+		<ATTR BTN_DIS_TEXT_COLOR_23="0xFF000000"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_24="0xFF4d2718"/>
+		<ATTR BTN_OVER_TEXT_COLOR_24="0xFF4d2718"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_24="0xFF790000"/>
+		<ATTR BTN_DIS_TEXT_COLOR_24="0xFF707070"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_25="0xFFd9c08c"/>
+		<ATTR BTN_OVER_TEXT_COLOR_25="0xFFd9c08c"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_25="0xFFFFF799"/>
+		<ATTR BTN_DIS_TEXT_COLOR_25="0xFF707070"/>
+
+		<ATTR BTN_UP_TEXT_COLOR_26="0xFFFFFFFF"/>
+		<ATTR BTN_OVER_TEXT_COLOR_26="0xffa2f70f"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_26="0xffa2f70f"/>
+		<ATTR BTN_DIS_TEXT_COLOR_26="0xffa2f70f"/>
+		
+		<ATTR BTN_UP_TEXT_COLOR_27="0xFF555555"/>
+		<ATTR BTN_OVER_TEXT_COLOR_27="0xFF555555"/>
+		<ATTR BTN_DOWN_TEXT_COLOR_27="0xFFFFFFFF"/>
+		<ATTR BTN_DIS_TEXT_COLOR_27="0xFFFFFFFF"/>
+		
+		<ATTR IMG_BODY_1="../Data/6_ui/Common/cmBgBoxBody.tga" BODY_W_1="1" BODY_H_1="512" />
+		<ATTR IMG_TB_1="../Data/6_ui/Common/cmBgBoxTB.tga" TB_W_1="1" TB_H_1="30" />
+		<ATTR IMG_LR_1="../Data/6_ui/Common/cmBgBoxLR.tga" LR_W_1="18" LR_H_1="512" />
+		<ATTR IMG_CORNER_1="../Data/6_ui/Common/cmBgBoxCorner.tga" CORNER_H_1="30" CORNER_W_1="30" />
+
+		<ATTR IMG_BODY_2="../Data/6_ui/Common/cmBody.tga" BODY_W_2="1" BODY_H_2="1" />
+		<ATTR IMG_TB_2="../Data/6_ui/Common/cmBoxTB_C1.tga" TB_W_2="1" TB_H_2="16" />
+		<ATTR IMG_LR_2="../Data/6_ui/Common/cmBoxLR_C1.tga" LR_W_2="16" LR_H_2="1" />
+		<ATTR IMG_CORNER_2="../Data/6_ui/Common/cmBoxCorner_C1.tga" CORNER_W_2="16" CORNER_H_2="16" />
+
+		<ATTR IMG_TB_3="../Data/6_ui/Common/cmSdwTB.tga" TB_W_3="1" TB_H_3="16" />
+		<ATTR IMG_LR_3="../Data/6_ui/Common/cmSdwLR.tga" LR_W_3="16" LR_H_3="1" />
+		<ATTR IMG_CORNER_3="../Data/6_ui/Common/cmSdwCorner.tga" CORNER_W_3="16" CORNER_H_3="16" />
+
+		<ATTR IMG_BODY_4="../Data/6_ui/Common/cmTitleBody.tga" BODY_W_4="1" BODY_H_4="36" />
+		<ATTR IMG_CORNER_4="../Data/6_ui/Common/cmTitleCorner.tga" CORNER_W_4="24" CORNER_H_4="36" />
+
+		<ATTR IMG_BODY_5="../Data/6_ui/Common/cmBody.tga" BODY_W_5="1" BODY_H_5="1" />
+		<ATTR IMG_TB_5="../Data/6_ui/Common/cmBoxTB_C2.tga" TB_W_5="1" TB_H_5="12" />
+		<ATTR IMG_LR_5="../Data/6_ui/Common/cmBoxLR_C2.tga" LR_W_5="12" LR_H_5="1" />
+		<ATTR IMG_CORNER_5="../Data/6_ui/Common/cmBoxCorner_C2.tga" CORNER_W_5="12" CORNER_H_5="12" />
+
+		<ATTR IMG_BODY_6="../Data/6_ui/Common/cmBody.tga" BODY_W_6="1" BODY_H_6="1" />
+		<ATTR IMG_TB_6="../Data/6_ui/Common/cmBoxTB_C3.tga" TB_W_6="1" TB_H_6="12" />
+		<ATTR IMG_LR_6="../Data/6_ui/Common/cmBoxLR_C3.tga" LR_W_6="12" LR_H_6="1" />
+		<ATTR IMG_CORNER_6="../Data/6_ui/Common/cmBoxCorner_C3.tga" CORNER_W_6="12" CORNER_H_6="12" />
+
+		<ATTR IMG_BODY_7="../Data/6_ui/Common/cmMenuBody.tga" BODY_W_7="1" BODY_H_7="55" />
+		<ATTR IMG_CORNER_7="../Data/6_ui/Common/cmMenuCorner.tga" CORNER_W_7="36" CORNER_H_7="56" />
+
+		<ATTR IMG_BODY_8="../Data/6_ui/Common/cmDropBody.tga" BODY_W_8="1" BODY_H_8="1" />
+		<ATTR IMG_TB_8="../Data/6_ui/Common/cmDropTB.tga" TB_W_8="1" TB_H_8="10" />
+		<ATTR IMG_LR_8="../Data/6_ui/Common/cmDropLR.tga" LR_W_8="10" LR_H_8="1" />
+		<ATTR IMG_CORNER_8="../Data/6_ui/Common/cmDropCorner.tga" CORNER_W_8="10" CORNER_H_8="10" />
+
+		<ATTR IMG_BODY_9="../Data/6_ui/Common/cmCtBoxBody.tga" BODY_W_9="1" BODY_H_9="1" />
+		<ATTR IMG_TB_9="../Data/6_ui/Common/cmCtBoxTB.tga" TB_W_9="1" TB_H_9="16" />
+		<ATTR IMG_LR_9="../Data/6_ui/Common/cmCtBoxLR.tga" LR_W_9="16" LR_H_9="1" />
+		<ATTR IMG_CORNER_9="../Data/6_ui/Common/cmCtBoxCorner.tga" CORNER_W_9="16" CORNER_H_9="16" />
+
+		<ATTR IMG_BODY_10="../Data/6_ui/main/mnSlotBody.tga" BODY_W_10="1" BODY_H_10="100" />
+		<ATTR IMG_CORNER_10="../Data/6_ui/main/mnSlotCorner.tga" CORNER_W_10="28" CORNER_H_10="100" />
+
+		<ATTR IMG_BODY_11="../Data/6_ui/main/mnHpBgBody.tga" BODY_W_11="1" BODY_H_11="20" />
+		<ATTR IMG_CORNER_11="../Data/6_ui/main/mnHpBgCorner.tga" CORNER_W_11="12" CORNER_H_11="20" />
+
+		<ATTR IMG_BODY_12="../Data/6_ui/main/mnMpBgBody.tga" BODY_W_12="1" BODY_H_12="20" />
+		<ATTR IMG_CORNER_12="../Data/6_ui/main/mnMpBgCorner.tga" CORNER_W_12="12" CORNER_H_12="20" />
+
+		<ATTR IMG_BODY_13="../Data/6_ui/main/mnExpBgBody.tga" BODY_W_13="66" BODY_H_13="18" />
+		<ATTR IMG_CORNER_13="../Data/6_ui/main/mnExpBgCorner.tga" CORNER_W_13="140" CORNER_H_13="18" />
+		
+		<ATTR IMG_BODY_14="../Data/6_ui/Pvp/pvPgBoxRBody.tga" BODY_W_14="317" BODY_H_14="1" />
+		<ATTR IMG_TB_14="../Data/6_ui/Pvp/pvPgBoxRTB.tga" TB_W_14="317" TB_H_14="28" />
+		<ATTR IMG_LR_14="../Data/6_ui/Pvp/pvPgBoxRLR.tga" LR_W_14="28" LR_H_14="55" />
+		<ATTR IMG_CORNER_14="../Data/6_ui/Pvp/pvPgBoxRCorner.tga" CORNER_W_14="28" CORNER_H_14="28" />
+		
+		<!-- *Pvp Blue Box -->
+		<ATTR IMG_BODY_15="../Data/6_ui/Pvp/pvPgBoxBBody.tga" BODY_W_15="317" BODY_H_15="1" />
+		<ATTR IMG_TB_15="../Data/6_ui/Pvp/pvPgBoxBTB.tga" TB_W_15="317" TB_H_15="28" />
+		<ATTR IMG_LR_15="../Data/6_ui/Pvp/pvPgBoxBLR.tga" LR_W_15="28" LR_H_15="55" />
+		<ATTR IMG_CORNER_15="../Data/6_ui/Pvp/pvPgBoxBCorner.tga" CORNER_W_15="28" CORNER_H_15="28" />
+		
+		<!-- *Pvp B Box -->
+		<ATTR IMG_BODY_16="../Data/6_ui/Pvp/pvBkboxBody.tga" BODY_W_16="1" BODY_H_16="1" />
+		<ATTR IMG_TB_16="../Data/6_ui/Pvp/pvBkboxTB.tga" TB_W_16="1" TB_H_16="10" />
+		<ATTR IMG_LR_16="../Data/6_ui/Pvp/pvBkboxLR.tga" LR_W_16="10" LR_H_16="1" />
+		<ATTR IMG_CORNER_16="../Data/6_ui/Pvp/pvBkboxCorner.tga" CORNER_W_16="10" CORNER_H_16="10" />
+		<!-- *Pvp W Box -->
+		<ATTR IMG_BODY_17="../Data/6_ui/Pvp/pvWtboxBody.tga" BODY_W_17="1" BODY_H_17="1" />
+		<ATTR IMG_TB_17="../Data/6_ui/Pvp/pvWtboxTB.tga" TB_W_17="1" TB_H_17="14" />
+		<ATTR IMG_LR_17="../Data/6_ui/Pvp/pvWtboxLR.tga" LR_W_17="14" LR_H_17="1" />
+		<ATTR IMG_CORNER_17="../Data/6_ui/Pvp/pvWtboxCorner.tga" CORNER_W_17="14" CORNER_H_17="14" />
+		
+		<!-- *Pvp Tab Red Box -->
+		<ATTR IMG_BODY_18="../Data/6_ui/Pvp/pvTabRbxBody.tga" BODY_W_18="353" BODY_H_18="1" />
+		<ATTR IMG_TB_18="../Data/6_ui/Pvp/pvTabRbxTB.tga" TB_W_18="353" TB_H_18="28" />
+		<ATTR IMG_LR_18="../Data/6_ui/Pvp/pvTabRbxLR.tga" LR_W_18="28" LR_H_18="218" />
+		<ATTR IMG_CORNER_18="../Data/6_ui/Pvp/pvTabRbxCorner.tga" CORNER_W_18="28" CORNER_H_18="28" />
+		<!-- *Pvp Tab Blue Box -->
+		<ATTR IMG_BODY_19="../Data/6_ui/Pvp/pvTabBbxBody.tga" BODY_W_19="353" BODY_H_19="1" />
+		<ATTR IMG_TB_19="../Data/6_ui/Pvp/pvTabBbxTB.tga" TB_W_19="353" TB_H_19="28" />
+		<ATTR IMG_LR_19="../Data/6_ui/Pvp/pvTabBbxLR.tga" LR_W_19="28" LR_H_19="218" />
+		<ATTR IMG_CORNER_19="../Data/6_ui/Pvp/pvPgBoxBCorner.tga" CORNER_W_19="28" CORNER_H_19="28" />
+		
+		<!-- pvpBgSmallB -->
+		<ATTR IMG_BODY_20="../Data/6_ui/Pvp/pvBgSBbody.tga" BODY_W_20="462" BODY_H_20="1" />
+		<ATTR IMG_TB_20="../Data/6_ui/Pvp/pvBgTB.tga" TB_W_20="1" TB_H_20="6" />
+		<ATTR IMG_CORNER_20="../Data/6_ui/Pvp/pvBgSBcorner.tga" CORNER_W_20="60" CORNER_H_20="46" />
+		<!-- pvpBgSmallR -->
+		<ATTR IMG_BODY_21="../Data/6_ui/Pvp/pvBgSRbody.tga" BODY_W_21="462" BODY_H_21="1" />
+		<ATTR IMG_TB_21="../Data/6_ui/Pvp/pvBgTB.tga" TB_W_21="1" TB_H_21="6" />
+		<ATTR IMG_CORNER_21="../Data/6_ui/Pvp/pvBgSRcorner.tga" CORNER_W_21="60" CORNER_H_21="46" />
+		
+		<!-- pvpBgBigB -->
+		<ATTR IMG_BODY_22="../Data/6_ui/Pvp/pvBgBbody.tga" BODY_W_22="512" BODY_H_22="1" />
+		<ATTR IMG_TB_22="../Data/6_ui/Pvp/pvBgTB.tga" TB_W_22="1" TB_H_22="6" />
+		<ATTR IMG_CORNER_22="../Data/6_ui/Pvp/pvBgBcorner.tga" CORNER_W_22="322" CORNER_H_22="92" />
+		<!-- PvpBgBigR -->
+		<ATTR IMG_BODY_23="../Data/6_ui/Pvp/pvBgRbody.tga" BODY_W_23="512" BODY_H_23="1" />
+		<ATTR IMG_TB_23="../Data/6_ui/Pvp/pvBgTB.tga" TB_W_23="1" TB_H_23="6" />
+		<ATTR IMG_CORNER_23="../Data/6_ui/Pvp/pvBgRcorner.tga" CORNER_W_23="322" CORNER_H_23="92" />
+
+		<!-- LineBox -->
+		<ATTR IMG_TB_24="../Data/6_ui/common/cmLineTB.tga" TB_W_24="1" TB_H_24="14" />
+		<ATTR IMG_LR_24="../Data/6_ui/common/cmLineLR.tga" LR_W_24="14" LR_H_24="1" />
+		<ATTR IMG_CORNER_24="../Data/6_ui/common/cmLineCorner.tga" CORNER_W_24="14" CORNER_H_24="14" />
+
+		<!-- menubox2 -->
+		<ATTR IMG_BODY_25="../Data/6_ui/common/cmMnBody.tga" BODY_W_25="1" BODY_H_25="40" />
+		<ATTR IMG_CORNER_25="../Data/6_ui/common/cmMnCorner.tga" CORNER_W_25="24" CORNER_H_25="40" />
+
+		<!-- MSMYBOX -->
+		<ATTR IMG_BODY_26="../Data/6_ui/mission/msRTbxBody.tga" BODY_W_26="1" BODY_H_26="1" />
+		<ATTR IMG_TB_26="../Data/6_ui/mission/msRTbxTB.tga" TB_W_26="1" TB_H_26="6" />
+		<ATTR IMG_CORNER_26="../Data/6_ui/mission/msRTmbCn.tga" CORNER_W_26="224" CORNER_H_26="222" />
+
+		<!-- MSUSBOX -->
+		<ATTR IMG_BODY_27="../Data/6_ui/mission/msRTbxBody.tga" BODY_W_27="1" BODY_H_27="1" />
+		<ATTR IMG_TB_27="../Data/6_ui/mission/msRTbxTB.tga" TB_W_27="1" TB_H_27="6" />
+		<ATTR IMG_CORNER_27="../Data/6_ui/mission/msRTbxCn.tga" CORNER_W_27="88" CORNER_H_27="74" />
+
+		<!-- MSITEMBOX -->
+		<ATTR IMG_BODY_28="../Data/6_ui/mission/msItemBody.tga" BODY_W_28="1" BODY_H_28="1" />
+		<ATTR IMG_TB_28="../Data/6_ui/mission/msItembxTB.tga" TB_W_28="1" TB_H_28="12" />
+		<ATTR IMG_LR_28="../Data/6_ui/mission/msItembxLR.tga" LR_W_28="12" LR_H_28="1" />
+		<ATTR IMG_CORNER_28="../Data/6_ui/mission/msItembxCn.tga" CORNER_W_28="12" CORNER_H_28="12" />
+
+		<!-- Shop UI -->
+		<ATTR IMG_BODY_29="../Data/6_ui/shop/shboxBody.tga" BODY_W_29="1" BODY_H_29="1" />
+		<ATTR IMG_TB_29="../Data/6_ui/shop/shboxTB.tga" TB_W_29="1" TB_H_29="24" />
+		<ATTR IMG_LR_29="../Data/6_ui/shop/shboxLR.tga" LR_W_29="24" LR_H_29="1" />
+		<ATTR IMG_CORNER_29="../Data/6_ui/shop/shboxCN.tga" CORNER_W_29="24" CORNER_H_29="24" />
+		
+		<ATTR IMG_BODY_30="../Data/6_ui/shop/shboxBody.tga" BODY_W_30="1" BODY_H_30="1" />
+		<ATTR IMG_TB_30="../Data/6_ui/shop/shboxTB2.tga" TB_W_30="1" TB_H_30="24" />
+		<ATTR IMG_LR_30="../Data/6_ui/shop/shboxLR.tga" LR_W_30="24" LR_H_30="1" />
+		<ATTR IMG_CORNER_30="../Data/6_ui/shop/shboxCN2.tga" CORNER_W_30="24" CORNER_H_30="24" />
+		
+		<ATTR IMG_BODY_31="../Data/6_ui/common/cmFinishBxBody.tga" BODY_W_31="1" BODY_H_31="1" />
+		<ATTR IMG_TB_31="../Data/6_ui/common/cmFinishBxBody.tga" TB_W_31="1" TB_H_31="1" />
+		<ATTR IMG_LR_31="../Data/6_ui/common/cmFinishBxBody.tga" LR_W_31="1" LR_H_31="1" />
+		<ATTR IMG_CORNER_31="../Data/6_ui/common/cmFinishBxCn.tga" CORNER_W_31="10" CORNER_H_31="10" />
+		
+		<ATTR IMG_BODY_32="../Data/6_ui/mission/msRkBgBody.tga" BODY_W_32="1" BODY_H_32="1" />
+		<ATTR IMG_TB_32="../Data/6_ui/mission/msRkBgTB.tga" TB_W_32="1" TB_H_32="144" />
+		<ATTR IMG_LR_32="../Data/6_ui/mission/msRkBgLR.tga" LR_W_32="26" LR_H_32="1" />
+		<ATTR IMG_CORNER_32="../Data/6_ui/mission/msRkBgCN.tga" CORNER_W_32="26" CORNER_H_32="144" />
+
+		<!-- Popup Conner Img -->
+		<ATTR IMG_TB_33="../Data/6_ui/Community/popBgLineTB.tga" TB_W_33="1" TB_H_33="32" />
+		<ATTR IMG_LR_33="../Data/6_ui/Community/popBgLineLR.tga" LR_W_33="14" LR_H_33="1" />
+		<ATTR IMG_CORNER_33="../Data/6_ui/Community/popBgLine.tga" CORNER_W_33="14" CORNER_H_33="32" />
+
+		<ATTR IMG_BODY_34="../Data/6_ui/Auction/auBoxBody.tga" BODY_W_34="1" BODY_H_34="1" />
+		<ATTR IMG_TB_34="../Data/6_ui/Auction/auBoxTB.tga" TB_W_34="1" TB_H_34="14" />
+		<ATTR IMG_LR_34="../Data/6_ui/Auction/auBoxLR.tga" LR_W_34="14" LR_H_34="1" />
+		<ATTR IMG_CORNER_34="../Data/6_ui/Auction/auBoxCN.tga" CORNER_W_34="14" CORNER_H_34="14" />
+
+		<ATTR IMG_BODY_35="../Data/6_ui/main/mndrBoxBody.tga" BODY_W_35="1" BODY_H_35="1" />
+		<ATTR IMG_TB_35="../Data/6_ui/main/mndrBoxTB.tga" TB_W_35="1" TB_H_35="20" />
+		<ATTR IMG_LR_35="../Data/6_ui/main/mndrBoxLR.tga" LR_W_35="20" LR_H_35="1" />
+		<ATTR IMG_CORNER_35="../Data/6_ui/main/mndrBoxCN.tga" CORNER_W_35="20" CORNER_H_35="20" />
+		
+		<ATTR IMG_BODY_36="../Data/6_ui/quest/qsBoxBody.tga" BODY_W_36="1" BODY_H_36="1" />
+		<ATTR IMG_TB_36="../Data/6_ui/quest/qsBoxTB.tga" TB_W_36="1" TB_H_36="8" />
+		<ATTR IMG_LR_36="../Data/6_ui/quest/qsBoxLR.tga" LR_W_36="8" LR_H_36="1" />
+		<ATTR IMG_CORNER_36="../Data/6_ui/quest/qsBoxCN.tga" CORNER_W_36="8" CORNER_H_36="8" />
+		
+		<ATTR IMG_BODY_37="../Data/6_ui/book/bkBox_Body.tga" BODY_W_37="1" BODY_H_37="1" />	<!--book Box-->
+		<ATTR IMG_TB_37="../Data/6_ui/book/bkBox_TB.tga" TB_W_37="1" TB_H_37="16" />
+		<ATTR IMG_LR_37="../Data/6_ui/book/bkBox_LR.tga" LR_W_37="16" LR_H_37="1" />
+		<ATTR IMG_CORNER_37="../Data/6_ui/book/bkBox_CN.tga" CORNER_W_37="16" CORNER_H_37="16" />
+		
+		<ATTR IMG_BODY_38="../Data/6_ui/msbook/mbBxBody.tga" BODY_W_38="1" BODY_H_38="1" />	<!--msbook Box-->
+		<ATTR IMG_TB_38="../Data/6_ui/msbook/mbBxTB.tga" TB_W_38="139" TB_H_38="12" />
+		<ATTR IMG_LR_38="../Data/6_ui/msbook/mbBxLR.tga" LR_W_38="12" LR_H_38="1" />
+		<ATTR IMG_CORNER_38="../Data/6_ui/msbook/mbBxConer.tga" CORNER_W_38="12" CORNER_H_38="12" />
+		
+		<ATTR IMG_BODY_39="../Data/6_ui/common/cmRmnBxBody.tga" BODY_W_39="1" BODY_H_39="1" />
+		<ATTR IMG_TB_39="../Data/6_ui/common/cmRmnBxTB.tga" TB_W_39="1" TB_H_39="20" />
+		<ATTR IMG_LR_39="../Data/6_ui/common/cmRmnBxLR.tga" LR_W_39="20" LR_H_39="1" />
+		<ATTR IMG_CORNER_39="../Data/6_ui/common/cmRmnBxCorner.tga" CORNER_W_39="20" CORNER_H_39="20" />
+		
+		<ATTR IMG_TB_40="../Data/6_ui/main/mnWnTB.tga" TB_W_40="2" TB_H_40="484" />
+		<ATTR IMG_LR_40="../Data/6_ui/main/mnWnLR.tga" LR_W_40="484" LR_H_40="2" />
+		<ATTR IMG_CORNER_40="../Data/6_ui/main/mnWnCn.tga" CORNER_W_40="484" CORNER_H_40="484" />
+
+		<ATTR IMG_BODY_41="../Data/6_ui/constellation/ctBgbxBody.tga" BODY_W_41="1" BODY_H_41="1" />
+		<ATTR IMG_TB_41="../Data/6_ui/constellation/ctBgbxTB.tga" TB_W_41="1" TB_H_41="240"/>
+		<ATTR IMG_LR_41="../Data/6_ui/constellation/ctBgbxLR.tga" LR_W_41="14" LR_H_41="1"/>
+		<ATTR IMG_CORNER_41="../Data/6_ui/constellation/ctBgbxCn.tga" CORNER_W_41="26" CORNER_H_41="240"/>
+		
+		<ATTR IMG_BODY_42="../Data/6_ui/constellation/ctNoticeBody.tga" BODY_W_42="1" BODY_H_42="1" />
+		<ATTR IMG_TB_42="../Data/6_ui/constellation/ctNoticeTB.tga" TB_W_42="1" TB_H_42="6"/>
+		<ATTR IMG_LR_42="../Data/6_ui/constellation/ctNoticeLR.tga" LR_W_42="6" LR_H_42="1"/>
+		<ATTR IMG_CORNER_42="../Data/6_ui/constellation/ctNoticeCn.tga" CORNER_W_42="14" CORNER_H_42="14"/>
+		
+		<ATTR IMG_TB_43="../Data/6_ui/constellation/ctbxTB.tga" TB_W_43="1" TB_H_43="18"/>
+		<ATTR IMG_LR_43="../Data/6_ui/constellation/ctbxLR.tga" LR_W_43="12" LR_H_43="1"/>
+		<ATTR IMG_CORNER_43="../Data/6_ui/constellation/ctbxCn.tga" CORNER_W_43="18" CORNER_H_43="18"/>
+		
+		<ATTR IMG_BODY_44="../Data/6_ui/constellation/ctTxbxBody.tga" BODY_W_44="1" BODY_H_44="1" />
+		<ATTR IMG_TB_44="../Data/6_ui/constellation/ctTxbxTB.tga" TB_W_44="1" TB_H_44="14"/>
+		<ATTR IMG_LR_44="../Data/6_ui/constellation/ctTxbxLR.tga" LR_W_44="12" LR_H_44="1"/>
+		<ATTR IMG_CORNER_44="../Data/6_ui/constellation/ctTxbxCn.tga" CORNER_W_44="14" CORNER_H_44="14"/>
+		
+		<ATTR IMG_TB_45="../Data/6_ui/constellation/ctElsOverTB.tga" TB_W_45="1" TB_H_45="32"/>
+		<ATTR IMG_LR_45="../Data/6_ui/constellation/ctElsOverLR.tga" LR_W_45="14" LR_H_45="1"/>
+		<ATTR IMG_CORNER_45="../Data/6_ui/constellation/ctElsOverCn.tga" CORNER_W_45="14" CORNER_H_45="32"/>
+		
+		<ATTR IMG_TB_46="../Data/6_ui/constellation/ctElsClickTB.tga" TB_W_46="1" TB_H_46="32"/>
+		<ATTR IMG_LR_46="../Data/6_ui/constellation/ctElsClickLR.tga" LR_W_46="14" LR_H_46="1"/>
+		<ATTR IMG_CORNER_46="../Data/6_ui/constellation/ctElsClickCn.tga" CORNER_W_46="14" CORNER_H_46="32"/>
+		
+		<ATTR IMG_BODY_47="../Data/6_ui/constellation/ctLvboxBody.tga" BODY_W_47="1" BODY_H_47="1" />
+		<ATTR IMG_TB_47="../Data/6_ui/constellation/ctLvboxTB.tga" TB_W_47="1" TB_H_47="8"/>
+		<ATTR IMG_LR_47="../Data/6_ui/constellation/ctLvboxLR.tga" LR_W_47="214" LR_H_47="1"/>
+		<ATTR IMG_CORNER_47="../Data/6_ui/constellation/ctLvboxCn.tga" CORNER_W_47="214" CORNER_H_47="8"/>
+		
+		<ATTR IMG_BODY_48="../Data/6_ui/constellation/ctBoxBody_C2.tga" BODY_W_48="1" BODY_H_48="1" />
+		<ATTR IMG_TB_48="../Data/6_ui/constellation/ctBoxTB_C2.tga" TB_W_48="1" TB_H_48="12"/>
+		<ATTR IMG_LR_48="../Data/6_ui/constellation/ctBoxLR_C2.tga" LR_W_48="12" LR_H_48="1"/>
+		<ATTR IMG_CORNER_48="../Data/6_ui/constellation/ctBoxCorner_C2.tga" CORNER_W_48="12" CORNER_H_48="12"/>
+		
+		<ATTR IMG_BODY_49="../Data/6_ui/constellation/ctBoxBody_C3.tga" BODY_W_49="1" BODY_H_49="1" />
+		<ATTR IMG_TB_49="../Data/6_ui/constellation/ctBoxTB_C3.tga" TB_W_49="1" TB_H_49="12"/>
+		<ATTR IMG_LR_49="../Data/6_ui/constellation/ctBoxLR_C3.tga" LR_W_49="12" LR_H_49="1"/>
+		<ATTR IMG_CORNER_49="../Data/6_ui/constellation/ctBoxCorner_C3.tga" CORNER_W_49="12" CORNER_H_49="12"/>
+		
+		<GLOBAL_HOTKEY ID="1001">	<!--KEY_ESC-->
+			local kTemp = GetUIWnd("SFRM_COUPLE_AUTO_MATCH")			
+			if kTemp:IsNil() == false then
+				CloseUI("SFRM_COUPLE_AUTO_MATCH")
+				return true
+			end
+			if EnableShortCutKey() then
+				if GetUIWnd("FRM_MOVIE_IN"):IsNil() then
+					CallUI("Option")
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1015">	<!--KEY_TAB-->
+			if EnableShortCutKey() then
+				if( CheckNil(g_world == nil) ) then return false end
+				if( CheckNil(g_world:IsNil()) ) then return false end
+				if true == IsUIWnd("SFRM_BIG_MAP") or GATTR_EMPORIABATTLE == g_world:GetAttr() then 
+					return true
+				end
+				local Chatout = GetUIWnd("ChatOut")
+				local WisperTarget = g_ChatMgrClient:SetWhisperByTab(UISelf:GetParent())
+				if 0 ~= WisperTarget:Length() then
+					g_ChatMgrClient:CheckChatCommand(WideString("/MODE 4 "..WisperTarget:GetStr()))
+				else
+					local kTop = GetUIWnd("ChatBar")
+					if not kTop:IsNil() then
+						local kEditChat = kTop:GetControl("EDT_CHAT")
+						if not kEditChat:IsNil() then
+							kEditChat:SetEditFocus(true)
+							kEditChat:SetEditText(GetTT(799334):GetStr())
+							ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 1)
+						end
+					end
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1016">	<!--KEY_Q-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(0)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1017">	<!--KEY_W-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(1)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1018">	<!--KEY_E-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(2)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1019">	<!--KEY_R-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(3)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1019" LA="1">	<!--KEY_R-->
+			if EnableShortCutKey() then
+				g_ChatMgrClient:CheckChatCommand(WideString("/r"))
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1030">	<!--KEY_A-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(4)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1031">	<!--KEY_S-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(5)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1032">	<!--KEY_D-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(6)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1033">	<!--KEY_F-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(7)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1034">	<!--KEY_G-->
+			if EnableShortCutKey() then
+				CallGuildUI()
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1020">	<!--KEY_T-->
+			if EnableShortCutKey() then
+				SwapStrategySkill()
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1035">	<!--KEY_H-->
+			local kViewUI = GetUIWnd("SFRM_JOB_SKILL_VIEW")
+			if false == kViewUI:IsNil() then
+				CloseUI("SFRM_JOB_SKILL_VIEW")
+				return
+			elseif EnableShortCutKey() then
+				CallJobSkillViewUI()
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1127">	<!--PGDN-->
+			if EnableShortCutKey() then
+				local hero = GetUIWnd("FormHero")
+				if hero:IsNil() == false then
+					ChageQuickSlot(GetUIWnd("QuickInv"):GetControl("FRM_NUM_BG"), -1)
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1122">	<!--PGUP-->
+			if EnableShortCutKey() then
+				local hero = GetUIWnd("FormHero")
+				if hero:IsNil() == false then
+					ChageQuickSlot(GetUIWnd("QuickInv"):GetControl("FRM_NUM_BG"), 1)
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1023"><!-- KEY_I -->
+			if EnableShortCutKey() then
+				CallUI("Inv")
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1022"><!-- KEY_U -->
+			local kAuction = GetUIWnd("FRM_AUCTION_MAIN")
+			if kAuction:IsNil() == false then
+				return 
+			end
+			local kParent = GetUIWnd("CharInfo")
+			if kParent:IsNil() == false then
+				local kPet = kParent:GetControl("FRM_PET_INFO")
+				if kPet:IsNil() == false then
+					if kPet:IsVisible() then
+						local kBtn = kParent:GetControl("CBTN_TAB_0")
+						if not kBtn:IsNil() then
+							ChangeInfoTab(kBtn, 0)
+							return
+						end
+					end
+				end
+			end
+			if EnableShortCutKey() then
+				CallUI("CharInfo")
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1025"><!-- KEY_P -->
+			if EnableShortCutKey() then
+				CallPetUI()
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1038"><!-- KEY_L -->
+			local kTemp = GetUIWnd("FRM_AUCTION_MAIN")			
+			if kTemp:IsNil() == false then
+				return 
+			end
+			if EnableShortCutKey() then
+				if( CheckNil(g_world == nil) ) then return false end
+				if( CheckNil(g_world:IsNil()) ) then return false end
+				if g_world:IsHaveWorldAttr(GATTR_FLAG_EMPORIABATTLE) then
+					AddWarnDataTT(98)
+				else
+					Show_IngQuestInterface()
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1037"><!-- KEY_K -->
+			local kTemp = GetUIWnd("FRM_AUCTION_MAIN")			
+			if kTemp:IsNil() == false then
+				return 
+			end
+			if EnableShortCutKey() then
+				CallUI("SFRM_SKILL_WINDOW")
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1021"><!-- KEY_Y -->
+			if EnableShortCutKey() then
+				OnEsc_CloseCommunity()
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1024">	<!--KEY_O-->
+			if EnableShortCutKey() then
+				local kWnd = GetUIWnd("SFRM_SKILLSET")
+				if kWnd:IsNil() then
+					CallUI("SFRM_SKILLSET")
+				else
+					SkillSetClose()
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1049"> <!-- KEY_N-->
+			if EnableShortCutKey() then
+				CallWorldMap(true)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1050"> <!-- KEY_M-->
+			if EnableShortCutKey() then
+				CloseToolTip()
+				CallWorldMap(false)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1128"> <!-- KEY_INSERT -->
+			if EnableShortCutKey() then
+				CallQuickSlotEx(true)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1036"> <!-- KEY_J-->
+			local kTemp = GetUIWnd("FRM_AUCTION_MAIN")			
+			if kTemp:IsNil() == false then
+				return 
+			end
+			if EnableShortCutKey() then
+				CloseToolTip()
+				CloseUI("FRM_BOOK")
+				local bOpen = false
+				for i=1,BOOK_TAB_COUNT do
+					local kUI = GetUIWnd("FRM_BOOK"..i)
+					if false==kUI:IsNil() then
+						CloseUI("FRM_BOOK"..i)
+						bOpen = true
+					end
+				end
+				if( CheckNil(g_world == nil) ) then return false end
+				if( CheckNil(g_world:IsNil()) ) then return false end
+				if false==bOpen then
+					local kBook = CallUI("FRM_BOOK")
+					if kBook:IsNil() then
+						g_world:SetShowWorldFocusFilter(false) 
+					end
+				else
+					g_world:SetShowWorldFocusFilter(false) 
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1063"> <!-- KEY_F5 -->
+			local Chatout = GetUIWnd("ChatOut")
+			if EnableShortCutKey() then
+				local kWnd = GetUIWnd("FRM_DEFENCE_SKILL")
+				if kWnd:IsNil() == false then
+					StrategyItemDoAction(0)
+				else
+					g_ChatMgrClient:CheckChatCommand(WideString("/MODE 2"))
+					ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 1)
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<!--GLOBAL_HOTKEY ID="1064"> <!-- KEY_F6 ->
+			local Chatout = GetUIWnd("ChatOut")
+			if EnableShortCutKey() then
+				local kWnd = GetUIWnd("FRM_DEFENCE_SKILL")
+				if kWnd:IsNil() == false then
+					StrategyItemDoAction(1)
+				else
+					g_ChatMgrClient:CheckChatCommand(WideString("/r"))
+					ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 1)
+				end
+			end
+		</GLOBAL_HOTKEY-->
+		<GLOBAL_HOTKEY ID="1064">
+			local Chatout = GetUIWnd("ChatOut")
+			if EnableShortCutKey() then
+				local kWnd = GetUIWnd("FRM_DEFENCE_SKILL")
+				if kWnd:IsNil() == false then
+					StrategyItemDoAction(3)
+				else
+					g_ChatMgrClient:CheckChatCommand(WideString("/MODE 5"))
+					ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 1)
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1065"> <!-- KEY_F7 -->
+			local Chatout = GetUIWnd("ChatOut")
+			if EnableShortCutKey() then
+				local kWnd = GetUIWnd("FRM_DEFENCE_SKILL")
+				if kWnd:IsNil() == false then
+					StrategyItemDoAction(2)
+				else
+					local kStatus = GetContentsStatus()
+					if STATUS_ROOM == kStatus or STATUS_PLAYING == kStatus then
+						OnClick_ChatMode_Change(7)
+					else
+						g_ChatMgrClient:CheckChatCommand(WideString("/MODE 3"))
+						ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 3)					
+					end
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<!--GLOBAL_HOTKEY ID="1066"> 
+			local Chatout = GetUIWnd("ChatOut")
+			if EnableShortCutKey() then
+				local kWnd = GetUIWnd("FRM_DEFENCE_SKILL")
+				if kWnd:IsNil() == false then
+					StrategyItemDoAction(3)
+				else
+					g_ChatMgrClient:CheckChatCommand(WideString("/MODE 5"))
+					ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 1)
+				end
+			end
+		</GLOBAL_HOTKEY-->
+		<GLOBAL_HOTKEY ID="1066"> <!-- KEY_F8 -->
+			local Chatout = GetUIWnd("ChatOut")
+			if EnableShortCutKey() then
+				g_ChatMgrClient:CheckChatCommand(WideString("/MODE 6"))
+				ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 2)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1067"> <!-- KEY_F9 -->
+			local Chatout = GetUIWnd("ChatOut")
+			if EnableShortCutKey() then
+				g_ChatMgrClient:CheckChatCommand(WideString("/MODE 39"))
+				ChatMode_FilterSet(Chatout:GetControl("CHAT_BG"), 4)
+			end
+		</GLOBAL_HOTKEY>
+		
+		<!--GLOBAL_HOTKEY ID="1059">
+		</GLOBAL_HOTKEY-->
+		
+		<GLOBAL_HOTKEY ID="1002"><!--KEY_1-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(8)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1003"><!--KEY_2-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(9)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1004"><!--KEY_3-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(10)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1005"><!--KEY_4-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(11)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1006"><!--KEY_5-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(12)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1007"><!--KEY_6-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(13)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1008"><!--KEY_7-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(14)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1009"><!--KEY_8-->
+			if EnableShortCutKey() then
+				QuickInvDoAction(15)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1002" LA="1"><!--KEY_1-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404501, 1)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1003" LA="1"><!--KEY_2-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404502, 2)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1004" LA="1"><!--KEY_3-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404503, 6)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1005" LA="1"><!--KEY_4-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404504, 19)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1006" LA="1"><!--KEY_5-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404505, 7)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1007" LA="1"><!--KEY_6-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404506, 8)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1008" LA="1"><!--KEY_7-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404507, 10)
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1009" LA="1"><!--KEY_8-->
+			if EnableShortCutKey() then
+				SendChatEmotion(404508, 18)
+			end
+		</GLOBAL_HOTKEY>
+		<!--KEY_F10-->
+		<!--GLOBAL_HOTKEY ID="1068">	
+			if EnableShortCutKey() then
+				g_Petition:Remainder_Petition()
+			end
+		</GLOBAL_HOTKEY-->
+		<GLOBAL_HOTKEY ID="1068">	<!--KEY_F12-->
+			if EnableShortCutKey() then
+				if IsAllShowUI() then
+					CallUI("BTN_ALL_SHOW_UI")
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1061"> <!--KEY_HOME-->
+			if EnableShortCutKey() then
+				g_ChatMgrClient:ToggleConsecutiveChat()
+				g_ChatMgrClient:ToggleConsecutiveChatUI()
+			end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1078"> <!--KEY_ADD-->
+				if true ~= g_ChatMgrClient:CheckChatOut() then
+					if not UISelf:IsDisable() then
+						ChangeChatOutSize(1)
+					end
+				end
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1013"> <!--KEY_EQUALS-->
+			if true ~= g_ChatMgrClient:CheckChatOut() then
+				if not UISelf:IsDisable() then
+					ChangeChatOutSize(1)
+				end
+			end
+		</GLOBAL_HOTKEY>
+		<!--
+		<GLOBAL_HOTKEY ID="1018">
+			charform = CallUI("CharInfo")
+			if charform:IsNil() == true then
+				return true
+			end
+			petform = charform:GetControl("Pet")
+			characterForm = charform:GetControl("Charactor")
+			characterForm:Visible(false)
+			petform:Visible(true)
+
+			GetPetInfo()
+			CallPetUI()
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="1064">
+			CallUI("FRM_ITEM_PLUS_UPGRADE")
+		</GLOBAL_HOTKEY>
+		<GLOBAL_HOTKEY ID="50">
+			if IsVisible("WorldMap") then
+				CloseUI("WorldMap")
+			else
+				CallUI("WorldMap")
+			end
+		</GLOBAL_HOTKEY>
+
+		<GLOBAL_HOTKEY ID="64">
+			CallUI("FRM_ITEM_PLUS_UPGRADE")
+		</GLOBAL_HOTKEY>
+		-->
+	</CONFIG>
+</XUI>
+
+
+

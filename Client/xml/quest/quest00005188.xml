@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5188</ID> <!--T.T.10518801 퍼거슨의 배려(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴 - 펑프로부터 펑프고기 15개 획득-->
+<!--[완료NPC]	위험한 동굴 - 퍼거슨-->
+<!--[내용]	위험한 동굴 대장장이 퍼거슨은 함께 지내고 있는 센이 안쓰럽다고 한다. 겁먹은 센이 조금이라도 진정할 수 있게 따뜻한 스프를 만들어주겠다고 한다. 위험한 동굴[아케이드(F1)]으로 가서 펑프를 처리하고 펑프고기 15개를 얻어오자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4B04C2C6-8CB8-4e70-8001-41C58E9FE0B0</CLIENT> <!--시작NPC 위험한 동굴 - 퍼거슨 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4B04C2C6-8CB8-4e70-8001-41C58E9FE0B0</PAYER> <!--완료NPC 위험한 동굴 - 퍼거슨 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4B04C2C6-8CB8-4e70-8001-41C58E9FE0B0</AGENT> <!--진행NPC 11 위험한 동굴 - 퍼거슨 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010603/10000/2500/1/1/160518850">6024100</MONSTER> 
+ <!--MON_NO=6024100/펑프,MAP_NO=9010603/위험한 동굴 아케이드 3,Item_NO=160518850/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160518850</ITEM> 
+ <!--Item_NO=160518850/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10518811"/> <!--펑프 고기 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10518821" FACE="Darby_normal"/> <!--저기 구석에서 바들바들 떨고 있는 친구 보이지?
+그 녀석에게 무언가 해주고 싶어. 괜히 나까지 정신이 없어서 말이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10518826" FACE="Darby_normal"/> <!--좋은 고기를 구해왔군. 수고했어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10518823" FACE="Darby_smile"/> <!--저럴 땐 마음을 진정시킬 필요가 있어.
+네가 위험한 동굴[아케이드 모드(F1)]으로 가서 펑프를 처리하고
+펑프고기 15개만 얻어와%%
+마음을 조금이라도 진정시키는 스프를 만들어 줘야겠어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10518824" FACE="Darby_normal"/> <!--매정한 사람이군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10518825" FACE="Darby_normal"/> <!--나는 쌀을 불리고 있을게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10518802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

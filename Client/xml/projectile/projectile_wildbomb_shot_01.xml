@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_WildBomb_shot_01">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="1.0">../Data/5_Effect/4_Pet/efk_wildcar/efk_wildcar_fire_01.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_Parabola</SCRIPT>
+	<PARAM SPEED="260.0" ACCEL="2" MASS="0.5"/>
+	<SCRIPT_CALL_EVENT>
+    <EVENT TYPE="FLYING_START"/>
+    <EVENT TYPE="ARIVED_AT_TARGET"/>
+    <EVENT TYPE="ARIVED_AT_TARGET_COLLISION"/>
+  </SCRIPT_CALL_EVENT>
+</PROJECTILE>

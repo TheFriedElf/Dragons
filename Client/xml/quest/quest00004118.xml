@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4118</ID> <!--T.T.10411801 행방불명된 상인들 (5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	마르두크의 뼈조각 습득-->
+<!--[완료NPC]	악마의 숨결 - 제이드-->
+<!--[내용]	병사 제이드는 네크로맨서 부족에 대한 조사를 하기 위해 악마의 숨결을 찾았다고 한다. 그러나 마르두크를 잡는 데 애를 먹고 있는 중이다. 증거물로 마르두크의 뼈조각이 필요하지만, 마르두크는 너무 강해서 처치하기 힘드니 악마의 숨결에서 스켈레턴들을 퇴치하고, 뼈조각을 습득하여 마르두크의 뼈조각이라고 우겨보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</CLIENT> <!--시작NPC 악마의 숨결 - 제이드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</PAYER> <!--완료NPC 악마의 숨결 - 제이드 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 11 악마의 숨결 - 제이드 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/5000/1/1/160411800">6014100</MONSTER> 
+ <!--MON_NO=6014100/스켈레턴,Item_NO=160411800/[Q.ID:04118] 마르두크의 뼈조각50%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160411800</ITEM> 
+ <!--Item_NO=160411800/[Q.ID:04118] 마르두크의 뼈조각,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10411811"/> <!--마르두크의 뼈조각-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411821" FACE="Walter_normal"/> <!--사실 이곳에 온 까닭은 마르두크라는 사악한 해골바가지를 찾아 온거야.
+파블로라는 늙은 마법사인지 곤충학자인지가.. %%
+화암산호족이 네크로맨서 부족이라고 하더군. 헤헤 무섭지?
+시체들에게 주술을 걸어 살아 움직이게 만드는 걸 네크로맨싱이라고 해.
+나한테 재능이 있다는 걸 딱 알아차리고 조사를 해달라고 부탁했던 거지%%. 
+그런데 너 그거 알아? 
+호프먼 대장은 대마법사의 의견은 전혀 듣지 않고 있어.%% 
+마르두크란 녀석이 얼마나 강한 지 모르고 나같은 놈 
+한명만 달랑 보냈으니 안봐도 뻔하지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411826" FACE="Walter_smile"/> <!--흠.. 이건 또 어디서 난 뼈야?
+오오… 이거면 스켈레턴의 것이라고 대충 얼버무릴 수 있겠어~%%
+짜식... 그래도 거짓말은 잘하는 녀석이지만, 
+빠릿빠릿하니 미워할 수가 없구나. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411823" FACE="Walter_normal"/> <!--대장님은 기사단에 있을 때 대단한 기사였다고 들었는데…
+지금은 왜 그런지 모르겠어.%% 
+하여간 마르두크의 뼈조각을 가져오라는데, 그 녀석을 처치하는 일이 보통일은 아니야, 그리고 아주 가끔씩 나타나고 있거든. 그래서 내가 생각해 낸 건데, 만만한 스켈레턴을 처치하고 그 뼈조각을 주어다가 마르두크의 뼈조각이라고 속이는건 어떨까?%%
+그냥 대충 해골 몇 조각 가져가면 될 것 같으니 
+15개만 주어다가 내가 가져다줘.%%
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411824" FACE="Walter_angly"/> <!--그래, 뭐 이건 내가 생각해도 무리인 거 같긴 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411825" FACE="Walter_angly"/> <!--너 설마 마르두크를 잡으려는건 아니지 그냥 쉽게 하자고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

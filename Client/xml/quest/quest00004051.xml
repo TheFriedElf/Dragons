@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4051</ID> <!--T.T.10405101 투, 투.. 투시 장치라굽쇼?(1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	시청 지하수로의 몬스터로부터 기계박쥐 소리주머니 1개, 낡은 트랜지스터 3개, 만능전자키트 5개를 획득-->
+<!--[완료NPC]	바람항구 - 에델린-->
+<!--[내용]	에델린은 펫 알 속에 든 생물의 정체를 파악하기 위해서 초음파 스캐너를 만들기로 했다. 지하수로에서 기계박쥐 소리주머니 1개, 낡은 트랜지스터 3개, 만능전자키트 5개를 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT> <!--시작NPC 바람항구 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER> <!--완료NPC 바람항구 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 11 바람항구 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/5000/1/1/160405100">9010502</GROUND> 
+ <!--MAP_NO=9010502/파렐 대저택,Item_NO=160405100/[Q.ID:04051] 기계 박쥐의 소리주머니50%,-->
+		<GROUND OBJECTNO="2" TYPE="MONSTERDROP" VALUE="10000/7000/1/1/160405110">9010502</GROUND> 
+ <!--MAP_NO=9010502/파렐 대저택,Item_NO=160405110/[Q.ID:04051] 낡은 트랜지스터30%,-->
+		<GROUND OBJECTNO="3" TYPE="MONSTERDROP" VALUE="10000/0/1/1/160400430">9010502</GROUND> 
+ <!--MAP_NO=9010502/파렐 대저택,Item_NO=160400430/[Q.ID:04004] 만능전자키트100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160405100</ITEM> 
+ <!--Item_NO=160405100/[Q.ID:04051] 기계 박쥐의 소리주머니,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">160405110</ITEM> 
+ <!--Item_NO=160405110/[Q.ID:04051] 낡은 트랜지스터,-->
+		<ITEM OBJECTNO="3" TYPE="CHANGE_COUNT" VALUE="1">160400430</ITEM> 
+ <!--Item_NO=160400430/[Q.ID:04004] 만능전자키트,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10405111"/> <!--기계박쥐 소리주머니-->
+		<OBJECT2 COUNT="3" TEXT="10405112"/> <!--낡은 트랜지스터-->
+		<OBJECT3 COUNT="5" TEXT="10405113"/> <!--만능전자키트-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10405121" FACE="Edeline_normal"/> <!--그러니까 간단히 말하자면… 
+이 펫알의 종류를 조사해서 인공부화시키고 싶다는 말씀이신 거죠?%%
+흠…
+알 속에 담긴 펫의 정체라...%%
+흥미롭네요. 갑자기 고대의 기계장치에 대해 조예가 깊으신 
+노엘박사님의 책이 생각나요.%%
+아주 먼 과거의 고대인들은 사물의 내부를 투시할 수 있는 장치를 
+만들었다고 하더군요.%% 
+그 장치로 포장을 열지 않은 소포의 내용물을 확인하기도 하고, 
+심지어는 엄마 배 속에 들어있는 아이를 보기도 했대요.%%
+그런 투시 장치를 만들어 낼 수 있다면 
+이 알 속에 든 생물이 어떤 종류의 것인지 금방 알 수 있겠죠?%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10405126" FACE="Edeline_smile"/> <!--벌써 다녀오셨군요.
+어디 한번 구해온 걸 볼까요..%%
+기계박쥐… 소리주머니도 있고… 
+트랜지스터… 전자키트…%%
+좋아요. 빠짐 없이 구해오셨군요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10405123" FACE="Edeline_smile"/> <!--노엘박사의 책에는 파렐박사가 발명한 벌레 잡는 기계박쥐의 내부에 
+이 투시장치를 만드는 데 필요한 소리 발생 주머니가 있다고 했어요.%% 
+파렐박사의 연구실과 이어진 시청 지하수로에 가시면 
+기계장치들이 많이 버려져 있다고 들었는데....%%
+혹시라도 그곳에서 필요한 부품을 찾아오신다면…
+제가 설계도를 보고 투시장치를 만들어 드릴 수 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10405124" FACE="Edeline_angly"/> <!--뭐, 그럼 어쩔 수 없지요. 전 다른 일이 있어서 이만...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10405125" FACE="Edeline_normal"/> <!--호기심 많은 지하 수로의 몬스터들이 기계장치 잡동사니들을 꽤 가지고 다닐 거란 말이죠. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10405102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

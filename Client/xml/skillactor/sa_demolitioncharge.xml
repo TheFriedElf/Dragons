@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_demolitioncharge" ALWAYS_GLOWMAP="TRUE">
+	<TEXTURE SRC="death_stinger.dds">../Data/1_Cha/9_SSkill/Death_Stinger/death_stinger.dds</TEXTURE>
+	<TEXTURE SRC="death_stinger_glow.dds">../Data/1_Cha/9_SSkill/Death_Stinger/death_stinger_glow.dds</TEXTURE>
+	<TEXTURE SRC="reflection_metal.dds">../Data/1_Cha/9_SSkill/Death_Stinger/reflection_metal.dds</TEXTURE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/1_Cha/9_SSKill/Demolition_Charge/Demolition_Charge.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/pc_base.lua">
+			<ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="Twohand_skill_DemolitionCharge_01" ANIMATION="1000000"/>
+			<ITEM NAME="Twohand_skill_DemolitionCharge_02" ANIMATION="1000001"/>
+			<ITEM NAME="Twohand_skill_DemolitionCharge_03" ANIMATION="1000002"/>
+			<ITEM NAME="Twohand_skill_DemolitionCharge_04" ANIMATION="1000003"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

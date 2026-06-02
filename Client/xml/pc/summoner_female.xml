@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="euc-kr" ?> 
+<ACTOR NAME="summoner_female" INIT_ACTION="a_idle">
+	<HEAD DEFAULT_SIZE="1.08"/>
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/1_PC/4_Dfemale/01_Sum/00_Base.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/pc_base.lua">
+			<ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<CAPSULE TO="Bip01 Spine" SIZE="30, 7.5" LOCATE="5,0,0" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+			<!-- GunStaff -->
+			<ITEM NAME="Rifle_Shot" ANIMATION="60"/> 	
+			<ITEM NAME="Smart_Rifle_Shot" ANIMATION="520"/>
+			<ITEM NAME="attk_down_fly" ANIMATION="64"/> 
+			
+			<ITEM NAME="charge_01" ANIMATION="70"/>		
+			<ITEM NAME="charge_02" ANIMATION="71"/>		
+			<ITEM NAME="charge_03" ANIMATION="72"/>		
+			
+			<ITEM NAME="dash_attk_01" ANIMATION="45"/>	
+
+			<ITEM NAME="attk_down_01" ANIMATION="80"/>	
+			<ITEM NAME="attk_down_02" ANIMATION="81"/>	
+
+			<ITEM NAME="battle_idle" ANIMATION="5"/>    
+						
+			<ITEM NAME="inferno_01" ANIMATION="403"/>
+			<ITEM NAME="inferno_02" ANIMATION="417"/>
+			<ITEM NAME="inferno_03" ANIMATION="418"/>
+			
+			<ITEM NAME="volcano_01" ANIMATION="407"/>
+			<ITEM NAME="volcano_02" ANIMATION="409"/>			
+			
+			<ITEM NAME="magic_jail_cast" ANIMATION="413"/>
+			<ITEM NAME="magic_jail_fire" ANIMATION="420"/>
+			
+			<ITEM NAME="earth_quake_01" ANIMATION="414"/>
+			<ITEM NAME="earth_quake_02" ANIMATION="416"/>
+			
+			<ITEM NAME="meteor_rain_01" ANIMATION="410"/>
+			<ITEM NAME="meteor_rain_02" ANIMATION="412"/>
+			
+			<ITEM NAME="poison_guard_01" ANIMATION="504"/>
+			<ITEM NAME="poison_guard_02" ANIMATION="506"/>
+			
+			<ITEM NAME="mega_inferno_01" ANIMATION="508"/>
+			<ITEM NAME="mega_inferno_02" ANIMATION="509"/>
+			<ITEM NAME="mega_inferno_03" ANIMATION="510"/>
+			
+			<ITEM NAME="mega_spark_wave_cast" ANIMATION="512"/>
+			<ITEM NAME="mega_spark_wave_fire" ANIMATION="514"/>
+			
+			<ITEM NAME="impact_pressure" ANIMATION="511"/>
+			
+			<ITEM NAME="rolling_stone_01" ANIMATION="515"/>
+			<ITEM NAME="rolling_stone_02" ANIMATION="517"/>
+			
+			<ITEM NAME="mana_burn_cast" ANIMATION="507"/>
+			<ITEM NAME="mana_burn_fire" ANIMATION="518"/>
+			
+			<ITEM NAME="shout_of_life_cast" ANIMATION="401"/>
+			<ITEM NAME="shout_of_life_fire" ANIMATION="419"/>
+			
+			<ITEM NAME="recall" ANIMATION="400"/>
+			<ITEM NAME="summon_attack" ANIMATION="500"/>
+			<ITEM NAME="impact_unsummon" ANIMATION="502"/>			
+			
+			<ITEM NAME="smart_shot_cast" ANIMATION="503"/>
+			<ITEM NAME="smart_shot_castfire" ANIMATION="519"/>
+			
+			<ITEM NAME="walk_pickout" ANIMATION="202"/>
+			<ITEM NAME="walk_weapon" ANIMATION="203"/>
+
+			<ITEM NAME="run_pickout" ANIMATION="205"/>
+			<ITEM NAME="run_weapon" ANIMATION="206"/>
+			
+			<!-- Common Action -->
+			<ITEM NAME="casting01" ANIMATION="75"/>
+			<ITEM NAME="casting02" ANIMATION="76"/>
+			
+			<ITEM NAME="idle_01" ANIMATION="200" DEFAULT="1241200"/>	
+			<ITEM NAME="idle_01" ANIMATION="201" DEFAULT="1241201" RANDOM="100"/>		
+			<ITEM NAME="idle_01" ANIMATION="202" DEFAULT="1241202" RANDOM="100"/>		
+			
+			<ITEM NAME="walk" ANIMATION="250" DEFAULT="501250"/>
+			<ITEM NAME="run" ANIMATION="255" DEFAULT="501255"/>
+			
+			<ITEM NAME="dash" ANIMATION="1240040"/>					
+						
+			<ITEM NAME="jump_01" ANIMATION="30" DEFAULT="1240030"/>				
+			<ITEM NAME="jump_02" ANIMATION="31" DEFAULT="1240031"/>				
+			<ITEM NAME="jump_03" ANIMATION="32" DEFAULT="1240032"/>
+			<ITEM NAME="jump_04" ANIMATION="33" SPEED="0.7" DEFAULT="1240033"/>  
+			
+			<ITEM NAME="jump_attk_01" SPEED="1.5" ANIMATION="35"/>
+			
+			<ITEM NAME="dash_jump_01" ANIMATION="43" DEFAULT="1240043"/>
+			<ITEM NAME="dash_jump_02"  ANIMATION="33" SPEED="0.7" DEFAULT="1240033"/>
+			<ITEM NAME="dash_jump_idle" ANIMATION="32" DEFAULT="1240032"/>
+			
+			<ITEM NAME="die_01" ANIMATION="1240220"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1240221"/>
+			
+			<ITEM NAME="sit_down" ANIMATION="1002001"/>
+			<ITEM NAME="sit_idle" ANIMATION="1002002"/>
+			<ITEM NAME="sit_up" ANIMATION="1002003"/>
+
+			<ITEM NAME="lie_down" ANIMATION="1000030"/>
+			<ITEM NAME="lie_idle" ANIMATION="1000031"/>
+			<ITEM NAME="lie_up" ANIMATION="1000032"/>
+
+			<ITEM NAME="level_up" ANIMATION="1000001"/>
+
+			<ITEM NAME="teleport" ANIMATION="1000105"/>
+			<ITEM NAME="teleport_out" ANIMATION="1000106"/>
+
+			<ITEM NAME="teleport01" ANIMATION="1000105"/>
+			<ITEM NAME="teleport01_out" ANIMATION="1000106"/>
+			<ITEM NAME="teleport02" ANIMATION="1000105"/>
+			<ITEM NAME="teleport02_out" ANIMATION="1000106"/>
+			
+			<ITEM NAME="ladder_up" ANIMATION="1000101"/>
+			<ITEM NAME="ladder_down" ANIMATION="1000103"/>
+			<ITEM NAME="ladder_idle" ANIMATION="1000102"/>
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012"/>
+			<ITEM NAME="dmg_03" ANIMATION="1000012"/>
+			
+			<ITEM NAME="knockdown_01" ANIMATION="1000026"/>
+			<ITEM NAME="knockdown_idle" ANIMATION="1000027"/>
+			<ITEM NAME="knockdown_up" ANIMATION="1000028"/>
+			
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Stand" ANIMATION="1000024"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			
+			<ITEM NAME="StepTheBeat_idle" ANIMATION="1140001"/>
+			<ITEM NAME="Common_Com_Skill_Dark_Wheelwind_01" ANIMATION="1130001"/>
+			
+			<ITEM NAME="Com_breakfall_Backward" ANIMATION="1000015"/>
+			<ITEM NAME="Com_breakfall_Foward" ANIMATION="1000016"/>
+			<ITEM NAME="Com_breakfall_Left" ANIMATION="1000018"/>
+			<ITEM NAME="Com_breakfall_Right" ANIMATION="1000017"/>
+			
+			<ITEM NAME="Com_Rest_01" ANIMATION="1100011"/>
+			<ITEM NAME="Com_Rest13_idle_01" ANIMATION="1100131"/>
+			<ITEM NAME="Com_Rest13_idle_02" ANIMATION="1100132"/>
+			<ITEM NAME="Com_Rest14_idle_01" ANIMATION="1100141"/>
+			<ITEM NAME="Com_Rest14_idle_02" ANIMATION="1100142"/>
+			<ITEM NAME="Com_Rest15_idle_01" ANIMATION="1100151"/>
+			<ITEM NAME="Com_Rest15_idle_02" ANIMATION="1100152"/>			
+
+			<ITEM NAME="ride_01" ANIMATION="1000100"/>
+			<ITEM NAME="combat_revive_act" ANIMATION="2100032"/>
+			
+			<ITEM NAME="Com_Resurrection_01" ANIMATION="1240229"/>
+			
+			<ITEM NAME="Com_Guild_spell_01" ANIMATION="1140002"/>
+			<ITEM NAME="Com_Guild_shot_01" ANIMATION="1140003"/>
+
+			<ITEM NAME="com_skill_spell_01" ANIMATION="1140002"/>
+			<ITEM NAME="Com_shot_01" ANIMATION="1140003"/>
+
+			<ITEM NAME="Com_spell_01" ANIMATION="1140002"/>
+			<ITEM NAME="Special_Skill_Shot" ANIMATION="1140003"/>
+
+
+			<!--캐릭터 선택 애니메이션-->
+			<!--선택전 (슬롯별 동작)-->
+			<ITEM NAME="intro_idle_01" ANIMATION="1300011" DEFAULT="1300011" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_01" ANIMATION="1300012" RANDOM="100"/>
+			<ITEM NAME="intro_idle_02" ANIMATION="1300051" DEFAULT="1300051" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_02" ANIMATION="1300052" RANDOM="100"/>
+			<ITEM NAME="intro_idle_03" ANIMATION="1300031" DEFAULT="1300031" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_03" ANIMATION="1300032" RANDOM="100"/>
+			<ITEM NAME="intro_idle_04" ANIMATION="1300041" DEFAULT="1300041" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_04" ANIMATION="1300042" RANDOM="100"/>
+			<ITEM NAME="intro_idle_05" ANIMATION="1300021" DEFAULT="1300021" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_05" ANIMATION="1300022" RANDOM="100"/>
+			<ITEM NAME="intro_idle_06" ANIMATION="1300061" DEFAULT="1300061" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_06" ANIMATION="1300062" RANDOM="100"/>
+			<ITEM NAME="intro_idle_07" ANIMATION="1300071" DEFAULT="1300071" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_07" ANIMATION="1300072" RANDOM="100"/>
+			<ITEM NAME="intro_idle_08" ANIMATION="1300081" DEFAULT="1300081" RANDOM="100"/>		
+			<ITEM NAME="intro_idle_08" ANIMATION="1300082" RANDOM="100"/>
+			<!--선택 시 1단계 (슬롯별 동작)-->
+			<ITEM NAME="intro_up_01" ANIMATION="1300013"/>
+			<ITEM NAME="intro_up_02" ANIMATION="1300053"/>
+			<ITEM NAME="intro_up_03" ANIMATION="1300033"/>
+			<ITEM NAME="intro_up_04" ANIMATION="1300043"/>
+			<ITEM NAME="intro_up_05" ANIMATION="1300023"/>
+			<ITEM NAME="intro_up_06" ANIMATION="1300063"/>
+			<ITEM NAME="intro_up_07" ANIMATION="1300073"/>
+			<ITEM NAME="intro_up_08" ANIMATION="1300083"/>
+			<!--선택 시 2단계 (무기별 동작)-->
+			<ITEM NAME="intro_select" ANIMATION="1"/>
+			<!--선택후 (무기별 동작)-->
+			<ITEM NAME="intro_select_idle" ANIMATION="2"/>
+			<!--취소 시 1단계 (무기별 동작)-->
+			<ITEM NAME="intro_select_back" ANIMATION="3"/>
+			<!--취소 시 2단계 (슬롯별 동작)-->
+			<ITEM NAME="intro_down_01" ANIMATION="1300014"/>
+			<ITEM NAME="intro_down_02" ANIMATION="1300054"/>
+			<ITEM NAME="intro_down_03" ANIMATION="1300034"/>
+			<ITEM NAME="intro_down_04" ANIMATION="1300044"/>
+			<ITEM NAME="intro_down_05" ANIMATION="1300024"/>
+			<ITEM NAME="intro_down_06" ANIMATION="1300064"/>
+			<ITEM NAME="intro_down_07" ANIMATION="1300074"/>
+			<ITEM NAME="intro_down_08" ANIMATION="1300084"/>
+			<!---->			
+			
+			<ITEM NAME="Com_Bootster_up" ANIMATION="1000107"/>
+			<ITEM NAME="Com_Booster_down" ANIMATION="1000108"/>
+			
+			<ITEM NAME="carry_idle" ANIMATION="1160000"/>
+			<ITEM NAME="carry_dash" ANIMATION="1160040"/>
+			<ITEM NAME="carry_run" ANIMATION="1160055"/>
+			<ITEM NAME="carry_jump_01" ANIMATION="1160030"/>
+			<ITEM NAME="carry_jump_02" ANIMATION="1160031"/>
+			<ITEM NAME="carry_jump_03" ANIMATION="1160032"/>
+			<ITEM NAME="carry_jump_04" ANIMATION="1160033"/>
+			<ITEM NAME="carry_shot" ANIMATION="1140003"/>
+			
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="blocking" ANIMATION="1140006"/>
+			<!-- Common Action END-->	
+			
+			<!-- Emotion -->
+			<ITEM NAME="emotion_beg_01" ANIMATION="2100001"/>
+			<ITEM NAME="emotion_beg_02" ANIMATION="2100002"/>
+			<ITEM NAME="emotion_beg_03" ANIMATION="2100003"/>
+			<ITEM NAME="emotion_beg_04" ANIMATION="2000004"/>
+			<ITEM NAME="emotion_beg_05" ANIMATION="2000005"/>
+			<ITEM NAME="emotion_beg_06" ANIMATION="2000006"/>
+			<ITEM NAME="emotion_bow" ANIMATION="2100207"/>
+			<ITEM NAME="emotion_cry" ANIMATION="2100208"/>
+			<ITEM NAME="emotion_flop_01" ANIMATION="2100011"/>
+			<ITEM NAME="emotion_flop_02" ANIMATION="2100012"/>
+			<ITEM NAME="emotion_flop_03" ANIMATION="2100013"/>
+			<ITEM NAME="emotion_handclap_01" ANIMATION="2100214"/>
+			<ITEM NAME="emotion_hi" ANIMATION="2100016"/>
+			<ITEM NAME="emotion_honor_01" ANIMATION="2100017"/>
+			<ITEM NAME="emotion_honor_02" ANIMATION="2100018"/>
+			<ITEM NAME="emotion_honor_03" ANIMATION="2100019"/>
+			<ITEM NAME="emotion_laugh_01" ANIMATION="2100220"/>
+			<ITEM NAME="emotion_love_01" ANIMATION="2100221"/>
+			<ITEM NAME="emotion_OTL_01" ANIMATION="2100022"/>
+			<ITEM NAME="emotion_OTL_02" ANIMATION="2100023"/>
+			<ITEM NAME="emotion_OTL_03" ANIMATION="2100024"/>
+			<ITEM NAME="emotion_pride" ANIMATION="2100025"/>
+			<ITEM NAME="emotion_provoc_01" ANIMATION="2100026"/>
+			<ITEM NAME="emotion_provoc_02" ANIMATION="2100027"/>
+			<ITEM NAME="emotion_provoc_03" ANIMATION="2100028"/>
+			<ITEM NAME="emotion_rowdy_01" ANIMATION="2100029"/>
+			<ITEM NAME="emotion_rowdy_02" ANIMATION="2100030"/>
+			<ITEM NAME="emotion_rowdy_03" ANIMATION="2100031"/>
+			<ITEM NAME="emotion_rush_01" ANIMATION="2100032"/>
+			<ITEM NAME="emotion_sleep_02" ANIMATION="2100037"/>
+			<ITEM NAME="emotion_sleep_03" ANIMATION="2100038"/>
+			<ITEM NAME="emotion_sorry_01" ANIMATION="2100033"/>
+			<ITEM NAME="emotion_surprise_01" ANIMATION="2100034"/>
+			<ITEM NAME="emotion_victory_01" ANIMATION="2100035"/>
+			<ITEM NAME="emotion_vote_01" ANIMATION="2100036"/>
+			<ITEM NAME="emotion_dance_01" ANIMATION="2100209"/>
+			<ITEM NAME="emotion_dance_02" ANIMATION="2100210"/>
+			<ITEM NAME="emotion_kiss" ANIMATION="2200210"/>
+			<ITEM NAME="emotion_hug_01" ANIMATION="2200202"/>
+			<ITEM NAME="emotion_hug_02" ANIMATION="2200203"/>
+			<ITEM NAME="emotion_hug_03" ANIMATION="2200204"/>
+	  		<ITEM NAME="emotion_grap_hand_01" ANIMATION="2200207"/>
+	  		<ITEM NAME="emotion_grap_hand_02" ANIMATION="2200208"/>
+			<ITEM NAME="emotion_grap_hand_03" ANIMATION="2200209"/>
+			<ITEM NAME="emotion_wedding" ANIMATION="2200211"/>
+	  		<ITEM NAME="emotion_balloon" ANIMATION="2200201"/>
+			<ITEM NAME="emotion_happy" ANIMATION="2100015"/> <!-- 사용 안하는듯한데 -->				
+			<ITEM NAME="emotion_dance_03" ANIMATION="2100039"/>
+
+			<!-- Skill -->
+			<ITEM NAME="Skill_Summon" ANIMATION="300"/>
+			<ITEM NAME="dragon_tooth" ANIMATION="301"/>
+			<ITEM NAME="Skill_Ground_Piston" ANIMATION="302"/>
+			<ITEM NAME="magic_trap_cast" ANIMATION="303"/>
+			<ITEM NAME="magic_trap_fire" ANIMATION="306"/>
+			<ITEM NAME="Skill_Air_Sprash" ANIMATION="304" SPEED="1.5"/>
+			<ITEM NAME="spark_wave_cast" ANIMATION="305"/>
+			<ITEM NAME="spark_wave_fire" ANIMATION="307"/>
+			<ITEM NAME="breath_of_nature_cast" ANIMATION="308"/>
+			<ITEM NAME="breath_of_nature_fire" ANIMATION="310"/>
+			<ITEM NAME="Skill_Regain" ANIMATION="309" SPEED="3.6"/>
+			<ITEM NAME="Skill_Recall" ANIMATION="400"/>
+			<ITEM NAME="Skill_Air_Smash" ANIMATION="402"/>
+			<ITEM NAME="magic_shield_cast" ANIMATION="404"/>
+			<ITEM NAME="magic_shield_fire" ANIMATION="406"/>
+			
+			<ITEM NAME="frozen_chain_cast" ANIMATION="522"/>
+			<ITEM NAME="frozen_chain_fire" ANIMATION="521"/>
+			
+			<ITEM NAME="temptation_cast" ANIMATION="600"/>
+			<ITEM NAME="temptation_fire" ANIMATION="601"/>
+			
+			<ITEM NAME="Awake_Charge_Cast" ANIMATION="1146001"/>
+			<ITEM NAME="Awake_Charging" ANIMATION="1146002"/>
+			
+			<ITEM NAME="elestorm_cast" ANIMATION="602"/>
+			<ITEM NAME="elestorm_fire" ANIMATION="603"/>
+			<ITEM NAME="elestorm_finish" ANIMATION="607"/>					
+			
+			<ITEM NAME="dragon_rage_cast" ANIMATION="604"/>
+			<ITEM NAME="dragon_rage_fire" ANIMATION="605"/>
+			<ITEM NAME="dragon_rage_finish" ANIMATION="606"/>
+			
+		<!-- Job Skill -->
+			<ITEM NAME="Common_Com_Job_Fishing_Fishing_01" ANIMATION="1110411"/>
+			<ITEM NAME="Common_Com_Job_Fishing_Fishing_02" ANIMATION="1110412"/>
+			<ITEM NAME="Common_Com_Job_Fishing_Fishing_03" ANIMATION="1110413"/>
+			<ITEM NAME="Common_Com_Job_Fishing_Net_01" ANIMATION="1110421"/>
+			<ITEM NAME="Common_Com_Job_Fishing_Net_02" ANIMATION="1110422"/>
+			<ITEM NAME="Common_Com_Job_Fishing_Net_03" ANIMATION="1110423"/>
+			
+			<ITEM NAME="Common_Com_Job_Gather_Hoe_01" ANIMATION="1110311"/>
+			<ITEM NAME="Common_Com_Job_Gather_Hoe_02" ANIMATION="1110312"/>
+			<ITEM NAME="Common_Com_Job_Gather_Hoe_03" ANIMATION="1110313"/>		
+			<ITEM NAME="Common_Com_Job_Gather_Weeder_01" ANIMATION="1110321"/>
+			<ITEM NAME="Common_Com_Job_Gather_Weeder_02" ANIMATION="1110322"/>
+			<ITEM NAME="Common_Com_Job_Gather_Weeder_03" ANIMATION="1110323"/>
+			
+			<ITEM NAME="Common_Com_Job_Lumber_Axe_01" ANIMATION="1110111"/>
+			<ITEM NAME="Common_Com_Job_Lumber_Axe_02" ANIMATION="1110112"/>
+			<ITEM NAME="Common_Com_Job_Lumber_Axe_03" ANIMATION="1110113"/>
+			<ITEM NAME="Common_Com_Job_Lumber_Chainsaw_01" ANIMATION="1110121"/>
+			<ITEM NAME="Common_Com_Job_Lumber_Chainsaw_02" ANIMATION="1110122"/>
+			<ITEM NAME="Common_Com_Job_Lumber_Chainsaw_03" ANIMATION="1110123"/>
+			
+			<ITEM NAME="Common_Com_Job_Mining_Drill_01" ANIMATION="1110221"/>
+			<ITEM NAME="Common_Com_Job_Mining_Drill_02" ANIMATION="1110222"/>
+			<ITEM NAME="Common_Com_Job_Mining_Drill_03" ANIMATION="1110223"/>
+			<ITEM NAME="Common_Com_Job_Mining_Pick_01" ANIMATION="1110211"/>
+			<ITEM NAME="Common_Com_Job_Mining_Pick_02" ANIMATION="1110212"/>
+			<ITEM NAME="Common_Com_Job_Mining_Pick_03" ANIMATION="1110213"/>
+			<ITEM NAME="Common_Com_Job_Gain" ANIMATION="1110001"/>
+			<!-- Job Skill End-->
+			
+			<!-- Manufacture 즉석가공-->
+			<ITEM NAME="Common_Com_Work_Cook_Start" ANIMATION="1150100" />
+			<ITEM NAME="Common_Com_Work_Cook_Work" ANIMATION="1150101" />
+			<ITEM NAME="Common_Com_Work_Cook_Success" ANIMATION="1150102" />
+			<ITEM NAME="Common_Com_Work_Cook_Fail" ANIMATION="1150103" />
+			
+			<ITEM NAME="Common_Com_Work_Workmanship_Start" ANIMATION="1150200" />
+			<ITEM NAME="Common_Com_Work_Workmanship_Work" ANIMATION="1150201" />
+			<ITEM NAME="Common_Com_Work_Workmanship_Success" ANIMATION="1150202" />
+			<ITEM NAME="Common_Com_Work_Workmanship_Fail" ANIMATION="1150203" />
+			
+			<ITEM NAME="Common_Com_Work_Spell_01_Start" ANIMATION="1150300" />
+			<ITEM NAME="Common_Com_Work_Spell_01_Work" ANIMATION="1150301" />
+			<ITEM NAME="Common_Com_Work_Spell_01_Success" ANIMATION="1150302" />
+			<ITEM NAME="Common_Com_Work_Spell_01_Fail" ANIMATION="1150303" />
+			<!-- Manufacture End-->
+		
+			<ITEM NAME="Interactive_Emotion_Waltz1" ANIMATION="2200206"/>
+			<ITEM NAME="Interactive_Emotion_Waltz2" ANIMATION="2200205"/>
+
+			<ITEM NAME="domination_start" ANIMATION="1140004"/>
+			<ITEM NAME="domination_loop" ANIMATION="1140005"/>
+			<ITEM NAME="KOH_area_bomb_start" ANIMATION="1140004"/>
+			<ITEM NAME="class_promotion" ANIMATION="1000005"/>
+
+
+<!-- 소환사 기본콤보 -->
+			<ITEM NAME="gs_combo_a_Attk" ANIMATION="9502115"/>
+			<ITEM NAME="gs_combo_a_Finish" ANIMATION="9502119" COMBO_DELAY="1"/>
+
+
+			<ITEM NAME="gs_combo_b_Attk" ANIMATION="9502215"/>
+			<ITEM NAME="gs_combo_b_Finish" ANIMATION="9502219" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_c_Attk" ANIMATION="9502315"/>
+			<ITEM NAME="gs_combo_c_Finish" ANIMATION="9502319" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_d_Attk" ANIMATION="9502415"/>
+			<ITEM NAME="gs_combo_d_Finish" ANIMATION="9502419" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_c_4_F0_Start" ANIMATION="9502341" COMBO_DELAY="1"/>
+			<ITEM NAME="gs_combo_c_4_F0_btlidle" ANIMATION="9502343" COMBO_DELAY="1"/>
+
+
+			<ITEM NAME="gs_combo_c_4_F1_Attk" ANIMATION="9502345"/>
+			<ITEM NAME="gs_combo_c_4_F1_Finish" ANIMATION="9502349" COMBO_DELAY="1"/>
+			<ITEM NAME="gs_combo_c_4_F2_Attk" ANIMATION="9502345"/>	
+			<ITEM NAME="gs_combo_c_4_F2_Finish" ANIMATION="9502349" COMBO_DELAY="1"/>
+			<ITEM NAME="gs_combo_c_4_F3_Attk" ANIMATION="9502345"/>	
+			<ITEM NAME="gs_combo_c_4_F3_Finish" ANIMATION="9502349" COMBO_DELAY="1"/>	
+			<ITEM NAME="gs_combo_c_4_F4_Attk" ANIMATION="9502345"/>	
+			<ITEM NAME="gs_combo_c_4_F4_Finish" ANIMATION="9502349" COMBO_DELAY="1"/>				
+			<ITEM NAME="gs_combo_c_4_F5_Attk" ANIMATION="9502345"/>	
+			<ITEM NAME="gs_combo_c_4_F5_Finish" ANIMATION="9502349" COMBO_DELAY="1"/>	
+
+
+
+			<ITEM NAME="gs_combo_z_1_Attk" ANIMATION="9502125" SPEED="1.8"/>
+			<ITEM NAME="gs_combo_z_1_Finish" ANIMATION="9502129"  COMBO_DELAY="1"/>
+			
+			<ITEM NAME="gs_combo_z_2_Attk" ANIMATION="9502225" SPEED="3.0"/>
+			<ITEM NAME="gs_combo_z_2_Finish" ANIMATION="9502229" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_z_3_Attk" ANIMATION="9502325" SPEED="1.0"/>
+			<ITEM NAME="gs_combo_z_3_Finish" ANIMATION="9502329" COMBO_DELAY="1"/>
+			
+			<ITEM NAME="gs_combo_z_4_Attk" ANIMATION="9502425"/>
+			<ITEM NAME="gs_combo_z_4_Finish" ANIMATION="9502429" COMBO_DELAY="1"/>			
+
+			<ITEM NAME="gs_combo_z_3_4_Attk" ANIMATION="9502435"/>
+			<ITEM NAME="gs_combo_z_3_4_Finish" ANIMATION="9502439" COMBO_DELAY="1"/>
+			
+			<ITEM NAME="gs_combo_z_2_3_Attk" ANIMATION="9502345"/>
+			<ITEM NAME="gs_combo_z_2_3_Finish" ANIMATION="9502349" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_z_2_4_Attk" ANIMATION="9502445"/>
+			<ITEM NAME="gs_combo_z_2_4_Finish" ANIMATION="9502449" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_z_2_3_4_Attk" ANIMATION="9502455"/>
+			<ITEM NAME="gs_combo_z_2_3_4_Finish" ANIMATION="9502459" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_z_1_2_Attk" ANIMATION="9502265" SPEED="2.0"/>
+			<ITEM NAME="gs_combo_z_1_2_Finish" ANIMATION="9502269" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_z_1_3_Attk" ANIMATION="9502365"/>
+			<ITEM NAME="gs_combo_z_1_3_Finish" ANIMATION="9502369" COMBO_DELAY="1"/>
+
+			<ITEM NAME="gs_combo_z_1_2_3_Attk" ANIMATION="9502375"/>
+			<ITEM NAME="gs_combo_z_1_2_3_Finish" ANIMATION="9502379" COMBO_DELAY="1"/>
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

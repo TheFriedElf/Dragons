@@ -1,0 +1,27 @@
+<ACTION ID="a_MP-Zero Trap Active" NEXT="a_battle_idle" IGNORE_DMG_EFFECT="TRUE" >
+  <SLOT NAME="idle_01"/>
+  <FSM SCRIPT="Trap_Play" 
+       TYPE="BOMB" 
+       SERACH_TYPE="FULLSEARCH"
+       BOMB_EFFECT_ID="ef_mag_charge01_result"
+       BOME_AFTER_EFFECT_ID="e_ef_fossilearth_explosion" 
+       BOME_AFTER_EFFECT_SCALE="0.4"
+       HIT_SOUND_ID="Deapodong"
+       BOME_AFTER_SOUND_ID="SplashTrap2"
+	   
+       IF_MY_UNDERCONTROL_THEN_INSTALL_EFFECT_ID="ef_Trap_Bound_01"
+       IF_MY_UNDERCONTROL_THEN_INSTALL_EFFECT_TARGET_NODE_POS="Dummy01"
+	   
+       INSTALL_EFFECT_ID2="ef_dust_01"
+       INSTALL_EFFECT_TARGET_NODE_POS2="Dummy01"
+	   
+	   TRANSFORM_EFFECT_ID="ef_dust_01"
+       TRANSFORM_EFFECT_TARGET_NODE_POS="Dummy01"
+	   TRANSFORM_SOUND_ID="Needle_Trap_01"
+	   
+	   TARGET_SCALE="0.5"
+	   TARGET_SCALE_TIME="1000"
+	   
+       FIND_TARGET_TYPE="SPHERE"
+	   />
+</ACTION>

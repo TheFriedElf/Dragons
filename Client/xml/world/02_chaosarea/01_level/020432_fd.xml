@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020432_FD">
+	<GSAPATH>../Data/3_World/02_Chaosarea/01_Level/020432_FD.GSA</GSAPATH>
+	<MINIMAP Y="140" H="255">../Data/3_World/02_ChaosArea/01_Level/020432_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!-- 트리거 점프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="450"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_3" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="250"/>
+	</TRIGGER>
+	<!-- 포그 -->
+	<FOG DENSITY="0.050000" START="1000" END="4000" COLOR="0.562000,0.774000,0.562000" />
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="2000" LOW_END="3000" USE="1" />
+</WORLD>

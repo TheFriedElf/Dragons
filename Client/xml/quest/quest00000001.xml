@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>1</ID> <!--T.T.10000101 일어나! 비룡(4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	상급법사 에델린과 대화-->
+<!--[완료NPC]	바람항구 - 에델린-->
+<!--[내용]	키에로가 낳은 알은 아직 미숙한 상태라고 에델린이 진단을 내린다. 성공적인 부화를 위해서는 뭔가의 조치가 필요한데, 인큐베이터를 만들 생각인 듯 하다. 에델린의 예기를 끝까지 들어 보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT> <!--시작NPC 바람항구 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER> <!--완료NPC 바람항구 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 11 바람항구 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10000111"/> <!--에델린과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">60000610</ITEM><!--전체지급/전체/1)/60000610(봉인아님) 1개-비상용 방독면-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10000121" FACE="Edeline_normal"/> <!--이것이 비룡의 알이라구요?
+책으로만 접했던 것을 직접 보게될 줄은 몰랐어요…%%
+{T=FTcts_13/C=0xFFA62700/}(에델린은 이후 차분히 자초지종을 들어주었다.){T=QTtext/C=0xFF4D0D08/}%%
+그렇군요. 엄마 비룡의 기력이 충분하지 못한 상태에서 알이 태어났다는 것이죠.
+인간으로 치자면 미숙아로 태어난 것일텐데…%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10000126" FACE="Edeline_smile"/> <!--용감하신 분이군요. 자 여기 비상용 방독면이 있습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10000123" FACE="Edeline_normal"/> <!--비룡의 알에 맞는 전용 인큐베이터를 만드는 것 외에는 방법이 없네요.
+인큐베이터를 만들기 위해서는 다양한 부품이 필요한데, 이 근방에서 그걸 구할 수 있는 곳은 딱 한군데 밖에 없습니다. %%
+이곳 시청 지하수로에 있는 파렐 박사의 연구실이죠 
+하지만 시청 지하수로는 독가스로 가득 차있어요. 아마도 방독면이 없다면 오래 버틸수 없을 겁니다. 만약 구품을 구하려 가시겠다면 제가 비상용 방독면을 드리지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10000124" FACE="Edeline_angly"/> <!--이 알을 남기고 죽어간 비룡에게 미안하지도 안나요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10000125" FACE="Edeline_angly"/> <!--없음-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10000102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

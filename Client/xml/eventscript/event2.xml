@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 마을 주민들이 도망가는 씬 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="stopBGM" SoundNo = "0"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<!--  <CMD TYPE="setmoviescene" enable="true" Time="1"/>
+    <CMD type="waittime" time="0"/>-->
+	<!-- 화면을 와이드 화면으로 출력하고 3초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<!-- 카메라를 이벤트 전용 카메라로 바꾼다. -->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2"/>
+    
+    <CMD TYPE="PlayBGM" SoundNo = "2"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+    
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505469" TextTTID="505580" FaceID="Helper_question"/>
+	<CMD TYPE="WaitDialogue"/>
+    <CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+    
+    <CMD TYPE="MoveCamToPos" TargetPos="2916.498, 34.96497,86.297249" MoveTime="1"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+    
+	<CMD TYPE="AddNPC" ClassNo="1028150" NameTTID="505533" SpawnPos="2916.498, 34.96497,86.297249"/>
+	<CMD TYPE="SetActorDirection" NameTTID="505533" Direction="1"/>
+	<CMD TYPE="MoveCamToActor" NameTTID="505533" MoveTime="1" CamActorDistance="350"/>
+    <CMD TYPE="PlayAnimation" NameTTID="505533" SlotName="play01"/>
+	<CMD TYPE="WaitTime" Time="4"/>
+    
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+    <CMD TYPE="ShowActor" NameTTID="505533" Show="FALSE"/>
+	<CMD TYPE="RemoveActor" NameTTID="505533"/>
+    
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505469" TextTTID="505537" FaceID="Helper_angly"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="ShowActor" ActorGUID="97DE8BD3-47E5-4731-8F51-3A8B91FB0177" Show="true"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	
+	<CMD TYPE="EnableTrigger" TriggerID="Event_Quest_TU01" Enable="FALSE"/>  
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>    
+</EVENT_SCRIPT>

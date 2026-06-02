@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5060</ID> <!--T.T.10506001 엉큼한 녀석들 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)]에서 별가사리 라라라 20마리 처리하자-->
+<!--[완료NPC]	수염고래 해안가 - 프리모-->
+<!--[내용]	프리모는 한가롭게 낚시를 하던 중에 누군가 자신의 엉덩이를 만지는 느낌이 들어서 화들짝 놀라며 일어났다고 한다. 자신의 엉덩이를 만지던 것은 별가사리 로로로였다. 프리모는 하지 말라고 했지만 별가사리 라라라는 자신의 엉덩이를 찰싹 때리고는 도망가버렸다고 한다. 수염고래 해안가 [아케이드 모드(F1)]에서 엉큼한 짓을 한 별가사리 라라라 20마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D9D4C750-7AE1-4084-B14A-770E1D304FA1</CLIENT> <!--시작NPC 수염고래 해안가 - 프리모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D9D4C750-7AE1-4084-B14A-770E1D304FA1</PAYER> <!--완료NPC 수염고래 해안가 - 프리모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D9D4C750-7AE1-4084-B14A-770E1D304FA1</AGENT> <!--진행NPC 11 수염고래 해안가 - 프리모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010106/1">6011300</MONSTER> 
+ <!--MON_NO=6011300/별가사리 라라라,MAP_NO=9010106/수염고래 해안가 아케이드 6,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10506011"/> <!--별가사리 라라라-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10506021" FACE="Primo_normal"/> <!--컹컹. 화가 난다. 
+오늘 한가롭게 낚시를 즐기고 있었다. 
+그런데 갑자기 누군가 내 엉덩이를 때리는 느낌이 났다. %%
+그래서 깜짝 놀라서 벌떡 일어 났더니. 별가사리 라라라 녀석들이었다.
+난 열심히 녀석들을 피했다. 하지만 녀석들은 생각보다 훨씬 더 빨랐다.%% 
+녀석들은 내 엉덩이를 자꾸 찰싹 때리면서 날 놀려댔다. 
+이대로는 억울해서 못 있겠다. 내 억울함을 풀어 주라. 컹컹.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10506026" FACE="Primo_smile"/> <!--고맙다. 내 엉덩이도 이제 한시름 놓았을 거다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10506023" FACE="Primo_normal"/> <!--도대체 내 엉덩이가 무슨 잘못을 했다고 그렇게 때리는지 모르겠다.
+내가 볼때도 탐스럽게 보이기는 하지만, 그것은 문제가 안 된다.%%
+녀석들이 내 엉덩이를 두들겨대서 내 엉덩이가 더 크게 부었다. 
+녀석들의 엉덩이도 탱탱하게 만들어 줘라. 컹컹.
+별가사리 라라라는 수염고래 해안가 [아케이드 모드(F1)]에 있다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10506024" FACE="Primo_angly"/> <!--어쩔 수 없다. 얼음찜질이나 하면서 억울함을 풀어야 겠다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10506025" FACE="Primo_normal"/> <!--이제는 앉아서 낚시를 즐길 수도 없다. 서서해야 한다. 슬프다. 컹컹-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10506002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

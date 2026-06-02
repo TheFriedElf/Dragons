@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5016</ID> <!--T.T.10501601 독특한 취미 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 노랑별 10개 습득-->
+<!--[완료NPC]	바람항구 - 루돌프-->
+<!--[내용]	별 모양의 물건을 모으는 게 취미인 루돌프는 로로로라는 몬스터가 가지고 있다는 노랑별 모양을 탐내고 있다. 그런 루돌프를 위해 수염고래 해안가에서 노랑별 10개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</CLIENT> <!--시작NPC 바람항구 - 루돌프 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</PAYER> <!--완료NPC 바람항구 - 루돌프 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</AGENT> <!--진행NPC 11 바람항구 - 루돌프 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/0/1/1/160501600">6011200</MONSTER> 
+ <!--MON_NO=6011200/별가사리 로로로,MAP_NO=9010100/수염고래 해안가,Item_NO=160501600/[Q.ID:05016] 노랑별,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160501600</ITEM> 
+ <!--Item_NO=160501600/[Q.ID:05016] 노랑별,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10501611"/> <!--노랑별 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501621" FACE="Rudolph_normal"/> <!--널, 가지고 싶어.
+앗, 이런 %class%님에게 한 이야기는 아니에요.
+사실 제가 몹시 가지고 싶은 게 있어서…
+그것을 생각하다고 무심코 튀어 나왔네요.%%
+혹시 %class%님은 뭔가 가지고 싶은 것 없나요?
+이성친구라든지.
+이성친구라든지.
+이성친구라든지.
+앗 이런 또 속에 있는 말을 계속 반복했네요.%%
+저기, 죄송하지만 저의 작은 부탁 하나만 들어 주실 수 있을까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501626" FACE="Rudolph_smile"/> <!--감사합니다. 정말 가지고 싶었던 거에요. 
+펫 상점을 하는 에이미씨가 별 모양을 좋아한다는 이야기를 듣고 나서 이렇게 모으고 있답니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501623" FACE="Rudolph_normal"/> <!--감사합니다. 
+사실. 제가 요즘 이상한 취미가 생겼어요. 
+노랑색 별 모양의 물건을 모으는 취미에요.%%
+그런데 사실 노랑색 별 모양의 물건은 모으기가 쉽지 않아요.
+그래서 수소문 끝에 알아 봤더니, 수염고래 해안가의 로로로가 가지고 있다는 거에요.
+제발 부탁드리겠습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501624" FACE="Rudolph_angly"/> <!--그래요? 뭐 어쩔 수 없죠. 
+제가 노랑별을 구하러 가다가 로로로한테 붙잡혀서 얻어맞은 다음 %class%님을 원망하는 수밖에는 없겠군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501625" FACE="Rudolph_normal"/> <!--해주신다니까, 정말 감사합니다만…
+조금 더 빨리 가 주실 수는 없을까요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

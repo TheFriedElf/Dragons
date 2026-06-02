@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_demon_Darkbust_st" DIE_PARTICLE_ID="ef_monster_die_02" DIE_SOUND_ID="Demon_Die01">
+	<TEXTURE SRC="reflection_metal.dds">../Data/4_Item/1_Armor/1_Male/04_U_Armor/reflection_metal.dds</TEXTURE>
+	<TEXTURE SRC="N_Seukelreteon.dds">../Data/2_Mon/N_Seukelreteon/N_Seukelreteon.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_demon_Darkbust"/>
+		<KFMPATH SCALE="0.8">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Demon_Darkbust_ST/Demon_Darkbust_ST.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ATTACH TYPE="effect" SLOT="53911" EFFECT="ef_Mon_fireeye_blue_01_p_ef_eye_l" TO="p_ef_eye_l"/>
+		<ATTACH TYPE="effect" SLOT="53912" EFFECT="ef_Mon_fireeye_blue_01_p_ef_eye_r" TO="p_ef_eye_r"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="72,12" ROTATE="1,0,0,90" LOCATE="0,-10,0"/>
+		</ABV>
+		<SLOT>
+			<!-- 공격 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000066" FIRE_START_NODE="p_ef_Weapon" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_demon_shot_02"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000201"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000202" FIRE_START_NODE="p_ef_skill" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_demon_shot_03"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

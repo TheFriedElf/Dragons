@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4121</ID> <!--T.T.10412101 천년 전의 저주 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	나무곡괭이, 양초, 횃불 1개씩 습득-->
+<!--[완료NPC]	악마의 숨결 - 터너-->
+<!--[내용]	%name%의 전투실력에 놀란 터너는 스켈레톤 엉클이 훔쳐간 자신의 장비를 찾아달라고 부탁한다. 악마의 숨결[미션 모드]에서 스켈레톤 엉클로부터 나무곡괭이, 양초, 횃불 각각 1개씩을 찾아내 광부 터너에게 전달하자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2c58cea2-c807-4491-ad32-d6e26d65fca4</CLIENT> <!--시작NPC 악마의 숨결 - 터너 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2c58cea2-c807-4491-ad32-d6e26d65fca4</PAYER> <!--완료NPC 악마의 숨결 - 터너 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2c58cea2-c807-4491-ad32-d6e26d65fca4</AGENT> <!--진행NPC 11 악마의 숨결 - 터너 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9020102/10000/9000/1/1/160412100">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9020102/악마의 숨결 아케이드 2,Item_NO=160412100/[Q.ID:04121] 나무곡괭이,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9022102/10000/9000/1/1/160412100">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9022102/악마의 숨결 카오스 2,Item_NO=160412100/[Q.ID:04121] 나무곡괭이,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160412100</ITEM> 
+ <!--Item_NO=160412100/[Q.ID:04121] 나무곡괭이,-->
+		<MONSTER OBJECTNO="2" TYPE="INSTDROP100_IN" VALUE="9020102/10000/9000/1/1/160412110">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9020102/악마의 숨결 아케이드 2,Item_NO=160412110/[Q.ID:04121] 양초,-->
+		<MONSTER OBJECTNO="2" TYPE="INSTDROP100_IN" VALUE="9022102/10000/9000/1/1/160412110">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9022102/악마의 숨결 카오스 2,Item_NO=160412110/[Q.ID:04121] 양초,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">160412110</ITEM> 
+ <!--Item_NO=160412110/[Q.ID:04121] 양초,-->
+		<MONSTER OBJECTNO="3" TYPE="INSTDROP100_IN" VALUE="9020102/10000/9000/1/1/160412120">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9020102/악마의 숨결 아케이드 2,Item_NO=160412120/[Q.ID:04121] 횃불,-->
+		<MONSTER OBJECTNO="3" TYPE="INSTDROP100_IN" VALUE="9022102/10000/9000/1/1/160412120">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9022102/악마의 숨결 카오스 2,Item_NO=160412120/[Q.ID:04121] 횃불,-->
+		<ITEM OBJECTNO="3" TYPE="CHANGE_COUNT" VALUE="1">160412120</ITEM> 
+ <!--Item_NO=160412120/[Q.ID:04121] 횃불,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10412111"/> <!--나무 곡괭이-->
+		<OBJECT2 COUNT="1" TEXT="10412112"/> <!--양초-->
+		<OBJECT3 COUNT="1" TEXT="10412113"/> <!--횃불-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10412121" FACE="tourneur_normal"/> <!--아까 스켈레마들을 혼내던 모습을 보니 상당히 강한 솜씨를 
+가지고 있던데..  이런 부탁을 해도 좋을런지요...?%%
+스켈레마처럼 스켈레톤 엉클들 몇마리가 제 장비를 자꾸 
+훔쳐가는 바람에 작업에 애를 먹고 있습니다.%% 
+이 몬스터들에게 도둑 맞은 제 장비를 좀 찾아다 주시겠습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10412126" FACE="tourneur_smile"/> <!--고맙습니다. 덕분에 정든 제 장비를 되찾게 되었네요.
+해골들은 원래 이곳에 묻힌 화암산호족이 대부분입니다.%%
+그들은 네크로맨싱 기술을 이용해서 죽은 가족이나, 
+애완동물들을 되살리곤 하지요.%% 
+보통은 부패해서 저렇게 뼈만 남은 것 때문에 혐오스러워 
+보이지만, 특별히 악의를 가진 몬스터는 아닙니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10412123" FACE="tourneur_normal"/> <!--잃어버린 제 장비를 대충 꼽아보니... 
+나무곡괭이, 양초, 횃불 정도로군요.%%
+값 싼 물건이지만 손을 탄 녀석들이라 
+작업할 때 아쉬움이 많습니다. %%
+찾아주신다면 사례는 섭섭치 않게 해드리지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10412124" FACE="tourneur_angly"/> <!--아쉽군요. 제이드 병사도 거절한 일이니 어쩔 수 없지요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10412125" FACE="tourneur_angly"/> <!--악마의 숨결에 있는 스켈레톤 엉클들로부터 제 물건들을 꼭 찾아주십시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10412102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

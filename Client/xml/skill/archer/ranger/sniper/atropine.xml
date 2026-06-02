@@ -1,0 +1,14 @@
+<ACTION ID="a_Atropine" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_Atropine_01"/>
+  <FSM SCRIPT="Act_Melee_Default" FIND_TARGET_TYPE="SPHERE"
+       HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+       HIT_CASTER_EFFECT_ID="ef_Atropine_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_wp_r_hand"
+       FIRE_CASTER_EFFECT_ID="ef_Atropine_01_p_wp_r_hand"
+       FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+       HIT_SOUND_ID="Atropine"
+       DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+       HIDE_WEAPON="TRUE"
+       />
+</ACTION>

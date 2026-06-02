@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!--러브 대작전 득점 -->
+	<CMD TYPE="HideUI" enable="true"/><!--UI가리기 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.3" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="waittime" time="0.3"/>
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--소환체를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="false"/> <!--드랍아이템를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/> <!--모든 몬스터 숨기기 -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+<!------------------------------------------------------------------------------------------------------------ 기본 -->
+	<CMD TYPE="AddActorFilter" ClassNo="1028922"/><!-- 엔딩  1번-->
+	<CMD TYPE="AddNPC" ClassNo="1028922" NameTTID="521238" SpawnPos="-880.951, -3628.237, 471.7065"/> <!-- NPc 불러오기-->
+	<CMD TYPE="PlayAnimation" ClassNo="1028922" SlotName="ending_01"/><!-- 오프닝 1번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" /><!-- 엔카메라로 변경 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.2" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="6.5"/><!--  시간을 기다림-->
+
+<!------------------------------------------------------------------------------------------------------------ 돌아가기 -->
+	<!--엔딩 끝나고 돌아가기-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.2" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1028922" Show="false"/><!-- 엔딩 삭제-->
+	<CMD TYPE="RemoveActor" ClassNo="1028922"/><!-- 엔딩 삭제-->
+	<CMD TYPE="WaitTime" Time="1"/><!-- 시간을 기다림-->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="true"/> <!--드랍아이템를 보이기 -->
+	<CMD TYPE="ClearActorFilter"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="HideUI" enable="false"/><!--UI보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/> <!--모든 몬스터 숨기기 -->
+	<CMD TYPE="setmoviescene" enable="false" Time="0"/>
+	<CMD TYPE="waittime" time="0.5"/>
+	
+
+</EVENT_SCRIPT>
+

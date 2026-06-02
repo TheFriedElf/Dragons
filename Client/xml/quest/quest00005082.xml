@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5082</ID> <!--T.T.10508201 레오의 목걸이 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단 [아케이드 모드(F1)]의 별가사리 루루루에게서 목걸이 1개를 되찾자-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	레오는 별가사리 루루루와 다시 겨루러 갔다고 한다. 별가사리 루루루는 이번에는 저번과 다르게 더 강한 힘을 내고 있어서 레오도 상당히 힘들었지만 결국 자신이 이겼다고 했다. 하지만 루루루는 레오가 모르고 떨어뜨린 목걸이를 주워서 칼리곤 선단 [아케이드 모드(F1)]으로 도망가버렸다고 한다. 레오는 자신의 엄마의 유품인 목걸이를 꼭 되찾아 달라고 부탁한다. 칼리곤 선단 [아케이드 모드(F1)]의 별가사리 루루루에게서 레오의 목걸이 1개를 되찾아 주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010152/10000/8500/1/1/160508200">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010152/칼리곤 선단 아케이드 2,Item_NO=160508200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160508200</ITEM> 
+ <!--Item_NO=160508200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010154/10000/8500/1/1/160508200">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010154/칼리곤 선단 아케이드 4,Item_NO=160508200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160508200</ITEM> 
+ <!--Item_NO=160508200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10508211"/> <!--목걸이-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508221" FACE="Leo_normal"/> <!--%name%님 별가사리 루루루와 다시 겨루러 갔습니다. 
+이상하게 저만 성장한 게 아니라 별가사리 루루루도 강해져 있었습니다. 
+서로 거의 비슷한 실력을 가지고 있었기 때문에 쉽사리 결판이 나지 않았습니다.%%
+하지만 결국에는 제가 이겼습니다. 
+그런데 싸움에 정신이 팔려서 제 목걸이가 땅에 떨어졌다는 것을 모르고 있었습니다.%% 
+그것을 보고 별가사리 루루루가 목걸이를 주워서 도망가버렸습니다.
+엄마의 하나뿐인 유품입니다. 저를 도와주셨으면 좋겠습니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508226" FACE="Leo_smile"/> <!--감사합니다. 목걸이는 엄마와 추억을 떠올리게 만드는 물건입니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508223" FACE="Leo_normal"/> <!--별가사리 루루루를 저도 뒤쫓아 갔지만 더 이상 갈 수가 없었습니다. 
+별가사리 루루루가 숨은 곳이 칼리곤 선단 [아케이드 모드(F1)]이기 때문입니다. 
+별수 없이 저는 그냥 포기하고 돌아와야 했습니다.%%
+하지만 도저히 엄마의 유품을 포기할 수 없습니다.
+만약 포기한다면 그건 엄마와의 마지막 추억을 잃는 것이기 때문입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508224" FACE="Leo_normal"/> <!--알겠습니다. 그럼 저 혼자서라도 해결해 보도록 하겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508225" FACE="Leo_normal"/> <!--엄마가 생각나더라도 절대로 울지 않겠습니다.
+우는 것은 나약한 사람만 하는 것입니다.
+저는 나약하지 않습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

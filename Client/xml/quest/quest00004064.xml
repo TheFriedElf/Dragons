@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4064</ID> <!--T.T.10406401 하늘과 번개와 물과 불(2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	미리내 신전에서 정령신화 2페이지 습득-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	라르엘은 나머지 두루마리를 스켈레톤 무리들에게 빼앗겼다. 미리내 신전의 스켈레톤 엉클과 스켈레톤 투척병으로부터 정령신화 2페이지를 찾아오자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010200/10000/8000/1/1/160406400">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9010200/미리내 신전,Item_NO=160406400/[Q.ID:04064] 정령신화 2페이지,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160406400</ITEM> 
+ <!--Item_NO=160406400/[Q.ID:04064] 정령신화 2페이지,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010200/10000/8000/1/1/160406400">6014600</MONSTER> 
+ <!--MON_NO=6014600/스켈레톤 투척병,MAP_NO=9010200/미리내 신전,Item_NO=160406400/[Q.ID:04064] 정령신화 2페이지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10406411"/> <!--정령신화 2페이지-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10406421" FACE="Larel_normal"/> <!--어디선가 들은 얘기인데…%% 
+천년 전 절대신 에아를 섬기고 있던 신성제국은 
+종교적으로 타락할 대로 타락해 있었다고 하더군.%%
+오직 인간만이 에아님에게 선택받았다고 하면서
+반인반수 종족과 요정들을 탄압하고 대륙의 변방으로 내몰았지.%%
+나도 에아님을 모시는 수도사지만… 당시의 신성제국은
+정말 막장이었다고 생각해.%%  -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10406426" FACE="Larel_smile"/> <!--아… 그래 %name%! 두번째 두루마리를 찾아오기로 했지.. 
+좋았어. 한번 읽어볼까?%%
+파리스라는 마녀가 있었다.  
+그녀는 동생의 병을 치료하기 위해 영혼의 돌을 찾아다녔다.%%
+이제 새로운 부분이로군.
+파리스는 여행 중에 용을 잡으려는 용사들을 만났다.%%
+그들은 영혼의 돌을 찾아 용에 맞섰다.%%
+아.. 영웅들이 만나는 장면이군… 
+난 왠지 모르게 이 부분을 가장 좋아해.%% 
+다양한 사연을 가진 아이들이 우연히 만나서 갈등을 일으키다가…
+끝내는 악용을 잡기 위해 한마음으로 뭉친다. 캬~ 이 스트레이트함이란....   -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10406423" FACE="Larel_smile"/> <!--자, 이제 나머지 두루마리들을 찾을 차례로군. 기억을 더듬어 보니…
+이 나머지 두루마리들을 몰래 가지고 나오다가%% 
+스켈레톤 몬스터를 만나는 바람에 모두 팽개치고 도망쳐 나왔어.
+만약 가능하다면 이 녀석들에게서 두루마리를 찾아보기를 원해.%% 
+병사들에게 물어보니 미리내 신전에 스켈레톤 무리들이 활보 한다고 하더군
+메모라도 해두라고. 미리내 신전의 스켈레톤 무리-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10406424" FACE="Larel_angly"/> <!--흠.. 그냥 무섭다고 말해. 말 빙빙 돌리지 말고…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10406425" FACE="Larel_normal"/> <!--미리내 신전의 스켈레톤들이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10406402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

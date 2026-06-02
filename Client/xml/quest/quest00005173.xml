@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5173</ID> <!--T.T.10517301 끈질긴 성격 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴[아케이드(F1)]- 50콤보-->
+<!--[완료NPC]	달빛해안 마을 - 제스-->
+<!--[내용]	좀 도둑 제스는 위험한 동굴에서 불찌에게 당한 수모를 잊어가고 있었다고 한다. 하지만 바지에 실례한 게 소문이 났고, 제스는 일당들에게 계속 놀림 당하고 있다고 한다. 위험한 동굴 [아케이드 모드(F1)]에서 50콤보를 달성해 제스의 기분을 풀주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">89F4650C-E372-4716-B958-5C321BB62C51</CLIENT> <!--시작NPC 달빛해안 마을 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">89F4650C-E372-4716-B958-5C321BB62C51</PAYER> <!--완료NPC 달빛해안 마을 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 11 달빛해안 마을 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="50/1">9010601</GROUND> 
+ <!--MAP_NO=9010602/위험한 동굴 아케이드 1,-->
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="50/1">9010602</GROUND>  <!--MAP_NO=9010602/위험한 동굴 아케이드 2,-->
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="50/1">9010603</GROUND>  <!--MAP_NO=9010602/위험한 동굴 아케이드 3,-->
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="50/1">9010604</GROUND>  <!--MAP_NO=9010602/위험한 동굴 아케이드 4,-->
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="50/1">9010605</GROUND>  <!--MAP_NO=9010602/위험한 동굴 아케이드 5,-->
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="50/1">9010606</GROUND>  <!--MAP_NO=9010602/위험한 동굴 아케이드 6,-->
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="50/1">9010609</GROUND>  <!--MAP_NO=9010602/위험한 동굴 아케이드 9,-->
+
+
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10517311"/> <!--50콤보 -->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10517321" FACE="Jess_angly"/> <!--으악!
+어떻게 아는 거지? 대체 어떻게 아는 거냐고!
+마침 잘 됐다. 네 도움이 필요해!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10517326" FACE="Jess_normal"/> <!--휴. 이제 좀 화가 내려가는 것 같아. 고마워 친구.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10517323" FACE="Jess_angly"/> <!--모두 소문이 나버렸어. 모두 다 !!!
+어제부터 오늘까지 온종일 난 놀림의 대상이야.
+녀석들은 날 오줌쟁이 제스라고 부르기 시작했어.%%
+이제 난 다 틀린 것 같아.
+너무너무 화가 나서 어제는 한숨도 못 잤어.
+불찌 때문에 내 인생은 완전 꼬일 대로 꼬였어.%%
+부탁할게. 가서 그 녀석들 좀 두들겨 패줘.
+한 두 방으론 안 될 것 같아.
+위험한 동굴[아케이드 모드(F2)]로 가서 200콤보만 해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10517324" FACE="Jess_angly"/> <!--너마저도 날 화나게 할거야?!!!!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10517325" FACE="Jess_angly"/> <!--200방정도 두들겨 패줘!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10517302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

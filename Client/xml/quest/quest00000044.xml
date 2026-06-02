@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>44</ID> <!--T.T.10004401 부활절 업적을 받자! -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	토끼그림 부활절달걀 10개 - 모든 미션맵(F4)
+부활절 달걀 15개 - 로그인시 지급-->
+<!--[완료NPC]	행사도우미 <가토>-->
+<!--[내용]	 부활절을 맞이하여 게임에 참여하는 분들에게 행사도우미 <가토> 가 선물을 준단다. 정성껏 만든 [부활절 업적]. 그러나 조건이 쉽지가 않다. 모든 미션맵(F4)에 등장하는 절구 토끼로 부터 토끼그림 부활절달걀을 10개, 로그인시 지급해 주는 부활절 달걀을 15개나 모아야 한다. -->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 행사도우미 <가토> -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 행사도우미 <가토> -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 행사도우미 <가토> -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">291300030</ITEM> 
+ <!--Item_NO=291300030/토끼 그림 부활절 달걀(공속+10%10뷴),-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">291300020</ITEM> 
+ <!--Item_NO=291300020/부활절 달걀(부활깃털) 소비시부활/50%회복/모든래밸/거래가능),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10004411"/> <!--토끼그림 부활절달걀 수집-->
+		<OBJECT2 COUNT="15" TEXT="10004412"/> <!--부활절 달걀 수집-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">291300010</ITEM><!--전체지급/전체/1)/291300010(봉인아님) 1개-부활절 업적(소비)-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10004421" FACE="gatto_normal"/> <!-- 지금은 부활절 이벤트 기간이다옹.. 자 내가 주는 임무를 완수하면 %name%님한테 선물을 주겠다옹. 그런데 그게 쉽지 않다옹.. 긴장해야 된다옹.. %%
+ 부활절 이벤트 기간동안 로그인을 하면 매일 부활절 달걀을 1개씩 준다옹. 또한 이벤트 기간 동안 진행되는 OX퀴즈 나 최전선 이벤트에 참여해도 부활절 달걀을 얻을 수 있다옹.. 이 부활절 달걀을 15개 모아와야 한다옹. %%그리고 한가지 더 있다옹. 모든 미션맵(F4)에 절구 토끼라는 녀석이 나타났다옹. 그 녀석을 혼내 주면 토끼그림 부활절달걀을 줄것이다옹. 그걸 10개 모아와야 한다옹. 절구 토끼는 덤으로 토끼얼굴모양 초콜릿도 준다옹. %%
+ 부활절 달걀은 부활깃털과 동일한 효과가 있다옹. 만약 주는다면 그걸 사용할 수 있다옹. 또한 토끼그림 부활절달걀과 토끼얼굴모양 초코릿도 특수한 능력을 가지고 있다옹. 다시 말해 많으면 많을 수록 좋다는 예기다옹. 
+한번 도전해 볼텐가옹? 만약 내가 원하는 임무를 모두 완료한다면 특별히 제작한 [부활절 업적]을 선물로 주겠다옹.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10004426" FACE="gatto_normal"/> <!--쉬운게 아니었는데 잘 해냈다옹. 
+자 여기 약속한 [부활절 업적]이 다옹.. 이걸 차고 친구들에게 자랑해다옹~-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10004423" FACE="gatto_normal"/> <!-- [부활절 업적]의 능력은 탐날만큼 뛰어나다옹. 꼭 성공하길 바란다옹-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10004424" FACE="gatto_normal"/> <!-- 날이면 날마다 오는 기회가 아니다옹.. 난 손해 볼거 없다옹 ~~-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10004425" FACE="gatto_normal"/> <!--아직 임무를 완료하진 못한것 같다옹.. 임무를 완료하지 못하면 약속한 선물도 없다옹..-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10004402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>104</ID> <!--T.T.10010401 균열의 회복 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크필드의 몬스터 100마리를 처리하자.-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	테일링은 클라인 박사가 결합체의 핵에 반응이 없으면 서서히 차원의 균열이 사라진다는 사실을 알아냈다고 한다. 차원의 균열을 막기 위해 오크 필드의 몬스터 100마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</CLIENT> <!--시작NPC 게펜 - 테일링 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 11 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="KILLMONSTER" VALUE="1">9015610</GROUND> 
+ <!--MAP_NO=9015610/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="100" TEXT="10010411"/> <!--오크필드의 몬스터-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10010421" FACE="Tailing_normal"/> <!--%name%님 클라인 박사님이 결합체의 핵으로 차원의 균열을 인위적으로 만드는 데 성공했다고 하셨어요.
+연구결과 차원의 균열은 생명체와 결합할 때만 발생한다고 해요. 생명체의 생명 반응이 없으면 서서히 차원의 균열은 사라진다고 하네요.%%
+그런데 문제가 있어요. 오크 필드 에너지체에 의해서 변이된 몬스터의 수가 너무 많다는 거에요.
+이걸 우리가 해결해야 해요.
+(우리? 우리에 테일링이 포함되진 않을 것 같은데.)-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10010426" FACE="Tailing_smile"/> <!--오크 필드에 있는 차원의 균열도 이제 조금씩 줄어들고 있어요.
+이제 다음 연구에 필요한 게 무엇일지 벌써 흥분되는데요.%%
+점점 더 어렵고 힘든 일이 닥쳐올 게 분명해요.
+(자기가 하는 일 아니라고 저런 말을…)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10010423" FACE="Tailing_normal"/> <!--오크 필드는 지금 차원의 균열이 너무 많이 발생하고 있어요.
+오크 필드에 있는 몬스터를 제거해 주세요. 
+50마리 정도면 차원의 균열도 줄어들 거라고 박사님이 말씀하셨어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10010424" FACE="Tailing_angly"/> <!--이런, 자기밖에 모르는 이기적인 사람이었군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10010425" FACE="Tailing_normal"/> <!--우리가 힘을 모아야 한다고요. 어서 빨리 오크 필드로 가 주세요.
+전 여기서 열심히 응원할게요.
+(넌 역시 안 가는 거냐?)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10010402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

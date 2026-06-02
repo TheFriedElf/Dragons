@@ -1,0 +1,1340 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_OUTLINE_2" X="512" Y="0" W="70" H="83">
+	  <LOCAL>
+		<NAME ID="KOREA">
+		  <IMG ID = "IMG_MARK" IS_ABSOLUTE_Y ="1" X = "437" Y = "5" W = "70" H = "83" IMG = "../Data/6_ui/Mark.tga" IMG_W = "70" IMG_H = "83"/>
+			<SCRIPT ID="ON_CALL">
+				SCREEN_SIZE_SetPosX(UISelf, -(UISelf:GetSize():GetX()+5))
+			</SCRIPT>				  
+		</NAME>
+	  </LOCAL>
+	</FORM>
+	
+	<!-- Delete Character UI -->
+	<STATIC_FORM ID="DeleteConfirm" PRIORITY="2" >
+		<SCRIPT ID = "ON_DISPLAY"> 
+			if( true == g_selectStage:GetIsActiveDeleteConfirmEditBox() ) then
+				Button = UISelf:GetControl("BTN_DO_DELETE")
+				Button:SetEnable(true);
+			else
+				Button = UISelf:GetControl("BTN_DO_DELETE")
+				Button:SetEnable(false);
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_CALL">
+			UISelf:SetModal(true)
+			CloseUI("SFRM_OPTION")
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			UISelf:SetModal(false)
+		</SCRIPT>
+		
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="262" H="246" STATIC_NUM = "1" />
+		<ATTR TEXT = "41501" FONT = "FTtitle_14" T_X = "131" T_Y ="38" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER = "1" />
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="260" H="36" STATIC_NUM = "4"/>	
+			<ATTR TEXT = "41500" FONT = "Font_Text" T_X = "16" T_Y ="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" />
+		</STATIC_FORM>		
+		<STATIC_FORM ID="SFRM_CHARACTER_INFO_BOX">
+			<ATTR X="11" Y="59" W="242" H="53" STATIC_NUM = "34"/>
+			<ATTR FONT = "FT15" T_X = "121" T_Y ="6" FONT_COLOR_HEX="0xFFFFF5B2" T_OUTLINE="1" T_CENTER = "1" />
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_CONFIRM_INPUT_BOX">
+			<ATTR X="11" Y="116" W="240" H="80" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" STATIC_NUM = "2"/>
+			<ATTR TEXT = "41502" FONT = "Font_Text" T_X = "120" T_Y ="9" FONT_COLOR_HEX="0xFF4D3413" T_CENTER = "1" />
+			<STATIC_FORM ID="SFRM_CONFIRM_INPUT_BGBOX">
+				<ATTR X="0" Y="0" W="240" H="80" STATIC_NUM = "3"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_CONFIRM_OUTLINE">
+				<ATTR X="8" Y="49" W="224" H="24" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" STATIC_NUM = "6"/>
+			</STATIC_FORM>
+		</STATIC_FORM>		
+		<EDIT ID = "EDITBOX_CERTIFICATE_STRING">
+			<ATTR X="23" Y="169" W="216" H="20" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" STATIC_NUM = "6"/>						
+			<ATTR EDIT_FONT = "Font_Text" EDIT_PREVIEW = "0" FONT_COLOR_HEX="0xFF4D3413"/>	
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetCustomDataAsInt(0)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local cust = UISelf:GetCustomDataAsInt()
+				if cust == 0 then
+					UISelf:SetEditFocus(true)
+					UISelf:SetCustomDataAsInt(1)
+				end
+			</SCRIPT>			
+			<HOTKEY ID="59">
+				local kParent = UISelf:GetParent()
+				local kDeleteBtn = kParent:GetControl("BTN_DO_DELETE")
+				if true == kDeleteBtn:GetEnable() then
+					g_selectStage:CallDeleteCharacterIfAble(UISelf)
+				end
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">	 CloseUI("DeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) return true </HOTKEY>
+			<HOTKEY ID="60"> CloseUI("DeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) return true </HOTKEY>
+		</EDIT>
+		<STATIC_FORM ID="SFRM_BOX_LINE">
+			<ATTR X="5" Y="200" W="252" H="2" STATIC_NUM = "24"/>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_DO_DELETE" X="48" Y="206" W="111" H="41">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2" />
+			<ATTR TEXT = "96" FONT = "FTbt_12" T_X = "40" T_Y ="6" T_CENTER = "1" />
+			<SCRIPT ID="ON_L_BTN_UP">
+				g_selectStage:CallDeleteCharacterIfAble(UISelf)
+			</SCRIPT>			
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL_DELETE" X="132" Y="206" W="111" H="41">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<ATTR TEXT = "97" FONT = "FTbt_12" T_X = "40" T_Y ="6" T_CENTER = "1" />
+			<SCRIPT ID="ON_L_BTN_UP"> CloseUI("DeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true)	</SCRIPT>								
+		</BUTTON>
+		<HOTKEY ID="28"> return true </HOTKEY>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="AskOneMoreDeleteConfirm" PRIORITY="3" >	 
+		<SCRIPT ID="ON_CALL">
+			UISelf:SetModal(true)
+			local slf = UISelf
+			local dlt = GetUIWnd("DeleteConfirm")
+			if false==dlt:IsNil() then
+				slf:SetLocation(Point2(dlt:GetLocation():GetX()+3, dlt:GetLocation():GetY()))
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			UISelf:SetModal(false)
+		</SCRIPT>
+		<ATTR X="403" Y="300" W="257" H="241" STATIC_NUM = "34" />
+		
+		<STATIC_FORM ID="SFRM_BG">
+			<ATTR X="7" Y="32" W="242" H="25" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "4" STATIC_NUM = "2"/>
+			<ATTR TEXT = "41505" FONT = "FTtitle_14" T_X = "126" T_Y ="4" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER = "1" />
+			<STATIC_FORM ID="SFRM_BG_OUTLINE">
+				<ATTR X="0" Y="0" W="242" H="25" STATIC_NUM = "3"/>
+			</STATIC_FORM>
+
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_DO_DELETE" X="45" Y="206" W="111" H="41">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2" />
+			<ATTR TEXT = "96" FONT = "FTbt_12" T_X = "40" T_Y ="6" T_CENTER = "1" />
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				PlaySoundByID( "Staff_attk_04" )
+				g_selectStage:DeleteCharacterIfAble(UISelf) 
+				CloseUI("AskOneMoreDeleteConfirm", true) 
+				CloseUI("DeleteConfirm", true) CloseUI
+				("BarrierForDeleteConfirm", true) 
+			</SCRIPT>
+			<HOTKEY ID="28"> 
+				PlaySoundByID( "Staff_attk_04" )
+				g_selectStage:DeleteCharacterIfAble(UISelf) 
+				CloseUI("AskOneMoreDeleteConfirm", true) 
+				CloseUI("DeleteConfirm", true) CloseUI
+				("BarrierForDeleteConfirm", true) 
+				return true
+			</HOTKEY>
+			<HOTKEY ID="59"> 
+				PlaySoundByID( "Staff_attk_04" )
+				g_selectStage:DeleteCharacterIfAble(UISelf) 
+				CloseUI("AskOneMoreDeleteConfirm", true) 
+				CloseUI("DeleteConfirm", true) CloseUI
+				("BarrierForDeleteConfirm", true) 
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL_DELETE" X="129" Y="206" W="111" H="41">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<ATTR TEXT = "97" FONT = "FTbt_12" T_X = "40" T_Y ="6" T_CENTER = "1" />
+			<SCRIPT ID="ON_L_BTN_UP"> CloseUI("AskOneMoreDeleteConfirm", true) CloseUI("DeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) </SCRIPT>								
+			<HOTKEY ID="1">  CloseUI("AskOneMoreDeleteConfirm", true) CloseUI("DeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) return true </HOTKEY>
+			<HOTKEY ID="60"> CloseUI("AskOneMoreDeleteConfirm", true) CloseUI("DeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<FORM ID="BarrierForDeleteConfirm" PRIORITY="1" >
+		<ATTR X="0" Y="0" W="1600" H="1200"/>
+		<HOTKEY ID="1">return true</HOTKEY>
+		<HOTKEY ID="28">return true</HOTKEY>
+		<HOTKEY ID="106">return true</HOTKEY>
+	</FORM>
+	
+	<STATIC_FORM ID="WrongInputDeleteConfirm" PRIORITY="3">			
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="208" H="127" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="75" STATIC_NUM="3" />
+				<ATTR TEXT="41504" FONT="Font_Text" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<ATTR TEXT = "41504" FONT = "FTtitle_14" T_X = "131" T_Y ="38" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" T_CENTER = "1"/>
+		<BUTTON ID="BTN_OK" X="90" Y="206" W="111" H="41">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>			
+			<ATTR X="63" Y="88" W="79" H="28" />
+			<ATTR TEXT="96" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<SCRIPT ID="ON_L_BTN_UP"> CloseUI("WrongInputDeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) </SCRIPT>
+			<HOTKEY ID="59"> CloseUI("WrongInputDeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) return true</HOTKEY>
+			<HOTKEY ID="28"> CloseUI("WrongInputDeleteConfirm", true) CloseUI("BarrierForDeleteConfirm", true) return true</HOTKEY>
+			<HOTKEY ID="1"> CloseUI("WrongInputDeleteConfirm", true)  CloseUI("BarrierForDeleteConfirm", true) return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>	
+
+	<FORM ID="CharacterRotate" W="356" H="59" >
+		<SCRIPT ID="ON_DISPLAY">
+			local strCharNode = nil
+			if nil ~= g_CreateType then
+				if g_CreateType == 0 then
+					strCharNode = "char_root_create_1"
+				elseif g_CreateType == 1 then
+					strCharNode = "char_root_create_2"
+				end
+			else
+					strCharNode = "char_root_create_1"
+			end
+			local kSize = UISelf:GetSize()
+			UISelf:SetLocationByWorldNode(strCharNode, Point2(10-kSize:GetX()/2, 0) )
+		</SCRIPT>
+		<BUTTON ID="DoTurnRight" X="0" Y="0" W="63" H="59">
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaArrowL.tga" BTN_IMG_W="126" BTN_IMG_H="118"/>
+			<SCRIPT ID="ON_DISPLAY">
+				if UISelf:IsMouseDown() == true then
+					actor = g_selectStage:GetNewActor()
+					if actor:IsNil() == false then
+						actor:IncRotate(0.08)
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTextW(60016), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="DoTurnLeft" X="293" Y="0" W="63" H="59">
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaArrowR.tga" BTN_IMG_W="126" BTN_IMG_H="118"/>
+			<SCRIPT ID="ON_DISPLAY">
+				if UISelf:IsMouseDown() == true then
+					actor = g_selectStage:GetNewActor()
+					if actor:IsNil() == false then
+						actor:IncRotate(-0.08)
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTextW(60015), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</BUTTON>
+	</FORM>
+
+	<!-- Class -->
+	<FORM ID="SelectClass" Y="19" IS_ABSOLUTE_Y="1" W="828" H="249">
+		<SCRIPT ID="ON_DISPLAY">
+			local kMenu = GetUIWnd("SFRM_CHAR_MENU")
+			if nil~=kMenu and kMenu:IsNil()==false then
+				local kPos = UISelf:GetLocation()
+				local kMenuPos = kMenu:GetLocation()
+				UISelf:SetLocation( Point2(kMenuPos:GetX()-45, kPos:GetY()) )
+			end
+		</SCRIPT>
+		<CHECK_BUTTON ID="SelectFighter" X="0" Y="0" W="198" H="249" >
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card01front.tga" IMG_W="198" IMG_H="249" />
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card01over.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card01back.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, true, 1)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				CallMutableToolTipText(GetTextW(400191), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 1)
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="SelectMagician" X="210" Y="0" W="198" H="249" >
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card02front.tga" IMG_W="198" IMG_H="249" />
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card02over.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card02back.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, false, 2)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				CallMutableToolTipText(GetTextW(400192), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 2)
+			</SCRIPT>
+		</CHECK_BUTTON>	
+		<CHECK_BUTTON ID="SelectArcher" X="420" Y="0" W="198" H="249">
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card03front.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card03over.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card03back.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, false, 3)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				CallMutableToolTipText(GetTextW(400193), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 3)
+			</SCRIPT>
+		</CHECK_BUTTON>	
+		<CHECK_BUTTON ID="SelectThief" X="630" Y="0" W="198" H="249">
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card04front.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card04over.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card04back.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, false, 4)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				CallMutableToolTipText(GetTextW(400194), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 4)
+			</SCRIPT>
+		</CHECK_BUTTON>			
+		<!-- NEW RACE --------------------------------------------------------------------------------------------------------------------------------------------->
+		<CHECK_BUTTON ID="SelectSummoner" X="0" Y="0" W="198" H="249">
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card05front.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card05over.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card05back.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, true, 51)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				CallMutableToolTipText(GetTextW(791251), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 51)
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="SelectTwins" X="210" Y="0" W="198" H="249">
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card06front.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card06over.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/Card06back.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, false, 52)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				CallMutableToolTipText(GetTextW(791252), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 52)
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="SelectNewRace1" X="420" Y="0" W="198" H="249">
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/CardCS.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/CardCS.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/CardCS.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, false, 0)</SCRIPT>
+			<!--SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				CallMutableToolTipText(GetTextW(791252), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 51)
+			</SCRIPT-->
+		</CHECK_BUTTON>		
+		<CHECK_BUTTON ID="SelectNewRace2" X="630" Y="0" W="198" H="249">
+			<FORM ID="FRM_FRONT_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/CardCS.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_OVER_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/CardCS.tga" IMG_W="198" IMG_H="249"/>
+			<FORM ID="FRM_PUSH_IMG" X="0" Y="0" W="198" H="249" IS_VISIBLE="0" PASS_EVENT="1" IMG="../Data/6_ui/chaMake/CardCS.tga" IMG_W="198" IMG_H="249"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-20" Y="-20" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">SelectClassInit(UISelf, false, 0)</SCRIPT>
+			<!--SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				end
+				--CallMutableToolTipText(GetTextW(791252), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT-->
+			<!--SCRIPT ID="ON_MOUSE_OUT">
+				local UIPush = UISelf:GetControl("FRM_PUSH_IMG")
+				if not UIPush:IsNil() and UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", true)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", false)
+				elseif not UIPush:IsVisible() then
+					SelectClassCardEvent(UISelf, "FRM_PUSH_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_OVER_IMG", false)
+					SelectClassCardEvent(UISelf, "FRM_FRONT_IMG", true)
+				end
+				CloseToolTip()
+			</SCRIPT-->
+			<!--SCRIPT ID = "ON_L_BTN_UP">
+				PlaySound("../Sound/U_Sound/button(class).wav")
+				SelectClassPushEvent(UISelf, 51)
+			</SCRIPT-->
+		</CHECK_BUTTON>
+		<!------------------------------------------------------------------------------------------------------------------------------------------------------------>
+		<SCRIPT ID = "ON_MOUSE_OVER"> CloseToolTip() </SCRIPT>
+	</FORM>
+	<FORM ID="FRM_BACK_IMAGE" X="25" Y="492" W="350" H="383" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1" PRIORITY="1">
+		<SCRIPT ID="ON_DISPLAY">
+			local kMenu = GetUIWnd("SFRM_CHAR_MENU")
+			if nil~=kMenu and kMenu:IsNil()==false then
+				local kPos = UISelf:GetLocation()
+				local kMenuPos = kMenu:GetLocation()
+				local iScreenY = GetScreenSize():GetY()
+				UISelf:SetLocation( Point2(kMenuPos:GetX()-45, iScreenY-kMenu:GetSize():GetY()-UISelf:GetSize():GetY() ) )
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+
+		<STATIC_FORM ID="SFRM_NAME_EDIT_BG" X="0" Y="0" W="350" H="36" Z="-1" STATIC_NUM="4"/>
+		<FORM ID="FRM_NAME_TITLE" X="7" Y="4" W="78" H="24" IMG = "../Data/6_ui/common/cmTab.tga" IMG_W="78" IMG_H="24" TEXT="600000" FONT="Font_Text" T_X="37" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<STATIC_FORM ID="SFRM_CHAR_NAMING_COLORBOX" X="79" Y="4" W="264" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="3"/>
+		<STATIC_FORM ID="SFRM_CHAR_NAMING_SHADOWBOX" X="79" Y="4" W="264" H="24" Z="1" STATIC_NUM="3"/>
+		<EDIT ID="editUserName"><!-- EDIT_DONT_LOSTFOCUS="0"-->
+			<ATTR X="79" Y="4" W="264" H="24" EDIT_T_X="5" EDIT_T_Y="5" EDIT_FONT="Font_Text" EDIT_PREVIEW="600010" FONT_COLOR_HEX="0xFF4D3413" EDIT_LIMIT_LENGTH="10"/>
+			<ATTR EDIT_DONT_LOSTFOCUS="1"/>
+			<ATTR EDIT_BLOCK_IMG = "../Data/6_UI/01_main/bgWarn.tga" />
+			<ATTR EDIT_CAROT_IMG = "../Data/6_UI/Carot.tga" />
+			<SCRIPT ID = "ON_CALL">
+				SetLimitLength_CharSelect(UISelf)
+				UISelf:SetCustomDataAsInt(0)
+				UISelf:SetEditText("")
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local cust = UISelf:GetCustomDataAsInt()
+				if cust == 0 then
+					UISelf:SetEditFocus(true)
+					UISelf:SetCustomDataAsInt(1)
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_KEY_ENTER">
+				userName = GetUserName()
+				if userName:Length() ~= 0 then
+					ClearEditFocus()
+				end
+				UISelf:SetEditFocus(true)
+				SendScriptEvent("SFRM_CHAR_MENU", "BTN_CREATE_OK", "ON_L_BTN_UP")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(60010), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_LOSE_FOCUS">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_GET_FOCUS">CloseToolTip()</SCRIPT>
+			<HOTKEY ID="59"> SendScriptEvent("SFRM_CHAR_MENU", "BTN_CREATE_OK", "ON_L_BTN_UP") </HOTKEY>
+			<HOTKEY ID="60"> SendScriptEvent("SFRM_CHAR_MENU", "BTN_CREATE_CANCLE", "ON_L_BTN_UP") </HOTKEY>
+			<HOTKEY ID="1"> SendScriptEvent("SFRM_CHAR_MENU", "BTN_CREATE_CANCLE", "ON_L_BTN_UP") </HOTKEY>
+		</EDIT>
+		<FORM ID="SelectGender" X="0" Y="32" Z="10" W ="350" H ="36" PRIORITY="5">			
+			<STATIC_FORM ID="SFRM_GENDER_LINE_BG" X="0" Y="0" W="350" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID="SFRM_SELECT_GENDER_TITLE" X="7" Y="4" W="147" H="25" Z="1" STATIC_NUM="24">
+				<ATTR TEXT="600500" T_X="70" T_Y="3" T_CENTER="1" T_OUTLINE="1" />
+			</STATIC_FORM>
+			<CHECK_BUTTON ID="SelectMale" X = "156" Y = "0" W ="93" H ="32">
+			<ATTR BTN_IMG = "../Data/6_ui/chaMake/chaBm.tga" BTN_IMG_W = "186" BTN_IMG_H = "64"/>			
+				<ATTR TEXT="600501" T_X="39" T_Y="7" T_OUTLINE="1" FONT="FTcts_13"  OUTLINE_COLOR_HEX="0xFF000000" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="13"/>									
+				<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(254), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					if nil~=kSelf and kSelf:IsNil()==false then
+						SelectGender(kSelf, 1)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:CheckState(true) 
+				</SCRIPT>
+			</CHECK_BUTTON>
+			
+			<CHECK_BUTTON ID="SelectFemale" X = "251" Y = "0" W ="93" H ="32">
+				<ATTR BTN_IMG = "../Data/6_ui/chaMake/chaBw.tga" BTN_IMG_W = "186" BTN_IMG_H = "64"/>
+				<ATTR TEXT="600502" T_X="39" T_Y="7" T_OUTLINE="1"  FONT="FTcts_13"  OUTLINE_COLOR_HEX="0xFF000000" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="14"/>
+				<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(255), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					if nil~=kSelf and kSelf:IsNil()==false then
+						SelectGender(kSelf, 2)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:CheckState(false) 
+				</SCRIPT>
+			</CHECK_BUTTON>
+		</FORM>	
+		<FORM ID="FRM_BACK_IMAGE2" X="0" Y="64" W="350" H="317" PRIORITY="1">
+			<STATIC_FORM ID="SFRM_HAIR_SELECT_BG" X="0" Y="0" W="352" H="122" Z="-1" STATIC_NUM="1"/>
+			<STATIC_FORM ID="SFRM_SELECT_HAIR_TITLE" X="1" Y="0" W="350" H="36" STATIC_NUM="4" TEXT="600003" FONT="Font_Text" T_X="100" T_Y="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<STATIC_FORM ID="SFRM_SELECT_HAIR_TITLE_COLOR_BOX" X="7" Y="0" W="84" H="24" Z="1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<CHECK_BUTTON ID="FRM_SELECT_HAIR_TITLE_TEXT" X="7" Y="0" W="84" H="24" Z="2" TEXT="600002" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG = "../Data/6_ui/common/cmTabB.tga" BTN_IMG_W = "168" BTN_IMG_H = "48">
+				<SCRIPT ID="ON_CALL">UISelf:CheckState(true) UISelf:LockClick(true)</SCRIPT>
+			</CHECK_BUTTON>
+			<STATIC_FORM ID="SFRM_SELECT_HAIR_COLOR_BOX" X="9" Y="35" W="334" H="77" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_SELECT_HAIR_SHADOW_BOX" X="9" Y="35" W="334" H="77" Z="1" STATIC_NUM="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_01" X="36" Y="39" W="92" H="70" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_02" X="130" Y="39" W="92" H="70" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_03" X="224" Y="39" W="92" H="70" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<FORM ID="FRM_HAIR_SELECT" X="0" Y="35" Z="10" W="352" H="77">
+				<SCRIPT ID="ON_CALL">
+					local kSelf = UISelf
+					g_selectStage:CallSelectStyle_Hair(kSelf,1)
+				</SCRIPT>
+				<BUTTON ID="BTN_HAIR_SELECT_PREV" X="9" Y="0" W="29" H="77" BTN_IMG="../Data/6_ui/chaMake/chaLeftB.tga" BTN_IMG_W="58" BTN_IMG_H="154">
+					<SCRIPT ID="ON_L_BTN_UP">
+						g_selectStage:PrevSlot(2, 1)
+						g_selectStage:CallSelectStyle_Hair(UISelf:GetParent(),1)
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(60012), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_HAIR_SELECT_NEXT" X="314" Y="0" W="29" H="77" BTN_IMG="../Data/6_ui/chaMake/chaRightB.tga" BTN_IMG_W="58" BTN_IMG_H="154">
+					<SCRIPT ID="ON_L_BTN_UP">
+						g_selectStage:NextSlot(2, 1)
+						g_selectStage:CallSelectStyle_Hair(UISelf:GetParent(),1)
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(60012), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+				<BUILD TARGET_ID="FRM_HAIR" X="35" Y="3" X_COUNT="3" Y_COUNT="1" X_GAB="94"/>
+				<FORM ID="FRM_HAIR" X="0" Y="0" Z="10" W="92" H="70">
+					<FORM ID="FRM_IMG" X="0" Y="0" Z="10" W="92" H="70" IMG_W="92" IMG_H="70">
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							PlaySound("../Sound/U_Sound/button(Choice).wav")
+							g_selectStage:EquipBaseItem(2, UISelf:GetParent():GetBuildIndex())
+						</SCRIPT>
+					</FORM>
+				</FORM>
+			</FORM>
+			
+			<STATIC_FORM ID="SFRM_HAIR_COLOR_BG" X="0" Y="116" W="352" H="92" Z="-1" STATIC_NUM="1"/>
+			<STATIC_FORM ID="SFRM_HAIR_COLOR_TITLE" X="1" Y="116" W="350" H="36" STATIC_NUM="4" TEXT="600005" FONT="Font_Text" T_X="100" T_Y="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<STATIC_FORM ID="SFRM_SELECT_HAIR_COLOR_TITLE_COLOR_BOX" X="8" Y="120" W="84" H="24" Z="1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<CHECK_BUTTON ID="FRM_SELECT_HAIR_COLOR_TITLE_TEXT" X="8" Y="120" W="84" H="24" Z="2" TEXT="600004" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48">
+				<SCRIPT ID="ON_CALL">UISelf:CheckState(true) UISelf:LockClick(true)</SCRIPT>
+			</CHECK_BUTTON>
+			<STATIC_FORM ID="SFRM_SELECT_HAIR_COLOR_COLOR_BOX" X="9" Y="151" W="334" H="47" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_SELECT_HAIR_COLOR_SHADOW_BOX" X="9" Y="151" W="334" H="47" Z="1" STATIC_NUM="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_COLOR_01" X="36" Y="155" W="54" H="40" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_COLOR_02" X="92" Y="155" W="54" H="40" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_COLOR_03" X="148" Y="155" W="54" H="40" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_COLOR_04" X="204" Y="155" W="54" H="40" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_HAIR_COLOR_05" X="260" Y="155" W="54" H="40" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<FORM ID="FRM_COLOR_SELECT" X="0" Y="152" Z="10" W="352" H="77">
+				<SCRIPT ID="ON_CALL">
+					local kSelf = UISelf
+					g_selectStage:CallSelectStyle_Color(kSelf,0)
+				</SCRIPT>
+				<BUTTON ID="BTN_COLOR_SELECT_PREV" X="9" Y="0" W="29" H="47" BTN_IMG="../Data/6_ui/chaMake/chaLeftsB.tga" BTN_IMG_W="58" BTN_IMG_H="94">
+					<SCRIPT ID="ON_L_BTN_UP">
+						g_selectStage:PrevSlot(0)
+						g_selectStage:CallSelectStyle_Color(UISelf:GetParent(),0)
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(60013), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_COLOR_SELECT_NEXT" X="314" Y="0" W="29" H="47" BTN_IMG="../Data/6_ui/chaMake/chaRightsB.tga" BTN_IMG_W="58" BTN_IMG_H="94">
+					<SCRIPT ID="ON_L_BTN_UP">
+						g_selectStage:NextSlot(0)
+						g_selectStage:CallSelectStyle_Color(UISelf:GetParent(),0)
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(60013), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+				<BUILD TARGET_ID="FRM_COLOR" X="36" Y="3" X_COUNT="5" Y_COUNT="1" X_GAB="56"/>
+				<FORM ID="FRM_COLOR" X="0" Y="0" W="54" H="40">
+					<FORM ID="FRM_IMG" X="1" Y="2" W="54" H="40" IMG_W="54" IMG_H="38">
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							PlaySound("../Sound/U_Sound/button(Choice).wav")
+							g_selectStage:EquipBaseItem(0, UISelf:GetParent():GetBuildIndex())
+						</SCRIPT>
+					</FORM>
+				</FORM>			
+			</FORM>
+			
+			<STATIC_FORM ID="SFRM_SELECT_FACE_BG" X="0" Y="202" W="352" H="120" Z="-1" STATIC_NUM="1"/>
+			<STATIC_FORM ID = "SFRM_SELECT_FACE_TITLE" X="1" Y="202" W="350" H="36" STATIC_NUM="4" TEXT="600007" FONT="Font_Text" T_X="100" T_Y="6" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<STATIC_FORM ID="SFRM_SELECT_FACE_TITLE_COLOR_BOX" X="8" Y="205" W="84" H="24" Z="1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<CHECK_BUTTON ID="FRM_SELECT_FACE_TITLE_TEXT" X="8" Y="205" W="84" H="24" Z="2" TEXT="600006" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48">
+				<SCRIPT ID="ON_CALL">UISelf:CheckState(true) UISelf:LockClick(true)</SCRIPT>
+			</CHECK_BUTTON>		
+			<STATIC_FORM ID = "SFRM_SELECT_FACE_BOX" X="9" Y="236" W="334" H="77" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_SELECT_FACE_SHADOW_BOX" X="9" Y="236" W="334" H="77" Z="1" STATIC_NUM="3"/>
+			<STATIC_FORM ID="SFRM_FACE_01" X="36" Y="240" W="92" H="70" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_FACE_02" X="130" Y="240" W="92" H="70" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_FACE_03" X="224" Y="240" W="92" H="70" Z="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>		
+			<FORM ID="FRM_FACE_SELECT" X="0" Y="236" Z="10" W="352" H="77">
+				<SCRIPT ID="ON_CALL">
+					local kSelf = UISelf
+					g_selectStage:CallSelectStyle_Face(kSelf,2)
+				</SCRIPT>
+				<BUTTON ID="BTN_FACE_SELECT_PREV" X="9" Y="0" W="29" H="77" BTN_IMG="../Data/6_ui/chaMake/chaLeftB.tga" BTN_IMG_W="58" BTN_IMG_H="154">
+					<SCRIPT ID="ON_L_BTN_UP">
+						g_selectStage:PrevSlot(4, 1)
+						g_selectStage:CallSelectStyle_Face(UISelf:GetParent(),2)
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(60014), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_FACE_SELECT_NEXT" X="314" Y="0" W="29" H="77" BTN_IMG="../Data/6_ui/chaMake/chaRightB.tga" BTN_IMG_W="58" BTN_IMG_H="154">
+					<SCRIPT ID="ON_L_BTN_UP">
+						g_selectStage:NextSlot(4, 1)
+						g_selectStage:CallSelectStyle_Face(UISelf:GetParent(),2)
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(60014), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+				<BUILD TARGET_ID="FRM_FACE" X="36" Y="4" X_COUNT="3" Y_COUNT="1" X_GAB="94"/>
+				<FORM ID="FRM_FACE" X="0" Y="0" W="92" H="70">
+					<FORM ID="FRM_IMG" X="0" Y="0" W="92" H="70" IMG_W="92" IMG_H="70">
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							PlaySound("../Sound/U_Sound/button(Choice).wav")
+							g_selectStage:EquipBaseItem(4, UISelf:GetParent():GetBuildIndex())
+						</SCRIPT>
+					</FORM>
+				</FORM>					
+			</FORM>
+		</FORM>
+	</FORM>
+
+	<FORM ID="FRM_EQUIP_GROUP" Y="492" W="110" H="258" PRIORITY="5">
+		<SCRIPT ID="ON_DISPLAY">
+			local kTemp = GetUIWnd("FRM_BACK_IMAGE")
+			UISelf:SetLocation( Point2( kTemp:GetLocation():GetX()+kTemp:GetSize():GetX()+15, kTemp:GetLocation():GetY() ) )
+		</SCRIPT>
+		<ATTR IMG="../Data/6_ui/chaMake/chaBgPv.tga" IMG_W="110" IMG_H="258"/>
+		<BUTTON ID="BTN_CASH" X="8" Y="9" W="94" H="56">
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtPv.tga" BTN_IMG_W="94" BTN_IMG_H="224" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="791507" T_X="47" T_Y="20" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				TestEquipItem(1)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_SET" X="8" Y="62" W="94" H="56">
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtPv.tga" BTN_IMG_W="94" BTN_IMG_H="224" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="791508" T_X="47" T_Y="20" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				TestEquipItem(2)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_ADVENCE" X="8" Y="115" W="94" H="56">
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtPv.tga" BTN_IMG_W="94" BTN_IMG_H="224" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="791509" T_X="47" T_Y="20" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				TestEquipItem(3)
+			</SCRIPT>
+		</BUTTON>
+		<FORM ID="FRM_INFO" X="8" Y="180" W="93" H="90">
+			<ATTR TEXT="791511" T_X="47" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0XFFfff799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+	</FORM>
+	
+	<LIST ID="LST_REALM_COMBINE_CHAR_INFO" ALIGN_X="50" ALIGN_Y="50" W="298" H="560" ELEMENT_ID="FRM_REALM_COMBINE_CHAR_ITEM" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE">
+		<SCRIPT ID="ON_CALL">
+			local slf = UISelf
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetShowWorldFocusFilterColorAlpha( 0x00000000, 0.0, 0.5, 1.0, true, false )
+			local btn = CallUI("BTN_REALM_COMBINE_CANCLE")
+			if true==btn:IsNil() then return end
+			
+			local lstpos = slf:GetLocation()
+			lstpos:SetX(slf:GetSize():GetX()+slf:GetLocation():GetX())
+			lstpos:SetY(66+slf:GetLocation():GetY())
+			btn:SetLocation(lstpos)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetShowWorldFocusFilterColorAlpha( 0x00000000, 0.5, 0.0, 1.0, false, false )
+			g_bIgnoreCombine = true
+			SetCharSelectMenu(MENU_SELECT)
+		</SCRIPT>
+		<BUTTON ID="BTN_SCR_UP" X="168" Y="-66" W="66" H="66" BTN_IMG="../Data/6_ui/chaMake/chaBup2.tga" BTN_IMG_W="132" BTN_IMG_H="132"/>
+		<BUTTON ID="BTN_SCR_DOWN" X="168" Y="560" W="66" H="66" BTN_IMG="../Data/6_ui/chaMake/chaBdown2.tga" BTN_IMG_W="132" BTN_IMG_H="132"/>
+		<BUTTON ID="BTN_SCR_MIDDLE" X="0" Y="0" W="18" H="21" ALPHA="0" BTN_IMG="../Data/6_ui/Common/cmbody.tga" BTN_IMG_W="30" BTN_IMG_H="42" NO_FOCUS="1" PASS_EVENT="1"/>
+	</LIST>
+	<BUTTON ID="BTN_REALM_COMBINE_CANCLE">
+		<ATTR X="0" Y="0" Z="99" W ="84" H ="26"/>
+		<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		<ATTR TEXT = "97" FONT = "FTbt_12" T_X = "42" T_Y ="6" T_CENTER = "1" />
+		<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("LST_REALM_COMBINE_CHAR_INFO") CloseUI("BTN_REALM_COMBINE_CANCLE") </SCRIPT>
+		<HOTKEY ID = "60"> CloseUI("LST_REALM_COMBINE_CHAR_INFO") CloseUI("BTN_REALM_COMBINE_CANCLE") </HOTKEY>
+	</BUTTON>
+	<!-- 렐름 통합 -->
+	<FORM ID="FRM_REALM_COMBINE_CHAR_ITEM" X="0" Y="0" W="278" H="140" IMG="../Data/6_ui/chaMake/chaCd01.tga" IMG_X="121" IMG_W="155" IMG_H="128" T_X="141" T_Y="16" FONT="FTcts_13" FONT_COLOR_HEX="0xFF903701">
+		<FORM ID="FRM_CARD_IMG" X="0" Y="0" W="155" H="128" Z="-2"/>
+		<IMG ID="IMG_CLASS" X="230" Y="36" W="26" H="26" Z="-1" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1" PASS_EVENT="1">
+		</IMG>
+		<FORM ID="FRM_BIRTH_TEXT" X="169" Y="92" W="120" H="22" Z="-1" TEXT="" FONT_COLOR_HEX="0xFF6f2a00" PASS_EVENT="1">
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+		</FORM> 
+		<FORM ID="FRM_CARD_DISABLER" X="0" Y="0" W="270" H="128" IMG="../data/6_ui/chaMake/chaUnitybg.tga" IMG_Y="6" IMG_W="270" IMG_H="116">
+			<ATTR TEXT="50506" T_X="199" T_Y="45" T_CENTER="1" T_OUTLINE="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFBC8"/><!-- 이름변경인지 통합인지 설명 50506:통합 50507:이름 -->
+		</FORM>
+		<BUTTON ID="BTN_CHANGE_NAME" X="47" Y="52" W="76" H="24" BTN_IMG="../Data/6_ui/chaMake/chaUnityB01.tga" BTN_IMG_W="152" BTN_IMG_H="48" TEXT="50508" T_X="38" T_Y="3" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_L_BTN_DOWN">g_selectStage:OnClickCombineCharacter(UISelf)</SCRIPT> <!-- 이름 변경 버튼 -->
+		</BUTTON>
+		<BUTTON ID="BTN_COMBINE" X="47" Y="39" W="76" H="24" Z="1" BTN_IMG="../Data/6_ui/chaMake/chaUnityB01.tga" BTN_IMG_W="152" BTN_IMG_H="48" TEXT="50504" T_X="38" T_Y="3" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_L_BTN_DOWN">g_selectStage:OnClickCombineCharacter(UISelf)</SCRIPT> <!--통합 버튼 -->
+		</BUTTON>
+		<BUTTON ID="BTN_DELETE" X="47" Y="65" W="76" H="24" Z="1" BTN_IMG="../Data/6_ui/chaMake/chaUnityB02.tga" BTN_IMG_W="152" BTN_IMG_H="48" TEXT="50505" T_X="38" T_Y="3" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_L_BTN_DOWN">g_selectStage:OnClickDeleteCharacter(UISelf)</SCRIPT> <!--삭제 버튼 -->
+		</BUTTON>
+	</FORM>
+	<!--통합 UI -->
+	<STATIC_FORM ID="SFRM_COMBINE_REQUEST" ALIGN_X="50" ALIGN_Y="50" W="389" H="215" STATIC_NUM="1" PRIORITY="2">
+		<SCRIPT ID="ON_CLOSE">CloseUI("BarrierForDeleteConfirm")</SCRIPT>
+		<STATIC_FORM ID = "SFRM_CASH_TITLE" X = "1" Y = "0" W = "387" H = "36" STATIC_NUM = "4" T_X = "20" T_Y = "6" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="50501">
+			<BUTTON ID="BTN_CLOSE" X="356" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():Close()</SCRIPT>
+			</BUTTON>
+			<FORM ID="SFRM_BTN_BG" X="363" Y="9" Z="-1" W="12" H="11" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="12" IMG_H="11"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_BG" X="11" Y="36" W="367" H="131" Z="-2" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID="FRM_BG_SD" X="0" Y="0" W="367" H="131" STATIC_NUM="3"/>
+			<IMG ID="IMG_LINE" X="-6" Y="133" W="379" H="2" IMG="../Data/6_ui/Pvp/pvLine.tga" IMG_W="379" IMG_H="2"/>
+			<IMG ID="IMG_ARROW" X="157" Y="48" W="55" H="40" IMG="../Data/6_ui/chaMake/chaUnityAw.tga" IMG_W="55" IMG_H="40"/> 
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_BG_SM" X="11" Y="175" W="196" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID="FRM_BG_SM_SD" X="0" Y="0" W="196" H="26" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<FORM ID = "FRM_CARD_BEFORE" FONT="FTcts_13" FONT_COLOR_HEX="0xFF903701">
+			<ATTR X = "11" Y = "38" Z = "1" W = "155" H = "128" IS_VISIBLE = "1" PASS_EVENT="1"/>
+			<ATTR IMG = "../Data/6_ui/chaMake/chaCd01.tga" IMG_W = "155" IMG_H = "128" T_X = "20" T_Y = "16"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<IMG ID="IMG_CLASS">
+				<ATTR X="108" Y="36" W="26" H="26" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1" PASS_EVENT = "1"/>
+			</IMG>
+			<FORM ID = "FRM_BIRTH_TEXT">
+				<ATTR X = "47" Y = "92" W = "120" H = "22" TEXT = "" FONT_COLOR_HEX = "0xFF6f2a00" PASS_EVENT = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			</FORM> 
+			<FORM ID = "FRM_MAP_TEXT">
+				<ATTR X = "20" Y = "66" W = "120" H = "22" TEXT = "0" PASS_EVENT = "1"/>
+			</FORM>
+		</FORM>
+		<FORM ID = "FRM_CARD_AFTER" FONT="FTcts_13" FONT_COLOR_HEX="0xFF903701">
+			<ATTR X = "221" Y = "38" Z = "1" W = "155" H = "128" IS_VISIBLE = "1" PASS_EVENT="1"/>
+			<ATTR IMG = "../Data/6_ui/chaMake/chaCd01.tga" IMG_W = "155" IMG_H = "128" T_X = "20" T_Y = "16"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<IMG ID="IMG_CLASS">
+				<ATTR X="108" Y="36" W="26" H="26" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1" PASS_EVENT = "1"/>
+			</IMG>
+			<FORM ID = "FRM_BIRTH_TEXT">
+				<ATTR X = "47" Y = "92" W = "120" H = "22" TEXT = "" FONT_COLOR_HEX = "0xFF6f2a00" PASS_EVENT = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			</FORM>
+			<FORM ID = "FRM_MAP_TEXT">
+				<ATTR X = "20" Y = "66" W = "120" H = "22" TEXT = "0" PASS_EVENT = "1"/>
+			</FORM>
+		</FORM>
+		<EDIT ID="EDT_NAME">
+			<ATTR X="14" Y="179" W="190" H="17" EDIT_FONT="Font_Text" EDIT_PREVIEW="600010" FONT_COLOR_HEX="0xFF4D3413" EDIT_LIMIT_LENGTH="10"/>
+			<SCRIPT ID = "28">g_selectStage:OnInputCombineChangeName(UISelf) return true</SCRIPT>
+			<SCRIPT ID = "106">g_selectStage:OnInputCombineChangeName(UISelf) return true</SCRIPT>
+			<HOTKEY ID="1">ClearEditFocus() return true</HOTKEY>
+		</EDIT>
+		<BUTTON ID="BTN_RENAME_OK" X="209" Y="175" W="84" H="26" Z="1" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" TEXT="50601" T_X="42" T_Y="3" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				kNameEdit = UISelf:GetParent():GetControl("EDT_NAME")
+				g_selectStage:OnInputCombineChangeName(kNameEdit)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_OK" X="295" Y="175" W="84" H="26" Z="1" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" TEXT="50503" T_X="42" T_Y="3" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_CALL"> UISelf:Disable(true) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">g_selectStage:OnClickCombineOK(UISelf)</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+	<!--신규 캐릭터 생성 UI -->
+	<STATIC_FORM ID="SFRM_CHAR_MENU" ALIGN_X="50" ALIGN_Y="100" W="888" H="46">
+		<FORM ID="FRM_MAIN_IMG_1" X="0" Y="0" W="512" H="46">
+			<ATTR IMG="../Data/6_ui/chaMake/chaBarBt01.tga" IMG_W="512" IMG_H="46"/>
+		</FORM>
+		<FORM ID="FRM_MAIN_IMG_2"X="512" Y="0" W="376" H="46">
+			<ATTR IMG="../Data/6_ui/chaMake/chaBarBt02.tga" IMG_W="376" IMG_H="46"/>
+		</FORM>
+		<!--이전으로-->
+<LOCAL>
+	<NAME ID="JAPAN/KOREA">
+		<BUTTON ID="BTN_BACK" X="32" Y="10" W="115" H="35" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtback.tga" BTN_IMG_W="115" BTN_IMG_H="140" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="49006" FONT="Font_Text" T_X="57" T_Y="10" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				CallUI("QuitMessageBox", true)
+			</SCRIPT>
+			<HOTKEY ID="1">
+				CallUI("QuitMessageBox", true)
+			</HOTKEY>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+	</NAME>
+	<NAME ID="DEFAULT">
+		<BUTTON ID="BTN_BACK" X="32" Y="10" W="115" H="35" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtback.tga" BTN_IMG_W="115" BTN_IMG_H="140" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="49005" FONT="Font_Text" T_X="57" T_Y="10" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				CallYesNoMsgBox( GetTT(60069), GUID(), 4 )
+			</SCRIPT>
+			<HOTKEY ID="1">
+				CallYesNoMsgBox( GetTT(60069), GUID(), 4 )
+			</HOTKEY>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+	</NAME>
+</LOCAL>
+		<!--캐릭터 생성 -->
+		<BUTTON ID="BTN_CREATE_CHARACTOR" X="176" Y="15" W="131" H="25" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtcha.tga" BTN_IMG_W="131" BTN_IMG_H="100" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="600018" FONT="Font_Text" T_X="75" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<IMG ID="IMG_JUMPING_EVENT" X="-22" Y="-48" Z="10" W="110" H="140" IMG="../Data/6_UI/chaMake/chaJpImg.tga" IMG_W="220" IMG_H="280" U="2" V="4" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.08) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_L_BTN_UP">
+				OnSelectRaceUI()
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+		<!--캐릭터 삭제 -->
+		<BUTTON ID="BTN_DELETE_CHARACTOR" X="311" Y="15" W="131" H="25" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtchadt.tga" BTN_IMG_W="131" BTN_IMG_H="100" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="600019" FONT="Font_Text" T_X="75" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				CloseToolTip()
+				selectedActorGuid = g_selectStage:GetSelectedActor()
+				if selectedActorGuid:IsNil() then
+					AddWarnDataStr(GetTextW(600015), 0)
+					return true
+				end
+				g_selectStage:CallDeleteCharacterUI()
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+		<!--시스템 설정 -->
+		<BUTTON ID="BTN_OPTION" X="446" Y="15" W="131" H="25" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtsys.tga" BTN_IMG_W="131" BTN_IMG_H="100" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="201059" FONT="Font_Text" T_X="75" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				CloseUI("DeleteConfirm")
+				CloseUI("AskOneMoreDeleteConfirm")
+				CallUI("BarrierForDeleteConfirm")
+				CallUI("SFRM_OPTION") 
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+		<!--시나리오보기 -->
+<LOCAL>		
+	<NAME ID="DEFAULT">
+		<BUTTON ID="BTN_SHOW_SCENARIO" X="581" Y="15" W="131" H="25" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtscenario.tga" BTN_IMG_W="131" BTN_IMG_H="100" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="600036" FONT="Font_Text" T_X="75" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				if(GetLocale() == LOCALE.NC_USA) then
+					PlayMovie("2DIntro")
+				else
+					PlayMovie("opening") 
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+	</NAME>
+
+	<NAME ID="CHINA">
+		<BUTTON ID="BTN_SHOW_SCENARIO" IS_VISIBLE="0"/>
+	</NAME>
+</LOCAL>
+		<!--게임시작 -->
+		<BUTTON ID="BTN_START_GAME" X="737" Y="13" W="115" H="89" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtstart.tga" BTN_IMG_W="115" BTN_IMG_H="116" U="1" V="4" BTN_T_COLOR_TYPE="12"/>
+			<ATTR TEXT="600020" FONT="Font_Text" T_X="45" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0XFF2A0F0B"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				OnClick_CharacterSelect_StartGame()
+			</SCRIPT>
+			<HOTKEY ID="28">
+				OnClick_CharacterSelect_StartGame() 
+				return true
+			</HOTKEY>
+			<HOTKEY ID="106">
+				OnClick_CharacterSelect_StartGame() 
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+		<!-- 캐릭터 생성 : 취소-->
+		<BUTTON ID="BTN_CREATE_CANCLE" X="219" Y="10" W="115" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtback.tga" BTN_IMG_W="115" BTN_IMG_H="140" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(600009,2201) </SCRIPT>
+			<ATTR TEXT="791512" FONT="Font_Text" T_X="60" T_Y="7" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				g_SceneType = 2
+				LoadingSelectScene()
+				OffCreateUI()
+				MoveCamera_Select()
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+		<!-- 캐릭터 생성 : 생성하기-->
+		<BUTTON ID="BTN_CREATE_OK" X="429" Y="15" W="131" H="25" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtcha.tga" BTN_IMG_W="131" BTN_IMG_H="100" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(600008,2200) </SCRIPT>
+			<ATTR TEXT="600008" FONT="Font_Text" T_X="75" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP"> CreateCharacter() </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+		<!-- 캐릭터 생성 : 시나리오 보기-->
+		<BUTTON ID="BTN_CREATE_VIEW_STORY" X="561" Y="15" W="131" H="25" >
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtscenario.tga" BTN_IMG_W="131" BTN_IMG_H="100" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<ATTR TEXT="600036" FONT="Font_Text" T_X="75" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				local MoveMgr = GetMovieMgr()
+				local SelClassWnd = GetUIWnd("SelectClass")
+				local iType = SelClassWnd:GetCustomDataAsInt()
+				if 0 == iType then
+					MoveMgr:Play("fighter")
+				elseif 1 == iType then
+					MoveMgr:Play("magician")
+				elseif 2 == iType then
+					MoveMgr:Play("archer")
+				elseif 3 == iType then
+					MoveMgr:Play("thief")
+				elseif 50 == iType then
+					MoveMgr:Play("thief")
+				elseif 51 == iType then
+					MoveMgr:Play("thief")
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+		</BUTTON>
+		<!-- 종족 선책 : 취소-->
+		<BUTTON ID="BTN_RACE_CANCLE" X="375" Y="10" W="115" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/chaMake/chaBtback.tga" BTN_IMG_W="115" BTN_IMG_H="140" U="1" V="4" BTN_T_COLOR_TYPE="1"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(600009,2201) </SCRIPT>
+			<ATTR TEXT="791512" FONT="Font_Text" T_X="60" T_Y="7" T_CENTER="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				OnSelectUI() 
+				CallSelectCharactorUI()
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	PlaySound("../Sound/U_Sound/button(rollover).wav") </SCRIPT>
+			<HOTKEY ID="60"> OnSelectUI() </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	<!-- 서버 정보 -->
+	<STATIC_FORM ID="SFRM_SERVER_INFO" W="170" H="108">
+		<SCRIPT ID="ON_DISPLAY">
+			local kTemp = GetUIWnd("SelectClass")
+			if nil~=kTemp and kTemp:IsNil() == false then
+				UISelf:SetLocation( Point2( kTemp:GetLocation():GetX()+kTemp:GetSize():GetX()+15, kTemp:GetLocation():GetY() ) )
+			else
+				UISelf:SetLocation(Point2( GetScreenSize():GetX()-15, 4 ) )
+			end
+		</SCRIPT>
+		<ATTR IMG="../Data/6_ui/chaMake/chaBgSvInfo.tga" IMG_W="170" IMG_H="108"/>
+		<FORM ID="FRM_NAME" X="23" Y="15" W="140" H="20">
+			<ATTR TEXT="600018" FONT="FTcts_13" T_LEFT="1" FONT_COLOR_HEX="0XFFfff799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_CHENNEL" X="23" Y="38" W="140" H="20">
+			<ATTR TEXT="791504" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFF97ff43" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_LAST_CONNECT_TITLE" X="18" Y="60" W="140" H="20">
+			<ATTR TEXT="791505" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFFacacac" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+	<LOCAL>
+		<NAME ID = "CHINA">
+			<FORM ID="FRM_LAST_CONNECT_INFO" X="18" Y="78" W="140" H="20">
+				<ATTR TEXT="791522" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</FORM>
+		</NAME>
+		<NAME ID="DEFAULT">
+			<FORM ID="FRM_LAST_CONNECT_INFO" X="18" Y="78" W="140" H="20">
+				<ATTR TEXT="791506" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</FORM>
+		</NAME>
+	</LOCAL>
+	</STATIC_FORM>
+	<!-- 캐릭터 정보 -->
+	<STATIC_FORM ID="SFRM_CHARACTOR_INFO" ALIGN_X="0" Y="4" IS_ABSOLUTE_Y="1" W="340" H="152">
+		<ATTR IMG="../Data/6_ui/chaMake/chaBgChaInfo.tga" IMG_W="340" IMG_H="152"/>
+		<FORM ID="FRM_ID_TEXT" X="27" Y="20" W="170" H="20">
+			<ATTR TEXT="791500" FONT="FTctsBig_14" T_LEFT="1" FONT_COLOR_HEX="0XFF3c0e0e"/>
+		</FORM>
+		<IMG ID="IMG_LINE" X="0" Y="40" W="299" H="3" IMG="../Data/6_ui/chaMake/chaBg02B.tga" IMG_W="299" IMG_H="3" PASS_EVENT="1"/>
+		<IMG ID="IMG_CLASS" X="28" Y="50" W="26" H="26" Z="-1" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1" PASS_EVENT="1"/>
+		<FORM ID="FRM_LEVEL_TEXT" X="64" Y="47" W="100" H="20">
+			<ATTR TEXT="791500" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFF2c1e09"/>
+		</FORM>
+		<FORM ID="FRM_SEX_TEXT" X="64" Y="63" W="100" H="20">
+			<ATTR TEXT="791514" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFF2c1e09"/>
+		</FORM>
+		<FORM ID="FRM_CLASS_TEXT" X="28" Y="85" W="170" H="20">
+			<ATTR TEXT="791513" FONT="FTctsBig_14" T_LEFT="1" FONT_COLOR_HEX="0XFF2c1e09"/>
+		</FORM>
+		<FORM ID="FRM_SERVER_TEXT" X="170" Y="46" W="150" H="20">
+			<ATTR TEXT="791501" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFFfef8ac"/>
+		</FORM>
+		<FORM ID="FRM_MAP_TEXT" X="170" Y="66" W="150" H="20">
+			<ATTR TEXT="791502" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFFfef8ac"/>
+		</FORM>
+		<FORM ID="FRM_PLAY_TIME_TEXT" X="170" Y="86" W="150" H="20">
+			<ATTR TEXT="791503" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0XFFfef8ac"/>
+		</FORM>
+		<FORM ID="FRM_INFO" X="170" Y="115" W="340" H="20">
+			<ATTR TEXT="120001" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0XFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_EXP" X="235" Y="16" W="90" H="30">
+			<ATTR IMG="../Data/6_ui/chaMake/chaExpFt.tga" IMG_W="90" IMG_H="210" U="1" V="7" PASS_EVENT="1"/>
+		</FORM>
+	</STATIC_FORM>
+	<!-- 드래고니카 로고 -->
+	<FORM ID="FRM_LOGO" ALIGN_X="50" Y="4" IS_ABSOLUTE_Y="1"  W="257" H="102">
+		<LOCAL>
+			<NAME ID="DEFAULT/DEVELOP">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="KOREA">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_kr.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="JAPAN">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_jp.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_tw.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="CHINA">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_cn.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="EUROPE">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_eu.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_ru.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_sg.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_ph.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="THAILAND">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_thai.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_in.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="AMERICA">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_na.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<IMG ID="IMG_LOGO" IMG="../Data\6_UI\loading\logo_vt.tga" IMG_W="257" IMG_H="102" PASS_EVENT="1"/>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	<!-- 종족 선택 -->
+	<FORM ID="FRM_CHOICE_RACE" ALIGN_X="50" ALIGN_Y="50" W="1024" H="408">
+		<SCRIPT ID="ON_CALL">
+			CloseSelectCharactorUI()
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetShowWorldFocusFilterColorAlpha( 0x00000000, 0.0, 0.5, 1.0, true, false )
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetShowWorldFocusFilterColorAlpha( 0x00000000, 0.5, 0.0, 1.0, false, false )
+		</SCRIPT>
+		<IMG ID="IMG_LEFT" IMG="../Data/6_ui/chaMake/chaBgKnd01.tga" IMG_W="512" IMG_H="408" PASS_EVENT="1"/>
+		<IMG ID="IMG_RIGHT" X="512" IMG="../Data/6_ui/chaMake/chaBgKnd02.tga" IMG_W="512" IMG_H="408" PASS_EVENT="1"/>
+		<FORM ID="FRM_INFO" X="512" Y="10" W="200" H="20">
+			<ATTR TEXT="791515" FONT="FTctsBig_14" T_CENTER="1" FONT_COLOR_HEX="0XFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="FRM_SELECT_HUMAN" X="142" Y="13" W="340" H="395" BTN_W="340" BTN_H="395">
+			<FORM ID="FRM_MOUSE_OUT" Z="1" W="340" H="395" IMG="../Data/6_ui/chaMake/chaKndImg01.tga" IMG_W="340" IMG_H="395" PASS_EVENT="1">
+				<ATTR TEXT="791516" FONT="FTcts_16" T_X="175" T_Y="320" T_CENTER="1" FONT_COLOR_HEX="0XFF2c1e09"/>
+			</FORM>
+			<FORM ID="FRM_MOUSE_OVER" Z="2" W="340" H="395" IMG="../Data/6_ui/chaMake/chaKndImg01_over.tga" IMG_W="340" IMG_H="395" IS_VISIBLE="0" PASS_EVENT="1">
+				<ATTR TEXT="791516" FONT="FTcts_16" T_X="175" T_Y="320" T_CENTER="1" FONT_COLOR_HEX="0XFF2c1e09"/>
+			</FORM>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local kMouseOver = UISelf:GetControl("FRM_MOUSE_OVER")
+				if not kMouseOver:IsNil() then
+					kMouseOver:Visible(true)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local kMouseOver = UISelf:GetControl("FRM_MOUSE_OVER")
+				if not kMouseOver:IsNil() then
+					kMouseOver:Visible(false)
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				g_SceneType = 0
+				g_CreateType = 0
+				LoadingSelectScene()
+				PlaySoundByID( "cha-select-group" )
+				SetSelectCameraMove(g_kSelectCameraMode["CAMERA_MOVE_CREATE_HUMAN_IN"])
+				OffSelectUI()
+				CloseUI("FRM_CHOICE_RACE")
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="FRM_SELECT_DRAGON" X="532" Y="13" W="340" H="395" BTN_W="340" BTN_H="395">
+			<FORM ID="FRM_MOUSE_OUT" Z="1" W="340" H="395" IMG="../Data/6_ui/chaMake/chaKndImg02.tga" IMG_W="340" IMG_H="395" PASS_EVENT="1">
+				<ATTR TEXT="791517" FONT="FTcts_16" T_X="175" T_Y="320" T_CENTER="1" FONT_COLOR_HEX="0XFF2c1e09"/>
+			</FORM>
+			<FORM ID="FRM_MOUSE_OVER" Z="2" W="340" H="395" IMG="../Data/6_ui/chaMake/chaKndImg02_over.tga" IMG_W="340" IMG_H="395" IS_VISIBLE="0" PASS_EVENT="1">
+				<ATTR TEXT="791517" FONT="FTcts_16" T_X="175" T_Y="320" T_CENTER="1" FONT_COLOR_HEX="0XFF2c1e09"/>
+			</FORM>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				PlaySound("../Sound/U_Sound/button(rollover).wav")
+				local kMouseOver = UISelf:GetControl("FRM_MOUSE_OVER")
+				if not kMouseOver:IsNil() then
+					kMouseOver:Visible(true)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local kMouseOver = UISelf:GetControl("FRM_MOUSE_OVER")
+				if not kMouseOver:IsNil() then
+					kMouseOver:Visible(false)
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				if LOCALE.NC_KOREA == GetLocale() then
+					g_SceneType = 0
+					g_CreateType = 1
+					LoadingSelectScene()
+					PlaySoundByID( "cha-select-group" )
+					SetSelectCameraMove(g_kSelectCameraMode["CAMERA_MOVE_CREATE_DRAGON_IN"])
+					OffSelectUI()
+					CloseUI("FRM_CHOICE_RACE")
+					return
+				end
+				if true == g_selectStage:IsCreateNewRace() then
+					g_SceneType = 0
+					g_CreateType = 1
+					LoadingSelectScene()
+					PlaySoundByID( "cha-select-group" )
+					SetSelectCameraMove(g_kSelectCameraMode["CAMERA_MOVE_CREATE_DRAGON_IN"])
+					OffSelectUI()
+					CloseUI("FRM_CHOICE_RACE")
+				else
+					AddWarnDataTT(791520)
+				end
+			</SCRIPT>
+		</BUTTON>
+	</FORM>
+	<!-- 마우스 클릭 용 투명 UI-->
+	<FORM ID="FRM_SELECT_1" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(1)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SELECT_2" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(2)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SELECT_3" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(3)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SELECT_4" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(4)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SELECT_5" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(5)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SELECT_6" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(6)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SELECT_7" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(7)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SELECT_8" W="131" H="131" PASS_EVENT="1" >
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			SelectCharactorUI(8)
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_JUMPING_CLASS_MENU" ALIGN_X="50" Y="120" Z="3" W="260" H="463" IS_VISIBLE="0">
+		<FORM ID="IMG_TAB" X="10" W="97" H="23">
+			<ATTR FONT="FTcts_13" T_X="40" T_Y="2" TEXT="400039" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<ATTR IMG="../Data/6_UI/Common/cmMenuTab.tga" IMG_W="97" IMG_H="23"/>
+		</FORM>
+		<LIST ID="LIST_COMMAND" X="10" Y="23" W="240" H="145">
+			<ATTR ELEMENT_ID="BTN_JUMPING_CLASS_ITEM"/>
+		</LIST>
+		<SCRIPT ID="ON_CALL">CloseToolTip()</SCRIPT>
+		<HOTKEY ID="1">
+			CreateCharacter()
+			UISelf:Close()
+			return true
+		</HOTKEY>
+	</FORM>
+	<BUTTON ID="BTN_JUMPING_CLASS_ITEM" X="0" Y="0" W="240" H="30">
+		<ATTR BTN_IMG="../Data/6_ui/Common/cmMenuB.tga" BTN_IMG_W="480" BTN_IMG_H="60"/>
+		<ATTR TEXT="400803" T_X="120" T_Y="6" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="0"/>
+		<IMG ID="FRM_CURSOR" X="-5" Y="-4" W="250" H="38" IMG="../Data/6_ui/common/cmMenuBslt.tga" IMG_W="250" IMG_H="38" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1"/>
+		<SCRIPT ID="ON_MOUSE_OVER">UISelf:GetControl("FRM_CURSOR"):Visible(true)</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">UISelf:GetControl("FRM_CURSOR"):Visible(false)</SCRIPT>
+		<SCRIPT ID="ON_L_BTN_UP">DoAction_JumpingClassBtn(UISelf)</SCRIPT>			
+	</BUTTON>
+</XUI>

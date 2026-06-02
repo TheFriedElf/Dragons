@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030220_FD" DESCRIPTION="90302200">
+  <GSAPATH>../Data/3_World/03_Solaiden/01_Level/030220_FD.gsa</GSAPATH>
+  <MINIMAP Y="130" H="275">../Data/3_World/03_Solaiden/01_Level/030220_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Vally.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+
+	<!-- 유혹의설원 게이트 -->
+	<TRIGGER ID="gate_030200_base" TYPE="PORTAL" TITLE_TEXT_ID="800060" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act" />
+		<ACTION SCRIPT="World_Portal" PARAM="9030200" PARAM2="3">
+			<ACCESS>
+				<LEVEL MIN="0" />
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+
+  <!-- 텔레점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_10" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_10" PARAM="200" />
+  </TRIGGER>
+  <!-- 텔레포트 데미지 이동 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <!-- 트리거 점프 -->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="450" />
+  </TRIGGER>
+  <!-- 움직이는 오브젝트 -->
+  <STONES />
+  <OBJECT GUID="90b8cfd7-e4a3-4823-a69e-eebe056f8e8c" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000510">
+    <WayPoint POINT="1345.983, -4155.283, 539.0432" TIME="1" />
+    <WayPoint POINT="1804.941, -4156.623, 539.0415" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="86601430-02aa-407d-afbd-d373a569cbbf" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000510">
+    <WayPoint POINT="903.2792, -4316.183, 539.0425" TIME="1" />
+    <WayPoint POINT="1343.63, -4315.369, 539.0413" TIME="1" />
+  </OBJECT>
+
+  <!--<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="64F3E880-4ACF-4edc-B83A-F5A8DAE062D1" TYPE="FIXED" LOCATION="-53.61292, -2344.704, 1014.002"/>
+  <NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="F65317FF-1818-4adc-941F-A748AD9B8EFD" TYPE="FIXED" LOCATION="2640.283, -4060.605, 801.9984"/>
+  <NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="7760A860-0379-4298-947A-871CE005CEAC" TYPE="FIXED" LOCATION="-1247.074, -6443.076, -421.0031"/>
+    <NPC NAME="1028277" ACTOR="c_Hidden_Guide_Board" SCRIPT="NPC_HIDDEN" KID="1028277" GUID="989EF013-F1E8-49a8-946D-E6936D80FBEB" TYPE="FIXED" LOCATION="945.0803,-2378.5850,1024.5900"/>-->
+  <WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1" />
+  <FOG DENSITY="0" FUNC="Z_LINEAR" START="604" END="6798" COLOR="0.5176471,0.6862745,1"/>
+</WORLD>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5056</ID> <!--T.T.10505601 위기의 고래들(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)]의 캡틴 후커를 처치하자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 상어들이 고래의 눈물을 추출하는 이유를 알아냈다고 한다. 고래의 눈물은 그 아름다움으로 인해 높은 가격으로 밀거래가 이루어지고 있다는 것이다. 그래서 캡틴 후커는 상어들을 시켜서 수염고래로부터 강제적으로 고래의 눈물을 추출한 것이다. 수염고래들을 지키기 위해서 수염고래 해안가 [아케이드 모드(F1)]의 캡틴 후커를 처치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010109/1">6013900</MONSTER> 
+ <!--MON_NO=6013900/캡틴 후커,MAP_NO=9010109/캡틴후커 별장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10505611"/> <!--캡틴 후커-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10505621" FACE="Mukapa_normal"/> <!--상어들이 수염고래로부터 고래의 눈물을 추출하는 이유를 알아냈네. 
+고래의 눈물은 자네도 봤다시피 굉장히 아름다운 형태를 하고 있지. 
+게다가 엄청난 마력을 지니고 있기도 하고 말일세.%%
+이런 고래의 눈물이 부자들 사이에서 불법적으로 거래가 되고 있는 모양일세. 
+그것도 어마어마한 가격에 말일세.
+이것을 선동하고 있는 녀석이 바로 캡틴 후커일세.
+자네가 캡틴 후커를 막아 주게나.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10505626" FACE="Mukapa_smile"/> <!--잘했네. 이제 수염고래떼를 다시 수염고래 해안가에서 볼 날도 머지 않았네. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10505623" FACE="Mukapa_normal"/> <!--캡틴 후커는 고래의 눈물의 희소성을 이용해 돈을 가진 사람들을 선동하고 있네. 
+수요가 있으면 공급이 있는 것은 당연한 일이지만, 이런 선동으로 인해 불필요한 수요가 발생하고 있는 걸세.%%
+캡틴 후커만 처리한다면 고래의 눈물을 원하던 사람들도 자연히 줄어들 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10505624" FACE="Mukapa_angry"/> <!--캡틴 후커가 강하다고 해도 자네가 이렇게 두려워할 줄은 몰랐네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10505625" FACE="Mukapa_normal"/> <!--사람들을 선동하는 캡틴 후커에게 신의 철퇴를 내리게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10505602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

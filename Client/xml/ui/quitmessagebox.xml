@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="QuitMessageBox" PRIORITY="90" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW" X="0" Y="0" W="190" H="75" STATIC_NUM="3">
+				<ATTR TEXT="60073" FONT="FTbt_12" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID="ON_CALL">
+					local kWnd = UISelf
+
+					if false==GetUIWnd("LoginDlg"):IsNil()
+					or false==GetUIWnd("FRM_DEFAULT_CHANNEL"):IsNil() 
+					or false==GetUIWnd("CharacterManager"):IsNil()
+					or false==GetUIWnd("SFRM_CHAR_MENU"):IsNil() then
+						kWnd:SetStaticText(GetTT(60085):GetStr())
+						kWnd:SetTextPos(Point2(95,30))
+					else
+						kWnd:SetStaticText(GetTT(60073):GetStr())
+						kWnd:SetTextPos(Point2(95,12))
+					end
+				</SCRIPT>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK" X="20" Y= "88" W="79" H="28">
+			<ATTR TEXT="96" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				ExitClient()
+				UISelf:CloseParent()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="59">
+				ExitClient()
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+		</BUTTON>
+
+		<BUTTON ID="BTN_CANCEL" X="106" Y="88" W="79" H="28" >
+			<ATTR TEXT="97" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="60">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_QUIT_MESSAGEBOX" PRIORITY="90">	
+		<ATTR ALIGN_X="50" ALIGN_Y="45" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW" X="0" Y="0" W="190" H="75" STATIC_NUM="3" >
+				<ATTR TEXT="60073" FONT="FTbt_12" T_X="95" T_Y="10" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK" X="62" Y="88" W="79" H="28" >
+			<ATTR TEXT="400002" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				ExitClient()
+				return true
+			</SCRIPT>
+			<HOTKEY ID="59">
+				ExitClient()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_UP"> return true </SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+</XUI>

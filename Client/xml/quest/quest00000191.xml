@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>191</ID> <!--T.T.10019101 레벨업! 전광석화! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	 캐시샵에서 팔고 있는 20% 경험치증가 포션(10분) 1개를 구입해 보자.-->
+<!--[완료NPC]	종소리 마을 - 가토-->
+<!--[내용]	가토는 캐시샵에서 팔고 있는 20% 경험치증가 포션(10분)을 가지고 오면 놀라운 비밀을 알려 준다고 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 종소리 마을 - 가토 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 종소리 마을 - 가토 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 종소리 마을 - 가토 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">98000290</ITEM> 
+ <!--Item_NO=98002370/Mini 20% EXP Potion,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10019111"/> <!--20% 경험치증가 포션(2시간)-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="2">98100360</ITEM><!--전체지급/전체/1)/98100360(봉인아님) 2개-20% 경험치증가 포션(10분)(퀘스트)-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10019121" FACE="gatto_normal"/> <!--오옷! 거기 멋진 용자님 잠깐 이리로 와보라옹!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10019126" FACE="gatto_normal"/> <!--오오옷! 가지고 왔다냐옹?
+감사하다옹.
+전광석화와 같은 비밀은 이 20% 경험치증가 포션(2시간)을 마시는 거다옹.%%
+(꿀꺽꿀꺽)%%
+앗! 설명에 도취해 이걸 마셔버렸다옹!
+미안함의 의미로 이걸 주겠다옹. 용서해다옹!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10019123" FACE="gatto_normal"/> <!--혹시 전광석화처럼 빠르게 레벨업을 할 수 있는 방법을 알고 있냐옹?%%
+(고개를 절레절레 흔든다.)%%
+허거덩! 정말 모른다옹?
+그렇다면 캐시샵에서 판매하고 있는 20% 경험치증가 포션(2시간) 1개를 내게 가지고 와보라옹.%%
+캐시샵은 오른쪽 하단의 캐시샵 버튼을 클릭하면 된다옹.
+전광석화와 같이 레벨업을 할 수 있는 비밀을 알려 주겠다옹.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10019124" FACE="gatto_normal"/> <!--우옷! 정말 거부하는 거냐옹?
+소신있는 용자다옹.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10019125" FACE="gatto_normal"/> <!--늦게 올수록 레벨업의 속도는 늦어진다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10019102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

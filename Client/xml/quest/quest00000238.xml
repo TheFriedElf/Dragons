@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 펫상인 에이미와 대화-->
+<!--[완료NPC]	바람항구 - 용아-->
+<!--[내용]	용아는 인간 세계에서 신기한 라이딩펫을 보았다고 한다. 바람항구의 펫상인 에이미에게 이 라이딩펫에 대해 알아보고, 용아에게 전해주자.-->
+<QUEST>
+	<ID>238</ID> <!-- 왠지 마음에 걸리는 그 녀석 -->
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="523495">왠지 마음에 걸리는 그 녀석</TITLE>
+	<GROUPNAME TEXT="500009">바람항구 브리즈</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="20" MAX="99"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</CLIENT> <!--시작NPC 바람항구 - 용아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</PAYER> <!--완료NPC 바람항구 - 용아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</AGENT> <!--진행NPC 11 바람항구 - 용아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 11 바람항구 - 에이미 -->
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!--용아가 부탁-->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!--용아가 완료-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!--용아가 퀘스트 도중에 가면-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10012</NPC>  <!--에이미한테 가면 대화-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10012</NPC> <!--에이미 대화한 걸 체크-->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="523497"/> <!--에이미와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+		<ITEM COUNT="1">231001090</ITEM>
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="523498" FACE="DragonBaby_normal"/> <!--그런데 %name%! 
+혹시 말이지. 그 녀석을 아는 지 모르겠는데…%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="523502" FACE="DragonBaby_smile"/> <!--그리... 퐁이라.... 후후... 아무리 인간족의 성스러운 동물이라 해봤자... 
+우리 페이롱을 보면 냉큼 달아날 것 같은 겁 많은 인상이던데 말이지.%%
+잘하면 인간들도 라이딩펫을 몰 수 있을 지도 모르겠군. 후후후.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="523499" FACE="DragonBaby_normal"/> <!--바람항구 근처로 오면서 특이해 보이는 동물을 보았거든... 
+카즈라의 페이롱처럼 날개가 달려있었고, 사람도 타고 있었어.%%
+얼핏 보았을 때엔 사자 같은 몸집이었는데… 
+얼굴은 독수리처럼 생겼고 말이지.%%
+혹시 이 녀석에 대해 알아볼 생각 없어?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="523500" FACE="DragonBaby_angry"/> <!--난 그동안 아주 중요한 정보를 알려줬는데 말이지! 흥, 이기적이군!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="523501" FACE="DragonBaby_angry"/> <!--이 근방의 펫상인한테라도 물어봐야 하는 거 아냐?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> 
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" />
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="523496" /> 
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--기타-->
+			<BODY TEXT="523503" FACE="Amy_normal" /> <!--독수리의 부리와 날개가 달려있었고… 
+사자 같은 맹수의 몸을 하고 있는 동물이라구요?%%
+으으… 이건 무슨 전설에 나오는 수수께끼 같은 느낌이군요.
+흐음… 그래요. 아무리 생각해도 그… 
+그 녀석 말곤 떠오르는 녀석이 없네요.%%
+세상에 위기가 닥칠 때만 바람 대륙에 모습을 드러낸다고 하는 
+바로 그 성스러운 동물....말이죠.%%
+천년 전의 영웅들이 엘가를 해치울 때 탔다고 하는 
+바로 그 '그리퐁'일 거에요. 틀림 없어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>		
+	</DIALOGS>
+</QUEST>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4001</ID> <!--T.T.10400101 일어나! 비룡(1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	응급용 침술 세트 1개 수집(수염고래 해안가)-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	마이트리가 수염고래 해안가에 떨어트린 응급용 침술 세트를 회수하자. 수염고래 해안가의 몬스터들을 사냥하다보면 나오지 않을까? 샅샅이 뒤져보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">13D42615-B039-43f4-B6EB-28918778D237</CLIENT> <!--시작NPC 수염고래 해안가 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 11 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/8500/1/1/160400100">9010100</GROUND> 
+ <!--MAP_NO=9010100/수염고래 해안가,Item_NO=160400100/[Q.ID:04001] 응급용 침술 세트15%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160400100</ITEM> 
+ <!--Item_NO=160400100/[Q.ID:04001] 응급용 침술 세트,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10400111"/> <!--응급용 침술 세트-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<LOCAL>
+         
+			<NAME ID="EUROPE/TAIWAN">
+         </NAME>
+
+			<NAME ID="DEFAULT">
+            
+				<SELECT1 COUNT="0">
+                <ITEM COUNT="1">50901080</ITEM>
+            </SELECT1>
+	
+         </NAME>
+		
+</LOCAL>
+
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10400121" FACE="Maitri_normal"/> <!--이제 정신이 든 모양이군요.
+나는 신보를 찾아 카즈라에서 온 신전 사제 마이트리입니다.%%  
+야나이는... 빛의 신물이 오염된 걸 막으려다가 죽었다고 들었어요.
+이 아이도 %name%님을 이곳까지 데리고 도망치느라 무리를 했어요.%%
+추격해오는 마물들에게 당한 부상도 심한 듯 보이는군요...
+이제 이 비룡의 목숨도 얼마 남지 않았어요.%%
+네?
+이 아이를 살리고 싶다고요?%%
+그건... 힘들 것 같아요. 
+부상 당한 채 이곳까지 온 것만으로도 기적에 가까운 일입니다.%%
+흠…%% 
+간절한 그 마음은 알겠지만…
+그렇다면 한번 소생술을 시도해보겠습니다.%% 
+단, 부탁이 하나 있습니다. 들어주시겠어요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10400126" FACE="Maitri_smile"/> <!--수고했어요. 
+하지만... 이 아이의 운명도 여기까지인 것 같습니다.%%
+이젠 키에로를 보내줘야 할 것 같군요.
+키에로… 야나이를 만나거든 꼭 안부를 전해주렴.%%-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10400123" FACE="Maitri_normal"/> <!--나도 신보의 행방을 찾아서 이곳으로 오는 동안 몬스터들에게 공격을 당했습니다.%% 
+그 바람에 응급용으로 준비했던 치료도구를 잃어버리고 말았죠.
+이 근방 어디엔가 분명히 있을 거에요.%% 
+내가 키에로를 돌볼테니, 그 동안 잃어버린 응급용 침술 세트를 찾아주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10400124" FACE="Maitri_angry"/> <!--그래요.
+당신에게 키에로를 살릴 의무가 반드시 있는 것은 아니겠죠.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10400125" FACE="Maitri_angry"/> <!--어렸을 적에 퀘차 할머니에게 침술을 배웠어요.
+그 때도 지금처럼 같이 자랐던 비룡이 다쳤었죠... -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10400102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

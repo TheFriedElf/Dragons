@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4276</ID> <!--T.T.10427600 달빛성좌의 열쇠 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	황소자리던전에서 유로페만나보기-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	유로페는 지금 아무도 근처에 오길 원하지 않는다. 지옥의 신 하데스의 구애 때문에 노이로제에 걸렸기 때문이다. 유로페에게 잘 설명을 해서 달빛성좌의 열쇠를 얻어 와야한다. 특히 그를 지키는 황소 미노타우르스를 조심하도록 하자-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000120</ITEM> 
+ <!--Item_NO=82000120/[13_01 별자리] 달빛성좌의 열쇠,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">7281200</MONSTER> 
+ <!--MON_NO=7281200/황소 미노타우르스,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427611"/> <!--달빛성좌의 열쇠-->
+		<OBJECT2 COUNT="1" TEXT="10427612"/> <!--황소자리던전 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427621" FACE="Crete_normal"/> <!--황소자리에는 말 그대로 황소가 많답니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427626" FACE="Crete_smile"/> <!--첫번째 열쇠를 구하셨군요. 
+희망이 생기네요. 정말 감사해요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427623" FACE="Crete_normal"/> <!--그 중 황소 미노타우르스라는 유로페가 가장 아끼는 녀석인데 그 황소도 유로페를 잘 따른다고 하네요.
+지난번에도 말씀드렸지만 유로페는 지금 노이로제에 걸려서 히스테리가 심하니까 말을 잘해야 될거예요. 유로페를 지켜주는 황소 미노타우르스는 유로페에게 위험이 생긴다면 물불을 가리지 않기 때문에 더더욱 조심하셔야 됩니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427624" FACE="Crete_cry"/> <!--… 정말 이러실 건가요???-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427625" FACE="Crete_normal"/> <!--%name%님 부탁드립니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Kirab" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="980145">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+				<KFMPATH SCALE="1.8">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Kirab/Kirab.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+        
+		 <SPHERE TO="p_hit_point_01" SIZE="56"/>
+		 <SPHERE TO="p_hit_point_02" SIZE="56"/>
+         <SPHERE TO="p_hit_point_03" SIZE="23"/>
+		 <SPHERE TO="p_hit_point_04" SIZE="38"/>
+		 <SPHERE TO="p_hit_point_05" SIZE="28"/>
+		 <SPHERE TO="p_hit_point_06" SIZE="38"/>
+		 <SPHERE TO="p_hit_point_07" SIZE="23"/>
+		 <SPHERE TO="p_hit_point_08" SIZE="28"/>
+		 <SPHERE TO="p_hit_point_09" SIZE="56"/>
+
+
+
+		</ABV>
+		<SLOT>
+			<!--근거리 1-휘두르기-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+
+			<!--근거리 2_찍기-->
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000207"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000209"/>
+								
+			<!-- 거품발사-->
+			<ITEM NAME="btlidle_11_skill_shot_start" ANIMATION="1000250"/>
+			<ITEM NAME="btlidle_11_skill_shot" ANIMATION="1000251"/>
+			<ITEM NAME="skill_shot_11" ANIMATION="1000252"  PROJECTILE_ID="Projectile_TyphoonWave"  GROUND_EFFECT="efk_kirab_bublefragment_01" FIRE_START_NODE0="p_ef_head" FIRE_START_NODE1="p_ef_head" FIRE_START_NODE2="p_ef_head" FIRE_START_NODE3="p_ef_head" 
+			FIRE_START_NODE4="p_ef_head" SHOT_INTER_TIME="5.0"/>	
+
+			<!--모래 뿜어서 밀어내기-->
+			<ITEM NAME="energy_explosion_btlidle_start" ANIMATION="1000601" RANGE_EFFECT="NONE"/>
+			<ITEM NAME="energy_explosion_btlidle" ANIMATION="1000602"/>
+			<ITEM NAME="energy_explosion_fire" ANIMATION="1000603" FIRE_START_NODE="p_ef_star" FIRE_START_EFFECT="Projectile_kahuna_oakshire_ball" PROJECTILE_ID="Projectile_kahunaOakshire_magic_01" QUAKE_TIME="3" QUAKE_FACTOR="1.2" FIRE_TERM="0.2"/>
+			<ITEM NAME="energy_explosion_finish" ANIMATION="1000604"/>
+
+			<!--유도탄-->
+			<ITEM NAME="shot_around_01_start" ANIMATION="1001001"/>
+			<ITEM NAME="shot_around_01" ANIMATION="1001002"/>
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1001003"
+				FIRE_START_NODE="p_ef_r_hand" FIRE_START_NODE1="p_ef_r_hand" FIRE_START_NODE2="p_ef_r_hand" 
+				PROJECTILE_ID="Projectile_Kirab_shot_01" PROJECTILE_ID1="Projectile_Kirab_shot_01" PROJECTILE_ID2="Projectile_Kirab_shot_01" 
+				PROJECTILE_SPEED="250" PROJECTILE_SCALE="1.0" PROJECTILE_SCALE1="1.0" PROJECTILE_SCALE2="1.0"
+				PROJECTILE_COUNT="12"
+				HIT_TARGET_EFFECT_ID="efx_elgar_01_shot_around_01_dmg" HIT_TARGET_EFFECT_TARGET_NODE="Bip01 Spine1"/>
+
+
+			<!-- 땅에서 가시 -->
+			<ITEM NAME="attk_start_L" ANIMATION="1000386"/>
+			<ITEM NAME="attk_loop_L" ANIMATION="1000387"/>
+			<ITEM NAME="attk_shot_L" ANIMATION="1000388" FIRE_EFFECT="efk_kirab_projectileup_01" />
+
+			<!-- 독 거품  소환-->
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000210"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000211"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000212"/>
+
+			<!--가시 폭팔-->
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000337" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000338" TOP_RANGE_EFFECT_HEIGHT="500" TOP_RANGE_EFFECT="PROJECTILE_kirab_projectiledown_01" TOP_RANGE_EFFECT_SCALE="1.0" TOP_RANGE_EFFECT_TIME="3.0"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000339" FIRE_START_NODE="" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_kirab_projectiledown_01" FIRE_TERM="0.05" PROJECTILE_COUNT="5" QUAKE_TIME="1" QUAKE_FACTOR="1" ARRIVED_EFFECT="efx_DarkLoadmeteor_strike"/>
+			<ITEM NAME="massive_projectile_finish" ANIMATION="1000340"/>
+
+            <!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000005"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000005"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000005"/>
+			<ITEM NAME="Opening" ANIMATION="1000005" QUAKE_TIME="1.5" QUAKE_FACTOR="2" CAMERA_ZOOM_OUT="600" CAMERA_ZOOM_IN_SPEED="0"/>
+			<ITEM NAME="StandUp" ANIMATION="1000005"/>
+		
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

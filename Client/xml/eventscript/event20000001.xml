@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 전체 UI 숨기기-->
+	<CMD TYPE="DOSTRING" COMMAND="UIOff(false)"/>
+	<!-- 유닛 숨기기-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="false"/>
+	<!-- 맵기제 숨기기 -->
+	<CMD TYPE="MAPOBEJCT" id="starstory_waitingroom1001_01" enable="false"/>
+	<CMD TYPE="MAPOBEJCT" id="efk_starstory_main_02" enable="false"/>
+	<CMD TYPE="MAPOBEJCT" id="starstory_waitingroom1001_02 01" enable="false"/>
+	<CMD TYPE="MAPOBEJCT" id="KeyGide_Z_Jump 11" enable="false"/>
+	<!-- 별자리 던전 입장 UI 출력 -->
+	<CMD type="CallUI" UIWndName="FRM_CONSTELLATION_DUNGEON"/>
+	<!-- 카메라로 연출 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="MoveCamToPos" TargetPos="-4779.8872,3362.9211,-5218.3052" MoveTime="2.5" CamActorDistance="100" CamMoveUpDistance="10"/>
+    <CMD TYPE="WaitCamera"/>
+</EVENT_SCRIPT>

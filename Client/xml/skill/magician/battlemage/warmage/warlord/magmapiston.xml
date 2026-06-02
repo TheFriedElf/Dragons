@@ -1,0 +1,13 @@
+<ACTION ID="a_MagmaPiston" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="skill_summon_01_01"/>
+  <SLOT NAME="skill_summon_01_02" LOOP="TRUE"/>
+  <SLOT NAME="skill_summon_01_03"/>
+  <FSM SCRIPT="Skill_WarLord_MagmaPiston"
+       CASTING_EFFECT_EFFECT_ID=""
+       CASTING_EFFECT_TARGET_NODE=""
+       FIRE_CASTER_EFFECT_ID="ef_skill_magmapiston_03_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_SOUND_ID="MagmaPiston"
+       />
+</ACTION>
+

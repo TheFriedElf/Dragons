@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5080</ID> <!--T.T.10508001 현자의 서(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항 [아케이드 모드(F1)]의 별가사리 라라라에게서 정화의 진액 10개를 구하자-->
+<!--[완료NPC]	바람항구 - 제레미-->
+<!--[내용]	제레미는 현자의 서를 구할 방법을 알아냈다며 들떠 있다. 바로 정화의 진액이 있으면 현자의 서를 구할 수 있다는 것이다. 정화의 진액은 리무스와 특별한 반응을 일으켜 말끔하게 리무스의 흔적을 지워준다는 것이다. 뿐만 아니라 책을 거의 새 책 수준으로 말끔하게 만들어 준다고 했다. 정화의 진액은 별가사리 라라라에게서만 구할 수 있다고 한다. 제레미의 현자의 서를 구하기 위해 스티븐 무역항 [아케이드 모드(F1)]의 별가사리 라라라에게서 정화의 진액 10개를 구하자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</CLIENT> <!--시작NPC 바람항구 - 제레미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</PAYER> <!--완료NPC 바람항구 - 제레미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 11 바람항구 - 제레미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010136/10000/0/1/1/160508000">6011300</MONSTER> 
+ <!--MON_NO=6011300/별가사리 라라라,MAP_NO=9010136/스티븐 무역항 아케이드 6,Item_NO=160508000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160508000</ITEM> 
+ <!--Item_NO=160508000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10508011"/> <!--정화의 진액-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508021" FACE="Jeremy_normal"/> <!--아! 드디어 찾아 냈습니다. 
+저의 현자의 서를 구해낼 방법을 말입니다.
+리무스의 특수한 작용에 대해서는 전에 말씀드렸을 것입니다.%%
+전 이 리무스를 혹시 상쇄시켜줄 무언가가 있는지 열심히 고서를 뒤졌습니다.
+그리고 결국 발견해 낸 것입니다.
+바로 정화의 진액이라는 것입니다. %%
+정화의 진액은 리무스의 흔적을 제거해 줄 뿐만 아니라 헌책을 새 책과 같이 깨끗하게 만들어준다고 합니다. 
+%name%님 정화의 진액을 구해주시기 바랍니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508026" FACE="Jeremy_normal"/> <!--%name%님 덕분에 제 현자의 서가 새 책같이 변했습니다. 
+정말 감사합니다. 혹시 뭔가 궁금한 점이 생기신다면 저를 찾아주시기 바랍니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508023" FACE="Jeremy_normal"/> <!--하지만 정화의 진액을 구하는 것은 힘든 일입니다.
+스티븐 무역항 [아케이드 모드(F1)]의 별가사리 라라라에게서만 구할 수 있기 때문입니다.
+%name%님 아무쪼록 조심하시길 바라겠습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508024" FACE="Jeremy_angly"/> <!--현자의 서에 묻은 리무스는 정화의 진액이 아니고서야 지워지지 않습니다. 다시 한번 생각해 주시기 바랍니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508025" FACE="Jeremy_normal"/> <!--지금도 제 현자의 서는 리무스에 의한 침식이 진해중입니다. 
+정화의 진액을 꼭 부탁드립니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

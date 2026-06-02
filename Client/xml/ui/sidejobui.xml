@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI><!--		CallUI("SFRM_SIDE_JOB")		-->
+	<STATIC_FORM ID="SFRM_HOME_SIDE_JOB" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR X="320" Y="200" W="385" H="358" CAN_DRAG = "1" STATIC_NUM="1"/>
+		
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" W="383" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_TITLE" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="IMG_TITLE" X="7" Y="4" W="114" H="24" Z="1" NO_FOCUS="1" T_X = "7" T_Y = "4">
+				<ATTR FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413" TEXT="201600" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+			</IMG>
+			<BUTTON ID="BTN_CLOSE" X="352" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_UP"> UISelf:GetTopParent():Close() return true</SCRIPT>
+				<HOTKEY ID="1">UISelf:GetTopParent():Close() return true</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_COMMENT" X="11" Y="36" W="365" H="65" STATIC_NUM="34">
+			<ATTR FONT="Font_Text" TEXT="201601" T_X="5" T_Y="3" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_BODY_BG" X="9" Y="103" W="367" H="212" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_BODY_BG_SD" X="9" Y="103" Z="1" W="367" H="212" STATIC_NUM="3">
+			<ATTR FONT="Font_Text" TEXT="" T_X="7" T_Y="163" FONT_COLOR_HEX="0xFF790000"/>
+			<SCRIPT ID="ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<STATIC_FORM ID="SFRM_TITLE1" X="8" Y="8" W="351" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<ATTR FONT="Font_Text" TEXT="201604" T_X="5" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<CHECK_BUTTON ID="CBTN_REPAIR" X="11" Y="36" W="250" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> OnCheckSideJobList(UISelf:GetTopParent(), 1) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+				<FORM ID="FRM_TEXT" X="24" Y="0" W="200" H="20">
+					<ATTR FONT="Font_Text" TEXT="201605" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</CHECK_BUTTON>
+			<IMG ID="IMG_LINE1" X="11" Y="58" W="345" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="345" IMG_H="1"CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE2" X="11" Y="59" W="345" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="345" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<CHECK_BUTTON ID="CBTN_ENCHANT" X="11" Y="61" W="250" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtCheck.tga" BTN_IMG_W = "40" BTN_IMG_H = "40"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> OnCheckSideJobList(UISelf:GetTopParent(), 2) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+				<FORM ID="FRM_TEXT" X="24" Y="0" W="200" H="20">
+					<ATTR FONT="Font_Text" TEXT="201606" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</CHECK_BUTTON>
+			<STATIC_FORM ID="SFRM_TITLE2" X="8" Y="91" W="351" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<ATTR FONT="Font_Text" TEXT="201607" T_X="5" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<CHECK_BUTTON ID="CBTN_RADIO1" X="11" Y="119" W="50" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetClickLock(true)
+					UISelf:CheckState(true)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					OnClickMyHomeSideJobPeriodRadioButton(UISelf:GetParent(), 1)
+					UISelf:SetClickLock(true)
+					UISelf:CheckState(true)
+				</SCRIPT>
+				<FORM ID="FRM_TEXT" X="24" Y="0" W="200" H="20">
+					<ATTR FONT="Font_Text" TEXT="201608" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="CBTN_RADIO2" X="81" Y="119" W="50" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetClickLock(false)
+					UISelf:CheckState(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					OnClickMyHomeSideJobPeriodRadioButton(UISelf:GetParent(), 2)
+					UISelf:SetClickLock(true)
+					UISelf:CheckState(true)
+				</SCRIPT>
+				<FORM ID="FRM_TEXT" X="24" Y="0" W="200" H="20">
+					<ATTR FONT="Font_Text" TEXT="201608" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="CBTN_RADIO3" X="151" Y="119" W="50" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetClickLock(false)
+					UISelf:CheckState(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					OnClickMyHomeSideJobPeriodRadioButton(UISelf:GetParent(), 3)
+					UISelf:SetClickLock(true)
+					UISelf:CheckState(true)
+				</SCRIPT>
+				<FORM ID="FRM_TEXT" X="24" Y="0" W="200" H="20">
+					<ATTR FONT="Font_Text" TEXT="201608" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="CBTN_RADIO4" X="221" Y="119" W="50" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetClickLock(false)
+					UISelf:CheckState(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					OnClickMyHomeSideJobPeriodRadioButton(UISelf:GetParent(), 4)
+					UISelf:SetClickLock(true)
+					UISelf:CheckState(true)
+				</SCRIPT>
+				<FORM ID="FRM_TEXT" X="24" Y="0" W="200" H="20">
+					<ATTR FONT="Font_Text" TEXT="201608" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="CBTN_RADIO5" X="291" Y="119" W="50" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetClickLock(false)
+					UISelf:CheckState(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					OnClickMyHomeSideJobPeriodRadioButton(UISelf:GetParent(), 5)
+					UISelf:SetClickLock(true)
+					UISelf:CheckState(true)
+				</SCRIPT>
+				<FORM ID="FRM_TEXT" X="24" Y="0" W="200" H="20">
+					<ATTR FONT="Font_Text" TEXT="201608" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</CHECK_BUTTON>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_TEXT_REPAIR" X="170" Y="138" W="200" H="20">
+			<ATTR FONT="Font_Text" TEXT="201652" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_CALL"> OnCallMyHomeSideJobRemainText(UISelf, 1) return true </SCRIPT>
+		</FORM>
+		<FORM ID="FRM_TEXT_ENCHANT" X="170" Y="163" W="200" H="20">
+			<ATTR FONT="Font_Text" TEXT="201652" T_X="0" T_Y="2" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_CALL"> OnCallMyHomeSideJobRemainText(UISelf, 2) return true </SCRIPT>
+		</FORM>
+		<BUTTON ID="BTN_SETTING_CANCEL" X="227" Y="319" Z="1" W="97" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBgLg.tga" BTN_IMG_W="194" BTN_IMG_H="52"/>
+			<ATTR TEXT="201649" T_X="48" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClickMyHomeSideJobSettingCancel(UISelf:GetParent()) return true </SCRIPT>
+			<HOTKEY ID="61"> OnClickMyHomeSideJobSettingCancel(UISelf:GetParent()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_OK" X="57" Y="319" Z="1" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="201650" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClickMyHomeSideJobOK(UISelf:GetParent()) return true </SCRIPT>
+			<HOTKEY ID="59"> OnClickMyHomeSideJobOK(UISelf:GetParent()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="142" Y="319" Z="1" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="201651" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:GetTopParent():Close() return true </SCRIPT>
+			<HOTKEY ID="60"> UISelf:GetTopParent():Close() return true </HOTKEY>
+		</BUTTON>		
+		<!--BUTTON ID="BTN_SETTING_CANCEL" X="50" Y="319" Z="1" W="97" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBgLg.tga" BTN_IMG_W="194" BTN_IMG_H="52"/>
+			<ATTR TEXT="201649" T_X="48" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClickMyHomeSideJobSettingCancel(UISelf:GetParent()) return true </SCRIPT>
+			<HOTKEY ID="59"> OnClickMyHomeSideJobSettingCancel(UISelf:GetParent()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_OK" X="149" Y="319" Z="1" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="201650" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClickMyHomeSideJobOK(UISelf:GetParent()) return true </SCRIPT>
+			<HOTKEY ID="60"> OnClickMyHomeSideJobOK(UISelf:GetParent()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="234" Y="319" Z="1" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="201651" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:GetTopParent():Close() return true </SCRIPT>
+			<HOTKEY ID="61"> UISelf:GetTopParent():Close() return true </HOTKEY>
+		</BUTTON-->
+	</STATIC_FORM>
+	
+	<!--          CallUI("SFRM_SIDE_JOB_BOARD")                  -->
+	<STATIC_FORM ID="SFRM_SIDE_JOB_BOARD" ALIGN_X="40" ALIGN_Y="50" W="623" H="576" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_CLOSE"> CloseUI("FRM_SIDE_JOB_BOARD_TOWN_SELECT") CloseUI("FRM_SIDE_JOB_BOARD_SORT_SELECT")</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="621" H="36" Z="-2" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="590" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetTopParent():Close() return true</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetTopParent():Close() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_TAB_BG" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<CHECK_BUTTON ID="CBTN_TITLE" X="0" Y="0" W="144" H="24" BTN_IMG="../Data/6_ui/common/cmTabLong2.tga" BTN_IMG_W="144" BTN_IMG_H="96" BTN_VERTICAL_IMG="1" BTN_CLICK_LOCK="1">
+					<ATTR TEXT="201631" FONT="FTtitle_14" T_X="13" T_Y="4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL"> UISelf:CheckState(true) </SCRIPT>                                              
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_TOWN_ADDR" X="14" Y="36" W="122" H="23" STATIC_NUM="3">
+			<ATTR  TEXT="201002" T_X="13" T_Y="3" FONT="Font_text" FONT_COLOR_HEX="0xFF343413"/>
+			<BUTTON ID="BTN_DROP_ADDR" X="101" Y="1" W="21" H="21" BTN_IMG="../Data/6_ui/post/psDropB.tga" BTN_IMG_W="42" BTN_IMG_H="42">
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickSideJobBoardTownNumber(UISelf)</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_ALIGN_CATE" X="324" Y="36" W="142" H="23" STATIC_NUM="3">
+			<ATTR  TEXT="201032" T_X="13" T_Y="3" FONT="Font_text" FONT_COLOR_HEX="0xFF343413"/>
+			<BUTTON ID="BTN_DROP_VIEW_TYPE" X="121" Y="1" W="21" H="21" BTN_IMG="../Data/6_ui/post/psDropB.tga" BTN_IMG_W="42" BTN_IMG_H="42">
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickSideJobBoardListViewType(UISelf)</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<BUILD ID="BLD_ITEM_SLOT" TARGET_ID="FRM_ITEM_SLOT" X="14" Y="107" X_COUNT="1" Y_COUNT="15" Y_GAB="28"/>
+		<STATIC_FORM ID="FRM_ITEM_SLOT" X="0" Y="0" W="595" H="25">
+			<STATIC_FORM ID="SFRM_TOWN" X="6" Y="0" W="97" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" TEXT="" T_X="48" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			<STATIC_FORM ID="SFRM_ADDRESS" X="105" Y="0" W="108" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" TEXT="" T_X="54" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			<STATIC_FORM ID="SFRM_SIDE_JOB" X="215" Y="0" W="150" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" TEXT="" T_X="75" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			<STATIC_FORM ID="SFRM_DISCOUNT_RATE" X="367" Y="0" W="67" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" TEXT="" T_X="33" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			<STATIC_FORM ID="SFRM_LOCATION" X="436" Y="0" W="56" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" TEXT="" T_X="28" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			<BUTTON ID="BTN_VIEW_TO_GO" X="452" Y="0" W="37" H="25" Z="1" BTN_IMG="../Data/6_ui/myhome/mhHomeBt.tga" BTN_IMG_W="74" BTN_IMG_H="50">
+				<SCRIPT ID="ON_L_BTN_DOWN">OnCallHomeDetailView(UISelf)</SCRIPT>
+			</BUTTON>
+			<STATIC_FORM ID="SFRM_MOVE" X="494" Y="0" W="95" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" TEXT="" T_X="47" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+			<BUTTON ID="BTN_MOVE" X="494" Y="1" W="93" H="23" Z="1" BTN_IMG="../Data/6_ui/myhome/mhBt3.tga" BTN_IMG_W="93" BTN_IMG_H="92" BTN_VERTICAL_IMG="1">
+				<ATTR  TEXT="201602" T_X="46" T_Y="3" T_CENTER="1" FONT="Font_text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> OnClickSideJobBoardMoveHome(UISelf) </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<FORM ID="FRM_PAGE" X="179" Y="533" Z="1" W="274" H="23">
+			<IMG ID="BTN_FIRST_BG" X="19" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="BTN_PREV_BG" X="44" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="BTN_NEXT_BG" X="215" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="BTN_END_BG" X="241" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID = "BTN_FIRST" X="0" Y="2" W="23" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/pvp/pvBack2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickSideJobBoardBeginPage(UISelf)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_PREV" X="34" Y="2" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickSideJobBoardJumpPrevPage(UISelf)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_NEXT" X="215" Y="2" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickSideJobBoardJumpNextPage(UISelf)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_END" X="241" Y="2" W="23" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickSideJobBoardEndPage(UISelf)</SCRIPT>
+			</BUTTON>
+			<BUILD ID="BLD_PAGENUM" TARGET_ID = "CBTN_NUM" X = "57" Y = "0" X_COUNT = "5" Y_COUNT = "1" X_GAB = "30" Y_GAB = "0"/>
+			<CHECK_BUTTON ID="CBTN_NUM" X="0" Y="0" W="28" H="21" TEXT="5002" T_CENTER="1" T_X="14" T_Y="1" FONT="FTcts_16" BTN_CLICK_LOCK="1" BTN_T_INVERTBOLD="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickSideJobBoardPage(UISelf)</SCRIPT>
+			</CHECK_BUTTON>
+		</FORM>
+		<FORM ID="FRM_BG" X="5" Y="32" W="613" H="544" Z="-1">
+			<FORM ID="FRM_UNDER_TITLE" X="0" Y="0" W="613" H="33" Z="-1" IMG="../Data/6_ui/auction/auSchBg.tga" IMG_W="613" IMG_H="33"/>
+			<STATIC_FORM ID="SFRM_TOWN_BG" X="9" Y="4" W="122" H="23" Z="1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_CATE_BG" X="319" Y="4" W="142" H="23" Z="1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<FORM ID="FRM_NPC_FACE" X="432" Y="-82" W="163" H="120" IMG="../Data/6_ui/myhome/mhNpcImg.tga" IMG_W="168" IMG_H="120" NO_FOCUS="1" PASS_EVENT="1"/>
+			<STATIC_FORM ID="SFRM_MAIN_BG" X="9" Y="38" W="595" H="492" Z="1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_MAIN_BG_SD" X="0" Y="0" W="595" H="492" STATIC_NUM="3"/>
+				<STATIC_FORM ID="SFRM_TOWN_BG" X="6" Y="6" W="97" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" TEXT="201632" T_X="48" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<STATIC_FORM ID="SFRM_ADDRESS_BG" X="105" Y="6" W="108" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" TEXT="201633" T_X="54" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<STATIC_FORM ID="SFRM_SIDE_JOB_BG" X="215" Y="6" W="150" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" TEXT="201634" T_X="75" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<STATIC_FORM ID="SFRM_DISCOUNT_RATE_BG" X="367" Y="6" W="67" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" TEXT="201635" T_X="33" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<STATIC_FORM ID="SFRM_LOCATION_BG" X="436" Y="6" W="56" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" TEXT="201636" T_X="28" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<STATIC_FORM ID="SFRM_MOVE_BG" X="494" Y="6" W="95" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" TEXT="201637" T_X="47" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<BUILD ID="BLD_LINE_L" TARGET_ID="IMG_LINE_L" X="191" Y="465" X_COUNT="8" Y_COUNT="1" X_GAB="30"/>
+				<FORM ID="IMG_LINE_L" X="0" Y="0" W="1" H="19" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="19" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<BUILD ID="BLD_LINE_R" TARGET_ID="IMG_LINE_R" X="192" Y="465" X_COUNT="8" Y_COUNT="1" X_GAB="30"/>
+				<FORM ID="IMG_LINE_R" X="0" Y="0" W="1" H="19" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="19" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID="IMG_LINE0" X="6" Y="457" W="582" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="582" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<FORM ID="IMG_LINE1" X="6" Y="458" W="582" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="582" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			</STATIC_FORM>
+		</FORM>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_SIDE_JOB_BOARD_TOWN_SELECT" X="0" Y="0" W="123" H="100" PRIORITY="1">
+		<SCRIPT ID="ON_LOSE_FOCUS">UISelf:Close()</SCRIPT>
+		<STATIC_FORM ID="SFRM_BORDER" X="-2" Y="-2" W="123" H="104" Z="-1" STATIC_NUM="35" PASS_EVENT="1" NO_FOCUS="1"/>
+		<LIST ID="LST_DROP" X="0" Y="0" W="123" H="100" ELEMENT_ID="FRM_SIDE_JOB_BOARD_TOWN_ITEM" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="QUEST_LIST_SCROLL_BG" NO_FOCUS="1">
+			<IMG ID="QUEST_LIST_SCROLL_BG" X="103" Y="0" Z="-1" W="13" H="100" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="100" NO_FOCUS="1"/>
+			<BUTTON ID="BTN_SCR_UP" X="99" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30" NO_FOCUS="1"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="99" Y="85" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30" NO_FOCUS="1"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="91" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" NO_FOCUS="1"/>		
+			<SCRIPT ID="ON_LOSE_FOCUS">UISelf:Close()</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				UISelf:ClearAllListItem()
+			</SCRIPT>
+		</LIST>
+	</FORM>
+	
+	<BUTTON ID="FRM_SIDE_JOB_BOARD_TOWN_ITEM" X="0" Y="0" W="97" H="22" BTN_IMG="../Data/6_ui/common/cmDropB04.tga" BTN_IMG_W="194" BTN_IMG_H="44" NO_FOCUS="1">
+		<ATTR T_X="48" T_Y="3" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			local kSelf = UISelf
+			OnClickSideJobBoardTownItem(kSelf)
+			kSelf:GetParent():GetParent():Close()
+			return true
+		</SCRIPT>
+	</BUTTON>
+	
+	<FORM ID="FRM_SIDE_JOB_BOARD_SORT_SELECT" X="0" Y="0" W="143" H="100" PRIORITY="1">
+		<SCRIPT ID="ON_LOSE_FOCUS">UISelf:Close()</SCRIPT>
+		<STATIC_FORM ID="SFRM_BORDER" X="-2" Y="-2" W="143" H="104" Z="-1" STATIC_NUM="35" PASS_EVENT="1" NO_FOCUS="1"/>
+		<LIST ID="LST_DROP" X="0" Y="0" W="143" H="100" ELEMENT_ID="FRM_SIDE_JOB_BOARD_SORT_ITEM" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="QUEST_LIST_SCROLL_BG" NO_FOCUS="1">
+			<IMG ID="QUEST_LIST_SCROLL_BG" X="143" Y="0" Z="-1" W="13" H="100" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="100" NO_FOCUS="1"/>
+			<BUTTON ID="BTN_SCR_UP" X="119" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30" NO_FOCUS="1"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="119" Y="85" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30" NO_FOCUS="1"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="111" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" NO_FOCUS="1"/>		
+			<SCRIPT ID="ON_LOSE_FOCUS">UISelf:Close()</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				UISelf:ClearAllListItem()
+			</SCRIPT>
+		</LIST>
+	</FORM>
+	
+	<BUTTON ID="FRM_SIDE_JOB_BOARD_SORT_ITEM" X="0" Y="0" W="137" H="22" BTN_IMG="../Data/6_ui/common/cmDropB03.tga" BTN_IMG_W="234" BTN_IMG_H="44" NO_FOCUS="1">
+		<ATTR T_X="55" T_Y="3" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			local kSelf = UISelf
+			OnClickSideJobBoardListViewTypeItem(kSelf)
+			kSelf:GetParent():GetParent():Close()
+			return true
+		</SCRIPT>
+	</BUTTON>
+</XUI>

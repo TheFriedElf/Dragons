@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_seven_Dwarfs_first" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_seven_Dwarfs_first"/>
+		<KFMPATH>../Data/2_Mon/N_seven_Dwarfs_first/N_seven_Dwarfs_first.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000061"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000201"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

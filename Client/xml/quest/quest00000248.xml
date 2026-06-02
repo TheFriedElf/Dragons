@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>248</ID> <!--T.T.10024801 반디불이가 좋다옹! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	반디불이 10마리 채집-->
+<!--[완료NPC]	바람항구 - 가토-->
+<!--[내용]	가토는 인간 세상의 곤충 반디불이에 대해 뜻깊은 추억을 가지고 있는 듯 하다. 가토는 채집스킬(벌목, 약초캐기, 낚시, 채굴)을 통해 반디불 10마리를 잡아 올 경우, 답례로 반디불 채팅말풍선을 선물하겠다고 한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 바람항구 - 가토 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 바람항구 - 가토 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 바람항구 - 가토 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">299602710</ITEM> 
+ <!--Item_NO=299602710/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10024811"/> <!--반디불-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299602840</ITEM><!--전체지급/전체/1)/299602840() 1개-한여름밤의 별풍선-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10024821" FACE="gatto_normal"/> <!--내가 세상에서 가장 좋아하는 곤충은 반디불이다옹!
+반짝 반짝 불빛이 궁뎅이에서 나오는 생물이 있다니...
+이건 정말 놀라운 자연의 신비가 아닐까 싶다옹~%%
+그래서 상점에 사러 갔지만, 안타깝게도 반디불이를
+팔지 않는다옹... 실망했음이다옹...
+그래서 나도 곤충채집에 나서기로 결심했던 것이다옹!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10024826" FACE="gatto_normal"/> <!--와! 이건 반짝반짝 궁뎅이를 가진 반디불이들!
+아아.. 이걸 보고 있으니 이상하게 마음이 센치해진다옹.
+내가 아기 가토였을 땐 여름밤에 흔히 볼수있었다냐옹...%%
+사람들은 작은 곤충들이 세상에서 사라져도 큰
+관심을 기울이지 않는다옹. 그렇지만 %name%군은
+꼬옥 기억해줬으면 좋겠다옹.%%
+작은 벌레가 살 수 없는 세상은 새들도 살 수 없는 
+세상이고, 새들이 살 수 없는 숲은 고기가 빠진
+커틀렛임을... 냥... 이런 또 먹는 얘기로 새버렸군. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10024823" FACE="gatto_normal"/> <!--긴 말이 필요 없다옹. 반딧불을 잡기 위해선 채집 
+스킬이 필요하다옹. 벌목이나, 약초캐기, 낚시, 채굴을
+시도해서 반딧불을 구할 수 있다옹. %%
+다만 다른 곤충들의 채집과는 다르게 미션맵 보너스 
+스테이지의 보물상자에선 나오지 않으니까 주의를
+요한다옹!%%
+반디불을 10마리 구해서 나에게 가져다 주면, 내가
+채팅할 때 자신을 돋보이게 할 수 있는 특별한
+풍선을 제공하겠다옹. 오케이! 허리업이다옹! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10024824" FACE="gatto_normal"/> <!--냥! 지금이라도 늦지 않았다옹! 네버네버 기브업이다옹! 
+어쨌거나 반딧불이 남게되면 나한테 가져오길 바란다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10024825" FACE="gatto_normal"/> <!--반디불이는 다른 곤충들과 다르게 오직 채집스킬들을 통해서만 가능하다냥!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10024802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

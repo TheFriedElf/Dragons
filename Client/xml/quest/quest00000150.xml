@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>150</ID> <!--T.T.10015001 방독면이 필요해! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구 다비에게 사드오닉스 1개를 가져다 주자.-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 방독면을 잃어버렸다면, 자신이 다시 만들어주겠다고 한다. 방독면을 얻기 위해 다비의 왼편의 잡화상인 데이지가 파는 사드오닉스 1개를 사가지고 오자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">50903930</ITEM> 
+ <!--Item_NO=50903930/[보석상인]사드오닉스,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10015011"/> <!--사드오닉스-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">60000610</ITEM><!--전체지급/전체/1)/60000610(봉인아님) 1개-[파렐추가] 비상용 방독면-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10015021" FACE="Darby_normal"/> <!--음? 설마 방독면을 잃어버린 건가?
+흠. 내가 자네를 도와줄 수 있긴 한데.
+필요한 재료가 있어서 말이지. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10015026" FACE="Darby_smile"/> <!--음, 고맙네. 다음부터는 방독면을 잃어버리 말게나.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10015023" FACE="Darby_smile"/> <!--만들어 놓은 방독면이 있기는 한데, 이건 다른 사람이 주문해 놓은 거라서.
+그 사람이 당장 필요 없다고 했으니까, 자네에게 우선 줘도 상관 없을 것 같네.
+하지만 방독면을 만들기 위해서는 사드오닉스라는 게 필요해서 말이지.%%
+자네가 내 왼편의 잡화상인 데이지에게 사드오닉스를 사가지고 온다면, 만들어 놓은 방독면을 자네게에 먼저 주겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10015024" FACE="Darby_normal"/> <!--뭐, 알아서 하게나. 방독면 없이 견디긴 힘들 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10015025" FACE="Darby_normal"/> <!--세상에 쉽게 얻을 수 있는 물건은 없는 법이지. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10015002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

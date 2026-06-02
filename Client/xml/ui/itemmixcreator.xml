@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="SFRM_ITEM_MIX_CREATOR" X="200" Y="91" W="325" H="498" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_TICK">UpdateEqItemMixCreatorUI(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 200, 91)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">StopEpItemMixing(UISelf)</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="323" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="292" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():GetParent():Close()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():GetParent():Close() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_TAB_BG" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<CHECK_BUTTON ID="CBTN_TITLE" X="0" Y="0" W="84" H="24" BTN_IMG="../Data/6_ui/common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48" BTN_CLICK_LOCK="1">
+					<ATTR TEXT="50701" FONT="FTtitle_14" T_X="45" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL"> UISelf:CheckState(true) </SCRIPT>                                              
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_UIMODEL" X="10" Y="36" W="306" H="379" Z="1" STATIC_NUM="24" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="SFRM_BG" X="10" Y="36" W="306" H="379" Z="-2" STATIC_NUM="24" IMG="../Data/6_ui/etc/etcItBg.tga" IMG_X="1" IMG_Y="2" IMG_W="303" IMG_H="375">
+			<IMG ID="IMG_GEAR_L" X="1" Y="304" W="73" H="73" U="1" V="3" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItAni01.tga" IMG_W="73" IMG_H="219"/>
+			<IMG ID="IMG_GEAR_R" X="231" Y="304" W="73" H="73" U="1" V="3" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItAni02.tga" IMG_W="73" IMG_H="219"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_RECIPE_BG" X="142" Y="43" W="42" H="42" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<!--ATTR TEXT="50702" FONT="Font_Text" T_X="21" T_Y="14" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/-->
+			<STATIC_FORM ID="SFRM_RECIPE_BG" X="0" Y="0" W="42" H="42" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<ICON ID="ICN_RECIPE" X="143" Y="44" W="40" H="40" ICON_GRP="124">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<IMG ID="IMG_INSURANCE_RECIPE" X="141" Y="42" W="44" H="44" IMG="../Data/6_UI/etc/etcItEft.tga" IMG_W="220" IMG_H="88">
+			<ATTR U="5" V="2"/>
+			<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.2, 1, 10, 1)</SCRIPT>
+		</IMG>
+		<FORM ID="__FRM_INSURANCE_SCROLL" IS_VISIBLE="0" X="98" Y="108" W="130" H="57" IMG="../Data/6_ui/etc/etcItSclslot.tga" IMG_W="130" IMG_H="57">
+			<ATTR TEXT="50715" FONT="Font_Text" T_X="65" T_Y="40" T_CENTER="1" FONT_COLOR_HEX="0xFFFFDA6B" T_OUTLINE="1"/>
+			<ICON ID="ICN_RATEUP_BAG" X="45" Y="1" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_CREATE">UISelf:SetGrayScale(true)</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			</ICON>
+			<ICON ID="ICN_RATEUP" X="45" Y="1" W="40" H="40" Z="1" ICON_GRP="253">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallEqItemMixToolTip(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<BUTTON ID="BTN_DEREG" X="45" Y="27" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBDown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_DOWN">UpdateEpItemMixInsuranc(UISelf)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_REG" X="72" Y="27" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_DOWN">UpdateEpItemMixInsuranc(UISelf)</SCRIPT>
+			</BUTTON>
+		</FORM>
+		<FORM ID="__FRM_RATE_UP_SCROLL" IS_VISIBLE="0" X="98" Y="190" W="130" H="57" IMG="../Data/6_ui/etc/etcItSclslot.tga" IMG_W="130" IMG_H="57">
+			<ATTR TEXT="50703" FONT="Font_Text" T_X="65" T_Y="40" T_CENTER="1" FONT_COLOR_HEX="0xFFFFDA6B" T_OUTLINE="1"/>
+			<ICON ID="ICN_RATEUP_BAG" X="45" Y="1" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_CREATE">UISelf:SetGrayScale(true)</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			</ICON>
+			<ICON ID="ICN_RATEUP" X="45" Y="1" W="40" H="40" Z="1" ICON_GRP="253">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallEqItemMixToolTip(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<BUTTON ID="BTN_DEREG" X="45" Y="27" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBDown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_DOWN">UpdateEpItemMixProbability(UISelf)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_REG" X="72" Y="27" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_DOWN">UpdateEpItemMixProbability(UISelf)</SCRIPT>
+			</BUTTON>
+		</FORM>
+		<!--IMG ID="IMG_MIX_FLASH" X="124" Y="336" W="78" H="78" Z="1" U="2" V="2" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItBt.tga" IMG_W="156" IMG_H="156">
+			<ATTR TEXT="" FONT="FTctsBig_14" T_X="39" T_Y="30" T_CENTER="1" FONT_COLOR_HEX="0xFF2E1905"/>
+		</IMG-->
+		<IMG ID="IMG_MAIN_PROGBAR" X="129" Y="84" W="68" H="269" Z="-1" IMG="../Data/6_ui/etc/etcItLn01.tga" IMG_W="68" IMG_H="0"/>
+		<BUILD ID="BLD_MATERIAL_SLOT1" TARGET_ID="FRM_MATERIAL_SLOT_L" X="13" Y="86" X_COUNT="1" Y_COUNT="4" Y_GAB="60" TRG_CUSTOME_ID="FRM_MATERIAL_SLOT" START_INDEX="0"/>
+		<FORM ID="FRM_MATERIAL_SLOT_L" X="13" Y="86" W="136" H="58">
+			<ICON ID="ICN_MATERIAL_BAG" X="45" Y="1" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_CREATE">UISelf:SetGrayScale(true)</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			</ICON>
+			<ICON ID="ICN_MATERIAL" X="45" Y="1" W="40" H="40" Z="1" ICON_GRP="253">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallEqItemMixToolTip(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<ANI_BAR ID="IMG_SUBPROG" X="86" Y="6" W="49" H="30" BAR_IMG="../Data/6_ui/etc/etcItLn02.tga" BAR_IMG_W="49" BAR_IMG_H="30" BAR_SMOOTH="0">
+				<SCRIPT ID="ON_CALL">UISelf:BarMax(100)</SCRIPT>
+			</ANI_BAR>
+			<FORM ID="FRM_ITEM_NAME" X="0" Y="41" W="136" H="15" TEXT="" T_X="68" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_CNT_NEED" X="13" Y="26" W="40" H="15" TEXT="" T_X="10" T_Y="0" T_CENTER="1" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_CNT_HAVE" X="13" Y="12" W="40" H="15" TEXT="" T_X="10" T_Y="0" T_CENTER="1" FONT="Font_Chat" FONT_COLOR_HEX="0xFF88FF27"/>
+		</FORM>
+		<BUILD ID="BLD_MATERIAL_SLOT2" TARGET_ID="FRM_MATERIAL_SLOT_R" X="178" Y="86" X_COUNT="1" Y_COUNT="4" Y_GAB="60" TRG_CUSTOME_ID="FRM_MATERIAL_SLOT" START_INDEX="4"/>
+		<FORM ID="FRM_MATERIAL_SLOT_R" X="13" Y="86" W="136" H="58">
+			<ICON ID="ICN_MATERIAL_BAG" X="50" Y="1" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_CREATE">UISelf:SetGrayScale(true)</SCRIPT>
+			</ICON>
+			<ICON ID="ICN_MATERIAL" X="50" Y="1" W="40" H="40" Z="1" ICON_GRP="253">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallEqItemMixToolTip(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<ANI_BAR ID="IMG_SUBPROG" X="0" Y="6" W="49" H="30" BAR_IMG="../Data/6_ui/etc/etcItLn02.tga" BAR_IMG_W="49" BAR_IMG_H="30" BAR_REVERSE="1" BAR_SMOOTH="0">
+				<SCRIPT ID="ON_CALL">UISelf:BarMax(100)</SCRIPT>
+			</ANI_BAR>
+			<FORM ID="FRM_ITEM_NAME" X="0" Y="41" W="136" H="15" TEXT="" T_X="68" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_CNT_NEED" X="101" Y="26" W="40" H="15" TEXT="" T_X="10" T_Y="0" T_CENTER="1" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_CNT_HAVE" X="101" Y="12" W="40" H="15" TEXT="" T_X="10" T_Y="0" T_CENTER="1" FONT="Font_Chat" FONT_COLOR_HEX="0xFF88FF27"/>
+		</FORM>
+		<FORM ID="FRM_RESULT_ITEM" X="143" Y="350" W="50" H="50">
+			<IMG ID="IMG_ICON" X="-5" Y="-5" W="50" H="50" IMG="../Data/6_ui/etc/etcCrftItemBg.tga" IMG_W="400" IMG_H="150">
+				<ATTR U="8" V="3"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<ICON ID="ICN_SRC" X="0" Y="0" Z="3" W="50" H="50" ICON_GRP="254">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+		</FORM>
+		<FORM ID="FRM_RESULT_ITEM_NAME" X="0" Y="400" W="325" H="15" T_X="162" T_Y="-5" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF84FF4E"/>
+		<STATIC_FORM ID="SFRM_NOTICE" X="10" Y="417" W="306" H="37" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR TEXT="" FONT="Font_Text" T_X="153" T_Y="10" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			<STATIC_FORM ID="SFRM_NOTICE_SD" X="0" Y="0" W="306" H="37" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_MIX" X="73" Y="454" W="92" H="34" BTN_IMG="../Data/6_ui/skill/skBok.tga" BTN_IMG_W="184" BTN_IMG_H="68" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="50704" FONT="FTbt_12" T_X="46" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF2B3200"/>
+			<SCRIPT ID="ON_CALL">SetTextOnThisUI(50716, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">StartEpItemMixing(UISelf:GetParent())</SCRIPT>
+			<HOTKEY ID="59">StartEpItemMixing(UISelf:GetParent()) return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="165" Y="458" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="50706" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1"/>
+			<SCRIPT ID="ON_CALL">SetTextOnThisUI(50706, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():Close()</SCRIPT>
+			<HOTKEY ID="60">UISelf:GetParent():Close() return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	<FORM ID="FRM_MIX_CREATOR_SUCCESS" ALIGN_X="50" Y="210" W="394" H="148" ALIVE_TIME="3000" ALIVE_TIME_IGNORE_MOUSE_OVER="1" IMG="../Data/6_ui/etc/etcItPopS.tga" IMG_W="394" IMG_H="148">
+		<SCRIPT ID="ON_CALL">PlaySoundByID("Item_Mix_Success")</SCRIPT>
+		<IMG ID="ICN_ITEM" X="166" Y="3" W="40" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<FORM ID="FRM_UIMODEL" X="-190" Y="-355" W="768" H="768" IGNORE_PARENT_RECT="1" NO_FOCUS="1" PASS_EVENT="1">
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("MazeItemEffect", true, true)
+				kSelf:SetRenderModelCameraZoomMinMax("MazeItemEffect", 0.1, 1.0)
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:RenderModelOrthoCameraZoomSubstitutionOldVer("MazeItemEffect", 0.5)
+				kSelf:AddRenderModelNIFByPath("MazeItemEffect", "MazeMixEffect", "../Data/5_Effect/4_UI/ef_combination_01.nif", false, true)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">UISelf:DrawRenderModel("MazeItemEffect")</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("MazeItemEffect")</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">UISelf:ClearRenderModel("MazeItemEffect")</SCRIPT>
+		</FORM>
+		<ATTR TEXT="" FONT="FTcts_16" T_X="195" T_Y="72" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+	</FORM>
+	<FORM ID="FRM_MIX_CREATOR_FAILED" ALIGN_X="50" ALIGN_Y="30" W="394" H="137" ALIVE_TIME="3000" ALIVE_TIME_IGNORE_MOUSE_OVER="1" IMG="../Data/6_ui/etc/etcItPopF.tga" IMG_W="394" IMG_H="137">
+		<FORM ID="FRM_ICON" X="177" Y="3" W="40" H="40" U="12" V="12" UV_INDEX="28" IMG="../Data/6_ui/icon/IconEtc07.tga" IMG_W="480" IMG_H="480"/>
+		<ATTR TEXT="50713" FONT="FTcts_16" T_X="196" T_Y="57" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<SCRIPT ID="ON_CALL">PlaySoundByID("Item_Mix_Fail")</SCRIPT>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+	</FORM>
+
+	<STATIC_FORM ID="SFRM_COSTUME_MIXER_NPC_MENU" X="200" Y="91" W="271" H="290" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="269" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="238" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="229" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" T_X="10" T_Y="4" W="229" H="24" STATIC_NUM="3" TEXT="50801" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_SCRIPT" X="9" Y="35" STATIC_NUM="34" W="254" H="144">
+			<FORM ID="FRM_TEXT1" X="7" Y="7" W="230" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="1">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="50802" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT2" X="7" Y="40" W="230" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="2">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="50803" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT3" X="7" Y="73" W="230" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="50804" T_X="18" T_Y="-1"/>
+			</FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="181" Z="-1" W="253" H="66" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID = "SFRM_SHADOW" W="253" H="66" STATIC_NUM="3" TEXT="50805" FONT_COLOR_HEX="0xFF4D3413" T_X = "16" T_Y="8">
+				<IMG ID="IMG_ARROW" X="9" Y="13" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+				<IMG ID="IMG_LINE_1" X="8" Y="27" W="237" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="237" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="8" Y="28" W="237" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="237" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<STATIC_FORM ID = "SFRM_BTN_BG" X="8" Y="31" W="237" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+					<ATTR TEXT="50801" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_SELECT" X="185" Y="215" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2200) </SCRIPT>
+			<ATTR TEXT="400084" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CallCostumeMixUI(UISelf:GetParent())
+			</SCRIPT>
+			<HOTKEY ID="59"> CallCostumeMixUI(UISelf:GetParent()) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="88" Y="251" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="97" FONT="FTtitle_14" T_X="42" T_Y="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+	</STATIC_FORM>	
+	
+	<STATIC_FORM ID="SFRM_COSTUME_MIXER" X="200" Y="91" W="325" H="378" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_TICK">UpdateCostumeMixUI(UISelf)</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="323" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="292" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():GetParent():Close()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():GetParent():Close() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_TAB_BG" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<CHECK_BUTTON ID="CBTN_TITLE" X="0" Y="0" W="84" H="24" BTN_IMG="../Data/6_ui/common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48" BTN_CLICK_LOCK="1">
+					<ATTR TEXT="50801" FONT="FTtitle_14" T_X="45" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL"> UISelf:CheckState(true) </SCRIPT>                                              
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_BG_LINE" X="10" Y="36" W="306" H="239" Z="1" STATIC_NUM="24" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="SFRM_BG" X="10" Y="36" W="306" H="235" Z="-2" STATIC_NUM="24" IMG="../Data/6_ui/etc/etcCstBg.tga" IMG_X="1" IMG_Y="2" IMG_W="303" IMG_H="235">
+			<IMG ID="IMG_GEAR_L" X="1" Y="164" W="73" H="73" U="1" V="3" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItAni01.tga" IMG_W="73" IMG_H="219"/>
+			<IMG ID="IMG_GEAR_R" X="231" Y="164" W="73" H="73" U="1" V="3" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItAni02.tga" IMG_W="73" IMG_H="219"/>
+		</FORM>
+		<IMG ID="IMG_MAIN_PROGBAR" X="100" Y="60" W="128" H="144" Z="-1" IMG="../Data/6_ui/etc/etcCstLine.tga" IMG_W="128" IMG_H="0"/>
+		<FORM ID="FRM_MATERIAL_SLOT_0" X="13" Y="56" W="136" H="58">
+			<STATIC_FORM ID="SFRM_MATERIAL_BG" X="46" Y="0" W="42" H="43" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_MATERIAL_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="3"/>
+			</STATIC_FORM>
+			<IMG ID = "IMG_ITEM0" X="47" Y="1" W="40" H="40" IMG="../Data/6_ui/info/ifIconEtc.tga" IMG_W = "120" IMG_H="200" U="3" V="5" UV_INDEX="3" PASS_EVENT="1">
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(true)
+				</SCRIPT>
+			</IMG>
+			<ICON ID="ICN_MATERIAL" X="47" Y="1" W="40" H="40" Z="1" ICON_GRP="253">				
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() OnDragDropCostumeMixItem(UISelf, 0)</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallEqItemMixToolTip(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<FORM ID="FRM_ITEM_NAME" X="0" Y="41" W="136" H="15" TEXT="" T_X="68" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_MATERIAL_SLOT_1" X="178" Y="56" W="136" H="58">
+			<STATIC_FORM ID="SFRM_MATERIAL_BG" X="49" Y="0" W="42" H="43" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_MATERIAL_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="3"/>
+			</STATIC_FORM>
+			<IMG ID = "IMG_ITEM1" X="50" Y="1" W="40" H="40" IMG="../Data/6_ui/info/ifIconEtc.tga" IMG_W = "120" IMG_H="200" U="3" V="5" UV_INDEX="3" PASS_EVENT="1">
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(true)
+				</SCRIPT>
+			</IMG>
+			<ICON ID="ICN_MATERIAL" X="50" Y="1" W="40" H="40" Z="1" ICON_GRP="253">
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() OnDragDropCostumeMixItem(UISelf, 1)</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallEqItemMixToolTip(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<FORM ID="FRM_ITEM_NAME" X="0" Y="41" W="136" H="15" TEXT="" T_X="68" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_NOTICE" X="10" Y="277" W="306" H="57" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR TEXT="" FONT="Font_Text" T_X="153" T_Y="10" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			<STATIC_FORM ID="SFRM_NOTICE_SD" X="0" Y="0" W="306" H="57" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<IMG ID="IMG_MIX" X="124" Y="186" W="78" H="78" U="2" V="2" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItBt.tga" IMG_W="156" IMG_H="156"/>
+		<BUTTON ID="BTN_MIX" X="124" Y="186" W="78" H="78" Z="1" BTN_IMG="../Data/6_ui/etc/etcItBt.tga" BTN_IMG_W="156" BTN_IMG_H="156" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="50704" FONT="FTctsBig_14" T_X="39" T_Y="30" T_CENTER="1"/>
+			<SCRIPT ID="ON_CALL">UISelf:SetStaticTextW(GetTT(50704))</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">CallUI("MB_COSTUME_OK_CANCEL")</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="121" Y="338" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="50706" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(50706, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():Close()</SCRIPT>
+			<HOTKEY ID="60">UISelf:GetParent():Close() return true</HOTKEY>			
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+				CloseUI("Inv")
+		</SCRIPT>
+	</STATIC_FORM>	
+	
+	<MSG_BOX ID="MB_COSTUME_OK_CANCEL" ALIGN_X="50" ALIGN_Y="25" W="247" H="158" CAN_DRAG="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<!--ATTR IMG="../Data/6_ui/01_main/ptMsgBg.tga" IMG_W="247" IMG_H="158"/-->
+		<STATIC_FORM ID="SFRM_BG" Z="-1" W="247" H="158" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_BG_COLOR" X="8" Y="8" Z="0" W="231" H="108" STATIC_NUM="2"  CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="8" Y="8" Z="1" W="231" H="108" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<!--ATTR TEXT="19943" FONT="Font_Text" T_X="12" T_Y ="40" T_OUTLINE="1"/-->
+		<FORM ID="FRM_MESSAGE" X="8" Y="8" Z="0" W="231" H="108">
+			<ATTR TEXT="50818" FONT="Font_Text" T_X="116" T_Y ="22" T_CENTER="1" T_OUTLINE="0" FONT_COLOR_HEX="0xFF482e26"/>
+		</FORM>
+		<BUTTON ID="BTN_OK" X="41" Y="121" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400536" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">StartCostumeMixing(GetUIWnd("SFRM_COSTUME_MIXER")) UISelf:GetParent():Close()</SCRIPT>
+			<HOTKEY ID="59">StartCostumeMixing(GetUIWnd("SFRM_COSTUME_MIXER")) UISelf:GetParent():Close() return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="121" W="79" H="28">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400537" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+	</MSG_BOX>	
+	
+	<STATIC_FORM ID = "SFRM_COMMONTYPE_MIXER" X = "240" Y = "91" W ="282" H ="380" CAN_DRAG = "1" STATIC_NUM = "1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_TICK">UpdateCommonTypeMixer(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 240, 91)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">DeleteCommonMixerInfo()</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="280" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="249" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="150" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "IMG_TAB" X="0" Y="0" W="150" H="24" STATIC_NUM="3">
+					<ATTR TEXT = "790451" FONT = "FTtitle_14" T_X = "75" T_Y ="4" T_OUTLINE="0" T_CENTER = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<ICON ID = "ICN_RECIPE" X="16" Y="42" W="40" H="40" ICON_GRP ="124" ICON_KEY="0">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<STATIC_FORM ID = "SFRM_RECIPE_NAME">
+			<ATTR X="61" Y="60" W="206" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "4" T_Y ="4" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>	
+		<BUILD ID="BLD_MATERIAL_SLOT" X="95" Y="92" X_COUNT="1" Y_COUNT="4" X_GAB="0" Y_GAB="49" TARGET_ID="FRM_MATERIAL_SLOT"/> 
+		<FORM ID="FRM_MATERIAL_SLOT" X="0" Y="0" W="182" H="45" TEXT="" Z="3" FONT="Font_Text" T_X="47" T_Y="24" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<STATIC_FORM ID="SFRM_MATERIAL" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" Z="-1"/>
+			<ICON ID="ICN_MATERIAL" X="1" Y="1" W="40" H="40" Z="1" ICON_GRP="124" ICON_KEY="0">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<ICON ID="ICN_MATERIAL_GRAY" X="1" Y="1" W="40" H="40" ICON_GRP="254" ICON_KEY="0" IS_VISIBLE="0">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<STATIC_FORM ID = "SFRM_MATERIAL_NAME">
+				<ATTR X="46" Y="0" W="126" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X = "1" T_Y ="3" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			</STATIC_FORM>
+			<IMG ID="IMG_LINE_1" X="3" Y="44" W="169" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="169" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE_2" X="3" Y="45" W="169" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="169" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<FORM ID = "FRM_ARROW_BG" X="-53" Y="10" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" Z="-1">
+				<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+			</FORM>
+			<ANI_BAR ID="IMG_SUBPROG" X="-52" Y="10" W="54" H="22" BAR_IMG="../Data/6_ui/refine/rfArrow02cl.tga" BAR_IMG_W="54" BAR_IMG_H="22" BAR_REVERSE="1" BAR_SMOOTH="0">
+				<SCRIPT ID="ON_CALL">UISelf:BarMax(100) UISelf:BarNow(0)</SCRIPT>
+			</ANI_BAR>
+		</FORM>
+		<ICON ID = "ICN_DEST" X="16" Y="292" W="40" H="40" ICON_GRP ="254" ICON_KEY="0">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<STATIC_FORM ID = "SFRM_DEST_NAME" X="61" Y="310" W="206" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "4" T_Y ="4" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+		<IMG ID="IMG_MAIN_PROGBAR" X="24" Y="83" W="24" H="208" IMG="../Data/6_ui/refine/rfArrow01cl.tga" IMG_W="24" IMG_H="0"/>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="35" W="264" H="304" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" Z="-1">
+			<STATIC_FORM ID = "SFRM_SHADOW" X = "0" Y = "0" W="264" H="304" STATIC_NUM = "3" >
+				<STATIC_FORM ID = "SFRM_SRC" X="6" Y="6" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<FORM ID = "FRM_ARROW1" X="56" Y="3" W="200" H="24">
+					<IMG ID="IMG_ARROW" X="0" Y="9" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					<ATTR TEXT = "790452" FONT = "Font_Text" T_X = "7" T_Y ="5" T_OUTLINE="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+				<IMG ID="IMG_LINE_1" X="49" Y="49" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="49" Y="50" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<STATIC_FORM ID = "SFRM_DEST" X="6" Y="256" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<FORM ID = "FRM_ARROW2" X="56" Y="254" W="100" H="24">
+					<IMG ID="IMG_ARROW" X="0" Y="9" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					<ATTR TEXT = "790454" FONT = "Font_Text" T_X = "7" T_Y ="5" T_OUTLINE="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+				<IMG ID="IMG_LINE_3" X="49" Y="254" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_4" X="49" Y="255" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID = "FRM_DOWN_ARROW_BG" X="15" Y="48" W="24" H="208" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" >
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow01.tga" IMG_W = "24" IMG_H = "208"/>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<!--STATIC_FORM ID = "SFRM_COLOR2">
+			<ATTR X="9" Y="341" W="264" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW" X = "0" Y = "0" W="264" H="26" STATIC_NUM = "3" >
+				<ATTR TEXT = "790455" FONT = "Font_Text" T_X = "12" T_Y ="5" T_OUTLINE="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				<IMG ID="IMG_LINE_1" X="64" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="65" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID="FRM_COIN1" X="102" Y="5" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemCookingWnd(UISelf)
+						UISelf:DrawMoneyByValue(1, wnd:GetCookingNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN2" X="150" Y="5" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemCookingWnd(UISelf)
+						UISelf:DrawMoneyByValue(2, wnd:GetCookingNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN3" X="197" Y="5" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemCookingWnd(UISelf)
+						UISelf:DrawMoneyByValue(3, wnd:GetCookingNeedMoney())
+					</SCRIPT>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM-->
+		<BUTTON ID = "BTN_TRY_REFINE" X="52" Y="341" W="84" H="26">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(790456, 2200) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID="ON_L_BTN_UP">StartCommonTypeMixer(UISelf:GetParent())</SCRIPT>
+			<HOTKEY ID="59">StartCommonTypeMixer(UISelf:GetParent())</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="146" Y="341" W="84" H="26">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(790457, 2201) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:CloseParent() return true</SCRIPT>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>	
+	<!--	CallUI("SFRM_MONSTERCARD_MIXER")	DoFile("ui/common.lua")	-->
+	<STATIC_FORM ID="SFRM_MONSTERCARD_MIXER" X="200" Y="91" W="325" H="478" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_CALL">SetDefaultInsItemNo(99600150)</SCRIPT>
+		<SCRIPT ID="ON_TICK">OnUpdateMonsterCardMixerType2(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">OnCloseMonsterCardMixerType2() CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 200, 91)</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="323" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="292" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():GetParent():Close()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():GetParent():Close() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_TAB_BG" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<CHECK_BUTTON ID="CBTN_TITLE" X="0" Y="0" W="144" H="24" BTN_IMG="../Data/6_ui/common/cmTabLong2.tga" BTN_IMG_W="144" BTN_IMG_H="96" BTN_VERTICAL_IMG="1" BTN_CLICK_LOCK="1">
+					<ATTR TEXT="790480" FONT="FTtitle_14" T_X="60" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL"> UISelf:CheckState(true) </SCRIPT>                                              
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_BG_LINE" X="10" Y="36" W="306" H="239" Z="1" STATIC_NUM="24" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="SFRM_BG" X="10" Y="36" W="306" H="235" Z="-2" STATIC_NUM="24" IMG="../Data/6_ui/etc/etcCstBg2.tga" IMG_X="1" IMG_Y="2" IMG_W="303" IMG_H="235">
+			<IMG ID="IMG_GEAR_L" X="1" Y="164" W="73" H="73" U="1" V="3" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItAni01.tga" IMG_W="73" IMG_H="219"/>
+			<IMG ID="IMG_GEAR_R" X="231" Y="164" W="73" H="73" U="1" V="3" UV_INDEX="1" IMG="../Data/6_ui/etc/etcItAni02.tga" IMG_W="73" IMG_H="219"/>
+		</FORM>
+		<IMG ID="IMG_MAIN_PROGBAR" X="100" Y="60" W="128" H="144" Z="-1" IMG="../Data/6_ui/etc/etcCstLine.tga" IMG_W="128" IMG_H="0"/>
+		<FORM ID="FRM_MATERIAL_SLOT_0" X="13" Y="56" W="136" H="58">
+			<STATIC_FORM ID="SFRM_MATERIAL_BG" X="46" Y="0" W="42" H="43" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_MATERIAL_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="3"/>
+			</STATIC_FORM>
+			<ICON ID="ICN_MATERIAL" X="47" Y="1" W="40" H="40" Z="1" ICON_GRP="253" ICON_KEY="2">				
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<FORM ID="FRM_ITEM_NAME" X="0" Y="41" W="136" H="15" TEXT="" T_X="68" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_MATERIAL_SLOT_1" X="178" Y="56" W="136" H="58">
+			<STATIC_FORM ID="SFRM_MATERIAL_BG" X="49" Y="0" W="42" H="43" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_MATERIAL_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="3"/>
+			</STATIC_FORM>
+			<ICON ID="ICN_MATERIAL" X="50" Y="1" W="40" H="40" Z="1" ICON_GRP="253" ICON_KEY="2">
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<FORM ID="FRM_ITEM_NAME" X="0" Y="41" W="136" H="15" TEXT="" T_X="68" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_INSURANCE_SCROLL" X="98" Y="98" W="130" H="57" IMG="../Data/6_ui/etc/etcItSclslot.tga" IMG_W="130" IMG_H="57">
+			<ATTR TEXT="790481" FONT="Font_Text" T_X="65" T_Y="40" T_CENTER="1" FONT_COLOR_HEX="0xFFFFDA6B" T_OUTLINE="1"/>
+			<ICON ID="ICN_RATEUP_BAG" X="45" Y="1" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_CREATE">UISelf:SetGrayScale(true)</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<ICON ID="ICN_RATEUP" X="45" Y="1" W="40" H="40" Z="1" ICON_GRP="253">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<BUTTON ID="BTN_DEREG" X="45" Y="27" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBDown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_DOWN">SetMonsterCardMixerType2Ins()</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_REG" X="72" Y="27" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_DOWN">SetMonsterCardMixerType2Ins()</SCRIPT>
+			</BUTTON>
+		</FORM>
+		<FORM ID="FRM_RESULT_ITEM" X="139" Y="194" W="50" H="50">
+			<IMG ID="IMG_ICON" X="-1" Y="0" W="50" H="50" IMG="../Data/6_ui/etc/etcCrftItemBg.tga" IMG_W="400" IMG_H="150">
+				<ATTR U="8" V="3"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<ICON ID="ICN_SRC" X="4" Y="5" Z="3" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<FORM ID="FRM_ITEM_NAME" X="-43" Y="50" W="136" H="15" TEXT="" T_X="68" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF84FF4E"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_NOTICE" X="10" Y="277" W="306" H="157" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR TEXT="790483" FONT="Font_Text" T_X="8" T_Y="7" FONT_COLOR_HEX="0xFF4D3413"/>
+			<STATIC_FORM ID="SFRM_NOTICE_SD" X="0" Y="0" W="306" H="157" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<!--BUTTON ID="BTN_BUY_INS" X="15" Y="438" W="124" H="26" Z="1" BTN_IMG="../Data/6_ui/myhome/mhBt2.tga" BTN_IMG_W="124" BTN_IMG_H="104" BTN_VERTICAL_IMG="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="790482" FONT="FTctsBig_14" T_X="62" T_Y="4" T_CENTER="1"/>
+		</BUTTON-->
+		<BUTTON ID="BTN_MIX" X="137" Y="434" W="92" H="34" BTN_IMG="../Data/6_ui/skill/skBok.tga" BTN_IMG_W="184" BTN_IMG_H="68" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="50706" FONT="FTbt_12" T_X="46" T_Y="7" T_CENTER="1"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(790471, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">OnClickMonsterCardMixerType2Start()</SCRIPT>
+			<HOTKEY ID="59">OnClickMonsterCardMixerType2Start() return true</HOTKEY>			
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="227" Y="438" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="50706" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(50706, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():Close()</SCRIPT>
+			<HOTKEY ID="60">UISelf:GetParent():Close() return true</HOTKEY>			
+		</BUTTON>
+	</STATIC_FORM>		
+	<FORM ID="FRM_MONSTER_CARD_MIX_TYPE2_SUCCESS" X="323" Y="210" W="394" H="148" ALIVE_TIME="3000" ALIVE_TIME_IGNORE_MOUSE_OVER="1" IMG="../Data/6_ui/etc/etcItPopS.tga" IMG_W="394" IMG_H="148">
+		<SCRIPT ID="ON_CALL">PlaySoundByID("Item_Mix_Success")</SCRIPT>
+		<IMG ID="ICN_ITEM" X="166" Y="3" W="40" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<FORM ID="FRM_UIMODEL" X="-190" Y="-355" W="768" H="768" IGNORE_PARENT_RECT="1" NO_FOCUS="1" PASS_EVENT="1">
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("MonsterCardMixType2", true, true)
+				kSelf:SetRenderModelCameraZoomMinMax("MonsterCardMixType2", 0.1, 1.0)
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:RenderModelOrthoCameraZoomSubstitutionOldVer("MonsterCardMixType2", 0.5)
+				kSelf:AddRenderModelNIFByPath("MonsterCardMixType2", "MonsterCardMixType2", "../Data/5_Effect/4_UI/ef_combination_01.nif", false, true)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">UISelf:DrawRenderModel("MonsterCardMixType2")</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("MonsterCardMixType2")</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">UISelf:ClearRenderModel("MonsterCardMixType2")</SCRIPT>
+		</FORM>
+		<ATTR TEXT="" FONT="FTcts_16" T_X="195" T_Y="72" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+	</FORM>
+	<FORM ID="FRM_MONSTER_CARD_MIX_TYPE2_FAILED" ALIGN_X="50" ALIGN_Y="30" W="394" H="137" ALIVE_TIME="3000" ALIVE_TIME_IGNORE_MOUSE_OVER="1" IMG="../Data/6_ui/etc/etcItPopF.tga" IMG_W="394" IMG_H="137">
+		<FORM ID="FRM_ICON" X="177" Y="3" W="40" H="40" U="12" V="12" UV_INDEX="28" IMG="../Data/6_ui/icon/IconEtc07.tga" IMG_W="480" IMG_H="480"/>
+		<ATTR TEXT="50713" FONT="FTcts_16" T_X="196" T_Y="57" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<SCRIPT ID="ON_CALL">PlaySoundByID("Item_Mix_Fail")</SCRIPT>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+	</FORM>
+</XUI>

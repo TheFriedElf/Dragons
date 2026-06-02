@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Slack" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Slack"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Slack/N_Slack.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="1.0">../Data/2_Mon/N_Slack/N_slackHead.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="8"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000005"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000201" FIRE_START_NODE="char_root" FIRE_START_EFFECT="e_m_flower_shot_02_p_ef_head" PROJECTILE_ID="Projectile_flower_shot_01_p_ef_head"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

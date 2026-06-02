@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4059</ID> <!--T.T.10405901 동방보감(3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	미리내 신전에서 리리오페 20개, 머스크 20개 수집-->
+<!--[완료NPC]	미리내 신전 - 에델린-->
+<!--[내용]	에델린은 한방약의 제조를 위해 재료 수집을 또 부탁했다. 미리내 신전의 몬스터로부터 리리오페와 머스크를 각각 20개씩 구해오자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DD5BE5DB-F00D-42f1-9C16-8375EBE0C680</CLIENT> <!--시작NPC 미리내 신전 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DD5BE5DB-F00D-42f1-9C16-8375EBE0C680</PAYER> <!--완료NPC 미리내 신전 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DD5BE5DB-F00D-42f1-9C16-8375EBE0C680</AGENT> <!--진행NPC 11 미리내 신전 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/7500/1/1/160405900">9010200</GROUND> 
+ <!--MAP_NO=9010200/미리내 신전,Item_NO=160405900/[Q.ID:04059] 리리오페25%,-->
+		<GROUND OBJECTNO="2" TYPE="MONSTERDROP" VALUE="10000/7500/1/1/160405910">9010200</GROUND> 
+ <!--MAP_NO=9010200/미리내 신전,Item_NO=160405910/[Q.ID:04059] 머스크25%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160405900</ITEM> 
+ <!--Item_NO=160405900/[Q.ID:04059] 리리오페,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">160405910</ITEM> 
+ <!--Item_NO=160405910/[Q.ID:04059] 머스크,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10405911"/> <!--리리오페-->
+		<OBJECT2 COUNT="20" TEXT="10405912"/> <!--머스크-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10405921" FACE="Edeline_normal"/> <!--만약 몬스터들에게 빼앗긴 재료들을 더 찾아낼 수 있다면, 
+브리즈국의 병사들에게 지급되는 부족한 보급품을 보충할 수 있을 거에요.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10405926" FACE="Edeline_smile"/> <!--맞아요. 정확하게 원하는 재료들을 구해주셨군요.
+감사합니다. %name%님%%
+원정대의 용병대장 토마스님도 무척 고맙다고 전해달라더군요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10405923" FACE="Edeline_smile"/> <!--최근에 달빛해안 마을에서 유령이 나타난다는 소문 때문에
+원정대 병사분들이 받는 정신적 스트레스가 상당하답니다.%%
+카즈라에서 가져다 준 연금술서 동방보감에 의하면
+이런 현상을 기가 약해졌다-라고 표현하더군요.%%
+이럴 때 확실한 효과를 보여줄 수 있는 것이 바로 청심환이라는 약입니다.
+재료를 구해오신다면 달빛해안 마을의 불안감을 해소할 수 있을 것 같아요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10405924" FACE="Edeline_angly"/> <!--물론 어려운 일이겠지요. 알겠습니다. 다른 방법을 강구해보겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10405925" FACE="Edeline_normal"/> <!--한방약의 재료는 이곳 미리내 신전의 몬스터들을 통해 얻을 수 있답니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10405902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

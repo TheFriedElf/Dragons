@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010320_FD" DESCRIPTION="90103200">
+  <GSAPATH>../Data/3_World/01_Ingrid/01_Level/010320_FD.gsa</GSAPATH>
+  <MINIMAP Y="110" H="270">../Data/3_World/01_Ingrid/01_Level/010320_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/wind.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!--MAP TYPE설정-->
+  <!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+  <MAPVALUE PLAYERKILL="0" TYPE="1" />
+  <!--// 궁수 종소리마을 포탈 -->
+	<TRIGGER ID="gate_018230_base" TYPE="PORTAL" TITLE_TEXT_ID="801007" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018230" PARAM2="3"/>
+	</TRIGGER>
+	<!--// 도적 종소리마을 포탈 -->
+	<TRIGGER ID="gate_018240_base" TYPE="PORTAL" TITLE_TEXT_ID="801008" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018240" PARAM2="3"/>
+	</TRIGGER>
+	<!--// 남부 용자의 길 -->
+	<TRIGGER ID="gate_010310_base" TYPE="PORTAL" TITLE_TEXT_ID="800003" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010310" PARAM2="4"/>
+	</TRIGGER>
+  <!--// 숙련된 용자의 길 포탈-->
+  <TRIGGER ID="gate_010330_base" TYPE="PORTAL" TITLE_TEXT_ID="800002" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9010330" PARAM2="6" >
+	<ACCESS>
+		<!-- LEVEL MIN= "2"/ -->
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!--// 용자의 길 미션 포탈-->
+  <TRIGGER ID="gate_010301_base" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal" PARAM="90103" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms010300_0" MISSION_DISCRIPTION_TEXT_NUM="9010300" />
+  </TRIGGER>
+  <!--//용자의 길 미션 포탈-->
+  <TRIGGER ID="gate_010301_base 01" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal" PARAM="90103" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms010300_0" MISSION_DISCRIPTION_TEXT_NUM="9010300" />
+  </TRIGGER>
+  <!-- 텔레점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_11" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_11" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_12" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_13" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_14" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_15" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_16" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_16" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_17" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_17" PARAM="300" />
+  </TRIGGER>
+  
+  <!-- 트리거점프 -->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="200" />
+  </TRIGGER>
+
+  <!--<NPC NAME="1028119" ACTOR="c_DangerBoard" SCRIPT="NPC_Warning" KID="1028119" GUID="C79F2218-9735-423d-A895-DF748A9EE07A" TYPE="FIXED" LOCATION="-5.262146, 378.0195, 7.416885">
+    <SAY TYPE="WARNING" TTW="503488" FACE="m_Vagabond" FACE_ANI="1000207"/>
+  </NPC>-->
+  <NPC NAME="1028123" ACTOR="c_VendingMachine" SCRIPT="NPC_CoinChanger" KID="1028123" GUID="D213DA7C-0729-4800-91E8-F8FE282B16DA" TYPE="FIXED" LOCATION="-738.5742, 3764.431, 210.9182" />
+  <TRIGGER ID="Help_Tip_Mission_01">
+    <CONDITION TYPE="touch" />
+  </TRIGGER>
+  <TRIGGER ID="Help_Tip_Mission_02">
+    <CONDITION TYPE="touch" />
+  </TRIGGER>
+  
+  <TRIGGER ID="Help_Tip_Mission_04">
+    <CONDITION TYPE="touch" />
+  </TRIGGER>
+  
+  <TRIGGER ID="Help_Tip_Mission_05">
+    <CONDITION TYPE="touch" />
+  </TRIGGER>
+  
+  
+  <NPC NAME="1028190" ACTOR="c_joan" SCRIPT="NPC_Click" GUID="81227ADA-EFBB-48a6-B80E-540BD7A05873" TYPE="FIXED" KID="1028190" LOCATION="-1765.62, 3575.366, 7.417618" DIRECTION="-90,0,0" DESCRIPTION="507172">
+  </NPC>
+  
+  <NPC NAME="1028190" ACTOR="c_joan" SCRIPT="NPC_Click" GUID="A1FFEB26-1D0D-4d8c-92C5-68C11056C924" TYPE="FIXED" KID="1028190" LOCATION="-1501.85, 86.42188, 7.548935" DIRECTION="-90,0,0" DESCRIPTION="507172"/>
+  
+  <NPC NAME="1018203" ACTOR="c_huey" SCRIPT="NPC_Click_Shop" GUID="79567602-ceb5-4f39-9c1c-37e7a9a7c1f6" TYPE="FIXED" KID="1018203" LOCATION="708.7501, 1916.167, 7.435425" DIRECTION="-90,0,0" DESCRIPTION="507161">
+    <SAY TYPE="CLICK" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Huerin_Click1" />
+    <SAY TYPE="CLICK" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Huerin_Click2" />
+    <SAY TYPE="IDLE" TTW="" UPTIME="7" DELAY="25" ACTION="a_talk" SOUND="Huerin_Say1" />
+    <SAY TYPE="IDLE" TTW="" UPTIME="7" DELAY="25" ACTION="a_talk" SOUND="Huerin_Say2" />
+    <SAY TYPE="TALK" TTW="503210" UPTIME="" DELAY="" ACTION="" SOUND="" MIN_LEVEL="1" FACE="Huerin_normal" MAX_LEVEL="5" />
+    <SAY TYPE="TALK" TTW="503211" UPTIME="" DELAY="" ACTION="" SOUND="" MIN_LEVEL="6" FACE="Huerin_normal" MAX_LEVEL="15" />
+  </NPC>
+
+  
+  <TRIGGER ID="Quest_Trigger1268" TYPE="LOCATION">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="1268"/>
+  </TRIGGER>
+  
+  <!--
+  <TRIGGER ID="Help_Tip_Mission_03" TYPE="EVENT">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="ActivateEventEx" EventID="22" QuestID="904" />
+  </TRIGGER>
+  -->
+  <WORLD_QUALITY HIGH_END="1500" MID_END="2000" LOW_END="3000" USE="1" />
+  <FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="1500.000000" END="6000.000000" COLOR="0.799000,0.936000,0.875000" />
+  
+</WORLD>

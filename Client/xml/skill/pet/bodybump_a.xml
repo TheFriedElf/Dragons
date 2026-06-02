@@ -1,0 +1,12 @@
+<ACTION ID="a_body_bump_a" NEXT="a_trace_ground2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE" OVERRIDE_PACKET="TRUE">
+  <SLOT NAME="idle_01" LOOP="TRUE"/>
+  <SLOT NAME="dash_01"/>
+  <FSM SCRIPT="Act_Pet_Melee_Default"
+       HIT_CASTER_EFFECT_ID="ef_body_bump_00_char_root"
+       HIT_CASTER_EFFECT_TARGET_NODE_TO_WORLD_POS_WITH_ROTATE="char_root"
+       DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+       MULTI_HIT_NUM="1"
+       HIT_RUN_STOP="TRUE"
+       MOVING_ATTACK_TICK="0.0"
+       FIRE_SOUND_ID="skill-body_bump"/>
+</ACTION>

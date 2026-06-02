@@ -1,0 +1,13 @@
+#ifndef FREEDOM_DRAGONICA_CONTENTS_QUEST_UI_DIALOG_PGWARNINGDIALOG_H
+#define FREEDOM_DRAGONICA_CONTENTS_QUEST_UI_DIALOG_PGWARNINGDIALOG_H
+//
+class PgWarningDialog
+{
+public:
+	PgWarningDialog();
+	~PgWarningDialog();
+
+	bool CallWarningDialog(const SFullScreenDialogInfo& rkInfo);
+};
+
+#endif // FREEDOM_DRAGONICA_CONTENTS_QUEST_UI_DIALOG_PGWARNINGDIALOG_H

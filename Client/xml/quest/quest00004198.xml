@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4198</ID> <!--T.T.10419801 정령의 수호석을 찾아서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	파블로와 대화-->
+<!--[완료NPC]	상인의 마을 - 파블로-->
+<!--[내용]	파블로는 흑룡왕 엘가가 부활하는 것을 대비하기 위해 천년 전 영웅들이 사용했던 정령의 수호석이 필요하다고 말한다. 그러나 이 정령의 수호석은 천년 전 엘가가 사라진 후 종적을 감추었다. 이 신성한 보물에 대해 알고 있는 유일한 자가 바로 신록의 숲을 지키는 미스트 엘프, 헬크라우저라고 한다. 대마법사 파블로는 신록의 숲에서 헬크라우저를 만날 수 있을 것이지만, 그 전에 무수한 난관이 기다리고 있을 것이라 걱정한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">30B65084-661B-41bc-AB4B-D5CC8A113ADE</CLIENT> <!--시작NPC 상인의 마을 - 파블로 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">30B65084-661B-41bc-AB4B-D5CC8A113ADE</PAYER> <!--완료NPC 상인의 마을 - 파블로 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">30B65084-661B-41bc-AB4B-D5CC8A113ADE</AGENT> <!--진행NPC 11 상인의 마을 - 파블로 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419811"/> <!--파블로와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419821" FACE="Pablo_normal"/> <!--결국 검은 마녀가 드라칸의 신보를 이용하여 
+악룡을 만든 것이 사실로 드러났네.%%
+아마도 흑룡왕 엘가를 부활시키려 한다는 
+파렐박사의 말이 진실인 것 같더군.%%
+이대로 이 일을 좌시하다간 분명히 파리스가 
+원하는 대로 이 땅에 거대한 불행이 닥쳐오겠지.%%
+자네가 중요한 임무를 맡아주어야 할 때라네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419826" FACE="Pablo_smile"/> <!--이 정령의 수호석에 대해 알고 있는 자가 바로…
+신록의 숲에 사는 미스트엘프 헬 크라우저라네.%%
+그를 찾는다면 좋겠지만, 어지간해서는 모습을 보이지
+않는다고 하니 걱정이라네.%%
+신록의 숲에서 그를 찾는 동안, 무수한 난관이
+기다리고 있을 거라네. 부디 몸조심 하게나.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419823" FACE="Pablo_normal"/> <!--오래전, 그러니까… 
+천년 전 엘가가 세계를 파국으로 몰아 갔을 때…%%
+브리즈 대륙 각지에서 신의 선택을 받은 소년소녀들이 
+나타났다네. 후세의 사람들은 그들을 천년 영웅, 내지는
+정령의 수호자라고 불렀지.%%
+불의 스카이피, 물의 미리내, 바람의 벨칸, 대지의 팔미르...
+이들은 운명처럼 각각 정령의 수호석이 박힌 무기들을 
+가지고 있었지.%%
+바로 그 정령의 수호석들은 엘가를 퇴치하는데 이용된 후,
+어느 성지엔가 봉인되었다고 하더군.%%
+이 정령의 수호석들을 찾아낸다면, 엘가가 부활한다고
+하더라도 대비할 수 있는 최후의 보루가 될걸세.%%
+자네가 이 엘가를 무찌를 수 있는 결전병기의 행방을
+알아봐 주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419824" FACE="Pablo_angly"/> <!--진정 엘가의 부활을 바라만 보고 있을텐가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419825" FACE="Pablo_angly"/> <!--(없음)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

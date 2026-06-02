@@ -1,0 +1,8 @@
+<ACTION ID="a_twin_lightning_flash" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="lightning_flash_cast" LOOP="TRUE"/>
+  <SLOT NAME="lightning_flash_fire"/>
+  <FSM SCRIPT="CommonSkillAction" 
+	USE_TLM="TRUE"
+	NO_DAMAGE_HOLD="TRUE"
+  />
+</ACTION>

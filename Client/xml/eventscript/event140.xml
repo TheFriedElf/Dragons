@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+	<CMD TYPE="EscScript" EventID="141"/>
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.01" FadeIn="true"/> 
+	<CMD TYPE="WaitFade" Time="1"/>
+
+	<CMD TYPE="ShowActor" ClassNo="1028908" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1028908"/>
+	<CMD TYPE="RemoveActor" NameTTID ="521238"/><!-- 카메라 이벤트 삭제-->
+
+	<!-- 프롤로그 2번-->
+	<CMD TYPE="AddActorFilter" ClassNo="1028909"/>
+	<CMD TYPE="AddNPC" ClassNo="1028909" NameTTID="522983" SpawnPos="1786.76, 274.1513, -56.41582"/><!-- 프롤로그 2번-->
+	<CMD TYPE="PlayAnimation" ClassNo="1028909" SlotName="Sequence_01"/><!-- 프롤로그 2번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="522983" CameraID="Camera01" UseActorPositionAsSoundListener="true" /><!--프롤로그 2 카메라로 변경 -->
+	<CMD TYPE="Fade" FadeColor="255,255,255" FadeTime="0.2" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitTime" Time="30"/> <!-- 프롤로그 시간을 기다림-->
+
+
+	<CMD TYPE="ActivateEvent" EventId="141"/>
+
+
+</EVENT_SCRIPT>
+

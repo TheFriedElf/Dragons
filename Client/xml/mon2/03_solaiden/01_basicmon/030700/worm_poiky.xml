@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Worm_Poiky" INIT_ACTION="a_opening">
+	<TEXTURE SRC="Iky_ref.dds">../data/2_Mon2/03_Solaiden/01_BasicMon/030700/Iky/3_Tex/Iky_ref.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Worm_Poiky"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Worm_Poiky/Worm_Poiky.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			
+			 
+			<!-- 기본공격 -->
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000203"/>
+		
+			<!-- 찍기 -->
+
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION="1000301"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000302"/>
+		   <ITEM NAME="skill_attk_01" ANIMATION="1000303" FIRE_EFFECT_FRONT="80" FIRE_EFFECT="EF_Common_Mon_IcePick_iky"/>
+		
+			<!-- 대지의 분노-->
+
+			<ITEM NAME="earthquake_battleidle_start" ANIMATION="1000386"/>
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000387"/>
+				<ITEM NAME="earthquake_fire" ANIMATION="1000388" FIRE_EFFECT="EF_Common_Mon_IcePick_iky" RANDOM_SCALE="1.0"/>
+			<!--자폭 -->
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000405"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000406"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000407"/>
+
+		     <!--전격-->
+			<ITEM NAME="attk_fin_01_start" ANIMATION="1000433"/>
+			<ITEM NAME="attk_fin_01" ANIMATION="1000434"/>
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1000435" LIGHTNING_PATH="../Data/5_Effect/9_Tex/Fx_Lightningblue_1x4.dds" LIGHTNING_START_NODE="p_ef_antenna" DO_DAMAGE="TRUE"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000436"/>
+			
+			
+			<!-- Basic Movement -->
+		
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+		
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

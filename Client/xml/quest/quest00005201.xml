@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5201</ID> <!--T.T.10520101 용사는 담대함이 기본이야! (1) -->
+
+
+<!-- 작성자 : 최영진-->
+<!--[완료조건]	메르곤의 눈알 30개 습득 (지하묘지)-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	용사의 담대함을 시험하는 과제로 토마스는 지하무덤에서 메르곤을 처치하고 끔찍하게 생긴 눈을 모아오라고 한다. 눈을 모아서 담대한 용사라는것을 증명하자.-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/1500/1/1/160520110">4600400</MONSTER> 
+ <!--MON_NO=4600400/메르곤,Item_NO=160520110/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160520110</ITEM> 
+ <!--Item_NO=160520110/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10520111"/> <!--메르곤의 눈알 수집-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10520121" FACE="thomas_normal"/> <!--어이 풋내기 용자. 어딜 바쁘게 달려가시나? 
+보아하니 아직 초보 용자의 티를 떼지 못한것 같군, 아니라면 증명해 보시지.%% 오 얼굴이 빨개지는걸 보니 근성은 있는 모양이지? 
+좋아 용자라면 담대함이 기본이지 내 너의 담대함을 시험해 보도록하지. %%이 곳에는 지하무덤이라는 으스스한 곳이 있는데 
+그곳에서 흰 눈알을 번뜩이는 몬스터가 우글우글하지 어때 벌써 무서워 지지?%%메르곤이라는 몬스터 인데 그녀석의 눈알을 30개 모아오면 자네의 담력을 인정해 주도록 하지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10520126" FACE="thomas_smile"/> <!--오! 대단한데 자내가 대담한 용자라는것을 내 인정해 주지 
+뭐 조금 부족하기는하지만 말야 하하핫!!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10520123" FACE="thomas_normal"/> <!--역시 얼글 빨개질때부터 근성이 있는 용자라는걸 내 알아 봤지!!
+그래 심호흡 하고 달려가서 땀좀 식히고 오게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10520124" FACE="thomas_angly"/> <!--쳇! 역시 자네는 별볼일 없는 용자 놀이를 하는 중인 거로군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10520125" FACE="thomas_angly"/> <!--아직 다 모으지 못했나? 아니면 오금이저려서 못가는거 아닌가? 후훗-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10520111" FACE="None_None"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10520102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

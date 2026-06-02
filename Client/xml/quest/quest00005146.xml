@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5146</ID> <!--T.T.10514601 용병단의 부활을 위해(3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	팔미르 신전 - 돌 망치 미라, 쇠 망치 미라 20마리 씩 처치-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	용병단 토마스는 용병단의 부활을 위해 노력하고 있다고 한다. 무기와 방어구를 모으고 있는 토마스는 용병단이 사용할 무기를 주문했지만, 팔미르 신전을 막고 있는 돌 망치 미라, 쇠 망치 미라 때문에 못 오고 있다고 한다. 미라들을 처리하고, 무기가 배달 올 수 있도록 도와주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010230/1">6008500</MONSTER> 
+ <!--MON_NO=6008500/돌 망치 미라,MAP_NO=9010230/팔미르 신전,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010230/1">6008600</MONSTER> 
+ <!--MON_NO=6008600/쇠 망치 미라,MAP_NO=9010230/팔미르 신전,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10514611"/> <!--돌 망치 미라 처치-->
+		<OBJECT2 COUNT="20" TEXT="10514612"/> <!--쇠 망치 미라 처치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10514621" FACE="Thomas_normal"/> <!--어서 오게! 우리 용병단에 가입하기로 마음먹은 먹었나?
+아닌가? 아직 마음의 준비가 안 된 모양이군. 
+요즘 생각보다 용병단 준비가 꽤 잘 되고 있어. %%
+바로 어제까지만 해도 말일세. 
+오늘은 자네가 좀 도와주면 좋겠네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10514626" FACE="Thomas_smile"/> <!--고맙네 공짜로 우리 용병단에 넣어주지.%%
+… … … … … … … … %%
+싫다고? 왜 ! -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10514623" FACE="Thomas_normal"/> <!--저번에 자네가 구해 온 무기를 상인의 마을로 보냈다네.
+수리가 끝나면 다시 이쪽으로 갖다 주기로 했지.%%
+하지만 문제가 하나 있어.
+수리는 끝났지만 돌 망치 미라와 쇠 망치 미라가 방해하고 있네. 
+시간도 없는데 정말 귀찮게 하는 녀석들일세.%%
+자네가 팔미르 신전으로 가서 돌 망치 미라, 쇠 망치 미라를 20마리씩 처리 좀 해주게.
+한시바삐 무기가 와야 하네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10514624" FACE="Thomas_angly"/> <!--거절이라고? 그럼 우리 용병단의 들어와야 하네. 여기 명부에 이름을 적고…%%
+이봐 !! 이봐 !! 거기서!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10514625" FACE="Thomas_normal"/> <!--빨리 다녀오게! 그 녀석들만 처리하면 된다네-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10514602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

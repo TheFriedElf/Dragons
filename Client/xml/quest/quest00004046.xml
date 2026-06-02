@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4046</ID> <!--T.T.10404601 물의 신보, 엔다이론(1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 무카파와 대화-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	마이트리는 물의 신전에 물의 신보 엔다이론이 있다는 사실을 무카파에게 전해달라고 한다. 바람항구의 무카파에게 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">13D42615-B039-43f4-B6EB-28918778D237</CLIENT> <!--시작NPC 수염고래 해안가 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 11 수염고래 해안가 - 마이트리 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 12 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10404611"/> <!--무카파와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10404621" FACE="Maitri_normal"/> <!--아… %name%님!
+이런 곳에서 만나게 될 줄 몰랐어요.%%
+전에 후커에게 들은 이야기가 마음에 걸려 
+한동안 알비다의 행방을 쫓고 있던 중이었어요.%%
+그렇지만, 제가 %name%님 보다 한발 늦었군요. 
+어쨌거나 여기서 만나다니 정말 놀랍네요.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10404626" FACE="Mukapa_normal"/> <!--아니… 무엇이라고?
+신보의 행방을 찾았다고...!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10404623" FACE="Maitri_normal"/> <!--여기 있는 이 칼리곤은 죠니와 보석상자를 숨기려고 물의 신전에 갔다가
+보석을 잠시 구경했던 순간부터 기억을 잃었다고 했지요?%% 
+그건 바로 칼리곤이 오염된 신보에 노출되었기 때문에 생긴 일입니다.
+신보는 원래 파멸과 증오로 가득찬 용족의 조상들을 봉인하고 있으니까요.%%
+칼리곤은, 오염된 신보 탓에 이성을 잃고 흉폭해져서
+절친한 동료인 죠니를 공격한 것입니다.%%
+%name%님! 이제 신보가 물의 신전에 있는 것을 알았으니
+속히 태세를 정비하여 물의 신전으로 향하는 방법 밖에 없습니다.%%
+바람 항구의 무카파님에게 이 이야기를 전해주십시오.
+모두 힘을 합쳐 일곱개의 신보를 모두 정화시켜야 합니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10404624" FACE="Maitri_normal"/> <!--시간이 없습니다. 부디 바람항구에 이 소식을 알려야 합니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10404625" FACE="Maitri_normal"/> <!--바람항구의 무카파님에게 서둘러 가주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10404626" /> <!--없음-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10404602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

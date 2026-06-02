@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!--엘가 그로기 -->
+	<CMD TYPE="HideUI" enable="true"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="2"/> <!-- 신 카메라를 켠다.-->
+	<CMD TYPE="stopBGM" SoundNo = "0"/> <!-- BGM 끄기 -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/> <!--모든 몬스터 숨기기 -->
+	<CMD TYPE="MAPOBEJCT" id="Elga_Bossroom_Hero 01" enable="false"/> <!--4대영웅 숨기기 -->
+	<CMD TYPE="ShowActor" ClassNo="3542120" Show="false"/> <!--엘가3차 숨기기 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="AddActorFilter" ClassNo="1028912 "/>
+	<CMD TYPE="AddNPC" ClassNo="1028912 " NameTTID="521238" SpawnPos="964.8564,733.5825,1438.3298"/><!-- 그로기 1번-->
+	<CMD TYPE="PlayAnimation" ClassNo="1028912 " SlotName="groggy_scene_01"/><!-- 그로기 1-1번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" /><!--그로기 카메라로 변경 -->
+	
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="503051" TextTTID="503052" /> <!--미리내 대사 -->
+	<CMD TYPE="WaitTime" Time="3"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="WaitTime" Time="0.6"/> <!-- 그로기 시간을 기다림-->
+	<CMD TYPE="PlayAnimation" ClassNo="1028912 " SlotName="groggy_scene_02"/><!-- 그로기 1-2번-->
+	<CMD TYPE="WaitTime" Time="3"/>
+	<CMD TYPE="Dialogue" NameTTID="503154" TextTTID="503150" /> <!--스카이피 대사 -->
+	<CMD TYPE="WaitTime" Time="3"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="WaitTime" Time="3"/><!-- 그로기 시간을 기다림-->
+
+	<!--그로기 끝나고 돌아가기-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="ShowActor" ClassNo="1028912 " Show="false"/><!-- 그로기 삭제-->
+	<CMD TYPE="RemoveActor" ClassNo="1028912 "/><!-- 그로기 삭제-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--모든 플레이어 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/> <!--모든 몬스터 보이기 -->
+	<CMD TYPE="ShowActor" ClassNo="3542120" Show="true"/> <!--엘가3차 보이기 -->
+	<CMD TYPE="MAPOBEJCT" id="Elga_Bossroom_Hero 01" enable="true"/><!--4대 영웅 보이기-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="playBGM" SoundNo = "0"/> <!-- BGM 켜기 -->
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="HideUI" enable="false"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/> <!-- 신 카메라를 끈다.-->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+
+</EVENT_SCRIPT>
+

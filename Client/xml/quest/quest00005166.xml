@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5166</ID> <!--T.T.10516601 부자가 되는 방법(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴 - 주먹 두두 처리-->
+<!--[완료NPC]	달빛해안 마을 - 제시-->
+<!--[내용]	투자의 달인 제시는 부자가 되기 위해 재테크를 열심히 하고 있다고 한다. 그래서 제시는 좋은 땅을 골라지만, 그 곳은 이미 주먹 두두가 살고 있다고 한다. 제시를 도와 위험한 동굴에서 주먹 두두 20마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 달빛해안 마을 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 달빛해안 마을 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 달빛해안 마을 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6059200</MONSTER> 
+ <!--MON_NO=6059200/주먹 두두,MAP_NO=9010600/위험한 동굴,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10516611"/> <!--주먹 두두 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10516621" FACE="Jessie_normal"/> <!--이 보게! 어딜 그리 바쁘게 가시나!
+내 얘기 좀 듣고 가게나. 자네 요즘 재테크에 신경을 제대로 쓰고 있나?
+뭐 내가 말 안 해도 자네라면 잘하고 있겠지.%%
+자네가 재테크를 열심히 하고 있다니 내가 마음이 기쁘군.
+내 부탁을 들어주면 좋은 정보를 하나 알려주지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10516626" FACE="Jessie_smile"/> <!--완전히 씨를 말려야 하네. 사악한 놈들. 그곳에 하루빨리 자리를 마련 해야 하네.
+그래야 투자도 하고 마을도 짓고 꿩 먹고 알 먹고 하는 거지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10516623" FACE="Jessie_normal"/> <!--내가 투자하기에 안성맞춤인 땅을 발견했네. 
+그 땅에 투자하고 싶은데 문제가 하나 있네.
+문제란 바로 그곳에 사는 주먹 두두 때문일세.%%
+주먹 두두가 살고 있으니 공사를 시작할 수가 없네.
+자네가 위험한 동굴로 가서 주먹 두두 20마리만 처리해주면 좋겠네.
+그 땅이 어디인지도 알 수 있으니 자네도 나도 좋고 좋은 거 아니겠나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10516624" FACE="Jessie_angly"/> <!--들어보지도 않고 판단하는 건가? 이거 실망이군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10516625" FACE="Jessie_normal"/> <!--아직 출발 안 했나? 슬슬 준비해서 나가도록 하지 그러나? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10516602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

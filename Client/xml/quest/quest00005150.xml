@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5150</ID> <!--T.T.10515001 마을을 지키다(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	미리내 신전 - 그리드 청기사로부터 식량 포대 30개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	용병대장 토마스는 마을에 괴물들이 쳐들어 올 것이라는 얘기를 듣고 공격이 오기 전에 미리 준비를 시작했다고 한다. 식량을 싣고 오던 호송마차가 그리드 청기사에 공격에 모두 당했다고 한다. 게다가 호송마차 안에 있던 식량 포대마저 모두 가져갔다고 한다. 미리내 신전에 있는 그리드 청기사를 처리하고 식량 포대 30개를 빼앗아 토마스에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010200/10000/5000/1/1/160515000">6009100</MONSTER> 
+ <!--MON_NO=6009100/그리드 청기사,MAP_NO=9010200/미리내 신전,Item_NO=160515000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160515000</ITEM> 
+ <!--Item_NO=160515000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10515011"/> <!--식량 포대 30개 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10515021" FACE="Thomas_normal"/> <!--자네! 서두르게! 
+뭘 서두르냐고? 뭘 해야 될지 모른다는 표정이군. 이쪽으로 오게!
+여유 있는 그런 표정은 승리한 뒤에 즐기고 지금은 나를 도와주게.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10515026" FACE="Thomas_normal"/> <!--이제야 좀 든든하구먼. 병사들이 밥도 못 먹고 싸울 수는 없지. 
+게다가 나 같은 경우는 밥을 먹어야 싸움을 잘하는 법이거든 우하하%%
+어떤가? 나한테 싸움이 배우고 싶으면 찾아오게. 
+아 물론 공짜는 아니지만 말이야 우하하.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10515023" FACE="Thomas_normal"/> <!--미리내 신전으로 가면 그리드 청기사가 있는데 그 녀석들이 문제야.
+이번 전투를 위해 내가 식량을 주문했는데 호송대가 배달하다 문제가 생겼어.
+그리드 청기사가 공격해 식량을 모두 가져갔더군.%%
+이번처럼 중요한 순간에 빼앗기고 말다니 우리 용병단은 전투준비에 바쁘니
+자네가 수고를 좀 해줬으면 좋겠어. 식량 포대 30개야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10515024" FACE="Thomas_angly"/> <!--안 될 리가 있나? 잘못 생각한 거 아닌가? 
+아무튼 알겠네. 도와줄 사람은 많으니까 말이네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10515025" FACE="Thomas_normal"/> <!--어서 가보게나. 아직도 여기서 뭐하고 있는 건가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10515002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

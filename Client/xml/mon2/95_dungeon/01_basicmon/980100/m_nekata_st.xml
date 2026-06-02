@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Nekata_st" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Nekata"/>
+		<KFMPATH SCALE="0.6">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Nekata_ST/Nekata_ST.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="0.6">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Nekata_ST/Nekata_ST_Die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="18"/>
+			<SPHERE TO="p_hit_point_02" SIZE="26"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000062"/>
+			<ITEM NAME="shot_01" ANIMATION="1000063" FIRE_START_NODE="p_ef_eye" FIRE_START_EFFECT="ef_Nekata_shot_01_attack_char_root" PROJECTILE_ID="PROJECTILE_laser_shot_01" PROJECTILE_SCALE="2.0"/>
+
+			<!-- 해골 떨구기 -->
+			<!-- ITEM NAME="attk_04_01" ANIMATION="1000201" RANGE_EFFECT="EF_Pattern_Nekata_skill_01_char_root"/-->
+			<!-- ITEM NAME="attk_04_02" ANIMATION="1000202" PROJECTILE_ID="Projectile_ef_Nekata_shot_01"/-->
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000201" RANGE_EFFECT="EF_Pattern_Nekata_skill_01_char_root" TOP_RANGE_EFFECT_HEIGHT="200" />
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000202" PROJECTILE_ID="Projectile_ef_Nekata_shot_02" PROJECTILE_SCALE="30" RANDOM_SCALE="2" RANDOM_ROTATE="0.1" PROJECTILE_COUNT="30" FIRE_TERM="0.2" PROJECTILE_QUAKE_FACTOR="0.5" ARRIVED_EFFECT="ef_Nekata_Ground" ARRIVED_EFFECT_SCALE="13" ARRIVED_SOUND="nekata-shot01"/>
+
+			<!-- ITEM NAME="massive_projectile_fire" ANIMATION="1000202" PROJECTILE_ID="Projectile_ef_Nekata_shot_01" PROJECTILE_SCALE="10"발사체크기조정 RANDOM_SCALE="3"발사체크기의 렌덤치 10에서 -+3 RANDOM_ROTATE="0.1" 발사체회전  PROJECTILE_COUNT="30" 발사체의 갯수 FIRE_TERM="0.2"발사체의 발사텀.0.2초씩 30개면 1.2초 PROJECTILE_QUAKE_FACTOR="0.5" 발사체가발사될때의 진동(기본은 해당 애니가 뜰때 진동됨) ARRIVED_EFFECT="ef_Nekata_Ground" 발사체가 떨어질때의 이펙트 ARRIVED_EFFECT_SCALE="10" 발사체가떨어질때의 이펙트크기/ -->
+			<ITEM NAME="massive_projectile_finish" ANIMATION="1000005"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021" />
+			<ITEM NAME="die_idle_01" ANIMATION="1000021"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+									<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

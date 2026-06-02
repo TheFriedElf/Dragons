@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4080</ID> <!--T.T.10408001 툼레이더(4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	위험한 동굴[아케이드 모드(F1)] 정예방 수색-->
+<!--[완료NPC]	위험한 동굴 - 잭-->
+<!--[내용]	잭은 아투를 퇴치하는 방법을 찾기 위해 아투를 관찰하자고 말한다. 위험한 동굴[아케이드 모드(F1)] 아투가 있는 정예방에 진입하자. 아투와 싸울 필요는 없다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">A9F524A1-84FD-436f-8168-709A55165360</CLIENT> <!--시작NPC 위험한 동굴 - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">A9F524A1-84FD-436f-8168-709A55165360</PAYER> <!--완료NPC 위험한 동굴 - 잭 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">A9F524A1-84FD-436f-8168-709A55165360</AGENT> <!--진행NPC 11 위험한 동굴 - 잭 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<LOCATION OBJECTNO="1" TYPE="LOCATION_ENTER" VALUE="9010609">1</LOCATION> 
+ <!--MAP_NO=9010609/맘모두더지 아투,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10408011"/> <!--아투의 정예방 수색-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10408021" FACE="Jack_normal"/> <!--암튼 쉽게 정리하면…
+아투라고 하는 두목 두두가 뭔가 중요한 걸 지키고 있다는 거지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10408026" FACE="Jack_smile"/> <!--흠.. 만약 내가 값진 보물을 가진 펑프라고 해도 
+아투에게 보물을 맡겼을 거야.%% 무지하게 무섭게 생겼더만... -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10408023" FACE="Jack_smile"/> <!--그럼 망설일 게 뭐가 있어!
+당장 아투라는 녀석을 혼내주고 그.. 뭐더라… 대지의 정령…%%
+그래, 대지의 정령 수호석을 빼앗아 오는 거야.
+뭐야? 겁 먹은 거야? 아투한테…???%%
+나도 그래. 후덜덜...
+솔직히 무섭게 생긴 것 같긴 하더라.%%
+그럼 일단 구경만 하고 오는 게 어떨까? 
+녀석을 구경한다면 뭔가 해결할 방법이 떠오를 지도 모르니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10408024" FACE="Jack_angly"/> <!--야, 너, 너까지.. 겁 먹으면 보물은 어떻게 할려구 그래?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10408025" FACE="Jack_normal"/> <!--아투는 위험한 동굴[아케이드 모드(F1)]에서 찾을 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10408002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

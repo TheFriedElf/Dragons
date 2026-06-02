@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_012216_CF">
+	<GSAPATH>../Data/3_World/01_Ingrid/100_Chaos/012216_CF.gsa</GSAPATH>
+	<MINIMAP Y="215" H="175">../Data/3_World/01_Ingrid/100_Chaos/012216_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+	<!-- 트리거 점프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="200" />
+	</TRIGGER>
+
+	<!-- 텔레 포트 -->
+	<TRIGGER ID="teleDungeon_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleDungeon_zone_01" />
+    </TRIGGER>
+    <TRIGGER ID="teleDungeon_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleDungeon_zone_02" />
+    </TRIGGER>
+	<!-- 텔레 포트 -->
+	<TRIGGER ID="Touch_Teleport_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_Teleport_zone_01"/>
+	</TRIGGER>
+
+	<!--카오스 셋팅-->
+	<SPOTLIGHT BGCOLOR="70,8,80"/>
+	<FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="50.000000" END="6000.000000" COLOR="0.001,0.001,0.008"/>
+</WORLD>

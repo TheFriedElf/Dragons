@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_052233_CF" >
+	<GSAPATH>../Data/3_World/01_Felloruss/100_Chaos/052233_CF.gsa</GSAPATH>
+	<MINIMAP Y="160" H="275">../Data/3_World/01_Felloruss/100_Chaos/052233_CF.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+	
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!--트리거 점프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="280"/>
+	</TRIGGER>
+
+	<!--텔레포트 데미지 이동-->
+	<TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+	</TRIGGER>
+
+	<!--카오스 셋팅 -->
+	<SPOTLIGHT BGCOLOR="70,8,80"/>
+	<FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="50.000000" END="6000.000000" COLOR="0.001,0.001,0.008"/>
+	<!-- L,o,d -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="2000" LOW_END="3000" USE="1"/>
+
+</WORLD>

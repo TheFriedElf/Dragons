@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4163</ID> <!--T.T.10416301 바람의 시험 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	라미에타[시나리오 모드(F5)]의 킬로 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	퀘차는 두번째 시험을 바로 통과시켜주고 싶지만, 형평을 고려하여 시험을 강행한다.
+라미에타[시나리오 모드(F5)]로 가서, 킬로를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="111/5/1">3524900</MONSTER> 
+ <!--MON_NO=3524900/킬로,Mission_Key=111/라미에타,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416311"/> <!--킬로-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416321" FACE="Quecua_normal"/> <!--지금 같은 시기가 아니라면 너처럼 경험이 없는
+아이에게 이 같은 시험을 내려준다는 것은 있을 수도
+없는 일이었단다.%% 
+그만큼 이례적인 일이라 할 수 있지.
+그러니 너도 전심전력을 다해 시험에 임해야 할 것이야.%% 
+자, 그럼 준비된 것 같으니 시험을 시작해보도록 할까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416326" FACE="Quecua_smile"/> <!--신관 전사들에게 자로를 퇴치한 이야기는 들었다.
+이것으로 시험은 끝이 났어.
+허나…%%
+결과를 알려 주기에 앞서, 너에게
+꼭 일러두고 싶은 것이 있단다.%%
+신보를 지키는 전사가 되었을 때
+가장 중요하게 생각해야 하는 것은 정신력이란다.%%
+신보를 지키다 보면, 반드시라고 말해도 좋을 만큼,
+위급한 순간을 경험하게 될 것이야.%% 
+만약 신보가 불안정해 있을 때, 네가 침착함을 잃는다면
+너 뿐 아니라 주변의 모든 이들을 다치게 할 것이니...
+그 점을 각별히 명심하도록 하거라.%%
+그럼...
+나 바람의 사제 퀘차는 %name%이 신관전사가
+되는 것을 정식으로 허락한다.%%
+%name% 축하한다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416323" FACE="Quecua_normal"/> <!--사실 %name%, 네가 팔괘를 찾아준 것만으로 충분한
+능력을 알고 있단다.%%
+사실 그것으로도 시험을 치뤄야 할 이유가 없을테지만, 
+세상일은 모름지기 형평에 어긋남이 없어야 한단다.%%
+그럼, 바람의 사제로서 시험을 하도록 하겠다. 
+이제 해독 열매를 심은 포치와 정신을 차린 쿰바들 덕분에
+카즈라 주변의 환경은 시간이 해결을 해줄 것이다.%%
+허나 라미에타에는 아직도 이 카즈라를 호시탐탐 노리는
+녀석이 남아있는 듯 하구나. 
+라미에타[시나리오 모드(F5)]로 가서 킬로를 퇴치해주렴
+팔괘를 내놓은 뒤로 정신을 차린 줄 알았지만,
+아직도 카즈라 마을 안에 둔갑한 모습으로 돌아다니는 것
+같더구나. 아마 신보를 훔친 것과도 분명 연관이 있을 것이다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416324" FACE="Quecua_angry"/> <!--물론 큰 일을 앞둔 너의 초조함은 이해한다만… 
+지금은 반드시 앞으로 전진해야 할 시기란다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416325" FACE="Quecua_angry"/> <!--라미에타[시나리오 모드(F5)]의 킬로가 아직 활개를 친다던데, 어찌된 일이냐?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

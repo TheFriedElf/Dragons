@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4092</ID> <!--T.T.10409201 의미심장한 우연(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	망자의 탑(정상)에서 프린세시아와 대화-->
+<!--[완료NPC]	망자의 탑 (정상) - 프린세시아-->
+<!--[내용]	프린세시아는 망자의 탑을 조사하겠다며, 망자의 탑 정상에서 만나자고 한다. 망자의 탑에서 프린세시아와 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6033A670-A3C8-4cbe-B4DB-E252A9479740</CLIENT> <!--시작NPC 망자의 탑 (4층) - 프린세시아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C8E5676B-7BE4-4648-B212-AB0505BE2926</PAYER> <!--완료NPC 망자의 탑 (정상) - 프린세시아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6033A670-A3C8-4cbe-B4DB-E252A9479740</AGENT> <!--진행NPC 11 망자의 탑 (4층) - 프린세시아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">C8E5676B-7BE4-4648-B212-AB0505BE2926</AGENT> <!--진행NPC 12 망자의 탑 (정상) - 프린세시아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409211"/> <!--망자의 탑(정상)의 프린세시아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409221" FACE="Princessia_normal"/> <!--보면 볼수록 정교하게 만들어진 탑인걸. 이걸 만든 사람은 
+이 탑에 아무도 올라오지 못하게 하려는 게 분명해.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409226" FACE="Princessia_normal"/> <!--이게 어떻게 된 일인지 모르겠네… 이렇게 인적이 드문 외진 곳에,
+서있을 자리가 없을 정도로 사람들이 우글거리니 말이야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409223" FACE="Princessia_normal"/> <!--분명히 아빠는 이곳에 왔었던 적이 있을 거야.
+난 좀 더 자세히 이곳을 살펴보면서 천천히 따라갈게. 
+이따가 망자의 탑 정상에서 만나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409224" FACE="Princessia_angry"/> <!--설마 벌써 내려가려는 건 아니겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409225" FACE="Princessia_normal"/> <!--탑 정상에서 만나려면 빨리 서둘러야지. 뭐하고 있어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

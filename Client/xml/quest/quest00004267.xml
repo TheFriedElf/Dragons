@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4267</ID> <!--T.T.10426701 소켓카드 만들기 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	실험용 소켓카드 상자 전달-->
+<!--[완료NPC]	상인의 마을 - 노엘-->
+<!--[내용]	솜씨 좋은 마이스터는 노엘 박사의 부탁에 의해 실험용 소켓카드 상자를 제작해 낸다. 생산의 거장 마이스터는 상인의 마을에 있는 노엘 박사에게 실험용 소켓카드 상자를 전해달라고 부탁한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2913D89A-651D-488d-8C45-8BE6DD37BADE</CLIENT> <!--시작NPC 바람항구 - 마이스터 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</PAYER> <!--완료NPC 상인의 마을 - 노엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2913D89A-651D-488d-8C45-8BE6DD37BADE</AGENT> <!--진행NPC 11 바람항구 - 마이스터 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 12 상인의 마을 - 노엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160426700/1">10011</NPC> 
+ <!--Item_NO=160426700/[Q.ID:04267] 실험용 소켓카드 상자,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160426700/1/511">10011</NPC> 
+ <!--Item_NO=160426700/[Q.ID:04267] 실험용 소켓카드 상자,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160426700/1">10012</NPC> 
+ <!--Item_NO=160426700/[Q.ID:04267] 실험용 소켓카드 상자,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160426700/1/512">10012</NPC> 
+ <!--Item_NO=160426700/[Q.ID:04267] 실험용 소켓카드 상자,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="512/160426700/1">10012</NPC> 
+ <!--Item_NO=160426700/[Q.ID:04267] 실험용 소켓카드 상자,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10426711"/> <!--실험용 소켓카드 상자 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10426721" FACE="meister_normal"/> <!--자, 박사님이 부탁한 실험용 소켓카드의 제작이 끝났어.
+소켓카드는 정령 에너지의 특수성 때문에 특별한 상자로
+밀폐시켜두었네. 그럼 박사님께 잘 전달해주길 바래. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10426726" FACE="noel_smile"/> <!--오.. 벌써 완성까지 되었다니 역시 마이스터군이로군.
+저급 화염속성 소켓카드… 이 상자는 단순한 장치가 아니야.
+이 상자를 한번 열어보게나. 자네의 운을 한번 시험해보세.%%
+한 개가 아니라 여러 개의 정령속성 예비 카드가 꼽혀있다네.
+만약 정령 에너지가 잘 활성화된다면 모든 카드가 정상적인
+소켓카드로 완성이 될 것이네. 그러나 실패하면 한장의 카드
+밖에 못건질 것이네. 자, 받아주게나.    -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10426723" FACE="meister_normal"/> <!--이번에 제작하면서 확실히 정령속성 소켓카드에 대해
+마스터를 했어. 자네도 재료를 마련하게 된다면 언제건
+내게 찾아와 주게나.%%
+다만 재료 중에는 직업생산 활동을 통해서만 얻을 수 있는
+아이템들이 존재하니까, 미리 조합 재료를 잘 파악해두고
+해당하는 직업기술의 숙련도를 끌어올려놓길 바라네.%%
+그럼 노엘 박사님이 기다리실테니 서둘러 상인의 마을로 
+달려가 이 실험용 소켓카드 상자를 가져다 주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10426724" FACE="meister_normal"/> <!--어차피 박사님에게 가게 될 것이라면 이 상자를 가져가는 것이
+어려운 일은 아니잖아?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10426725" FACE="meister_normal"/> <!--이 실험용 소켓카드 상자를 상인의 마을에 있는 노엘 박사님에게 전해주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10426702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10426751" /> <!--이 실험용 소켓카드 상자를 상인의 마을에 있는 노엘 박사님에게 전해주게.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10426752" /> <!--허허.. 긴 길을 오는 동안 소켓카드상자를 분실한 것 아닌가?
+다시 마이스터에게 다녀와야 하겠구만…-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4071</ID> <!--T.T.10407101 프린세스 메이킹(3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	스카이피 신전에서 드래곤의 레오타드, 동방편날검 습득-->
+<!--[완료NPC]	스카이피 신전 - 프린세시아-->
+<!--[내용]	프린세시아는 청기사 몬스터들에게 빼앗긴 짐을 가져다 달라고 부탁한다. 스카이피 신전의 청기사류 몬스터들로부터 드래곤의 레오타드와 동방편날검을 찾아오자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3E51631-D7F2-4129-AB3F-ED04BC38E60F</CLIENT> <!--시작NPC 스카이피 신전 - 프린세시아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3E51631-D7F2-4129-AB3F-ED04BC38E60F</PAYER> <!--완료NPC 스카이피 신전 - 프린세시아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3E51631-D7F2-4129-AB3F-ED04BC38E60F</AGENT> <!--진행NPC 11 스카이피 신전 - 프린세시아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/9500/1/1/160407100">6009100</MONSTER> 
+ <!--MON_NO=6009100/그리드 청기사,Item_NO=160407100/[Q.ID:04071] 드래곤의 레오타드5%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160407100</ITEM> 
+ <!--Item_NO=160407100/[Q.ID:04071] 드래곤의 레오타드,-->
+		<MONSTER OBJECTNO="2" TYPE="INSTDROP100" VALUE="10000/9500/1/1/160407110">6009400</MONSTER> 
+ <!--MON_NO=6009400/그리드 용기사,Item_NO=160407110/[Q.ID:04071] 동방편날검5%,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">160407110</ITEM> 
+ <!--Item_NO=160407110/[Q.ID:04071] 동방편날검,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10407111"/> <!--드래곤의 레오타드(그리드 청기사)-->
+		<OBJECT2 COUNT="1" TEXT="10407112"/> <!--동방편날검(그리드 용기사)-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10407121" FACE="Princessia_normal"/> <!--휴우...
+그나저나 큰일이야.%%
+너 없는 동안 이 부근에서 개인적인 조사를 하고 있었는데…
+갑자기 갑옷을 입은 몬스터 녀석들이 나타나서 내 소지품을 빼앗아 가버렸어.%%
+공주 지망생 사이에서 가장 비싸게 팔리는 드래곤의 레오타드와
+깔맞춤으로 마련한 동방편날검을 찾아줘.%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10407126" FACE="Princessia_normal"/> <!--그 녀석들 강했지? 
+설마 내 짐들을 되찾을 수 있을 거라곤 상상하지 못했어.
+정말 고마워. %name%-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10407123" FACE="Princessia_normal"/> <!--어쨌거나 지금은 신세를 좀 지을게.
+이 곳 스카이피 신전의 그리드 청기사와 그리드 용기사로 부터 내 물건들을 되찾아줘.%%
+이미 사겠다고 한 귀족 아이에게 선불을 받은 거라
+찾지 못한다면 큰 빚을 지게 될 거야.%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10407124" FACE="Princessia_angly"/> <!--간단한 일도 아니고, 거절하더라도 원망하지는 않을게. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10407125" FACE="Princessia_normal"/> <!--이곳 스카이피 신전의 기사류 몬스터들에게서 내 짐들을 찾아줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10407102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

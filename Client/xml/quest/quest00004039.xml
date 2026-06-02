@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4039</ID> <!--T.T.10403901 신보의 행방을 찾아서(6) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	스티븐 무역항[아케이드 모드(F1)] 캡틴 알비다 처치-->
+<!--[완료NPC]	스티븐 무역항 - 크로키-->
+<!--[내용]	알비다가 은신처로 돌아왔다고 한다. 스티븐 무역항[아케이드 모드(F1)]에서 캡틴 알비다를 처치하자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 스티븐 무역항 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</PAYER> <!--완료NPC 스티븐 무역항 - 크로키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 스티븐 무역항 - 크로키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="5/0/1">6013800</MONSTER> 
+ <!--MON_NO=6013800/캡틴 알비다,Mission_Key=5/스티븐 무역항 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10403911"/> <!--캡틴 알비다-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403921" FACE="Kroki_normal"/> <!--방금 이 근방을 조사중인 제 누이동생에게 전해 들은 바에 의하면…
+알비다가 바로 이 근처에 있는 은신처로 돌아온다고 하더이다.%%  -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403926" FACE="Kroki_smile"/> <!--아마도 알비다가 달아난 것 같소 진짜 알비다를 잡기 위해서는 
+미션맵의 보다 깊은 곳으로 접근해야 할 것이오.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403923" FACE="Kroki_normal"/> <!--준비가 되는 대로 서둘러 스티븐 무역항에 존재하는 
+알비다의 은신처인 스티븐 무역항[시나리오 모드(F1)]로 갑시다.%%
+그곳에서 알비다를 퇴치한다면 신보의 행방을 알 수 있을 것이외다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403924" FACE="Kroki_angly"/> <!--도리가 없지요. 다만 지금까지의 노력이 수포로 돌아간다니…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403925" FACE="Kroki_angly"/> <!--알비다는 스티븐 무역항[아케이드 모드(F1)]에 숨어있소이다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

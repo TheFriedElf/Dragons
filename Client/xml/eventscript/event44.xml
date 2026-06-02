@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 카르카로스 오프닝-->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+    <CMD TYPE="SetCameraModeEvent"/> 
+
+	<CMD TYPE="stopBGM" SoundNo = "0"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <!-- 켄타들 빼고 모두 없앤다-->
+    <CMD type="AddActorFilter" ClassNo="1028191"/>
+    <CMD type="AddActorFilter" ClassNo="1028192"/>
+    <CMD type="AddActorFilter" ClassNo="1028193"/>
+    <CMD type="AddActorFilter" ClassNo="1028194"/>
+    <CMD type="AddActorFilter" ClassNo="1028195"/>
+    <CMD type="AddActorFilter" ClassNo="1028196"/>
+    <CMD type="AddActorFilter" ClassNo="1028198"/>
+    
+    <!-- 켄타 배치 -->
+	<CMD TYPE="AddNPC" ClassNo="1028192" NameTTID="506121" SpawnPos="1250.884, 664.5012, 310.5433"/>
+    <CMD TYPE="AddNPC" ClassNo="1028191" NameTTID="506122" SpawnPos="1155.927, 664.782, 310.5433"/>
+    <CMD TYPE="AddNPC" ClassNo="1028193" NameTTID="506123" SpawnPos="1082.758, 606.1052, 310.5433"/>
+	<CMD TYPE="AddNPC" ClassNo="1028194" NameTTID="506124" SpawnPos="1109.066, 672.4963, 310.5433"/>
+    <CMD TYPE="AddNPC" ClassNo="1028195" NameTTID="506125" SpawnPos="1041.19, 583.0579, 310.5433"/>
+	<CMD TYPE="AddNPC" ClassNo="1028196" NameTTID="506126" SpawnPos="992.8362, 673.3782, 310.5438"/>
+    <CMD TYPE="AddNPC" ClassNo="1028198" NameTTID="506127" SpawnPos="877.9671, 654.908, 310.5438"/>
+    
+    <!-- 살짝 기다림 -->
+    <CMD type="waittime" time="1"/>
+    <CMD TYPE="PlayBGM" SoundNo = "1"/>
+    <!-- 켄타들의 방향을 돌린다 -->
+    <CMD TYPE="SetActorDirection" NameTTID="506121" Direction="1"/>
+	<CMD TYPE="SetActorDirection" NameTTID="506122" Direction="1"/>
+    <CMD TYPE="SetActorDirection" NameTTID="506123" Direction="1"/>
+	<CMD TYPE="SetActorDirection" NameTTID="506124" Direction="2"/>
+    <CMD TYPE="SetActorDirection" NameTTID="506125" Direction="2"/>
+	<CMD TYPE="SetActorDirection" NameTTID="506126" Direction="2"/>
+    <CMD TYPE="SetActorDirection" NameTTID="506127" Direction="2"/>
+
+    <!--켄타들을 전투 즌비상태로 만든다-->
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="btlidle_01"/>
+	<CMD TYPE="WaitTime" Time="0"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506122" SlotName="btlidle_01"/>
+	<CMD TYPE="WaitTime" Time="0"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506123" SlotName="btlidle_01"/>
+	<CMD TYPE="WaitTime" Time="0"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506124" SlotName="btlidle_01"/>
+	<CMD TYPE="WaitTime" Time="0"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506125" SlotName="btlidle_01"/>
+	<CMD TYPE="WaitTime" Time="0"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506126" SlotName="btlidle_01"/>
+	<CMD TYPE="WaitTime" Time="0"/>
+    
+    
+    <!-- 카르카로스는 숨긴다-->
+    <CMD TYPE="ShowActor" NameTTID="506127" Show="false"/>
+    <CMD type="waittime" time="1"/>
+    
+    <CMD TYPE="MoveCamToPos" TargetPos="1220.884, 664.5012, 310.5433" MoveTime="0" CamActorDistance="250" CamMoveUpDistance="20"/>
+    
+    <!--카메라를 선한 켄타 궁수에게-->
+    <CMD TYPE="PlaySound" NameTTID="506124"  SlotNumber="1" SoundID="Centauros_Open_Scene"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="attlk_01"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506124" SlotName="attlk_01"/> 
+    <CMD TYPE="WaitTime" Time="0.3"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="attlk_01"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506125" SlotName="attlk_01"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506123" SlotName="attlk_01"/>
+    <CMD TYPE="WaitTime" Time="0.3"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506122" SlotName="attlk_01"/>
+    <CMD type="waittime" time="1"/>
+    
+	<CMD TYPE="PlayAnimation" NameTTID="506122" SlotName="attlk_01"/>
+    
+    <CMD TYPE="WaitTime" Time="0.3"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506122" SlotName="btlidle_01"/>
+    <CMD TYPE="WaitTime" Time="0.3"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506122" SlotName="attlk_01"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="btlidle_01"/>
+    <CMD TYPE="WaitTime" Time="0.5"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="attlk_01"/>
+    
+    <CMD TYPE="MoveCamToPos" TargetPos="1100.758, 606.1052, 310.5433" MoveTime="1" CamActorDistance="280" CamMoveUpDistance="25"/>
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506125" SlotName="attlk_02"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506125" SlotName="btlidle_01"/>
+    <CMD TYPE="WaitTime" Time="1"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506125" SlotName="attlk_01"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506123" SlotName="btlidle_01"/>
+    <CMD TYPE="WaitTime" Time="1"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506123" SlotName="attlk_01"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506125" SlotName="attlk_02"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506122" SlotName="attlk_01"/>
+    <CMD TYPE="WaitTime" Time="1"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506126" SlotName="die_01"/>
+    <CMD TYPE="WaitTime" Time="1"/>
+    
+    <!--카메라를 선한 켄타들의 애니를 발생 치고박고 싸우는 씬 -->
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="attlk_02"/>    
+    <CMD TYPE="WaitTime" Time="0.5"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="btlidle_01"/>
+    
+    <CMD TYPE="WaitTime" Time="1"/>
+    
+    <CMD TYPE="ShowActor" NameTTID="506127" Show="true"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506127" SlotName="action_01"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="506127" CameraID="Camera01"/>
+    <CMD TYPE="WaitTime" Time="4.5"/>
+    
+    <CMD TYPE="SetCameraModeEvent"/>
+    
+    <CMD TYPE="MoveCamToPos" TargetPos="1130.758, 606.1052, 310.5433" MoveTime="0.5" CamActorDistance="280" CamMoveUpDistance="25"/>
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506121" SlotName="die_01"/>
+    <CMD TYPE="WaitTime" Time="0.2"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506122" SlotName="die_01"/>
+    <CMD TYPE="WaitTime" Time="0.2"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506123" SlotName="die_01"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506124" SlotName="Scen_btlidle_01"/>
+    <CMD TYPE="WaitTime" Time="0.5"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506125" SlotName="Scen_btlidle_01"/>
+    <CMD TYPE="WaitTime" Time="5"/>
+    <CMD TYPE="StopSound" SpecialActor="ME"  SlotNumber="1"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506127" SlotName="action_02"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="506127" CameraID="Camera02"/>
+    <CMD TYPE="WaitTime" Time="2.5"/>
+    
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/>
+	<CMD type="WaitFade" time="1"/>
+    
+    <CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="0"/>
+	<CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="ShowActor" NameTTID ="506121" Show="false"/>
+    <CMD TYPE="ShowActor" NameTTID ="506122" Show="false"/>
+    <CMD TYPE="ShowActor" NameTTID ="506123" Show="false"/>
+    <CMD TYPE="ShowActor" NameTTID ="506124" Show="false"/>
+    <CMD TYPE="ShowActor" NameTTID ="506125" Show="false"/>
+    <CMD TYPE="ShowActor" NameTTID ="506126" Show="false"/>
+    <CMD TYPE="ShowActor" NameTTID ="506127" Show="false"/>
+    
+    <CMD TYPE="RemoveActor" NameTTID ="506121"/>
+    <CMD TYPE="RemoveActor" NameTTID ="506122"/>
+    <CMD TYPE="RemoveActor" NameTTID ="506123"/>
+    <CMD TYPE="RemoveActor" NameTTID ="506124"/>
+    <CMD TYPE="RemoveActor" NameTTID ="506125"/>
+    <CMD TYPE="RemoveActor" NameTTID ="506126"/>
+    <CMD TYPE="RemoveActor" NameTTID ="506127"/>
+
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="stopBGM" SoundNo = "1"/>
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+    
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="1"/>
+    <CMD type="ClearActorFilter"/>
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD type="CallUI" UIWndName = "FRM_GOGO_EVENT"/>
+    <CMD TYPE="PlayBGM" SoundNo = "0"/>
+    
+</EVENT_SCRIPT>

@@ -1,0 +1,9 @@
+<ACTION ID="a_Crux Shot" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP = "true"/>
+  <SLOT NAME="Com_shot_02"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Cruxshot_01_char_root" 
+       HIT_SOUND_ID="CruxShot"
+       />
+</ACTION>

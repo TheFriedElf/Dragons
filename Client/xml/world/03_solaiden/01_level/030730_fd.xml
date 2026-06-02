@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030730_FD" DESCRIPTION="90307300">
+	<GSAPATH>../Data/3_World/03_Solaiden/01_Level/030730_FD.gsa</GSAPATH>
+	<MINIMAP Y="135" H="235">../Data/3_World/03_Solaiden/01_Level/030730_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/ice_chasersridge.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!-- 잿빛 안개 마을 -->
+	<TRIGGER ID="gate_038300_base" TYPE="PORTAL" TITLE_TEXT_ID="801009" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9038300" PARAM2="3"/>
+	</TRIGGER>
+	
+	<!--영혼의 안식처 -->
+	<TRIGGER ID="gate_030720_base" TYPE="PORTAL" TITLE_TEXT_ID="800068" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030720" PARAM2="3"/>
+	</TRIGGER>
+
+	<!--하얀 추적자 언덕 -->
+	<TRIGGER ID="gate_030710_base" TYPE="PORTAL" TITLE_TEXT_ID="800067" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030710" PARAM2="1"/>
+	</TRIGGER>
+
+	<!-- 얼음바위 구릉 -->
+	<TRIGGER ID="gate_030830_base" TYPE="PORTAL" TITLE_TEXT_ID="800073" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030830" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 트리거 점프-->
+    <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+        <CONDITION TYPE="touch" />
+        <ACTION SCRIPT="DoHighJump" PARAM="300" />
+    </TRIGGER>
+
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="600"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="600"/>
+	</TRIGGER>
+
+	<!-- 엔터 던전 -->
+    <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="1" PARAM2="2"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="1" PARAM2="2"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" PARAM="2" PARAM2="1"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" PARAM="2" PARAM2="1"/>
+    </TRIGGER>
+    
+	<WORLD_QUALITY HIGH_END="600" MID_END="2000" LOW_END="3000" USE="1" />
+	<!-- 포그 -->
+    <FOG DENSITY="0" FUNC="Z_LINEAR" START="600" END="3000" COLOR="0.3058824,0.2431373,0.5568628"/>
+       
+</WORLD>

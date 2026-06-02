@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5123</ID> <!--T.T.10512301 음흉한 해골 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전 [아케이드 모드(F1)] - 스켈레톤 정찰병 20마리 처치-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	묘지기 라르엘은 몇 일 전부터 악몽에 시달리고 있다고 한다. 악몽의 원인을 분석한 라르엘은 스카이피신전에서 들려오는 음흉한 소리가 원인이라고 한다. 라르엘의 악몽을 없애기 위해 스카이피 신전[아케이드 모드(F1)]로 가서 음흉한 소리를 내는 스켈레톤 정찰병 20마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010211/1">6014500</MONSTER> 
+ <!--MON_NO=6014500/스켈레톤 정찰병,MAP_NO=9010211/스카이피 신전 아케이드 1,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10512311"/> <!--스켈레톤 정찰병 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10512321" FACE="Larel_normal"/> <!--잠깐 내 얘기 좀 들어줄래?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10512326" FACE="Larel_smile"/> <!--고마워. 이제 마음이 한결 편해졌어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10512323" FACE="Larel_normal"/> <!--간단하게 얘기할게. 
+며칠 전부터 심한 악몽에 시달리고 있는데, 
+아무래도 깨어 있을 때 들리는 소리가 원인인 것 같아. %%
+그 소리를 들은 뒤로 잠을 자면 악몽을 꾸더라고.
+그 소리를 누가 내는지는 알지만, 내가 없앨 순 없잖아.
+그래서 너에게 부탁하는 거야. %%
+스카이피 신전에서 스켈레톤 정찰병 20마리만 처리해 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10512324" FACE="Larel_angly"/> <!--싫다고? 나는 너를 좋게 생각했는데... 이제 아니야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10512325" FACE="Larel_normal"/> <!--스카이피 신전에서 가보면 음흉한 소리를 내는 녀석들이 있을거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10512302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

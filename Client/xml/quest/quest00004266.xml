@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4266</ID> <!--T.T.10426601 소켓카드 만들기 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	마이스터와 대화-->
+<!--[완료NPC]	바람항구 - 마이스터-->
+<!--[내용]	노엘 박사는 정령석의 힘을 과학적으로 분석하여 프로그램화시킨 소켓카드를 연구중이다. 이 연구를 위해 박사는 바람의 항구에 머물고 있는 생산의 거장 마이스터에게 소켓카드의 제작을 맡겼다고 한다. 소켓카드 개발의 진척상황을 파악하기 위해 마이스터를 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</CLIENT> <!--시작NPC 상인의 마을 - 노엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2913D89A-651D-488d-8C45-8BE6DD37BADE</PAYER> <!--완료NPC 바람항구 - 마이스터 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 11 상인의 마을 - 노엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2913D89A-651D-488d-8C45-8BE6DD37BADE</AGENT> <!--진행NPC 12 바람항구 - 마이스터 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10426611"/> <!--마이스터와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10426621" FACE="noel_normal"/> <!--정령석의 힘을 장비에 부여하는 일은 무척이나 힘든 일이지만,
+만약 이 일을 성공시키지 못한다면, 가디언 장치를 성공시키는
+일은 더욱 불투명해질거야.%%
+굉장히 복잡한 연구가 필요하지만, 자네에게 간단히 설명한다면, 
+정령석 장비를 만드는 일은 총 세가지 단계로 이루어지네. %%
+첫번째로는 방금 전 했던 것처럼 정령석에서 원소를 추출하는 것이고, 
+두번째로는 원소와 여러 아이템을 조합해 소켓카드를 만드는 일이라네.
+정령석 에너지를 과학적으로 분석해 프로그램화한 것이라고 할 수 있지.%%
+마지막으로 필요한 일은 소켓카드를 수납할 수 있도록...
+착용 장비에 소켓슬롯을 만들어 넣는 것일세. 이해가 가는가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10426626" FACE="meister_smile"/> <!--노엘 박사님도 어지간히 급하신 모양이군.
+이제 거의 마무리 단계가 남았으니 잠시만 기다려 주겠나?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10426623" FACE="noel_normal"/> <!--이 중에서 두번째 단계인 소켓카드를 만들기 위해선 생산의 거장 
+마이스터군의 도움이 필요하지. 그에게 정령석에서 추출한 원소와
+그 밖에 필요한 아이템을 가지고 가면, 소켓카드를 만들수 있게 
+되는 것이네.%%
+이미 NPC를 통해서 아이템을 조합하는 일은 많이 해보았을테니
+실습은 넘어가기로 하겠네.%%
+다만 내가 마이스터군에게 제작을 의뢰한 연구용 소켓카드가 있으니, 
+바람항구에 있는 생산의 거장 마이스터군을 찾아가 소켓카드가 
+어느 정도 제작이 됐는 지를 파악해 주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10426624" FACE="noel_normal"/> <!--중도에 포기하다니 자네답지 못한 짓이군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10426625" FACE="noel_normal"/> <!--생산의 거장 마이스터군은 바람항구에 머물러 있네. 
+그를 만난다면 그가 모든 것을 알아서 처리해줄 것이네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10426602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

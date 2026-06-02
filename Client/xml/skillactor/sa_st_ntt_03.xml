@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_st_ntt_03">
+	<WORLDOBJECT>
+			<KFMPATH SCALE="1.0">../Data/2_Mon2/95_Dungeon/02_RareMon/980100/SkillMon_Ntt/SkillMon_Ntt.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+		<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000001" />
+			<ITEM NAME="battle_idle" ANIMATION="1000001"/>
+
+		    <ITEM NAME="skill_shot_02" ANIMATION="1000204"  
+				FIRE_START_NODE="p_ef_head" 
+				PROJECTILE_ID="PROJECTILE_elga_shot_04"
+				PROJECTILE_SPEED="250" PROJECTILE_SCALE="1.0" PROJECTILE_SCALE1="1.0"/>
+			<ITEM NAME="walk" ANIMATION="1000055" />
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

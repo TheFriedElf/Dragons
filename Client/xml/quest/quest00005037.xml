@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5037</ID> <!--T.T.10503701 수행의 길(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)] - 붉은 안테나 몽글, 몽글, 꼬깨 10마리 처리-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 최후의 수행이라면서 자신이 했던 최고의 수행을 이야기 해준다. 그리고 3종류의 몬스터를 한번에 상대한다면 쉽게 이기기 힘들다는 이야기를 한다. 다비가 말한 최후의 수행을 위해서 수염고래 해안가 [아케이드 모드(F1)]에서 붉은 안테나 몽글, 몽글, 꼬깨 10마리를 처리하자. 붉은 안테나 몽글, 몽글, 꼬깨는 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010101/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010101/수염고래 해안가 아케이드 1,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010104/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010104/수염고래 해안가 아케이드 4,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012101/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9012101/수염고래 해안가 카오스 1,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010101/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010101/수염고래 해안가 아케이드 1,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010102/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010102/수염고래 해안가 아케이드 2,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010105/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010105/수염고래 해안가 아케이드 5,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010109/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010109/캡틴후커 별장,-->
+		<MONSTER OBJECTNO="3" TYPE="INCPARAM100_IN" VALUE="9010102/1">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9010102/수염고래 해안가 아케이드 2,-->
+		<MONSTER OBJECTNO="3" TYPE="INCPARAM100_IN" VALUE="9010103/1">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9010103/수염고래 해안가 아케이드 3,-->
+		<MONSTER OBJECTNO="3" TYPE="INCPARAM100_IN" VALUE="9010109/1">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9010109/캡틴후커 별장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10503711"/> <!--붉은 안테나 몽글-->
+		<OBJECT2 COUNT="10" TEXT="10503712"/> <!--몽글-->
+		<OBJECT3 COUNT="10" TEXT="10503713"/> <!--꼬깨-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503721" FACE="Darby_normal"/> <!--적을 잘 파악하면 어떤 싸움에서도 유리한 고지를 선점할 수 있지.
+그런 점에서 다양한 적들과 싸우는 것은 보다 많은 경험을 할 수 있다는 거지.%%
+내가 무사 수행을 나갔을 때 3종류의 적과 대치한 적이 있었어. 
+그때는 정말 힘들었지. 적들의 공격이 너무 다양해서 피하기 급급했거든.%%
+하지만 그 싸움 이후로 난 내가 엄청나게 성장했다는 것을 깨달았어.
+어때 너도 3종류의 적과 싸워 보지 않겠어? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503726" FACE="Darby_normal"/> <!--그래 지금까지 수행은 어땠어?
+뭐? 생각보다 별로라고?%% 
+흠, [무사수행의 길]이라는 책에서 보고 그대로 가르쳐 준 건데.
+아무래도 책을 잘못 산 거 같아. 
+같이 따라했다가는 큰일날 뻔했군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503723" FACE="Darby_normal"/> <!--마지막 수행이야. 
+이것을 거치면 너도 이제 한 사람의 수련자로서 당당하게 어깨를 펴도 좋을 거야.%%
+네가 상대해야 할 적들은 수염고래 해안가 [아케이드 모드(F1)]의 붉은 안테나 몽글, 몽글, 꼬깨들이야.%%
+싸움에 있어서 항상 문제가 되는 것은 방심이야. 
+주의를 잘 살피도록 해!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503724" FACE="Darby_normal"/> <!--이제와서 수행을 거부하다니 아깝군. 
+마지막 수행인데 말이야. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503725" FACE="Darby_angly"/> <!--최후의 수행에 이렇게 농땡이 부리려고 하지마!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

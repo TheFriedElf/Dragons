@@ -1,0 +1,20 @@
+<ACTION ID="a_Rain_Of_Fire" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">	
+	<SLOT NAME="spell_02" LOOP="TRUE"/>
+	<SLOT NAME="Staff_skill_LightningStorm_01_03"/>
+	
+	<FSM SCRIPT="Skill_RainOfFire" 		
+		CASTING_SOUND_ID="rainoffire-01"
+		
+		CASTING_EFFECT_TARGET_NODE="p_wp_r_hand"
+        CASTING_EFFECT_EFFECT_ID="ef_skill_RainOfFire_01_p_wp_r_hand"
+		 
+		CASTING_EFFECT_TARGET_NODE1="p_wp_l_hand"
+		 CASTING_EFFECT_EFFECT_ID1="ef_skill_RainOfFire_01_p_wp_r_hand"		 
+		 
+		FIRE_CASTER_EFFECT_ID="ef_skill_RainOfFire_00_char_root" 
+		FIRE_CASTER_EFFECT_TARGET_NODE="__FRONT_ACTOR"
+		
+		FIRE_SOUND_ID="rainoffire-02"
+		DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+       /> 
+</ACTION>

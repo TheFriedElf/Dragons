@@ -1,0 +1,14 @@
+<ACTION ID="a_Recovery Aura" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_04"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       HIT_SOUND_ID="RecoveryAura"
+	   
+	   NO_WEAPON_TRAIL="TRUE"
+       CASTING_EFFECT_EFFECT_ID="ef_area_circle_B_001"
+       CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+       DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+       CASTING_EFFECT_SIZE_TO_SKILLRANGE="TRUE"
+       FIND_TARGET_TYPE="SPHERE"	   
+	   />	   
+</ACTION>

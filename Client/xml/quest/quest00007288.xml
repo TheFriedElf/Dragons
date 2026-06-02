@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>7288</ID> <!--T.T.10728801 현상수배 - 디멘토이드 골렘 -->
+
+
+<!-- 작성자 : -->
+<!--완료조건	디멘토이드 골렘 38마리를 처치하라!!-->
+
+
+	<CLIENTS>
+<CLIENT TYPE="NPC" EVENTNO="10001">459320C1-DC6A-4daf-9B09-76188DB88E61</CLIENT> <!--시작NPC 현상수배게시판 -->
+</CLIENTS>
+	<PAYERS>
+<PAYER TYPE="NPC" EVENTNO="10031">459320C1-DC6A-4daf-9B09-76188DB88E61</PAYER> <!--완료NPC 현상수배게시판 -->
+</PAYERS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9030236/1">6041200</MONSTER><!--디멘토이드 골렘/얼음 협곡[미션 모드]-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9032236/1">6041200</MONSTER><!--디멘토이드 골렘/얼음 협곡[미션 모드]카오스-->
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP" > 
+		<OBJECT1 COUNT="38" TEXT="10728811"/><!--디멘토이드 골렘-->
+	</OBJECTS>
+
+
+	<REWARD></REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="WANTED">
+			<BODY TEXT="503141" FACE="m_Golem_Demantoid"/>
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="0" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+
+
+		<DIALOG ID="601" TYPE="WANTED_COMPLETE">
+			<BODY TEXT="517827" FACE="m_Golem_Demantoid"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+
+
+		<DIALOG ID="401">
+			<BODY TEXT="506625"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+
+
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="10728802"/><!--얼음 협곡[미션 모드]  {C=0xFFFF0000}디멘토이드 골렘 {C=0xFF4D0D08/}38마리를 처치하라!!-->
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+
+
+		<DIALOG ID="902"><!--인벤오류-->
+			<BODY TEXT="516989"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+
+
+		<DIALOG ID="903"><!--일일오류-->
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+
+
+	</DIALOGS>
+</QUEST>

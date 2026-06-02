@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5020</ID> <!--T.T.10502001 눈물나는 추억 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 몬스터 40마리 처리-->
+<!--[완료NPC]	바람항구 - 데이지-->
+<!--[내용]	데이지는 아름다웠던 수염고래 해안가에 몬스터들이 득실댄다며 슬퍼한다. 과거에는 사람들이 수염고래 해안가에서 뛰어놀면서 여러 가지 여가생활을 많이 즐겼었다고 한다. 그런 데이지의 슬픔을 잠재우기 위해서 수염고래 해안가에 있는 몬스터 40마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">928106B8-8596-4E9C-B89A-87772C71A749</CLIENT> <!--시작NPC 바람항구 - 데이지 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">928106B8-8596-4E9C-B89A-87772C71A749</PAYER> <!--완료NPC 바람항구 - 데이지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">928106B8-8596-4E9C-B89A-87772C71A749</AGENT> <!--진행NPC 11 바람항구 - 데이지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="KILLMONSTER" VALUE="1">9010100</GROUND> 
+ <!--MAP_NO=9010100/수염고래 해안가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="40" TEXT="10502011"/> <!--수염고래 해안가 몬스터-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502021" FACE="Huerin_normal"/> <!--아름다운 모습을 이제는 볼 수 없겠군.
+에휴~
+응? 무슨 일이냐고?%%
+수염고래 해안가에서 돌아다니는 몬스터 녀석들 때문이야.
+예전에는 정말 아름다운 해안가였었는데…
+아름다운 해안가를 되찾을 수 있도록 좀 도와줘!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502026" FACE="Huerin_smile"/> <!--고마워. 이제 그쪽에 마음 놓고 배달을 갈 수 있겠군. 
+해안가에 돌아다니는 녀석들 때문에 매상이 뚝 떨어졌거든.%%
+아름다움보다는 매상이 먼저지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502023" FACE="Huerin_normal"/> <!--수염고래 해안가에는 나에게 정말 소중한 추억이 깃든 장소야.
+물론 지금도 추억을 만들어 가고 있는 장소이기도 하고.%%
+하지만 어느새 그곳에 몬스터들이 모여들기 시작했어.
+그러고는 사람들을 괴롭히기 시작했지. %%
+지금 그 녀석들을 혼내줄 너 같은 사람을 찾고 있었어.
+자! 어서 가서 해안가를 탈환해와.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502024" FACE="Huerin_normal"/> <!--그래 뭐. 추억이란 하찮은 거니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502025" FACE="Huerin_angly"/> <!--어이, 뭐하는 거야? 지금 여기서 추억쌓기라도 하는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

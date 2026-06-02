@@ -1,0 +1,6 @@
+<ACTION ID="a_magician_charge_laser" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="charge_01"/>
+  <SLOT NAME="charge_02" LOOP="TRUE"/>
+  <SLOT NAME="Com_Skill_Cold_Burst_01"/>
+  <FSM SCRIPT="Skill_Magician_Charge_Laser" HIT_SOUND_ID="ChargedAttack"/>
+</ACTION>

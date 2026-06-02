@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4096</ID> <!--T.T.10409601 초마법 시전! 레.누.보. (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	망자의 탑(정상)에서 마녀 파리스 퇴치-->
+<!--[완료NPC]	망자의 탑 - 에델린-->
+<!--[내용]	초마법의 시전을 위해 망자의 탑(정상)인 영웅제단에서 마녀 파리스를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4D69D120-8EF6-451f-B348-3C01345299FD</CLIENT> <!--시작NPC 망자의 탑 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4D69D120-8EF6-451f-B348-3C01345299FD</PAYER> <!--완료NPC 망자의 탑 - 에델린 -->
+		<PAYER TYPE="NPC" EVENTNO="10031">DD5BE5DB-F00D-42f1-9C16-8375EBE0C680</PAYER> <!--완료NPC 망자의 탑 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4D69D120-8EF6-451f-B348-3C01345299FD</AGENT> <!--진행NPC 11 망자의 탑 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6126100</MONSTER> 
+ <!--MON_NO=6126100/파리스,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409611"/> <!--마녀 파리스 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409621" FACE="Edeline_normal"/> <!--모든 트랩을 뚫고 정상에 왔으니… 이제 레누보의 시전만이 남았지만,
+공교롭게도 이곳에 생각치 못했던 마지막 난관이 기다리고 있었네요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409626" FACE="Edeline_normal"/> <!--그녀에게 이상한 느낌을 받은 건 저만이 아닌 것 같네요.
+어쨌거나 파리스가 물러갔으니 초마법 레누보의 시전을 준비하겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409623" FACE="Edeline_normal"/> <!--이곳에 검은 마녀 파리스가 와있으니, 우리가 힘을 합쳐 
+그녀를 상대해보는 게 어떨까요.%%
+지금까지 일어난 불길한 일에는 모두 그녀가 연관되어 있어요.
+이 기회에 그녀의 정체를 알아낸다면 원정대는 커다란 힘을 얻게 될 거에요.%%
+부디 마녀 파리스를 물리쳐 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409624" FACE="Edeline_angly"/> <!--파리스라는 마녀의 의도를 알려면 이 수 밖에 없어요. 부디 거절하지 말아주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409625" FACE="Edeline_normal"/> <!--목표는 파리스. 그녀의 정체를 밝혀내기로 하죠.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	<COMPLETE_EVENT_SCRIPT_ID>4096</COMPLETE_EVENT_SCRIPT_ID>
+	
+	
+		
+</QUEST>

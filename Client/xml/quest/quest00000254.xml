@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>254</ID> <!--T.T.10025401 정령의 가호 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	그웬 - 그웬에게 정령의 가호를 받기-->
+<!--[완료NPC]	카즈라 마을 - 그웬-->
+<!--[내용]	그웬에 따르면 정령던전에 그냥 들어갈 수 없다고 한다. 정령던전은 각 정령의 기운이 강하게 뿜어져 나오기 때문에 그냥 들어갔다가 큰 사고를 당할 수 있다는 것이다. 이를 막기 위해 만들어진 것이 정령의 가호라는 아이템이다. 하지만 정령의 가호는 사용자의 정신력을 소모하기 때문에 한 사람이 사용할 수 있는 것은 4번이 한계라고 한다. 그웬과 이야기를 통해서 정령의 가호를 받자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F6892AEE-C23C-4e4c-848E-93F72A255B05</CLIENT> <!--시작NPC 카즈라 마을 - 그웬 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F6892AEE-C23C-4e4c-848E-93F72A255B05</PAYER> <!--완료NPC 카즈라 마을 - 그웬 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">F6892AEE-C23C-4e4c-848E-93F72A255B05</AGENT> <!--진행NPC 11 카즈라 마을 - 그웬 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10025411"/> <!--그웬과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="4">160025400</ITEM><!--전체지급/전체/1)/160025400(봉인아님) 4개-아이템없음-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10025421" FACE="Gwen_normal"/> <!--어서오십시오. 정령의 던전을 지키고 있는 마법사 그웬이라고 합니다.
+설마 정령던전에 들어가려고 하시는 것입니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10025426" FACE="Gwen_smile"/> <!--%class%님은 충분히 정령던전에 도전하실 자격을 가지고 있으신 것 같습니다.
+제가 드리는 정령의 가호를 가지고 들어가시면 될 것입니다.%% 
+부디 정령의 축복이 함께 있기를…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10025423" FACE="Gwen_normal"/> <!--정령던전은 %class%님도 상당히 위험한 곳입니다. 
+물론 정령던전은 그냥 들어갈 수 있는 곳도 아닙니다.%% 
+과거 정령던전에 무작정 들어가려다 목숨을 잃은 수많은 사람들이 있었습니다.%%
+그래서 무고한 수람들이 희생되는 것을 막고자 정령던전에 결계를 걸어서 정령던전에 도전할 자격이 되는 사람들만 들어갈 수 있게 된 것입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10025424" FACE="Gwen_normal"/> <!--잘 생각하셨습니다. 정령던전의 위험은 상상을 초월하는 것입니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10025425" FACE="Gwen_normal"/> <!--각 정령던전이 뿜어내는 기운은 평범한 사람은 견딜 수가 없습니다. 물론 전설의 용자라고 하더라도 오랫동안 버틸 수는 없습니다.%%  
+그래서 만들어진 것이 정령의 가호입니다. 
+정령의 가호는 각 정령들의 기운을 응축한 마법석입니다. 정령의 가호는 사용자의 정신력을 이용해 정령던전의 기운을 중화시켜 줍니다.%% 
+하지만 정령의 가호는 시전자의 정신력을 사용하기 때문에 한 사람이 4번 사용할 수 있는 것이 한계입니다.%%
+그래서 전 정령던전에 도전할 자격을 가진 사람들에게 4개의 정령의 가호를 나눠드리고 있습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10025402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

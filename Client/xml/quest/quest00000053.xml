@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>53</ID> <!--T.T.10005301 흑룡왕 원정대의 자격 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	세상의 끝[아케이드 모드(F1)]에서 카샤프로부터 검은 심연의 파편 습득-->
+<!--[완료NPC]	검은발톱 전초기지 - 준도-->
+<!--[내용]	검은 심연으로부터 무수한 원념체 몬스터들을 불러들이고 있는 것은 세상의 끝에 나타난 카샤프이다. 전초기지 지휘관 준도는 세상의 끝[아케이드 모드(F1)]에서 카샤프를 퇴치하고 검은 심연의 파편을 가져오는 자에게 흑룡왕 원정대의 자격을 부여한다고 약속한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C4025A97-4FDD-400a-9F2B-357733119AFD</CLIENT> <!--시작NPC 검은발톱 전초기지 - 준도 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C4025A97-4FDD-400a-9F2B-357733119AFD</PAYER> <!--완료NPC 검은발톱 전초기지 - 준도 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C4025A97-4FDD-400a-9F2B-357733119AFD</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 준도 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160005200">3526900</MONSTER> 
+ <!--MON_NO=3526900/카샤프,Item_NO=160005200/[Q.ID:00052] 검은 심연의 파편100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160005200</ITEM> 
+ <!--Item_NO=160005200/[Q.ID:00052] 검은 심연의 파편,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10005311"/> <!--검은 심연의 파편-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">231001920</ITEM><!--전체지급/전체/1)/231001920(봉인아님) 1개-흑룡왕 원정대 메달-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10005321" FACE="Jundo_normal"/> <!--애송이… 그렇게 흑룡왕 원정대원이 되고 싶나? 앙!
+흑룡왕 원정대가 된다는 것이 무슨 의미인 줄 아나?%%
+죽음…%%
+죽음이다.%% 
+이곳을 거쳐 간 무수한 원정대원들이 받아들이게 된 운명…
+사랑하는 가족과! 연인과! 아끼는 물건을 남기고...
+한줌 재로 사라져 버린 것이다. 
+우리의 동지들이, 젊고 창창한 미래를 가진 젊은이들이
+엘가에 의해 죽어갈 때…%%
+빌어먹을 저 칙칙한 몬스터들은 검은 심연이라 불리우는  
+곳으로부터 되살아나 몰려들고 있다!%%
+나는 이 점이 매우 안타깝다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10005326" FACE="Jundo_smile"/> <!--크하하하하!
+검은 심연의 파편이라니…. 설마했지만 너 같은 애송이가 
+이 걸 구해올 줄이야.%%
+약속대로 이제 넌 흑룡왕 원정대의 대원이다.
+애송이! 이제부터 너의 제 1법칙은…%%
+생존이다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10005323" FACE="Jundo_normal"/> <!--그러나 애송이!
+너의 살아있는 눈빛이 마음에 든다.%%
+당장 가서 카샤프를 단칼에 베어버리고 와!%%
+그 녀석이 원념을 불러들이는 윤무를 멈추지 않는 한
+이 재앙은 챗바퀴 돌 듯 끝이 없이 이어질테니 말이야.%%
+당장 세상의 끝[아케이드 모드(F1)]으로 출진하라!
+카샤프를 죽이고 전리품으로 검은 심연의 파편을 가져온다면
+두 말 없이 너를 원정대로 임명해주마!%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10005324" FACE="Jundo_angry"/> <!--그래, 애송이… 집으로 돌아가 세상이 끝나는 날을 기다리면 되는 거다!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10005325" FACE="Jundo_angry"/> <!--험난한 여정이 너를 기다릴 것이다. 포기하지 말아라. 애송이! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10005302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

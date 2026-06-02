@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4083</ID> <!--T.T.10408301 조이스 해적단의 비밀 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	위험한 동굴의 주술사 두두, 채굴지대의 주술사 두두 각 10마리 퇴치-->
+<!--[완료NPC]	위험한 동굴 - 칼리곤-->
+<!--[내용]	조이스 해적단의 보물을 구하러 온 칼리곤을 위해, 위험한 동굴과 채굴지대의 주술사 두두를 각각 10마리씩 퇴치하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</CLIENT> <!--시작NPC 위험한 동굴 - 칼리곤 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER> <!--완료NPC 위험한 동굴 - 칼리곤 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT> <!--진행NPC 11 위험한 동굴 - 칼리곤 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6059300</MONSTER> 
+ <!--MON_NO=6059300/주술사 두두,MAP_NO=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010620/1">6059300</MONSTER> 
+ <!--MON_NO=6059300/주술사 두두,MAP_NO=9010620/채굴지대,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10408311"/> <!--주술사 두두(위험한 동굴)-->
+		<OBJECT2 COUNT="10" TEXT="10408312"/> <!--주술사 두두(채굴지대)-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10408321" FACE="Kalligon_normal"/> <!--야! %name%! 반가워! 흐흐..
+혹시 너도 숨겨진 보물 이야기를 듣고 여길 찾아온거야?%%
+죠니와 나도 이 부근에 조이스 해적단이 숨긴 보물이 있다는
+말을 듣자마자 바로 이곳으로 달려온 거야..-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10408326" FACE="Kalligon_smile"/> <!--하하하!
+너 제법 터프한 녀석이구나.%%
+주술사 두두 녀석들이 당황해서 줄줄이 내빼고 있다고. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10408323" FACE="Kalligon_smile"/> <!--이 근방에 펑프와 두두 녀석들 봤지? 쉽게 모습을 드러내지 않는 
+펑프들이 나타난 걸 보면  분명히 무슨 수작을 꾸미고 있는 게 분명해.%%  
+어때 우릴 도와주지 않겠어? 
+특히나.. 네가 그 주술사 두두라는 녀석들을 맡아줬으면 좋겠어.%% 
+난 마법을 쓰는 놈들과는 왠지 싸우기 싫단 말이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10408324" FACE="Kalligon_angly"/> <!--이거 영 아쉬운데… 이봐 네 몪을 충분히 떼줄테니 다시 생각해 봐. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10408325" FACE="Kalligon_normal"/> <!--주술사 두두는 위험한 동굴과 채굴지대에 있으니 모두 잘 처리해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10408302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

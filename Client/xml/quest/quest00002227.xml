@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2227</ID> <!--T.T.10222701 여자 마음은 갈대(3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지(Lv35) - 외눈박이 미라로부터 우왕 청심환 1개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 소피아-->
+<!--[내용]	은행원 소피아는 며칠 전부터 가슴이 두근거리고, 얼굴이 달아올라 일상생활을 제대로 못 하고 있다고 한다. 소피아를 위해 지하묘지(Lv35)에서 외눈박이 미라를 처리하고 우왕 청심환을 구해다 주자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 달빛해안 마을 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">e195c5f3-ec93-431b-bd0e-8fa742f238b0</PAYER> <!--완료NPC 달빛해안 마을 - 소피아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 달빛해안 마을 - 소피아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010920/10000/8500/1/1/160518100">4600100</MONSTER> 
+ <!--MON_NO=4600100/외눈박이 미라,MAP_NO=9010920/Lv.35 지하묘지,Item_NO=160518100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160518100</ITEM> 
+ <!--Item_NO=160518100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10222711"/> <!--우왕 청심환  획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10222721" FACE="Sopia_normal"/> <!--안녕하세요. 용사님.
+저는 지금 힘이 너무 없어요. 오랫동안 가슴이 진정되질 않아 힘이 모두 빠졌네요.
+가슴을 좀 진정시켜야 할 것 같아요. 저 좀 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10222726" FACE="Sopia_normal"/> <!--구해 오셨나요? 약을 제게 주세요.
+꿀꺽.%%
+음... 이제 좀 진정되는 것 같아요. 고마워요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10222723" FACE="Sopia_normal"/> <!--지하묘지(Lv35)에 가면 외눈박이 미라가 있어요. 
+그 미라를 처치하면 마음을 진정시키는 특효약을 준다고 하더라고요. 
+우왕 청심환 1개만 구해다 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10222724" FACE="Sopia_normal"/> <!--네. 알겠어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10222725" FACE="Sopia_normal"/> <!--얼굴은 화끈화끈. 가슴은 두근두근.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10222702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

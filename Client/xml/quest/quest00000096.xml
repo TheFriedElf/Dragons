@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>96</ID> <!--T.T.10009601 변이의 흔적 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크 필드의 포링으로부터 변이의 흔적 5개를 구하자.-->
+<!--[완료NPC]	게펜 - 디포르테-->
+<!--[내용]	디포르테는 변이된 몬스터를 조금 상대해보면 얼마나 까다로운지 알 것이라면서 오크 필드의 포링을 처치해보라고 한다. 오크 필드의 포링으로부터 변이의 흔적 5개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">644911B5-D0CF-45c0-B654-28FFCDED339C</CLIENT> <!--시작NPC 게펜 - 디포르테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">644911B5-D0CF-45c0-B654-28FFCDED339C</PAYER> <!--완료NPC 게펜 - 디포르테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">644911B5-D0CF-45c0-B654-28FFCDED339C</AGENT> <!--진행NPC 11 게펜 - 디포르테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/5000/1/1/160009600">4701700</MONSTER> 
+ <!--MON_NO=4701700/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160009600/[Q.ID:00096] 변이의 흔적50%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160009600</ITEM> 
+ <!--Item_NO=160009600/[Q.ID:00096] 변이의 흔적,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10009611"/> <!--변이의 흔적-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10009621" FACE="Deforte_normal"/> <!--앞에서 열심히 떠들었지만, 이게 무용지물일 수도 있어.
+누군가의 실력과 외모가 모자라 보일 때는 말이지.
+(주위를 두리번거린다.)%%
+다른 곳 보지 마, 지금 너밖에 없잖아.
+괜히 갔다가 실신해서 우리가 데려올 순 없는 노릇이지.%%
+(옆에서 노랑머리 여자애가 떠든다.)
+"우왓! 디포르테 언니가 처음 보는 사람에게 노처녀 히스테리를 푼다."%%
+노처녀 아냐! 비닛, 넌 입 다물고 있어!  
+저 노랑머리는 신경 쓰지마. 어때, 조금 시험해 봐도 되겠지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10009626" FACE="Deforte_smile"/> <!--흠, 보기와는 다르게 조금은 쓸만한데?
+앞으로 많은 시련과 고통이 다가오겠지만, 힘내!
+사람 목숨은 생각보다 질긴 법이니까.%%
+(겨..격려인가?)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10009623" FACE="Deforte_angly"/> <!--왼쪽으로 조금 가다가 보면 오크 필드로 가는 길이 보일 거야.
+오크 필드에 변이된 몬스터인 포링이 있어.%% 
+가장 약한 몬스터라고 알려졌지만, 지금 포링은 에너지체와 결합해서 웬만한 녀석들은 눈물 찔끔 흘리고 도망가게 하지.%%
+포링에게서 변이한 몬스터에게서만 발견할 수 있다는 변이의 흔적 5개를 구해와 봐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10009624" FACE="Deforte_normal"/> <!--그래 거절할 줄 알았다. 테일링이 데려오는 녀석이 뻔하지 뭐.
+이제 여기 볼일 없잖아. 너희 세계로 가버려!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10009625" FACE="Deforte_normal"/> <!--포링이 너무 무섭다고 울면서 돌아오는 일이 없기를 바라지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10009602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

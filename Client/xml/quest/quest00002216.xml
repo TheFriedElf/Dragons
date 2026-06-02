@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2216</ID> <!--T.T.10221601 순도 높은 큐브 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	미리내 신전 - 디펜스 모드[F6]에서 방향 맞추기 3번 연속 성공-->
+<!--[완료NPC]	달빛해안 마을 - 니콜라-->
+<!--[내용]	달빛해안 마을 과학자 니콜라는 한 번 실패했던 에너지 장치를 가동시키기 위해 노력하고 있다고 한다. 에너지 장치 가동을 할 수 있는 재료는 순도 높은 시공간의 조각 미리내 신전에서 디펜스모드[F6]를 클리어하고, 순도 높은 시공간의 조각 1개를 얻어 니콜라에게 돌아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</CLIENT> <!--시작NPC 달빛해안 마을 - 니콜라 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</PAYER> <!--완료NPC 달빛해안 마을 - 니콜라 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</AGENT> <!--진행NPC 11 달빛해안 마을 - 니콜라 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/8000/1/1/160513800">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,Item_NO=160513800/[Q.ID:4177] 에너지 응축20%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160513800</ITEM> 
+ <!--Item_NO=160513800/[Q.ID:4177] 에너지 응축,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10221611"/> <!--미리내 신전 디펜스 모드[F6]에서 방향 맞추기 3번  연속 성공 후 '순도 높은 시공간의 조각'획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10221621" FACE="Nikola_normal"/> <!--자네가 가져온 니콜라슘으로 간단히 수리하는데 성공했네.
+재료를 충분히 가져다 주었기 때문에 수리하면서 업그레이드도 동시에 해버렸지.
+이제 고장날 일은 없을걸세. 일단 고맙다고 해야겠군.%%
+자 이제 다시 전송기를 돌려 봐야겠지? 물론 자네가 조금 도와준다면 말일세.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10221626" FACE="Nikola_smile"/> <!--운인가? 돈인가?
+방법은 모르겠지만, 순도 높은 시공간의 조각이 있으니 작동에는 문제가 없겠군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10221623" FACE="Nikola_smile"/> <!--이제 원점으로 돌아와 에너지 응축을 위한 촉매제가 필요해졌군.
+하지만 이번에는 순도100%의 재료가 필요해. 그럴 리는 없겠지만 
+또 고장이 나서는 안되겠지?%%
+미리내 신전[F6]에 가면 수호석을 노리는 몬스터들이 득실거리지.
+도대체 그 녀석들이 어디서 몰려오는지 모르겠지만,
+아마도 다른 차원은 아닐까 생각하네.%%
+그 녀석들로부터 수호석을 지켜내고, 방향 맞추기에 연속 3번을 성공하면 
+순도 높은 시공간의 조각을 얻을 수 있을거야. %%
+쉽지 않은 미션인데 내가 간단한 팁을 주도록 하지.
+디펜스 모드는 총 10Stage로 구성 되어 있고, 방향 맞추기기회는 9번이지.
+만약 처음 3번을 연속으로 맞추지 못했다고 해도, 
+두 번째부터 연속으로 맞추는 것도 가능하네.%%
+그럼 확률은 (1/2)x(1/2)x(1/2)x(1/2) = (1/16)
+그럼 확률은? 약 49%정도 될 걸세.
+운이 없다면, 2번 이상 클리어해야 할테지.%%
+자신이 없다면, 백발백중을 이용해 보도록..
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10221624" FACE="Nikola_normal"/> <!--정말 무책임하군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10221625" FACE="Nikola_normal"/> <!--어려운 일이 분명하지만, 자네를 믿어보기로 하지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10221602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

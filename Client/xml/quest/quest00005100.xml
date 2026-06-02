@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5100</ID> <!--T.T.10510001 두 개의 그림자(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항 [아케이드 모드(F1)]의 별가사리 루루루 20마리를 처리하자-->
+<!--[완료NPC]	스티븐 무역항 - 시진-->
+<!--[내용]	시진은 스티븐 무역항의 해적들과 칼리곤 선단의 해적들이 서로 힘을 합쳐서 바람항구를 기습한다는 소식을 들었다고 한다. 하지만 별가사리 라라라가 혼자서 중얼거리는 소리라서 정확한지 확신을 하지 못하겠다고 한다. 우선 알려진 것이 스티븐 무역항 [아케이드 모드(F1)]의 별가사리 루루루다. 앞으로 있을지도 모를 위험에 대비해서 스티븐 무역항 [아케이드 모드(F1)]의 별가사리 루루루 20마리를 처리하자. 별가사리 루루루는 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">116A12AC-D98A-483a-A1E9-3392632B7CDE</CLIENT> <!--시작NPC 스티븐 무역항 - 시진 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">116A12AC-D98A-483a-A1E9-3392632B7CDE</PAYER> <!--완료NPC 스티븐 무역항 - 시진 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 11 스티븐 무역항 - 시진 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010132/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010132/스티븐 무역항 아케이드 2,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010134/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010134/스티븐 무역항 아케이드 4,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10510011"/> <!--별가사리 루루루-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10510021" FACE="Walter_normal"/> <!--정말 잘 오셨습니다. 
+이번 사건은 상부에서 생각하는 것보다 더 중대하다고 봅니다.
+하지만 물증이 없기 때문에 상부에서 많은 인원을 파견해 줄 것이라는 생각은 하지 않았습니다.%%
+얼마 전 별가사리 라라라 한 녀석이 중얼거리는 소리를 들었습니다. 
+스티븐 무역항의 해적과 칼리곤 선단의 해적이 힘을 합쳐 바람항구를 기습한다는 이야기였습니다.%%
+기습에 포함된 해적들 중에 알아낸 것은 스티븐 무역항의 [아케이드 모드(F1)]의 별가사리 루루루입니다.
+별가사리 루루루의 퇴치에 협력해 주시기 바랍니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10510026" FACE="Walter_normal"/> <!--수고하셨습니다. 전 별가사리 루루루 외에 다른 협력 세력이 누구인지 알아내는 데 주력하겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10510023" FACE="Walter_normal"/> <!--상부에서는 심증만으로는 지원병력을 파견해주려고 하지 않습니다. 
+현장에 있는 저는 물증보다 심증이 많기 때문에 꾸준히 보고 하고 있습니다.
+하지만 정보 중에는 진짜보다 가짜가 많기 때문에 상부에서는 별로 달갑게 여기고 있지 않습니다.%% 
+정보들을 전부 걸러서 보고한다면 그 중에 섞여 있을지도 모르는 중요한 위험을 그냥 놓치게 될지도 모릅니다.
+앞으로도 저는 정보가 들어오는대로 보고할 생각입니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10510024" FACE="Walter_angly"/> <!--협력해 달라는 표현이 마음에 들지 않으시는 겁니까?
+꼭 도와주시라고 다리라도 붙잡아야 되겠습니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10510025" FACE="Walter_normal"/> <!--별가사리 라라라가 중얼거릴 때 왠지 술냄새도 같이 나는 것 같았습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10510002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

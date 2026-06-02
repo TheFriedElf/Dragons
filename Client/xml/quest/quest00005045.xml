@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5045</ID> <!--T.T.10504501 탱탱한 피부! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	톱날꽃게 해변 - 푸른 안테나 몽글에게서 푸른 안테나 몽글의 진액 20개 습득-->
+<!--[완료NPC]	바람항구 - 바티-->
+<!--[내용]	바티는 자신의 소환수들이 요즘 피부가 거칠어지는 것 같아서 걱정이라고 한다. 그런 바티에게 신디가 피부미용에 좋다는 몽글의 진액을 소개시켜 준다. 하지만 몽글의 진액은 다른 몽글에게는 나오지 않고 오직 톱날꽃게 해변의 푸른 안테나 몽글에게서만 추출할 수 있다고 한다. 용족과 인간족간의 우호를 위해 톱날꽃게 해변의 푸른 안테나 몽글에게서 푸른 안테나 몽글의 진액 20개를 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">42530F97-3737-47d0-9A00-C0AC94AB5A43</CLIENT> <!--시작NPC 바람항구 - 바티 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">42530F97-3737-47d0-9A00-C0AC94AB5A43</PAYER> <!--완료NPC 바람항구 - 바티 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">42530F97-3737-47d0-9A00-C0AC94AB5A43</AGENT> <!--진행NPC 11 바람항구 - 바티 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010110/10000/4000/1/1/160504500">6012400</MONSTER> 
+ <!--MON_NO=6012400/푸른 안테나 몽글,MAP_NO=9010110/톱날꽃게 해변,Item_NO=160504500/[Q.ID:05045] 푸른 안테나 몽글의 진액,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160504500</ITEM> 
+ <!--Item_NO=160504500/[Q.ID:05045] 푸른 안테나 몽글의 진액,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10504511"/> <!--푸른 안테나 몽글의 진액-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10504521" FACE="Valti_normal"/> <!--도대체 왜 이렇게 피부가 퍼석퍼석해지는 거지?
+응 네가 보기엔 괜찮은 피부 같다고?
+지금 설마 내가 내 피부따위를 신경쓰고 있는 거 같아?%%
+긍지높은 용족이 피부에 신경을 쓴다면 근처의 꼬깨들도 웃겠군.
+내가 신경쓰는 건 나와 같이 싸워 줄 소환수들이다.%% 
+요즘 잦은 전투로 인해 피부가 많이 상한 것 같아서 걱정이군. 
+하지만 신디가 피부에 좋은 약이 있다고 했는데.
+우리 용족과의 우호도를 상승시킬 기회라고 생각하는데 나를 도와 주겠지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10504526" FACE="Valti_normal"/> <!--일단은 고맙다고 하겠다. 하지만 어쩔 수 없는 상황에서 벌어진 일임을 명심해라!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10504523" FACE="Valti_normal"/> <!--신디는 톱날꽃개 해변의 푸른 안테나 몽글들의 진액이 피부미용에 좋다고 내개 알려 줬다. 
+하지만 도통 어디에 있는지 난 찾을 수가 없었어.%%
+이곳 지리에 밝은 너라면 충분히 찾을 수 있을 거라고 본다. 
+내 소환수들이 충분히 쓸 수 있도록 푸른 안테나 몽글의 진액 20개면 된다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10504524" FACE="Valti_angry"/> <!--역시 넌 우리와 인간의 우호적인 관계에는 관심이 없나보군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10504525" FACE="Valti_normal"/> <!--우리 소환수들이 촉촉한 피부를 할 수 있도록 빨리 일을 해결하도록 촉구한다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10504502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

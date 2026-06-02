@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by KKwang (kkj) -->
+<QUEST>
+	<ID>26</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="501642">1차 전직 레인저</TITLE>
+	<GROUPNAME TEXT="500009">바람의 항구</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="20" MAX="100"/>
+		<CLASSES>
+			<CLASS MEMO="Archer">3</CLASS>
+		</CLASSES>
+		<QUESTS>
+			<QUEST>1568</QUEST>
+		</QUESTS>
+		<NOT_QUESTS>
+			<QUEST>25</QUEST>
+		</NOT_QUESTS>        
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10001">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10002">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</PAYER>
+	</PAYERS>
+	<EVENTS>
+		<!--NPC와 대화-->
+		<!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10001</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/60004510/1">10002</NPC>         
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<!--
+완료 조건(목적): 최대 5가지 조건 시스템 고정
+TYPE = NOSTEP : 1~5 까지 진행 함에 있어 2의 조건을 충족 하기 위해 1을 먼저 완료 해야 한다.
+TYPE = NOSTEP : 1~5 까지 진행 함에 있어 2의 조건을 충족 하기 위해 1을 먼저 완료 하지 않아도 된다.
+!!!위의 NOSTEP은 아직 미구현!!!
+		-->
+		<OBJECT1 COUNT="0" TEXT="500265"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+		<!--
+아래 나머지 OBJECT2~OBJECT5의 항목은 필요시마다 참고하여 쓴다.
+아래의 형식의 형태를 유지하며
+<OBJECT? MEMO="메모내용" TYPE="퀘스트유형 종류" COUNT="수 최소1 ~ 최대255">퀘스트 유형의 간략설명</OBJECT2>
+
+<OBJECT? 에서 ? 에 들어갈 숫자의 범위는 1~5이며 절대로 중복되어저서는 안된다.
+
+!!!! 07년05월22일 현재 가능한 기능으로는 대화, 사냥, 수집 까지이다. !!!!
+26일 완료 목표를 가지는 기능으로는 제한시간과 아이템 사용이 있다.
+		<OBJECT2 MEMO="사냥" TYPE="MONSTER" COUNT="0" TTW="0">설명문</OBJECT2>
+		<OBJECT3 MEMO="수집" TYPE="ITEM" COUNT="0" TTW="0">설명문</OBJECT3>
+		<OBJECT4 MEMO="위치발견" TYPE="LOCATION" COUNT="0" TTW="0"></OBJECT4>
+		<OBJECT5 MEMO="제한시간" TYPE="TIME" COUNT="0" TTW="0"></OBJECT5>
+		-->
+	</OBJECTS>
+
+<LOCAL>
+   <NAME ID="DEFAULT">
+	<REWARD>
+		<CHANGECLASS PREVCLASS="3" MINLEVEL="20">10</CHANGECLASS>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">20202050</ITEM>
+		</SELECT1>
+		<SELECT2 COUNT="0">
+			<ITEM COUNT="1" RARITY="103" SEAL="1">119202050</ITEM>
+			<ITEM COUNT="1">119201880</ITEM>			
+		</SELECT2>
+	</REWARD>
+</NAME>
+ <NAME ID="KOREA">
+	<REWARD>
+		<CHANGECLASS PREVCLASS="3" MINLEVEL="20">10</CHANGECLASS>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">20202050</ITEM>
+		</SELECT1>
+		<SELECT2 COUNT="0">
+			<ITEM COUNT="1" RARITY="103" SEAL="1">119202050</ITEM>
+			<ITEM COUNT="1">119201880</ITEM>
+			<ITEM COUNT="1">98009810</ITEM><!--한국오픈 기념 소비인벤토리 확장-->
+		</SELECT2>
+	</REWARD>
+ </NAME>
+</LOCAL>
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="500262" FACE="Lonnie_normal"/>
+			<SELECT ID="10601" TYPE="ACCEPT" TEXT="500229">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500230">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="401">
+			<BODY TEXT="500231" FACE="Lonnie_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="500232" FACE="Lonnie_normal"/>
+			<SELECT ID="601" TEXT="500002">다음</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="500468" FACE="Lonnie_smile"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500235">완료</SELECT>
+		</DIALOG>
+		<!--701번은 완료를 허락 하였을 때 뜰창-->
+		<DIALOG ID="701">
+			<BODY TEXT="500468" FACE="Lonnie_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--801번은 완료를 거부 하였을 때 뜰창-->
+		<DIALOG ID="801">
+			<BODY TEXT="500474" FACE="Lonnie_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="500265"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="502048"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+	</DIALOGS>
+</QUEST>

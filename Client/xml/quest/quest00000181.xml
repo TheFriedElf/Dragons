@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>181</ID> <!--T.T.10018101 보물이 필요하다면 순은 열쇠! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	게펜의 테일링에게 보물교환을 통해 순은 열쇠(퀘스트) 1개를 가져오자!-->
+<!--[완료NPC]	게펜 - 아리엘-->
+<!--[내용]	아리엘이 준 몬스터카드(+9)(퀘스트)를 가지고, 게펜의 테일링에게 가자. 테일링의 보물교환 메뉴를 이용해서 몬스터카드를 순은 열쇠(퀘스트)로 교환해 오자!-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5579E956-CAD6-4819-93F1-B2C74DC2AB05</CLIENT> <!--시작NPC 게펜 - 아리엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5579E956-CAD6-4819-93F1-B2C74DC2AB05</PAYER> <!--완료NPC 게펜 - 아리엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5579E956-CAD6-4819-93F1-B2C74DC2AB05</AGENT> <!--진행NPC 11 게펜 - 아리엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/99624395/1">10011</NPC> 
+ <!--Item_NO=99624395/[오크히어로]★몬스터카드(+9)(퀘스트),-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/99624395/1/511">10011</NPC> 
+ <!--Item_NO=99624395/[오크히어로]★몬스터카드(+9)(퀘스트),-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/99624395/1">10011</NPC> 
+ <!--Item_NO=99624395/[오크히어로]★몬스터카드(+9)(퀘스트),-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">99622775</ITEM> 
+ <!--Item_NO=99622775/순은 열쇠(퀘스트),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10018111"/> <!--순은 열쇠(퀘스트)-->
+		
+	</OBJECTS>
+
+<LOCAL>
+	<NAME ID="DEFAULT">
+
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="2">99622780</ITEM><!--전체지급/전체/1)/99622780(봉인아님) 2개-동열쇠-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+	<NAME ID="KOREA">
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="2">99622770</ITEM><!--전체지급/전체/1)/99622770(봉인아님) 2개-순은열쇠-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+
+</LOCAL>
+
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10018121" FACE="Ariel_normal"/> <!--이런! 보물상자를 얻었는데, 순은 열쇠가 없어.
+미안하지만 좀 도와줄래?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10018126" FACE="Ariel_smile"/> <!--고마워, 이제 보물상자를 열 수 있겠군.
+앗! 주머니를 뒤져보니까 순은 열쇠가 있었네.
+미안해, 고마움의 표시로 순은 열쇠를 줄게.%%
+만약 오크필드에서 보물상자를 발견한다면 순은 열쇠를 사용해봐!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10018123" FACE="Ariel_normal"/> <!--오크필드에 몰래 들어갔다가 보물상자를 구했는데, 이 상자는 순은 열쇠가 아니면 열 수가 없어.%%
+내가 몬스터 카드 1개를 줄 테니까 이걸 순은 열쇠로 좀 교환해서 가지고 와줘.%%
+게펜의 테일링에게 가서 보물교환 메뉴를 이용하면 순은 열쇠로 교환할 수 있어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10018124" FACE="Ariel_angly"/> <!--설마, 거절하는 거야? 쳇, 글레스트헤임에 들어갈 생각은 포기하는 게 좋을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10018125" FACE="Ariel_angly"/> <!--보물상자에 뭐가 들었는지 정말 궁금해 미칠 지경이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10018102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10018151" FACE="Ariel_angly"/> <!--뭐야? 몬스터 카드를 잃어버린 거야?
+이번이 마지막이야!-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

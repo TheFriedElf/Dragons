@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>177</ID> <!--T.T.10017701 여름 축제에 가고 싶어요! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	해바라기 펫을 2차 전직시키고, 60레벨까지 키우자!-->
+<!--[완료NPC]	바람항구 - 클리티에-->
+<!--[내용]	여름 축제에 가고 싶은 클리티에를 위해서 해바라기 펫을 2차 전직시키고, 60레벨까지 키워주자! 2차 전직한 60레벨의 해바라기 펫을 가져오면, 클리티에가 여름 축제 상자를 준다고 한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">75E2C9E1-F32C-4b97-B738-64B3D8C89D17</CLIENT> <!--시작NPC 바람항구 - 클리티에 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">75E2C9E1-F32C-4b97-B738-64B3D8C89D17</PAYER> <!--완료NPC 바람항구 - 클리티에 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">75E2C9E1-F32C-4b97-B738-64B3D8C89D17</AGENT> <!--진행NPC 11 바람항구 - 클리티에 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="PET_CHECK" VALUE="60">65202130</ITEM> 
+ <!--Item_NO=65202150/해바라기 3차 -꽃,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+			<OBJECT1 COUNT="1" TEXT="10017712"/> <!--해바라기 펫 60레벨 달성-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">99629270</ITEM><!--전체지급/전체/1)/99629270(봉인아님) 1개-여름 축제 상자-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10017721" FACE="Clytie_normal"/> <!--음, 축제에 가고 싶어.
+앗! 용사님 제가 곤란할 때 또 이렇게 나타나셨군요.
+제 곤란함을 느끼신 건가요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10017726" FACE="Clytie_smile"/> <!--정말 감사합니다. 덕분에, 축제를 실컷 즐기고 왔어요.
+이건 감사의 의미로 드리는 여름 축제 상자에요.
+용사님의 따뜻한 마음에 비하면 너무 작은 선물이랍니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10017723" FACE="Clytie_normal"/> <!--저번에 해바라기를 키워주셔서 정말 감사했어요.
+하지만 다시 문제가 생겼어요.%%
+옆 마을에서 해바라기를 빌려달라고 해서, 용사님이 키워 주신 해바라기 펫을 빌려 줬어요.
+그런데 또 옆 마을에서 해바라기를 빌려달라고 해서, 제 해바라기 펫이 다른 곳으로 가버리고 말았어요.%%
+지금 다시 키운다면 시간 안에 키울 수 있지만, 마을의 축제가 전 너무너무 보고 싶어요.
+용사님이 해바라기 펫을 키우는 걸 좀 도와주시면 안 될까요?%%
+물론 축제를 보고 오면서 용사님을 위해서 선물을 사서 올게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10017724" FACE="Clytie_cry"/> <!--네, 제가 너무 염치없게 굴었네요. 죄송해요.
+지금까지 도와주신 것만 해도 고마웠어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10017725" FACE="Clytie_cry"/> <!--용사님 꼭 부탁할게요. 해바라기 펫을 2차 전직시키고, 60레벨까지 잘 키워주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10017702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+		<DIALOG ID="952"> <!--60레벨 달성 후, 펫 착용시 -->
+			<BODY TEXT="10017729"  FACE="Clytie_normal"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>	
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

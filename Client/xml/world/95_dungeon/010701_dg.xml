@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010701_DG" DESCRIPTION="90107010">
+  <GSAPATH>../Data/3_World/95_Dungeon/400_InDun/010701_DG.gsa</GSAPATH>
+  <BGSOUND VOLUME="1.0">../BGM/Water_Dungeon.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+
+  <!-- 바람항구 이동 포탈 -->
+  <TRIGGER ID="gate_018100_base" TYPE="PORTAL" TITLE_TEXT_ID="801001" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9018100" PARAM2="5">
+      <ACCESS>
+        <LEVEL MIN="0" />
+      </ACCESS>
+    </ACTION>
+  </TRIGGER>
+
+  <!-- 보스 이동 포탈 -->
+  <TRIGGER ID="gate_010709_base" TYPE="PORTAL" TITLE_TEXT_ID="802033" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,130" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9010709" PARAM2="1">
+    <ACCESS>
+            <QUEST NO="1985" CHECK="5" PARTY="0" GROUP="1"/>
+			<LEVEL MIN="25" MAX="100" PARTY="1"/>
+			</ACCESS>
+    </ACTION>
+  </TRIGGER>
+
+  <!-- 엔터 던전 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_05" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_06" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_07" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_08" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_09" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_10" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_11" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_11" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_12" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_12" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_13" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_13" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_14" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_14" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_15" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_15" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_16" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_16" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_17" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_17" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_18" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_18" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_19" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_19" />
+  </TRIGGER>
+
+
+    <!-- 카메라 인 아웃 -->
+	<TRIGGER ID="camera_in_1_01" CAMERA_TYPE = "in">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH="5" ZOOM="111" UP="365"  TARGET_X="7" TARGET_Y="247" TARGET_Z="-283" GROUP="1" />
+	</TRIGGER>
+	<TRIGGER ID="camera_out_1_01" CAMERA_TYPE = "out">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH="0" ZOOM="0" UP="0"  TARGET_X="0" TARGET_Y="0" TARGET_Z="0" GROUP="1"/>
+	</TRIGGER>
+	<TRIGGER ID="camera_out_1_02" CAMERA_TYPE = "out">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH="0" ZOOM="0" UP="0"  TARGET_X="0" TARGET_Y="0" TARGET_Z="0" GROUP="1"/>
+	</TRIGGER>
+
+	<TRIGGER ID="camera_in_2_01" CAMERA_TYPE = "in">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH="5" ZOOM="111" UP="365"  TARGET_X="7" TARGET_Y="247" TARGET_Z="-283" GROUP="2"/>
+	</TRIGGER>
+	<TRIGGER ID="camera_out_2_01" CAMERA_TYPE = "out">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH="0" ZOOM="0" UP="0"  TARGET_X="0" TARGET_Y="0" TARGET_Z="0" GROUP="2"/>
+	</TRIGGER>
+	<TRIGGER ID="camera_out_2_02" CAMERA_TYPE = "out">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH="0" ZOOM="0" UP="0"  TARGET_X="0" TARGET_Y="0" TARGET_Z="0" GROUP="2"/>
+	</TRIGGER>
+	
+
+  <!-- 트렙-->
+  <TRIGGER ID="Teleport_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Teleport_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Teleport_03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Teleport_04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+    <!-- 간헐천 트랩 -->
+    <TRIGGER ID="Water_Trap1001_01 01">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 02">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 03">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 04">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 05">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 06">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 07">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 08">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 09">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 10">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 11">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 12">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 13">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap1001_01 14">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+    <!-- 폭포 트랩 -->
+    <TRIGGER ID="Water_Trap2001_01 01">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 02">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 03">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 04">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 05">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 06">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 07">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 08">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 09">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Water_Trap2001_01 10">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+    <!-- 트리거 점프 -->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_01">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+
+    <!-- 2단텔레점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="20" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="20" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="20" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="20" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="20" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="50" />
+  </TRIGGER>
+  <!--// 퀘스트 트리거 -->
+  <TRIGGER ID="Quest_Trigger_1985_01" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="2" PARAM2="1985" />
+  </TRIGGER>
+
+
+  <!--// 퀘스트 트리거 -->
+  <TRIGGER ID="Quest_Trigger_1985_02" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="3" PARAM2="1985" />
+  </TRIGGER>
+
+
+  <!--// 퀘스트 트리거 -->
+  <TRIGGER ID="Quest_Trigger_1985_03" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="4" PARAM2="1985" />
+  </TRIGGER>
+
+  <!--물보라-->
+  <WAVE_EFFECT ENTITY_ID="BaseWater1001_01 01" STOP_EFFECT_ID="ef_walkwave_01" MOVE_EFFECT_ID="ef_walkwave_02"/>
+
+  <!--포그-->
+  <FOG DENSITY="0.050000" START="1500.000000" END="4000.000000" COLOR="0.000000,0.265000,0.192000" />
+  <!-- L.O.D -->
+  <WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="4000" USE="1" />
+
+</WORLD>

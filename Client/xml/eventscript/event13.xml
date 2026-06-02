@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 베가본드를 처리하고 NPC 클릭 하면 -->
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505375" TextTTID="506199" FaceID="Helper_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="WaitFade" time="1"/>
+  <CMD TYPE="CLOSE_DAILOGUE"/>
+  
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "false"/>  
+  <CMD type="WaitFade" time="1"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD TYPE="MapMoveOnlyInstance" MapID ="9010300" SpawnIndex="1" />
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+  <CMD TYPE="WaitCamera"/>
+  
+  <CMD type="SystemMessage" TTID="506198"/>
+  <CMD type="waittime" time="3"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+  <CMD type="WaitFade" time="1"/>
+  
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

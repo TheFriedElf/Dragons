@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="DoScript" OBJECTID="ClosePremiumUI()"/><!-- 프리미엄 UI 닫기 -->
+	<CMD TYPE="waittime" time="1"/><!-- 1초 대기(버그 대비용 방어)-->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="WAITTIME" TIME="1"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="FALSE"/>
+    <CMD TYPE="MoveCamToPos" TargetPos="-8300, -5644.137, -4400"  MoveTIME="0" CamActorDistance="100" CamMoveUpDistance="-10" HorizRotAngle="40" VertRotAngle="20"/>
+    <CMD TYPE="FADE" FADEColor="0,0,0" FADETIME="2" FADEIn="true"/>
+	<CMD TYPE="CALLDESCUI" TextTableID="1850001" ALIVE_TIME="23000"/> <!--설명 UI출력 -->
+	<CMD TYPE="CALLSUPERGROUNDTOOLTIP" CLOSE="false" ALIVE_TIME="23000" /> <!-- 말풍선 헬프UI출력 -->
+	<CMD TYPE="WAITFADE" TIME="1"/>
+    <CMD TYPE="WAITTIME" TIME="2"/>
+	<CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="1"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="TRUE"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTIME="20" CamActorDistance="500" CamMoveUpDistance="30" HorizRotAngle="-50" VertRotAngle="25"/>
+	<CMD TYPE="WAITCamera"/>
+	<CMD TYPE="FADE" FADEColor="0,0,0" FADETIME="1" FADEIn="FALSE"/>
+	<CMD TYPE="WAITFADE" TIME="1"/>
+	<CMD TYPE="setmoviescene" enable="FALSE" TIME="1"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTIME="1"/>
+	<CMD TYPE="WAITTIME" TIME="2"/>
+	<CMD TYPE="DoScript" OBJECTID="ActivatePremiumUI()"/><!-- 프리미엄 UI 열기 -->
+	<CMD TYPE="FADE" FADEColor="0,0,0" FADETIME="1" FADEIn="TRUE"/>
+	<CMD TYPE="WAITFADE" TIME="1"/>
+	<CMD TYPE="WAITCamera"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_GOGO"/> <!--GOGO UI 출력-->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="WAITTIME" TIME="0"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="FALSE"/>
+</EVENT_SCRIPT>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="p_husky_3">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/3_PET/Husky/Step3/P_Husky_Step03.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/pet_base.lua">
+			<ITEM NAME="Act_Pet_Follow" TYPE="COMMON"/>
+		</SCRIPT>
+		<EFFECT SCALE="0.7"/>
+		<SLOT>
+			<ITEM NAME="btidle_01" ANIMATION="1000011"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000001"/> 
+			<ITEM NAME="idle_02" ANIMATION="1000002"/> 
+			<ITEM NAME="idle_03" ANIMATION="1000003"/> 
+			<ITEM NAME="idle_04" ANIMATION="1000004"/> 
+			<ITEM NAME="idle_05" ANIMATION="1000005"/> 
+			<ITEM NAME="idle_down_01" ANIMATION="1000009"/> 
+			<ITEM NAME="idle_up_01" ANIMATION="1000010"/> 
+			<ITEM NAME="run" ANIMATION="1000051" SOUND="Data/2_Mon/M_Sound/p_Husky_Step02_run_01.wav"/> 
+
+			<ITEM NAME="teleport" ANIMATION="1000005"/>
+			<ITEM NAME="teleport_out" ANIMATION="1000005"/>
+			<ITEM NAME="jump_01" ANIMATION="1000001"/>
+			<ITEM NAME="jump_02" ANIMATION="1000001"/>
+			<ITEM NAME="jump_03" ANIMATION="1000001"/>
+			<ITEM NAME="jump_04" ANIMATION="1000001"/>
+			<ITEM NAME="second_jump" ANIMATION="1000001"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

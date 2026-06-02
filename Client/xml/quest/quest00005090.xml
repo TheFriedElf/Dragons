@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5090</ID> <!--T.T.10509001 갈 수 없는 고향(5) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 [카오스 모드(F2)]의 갑판상어에게서 진짜 승선증 10장을 회수해서 바람항구의 크리스핀에게 가져가자-->
+<!--[완료NPC]	바람항구 - 크리스핀-->
+<!--[내용]	크로키는 상어들이 진짜 승선증과 갑판상어가 가지고 있던 술집 출입증을 바꾼 것 같다고 한다. 군선에 탑승시에는 특별한 검사를 하지 않기 때문에 몇몇 사람들이 안전한 밀무역을 하기 위해서 승선증을 비싼 값에 사들이고 있다는 것이다. 스티븐 무역항의 [카오스 모드(F2)]에서 진짜 승선증 10장을 구해서 바람항구의 크리스핀에게 가져가자. 갑판상어들은 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.   -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 스티븐 무역항 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">33FAB5CE-50F9-407E-807C-5F32FA202064</PAYER> <!--완료NPC 바람항구 - 크리스핀 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 스티븐 무역항 - 크로키 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">33FAB5CE-50F9-407E-807C-5F32FA202064</AGENT> <!--진행NPC 12 바람항구 - 크리스핀 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9012132/10000/5000/1/1/160509000">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012132/스티븐 무역항 카오스 2,Item_NO=160509000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160509000</ITEM> 
+ <!--Item_NO=160509000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9012133/10000/5000/1/1/160509000">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012133/스티븐 무역항 카오스 3,Item_NO=160509000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160509000</ITEM> 
+ <!--Item_NO=160509000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9012135/10000/5000/1/1/160509000">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012135/스티븐 무역항 카오스 5,Item_NO=160509000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160509000</ITEM> 
+ <!--Item_NO=160509000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10509011"/> <!--진짜 승선증-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509021" FACE="Kroki_normal"/> <!--아무래도 진짜 승선증을 상어들이 술집 출입증과 바꾼 것 같소.
+소자도 정확히 알지 못하지만 갑판상어들이 떠드는 것을 들었소.
+승선증이 지금 상당히 높은 가격으로 사람들 사이에 거래되고 있는 모양이오.%%
+갑판상어는 그 사실을 알고 승선증을 사람들에게 팔려는 생각을 하고 있소.
+승선증이 진짜 주인이 그것을 가질 수 있게 빨리 움직여야 할 것이오.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509026" FACE="Crispin_smile"/> <!--고맙네. 드디어 이제 당당히 가슴을 펴고 고향에 내려갈 수 있게 되었네.
+고향 사람들에게도 이 승선증을 빨리 돌려줘야 겠네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509023" FACE="Kroki_normal"/> <!--승선증이 높은 가격에 거래되는 것은 군선이라는 안정적인 이동수단과 민간인에 대해선 어떤 검사도 하지 않는다는 이유 때문이라는 것 같소.
+물론 항구에서도 군선은 검사를 하지 않고 있다고 들었소.%%
+그렇기 때문에 밀무역을 하려는 사람들이 지금 승선증을 구하려고 하고 있는 것이오.
+제 주인에게 물건이 가지 않는다는 것은 소자로서도 굉장히 불쾌한 일이오.
+이건 확실한 정보지만 그대가 잘 확인하고 주인에게 갖다 주도록 하시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509024" FACE="Kroki_angry"/> <!--그대는 지금 나를 불쾌하게 만들고 있소.
+처음의 타인을 도우려는 마음은 어디로 간 것이오?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509025" FACE="Kroki_normal"/> <!--승선증을 팔아먹으려는 녀석들도 문제지만, 그것을 이용해 불법적인 이익을 얻으려는 인간들도 문제가 있긴 마찬가지오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

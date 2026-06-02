@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4259</ID> <!--T.T.10425901 힘 쎄고 오래가는 배터리가 필요해! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	타키온 리퀴드 습득-->
+<!--[완료NPC]	밴시협곡 - 정체불명의 고물단지-->
+<!--[내용]	잭이 선물한 기계를 살펴보다가 우연히 스위치를 만진 탓인지, 낡은 기계가 작동하기 시작했다. 뜬금 없이 터미네이터 흉내를 내던 정체불명의 고물단지는 배터리가 부족하다며, 붉은 여우 삼각지의 기계하피 세티로스가 지키고 있는 타키온 리퀴드를 입수해 달라고 부탁한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3E0A6DCD-E50D-4ab9-86F1-2CED7DE8679B</CLIENT> <!--시작NPC 밴시협곡 - 정체불명의 고물단지 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3E0A6DCD-E50D-4ab9-86F1-2CED7DE8679B</PAYER> <!--완료NPC 밴시협곡 - 정체불명의 고물단지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3E0A6DCD-E50D-4ab9-86F1-2CED7DE8679B</AGENT> <!--진행NPC 11 밴시협곡 - 정체불명의 고물단지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160425900">3571400</MONSTER> 
+ <!--MON_NO=3571400/세티로스,Item_NO=160425900/타퀴온 리퀴드100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160425900</ITEM> 
+ <!--Item_NO=160425900/타퀴온 리퀴드,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10425911"/> <!--타키온 리퀴드 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10425921" FACE="kionesque_normal"/> <!--푸슈슉…
+철컹... 철컥… 끼리릭….%%
+(고물덩어리 기계 장치가 연기를 내뿜더니 조금씩 작동하기 시작한다)%%
+푸슈슈슈….%%
+딩~동!%%
+현재 시각은...
+두.시.입.니.다.%%
+(뭐야… 이 건… 그냥 오래된 괘종시계인 건가?)%%
+아, 저기…
+선생님… 
+(뭐, 뭐야...! 서, 선생님이라니...)%%
+저, 실례 좀 하겠습니다.
+제가 시스템에 약간 문제가 생겼는데요…%%
+지금 이 장소 말입니다. 이곳이 지도 상 어디 쯤 되는지요?
+그리고 또 지금이 어떤 시대인지도 궁금하네요.
+제가 그, 저기… 시스템에 문제가 조금 생겨 가지고…%%
+선생님의 복식을 보아하니, 후기 브리즈 시대의
+것으로 보이고 있습니다만... 아직 검은 용이 부활하기
+전인가 봅니... 푸쉬쉭!%%
+(이건 또 무슨 뚱딴지 같은 상황인 거야...!) -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10425926" FACE="kionesque_normal"/> <!--끼리릭… 
+푸슈슉…
+철컹... 철컥… 끼리릭….%%
+다, 다행입니다…. 
+서... 선생님이 제 배터리를 구해오셨군요.%%
+그렇다면 이렇게 절 구해주신 것도 인연인데, 제 소개를 좀 할까요.
+저는 전설의 고대 결전병기이자, 시공을 초월하여…
+서... 선생님, 어디 가십니까? 잠시만… 제 소개가 아직 끝나지 않았…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10425923" FACE="kionesque_normal"/> <!--어이쿠… 이런... 
+배.. 배터리가 부족합니다. 
+아아... 기동 가능 시간이… 얼마 남지 않았군요.%%
+저기 혹시 시간이 좀 있으시다면 타키온리퀴드라고 불리우는
+에너지원을 구해다 주시지 않겠습니까?%%
+세티로스라는 친구가 제 예비 배터리를 지키고 있을 건데요...
+어, 어… 배터리이이… 이런… 안되는데에에에… 
+끼리릭… 푸슈슈슈…...  -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10425924" FACE="kionesque_normal"/> <!--(아마도 도와주지 않는다면 이대로 쭈욱 버려진 채 있을 것만 같다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10425925" FACE="kionesque_normal"/> <!--(세티로스라면 붉은 여우 삼각지에 있다는 기계하피를 말할텐데..)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10425902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

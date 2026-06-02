@@ -1,0 +1,15 @@
+<ACTION ID="a_Energy Burster" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_EnergyBuster_01"/>
+  <FSM SCRIPT="Act_Melee_Default" 
+       FIND_TARGET_TYPE ="BAR" 
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root" 
+       FIRE_CASTER_EFFECT_ID="ef_skill_EnergyBurster_01_char_root" 
+       FIRE_CASTER_EFFECT_TARGET_NODE2="p_wp_l_hand"
+       FIRE_CASTER_EFFECT_ID2="Energy _Burster"
+       FIRE_CASTER_EFFECT_ID2_DEFAULT_DETACH="TRUE"
+       DETACH_FIRE_EFFECT_AT_FINISH ="TRUE"
+       HIDE_WEAPON="TRUE"
+       HIT_SOUND_ID ="Energy_Burster"
+       />
+</ACTION>

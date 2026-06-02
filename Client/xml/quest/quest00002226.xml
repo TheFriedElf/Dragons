@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2226</ID> <!--T.T.10222601 여자 마음은 갈대(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 클레아와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 소피아-->
+<!--[내용]	은행원 소피아는 며칠 전 자신을 구해 준 스웰에 대한 생각으로 잠을 제대로 못 자고 있다고 한다. 왜 스웰에 대한 생각이 계속 나는지 궁금한 소피아는 클레아라면 알고 있을 거라고 한다. 클레아에게 이유를 물어보고 소피아에게 얘기해주자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 달빛해안 마을 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">e195c5f3-ec93-431b-bd0e-8fa742f238b0</PAYER> <!--완료NPC 달빛해안 마을 - 소피아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021"  MARK="END">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 1 달빛해안 마을 - 클레아 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 달빛해안 마을 - 소피아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10222611"/> <!--클레아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10222621" FACE="Sopia_normal"/> <!--안녕하세요. 용사님! 
+제 인사를 전해주셔서 정말 고마워요.
+그런데 참 이상해요. 감사의 말을 전하면 괜찮을 것으로 생각했는데 아닌가 봐요.%%
+요즘 자려고 누우면 얼굴이 화끈거리고 두근거려서 잠을 잘 수가 없어요.
+왜 그런지 아시나요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10222626" FACE="Sopia_smile"/> <!--사랑?.....-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10222623" FACE="Sopia_smile"/> <!--용사님이 알아봐 주신다고요? 정말요?
+제 생각에는 클레아아주머니는 알고 있지 않을까요?
+같은 여자끼리는 뭔가 통하는 게 분명히 있겠죠.
+게다가 인생을 오래 경험하신 분이니, 분명 알고 있는 게 있을 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10222624" FACE="Sopia_angly"/> <!--안 된다고 하니 섭섭해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10222625" FACE="Sopia_normal"/> <!--물어보셨나요? 지금도 가슴이 두근두근해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10222602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10222651" FACE="Floran_normal"/> <!--어머머.
+이게 무슨 일인가요?
+소피아가 혹시 사랑에 빠진 게 아닐까요?
+호호.
+그 나이쯤엔 누구나 한 번씩 사랑의 열병을 앓게 되는 법이랍니다.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

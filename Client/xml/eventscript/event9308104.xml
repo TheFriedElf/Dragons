@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+<!-- 플레이어 이동을 막는다. (Blue)-->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+
+<!-- 화면을 와이드 화면으로 출력하고 1초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+	<CMD type="waittime" time="1"/>
+	
+<!-- 미션 실패 UI출력  -->
+	<CMD type="CallUI" UIWndName="FRM_MISSION_STAGE_FAILED" />
+
+<!-- 수호석 줌업 (Blue)-->
+	<CMD TYPE="MoveCamToActor" ClassNo ="5006903" MoveTime="1" CamActorDistance="250" CamMoveUpDistance="5"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD type="waittime" time="3"/>
+
+<!-- 페이드아웃 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/>
+	<CMD type="waittime" time="1"/>
+  
+
+<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1" />
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="WaitCamera"/>
+
+<!-- 플레이어 이동 가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+
+<!-- 밖으로 나가기 -->
+	<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_END"/>
+	
+</EVENT_SCRIPT>

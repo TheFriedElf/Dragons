@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5072</ID> <!--T.T.10507201 투지! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단의 별가사리 루루루, 라라라, 로로로 40마리를 처리하자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 용족이 인간보다 높은 정신체계를 형성하고 있다고 한다. 하지만 그런 정신체계는 오랜기간의 수련을 통해서 얻을 수 있다고 한다. 인간들 중에 높은 정신체계를 가지고 있는 사람이 있는 것도 그런 수련을 통해서 얻었다고 한다. 위험에 대처하는 자세 중 가장 중요한 것은 바로 어떤 상황에서도 포기하지 않는 투지라고 한다. 그런 투지를 익히기 위해서 칼리곤 선단의 별가사리 루루루, 라라라, 로로로 40마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010150/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010150/칼리곤 선단,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010150/1">6011200</MONSTER> 
+ <!--MON_NO=6011200/별가사리 로로로,MAP_NO=9010150/칼리곤 선단,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010150/1">6011300</MONSTER> 
+ <!--MON_NO=6011300/별가사리 라라라,MAP_NO=9010150/칼리곤 선단,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="40" TEXT="10507211"/> <!--별가사리 루루루, 라라라, 로로로-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10507221" FACE="Mukapa_normal"/> <!--용족은 인간에 비해서 상당히 높은 정신체계를 가지고 있네.
+물론 인간들 중에도 높은 정신체계를 가지고 있기도 하지.
+저기 옆에 있는 챤피오 녀석처럼 낮은 정신체계를 가지고 있듯이 말일세. %%
+내가 이런 이야기를 하는 이유는 위험에 대처하는 방법에 있어 가장 중요한 것을 자네에게 알려주기 위해서네.
+나의 마지막 조언을 들을텐가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10507226" FACE="Mukapa_smile"/> <!--잘했네. 이제 어떤 위험이 찾아오더라도 자네가 이겨낼 것이라는 것을 믿어 의심치 않네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10507223" FACE="Mukapa_normal"/> <!--여러 가지의 위험을 내가 극복한 것은 앞서 말했듯이 수련을 통한 높은 정신체계를 만들어 놓았기 때문이지.
+높은 정신체계라고 말했지만 이것은 어떤 상황이라도 포기하지 않는 투지라고 할 수 있네.%%
+나에게 있어 가장 큰 적은 내 안의 적일세. 
+쉽게 포기하는 마음으로 적을 상대하다는 것은 자신을 죽음으로 내모는 길이지.
+그런 투지를 쉽게 익힐 수는 없네. 오직 경험을 통해서만 익힐 수 있지.%%
+다행히 투지를 익힐 좋은 장소가 있네. 바로 칼리곤 선단이지.
+칼리곤 선단의 별가사리 루루루, 라라라, 로로로는 정말 상대의 투지를 빼앗아 버리지.
+비슷한 얼굴의 녀석들을 정신없이 상대하면 도대체 녀석들이 피해를 입었는지 알수 없게 되버리고. 녀석들의 끊임없는 독설은 귀를 마비시키지.%%
+자네가 녀석들을 상대하다 보면 한층 성장한 자신을 느낄 수 있을 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10507224" FACE="Mukapa_angry"/> <!--자네. 지금 이때까지 다 배워 놓고 마지막을 포기하겠다는 소린가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10507225" FACE="Mukapa_normal"/> <!--투지는 여럿이서 음식 한 접시를 놓고 있을 때만 불태우는 것은 아니지. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10507202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

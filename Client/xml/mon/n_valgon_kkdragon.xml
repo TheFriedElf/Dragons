@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Valgon_KKDragon" DIE_PARTICLE_ID="ef_valgon_die_01_char_root" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Algon_Kimat"/>
+		<KFMPATH>../Data/2_Mon/N_Valgon_KKDragon/N_Valgon_KKDragon.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="28"/>
+			<SPHERE TO="p_hit_point_02" SIZE="14"/>
+			<SPHERE TO="p_hit_point_03" SIZE="14"/>
+			<SPHERE TO="p_hit_point_04" SIZE="14"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본 스킬 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000065"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000066" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000067" RANDOM="100"/>
+			<!-- 공중에서 돌진 스킬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000205" FIRE_EFFECT="ef_valgon_skill_01_01_p_ef_heart" FIRE_EFFECT_NODE="p_ef_heart"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000206" ADD_Z="100"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000207" FIRE_EFFECT="ef_valgon_skill_01_02_p_ef_heart" FIRE_EFFECT_NODE="p_ef_heart"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000208"/>
+			<!-- 입으로 브레스 스킬 -->
+			<!--ITEM NAME="btlidle_01_skill" ANIMATION="1000209"/>
+			<ITEM NAME="shot_01" ANIMATION="1000210" FIRE_START_NODE="p_ef_mouse" PROJECTILE_ID=""/-->
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000209"/>
+			<ITEM NAME="breath_01" ANIMATION="1000210"/>
+			<!-- 불덩어리 떨어트리는 스킬 -->
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000211" RANGE_EFFECT="ef_Porkyking_skill_05_01_char_root"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000212" PROJECTILE_ID="Projectile_Porky_Banana_02" PROJECTILE_COUNT="12" QUAKE_TIME="3" QUAKE_FACTOR="1.2" FIRE_TERM="0.2"/>
+			<!-- 애들 부르기 -->
+			<ITEM NAME="attk_08_01" ANIMATION="1000211"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000212"/>
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="0.5" QUAKE_FACTOR="1.6" CAMERA_ZOOM_OUT="800" CAMERA_ZOOM_IN_SPEED="0.1"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000012"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000021" DIE_ALPHA="1"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000015" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000023"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

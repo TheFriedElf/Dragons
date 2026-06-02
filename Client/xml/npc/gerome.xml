@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="c_Gerome" INIT_ACTION="a_idle">
+	<NPCMARK NAME="e_ef_colorshadow_npc" ATTATCH_TO="char_root"/>
+	<TEXTURE SRC="florence_face.dds">../Data/1_Cha/2_NPC/Florence/florence_face.dds</TEXTURE>
+	<TEXTURE SRC="Work_Lathe1001_01.dds">../Data/3_World/Map_Textures/Work_Lathe1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Nature_Flower5001_01.dds">../Data/3_World/Map_Textures/Nature_Flower5001_01.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_n_Gerome"/>
+		<KFMPATH SCALE="1.2">../Data/1_Cha/2_NPC/Gerome/Gerome.kfm</KFMPATH>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="emotion_talk_01" ANIMATION="1000005" RANDOM="100"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

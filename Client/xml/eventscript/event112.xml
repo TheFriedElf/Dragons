@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 레그노 엔딩 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/>
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="false"/>
+	<CMD TYPE="PlayAnimation" ClassNo="4500920" SlotName="ending_movie"/>
+	<!-- 카메라를 특점 지점에 위치시켜 뒤로 빼면서 대사를 표현한다. --> 
+	<CMD TYPE="Dialogue" NameTTID="521864" TitleTTID="521856" TextTTID="521861" FaceID="Heath_cry"/>
+	<CMD type="waittime" time="7"/>
+    <CMD TYPE="Dialogue" NameTTID="521864" TitleTTID="521856" TextTTID="521862" FaceID="Heath_cry"/>
+	<CMD type="waittime" time="7"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+    <CMD TYPE="setmoviescene" enable="false" Time="1"/>     
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+
+    <!--로커 엔딩-->
+    <!--CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="setmoviescene" enable="true"/>
+    <CMD type="waittime" time="0"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    <CMD type="WaitTime" time="2"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "false"/>
+    <CMD type="WaitFade" time="1"/>        
+    <CMD TYPE="MapMove" MapID ="9030810" SpawnIndex="2" />  
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    <CMD TYPE="WaitCamera" />    
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+    <CMD type="WaitFade" time="1"/>
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    <CMD TYPE="setmoviescene" enable="false" Time="1"/>
+    <CMD type="waittime" time="0"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/-->
+</EVENT_SCRIPT>

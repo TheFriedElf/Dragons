@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4145</ID> <!--T.T.10414501 무릉도원 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	에르다 협곡의 옵큘링 30마리 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 라노타-->
+<!--[내용]	라노타 전사장은 포치가 키우는 식물을 먹고 사는 다른 동물들도 서서히 난폭성을 드러내기 시작한다고 말해준다. 에르다 협곡의 옵큘링과 레드 옵큘링 등 옵큘링류 몬스터 30마리를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D66550AB-63CC-4ea1-881C-0EBB953E2D94</CLIENT> <!--시작NPC 카즈라 마을 - 라노타 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D66550AB-63CC-4ea1-881C-0EBB953E2D94</PAYER> <!--완료NPC 카즈라 마을 - 라노타 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D66550AB-63CC-4ea1-881C-0EBB953E2D94</AGENT> <!--진행NPC 11 카즈라 마을 - 라노타 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3522000</MONSTER> 
+ <!--MON_NO=3522000/옵큘링 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3522100</MONSTER> 
+ <!--MON_NO=3522100/레드 옵큘링,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10414511"/> <!--옵큘링류 몬스터-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10414521" FACE="Lanota_normal"/> <!--포치는 이곳에 있는 여러 동물들에게 도움을 주는 특별한 
+생물이지. 포치가 없다면 이곳의 생태계는 유지되기 힘들 거야.
+포치는 머리 위로 꽃이나 열매를 키워 척박한 환경에서 살고 있는
+이곳 동물들에게 식량을 제공하지. 돌아다니는 토지 마다 
+꽃씨를 뿌려 황무지를 개간하는 기특한 녀석이지.
+그런데 어쩌다 포치들이 이렇게 변한 것인지 모르겠네.
+게다가 포치들이 난폭해지기 시작하면서부터 옵큘링마저 
+기이한 모습을 보이고 있다네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10414526" FACE="Lanota_smile"/> <!--난폭한 옵큘링을 퇴치한 것은 무척 다행스러운 일이지만,
+기분이 좋지 않아. 분명 뭔가 잘못 돌아가고 있는 거라고.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10414523" FACE="Lanota_normal"/> <!--옵큘링은 포치와 공생관계로, 포치들이 머리 위로 키운
+열매를 좋아하는 녀석이야. 그런데 최근 들어…%%
+카즈라 마을 주변의 옵큘링들 역시 난폭해지기 시작했네.
+이제는 도를 넘어선 위협을 모험자들에게 가하기 시작했지.%%
+%name%... 자네가 에르다 협곡으로 가서 이 난폭해진 
+옵큘링들을 퇴치해주지 않겠나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10414524" FACE="Lanota_angry"/> <!--쳇, 옵큘링 쯤이야. 우리 신관 전사들의 힘만으로 충분하네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10414525" FACE="Lanota_angry"/> <!--에르다 협곡의 옵큘링들은 어찌 되었는가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10414502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

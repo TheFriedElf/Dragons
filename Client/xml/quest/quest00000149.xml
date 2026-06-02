@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>149</ID> <!--T.T.10014901 에르늄 추출 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	에르늄을 추출해 보자.-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	테일링은 글레스트 헤임에서 발견할 수 있는 발키리 세트 중 착용할 수 없는 부위로 에르늄을 추출할 수 있다고 알려 준다. 또 에르늄과 자신이 원하는 발키리 세트를 교환할 수 있다. 테일링에게 받은 망가진 발키리 투구를 이용해 에르늄을 추출해 보자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</CLIENT> <!--시작NPC 게펜 - 테일링 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 11 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160014900/1">10011</NPC> 
+ <!--Item_NO=160014900/[Q.ID:00149] 망가진 발키리 투구,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160014900/1/511">10011</NPC> 
+ <!--Item_NO=160014900/[Q.ID:00149] 망가진 발키리 투구,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160014900/1">10011</NPC> 
+ <!--Item_NO=160014900/[Q.ID:00149] 망가진 발키리 투구,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">99622615</ITEM> 
+ <!--Item_NO=99622615/[라그나로크테마]에르늄(퀘스트),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10014911"/> <!--에르늄-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="2">99622610</ITEM><!--전체지급/전체/1)/99622610(봉인아님) 2개-[라그나로크테마]에르늄-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10014921" FACE="Tailing_normal"/> <!--앞서 이야기했듯이 글레스트 헤임에는 발키리의 유물이 잠들어 있어요.
+하지만 발키리의 유물은 굉장히 종류가 많아요.
+%name%님이 필요하신 발키리의 유물을 구하는 법을 알려드릴까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10014926" FACE="Tailing_smile"/> <!--와! 잘하셨어요.
+자, 그럼 잘하셨다는 의미로 에르늄 2개를 드릴게요.
+예전에 어떤 분이 발키리 세트를 구매하실 때, 2개를 더 주고 가셨거든요.
+뭐, 설마 다시 찾으러 오지는 않겠죠.%%
+(이런 직원이 있는 카프라 회사라… 곧 망하겠군.)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10014923" FACE="Tailing_smile"/> <!--짜잔! 그 방법은 바로 저에요.
+저에게 %name%님에게 맞지 않은 발키리의 유물을 가져와서 에르늄 추출을 사용하면 에르늄으로 바꾸실 수 있어요.%% 
+그리고 에르늄을 저에게 가져오시면 원하는 발키리 세트를 구매하실 수 있어요.%%
+(발키리의 유물을 가져가지 못하도록 차원의 결계가 있는 게 아니었나? 테일링에게 발키리 세트를 구한다는 게 의심스러운데.)%%
+앗! 그런 의심의 눈빛은 버리세요. 
+알다시피 발키리는 한 두 명이 아니에요. 떼거리로 몰려다니는 까마귀 같은 애들이죠. 
+그래서 발키리의 유물이 산처럼 많아요. 그리고 아까 말한 것처럼 자신에게 필요없는 장비를 교환해줄 사람이 필요하게 되었죠.%%
+그걸 저희 카프라 회사에서 맡게 된 거에요.
+그리고 에르늄은 회사의 입장에서도 큰돈이 되기 때문에 하는 것이기도 하고요.%%
+하지만 발키리의 유물과 에르늄의 숫자가 정확히 맞지 않으면 제가 추궁받게 되죠.
+그럼 전 깜짝 놀라서 사실대로 말하고, %name%님은 저쪽 감옥으로 잡혀가게 되겠죠.%%
+그래서 세계를 구하러 오신 용사님이이라도 에르늄을 받지 않으면 발키리의 유물을 드릴 수 없어요.%%
+자 이야기는 이 정도로 하고, 망가진 발키리의 투구를 드릴 테니, 에르늄 추출을 사용해서 에르늄을 만들어 보세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10014924" FACE="Tailing_smile"/> <!--앗! 역시 대범하군요. 발키리의 유물 따윈 관심도 없다는 그 자세 훌륭해요.
+역시! 다른 차원의 사람들은 성격과 얼굴이 웃겨.
+(눈앞에 서 있는 내가 안 보이나?)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10014925" FACE="Tailing_normal"/> <!--자, 에르늄 추출을 사용해서 망가진 발키리의 투구에서 에르늄 1개를 추출해 보세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10014902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10014951" FACE="Tailing_normal"/> <!--앗, 설마 이런식인가요? 망가졌다고 그냥 버리신 거에요?
+딱! 한 번만 더 드릴 거에요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

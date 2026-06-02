@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5014</ID> <!--T.T.10501401 근육통에는 이거다! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구 - 제레미에게 약 전달-->
+<!--[완료NPC]	바람항구 - 제레미-->
+<!--[내용]	제시의 부탁을 받아서 구해온 사라스바티의 껍질. 이 사라스바티의 껍질을 데이지가 갖은 물약을 사용해 비전근육통약으로 만들었다고 한다. 이렇게 만든 비전근육통약을 근육통에 시달리는 바람항구의 제레미에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">928106B8-8596-4E9C-B89A-87772C71A749</CLIENT> <!--시작NPC 바람항구 - 데이지 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</PAYER> <!--완료NPC 바람항구 - 제레미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">928106B8-8596-4E9C-B89A-87772C71A749</AGENT> <!--진행NPC 11 바람항구 - 데이지 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 12 바람항구 - 제레미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160501400/1">10011</NPC> 
+ <!--Item_NO=160501400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160501400/1/511">10011</NPC> 
+ <!--Item_NO=160501400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160501400/1">10011</NPC> 
+ <!--Item_NO=160501400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160501400/1/512">10012</NPC> 
+ <!--Item_NO=160501400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160501400/1">10012</NPC> 
+ <!--Item_NO=160501400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10501411"/> <!--제레미에게 약 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501421" FACE="Huerin_normal"/> <!--자. 이제 다 만들어졌어.
+그럼 이 약을 제레미 할아버지에게 가져다 줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501426" FACE="Jeremy_smile"/> <!--허허. 제시가 나에게 비전근육통 약을 줬다고? 
+역시 내 몸을 생각해 주는 것은 제시밖엔 없군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501423" FACE="Huerin_smile"/> <!--아차차. 중요한 사항을 빠뜨릴 뻔했군. 갈 때 가더라도 돈은 줘야지.
+그럼 수고비를 내놔. 100골드야.%%
+비싸다고? 우리 가게의 좋은 물약은 다 사용해서 만든 거야. 100골드도 싸.
+뭐야 돈이 없다고? 할 수 없지. 제시 할아버지에게 받아야지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501424" FACE="Huerin_angly"/> <!--아니, 왜 거절하는 거야? 부탁한 건 너잖아!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501425" FACE="Huerin_normal"/> <!--자, 여기서 서성거리지 말고 얼른 가봐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10501451" FACE="Huerin_angly"/> <!--뭐야 설마 비전근육통약을 잃어버린 거야? 
+이런 나중에 잃어버린 비용을 청구할 줄 알아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10501452" FACE="Jeremy_normal"/> <!--흐음, 요즘 몸이 결리는 게 좀 안 좋군.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

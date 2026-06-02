@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4031</ID> <!--T.T.10403101 용궁에서 온 선물(3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	별가사리 로로로, 별가사리 루루루 각각 10마리 퇴치-->
+<!--[완료NPC]	수염고래 해안가 - 프리모-->
+<!--[내용]	낚시꾼 프리모는 아직도 믿지를 못한다. 수염고래 해안가 주변 생태계를 위협하는 별가사리 로로로, 별가사리 루루루를 각각 10마리 퇴치하고 돌아오자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D9D4C750-7AE1-4084-B14A-770E1D304FA1</CLIENT> <!--시작NPC 수염고래 해안가 - 프리모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D9D4C750-7AE1-4084-B14A-770E1D304FA1</PAYER> <!--완료NPC 수염고래 해안가 - 프리모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D9D4C750-7AE1-4084-B14A-770E1D304FA1</AGENT> <!--진행NPC 11 수염고래 해안가 - 프리모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6011200</MONSTER> 
+ <!--MON_NO=6011200/별가사리 로로로,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10403111"/> <!--별가사리 로로로-->
+		<OBJECT2 COUNT="10" TEXT="10403112"/> <!--별가사리 루루루-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403121" FACE="Primo_normal"/> <!--흥.. 그래도 왠지 말해줄 기분이 안드는군요.
+어떻게 알아? 원래 해적들과 한패라서 쉽게 두건을 가져왔을 지도 모르지.%%
+만약 당신이 해적들을 때려눕힐 정도의 실력을 갖췄다면
+이 일도 쉽게 해낼 것 같은데, 어때요? 도전해 보시겠소?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403126" FACE="Primo_smile"/> <!--에엥?
+어떤수를 썼길래 이렇게 빨리 별가사리를 잡을 수가 있단 말이지?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403123" FACE="Primo_normal"/> <!--이 근방에 급격히 늘어난 변종 불가사리들이 
+해안 근처의 물고기들을 닥치는대로 집어삼키고 있어요.%%
+이전에는 그렇게까지 탐욕적인 놈들은 아니었는데…%%
+이것도 다 그 똑똑한 박사님들과 귀족들이 유전자 뭐시기라는
+실험을 했기 때문에 일어난 일인지도 모르겠소.%%
+어쨌거나, 이 근방의 골치거리인 별가사리들을 퇴치한다면
+해적들과 한패가 아니라고 믿어주지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403124" FACE="Primo_smile"/> <!--흥! 거 봐. 난 처음부터 당신이 해적들과 한패라고 생각했어! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403125" FACE="Primo_angly"/> <!--잊지마슈. 수염고래 해안가의 별가사리들을 퇴치해야 합니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

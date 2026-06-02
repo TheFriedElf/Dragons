@@ -1,0 +1,13 @@
+<ACTION ID="a_Wind Suriken" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_Ground_01"/>
+  <FSM SCRIPT="Projectile_Default" PROJECTILE_ID="Projectile_Windsuriken"
+       HIT_SOUND_ID="WindSuriken"
+       FIRE_CASTER_EFFECT_ID="ef_Ground_01_p_wp_r_hand"
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_wp_r_hand"
+       DETACH_FIRE_CASTER_EFFECT_AT_HIT="TRUE"
+       SKILL_LEVEL_TO_SIZE="TRUE"
+       SKILL_LEVEL_TO_SIZE_START_EFFECT_SIZE="0.9"
+       HIDE_WEAPON="TRUE"
+       />
+</ACTION>

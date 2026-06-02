@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2220</ID> <!--T.T.10222001 차원교환기 작동 보고 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 하임, 소피아와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 클레아-->
+<!--[내용]	여관주인 클레아는 니콜라가 발명한 차원변환기에서 나온 봉인 된 아이템을 풀 수 있는 차원봉인해제주문서를 만들 수 있다고 한다. 차원변환기에서 아이템이 나온다는 사실과 봉인해제주문서에 대한 사실을 하임과 소피아에게 알리도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6582AB80-AF1C-4798-865E-E113A1241350</CLIENT> <!--시작NPC 달빛해안 마을 - 클레아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6582AB80-AF1C-4798-865E-E113A1241350</PAYER> <!--완료NPC 달빛해안 마을 - 클레아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 1 달빛해안 마을 - 하임 -->
+		<AGENT TYPE="NPC" EVENTNO="10022">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 2 달빛해안 마을 - 소피아 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 11 달빛해안 마을 - 클레아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10222011"/> <!--하임과 대화-->
+		<OBJECT2 COUNT="1" TEXT="10222012"/> <!--소피아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10222021" FACE="Floran_normal"/> <!--차원봉인이 제대로 해제가 되었군요. 야호!
+이제 소울로 만들 수 있는 것이 하나 더 늘었네요. 
+아 참 빨리 이 소식을 다른 분들한테 알려줘야 되지 않을까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10222026" FACE="Floran_smile"/> <!--알려주고 오셨나요? 수고하셨어요. 호호-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10222023" FACE="Floran_smile"/> <!--실은 모두 모른 채 했지만, 마을 사람들 모두 차원교환기에 많은 관심을 가지고
+있었어요.
+그 사실을 %name%님이 알려준다면 인기가 올라갈 거예요.%%
+제일먼저 도구상인 하임과 은행원 소피아에게 알려주세요.
+그리고 니콜라박사님에게 제가 차원봉인해제 주문서를 만들었다고
+전해주세요. 꼭 제가 했다고 전해야 되요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10222024" FACE="Floran_normal"/> <!--전하기 싫으면 마세요. 저야 손해볼 것 없으니까요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10222025" FACE="Floran_normal"/> <!--니콜라씨가 좋아하시겠는데요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10222002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10222051" /> <!--이제 그 차원교환기로 여기서는 쓸모 없는 아이템을
+ 다른 차원의 값어치 있는 아이템으로 바꿔 올 수 있겠군요.
+그건 마치 납 덩어리를 금으로 만드는 고대 연금술과 같다고나 할까?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10222052" /> <!--어머 놀랍군요. 드디어 니콜라씨가 성공을 했다 이건가요?
+이제 돈 방석에 앉는건 시간문제겠어요.%%
+제가 그 자리에 앉아야 할텐데.. 에헴
+아무튼 니 콜라씨에게 전해주세요. %%
+제가 니콜라씨에게 일부러 쌀쌀맞게 굴었던 이유에 대해서 말이예요.
+저에게 반해 연구에 지장이 갈까 노심초사했던 이 소녀의 마음을 전해주세요.%%
+꼭 ~~ 전해 주세요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

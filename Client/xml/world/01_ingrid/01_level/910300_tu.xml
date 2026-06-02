@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<WORLD ID="W_910300_TU">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/910300_TU.gsa</GSAPATH>
+	<MINIMAP Y="235" H="385">../Data/3_World/01_Ingrid/01_Level/910100_MM.dds</MINIMAP>
+	<SCRIPT>World/01_Ingrid/910300_TU.lua</SCRIPT>
+	<BGSOUND VOLUME="1.0">../BGM/wind.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+	<MAPVALUE PLAYERKILL="0" TYPE="8"/>
+	<!-- 포털 -->
+	<TRIGGER ID="gate_018230_base" TYPE="PORTAL" TITLE_TEXT_ID="800028" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018230" PARAM2="1"/>
+	</TRIGGER>
+	<!-- 트 리 거 점 프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="200"/>
+	</TRIGGER>
+
+	<!-- 텔 레 점 프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="450"/>
+	</TRIGGER>
+    <!-- 트리거 퀘스트1 -->
+     <TRIGGER ID="Triger_Quest1">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="503277" PARAM2="184"/>
+	</TRIGGER>
+    
+	<TRIGGER ID="Triger_Quest2">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501703" PARAM2="184"/>
+	</TRIGGER>
+    
+      <!-- 트리거 퀘스트3 -->
+	<TRIGGER ID="Triger_Quest3">
+		<CONDITION TYPE="touch"/>
+        <ACTION SCRIPT="DoTutorialHint" PARAM="501704" PARAM2="184"/>
+	</TRIGGER>
+    
+    <!-- 트리거 퀘스트4 -->
+	<TRIGGER ID="Triger_Quest4">
+		<CONDITION TYPE="touch"/>
+        <ACTION SCRIPT="DoTutorialHint" PARAM="501723" PARAM2="184"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="Triger_Quest5">
+		<CONDITION TYPE="touch"/>
+        <ACTION SCRIPT="DoTutorialHint" PARAM="501711" PARAM2="184"/>
+	</TRIGGER>
+    
+    
+	<TRIGGER ID="Triger_Quest6">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501712" PARAM2="184"/>
+	</TRIGGER>
+    
+    
+    <TRIGGER ID="Triger_Quest7">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoIngQuestDialog" PARAM="184" PARAM2="493" NPC_GUID="FAFB3F4C-5498-411a-94F8-8C5BF1C780BC"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="Triger_Quest8">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501714" PARAM2="184"/>
+	</TRIGGER>
+    
+   <TRIGGER ID="Triger_Quest9">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoIngQuestDialog" PARAM="184" PARAM2="494" NPC_GUID="FAFB3F4C-5498-411a-94F8-8C5BF1C780BC"/>
+	</TRIGGER>
+    
+    
+    <TRIGGER ID="Triger_Quest12">
+		<CONDITION TYPE="touch"/>
+        <ACTION SCRIPT="DoTutorialHint" PARAM="501718" PARAM2="184"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="Triger_Quest13">
+		<CONDITION TYPE="touch"/>
+        <ACTION SCRIPT="DoTutorialHint" PARAM="501719" PARAM2="184"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="Triger_Quest21">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501725" PARAM2="184"/>
+	</TRIGGER>
+    
+    
+    
+	<TRIGGER ID="Triger_Quest10">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501716" PARAM2="184"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Triger_Quest11">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501717" PARAM2="184"/>
+	</TRIGGER>
+
+
+	<TRIGGER ID="Triger_Quest14">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501720" PARAM2="184"/>
+	</TRIGGER>
+
+    <TRIGGER ID="Triger_Quest24">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="503190" PARAM2="184"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Triger_Quest17">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501721" PARAM2="184"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Triger_Quest18">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoEndQuestDialog" PARAM="184" PARAM2="601" NPC_GUID="810F9BB2-A7F2-4471-A0F1-83ECA39AE7A3"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Triger_Quest19">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501722" PARAM2="184"/>
+	</TRIGGER>
+    
+    <TRIGGER ID="Triger_Quest20">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTutorialHint" PARAM="501724" PARAM2="184"/>
+	</TRIGGER>
+    
+
+	<!-- 트리거 퀘스트 완료 -->
+	<TRIGGER ID="Triger_Quest15">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoSimpleLocation" PARAM="3" PARAM2="184"/>
+	</TRIGGER>
+	<NPC NAME="1018209" ACTOR="c_adelio" SCRIPT="NPC_Click" GUID="FAFB3F4C-5498-411a-94F8-8C5BF1C780BC" KID="1018209" TYPE="FIXED" LOCATION="-170.7458, 142.476, 61.24747">
+    <SAY TYPE="IDLE" TTW="503279" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    </NPC>
+    
+	<NPC NAME="1018209" ACTOR="c_adelio" SCRIPT="NPC_Click" GUID="810F9BB2-A7F2-4471-A0F1-83ECA39AE7A3" KID="1018209" TYPE="FIXED" LOCATION="7343.081, 1902.6, 62.05261"/>
+    
+    
+    
+     <NPC NAME="1018209" ACTOR="c_adelio" SCRIPT="NPC_Click" GUID="5812198C-C829-408b-B9AE-F6422E04D7BA" KID="1018209" TYPE="FIXED" LOCATION="1334.86, 104.869, 61.24747">
+    <SAY TYPE="IDLE" TTW="504196" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="IDLE" TTW="504197" UPTIME="15" DELAY="10" ACTION="a_talk"/>
+    
+    <SAY TYPE="CLICK" TTW="504196" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="CLICK" TTW="504197" UPTIME="15" DELAY="10" ACTION="a_talk"/>
+    </NPC>
+    
+    <NPC NAME="1018209" ACTOR="c_adelio" SCRIPT="NPC_Click" GUID="988ABCA7-8D3F-4be0-9EDB-5735AAA50207" KID="1018209" TYPE="FIXED" LOCATION="3150.734, 421.1707, 61.24747">
+    <SAY TYPE="IDLE" TTW="504198" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="IDLE" TTW="504203" UPTIME="15" DELAY="15" ACTION="a_talk"/>
+    
+    <SAY TYPE="CLICK" TTW="504198" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="CLICK" TTW="504203" UPTIME="15" DELAY="15" ACTION="a_talk"/>
+    </NPC>
+    
+    <NPC NAME="1018209" ACTOR="c_adelio" SCRIPT="NPC_Click" GUID="DDC992A1-849D-4744-BB3A-0E4A1875F7BA" KID="1018209" TYPE="FIXED" LOCATION="5525.589, 92.95239, 61.20634">
+    <SAY TYPE="IDLE" TTW="504199" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="IDLE" TTW="504202" UPTIME="15" DELAY="15" ACTION="a_talk"/>
+    
+    <SAY TYPE="CLICK" TTW="504199" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="CLICK" TTW="504202" UPTIME="15" DELAY="15" ACTION="a_talk"/>
+    </NPC>
+    
+    <NPC NAME="1018209" ACTOR="c_adelio" SCRIPT="NPC_Click" GUID="F7D311BA-EEFE-4dd2-B828-CB3299AEC6F0" KID="1018209" TYPE="FIXED" LOCATION="7058.145, 233.4755, 61.20599">
+    <SAY TYPE="IDLE" TTW="504200" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="IDLE" TTW="504201" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    
+    <SAY TYPE="CLICK" TTW="504200" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    <SAY TYPE="CLICK" TTW="504201" UPTIME="15" DELAY="5" ACTION="a_talk"/>
+    </NPC>
+    
+    
+    
+    
+	<!--포그-->
+	<FOG DENSITY="0.050000" START="30.000000" END="9560.000000" COLOR="0.930999,0.940999,0.528000"/>
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="1"/>
+	<STONES/>
+</WORLD>

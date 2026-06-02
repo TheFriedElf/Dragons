@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!--STATIC_FORM ID="FRM_ITEM_MAKING_MAIN" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">	
+		<ATTR X = "50" Y = "150" W ="632" H ="430" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<SCRIPT ID = "ON_CALL">
+			local wnd = ItemMakingWnd(UISelf)
+			wnd:Clear()
+		</SCRIPT>
+
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="630" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID="SFRM_CLOSE_BG">
+				<ATTR X="599" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID="Close">
+					<ATTR X="0" Y="0" W="24" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<IMG ID = "IMG_TAB">
+					<ATTR X="0" Y="0" W="84" H="24" U = "2" V = "2" UV_INDEX = "3"/>
+					<ATTR IMG = "../Data/6_ui/common/cmTabB.tga" IMG_W = "168" IMG_H = "48"/>
+					<ATTR TEXT = "400600" FONT = "FTtitle_14" T_X = "38" T_Y ="4" T_OUTLINE="0" T_CENTER = "1"/>
+				</IMG>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID = "SFRM_COLOR1_TODO">
+			<ATTR X="9" Y="35" W="160" H="340" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="160" H="340" STATIC_NUM = "3" />
+				<LIST ID = "LIST_TODO">
+					<ATTR X = "5" Y = "5" W = "254" H = "330" ITEM_X = "0" ITEM_Y = "0" CAN_SELECT = "1" />	
+					<ATTR BTN_UP = "ScrUp" />
+					<ATTR BTN_DOWN = "ScrDown" />
+					<ATTR BTN_MIDDLE = "ScrMiddle" />
+					<ATTR ELEMENT_ID = "FRM_TODOLIST_DETAIL" />
+					<SCRIPT ID="ON_CALL">
+						local wnd = ItemMakingWnd(UISelf)
+						wnd:RefreshTodoList()
+					</SCRIPT>
+					<BUTTON ID = "ScrUp">
+						<ATTR X = "132" Y = "0" W ="19" H ="15" />
+						<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+			      	</BUTTON>
+					<BUTTON ID = "ScrDown">
+						<ATTR X = "132" Y = "315" W ="19" H ="15" />
+						<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+					</BUTTON>
+					<BUTTON ID = "ScrMiddle">
+						<ATTR X = "134" Y = "0" W ="15" H ="21" />
+						<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W = "30" BTN_IMG_H = "42" />
+					</BUTTON>
+				</LIST>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR2_INPUTSLOT">
+			<ATTR X="175" Y="35" W="220" H="340" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<ATTR TEXT = "0" FONT = "Font_QuestWarn" T_X="10" T_Y ="5" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemMakingWnd(UISelf)
+				local TextNo = wnd:GetCurTitleTextNo()
+				local strDef = GetDefString(TextNo)
+				UISelf:SetStaticText(strDef)
+			</SCRIPT>
+
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" Z="-1" W="220" H="340" STATIC_NUM = "3" PASS_EVENT="1"/>
+				<BUILD TARGET_ID="SFRM_ICON_BG" X="5" Y="252" Z="-1" X_COUNT = "5" Y_COUNT = "2" X_GAB = "42" Y_GAB = "42"/>
+				<STATIC_FORM ID="SFRM_ICON_BG">
+					<ATTR X="0" Y="0" Z="-1" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" PASS_EVENT="1"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			!-- 필요 아이템 설명.--
+			<FORM ID = "FRM_NEED_ITEM">
+				<ATTR X = "0" Y = "0" Z="-1" W="220" H="340" PASS_EVENT="1"/>
+				<BUILD TARGET_ID="SFRM_NEED_LIST" X="7" Y="50" Z="-1" X_COUNT = "1" Y_COUNT = "10" X_GAB = "110" Y_GAB = "16"/>
+				<FORM ID="SFRM_NEED_LIST">
+					<ATTR X="0" Y="0" Z="-1" W="210" H="20"/>
+					<ATTR TEXT = "0" FONT = "Font_Text" T_X="0" T_Y ="0" T_RIGHT = "0" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ItemMakingWnd(UISelf)
+						wnd:DisplaySrcList()
+					</SCRIPT>
+				</FORM>
+			</FORM>
+			!-- 아이템 올려 놓는 곳 --
+			<BUILD TARGET_ID="SFRM_ICON" X="5" Y="252" Z="1" X_COUNT = "5" Y_COUNT = "2" X_GAB = "42" Y_GAB = "42"/>
+			<ICON ID = "SFRM_ICON">
+				<ATTR TEXT="" FONT="Font_Warn" T_X="20" T_Y="9" T_CENTER = "1"/>
+				<ATTR X="0" Y="0" Z="1" W="40" H="40"/>
+				<ATTR ICON_GRP ="120" ICON_KEY = "0"/>
+				<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_UP">
+					local bRet = UISelf:CursorToIcon()
+					if bRet == true then
+						local kCountWnd = ActivateUI("SFRM_ITEMMAKING_COUNT")
+						local kWnd = kCountWnd:GetControl("ITEM_COUNT")
+						if kWnd:IsNil() == false then
+							kWnd:SetEditFocus(true)
+						end
+					end
+				</SCRIPT>
+				<SCRIPT ID = "ON_DISPLAY">
+					local wnd = ItemMakingWnd(UISelf)
+					wnd:DisplaySrcItem()
+				</SCRIPT>
+			</ICON>
+			!-- 필요 금액 --
+			<FORM ID="FRM_COINS">
+				<ATTR X="65" Y="232" W="146" H="16"/>
+				<FORM ID="FRM_COIN1">
+					<ATTR X="0" Y="0" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ItemMakingWnd(UISelf)
+						UISelf:DrawMoneyByValue(1, wnd:GetNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN2">
+					<ATTR X="48" Y="0" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ItemMakingWnd(UISelf)
+						UISelf:DrawMoneyByValue(2, wnd:GetNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN3">
+					<ATTR X="96" Y="0" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ItemMakingWnd(UISelf)
+						UISelf:DrawMoneyByValue(3, wnd:GetNeedMoney())
+					</SCRIPT>
+				</FORM>
+			</FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR3_OUTLIST">
+			<ATTR X="402" Y="35" W="220" H="250" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUILD TARGET_ID="FRM_OUTLIST_DETAIL" X="5" Y="5" Z="1" X_COUNT = "1" Y_COUNT = "10" X_GAB = "0" Y_GAB = "24"/>
+			<BUTTON ID = "FRM_OUTLIST_DETAIL">
+				<ATTR X="0" Y="0" W="210" H="24" />
+				<ATTR TEXT = "0" FONT = "FTbt_12" T_X="105" T_Y ="2" T_CENTER = "1" T_OUTLINE="1" />
+				<SCRIPT ID = "ON_DISPLAY">
+					local wnd = ItemMakingWnd(UISelf)
+					wnd:DisplayDestList()
+				</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_UP">
+					local wnd = ItemMakingWnd(UISelf)
+					wnd:SelectDestList()
+				</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR4_OUTPUTSLOT">
+			<ATTR X="402" Y="35" W="220" H="340" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="220" H="340" STATIC_NUM = "3" PASS_EVENT="1"/>
+				<BUILD TARGET_ID="SFRM_ICON_BG" X="5" Y="252" Z="-1" X_COUNT = "5" Y_COUNT = "2" X_GAB = "42" Y_GAB = "42"/>
+				<STATIC_FORM ID="SFRM_ICON_BG">
+					<ATTR X="0" Y="0" Z="-1" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"  PASS_EVENT="1"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<BUILD TARGET_ID="SFRM_ICON" X="5" Y="252" Z="1" X_COUNT = "5" Y_COUNT = "2" X_GAB = "42" Y_GAB = "42"/>
+			<ICON ID = "SFRM_ICON">
+				<ATTR TEXT="" FONT="Font_Warn" T_X="20" T_Y="9" T_CENTER = "1" />
+				<ATTR X="0" Y="0" Z="1" W="40" H="40"/>
+				<ATTR ICON_GRP ="121" ICON_KEY = "0"/>
+				<SCRIPT ID = "ON_L_BTN_UP">
+					--UISelf:CursorToIcon()
+				</SCRIPT>
+				<SCRIPT ID = "ON_DISPLAY">
+					local wnd = ItemMakingWnd(UISelf)
+					wnd:DisplayDestItem()
+				</SCRIPT>
+				<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+		</STATIC_FORM>
+
+		<BUTTON ID="OK">
+			<ATTR X="250" Y="385" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "400002" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" />
+			<SCRIPT ID="ON_L_BTN_UP">
+				local wnd = ItemMakingWnd(UISelf)
+				wnd:MakingItem()
+				--UISelf:CloseParent() return true
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="CANCEL">
+			<ATTR X="336" Y="385" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "400003" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" />
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				UISelf:CloseParent() return true
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM-->
+
+	<STATIC_FORM ID = "FRM_TODOLIST_DETAIL">
+		<ATTR X = "0" Y = "0" W ="131" H ="44" CAN_DRAG = "0" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2"/>
+		<ATTR FONT = "FTctsBig_14" T_X = "65" T_Y ="12" T_CENTER = "1" FONT_COLOR_HEX = "0xFF4D3413" />
+		<BUTTON ID = "BTN_TODO">
+			<ATTR X = "0" Y = "0" W ="131" H ="44" />
+			<ATTR FONT = "FTctsBig_14" T_X = "65" T_Y ="14" T_CENTER = "1" />
+			<ATTR BTN_IMG = "../Data/6_ui/server/svOverB.tga" BTN_IMG_W = "262" BTN_IMG_H = "88" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_CALL">
+				UISelf:SetEditText("")
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				local wnd = ItemMakingWnd(UISelf)
+				wnd:SelectTodoList()
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID = "FRM_OUTLIST_DETAIL2">
+		<ATTR X = "0" Y = "0" W ="210" H ="24" CAN_DRAG = "0" STATIC_NUM = "3" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2"/>
+		<ATTR FONT = "FTctsBig_14" T_X = "105" T_Y ="2" T_CENTER = "1" FONT_COLOR_HEX = "0xFF4D3413" />
+		<BUTTON ID = "BTN_TODO">
+			<ATTR X = "0" Y = "0" W ="210" H ="24" />
+			<ATTR FONT = "FTctsBig_14" T_X = "105" T_Y ="2" T_CENTER = "1" FONT_COLOR_HEX = "0xFF4D3413" />
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemMakingWnd(UISelf)
+				wnd:DisplayDestList()
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				local wnd = ItemMakingWnd(UISelf)
+				wnd:SelectDestList()
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_ITEMMAKING_COUNT" IS_VISIBLE="0">
+		<ATTR ALIGN_X="50" Y="450" W="249" H="145" STATIC_NUM = "1" CAN_DRAG = "1"/>	
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="247" H="36" STATIC_NUM = "4" />
+			<STATIC_FORM ID="SFRM_COLOR1">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1" />
+				<CHECK_BUTTON ID="CBTN_TITLE">
+					<ATTR X="0" Y="0" W="84" H="24" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmTabB.tga" BTN_IMG_W = "168" BTN_IMG_H = "48"/>
+					<ATTR TEXT = "400101" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL">
+						--UISelf:CheckState(true)
+						UISelf:LockClick(true)
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_COLOR4">
+				<ATTR X="216" Y="4" W="24" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1"/>
+				<BUTTON ID="BNT_CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W = "48" BTN_IMG_H = "48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> 
+						--CallUI("QuitMessageBox", true) 
+					</SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="35" W="231" H="65" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1" />
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="231" H="65" STATIC_NUM = "3"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_PW">
+				<ATTR X="6" Y="35" W="219" H="24" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" />
+				<STATIC_FORM ID="SFRM_PW_TITLE">
+					<ATTR X="0" Y="0" W="69" H="25" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" />
+					<ATTR TEXT = "400103" FONT = "Font_Text" T_X="34" T_Y ="4" T_CENTER = "1" />
+					<SCRIPT ID="ON_CALL">	UISelf:SetFontColor(5059603)</SCRIPT>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<EDIT ID="ITEM_COUNT">
+			<ATTR X="88" Y="70" W="116" H="20" />
+			<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text" EDIT_ONLY_NUM="1"/>
+			<ATTR EDIT_PREVIEW="10004" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_CALL">
+				--
+				UISelf:SetEditText("")
+				UISelf:SetEditFocus(true)
+			</SCRIPT>
+			<!--
+			<SCRIPT ID="ON_KEY_ENTER">return OnKey_Login_Enter(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_KEY_TAB">OnKey_Login_Tab() return true</SCRIPT>
+			-->
+			<HOTKEY ID="28">UISelf:SetEditFocus(true)--return OnKey_Login_Enter(UISelf)</HOTKEY>
+			<HOTKEY ID="106">--return OnKey_Login_Enter(UISelf)</HOTKEY>			
+		</EDIT>
+
+
+		<BUTTON ID="OK">
+			<ATTR X="39" Y="106" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "400002" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" />
+			<SCRIPT ID = "ON_CALL">
+				--fTryLoginTime = 0
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				local edit_wnd = UISelf:GetParent():GetControl("ITEM_COUNT")
+				local wnd = ItemMakingWnd(UISelf)
+				wnd:SetItemCount(edit_wnd:GetEditText())
+				UISelf:CloseParent() return true
+			</SCRIPT>
+			<HOTKEY ID="28">
+				local edit_wnd = UISelf:GetParent():GetControl("ITEM_COUNT")
+				local wnd = ItemMakingWnd(UISelf)
+				local bRet = wnd:SetItemCount(edit_wnd:GetEditText())
+				
+				if bRet == true then
+					UISelf:CloseParent()
+				end
+			</HOTKEY>
+			<ATTR TOOL_TIP_TEXT = "10003" />
+		</BUTTON>
+		<BUTTON ID="CANCEL">
+			<ATTR X="125" Y="106" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "400003" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" />
+			<SCRIPT ID="ON_L_BTN_UP"> 
+				UISelf:CloseParent() return true
+				--CallUI("QuitMessageBox", true) 
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+
+	<!-- //////////////////// ItemMaking Cooking ////////////////////-->
+	<STATIC_FORM ID = "SFRM_ITEM_MAKING_COOK" X = "240" Y = "91" W ="282" H ="412" CAN_DRAG = "1" STATIC_NUM = "1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="280" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="249" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="84" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<IMG ID = "IMG_TAB" X="0" Y="0" W="84" H="24" U = "2" V = "2" UV_INDEX = "3">
+					<ATTR IMG = "../Data/6_ui/common/cmTabB.tga" IMG_W = "168" IMG_H = "48"/>
+					<ATTR TEXT = "1601" FONT = "FTtitle_14" T_X = "35" T_Y ="5" T_OUTLINE="0" T_CENTER = "1"/>
+				</IMG>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="35" W="264" H="304" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID = "SFRM_SHADOW" X = "0" Y = "0" W="264" H="304" STATIC_NUM = "3" >
+				<STATIC_FORM ID = "SFRM_SRC" X="6" Y="6" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+					<ICON ID = "ICN_SRC" X="1" Y="1" W="40" H="40" ICON_GRP ="122" ICON_KEY = "0">
+						<SCRIPT ID = "ON_L_BTN_UP">	UISelf:CursorToIcon()</SCRIPT>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemCookingWnd(UISelf)
+							wnd:DisplaySrcIcon()
+						</SCRIPT>
+						<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<FORM ID = "FRM_ARROW1" X="56" Y="3" W="100" H="24">
+					<IMG ID="IMG_ARROW" X="0" Y="9" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					<ATTR TEXT = "1602" FONT = "Font_Text" T_X = "7" T_Y ="5" T_OUTLINE="0" />
+				</FORM>
+				<STATIC_FORM ID = "SFRM_SRC_NAME">
+					<ATTR X="52" Y="25" W="206" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "4" T_Y ="4" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</STATIC_FORM>
+				<IMG ID="IMG_LINE_1" X="49" Y="49" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="49" Y="50" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<BUILD TARGET_ID="FRM_MATERIAL" X="86" Y="57" X_COUNT = "1" Y_COUNT = "4" X_GAB = "0" Y_GAB = "49"/>
+				<FORM ID = "FRM_MATERIAL" X="0" Y="0" W="182" H="45">
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "47" T_Y ="24" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<STATIC_FORM ID = "SFRM_MATERIAL" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+						<ICON ID = "ICN_MATERIAL" X="1" Y="1" W="40" H="40" ICON_GRP ="122" ICON_KEY = "0">
+							<SCRIPT ID = "ON_DISPLAY">
+								wnd = ItemCookingWnd(UISelf)
+								wnd:DisplayNeedItemIcon()
+							</SCRIPT>
+							<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+							<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+							<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+						</ICON>
+						<BUTTON ID="BTN_PLUS" X="28" Y="29"  W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBUp.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+							<SCRIPT ID="ON_L_BTN_UP">
+								local wnd = ItemCookingWnd(UISelf)
+								wnd:SetUseOptionItem(true)
+							</SCRIPT>
+						</BUTTON>
+						<BUTTON ID="BTN_MINUS" X="0" Y="29" W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+							<SCRIPT ID="ON_L_BTN_UP">
+								local wnd = ItemCookingWnd(UISelf)
+								wnd:SetUseOptionItem(false)
+							</SCRIPT>
+						</BUTTON>
+					</STATIC_FORM>
+					<STATIC_FORM ID = "SFRM_MATERIAL_NAME">
+						<ATTR X="46" Y="0" W="126" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X = "1" T_Y ="3" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					</STATIC_FORM>
+					<IMG ID="IMG_LINE_1" X="3" Y="44" W="169" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="169" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+					<IMG ID="IMG_LINE_2" X="3" Y="45" W="169" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="169" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				</FORM>
+
+				<STATIC_FORM ID = "SFRM_DEST" X="6" Y="256" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+					<ICON ID = "ICN_DEST" X="1" Y="1" W="40" H="40" ICON_GRP ="122" ICON_KEY = "0">
+						<SCRIPT ID = "ON_DISPLAY">
+							wnd = ItemCookingWnd(UISelf)
+							wnd:DisplayResultItemIcon()
+						</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							wnd = ItemCookingWnd(UISelf)
+							wnd:NextResultItem()
+						</SCRIPT>
+						<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+
+				<STATIC_FORM ID = "SFRM_DEST_NAME" X="52" Y="275" W="206" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "4" T_Y ="4" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</STATIC_FORM>
+
+				<FORM ID = "FRM_ARROW2" X="56" Y="254" W="180" H="24">
+					<IMG ID="IMG_ARROW" X="0" Y="9" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					<ATTR TEXT = "1603" FONT = "Font_Text" T_X = "7" T_Y ="5" T_OUTLINE="0" />
+				</FORM>
+				<IMG ID="IMG_LINE_3" X="49" Y="254" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_4" X="49" Y="255" W="207" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="207" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<FORM ID = "FRM_DOWN_ARROW_BG" X="15" Y="48" W="24" H="208" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" >
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow01.tga" IMG_W = "24" IMG_H = "208"/>
+					<IMG ID="IMG_ARROW" X="0" Y="0" W="24" H="208" IMG="../Data/6_ui/refine/rfArrow01cl.tga" IMG_W="24" IMG_H="208" >
+						<SCRIPT ID = "ON_DISPLAY">
+							local kSize = UISelf:GetSize()
+							if g_bOnCooking == nil or g_bOnCooking == false then
+								UISelf:SetImgSize(kSize)
+								wnd = ItemCookingWnd(UISelf)
+								wnd:SetNowCooking(false)
+								return
+							end
+							if g_fCookingStartTime == nil then
+								wnd:SetNowCooking(false)
+								return
+							end
+							local fDelta = GetAccumTime() - g_fCookingStartTime
+							if fDelta >= 2 then
+								g_bOnCooking = false
+								wnd:SetNowCooking(false)
+								local wnd = ItemCookingWnd(UISelf)
+								wnd:SendReqItemCooking(true)
+								wnd:ClearCookingData()
+							else
+								local iH = fDelta/2*kSize:GetY()
+								local iMinH = math.min(iH, kSize:GetY())
+								kSize:SetY(iMinH)
+								UISelf:SetImgSize(kSize)
+							end
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_ARROW_BG1" X="33" Y="67" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" >
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW" X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow02cl.tga" IMG_W="54" IMG_H="22" >
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemCookingWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 0, 0.5, 0.1, g_bOnCooking, g_fCookingStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_ARROW_BG2" >
+					<ATTR X="33" Y="116" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow03cl.tga" IMG_W="54" IMG_H="22" />
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemCookingWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 1, 0.5, 0.6, g_bOnCooking, g_fCookingStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_ARROW_BG3" >
+					<ATTR X="33" Y="165" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow04cl.tga" IMG_W="54" IMG_H="22" />
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemCookingWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 2, 0.5, 1.1, g_bOnCooking, g_fCookingStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_ARROW_BG4" >
+					<ATTR X="33" Y="214" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow05cl.tga" IMG_W="54" IMG_H="22" />
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemCookingWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 3, 0.5, 1.6, g_bOnCooking, g_fCookingStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR2">
+			<ATTR X="9" Y="341" W="264" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW" X = "0" Y = "0" W="264" H="26" STATIC_NUM = "3" >
+				<ATTR TEXT = "1604" FONT = "Font_Text" T_X = "12" T_Y ="5" T_OUTLINE="0" />
+				<IMG ID="IMG_LINE_1" X="64" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="65" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID="FRM_COIN1" X="102" Y="5" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemCookingWnd(UISelf)
+						UISelf:DrawMoneyByValue(1, wnd:GetCookingNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN2" X="150" Y="5" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemCookingWnd(UISelf)
+						UISelf:DrawMoneyByValue(2, wnd:GetCookingNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN3" X="197" Y="5" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemCookingWnd(UISelf)
+						UISelf:DrawMoneyByValue(3, wnd:GetCookingNeedMoney())
+					</SCRIPT>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<IMG ID = "BTN_BG_UP" X = "14" Y = "378" Z = "-1" W = "16" H = "16" CAN_COLOR_CHANGE = "1" COLOR_TYPE="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="16" IMG_H="16"/>
+		<IMG ID = "BTN_BG_DOWN" X = "78" Y = "378" Z = "-1" W = "16" H = "16" CAN_COLOR_CHANGE = "1" COLOR_TYPE="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="16" IMG_H="16"/>
+		<BUTTON ID = "BTN_COUNT_UP" X = "13" Y = "377" W ="18" H ="18">
+			<ATTR BTN_IMG = "../Data/6_ui/skill/skUpB.tga" BTN_IMG_W = "36" BTN_IMG_H = "36"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				wnd = ItemCookingWnd(UISelf)
+				local count = wnd:AddMakingCount(1)
+				UISelf:GetParent():GetControl("SFRM_COOK_COUNT"):SetStaticText(tostring(count))
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, GetTT(1615), UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_COUNT_DOWN" X = "77" Y = "377" W ="18" H ="18">
+			<ATTR BTN_IMG = "../Data/6_ui/skill/skDnB.tga" BTN_IMG_W = "36" BTN_IMG_H = "36"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				wnd = ItemCookingWnd(UISelf)
+				local count = wnd:AddMakingCount(-1)
+				UISelf:GetParent():GetControl("SFRM_COOK_COUNT"):SetStaticText(tostring(count))
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, GetTT(1616), UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+		<STATIC_FORM ID = "SFRM_COOK_COUNT" X = "10" Y = "373" Z = "-2" W = "89" H = "26" STATIC_NUM = "34" >
+			<ATTR FONT = "QTtext" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1" T_CENTER = "1" T_X = "44" T_Y = "5"/>
+			<SCRIPT ID = "ON_CALL">
+				wnd = ItemCookingWnd(UISelf)
+				UISelf:SetStaticText(tostring(wnd:GetMakingCount()))
+			</SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				wnd = ItemCookingWnd(UISelf)
+				UISelf:SetStaticText(tostring(wnd:GetMakingCount()))
+			</SCRIPT>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_TRY_REFINE" X="103" Y="373" W="84" H="26">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(1605, 2200) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID="ON_L_BTN_UP">
+				if g_bOnCooking == true then 
+					return 
+				end
+				local wnd = ItemCookingWnd(UISelf)
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallComfirmMessageBox()
+				else
+					CommonMsgBoxByTextTable(iError, true)
+				end
+			</SCRIPT> 
+			<HOTKEY ID="59">
+				if g_bOnCooking == true then 
+					return 
+				end
+				wnd = ItemCookingWnd(UISelf)
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallComfirmMessageBox()
+				else
+					CommonMsgBoxByTextTable(iError, true)
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="189" Y="373" W="84" H="26">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+			
+				StopSoundByID("Cook_Cooking")
+				if g_bOnCooking == true then 
+					g_bOnCooking = false
+					AddWarnDataTT(1614)
+					local wnd = ItemCookingWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+			</SCRIPT>
+			<HOTKEY ID="60">
+			StopSoundByID("Cook_Cooking")
+				if g_bOnCooking == true then 
+					g_bOnCooking = false
+					AddWarnDataTT(1614)
+					local wnd = ItemCookingWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return true
+				else
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+			StopSoundByID("Cook_Cooking")
+				if g_bOnCooking == true then 
+					g_bOnCooking = false
+					AddWarnDataTT(1614)
+					local wnd = ItemCookingWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return true
+				else
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			wnd = ItemCookingWnd(UISelf)
+			wnd:Clear()
+			CloseToolTip()
+		</SCRIPT> 
+		<SCRIPT ID = "ON_CALL">
+			ActivateUI("Inv")
+			wnd = ItemCookingWnd(UISelf)
+			wnd:Clear()
+			ArrowReset(UISelf)
+			g_bOnCooking = false
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 240, 91)</SCRIPT>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_COOKING_REFINE">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="177" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="125" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="125" STATIC_NUM="3" />
+				<ATTR TEXT="" FONT="Font_Text" T_X="95" T_Y="13" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID = "ON_CALL">
+					UISelf:SetStaticText("")			
+				</SCRIPT>
+				<SCRIPT ID = "ON_DISPLAY">
+					local t = UISelf:GetStaticText()
+					local ts = t:Length()
+					local t_y = 55-ts*0.5
+					UISelf:SetTextPos(Point2(95,t_y))
+				</SCRIPT>				
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_TRY_REFINE">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(1605, 2200) </SCRIPT>
+			<ATTR X="18" Y="138" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_UP">
+				if g_bOnCooking == true then 
+					return 
+				end
+				local wnd = ItemCookingWnd(UISelf)
+
+				if wnd:SendReqItemCooking(false) == false then
+					wnd:SetNowCooking(false)
+				else
+					UISelf:CloseParent()
+					g_bOnCooking = true
+					g_fCookingStartTime = GetAccumTime()
+					wnd:SetNowCooking(true)
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				if g_bOnCooking == true then 
+					return true
+				end
+				local wnd = ItemCookingWnd(UISelf)
+
+				if wnd:SendReqItemCooking(false) == false then
+					wnd:SetNowCooking(false)
+				else
+					UISelf:CloseParent()
+					g_bOnCooking = true
+					g_fCookingStartTime = GetAccumTime()
+					wnd:SetNowCooking(true)
+				end
+				return true
+			</HOTKEY>		
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR X="104" Y="138" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "400003" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent() return true </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>			
+		</BUTTON>
+	</STATIC_FORM>
+
+	<!-- //////////////////// Item Making result ////////////////////-->
+	<FORM ID="FRM_ITEM_MAKING_RESULT_SINGLE">
+		<SCRIPT ID="ON_CALL"> PlaySoundByID("Item_Mix_Success") </SCRIPT>
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="263" H="99" IMG="../Data/6_ui/stone/stIconBg.tga" IMG_W="263" IMG_H="99" PASS_EVENT="1"/>
+		<ATTR ALIVE_TIME="3000" PRIORITY="98" ALIVE_TIME_IGNORE_MOUSE_OVER = "1"/>
+		<ATTR TEXT = "" FONT = "Font_Text" T_X="135" T_Y ="50" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID = "IMG_GET">
+			<ATTR X="111" Y="2" W="40" H="40" U = "12" V = "12" UV_INDEX = "78"/>
+			<ATTR IMG = "../Data/6_ui/icon/IconEtc02.tga" IMG_W = "480" IMG_H = "480"/>
+			<SCRIPT ID = "ON_MOUSE_OVER"> OnCallMissionRewardItemToolTip(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>	
+		</IMG>
+
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+		</SCRIPT>
+		<HOTKEY ID="1">
+			UISelf:Close()
+			return true
+		</HOTKEY>
+		<HOTKEY ID="28">
+			UISelf:Close()
+			return true
+		</HOTKEY>
+	</FORM>
+</XUI>

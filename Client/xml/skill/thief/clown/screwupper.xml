@@ -1,0 +1,14 @@
+<ACTION ID="a_Screw Upper" NEXT="a_jump" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_ScrewUpper_01"/>
+  <SLOT NAME="Com_skill_ScrewUpper_02"/>
+  <FSM SCRIPT="Skill_ScrewUpper" 
+       FIRE_CASTER_EFFECT_ID="ef_Claw_Skill_Raid_01_char_root" 
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       NO_WEAPON_TRAIL="TRUE"
+       HIT_SOUND_ID="ScrewUpper"
+	   
+	   NO_DAMAGE_HOLD="FALSE"
+	   DAMAGE_HOLD_TIME=""
+       />
+</ACTION>

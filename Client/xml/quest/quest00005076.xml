@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5076</ID> <!--T.T.10507601 전설의 미끼(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	물의 신전에서 이끼 낀 골렘에게 골렘의 이끼 10개를 구하자-->
+<!--[완료NPC]	바람항구 - 혜나-->
+<!--[내용]	혜나는 전설의 미끼 중 하나인 골렘의 이끼에 대해서 이야기 해준다. 골렘의 이끼는 물의 신전에서만 발견되는 이끼 낀 골렘에게서만 나오는 것이라고 한다. 과거 우연찮게 물의 신전으로 들어간 용자가 그것을 발견했다고 한다. 낚시를 좋아하는 용자가 골렘의 이끼를 낚시터에 뿌리자 엄청난 물고기 떼가 몰려왔다는 것이다. 모든 낚시꾼의 염원인 골렘의 이끼를 물의 신전의 이끼 낀 골렘에게서 10개를 구하자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">975FD858-1F6E-447e-9EED-C83158EC72FC</CLIENT> <!--시작NPC 바람항구 - 혜나 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">975FD858-1F6E-447e-9EED-C83158EC72FC</PAYER> <!--완료NPC 바람항구 - 혜나 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">975FD858-1F6E-447e-9EED-C83158EC72FC</AGENT> <!--진행NPC 11 바람항구 - 혜나 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010701/10000/0/1/1/160507600">6122100</MONSTER> 
+ <!--MON_NO=6122100/이끼 낀 골렘,MAP_NO=9010701/물의신전,Item_NO=160507600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160507600</ITEM> 
+ <!--Item_NO=160507600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10507611"/> <!--골렘의 이끼-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10507621" FACE="Hyena_normal"/> <!--혜나가 전설의 미끼에 대해서 알려 줄게. 놀라지 말고 들어.
+바로 골렘의 이끼야. 응? 별로 놀라지 않는 거야?
+골렘의 이끼는 물의 신전에 살고 있는 이끼 낀 골렘에게서만 발견되는 특수한 이끼야.%%
+사실 골렘의 이끼가 낚시의 미끼가 될 것이라는 것은 아무도 알지 못했어.
+만약 골렘의 이끼를 구해준다고 약속한다면 내가 그 이야기를 해 줄게.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10507626" FACE="Hyena_smile"/> <!--와! 이게 바로 골렘의 이끼구나. 고마워. 혜나는 기뻐.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10507623" FACE="Hyena_normal"/> <!--과거의 용자라 불리는 사람이 물의 신전에 들어간 일이 있었데. 
+용자는 물의 신전에서 이끼 낀 골렘과 싸우게 된 거야.
+이끼 낀 골렘과의 싸움에서 승리한 용자가 골렘의 이끼를 발견하게 된 거지.%%
+낚시를 좋아하는 용자는 갑자기 골렘의 이끼를 낚시터에 뿌리고 싶었데.
+그래서 낚시터에 뿌렸더니. 엄청나게 많은 물고기 떼가 몰려왔다는 거야.
+굉장한 이야기지. 혜나도 이런 굉장한 경험을 해보고 싶어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10507624" FACE="Hyena_angly"/> <!--정말 거절하는 거야? 혜나가 해주는 이야기를 들으면 정말 깜짝 놀랄텐데도?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10507625" FACE="Hyena_normal"/> <!--에르실이 자신에게는 엄청나게 큰 지렁이가 있다고 자랑했어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10507602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

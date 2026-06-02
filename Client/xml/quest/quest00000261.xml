@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>261</ID> <!--T.T.10026101 금속채광 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	광물조각 5개 구하기-->
+<!--[완료NPC]	채집농장 - 베시-->
+<!--[내용]	금속채광을 하기 위해서는 우선 곡괭이를 장비해야 하고, 금속채광 스킬을 배워야 한다고 한다. 금속채광장에서 자신의 스킬레벨에 맞는 곳에서 오라가 빛나면 작업을 할 수 있다고 한다. 금속채광장에서 광물조각 5개를 구해서 베시에게 가져 가자.-->
+	<LIMITS>
+            <SKILLS>
+			<SKILL TYPE="OR">85000300</SKILL>
+			</SKILLS>
+    </LIMITS>
+
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">17458695-BE7C-4eb0-ADDE-B6E6E0DBE941</CLIENT> <!--시작NPC 채집농장 - 로미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">14DC362F-D0CA-4ede-8F38-33F2D92D8731</PAYER> <!--완료NPC 채집농장 - 베시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">17458695-BE7C-4eb0-ADDE-B6E6E0DBE941</AGENT> <!--진행NPC 11 채집농장 - 로미 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">14DC362F-D0CA-4ede-8F38-33F2D92D8731</AGENT> <!--진행NPC 12 채집농장 - 베시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">89006280</ITEM> 
+ <!--Item_NO=89006280/[직업생산 개선] 광물 조각,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="502">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10026111"/> <!--광물조각-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">89006360</ITEM><!--전체지급/전체/1)/89006360(봉인아님) 1개-[직업생산 개선] 허름한 돌 조각상-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10026121" FACE="Romi_normal"/> <!--흐응. 네가 이번에 금속채광을 배우고 싶어서 왔다는 애구나.
+하지만 금속채광을 배우기는 생각보다 까다로워. 
+물론 일한만큼 보람이 많이 느껴지지 않을 수도 있어.
+스킬이 숙련되는데 상당한 시간이 걸리는 일이거든.
+뭐 그래도 괜찮다면 내가 금속채광에 대해서 가르쳐 줄 수는 있어.
+어때? 아직도 금속채광에 대해서 배우고 싶은 거야?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10026126" FACE="Bessie_smile"/> <!--흠. 금속채광에 대해서 조금은 이해하고 있는 것 같군.
+잘했어. 내 왈가닥 손녀에게 조금은 배운 것 같군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10026123" FACE="Romi_normal"/> <!--금속채광을 배우기 위해서는 우선 장비가 필요하지.
+물론 장비뿐만이 아니라, 금속채광을 할 수 있는 기본적인 스킬도 필요하고 말이야.
+뭐 네가 여기까지 왔다는 것은 이미 마이스터에게 어느 정도 기본적인 것을 배우고 왔다는 것이겠지.
+좋아 그럼 난 어디서 금속채광을 할 수 있는지 알려 줄 게.
+금속채광은 미니맵에 곡괭이 그림이 있는 곳에서 가능해.
+그곳에 가면 아마 바로 100이라고 쓰여진 간판이 있을 거야. 
+지금 네 숙련레벨에 가능한 곳은 100밖에는 없을 거야.
+100이라고 쓰여진 곳을 잘 살펴보면 오라가 빛날 때가 있어.
+그때가 바로 금속채광이 가능한 때지.
+오라가 빛나는 곳에서 채광스킬 버튼을 누르면 금속채광을 할 수 있어.
+자! 금속채광을 과연 네가 할 수 있는지 시험해 보지. 광물조각 5개를 구해서 베시 할머니에게 가봐. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10026124" FACE="Romi_angly"/> <!--뭐야? 여기에 그럼 뭐하러 온 거야? 지금 나랑 장난하러 온 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10026125" FACE="Romi_angly"/> <!--빨리, 빨리 가봐. 아니면 내가 가서 금속을 몽땅 다 캐어버릴 거야!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10026127" FACE="Bessie_angly"/> <!--내 손자이지만 로미를 길들이는 건 쉬운 일이 아니야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10026102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

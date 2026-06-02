@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Pooka_Flappi" INIT_ACTION="a_opening">
+	<TEXTURE SRC="N_Pooka_Choppi.dds">../Data/2_Mon/N_Pooka_Choppi/N_Pooka_Flappi.dds</TEXTURE>
+	<TEXTURE SRC="N_Pooka_Choppi_glow.dds">../Data/2_Mon/N_Pooka_Choppi/N_Pooka_Flappi_glow.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Pooka_Flappi"/>
+		<KFMPATH>../Data/2_Mon/N_Pooka_Choppi/N_Pooka_Choppi.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Pooka_Choppi/N_Pooka_Ghost.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="29,8"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="shot_01" ANIMATION="1000071" RANDOM="100" FIRE_START_NODE="p_ef_antenna" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_magic_ball_blue_03" PROJECTILE_SPEED="80" PROJECTILE_SCALE="2.5"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022" VELOCITY="50" VELOCITY_INIT="60"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

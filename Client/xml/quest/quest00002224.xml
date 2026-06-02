@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2224</ID> <!--T.T.10222401 백팩 시그너스 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	붉은 여우 삼각지 - 세티로스로부터 백팩 업그레이드 키트 습득
+-->
+<!--[완료NPC]	밴시협곡 - 모하모-->
+<!--[내용]	모하모는 백팩 업그레이드 키트를 갖다주면, 백팩 시그너스를 다시 만들어주겠다고 한다. 백팩 업그레이드 키트는 붉은 여우 삼각지의 세티로스가 가지고 있을 것 같지만, 워낙 희귀한 아이템이기 때문에 쉽게 구할 수가 없다고 한다. 모하모에게 백팩 업그레이드 키트를 갖다주고, 백팩 시그너스를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</CLIENT> <!--시작NPC 밴시협곡 - 모하모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</PAYER> <!--완료NPC 밴시협곡 - 모하모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</AGENT> <!--진행NPC 11 밴시협곡 - 모하모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160424300</ITEM> 
+ <!--Item_NO=160424300/백팩 업그레이드 키트,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">299602650</ITEM> 
+ <!--Item_NO=299602650/부스터 백팩 [페리] -붉은여우 삼각지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10222411"/> <!--백팩 업그레이드 키트-->
+		<OBJECT2 COUNT="1" TEXT="10222412"/> <!--부스터 백팩[페리]-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299602660</ITEM><!--전체지급/전체/1)/299602660(봉인아님) 1개-부스터 백팩 [시그너스] -붉은여우 삼각지-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10222421" FACE="Mohamo_normal"/> <!--무슨 부탁이라도 있는 표정을 짓고 있군.
+뭔가 부탁할 일이 있는건 아니겠지?
+예를 들면 백팩을 만들어 달라던가 이런 부탁은 절대 하지마! 알겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10222426" FACE="Mohamo_normal"/> <!--좋아. 잠시만 기다려. 금방 만들어줄게.
+내가 너 때문에 두 번씩 고생하고 말이야. 으이구!!%%
+… … … … …%%
+자! 여기 있어. 너도 나도 고생해서 만들었으니까, 
+이번에는 잃어버리지 말고 잘 관리하도록 해.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10222423" FACE="Mohamo_angly"/> <!--뭐? 백팩 시그너스를 잃어버렸다고? 
+이런 바보! 그런 소중한 물건을 대체 어떻게 관리했길래 
+잃어버리고 다니는 거야! 으이구!!!
+정말 너 때문에 나까지 머리가 아프다.%%
+아무튼 이미 잃어 버린 거니까 뭐라고 할 필요는 없겠지.
+일단 급한 건, 다시 백팩을 구하는 문제니까 말이야.
+좋아. 일단 그럼 백팩 페리는 가지고 있겠지?%%
+백팩 페리마저 없다면, 도저히 만들 수 없어.
+나도 백팩 페리는 구해줄 수 없으니 말이야. 
+혹시 잭이라면 알고 있을려나? 그 녀석 여기저기 자주 기웃거리잖아.%%
+아휴! 헬크라우저님의 부탁이 없었으면 도와주지 않는 건데.
+아무튼 업그레이드는 나한테 맡기고 너는 붉은 여우 삼각지 세티로스에게서
+백팩 업그레이드 키트를 구해와. 그게 있어야 백팩 시그너스를 만들 수 있거든.
+한 번 구한적이 있으니, 두 번은 어렵지 않을 거야. 
+서둘러! 너나 나나 서로 바쁜 몸이니까 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10222424" FACE="Mohamo_angly"/> <!--싫다고? 참나 웃기는 녀석이군. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10222425" FACE="Mohamo_angly"/> <!--나는 바쁜 몸이니까, 조금만 서둘러 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10222402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--none-->
+			<BODY TEXT="10222451" FACE="Mohamo_smile"/> <!--None-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Spark_Ubell" DIE_PARTICLE_ID="ef_fire_mon_die_red_01_p_ef_heart_02">
+	<TEXTURE SRC="reflection_metal.dds">../Data/4_Item/1_Armor/1_Male/04_U_Armor/reflection_metal.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Spark_Ubell"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Spark_Ubell/N_Spark_Ubell.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="53911" EFFECT="ef_blazer_p_ef_fire" TO="p_ef_heart"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="40,15"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본 공격 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			
+			<!-- 가미가제 -->
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000011"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000011"/>
+       		
+			<!-- 기본 동작 -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

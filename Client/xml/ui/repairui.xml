@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_REPAIR" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_CLOSE">
+			local wnd = ItemRepairWnd(UISelf)			
+			wnd:Clear(true)
+			CloseUI("Inv")
+		</SCRIPT>	
+		<SCRIPT ID = "ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+			CloseUI("SFRM_MSG_REPAIR_ALL") 
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 240, 91)</SCRIPT>
+		<ATTR X = "240" Y = "91" W ="272" H ="237" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="270" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID="SFRM_CLOSE_BG">
+				<ATTR X="239" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID="Close">
+					<ATTR X="0" Y="0" W="24" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<IMG ID = "IMG_TAB">
+					<ATTR X="0" Y="0" W="84" H="24" U = "2" V = "2" UV_INDEX = "3"/>
+					<ATTR IMG = "../Data/6_ui/common/cmTabB.tga" IMG_W = "168" IMG_H = "48"/>
+					<ATTR TEXT = "400600" FONT = "FTtitle_14" T_X = "38" T_Y ="4" T_OUTLINE="0" T_CENTER = "1"/>
+				</IMG>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID = "SFRM_COLOR1">
+			<ATTR X="9" Y="35" W="254" H="128" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="254" H="128" STATIC_NUM = "3" />
+				<STATIC_FORM ID = "SFRM_SINGLE">
+					<ATTR X="6" Y="6" W="242" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT = "400601" T_X = "30" T_Y ="6"/>
+					<CHECK_BUTTON ID = "CBTN_CHECK">
+						<ATTR X="5" Y="4" Z="1" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID = "ON_L_BTN_DOWN">
+							UISelf:CheckState(true)
+							UISelf:LockClick(true)
+							UISelf:GetParent():GetParent():GetParent():GetControl("SFRM_ALL"):GetControl("CBTN_CHECK"):CheckState(false)
+							local wnd = ItemRepairWnd(UISelf)
+							wnd:Clear()
+						</SCRIPT>
+						<SCRIPT ID = "ON_CALL"> UISelf:CheckState(true) </SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID = "SFRM_ICON_BG">
+					<ATTR X="14" Y="37" W="42" H="42" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ICON ID = "ICN_ITEM">
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="106" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_L_BTN_DOWN">
+							local wnd = ItemRepairWnd(UISelf)
+							wnd:Clear()
+						</SCRIPT>
+						<SCRIPT ID = "ON_L_BTN_UP">
+							UISelf:CursorToIcon()
+						</SCRIPT>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemRepairWnd(UISelf)
+							wnd:DisplaySrcIcon()
+						</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID = "SFRM_NAME">
+					<ATTR X="60" Y="58" W="183" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR T_X="4" T_Y="4" FONT_COLOR_HEX="0xFF4D3413" />
+				</STATIC_FORM>
+
+				<FORM ID = "FRM_NAME">
+					<ATTR X = "60" Y = "36" W ="206" H ="21" />
+					<ATTR TEXT = "400602" FONT = "Font_Text" T_X = "7" T_Y ="3" T_OUTLINE="0"/>
+					<FORM ID = "FRM_ARROW">
+						<ATTR X="0" Y="8" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</FORM>
+				</FORM>
+			</STATIC_FORM>
+
+			<STATIC_FORM ID = "SFRM_ALL">
+				<ATTR X="6" Y="94" W="242" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<ATTR TEXT = "400603" T_X = "30" T_Y ="6"/>
+				<CHECK_BUTTON ID = "CBTN_CHECK">
+					<ATTR X="5" Y="4" Z="1" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" />
+					<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN">
+						UISelf:CheckState(true)
+						UISelf:LockClick(true)
+						UISelf:GetParent():GetParent():GetControl("SFRM_SHADOW"):GetControl("SFRM_SINGLE"):GetControl("CBTN_CHECK"):CheckState(false)
+						local wnd = ItemRepairWnd(UISelf)
+						wnd:SetRepairAllInfo()
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+			<!--/STATIC_FORM-->
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR2">
+			<ATTR X="9" Y="165" W="254" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="254" H="26" STATIC_NUM = "3" />
+				<ATTR TEXT = "400604" T_X="13" T_Y ="6" />
+
+				<!--IMG ID="IMG_LINE_1" X="54" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="55" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/-->
+
+				<FORM ID="FRM_COIN1">
+					<ATTR X="98" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ItemRepairWnd(UISelf)
+						UISelf:DrawMoneyByValue(1, wnd:GetRepairNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN2">
+					<ATTR X="146" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ItemRepairWnd(UISelf)
+						UISelf:DrawMoneyByValue(2, wnd:GetRepairNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN3">
+					<ATTR X="193" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ItemRepairWnd(UISelf)
+						UISelf:DrawMoneyByValue(3, wnd:GetRepairNeedMoney())
+					</SCRIPT>
+				</FORM>
+
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_REPAIR">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400605, 2200)	</SCRIPT>
+			<ATTR X="51" Y="197" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> 
+				local btn = ItemRepairWnd(UISelf)
+				local err = btn:CheckOK()
+				if 0 ~= err then
+					AddWarnDataTT(err)
+					return
+				end
+				local wnd = UISelf:GetParent():GetControl("SFRM_COLOR1"):GetControl("SFRM_SHADOW"):GetControl("SFRM_SINGLE"):GetControl("CBTN_CHECK") 
+				local wnd1 = UISelf:GetParent():GetControl("SFRM_COLOR1"):GetControl("SFRM_ALL"):GetControl("CBTN_CHECK") 
+				if wnd:IsNil() == false and wnd:GetCheckState() == true then
+					CallUI("SFRM_MSG_REPAIR_SINGLE")
+				elseif wnd1:IsNil() == false and wnd1:GetCheckState() == true then
+					CallUI("SFRM_MSG_REPAIR_ALL")
+				end
+			</SCRIPT>
+			<HOTKEY ID = "59">
+				local btn = ItemRepairWnd(UISelf)
+				local err = btn:CheckOK()
+				if 0 ~= err then
+					AddWarnDataTT(err)
+					return true
+				end
+				local wnd = UISelf:GetParent():GetControl("SFRM_COLOR1"):GetControl("SFRM_SHADOW"):GetControl("SFRM_SINGLE"):GetControl("CBTN_CHECK") 
+				local wnd1 = UISelf:GetParent():GetControl("SFRM_COLOR1"):GetControl("SFRM_ALL"):GetControl("CBTN_CHECK") 
+				if wnd:IsNil() == false and wnd:GetCheckState() == true then
+					CallUI("SFRM_MSG_REPAIR_SINGLE")
+				elseif wnd1:IsNil() == false and wnd1:GetCheckState() == true then
+					CallUI("SFRM_MSG_REPAIR_ALL")
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCEL">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400003, 2201)	</SCRIPT>
+			<ATTR X="137" Y="197" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID = "60"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID = "1">  UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_REPAIR_SINGLE">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="75" STATIC_NUM="3" />
+				<ATTR TEXT="400606" FONT="Font_Text" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400002, 2200)	</SCRIPT>
+			<ATTR X="20" Y="88" W="79" H="28" />
+			<ATTR TEXT="" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRepairWnd(UISelf)
+				wnd:SendReqRepair(false)
+				UISelf:CloseParent()
+			</SCRIPT>		
+			<HOTKEY ID="59">
+				local wnd = ItemRepairWnd(UISelf)
+				wnd:SendReqRepair(false)
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL">
+		<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400003, 2201)	</SCRIPT>
+			<ATTR X="104" Y="88" W="79" H="28" />
+			<ATTR TEXT="" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="60">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_REPAIR_ALL">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="75" STATIC_NUM="3" />
+				<ATTR TEXT="400607" FONT="Font_Text" T_X="95" T_Y="20" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK">
+			<ATTR X="20" Y="88" W="79" H="28" />
+			<ATTR TEXT="96" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRepairWnd(UISelf)
+				wnd:SendReqRepair(true)
+				UISelf:CloseParent()
+				return
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local wnd = ItemRepairWnd(UISelf)
+				wnd:SendReqRepair(true)
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL">
+			<ATTR X="104" Y="88" W="79" H="28" />
+			<ATTR TEXT="97" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:OnOk()
+				UISelf:CloseParent()  
+				return true
+			</HOTKEY>
+			<HOTKEY ID="60">
+				UISelf:OnOk()
+				UISelf:CloseParent()  
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID = "ON_CALL"> CloseUI("SFRM_MSG_REPAIR_SINGLE") </SCRIPT>
+	</STATIC_FORM>
+	
+	<FORM ID = "FRM_REPAIR_ALARM">
+		<ATTR ALIGN_X = "100" ALIGN_Y = "50" W = "128" H = "135" PASS_EVENT = "1" IGNORE_TWINKLE="1"/>
+		<SCRIPT ID = "ON_CALL">
+			local kActor = GetPlayer()
+			if true == kActor:IsNil() then
+				return
+			end
+			local	iBaseClassID = kActor:GetPilot():GetBaseClassID()
+			local Arr = {}
+			Arr[1] = "FRM_FIGHTER"
+			Arr[2] = "FRM_MAGICIAN"
+			Arr[3] = "FRM_ARCHER"
+			Arr[4] = "FRM_THIFE"
+			Arr[51] = "FRM_SHAMAN"
+			Arr[52] = "FRM_DOUBLE_FIGHTER"
+			for i=1,4 do
+				local wndClass = UISelf:GetControl(Arr[i])
+				if false==wndClass:IsNil() then
+					wndClass:Visible(i==iBaseClassID)					
+				end
+			end
+			for i=51,52 do
+				local wndClass = UISelf:GetControl(Arr[i])
+				if false==wndClass:IsNil() then
+					wndClass:Visible(i==iBaseClassID)					
+				end
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		<FORM ID = "FRM_MAN">
+			<ATTR X = "27" Y = "0" W = "68" H = "105" IGNORE_TWINKLE = "1" />
+			<ATTR IMG = "../Data/6_ui/repair/rpMan.tga" IMG_X="0" IMG_Y="0" IMG_W = "68" IMG_H = "105"/>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  CloseToolTip() </SCRIPT>
+			<IMG ID = "IMG_HEAD" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "14" Y = "1" IMG = "../Data/6_ui/repair/rpRheaD.tga" IMG_W = "37" IMG_H = "30" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_SHOULDER" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "15" Y = "38" IMG = "../Data/6_ui/repair/rpRshoulder.tga" IMG_W = "36" IMG_H = "12" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_JACKET" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "11" Y = "38" IMG = "../Data/6_ui/repair/rpRjacket.tga" IMG_W = "43" IMG_H = "27" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_GLOVE" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "1" Y = "51" IMG = "../Data/6_ui/repair/rpRglove.tga" IMG_W = "63" IMG_H = "26" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_PANTS" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "15" Y = "64" IMG = "../Data/6_ui/repair/rpRpants.tga" IMG_W = "35" IMG_H = "20" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_FOOT" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "19" Y = "79" IMG = "../Data/6_ui/repair/rpRfootwear.tga" IMG_W = "28" IMG_H = "21" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</IMG>
+			
+			<!--아래는 UI추가된 악세사리-->
+			<IMG ID = "IMG_L_RING" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "-33" Y = "105" W = "30" H = "30" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpRing.tga" IMG_W = "60" IMG_H = "30" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL">
+					UISelf:Visible(false)
+					UISelf:SetUVIndex(1)
+					UISelf:SetCustomDataAsBYTE(1)
+				</SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_R_RING" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "-6" Y = "105" W = "30" H = "30" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpRing.tga" IMG_W = "60" IMG_H = "30" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL">
+					UISelf:Visible(false)
+					UISelf:SetUVIndex(1)
+					UISelf:SetCustomDataAsBYTE(1)
+				</SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_EARING" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "19" Y = "105" W = "30" H = "30" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpEar.tga" IMG_W = "60" IMG_H = "30" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL">
+					UISelf:Visible(false)
+					UISelf:SetUVIndex(1)
+					UISelf:SetCustomDataAsBYTE(1)
+				</SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_NECKLACE" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "45" Y = "105" W = "30" H = "30" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpNeck.tga" IMG_W = "60" IMG_H = "30" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL">
+					UISelf:Visible(false)
+					UISelf:SetUVIndex(1)
+					UISelf:SetCustomDataAsBYTE(1)
+				</SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_BELT" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "73" Y = "105" W = "30" H = "30" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpBelt.tga" IMG_W = "60" IMG_H = "30" IS_VISIBLE = "0"/>
+				<SCRIPT ID = "ON_CALL">
+					UISelf:Visible(false)
+					UISelf:SetUVIndex(1)
+					UISelf:SetCustomDataAsBYTE(1)
+				</SCRIPT>
+			</IMG>
+		</FORM>
+
+		<FORM ID = "FRM_FIGHTER" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR X = "0" Y = "33" W = "120" H = "72" IS_VISIBLE = "0"/>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  CloseToolTip() </SCRIPT>
+			<IMG ID = "IMG_WEAPON">
+				<ATTR X = "0" Y = "0" W = "39" H = "72" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpSword.tga" IMG_W = "78" IMG_H = "72"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_BACK" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "92" Y = "3" W = "37" H = "39" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpCloak.tga" IMG_W = "74" IMG_H = "39"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_SHIELD" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "91" Y = "38" W = "33" H = "35" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpShield.tga" IMG_W = "66" IMG_H = "35"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+		</FORM>
+
+		<FORM ID = "FRM_MAGICIAN" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR X = "0" Y = "33" W = "120" H = "72" IS_VISIBLE = "0"/>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  CloseToolTip() </SCRIPT>
+			<IMG ID = "IMG_WEAPON" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "0" Y = "0" W = "39" H = "72" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpStick.tga" IMG_W = "78" IMG_H = "72"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_BACK" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "92" Y = "3" W = "37" H = "39" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpWing.tga" IMG_W = "74" IMG_H = "39"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+		</FORM>
+
+		<FORM ID = "FRM_ARCHER" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR X = "0" Y = "33" W = "120" H = "72" IS_VISIBLE = "0"/>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  CloseToolTip() </SCRIPT>
+			<IMG ID = "IMG_WEAPON" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "0" Y = "0" W = "39" H = "72" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpBow.tga" IMG_W = "78" IMG_H = "72"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_BACK" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "92" Y = "3" W = "37" H = "39" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpFlag.tga" IMG_W = "74" IMG_H = "39"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+		</FORM>
+
+		<FORM ID = "FRM_THIFE" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR X = "0" Y = "33" W = "120" H = "72" IS_VISIBLE = "0" />
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  CloseToolTip() </SCRIPT>
+			<IMG ID = "IMG_WEAPON">
+				<ATTR X = "0" Y = "0" W = "39" H = "72" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpClo.tga" IMG_W = "78" IMG_H = "72"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_BACK" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "92" Y = "3" W = "37" H = "39" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpMuffler.tga" IMG_W = "74" IMG_H = "39"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_SHIELD" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "91" Y = "38" W = "33" H = "35" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpShield.tga" IMG_W = "66" IMG_H = "35"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+		</FORM>
+		
+		<FORM ID = "FRM_SHAMAN" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR X = "0" Y = "33" W = "120" H = "72" IS_VISIBLE = "0"/>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  CloseToolTip() </SCRIPT>
+			<IMG ID = "IMG_WEAPON" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "0" Y = "0" W = "39" H = "72" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpGunstick.tga" IMG_W = "78" IMG_H = "72"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_BACK" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "92" Y = "3" W = "37" H = "39" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpCloak.tga" IMG_W = "74" IMG_H = "39"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_SHIELD" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "91" Y = "38" W = "33" H = "35" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpTalisman.tga" IMG_W = "66" IMG_H = "35"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+		</FORM>
+		
+		<FORM ID = "FRM_DOUBLE_FIGHTER" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR X = "0" Y = "33" W = "120" H = "72" IS_VISIBLE = "0" />
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipRepair(UISelf:GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  CloseToolTip() </SCRIPT>
+			<IMG ID = "IMG_WEAPON">
+				<ATTR X = "0" Y = "0" W = "39" H = "72" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpGauntlet.tga" IMG_W = "78" IMG_H = "72"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_BACK" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "92" Y = "3" W = "37" H = "39" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpCloak.tga" IMG_W = "74" IMG_H = "39"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+			<IMG ID = "IMG_KICKBALL" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR X = "91" Y = "38" W = "33" H = "35" U = "2" V = "1" UV_INDEX = "1" IMG = "../Data/6_ui/repair/rpKickball.tga" IMG_W = "66" IMG_H = "35"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+			</IMG>
+		</FORM>		
+	</FORM>
+</XUI>

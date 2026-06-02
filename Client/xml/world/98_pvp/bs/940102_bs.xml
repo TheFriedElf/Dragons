@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_940102_BS">
+  <GSAPATH>../Data/3_World/98_PVP/01_Level/BS/940102_BS.gsa</GSAPATH>
+  <MINIMAP Y="165" H="235">../Data/3_World/98_PVP/01_Level/BS/940102_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/battlesquare.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0" />
+  
+  
+    <!-- 텔레 점프 -->
+	 <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+     <CONDITION TYPE="touch"/>
+     <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="450"/>
+     </TRIGGER>
+     <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+     <CONDITION TYPE="touch"/>
+     <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="450"/>
+     </TRIGGER>
+  
+  <!-- 카메라 컬링 -->
+     <WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1" />
+ 
+  <!-- 포그 -->
+     <FOG DENSITY="0.050000" START="150.000000" END="6000.000000" COLOR="0.4,0.2,0.1" />
+   
+</WORLD>

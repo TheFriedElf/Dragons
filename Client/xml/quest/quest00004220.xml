@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4220</ID> <!--T.T.10422001 검은 심연의 윤무 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	카샤프 퇴치-->
+<!--[완료NPC]	엘로라주둔지 - 헬 크라우저-->
+<!--[내용]	헬 크라우저는 카샤프의 윤무에 의해 검은 심연으로 원념체가 나온다는 사실에 적개심을 불태운다. 이대로 카샤프를 막지 못하면 엘가 원정대의 전력 약화는 불을 보듯 뻔한 일. 헬 크라우져의 부탁 대로 세상의 끝[시나리오모드(F5)]로 나가 원념체 카샤프를 퇴치하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7916D548-1032-44e4-85ED-983F3FFD01CE</CLIENT> <!--시작NPC 엘로라주둔지 - 헬 크라우저 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7916D548-1032-44e4-85ED-983F3FFD01CE</PAYER> <!--완료NPC 엘로라주둔지 - 헬 크라우저 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7916D548-1032-44e4-85ED-983F3FFD01CE</AGENT> <!--진행NPC 11 엘로라주둔지 - 헬 크라우저 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="114/4/1">3526900</MONSTER> 
+ <!--MON_NO=3526900/카샤프,Mission_Key=114/세상의 끝,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10422011"/> <!--카샤프 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10422021" FACE="Hell_krauser_normal"/> <!--이제까지 쏟아져 나왔던 저 몬스터들이 
+카샤프의 윤무에 의한 것이라고?%%
+검은 마녀가 사라진 이후에도, 원혼으로 된 몬스터가
+끊임 없이 나타난 원인이 그것이었군.
+이제 네가 나서줘야 할 때가 된 것 같구나.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10422026" FACE="Hell_krauser_smile"/> <!--너와 처음 만났던 날…
+너에게 범했던 이 어리석은 자의 결례를 용서해다오.
+지금 바로 이 순간…%%
+원정대의 영웅은 그 누구도 아닌 바로 너다!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10422023" FACE="Hell_krauser_normal"/> <!--검은 심연으로부터 원념체들을 내뿜고 있는
+저 카샤프를 처단하지 못한다면, 우리에게
+엘가 원정의 기회는 사라지고 말 것이다.%%
+게다가 죽음을 무릅쓰고 엘가의 은신처를 알아낸 
+미카족 무녀들의 노력도 물거품이 되겠지.%%
+세상의 끝[시나리오모드(F5)]에서 원념체 카샤프를 
+무찔러다오! 이 일에 우리 모두의 미래가 달려있다! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10422024" FACE="Hell_krauser_angly"/> <!--이제 이 싸움은 결론이 난 것 같구나. 너 마져 용기를 잃었으니…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10422025" FACE="Hell_krauser_angly"/> <!--세상의 끝[시나리오모드(F5)]의 카샤프를 퇴치해야만 한다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10422002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

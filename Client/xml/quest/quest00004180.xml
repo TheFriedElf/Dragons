@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4180</ID> <!--T.T.10418001 방랑자의 묵시록 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샤말키와 대화-->
+<!--[완료NPC]	솔방울 언덕 - 샤말키-->
+<!--[내용]	나오이는 바로 어제밤, %name%이 솔방울 언덕에 나타나 무사히 숲의 인도를 받으며 신록의 숲으로 들어가는 예지몽을 꾸었다고 한다. 신록의 숲을 들어가는 입구를 나무꾼 버나언들이 막아서고 있어. 현재는 신록의 숲으로 가는 것이 불가능하다고 하니, 나무꾼의 염탐을 맡은 샤말키를 솔방울 언덕에서 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DD8F04C8-7041-4c0b-86D2-A7DC6A523E01</CLIENT> <!--시작NPC 솔방울 언덕 - 나오이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2E1A237B-B19A-4c34-97C3-52FF26DBEB6A</PAYER> <!--완료NPC 솔방울 언덕 - 샤말키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DD8F04C8-7041-4c0b-86D2-A7DC6A523E01</AGENT> <!--진행NPC 11 솔방울 언덕 - 나오이 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2E1A237B-B19A-4c34-97C3-52FF26DBEB6A</AGENT> <!--진행NPC 12 솔방울 언덕 - 샤말키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10418011"/> <!--샤말키와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418021" FACE="Naoi_normal"/> <!--그 꿈에 따라 신록의 숲 지역까지 머나먼 길을 떠나왔지만,
+보시다시피 이곳에서 생각지도 못한 난관을 맞이했습니다.%%
+나무꾼 버나언 일족이 신록의 숲으로 들어가는 입구를
+막고 있기 때문이에요.%%
+우리 일족은 신록의 특별한 인도에 의해 
+숲으로 들어가는 것이 허락되어 있습니다.%%
+하지만 저 벌목꾼들은 신록의 숲에 입구를 내기 위해 
+나무를 베고 있어요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418026" FACE="Syamalki_smile"/> <!--여어, 반가워!
+난 샤말키!%%
+네가 나오이가 말한 그… 용사님…이구나.
+나무꾼들을 퇴치하고 길을 열어줄꺼라고 해서
+엄청난 덩치를 상상했는데… 하하하!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418023" FACE="Naoi_normal"/> <!--어쨌거나 이런 교착 상태가 이어지고 있던 가운데…
+어제 밤 꿈을 꾸었어요.%%
+당신이 신록의 숲으로 들어가는 꿈. 신의 나무들이
+당신을 인도하는 꿈이었지요.%%
+아마 우리들도 당신 덕분에 이곳을 통과해 
+신이 잠든 곳까지 이동할 수 있을 것이라 생각해요.%%
+나무꾼들에 대해선, 사냥을 겸해 염탐을 맡은
+샤말키에게 들어보세요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418024" FACE="Naoi_angly"/> <!--당신이 저희를 도와주시지 않는다면… 커다란 재앙이 일어날 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418025" FACE="Naoi_angly"/> <!--샤말키를 만나주세요. 부탁입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

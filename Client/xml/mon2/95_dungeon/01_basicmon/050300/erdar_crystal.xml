@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Erdar_crystal" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Erdar_crystal"/>
+		<KFMPATH SCALE="2.0">../Data/2_Mon2/95_Dungeon/04_Boss/050300/Erdar_crystal/Erdar_crystal.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<!--SPHERE TO="p_hit_point_01" SIZE="4"/-->
+		
+		</ABV>
+		<SLOT>
+			<!--근거리 1-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000203"/>
+
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000203"/>
+  <ITEM NAME="btlidle_01" ANIMATION="1000202"/>
+	<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021" DONT_RELEASE_PARTICLE="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000000"/>
+		
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,9 @@
+<ACTION ID="a_Lighting_Storm2" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE"  ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Staff_skill_LightningStorm_01_03" />
+  <FSM SCRIPT="Skill_Lighting_Storm_Finish"
+       
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+       HIT_TARGET_EFFECT_ID="ef_skill_lightingstorm_02_char_root"
+       
+       CHECK_CAN_PREV_ACTION_ID="a_Lighting_Storm"/>
+</ACTION>

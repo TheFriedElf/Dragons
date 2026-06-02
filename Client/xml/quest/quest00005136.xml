@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5136</ID> <!--T.T.10513601 성격 좋은 상인 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴 - 주술사 두두 10마리 처치-->
+<!--[완료NPC]	달빛해안 마을 - 스미스-->
+<!--[내용]	대장장이 스미스에게 마을 사람들은 많은 부탁을 한다고 한다. 성격 좋은 스미스는 차마 거절하지 못하고 다 들어 준다고 말해 버렸다. 스미스는 자신이 거절하지 못한 일을 도와달라고 한다. 스미스가 맡은 일 중 가장 어려운 위험한 동굴에 있는 주술사 두두10마리를 처리해 스미스를 도와주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B62D7CB2-0B35-402f-9117-43AA95707E9E</CLIENT> <!--시작NPC 달빛해안 마을 - 스미스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B62D7CB2-0B35-402f-9117-43AA95707E9E</PAYER> <!--완료NPC 달빛해안 마을 - 스미스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B62D7CB2-0B35-402f-9117-43AA95707E9E</AGENT> <!--진행NPC 11 달빛해안 마을 - 스미스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6059300</MONSTER> 
+ <!--MON_NO=6059300/주술사 두두,MAP_NO=9010600/위험한 동굴,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10513611"/> <!--주술사 두두 10마리 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10513621" FACE="Darby_normal"/> <!--이봐! 한참 찾았어!
+많이 바빠? 내가 너한테 부탁할 일이 좀 있어.%%
+너라면 들어줄 거로 생각해.
+너는 인상이 매우 좋아서 말이야. 완전 내 스타일이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10513626" FACE="Darby_smile"/> <!--벌써 처리했다고? 역시 내가 보는 눈은 틀리지 않았군. 종종 부탁하네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10513623" FACE="Darby_normal"/> <!--마을 사람들은 나에게 많은 부탁을 하곤 해. 하지만 내 성격이 항상 말썽이지.
+거절을 해야 하는데 타이밍을 놓치고 말았어. 정말 미안해.%%
+마을 사람들이 위험한 동굴에서 버섯을 채취하려 하는데, 주술사 두두가 
+가끔 방해하나 봐. 위험한 동굴에서 주술사 두두 10마리만 처리해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10513624" FACE="Darby_angly"/> <!--안 된다고? 나도 너처럼 매몰차게 거절을 잘했으면 좋겠군!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10513625" FACE="Darby_normal"/> <!--내가 괜한 소리를 하는 바람에 정말 미안해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10513602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

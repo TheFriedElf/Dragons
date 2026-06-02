@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_015128_EM">
+  <GSAPATH>../Data/3_World/93_EventMap/01_Level/015128_EM.gsa</GSAPATH>
+  <MINIMAP Y="190" H="130">../Data/3_World/93_EventMap/01_Level/015128_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Event_CookieFactory.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  
+  
+  <!-- 마스터 머신 방 -->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+
+ <!--이벤트 포탈 -->
+  <TRIGGER ID="Event_Trigger_01" TITLE_TEXT_ID="810015" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,85" TITLE_TEXT_SCALE="2" TITLE_TEXT_COLOR="1,1,1,1" />   
+
+  <!-- 뿅망치 트랩 -->
+    <TRIGGER ID="Glog_Cookie_Trap2001_01 11">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap5001_01 12">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap5001_01 13">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap5001_01 14">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+  <!-- 빼빼로 트랩 -->
+    <TRIGGER ID="Glog_Cookie_Trap1001_01 01">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_01 02">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_01 03">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 01">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 02">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 03">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 04">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+	  <!-- 데미지 텔레포트 이동 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+
+	  <!-- 엔터던전 -->
+    <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_05" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" />
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_06" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" />
+    </TRIGGER>
+    
+	  <!-- 텔레점프 -->
+    <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+      <CONDITION TYPE="touch"/>
+      <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="400"/>
+    </TRIGGER>
+    <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+      <CONDITION TYPE="touch"/>
+      <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400"/>
+    </TRIGGER>
+  <FOG DENSITY="0" FUNC="RANGE_SQ" START="0" END="6780" COLOR="0.6470588,0.5333334,0.6509804"/>
+  <WORLD_QUALITY HIGH_END="500" MID_END="1000" LOW_END="1500" USE="1" />
+  <STONES />
+</WORLD>

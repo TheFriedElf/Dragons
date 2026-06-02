@@ -1,0 +1,14 @@
+<ACTION ID="a_Killing Mist01" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_FallingLeaf_01"/>
+  <FSM SCRIPT="Act_Melee_Default" 
+       CASTING_EFFECT_TARGET_NODE ="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_metamorphosis_skill_fallingleaf_01"
+	   DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+	   CASTING_EFFECT_ID_DEFAULT_DETACH="TRUE"
+  
+       MULTI_HIT_NUM="3"
+       NO_WEAPON_TRAIL="TRUE"
+       NO_DAMAGE_HOLD="TRUE"
+      />
+</ACTION>

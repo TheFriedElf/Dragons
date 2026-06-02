@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Alexandre_mission" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="110">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Alexandre"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/03_Solaiden/03_EliteMon/030800/Alexandre/Alexandre.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="60"/>
+			<SPHERE TO="p_hit_point_02" SIZE="60"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<!-- 근접 물기공격 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000210"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000211"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000212"/>
+			<!-- 오른손 치기 -->
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION="1000301"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000302"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000303"/>
+			<!-- 왼손 치기 -->
+			<ITEM NAME="btlidle_02_skill_attk_start" ANIMATION="1000304"/>
+			<ITEM NAME="btlidle_02_skill_attk" ANIMATION="1000305"/>
+			<ITEM NAME="skill_attk_02" ANIMATION="1000306"/>
+			<!-- 강하게치기(어스퀘이크) -->
+			<ITEM NAME="earthquake_battleidle_start" ANIMATION="1000307"/>
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000308"/>
+			<ITEM NAME="earthquake_fire" ANIMATION="1000309" FIRE_EFFECT="EF_Common_Mon_IcePick_04" RANDOM_SCALE="1.0"/>
+			<!--대쉬공격 베어슬래쉬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000329" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000330" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000331" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000332" FIRE_EFFECT="NONE"/>
+			<!--뛰어들어물기 -->
+			<ITEM NAME="dash_after_attk_btlidle_01_start" ANIMATION="1000414" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_btlidle_01" ANIMATION="1000330" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_rush" ANIMATION="1000415" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_01_02" ANIMATION="1000416" FIRE_EFFECT="NONE"/>
+			<!--점프어택(뼈소환) -->
+			<ITEM NAME="summonbone_battleidle_start" ANIMATION="1000357"/>
+			<ITEM NAME="summonbone_battleidle" ANIMATION="1000358" USE_EVENT_KEY="0"/>
+			<ITEM NAME="summonbone_fire" ANIMATION="1000359" FIRE_EFFECT="EF_Common_Mon_IcePick_regno" USE_EVENT_KEY="1" QUAKE_TIME="0.5" QUAKE_FACTOR="2"/>
+			<!-- CAST_EFFECT, CAST_EFFECT_SCALE ,GROUND_EFFECT, GROUND_EFFECT_SCALE-->
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020" DIE_ALPHA="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+			<!--ITEM NAME="run" ANIMATION="1000055"/-->
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="1.5" QUAKE_FACTOR="2"/>
+					<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

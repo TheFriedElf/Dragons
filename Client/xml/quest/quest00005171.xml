@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5171</ID> <!--T.T.10517101 도둑의 자존심 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴[아케이드 모드(F1)] - 돌연변이 불찌 20마리 처리-->
+<!--[완료NPC]	달빛해안 마을 - 제스-->
+<!--[내용]	좀도둑 제스는 어느 날 위험한 동굴을 지나다 좋지 않은 일을 당했다고 한다. 어두운 밤에 주술사 불찌가 갑자기 나타나 제스를 깜짝 놀라게 했고 그만 제스는 바지에 실례를 해버렸다고 한다. 위험한 동굴에서 돌연변이 불찌 20마리를 처리해 제스의 복수를 해주도록 하자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">89F4650C-E372-4716-B958-5C321BB62C51</CLIENT> <!--시작NPC 달빛해안 마을 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">89F4650C-E372-4716-B958-5C321BB62C51</PAYER> <!--완료NPC 달빛해안 마을 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 11 달빛해안 마을 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010601/1">6039200</MONSTER> 
+ <!--MON_NO=6039200/돌연변이 불찌,MAP_NO=9010601/위험한 동굴 아케이드 1,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10517111"/> <!--돌연변이 불찌 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10517121" FACE="Jess_angly"/> <!--앗! 아..아..안녕?
+뭐..뭐..뭐가? 말을 더.. 더.. 더듬긴 무슨 소리야?
+나도 몰라. %%
+자꾸 물어보지 마! 정말 들어야겠어? 정말?!!
+윽… 얘기 안 하려고 했는데...
+얘기를 듣고싶다면 책임을 져야해. 그래도 듣겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10517126" FACE="Jess_normal"/> <!--확실하게 모두 다 처리한 거지?
+우리 패거리들은 내가 무서워서 바지에 실례한 줄 알지만
+나는 그 녀석 마법에 걸린 것 같은 느낌이야.%%
+이건 사례금이야. 두둑이 챙겼으니 다음에 누군가 물어보거든,
+바지에 실례하는 마법을 사용하는 불찌라고 말해줬으면 좋겠어.
+부탁할게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10517123" FACE="Jess_angly"/> <!--에이! 모르겠다! 약속했으니, 모두 다 말할게.
+어제 어떤 물건을 숲에 숨겨놓고 집에 오는 길이었어. %%
+칠흑같이 어두운데다 스산한 바람 소리 때문에
+왠지 뭐라도 나올 것 같은 분위기였지. %%
+안 그래도 뭔가 불안한데, 그때 갑자기 불찌가 나타나더군!
+그래서.... 놀라는... 바람에... 바지에... 그만... 휴...
+아무튼, 난 그 녀석을 용서할 수 없어! %%
+위험한 동굴[아케이드 모드(F1)]로 가서 돌연변이 불찌 20마리를 없애 줘.
+가만두지 않을 거야!! 난 지금 매우 화났어!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10517124" FACE="Jess_angly"/> <!--뭐야? 너도 불찌를 보고 실례할까 봐 겁내는 거구나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10517125" FACE="Jess_angly"/> <!--아직 출발 안했어? 무서워서 아직도 안 가는건 아니지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10517102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

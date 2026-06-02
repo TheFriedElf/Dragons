@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 크리스마스 영원한 겨울 엔딩 F6 Close -->
+ 
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="2"/>
+  <CMD TYPE="stopBGM" SoundNo = "0"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  <CMD TYPE="setmoviescene" enable="true"/>
+  <CMD TYPE="playBGM" SoundNo = "1"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+ 
+ 
+  
+  <CMD TYPE="Dialogue" NameTTID="524105" TitleTTID="10029601" TextTTID="524099"  FaceID="User_normal"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524109" TitleTTID="10029601" TextTTID="524100" FaceID="Santa_smile"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524110" TitleTTID="10029601" TextTTID="524101"  FaceID="Event_Rudolph_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524109" TitleTTID="10029601" TextTTID="524102"  FaceID="Santa_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  
+  <CMD TYPE="Dialogue" NameTTID="524106" TitleTTID="10029601" TextTTID="524103"  FaceID="Nia_cry"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+
+  <CMD TYPE="Dialogue" NameTTID="524109" TitleTTID="10029601" TextTTID="524111"  FaceID="Santa_smile"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524106" TitleTTID="10029601" TextTTID="524112"  FaceID="Nia_smile"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524109" TitleTTID="10029601" TextTTID="524113"  FaceID="Santa_smile"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524108" TitleTTID="10029601" TextTTID="524114"  FaceID="SnowQueen_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524110" TitleTTID="10029601" TextTTID="524115"  FaceID="Event_Rudolph_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524105" TitleTTID="10029601" TextTTID="524116"  FaceID="User_normal"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+
+
+  <CMD TYPE="CLOSE_DAILOGUE"/>
+    
+   
+  <CMD type="waittime" time="1"/>
+  <CMD TYPE="stopBGM" SoundNo = "1"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2"/>
+  <CMD TYPE="setmoviescene" enable="false"/>
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+  <CMD TYPE="playBGM" SoundNo = "0"/>
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+
+<!-- 미션 클리어 UI출력  -->
+	<CMD type="CallUI" UIWndName = "FRM_MISSION_END"/>
+	<CMD type="waittime" time="2"/>
+
+<!-- 밖으로 나가기 -->
+	<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_END"/>
+
+
+
+</EVENT_SCRIPT>

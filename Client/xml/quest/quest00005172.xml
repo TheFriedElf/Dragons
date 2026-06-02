@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5172</ID> <!--T.T.10517201 맛있는 주먹 밥 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전 - 주먹밥 배달-->
+<!--[완료NPC]	스카이피 신전 - 프린세시아-->
+<!--[내용]	경비병 스웰은 요리하는 게 취미라고 한다. 그런 스웰에게 사람들은 종종 요리를 부탁하곤 하는데, 수행을 떠나있는 프린세시아가 스웰에게 주먹밥을 부탁했다고 한다. 스웰이 만든 주먹밥을 스카이피신전에 있는 프린세시아에게 전달해주자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DB9DFA7F-7F14-4530-A367-DCA447537B2F</CLIENT> <!--시작NPC 달빛해안 마을 - 스웰 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3E51631-D7F2-4129-AB3F-ED04BC38E60F</PAYER> <!--완료NPC 스카이피 신전 - 프린세시아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DB9DFA7F-7F14-4530-A367-DCA447537B2F</AGENT> <!--진행NPC 11 달빛해안 마을 - 스웰 -->
+		<AGENT TYPE="NPC" EVENTNO="10012"  MARK="END">F3E51631-D7F2-4129-AB3F-ED04BC38E60F</AGENT> <!--진행NPC 12 스카이피 신전 - 프린세시아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160517200/1">10011</NPC> 
+ <!--Item_NO=160517200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160517200/1/511">10011</NPC> 
+ <!--Item_NO=160517200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160517200/1">10011</NPC> 
+ <!--Item_NO=160517200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160517200/1/512">10012</NPC> 
+ <!--Item_NO=160517200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160517200/1">10012</NPC> 
+ <!--Item_NO=160517200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10517211"/> <!--프린세시아에게 주먹밥 배달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10517221" FACE="Walter_normal"/> <!--킁킁.
+이 냄새가 어디서 나는지 궁금하시죠?
+제 부탁을 들어준다면 이 맛있는 음식을 드릴게요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10517226" FACE="Princessia_normal"/> <!--주먹밥을 가지고 온 거야?
+멀리까지 오다니 고생했네. 정말 고마워.%%-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10517223" FACE="Walter_normal"/> <!--저는 요리하는 걸 좋아해요.
+어렸을 때부터 혼자 집에서 요리하곤 했는데, 그때부터 좋아했어요.
+제가 좀 잘하다 보니까 마을 사람들은 저에게 가끔 요리를 부탁하곤 해요.%%
+프린세시아도 제 요리를 가끔 먹곤 했어요.
+수행하느라 멀리 나가 있는데도 제 요리가 그리운가 봐요.
+이 주먹밥을 스카이피 신전에서 있는 프린세시아에게 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10517224" FACE="Walter_normal"/> <!--그래요? 어쩔 수 없죠. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10517225" FACE="Walter_normal"/> <!--어서 서둘러요 ~  음식이 식는단 말이에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10517202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10517251" /> <!--네? 주먹밥을 먹어버렸다고요? 이런,
+잠시만요. 하나 더 쌀게요. 근데 이번에는 드시면 저 정말 화냅니다.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10517252" /> <!--뭐야? 빈 손으로 날 찾아오다니? 
+혼나볼래?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

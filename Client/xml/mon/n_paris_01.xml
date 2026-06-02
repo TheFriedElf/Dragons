@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_paris_01" EVENT_SCRIPT_ON_DIE="9030303">
+
+	<TEXTURE SRC="paris_pet02.dds">../Data/1_Cha/3_PET/Paris_pet02/paris_pet02.dds</TEXTURE>
+	<TEXTURE SRC="Fairy_of_Truth_001.dds">../Data/1_Cha/2_NPC/Stone_Truth/Fairy_of_Truth_001.dds</TEXTURE>
+	<TEXTURE SRC="Fairy_of_Truth_002.dds">../Data/1_Cha/2_NPC/Stone_Truth/Fairy_of_Truth_002.dds</TEXTURE>
+	<TEXTURE SRC="Fairy_of_Truth_003.dds">../Data/1_Cha/2_NPC/Stone_Truth/Fairy_of_Truth_003.dds</TEXTURE>
+	<TEXTURE SRC="Fx_Lightni_00000.ifl">..Data/5_Effect/9_Tex/Fx_Lightni_00000.ifl</TEXTURE>
+	<TEXTURE SRC="Van_Prop1001_01.dds">../Data/3_World/Map_Textures/Van_Prop1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Wall1001_01.dds">../Data/3_World/Map_Textures/Veta_Wall1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Wall1001_01_glow.dds">../Data/3_World/Map_Textures/Veta_Wall1001_01_glow.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Base1002_01.dds">../Data/3_World/Map_Textures/Veta_Base1002_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Base1001_01.dds">../Data/3_World/Map_Textures/Veta_Base1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Inside1001_01.dds">../Data/3_World/Map_Textures/Veta_Inside1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Inside3001_01.dds">../Data/3_World/Map_Textures/Veta_Inside4001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Inside4001_01.dds">../Data/3_World/Map_Textures/Veta_Inside3001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_BkOb1001_01.dds">../Data/3_World/Map_Textures/Veta_BkOb1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Glass1001_01.dds.">../Data/3_World/Map_Textures/Veta_Glass1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Ef1001_01.dds">../Data/3_World/Map_Textures/Veta_Ef1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Veta_Ef2001_01.dds">../Data/3_World/Map_Textures/Veta_Ef2001_01.dds</TEXTURE>
+	<TEXTURE SRC="Art_Torchlight1001_01.dds">../Data/3_World/Map_Textures/Art_Torchlight1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Art_CenterColumn_ST1001_01.DDS">../Data/3_World/Map_Textures/Art_CenterColumn_ST1001_01.DDS</TEXTURE>
+	<TEXTURE SRC="Art_CenterColumn_ST1001_02.DDS">../Data/3_World/Map_Textures/Art_CenterColumn_ST1001_02.DDS</TEXTURE>
+	<TEXTURE SRC="Art_CenterColumn_ST1001_04.DDS">../Data/3_World/Map_Textures/Art_CenterColumn_ST1001_04.DDS</TEXTURE>
+	<TEXTURE SRC="Dragon_Elgar_body01.dds">../Data/1_Cha/2_NPC/Dragon_elga/Dragon_Elgar_body01.dds</TEXTURE>
+	<TEXTURE SRC="Dragon_Elgar_body02.dds">../Data/1_Cha/2_NPC/Dragon_elga/Dragon_Elgar_body02.dds</TEXTURE>
+	<TEXTURE SRC="Dragon_Elgar_face.dds">../Data/1_Cha/2_NPC/Dragon_elga/Dragon_Elgar_face.dds</TEXTURE>
+	<TEXTURE SRC="Dragon_Elgar_man.dds">../Data/1_Cha/2_NPC/Dragon_elga/Dragon_Elgar_man.dds</TEXTURE>
+	<TEXTURE SRC="Dragon_Elgar_wing.dds">../Data/1_Cha/2_NPC/Dragon_elga/Dragon_Elgar_wing.dds</TEXTURE>
+	<TEXTURE SRC="BGSky5001_01.dds">../Data/3_World/Map_Textures/BGSky5001_01.dds</TEXTURE>
+	<TEXTURE SRC="BGSky5002_01.dds">../Data/3_World/Map_Textures/BGSky5002_01.dds</TEXTURE>
+	<TEXTURE SRC="Art_BigMazewall1001_01_d01.dds">../Data/3_World/Map_Textures/Art_BigMazewall1001_01_d01.dds</TEXTURE>
+	<TEXTURE SRC="Van_CastleFence2001_01.dds">../Data/3_World/Map_Textures/Van_CastleFence2001_01.dds</TEXTURE>
+	<TEXTURE SRC="Art_CenterColumn2001_01.dds">../Data/3_World/Map_Textures/Art_CenterColumn2001_01.dds</TEXTURE>
+	<TEXTURE SRC="Art_CenterColumn2001_01.dds">../Data/1_Cha/2_NPC/Adelio/CircleShadow.dds</TEXTURE>
+	<TEXTURE SRC="Art_CenterColumn2001_01.dds">../Data/5_Effect/9_Tex/ef_cloud_002.dds</TEXTURE>
+
+	<WORLDOBJECT>
+		<ICON ID="icon_m_paris"/>
+		<KFMPATH SCALE="1.3">../Data/2_Mon/B_Palis/B_Palis.kfm</KFMPATH>
+	
+	
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="0.7"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="65,50" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+		
+
+			<!-- 희귀몹소환 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000201"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000202" FIRE_EFFECT="e_b_palis_skill_01_MagicPattern_char_root" FIRE_EFFECT_NODE="p_hit_point_02"/>
+			
+			
+			
+			<!-- 레이져 발사 멀티-->
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1000204"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000203" CAST_EFFECT="Paris_ef_hand" CAST_EFFECT_NODE="p_ef_l_hand" CAST_EFFECT_SCALE="1.5"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000205" FIRE_START_NODE0="p_ef_pet01" FIRE_START_NODE1="p_ef_pet02" FIRE_START_NODE2="p_ef_pet03" FIRE_START_NODE3="p_ef_pet04" SHOT_INTER_TIME="0.4" PROJECTILE_ID="PROJECTILE_Paris_Shot"  FIRE_EFFECT="palis_skill_02_PetOra_p_ef_pet"/>
+
+			<!-- 크로스어택 -->
+			<ITEM NAME="crossattack_01_idle" ANIMATION="1000206" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_01_fire" ANIMATION="1000207" FIRE_EFFECT="ef_Tornado_char_root" QUAKE_TIME="1" QUAKE_FACTOR="3" RANDOM_SCALE="1.0"/>	
+
+			<!-- 서몬본 -->
+			<ITEM NAME="summonbone_battleidle_start" ANIMATION="1000210"/>
+			<ITEM NAME="summonbone_battleidle" ANIMATION="1000211" USE_EVENT_KEY="0"/>
+			<ITEM NAME="summonbone_fire" ANIMATION="1000212" FIRE_EFFECT="EF_Common_Mon_IcePick_regno" USE_EVENT_KEY="1" QUAKE_TIME="0.5" QUAKE_FACTOR="2"/>
+
+		
+		<!-- 회오리윧호 -->
+			<ITEM NAME="shot_around_01" ANIMATION="1000208"/>
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1000209" FIRE_START_NODE="p_ef_pet01" FIRE_START_NODE1="p_ef_pet01" FIRE_START_NODE2="p_ef_pet01" PROJECTILE_ID="Projectile_HommingTwist_shot" PROJECTILE_ID1="Projectile_HommingTwist_shot" PROJECTILE_ID2="Projectile_HommingTwist_shot" PROJECTILE_SPEED="250" PROJECTILE_SCALE="2.0" PROJECTILE_SCALE1="2.0" PROJECTILE_SCALE2="2.0"/>
+
+			<!--아이들 부르기-->
+			<ITEM NAME="attk_08_01" ANIMATION="1000067"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000068"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000014" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000081"/> <!--DIE_ACTOR="6126291" ENDING_ACTOR_X="-7305" ENDING_ACTOR_Y="4503" ENDING_ACTOR_Z="4563" -->
+			
+			<ITEM NAME="die_02" ANIMATION="1000082"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000082"/>
+
+
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="100005"/>
+
+			<!-- ITEM NAME="Opening" ANIMATION="1000082" OPENING_ACTOR="6126290" OPENING_ACTOR_X="-7305"  OPENING_ACTOR_Y="4503" OPENING_ACTOR_Z="4563"/-->
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

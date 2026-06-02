@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_summonfirefield">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSkill/ef_Siegedragon_Big2/ef_Siegedragon_Big2_skill.kfm</KFMPATH>
+		<SCRIPT SRC="SkillActor/SummonThorn.lua">
+			<ITEM NAME="Summonfirefield_Initialize" TYPE="INIT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="idle_01" ANIMATION="1000000" />
+      <ITEM NAME="attk_01" ANIMATION="1000000" FIRE_START_EFFECT="ef_Siegedragon_Big2_skill_04_02_char_root" INTER_TIME="0.2"/>
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

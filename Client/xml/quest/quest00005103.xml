@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5103</ID> <!--T.T.10510301 두 개의 그림자(5) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단 [카오스 모드(F2)]의 갑판상어 20마리를 처리하자-->
+<!--[완료NPC]	스티븐 무역항 - 시진-->
+<!--[내용]	시진은 바람항구 습격의 주동자를 알아냈다고 했다. 이번에도 별가사리 라라라가 술취한 채 와서 털어놓았다는 것이다. 별가사리 라라라는 바람항구에 새로운 술집이 생겼는데 거기 술맛이 엄청나다는 것이었다. 그래서 칼리곤 선단 [카오스 모드(F2)]의 갑판상어의 주축이되어 스티븐 무역항의 별가사리 루루루와 칼리곤 선단의 꼬깨가 같이 바람항구의 술집을 털기로 되어 있다는 것이다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">116A12AC-D98A-483a-A1E9-3392632B7CDE</CLIENT> <!--시작NPC 스티븐 무역항 - 시진 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">116A12AC-D98A-483a-A1E9-3392632B7CDE</PAYER> <!--완료NPC 스티븐 무역항 - 시진 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 11 스티븐 무역항 - 시진 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012152/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012152/칼리곤 선단 카오스 2,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012153/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012153/칼리곤 선단 카오스 3,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012155/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012155/칼리곤 선단 카오스 5,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10510311"/> <!--갑판상어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10510321" FACE="Walter_normal"/> <!--드디어 사건 전체의 내용이 밝혀졌습니다.
+오늘도 별가사리 라라라가 찾아왔습니다. 
+라라라가 말하길 자신을 빼놓고 바람항구의 새로 생긴 술집을 습격하기로 했다는 것입니다. %%
+빅터에게 이야기를 들어보니 새로 생긴 술집의 술은 벌꿀과 과일 등을 넣은 술로 정말 맛있다고 합니다. 꿀꺽. 앗 죄송합니다. 저도 모르게 침이.
+하여간 이것을 칼리곤 선단 [카오스 모드(F2)]의 갑판상어가 주축이 되어 훔쳐올 생각이라고 합니다.%% 
+부디 맛좋은 술을 위해 아니, 바람항구의 주민들을 위해 갑판상어를 막아 주시기 바랍니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10510326" FACE="Walter_smile"/> <!--수고하셨습니다. 덕분에 맛 좋은 술…..이 아니라 주민들을 지킬 수 있었습니다.
+%name%님 있다가 근무 끝나고 같이 그 술집으로 가보지 않으실래요?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10510323" FACE="Walter_normal"/> <!--해적 녀석들이 어떻게 새로 생긴 술집의 술맛을 알아냈는지 모르겠습니다. 
+빅터의 이야기에 따르면 술집에서 술을 사기 위해서 줄을 서야 할 정도로 굉장하다고 합니다. 
+아마도 해적들도 그 소문을 들은 게 틀림없습니다.%%
+해적들의 습격이 이루어지면 술뿐만이 아니라 거기에 있는 주민들도 다칠 게 분명합니다. 
+바람항구 주민들을 위해 %name%님의 힘을 빌려 주시기 바랍니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10510324" FACE="Walter_angly"/> <!--지금 그 맛 좋은 술……이 아니라 주민들의 안전을 포기하겠다는 겁니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10510325" FACE="Walter_normal"/> <!--빅터 녀석 어찌나 술에 대해서 칭찬을 하던지, 왠지 멀리 떨어져 근무를 하는 저를 놀리는 것 같았습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10510302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

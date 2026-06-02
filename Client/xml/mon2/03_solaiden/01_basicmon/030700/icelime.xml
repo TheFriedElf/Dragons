@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Icelime" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Icelime"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Icelime/Icelime.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			<!-- 물어버리기 -->
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000203"/>
+		
+			<!-- 원거리1 입에서 얼음송곳발사-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000214"/>
+			<ITEM NAME="shot_01" ANIMATION="1000215" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_IcePick_shot"/>
+			
+			<!-- 근접공격1 입김불기 -->
+
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION="1000301"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000302"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000303" />
+				
+				<!-- 던지기 얼음구슬 토하기 -->
+
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000311"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000312" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_IceBall_shot_02"/>
+
+			
+			<!-- 돌진-->
+
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000328"/>
+	
+					
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022" VELOCITY="1" VELOCITY_INIT="1"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

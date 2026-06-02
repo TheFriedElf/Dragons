@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_029109_FD">
+	<GSAPATH>../Data/3_World/02_ChaosArea/01_Level/020109_FD.GSA</GSAPATH>
+	<MINIMAP Y="110" H="270">../Data/3_World/02_ChaosArea/01_Level/020109_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<SCRIPT>World/02_ChaosArea/020109_FD.lua</SCRIPT>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 --> 
+	<MAPVALUE PLAYERKILL="0" TYPE="129"/>
+	<!--// 포털 -->
+	<TRIGGER ID="boss_camera_in">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="Boss_Camera_In"/>
+	</TRIGGER>
+	<TRIGGER ID="boss_camera_out">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="Boss_Camera_Out"/>
+	</TRIGGER>
+	<FOG DENSITY="0.050000" START="300.000000" END="8345.000000" COLOR="0.542000,0.272990,0.006000"/>
+</WORLD>

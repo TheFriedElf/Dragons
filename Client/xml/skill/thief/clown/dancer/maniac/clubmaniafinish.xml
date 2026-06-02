@@ -1,0 +1,7 @@
+<ACTION ID="a_Club_Mania2" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE"  ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Claw_Skill_ClubMania_02" />
+  <FSM SCRIPT="Skill_Club_Mania_Finish"
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+       HIT_TARGET_EFFECT_ID="ef_boom_01"
+       CHECK_CAN_PREV_ACTION_ID="a_Club_Mania"/>
+</ACTION>

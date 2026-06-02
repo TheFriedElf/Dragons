@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4160</ID> <!--T.T.10416001 신성한 시험 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	대지의 사제 샤리와 대화-->
+<!--[완료NPC]	카즈라 마을 - 샤리-->
+<!--[내용]	오추쿠 장로는 상황이 심각한 만큼 특별히 활약이 뛰어난 인재들을 신관의 전사로 임명하겠다고 전한다. 샤리 사제가 신관 전사가 되는 첫번째 시험을 준다고 한다. 카즈라 마을의 샤리 사제를 찾아가자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">48AB8C5A-FB6A-467d-B914-01514408440A</CLIENT> <!--시작NPC 카즈라 마을 - 오추쿠 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">96F19874-A786-4851-B336-0D67FF9B2282</PAYER> <!--완료NPC 카즈라 마을 - 샤리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">48AB8C5A-FB6A-467d-B914-01514408440A</AGENT> <!--진행NPC 11 카즈라 마을 - 오추쿠 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">96F19874-A786-4851-B336-0D67FF9B2282</AGENT> <!--진행NPC 12 카즈라 마을 - 샤리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416011"/> <!--샤리와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416021" FACE="Ocuku_normal"/> <!--이렇게 부른 일은 다름이 아니라…
+%name%군을 우리 신관 전사로 추천하고 싶소만…%%
+그대의 생각이 어떤 지 궁금하여 만나자 한 것이오.
+허허허허!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416026" FACE="Shari_smile"/> <!--반갑습니다. 제가 %name%님의 첫번째 시험을 맡게 될 샤리입니다.
+마이트리 사제의 쌍둥이 동생이니, 제 얼굴이 낯이 익으신 분도 
+계실 겁니다.%%
+어쨌거나, 지금까지 보여주신 실력을 십분 발휘하신다면 
+신관 전사로서의 시험도 무사히 통과하실 수 있을실 겁니다.
+앞으로 잘 부탁드립니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416023" FACE="Ocuku_normal"/> <!--옛말에... 사람을 뽑을 때 그 근본을 가리지 말라 하였소이다.
+인간이나 드라칸이나 세상을 사는 똑같은 인격체이고,
+나이가 적고 많음도, 남녀의 성별도 모두 가릴 것이 없소.%%
+다만 우리에게 지금 필요한 것은 지혜와 용기를 가지고
+위험에 대처할 준비가 되었는가 하는 점이라오.%%
+마침 %name%처럼 적합한 인재가 생겼으니,
+특별한 시험을 통해 신관 전사를 충원하려는 것이었소.%%
+자, 준비가 되는 대로 샤리 사제를 찾아가시오.
+건투를 빌겠소이다. 허허허허!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416024" FACE="Ocuku_angry"/> <!--허허어... 이거 듣던 것과는 좀 다른 분 같소이다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416025" FACE="Ocuku_angry"/> <!--샤리님과는 이야기를 나누어 보셨습니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

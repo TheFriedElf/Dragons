@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5034</ID> <!--T.T.10503401 맛의 결정체 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 붐붐에게서 콘디멘툼 10개 획득-->
+<!--[완료NPC]	바람항구 - 데이지-->
+<!--[내용]	데이지는 음식맛을 내는데 꼭 필요한 전설의 조미료 콘디멘툼의 소식을 입수했다고 한다. 데이지에 따르면 붐붐이라는 몬스터에게서 만들어지는 특수한 성분이 전설의 조미료이며 이것을 구하기는 굉장히 힘들다고 했다. 하지만 시청 지하수로에서 붐붐을 봤다는 사람이 있다는 것을 들은 데이지는 콘디멘툼을 가져달라고 부탁한다. 데이지를 위해서 시청 지하수로에 있다는 붐붐에게서 콘디멘툼 10개를 가져가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">928106B8-8596-4E9C-B89A-87772C71A749</CLIENT> <!--시작NPC 바람항구 - 데이지 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">928106B8-8596-4E9C-B89A-87772C71A749</PAYER> <!--완료NPC 바람항구 - 데이지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">928106B8-8596-4E9C-B89A-87772C71A749</AGENT> <!--진행NPC 11 바람항구 - 데이지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/0/1/1/160503500">6015100</MONSTER> 
+ <!--MON_NO=6015100/붐붐,MAP_NO=9010502/파렐 대저택,Item_NO=160503500/[Q.ID:05035] 콘디멘툼,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503500</ITEM> 
+ <!--Item_NO=160503500/[Q.ID:05035] 콘디멘툼,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/0/1/1/160503500">6015800</MONSTER> 
+ <!--MON_NO=6015800/아담한 엄마붐붐,MAP_NO=9010502/파렐 대저택,Item_NO=160503500/[Q.ID:05035] 콘디멘툼,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503500</ITEM> 
+ <!--Item_NO=160503500/[Q.ID:05035] 콘디멘툼,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10503411"/> <!--콘디멘툼-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503421" FACE="Huerin_normal"/> <!--드디어 전설속의 조미료가 어디에 있는지 알았다!
+헉, 뭐야 설마 너 내 이야기를 들은 거야.
+내가 너무 큰 소리로 떠들었다고?
+뭐 그건 인정할 수밖에 없군.%%
+혹시 콘디멘툼이라는 조미료에 대해서 들은 적이 있어?
+없다고? 
+콘디멘툼은 어떤 음식이라도 환상적인 맛이 나게 해준다는 전설의 조미료야.%%
+또한 쉽게 구할 수 없는 게 단점이지.
+하지만 난 찾아 냈어. 콘디멘툼이 있는 곳을.%%
+바로 붐붐이라는 몬스터에게서 만들어지는 특수성분이 콘디멘툼이었어.
+이 귀한 정보를 알려줬으니 나에게 콘디멘툼을 구해주지 않겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503426" FACE="Huerin_smile"/> <!--캬캬캬. 드디어 손에 넣었다. 이제 모든 식당에서 나의 조미료를 원할 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503423" FACE="Huerin_normal"/> <!--흐흐. 붐붐이라는 몬스터는 시청 지하수로에서 봤다는 사람들이 있어.
+왜 그곳에 있는지 정확히 알 수는 없지만 조심해야 해.
+잘못해서 조미료가 상할 수도 있으니까 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503424" FACE="Huerin_angly"/> <!--뭐야 정보만 쏙 빼먹고 날 도와주지 않을 셈이야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503425" FACE="Huerin_angly"/> <!--어이, 콘디멘툼을 기다리는 손님이 많다고. 
+내가 콘디멘툼을 구했다고 홍보를 했단 말이야. 
+나를 거짓말쟁이로 만들 속셈이야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

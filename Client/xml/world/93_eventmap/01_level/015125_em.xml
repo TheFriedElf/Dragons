@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_015125_EM">
+  <GSAPATH>../Data/3_World/93_EventMap/01_Level/015125_EM.gsa</GSAPATH>
+  <MINIMAP Y="240" H="140">../Data/3_World/93_EventMap/01_Level/015125_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Event_CookieFactory.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  
+      <!-- 마시말로우 초목이방 -->
+    <TRIGGER ID="gate_next_base" TYPE="MISSION">
+      <CONDITION TYPE="action" ACTION="a_act" />
+      <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+    </TRIGGER>
+
+	  <!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="300"/>
+	</TRIGGER>
+
+	  <!-- 빼빼로 트랩 -->
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 01">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 02">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 03">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 04">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Glog_Cookie_Trap1001_02 05">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+
+	  <!-- 물보라-->
+  <WAVE_EFFECT ENTITY_ID="BaseWater1003_01 01" STOP_EFFECT_ID="ef_walkwave_01" MOVE_EFFECT_ID="ef_walkwave_02"/>
+  <FOG DENSITY="0.3" FUNC="RANGE_SQ" START="3000" END="6000" COLOR="0.9372549,0.7529412,0.6196079"/>
+  <WORLD_QUALITY HIGH_END="500" MID_END="1000" LOW_END="1500" USE="1" />
+  <STONES />
+</WORLD>

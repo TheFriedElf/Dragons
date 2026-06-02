@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5104</ID> <!--T.T.10510401 우정의 편지 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	달빛해안 마을의 하임에게 시진의 우정의 편지를 전해주자-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	시진은 사촌을 볼 시간이 없다면서 걱정을 하고 있다. 달빛해안에 살고 있는 사촌 하임과 벌써 1년이 가깝게 보지 못했다는 것이다. 시진은 사촌에게 꼭 전하고 싶은 편지가 있는데 혹시 달빛해안 마을로 가게 된다면 좀 전해달라고 한다. 시진의 우정의 편지를 달빛해안 마을의 하임에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">116A12AC-D98A-483a-A1E9-3392632B7CDE</CLIENT> <!--시작NPC 스티븐 무역항 - 시진 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 11 스티븐 무역항 - 시진 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 12 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160510400/1">10011</NPC> 
+ <!--Item_NO=160510400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160510400/1/511">10011</NPC> 
+ <!--Item_NO=160510400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160510400/1">10011</NPC> 
+ <!--Item_NO=160510400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160510400/1/512">10012</NPC> 
+ <!--Item_NO=160510400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160510400/1">10012</NPC> 
+ <!--Item_NO=160510400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10510411"/> <!--우정의 편지-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10510421" FACE="Walter_normal"/> <!--아! %name%님 저에게 큰 고민이 있습니다.
+달빛해안 마을의 사촌 하임을 근 1년간 보지 못했습니다.
+어렸을 때부터 친하게 지내던 사촌이지만 요즘은 통 볼 시간이 나지 않았네요.%%
+혹시 달빛해안 마을로 가시려면 제 사촌 하임에게 편지를 좀 전해 주시지 않겠습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10510426" FACE="Coneil_angly"/> <!--응? 시진이 나에게 편지를 보냈다고?
+잠시만. 이 편지를 다른 사람에게 7통을 보내지 않을 시에는 당신에게 불행이 찾아옵니다?
+이 녀석 또 나에게 행운의 편지를 보냈잖아.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10510423" FACE="Walter_normal"/> <!--감사합니다. 요즘 꿈에 자꾸 하임이 나오는 게 걱정이 되었습니다.
+하임과 저는 서로 장난치는 것을 좋아해서 여기 저기 사고도 많이 쳤습니다.%%
+하지만 커서는 서로 바빠서 볼 시간이 없어서 항상 서로를 걱정만 하고 있었습니다.
+%name%님 덕분에 이제 그런 걱정을 덜어낼 수 있을 것 같습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10510424" FACE="Walter_angly"/> <!--어쩔 수 없군요. 계속 하임을 걱정하면서 살 수밖에 없을 것 같습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10510425" FACE="Walter_normal"/> <!--하임에게 꼭 이편지를 전해 주시기 바랍니다. 하임도 기뻐할 겁니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10510402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10501451" FACE="Huerin_angly"/> 
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10501452" FACE="Jeremy_normal"/> 
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030315_FD">
+	<GSAPATH>../Data/3_World/03_Solaiden/01_Level/030315_FD.gsa</GSAPATH>
+	<MINIMAP Y="170" H="290">../Data/3_World/03_Solaiden/01_Level/030315_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DragonMage.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+  <!--용의탑 14층-->
+  <TRIGGER ID="gate_030314_base" TYPE="PORTAL" TITLE_TEXT_ID="800079" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030314" PARAM2="3" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!--용의탑 16층-->
+  <TRIGGER ID="gate_030316_base" TYPE="PORTAL" TITLE_TEXT_ID="800081" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030316" PARAM2="1" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+
+  <!--용의탑 15층 정예 안타레스-->
+  <TRIGGER ID="gate_030393_base" TYPE="PORTAL" TITLE_TEXT_ID="802032" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="SelectMapUI_OpenUI" TitleTextID="509353">
+	<ITEM NAME="509356" PARAM="9034393" PARAM2="3">
+	    <ACCESS>
+            <LEVEL MIN= "0"/>
+            <QUEST NO="929" CHECK="5" PARTY="0"/>
+	    </ACCESS>
+    </ITEM>
+        <ITEM NAME="509359" PARAM="9030393" PARAM2="2">
+    </ITEM>
+	</ACTION>
+  </TRIGGER>
+  
+  <!-- 트리거점프-->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="900" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="900" />
+  </TRIGGER>
+
+  <!-- 텔레포트  -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_05" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_06" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_07" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_08" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_09" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_10" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_11" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_11" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_12" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_12" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_13" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_13" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_14" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_14" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_15" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_15" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_16" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_16" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_17" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_17" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_18" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_18" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_19" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_19" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_20" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_20" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_21" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_21" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_22" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_22" />
+  </TRIGGER>
+
+
+
+  <!--// 주먹트랩 -->
+ <TRIGGER ID="Art_StoneHandTrap3001_01 01">
+   <CONDITION TYPE="touch" />
+   <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StoneHandTrap3001_01 04">
+   <CONDITION TYPE="touch" />
+   <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+  <!--// 밀기트랩 -->
+ <TRIGGER ID="Art_StonePillarTrap2001_01 01">
+   <CONDITION TYPE="touch" />
+   <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StonePillarTrap2001_01 02">
+   <CONDITION TYPE="touch" />
+   <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+  <!--// 가시트랩 -->
+ <TRIGGER ID="DU_GT_MTA2001_03 03">
+   <CONDITION TYPE="touch" />
+   <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_02 01">
+   <CONDITION TYPE="touch" />
+   <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_01 08">
+   <CONDITION TYPE="touch" />
+   <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+  <!--// 퀘스트 트리거 -->
+    <TRIGGER ID="Quest_Trigger1079_2" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="2" PARAM2="1079" />
+  </TRIGGER>
+  
+   <!--// 퀘스트 트리거 -->
+    <TRIGGER ID="Quest_Trigger1081" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="1081" />
+  </TRIGGER>
+  
+  
+  <!--NPC NAME="1018128" ACTOR="c_Jeffrey" SCRIPT="NPC_Click_Shop" KID="1018128" GUID="42536D45-43F6-45b5-B6AA-B17A9F05484F" TYPE="FIXED" LOCATION="-1137.968, 2883.894, 900.6976">
+    <SAY TYPE="CLICK" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Felix_Click1" />
+    <SAY TYPE="CLICK" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Felix_Click2" />
+    <SAY TYPE="IDLE" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Felix_Click_End1" />
+    <SAY TYPE="IDLE" TTW="" UPTIME="7" DELAY="15" ACTION="a_talk" SOUND="Felix_Click_End2" />
+  </NPC-->
+  <!--NPC NAME="1028237" ACTOR="c_Edward" SCRIPT="NPC_GEMSTORE" GUID="C815E495-16C1-4146-AD61-B44648B1C279" KID="1028237" TYPE="FIXED" LOCATION="3133.0129,1442.4520,1150.9847"/-->
+  <CAMERA_ADJUST MAX_ZOOM="330" />
+  <FOG DENSITY="0.050000" START="50.000000" END="3455.000000" COLOR="0.252000,0.225000,0.234001" />
+</WORLD>

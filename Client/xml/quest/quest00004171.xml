@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4171</ID> <!--T.T.10417101 파멸의 숙명 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	단쿠와 대화-->
+<!--[완료NPC]	카즈라 마을 - 단쿠-->
+<!--[내용]	단쿠는 의문의 드라칸 노인으로, 신보를 정화시키는 것이 오히려 잘못된 일이라고 말한다. 그는 오리진이라고 불리우는 드라칸 여신을 믿고 있는 듯 하다. 의문의 노인 단쿠의 이야기를 들어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4A58ECF6-9494-4623-AD5C-2FC56020133F</CLIENT> <!--시작NPC 카즈라 마을 - 단쿠 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4A58ECF6-9494-4623-AD5C-2FC56020133F</PAYER> <!--완료NPC 카즈라 마을 - 단쿠 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4A58ECF6-9494-4623-AD5C-2FC56020133F</AGENT> <!--진행NPC 11 카즈라 마을 - 단쿠 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10417111"/> <!--단쿠와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10417121" FACE="Dankoo_normal"/> <!--꼬마…
+크크크크… 흐흐… 다시 만나게 되었구나.%%
+결국 오추쿠와 퀘차 할멈의 말을 따라 아카나이를 다시 
+속박시키려 하는 거지? 쿨럭쿨럭…%%
+그래봤자. 불행만 키울 뿐이야.
+우리는 우리 숙명을 받아들일 필요가 있다.%%
+어차피 모든 것은 죽어서 흙으로 돌아가는 것이고,
+이 세계도 사라진 신과 마찬가지로 수명이 다한 것 뿐이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10417126" FACE="Dankoo_smile"/> <!--검은 심연 속에서 오리진님이 세상에 돌아오는 날
+어차피 세상은 사라지게 될 거야.
+그것이 내가 믿는 유일한 사실이야.%%
+그러니 신보의 해방을 가로막지 말거라.
+우리들은 파멸의 인형으로 거듭나야 한다.
+(이 단쿠라는 자가 신보를 훔쳐간 자일까?)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10417123" FACE="Dankoo_normal"/> <!--그러나 이곳에 있는 많은 드라칸 사제들과 자연계의 인간들은
+그런 자신들의 운명을 받아들이고 싶어하지 않는 것 뿐이다.%%
+단지 하루라도 더 살고 싶어할 뿐이지. 
+그러나 그런 생각이 우리 위대한 드라칸의 번영을
+막아서고 있다는 생각을 하지 못하고 있어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10417124" FACE="Dankoo_normal"/> <!--크크크… 그래 어차피 이제 아무리 발버둥쳐도 소용 없다.
+오리진님의 부활은 시작되었으니까 크흐흐흐흐….-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10417125" FACE="Dankoo_normal"/> <!--(없음)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10417102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

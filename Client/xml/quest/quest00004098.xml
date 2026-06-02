@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4098</ID> <!--T.T.10409801 초마법 시전! 레.누.보. (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	프린세시아, 잭, 에델린과 대화 후 제스에게 보고-->
+<!--[완료NPC]	망자의 탑 (정상) - 제스-->
+<!--[내용]	제스는 망자의 탑에서 레누보를 체험한 다른 동료들에게 파리스에 대한 의견을 구한다. 옆에 있는 프린세시아, 잭, 에델린과 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B80BDF67-15D0-459d-A293-1C2E0066F769</CLIENT> <!--시작NPC 망자의 탑 (정상) - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B80BDF67-15D0-459d-A293-1C2E0066F769</PAYER> <!--완료NPC 망자의 탑 (정상) - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021">C8E5676B-7BE4-4648-B212-AB0505BE2926</AGENT> <!--진행NPC 1 망자의 탑 (정상) - 프린세시아 -->
+		<AGENT TYPE="NPC" EVENTNO="10022">FA879C67-33DA-47e1-833A-82C88D74F823</AGENT> <!--진행NPC 2 망자의 탑 (정상) - 잭 -->
+		<AGENT TYPE="NPC" EVENTNO="10023">4D69D120-8EF6-451f-B348-3C01345299FD</AGENT> <!--진행NPC 3 망자의 탑 - 에델린 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">B80BDF67-15D0-459d-A293-1C2E0066F769</AGENT> <!--진행NPC 11 망자의 탑 (정상) - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="3" TYPE="INCPARAM" VALUE="513/1">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="513">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409811"/> <!--프린세시아와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10409812"/> <!--잭과 대화-->
+		<OBJECT3 COUNT="1" TEXT="10409813"/> <!--에델린과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409821" FACE="Jess_normal"/> <!--에델린이 구한 책을 보면 파리스가 영웅들을 배신했다고 하지 않았어?
+그 때문에 영웅들이 엘가와 같이 다른 차원으로 영원히 사라졌다고...%% 
+그런데 어째서 그녀가 영웅들을 이끌고 있었던 거야?
+어떻게 이런 일이… 앞뒤가 맞지 않아.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409826" FACE="Jess_normal"/> <!--이 마법 뭐가 이래. 괜히 분위기만 가라앉았어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409823" FACE="Jess_normal"/> <!--그녀는 분명히 마녀가 아니었어.
+목숨을 버려가면서 엘가를 무찔렀다고.%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409824" FACE="Jess_angry"/> <!--그래, 난 어차피 벨칸님을 구경한 걸로 만족해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409825" FACE="Jess_normal"/> <!--그렇다면 왜 그녀가 천년이나 지난 지금에 와서 
+마녀의 모습으로 다시 나타난 거야.%%
+이 마법은 뭔가 잘못된 게 분명해.
+붉은 옷을 입은 영웅도... 분명히 우리 아빠와 닮았어.%%
+아빠가 천년 전의 영웅으로 등장했다는 건 아무리 봐도 이상한 걸.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10409851" FACE="Princessia_nomal"/> <!--그렇다면 왜 그녀가 천년이나 지난 지금에 와서 
+마녀의 모습으로 다시 나타난 거야.%%
+이 마법은 뭔가 잘못된 게 분명해.
+붉은 옷을 입은 영웅도... 분명히 우리 아빠와 닮았어.%%
+아빠가 천년 전의 영웅으로 등장했다는 건 아무리 봐도 이상한 걸.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10409852" FACE="jack_normal"/> <!--아.. 난 벨칸님을 자세히 보지 못했어... 씨이..
+벨칸님이 우리 아빠였다면 좋을텐데...-->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="513" > <!--진행중-->
+			<BODY TEXT="10409853" FACE="hyena_normal"/> <!--어떻게...
+어떻게 이럴 수 있지?%%
+하얀 옷을 입은 여자 마도사도…
+엄마랑 닮았어. 아주 많이…%%
+아니야... 아무래도 이 마법실험은 잘못된 것 같아. 
+잡념이 끼어들어 실패하고 만거야.%%-->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4264</ID> <!--T.T.10426401 정령의 기운이 담긴 돌 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	노엘 박사와 대화-->
+<!--[완료NPC]	상인의 마을 - 노엘-->
+<!--[내용]	파렐 박사의 절친으로 알려진 노엘은 파렐 박사의 연구로부터 영감을 얻어 제작 중인 대몬스터전 무인병기 가디언의 개발에 도움을 얻을 생각으로, 정령속성 소켓카드 시스템을 실험하고 있다. 노엘 박사의 이야기를 들어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</CLIENT> <!--시작NPC 상인의 마을 - 노엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</PAYER> <!--완료NPC 상인의 마을 - 노엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 11 상인의 마을 - 노엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10426411"/> <!--노엘 박사와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10426421" FACE="noel_normal"/> <!--최근 나는 과학의 힘으로 초자연적인 현상을 규명하고 있다네. 
+우리 주위에는 초능력, 마법, 정령, 소환 등등 신비한 능력들이 
+많지만 그 누구도 원인 규명에는 실패했더랬지.%% 
+원래는 이러한 것들의 실체를 밝히는 연구에는 관심이 없었을 
+뿐더러 오히려 사이비라고 무시하기도 했지만… %%
+과거에 나의 동료이자 친구였던 파렐 박사의 연구를 접한 뒤로,
+완전히 생각이 뒤바뀌고 말았네. 특히 내 관심을 이끈 것은
+마력이 깃든 돌... 바로 정령석이야. 혹시 자네도 정령석에 대해
+알고 있는가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10426426" FACE="noel_smile"/> <!--나는 현재 개발중인 가디언이라는 병기의 개발을 위해서
+우선, 간단한 정령석 개조를 실험해 볼 생각일세.
+자네도 만약 정령석에 관심이 있다면 내 실험을 도와주게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10426423" FACE="noel_normal"/> <!--정령석은 말 그대로 세상을 만드는데 이용된 기초 원소가
+들어있는 돌을 말한다네. 물과 불과 대지와 바람의 정령이
+오랜 시간에 걸쳐 평범한 돌 안에 스며들게 것이지. %%
+이것을 특별한 기술로 추출하면 강력한 에너지원이 된다네.
+이 에너지원을 다시 응축시켰다가 풀어내면 강력한 힘이
+분출된다는 것을 증명했어.%%
+소문으로 듣기에는 동쪽에서 온 드라칸 소환사들은 그들만의 
+방식으로 정제한 정령석 속에 몬스터의 원념을 집어넣었다가
+원하는 순간에 꺼낼 수 있는 기술을 연마한다고 하더군.%%
+이런 소환기술이나, 특수기, 마법... 같은 신비한 기술들은 
+여러 이름으로 불리지만 그 힘을 사용하는 원리는 모두 
+이 정령석에서 출발한 것이라고 해도 과언이 아니야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10426424" FACE="noel_normal"/> <!--정령석은 장비가 가진 능력을 증강시키는 기술…
+자넨 강해질 생각이 별로 없는 것 같군. 
+내 실험대상자로서도 부적격이야. 나 역시 거절하겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10426425" FACE="noel_normal"/> <!--그럼 이야기를 마저 하도록 하지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10426402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

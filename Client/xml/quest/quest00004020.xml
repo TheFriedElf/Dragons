@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4020</ID> <!--T.T.10402001 고장수리내역 출력 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 에델린에게 고장수리 내역서 전달-->
+<!--[완료NPC]	바람항구 - 에델린-->
+<!--[내용]	오토런치5에게 받은 고장수리 내역서를 바람항구의 에델린에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">16B185BF-31BE-4048-9070-3C5868FECAE2</CLIENT> <!--시작NPC 시청 지하수로 - 오토런치5 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER> <!--완료NPC 바람항구 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">16B185BF-31BE-4048-9070-3C5868FECAE2</AGENT> <!--진행NPC 11 시청 지하수로 - 오토런치5 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 12 바람항구 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160402000/1">10011</NPC> 
+ <!--Item_NO=160402000/[Q.ID:04020] 고장수리 내역서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160402000/1/511">10011</NPC> 
+ <!--Item_NO=160402000/[Q.ID:04020] 고장수리 내역서,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160402000/1">10011</NPC> 
+ <!--Item_NO=160402000/[Q.ID:04020] 고장수리 내역서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160402000/1/512">10012</NPC> 
+ <!--Item_NO=160402000/[Q.ID:04020] 고장수리 내역서,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160402000/1">10012</NPC> 
+ <!--Item_NO=160402000/[Q.ID:04020] 고장수리 내역서,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10402011"/> <!--고장수리 내역서 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10402021" FACE="autolunch_normal"/> <!--삐리비리삡…
+박사님…비상! 비상!%%
+삐빕! 동물들에게 이상을 일으킬 수 있는
+오염된 사료의 조리법이 강제 설정되었습니다.%%
+그럼… 고장수리내역을 출력하겠습니다.
+삐리비리삡!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10402026" FACE="Edeline_smile"/> <!--수고했어요. 이젠 이 서류를 콜린 대장님께 가져다 드리기만 하면…%%
+?%%
+이게 무슨 뜻이지…%%
+동물들을 난폭하게 만드는 사료?
+그러고 보니 최근에 종소리 마을 근방에 나타난 동물들은…%%
+파렐 박사와 연관이 있었는데... -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10402023" FACE="autolunch_normal"/> <!--(오토런치5로 받은 고장 수리내역서를 에델린에게 전달한다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10402024" FACE="autolunch_normal"/> <!--삐리빕!!!!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10402025" FACE="autolunch_normal"/> <!--곧 인공지능 시스템이 종료됩니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10402002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10402051" FACE="autolunch_normal"/> <!--곧 인공지능 시스템이 종료됩니다.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10402052" FACE="Edeline_normal"/> <!--오토런치5에게 고장수리 내역서는 받아 오셨나요? 보아하니 없는것 같은데-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

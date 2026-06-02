@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Hydra_01" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="980205">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+		<KFMPATH SCALE="1.3">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Hydra/Hydra_01.kfm</KFMPATH>
+
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+             <SPHERE TO="p_hit_point_01" SIZE="41.0"/>
+             <SPHERE TO="p_hit_point_02" SIZE="77.0"/>
+             <SPHERE TO="p_hit_point_03" SIZE="44.0"/>
+			 <SPHERE TO="p_hit_point_04" SIZE="60.0"/>
+
+
+		</ABV>
+		<SLOT>
+
+			<!-- 원거리 공격 -->
+			<ITEM NAME="btlidle_11_skill_shot_start" ANIMATION="1000204"/>
+			<ITEM NAME="btlidle_11_skill_shot" ANIMATION="1000205"/>
+			<ITEM NAME="skill_shot_11" ANIMATION="1000206" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_hydra_engball_01"/>
+
+			<!-- 원거리 공격 2 -->
+			<ITEM NAME="btlidle_12_skill_shot_start" ANIMATION="1000207"/>
+			<ITEM NAME="btlidle_12_skill_shot" ANIMATION="1000208"/>
+			<ITEM NAME="skill_shot_12" ANIMATION="1000209" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_hydra_dawnball_01"/>  
+			<!--부활스킬-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000020"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000021"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000024"/>
+	
+
+			<!--원거리 1 S자발사 -->
+			<ITEM NAME="360s_curve_start" ANIMATION="1000431"/>
+			<ITEM NAME="360s_curve_idle" ANIMATION="1000432"/>
+			<ITEM NAME="360s_curve_fire" ANIMATION="1000433" FIRE_EFFECT_NODE="p_ef_shot" FIRE_EFFECT_SCALE="1.0" HIT_SOUND_ID="" FIRE_START_NODE="p_ef_shot" PROJECTILE_ID="Projectile_hydra_sturnball_01" PROJECTILE_SCALE="1.0" PROJECTILE_COUNT="1" FIRE_DELAY="1.2" SECTION_RANGE="300" CURVE_VALUE="300"/>
+			<ITEM NAME="360s_curve_finish" ANIMATION="1000434"/>	
+	   
+
+			<!-- 회오리 유도-->
+			<ITEM NAME="btlidle_13_skill_shot_start" ANIMATION="1001001"/>
+			<ITEM NAME="btlidle_13_skill_shot" ANIMATION="1001002"/>
+			<ITEM NAME="skill_shot_13" ANIMATION="1001003" FIRE_START_NODE="char_root" PROJECTILE_ID="Projectile_hydra_engball_01" PROJECTILE_SCALE="1.0"/>
+
+			<!--회복-->
+			<ITEM NAME="select_shot_start" ANIMATION="1000250"/>
+			<ITEM NAME="select_shot_idle" ANIMATION="1000251" />
+			<ITEM NAME="select_shot_fire" ANIMATION="1000252"/>
+
+            <!--레이저 공격-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1001151"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1001152"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1001153" FIRE_START_NODE="p_ef_mouth" SHOT_INTER_TIME="0.03" PROJECTILE_SCALE="3" GROUND_EFFECT="NONE" PROJECTILE_ID="PROJECTILE_elga03_breath"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1001154"/>
+
+			<!-- 대쉬 공격 -->
+             <ITEM NAME="attk_fin_01_start" ANIMATION="1000414"/>
+             <ITEM NAME="attk_fin_01" ANIMATION="1000415"/>
+             <ITEM NAME="attk_fin_01_fire" ANIMATION="1000416"/>
+             <ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000417"/>
+
+
+            <!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="fury_01" ANIMATION="1000044"/>
+			<ITEM NAME="stun" ANIMATION="1000025"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000005" />
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

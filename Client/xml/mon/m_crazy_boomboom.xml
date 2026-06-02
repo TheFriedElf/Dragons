@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_JasonBoomBoom" INIT_ACTION="a_opening">
+<TEXTURE SRC="mumboomboom_jason_body.dds">../Data/2_Mon/M_Crazy_BoomBoom/M_Crazy_BoomBoom_body.dds</TEXTURE>
+<TEXTURE SRC="mumboomboom_jason_item.dds">../Data/2_Mon/M_Crazy_BoomBoom/M_Crazy_BoomBoom_item.dds</TEXTURE>
+<TEXTURE SRC="mumboomboom_jason_knife.dds.dds">../Data/2_Mon/M_Crazy_BoomBoom/M_Crazy_BoomBoom_knife.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_JasonBoomBoom"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Mumboomboom_jason/N_Mumboomboom_jason.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="37"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000063" RANDOM="100"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+					<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

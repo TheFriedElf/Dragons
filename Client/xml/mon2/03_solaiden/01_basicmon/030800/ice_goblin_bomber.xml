@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Ice_Goblin_Bomber" INIT_ACTION="a_opening">
+
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Ice_Goblin_Bomber"/>
+		<KFMPATH SCALE="1.3">../Data/2_Mon2/03_Solaiden/01_BasicMon/030800/IceGoblin_Bomber/IceGoblin_Bomber.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			<!-- 단검찌르기-->
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+		
+			<!-- 주머니던지기(아래로굴리기) -->
+
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000349"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000350"/>
+		    <ITEM NAME="skill_shot_01" ANIMATION="1000351" FIRE_START_NODE="p_ef_summon_thorn" PROJECTILE_ID="Projectile_goblinshot"/>
+		
+
+			
+				<!--점프-->
+
+			
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000353"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000354"/>
+            <ITEM NAME="skill_shot_02" ANIMATION="1000355" GROUND_EFFECT="" FIRE_START_NODE="p_ef_summon_thorns" PROJECTILE_ID="Projectile_goblinshot"/>
+			<ITEM NAME="shot_return_02" ANIMATION="1000356"/>
+	        <!-- 연속 던지기 -->
+
+			
+			<ITEM NAME="btlidle_03_skill_shot_start" ANIMATION="1000443"/>
+			<ITEM NAME="btlidle_03_skill_shot" ANIMATION="1000444"/>
+            <ITEM NAME="skill_shot_03" ANIMATION="1000445" FIRE_START_NODE="p_ef_Bomber_point_burst" PROJECTILE_ID="Projectile_IceBomb_shot_01" Z_FACTOR="0.3" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="shot_return_03" ANIMATION="1000447"/>
+			<ITEM NAME="btlidle_03_skill_shot_middle" ANIMATION="1000446"  FIRE_START_NODE="p_ef_Bomber_point_burst" PROJECTILE_ID="Projectile_IceBomb_shot_01" Z_FACTOR="0.3" PROJECTILE_TYPE="BOOMERANG"/>
+					
+	
+		
+				
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

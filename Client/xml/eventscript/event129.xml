@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!--엘가 2차 오프닝 -->
+    <CMD TYPE="waittime" time="3"/>
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+
+	<CMD TYPE="HideUI" enable="true"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+
+	<CMD TYPE="AddActorFilter" ClassNo="1028904"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--소환체를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="false"/> <!--드랍아이템를 숨기기 -->
+	<CMD TYPE="ShowActor" ClassNo="3542100" Show="false"/> <!-- 죽어가는 엘가 1차 숨기기 -->
+	<CMD TYPE="ShowActor" ClassNo="3542110" Show="false" Save="true"/> <!-- 실제 엘가 숨기기 -->	
+	<CMD TYPE="AddNPC" ClassNo="1028904" NameTTID="521238" SpawnPos="964.8564,733.5825,1438.3298"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1028904" SlotName="opening_01"/><!-- 오프닝 1번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" /><!-- 오프닝 카메라로 변경 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="0.3"/><!--  시간을 기다림-->
+	<CMD TYPE="Dialogue" NameTTID="503155" TextTTID="503142" /><!-- 엘가 대사 -->
+	<CMD TYPE="WaitTime" Time="8.7"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="WaitTime" Time="0.5"/> <!-- 오프닝 시간을 기다림-->
+	<CMD TYPE="PlayAnimation" ClassNo="1028904" SlotName="opening_02"/><!-- 오프닝 2번-->
+	<CMD TYPE="WaitTime" Time="6.6"/><!-- 오프닝 시간을 기다림-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1028904" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1028904"/>
+	<CMD TYPE="ShowActor" ClassNo="3542110" Show="true" Save="true"/> <!-- 실제 엘가 보이기 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오세 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	
+    <CMD TYPE="setmoviescene" enable="false" Time="0"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="true"/> <!--드랍아이템를 보이기 -->
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="HideUI" enable="false"/>
+
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_WARNING"/>
+</EVENT_SCRIPT>
+

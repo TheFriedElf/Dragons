@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020406_FD">
+	<GSAPATH>../Data/3_World/02_Chaosarea/01_Level/020406_FD.GSA</GSAPATH>
+	<MINIMAP Y="160" H="235">../Data/3_World/02_ChaosArea/01_Level/020406_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base"  TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+	<!-- 포그 -->
+	<FOG DENSITY="0.050000" START="105.000000" END="4525.000000" COLOR="0.776999,0.736999,0.402000"/>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1775" MID_END="2000" LOW_END="3000" USE="1" />
+</WORLD>

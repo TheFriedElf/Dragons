@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>100</ID> <!--T.T.10010001 또 다른 조력자 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크 필드의 고블린 도끼로부터 분열체 20개를 구하자.-->
+<!--[완료NPC]	게펜 - 비닛-->
+<!--[내용]	비닛은 클라인 박사에 동조하는 또 다른 연구가가 있다고 한다. 그 연구가를 돕기 위해서 오크 필드의 고블린 도끼로부터 분열체 20개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">18A90539-E61E-4941-A7C8-90F40254BA7A</CLIENT> <!--시작NPC 게펜 - 비닛 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">18A90539-E61E-4941-A7C8-90F40254BA7A</PAYER> <!--완료NPC 게펜 - 비닛 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">18A90539-E61E-4941-A7C8-90F40254BA7A</AGENT> <!--진행NPC 11 게펜 - 비닛 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/3000/1/1/160010000">4702000</MONSTER> 
+ <!--MON_NO=4702000/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160010000/[Q.ID:00100] 분열체70%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160010000</ITEM> 
+ <!--Item_NO=160010000/[Q.ID:00100] 분열체,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10010011"/> <!--분열체-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10010021" FACE="Vinit_normal"/> <!--흠! 안녕!
+하하하! 그건 그렇고 너 조금 웃긴 얼굴을 하고 있구나.
+미안! 그냥 무심코 이야기해버렸네. 헤헷.%%
+(귀여운 척 하지 마!)%%
+다른 게 아니라, 온건파 중에서 클라인 박사님을 위해서 일하는 박사님이 있어.
+그분에게 필요한 재료가 있는데, 좀 구해 줄 수 있을까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10010026" FACE="Vinit_normal"/> <!--고마워. 덕분에 그 박사님도 연구를 계속할 수 있게 되었어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10010023" FACE="Vinit_normal"/> <!--박사님은 몬스터들 중에 에너제체와 결합하지 않고, 작은 덩어리로 분열이 진행되는 몬스터가 있다고 하셨어.
+그 분열체가 발생하는 몬스터는 오크필드의 고블린 도끼야.
+박사님은 분열체를 가져다주면 클라인 박사님을 도울 수 있다고 하셨어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10010024" FACE="Vinit_angly"/> <!--(디포르테가 가까이 하지 말라고 했지.)%%
+앗! 너무해! 좋아, 그럼 저주를 걸 거야. 디포르테 언니 밑에서 평생 살아라!
+(…)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10010025" FACE="Vinit_normal"/> <!--흠, 다른 차원의 사람은 얼굴이 이상할 뿐만 아니라 키도 좀 짧은 느낌이 들긴 하군,
+(너도 짧잖아!)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10010002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+		
+</QUEST>

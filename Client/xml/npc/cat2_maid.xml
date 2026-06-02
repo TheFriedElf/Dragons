@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="c_cat2_maid" INIT_ACTION="a_idle">
+	<TEXTURE SRC="cat_body.dds">../Data/1_Cha/2_NPC/Cat_maid/cat_body_0102.dds</TEXTURE>
+	<TEXTURE SRC="cat_face.dds">../Data/1_Cha/2_NPC/Cat_maid/cat_face_0102.dds</TEXTURE>
+	<TEXTURE SRC="cat_face_angry.dds">../Data/1_Cha/2_NPC/Cat_maid/cat_face_angry_0102.dds</TEXTURE>
+	<TEXTURE SRC="cat_face_happy.dds">../Data/1_Cha/2_NPC/Cat_maid/cat_face_happy_0102.dds</TEXTURE>
+	<TEXTURE SRC="cat_face_sad.dds">../Data/1_Cha/2_NPC/Cat_maid/cat_face_sad_0102.dds</TEXTURE>
+	<NPCMARK NAME="e_ef_colorshadow_npc" ATTATCH_TO="char_root"/>
+	<WORLDOBJECT>
+		<ICON ID="icon_n_cat1_maid"/>
+		<KFMPATH SCALE="1.1">../Data/1_Cha/2_NPC/Cat_maid/Cat_maid.kfm</KFMPATH>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="idle_02" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_03" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="talk_01" ANIMATION="1000005" RANDOM="100"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

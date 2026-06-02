@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5140</ID> <!--T.T.10514001 농장 만들기(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전 - 쇠망치 미라에게서 사과 씨앗 20개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 클레아-->
+<!--[내용]	클레아에 부탁으로 종소리 마을 플로렌스에게 치즈사과에 대해 물어봤지만, 이미 재배하는 곳은 찾을 수 없다고 한다. 하지만 치즈사과의 씨앗은 지금 구할 수 있을 것 같다고 한다. 플로렌스가 알려 준 스카이피 신전으로 가서 쇠망치 미라를 처리하고 사과 씨앗 20개를 구해 클레아에게 갖다 주자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">cdb2443d-cbf7-4446-a9c1-769342f41b49</CLIENT> <!--시작NPC 종소리 마을 - 플로렌스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6582AB80-AF1C-4798-865E-E113A1241350</PAYER> <!--완료NPC 달빛해안 마을 - 클레아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">cdb2443d-cbf7-4446-a9c1-769342f41b49</AGENT> <!--진행NPC 11 종소리 마을 - 플로렌스 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 12 달빛해안 마을 - 클레아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010210/10000/5000/1/1/160514000">6008600</MONSTER> 
+ <!--MON_NO=6008600/쇠 망치 미라,MAP_NO=9010210/스카이피 신전,Item_NO=160514000/[Q.ID:02214] 물품 접수증,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160514000</ITEM> 
+ <!--Item_NO=160514000/[Q.ID:02214] 물품 접수증,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10514011"/> <!--사과 씨앗 20개 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10514021" FACE="Floran_normal"/> <!--씨앗이요? 글쎄요.
+지금도 있을지 모르겠네요. 얼마 전에 들은 게 있긴 한데, 불확실한 정보라서요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10514026" FACE="Floran_normal"/> <!--이게 그 씨앗이에요? 
+처음 보는 거라 신기하게 생겼네요. 너무 감사해요. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10514023" FACE="Floran_normal"/> <!--그래도 상관없다면 알려 드릴게요. 
+미리내 신전 쇠 망치 미라한테 얻을 수 있다고 들었어요.%%
+뭐 농장을 만들려면 사과 씨앗이 좀 많아 필요할 거에요. 적어도 20개 정도?
+운이 좋다면 구할 수 있을 거에요.
+구해서 클레아에게 갖다 주세요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10514024" FACE="Floran_angly"/> <!--그래요? 바쁘시다면 뭐… 어차피 제 것이 아니라 상관은 없으니까요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10514025" FACE="Floran_normal"/> <!--아직도 안 가셨나요? 서두르시는 게 좋을 것 같은데요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10514002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

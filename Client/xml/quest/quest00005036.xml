@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5036</ID> <!--T.T.10503601 수행의 길(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 별가사리 루루루와 별가사리 로로로 30마리 처리-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 무사수행에서 자신이 가장 어려웠던 상대는 가장 강한 상대가 아니라고 한다. 바로 수많은 상대와 오랫동안 싸우는 게 가장 어렸웠다는 것이다. 그런 상대로 다비는 별가사리 루루와 별가사리 로로로를 들었다. 어려운 싸움을 경험하기 위해 수염고래 해안가에서 별가사리 루루루와 별가사리 로로로 30마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010100/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010100/수염고래 해안가,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010100/1">6011200</MONSTER> 
+ <!--MON_NO=6011200/별가사리 로로로,MAP_NO=9010100/수염고래 해안가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10503611"/> <!--별가사리 루루루와 로로로-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503621" FACE="Darby_normal"/> <!--내가 무사수행을 떠났을 가장 어려웠던 적은 가장 강한 적이 아니었어.
+바로 물밀듯이 밀려드는 적들이었지.%%
+쉴틈도 없이 밀려드는 적들을 상대하다 보면 정말 죽고 싶은 심정이었지.
+그런 점에서 별가사리 루루루와 로로로를 상대하는 것은 좋은 경험이 될 거야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503626" FACE="Darby_normal"/> <!--좋은 경험을 했군. 이제 마지막 수행이 남았어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503623" FACE="Darby_normal"/> <!--별가사리 루루루와 로로로는 혼자서는 잘 안 움직이는 녀석들이지.
+언제나 몰려다니려는 습성 때문에 많은 무사수행자들이 괴로움을 겪고 있어.%%
+그런 녀석들을 상대하다 보면 자연히 강한 힘을 가진 자들도 상대할 수 있게 될 거야.
+수염고래 해안가의 별가사리 루루루와 별가사리 로로로를 잘 기억해 두라고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503624" FACE="Darby_angly"/> <!--이제와서 거절하다니 겁이라도 먹은 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503625" FACE="Darby_normal"/> <!--수행을 하다가 빈둥대면 금방 감을 잊어버릴지도 몰라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5022</ID> <!--T.T.10502201 끈적이는 녀석 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)] - 붉은 안테나 몽글 15마리 처치-->
+<!--[완료NPC]	바람항구 - 에르실-->
+<!--[내용]	에르실은 붉은 안테나 몽글이 나타나 해안가에 뭔가 끈적이는 것을 뿜어대고 도망갔다고 했다. 그 끈적이는 것을 치우기 위해 고생을 했다는 에르실을 위해 붉은 안테나 몽글을 처리하자. 수염고래 해안가 [아케이드 모드(F1)]에서 붉은 안테나 몽글 15마리를 처리해야 한다. 붉은 안테나 몽글은 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</CLIENT> <!--시작NPC 바람항구 - 에르실 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</PAYER> <!--완료NPC 바람항구 - 에르실 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</AGENT> <!--진행NPC 11 바람항구 - 에르실 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010101/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010101/수염고래 해안가 아케이드 1,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010104/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010104/수염고래 해안가 아케이드 4,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10502211"/> <!--붉은 안테나 몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502221" FACE="ersil_normal"/> <!--에구에구. 팔다리가 안 쑤시는 곳이 없네.
+왜 그런 표정으로 쳐다보는 건가요?
+애들도 팔다리가 쑤실 때가 있다고요.%%
+이게 다 붉은 안테나 몽글 때문이에요.
+제가 이야기 해드릴테니 혹시 절 좀 도와 주실 건가요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502226" FACE="ersil_smile"/> <!--고마워요. 덕분에 팔다리 쑤실 일이 좀 줄어들겠네요.
+그래도 비가 오는 날에는 여전히 쑤시겠죠.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502223" FACE="ersil_normal"/> <!--붉은 안테나 몽글 녀석들이 갑자기 나타나 수염고래 해안가를 더럽히기 시작했어요.
+녀석들 왠지 좀 끈적끈적해 보이잖아요.
+역시나 생긴 것답게 끈적이는 것을 해안가 여기저기에 묻히고 다니더라고요.%%
+그 느낌 아세요?
+완전 더운 여름에 서로 살을 맞대고 있는 그런 느낌이라고요.
+우으으으. 생각만 해도 소름이 돋으려고 하네요.%%
+하지만 녀석들은 캡틴후커가 있는 곳으로 숨었어요.
+끈적이는 것을 없애기 위해 마을 사람들과 청소를 하다 보니까 온몸에 근육통이 생기고 말아 버렸네요.%%
+붉은 안테나 몽글이 다시는 수염고래 해안가로 오지 못하도록 좀 막아 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502224" FACE="ersil_normal"/> <!--그래요. 뭐 애들이 혹사를 당하든 말든 상관이 없겠죠.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502225" FACE="ersil_angly"/> <!--저기 그렇게 늑장을 부리시면, 저 또 청소하러 갈지도 모르거든요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

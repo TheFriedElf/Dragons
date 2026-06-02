@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_018200_SC" DESCRIPTION="90182100">
+
+    <!--이벤트 시간 설정(이벤트의 개수 만큼 시간설정)-->
+	<TIME_EVENT ID="1" FROM="2011,11,16,00,00" TO="2011,12,26,24,00" /> <!--크리스마스 이벤트-->
+    <TIME_EVENT ID="2" FROM="2012,11,29,14,00" TO="2013,02,25,23,59" /> <!--겨울맵 이벤트-->
+	<TIME_EVENT ID="3" FROM="2012,10,15,12,00" TO="2012,11,08,23,59" /> <!--할로윈 이벤트-->
+	<TIME_EVENT ID="4" FROM="2010,12,02,15,00" TO="2010,12,02,15,30" /> <!--추석 이벤트-->
+	
+	<!--이벤트 맵 설정(이벤트시간에 따라 변화될 맵 설정)-->
+	<GSAPATH>
+		<CONDITION TYPE="DEFAULT">../Data/3_World/01_Ingrid/01_Level/018200_SC.gsa</CONDITION> <!--디폴트-->
+		<CONDITION ID="1">../Data/3_World/01_Ingrid/01_Level/018200_SC_CH.gsa</CONDITION> <!--크리스마스 이벤트-->
+		<CONDITION ID="2">../Data/3_World/01_Ingrid/01_Level/018200_SC_w.gsa</CONDITION> <!--겨울맵 이벤트-->
+		<CONDITION ID="3">../Data/3_World/01_Ingrid/01_Level/018200_SC_HW.gsa</CONDITION> <!--할로윈 이벤트-->
+		<CONDITION ID="4">../Data/3_World/01_Ingrid/01_Level/018200_SC_CS.gsa</CONDITION> <!--추석 이벤트-->
+	</GSAPATH>
+	
+	<!--이벤트 사운드 설정(이벤트에 맞는 사운드 설정)-->
+	<BGSOUND VOLUME="1.0">../BGM/odelia_bg.mp3</BGSOUND><!--디폴트-->
+	<BGSOUND_SUB VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND_SUB><!--디폴트 서브-->
+	<BGSOUND ID="1" VOLUME="1.0">../BGM/Chrismas.wav</BGSOUND> <!--크리스마스이벤트-->
+	<BGSOUND ID="2" VOLUME="1.0">../BGM/odelia_bg.mp3</BGSOUND> <!--겨울맵 이벤트-->
+	<BGSOUND ID="3" VOLUME="1.0">../BGM/Hill_backup.mp3</BGSOUND> <!--할로윈 이벤트-->
+	<BGSOUND ID="4" VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND> <!--추석 이벤트-->
+	
+	<!--이벤트 포그설정(이벤트에 맞는 사운드 설정)-->
+	<FOG DENSITY="0" START="4000" END="10316" COLOR="0.8901961,0.8705882,0.6078432"  SKYBOX="0"/> <!--디폴트-->
+	<FOG ID="1" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="20250" COLOR="0,0,0" SKYBOX="0" /> <!--크리스마스 이벤트-->
+	<FOG ID="2" DENSITY="0" FUNC="Z_LINEAR" START="7933" END="20250" COLOR="0.858000,0.910990,0.903999" SKYBOX="0" /> <!-- 겨울맵 이벤트-->
+	<FOG ID="3" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="20250" COLOR="0,0,0" SKYBOX="0" /> <!-- 할로윈 이벤트-->
+	<FOG ID="4" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="12000" COLOR="0.858000,0.910990,0.903999" SKYBOX="0" /> <!--추석 이벤트-->
+	<MINIMAP Y="173" H="213">../Data/3_World/01_Ingrid/01_Level/018200_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/odelia_bg.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+	<!--8방향 -->
+	<FREE_DIRECTION ALL="TRUE"/>
+
+	<!-- 용자의길 포탈 -->
+	<TRIGGER ID="gate_010300_base" TYPE="PORTAL" TITLE_TEXT_ID="800001" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010300" PARAM2="1"/>
+	</TRIGGER>
+
+	<!-- 숙련된 용자의 길 포탈-->
+	<TRIGGER ID="gate_010330_base" TYPE="PORTAL" TITLE_TEXT_ID="800002" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010330" PARAM2="1">
+			<ACCESS>
+				<!-- LEVEL MIN= "2"/ -->
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 배신자의 고개 포탈 -->
+	<TRIGGER ID="gate_010400_base" TYPE="PORTAL" TITLE_TEXT_ID="800005" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010400" PARAM2="1">
+			<ACCESS>
+				<!-- LEVEL MIN= "5"/ -->
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 망각의 협곡 포탈 -->
+	<TRIGGER ID="gate_010430_base" TYPE="PORTAL" TITLE_TEXT_ID="800006" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010430" PARAM2="1">
+			<ACCESS>
+				<!-- LEVEL MIN= "9"/ -->
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!--이벤트 포탈 -->
+	<TRIGGER ID="Event_title_01" TITLE_TEXT_ID="810000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="3,0,52" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1"/>
+	<!-- 텔레 포트 -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_03"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_04"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_05" TYPE="TELEPORT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_06" TYPE="TELEPORT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_06"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_09" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_09"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_10" TYPE="TELEPORT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_10"/>
+	</TRIGGER>
+	<!--<EVENT_SCRIPT_ON_ENTER ID="5"/>
+    -->
+	<!-- Quest 
+  <TRIGGER ID="Quest_trigger_box" TYPE="EVENT">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="ActivateEventEx" EventID="11" QuestID="903" />
+    -->
+	<!--
+    <TRIGGER ID="Quest_trigger_box">
+	<CONDITION TYPE="touch"/>
+	</TRIGGER>
+    -->
+	<TRIGGER ID="Help_Tip_Quest_01">
+		<CONDITION TYPE="touch"/>
+	</TRIGGER>
+	<TRIGGER ID="Help_Tip_Quest_02">
+		<CONDITION TYPE="touch"/>
+	</TRIGGER>
+	<TRIGGER ID="Help_Tip_Quest_03">
+		<CONDITION TYPE="touch"/>
+	</TRIGGER>
+	<TRIGGER ID="Help_Tip_Quest_05">
+		<CONDITION TYPE="touch"/>
+	</TRIGGER>
+	<TRIGGER ID="Help_Tip_Quest_06">
+		<CONDITION TYPE="touch"/>
+	</TRIGGER>
+	<TRIGGER ID="Help_Tip_Quest_08">
+		<CONDITION TYPE="touch"/>
+	</TRIGGER>
+
+	<CAMERA_ADJUST ZOOM="0" UP="0" TARGET_Z="0"/>
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1"/>
+	<STONES/>
+</WORLD>

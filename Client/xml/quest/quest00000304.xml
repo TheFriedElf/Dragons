@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+	<ID>304</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="502313">펫 주문서 배달</TITLE>
+	<GROUPNAME TEXT="500009">바람의 항구</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="13" MAX="999"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">975FD858-1F6E-447e-9EED-C83158EC72FC</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10001">975FD858-1F6E-447e-9EED-C83158EC72FC</AGENT>
+		<AGENT TYPE="NPC" EVENTNO="10002" MARK="END">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10003">975FD858-1F6E-447e-9EED-C83158EC72FC</PAYER>
+	</PAYERS>
+	<EVENTS>
+		<!--NPC와 대화-->
+		<!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<!--사용자가 퀘스트를 하락 했을 때(=301번 다이얼로그가 뜰때) 아이템 10000번을 1개 지급한다-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/20300095/1">10001</NPC>
+		<!--1번 목표를 끝마치지 않았으면 2000번 NPC에서 501 다이얼로그를 띄운다-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10001</NPC>
+		<!--501 다이얼로그에서 502로 갈 때 10000번 아이템 1개를 검사 하여 없으면 551로 보낸다.-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/20300095/1/551">10001</NPC>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="551/20300095/1">10001</NPC>
+		<!--502 다이얼로그가 뜨면 10000번 아이템을 1개 회수하고
+			20000번 아이템을 1개 주고
+			목표 1을 증가 시킨다.-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="507">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="507/20300095/1/552">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="507/20300095/1">10002</NPC>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="507/1">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+		<!--2000번 NPC에 항상 1101 대화를 띄운다-->
+		<!--습득해야할 Item-->
+		<!--위치-->
+		<!--<LOCATION OBJECTNO="4">1000</LOCATION>-->
+		<!--시간-->
+		<!--<TIME OBJECTNO="5">60</TIME>-->
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="502310"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+	</OBJECTS>
+	<REWARD>
+		<EXP>2540</EXP>
+		<GOLD>1000</GOLD>
+		<SELECT1 COUNT="0"/>
+		<SELECT2 COUNT="0"/>
+	</REWARD>
+	<DIALOGS>
+		<!--
+<SELECT ID="" TYPE="">의 ID는 다음 DIALOG번호를 나타낸다
+0 = 닫기
+1~1000 = 다음 Dialog 번호
+10000,TYPE "ACCEPT" = 퀘스트 수락 버튼
+20000,TYPE "REJECT" = 퀘스트 거부 버튼
+30000,TYPE "COMPLETE" = 완료 버튼
+
+<DIALOG TYPE="?">에서
+TYPE은 특수 Dialog를 나타낸다. 지정하지 않으면 기본 다이얼로그(창)으로 뜬다
+
+PROLOG = 퀘스트 목표, 보상이 뜨는 정보창
+COMPLETE = 보상을 선택 할 수 있는 정보창
+INFO = 닫기 버튼이 존재 하는 정보창
+		-->
+		<!--101번은 퀘스트 의뢰 정보창-->
+		<!--MEMO=201번은 퀘스트 수락/거부 여부창-->
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="502305" FACE="Hyena_normal"/>
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="301">
+			<BODY TEXT="502306" FACE="Hyena_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="401">
+			<BODY TEXT="502307" FACE="Hyena_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="502308" FACE="Hyena_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="507">
+			<BODY TEXT="502311" FACE="Amy_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="551">
+			<BODY TEXT="502308"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="552">
+			<BODY TEXT="502312" FACE="Amy_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="502309" FACE="Hyena_smile"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<!--701번은 완료를 허락 하였을 때 뜰창-->
+		<DIALOG ID="701">
+			<BODY TEXT="500017"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--801번은 완료를 거부 하였을 때 뜰창-->
+		<DIALOG ID="801">
+			<BODY TEXT="500018"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="502314"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="502048"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+	</DIALOGS>
+</QUEST>

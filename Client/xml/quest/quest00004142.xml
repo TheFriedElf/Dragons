@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4142</ID> <!--T.T.10414201 달려라! 비룡 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	천산설련을 샤리에게 전달-->
+<!--[완료NPC]	카즈라 마을 - 샤리-->
+<!--[내용]	샤리는 페이롱의 상태를 살펴보고 라이딩펫이 되기 위해서는 천산설련이라는 약재가 필요하다 말해준다. 카즈라 마을의 포션 상인으로부터 천산설련을 구해 사제 샤리에게 전해주자.-->
+
+
+	<LIMITS>
+		<PET_CLASS TYPE="2" LEVEL="1"/>
+		
+<PET_LEVEL MIN="40" MAX="99"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">96F19874-A786-4851-B336-0D67FF9B2282</CLIENT> <!--시작NPC 카즈라 마을 - 샤리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">96F19874-A786-4851-B336-0D67FF9B2282</PAYER> <!--완료NPC 카즈라 마을 - 샤리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">96F19874-A786-4851-B336-0D67FF9B2282</AGENT> <!--진행NPC 11 카즈라 마을 - 샤리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160414300</ITEM> 
+ <!--Item_NO=160414300/[Q.ID:04143] 천산설련,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10414211"/> <!--천산설련 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">265002280</ITEM><!--전체지급/전체/1)/265002280(봉인아님) 1개-[전투펫] 진화의 수정-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10414221" FACE="Shari_normal"/> <!--혹시 당신이 %name%...인가요?
+그렇군요. 맞죠? 전 샤리라고 해요~%%
+저 못 알아보시겠어요?%%
+맞아요. 헤헤. 마이트리 언니의 쌍둥이 동생이에요.
+마이트리 언니가 편지를 보낼 때 마다 가끔씩
+%name%님 이야기를 종종 했어요.%%
+카즈라에 오면 잘 부탁한다고 하던데… 
+이렇게 만나게 되다니 제가 다 반갑네요.%% 
+아직까지 서로 만난 적이 없는데…
+이런 걸 쌍둥이 효과라 해야겠군요. 호호~-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10414226" FACE="Shari_smile"/> <!--천산설련을 가져오셨군요!
+이 아이가 평생 라이딩펫이 되지 못하는 게 아닐까…
+걱정을 많이 했어요.%%
+정말 다행스러운 일이로군요! 
+이 아이도 아직 누군가를 태우지 못한다는 
+부담감이 상당할텐데 말이에요.%%
+부디 이 아이가 정상적인 날개를 갖게 되면 
+지금보다 더 많이 아껴주셨으면 해요.%%
+자! 그럼 천산설련의 약효를 시험해보도록 하지요. 
+바로 시작할 거에요. 자아! -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10414223" FACE="Shari_normal"/> <!--어라.. 그건 그렇고.. 그 아기 페이롱… 
+어딘가 좀 이상해 보이는군요. 
+한번 볼까요... %%
+제가 맥을 좀 짚을 줄 알아서요.%%
+... ...%%
+기의... 흐름이... 
+원활치 않아요. 어딘가 병에 걸린건가...?%%
+(이후로 샤리는 차분히 그 동안의 자초지종을 들어주었다.)%%
+인큐베이터? 
+그렇군요. 이 아이가 미숙아로 태어난 것 때문에 
+날개의 발달이 정상적이지 않은 것 같네요.%%
+이미 성체가 되서 사람들을 태우고 다녀야할 때가 
+다 된 것 같은데... %%
+천산설련이라는 약재를 구할 수 있다면 정상으로 
+몸을 회복시켜줄 수 있을 것 같아요.%%
+물론 고가에다가 구하기가 쉽지 않은 아이템이지만, 
+막혀있는 기의 흐름을 단번에 치료해주는 신비스러운 
+약재랍니다.%%
+천산설련은 이곳 포션상인에게 구할 수 있을 거에요..
+약재를 가져오신다면 페이롱의 증상을 치료해줄게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10414224" FACE="Shari_angry"/> <!--아, 페일롱이 너무 가여워요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10414225" FACE="Shari_angry"/> <!--포션상인이 천산설련을 팔고 있던가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10414202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

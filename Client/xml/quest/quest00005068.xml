@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5068</ID> <!--T.T.10506801 소문은 바람을 타고(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 상어와 갑판상어 40마리를 처리하자-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 상어와 갑판상어가 찾아와서 자신을 협박했다고 한다. 협박의 이유는 자신들이 소문을 듣고 찾아와서 정당하게 물건을 요구했는데 자꾸 안 주면 대장간을 부숴버리겠다는 것이다. 다비는 더 이상 대장간을 지킬 힘이 없다며 슬퍼한다. 다비의 대장간을 지키기 위해서 스티븐 무역항의 상어와 갑판상어 40마리를 처리하자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010130/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010130/스티븐 무역항,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010130/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010130/스티븐 무역항,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="40" TEXT="10506811"/> <!--상어와 갑판상어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10506821" FACE="Darby_normal"/> <!--에휴- 드디어 정든 대장간을 떠날 때가 온 거 같아.
+아까 상어와 갑판상어가 찾아왔어.
+자신들은 소문을 듣고 왔는데 왜 물건을 주지 않겠냐며 날 협박하더군.%%
+그리고 있다가 자신들이 찾아올 때까지 물건을 주지 않으면 대장간을 부숴버리겠다고 했어.
+바람항구의 경비병에게 말해도 소용없다고 했어. 언젠가 경비병이 없을 때를 노려서 온다고.%%
+미안하지만 마지막으로 날 도와줄 수 있어?
+상어와 갑판상어가 더 이상 대장간에 찾아 오지 못하도록 해줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10506826" FACE="Darby_smile"/> <!--아하하하. 고마워. 여기서 계속 일할 수 있다고 생각하니까 갑자기 콧등이 시린데.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10506823" FACE="Darby_normal"/> <!--고마워. 이렇게 날 또 도와줄 거라고 미처 생각 못했어.
+사실 요즘 같은 세상에 남을 돕는다는 게 쉬운 일은 아니잖아.%%
+그에 비해 상어와 갑판상어는 도대체 어떤 녀석들인지 알 수가 없군.
+상어와 갑판상어가 같이 있으면 위험하니까 아무쪼록 조심해야 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10506824" FACE="Darby_normal"/> <!--그래? 알았어. 이제 여기서 내 얼굴을 보진 못할 거야. 
+월터의 옆으로 이사가야겠군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10506825" FACE="Darby_normal"/> <!--설마 그동안 또 다른 녀석들이 찾아오진 않겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10506802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,12 @@
+<ACTION ID="a_rolling_stone_cast" NEXT="a_battle_idle" USE-EVENT="TRUE" USE_CFUNC_ONTARGET="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC="TRUE" IGNORE_DMG_EFFECT="TRUE">	
+	<SLOT NAME="casting01" LOOP="TRUE"/>
+	<SLOT NAME="rolling_stone_01"/>
+	<SLOT NAME="rolling_stone_02"/>
+    <FSM SCRIPT="CommonSkillAction"	
+		USE_TLM="FALSE"
+		
+		HIDE_WEAPON_WHEN_ANI_SLOT1="TRUE"
+		
+		
+	/>
+</ACTION>

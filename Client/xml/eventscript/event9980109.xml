@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+
+<!-- 화면을 와이드 화면으로 출력하고 1초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="waittime" time="1"/>
+
+	<CMD TYPE="EscScript" EventID="9980106"/>
+
+<!-- 몬스터 줌업 -->
+	<CMD TYPE="MoveCamToTrigger" Target="B_Mon_5" MoveTime="1" CamActorDistance="600" CamMoveUpDistance="-20"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD type="Text" UIWndName="SFRM_EVENT_SCRIPT_TEXT" TextTTID="401161" AlignX="50" AlignY="80" WaitTime="4"/>
+	<CMD type="waittime" time="5"/>
+	<CMD type="Text" UIWndName="SFRM_EVENT_SCRIPT_TEXT" TextTTID="401162" AlignX="50" AlignY="80" WaitTime="4"/>
+	<CMD type="waittime" time="5"/>
+
+<!-- 몬스터길 줌업 -->
+	<CMD TYPE="MoveCamToTrigger" Target="Way_00" MoveTime="3" CamActorDistance="600" VertRotAngle="40" CamMoveUpDistance="-20"/>
+	<CMD type="waittime" time="1"/>
+	<CMD type="Text" UIWndName="SFRM_EVENT_SCRIPT_TEXT" TextTTID="401163" AlignX="50" AlignY="80" WaitTime="4"/>
+	<CMD type="waittime" time="4"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD type="waittime" time="1"/>
+
+<!-- 가디언 설치 지역  -->
+	<CMD TYPE="MoveCamToTrigger" Target="Guardian_07" MoveTime="1" CamActorDistance="200" VertRotAngle="45" CamMoveUpDistance="-30"/>
+	<CMD type="waittime" time="1"/>
+	<CMD type="Text" UIWndName="SFRM_EVENT_SCRIPT_TEXT" TextTTID="401164" AlignX="50" AlignY="80" WaitTime="4"/>
+	<CMD type="waittime" time="5"/>
+
+<!-- 더블업 줌업-->
+	<CMD TYPE="MoveCamToTrigger" Target="DOUBLE_UP_2" MoveTime="1" CamActorDistance="600" VertRotAngle="40" CamMoveUpDistance="-20"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD type="Text" UIWndName="SFRM_EVENT_SCRIPT_TEXT" TextTTID="401165" AlignX="50" AlignY="80" WaitTime="4"/>
+	<CMD type="waittime" time="5"/>	
+
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="9980106"/>
+
+
+
+</EVENT_SCRIPT>

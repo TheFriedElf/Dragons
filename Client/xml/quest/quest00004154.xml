@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4154</ID> <!--T.T.10415401 재앙의 전조 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	라미에타에서 프링의 깃털 15개 습득-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	퀘차는 온전한 프링의 깃털을 이용해 돌연변이 해독제를 만드는 일에 이용하겠다 한다. 퀘차를 위해 라미에타에서 낙엽프링과 검은프링을 퇴치한 뒤 프링의 깃털을 15개 습득하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/6000/1/1/160415400">3528100</MONSTER> 
+ <!--MON_NO=3528100/낙엽 프링,Item_NO=160415400/[Q.ID:04154] 프링의 깃털40%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/6000/1/1/160415400">3528300</MONSTER> 
+ <!--MON_NO=3528300/검은 프링,Item_NO=160415400/[Q.ID:04154] 프링의 깃털40%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160415400</ITEM> 
+ <!--Item_NO=160415400/[Q.ID:04154] 프링의 깃털,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10415411"/> <!--프링의 깃털-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10415421" FACE="Quecua_normal"/> <!--프링은 원래 괴팍하긴 해도, 드라칸들에게 피해를 거의 끼치지 않는
+동물이었지. 하지만 그것도 이젠 모두 옛날 얘기가 되어버렸어.%%
+벌써 이번 달 들어 프링에게 공격 당한 드라칸도 상당하단다.
+반드시 흉폭해진 프링을 원래대로 되돌려야 한다네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10415426" FACE="Quecua_smile"/> <!--잘했다. 수고했어!%%
+온전한 프링의 깃털이 있으니, 
+돌연변이 해독약을 만드는 일도 시간문제라고 해야겠구나.%%
+그 동안 수고가 많았다.
+사례는 넉넉히 해줄테니, 거절하지 말아주렴-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10415423" FACE="Quecua_normal"/> <!--키마이라는 심하게 중독되서 돌연변이까지 일으킨 프링이란다.
+키마이라를 치료하기 위해서는 아무래도 온전한 상태의 프링에게서 재료를 찾아야 할것 같거든.%%
+온전한 프링녀석들의 깃털을 조사해서 제대로된 해독약을 만들수 있을것 같다는게 내생각이다.
+에르다 협곡서 서식하는 낙엽프링과 검은프링을 찾아내면, 
+반드시 프링의 깃털을 가져다 주렴.!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10415424" FACE="Quecua_angry"/> <!--벌써부터 겁을 집어먹는 것이냐? 에잉…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10415425" FACE="Quecua_angry"/> <!--프링은 그리 강한 몬스터는 아니야.
+용기를 가지고 에르다 협곡을 뒤져보거라. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10415402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

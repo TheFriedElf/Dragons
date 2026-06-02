@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4036</ID> <!--T.T.10403601 신보의 행방을 찾아서(3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	스티븐 무역항의 크로키와 대화-->
+<!--[완료NPC]	스티븐 무역항 - 크로키-->
+<!--[내용]	알비다에 대한 정보를 얻기 위해 스티븐 무역항에 있는 용족 모험가 크로키를 찾아가보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</PAYER> <!--완료NPC 스티븐 무역항 - 크로키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 12 스티븐 무역항 - 크로키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10403611"/> <!--크로키와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403621" FACE="Mukapa_normal"/> <!--자초지종은 이제 잘 알겠네.%%
+오염되어 자취를 감춘 빛의 신보까지…
+우리가 잃어버린 일곱개의 신보는 단순한 보석이 아니라네.%%
+신보는 일찍이 신에게 버림 받은 일곱마리의 사악한 용의 기운을
+봉인해둔 신의 보옥을 뜻하지.%%
+무엇보다…%%
+신보는 카즈라의 세계를 지탱하는 원동력일세…
+그런 중요한 우리의 보물이 한낯 해적들의 손에 들어가다니!%% 
+통탄할 일이로고!!!!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403626" FACE="Kroki_smile"/> <!--기다리고 있었소.
+나는 크로키라고 하오.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403623" FACE="Mukapa_normal"/> <!--이제부터 내 말을 잘 듣게나.
+자네는 지금 바로 스티븐 무역항으로 출발하게나.%%
+크로키라고 하는 용족의 용맹한 전사가 기다리고 있을걸세.
+그는 이미 이곳 브리즈국의 여러 곳을 여행했으니
+분명 이 근방의 해적에 대해서 많은 정보를 가지고 있을거야.%%
+그럼 바로 출발하게나!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403624" FACE="Mukapa_angly"/> <!--뭐라고!! 지금 내게 무슨 말을 하는 건지 알고 있는 건가!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403625" FACE="Mukapa_angly"/> <!--기억하게나! 스티븐 무역항의 크로키라네!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10403626" /> <!--없음-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

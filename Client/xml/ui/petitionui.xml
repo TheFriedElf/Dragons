@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!--진정창-->
+	<STATIC_FORM ID="SFRM_PETITIONDLG">
+		<ATTR X="150" Y="100" W="502" H="550" STATIC_NUM = "1" CAN_DRAG = "1"/>	
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="500" H="36" STATIC_NUM = "4" />
+			<STATIC_FORM ID="SFRM_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1" />
+				<CHECK_BUTTON ID="CBTN_TITLE">
+					<ATTR X="0" Y="0" W="84" H="24" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmTabB.tga" BTN_IMG_W = "168" BTN_IMG_H = "48"/>
+					<ATTR TEXT = "810031" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL">
+						UISelf:CheckState(true)
+						UISelf:LockClick(true)
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_CLOSE_BG">
+				<ATTR X="466" Y="4" W="24" H="24" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID="CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID = "1">UISelf:GetParent():GetParent():CloseParent() return true </HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>	
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_COLOR1">
+			<ATTR X="9" Y="35" W="300" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "6" COLOR_TYPE = "1" />
+			<!--제목-->
+			<STATIC_FORM ID="SFRM_TITLE">
+				<ATTR X="0" Y="0" W="300" H="24" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" />
+				<STATIC_FORM ID="SFRM_TITLE_TEXT">
+					<ATTR X="0" Y="0" W="69" H="25" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" />
+					<ATTR TEXT = "810032" FONT = "Font_Text" T_X="34" T_Y ="4" T_CENTER = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<EDIT ID="SFRM_TITLE_EDIT">
+				<ATTR EDIT_BLOCK_IMG = "../Data/6_UI/01_main/bgWarn.tga" />
+				<ATTR EDIT_CAROT_IMG = "../Data/6_UI/Carot.tga" />
+				<ATTR X="78" Y="0" Z="1" W="300" H="16"/>
+				<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text" EDIT_LIMIT_LENGTH="30"/>
+				<ATTR EDIT_PREVIEW="810034" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>				
+			</EDIT>
+		</STATIC_FORM>
+		<!--남은진정수-->
+		<STATIC_FORM ID="SFRM_COLOR4">
+			<ATTR X="368" Y="34" W="90" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "6" COLOR_TYPE = "1" />
+			<!--남은진성수-->
+			<STATIC_FORM ID="SFRM_REMAINDER_LABEL">
+				<ATTR X="0" Y="0" W="90" H="25" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" />
+				<ATTR TEXT = "810036" FONT = "Font_Text" T_X="45" T_Y ="4" T_CENTER = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>				
+			<STATIC_FORM ID="SFRM_REMAINDER_TEXT">
+				<ATTR X="95" Y="0" W="30" H="25" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" />
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="10" T_Y ="4" T_CENTER = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>							
+		</STATIC_FORM>					
+		<!--내용 Label-->	
+		<STATIC_FORM ID="SFRM_COLOR2">
+			<ATTR X="9" Y="65" W="69" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "6" COLOR_TYPE = "1" />
+			<STATIC_FORM ID="SFRM_MEMO">
+				<ATTR X="0" Y="0" W="30" H="24" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" />
+				<STATIC_FORM ID="SFRM_MEMO_TEXT">
+					<ATTR X="0" Y="0" W="69" H="25" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" />
+					<ATTR TEXT = "810033" FONT = "Font_Text" T_X="34" T_Y ="4" T_CENTER = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>			
+		</STATIC_FORM>		
+		<!--내용 Edit-->	
+		<STATIC_FORM ID="SFRM_COLOR3">
+			<ATTR X="9" Y="95" W="483" H="415" CAN_COLOR_CHANGE = "1" STATIC_NUM = "6" COLOR_TYPE = "1" />
+			<EDIT_MULTI ID="SFRM_NOTE_EDIT">
+				<ATTR EDIT_BLOCK_IMG = "../Data/6_UI/01_main/bgWarn.tga" />
+				<ATTR EDIT_CAROT_IMG = "../Data/6_UI/Carot.tga" />
+				<ATTR X="0" Y="0" Z="1" W="483" H="415" EDIT_MULTI_LINE_COUNT = "10"/>
+				<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text" EDIT_LIMIT_LENGTH="1000"/>
+				<ATTR EDIT_PREVIEW="810035" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+				<HOTKEY ID = "28">return true</HOTKEY>
+				<HOTKEY ID = "106">return true</HOTKEY>
+			</EDIT_MULTI>			
+		</STATIC_FORM>		
+		<!--접수 버튼-->	
+		<BUTTON ID="RECEIPT_BTN">
+			<ATTR X="314" Y="513" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "810037" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">OnKey_Receipt_Petition()</SCRIPT>
+		</BUTTON>
+		<!--닫기  버튼-->	
+		<BUTTON ID="CLOSE_BTN">
+			<ATTR X="408" Y="513" W="84" H="26" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "810038" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>		
+	</STATIC_FORM>	
+	
+	<!--Chat Dlg -->
+	<STATIC_FORM ID = "SFRM_PATITION_CHAT_DLG">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "50" W ="282" H ="272" CAN_DRAG = "1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="280" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X="7" Y="4" W="240" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID = "SFRM_SDW">
+					<ATTR X="0" Y="0" W="240" H="24" STATIC_NUM="3"/>
+					<ATTR TEXT="" T_X = "5" T_Y = "3" />
+				</STATIC_FORM>
+			</STATIC_FORM>
+<!--			<STATIC_FORM ID="SFRM_CLOSE_BG">
+				<ATTR X="249" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID="Close">
+					<ATTR X="0" Y="0" W="24" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>	-->
+		</STATIC_FORM>
+
+		<LIST ID="LIST_CHAT_HISTORY">
+			<ATTR X="9" Y="41" Z="1" W="470" H="170" ITEM_X="20" ITEM_Y="0" CAN_SELECT="1"/>
+			<IMG ID="IMG_LIST_SCROLL_BG">
+				<ATTR X="242" Y="11" Z="-1" W="13" H="165" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="165"/>
+			</IMG>
+			<BUTTON ID="ScrUp">
+				<ATTR X="238" Y="0" W="19" H="15" />
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+			<BUTTON ID="ScrDown">
+				<ATTR X="238" Y="170" W="19" H="15" />
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle">
+				<ATTR X="240" Y="115" W="15" H="21" />
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+
+			<ATTR BTN_UP = "ScrUp" />
+			<ATTR BTN_DOWN = "ScrDown" />
+			<ATTR BTN_MIDDLE = "ScrMiddle" />
+
+			<ATTR ELEMENT_ID="FRM_PETI_MESSAGE_DATA" />
+
+			<SCRIPT ID="ON_DISPLAY"></SCRIPT>
+		</LIST>
+
+		<STATIC_FORM ID = "SFRM_COLOR">
+			<ATTR X="9" Y="35" W="264" H="197" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SDW">
+				<ATTR X="0" Y="0" W="257" H="197" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_CHAT_COLOR">
+			<ATTR X="9" Y="232" W="265" H="27" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_CHAT_SDW">
+				<ATTR X="0" Y="0" W="265" H="27" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<EDIT ID = "EDT_CHAT" X = "9" Y = "232" W = "254" H = "20">
+			<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<ATTR EDIT_DONT_LOSTFOCUS = "1"/>
+			<HOTKEY ID="28">return Net_ReqGMChat(UISelf)</HOTKEY>
+			<HOTKEY ID="106">return Net_ReqGMChat(UISelf)</HOTKEY>
+			<HOTKEY ID="1">
+				if UISelf:IsFocus() then
+					UISelf:SetEditText("")
+					ClearEditFocus()
+					return true
+				end
+			</HOTKEY>
+			<SCRIPT ID="ON_CREATE">
+				g_ChatMgrClient:InputNow_TimeMinimum(5000)
+			</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">
+				local parent = UISelf:GetParent()
+				local edit_wnd = parent:GetControl("EDT_CHAT")
+
+				local strChat = edit_wnd:GetEditText()
+				local iLength = strChat:Length()
+			</SCRIPT>
+		</EDIT>
+	</STATIC_FORM> 
+
+	<FORM ID="FRM_PETI_MESSAGE_DATA">
+		<ATTR X="0" Y="0" W="238" H="17" CAN_DRAG = "0"/>		
+		<ATTR TEXT = "" FONT="Font_Text" T_X="10" T_Y="1" T_OUTLINE="0"/>
+	</FORM>	
+</XUI>

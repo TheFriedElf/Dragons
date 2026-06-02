@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>113</ID> <!--T.T.10011301 연구자의 허영심 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크 필드의 오크 히어로에게서 에너지체의 결정 1개를 구하자.-->
+<!--[완료NPC]	게펜 - 비닛-->
+<!--[내용]	비닛은 테일링이 에너지체의 결정을 찾아 달라고 부탁하겠지만, 자신에게 먼저 에너지체의 결정을 가져다 달라고 한다. 오크 필드의 오크 히어로에게서 에너지체의 결정 1개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">18A90539-E61E-4941-A7C8-90F40254BA7A</CLIENT> <!--시작NPC 게펜 - 비닛 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">18A90539-E61E-4941-A7C8-90F40254BA7A</PAYER> <!--완료NPC 게펜 - 비닛 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">18A90539-E61E-4941-A7C8-90F40254BA7A</AGENT> <!--진행NPC 11 게펜 - 비닛 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160011300">4702300</MONSTER> 
+ <!--MON_NO=4702300/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160011300/[Q.ID:00113] 에너지체의 결정(오크 필드)100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160011300</ITEM> 
+ <!--Item_NO=160011300/[Q.ID:00113] 에너지체의 결정(오크 필드),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10011311"/> <!--에너지체의 결정-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10011321" FACE="Vinit_normal"/> <!--헤헷. 안녕! %name%.
+오늘도 재밌는 얼굴을 하고 있구나.
+혹시 테일링이 뭔가 부탁하지 않았어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10011326" FACE="Vinit_normal"/> <!--이게 에너지체의 결정인가?
+고마워. 그리고 %name%, 참 다정하구나.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10011323" FACE="Vinit_normal"/> <!--음~ 사실은 말이야. 전에 말했던 박사님이 에너지체의 결정이라는 게 있다고 하셔서 말이지.
+그걸 클라인 박사님보다 먼저 연구해 보고 싶다고 하셔서 말이지.%%
+만약 테일링에게 부탁을 받았다면, 테일링보다 먼저 나에게 가져다주지 않겠어?
+물론 박사님이 연구가 끝나신 뒤에 바로 클라인 박사님께 가져가신다고 하셨어.%%
+에너지체의 결정은 오크 필드의 오크 히어로가 가지고 있다고 들었어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10011324" FACE="Vinit_normal"/> <!--그래? 뭔가 특별한 부탁을 하지 않은 모양이구나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10011325" FACE="Vinit_normal"/> <!--오빠랑 동생이 보고 싶어…
+응? 아무것도 아니야. 헤헤.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10011302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

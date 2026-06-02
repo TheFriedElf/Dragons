@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4175</ID> <!--T.T.10417501 빛의 시험 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	박쥐거미 퇴치-->
+<!--[완료NPC]	아키아 동굴(아카나이 근처) - 야나이-->
+<!--[내용]	아카나이를 찾기 위해 아키아 동굴을 찾은 야나이는 빛의 신보로부터 해방된 아카나이가 그림자의 신보를 본능적으로 찾고 있다고 말한다. 야나이의 부탁 대로 아키아 동굴에 있는 박쥐거미 근처에 있는 야나이를 찾아보자. 빛의 사제 야나이를 만나기 위해선 박쥐거미를 퇴치해야 할 것이다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2A4A4A54-3E04-44ad-BF61-D279E8D3A598</CLIENT> <!--시작NPC 아키아 동굴(박쥐거미 근처) - 야나이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3736865F-3956-4e23-8760-975A2F95AA1A</PAYER> <!--완료NPC 아키아 동굴(아카나이 근처) - 야나이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2A4A4A54-3E04-44ad-BF61-D279E8D3A598</AGENT> <!--진행NPC 11 아키아 동굴(박쥐거미 근처) - 야나이 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">3736865F-3956-4e23-8760-975A2F95AA1A</AGENT> <!--진행NPC 12 아키아 동굴(아카나이 근처) - 야나이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3530700</MONSTER> 
+ <!--MON_NO=3530700/박쥐 거미,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="502">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10417511"/> <!--박쥐거미 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10417521" FACE="Yanai_normal"/> <!--오염된 신보 아카나이를 아키아 동굴로 옮긴 무리들도
+아마 그 때문이었을 거야.%%
+아카나이는 오랜 세월 동안 신보에 갇혀있었기 때문에
+그림자의 신보를 찾는 본능 밖에 남지 않았을 거야.%%
+결국 이 동굴 깊숙히 숨겨둔 그림자의 신보를 찾기 위해서 
+아카나이를 이곳에 풀어둔 걸꺼야.  -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10417526" FACE="Yanai_smile"/> <!--지금 우리가 찾고 있는 아카나이가 원래는 우리의 조상이라는 
+사실을 알고 있니? 아카나이 뿐만 아니라 신보에 갇힌 일곱 정령 
+모두가 드래곤차일드라고 이름 붙여진 원시 드라칸이었단다.%%
+(이게 신보의 오염 때문에 일어난 환상이 아니라면...)%%
+파괴와 욕망에 물들어 무서운 돌연변이로 변해버린 드래곤차일드를
+가둬둔 것이 바로 신보야. 다시 잊지 않기 위해서, 짐승으로
+변하지 않기 위해서 우린 신보를 지켜가고 있는 거란다.%%
+(지금 앞에 있는 사람은... 야나이가 아닌... 루!)%%
+신보를 지킨다는 건 단순히 보물을 지키는 일이 아니야.
+우리 일족을 지키는 거고, 더 나가 세상을 지키는 일이란다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10417523" FACE="Yanai_normal"/> <!--지금까지처럼 다음 층에서 만나기로 하자꾸나.
+아마 박쥐거미가 있는 곳을 지나쳐야 할테니
+조심하도록 하렴.%%
+(야나이의 소매 속에서 흑단목으로 된 피리가 비쳤다)%%
+뭐하고 있니? 서둘러야 해!%%
+(저… 피리는…!!!)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10417524" FACE="Yanai_angry"/> <!--아카나이를 찾는 일이 겁이 나는 모양이구나. 그럼 어쩔 수 없지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10417525" FACE="Yanai_angry"/> <!--박쥐거미가 있는 곳에 먼저 가있을테니까 주의해서 따라오도록 하렴.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10417511" FACE="Yanai_angry"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10417502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

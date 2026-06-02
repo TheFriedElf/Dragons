@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="EscScript" EventID="980172"/>
+
+	<!-- 포트레이트 연출 시작-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.2" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="0.5"/><!--  시간을 기다림-->
+
+	<CMD TYPE="Dialogue" NameTTID="99801064" TextTTID="99801721" FaceID="Perseus_angry" /><!-- 페르세우스 화남-->
+	  <CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801722" FaceID="User_normal"/><!-- 유저 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	
+	<CMD TYPE="Dialogue" NameTTID="99801064" TextTTID="99801723" FaceID="Perseus_normal" /><!-- 페르세우스 기본-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+
+
+	
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980172"/>
+
+	
+</EVENT_SCRIPT>
+

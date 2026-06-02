@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="040115_FD" DESCRIPTION="90401100">
+  <GSAPATH>../Data/3_World/04_Lavita/01_Level/040115_FD.gsa</GSAPATH>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!-- 포탈-->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+  <!-- 엔터 던전 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" HIDE_MINIMAP="1">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <!-- 엘리베이터-->
+  <STONES />
+  <OBJECT GUID="dbc28a69-b765-44d1-9116-8a40cdd848f1" RIDABLE="TRUE" SPEED="120" CLASS_NO="5000542">
+    <WayPoint POINT="-2467.375, -106.952, 773.403" TIME="1" />
+    <WayPoint POINT="-2467.375, -106.952, 1105.462" TIME="1" />
+  </OBJECT>
+</WORLD>

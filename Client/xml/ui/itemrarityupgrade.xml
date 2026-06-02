@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_ITEM_RARITY_UPGRADE" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR X = "240" Y = "91" W ="255" H ="453" CAN_DRAG = "1" STATIC_NUM = "1"/>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="253" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="222" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="213" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" T_X="10" T_Y="4" W="213" H="24" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<IMG ID="IMG_LINE_1" X="5" Y="275" W="245" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="245" IMG_H="2" />
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="280" Z="-2" W="237" H="130" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID = "SFRM_SHADOW" X = "9" Y = "280" Z="-1" W="237" H="130" STATIC_NUM = "3" >
+			<ATTR TEXT = "" FONT_COLOR_HEX="0xFF4D3413" T_X = "10" T_Y = "10"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<IMG ID="IMG_LINE_1" X="6" Y="98" W="224" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="224" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE_2" X="6" Y="99" W="224" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="224" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN1" X="7" Y="102" Z="-2" W="116" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN2" X="140" Y="102" Z="-2" W="30" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN3" X="187" Y="102" Z="-2" W="30" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<FORM ID="FRM_COIN1" X="87" Y="105" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					wnd = ItemRarityUpgradeWnd(UISelf)
+					UISelf:DrawMoneyByValue(1, wnd:GetUpgradeNeedMoney())
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN2" X="134" Y="105" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					wnd = ItemRarityUpgradeWnd(UISelf)
+					UISelf:DrawMoneyByValue(2, wnd:GetUpgradeNeedMoney())
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN3" X="181" Y="105" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					wnd = ItemRarityUpgradeWnd(UISelf)
+					UISelf:DrawMoneyByValue(3, wnd:GetUpgradeNeedMoney())
+				</SCRIPT>
+			</FORM>	
+		</STATIC_FORM>
+		<IMG ID="IMG_STONE_BG" X="12" Y="38" Z="-2" W="231" H="230" IMG="../Data/6_ui/stone/stCraftBg.tga" IMG_W="231" IMG_H="230"/>
+		<FORM ID = "FRM_UIMODEL" X="12" Y="38" Z="1" W="231" H="230" PASS_EVENT="1">
+			<SCRIPT ID="ON_TICK">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:OnTick(UISelf)
+			</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:OnDisplay()
+			</SCRIPT>
+			<!--SCRIPT ID="ON_CALL"> gWheel=0  gRotX = 0 gRotY = 0</SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP">
+				gWheel=gWheel+2
+				ODS("ON_WHEEL_UP " ..gWheel .."\n",false,1509)
+			</SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN">
+				gWheel=gWheel-2
+				ODS("ON_WHEEL_DOWN " ..gWheel .."\n",false,1509)
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				UISelf:RenderModelCameraZoom("ef_UImix_01", gWheel)
+			</SCRIPT-->
+		</FORM>
+		<IMG ID="IMG_STONE_SLOT" X="42" Y="67" Z="-1" W="172" H="172" IMG="../Data/6_ui/stone/stCraftSlot.tga" IMG_W="172" IMG_H="172">
+			<STATIC_FORM ID = "SFRM_COLOR_SLOT" X="65" Y="65" Z="-2" W="42" H="42" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW_SLOT" X = "65" Y = "65" Z="-1" W="42" H="42" STATIC_NUM = "3" />
+		</IMG>		
+		<IMG ID = "IMG_ITEM" X="108" Y="134" W="40" H="40" IMG_W = "40" IMG_H="40" PASS_EVENT="1">
+			<LOCAL>
+				<NAME ID="DEVELOP">
+					<ATTR IMG="../Data/6_ui/info/ifIconWp.tga"/>
+				</NAME>
+			</LOCAL>
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(true)
+			</SCRIPT>
+		</IMG>
+		<ICON ID = "ICN_SRC" X="108" Y="134" Z="0" W="40" H="40" ICON_GRP ="115" ICON_KEY = "0">			
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemRarityUpgradeWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">				
+				UISelf:CursorToIcon()
+			</SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:DisplaySrcIcon()
+				SetExplaneText()
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<ICON ID = "ICN_MATERIAL0" X="43" Y="69" W="40" H="40" ICON_GRP ="0" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemRarityUpgradeWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:DisplayNeedItemIcon(2)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> OnCallMissionRewardItemToolTip(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<IMG ID = "IMG_LOCK0" X="43" Y="69" Z="1" W="40" H="40" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40">
+			<!--SCRIPT ID="ON_CALL">
+				wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SetLockSlot(0)
+			</SCRIPT-->
+		</IMG>
+		<ICON ID = "ICN_MATERIAL1" X="43" Y="199" W="40" H="40" ICON_GRP ="117" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemRarityUpgradeWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:DisplayNeedItemIcon(1)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_REG1" X="69" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SetMaterialItem(1, false)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEREG1" X="43" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SetMaterialItem(1, true)
+			</SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_LOCK1" X="43" Y="199" Z="3" W="40" H="40" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40">
+			<SCRIPT ID = "ON_CALL">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SetLockSlot(1)
+			</SCRIPT>
+		</IMG>
+		<ICON ID = "ICN_MATERIAL3" X="173" Y="199" W="40" H="40" ICON_GRP ="116" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemRarityUpgradeWnd(UISelf) </SCRIPT>
+			<!--SCRIPT ID = "ON_L_BTN_UP"> UISelf:CursorToIcon() </SCRIPT-->
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:DisplayNeedItemIcon(3)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_REG3" X="199" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SetMaterialItem(3, false)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEREG3" X="173" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SetMaterialItem(3, true)				
+			</SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_LOCK3" X="173" Y="199" W="40" H="40" Z="3" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40">
+			<SCRIPT ID = "ON_CALL">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SetLockSlot(3)
+			</SCRIPT>
+		</IMG>
+		<ICON ID = "ICN_MATERIAL_SOUL" X="173" Y="69" W="40" H="40" ICON_GRP ="0" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:DisplayNeedItemIcon(0)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			<!--SCRIPT ID = "ON_MOUSE_OVER"> OnCallMissionRewardItemToolTip(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT-->
+		</ICON>
+
+		<BUTTON ID = "BTN_TRY_REFINE" X="44" Y="414" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				if wnd:InProgress() == true then return end
+
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallCheckInsureItem()
+				else
+					CommonMsgBoxByTextTable(iError, true)
+				end
+			</SCRIPT> 
+			<HOTKEY ID="59">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				if wnd:InProgress() == true then return end
+
+				wnd = ItemRarityUpgradeWnd(UISelf)
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallCheckInsureItem()
+				else
+					CommonMsgBoxByTextTable(iError, true)
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="130" Y="414" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				if wnd:InProgress() == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemRarityUpgradeWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+			</SCRIPT>
+			<HOTKEY ID="1">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				if wnd:InProgress() == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemRarityUpgradeWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+			<HOTKEY ID="60">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				if wnd:InProgress() == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemRarityUpgradeWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			local wnd = ItemRarityUpgradeWnd(UISelf)
+			wnd:Clear(true)
+			CloseUI("Inv")
+		</SCRIPT> 
+		<SCRIPT ID = "ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+			local wnd = ItemRarityUpgradeWnd(UISelf)
+			wnd:Clear()
+			CloseUI("SFRM_MSG_TRADE")
+			CloseUI("SFRM_MSG_TRADE_REQUEST")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 240, 91)</SCRIPT>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_RARITY_REFINE">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="122" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="70" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="70" STATIC_NUM="3" />
+				<ATTR TEXT="" FONT="Font_Text" T_X="95" T_Y="13" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID = "ON_CALL">
+					UISelf:SetStaticText("")			
+				</SCRIPT>
+				<!--SCRIPT ID = "ON_DISPLAY">
+					local t = UISelf:GetStaticText()
+					local t_y = 55-t:Length()*0.5
+					local tpos = UISelf:GetTextPos()
+					tpos:SetY(t_y)
+					UISelf:SetTextPos(tpos)
+				</SCRIPT-->
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_TRY_REFINE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR X="18" Y="83" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				if wnd:InProgress() == true then 
+					return 
+				end
+
+				if wnd:SendReqRarityUpgrade(false) == false then
+					AddWarnDataTT(59003)
+				else
+					UISelf:CloseParent()
+					g_bOnUpgrade = true
+					g_fUpgradeStartTime = GetAccumTime() 
+					g_bUpgradeSound = false
+					local	kActor = GetMyActor()
+					if false == kActor:IsNil() then
+						kActor:AttachSound(2998, "Enchant")
+					end
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				if wnd:InProgress() == true then 
+					return true
+				end
+
+				if wnd:SendReqRarityUpgrade(false) == false then
+					AddWarnDataTT(59003)
+				else
+					UISelf:CloseParent()
+					g_bOnUpgrade = true
+					g_fUpgradeStartTime = GetAccumTime()
+					g_bUpgradeSound = false
+					local	kActor = GetMyActor()
+					if false == kActor:IsNil() then
+						kActor:AttachSound(2998, "Enchant")
+					end
+				end
+				return true
+			</HOTKEY>		
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR X="104" Y="83" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<!--FORM ID = "FRM_ITEM_PLUS_UPGRADE_STATE">
+  		<ATTR ALIGN_X = "50" ALIGN_Y = "40" W ="265" H ="77" CAN_DRAG = "0" />
+		<ATTR IMG = "../Data/6_ui/12_ItemPlusUpgrade/RefineTbg.tga" IMG_W = "265" IMG_H = "77"/>
+		<ATTR FONT = "Font_Text" TEXT = "1400" T_X = "40" T_Y ="45" T_OUTLINE ="0"/>
+
+		<ANI_BAR ID = "BAR_TIMER">
+			<ATTR X= "10" Y = "12" W ="240" H ="20" />
+			<ATTR U = "1" V = "1" /> 
+			<ATTR BAR_COUNT = "1"/>
+			<ATTR BAR_IMG = "../Data/6_ui/12_ItemPlusUpgrade/RefineTbar.tga" BAR_IMG_W = "240" BAR_IMG_H = "20"/>	
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "111" T_Y ="3" />
+			<SCRIPT ID = "ON_DISPLAY">
+				UISelf:DisplayTimeBar(true)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				UISelf:SetStartTime(5000)
+			</SCRIPT>
+			<SCRIPT ID = "ON_BAR_FULL">
+				wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:SendReqRarityUpgrade(true)
+				wnd:ClearUpgradeData()
+			</SCRIPT>
+		</ANI_BAR>
+
+	</FORM-->
+	<STATIC_FORM ID = "ITEM_RARITY_UPGRADE_SELECT" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "40" W="261" H="290" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="259" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="228" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="219" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" T_X="10" T_Y="4" W="219" H="24" STATIC_NUM="3" TEXT="1434" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_SCRIPT" X="9" Y="35" STATIC_NUM="34" W="244" H="113" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE = "1" TEXT="1435" T_X="7" T_Y="8"/>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="151" Z="-1" W="243" H="96" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID = "SFRM_SHADOW" W="243" H="96" STATIC_NUM="3" TEXT="1436" FONT_COLOR_HEX="0xFF4D3413" T_X = "16" T_Y="8">
+				<IMG ID="IMG_ARROW" X="9" Y="13" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+				<IMG ID="IMG_LINE_1" X="8" Y="27" W="227" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="227" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="8" Y="28" W="227" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="227" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<BUILD TARGET_ID="SFRM_BTN_BG" X="8" Y="31" X_COUNT = "1" Y_COUNT = "2" X_GAB = "0" Y_GAB = "30" START_INDEX = "5"/>
+				<STATIC_FORM ID = "SFRM_BTN_BG" X="0" Y="0" W="227" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+					<ATTR FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+					<SCRIPT ID = "ON_BUILD">UISelf:SetStaticTextW(GetTextW(1440+UISelf:GetBuildIndex()))</SCRIPT>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUILD TARGET_ID="BTN_SELECT" X="175" Y="185" X_COUNT = "1" Y_COUNT = "2" X_GAB = "0" Y_GAB = "30" START_INDEX = "5"/>
+		<BUTTON ID = "BTN_SELECT" X = "0" Y = "0" Z="1" W = "67" H = "21">
+			<!-- START_INDEX = 5 라서 
+				어쩔 수 없이 2195에 BuildIndex 더해서 2200, 2201 만듬 -->
+			<SCRIPT ID ="ON_BUILD">
+				local kTemp = 2195
+				local kHotkeyString = kTemp + UISelf:GetBuildIndex()
+				SetTextOnThisUI(400084, kHotkeyString )
+			</SCRIPT>			
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W = "134" BTN_IMG_H = "42"/>
+			<ATTR TEXT = "400084" FONT = "FTtitle_14" T_X = "10" T_Y ="3" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> 
+				local index = UISelf:GetBuildIndex()+1
+				SelectSoulCraftByIndex( index )
+			</SCRIPT>
+			<HOTKEY ID="59"> SelectSoulCraftByIndex(6)	return true </HOTKEY>
+			<HOTKEY ID="60"> SelectSoulCraftByIndex(7)	return true </HOTKEY>
+			<SCRIPT ID = "ON_MOUSE_OVER"> CallToolTipText(0, GetTT(UISelf:GetBuildIndex()+1490), UISelf:GetLocation())  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+
+		<BUTTON ID = "BTN_CANCLE" X="88" Y="251" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(50706, 2202) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "3303" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="61">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> CloseToolTip() </SCRIPT>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_UPGRADE_RESET" ALIGN_X="50" ALIGN_Y="40" W="263" H="106" IMG="../Data/6_ui/stone/stIconBg.tga" IMG_W="263" IMG_H="99">
+		<ATTR TEXT="1401" FONT_COLOR_HEX="0xFFFFFFFF" T_X="131" T_Y="50" T_CENTER="1" T_OUTLINE="1"/>
+		<ICON ID="ICN_ITEM" X="111" Y="2" Z="2" W ="40" H ="40" ICON_GRP="227" ICON_STATIC="1">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_OK" X="42" Y="80" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_X="42" T_Y="4" T_CENTER="1"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(50601, 2200)</SCRIPT>
+			<HOTKEY ID="59">UISelf:GetParent():Close() return true</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():Close() return true</SCRIPT>			
+		</BUTTON>
+		<BUTTON ID="BTN_RESET" X="136" Y="80" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_X="42" T_Y="4" T_CENTER="1"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(50602, 2201)</SCRIPT>
+			<HOTKEY ID="60">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:OnClickReset()
+				UISelf:GetParent():Close()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemRarityUpgradeWnd(UISelf)
+				wnd:OnClickReset()
+				UISelf:GetParent():Close()
+				return true
+			</SCRIPT>				
+		</BUTTON>
+	</FORM>
+	<!--
+	DoFile("ui/common.lua") CallUI("FRM_UPGRADE_RESET") 
+	-->
+</XUI>

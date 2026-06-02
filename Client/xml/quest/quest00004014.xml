@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4014</ID> <!--T.T.10401401 지하수로에 대한 보고 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구에서 에델린과 대화-->
+<!--[완료NPC]	바람항구 - 에델린-->
+<!--[내용]	바람 항구에 불길한 일이 끊이질 않는다. 바람항구의 상급법사인 에델린을 만나 이야기를 들어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2FF6590B-6648-4D73-9A61-7B4FA9065498</CLIENT> <!--시작NPC 바람항구 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER> <!--완료NPC 바람항구 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2FF6590B-6648-4D73-9A61-7B4FA9065498</AGENT> <!--진행NPC 11 바람항구 - 콜린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 12 바람항구 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10401411"/> <!--에델린과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10401421" FACE="Colin_normal"/> <!--이렇게 드라칸 동지들을 친히 부른 것은 다름이 아니라,
+바람항구에서 최근 불길한 사건이 끊이지 않고 있어서%% 
+특별히 주의할 것을 알려드리기 위함이요. 우선은 이 일에 관한
+모든 권한을 상급법사인 에델린에게 맡겼으니 그녀를 만나보는 것이
+어떠하겠소? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10401426" FACE="Edeline_normal"/> <!--어째서…
+(에델린의 표정에 실망한 기색이 역력하다.)%%
+아무래도 시청 지하수로를 조사해 봐야 할 것 같네요. 
+그 곳은 독가스로 가득차 있어서 제대로 숨을 쉴수도 없답니다. 
+
+-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10401423" FACE="Colin_normal"/> <!--그렇다면 바로 에델린을 찾아가시오. 
+자세한 이야기는 그녀에게 들을 수 있을 것이오. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10401424" FACE="Colin_angly"/> <!--흐흠…!
+그래, 그렇다면… 나는 지금 시간이 없으니 이만 실례하겠네…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10401425" FACE="Colin_normal"/> <!--에델린은 나이는 어리지만… 상급법사를 맡고 있는 유능한 인재라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10401402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

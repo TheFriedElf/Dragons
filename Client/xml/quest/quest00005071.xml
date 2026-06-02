@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5071</ID> <!--T.T.10507101 강함! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단의 톱날꼬깨 30마리를 처리하자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 위험에 대처하는 자세에 대해서 계속 이야기 한다. 위험에 대처하는 자세 중 가장 중요한 것 중에 또 다른 한 가지는 바로 강함이라고 했다. 날렵함으로 대적하지 못하는 경우가 반드시 발생하게 마련인데, 그것을 강함으로 극복해야 한다고 했다. 이런 강함을 익히기 위해서는 칼리곤 선단의 껍질이 단단하기로 유명한 톱날꼬깨를 상대해야 한다. 강함을 익히기 위해 칼리곤 선단의 톱날꼬깨 30마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010150/1">6010900</MONSTER> 
+ <!--MON_NO=6010900/톱날꼬깨,MAP_NO=9010150/칼리곤 선단,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10507111"/> <!--톱날꼬깨-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10507121" FACE="Mukapa_normal"/> <!--위험에 대처하는 자세는 여러 가지가 있다고 말했네.
+하지만 안타깝게도 위험 또한 여러 종류가 찾아오게 되지.
+막상 준비했다고 생각하지만, 그것과는 또 다른 일이 벌어지기 마련이네.%%
+그런 상황에서 자네가 열심히 노력한 날렵함을 무용지물로 만드는 위험이 찾아오기도 하지.
+이제 자네는 날렵함 이외의 다른 것을 익힐 때라고 보네. 물론 당연히 할 거라고 믿네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10507126" FACE="Mukapa_normal"/> <!--드디어 날렵함과 강함 모두를 익히게 되었네. 슬슬 위험에 대처하는 자세도 마지막에 가까워졌다는 생각이 드는군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10507123" FACE="Mukapa_normal"/> <!--날렵함으로 이길 수 없는 상대는 엄청난 맷집과 방어력을 가진 존재들이지.
+그 녀석들에게 날렵함은 그저 귀찮은 날파리일 뿐이지.%%
+그런 녀석들을 쓰러뜨리기 위해 필요한 것은 강함이지. 
+맷집과 방어력을 한 방에 무력하게 만들 강함이야 말로 녀석들에게 가장 큰 무기로 작용할 걸세.%%
+이런 강함을 익히기 위해서는 칼리곤 선단에 있는 톱날꼬깨를 상대하는 게 가장 좋다네.
+녀석들의 단단한 껍질은 보통의 힘으로는 부수지 못한다고 알려져 있네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10507124" FACE="Mukapa_angry"/> <!--강함을 겸비하지 못하면, 언젠가 큰 위험이 닥쳤을 경우 반드시 후회할 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10507125" FACE="Mukapa_normal"/> <!--톱날꼬깨 녀석들은 상당히 단단한 녀석들이니 손을 다치지 않도록 조심하는 게 좋을 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10507102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

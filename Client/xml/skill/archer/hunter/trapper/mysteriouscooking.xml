@@ -1,0 +1,8 @@
+<ACTION ID="a_Mysterious Cooking" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP = "true"/>
+  <SLOT NAME="com_skill_buff"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_ID ="ef_Mysteryouscooking_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE ="char_root"
+       />
+</ACTION>

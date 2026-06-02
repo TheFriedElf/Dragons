@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4172</ID> <!--T.T.10417201 아카나이를 처단하라! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	아카나이 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 오추쿠-->
+<!--[내용]	장로 오추쿠는 아카나이를 잡기 위해 카즈라를 찾은 모든 전사들에게 아카나이 토벌령을 공표한다. 아키아 동굴에 숨어있는 오염된 신보의 정령 아카나이를 퇴치하라.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">48AB8C5A-FB6A-467d-B914-01514408440A</CLIENT> <!--시작NPC 카즈라 마을 - 오추쿠 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">48AB8C5A-FB6A-467d-B914-01514408440A</PAYER> <!--완료NPC 카즈라 마을 - 오추쿠 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">48AB8C5A-FB6A-467d-B914-01514408440A</AGENT> <!--진행NPC 11 카즈라 마을 - 오추쿠 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3530800</MONSTER> 
+ <!--MON_NO=3530800/아카나이,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10417211"/> <!--아카나이 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">160000680</ITEM><!--전체지급/전체/1)/160000680(봉인아님) 1개-카즈라 수호자의 증료-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10417221" FACE="Ocuku_normal"/> <!--이제 드라칸 내의 모든 전사들은 들으시오.
+아카나이가 아키아 동굴의 어둠 속에 숨어서
+우리 드라칸과 세상의 미래를 위태롭게 하고 있소이다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10417226" FACE="Ocuku_smile"/> <!--오오! 아카나이를 퇴치하였으니
+우리 드라칸에게 무한한 기쁨이외다.%%
+%name%님의 덕분에 우리의 가장 큰 근심을 덜었으니
+내 특별히 보상을 해드리겠소.  -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10417223" FACE="Ocuku_normal"/> <!--드라칸과 인간의 전사들이시어. 
+반드시 아카나이를 퇴치하여 주시오.%%
+오늘 아키아 동굴에서 아카나이를 퇴치해낸다면
+이는 우리 드라칸 족의 무구한 역사 속에
+중대한 기록으로 남을 것입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10417224" FACE="Ocuku_angry"/> <!--그대는 정녕 세상의 평화를 뒤흔드는 일을 방관할 생각이오?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10417225" FACE="Ocuku_angry"/> <!--아카나이는 어찌되었습니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10417202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

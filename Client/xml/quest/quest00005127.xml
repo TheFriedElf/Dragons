@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5127</ID> <!--T.T.10512701 용병단의 부활을 위해(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전 [아케이드 모드(F1)] - 그리드 청기사로부터 녹슨 투구 20개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	용병단장 토마스는 강력했던 용병단을 다시 부활시키기 위해 노력하고 있다고 한다. 지금은 사람이 많이 없지만 곧 많은 지원자들이 몰리게 될 것을 대비하여, 무기를 수집하고 있는 토마스. 토마스의 용병단을 위해 스카이피 신전[아케이드 모드(F1)]으로 가서 그리드 청기사를 처리하고 녹슨 투구 20개를 구해오자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010216/10000/5500/1/1/160512700">6009100</MONSTER> 
+ <!--MON_NO=6009100/그리드 청기사,MAP_NO=9010216/스카이피 신전 아케이드 6,Item_NO=160512700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010211/10000/5500/1/1/160512700">6009100</MONSTER> 
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010214/10000/5500/1/1/160512700">6009100</MONSTER> 
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010219/10000/5500/1/1/160512700">6009100</MONSTER> 
+
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160512700</ITEM> 
+ <!--Item_NO=160512700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10512711"/> <!--녹슨 투구 획득 -->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10512721" FACE="Thomas_angly"/> <!--오 ! 또 왔나? 아주 좋은 소식이 하나 있네.
+자네가 날 자주 도와주니 우리 용병단에 입단비 없이 가입시켜주지.
+당장 가입신청서부터 작성하게.%%
+뭐?! 싫다고? 나도 그럼 싫어! 흥! 대신 내 부탁이나 들어주게.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10512726" FACE="Thomas_smile"/> <!--오... 우리 용병단이 강해지는 소리가 들리는군. 자네도 금방 들어올 수 있을 걸세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10512723" FACE="Thomas_normal"/> <!--내가 용병단을 모으고 있는 건 자네도 알고 있지?
+저번에 자네가 구해다 준 검은 창고에 차곡차곡 모아놨지. %%
+이제 방어구를 모아야겠네.
+스카이피 신전[아케이드 모드(F1)]으로 가서 그리드 청기사를 처리하고, 
+녹슨 투구 20개만 구해오게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10512724" FACE="Thomas_angly"/> <!--자네는 우리 용병단에 안 받아줄 거야. 뭐? 어차피 그럴 생각 없다고? 쳇!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10512725" FACE="Thomas_normal"/> <!--뭐 하고 있는 건가? 어서 출발하게. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10512702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

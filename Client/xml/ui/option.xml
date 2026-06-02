@@ -1,0 +1,3292 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start Key Set Dialog▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	<STATIC_FORM ID="SFRM_KEYSET" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<ATTR ALIGN_X="50" Y="91" W="826" H="415" CAN_DRAG = "1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_TITLE_KEYSET">
+			<ATTR X="1" Y="0" W="824" H="36" STATIC_NUM="4" />
+			<STATIC_FORM ID="SFRM_KEY">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+				<CHECK_BUTTON ID="CBTN_KEYSET">
+					<ATTR X="0" Y="0" W="84" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+					<ATTR TEXT="400038" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_PAD">
+				<ATTR X="96" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+				<CHECK_BUTTON ID="CBTN_GAMEPAD">
+					<ATTR X="0" Y="0" W="84" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+					<ATTR TEXT="90003000" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL">UISelf:CheckState(false)</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+					  Option_OnKeySet_Cancel()
+					  CallUI("SFRM_GAMEPAD")
+					  CloseUI("SFRM_KEYSET")
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_CLOSE">
+				<ATTR X="793" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<BUTTON ID="BNT_CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						Option_OnKeySet_Cancel()
+					</SCRIPT>			
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_NOT_USE_MAP">
+			<ATTR X="9" Y="316" W="808" H="54" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<ATTR TEXT="400043" FONT="Font_Text" T_X="92" T_Y="7" T_RIGHT="1" FONT_COLOR_HEX="0xFF4D3413"/>
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="808" H="54" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_KEYBOARD_MAP">
+			<ATTR X="9" Y="35" W="808" H="280" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="808" H="280" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<IMG ID="IMG_KEYSET_BG1">
+			<ATTR X="16" Y="41" W="398" H="323" IMG = "../Data/6_ui/key/keyBg.tga" IMG_W="398" IMG_H="323"/>
+		</IMG>
+		<IMG ID="IMG_KEYSET_BG2">
+			<ATTR X="414" Y="41" W="398" H="323" IMG = "../Data/6_ui/key/keyBg2.tga" IMG_W="398" IMG_H="323"/>
+		</IMG>
+		
+		<FORM ID="FRM_KEYSET_BG">
+			<ATTR X="0" Y="35" W="817" H="335"/>
+			
+			<IMG ID="IMG_KEYSET_LOCK_ESC">
+				<ATTR X="7" Y="33" W="398" H="323" IMG = "../Data/6_ui/key/keyEpbg.tga" IMG_W="60" IMG_H="23"/>
+				<ATTR T_X="30" T_Y="1" TEXT="400039" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</IMG>
+			<IMG ID="IMG_KEYSET_LOCK_PRINTSCREEN">
+				<ATTR X="673" Y="33" W="398" H="323" IMG = "../Data/6_ui/key/keyEpbg.tga" IMG_W="60" IMG_H="23"/>
+				<ATTR T_X="30" T_Y="1" TEXT="400040" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</IMG>
+			<IMG ID="IMG_KEYSET_LOCK_ENTER">
+				<ATTR X="625" Y="150" W="398" H="323" IMG = "../Data/6_ui/key/keyEpbg.tga" IMG_W="60" IMG_H="23"/>
+				<ATTR T_X="30" T_Y="1" TEXT="400041" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</IMG>
+			<!--IMG ID="IMG_KEYSET_LOCK_ARROW">
+				<ATTR X="716" Y="221" W="398" H="323" IMG = "../Data/6_ui/key/keyEpbg.tga" IMG_W="60" IMG_H="23"/>
+				<ATTR T_X="30" T_Y="1" TEXT="400042" FONT="FTbt_12" T_CENTER="1"/>
+			</IMG-->
+			
+			<FORM ID="FRM_KEYSET_DUMMY">
+				<ATTR X="9" Y="0" W="808" H="335"/>
+				
+				<!-- 101 Group Icons are automatic set ICON_KEY from Icon Control ID (Ex: "ICON_KEY_MAP_XX") -->
+				
+				<!-- Function Key START		F3(61)~F4(62) F5(63)~F8(66) F9(67) F10(68) F11(85) F12(86) -->
+				<BUILD ID="BUILD_F3" TARGET_ID="ICON_KEY_MAP_F3" X="184" Y="7" X_COUNT="2" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="61" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_F3">
+					<ATTR X="0" Y="0" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- ===========BLANK========== -->
+				<BUILD ID="BUILD_F5" TARGET_ID="ICON_KEY_MAP_F5" X="294" Y="7" X_COUNT="4" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="63" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_F5">
+					<ATTR X="0" Y="0" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- ===========BLANK========== -->
+				<BUILD ID="BUILD_F9" TARGET_ID="ICON_KEY_MAP_F9" X="492" Y="7" X_COUNT="4" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="67" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_F9">
+					<ATTR X="0" Y="0" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- Function Key END		F1(59)~F4(62) F5(63)~F8(66) F9(67) F10(68) F11(85) F12(86) -->
+																			
+				<!-- Start `(41) 1(2)~0(11) -(12) =(13) \(43) -->
+				<LOCAL>				
+				<!-- ~키 위치 -->					
+					<NAME ID="FRANCE">
+						<ICON ID="ICON_KEY_MAP_41">
+							<ATTR X="8" Y="57" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+					<NAME ID="GERMANY">
+						<ICON ID="ICON_KEY_MAP_41">
+							<ATTR X="8" Y="57" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+					<NAME ID="EUROPE/AMERICA"> <!-- 정확히는 유럽 영문 버전 -->
+					</NAME>
+					<NAME ID="DEFAULT">
+						<ICON ID="ICON_KEY_MAP_41">
+							<ATTR X="8" Y="57" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+				</LOCAL>				
+				<BUILD ID="BUILD_1" TARGET_ID="ICON_KEY_MAP_1LINE" X="52" Y="57" X_COUNT="12" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="2" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_1LINE">
+					<ATTR X="0" Y="0" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<LOCAL>
+					<!-- \키 위치 -->					
+					<NAME ID="EUROPE/AMERICA">
+					</NAME>
+					<NAME ID="FRANCE">
+					</NAME>
+					<NAME ID="GERMANY">
+					</NAME>					
+					<NAME ID="DEFAULT">
+						<ICON ID="ICON_KEY_MAP_43">
+							<ATTR X="580" Y="57" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+				</LOCAL>
+							
+				
+				<!-- END `(41) 1(2)~0(11) -(12) =(13) \(43) -->
+
+				<!-- Start Insert(128), Home(120), PgUp(122) -->
+				<ICON ID="ICON_KEY_MAP_128">
+					<ATTR X="674" Y="57" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_120">
+					<ATTR X="718" Y="57" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_122">
+					<ATTR X="762" Y="57" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- END Insert(128), Home(120), PgUp(122) -->
+				
+				<!-- Tab -->
+				
+				<ICON ID="ICON_KEY_MAP_15">
+					<ATTR X="8" Y="101" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				
+				<!-- End Tab -->
+				
+				<!-- Start q(16)~p(25) [(26) ](27) -->
+				<BUILD ID="BUILD_2" TARGET_ID="ICON_KEY_MAP_2LINE" X="72" Y="101" X_COUNT="12" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="16" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_2LINE">
+					<ATTR X="0" Y="101" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- END q(16)~p(25) [(26) ](27) -->
+				<!-- Start Delete(129), End(125), PgDn(127) -->
+				<ICON ID="ICON_KEY_MAP_129">
+					<ATTR X="674" Y="101" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_125">
+					<ATTR X="718" Y="101" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_127">
+					<ATTR X="762" Y="101" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- END Delete(129), End(125), PgDn(127) -->
+				
+				<!-- Start a(30)~L(38) ;(39) '(40) -->
+				<BUILD ID="BUILD_3" TARGET_ID="ICON_KEY_MAP_3LINE" X="84" Y="145" X_COUNT="11" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="30" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_3LINE">
+					<ATTR X="0" Y="0" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- End a(30)~L(38) ;(39) '(40) -->
+				
+				<!-- Start L-Shift(42) z(44)~M(50) ,(51) .(52) /(53) R-Shift(54) -->
+				<ICON ID="ICON_KEY_MAP_42">
+					<ATTR X="8" Y="189" W="92" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<BUILD ID="BUILD_4" TARGET_ID="ICON_KEY_MAP_4LINE" X="104" Y="189" X_COUNT="9" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="44" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_4LINE">
+					<ATTR X="0" Y="0" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<LOCAL>
+					<!-- /키 위치 -->					
+					<NAME ID="GERMANY">
+						<ICON ID="ICON_KEY_MAP_53">
+							<ATTR X="500" Y="189" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+					<NAME ID="EUROPE/AMERICA">
+						<ICON ID="ICON_KEY_MAP_53">
+							<ATTR X="500" Y="189" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+					<NAME ID="FRANCE">
+					</NAME>
+					<NAME ID="DEFAULT">
+						<ICON ID="ICON_KEY_MAP_53">
+							<ATTR X="500" Y="189" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+				</LOCAL>
+				
+				<ICON ID="ICON_KEY_MAP_54">
+					<ATTR X="544" Y="189" W="120" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- END L-Shift(42) z(44)~M(50) ,(51) .(52) /(53) R-Shift(54) -->
+				
+				<!-- Start ETC L-Ctrl(29) L-Alt(56) Space Bar(57) R-Alt(118) R-Ctrl(107) -->
+				<ICON ID="ICON_KEY_MAP_29">
+					<ATTR X="8" Y="233" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_56">
+					<ATTR X="104" Y="233" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_57">
+					<ATTR X="200" Y="233" W="228" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<LOCAL>
+					<!-- R-Alt -->					
+					<NAME ID="FRANCE">
+					</NAME>
+					<NAME ID="GERMANY">
+					</NAME>
+					<NAME ID="EUROPE/AMERICA">
+					</NAME>					
+					<NAME ID="DEFAULT">
+						<ICON ID="ICON_KEY_MAP_118">
+							<ATTR X="476" Y="233" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+							<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>
+					</NAME>
+				</LOCAL>
+				<ICON ID="ICON_KEY_MAP_107">
+					<ATTR X="616" Y="233" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- END ETC L-Ctrl(29) L-Alt(56) Space Bar(57) R-Alt(118) R-Ctrl(107) -->
+				
+				<!-- Start CrossKey Up(121) Left(123) Down(126) RIght(124) -->
+				<ICON ID="ICON_KEY_MAP_121"><!--UP-->
+					<ATTR X="718" Y="189" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_123"><!--LEFT-->
+					<ATTR X="674" Y="233" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_126"><!--DOWN-->
+					<ATTR X="718" Y="233" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<ICON ID="ICON_KEY_MAP_124"><!--RIGHT-->
+					<ATTR X="762" Y="233" W="48" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_CREATE">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+				<!-- END CrossKey Up(121) Left(123) RIght(124) Down(126) -->
+				
+				<!-- not use function key list -->
+				<BUILD ID="BUILD_5" TARGET_ID="ICON_KEY_MAP_5LINE" X="102" Y="288" X_COUNT="16" Y_COUNT="1" X_GAB="44" Y_GAB="44" START_INDEX="150" TRG_CUSTOME_ID="ICON_KEY_MAP_"/>
+				<ICON ID="ICON_KEY_MAP_5LINE">
+					<ATTR X="0" Y="0" W="40" H="40" ICON_GRP="151" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT><SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT><SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT><SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+			</FORM>
+		</FORM>
+		
+		<BUTTON ID="BTN_DEFAULT">
+			<ATTR X="273" Y="376" W="84" H="26" />
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400001" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				Config_DefaultKeySet()
+				KEY_CHARGING = UKeyToKey(1046)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_OK">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR X="382" Y="376" W="84" H="26" />
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">	Option_OnKeySet_Accept() </SCRIPT>
+			<HOTKEY ID="59"> Option_OnKeySet_Accept() return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR X="468" Y="376" W="84" H="26" />
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> Option_OnKeySet_Cancel() </SCRIPT>
+			<HOTKEY ID="1">	 Option_OnKeySet_Cancel() return true </HOTKEY>
+			<HOTKEY ID="60"> Option_OnKeySet_Cancel() return true </HOTKEY>			
+		</BUTTON>
+	</STATIC_FORM>
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End Key Set Dialog▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	
+	
+	<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Cut line▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+	
+	<LOCAL>
+		<NAME ID="DEVELOP">
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start Option Dialog▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<STATIC_FORM ID="SFRM_OPTION" PRIORITY="2" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+				<SCRIPT ID="ON_CLOSE">
+					CloseUI("BarrierForDeleteConfirm", true)
+				</SCRIPT>
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="298" H="507" CAN_DRAG = "1" STATIC_NUM="1"/>
+				<BUTTON ID="BTN_DEFAULT">
+					<ATTR X="9" Y="468" W="84" H="26" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT = "400001" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> Option_Default() </SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_OK">
+					<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400002, 2200) </SCRIPT>
+					<ATTR X="119" Y="468" W="84" H="26" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> Config_Save_Extern() </SCRIPT>
+					<HOTKEY ID="59"> Config_Save_Extern() return true </HOTKEY>
+				</BUTTON>
+				<BUTTON ID="BTN_CANCEL">
+					<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400003, 2201) </SCRIPT>
+					<ATTR X="205" Y="468" W="84" H="26" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> Config_Cancel_Extern() </SCRIPT>
+					<HOTKEY ID="60"> Config_Cancel_Extern() return true </HOTKEY>
+					<HOTKEY ID="1">  Config_Cancel_Extern() return true </HOTKEY>			
+				</BUTTON>
+
+				<STATIC_FORM ID="SFRM_OPTION_TITLE">
+					<ATTR X="1" Y="0" W="296" H="36" STATIC_NUM="4" />
+					
+					<STATIC_FORM ID="SFRM_OPTION1">
+						<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+						<CHECK_BUTTON ID="CBTN_GRAPHIC">
+							<ATTR X="0" Y="0" W="84" H="24"/>
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400004" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<SCRIPT ID="ON_GET_FOCUS"> 
+								local kSelf = UISelf
+								if kSelf:GetCheckState() == false then
+									local kTopParent = kSelf:GetParent():GetParent():GetParent()
+									Option_TabChange(kTopParent, 1)
+								end
+							</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+					
+					<STATIC_FORM ID="SFRM_OPTION2">
+						<ATTR X="93" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+						<CHECK_BUTTON ID="CBTN_SOUND">
+							<ATTR X="0" Y="0" W="84" H="24" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400005" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<SCRIPT ID="ON_GET_FOCUS"> 
+								local kSelf = UISelf
+								if kSelf:GetCheckState() == false then
+									local kTopParent = kSelf:GetParent():GetParent():GetParent()
+									Option_TabChange(kTopParent, 2)
+								end
+							</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+					
+					<STATIC_FORM ID="SFRM_OPTION3">
+						<ATTR X="179" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+						<CHECK_BUTTON ID="CBTN_ETC">
+							<ATTR X="0" Y="0" W="84" H="24" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400006" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<SCRIPT ID="ON_GET_FOCUS"> 
+								local kSelf = UISelf
+								if kSelf:GetCheckState() == false then
+									local kTopParent = kSelf:GetParent():GetParent():GetParent()
+									Option_TabChange(kTopParent, 3)
+								end
+							</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+					
+					<STATIC_FORM ID="SFRM_BTN_CLOSE">
+						<ATTR X="265" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+						<BUTTON ID="BNT_CLOSE">
+							<ATTR X="0" Y="0" W="24" H="24" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+							<SCRIPT ID="ON_L_BTN_DOWN">	Config_Cancel_Extern()	</SCRIPT>
+						</BUTTON>
+					</STATIC_FORM>
+					<SCRIPT ID="ON_CALL">
+						local kTopParent = UISelf:GetParent()
+						Option_TabChange(kTopParent, 0)
+					</SCRIPT>
+				</STATIC_FORM>
+				 
+				 <!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Form Graphic Option▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+				<STATIC_FORM ID="SFRM_GRAPHIC">
+					<ATTR X="9" Y="35" W="280" H="427" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+					<STATIC_FORM ID="SFRM_SHADOW">
+						<ATTR X="0" Y="0" W="280" H="427" STATIC_NUM="3"/>
+					</STATIC_FORM>
+					<LIST ID="LST_GRAPHIC_OPTION">
+						<ATTR X="2" Y="6" W="270" H="410" ITEM_X="0" ITEM_Y="0"/>
+						<ATTR ELEMENT_ID="FRM_OPTION_GRAPHIC" />
+						<IMG ID="IMG_LIST_SCROLL_BG">
+							<ATTR X="260" Y="15" Z="-1" W="13" H="385" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="375"/>
+						</IMG>
+						<BUTTON ID="ScrUp">
+							<ATTR X="256" Y="0" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrDown">
+							<ATTR X="256" Y="400" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle">
+							<ATTR X="258" Y="0" W="15" H="21" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR WND_BAR = "IMG_LIST_SCROLL_BG" />
+						<ATTR BTN_UP = "ScrUp" />
+						<ATTR BTN_DOWN = "ScrDown" />
+						<ATTR BTN_MIDDLE = "ScrMiddle" />
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							kSelf:ClearAllListItem()
+							kSelf:AddNewListItemChar("")
+						</SCRIPT>
+					</LIST>
+				</STATIC_FORM> 
+				<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Form Sound Option▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+				<STATIC_FORM ID="SFRM_SOUND">
+					<ATTR X="9" Y="35" W="280" H="427" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" IS_VISIBLE="0" />
+					<STATIC_FORM ID="SFRM_SHADOW">
+						<ATTR X="0" Y="0" W="280" H="427" STATIC_NUM="3"/>
+					</STATIC_FORM>
+					<LIST ID="LST_SOUND_OPTION">
+						<ATTR X="2" Y="6" W="270" H="410" ITEM_X="0" ITEM_Y="0"/>
+						<ATTR ELEMENT_ID="FRM_OPTION_SOUND" />
+						<IMG ID="IMG_LIST_SCROLL_BG">
+							<ATTR X="260" Y="15" Z="-1" W="13" H="385" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="375"/>
+						</IMG>
+						<BUTTON ID="ScrUp">
+							<ATTR X="256" Y="0" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrDown">
+							<ATTR X="256" Y="400" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle">
+							<ATTR X="258" Y="0" W="15" H="21" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR WND_BAR = "IMG_LIST_SCROLL_BG" />
+						<ATTR BTN_UP = "ScrUp" />
+						<ATTR BTN_DOWN = "ScrDown" />
+						<ATTR BTN_MIDDLE = "ScrMiddle" />
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							kSelf:ClearAllListItem()
+							kSelf:AddNewListItemChar("")
+						</SCRIPT>
+					</LIST>
+				</STATIC_FORM>
+				<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Form ETC Option▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+				<STATIC_FORM ID="SFRM_ETC">
+					<ATTR X="9" Y="35" W="280" H="427" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" IS_VISIBLE="0" />
+					<STATIC_FORM ID="SFRM_SHADOW">
+						<ATTR X="0" Y="0" W="280" H="427" STATIC_NUM="3"/>
+					</STATIC_FORM>
+					<LIST ID="LST_ETC_OPTION">
+						<ATTR X="2" Y="6" W="270" H="410" ITEM_X="0" ITEM_Y="0"/>
+						<ATTR ELEMENT_ID="FRM_OPTION_ETC" />
+						<IMG ID="IMG_LIST_SCROLL_BG">
+							<ATTR X="260" Y="15" Z="-1" W="13" H="385" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="375"/>
+						</IMG>
+						<BUTTON ID="ScrUp">
+							<ATTR X="256" Y="0" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrDown">
+							<ATTR X="256" Y="400" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle">
+							<ATTR X="258" Y="0" W="15" H="21" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR WND_BAR = "IMG_LIST_SCROLL_BG" />
+						<ATTR BTN_UP = "ScrUp" />
+						<ATTR BTN_DOWN = "ScrDown" />
+						<ATTR BTN_MIDDLE = "ScrMiddle" />
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							kSelf:ClearAllListItem()
+							kSelf:AddNewListItemChar("")
+						</SCRIPT>
+					</LIST>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End Option Dialog▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			
+			
+			
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start ETC Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<FORM ID="FRM_OPTION_ETC" X="0" Y="0" W="270" H="800">
+				<STATIC_FORM ID="SFRM_TITLE_CHAT">
+					<ATTR X="6" Y="0" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400025" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<SCRIPT ID="ON_CALL"> OnUpdate_OptionETC_State(UISelf) </SCRIPT>
+				
+				<!-- ROW 1 -->
+				<FORM ID="FRM_ETC_ROW1_COL1">
+					<ATTR X="0" Y="26" W="126" H="25" TEXT="400028" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_WHISPER)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW1_COL2">
+					<ATTR X="124" Y="26" W="126" H="25"		TEXT="400029" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_PARTY)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<IMG ID="IMG_ROW1_LINE1">
+					<ATTR X="8" Y="48" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW1_LINE2">
+					<ATTR X="8" Y="49" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				
+				<!-- ROW 2 -->
+				<FORM ID="FRM_ETC_ROW2_COL1">
+					<ATTR X="0" Y="51" W="126" H="25"		TEXT="400030" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_FRIEND)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW2_COL2">
+					<ATTR X="124" Y="51" W="126" H="25"		TEXT="400031" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_GUILD)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_COMMUNITY">
+					<ATTR X="6" Y="84" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400026" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<!-- ROW 3 -->
+				<FORM ID="FRM_ETC_ROW3_COL1">
+					<ATTR X="0" Y="110" W="126" H="25"		TEXT="400032" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_TRADE)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW3_COL2">
+					<ATTR X="124" Y="110" W="126" H="25"		TEXT="400033" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_PARTY)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+
+				<IMG ID="IMG_ROW3_LINE1">
+					<ATTR X="8" Y="132" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW3_LINE2">
+					<ATTR X="8" Y="133" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				<!-- ROW 4 -->
+				<!--FORM ID="FRM_ETC_ROW4_COL1">
+					<ATTR X="0" Y="135" W="126" H="25"		TEXT="400034" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_FRIEND)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM-->
+				<FORM ID="FRM_ETC_ROW4_COL1">
+					<!--ATTR X="124" Y="135" W="126" H="25"	TEXT="400035" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/-->
+					<ATTR X="0" Y="135" W="126" H="25"	TEXT="400035" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_GUILD)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW4_COL2">
+					<!--ATTR X="124" Y="135" W="126" H="25"	TEXT="400035" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/-->
+					<ATTR X="124" Y="135" W="126" H="25"	TEXT="201210" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_DUEL)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_TOOLTIP">
+					<ATTR X="6" Y="168" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "790092" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<FORM ID="FRM_ETC_ROW15_COL1">
+					<ATTR X="0" Y="194" W="249" H="25" TEXT="790093" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="229" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_SIMPLY_TOOLTIP)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_NAME">
+					<ATTR X="6" Y="227" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400027" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<!-- ROW 5 -->
+				<FORM ID="FRM_ETC_ROW5_COL1">
+					<ATTR X="0" Y="253" W="126" H="25"		TEXT="400036" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_SHOW_NAME_NPC)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW5_COL2">
+					<ATTR X="124" Y="253" W="126" H="25"	TEXT="400037" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_SHOW_NAME_PC)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_LOOT">
+					<ATTR X="6" Y="286" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "399903" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>	
+				
+				<FORM ID="FRM_ETC_ROW6_COL1">
+					<ATTR X="0" Y="312" W="126" H="25" TEXT="399904" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+				  OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_MONEY)
+				  UpdateEtcConfig()
+				</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW6_COL2">
+					<ATTR X="124" Y="312" W="126" H="25" TEXT="50002" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_EQUIP)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<IMG ID="IMG_ROW6_LINE1">
+					<ATTR X="8" Y="334" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW6_LINE2">
+					<ATTR X="8" Y="335" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				
+				<FORM ID="FRM_ETC_ROW7_COL1">
+					<ATTR X="0" Y="339" W="126" H="25" TEXT="399905" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_CONSUME)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<FORM ID="FRM_ETC_ROW7_COL2">
+					<ATTR X="124" Y="339" W="126" H="25" TEXT="399906" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_ETC)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_BATTLE">
+					<ATTR X="6" Y="372" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "3012" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<FORM ID="FRM_ETC_ROW8_COL1">
+					<ATTR X="0" Y="398" W="126" H="25" TEXT="399907" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_BATTLEOP_DISPLAY_HPBAR)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>		
+				<FORM ID="FRM_ETC_ROW8_COL2">
+					<ATTR X="124" Y="398" W="126" H="25" TEXT="790100" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">				
+							OnClick_OptionETC_State(UISelf, SUBKEY_DISPLAY_HELMET)
+							UpdateEtcConfig()
+						</SCRIPT>
+						<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0,GetTextW(790101),GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+						<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+
+				<IMG ID="IMG_ROW8_LINE1">
+					<ATTR X="8" Y="420" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW8_LINE2">
+					<ATTR X="8" Y="421" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+
+				<FORM ID="FRM_ETC_ROW8_COL3">
+					<ATTR X="0" Y="425" W="249" H="25" TEXT="790095" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="229" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">				
+							OnClick_OptionETC_State(UISelf, SUBKEY_DISPLAY_PET_MPBAR)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_HELP">
+					<ATTR X="6" Y="458" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "460008" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<FORM ID="FRM_ETC_ROW9_COL1">
+					<ATTR X="0" Y="484" W="126" H="25" TEXT="460009" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_OFF_HELP)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_QUEST">
+					<ATTR X="6" Y="517" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "406117" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<FORM ID="FRM_ETC_ROW10" X="0" Y="544" W="249" H="50">
+					<IMG ID="IMG_IconAllow1" X="12" Y="10" W="200" H="6">
+						<ATTR CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<IMG ID="IMG_IconAllow2" X="12" Y="35" W="200" H="6">
+						<ATTR CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<FORM ID="FRM_DESC_1" X="22" Y="4" W="200" H="20">
+						<ATTR TEXT="406119" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFF4D3413"/>
+					</FORM>
+					<FORM ID="FRM_DESC_2" X="22" Y="29" W="200" H="20">
+						<ATTR TEXT="406118" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFF4D3413"/>
+					</FORM>
+					<CHECK_BUTTON ID="BTN_ON" X="229" Y="2" W="20" H="20">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_ComboState(UISelf, UISelf:GetParent():GetControl("BTN_OFF"), SUBKEY_SHOW_ALL_QUEST)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF" X="229" Y="27" W="20" H="20">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_ComboState(UISelf:GetParent():GetControl("BTN_ON"), UISelf, SUBKEY_SHOW_ALL_QUEST)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_ACHIEVE_STATUS">
+					<ATTR X="6" Y="605" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "3001" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>				
+				<FORM ID="FRM_ETC_ROW11_COL1">
+					<ATTR X="0" Y="631" W="249" H="25" TEXT="2808" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="229" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_DISPLAY_ACHIEVE_STATUS)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_CONNECT_NOTIFY">
+					<ATTR X="6" Y="664" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "799318" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<FORM ID="FRM_ETC_ROW12_COL1">
+					<ATTR X="0" Y="692" W="126" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT="799319" FONT="Font_Text" T_X="22" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_NOTIFY_FRIEND)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW12_COL2">
+					<ATTR X="124" Y="692" W="126" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT="799320" FONT="Font_Text" T_X="22" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_NOTIFY_COUPLE)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<IMG ID="IMG_ROW12_LINE1">
+					<ATTR X="8" Y="714" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW12_LINE2">
+					<ATTR X="8" Y="715" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+				</IMG>
+				
+				<FORM ID="FRM_ETC_ROW13_COL1">
+					<ATTR X="0" Y="719" W="126" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT="799321" FONT="Font_Text" T_X="22" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_NOTIFY_GUILD)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_NAVIGATION_VISIBLE">
+					<ATTR X="6" Y="745" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "791600" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>				
+				<FORM ID="FRM_ETC_ROW14_COL1">
+					<ATTR X="0" Y="773" W="249" H="25" TEXT="791601" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="229" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_NAVIGATION)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+			</FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End ETC Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start Sound Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<FORM ID="FRM_OPTION_SOUND">
+				<ATTR X="0" Y="0" W="270" H="270" />
+				<STATIC_FORM ID="SFRM_BGM">
+					<ATTR X="6" Y="0" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400022" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_VOLUME_BGM">
+					<ATTR X="8" Y="32" W="175" H="12" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<IMG ID="IMG_VOLUME_BGM">
+						<ATTR X="2" Y="5" W="171" H="2" IMG = "../Data/6_ui/Option/OptLine.tga" IMG_W="171" IMG_H="2"/>
+					</IMG>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_BTN_BGM">
+					<ATTR X="184" Y="26" W="70" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400024" FONT = "Font_Text" T_X="26" T_Y ="4" T_CENTER="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<STATIC_FORM ID="SFRM_EFFECT">
+					<ATTR X="6" Y="60" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400023" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_VOLUME_EFFECT">
+					<ATTR X="8" Y="92" W="175" H="12" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<IMG ID="IMG_VOLUME_EFFECT">
+						<ATTR X="2" Y="5" W="171" H="2" IMG = "../Data/6_ui/Option/OptLine.tga" IMG_W="171" IMG_H="2"/>
+					</IMG>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_BTN_EFFECT">
+					<ATTR X="184" Y="86" W="70" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400024" FONT = "Font_Text" T_X="26" T_Y ="4" T_CENTER="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<CHECK_BUTTON ID="BTN_MUTE_BGM">
+					<ATTR X="186" Y="30" Z="1" W="68" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_Sound_MuteButton(UISelf:GetParent(), 1) </SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_MUTE_EFFECT">
+					<ATTR X="186" Y="90" Z="1" W="68" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_Sound_MuteButton(UISelf:GetParent(), 2) </SCRIPT>
+				</CHECK_BUTTON>
+				
+				<HSCROLL ID="HSCRL_BGM_VOLUME" X="11" Y="26" Z="1" W="168" H="25">
+						<ATTR MIN="0" MAX="100" CUR="50"/>
+						<BUTTON ID="ScrMiddle" X="70" Y="3" W="20" H="18">
+							<ATTR BTN_IMG="../Data/6_ui/Option/OptSoundB.tga" BTN_IMG_W="40" BTN_IMG_H="36" />
+							<IMG ID="IMG_BG1" X="6" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+							<IMG ID="IMG_BG2" X="12" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+						</BUTTON>
+						<ATTR BTN="ScrMiddle"/>
+						
+						<SCRIPT ID="ON_SCROLL_MOVE">
+							local kSelf = UISelf
+							SetBGMVolume((kSelf:GetScrollCur() / kSelf:GetScrollMax()), false)
+							OnUpdate_Sound_SaveValue(kSelf:GetParent(), 1, kSelf:GetScrollCur())
+						</SCRIPT>
+				</HSCROLL>
+				
+				<HSCROLL ID="HSCRL_EFFECT_VOLUME" X="11" Y="86" Z="1" W="168" H="25">
+						<ATTR MIN="0" MAX="100" CUR="50"/>
+						<BUTTON ID="ScrMiddle" X="70" Y="3" W="20" H="18">
+							<ATTR BTN_IMG="../Data/6_ui/Option/OptSoundB.tga" BTN_IMG_W="40" BTN_IMG_H="36" />
+							<IMG ID="IMG_BG1" X="6" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+							<IMG ID="IMG_BG2" X="12" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+						</BUTTON>
+						<ATTR BTN="ScrMiddle"/>
+						
+						<SCRIPT ID="ON_SCROLL_MOVE">
+							local kSelf = UISelf
+							SetEffectVolume((kSelf:GetScrollCur() / kSelf:GetScrollMax()), false)
+							OnUpdate_Sound_SaveValue(kSelf:GetParent(), 2, kSelf:GetScrollCur())
+						</SCRIPT>
+				</HSCROLL>
+				
+				<SCRIPT ID="ON_CALL">
+					OnUpdate_Sound_ValueControl(UISelf, 1)
+					OnUpdate_Sound_ValueControl(UISelf, 2)
+				</SCRIPT>
+			</FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End Sound Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start Graphic Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<FORM ID="FRM_OPTION_GRAPHIC">
+				<ATTR X="0" Y="0" W="270" H="480" />
+				<SCRIPT ID="ON_CALL">
+					local kSelf = UISelf
+					Quick_Graphic_Set(kSelf, 0)
+					Option_ColorSet(kSelf, 0)
+				</SCRIPT>
+				
+				<STATIC_FORM ID="SFRM_SIMPLE">
+					<ATTR X="6" Y="0" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400021" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_HIGH">
+					<ATTR X="8" Y="26" W="75" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400007" FONT = "Font_Text" T_X="50" T_Y ="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<CHECK_BUTTON ID="BTN_HIGH">
+						<ATTR X="3" Y="2" W="20" H="20" />
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1" />
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Quick_Graphic_Set(kGrandParent, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_LOW">
+					<ATTR X="85" Y="26" W="75" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400008" FONT = "Font_Text" T_X="50" T_Y ="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<CHECK_BUTTON ID="BTN_LOW">
+						<ATTR X="3" Y="2" W="20" H="20" />
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1" />
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Quick_Graphic_Set(kGrandParent, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_CUSTOM">
+					<ATTR X="162" Y="26" W="91" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400009" FONT = "Font_Text" T_X="56" T_Y ="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<CHECK_BUTTON ID="BTN_CUSTOM">
+						<ATTR X="3" Y="2" W="20" H="20" />
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1" />
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Quick_Graphic_Set(kGrandParent, 3)
+							end
+						</SCRIPT> 
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+
+				<STATIC_FORM ID="SFRM_DETAIL">
+					<ATTR X="6" Y="60" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400010" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<FORM ID="FRM_DETAIL_1">
+					<ATTR X="0" Y="84" W="249" H="25"/>
+					<ATTR TEXT="400011" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 1, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 1, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_2">
+					<ATTR X="0" Y="109" W="249" H="25"/>
+					<ATTR TEXT="400012" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 2, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 2, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+
+				<FORM ID="FRM_DETAIL_3">
+					<ATTR X="0" Y="134" W="249" H="25"/>
+					<ATTR TEXT="400013" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 3, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 3, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_4">
+					<ATTR X="0" Y="159" W="249" H="25"/>
+					<ATTR TEXT="400014" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 4, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 4, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_5">
+					<ATTR X="0" Y="184" W="249" H="25"/>
+					<ATTR TEXT="400015" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 5, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 5, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_6">
+					<ATTR X="0" Y="209" W="249" H="25"/>
+					<ATTR TEXT="399901" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 6, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 6, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_7">
+					<ATTR X="0" Y="234" W="249" H="25"/>
+					<ATTR TEXT="399902" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 7, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 7, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>			
+				
+				<FORM ID="FRM_DETAIL_8">
+					<ATTR X="0" Y="259" W="249" H="25"/>
+					<ATTR TEXT="790094" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 8, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 8, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>	
+				
+				<STATIC_FORM ID="SFRM_COLOR">
+					<ATTR X="6" Y="288" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400016" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<IMG ID="IMG_COLOR_1">
+					<ATTR X="32" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor01.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				<IMG ID="IMG_COLOR_2">
+					<ATTR X="94" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor02.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				<IMG ID="IMG_COLOR_3">
+					<ATTR X="156" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor03.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				<IMG ID="IMG_COLOR_4">
+					<ATTR X="218" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor04.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				
+				<CHECK_BUTTON ID="BTN_COLOR_1">
+					<ATTR X="10" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 1)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_COLOR_2">
+					<ATTR X="72" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 2)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_COLOR_3">
+					<ATTR X="134" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 3)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_COLOR_4">
+					<ATTR X="196" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 4)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				
+				<STATIC_FORM ID="SFRM_GAME">
+					<ATTR X="6" Y="355" W="249" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400098" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<!--해상도 설정-->
+				<FORM ID="FRM_RESOLUTION" >
+					<ATTR X="0" Y="380" W="249" H="225"/>
+					<ATTR TEXT="400000" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<FORM ID="FRM_CURRENT_RESOLUTION" X="100" Y="3" TEXT="" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" W="100" H="25" >
+						<SCRIPT ID="ON_CALL">
+							UISelf:SetStaticText( GetCurrentResolutionWidth() .. " x " .. GetCurrentResolutionHeight()  )
+						</SCRIPT>
+					</FORM>
+					<BUTTON ID="BTN_CHANGE_RESOLUTION" X="180" Y="0" Z="3" W="65" H="23">
+						<ATTR BTN_IMG="../Data/6_ui/Main/mnHelpBt.tga" BTN_IMG_W="130" BTN_IMG_H="46"/>
+						<ATTR TEXT="399999" T_X="32" T_Y="4" FONT="Font_Text" T_OUTLINE="1" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN"> 
+							if true==GetEventScriptSystem():IsNowActivate() then
+								AddWarnDataTT(399900)
+							else
+								CallUI("SFRM_RESOLUTION") 
+							end
+						</SCRIPT>
+					</BUTTON>					
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				<!--해상도 설정 끝-->				
+				<FORM ID="FRM_GAME_DETAIL_1">
+					<ATTR X="0" Y="405" W="249" H="25"/>
+					<ATTR TEXT="400099" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 1, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 1, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<SCRIPT ID="ON_CALL">
+						Option_Game_Subset(UISelf, 1, 0)
+					</SCRIPT>
+				</FORM>
+				
+				<FORM ID="FRM_GAME_DETAIL_2">
+					<ATTR X="0" Y="430" W="249" H="25"/>
+					<ATTR TEXT="460000" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 5, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 5, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<SCRIPT ID="ON_CALL">
+						Option_Game_Subset(UISelf, 5, 0)
+					</SCRIPT>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_9">
+					<ATTR X="0" Y="455" W="249" H="25"/>
+					<ATTR TEXT="790097" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 9, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">				<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 9, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>				
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0,GetTextW(790096),GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_FLY_TO_CAMERA">
+					<ATTR X="0" Y="480" W="249" H="25"/>
+					<ATTR TEXT="790098" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="146" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 2, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">				<ATTR X="196" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 2, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>				
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0,GetTextW(790099),GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="245" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="245" IMG_H="1"/>
+					</IMG>
+					<SCRIPT ID="ON_CALL">
+						Option_Game_Subset(UISelf, 2, 0)
+					</SCRIPT>
+				</FORM>
+			</FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End Graphic Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+		</NAME>
+		<NAME ID="DEFAULT">
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start Option Dialog▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<STATIC_FORM ID="SFRM_OPTION" PRIORITY="2" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+				<ATTR ALIGN_X="50" Y="91" W="333" H="507" CAN_DRAG = "1" STATIC_NUM="1"/>
+				<SCRIPT ID="ON_CLOSE">
+					CloseUI("BarrierForDeleteConfirm", true)
+				</SCRIPT>
+				<BUTTON ID="BTN_DEFAULT">
+					<ATTR X="9" Y="468" W="84" H="26" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT = "400001" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> Option_Default() </SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_OK">
+					<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400002, 2200) </SCRIPT>
+					<ATTR X="154" Y="468" W="84" H="26" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> Config_Save_Extern() </SCRIPT>
+					<HOTKEY ID="59"> Config_Save_Extern() return true </HOTKEY>
+				</BUTTON>
+				<BUTTON ID="BTN_CANCEL">
+					<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400003, 2201) </SCRIPT>
+					<ATTR X="240" Y="468" W="84" H="26" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT = "" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> Config_Cancel_Extern() </SCRIPT>
+					<HOTKEY ID="60"> Config_Cancel_Extern() return true </HOTKEY>
+					<HOTKEY ID="1">  Config_Cancel_Extern() return true </HOTKEY>			
+				</BUTTON>
+
+				<STATIC_FORM ID="SFRM_OPTION_TITLE">
+					<ATTR X="1" Y="0" W="331" H="36" STATIC_NUM="4" />
+					
+					<STATIC_FORM ID="SFRM_OPTION1">
+						<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+						<CHECK_BUTTON ID="CBTN_GRAPHIC">
+							<ATTR X="0" Y="0" W="84" H="24"/>
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400004" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<SCRIPT ID="ON_GET_FOCUS"> 
+								local kSelf = UISelf
+								if kSelf:GetCheckState() == false then
+									local kTopParent = kSelf:GetParent():GetParent():GetParent()
+									Option_TabChange(kTopParent, 1)
+								end
+							</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+					
+					<STATIC_FORM ID="SFRM_OPTION2">
+						<ATTR X="93" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+						<CHECK_BUTTON ID="CBTN_SOUND">
+							<ATTR X="0" Y="0" W="84" H="24" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400005" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<SCRIPT ID="ON_GET_FOCUS"> 
+								local kSelf = UISelf
+								if kSelf:GetCheckState() == false then
+									local kTopParent = kSelf:GetParent():GetParent():GetParent()
+									Option_TabChange(kTopParent, 2)
+								end
+							</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+					
+					<STATIC_FORM ID="SFRM_OPTION3">
+						<ATTR X="179" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+						<CHECK_BUTTON ID="CBTN_ETC">
+							<ATTR X="0" Y="0" W="84" H="24" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400006" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<SCRIPT ID="ON_GET_FOCUS"> 
+								local kSelf = UISelf
+								if kSelf:GetCheckState() == false then
+									local kTopParent = kSelf:GetParent():GetParent():GetParent()
+									Option_TabChange(kTopParent, 3)
+								end
+							</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+					
+					<STATIC_FORM ID="SFRM_BTN_CLOSE">
+						<ATTR X="300" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+						<BUTTON ID="BNT_CLOSE">
+							<ATTR X="0" Y="0" W="24" H="24" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+							<SCRIPT ID="ON_L_BTN_DOWN">	Config_Cancel_Extern()	</SCRIPT>
+						</BUTTON>
+					</STATIC_FORM>
+					<SCRIPT ID="ON_CALL">
+						local kTopParent = UISelf:GetParent()
+						Option_TabChange(kTopParent, 0)
+					</SCRIPT>
+				</STATIC_FORM>
+				 
+				 <!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Form Graphic Option▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+				<STATIC_FORM ID="SFRM_GRAPHIC">
+					<ATTR X="9" Y="35" W="315" H="427" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+					<STATIC_FORM ID="SFRM_SHADOW">
+						<ATTR X="0" Y="0" W="315" H="427" STATIC_NUM="3"/>
+					</STATIC_FORM>
+					<LIST ID="LST_GRAPHIC_OPTION">
+						<ATTR X="2" Y="6" W="305" H="410" ITEM_X="0" ITEM_Y="0"/>
+						<ATTR ELEMENT_ID="FRM_OPTION_GRAPHIC" />
+						<IMG ID="IMG_LIST_SCROLL_BG">
+							<ATTR X="295" Y="15" Z="-1" W="13" H="385" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="375"/>
+						</IMG>
+						<BUTTON ID="ScrUp">
+							<ATTR X="291" Y="0" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrDown">
+							<ATTR X="291" Y="400" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle">
+							<ATTR X="293" Y="0" W="15" H="21" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR WND_BAR = "IMG_LIST_SCROLL_BG" />
+						<ATTR BTN_UP = "ScrUp" />
+						<ATTR BTN_DOWN = "ScrDown" />
+						<ATTR BTN_MIDDLE = "ScrMiddle" />
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							kSelf:ClearAllListItem()
+							kSelf:AddNewListItemChar("")
+						</SCRIPT>
+					</LIST>
+				</STATIC_FORM> 
+				<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Form Sound Option▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+				<STATIC_FORM ID="SFRM_SOUND">
+					<ATTR X="9" Y="35" W="315" H="427" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" IS_VISIBLE="0" />
+					<STATIC_FORM ID="SFRM_SHADOW">
+						<ATTR X="0" Y="0" W="315" H="427" STATIC_NUM="3"/>
+					</STATIC_FORM>
+					<LIST ID="LST_SOUND_OPTION">
+						<ATTR X="2" Y="6" W="305" H="410" ITEM_X="0" ITEM_Y="0"/>
+						<ATTR ELEMENT_ID="FRM_OPTION_SOUND" />
+						<IMG ID="IMG_LIST_SCROLL_BG">
+							<ATTR X="295" Y="15" Z="-1" W="13" H="385" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="375"/>
+						</IMG>
+						<BUTTON ID="ScrUp">
+							<ATTR X="291" Y="0" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrDown">
+							<ATTR X="291" Y="400" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle">
+							<ATTR X="293" Y="0" W="15" H="21" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR WND_BAR = "IMG_LIST_SCROLL_BG" />
+						<ATTR BTN_UP = "ScrUp" />
+						<ATTR BTN_DOWN = "ScrDown" />
+						<ATTR BTN_MIDDLE = "ScrMiddle" />
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							kSelf:ClearAllListItem()
+							kSelf:AddNewListItemChar("")
+						</SCRIPT>
+					</LIST>
+				</STATIC_FORM>
+				<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Form ETC Option▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+				<STATIC_FORM ID="SFRM_ETC">
+					<ATTR X="9" Y="35" W="315" H="427" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" IS_VISIBLE="0" />
+					<STATIC_FORM ID="SFRM_SHADOW">
+						<ATTR X="0" Y="0" W="315" H="427" STATIC_NUM="3"/>
+					</STATIC_FORM>
+					<LIST ID="LST_ETC_OPTION">
+						<ATTR X="2" Y="6" W="305" H="410" ITEM_X="0" ITEM_Y="0"/>
+						<ATTR ELEMENT_ID="FRM_OPTION_ETC" />
+						<IMG ID="IMG_LIST_SCROLL_BG">
+							<ATTR X="295" Y="15" Z="-1" W="13" H="385" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="375"/>
+						</IMG>
+						<BUTTON ID="ScrUp">
+							<ATTR X="291" Y="0" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrDown">
+							<ATTR X="291" Y="400" W="19" H="15" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle">
+							<ATTR X="293" Y="0" W="15" H="21" />
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR WND_BAR = "IMG_LIST_SCROLL_BG" />
+						<ATTR BTN_UP = "ScrUp" />
+						<ATTR BTN_DOWN = "ScrDown" />
+						<ATTR BTN_MIDDLE = "ScrMiddle" />
+						<SCRIPT ID="ON_CALL">
+							local kSelf = UISelf
+							kSelf:ClearAllListItem()
+							kSelf:AddNewListItemChar("")
+						</SCRIPT>
+					</LIST>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End Option Dialog▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			
+			
+			
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start ETC Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<FORM ID="FRM_OPTION_ETC" X="0" Y="0" W="305" H="745">
+				<STATIC_FORM ID="SFRM_TITLE_CHAT">
+					<ATTR X="6" Y="0" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400025" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<SCRIPT ID="ON_CALL"> OnUpdate_OptionETC_State(UISelf) </SCRIPT>
+				
+				<!-- ROW 1 -->
+				<FORM ID="FRM_ETC_ROW1_COL1">
+					<ATTR X="0" Y="26" W="144" H="25" TEXT="400028" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_WHISPER)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW1_COL2">
+					<ATTR X="133" Y="26" W="161" H="25"	TEXT="400029" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_PARTY)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<IMG ID="IMG_ROW1_LINE1">
+					<ATTR X="8" Y="48" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW1_LINE2">
+					<ATTR X="8" Y="49" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				
+				<!-- ROW 2 -->
+				<FORM ID="FRM_ETC_ROW2_COL1">
+					<ATTR X="0" Y="51" W="144" H="25" TEXT="400030" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_FRIEND)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW2_COL2">
+					<ATTR X="133" Y="51" W="161" H="25"	TEXT="400031" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_CHAT_GUILD)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_COMMUNITY">
+					<ATTR X="6" Y="84" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400026" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<!-- ROW 3 -->
+				<FORM ID="FRM_ETC_ROW3_COL1">
+					<ATTR X="0" Y="110" W="144" H="25" TEXT="400032" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_TRADE)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW3_COL2">
+					<ATTR X="133" Y="110" W="161" H="25" TEXT="400033" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_PARTY)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+
+				<IMG ID="IMG_ROW3_LINE1">
+					<ATTR X="8" Y="132" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW3_LINE2">
+					<ATTR X="8" Y="133" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				<!-- ROW 4 -->
+				<!--FORM ID="FRM_ETC_ROW4_COL1">
+					<ATTR X="0" Y="135" W="126" H="25"		TEXT="400034" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="105" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_FRIEND)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM-->
+				<FORM ID="FRM_ETC_ROW4_COL1">
+					<!--ATTR X="124" Y="135" W="126" H="25"	TEXT="400035" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/-->
+					<ATTR X="0" Y="135" W="144" H="25"	TEXT="400035" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_GUILD)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW4_COL2">
+					<!--ATTR X="124" Y="135" W="126" H="25"	TEXT="400035" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/-->
+					<ATTR X="133" Y="135" W="161" H="25"	TEXT="201210" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_DENY_DUEL)
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_TOOLTIP">
+					<ATTR X="6" Y="168" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "790092" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<!-- ROW 5 -->
+				<FORM ID="FRM_ETC_ROW15_COL1">
+					<ATTR X="0" Y="194" W="287" H="25" TEXT="790093" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="266" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_SIMPLY_TOOLTIP)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_NAME">
+					<ATTR X="6" Y="227" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400027" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<!-- ROW 5 -->
+				<FORM ID="FRM_ETC_ROW5_COL1">
+					<ATTR X="0" Y="253" W="144" H="25" TEXT="400036" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_SHOW_NAME_NPC)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW5_COL2">
+					<ATTR X="133" Y="253" W="161" H="25" TEXT="400037" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_SHOW_NAME_PC)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_LOOT">
+					<ATTR X="6" Y="286" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "399903" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>	
+				
+				<FORM ID="FRM_ETC_ROW6_COL1">
+					<ATTR X="0" Y="312" W="144" H="25" TEXT="399904" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+				  OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_MONEY)
+				  UpdateEtcConfig()
+				</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW6_COL2">
+					<ATTR X="133" Y="312" W="161" H="25" TEXT="50002" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_EQUIP)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<IMG ID="IMG_ROW6_LINE1">
+					<ATTR X="8" Y="334" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW6_LINE2">
+					<ATTR X="8" Y="335" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				
+				<FORM ID="FRM_ETC_ROW7_COL1">
+					<ATTR X="0" Y="339" W="144" H="25" TEXT="399905" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_CONSUME)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<FORM ID="FRM_ETC_ROW7_COL2">
+					<ATTR X="133" Y="339" W="161" H="25" TEXT="399906" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_AUTOITEM_ETC)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_BATTLE">
+					<ATTR X="6" Y="372" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "3012" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<FORM ID="FRM_ETC_ROW8_COL1">
+					<ATTR X="0" Y="398" W="144" H="25" TEXT="399907" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_BATTLEOP_DISPLAY_HPBAR)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>		
+				<FORM ID="FRM_ETC_ROW8_COL2">
+					<ATTR X="133" Y="398" W="161" H="25" TEXT="790100" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">				
+							OnClick_OptionETC_State(UISelf, SUBKEY_DISPLAY_HELMET)
+							UpdateEtcConfig()
+						</SCRIPT>
+						<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0,GetTextW(790101),GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+						<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+
+				<IMG ID="IMG_ROW8_LINE1">
+					<ATTR X="8" Y="420" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW8_LINE2">
+					<ATTR X="8" Y="421" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+
+				<FORM ID="FRM_ETC_ROW8_COL3">
+					<ATTR X="0" Y="425" W="287" H="25" TEXT="790095" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="266" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">				
+							OnClick_OptionETC_State(UISelf, SUBKEY_DISPLAY_PET_MPBAR)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_HELP">
+					<ATTR X="6" Y="458" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "460008" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<FORM ID="FRM_ETC_ROW9_COL1">
+					<ATTR X="0" Y="484" W="144" H="25" TEXT="460009" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_OFF_HELP)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_TITLE_QUEST">
+					<ATTR X="6" Y="517" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "406117" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<FORM ID="FRM_ETC_ROW10" X="0" Y="543" W="287" H="50">
+					<IMG ID="IMG_IconAllow1" X="9" Y="10" W="235" H="6">
+						<ATTR CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<IMG ID="IMG_IconAllow2" X="9" Y="35" W="235" H="6">
+						<ATTR CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<FORM ID="FRM_DESC_1" X="22" Y="4" W="235" H="20">
+						<ATTR TEXT="406119" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFF4D3413"/>
+					</FORM>
+					<FORM ID="FRM_DESC_2" X="22" Y="29" W="235" H="20">
+						<ATTR TEXT="406118" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFF4D3413"/>
+					</FORM>
+					<CHECK_BUTTON ID="BTN_ON" X="266" Y="2" W="20" H="20">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_ComboState(UISelf, UISelf:GetParent():GetControl("BTN_OFF"), SUBKEY_SHOW_ALL_QUEST)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF" X="266" Y="27" W="20" H="20">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_ComboState(UISelf:GetParent():GetControl("BTN_ON"), UISelf, SUBKEY_SHOW_ALL_QUEST)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+
+				<!-- #NOT_OPEN# -->
+				<!--STATIC_FORM ID="SFRM_TITLE_ACHIEVE_STATUS">
+					<ATTR X="6" Y="518" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "3001" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>				
+				<FORM ID="FRM_ETC_ROW11_COL1">
+					<ATTR X="0" Y="544" W="284" H="25" TEXT="2808" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_DISPLAY_ACHIEVE_STATUS)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM-->
+				
+				<STATIC_FORM ID="SFRM_TITLE_CONNECT_NOTIFY">
+					<ATTR X="6" Y="597" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "799318" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<FORM ID="FRM_ETC_ROW12_COL1">
+					<ATTR X="0" Y="623" W="144" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT="799319" FONT="Font_Text" T_X="22" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_NOTIFY_FRIEND)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				<FORM ID="FRM_ETC_ROW12_COL2">
+					<ATTR X="133" Y="623" W="161" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT="799320" FONT="Font_Text" T_X="22" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="12" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="133" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_NOTIFY_COUPLE)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<IMG ID="IMG_ROW12_LINE1">
+					<ATTR X="8" Y="646" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				<IMG ID="IMG_ROW12_LINE2">
+					<ATTR X="8" Y="647" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+				</IMG>
+				
+				<FORM ID="FRM_ETC_ROW13_COL1">
+					<ATTR X="0" Y="651" W="144" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT="799321" FONT="Font_Text" T_X="22" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+						<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							OnClick_OptionETC_State(UISelf, SUBKEY_NOTIFY_GUILD)
+							UpdateEtcConfig()
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				
+				<STATIC_FORM ID="SFRM_TITLE_ACHIEVE_STATUS">
+					<ATTR X="6" Y="682" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "791600" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>				
+				<FORM ID="FRM_ETC_ROW11_COL1">
+					<ATTR X="0" Y="713" W="284" H="25" TEXT="791601" FONT="Font_Text" T_X="22" T_Y="3" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="9" Y="7" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_CHECK">
+					<ATTR X="120" Y="0" W="20" H="20" CAN_COLOR_CHANGE="0" BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnClick_OptionETC_State(UISelf, SUBKEY_NAVIGATION)
+						UpdateEtcConfig()
+					</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+			</FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End ETC Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start Sound Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<FORM ID="FRM_OPTION_SOUND">
+				<ATTR X="0" Y="0" W="305" H="270" />
+				<STATIC_FORM ID="SFRM_BGM">
+					<ATTR X="6" Y="0" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400022" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_VOLUME_BGM">
+					<ATTR X="8" Y="32" W="210" H="12" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<IMG ID="IMG_VOLUME_BGM">
+						<ATTR X="2" Y="5" W="206" H="2" IMG = "../Data/6_ui/Option/OptLine.tga" IMG_W="206" IMG_H="2"/>
+					</IMG>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_BTN_BGM">
+					<ATTR X="219" Y="26" W="70" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400024" FONT = "Font_Text" T_X="26" T_Y ="4" T_CENTER="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<STATIC_FORM ID="SFRM_EFFECT">
+					<ATTR X="6" Y="60" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400023" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_VOLUME_EFFECT">
+					<ATTR X="8" Y="92" W="210" H="12" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<IMG ID="IMG_VOLUME_EFFECT">
+						<ATTR X="2" Y="5" W="206" H="2" IMG = "../Data/6_ui/Option/OptLine.tga" IMG_W="206" IMG_H="2"/>
+					</IMG>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_BTN_EFFECT">
+					<ATTR X="219" Y="86" W="70" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400024" FONT = "Font_Text" T_X="26" T_Y ="4" T_CENTER="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<CHECK_BUTTON ID="BTN_MUTE_BGM">
+					<ATTR X="221" Y="30" Z="1" W="68" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_Sound_MuteButton(UISelf:GetParent(), 1) </SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_MUTE_EFFECT">
+					<ATTR X="221" Y="90" Z="1" W="68" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_Sound_MuteButton(UISelf:GetParent(), 2) </SCRIPT>
+				</CHECK_BUTTON>
+				
+				<HSCROLL ID="HSCRL_BGM_VOLUME" X="11" Y="26" Z="1" W="203" H="25">
+						<ATTR MIN="0" MAX="100" CUR="50"/>
+						<BUTTON ID="ScrMiddle" X="70" Y="3" W="20" H="18">
+							<ATTR BTN_IMG="../Data/6_ui/Option/OptSoundB.tga" BTN_IMG_W="40" BTN_IMG_H="36" />
+							<IMG ID="IMG_BG1" X="6" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+							<IMG ID="IMG_BG2" X="12" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+						</BUTTON>
+						<ATTR BTN="ScrMiddle"/>
+						
+						<SCRIPT ID="ON_SCROLL_MOVE">
+							local kSelf = UISelf
+							SetBGMVolume((kSelf:GetScrollCur() / kSelf:GetScrollMax()), false)
+							OnUpdate_Sound_SaveValue(kSelf:GetParent(), 1, kSelf:GetScrollCur())
+						</SCRIPT>
+				</HSCROLL>
+				
+				<HSCROLL ID="HSCRL_EFFECT_VOLUME" X="11" Y="86" Z="1" W="203" H="25">
+						<ATTR MIN="0" MAX="100" CUR="50"/>
+						<BUTTON ID="ScrMiddle" X="70" Y="3" W="20" H="18">
+							<ATTR BTN_IMG="../Data/6_ui/Option/OptSoundB.tga" BTN_IMG_W="40" BTN_IMG_H="36" />
+							<IMG ID="IMG_BG1" X="6" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+							<IMG ID="IMG_BG2" X="12" Y="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+								<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="2" IMG_H="7"/>
+							</IMG>
+						</BUTTON>
+						<ATTR BTN="ScrMiddle"/>
+						
+						<SCRIPT ID="ON_SCROLL_MOVE">
+							local kSelf = UISelf
+							SetEffectVolume((kSelf:GetScrollCur() / kSelf:GetScrollMax()), false)
+							OnUpdate_Sound_SaveValue(kSelf:GetParent(), 2, kSelf:GetScrollCur())
+						</SCRIPT>
+				</HSCROLL>
+				
+				<SCRIPT ID="ON_CALL">
+					OnUpdate_Sound_ValueControl(UISelf, 1)
+					OnUpdate_Sound_ValueControl(UISelf, 2)
+				</SCRIPT>
+			</FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End Sound Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Start Graphic Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+			<FORM ID="FRM_OPTION_GRAPHIC">
+				<ATTR X="0" Y="0" W="290" H="520" />
+				<SCRIPT ID="ON_CALL">
+					local kSelf = UISelf
+					Quick_Graphic_Set(kSelf, 0)
+					Option_ColorSet(kSelf, 0)
+				</SCRIPT>
+				
+				<STATIC_FORM ID="SFRM_SIMPLE">
+					<ATTR X="6" Y="0" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400021" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_HIGH">
+					<ATTR X="8" Y="26" W="87" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400007" FONT = "Font_Text" T_X="50" T_Y ="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<CHECK_BUTTON ID="BTN_HIGH">
+						<ATTR X="3" Y="2" W="20" H="20" />
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1" />
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Quick_Graphic_Set(kGrandParent, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_LOW">
+					<ATTR X="97" Y="26" W="87" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400008" FONT = "Font_Text" T_X="50" T_Y ="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<CHECK_BUTTON ID="BTN_LOW">
+						<ATTR X="3" Y="2" W="20" H="20" />
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1" />
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Quick_Graphic_Set(kGrandParent, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_CUSTOM">
+					<ATTR X="186" Y="26" W="102" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" />
+					<ATTR TEXT = "400009" FONT = "Font_Text" T_X="56" T_Y ="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<CHECK_BUTTON ID="BTN_CUSTOM">
+						<ATTR X="3" Y="2" W="20" H="20" />
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1" />
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Quick_Graphic_Set(kGrandParent, 3)
+							end
+						</SCRIPT> 
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+
+				<STATIC_FORM ID="SFRM_DETAIL">
+					<ATTR X="6" Y="60" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400010" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<FORM ID="FRM_DETAIL_1">
+					<ATTR X="0" Y="84" W="290" H="25"/>
+					<ATTR TEXT="400011" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 1, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 1, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_2">
+					<ATTR X="0" Y="109" W="290" H="25"/>
+					<ATTR TEXT="400012" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 2, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 2, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+
+				<FORM ID="FRM_DETAIL_3">
+					<ATTR X="0" Y="134" W="290" H="25"/>
+					<ATTR TEXT="400013" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 3, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 3, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_4">
+					<ATTR X="0" Y="159" W="290" H="25"/>
+					<ATTR TEXT="400014" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 4, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 4, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_5">
+					<ATTR X="0" Y="184" W="290" H="25"/>
+					<ATTR TEXT="400015" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 5, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 5, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_6">
+					<ATTR X="0" Y="209" W="290" H="25"/>
+					<ATTR TEXT="399901" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 6, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 6, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_7">
+					<ATTR X="0" Y="234" W="290" H="25"/>
+					<ATTR TEXT="399902" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400017" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 7, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400018" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 7, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>			
+
+				<FORM ID="FRM_DETAIL_8">
+					<ATTR X="0" Y="259" W="290" H="25"/>
+					<ATTR TEXT="790094" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 8, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 8, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+				</FORM>
+				
+				<STATIC_FORM ID="SFRM_COLOR">
+					<ATTR X="6" Y="288" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400016" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<IMG ID="IMG_COLOR_1">
+					<ATTR X="32" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor01.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				<IMG ID="IMG_COLOR_2">
+					<ATTR X="104" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor02.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				<IMG ID="IMG_COLOR_3">
+					<ATTR X="176" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor03.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				<IMG ID="IMG_COLOR_4">
+					<ATTR X="248" Y="316" W="35" H="30" IMG = "../Data/6_ui/Option/OptUIcolor04.tga" IMG_W="35" IMG_H="30"/>
+				</IMG>
+				
+				<CHECK_BUTTON ID="BTN_COLOR_1">
+					<ATTR X="10" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 1)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_COLOR_2">
+					<ATTR X="82" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 2)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_COLOR_3">
+					<ATTR X="154" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 3)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				<CHECK_BUTTON ID="BTN_COLOR_4">
+					<ATTR X="226" Y="321" W="20" H="20" BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						if kSelf:GetCheckState() == false then
+							Option_ColorSet(kSelf:GetParent(), 4)
+						end
+					</SCRIPT>
+				</CHECK_BUTTON>
+				
+				<STATIC_FORM ID="SFRM_GAME">
+					<ATTR X="6" Y="354" W="284" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" />
+					<ATTR TEXT = "400098" FONT = "Font_Text" T_X="10" T_Y ="4" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				
+				<!--해상도 설정-->
+				<FORM ID="FRM_RESOLUTION" >
+					<ATTR X="0" Y="380" W="290" H="225"/>
+					<ATTR TEXT="400000" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<FORM ID="FRM_CURRENT_RESOLUTION" X="130" Y="3" TEXT="" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" W="100" H="25" >
+						<SCRIPT ID="ON_CALL">
+							UISelf:SetStaticText( GetCurrentResolutionWidth() .. " x " .. GetCurrentResolutionHeight()  )
+						</SCRIPT>
+					</FORM>
+					<BUTTON ID="BTN_CHANGE_RESOLUTION" X="213" Y="0" Z="3" W="65" H="23">
+						<ATTR BTN_IMG="../Data/6_ui/Main/mnHelpBt.tga" BTN_IMG_W="130" BTN_IMG_H="46"/>
+						<ATTR TEXT="399999" T_X="32" T_Y="4" FONT="Font_Text" T_OUTLINE="1" T_CENTER="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN"> 
+							if true==GetEventScriptSystem():IsNowActivate() then
+								AddWarnDataTT(399900)
+							else
+								CallUI("SFRM_RESOLUTION") 
+							end
+						</SCRIPT>
+					</BUTTON>					
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				<!--해상도 설정 끝-->				
+				<FORM ID="FRM_GAME_DETAIL_1">
+					<ATTR X="0" Y="406" W="290" H="25"/>
+					<ATTR TEXT="400099" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 1, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 1, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<SCRIPT ID="ON_CALL">
+						Option_Game_Subset(UISelf, 1, 0)
+					</SCRIPT>
+				</FORM>
+				
+				<FORM ID="FRM_GAME_DETAIL_2">
+					<ATTR X="0" Y="432" W="290" H="25"/>
+					<ATTR TEXT="460000" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 5, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 5, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<SCRIPT ID="ON_CALL">
+						Option_Game_Subset(UISelf, 5, 0)
+					</SCRIPT>
+				</FORM>
+				
+				<FORM ID="FRM_DETAIL_9">
+					<ATTR X="0" Y="458" W="290" H="25"/>
+					<ATTR TEXT="790097" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 9, 1, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kGrandParent = kSelf:GetParent():GetParent()
+								Option_SubSet(kGrandParent, 9, 0, true)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>				
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0,GetTextW(790096),GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+				</FORM>
+				
+				<FORM ID="FRM_FLY_TO_CAMERA">
+					<ATTR X="0" Y="484" W="290" H="25"/>
+					<ATTR TEXT="790098" FONT="Font_Text" T_X="27" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+					<IMG ID="IMG_IconAllow">
+						<ATTR X="17" Y="10" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</IMG>
+					<CHECK_BUTTON ID="BTN_ON">
+						<ATTR X="176" Y="2" W="40" H="20" CAN_COLOR_CHANGE="0"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400019" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 2, 1)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="BTN_OFF">
+						<ATTR X="230" Y="2" W="40" H="20"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" BTN_ENABLE_CHANGE_COLOR="0" BTN_CLICK_LOCK="1"/>
+						<ATTR TEXT="400020" FONT="Font_Text" T_X="34" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf
+							if kSelf:GetCheckState() == false then
+								local kParent = kSelf:GetParent()
+								Option_Game_Subset(kParent, 2, 2)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>				
+					<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0,GetTextW(790099),GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<IMG ID="IMG_LINE1">
+						<ATTR X="8" Y="23" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<IMG ID="IMG_LINE2">
+						<ATTR X="8" Y="24" W="280" H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="280" IMG_H="1"/>
+					</IMG>
+					<SCRIPT ID="ON_CALL">
+						Option_Game_Subset(UISelf, 2, 0)
+					</SCRIPT>
+				</FORM>
+			</FORM>
+			<!-- ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒End Graphic Element▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ -->
+		</NAME>
+	</LOCAL>
+	
+	<STATIC_FORM ID="SFRM_RESOLUTION" PRIORITY="3" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="165" H="175" CAN_DRAG = "1" STATIC_NUM="1"/>
+		<HOTKEY ID="1"> CloseUI("SFRM_RESOLUTION") return true </HOTKEY>
+		<STATIC_FORM ID="SFRM_BG_COLOR_1" X="7" Y="4" Z="-2"  W="124" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_BG_SHADOW_1"  X="7" Y="4" Z="-1" W="124" H="24" STATIC_NUM="3">
+			<ATTR TEXT="399999" FONT = "FTtitle_14" T_X="62" T_Y ="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="-3" W="163" H="36" STATIC_NUM="4">
+			<BUTTON ID="BNT_CLOSE">
+				<ATTR X="133" Y="4" W="24" H="24" />
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("SFRM_RESOLUTION")	</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>		
+		<STATIC_FORM ID="SFRM_BG_COLOR_2" X="9" Y="35" Z="-2" W="147" H="129" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_BG_SHADOW_2">
+			<ATTR X="9" Y="35" Z="-1" W="147" H="129" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<!-- 해상도 지원
+			최소: 1024 * 768
+			최대: 1600 * 1200 -->
+		<SCRIPT ID="ON_CALL">
+			local list = UISelf:GetControl("LST_RESOLUTION")
+			if not list:IsNil() then
+				list:ClearAllListItem()
+				local count = UISelf:GetResolutionModeCount()
+				for i=0, count-1 do
+					local kWidth = UISelf:GetResolutionSize(i):GetX()
+					local kHeight = UISelf:GetResolutionSize(i):GetY()
+					if  kWidth >= 1024 and kHeight >= 768 then
+						local kItem
+						if true == UISelf:IsWideResolution( kWidth, kHeight ) then
+							kItem = list:AddNewListItemChar(  kWidth .. " x " .. kHeight.."("..GetTextW(399998):GetStr()..")" )
+						else
+							kItem = list:AddNewListItemChar(  kWidth .. " x " .. kHeight  )
+						end
+						if not kItem:IsNil() and not kItem:GetWnd():IsNil() then
+							kItem:GetWnd():SetCustomDataAsInt( i )
+						end
+					end
+				end
+				local size = math.min(8,count)
+				--[[local pt = Point2(list:GetSize():GetX(), size*22)
+				list:SetSize(pt)]]
+			end
+		</SCRIPT>
+		<LIST ID="LST_RESOLUTION">
+			<ATTR X="13" Y="40" W="270" H="118" ITEM_X="0" ITEM_Y="0"/>
+			<ATTR ELEMENT_ID="BTN_ELE_RESOLUTION" />
+			<IMG ID="IMG_LIST_SCROLL_BG">
+				<ATTR X="129" Y="19" Z="-1" W="13" H="92" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="92"/>
+			</IMG>
+			<BUTTON ID="ScrUp">
+				<ATTR X="120" Y="0" W="19" H="15" />
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown">
+				<ATTR X="120" Y="106" W="19" H="15" />
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle">
+				<ATTR X="122" Y="19" W="15" H="21" />
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR WND_BAR = "IMG_LIST_SCROLL_BG" />
+			<ATTR BTN_UP = "ScrUp" />
+			<ATTR BTN_DOWN = "ScrDown" />
+			<ATTR BTN_MIDDLE = "ScrMiddle" />			
+		</LIST>		
+	</STATIC_FORM>
+	<BUTTON ID="BTN_ELE_RESOLUTION" X="0" Y="0" W="234" H="24">
+		<ATTR BTN_IMG="../Data/6_ui/Common/cmDropB03.tga" BTN_IMG_W="234" BTN_IMG_H="44" />
+		<ATTR TEXT = "" FONT = "Font_Text"  FONT_COLOR_HEX="0xFF4D3413" T_X="58" T_Y ="3" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			local kIndex = UISelf:GetCustomDataAsInt()
+			local kWidth = UISelf:GetResolutionSize( kIndex ):GetX()
+			local kHeight = UISelf:GetResolutionSize( kIndex ):GetY()
+			Option_Game_Subset( UISelf, 3,  kWidth)
+			Option_Game_Subset( UISelf, 4,  kHeight)
+			
+			local kOption = GetUIWnd("SFRM_OPTION")
+			if not kOption:IsNil() then
+				kGraphic = kOption:GetControl("SFRM_GRAPHIC")
+				if not kGraphic:IsNil() then
+					local kGraphicOption = kGraphic:GetControl("LST_GRAPHIC_OPTION")
+					if not kGraphicOption:IsNil() then
+						local kList = kGraphicOption:ListFirstItem()
+						if not kList:IsNil() then
+							local kWndResolution = kList:GetWnd("FRM_RESOLUTION")
+							if not kWndResolution:IsNil() then
+								local kResolution = kWndResolution:GetControl("FRM_RESOLUTION")
+								if not kResolution:IsNil() then
+									local kCurrent = kResolution:GetControl("FRM_CURRENT_RESOLUTION")
+									if not kCurrent:IsNil() then
+										kCurrent:SetStaticText( kWidth .. " x " .. kHeight  )	
+									end
+								end
+							end
+						end
+					end
+				end
+			end			
+			CloseUI("SFRM_RESOLUTION")
+		</SCRIPT>
+		<SCRIPT ID="ON_R_BTN_DOWN">  </SCRIPT>
+		<SCRIPT ID = "ON_LOSE_FOCUS">  </SCRIPT>
+	</BUTTON>
+</XUI>

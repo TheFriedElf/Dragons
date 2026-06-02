@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2222</ID> <!--T.T.10222201 차원교환을 경험하다 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 니콜라와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 니콜라-->
+<!--[내용]	달빛해안 마을 과학자 니콜라는 시행착오 끝에 '차원 변환기'를 완성했다고 한다.
+니콜라한테 차원변환기에 관한 설명을 듣고, 차원변환기를 사용할 수 있도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</CLIENT> <!--시작NPC 달빛해안 마을 - 니콜라 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</PAYER> <!--완료NPC 달빛해안 마을 - 니콜라 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</AGENT> <!--진행NPC 11 달빛해안 마을 - 니콜라 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10222211"/> <!--니콜라와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">79653210</ITEM><!--전체지급/전체/1)/79653210(봉인아님) 1개-아이템없음-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10222221" FACE="Nikola_normal"/> <!--왔군. 차원교환기를 이용하기 위해서 왔겠지?
+음 좋아. 내가 자네에게 정확한 작동법을 설명해주지 않은 것 같아서 몇 가지 더
+알려 주겠네. 잘 듣겠나.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10222226" FACE="Nikola_smile"/> <!--쉽게 이해하기 쉬운 내 설명은 모두 다 끝났네.
+이제 마음대로 사용해 보도록. 이제는 고장 날 일도 없을테지,%%
+[차원교환기를 이용하여 '차원교환'이 가능해졌습니다.]-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10222223" FACE="Nikola_smile"/> <!--첫 번째는 에너지 응축시간이라네. 내가 원래 이 장치를 만든 목적은 공간 에너지를
+응축해서 다른 지역으로 전송하기 위함이었네. 기억하나?
+하지만 그건 시간이 오래 걸린다는 얘기도 했지.%%
+그래서 장치 작동을 위해선 에너지 응축이 필요하지. 약 1시간 정도 걸리네.
+응축이 완료 된 다음 교환기를 작동시킬 수 있는 걸세.%%
+다른 하나는 원하는 차원과 교환할 수 없다는 문제가 있었지.
+안타깝긴 하지만 아직 까지는 제어가 불가능한 상태네.
+원하는 차원과 교환할 순 없지만, 방법이 없는것도 아니야.%%
+여기 이 '차원수신 차단기'를 이용하면 가능하네. 이걸 이용하면 원하지 않는 차원과는
+교환하지 않을 수 있지.
+하지만 응축된 에너지가 소모되는 것은 어쩔 수 없네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10222224" FACE="Nikola_normal"/> <!--듣기 싫으면 말게. 나야 손해 볼 것 없으니,-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10222225" FACE="Nikola_normal"/> <!--들을 준비가 됐나? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10222202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

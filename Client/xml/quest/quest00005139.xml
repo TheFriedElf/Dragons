@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5139</ID> <!--T.T.10513901 농장 만들기(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	종소리 마을 - 여관주인 플로렌스와 대화-->
+<!--[완료NPC]	종소리 마을 - 플로렌스-->
+<!--[내용]	여관주인 클레아는 얼마 전 제시에게 땅을 조금 빌렸다고 한다. 무엇을 할까 고민하던 클레아는 어렸을 적 좋아했던 치즈사과를 재배하고 싶어한다고 한다. 종소리 마을 플로렌스에게 치즈사과 재배법을 물어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6582AB80-AF1C-4798-865E-E113A1241350</CLIENT> <!--시작NPC 달빛해안 마을 - 클레아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">cdb2443d-cbf7-4446-a9c1-769342f41b49</PAYER> <!--완료NPC 종소리 마을 - 플로렌스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 11 달빛해안 마을 - 클레아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012"  MARK="END">cdb2443d-cbf7-4446-a9c1-769342f41b49</AGENT> <!--진행NPC 12 종소리 마을 - 플로렌스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10513911"/> <!--플로렌스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10513921" FACE="Floran_normal"/> <!--안녕하세요 ~ 요즘 날씨가 참 좋죠? 
+날씨가 좋아도 여행객이 줄어 수입도 많이 줄었네요.
+그래서 아이들이 걱정이에요.
+용사님 혹시 바람의 항구의 갈 일 있으세요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10513926" FACE="Floran_smile"/> <!--치즈사과요? 치즈사과를 알고 있는 사람이 있었네요. 
+그 사과는 이제 더는 구할 수 없어요.%%
+더는 재배하는 곳도 없어요. 
+치즈사과는 건조하고 바람이 많은 장소에서 잘 자라는데, 그런 장소는
+몬스터들도 살기가 좋은 땅인가 봐요.%%
+결국은 모두 재배를 포기하고 말았어요.
+그래서 지금은 구하기 어려울 거에요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10513923" FACE="Floran_normal"/> <!--다름이 아니라 몇 일 전에 제시씨에게 땅을 조금 빌렸는데,
+거기에다가 과일이라도 재배해볼까 해서요.
+어렸을 적 좋아했던 치즈사과를 재배하고 싶은데.%%
+재배법을 몰라 고민 중이었어요.
+그런데 플로렌스가 치즈사과재배법을 알고 있다고 하네요.
+그래서 종소리 마을에서 알아봐주셨으면 해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10513924" FACE="Floran_angly"/> <!--역시 안되나요? 저는 용사님이라면, 꼭 들어줄 거로 생각했는데… 어쩔 수 없죠-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10513925" FACE="Floran_normal"/> <!--아이들한테 말했더니, 어찌나 좋아하던지… 
+용사님만 믿고 내년을 기다리고 있을게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10513902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

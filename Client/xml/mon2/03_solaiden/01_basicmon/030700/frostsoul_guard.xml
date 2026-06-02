@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Frostsoul_Guard" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Frostsoul_Guard"/>
+				<KFMPATH SCALE="0.5">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Frostsoul_Guard/Frostsoul_Guard.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="0.5">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Frostsoul_Guard/Frostsoul_Guard_die.kfm</SUB_KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			
+	<!-- 기본공격 배치기-->
+
+			<ITEM NAME="breath_btlidle_03_start" ANIMATION="1000201"/>
+			<ITEM NAME="breath_btlidle_03" ANIMATION="1000202"/>
+			<ITEM NAME="breath_03" ANIMATION="1000203"/>
+			
+			<!--4번 찍기 루프-->
+
+			<ITEM NAME="breath_btlidle_02_start" ANIMATION="1000301"/>
+			<ITEM NAME="breath_btlidle_02" ANIMATION="1000302"/>
+		   <ITEM NAME="breath_02" ANIMATION="1000303"/>
+		
+			<!-- 브레스-->
+
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+		
+		
+		
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!--ITEM NAME="die_01" ANIMATION="1000020"/ -->
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

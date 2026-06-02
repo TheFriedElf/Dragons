@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="c_Defence_mode_opening" INIT_ACTION="a_idle">
+<TEXTURE SRC="FX_flow_wheel.dds">../Data/5_Effect/9_Tex/FX_flow_wheel.dds</TEXTURE>
+<TEXTURE SRC="ef_flashlight_02.tga">../Data/5_Effect/9_Tex/ef_flashlight_02.tga</TEXTURE>
+	
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1">../Data/3_World/00_Object/breakObject/Mission/Mission_Guard_Stone_01/Mission_Guard_Stone_opening.kfm</KFMPATH>
+		<SLOT>
+			<!-- Basic Movement -->
+            <ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="idle_02" ANIMATION="1000081" RANDOM="100"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030691_DG" DESCRIPTION="90306900">
+  <GSAPATH>../Data/3_World/99_Boss/01_Level/030600/030691_DG.gsa</GSAPATH>
+  <!--8방향-->
+  <FREE_DIRECTION ALL="TRUE" />
+
+  <!-- 데미지 이동-->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+
+
+  <!-- 텔레포트-->
+  <TRIGGER ID="teleport_target_01">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+
+  <OBJECT GUID="04ad7494-0022-4881-a3f8-df9e6e5a2e54" RIDABLE="TRUE" SPEED="50" CLASS_NO="5000540">
+    <WayPoint POINT="-5266.156, -675.9421, 3600.546" TIME="1" />
+    <WayPoint POINT="-4065.852, -676.6973, 3600.546" TIME="100000" />
+  </OBJECT>
+  <!-- 포그 -->
+<FOG DENSITY="0.64" FUNC="RANGE_SQ" START="306" END="7351" COLOR="0.5019608,0.5019608,0.7529412"/>
+
+  <STONES />
+</WORLD>

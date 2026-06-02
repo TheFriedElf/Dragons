@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>262</ID> <!--T.T.10026201 약초채집 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	처음보는 잎사귀 5장 구하기-->
+<!--[완료NPC]	채집농장 - 베시-->
+<!--[내용]	약초채집장은 호미모양의 그림이 있는 곳이다. 자신의 레벨에 맞는 100이라고 쓰여진 간판이 있는 곳으로 가자. 그곳에서 호미를 장착한 상태에서 오라가 빛나는 장소에서 약초채집 스킬을 누르자. 약초채집장에서 처음보는 잎사귀 5장을 구하면 베시에게 가져가자. -->
+	<LIMITS>
+            <SKILLS>
+			<SKILL TYPE="OR">85000500</SKILL>
+			</SKILLS>
+    </LIMITS>
+
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">21A00C9B-83DD-4094-AB74-8FDCDA568AC0</CLIENT> <!--시작NPC 채집농장 - 제롬 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">14DC362F-D0CA-4ede-8F38-33F2D92D8731</PAYER> <!--완료NPC 채집농장 - 베시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">21A00C9B-83DD-4094-AB74-8FDCDA568AC0</AGENT> <!--진행NPC 11 채집농장 - 제롬 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">14DC362F-D0CA-4ede-8F38-33F2D92D8731</AGENT> <!--진행NPC 12 채집농장 - 베시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">89006260</ITEM> 
+ <!--Item_NO=89006260/[직업생산 개선] 처음 보는 잎사귀 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="502">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10026211"/> <!--처음보는 잎사귀-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">89006300</ITEM><!--전체지급/전체/1)/89006300(봉인아님) 1개-[직업생산 개선] 연한 녹즙-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10026221" FACE="Gerome_normal"/> <!--어서오세요! %name%님. 베시 스승님께 이야기 잘 들었답니다. 
+약초채집에 대해서 배우고 싶으시다고요?%%
+약초채집은 일상생활은 물론 자신의 기술을 익히기 위해서도 상당히 주요한 직업스킬입니다.%%
+과거 몸이 아프신 어머니를 위해서 약초를 사온 적이 있습니다. 
+어머니는 제가 사온 약초를 드시고 많이 몸이 좋아지셨다고 말씀하셨지만, 사실 어머니의 상태는 더 안 좋아지셨습니다.%%
+그때 제 어머니의 병을 고쳐주신 분이 베시 스승님입니다. 베시 스승님은 제가 사온 것이 약초가 아니라 독초였다고 했습니다.%%
+그 뒤로 약초에 대한 해박한 지식을 얻기 위해 베시 스승님의 밑에서 수련을 하게 되었습니다. %%
+약초채집에 대해서 더 자세히 알고 싶으신가요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10026226" FACE="Bessie_smile"/> <!--흠, 약초채집에 대해서 자네도 어느 정도 알게 된 것 같군.
+하지만 지금 한 것은 그냥 맛보기에 불과한 거야.%%
+더욱 정진하면 제롬처럼 될 수 있을 거야.
+물론 제롬처럼 여성스럽게 된다는 것은 아니야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10026223" FACE="Gerome_smile"/> <!--약초채집은 의외로 쉽습니다. 약초채집장에 들어가서 자신의 능력에 맞는 100이라고 쓰여진 표지판에 오라가 빛날 때 들어가면 됩니다.%%
+그리고 호미를 장착한 상태에서 약초채집스킬을 누르면 약초채집이 가능하게 됩니다.
+약초채집은 단순히 약초채집의 스킬을 올리는 것만 하는 게 아닙니다.%%
+약초채집을 통해 얻은 약초는 베시 스승님이 유요한 물건으로 바꿔주시기 때문입니다.
+그럼 약초채집을 잘 하실 수 있는지 시험해보도록 할까요?%%
+약초채집을 통해서 얻을 수 있는 처음보는 잎사귀 5장만 구해서 베시 스승님에게 드리면 됩니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10026224" FACE="Gerome_cry"/> <!--약초채집을 배우기 위해서 저에게 오신 줄 알았는데, 그게 아니었군요.
+단순히 저를 놀리기 위한 것이었네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10026225" FACE="Gerome_normal"/> <!--약초채집은 오라가 빛날 때만 가능합니다. 오라는 빛나는 시간은 일정하지 않으니 참을성을 가지고 기다려 보세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10026227" FACE="Bessie_angly"/> <!--무언가 내게 하고 싶은 이야기라도 있는 겐가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10026202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

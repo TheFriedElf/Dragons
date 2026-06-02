@@ -1,0 +1,12 @@
+<ACTION ID="a_Reverse_Gravity" NEXT="a_Reverse_Gravity2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE" ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Spear_skill_ReverseGravity_01_01"/>
+  <FSM SCRIPT="Skill_Reverse_Gravity"
+       HIT_TARGET_EFFECT_ID="ef_Reversegravity_03_char_root"
+       HIT_TARGET_EFFECT_TARGET_NODE_TO_GROUND="TRUE"
+        FIRE_SOUND_ID="ReverseGravity"
+		
+		CASTING_SOUND_ID_MALE="Male_ReversGravity"
+		CASTING_SOUND_ID_FEMALE="Female_ReversGravity"
+		/>
+</ACTION>

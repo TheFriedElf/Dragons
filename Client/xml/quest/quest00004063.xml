@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4063</ID> <!--T.T.10406301 하늘과 번개와 물과 불(1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	지하묘지에서 정령신화 1페이지 습득-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	라르엘은 지하묘지에 유령들이 넘쳐나기 시작하면서 자신의 개인 서고에 있던 자료들을 모두 잃어버렸다고 한다. 지하묘지의 카지모도로부터 정령신화 1페이지를 찾아오자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160406300">4602100</MONSTER> 
+ <!--MON_NO=4602100/카지모도,Item_NO=160406300/[Q.ID:04063] 정령신화 1페이지100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160406300</ITEM> 
+ <!--Item_NO=160406300/[Q.ID:04063] 정령신화 1페이지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10406311"/> <!--정령신화 1페이지-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10406321" FACE="Larel_normal"/> <!--아, 그래… 맞아. 내가 라르엘이야.
+흠… 파리스와 영웅들이라고?%%
+뭐, 뭐뭐뭐뭐? 엘가라고?
+음… 오래간만에 들어보는 소름 끼치는 이름이군 그래.%%
+그래 이제야 생생하게 기억이 나.%%
+흑룡왕 엘가, 세상 가장 흉폭한 고대 드래곤의 이름... 
+신성제국의 3대 기사단을 한꺼번에 소멸시킨 재앙의 대명사지.%%
+그러니까.. 천년 전의 전설이 담긴 자료를 찾는다 이 말이지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10406326" FACE="Larel_smile"/> <!--그래 바로 이거라고. 정령신화의 서장…
+한번 읽어볼까?%%
+파리스라는 마녀가 있었다.%%  
+그녀는 동생의 병을 치료하기 위해 영혼의 돌을 찾아다녔다.%%-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10406323" FACE="Larel_smile"/> <!--미안하지만 딱히 대답해 줄 말이 없어. 
+돌아가…%%
+이크… 뭐라고?  
+에델린이 내가 자기가 아는 사람 중에 가장 책을 많이 읽는다고 했다고?%%
+흠… 과찬이지만 사실인 부분이 딱히 없는 것은 아냐.
+하하하... 이렇게 그냥 되돌려 보낼 수야 없겠구만.%%
+사실 내가 이 지하묘지에서 일했던 까닭은 그동안 모아왔던
+중요한 도서들을 은밀하게 보관하기 위해서지.%%
+내 꿈은 세계최초로 지하묘지 안에 대규모 도서관을 만드는 일이니까.
+%name%… 자네에게 사실을 말하자면...%%
+찾고 있다는 정령신화에 관한 두루마리도 얼마 전까지 지하 서고에 있었어.
+지금은 갑자기 넘쳐나기 시작한 지하묘지의 유령들 때문에... %%
+두루마리 뭉치들이 모두 뿔뿌리 흩어지고 말았지만 말이야. 
+이것을 되찾아온다면 자네에게 틀림 없이 도움이 될꺼야.%% 
+양피지로 된 그 오래된 두루마리의 이름은 -하늘과 번개와 물과 불-이라고 한다네 
+이 양피지들을 모두 모아온다면. 자네가 알고 싶은 것을 찾을 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10406324" FACE="Larel_angly"/> <!--그래 나도 어차피 상관 없는 일에 말려드는 것이 귀찮아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10406325" FACE="Larel_normal"/> <!--정령신화의 1페이지는 지하묘지의 카지모도에게 얻을 수 있을 거라고 봐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10406302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

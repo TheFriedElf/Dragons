@@ -1,0 +1,9 @@
+<ACTION ID="a_SoulDrain_Play" NEXT="a_idle" USE-EVENT="TRUE">
+  <SLOT NAME="SoulDrain_Skill_01_start"/>
+  <SLOT NAME="SoulDrain_Skill_01_attack" LOOP="TRUE"/>
+  <SLOT NAME="SoulDrain_Skill_01_finish"/>
+  <FSM SCRIPT="Skill_SoulDrain_play"
+		FIRE_CASTER_EFFECT_ID=""
+		FIRE_CASTER_EFFECT_TARGET_NODE=""
+  />
+</ACTION>

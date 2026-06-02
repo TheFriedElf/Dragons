@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Balgon_03_ST" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Algon_Numin"/>
+		<KFMPATH SCALE="0.7">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Balgon_03_ST/Balgon_03_ST.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ATTACH TYPE="effect" SLOT="53911" EFFECT="ef_dmg_fire_02" TO="p_ef_r_hand"/>
+		<ATTACH TYPE="effect" SLOT="53912" EFFECT="ef_dmg_fire_02" TO="p_ef_l_hand"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="28"/>
+			<SPHERE TO="p_hit_point_02" SIZE="14"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000201" FIRE_START_NODE="p_wp_r_hand" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_mag_cannon_05" PROJECTILE_SPEED="150" PROJECTILE_SCALE="1.0"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_02" ANIMATION="1000202" FIRE_START_NODE="p_ef_skill_01" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_magic_ball_red_01" PROJECTILE_SPEED="150" PROJECTILE_SCALE="2.0"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

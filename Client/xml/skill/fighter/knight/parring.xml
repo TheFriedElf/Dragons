@@ -1,0 +1,13 @@
+<ACTION ID="a_Parring" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_Bup_01"/>
+  <FSM SCRIPT="Act_Melee_Default" 
+       HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+       HIT_CASTER_EFFECT_ID="ef_Parring_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Parring_01_char_root"
+       HIT_SOUND_ID="Parring"
+       HIT_SOUND_ID_MALE="voice_male5"
+       HIT_SOUND_ID_FEMALE="voice_female5"
+       />
+</ACTION>

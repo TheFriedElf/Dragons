@@ -1,0 +1,10 @@
+<ACTION ID="a_April Fool" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Skill_StripWeapon_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       NO_WEAPON_TRAIL="TRUE"
+	   HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+       HIT_CASTER_EFFECT_ID ="eff_skill_april_01"
+	   HIT_SOUND_ID="AprilFool"
+       />  
+</ACTION>

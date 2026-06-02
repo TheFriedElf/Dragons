@@ -1,0 +1,18 @@
+<ACTION ID="a_crossblade_play" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="melee_01"/>
+  <SLOT NAME="melee_02"/>
+  <SLOT NAME="melee_03"/>
+  <!--SLOT NAME="attk_down_01"/>  
+  <SLOT NAME="melee_blow_up"/-->
+  <SLOT NAME="attk_down_03"/>
+  <SLOT NAME="dash_attk_01"/>
+  <SLOT NAME="Com_spell_01"/>
+  <FSM SCRIPT="Skill_CrossBlade_Play"  
+	HIT_SOUND_ID=""
+	
+	CASTING_EFFECT_EFFECT_ID ="ef_smog_03_char_root" 
+	CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS = "char_root"
+	DETACH_CASTING_EFFECT_AT_FINISH = "TRUE"
+	NO_DAMAGE_HOLD="TRUE"
+  />
+</ACTION>

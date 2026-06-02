@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 아르카 엔딩 -->
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD type="WaitTime" time="3"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="false"/>
+	<CMD type="WaitFade" time="1"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다. -->
+    <CMD TYPE="AddNPC" ClassNo ="1028203" NameTTID ="506157" SpawnPos = "177.3612, 121.0291, 879.1934"/>
+    <CMD TYPE="AddNPC" ClassNo ="1028204" NameTTID ="506159" SpawnPos = "276.3365, 194.5542, 879.1939"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506159" SlotName="opening_idle"/>
+    
+    <CMD TYPE="ShowActor" NameTTID ="506157" Show="true"/>
+    <CMD TYPE="ShowActor" NameTTID ="506159" Show="true"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="false"/>
+    
+    <CMD TYPE="MoveCamToActor" NameTTID ="506159" MoveTime="0"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="ShowActor" ClassNo ="1028202" Show="false"/>    
+    
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+    
+    <CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+    
+    <CMD TYPE="PlayBGM" SoundNo = "1"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506159" SlotName="opening"/>
+	<CMD TYPE="MoveCamToActor" NameTTID="506159" MoveTime="3" CamActorDistance="130" CamMoveUpDistance="95"/>
+	<CMD TYPE="WaitTime" Time="6.9"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506159" SlotName="talk_02"/>
+    <CMD TYPE="MoveCamToActor" NameTTID="506159" MoveTime="3" CamActorDistance="130" CamMoveUpDistance="95"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+    
+    <CMD TYPE="Dialogue" NameTTID="506154" TitleTTID="505706" TextTTID="506151" FaceID="Palis_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+    <CMD TYPE="WaitTime" Time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506159" SlotName="cloth_01"/>
+    <CMD TYPE="MoveCamToActor" NameTTID="506159" MoveTime="0.7" CamActorDistance="300" CamMoveUpDistance="50"/>
+	<CMD TYPE="WaitTime" Time="3.833"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506159" SlotName="attck_01"/>
+	<CMD TYPE="WaitTime" Time="1.396"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506157" SlotName="action"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="506157" CameraID="Camera01"/>
+	<CMD TYPE="WaitTime" Time="2"/>
+    
+    <CMD TYPE="SetCameraModeEvent"/>
+    
+    <CMD TYPE="MoveCamToActor" NameTTID="506159" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="65"/>
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="506159" SlotName="talk_03"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+    
+    <CMD TYPE="Dialogue" NameTTID="506154" TitleTTID="505706" TextTTID="506152" FaceID="Palis_angly"/>
+	<CMD TYPE="WaitDialogue"/>
+    <CMD TYPE="WaitTime" Time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+    <CMD TYPE="PlayAnimation" NameTTID="506159" SlotName="ending_02"/>
+	<CMD TYPE="WaitTime" Time="5"/>
+    
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="false"/>
+	<CMD type="WaitFade" time="2"/>
+    
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+		<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD TYPE="MapMove" MapID ="9030230" SpawnIndex="2" />
+    <CMD TYPE="SetCameraModeEvent"/>
+    
+    <CMD TYPE="ShowActor" NameTTID ="506159" Show="false"/>
+    <CMD TYPE="RemoveActor" NameTTID="506159"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    <CMD TYPE="stopBGM" SoundNo = "1"/>
+    
+    <CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>    
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+    
+</EVENT_SCRIPT>

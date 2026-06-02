@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Umai_Ghost_eft" INIT_ACTION="a_opening" DIE_PARTICLE_ID="ef_Umai_die_01_p_ef_heart">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Umai"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Umai_Ghost/N_Umai_Ghost.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="26"/>
+			<SPHERE TO="p_hit_point_02" SIZE="20"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본 공격 1-->
+			<ITEM NAME="btlidle_01" ANIMATION="1000065"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000066"/>
+			<!-- 기본 공격 2-->
+			<ITEM NAME="attk_02_01" ANIMATION="1000068"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000067"/>
+			<!-- 초목이 소환해서 떨어트리는 스킬-->
+			<ITEM NAME="drop_projectile_btlidle" ANIMATION="1000205"/>
+			<ITEM NAME="drop_projectile_fire" ANIMATION="1000206" PROJECTILE_ID="Projectile_BigWoody_True" EFFECT_TO_GROUND="ef_woody_attk_True" QUAKE_TIME="0.6" QUAKE_FACTOR="6.2" PROJECTILE_SPEED="800"/>
+			<!-- -->
+			<!-- 회오리 던지는 스킬-->
+			<ITEM NAME="Bat_Missile_start_02" ANIMATION="1000207"/>
+			<ITEM NAME="Bat_Missile_btlidle_02" ANIMATION="1000208"/>
+			<ITEM NAME="Bat_Missile_02" ANIMATION="1000209" FIRE_START_NODE="char_root" FIRE_START_EFFECT="e_m_Yakut_cast_char_root" PROJECTILE_ID="Projectile_Yakut_skill_twist" PROJECTILE_COUNT="5" PROJECTILE_ADD_Z="30" NO_VERICAL_RANDOM="1" FIRE_DELAY="0.04"/>
+			<!-- 바닥 내려 치기 스킬-->
+			<ITEM NAME="summon_thorn_btlidle" ANIMATION="1000210"/>
+			<ITEM NAME="summon_thorn_fire" ANIMATION="1000211"/>
+			<!-- 박쥐 앞으로 발사 스킬-->
+			<ITEM NAME="Bat_Missile_btlidle_01" ANIMATION="1000212" FIRE_EFFECT="ef_Umai_skill_04_01_p_hit_point_02" FIRE_EFFECT_NODE="p_hit_point_02"/>
+			<ITEM NAME="Bat_Missile_01" ANIMATION="1000213" FIRE_START_NODE="p_ef_shot_01" PROJECTILE_ID="PROJECTILE_BAT_MISSILE" FIRE_DELAY="0.2" PROJECTILE_COUNT="6"/>
+			<!--아이들 부르기-->
+			<ITEM NAME="attk_08_01" ANIMATION="1000210"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000211"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000055" SPEED="1.5"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="1.2" QUAKE_FACTOR="0.6"/>
+			<ITEM NAME="die_01" ANIMATION="1000021" REMAIN_BODY="true"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000041" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000042" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000041"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000042"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000043"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000044"  DIE_ALPHA="1"/>
+									<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

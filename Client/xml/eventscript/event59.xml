@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 벌룬 엔딩-->
+    <CMD type="WaitTime" time="1"/>
+    <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="setmoviescene" enable="true"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/>    
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2" CamActorDistance="200" CamMoveUpDistance="-35"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "false"/>  
+    <CMD type="WaitFade" time="1"/>
+  
+    <CMD TYPE="Dialogue" NameTTID="" TitleTTID="" TextTTID="" StitchImageID="balloon_ending"/>
+    <CMD TYPE="WaitDialogue"/>
+    <CMD type="waittime" time="5"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+    
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+    <CMD type="WaitFade" time="1"/>
+    
+		<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD TYPE="MapMove" MapID ="9030130" SpawnIndex="2" />
+    <CMD type="waittime" time="2"/>
+  
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="0"/>
+    <CMD TYPE="WaitCamera"/>
+  
+    <CMD type="waittime" time="2"/>
+  
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

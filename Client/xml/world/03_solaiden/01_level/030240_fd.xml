@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030240_FD" DESCRIPTION="90302400">
+	<GSAPATH>../Data/3_World/03_Solaiden/01_Level/030240_FD.gsa</GSAPATH>
+	<MINIMAP Y="150" H="255">../Data/3_World/03_Solaiden/01_Level/030240_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DewWood.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	
+
+	<!-- 얼음협곡 게이트 -->
+    <TRIGGER ID="gate_030230_base" TYPE="PORTAL" TITLE_TEXT_ID="800063" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030230" PARAM2="3">
+      <ACCESS>
+        <LEVEL MIN="0" />
+      </ACCESS>
+    </ACTION>
+    </TRIGGER>
+
+	<!-- 텔레점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="100"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="100"/>
+	</TRIGGER>
+
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="280"/>
+	</TRIGGER>
+
+   <!--<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="64F3E880-4ACF-4edc-B83A-F5A8DAE062D1" TYPE="FIXED" LOCATION="906.8802, -3281.393, 66.5715"/>
+  <NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="F65317FF-1818-4adc-941F-A748AD9B8EFD" TYPE="FIXED" LOCATION="127.6213, 2380.575, 58.4874"/>
+  <NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="7760A860-0379-4298-947A-871CE005CEAC" TYPE="FIXED" LOCATION="-888.0654, -1196.061, 202.9086"/>-->
+
+	<WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1" />
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="2667" COLOR="0.5882353,0.7294118,0.945098"/>
+</WORLD>

@@ -1,0 +1,9 @@
+<ACTION ID="a_Coke Screw Upper" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Claw_Skill_Raid_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIND_TARGET_TYPE ="BAR" 
+       HIT_CASTER_EFFECT_TARGET_NODE="char_root" 
+       HIT_CASTER_EFFECT_ID="ef_Cokescrewupper_01_char_root" 
+       />
+</ACTION>

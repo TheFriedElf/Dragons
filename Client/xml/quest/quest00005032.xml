@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5032</ID> <!--T.T.10503201 도쥬의 투구 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 프랑켄 도쥬에게서 투구 회수-->
+<!--[완료NPC]	바람항구 - 빈센트-->
+<!--[내용]	빈센트에 따르면 스티븐 2세의 물건인 투구를 도쥬가 쓰고 있다고 한다. 과거 스티븐 2세가 수집하고 있던 투구는 그 선대부터 싸움의 승리의 전리품으로서 가지고 있었다. 하지만 왕국의 기념일에 투구 전시회 중 도난당했다고 한다. 그 도난당한 투구를 프랑켄 도쥬가 가지고 있는 것을 목격했다는 소문을 듣고 빈센트는 찾아 줄 것을 부탁한다. 시청 지하수로에서 프랑켄 도쥬가 훔쳐간 투구를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">53093AB3-00D2-4B73-8411-B48783767B6A</CLIENT> <!--시작NPC 바람항구 - 빈센트 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">53093AB3-00D2-4B73-8411-B48783767B6A</PAYER> <!--완료NPC 바람항구 - 빈센트 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">53093AB3-00D2-4B73-8411-B48783767B6A</AGENT> <!--진행NPC 11 바람항구 - 빈센트 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/0/1/1/160503200">6006600</MONSTER> 
+ <!--MON_NO=6006600/프렝켄 도쥬,MAP_NO=9010502/파렐 대저택,Item_NO=160503200/[Q.ID:05032] 투구,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503200</ITEM> 
+ <!--Item_NO=160503200/[Q.ID:05032] 투구,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10503211"/> <!--투구-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503221" FACE="Vincent_normal"/> <!--과거 치열했던 전투를 떠올리면 그대는 무엇이 생각 나시오?
+난 싸움의 승리와 달콤한 전리품이 생각나오.%%
+물론 싸움에는 전리품이라는 물질적인 가치만이 남는 것은 아니오.
+더욱 중요한 것은 그 싸움에서 얻을 수 있었던 용기와 지혜요.
+전리품이란 그런 것들을 다시 생각나게 해주는 매개체일뿐이오.%%
+하지만 이런 승리의 교훈을 돌이킬 전리품 중에 하나를 잃어버리고 말았소.
+부디 그대가 이 일을 맡아서 해결해줬으면 좋겠소.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503226" FACE="Vincent_normal"/> <!--수고했소. 그대의 노고에 감사하는 바이오.
+우리 군주 스티븐 2세도 기뻐하실 거요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503223" FACE="Vincent_normal"/> <!--과거 왕국의 기념일에 스티븐 2세의 업적을 보이기 위해 각 전리품들을 일반인들이 볼 수 있도록 전시한 적이 있소.
+문제는 그 안에 악의를 품은 적들을 제대로 감지하지 못했다는 데 있소.%%
+그 악의를 품은 자는 스티븐 2세의 전리품 중에 하나인 투구를 가져가 버렸소.
+꽤 긴 시간 투구를 찾았지만 결국 찾지 못했소.%%
+하지만 다행이 그 투구의 행방이 밝혀졌소. 
+바로 프랑켄 도쥬가 쓰고 있다고 하오. %%
+도쥬는 되돌려달라는 왕국의 요청을 거부하고 있소. 
+그대가 할 일은 물건이 있어야 할 자리에 돌려 놓는 것이오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503224" FACE="Vincent_angly"/> <!--이건 나 하나의 부탁이 아니라 우리 군주의 부탁과도 같은 것인데, 이것을 지금 거절하는 것이오?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503225" FACE="Vincent_normal"/> <!--도쥬가 눈치를 채고 도망가기 전에 구해주길 바라오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

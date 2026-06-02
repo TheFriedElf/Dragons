@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+<!-- 눈의 여왕 F5 엔딩 - 몬스터 죽었을때 호출-->
+	 <CMD type="waittime" time="3"/>
+  	<CMD TYPE="HideUI" enable="true"/> <!--UI가리기 -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--소환체를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="false"/> <!--드랍아이템를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/> <!--모든 몬스터 숨기기 -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+    
+
+	  
+ 
+  <CMD TYPE="Dialogue" NameTTID="524108" TitleTTID="10029501" TextTTID="524088" FaceID="SnowQueen_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524105" TitleTTID="10029501" TextTTID="524089" FaceID="User_normal"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524108" TitleTTID="10029501" TextTTID="524090" FaceID="SnowQueen_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524105" TitleTTID="10029501" TextTTID="524091" FaceID="User_normal"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524108" TitleTTID="10029501" TextTTID="524092" FaceID="SnowQueen_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524105" TitleTTID="10029501" TextTTID="524093" FaceID="User_normal"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+
+
+
+  <CMD TYPE="CLOSE_DAILOGUE"/>
+
+  	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="true"/> <!--드랍아이템를 보이기 -->
+	
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="WaitTime" Time="0.1"/><!-- 시간을 기다림-->
+
+    
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="setmoviescene" enable="false"/>
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="HideUI" enable="false"/><!--UI보이기 -->
+	
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+
+
+
+	<CMD TYPE="MapMove" MapID="9018100" SpawnIndex="2"/>
+
+
+</EVENT_SCRIPT>

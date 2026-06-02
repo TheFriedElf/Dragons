@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 튜토리얼 2번째 몬스터 등장 씬 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="WaitTime" Time="2"/>
+    <CMD TYPE="setmoviescene" enable="false" Time="0"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+	
+    <CMD TYPE="AddNPC" ClassNo="6004100" NameTTID="502067" SpawnPos="6082.904297,-53.750473,86.296257"/>
+	<CMD TYPE="AddNPC" ClassNo="6004300" NameTTID="503031" SpawnPos="6043.757813,12.053127,86.296257"/>
+    <!--
+    <CMD type="AddActorFilter" ClassNo="6004100"/>
+    <CMD type="AddActorFilter" ClassNo="6004300"/>
+    -->
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505469" TextTTID="505555" FaceID="Helper_surprise"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+    <CMD TYPE="SetActorDirection" NameTTID="502067" Direction="1"/>
+	<CMD TYPE="SetActorDirection" NameTTID="503031" Direction="1"/>    
+    
+    <CMD TYPE="MoveCamToActor" NameTTID="503031" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="503031" SlotName="idle_03"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+    
+    <CMD TYPE="PlayAnimation" NameTTID="502067" SlotName="idle_03"/>
+    <CMD TYPE="WaitTime" Time="2"/>
+    
+    <CMD TYPE="ShowActor" NameTTID="502067" Show="false"/>
+	<CMD TYPE="ShowActor" NameTTID="503031" Show="false"/>
+
+    <CMD TYPE="RemoveActor" NameTTID ="502067"/>
+    <CMD TYPE="RemoveActor" NameTTID ="503031"/>
+    
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505469" TextTTID="505556" FaceID="Helper_surprise"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="BalloonDialogue" SpecialActor="ME" TextTableID="505572"/>
+    <!--<CMD type="ClearActorFilter"/>-->
+    <CMD type="CallUI" UIWndName = "FRM_GOGO_EVENT"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

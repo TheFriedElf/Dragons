@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="EscScript" EventID="980117"/>
+
+	<!-- 포트레이트 연출 시작-->
+
+	<CMD TYPE="Dialogue" NameTTID="99801067" TextTTID="99801941" FaceID="Chiron_shock" /><!-- 케이론 당혹-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801942" FaceID="User_normal"/><!-- 유저 -->
+	<CMD TYPE="WaitDialogue"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801067" TextTTID="99801943" FaceID="Chiron_normal" /><!-- 케이론 기본 -->
+	<CMD TYPE="WaitDialogue"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801067" TextTTID="99801944" FaceID="Chiron_smile" /><!-- 케이론 웃음-->
+	<CMD TYPE="WaitDialogue"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801067" TextTTID="99801945" FaceID="Chiron_angry" /><!-- 케이론 화남-->
+	<CMD TYPE="WaitDialogue"/>
+
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980117"/>
+
+	
+</EVENT_SCRIPT>
+

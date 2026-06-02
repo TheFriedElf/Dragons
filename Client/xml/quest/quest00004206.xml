@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4206</ID> <!--T.T.10420601 별난 공작과의 재회 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	유혹의 설원[아케이드모드(F1)] 클리어-->
+<!--[완료NPC]	버섯마을 - 모나드론-->
+<!--[내용]	버섯마을로 특이한 버섯을 수집하러 왔다는 모나드론은 유혹의 설원에 사는 얼음 괴물에 대해 지대한 관심을 가지고 있다. 모나드론 공작의 부탁 대로 유혹의 설원[아케이드모드(F1)]을 클리어 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">869D05C4-5714-48ab-AB48-E86C36FB6221</CLIENT> <!--시작NPC 버섯마을 - 모나드론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">869D05C4-5714-48ab-AB48-E86C36FB6221</PAYER> <!--완료NPC 버섯마을 - 모나드론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">869D05C4-5714-48ab-AB48-E86C36FB6221</AGENT> <!--진행NPC 11 버섯마을 - 모나드론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6041500</MONSTER> 
+ <!--MON_NO=6041500/파타누스,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10420611"/> <!--유혹의 설원[아케이드모드(F1)] 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10420621" FACE="Monaderon_normal"/> <!--여어, 이게 누구야?
+%name%군 아닌가? 
+잘 있었나, 음하하하!%%
+난 보다시피 이곳에서 각종 버섯을 수집하는 중이라네
+특히 사람처럼 생긴 만드라버섯 말이야.
+이건 내 수집품 중 최고가 될 걸세.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10420626" FACE="Monaderon_smile"/> <!--오호, 그 몬스터의 이름이 골렘 파타누스였단 말이지?
+그래 대결해보니 어떻던가?%%
+후후 이거 일이 재밌게 흘러가고 있구만.
+음하하하하!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10420623" FACE="Monaderon_normal"/> <!--아, 그건 그렇고… 
+자네 얼음으로 된 괴물에 대해 들어본 적 있나?%%
+유혹의 설원 어딘가에 있다는 그 몬스터 말일세.
+자네만 괜찮다면 그 몬스터에 대해 알아주었으면 하네.%%
+들리는 바에 의하면 원래 오래 전 이곳에 살았던 몬스터를
+검은 마녀가 부활시켰다고 하더군.%%
+바로 유혹의 설원[아케이드모드(F1)]으로 가서 그 괴물에
+대해 조사를 시작해주게. 뭐든지 좋아!
+최대한 많은 정보를 알아봐주게나.%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10420624" FACE="Monaderon_angry"/> <!--벌써 가려고? 제법 중요한 이야기가 있는데 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10420625" FACE="Monaderon_angry"/> <!--유혹의 설원[아케이드모드(F1)]를 클리어하면 된다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10420602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

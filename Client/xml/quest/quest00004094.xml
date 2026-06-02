@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4094</ID> <!--T.T.10409401 의미심장한 우연(7) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	망자의 탑(정상)에서 제스와 대화-->
+<!--[완료NPC]	망자의 탑 (정상) - 제스-->
+<!--[내용]	제스는 망자의 탑 정상으로 간다고 한다. 망자의 탑(정상)에서 제스와 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">CB647CD5-9220-4fd7-8D07-FA05C932DD57</CLIENT> <!--시작NPC 망자의 탑 (5층) - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B80BDF67-15D0-459d-A293-1C2E0066F769</PAYER> <!--완료NPC 망자의 탑 (정상) - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">CB647CD5-9220-4fd7-8D07-FA05C932DD57</AGENT> <!--진행NPC 11 망자의 탑 (5층) - 제스 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">B80BDF67-15D0-459d-A293-1C2E0066F769</AGENT> <!--진행NPC 12 망자의 탑 (정상) - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409411"/> <!--망자의 탑(정상)의 제스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409421" FACE="jess_normal"/> <!--위험한 트랩을 제거하는 방법은 전혀 찾을 수 없었지만
+예상대로 이 근처에 탑의 문을 여는 장치가 숨겨져 있었어.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409426" FACE="Jess_normal"/> <!--이봐… 여기... 그… 그...
+마녀가 와있어...-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409423" FACE="jess_normal"/> <!--앞으로는 굳이 각 층의 원령들을 퇴치하지 않아도
+문이 열려 있어서 다음 층으로 진행이 가능할거야.%%
+하지만, 각 층의 원령들은 쓸만한 보물을 가지고 있는 것 같으니
+이 기회를 놓치는 것도 바보 같은 짓이지.%%
+그럼 난 잭을 찾으면서 정상으로 올라갈테니 그곳에서 보자!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409424" FACE="jess_angly"/> <!--여기까지 와서는 정상에 올라갈 생각이 없는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409425" FACE="jess_normal"/> <!--그럼 탑의 정상까지 뒤쳐지지 말고 따라와.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

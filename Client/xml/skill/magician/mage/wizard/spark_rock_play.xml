@@ -1,0 +1,11 @@
+<ACTION ID="a_Spark_Rock_Play" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="idle_01"/>
+  <FSM SCRIPT="Skill_Spark_Rock_Play"
+	 INSTALL_EFFECT_TARGET_NODE="char_root"
+	 INSTALL_EFFECT_ID="ef_Skill_SparkRock"
+	 FIRE_CASTER_SCALE_NORMALIZE="60"
+
+	 ENTER_TIMER_TIME=""
+     ENTER_TIMER_TICK="0.3"
+  />
+</ACTION>

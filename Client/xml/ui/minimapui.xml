@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_MINIMAP" ALIGN_X="100" ALIGN_Y="0" W="284" H="250" CAN_CLIP="1" PASS_EVENT="1" NO_FOCUS="1">	
+		<BUTTON ID="BTN_HOME_INVITE_LIST">
+			<ATTR X="52" Y="85" W="34" H="34" BTN_IMG="../Data/6_ui/myhome/mhMapBt.tga" BTN_IMG_W="68" BTN_IMG_H="68" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="7" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:ClearTwinkleInfo() CallMinimapMyHomePopupMenu()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, GetTextW(790603), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_RANKING">
+			<LOCAL>
+				<NAME ID="CHINA/DEVELOP">
+					<ATTR IS_VISIBLE="1"/>
+				</NAME>
+				<NAME ID="DEFAULT">
+					<ATTR IS_VISIBLE="0"/>
+				</NAME>
+			</LOCAL>
+			<ATTR X="52" Y="119" W="34" H="34" BTN_IMG="../Data/6_ui/main/mnRanking.tga" BTN_IMG_W="68" BTN_IMG_H="68" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="7" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+					CallUI("SFRM_RANKING")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, GetTextW(301207), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+		<IMG ID="IMG_HELP_PARTY_ARROW" IS_VISIBLE="0" X="0" Y="0" Z="1" W="52" H="56" IMG="../Data/6_UI/main/mnPtIn.tga" IMG_W="52" IMG_H="112" U="1" V="2" UV_INDEX="1" PASS_EVENT="1" NO_FOCUS="1">
+			<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.2) </SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				local kWnd = kSelf:GetParent()
+				local kPartyPos = kWnd:GetControl("BTN_PARTY_FIND_LIST"):GetLocation()
+				local kPartySize = kWnd:GetControl("BTN_PARTY_FIND_LIST"):GetSize()
+				local kLoc = Point2(2+kPartyPos:GetX() - kSelf:GetSize():GetX(), (kPartyPos:GetY()+(kPartySize:GetY()/2)) - (kSelf:GetSize():GetY()/2) - 8)
+				kSelf:SetLocation(kLoc)
+			</SCRIPT>
+		</IMG>
+		<STATIC_FORM ID="SFRM_PARTY_FIND_LIST">
+				<ATTR X="52" Y="153" Z="5" W="34" H="34" IMG="../Data/6_ui/main/mnPtBt.tga" IMG_W="68" IMG_H="68" U="2" V="2" UV_INDEX="1" IS_VISIBLE="0" PASS_EVENT="1"/>
+				<ATTR U="2" V="2" />
+				<SCRIPT ID="ON_TICK">UVAnimation(UISelf, 0.1)</SCRIPT>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_PARTY_FIND_LIST">
+			<ATTR X="52" Y="153" W="34" H="34" BTN_IMG="../Data/6_ui/main/mnPtBt.tga" BTN_IMG_W="68" BTN_IMG_H="68" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="7" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				CallUI("SFRM_PARTY_PART_FIND")
+				UISelf:GetParent():GetControl("IMG_HELP_PARTY_ARROW"):Visible(false)
+				UISelf:GetParent():GetControl("SFRM_PARTY_FIND_LIST"):Visible(false)
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, GetTextW(401356), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>		
+		<STATIC_FORM ID="SFRM_RESTEXP" IS_VISIBLE="0">
+			<ATTR X="52" Y="60" W="34" H="34" IMG="../Data/6_UI/main/mnExpZz.tga" IMG_W="68" IMG_H="68" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<ATTR U="2" V="1" />
+			<SCRIPT ID="ON_CALL"> UISelf:ClearCustomData() </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 1) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, GetTextW(799021), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_TITLEBAR">
+			<ATTR X="61" Y="0" W="222" H="36" STATIC_NUM="4"/>			
+			<BUTTON ID="BTN_WORLD">
+				<ATTR X="7" Y="4" W="24" H="24" T_X = "12" T_Y = "4" TEXT = "420050" T_CENTER = "1" T_OUTLINE="1"  FONT="FTtab"/>
+				<ATTR BTN_IMG = "../Data/6_ui/common/cmSmbtBg.tga" BTN_IMG_W = "48" BTN_IMG_H = "48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="7" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+				<SCRIPT ID="ON_L_BTN_UP"> CallNewWorldMap() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					CallToolTipText(0, MakeHotKeyText(651, 1050), GetUIWnd("Cursor"):GetLocation())
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">
+					CloseToolTip()
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_SUBMAP">
+				<ATTR X="33" Y="4" W="24" H="24" T_X = "12" T_Y = "4" TEXT = "420049" T_CENTER = "1" T_OUTLINE="1" FONT="FTtab"/>
+				<ATTR BTN_IMG = "../Data/6_ui/common/cmSmbtBg.tga" BTN_IMG_W = "48" BTN_IMG_H = "48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="7" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+				<SCRIPT ID="ON_L_BTN_UP"> CallWorldMap(true) </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					CallToolTipText(0, MakeHotKeyText(652, 1049), GetUIWnd("Cursor"):GetLocation())
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">
+					CloseToolTip()
+				</SCRIPT>
+			</BUTTON>
+			<STATIC_FORM ID="SFRM_COLOR1">
+				<ATTR X="59" Y="4" W="130" H="24" CAN_COLOR_CHANGE = "1" STATIC_NUM = "2" COLOR_TYPE = "1" />
+				<STATIC_FORM ID="SFRM_SHADOW">
+					<ATTR X="0" Y="0" W="130" H="24" STATIC_NUM = "3" T_CENTER = "1" T_X = "65" T_Y = "5" TEXT="" FONT_COLOR_HEX = "0xFF4D3413" />
+					<SCRIPT ID = "ON_TICK">	
+						if (g_world:IsHaveWorldAttr(GATTR_FLAG_EXPEDITION)) or (g_world:IsHaveWorldAttr(GATTR_EXPEDITION_LOBBY)) then
+							UISelf:SetStaticTextW(GetTT(710037))
+						else
+							UISelf:ConnectedInfo(g_mapNo, 3)
+						end
+					</SCRIPT>
+				</STATIC_FORM>
+				<SCRIPT ID = "ON_CALL">	
+					if UISelf:IsVisible() == false then
+						UISelf:Visible(true)
+					end					
+				</SCRIPT>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_COLOR4">
+				<ATTR X="191" Y="4" W="24" H="24" Z="-1" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_CLOSE"><!--미니맵 접음-->
+				<ATTR X="191" Y="4" W="24" H="24"/>
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnMiniB2.tga" BTN_IMG_W = "48" BTN_IMG_H = "48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					UISelf:Visible(false)
+					kOpen = UISelf:GetParent():GetControl("BTN_OPEN")
+					if  kOpen:IsNil() == false then kOpen:Visible(true) end
+					if g_MiniType1 then
+						if g_MiniMapViewState then							
+							ShowCurrentMiniMap(2)
+							g_MiniMapViewState = false								
+						else							
+							ShowCurrentMiniMap(1)
+							g_MiniMapViewState = true
+						end
+					else
+						g_ChatMgrClient:AddLogMessage(GetTT(665), true)
+					end
+					CloseToolTip()
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					if g_MiniMapViewState then
+						CallToolTipText(0,  GetTextW(663), GetUIWnd("Cursor"):GetLocation())
+					else
+						CallToolTipText(0,  GetTextW(664), GetUIWnd("Cursor"):GetLocation())
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_OPEN"><!--미니맵 펼침-->
+				<ATTR X="191" Y="4" W="24" H="24" VISIBLE="0"/>
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnMiniB.tga" BTN_IMG_W = "48" BTN_IMG_H = "48" IS_VISIBLE="0"/>				
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					UISelf:Visible(false)
+					kClose = UISelf:GetParent():GetControl("BTN_CLOSE")
+					if  kClose:IsNil() == false then 	kClose:Visible(true) end
+					if g_MiniType1 then
+						if g_MiniMapViewState then							
+							ShowCurrentMiniMap(2)
+							g_MiniMapViewState = false								
+						else							
+							ShowCurrentMiniMap(1)
+							g_MiniMapViewState = true							
+						end
+					else
+						g_ChatMgrClient:AddLogMessage(GetTT(665), true)
+					end
+					CloseToolTip()
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					if g_MiniMapViewState then
+						CallToolTipText(0,  GetTextW(663), GetUIWnd("Cursor"):GetLocation())
+					else
+						CallToolTipText(0,  GetTextW(664), GetUIWnd("Cursor"):GetLocation())
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_MINIMAP">
+			<ATTR X="61" Y="20" W="222" H="178" Z="-1" STATIC_NUM="1"/>
+			<ATTR TEXT="" FONT="Font_Text" T_X="111" T_Y="84" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_CLOCK" X="38" Y="15" W="180" H="20" TEXT="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+				<ATTR TICK_TIME="10000" FONT="Font_Text"/>
+				<SCRIPT ID="ON_CALL">
+					SetServerDateTimeToWnd(UISelf, false)
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					SetServerDateTimeToWnd(UISelf, false)
+				</SCRIPT>
+			</FORM>
+			<BUTTON ID="BTN_SAVE">
+				<LOCAL>
+					<NAME ID="DEFAULT">
+							<ATTR IS_VISIBLE="1"/>
+					</NAME>
+					<NAME ID="JAPAN">
+							<ATTR IS_VISIBLE="0"/>
+					</NAME>
+				</LOCAL>
+				<ATTR X="12" Y="15" W="25" H="23" T_X = "12" T_Y = "4" T_CENTER = "1" T_OUTLINE="1"  FONT="FTtab"/>
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnPcSvBt.tga" BTN_IMG_W = "50" BTN_IMG_H = "46" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="7" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+				<SCRIPT ID="ON_L_BTN_UP"> SendRegMemPortalReq() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0,GetTextW(790336),GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</BUTTON>
+			
+			<STATIC_FORM ID="SFRM_MAP_TEX">
+				<ATTR X = "11" Y = "15" W ="202" H ="151" STATIC_NUM="24" />
+				<SCRIPT ID="ON_CREATE">
+					g_MiniType1 = true
+					g_MiniMapViewState = true
+					g_MiniViewTooltip = false
+				</SCRIPT>
+				<SCRIPT ID = "ON_CALL">
+					g_MiniType1 = UISelf:InitMiniMap(MINIMAP_MAIN, 0)
+					if g_MiniType1 then
+						UISelf:GetParent():SetStaticText("")
+						g_MiniMapViewState = true
+						UISelf:SetMiniMapTriggerIconUI(MINIMAP_MAIN,UISelf:GetParent():GetControl("DMY_TRRIGER"))
+					else
+						UISelf:GetParent():SetStaticTextW(GetTT(665))
+						g_MiniMapViewState = false
+					end
+				</SCRIPT>
+				<SCRIPT ID = "ON_DISPLAY">
+					if g_MiniType1 then
+						UISelf:DrawMiniMapUI(MINIMAP_MAIN, UISelf:GetParent():GetControl("DMY_TRRIGER")) --[[DrawMiniMap함수보다 앞에 실행되어야 함!!]]
+						UISelf:DrawMiniMap(MINIMAP_MAIN)
+						if g_MiniViewTooltip then
+							UISelf:MouseOverMiniMap(MINIMAP_MAIN, GetCursorPos())
+						end
+					else
+						MiniMapOpenToClose(UISelf:GetParent():GetParent(), g_MiniType1)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">g_MiniViewTooltip = true</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip() g_MiniViewTooltip = false</SCRIPT>
+				<SCRIPT ID = "ON_WHEEL_UP">
+					if g_MiniType1 then
+						local ZoomLevel = UISelf:GetZoomMiniMap(MINIMAP_MAIN)
+						UISelf:ZoomMiniMap(MINIMAP_MAIN, 0.25)
+					end
+					return true
+				</SCRIPT>
+				<SCRIPT ID = "ON_WHEEL_DOWN">
+					if g_MiniType1 then
+						local ZoomLevel = UISelf:GetZoomMiniMap(MINIMAP_MAIN)
+						UISelf:ZoomMiniMap(MINIMAP_MAIN, -0.25)
+					end
+					return true
+				</SCRIPT>
+				<SCRIPT ID="ON_R_BTN_DOWN">CallWorldMap(true)</SCRIPT>
+				<SCRIPT ID="ON_CLOSE">
+					CloseToolTip()
+				</SCRIPT>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_MISSION_ENTER"> <!-- 미션 맵 바로가기-->
+				<ATTR X="3" Y="138" W="216" H="34" T_X="108" T_Y="17" T_CENTER = "1" T_Y_CENTER = "1" FONT="Font_Text" IS_VISIBLE="0"/>
+				<ATTR BTN_IMG = "../Data/6_UI/common/cmBtBgMission.tga" BTN_IMG_W = "216" BTN_IMG_H = "136" U="1" V="4" BTN_ENABLE_CHANGE_COLOR="0" FONT_COLOR_HEX="0xFF4D3413" TEXT="666" />
+				<SCRIPT ID="ON_L_BTN_UP">
+					local kMyActor = g_pilotMan:GetPlayerActor()
+					if false == kMyActor:IsNil() then
+						local kTrigger = kMyActor:GetCurrentTrigger()
+						if false == kTrigger:IsNil() then
+							AddWarnDataTT(667)
+							return true
+						end
+					end
+				
+					if IsUIWnd("FRM_CREATE_SCENARIO_ITEM") then
+						return true
+					end
+					
+					local kMissionTrigID = UISelf:GetCustomDataAsStr()
+					if kMissionTrigID:IsNil() == false then
+						if( CheckNil(g_world == nil) ) then return false end
+						if( CheckNil(g_world:IsNil()) ) then return false end
+						local kMissionTrig = g_world:GetTriggerByID(kMissionTrigID:GetStr())
+						if kMissionTrig:IsNil() == false then
+							World_Mission_Portal(kMissionTrig, GetMyActor(), 0)
+						end
+					end
+					return true
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER"></SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"></SCRIPT>				
+				<SCRIPT ID="ON_CALL">
+					if( CheckNil(g_world == nil) ) then return false end
+					if( CheckNil(g_world:IsNil()) ) then return false end
+					local kMissionTrigID = g_world:GetMissionTrigIDOnThisMap()
+					if kMissionTrigID:IsNil() then
+						UISelf:ClearCustomData()
+						UISelf:Visible(false)
+					else
+						UISelf:SetCustomDataAsStr(kMissionTrigID:GetStr())
+						UISelf:Visible(true)
+					end
+				</SCRIPT>
+			</BUTTON>
+			
+			<DUMMY ID="DMY_TRRIGER" X="11" Y="15" W="201" H="150" IS_CHILD_DISPLAY="1"/>
+			<STATIC_FORM ID="SFRM_COLOR1">
+				<ATTR X="191" Y="18" W="18" H="18" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			</STATIC_FORM>
+			<BUTTON ID="BTN_PLUS">
+				<ATTR X="191" Y="18" W="18" H="18" />
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnPlusB.tga" BTN_IMG_W = "36" BTN_IMG_H = "36"/>
+				<SCRIPT ID="ON_L_BTN_UP">
+					zoomLevel = UISelf:GetZoomMiniMap(MINIMAP_MAIN)
+					UISelf:ZoomMiniMap(MINIMAP_MAIN, 0.2)
+				</SCRIPT>
+			</BUTTON>
+			<STATIC_FORM ID="SFRM_COLOR2">
+				<ATTR X="191" Y="37" W="18" H="18" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			</STATIC_FORM>
+			<BUTTON ID="BTN_MINUS">
+				<ATTR X="191" Y="37" W="18" H="18" />
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnMinusB.tga" BTN_IMG_W = "36" BTN_IMG_H = "36"/>
+				<SCRIPT ID="ON_L_BTN_UP">
+					zoomLevel = UISelf:GetZoomMiniMap(MINIMAP_MAIN)
+					UISelf:ZoomMiniMap(MINIMAP_MAIN, -0.2)
+				</SCRIPT>
+			</BUTTON>		
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SUB_MENU">
+			<ATTR X="64" Y="191" W="217" H="39"/>
+			<ATTR IMG="../Data/6_ui/Main/mnMnyBg.tga" IMG_W="217" IMG_H="39"/>
+			<IMG ID="IMG_LETTER" X="5" Y="4" Z = "-1" W="25" H="25" IMG = "../Data/6_ui/main/mnLT01.tga" IMG_W = "25" IMG_H = "25">
+				<SCRIPT ID = "ON_L_BTN_DOWN"> ActivateUI("SFRM_POST") </SCRIPT>
+			</IMG>
+			<IMG ID="IMG_LETTER_ALARM" X="5" Y="4" W="25" H="25" IS_VISIBLE = "0" >
+				<ATTR IMG = "../Data/6_ui/main/mnLT02.tga" IMG_W = "50" IMG_H = "50" U="2" V="2" UV_INDEX = "1"/>
+				<SCRIPT ID = "ON_TICK">	UISelf:SetUVIndex(math.mod(math.floor(GetAccumTime()*10),4) + 1) </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> CallToolTipText(0, GetTextW(UISelf:GetCustomDataAsInt()), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> ActivateUI("SFRM_POST") </SCRIPT>
+			</IMG>
+			<FORM ID="FRM_COIN_GOLD">
+				<ATTR X="45" Y="8" W="80" H="16"/>
+				<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="60" IMG_Y="0"/>
+				<ATTR TEXT="" FONT="Font_Text" T_X="59" T_Y="0" T_RIGHT="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<SCRIPT ID="ON_TICK">
+					UISelf:DrawMoney(1)
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN_SILVER">
+				<ATTR X="115" Y="8" W="50" H="16"/>
+				<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT="" FONT="Font_Text" T_X="29" T_Y="0" T_RIGHT="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<SCRIPT ID="ON_TICK">
+					UISelf:DrawMoney(2)
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN_COPPER">
+				<ATTR X="155" Y="8" W="50" H="16"/>
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT="" FONT="Font_Text" T_X="29" T_Y="0" T_RIGHT="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<SCRIPT ID="ON_TICK">
+					UISelf:DrawMoney(3)
+				</SCRIPT>
+			</FORM>			
+		</STATIC_FORM>
+	</FORM>
+	
+	<!-- 미니맵 접었을 때 미션 맵 바로가기-->
+	<FORM ID="FRM_MISSION_ENTER" ALIGN_X="100" ALIGN_Y="0" W="216" H="34" CAN_CLIP="1" IS_VISIBLE="0">
+		<SCRIPT ID="ON_CALL">
+			local kPos = UISelf:GetLocation()
+			kPos:SetX(kPos:GetX() - 3)
+			kPos:SetY(63)
+			UISelf:SetLocation(kPos)
+		</SCRIPT>
+		<BUTTON ID="BTN_MISSION_ENTER">
+			<ATTR BTN_IMG = "../Data/6_UI/common/cmBtBgMission.tga" BTN_IMG_W = "216" BTN_IMG_H = "136" U="1" V="4" />
+			<ATTR X="0" Y="0" W="216" H="34" T_X="108" T_Y="17" T_CENTER = "1" T_Y_CENTER = "1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="0" TEXT="666" />
+			<SCRIPT ID="ON_L_BTN_UP">
+				if IsUIWnd("FRM_CREATE_SCENARIO_ITEM") then
+					return true
+				end
+				local kMyActor = g_pilotMan:GetPlayerActor()
+				if false == kMyActor:IsNil() then
+					local kTrigger = kMyActor:GetCurrentTrigger()
+					if false == kTrigger:IsNil() then
+						AddWarnDataTT(667)
+						return true
+					end
+				end
+				
+				local kMissionTrigID = UISelf:GetCustomDataAsStr()
+				if kMissionTrigID:IsNil() == false then
+					if( CheckNil(g_world == nil) ) then return false end
+					if( CheckNil(g_world:IsNil()) ) then return false end
+					local kMissionTrig = g_world:GetTriggerByID(kMissionTrigID:GetStr())
+					if kMissionTrig:IsNil() == false then
+						World_Mission_Portal(kMissionTrig, GetMyActor(), 0)
+					end
+				end
+				return true
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"></SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"></SCRIPT>				
+		</BUTTON>
+	</FORM>
+
+	<FORM ID="FRM_MAP_POSITION" USE_OFFSCREEN="1">
+		<ATTR X="194" ALIGN_Y="0" W="577" H="48"/>
+		<FORM ID="FRM_BG" X="0" Y="0" H="512" W="48" Z="-1" IMG="../Data/6_ui/main/mnTbg.tga" IMG_W="512" IMG_H="48"/>
+		<FORM ID="FRM_BG2" X="512" Y="0" H="65" W="48" Z="-1" IMG="../Data/6_ui/main/mnTbg2.tga" IMG_W="65" IMG_H="48"/>
+		<BUILD ID = "BLD_MAPICON" TARGET_ID="FRM_MAPICON" X="20" Y="0" X_COUNT = "5" Y_COUNT = "1" X_GAB = "107"/>
+		<FORM ID="FRM_MAPICON" X="0" Y="0" W="108" H="48">
+			<ATTR IMG="../Data/6_ui/main/mnPiconF.tga" IMG_X="38" IMG_Y="2" IMG_W="60" IMG_H="60" U="2" V="2" UV_INDEX="1"/>
+			<ATTR TEXT="" FONT="Font_Text" T_X="54" T_Y="28" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<BUTTON ID="BTN_PREV">
+			<ATTR X="3" Y="3" W="21" H="42"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnTarL.tga" BTN_IMG_W="42" BTN_IMG_H="84"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				OnMapNetworkTypeIcon2(UISelf:GetParent(), g_mapNo, 1)
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				CallToolTipText(0, GetTextW(661), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_NEXT">
+			<ATTR X="553" Y="3" W="21" H="42"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnTarR.tga" BTN_IMG_W="42" BTN_IMG_H="84"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				OnMapNetworkTypeIcon2(UISelf:GetParent(), g_mapNo, -1)
+			</SCRIPT>			
+			<SCRIPT ID="ON_MOUSE_OVER">
+				CallToolTipText(0,  GetTextW(662), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			OnMapNetworkTypeIcon2(UISelf, g_mapNo, 0)
+		</SCRIPT>
+	</FORM>
+	<!--	CallUI("SFRM_BIG_MAP2")	-->
+	<STATIC_FORM ID = "SFRM_BIG_MAP">
+		<ATTR ALIGN_X="50" Y="48" W="518" H="390" STATIC_NUM = "30" CAN_DRAG = "0" IS_ABSOLUTE_Y="1"/>
+		<BUILD ID="BLD_MINIMAP_ALARM" TARGET_ID="FRM_ALARM_" X="0" Y="0" X_COUNT="1" Y_COUNT="20"/>
+		<FORM ID = "FRM_ALARM_" X="0" Y="0" Z="2" W="34" H="34" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_ui/pvp/pvpMapC.tga" IMG_W="68" IMG_H="68" U="2" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK">
+				local BuildIndex = UISelf:GetBuildIndex()
+				if UISelf:GetUVIndex() == 1 then
+					g_MinimapAlramAniCount[BuildIndex] = g_MinimapAlramAniCount[BuildIndex] + 1
+				end
+				UVAnimation(UISelf, 0.09, 1, 4, 1)
+				if g_MinimapAlramAniCount[BuildIndex] >= 20 then
+					g_MinimapAlramAniCount[BuildIndex] = 0
+					UISelf:Visible(false)
+				end
+			</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_MINIMAP_LINK" X="0" Y="0" Z="1" W="512" H="384" PASS_EVENT="1" NO_FOCUS="1">
+			<BUILD ID="BLD_MINIMAP_LINE" TARGET_ID="FRM_MINIMAP_LINE_" X="0" Y="0" X_COUNT="1" Y_COUNT="20"/>
+			<FORM ID="FRM_MINIMAP_LINE_" X="0" Y="0" W="1" H="2" ALPHA="150" IS_VISIBLE="0">
+				<ATTR IMG="" IMG_W="1" IMG_H="2"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(false)
+				</SCRIPT>
+			</FORM>
+		</FORM>
+		<FORM ID = "FRM_TAB_DESCRIPTION">
+			<ATTR X="10" Y="10" Z="5" W="450" H="20" PASS_EVENT="1"/>
+			<ATTR TEXT="658" FONT_COLOR_HEX="0xFFfae7cf" T_X="259" T_Y="-5" T_OUTLINE="1" T_CENTER="1"/>
+			<LOCAL>
+				<NAME ID="DEFAULT">
+					<ATTR FONT="Font_Text" T_CENTER="1" />
+				</NAME>
+				<NAME ID="JAPAN">
+					<ATTR FONT="FT11" T_CENTER="1" />
+				</NAME>
+			</LOCAL>
+		</FORM>
+		<FORM ID = "FRM_CLICK_DESCRIPTION">
+			<ATTR X="0" Y="0" Z="5" W="450" H="80" PASS_EVENT="1"/>
+			<ATTR TEXT="650" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFfae7cf" T_X="259" T_Y="-5" T_OUTLINE="1" T_CENTER="1"/>
+		</FORM>
+		<FORM ID = "FRM_MAP">
+			<ATTR X = "3" Y = "3" W ="512" H ="384" />
+			<SCRIPT ID="ON_CREATE">g_MiniType2 = false</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				if not g_MiniType2 then
+					UISelf:GetParent():Close()
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				if g_MiniType2 then
+					UISelf:DrawMiniMap(MINIMAP_WHOLE)
+					if g_MiniViewTooltip2 then
+						UISelf:MouseOverMiniMap(MINIMAP_WHOLE, GetCursorPos())
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">g_MiniViewTooltip2 = true</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				local kSelf = UISelf;
+				local UIText = kSelf:GetParent():GetControl("FRM_CLICK_DESCRIPTION")
+				if UIText:IsNil() == true then
+					return
+				end
+				if( CheckNil(g_world == nil) ) then return false end
+				if( CheckNil(g_world:IsNil()) ) then return false end
+
+				if false == kSelf:InitMiniMap(MINIMAP_WHOLE, 1) then
+					g_MiniType2 = false
+					UIText:SetStaticTextW(GetTT(665))
+					
+					local UIParent = kSelf:GetParent()
+					if UIParent:IsNil() ~= true then
+						local kSize = UIParent:GetSize()
+						kSize:SetY(100)
+						UIParent:SetSize(kSize)
+
+						local kLoc = UIText:GetLocation()
+						kLoc:SetY(kSize:GetY() / 2 - 10)
+						UIText:SetLocation(kLoc);
+					end
+					g_ChatMgrClient:AddLogMessage(GetTT(665), true)					
+				else
+					g_MiniType2 = true
+					kSelf:ZoomMiniMapFixedFactor(MINIMAP_WHOLE, 0)
+					UIText:SetStaticTextW(GetTT(650))
+					if not g_world:IsHaveWorldAttr(GATTR_FLAG_MISSION) 
+					and not g_world:IsHaveWorldAttr(GATTR_SUPER_GROUND) then
+						CallMinimapObjectList(kSelf:GetParent())
+					end
+					if not g_world:IsHaveWorldAttr(GATTR_RACE_GROUND)then
+						ShowCurrentMinimap2(GetUIWnd("FRM_MINIMAP"), 2)
+					end	
+
+					kSelf:SetMiniMapTriggerIconUI(MINIMAP_WHOLE,kSelf:GetParent():GetControl("DMY_TRRIGER"))
+				end
+				
+				local BtnClose = kSelf:GetParent():GetControl("BTN_CLOSE")
+				if BtnClose:IsNil() then
+					return
+				end
+				if g_world:IsHaveWorldAttr(GATTR_BATTLESQUARE) then
+					BtnClose:Visible(false)
+				else
+					BtnClose:Visible(true)
+				end
+				if PVP_TYPE_KTH == PvPAttrTable["TYPE"]
+					or PVP_TYPE_LOVE == PvPAttrTable["TYPE"] then
+					BtnClose:Visible(false)
+				else
+					BtnClose:Visible(true)
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip() g_MiniViewTooltip2 = false</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				if g_MiniType2 then
+					UISelf:MouseClickMiniMap(MINIMAP_WHOLE, GetCursorPos())
+				end
+			</SCRIPT>
+		</FORM>
+		<DUMMY ID="DMY_TRRIGER" X="3" Y="3" W="512" H="384" Z="10" IS_CHILD_DISPLAY="1"/>
+		<BUTTON ID = "BTN_CLOSE">
+			<ATTR X = "482" Y = "8" Z="6" W ="28" H ="28" />
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnMMclose.tga" BTN_IMG_W = "56" BTN_IMG_H = "56"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			
+			UISelf:SetCanDrag(false)
+			
+			if g_world:IsHaveWorldAttr(GATTR_FLAG_PVP) then
+				if PVP_TYPE_KTH == PvPAttrTable["TYPE"] then
+					UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(), 33 ) )
+				elseif PVP_TYPE_LOVE == PvPAttrTable["TYPE"] then
+					UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(), 48 ) )
+				end
+			end
+				
+			if g_world:IsHaveWorldAttr(GATTR_RACE_GROUND) then
+				UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(), 0 ) )
+				UISelf:SetCanDrag(true)
+			end
+			
+			if true==GetUIWnd("FRM_MINIMAP"):IsNil() then
+				UISelf:SetShowMiniMap(MINIMAP_MAIN, false)
+			end
+				
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseMinimapObjectList()
+			OnCloseCenterMiniMap(UISelf)
+			UISelf:SetShowMiniMap(MINIMAP_WHOLE, false)
+			CloseToolTip()
+			if g_MiniMapViewState == true then
+				ShowCurrentMinimap2(GetUIWnd("FRM_MINIMAP"), 1)
+			end
+			g_MiniViewTooltip2 = false
+			return true
+		</SCRIPT>
+		<HOTKEY ID = "1">
+			if PVP_TYPE_KTH == PvPAttrTable["TYPE"]
+				or PVP_TYPE_LOVE == PvPAttrTable["TYPE"] then
+				return
+			end
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			if not g_world:IsHaveWorldAttr(GATTR_BATTLESQUARE) then
+				UISelf:Close() return true
+			end
+		</HOTKEY>
+	</STATIC_FORM>
+	<STATIC_FORM ID = "SFRM_ACTOR_LIST_0" IS_ABSOLUTE_Y="1">
+		<ATTR ALIGN_X="50" Y="0" W="518" H="108" STATIC_NUM = "30" CAN_DRAG = "0"/>
+		<LIST ID="LST_ACTORS" X="17" Y="7" W="511" H="101" ELEMENT_ID="FRM_ACTOR_SLOT" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="IMG_SCR_BG"/>
+	</STATIC_FORM>	
+	<!--	CallUI("SFRM_ACTOR_LIST")	-->
+	<STATIC_FORM ID = "SFRM_ACTOR_LIST" IS_ABSOLUTE_Y="1">
+		<ATTR ALIGN_X="50" Y="0" W="518" H="108" STATIC_NUM = "30" CAN_DRAG = "0"/>
+		<LIST ID="LST_ACTORS" X="7" Y="7" W="498" H="96" ELEMENT_ID="FRM_ACTOR_SLOT" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="IMG_SCR_BG">
+			<IMG ID="IMG_SCR_BG" X="488" Y="20" Z="-1" W="13" H="86" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="86"/>
+			<BUTTON ID="BTN_SCR_UP" X="484" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="484" Y="79" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="486" Y="15" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+		</LIST>
+	</STATIC_FORM>
+	<!--	CallUI("FRM_ACTOR_SLOT")	-->
+	<FORM ID="FRM_ACTOR_SLOT" X="0" Y="0" W="486" H="48">
+		<BUILD ID="BLD_ACTOR_SLOT" X="0" Y="0" TARGET_ID="FRM_M_ACTOR_SLOT" X_COUNT="3" Y_COUNT="1" X_GAB="161" Y_GAB="48"/>
+		<STATIC_FORM ID="FRM_M_ACTOR_SLOT" X="0" Y="0" W="160" H="48" STATIC_NUM="34">
+		<FORM ID="IMG_ACTOR" X="4" Y="3" W="40" H="40" U="12" V="12" UV_INDEX="1" IMG="../data/6_ui/map/mapNpc.tga" IMG_W="480" IMG_H="480" IS_ENABLE="FALSE" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="FRM_NAME" X="48" Y="3" W="108" H="40" TEXT="21" FONT="Font_Text" T_X="54" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0xFFFFE9AE" USE_ALPHA_ANI="0" PRIORITY="99" IS_ENABLE="FALSE" PASS_EVENT="1" NO_FOCUS="1"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">OnClickMinimapIconItem(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OVER">OnOverMinimapIconItem(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">ClearMinimapIconInfo()</SCRIPT>
+	</STATIC_FORM>
+	</FORM>
+	<!-- 네비_월드맵 -->
+	
+	<STATIC_FORM ID="SFRM_NAVI_MAP" X="2000" Y="230" IS_ABSOLUTE_Y="1" W="300" H="300" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_COLOR" W="300" H="300" ALPHA="150" STATIC_NUM="30"/>
+		<FORM ID="FRM_ROUTE_MAP" Z="1" W="100" H="100" />
+		<BUILD ID="BLD_ICON" TARGET_ID="FRM_MAP" X="0" Y="0" X_COUNT="14" Y_COUNT="1" X_GAB="0" Y_GAB="0" START_INDEX="1"/>
+		<FORM ID="FRM_MAP" X="0" Y="0" Z="6" W="80" H="70" IS_VISIBLE="0">
+			<ATTR FONT="Font_Text_Small" FONT_COLOR_HEX="0xfff4f3f3" T_CENTER="1" T_X="40" T_Y="26" IGNORE_PARENT_RECT="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff392d07"/>
+			<FORM ID = "IMG_ICON" X="25" Y="0" W="30" H="30" IMG_W="48" IMG_H="48" U="2" V="2" UV_INDEX="1"/>
+		</FORM>
+		<BUILD ID="BLD_PARTY" TARGET_ID="IMG_PARTY" X="0" Y="0" X_COUNT="3" Y_COUNT="1" X_GAB="0" Y_GAB="0"/>
+		<IMG ID="IMG_PARTY" X="0" Y="0" Z="10" W="16" H="16" IMG="../Data/6_ui/map/iconParty.tga" IMG_W="16" IMG_H="16" IS_VISIBLE="0" PASS_ACQUIRE_FOCUS_ON_VISIBLE="1">
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, UISelf:GetCustomDataAsStr(), GetCursorPos()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_COUPLE" X="0" Y="0" Z="10" W="16" H="16" IMG="../Data/6_ui/map/mapIconCP.tga" IMG_W="16" IMG_H="16" PASS_EVENT="1" IS_VISIBLE="0">
+			<!--SCRIPT ID="ON_MOUSE_OVER"> CallToolTipText(0, UISelf:GetCustomDataAsStr(), GetCursorPos()) </SCRIPT-->
+			<!--SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT-->
+		</IMG>
+		<BUTTON ID="BTN_CLOSE">
+			<ATTR X="260" Y="8" Z="6" W="28" H ="28" />
+			<ATTR BTN_IMG="../Data/6_ui/main/mnMMclose.tga" BTN_IMG_W="56" BTN_IMG_H="56"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				Config_SetValue(HEADKEY_ETC, SUBKEY_NAVIGATION, 0)
+				UpdateEtcConfig()
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_PROGRESS_MAP" ALIGN_X="50" Y="48" W="480" H="120" STATIC_NUM="30" CAN_DRAG="0">
+		<IMG ID="IMG_PROGRESS_MAP" X="0" Y="0" W="480" H="120" PRIORITY="1">
+			<ATTR IMG="../Data/6_UI/dungeon/dgMapLn010.tga" IMG_W="480" IMG_H="120"/>
+		</IMG>
+		
+		<IMG ID="IMG_RUN_RIGHT" X="0" Y="0" Z="2" W="30" H="30"  IS_VISIBLE="0" TICK_TIME="100">
+			<ATTR IMG="../Data/6_UI/Community/ptMan.tga" IMG_W="90" IMG_H="90" U="3" V="3" UV_INDEX="1"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetUVIndex(1)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local iCurUVIndex = UISelf:GetUVIndex() + 1
+				if iCurUVIndex > 8 then
+					iCurUVIndex = 1
+				end
+				UISelf:SetUVIndex(iCurUVIndex)
+			</SCRIPT>
+		</IMG>
+		
+		<IMG ID="IMG_RUN_LEFT" X="0" Y="0" Z="2" W="30" H="30" IS_VISIBLE="0" TICK_TIME="100">
+			<ATTR IMG="../Data/6_UI/Community/ptMan_.tga" IMG_W="90" IMG_H="90" U="3" V="3" UV_INDEX="1"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetUVIndex(1)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local iCurUVIndex = UISelf:GetUVIndex() + 1
+				if iCurUVIndex > 8 then
+					iCurUVIndex = 1
+				end
+				UISelf:SetUVIndex(iCurUVIndex)
+			</SCRIPT>
+		</IMG>
+
+		<IMG ID="IMG_STAR" X="0" Y="0" Z="2" W="48" H="48" IS_VISIBLE="0" TICK_TIME="50">
+			<ATTR IMG="../Data/6_UI/dungeon/dgpoint.tga" IMG_W="192" IMG_H="48" U="4" V="1" UV_INDEX="1"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetUVIndex(1)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local iCurUVIndex = UISelf:GetUVIndex() + 1
+				if iCurUVIndex > 4 then
+					iCurUVIndex = 1
+				end
+				UISelf:SetUVIndex(iCurUVIndex)
+			</SCRIPT>
+		</IMG>
+		
+		<FORM ID="FRM_WAVE" X="0" Y="0" Z="3" W="48" H="48" TICK_TIME="150" PASS_EVENT="1">
+			<IMG ID="IMG_WAVE" X="0" Y="0" Z="3" W="48" H="48" IS_VISIBLE="0">
+				<ATTR IMG="../Data/6_ui/dungeon/dgMoveAct.tga" IMG_W="96" IMG_H="192" U="2" V="4" UV_INDEX="1" />
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetUVIndex(1)
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					UpdateProgressMap(UISelf)
+				</SCRIPT>
+			</IMG>
+		</FORM>
+		<FORM ID="FRM_MOVE_ACTION_BIG" X="0" Y="0" Z="3" W="48" H="48" TICK_TIME="150" PASS_EVENT="1">
+			<IMG ID="IMG_WAVE" X="0" Y="0" Z="3" W="48" H="48" IS_VISIBLE="0">
+				<ATTR IMG="../Data/6_ui/dungeon/dgMoveAct.tga" IMG_W="96" IMG_H="192" U="2" V="4" UV_INDEX="1" />
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetUVIndex(1)
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					UpdateProgressMap(UISelf)
+				</SCRIPT>
+			</IMG>
+		</FORM>
+		<FORM ID="FRM_MOVE_ACTION_SMALL" X="0" Y="0" Z="3" W="34" H="34" TICK_TIME="150" PASS_EVENT="1">
+			<IMG ID="IMG_WAVE" X="0" Y="0" Z="3" W="34" H="34" IS_VISIBLE="0">
+				<ATTR IMG="../Data/6_ui/dungeon/dgMoveAct_CT.tga" IMG_W="68" IMG_H="136" U="2" V="4" UV_INDEX="1" />
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetUVIndex(1)
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					UpdateProgressMap(UISelf)
+				</SCRIPT>
+			</IMG>
+		</FORM>
+		
+		<BUILD ID="BLD_ICON" TARGET_ID="IMG_ICON" X="0" Y="0" X_COUNT="30" Y_COUNT="1"/>
+		<IMG ID="IMG_ICON" X="0" Y="0" Z="1" W="36" H="36">
+			<ATTR IMG="../Data/6_ui/dungeon/dgpticon.tga" IMG_W="72" IMG_H="144" U="2" V="4" UV_INDEX="1"/>
+		</IMG>
+		
+		<BUILD ID="BLD_WAY_LINE" TARGET_ID="IMG_WAY_LINE" X="0" Y="0" X_COUNT="30" Y_COUNT="1"/>
+		<IMG ID="IMG_WAY_LINE" X="0" Y="0" Z="1" W="1" H="2">
+			<ATTR IMG="../Data/6_ui/dungeon/dgctLine.tga" IMG_W="1" IMG_H="2"/>
+		</IMG>
+		
+		<BUTTON ID="BTN_CLOSE">
+			<ATTR X="260" Y="8" Z="6" W="28" H ="28" />
+			<ATTR BTN_IMG="../Data/6_ui/main/mnMMclose.tga" BTN_IMG_W="56" BTN_IMG_H="56"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+				return true
+			</SCRIPT>
+			<HOTKEY ID = "1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		
+		<FORM ID = "FRM_CLICK_DESCRIPTION">
+			<ATTR X="0" Y="360" Z="5" W="450" H="20" PASS_EVENT="1"/>
+			<ATTR TEXT="650" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFfae7cf" T_X="259" T_Y="-5" T_OUTLINE="1" T_CENTER="1"/>
+		</FORM>
+		
+		<SCRIPT ID="ON_CALL">
+			local kPos = UISelf:GetLocation()
+			kPos:SetY(48)
+			UISelf:SetLocation(kPos)
+			UISelf:SetAlignX(50)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			local kNpcListWnd = GetUIWnd("SFRM_ACTOR_LIST")
+			if kNpcListWnd:IsNil() == false then
+				kNpcListWnd:Close()
+			end
+			kNpcListWnd = GetUIWnd("SFRM_ACTOR_LIST_0")
+			if kNpcListWnd:IsNil() == false then
+				kNpcListWnd:Close()
+			end
+		</SCRIPT>
+	</STATIC_FORM>
+	
+</XUI>
+

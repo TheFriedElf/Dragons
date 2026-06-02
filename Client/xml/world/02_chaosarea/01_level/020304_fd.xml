@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020304_FD">
+	<GSAPATH>../Data/3_World/02_ChaosArea/01_Level/020304_FD.GSA</GSAPATH>
+	<MINIMAP Y="235" H="130">../Data/3_World/02_ChaosArea/01_Level/020304_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base"  TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!-- 엔터 던전 -->
+    <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+        <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="2" PARAM2="2"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="1" PARAM2="1"/>
+    </TRIGGER>
+
+	<WAVE_EFFECT ENTITY_ID="ChaosArea_swamp1001_01 01" STOP_EFFECT_ID="ef_walkwave_01" MOVE_EFFECT_ID="ef_walkwave_02"/>
+	<FOG DENSITY="0.050000" START="245.000000" END="6570.000000" COLOR="0.826000,0.552000,0.294000"/>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1775" MID_END="2000" LOW_END="3000" USE="1" />
+</WORLD>

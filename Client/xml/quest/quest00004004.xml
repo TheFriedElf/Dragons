@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4004</ID> <!--T.T.10400401 일어나! 비룡(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	시청 지하수로에서 커다란 유리배양관, 적외선램프, 만능전자키트 수집-->
+<!--[완료NPC]	바람항구 - 에델린-->
+<!--[내용]	키에로가 낳은 알의 부화를 위해서는 인큐베이터가 필요하다. 시청 지하수로의 몬스터들을 퇴치면 필요한 재료를 얻을 수 있다고 한다. 커다란 유리배양관 1개, 적외선램프 5개, 만능전자키트 2개를 얻어내자. 반드시 에델린이 준 비상용 방독면을 꼭 착용해야 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT> <!--시작NPC 바람항구 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER> <!--완료NPC 바람항구 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 11 바람항구 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/8000/1/1/160400410">9010502</GROUND> 
+ <!--MAP_NO=9010502/파렐 대저택,Item_NO=160400410/[Q.ID:04004] 커다란 유리배양관20%,-->
+		<GROUND OBJECTNO="2" TYPE="MONSTERDROP" VALUE="10000/0/1/1/160400420">9010502</GROUND> 
+ <!--MAP_NO=9010502/파렐 대저택,Item_NO=160400420/[Q.ID:04004] 적외선 램프100%,-->
+		<GROUND OBJECTNO="3" TYPE="MONSTERDROP" VALUE="10000/5000/1/1/160400430">9010502</GROUND> 
+ <!--MAP_NO=9010502/파렐 대저택,Item_NO=160400430/[Q.ID:04004] 만능전자키트50%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160400410</ITEM> 
+ <!--Item_NO=160400410/[Q.ID:04004] 커다란 유리배양관,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">160400420</ITEM> 
+ <!--Item_NO=160400420/[Q.ID:04004] 적외선 램프,-->
+		<ITEM OBJECTNO="3" TYPE="CHANGE_COUNT" VALUE="1">160400430</ITEM> 
+ <!--Item_NO=160400430/[Q.ID:04004] 만능전자키트,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10400411"/> <!--커다란 유리배양관-->
+		<OBJECT2 COUNT="5" TEXT="10400412"/> <!--적외선램프-->
+		<OBJECT3 COUNT="2" TEXT="10400413"/> <!--만능전자키트-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10400421" FACE="Edeline_normal"/> <!--자 이제 부터 필요한 재료를 말씀 드리겠습니다. 준비가 되셨나요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10400426" FACE="Edeline_smile"/> <!--이렇게까지 완벽하게 준비를 해오다니…
+그럼 잠시만 기다려주세요.%%
+이제 인큐베이터를 만들어 보겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10400423" FACE="Edeline_normal"/> <!--이곳 시청 지하수로 아래에는 괴짜 발명가로 유명했던 파렐 박사의 연구실이 있어요.%%
+덕분에 시청 지하수로 곳곳에는 파렐박사가 연구에 사용하던 실험도구들이 즐비하죠.
+지금은 그런 도구들이 시청 지하수로에 있는 몬스터들의 장난감이 된 듯 해요.%%
+가능하다면 그곳에서 인큐베이터의 재료를 구해주세요. 
+비룡의 알을 보호하기 위한 발명품을 우리가 만들 수 있을 거에요. %%
+그러나 지하에 쌓여 있는 독가는 매우 위험하니 진입하기 전에 비상용 방독면을 먼저 착용하세요-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10400424" FACE="Edeline_angly"/> <!--알이 부화하는 모습을 보고 싶었습니다만…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10400425" FACE="Edeline_angly"/> <!--이 알의 상태를 봐서는 한시라도 지체할 수 없어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10400402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

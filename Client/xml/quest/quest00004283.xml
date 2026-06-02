@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4283</ID> <!--T.T.10428300 현명한 켄타우르스 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	사수자리 던전에서 켄타우르스의 도움받기-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	이제 마지막 열쇠만 남았다. 마지막 열쇠는 머리가 여러 개 달린 바다뱀 희드라가 가지고 있다. 잠자고 있는 희드라를 깨우기 위해서는 켄타우르스족의 현명한 케이론이 가지고 있는 여신의 하프가 필요하다. 금요일에 열리는 사수자리에서 케이론을 만나 여신의 하프를 얻어 오자.-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000190</ITEM> 
+ <!--Item_NO=82000190/[13_01 별자리] 여신의 하프,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">7282000</MONSTER> 
+ <!--MON_NO=7282000/현명한 켄타우르스 케이론,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10428311"/> <!--여신의 하프-->
+		<OBJECT2 COUNT="1" TEXT="10428312"/> <!--사수자리던전 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10428321" FACE="Crete_normal"/> <!--마지막 열쇠인 금빛성좌의 열쇠는 머리가 여러 개 달린 바다뱀이 가지고 있답니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10428326" FACE="Crete_smile"/> <!--이제 곧 피오스님을 만날 수 있겠군요. 정말 수고하셨어요. %name%님-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10428323" FACE="Crete_normal"/> <!--바다뱀 희드라는 너무 난폭한 괴물이라 지금은 봉인해 놓은 상태인데 어쩔 수 없이 그 괴물을 깨워야만 하네요.
+희드라를 깨우려면 여신의 하프가 필요하답니다. 여신의 하프는 현명하기로 소문난 켄타우르스족의 케이론님이 가지고 있어요. 그 분께 사정을 말씀드리면 여신의 하프를 얻어 올 수 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10428324" FACE="Crete_cry"/> <!--이제 마지막인데. 힘을 내세요 %name%님-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10428325" FACE="Crete_normal"/> <!--케이론은 현명하기로 소문난 분입니다. 의술, 음악에도 뛰어나신 분이예요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10428302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

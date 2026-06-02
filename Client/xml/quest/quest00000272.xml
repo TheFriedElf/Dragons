@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>272</ID> <!--T.T.10027201 마력추출이란? -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	종소리마을의 소울크래프트 상인 쥴리와 이야기 하자-->
+<!--[완료NPC]	종소리 마을 - 쥴리-->
+<!--[내용]	몬스터들을 퇴치하다가 얻는 물건들 중에 마력이 담긴 물건을 구할 수 있다고 한다. 마력이 담긴 아이템들은 마력을 추출해서 필요한 아이템으로 만들 수 있다. 하지만 공짜를 밝히다 대머리가 된 자신의 할아버지와 같은 사람은 더 이상 생기면 안된다면서 소울 1개를 주면 마력추출 방법을 알려준다고 한다. 쥴리에게 소울 1개를 가져가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DD343923-1FAA-4e83-87CB-9861329FD82B</CLIENT> <!--시작NPC 종소리 마을 - 쥴리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DD343923-1FAA-4e83-87CB-9861329FD82B</PAYER> <!--완료NPC 종소리 마을 - 쥴리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DD343923-1FAA-4e83-87CB-9861329FD82B</AGENT> <!--진행NPC 11 종소리 마을 - 쥴리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">79000030</ITEM> 
+ <!--Item_NO=79000030/소울,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10027211"/> <!--소울 구하기-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">89008620</ITEM><!--전체지급/전체/1)/89008620(봉인아님) 1개-[즉석가공] 마력추출 배우기 -->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10027221" FACE="Jewelry_normal"/> <!--어떻게 오셨나요?
+현재 할아버지를 대신해 소울크래프트를 관리하고 있는 쥴리라고 해요.
+네? 마력추출을 알려 달라고요?%%
+이런, 마력추출은 할아버지가 아무나 알려주면 안 된다고 하셨는데…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10027226" FACE="Jewelry_normal"/> <!--앗, 소울을 가지고 오셨군요.
+그럼 합당한 물건을 가지고 오셨으니 제가 마력추출을 가르쳐 드려야 겠네요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10027223" FACE="Jewelry_normal"/> <!--마력 추출은 마력이 담긴 아이템에서 마력을 추출해서 사용할 수 있는 유용한 기술이에요. 그래서 할아버지가 저만 알고 있으라고 하셧고요.%%
+하지만 할아버지가 무조건 가르쳐주지 말라고 하시진 않고요.
+가르침에는 합당한 대가가 따른다고 하셨거든요.%%
+그래서 말인데, 소울 5개를 저에게 가져 오시면 마력추출에 대해서 알려 드릴게요.
+소울은 장비아이템을 부수면 나오니까 잘 구해 보세요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10027224" FACE="Jewelry_normal"/> <!--앗? 제가 아무나 알려주면 안 된다고 그냥 가버리시는 건가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10027225" FACE="Jewelry_normal"/> <!--이렇게 이곳에서 논다고 소울이 생기지는 않아요!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10027202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

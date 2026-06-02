@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4058</ID> <!--T.T.10405801 동방보감(2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	미리내 신전에서 시나몬 10개, 리커리스 10개, 티파 10개를 수집-->
+<!--[완료NPC]	미리내 신전 - 에델린-->
+<!--[내용]	에델린은 한방약의 제조를 위해 재료 수집을 부탁한다. 미리내 신전의 몬스터로부터 시나몬, 리커리스, 티파를 각각 10개씩 구해오자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DD5BE5DB-F00D-42f1-9C16-8375EBE0C680</CLIENT> <!--시작NPC 미리내 신전 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DD5BE5DB-F00D-42f1-9C16-8375EBE0C680</PAYER> <!--완료NPC 미리내 신전 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DD5BE5DB-F00D-42f1-9C16-8375EBE0C680</AGENT> <!--진행NPC 11 미리내 신전 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/7500/1/1/160405800">9010200</GROUND> 
+ <!--MAP_NO=9010200/미리내 신전,Item_NO=160405800/[Q.ID:04058] 시나몬25%,-->
+		<GROUND OBJECTNO="2" TYPE="MONSTERDROP" VALUE="10000/7500/1/1/160405810">9010200</GROUND> 
+ <!--MAP_NO=9010200/미리내 신전,Item_NO=160405810/[Q.ID:04058] 리커리스25%,-->
+		<GROUND OBJECTNO="3" TYPE="MONSTERDROP" VALUE="10000/7500/1/1/160405820">9010200</GROUND> 
+ <!--MAP_NO=9010200/미리내 신전,Item_NO=160405820/[Q.ID:04058] 티파25%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160405800</ITEM> 
+ <!--Item_NO=160405800/[Q.ID:04058] 시나몬,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">160405810</ITEM> 
+ <!--Item_NO=160405810/[Q.ID:04058] 리커리스,-->
+		<ITEM OBJECTNO="3" TYPE="CHANGE_COUNT" VALUE="1">160405820</ITEM> 
+ <!--Item_NO=160405820/[Q.ID:04058] 티파,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10405811"/> <!--시나몬-->
+		<OBJECT2 COUNT="10" TEXT="10405812"/> <!--리커리스-->
+		<OBJECT3 COUNT="10" TEXT="10405813"/> <!--티파-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10405821" FACE="Edeline_normal"/> <!--이곳에 온 이유는 파리스 탓도 있지만, 
+개인적인 연금술의 연구를 위한 것이기도 해요.%%
+최근에 용족이 브리즈국과 협조하게 되면서
+원정대는 그들이 가진 특별한 연금술 제조서를 선물 받았어요.%%
+그 책의 이름은 동방보감.%% 
+그들은 이 책을 통해 만들어진 특별한 종류의 포션을 
+한방약이라고 부르는 것 같더군요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10405826" FACE="Edeline_smile"/> <!--모두 빠짐 없이 구해 오셨군요!
+이것으로 원정대의 병사분들은 큰 걱정을 됐네요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10405823" FACE="Edeline_smile"/> <!--이 포션의 제조를 위해 필요한 독특한 재료를 구하기 위해
+상인의 마을의 병사들께 부탁드려 재료를 사모았는데...
+바람의 항구로 배송 중에 이곳 몬스터들에게 빼앗기게 되었죠. 
+그래서 겸사겸사 이곳까지 오게 된 거에요.%%
+우선적으로 달빛안개 마을에 근무하고 있는 원정대 병사분들께
+간단한 회복제를 만들어드릴까 합니다.%%
+%name%님. 제가 재료를 찾는 것을 도와주시지 않겠어요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10405824" FACE="Edeline_angly"/> <!--별 수 없지요. 어차피 큰 기대는 안했어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10405825" FACE="Edeline_normal"/> <!--한방약의 재료는 이곳 미리내 신전의 몬스터들을 통해 얻을 수 있답니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10405802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

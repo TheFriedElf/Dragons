@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by KKwang (kkj) -->
+<QUEST>
+	<ID>24</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="500945">전투 마법사 전직 시험 합격!</TITLE>
+	<GROUPNAME TEXT="500009">바람의 항구</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="19" MAX="100"/>
+		<CLASSES>
+			<CLASS MEMO="Magician">2</CLASS>
+		</CLASSES>
+		<QUESTS>
+			<QUEST>1568</QUEST>
+		</QUESTS>        
+		<NOT_QUESTS>
+			<QUEST>23</QUEST>
+		</NOT_QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10002">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER>
+	</PAYERS>
+	<EVENTS>
+		<!--NPC와 대화-->
+		<!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10001</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/60004510/1">10002</NPC>         
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="0" TEXT="500255"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+	</OBJECTS>
+	
+	<LOCAL>
+   <NAME ID="DEFAULT">
+	<REWARD>
+		<CHANGECLASS PREVCLASS="2" MINLEVEL="20">8</CHANGECLASS>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">20202050</ITEM>
+		</SELECT1>
+		<SELECT2 COUNT="0">
+			<ITEM COUNT="1" RARITY="103" SEAL="1">119202030</ITEM>
+			<ITEM COUNT="1">119201820</ITEM>			
+		</SELECT2>
+	</REWARD>
+	</NAME>	
+	<NAME ID="KOREA">
+	<REWARD>
+	<CHANGECLASS PREVCLASS="2" MINLEVEL="20">8</CHANGECLASS>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">20202050</ITEM>
+		</SELECT1>
+		<SELECT2 COUNT="0">
+			<ITEM COUNT="1" RARITY="103" SEAL="1">119202030</ITEM>
+			<ITEM COUNT="1">119201820</ITEM>
+			<ITEM COUNT="1">98009810</ITEM><!--한국오픈 기념 소비인벤토리 확장-->
+		</SELECT2>
+	</REWARD>
+</NAME>
+</LOCAL>
+	<DIALOGS>
+		<!--
+<SELECT ID="" TYPE="">의 ID는 다음 DIALOG번호를 나타낸다
+0 = 닫기
+1~1000 = 다음 Dialog 번호
+10000,TYPE "ACCEPT" = 퀘스트 수락 버튼
+20000,TYPE "REJECT" = 퀘스트 거부 버튼
+30000,TYPE "COMPLETE" = 완료 버튼
+
+<DIALOG TYPE="?">에서
+TYPE은 특수 Dialog를 나타낸다. 지정하지 않으면 기본 다이얼로그(창)으로 뜬다
+
+PROLOG = 퀘스트 목표, 보상이 뜨는 정보창
+COMPLETE = 보상을 선택 할 수 있는 정보창
+INFO = 닫기 버튼이 존재 하는 정보창
+		-->
+		<!--101번은 퀘스트 의뢰 정보창-->
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="500252" FACE="Edeline_smile"/>
+			<SELECT ID="10601" TYPE="ACCEPT" TEXT="500229">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500230">거절</SELECT>
+		</DIALOG>
+		<!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+		<!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="401">
+			<BODY TEXT="500231"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="500232"/>
+			<SELECT ID="601" TEXT="500002">다음</SELECT>
+		</DIALOG>
+		<!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="500922" FACE="Edeline_smile"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500235">완료</SELECT>
+		</DIALOG>
+		<!--701번은 완료를 허락 하였을 때 뜰창-->
+		<DIALOG ID="701">
+			<BODY TEXT="500922" FACE="Edeline_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--801번은 완료를 거부 하였을 때 뜰창-->
+		<DIALOG ID="801">
+			<BODY TEXT="500237" FACE="Edeline_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="500255"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="502048"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+	</DIALOGS>
+</QUEST>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 진실의탑 정예 화면 밝아지기 -->
+<EVENT_SCRIPT>
+  	<CMD TYPE="waittime" time="2"/>
+   	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="true"/>
+  	<CMD TYPE="DOSTRING" COMMAND="ON_CALL_FROMEVENTSCRIPT_TRUETW(2)"/>
+    <CMD TYPE="PlaySound" SpecialActor="ME"  SlotNumber="1" SoundID="cleareffect"/>
+    <CMD TYPE="CallUI" UIWndName = "FRM_CLEAR_END"/>
+    <CMD TYPE="waittime" time="4"/>
+    <CMD TYPE="StopSound" SpecialActor="ME"  SlotNumber="1"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "1" FadeIn = "false"/>
+    <CMD TYPE="WaitFade" time="1"/>
+    <CMD TYPE="CloseUI" UIWndName = "FRM_MAIN_GAUGEBAR"/>
+   	<CMD TYPE="waittime" time="0"/>
+    <CMD TYPE="setmoviescene" enable="true" Time="1"/>
+   	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="ShowActor" ClassNo ="6125200" Show="false"/>
+    <CMD TYPE="MoveCamToPos" TargetPos="0.909, -120, 4951" MoveTime="0" CamActorDistance="290" CamMoveUpDistance="60" HorizRotAngle ="-65"/>
+   	<CMD TYPE="AddNPC" ClassNo="1030000"   NameTTID="505486" SpawnPos="0,0,5001"/>
+    <CMD TYPE="PlayAnimation" ClassNo="1030000" SlotName="idle_01" KeepAnimation="true"/>
+	<CMD TYPE="DOSTRING" COMMAND="READY_010801()"/>
+   	<CMD TYPE="WaitCamera"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "1" FadeIn = "true"/>
+    <CMD TYPE="WaitFade" time="1"/>
+    <CMD TYPE="WaitTime" time="7"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "1" FadeIn = "false"/>
+    <CMD TYPE="WaitFade" time="1"/>
+  	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>	
+	<CMD TYPE="DOSTRING" COMMAND="START_010801()"/>	
+</EVENT_SCRIPT>

@@ -1,0 +1,8 @@
+<ACTION ID="a_mage_down_shot" NEXT="a_jump" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="jump_down_attk"/>
+  <FSM SCRIPT="Mage_Down_Shot" FIRE_ATTACH_EFFECT_ID="e_arrow" ATTACH_NODE="p_wp_r_hand"
+   FIRE_ATTACH_EFFECT_TARGET_HELPER_ID="char_root" HIT_EFFECT_ID="e_dmg_cri"
+   PROJECTILE_ID="Projectile_Magician_Down_Shot"
+	 MONSTER_UP_EFFECT_ID="e_jump" MONSTER_DOWN_EFFECT_ID=""
+	 MONSTER_FALLEN_EFFECT_ID="e_skill_reverse_gravity_mon_fallen"/>
+</ACTION>

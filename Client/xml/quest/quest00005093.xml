@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5093</ID> <!--T.T.10509301 뛰어난 걸작(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	갑판상어 부둣가의 상어로부터 눈이 동그란 조각품 1개를 회수하자-->
+<!--[완료NPC]	바람항구 - 빅터-->
+<!--[내용]	시진은 빅터의 예술품을 상어가 가지고 가는 것을 목격했다고 한다. 상어는 상당히 난폭한 녀석이라 예술품이 어떻게 될지 너무 걱정이 되지만, 지금은 자리를 비울 수가 없다면서 걱정한다. 빅터의 예술품은 눈이 동그란 조각품인데, 더 이상 자신에게 맡기면 위험하다면서 바로 빅터에게 가져다 주길 부탁한다. 갑판상어 부둣가의 상어로부터 눈이 동그란 조각품 1개를 회수해 빅터에게 가져가자.  -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">116A12AC-D98A-483a-A1E9-3392632B7CDE</CLIENT> <!--시작NPC 스티븐 무역항 - 시진 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</PAYER> <!--완료NPC 바람항구 - 빅터 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 11 스티븐 무역항 - 시진 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</AGENT> <!--진행NPC 12 바람항구 - 빅터 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010120/10000/9200/1/1/160509300">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010120/갑판상어 부둣가,Item_NO=160509300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160509300</ITEM> 
+ <!--Item_NO=160509300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10509311"/> <!--눈이 동그란 조각품-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509321" FACE="Walter_normal"/> <!--아! 근무시간이 끝나고 예술품을 찾기 위해 갑판상어 부둣가로 갔습니다.
+막상 예술품을 찾으려는 그때 상어가 나타나 빅터의 예술품을 가져가 버렸습니다.
+상어들은 자신들이 흉측한 물건들을 모은다고 하면서 말이에요.%%
+빅터의 물건들이 설마 상어들에게 인기를 얻을 줄은 꿈에도 몰랐습니다.
+이 사실을 빅터가 알게 된다면 굉장히 실망하고 말 거에요.%%
+저는 근무시간이기 때문에 자리를 현재 비울 수가 없습니다.
+%class%님 상어로부터 빅터의 눈이 동그란 조각품을 찾아 주시길 바랍니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509326" FACE="Walter_smile"/> <!--와! 드디어 제 예술품이 돌아왔군요.
+시진은 제예 술품에 대해서 어떻게 표현하던가요?%%
+네? 제 생각과 똑같다고요?
+하하. 역시 이번 작품은 확실히 걸작이었군요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509323" FACE="Walter_smile"/> <!--빅터의 작품은 사실 뭐라고 표현하기 힘들 정도에요.
+하지만 직접적으로 이야기하지는 못하고 있습니다.%%
+빅터의 눈이 동그란 조각품을 찾으신다면 빅터에게 바로 전해주시길 바랍니다. 저에게 있다가는 조각품이 어떻게 될지 저도 잘 모르겠네요.
+빅터가 작품에 대한 저의 의견을 물어본다면 너의 생각과 똑같다고 전해 주세요.
+아마 알아서 잘 해석할 겁니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509324" FACE="Walter_angly"/> <!--빅터와 저의 우정을 여기서 끝내게 만드실 생각입니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509325" FACE="Walter_normal"/> <!--상어를 대상으로 빅터가 작품을 만들어도 괜찮을 것 같네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

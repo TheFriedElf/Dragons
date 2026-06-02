@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4181</ID> <!--T.T.10418101 신록을 지키는 사람들 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	아그니 30마리 퇴치-->
+<!--[완료NPC]	솔방울 언덕 - 샤말키-->
+<!--[내용]	샤말키는 천년영웅 중 한명이면서 미카족 출신이기도 한 팔미르의 뒤를 이어 최고의 사냥꾼이 되는 것이 소원. 샤말키는 사냥감 부족의 원일을 제공하는 아그니들을 누가 더 빨리 잡을 것인가 대결하자고 한다. 솔방울 언덕의 아그니 30마리를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2E1A237B-B19A-4c34-97C3-52FF26DBEB6A</CLIENT> <!--시작NPC 솔방울 언덕 - 샤말키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2E1A237B-B19A-4c34-97C3-52FF26DBEB6A</PAYER> <!--완료NPC 솔방울 언덕 - 샤말키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2E1A237B-B19A-4c34-97C3-52FF26DBEB6A</AGENT> <!--진행NPC 11 솔방울 언덕 - 샤말키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6062100</MONSTER> 
+ <!--MON_NO=6062100/아그니,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10418111"/> <!--아그니 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418121" FACE="Syamalki_normal"/> <!--미카족의 일원도 이제 얼마 남지 않았네.
+이젠 젊은이들도 부족하고 말이야.
+천년 전엔 우리 부족도 꽤 융성했다고 들었지만…
+신성제국에게 이단 취급을 받게 된 뒤로는 
+탄압이 심해져서 뿔뿔이 흩어지는 바람에…%%
+그 뒤론 이렇게 이름만 남은 부족이 되어버렸지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418126" FACE="Syamalki_smile"/> <!--와! 이런.. 너 혹시 반칙 쓴 거 아냐?
+난 오래간만에 찾아온 베스트 컨디션이었는데 말이야.%%
+이건 완전한 패배야. 후후. 요령 좀 알려주지 않을래?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418123" FACE="Syamalki_normal"/> <!--그래도, 난 미카족인게 자랑스러워.
+대지의 수호자!
+팔미르를 혹시 아니?%%
+바로 천년 영웅 중에 한명이지. 엘가를 잡은 그 영웅들…
+바로 그 팔미르가 우리 미카일족이란 말이야.%%
+나도 팔미르처럼 최고의 사냥꾼이 되는 게 소원이야.
+하지만 최근엔 이 부근에 아그니란 나무 정령들이
+나타나서 사냥감들이 부족해졌어.%%
+너 말이야 나랑 내기하지 않을래?
+누가 더 빨리 아그니 30마리를 잡는 지 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418124" FACE="Syamalki_normal"/> <!--흠.. 나오님이 보내서 온 녀석이 아닌가 보네…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418125" FACE="Syamalki_normal"/> <!--아그니란 몬스터를 누가 더 빨리 퇴치하는 가가 우리들의 내기다!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

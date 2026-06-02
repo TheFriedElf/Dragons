@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Szaffi_bone" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Szaffi_bone"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Szaffi_bone/N_Szaffi_bone.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<!--ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_Szaffi_idle_G_p_ef_heart" TO="p_ef_heart"/>
+		<ATTACH TYPE="effect" SLOT="1" EFFECT="ef_Szaffi_idle_G_p_ef_r_eye" TO="p_ef_r_eye"/>
+		<ATTACH TYPE="effect" SLOT="2" EFFECT="ef_Szaffi_idle_G_p_ef_r_eye" TO="p_ef_l_eye"/>
+		<ATTACH TYPE="effect" SLOT="3" EFFECT="ef_Szaffi_idle_BK_p_ef_tail01" TO="p_ef_tail01"/>
+		<ATTACH TYPE="effect" SLOT="4" EFFECT="ef_Szaffi_idle_BK_p_ef_tail02" TO="p_ef_tail02"/>
+		<ATTACH TYPE="effect" SLOT="5" EFFECT="ef_Szaffi_idle_BK_p_ef_tail03" TO="p_ef_tail03"/-->
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="27"/>
+			<SPHERE TO="p_hit_point_02" SIZE="18"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- 암흑 덩어리 토 한다 -->
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000202"/>
+			<ITEM NAME="shot_01" ANIMATION="1000201" FIRE_START_NODE="p_ef_heart" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_Szaffi_shot_01"/>
+			<!-- 암흑을 던지면 PC 주변 바닥에서 손이 올라온다 -->
+			<ITEM NAME="summon_thorn_btlidle" ANIMATION="1000203" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="summon_thorn_fire" ANIMATION="1000204" FIRE_START_NODE="p_ef_heart" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_BossAram_Item03_01" QUAKE_TIME="1" QUAKE_FACTOR="3" HIT_SOUND_ID="Aram_Skill02"/>
+			<!-- 쇠사슬을 던진다. -->
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000205"/>
+			<ITEM NAME="shot_02" ANIMATION="1000206" FIRE_START_NODE="p_ef_lock" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_Szaffi_shot_03"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<!--ITEM NAME="walk" ANIMATION="1000050"/-->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000055"/-->
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

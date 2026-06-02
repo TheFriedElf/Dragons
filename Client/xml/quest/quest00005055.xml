@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5055</ID> <!--T.T.10505501 위기의 고래들(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)]의 상어로부터 고래의 눈물 15개 회수하자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 바다의 산성화 이외에 고래들이 줄어들고 있는 이유에 대해서 알아냈다며 흥분한다. 그 이유는 수염고래 해안가의 상어들이 고래의 눈물이라고 불리는 고래들의 마력원을 추출하고 있기 때문이라고 한다. 마력의 근원을 잃은 고래들은 쇠약해지다가 결국 죽고 만다. 지금 쇠약해지고 있는 고래들을 살리기 위해 수염고래 해안가 [아케이드 모드(F1)]의 상어로부터 고래의 눈물 15개를 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010103/10000/5000/1/1/160505500">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010103/수염고래 해안가 아케이드 3,Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505500</ITEM> 
+ <!--Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010104/10000/5000/1/1/160505500">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010104/수염고래 해안가 아케이드 4,Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505500</ITEM> 
+ <!--Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010105/10000/5000/1/1/160505500">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010105/수염고래 해안가 아케이드 5,Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505500</ITEM> 
+ <!--Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010109/10000/6000/1/1/160505500">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010109/캡틴후커 별장,Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160505500</ITEM> 
+ <!--Item_NO=160505500/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10505511"/> <!--고래의 눈물-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10505521" FACE="Mukapa_normal"/> <!--드디어 바다의 산성화 이외에 고래들이 사라지고 있는 이유에 대해서 알아냈네.
+아니, 가장 큰 이유에서 일지도 모르겠군.
+수염고래에게는 고래의 눈물이라는 마력의 결정이 있다고 하는군.%%
+이것은 살아 있는 고래에게서만 나오는 것으로 고래가 죽은 상태에서는 나오지 않는다네.
+고래의 눈물은 수염고래가 진정으로 자신과 교감할 수 있는 자만 준다고 알려져 있지.%%
+하지만 고래의 눈물을 인공적으로 뽑아낼 수 있는 장치를 가지고 있는 녀석들이 나타났네.
+난 자네가 그 녀석들을 막아줬으면 좋겠네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10505526" FACE="Mukapa_smile"/> <!--잘했네. 자네가 가져온 고래의 눈물은 지금 당장 수염고래들에게 다시 건네주도록 하겠네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10505523" FACE="Mukapa_normal"/> <!--고래의 눈물을 인공적으로  뽑아서 가지고 다니는 녀석들은 수염고래의 천적인 상어로 밝혀졌네. 
+도대체 어디에 사용할 것인지는 명확히 밝혀지지는 않았지만 좋은 일에 사용하지 않을 것임에는 분명하지.%%
+자네는 상어들로부터 고래의 눈물을 회수해 주기를 바라네.
+이미 많은 수염고래들이 고래의 눈물이 뽑힌 채 죽어가고 있네.
+상어들은 수염고래 해안가 [아케이드 모드(F1)]에 있다네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10505524" FACE="Mukapa_angry"/> <!--자네의 거절로 많은 수염고래들이 죽어가도 좋다는 말인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10505525" FACE="Mukapa_normal"/> <!--어서빨리 가게나. 조금이라도 많은 수염고래들의 생명을 살려야 하네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10505502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

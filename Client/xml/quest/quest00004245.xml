@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4245</ID> <!--T.T.10424501 말괄량이 샤말키 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	협곡 그리폰 15마리 퇴치-->
+<!--[완료NPC]	밴시협곡 - 샤말키-->
+<!--[내용]	솔방울 언덕에서 만난 적이 있는 샤말키는 최고의 사냥꾼이 되는 꿈을 이루기 위해 밴시협곡으로 사냥을 왔다고 한다. 샤말키가 사냥 실력을 보고 배울 수 있도록 밴시협곡의 협곡 그리폰류 몬스터 15마리를 퇴치하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">156AB74D-9EC3-4058-A901-C34D2BE356FB</CLIENT> <!--시작NPC 밴시협곡 - 샤말키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">156AB74D-9EC3-4058-A901-C34D2BE356FB</PAYER> <!--완료NPC 밴시협곡 - 샤말키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">156AB74D-9EC3-4058-A901-C34D2BE356FB</AGENT> <!--진행NPC 11 밴시협곡 - 샤말키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3401400</MONSTER> 
+ <!--MON_NO=3401400/암석 그리폰,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3401500</MONSTER> 
+ <!--MON_NO=3401500/화염 그리폰,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3401600</MONSTER> 
+ <!--MON_NO=3401600/스파크 그리폰,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10424511"/> <!--협곡 그리폰류 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10424521" FACE="Syamalki_normal"/> <!--야! 우리 저번에 솔방울 언덕에서 만났었지?
+이런 우연도 다 있네. 후훗…
+넌 여기 왠 일이니?%%
+뭐? 키오네스크? 고대 전설 속에 나오는 기계장치?
+무슨 뚱딴지 같은 소린지 모르겠다.
+엥? 나? 아.. 나, 난 말이지…%%
+그러니까... 그… 최고의 사냥꾼! 
+그래 맞아. 우리 부족 최고의 사냥꾼이 되기 위해
+수련 중이야.%%
+아, 그래.. 잘됐다. 너 시간 좀 있니?
+네가 아주 쬐금 도와줬음 하는 일이 있어. 후후..-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10424526" FACE="Syamalki_smile"/> <!--와… 정말 다시 봐야겠다.
+네가 사냥하는 모습을 지켜봤어.
+정말 스승님으로 삼고 싶은 실력이던데…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10424523" FACE="Syamalki_normal"/> <!--내가 그동안 이곳에서 사냥을 제법 하고 다녔는데 말이지.
+이곳에 있는 협곡 그리폰들은 도저히 어떻게 해보질
+못하겠는 거야. %%
+활의 사정거리에 넣겠다고 몰래 살금살금 다가가다 보면 
+어느새 바로 내 앞까지 재빠르게 날아와버리곤 하거든.
+날카로운 발톱 공격을 받다가 도망쳐 온 게 한두번이 아냐.%%
+넌, 우리 무녀가 예언한 대단한 용사잖아! 그러니까 내게
+싸우는 법을 좀 알려줘. 방해되지 않게 널 몰래 뒤따라갈테니
+그리폰들을 사냥하는 모습을 보여달란 거지.%%
+내가 잘 봐뒀다가 나중에 그대로 수련할테니까 말이야.
+아아.. 제발 날 좀 도와줘. 협곡그리폰을 종류에 상관 없이
+20마리만 잡아줘. 이대로 가다간 헤어나기 힘든 무력감에
+빠져들 지도 몰라. 잉잉...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10424524" FACE="Syamalki_normal"/> <!--무턱대고 부탁한 감이 있으니 뭐, 별 수 없지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10424525" FACE="Syamalki_normal"/> <!--이곳 밴시협곡에 사는 협곡 그리폰 종류의 몬스터를 잡아달란 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10424502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

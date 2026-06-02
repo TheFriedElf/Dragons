@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>8</ID> <!--T.T.10000801 초코장인 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람의 항구의 고든과 이야기 해보자.-->
+<!--[완료NPC]	바람항구(발렌타인) - 고든-->
+<!--[내용]	소피아는 초콜릿 케이크에 사용한 초콜릿이, 초코장인이 직접 만든 것이라고 한다. 초코장인이 만든 초콜릿 맛이 변하는 이유를 알아봐야 한다. 탐정 고든에게 가보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 바람항구 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</PAYER> <!--완료NPC 바람항구(발렌타인) - 고든 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 바람항구 - 소피아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 12 바람항구(발렌타인) - 고든 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10000811"/> <!--고든과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10000821" FACE="Sopia_normal"/> <!--이상해요! 정말 이상해요!
+제 초콜릿 케이크에서 이런 맛이 나올 이유가 없어요.
+이건 그 유명한 초코장인 진저맨이 만든 초콜릿이니까요.
+아무래도 뭔가 다른 이유가 있는 거 같아요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10000826" FACE="Goden_normal"/> <!--음? 초콜릿 장인이 만든 초콜릿의 맛이 아주 쓰게 변했다고?
+흠, 벌써 몇 건째 같은 사건의 조사요청이 들어오고 있군.
+내가 좀 더 조사해서 알려 주도록 하지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10000823" FACE="Sopia_normal"/> <!--제가 초콜릿 케이크를 만들었지만, 직접 먹어보지는 않았어요.
+제가 요리에 조금 실력이 있는 것도 이유지만, 이건 그 유명한 초콜릿 장인이 만든 초콜릿이니까요.%%
+천상의 맛이라고 알려진 초코장인 진저맨의 초콜릿은 예약만 한 달이 넘게 걸린다고요.
+친구들이 최근 초코장인 진저맨이 만든 초콜릿의 맛이 변했다고 해도 믿지 않았었는데...%%
+아무래도 고든씨에게 도움을 청해야겠네요.
+지금 은행일 때문에 자리를 뜰 수가 없어요. 고든씨에게 이야기 좀 해주시겠어요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10000824" FACE="Sopia_angly"/> <!--할 수 없죠. 전 로니씨가 돌려준 이 쓴 초콜릿 케이크를 먹으면서, 저 자신을 원망이나 해야죠 뭐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10000825" FACE="Sopia_normal"/> <!--정말, 제가 이렇게 요리를 못 하는 걸까요? 아니겠죠? 제발 아니라고 이야기해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10000802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

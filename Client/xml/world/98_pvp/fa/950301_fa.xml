@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_950301_FA">
+  <GSAPATH>../Data/3_World/98_PVP/01_Level/FA/950301_FA.gsa</GSAPATH>
+  <MINIMAP Y="229" H="78">../Data/3_World/98_PVP/01_Level/FA/950301_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/LoveLoveOperationBG.mp3</BGSOUND>
+  <SCRIPT>World/98_PVP/1vs1/920103_VS.lua</SCRIPT>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!--MAP TYPE설정-->
+  <!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+  <MAPVALUE PLAYERKILL="0" TYPE="64" />
+  
+  <!--대 점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="300" />
+  </TRIGGER>
+  
+  <!--곰 스코어 득점 연출 신 -->
+	<WORLD_EVENT ID="1" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="INDUN_STATE" TARGET_ID="0" EVENT="EQUAL" VALUE="16" /> <!--32 : INDUN_STATE_RESULT 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(9950301)" EVENT="SCRIPT"/>	<!--이벤트 씬 호출 -->
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="2" EVENT="STATUS" VALUE="0"/>
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<WORLD_EVENT ID="2" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="INDUN_STATE" TARGET_ID="0" EVENT="EQUAL" VALUE="8" /> <!--8 : INDUN_STATE_PLAY 이벤트 실행 -->
+		<DEACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="1" EVENT="STATUS" VALUE="0"/>
+		</DEACTIVATE_ACTION>
+	</WORLD_EVENT>
+  
+
+
+
+  <!--기속 패드 
+  <TRIGGER ID="telejump_target_03" TYPE="ACCEL_PAD" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="AccelPad" PARAM_STRING="telejump_zone_03" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="ACCEL_PAD" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="AccelPad" PARAM_STRING="telejump_zone_04" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="ACCEL_PAD" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="AccelPad" PARAM_STRING="telejump_zone_05" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_06" TYPE="ACCEL_PAD" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="AccelPad" PARAM_STRING="telejump_zone_06" PARAM="5" />
+  </TRIGGER -->
+	
+  <!-- 미니맵 트리거 -->
+ <TRIGGER ID="LOVE_FENCE_RED" TYPE="LOVE_FENCE">
+	<ACTION INIT_OBJECT_TEAM="1" INIT_OBJECT_NO="5006208"/>
+ </TRIGGER>
+ 
+ <TRIGGER ID="LOVE_FENCE_BLUE" TYPE="LOVE_FENCE">
+	<ACTION INIT_OBJECT_TEAM="2" INIT_OBJECT_NO="5006209"/>
+ </TRIGGER>
+
+  <TRIGGER ID="Score_Red" TYPE="SCORE">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="ScoreTrigger" TEAM="RED"/>
+  </TRIGGER>
+  <TRIGGER ID="Score_Blue" TYPE="SCORE">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="ScoreTrigger" TEAM="BLUE"/>
+  </TRIGGER>	
+
+  <FOG DENSITY="0" FUNC="Z_LINEAR" START="1883" END="8264" COLOR="0,0.6509804,0.5372549"/>
+ 
+</WORLD>

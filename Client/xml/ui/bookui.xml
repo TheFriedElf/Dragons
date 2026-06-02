@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_BOOK1" ALIGN_X ="50" ALIGN_Y ="50" W ="1024" H ="768" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<IMG ID = "IMG_LEFT_TOP" X="87" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg01.tga" IMG_W = "383" IMG_H = "512"/>
+		<IMG ID = "IMG_LEFT_BOTTOM" X="87" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg01_2.tga" IMG_W = "383" IMG_H = "69"/>
+		<IMG ID = "IMG_RIGHT_TOP" X="470" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg02.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_RIGHT_BOTTOM" X="470" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg02_2.tga" IMG_W = "512" IMG_H = "69"/>
+		<BUTTON ID = "BTN_CLOSE" X="869" Y="124" Z="10" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "70"/>
+			<SCRIPT ID = "ON_L_BTN_UP">UI_Book_OnClose(1) UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID = "1">UI_Book_OnClose(1) UISelf:Close() return true </HOTKEY>
+		<BUILD ID="BLD_TAB" TARGET_ID = "CBTN_TAB" X = "912" Y = "160" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "40" START_INDEX="1"/>
+		<CHECK_BUTTON ID = "CBTN_TAB" X="0" Y="0" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" FONT="FT15"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_BUILD"> UI_Build_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_TAB0" X="912" Y="574" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3036" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<BUTTON ID = "CBTN_TAB6" X="912" Y="494" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3000" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> ActivateUIPriority("FRM_HELP_MAIN", 9) </SCRIPT>
+		</BUTTON>
+		<FORM ID = "FRM_PAGE1" X="153" Y="135" W="740" H="480">
+			<IMG ID="IMG_LEFT_PAGE" X="0" Y="30" Z="-1" W="302" H="461">
+				<ATTR IMG="../Data/6_ui/book/bkBg_L02.tga" IMG_W = "302" IMG_H = "461"/>
+			</IMG>
+			<IMG ID="IMG_RIGHT_PAGE" X="335" Y="30" Z="-1" W="409" H="461">
+				<ATTR IMG="../Data/6_ui/book/bkBg_R11.tga" IMG_W = "409" IMG_H = "461"/>
+			</IMG>
+			<BUILD ID="BLD_TYPE" TARGET_ID = "CBTN_TAB" X = "12" Y = "58" X_COUNT = "1" Y_COUNT = "7" X_GAB = "0" Y_GAB = "49" START_INDEX="1"/>
+			<CHECK_BUTTON ID="CBTN_TAB" X="0" Y="0" W="273" H="50" BTN_VERTICAL_IMG="1">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkMenuB.tga" BTN_IMG_W = "273" BTN_IMG_H = "200" />
+				<ATTR TEXT="1" T_CENTER="1" T_X="136" T_Y="15" FONT="FT15" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4"/> 
+				<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Medal_Sub(UISelf) </SCRIPT>
+				<SCRIPT ID = "ON_BUILD">
+					local BuildIdx = UISelf:GetBuildIndex()
+					if 1 == BuildIdx then
+						UISelf:SetStaticTextW(GetTT(3180))
+					elseif 7 == BuildIdx then
+						UISelf:SetStaticTextW(GetTT(3035))
+					else
+						UISelf:SetStaticTextW(GetTT(BuildIdx+3018))
+					end
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<FORM ID="FRM_PAGE" X="335" Y="30" W="409" H="461" IMG="../Data/6_ui/book/bkBg_Rwk01.tga" IMG_W="409" IMG_H="461" IS_VISIBLE="1">
+				<FORM ID="FRM_TEXT0" X="12" Y="33" W="385" H="20" FONT="FT15" TEXT="3143" FONT_COLOR_HEX="0xFF920B0F" T_X="192" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT1" X="12" Y="66" W="385" H="20" TEXT="3144" FONT_COLOR_HEX="0xFF4E1D0E" T_X="192">
+					<LOCAL>
+						<NAME ID="DEFAULT">
+							<ATTR FONT="FTcts_13" T_CENTER="1"/>
+						</NAME>
+						<NAME ID="JAPAN">
+							<ATTR FONT="Font_Text" T_Y="-3" T_CENTER="1"/>
+						</NAME>
+					</LOCAL>
+				</FORM>
+				<FORM ID="FRM_TEXT2" X="12" Y="149" W="385" H="20" FONT="FT15" TEXT="3145" FONT_COLOR_HEX="0xFF920B0F" T_X="192" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT3" X="12" Y="182" W="385" H="20" FONT="FTcts_13" TEXT="3146" FONT_COLOR_HEX="0xFF4E1D0E" T_X="192" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT4" X="12" Y="264" W="385" H="20" FONT="FT15" TEXT="3147" FONT_COLOR_HEX="0xFF920B0F" T_X="192" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT5" X="12" Y="297" W="385" H="20" FONT="FTcts_13" TEXT="3148" FONT_COLOR_HEX="0xFF4E1D0E" T_X="192" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT6" X="12" Y="378" W="385" H="20" FONT="FT15" TEXT="3149" FONT_COLOR_HEX="0xFF920B0F" T_X="192" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT7" X="12" Y="411" W="385" H="20" FONT="FTcts_13" TEXT="3150" FONT_COLOR_HEX="0xFF4E1D0E" T_X="192" T_CENTER="1"/>
+			</FORM>
+			<FORM ID="FRM_EQUIP_BOOK_MEDAL" X="345" Y="54" W="366" H="58" U="1" V="2" UV_INDEX="1" IMG="../Data/6_ui/book/bkBg_LhsList.tga" IMG_W="366" IMG_H="116">
+				<IMG ID = "SFRM_TEXT" X="0" Y="-20" W="255" H="38" TEXT="3305" T_X="0" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFEFBF" T_OULINE="1" OUTLINE_COLOR_HEX="0xFF301100"/>
+				<IMG ID = "SFRM_TITLE" X="56" Y="3" W="255" H="38" T_X="6" T_Y="2" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>
+				<IMG ID = "SFRM_RANKPOINT" X="309" Y="-14" W="60" H="38" TEXT="3307" T_X="30" T_Y="0" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFEED2"/>
+				<IMG ID = "IMG_RANKPOINT" X="315" Y="3" W="50" H="47" TEXT="3158" T_CENTER="1" T_X="25" T_Y="5" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<IMG ID = "IMG_COUNT" X="315" Y="3" W="50" H="47" T_CENTER="1" T_X="25" T_Y="28" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>
+				<IMG ID = "IMG_ITEM" X="7" Y="7" W="40" H="40" STATIC_NUM="35">
+					<SCRIPT ID="ON_DISPLAY"> DrawMissionRewardItem(UISelf)</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN">OnClickBookAchieveIcon(UISelf)</SCRIPT>
+				</IMG>
+				<IMG ID="IMG_EQUIP_MARK" X="2" Y="35" W="17" H="18" Z="1" IMG="../Data/6_ui/book/bkMarkE.tga" IMG_W="17" IMG_H="18" PASS_EVENT="1" NO_FOCUS="1"/>
+				<FORM ID = "FRM_DISCRIPT" X="56" Y="3" W="255" H="38" STATIC_NUM="35">
+					<ATTR T_X="6" T_Y="17" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+				</FORM>
+				<ANI_BAR ID="ANB_PERCENT" X="57" Y="43" Z="1" W="253" H="7" BAR_SMOOTH="0">
+					<ATTR BAR_IMG="../Data/6_ui/book/bkHsBar.tga" BAR_IMG_W="253" BAR_IMG_H="7" BAR_COUNT="1"/>
+					<ATTR T_X="10" T_Y="-6" FONT="FTNumber" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/>
+					<SCRIPT ID="ON_CREATE"></SCRIPT>
+				</ANI_BAR>
+			</FORM>			
+			<LIST ID = "LST_MEDAL" X="345" Y="120" W="390" H="360" IS_VISIBLE="0">
+				<IMG ID="IMG_LIST_SCROLL_BG" X="373" Y="15" Z="-1" W="13" H="360">
+					<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="360"/>
+				</IMG>
+				<BUTTON ID="ScrUp" X="371" Y="0" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+				<BUTTON ID="ScrDown" X="371" Y="345" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="373" Y="15" W="15" H="21">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+				</BUTTON>
+				<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BOOK_MEDAL_ELE" />
+			</LIST>
+			<BUTTON ID = "BTN_BOOK_GET_ACHIEVE_ITEM" X="0" Y="0" W="141" H="22" Z="1" IS_VISIBLE="0">
+				<ATTR BTN_IMG="../Data/6_ui/msbook/mbDrB.tga" BTN_IMG_W = "282" BTN_IMG_H = "44" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+				<ATTR T_CENTER="1" T_X="70" T_Y="3" FONT="FTbt_12" TEXT="3067"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					OnClickBookAchieveGetItem(UISelf)
+					return true
+				</SCRIPT>
+				<SCRIPT ID = "ON_LOSE_FOCUS"> UISelf:Visible(false) </SCRIPT>
+			</BUTTON>
+			<SCRIPT ID = "ON_CALL"> UI_Init_Book_Medal_Sub(UISelf) </SCRIPT>
+		</FORM>
+	</FORM>
+
+	<FORM ID = "FRM_BOOK2" ALIGN_X = "50" ALIGN_Y = "50" W ="1024" H ="768" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID="ON_CALL">UI_Set_Book_MapNavi(UISelf, g_mapNo, "")</SCRIPT>
+		<IMG ID = "IMG_LEFT_TOP" X="87" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg01.tga" IMG_W = "383" IMG_H = "512"/>
+		<IMG ID = "IMG_LEFT_BOTTOM" X="87" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg01_2.tga" IMG_W = "383" IMG_H = "69"/>
+		<IMG ID = "IMG_RIGHT_TOP" X="470" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg02.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_RIGHT_BOTTOM" X="470" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg02_2.tga" IMG_W = "512" IMG_H = "69"/>
+		<BUTTON ID = "BTN_CLOSE" X="869" Y="124" Z="10" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "70"/>
+			<SCRIPT ID = "ON_L_BTN_UP">UI_Book_OnClose(2) UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID = "1">UI_Book_OnClose(2) UISelf:Close() return true </HOTKEY>
+		<BUILD ID="BLD_TAB" TARGET_ID = "CBTN_TAB" X = "912" Y = "160" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "40" START_INDEX="1"/>
+		<CHECK_BUTTON ID = "CBTN_TAB" X="0" Y="0" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" FONT="FT15"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_BUILD"> UI_Build_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_TAB0" X="912" Y="574" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3036" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<BUTTON ID = "CBTN_TAB6" X="912" Y="494" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3000" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> ActivateUIPriority("FRM_HELP_MAIN", 9) </SCRIPT>
+		</BUTTON>
+
+		<IMG ID="IMG_LEFT_PAGE" X="153" Y="165" W="302" H="461">
+			<ATTR IMG="../Data/6_ui/book/bkBg_L06.tga" IMG_W = "302" IMG_H = "461"/>
+			<ATTR TEXT="1" T_X="10" T_Y="178" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+		</IMG>
+
+		<LIST ID="LST_CONT" X="157" Y="190" Z="1" W="285" H="136">
+			<IMG ID="IMG_LIST_SCROLL_BG" X="270" Y="15" Z="-1" W="13" H="107">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="107"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="266" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+			<BUTTON ID="ScrDown" X="266" Y="121" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="270" Y="15" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="BTN_CONT_BOOK_ELE" />
+		</LIST>
+
+		<LIST ID="LST_GROUND" X="158" Y="371" Z="1" W="286" H="240">
+			<IMG ID="IMG_LIST_SCROLL_BG" X="266" Y="15" Z="-1" W="13" H="230">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="217"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="267" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+			<BUTTON ID="ScrDown" X="267" Y="230" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="269" Y="15" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="BTN_GROUND_BOOK_ELE" />
+		</LIST>
+
+ 
+		<FORM ID = "FRM_PAGE2" X="153" Y="135" W="740" H="509">
+			<ATTR TEXT="" T_CENTER="1" T_X="152" T_Y="90" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			<CHECK_BUTTON ID = "BTN_CONT1" X="0" Y="0" W="100" H="30" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF371c0f" BTN_T_INVERTBOLD="1" FONT="FT15">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkMenuSub.tga" BTN_IMG_W = "200" BTN_IMG_H = "60" TEXT="700" T_CENTER="1" T_X="49" T_Y="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					local slf = UISelf
+					UI_Click_Book_Cont_Btn(slf)
+					UI_Set_Book_MapNavi(slf:GetParent():GetParent(), 0, slf:GetCustomDataAsStr():GetStr(), "", true) </SCRIPT>
+				<SCRIPT ID = "ON_CALL">UISelf:SetCustomDataAsStr("WIND")</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID = "BTN_CONT2" X="100" Y="0" W="100" H="30" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF371c0f" BTN_T_INVERTBOLD="1" FONT="FT15">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkMenuSub.tga" BTN_IMG_W = "200" BTN_IMG_H = "60" TEXT="701" T_CENTER="1" T_X="49" T_Y="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					local slf = UISelf
+					UI_Click_Book_Cont_Btn(slf)
+					UI_Set_Book_MapNavi(slf:GetParent():GetParent(), 0, slf:GetCustomDataAsStr():GetStr(), "", true) </SCRIPT>
+				<SCRIPT ID = "ON_CALL">UISelf:SetCustomDataAsStr("CHAOS")</SCRIPT>
+			</CHECK_BUTTON>
+			<IMG ID="IMG_RIGHT_PAGE" X="335" Y="30" W="409" H="476">
+				
+				<LOCAL>
+					<NAME ID="DEVELOP">  <!-- #NOT_OPEN# -->
+						<BUTTON ID="BTN_PREVIEW" X="147" Y="441" W="112" H="35" Z="1" BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" TEXT="3182" FONT="FTcts_13" T_X="56" T_Y="7" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+							<SCRIPT ID="ON_L_BTN_DOWN">CallActorInfo(UISelf)</SCRIPT>
+						</BUTTON>
+					</NAME>
+				</LOCAL>
+				<FORM ID="FRM_PAGE0" X="0" Y="0" W="409" H="475" IMG="../Data/6_ui/book/bkBg_Rwd01.tga" IMG_W="409" IMG_H="461" T_X="102" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E">
+					<FORM ID="FRM_MAP_COMMENT" X="102" Y="30" W="307" H="20" FONT="Font_Text" FONT_COLOR_HEX="0xFF8A2C0F"/>
+					<IMG ID = "IMG_MAP" X="0" Y="0" W="91" H="114" IMG="../Data/6_ui/msbook/mbImg01_06.tga" IMG_W="91" IMG_H="114"/>
+					<LIST ID="LST_MONSTER" X="8" Y="124" W="390" H="210">
+						<IMG ID="IMG_LIST_SCROLL_BG" X="373" Y="15" Z="-1" W="13" H="210">
+							<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+						</IMG>
+						<BUTTON ID="ScrUp" X="371" Y="0" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			      		</BUTTON>
+						<BUTTON ID="ScrDown" X="371" Y="190" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle" X="373" Y="15" W="15" H="21">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BOOK_MONSTER_COMMENT_ELE" />
+					</LIST>
+					<FORM ID="FRM_BOSS" X="18" Y="357" W="353" H="62">
+						<ICON ID="ICN_BOSS" X="0" Y="0" W="62" H="62" IMG_W="62" IMG_H="62" ICON_GRP ="228" ICON_STATIC="1" PASS_EVENT="1">
+							<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+						</ICON>
+						<FORM ID="FRM_BOSS_NAME" X="73" Y="22" W="280" H="20" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E" PASS_EVENT="1"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">ClickActorSlot(UISelf, 3)</SCRIPT>
+					</FORM>
+				</FORM>
+				<FORM ID="FRM_PAGE1" X="0" Y="0" W="409" H="475" IMG="../Data/6_ui/book/bkBg_Rwd02.tga" IMG_W="409" IMG_H="461" T_X="102" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4E1D0E">
+					<FORM ID="FRM_MAP_COMMENT" X="102" Y="30" W="307" H="20" FONT="Font_Text" FONT_COLOR_HEX="0xFF8A2C0F"/>
+					<IMG ID = "IMG_MAP" X="0" Y="0" W="91" H="114" IMG="../Data/6_ui/msbook/mbImg01_06.tga" IMG_W="91" IMG_H="114"/>
+					<LIST ID = "LST_NPC" X="8" Y="124" W="390" H="310">
+						<IMG ID="IMG_LIST_SCROLL_BG" X="373" Y="15" Z="-1" W="13" H="310">
+							<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+						</IMG>
+						<BUTTON ID="ScrUp" X="371" Y="0" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			      		</BUTTON>
+						<BUTTON ID="ScrDown" X="371" Y="290" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle" X="373" Y="15" W="15" H="21">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BOOK_NPC_COMMENT_ELE" />
+					</LIST>
+				</FORM>
+				<FORM ID = "FRM_PAGE2" X="0" Y="0" W="409" H="461" >
+					<ATTR IMG="../Data/6_ui/book/bkBg_R05.tga" IMG_W = "409" IMG_H = "461"/>
+					<FORM ID="FRM_BOSS_TEXT" X="13" Y="17" W="378" H="20" FONT_COLOR_HEX="0xFFfff4dd" TEXT="3029" T_X="189" T_CENTER="1" FONT="FTcts_16"/>
+					<FORM ID="FRM_MONSTER_TEXT" X="13" Y="218" W="378" H="20" FONT_COLOR_HEX="0xFF4e1d0e" TEXT="3030" T_X="189" T_CENTER="1" />
+					<ICON ID="ICN_BOSS" X="21" Y="51" W="62" H="62" IMG_W="62" IMG_H="62" ICON_GRP ="228" ICON_STATIC="1" PASS_EVENT="1">
+							<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+						</ICON>
+					<FORM ID = "FRM_BOSS_NAME" X="89" Y="78" W="293" H="36" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF8a2c0f" TEXT=""/>
+					<FORM ID = "FRM_BOSS_COMMENT" X="19" Y="122" W="364" H="91" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e" TEXT=""/>
+					<LIST ID = "LST_MONSTER" X="14" Y="240" W="373" H="208">
+						<IMG ID="IMG_LIST_SCROLL_BG" X="373" Y="15" Z="-1" W="13" H="70">
+							<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+						</IMG>
+						<BUTTON ID="ScrUp" X="354" Y="0" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			      		</BUTTON>
+						<BUTTON ID="ScrDown" X="354" Y="187" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle" X="356" Y="15" W="15" H="21">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						</BUTTON>
+						<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BOOK_MONSTER_ELE" />
+					</LIST>
+				</FORM>
+			</IMG>
+		</FORM>
+	</FORM>
+
+	<FORM ID = "FRM_BOOK3" ALIGN_X = "50" ALIGN_Y = "50" W ="1024" H ="768" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID="ON_CALL">UI_Set_Book_MapNavi(UISelf, g_mapNo, "")</SCRIPT>
+		<IMG ID = "IMG_LEFT_TOP" X="87" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg01.tga" IMG_W = "383" IMG_H = "512"/>
+		<IMG ID = "IMG_LEFT_BOTTOM" X="87" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg01_2.tga" IMG_W = "383" IMG_H = "69"/>
+		<IMG ID = "IMG_RIGHT_TOP" X="470" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg02.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_RIGHT_BOTTOM" X="470" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg02_2.tga" IMG_W = "512" IMG_H = "69"/> 
+
+		<BUTTON ID = "BTN_CLOSE" X="869" Y="124" Z="10" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "70"/>
+			<SCRIPT ID = "ON_L_BTN_UP">UI_Book_OnClose(3) UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID = "1">UI_Book_OnClose(3) UISelf:Close() return true </HOTKEY>
+		<BUILD ID="BLD_TAB" TARGET_ID = "CBTN_TAB" X = "912" Y = "160" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "40" START_INDEX="1"/>
+		<CHECK_BUTTON ID = "CBTN_TAB" X="0" Y="0" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" FONT="FT15"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_BUILD"> UI_Build_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_TAB0" X="912" Y="574" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3036" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<BUTTON ID = "CBTN_TAB6" X="912" Y="494" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3000" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> ActivateUIPriority("FRM_HELP_MAIN", 9) </SCRIPT>
+		</BUTTON>
+
+		<IMG ID="IMG_LEFT_PAGE" X="153" Y="165" W="302" H="461">
+			<ATTR IMG="../Data/6_ui/book/bkBg_L07.tga" IMG_W = "302" IMG_H = "461"/>
+			<ATTR TEXT="421" T_X="10" T_Y="6" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+		</IMG>
+
+		<FORM ID = "FRM_PAGE2" X="153" Y="135" W="740" H="480" >
+			<ATTR TEXT="" T_CENTER="1" T_X="152" T_Y="90" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			<SCRIPT ID = "ON_CALL"> UI_Click_Book_Quest_Tab(UISelf, 1) </SCRIPT>
+			<FORM ID="FRM_MARK_EXPLAN" X="10" Y="185" W="291" H="20" FONT_COLOR_HEX="0xFF790000" FONT="FTcts_13"/>
+			<CHECK_BUTTON ID = "BTN_EXCLAM" X="7" Y="60" W="284" H="49" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF2f1509" BTN_T_INVERTBOLD="1" FONT="FTcts_13">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkQstMenu.tga" BTN_IMG_W = "284" BTN_IMG_H = "192" TEXT="422" T_X="49" T_Y="13" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" BTN_VERTICAL_IMG="1"/>
+				<FORM ID="FRM_ICON" X="8" Y="8" W="32" H="32">
+					<ATTR IMG="../Data/6_ui/main/mnMMicon2.tga" IMG_W="128" IMG_H="320" U="4" V="10" UV_INDEX="9"/>
+				</FORM>
+				<SCRIPT ID = "ON_CALL">UI_Book_Explain_Mark(UISelf)</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_DOWN">UI_Book_Explain_Mark(UISelf)</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID = "BTN_QUESTION" X="7" Y="110" W="284" H="49" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF681100" BTN_T_INVERTBOLD="1" FONT="FTcts_13">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkQstMenu.tga" BTN_IMG_W = "284" BTN_IMG_H = "192" TEXT="423" T_X="49" T_Y="13" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" BTN_VERTICAL_IMG="1"/>
+				<FORM ID="FRM_ICON" X="8" Y="8" W="32" H="32">
+					<ATTR IMG="../Data/6_ui/main/mnMMicon2.tga" IMG_W="128" IMG_H="320" U="4" V="10" UV_INDEX="8"/>
+				</FORM>
+				<SCRIPT ID = "ON_L_BTN_DOWN">UI_Book_Explain_Mark(UISelf)</SCRIPT>
+			</CHECK_BUTTON>
+
+			<LIST ID = "LST_MARK" X="4" Y="213" W="286" H="265">
+				<IMG ID="IMG_LIST_SCROLL_BG" X="277" Y="15" Z="-1" W="13" H="235">
+					<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+			</IMG>
+				<BUTTON ID="ScrUp" X="274" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+				<BUTTON ID="ScrDown" X="274" Y="250" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+				<BUTTON ID="ScrMiddle" X="276" Y="15" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+				<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BOOK_MARK_ELE" />
+		</LIST>
+
+			<CHECK_BUTTON ID = "BTN_QUEST_TYPE_CHANGE1" X="340" Y="1" W="179" H="28" FONT="FTcts_13" BTN_VERTICAL_IMG="1">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkQstTab.tga" BTN_IMG_W = "179" BTN_IMG_H = "112" TEXT="3079" T_X="17" T_Y="6" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="25" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff501e10"/>
+				<SCRIPT ID="ON_CALL">UISelf:CheckState(true) UISelf:LockClick(true)</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_DOWN">OnClickQuestViewListChange(UISelf)</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID = "BTN_QUEST_TYPE_CHANGE2" X="522" Y="1" W="179" H="28" FONT="FTcts_13" BTN_VERTICAL_IMG="1">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkQstTab.tga" BTN_IMG_W = "179" BTN_IMG_H = "112" TEXT="3080" T_X="17" T_Y="6" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="25" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff501e10"/>
+				<SCRIPT ID="ON_CALL">UISelf:CheckState(false) UISelf:LockClick(false)</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_DOWN">OnClickQuestViewListChange(UISelf)</SCRIPT>
+			</CHECK_BUTTON>
+			
+			<IMG ID="IMG_RIGHT_PAGE" X="335" Y="30" Z="-1" W="409" H="461">
+				<ATTR IMG="../Data/6_ui/book/bkBg_R06.tga" IMG_W = "409" IMG_H = "461"/>
+				<ATTR TEXT=""  T_X="80" T_Y="219" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4e1d0e"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+				<BUTTON ID="BTN_REMOTE_ACCEPT" X="290" Y="210" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+					<ATTR TEXT="75006" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+					<SCRIPT ID="ON_L_BTN_UP">GetQuestMan():RemoteAcceptQuest(UISelf)</SCRIPT>	
+				</BUTTON>				
+				<FORM ID="FRM_START_NPC" X="90" Y="236" W="300" H="17" TEXT="" T_RIGHT="1" T_X="290" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			</IMG>
+			<LIST ID = "LST_QUEST" X="345" Y="33" W="390" H="180" >
+				<IMG ID="IMG_LIST_SCROLL_BG" X="373" Y="15" Z="-1" W="13" H="70">
+					<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+				</IMG>
+				<BUTTON ID="ScrUp" X="371" Y="0" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+		      		</BUTTON>
+				<BUTTON ID="ScrDown" X="371" Y="164" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="373" Y="15" W="15" H="21">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+				</BUTTON>
+				<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BOOK_QUEST_ELE" />
+				<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+			</LIST>
+			<LIST ID = "LST_IMPORTANCE_QUEST" X="345" Y="33" W="390" H="180" IS_VISIBLE="0">
+				<IMG ID="IMG_LIST_SCROLL_BG" X="373" Y="15" Z="-1" W="13" H="70">
+					<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+				</IMG>
+				<BUTTON ID="ScrUp" X="371" Y="0" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+		      		</BUTTON>
+				<BUTTON ID="ScrDown" X="371" Y="164" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="373" Y="15" W="15" H="21">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+				</BUTTON>
+				<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="TRE_BOOK_IMPORTANCE_QUEST_ELE" />
+				<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			</LIST>			
+			<LIST ID = "LST_QUEST_COMMENT" X="345" Y="296" W="390" H="180">
+				<IMG ID="IMG_LIST_SCROLL_BG" X="373" Y="15" Z="-1" W="13" H="70">
+					<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+				</IMG>
+				<BUTTON ID="ScrUp" X="371" Y="0" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+		      		</BUTTON>
+				<BUTTON ID="ScrDown" X="371" Y="164" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="373" Y="15" W="15" H="21">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+				</BUTTON>
+				<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_BOOK_QUEST_COMMENT_ELE" />
+				<SCRIPT ID = "ON_CALL"> UISelf:ClearAllListItem() </SCRIPT>
+			</LIST>
+			<ICON ID = "ICN_NPC" X="350" Y="241" W="40" H="40" ICON_GRP ="225" ICON_KEY = "0">
+				<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+		</FORM>
+	</FORM>
+
+	<FORM ID = "FRM_BOOK4" ALIGN_X = "50" ALIGN_Y = "50" W ="1024" H ="768" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<IMG ID = "IMG_LEFT_TOP" X="87" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg01.tga" IMG_W = "383" IMG_H = "512"/>
+		<IMG ID = "IMG_LEFT_BOTTOM" X="87" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg01_2.tga" IMG_W = "383" IMG_H = "69"/>
+		<IMG ID = "IMG_RIGHT_TOP" X="470" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg02.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_RIGHT_BOTTOM" X="470" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg02_2.tga" IMG_W = "512" IMG_H = "69"/>
+		<BUTTON ID = "BTN_CLOSE" X="869" Y="124" Z="10" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "70"/>
+			<SCRIPT ID = "ON_L_BTN_UP">UI_Book_OnClose(4) UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID = "1">UI_Book_OnClose(4) UISelf:Close() return true </HOTKEY>
+		<BUILD ID="BLD_TAB" TARGET_ID = "CBTN_TAB" X = "912" Y = "160" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "40" START_INDEX="1"/>
+		<CHECK_BUTTON ID = "CBTN_TAB" X="0" Y="0" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" FONT="FT15"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_BUILD"> UI_Build_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_TAB0" X="912" Y="574" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3036" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<BUTTON ID = "CBTN_TAB6" X="912" Y="494" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3000" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> ActivateUIPriority("FRM_HELP_MAIN", 9) </SCRIPT>
+		</BUTTON>
+		<FORM ID = "FRM_PAGE4" X="153" Y="165" W="740" H="461">
+			<IMG ID="IMG_LEFT_PAGE" X="0" Y="0" Z="-1" W="302" H="461">
+				<ATTR IMG="../Data/6_ui/book/bkBg_L01.tga" IMG_W = "302" IMG_H = "461"/>
+				<ATTR T_CENTER="1" T_X="151" T_Y="17" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			</IMG>
+			<FORM ID="FRM_PAGE0" X="335" Y="0" W="409" H="461" IMG="../Data/6_ui/book/bkBg_Rit01.tga" IMG_W="409" IMG_H="461" IS_VISIBLE="1">
+				<FORM ID="FRM_TOOLTIP_EX" X="107" Y="12" W="190" H="20" Z="-1" TEXT="3124"/>
+				<FORM ID="FRM_TOOLTIP_EX_GRADE" X="295" Y="30" W="190" H="20" Z="-1" FONT="Font_Chat" TEXT="3151" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<BUILD ID="BUILD_BUTTON" X="10" Y="10" X_COUNT="1" Y_COUNT="11" TARGET_ID="BTN_EXP"/>
+				<BUTTON ID="BTN_EXP" X="0" Y="0" W="48" H="18" U="1" V="4" BTN_IMG="../Data/6_ui/book/bkMoreBt.tga" BTN_IMG_W="48" BTN_IMG_H="72" T_X="10" T_Y="1" T_CENTER="1" FONT="FTtab" FONT_COLOR_HEX="0xFFFFEFAA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF491802">
+					<SCRIPT ID="ON_BUILD">UI_Build_Book_ToolTipExpButton(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">UI_Click_Book_ToolTipExplanation(UISelf)</SCRIPT>
+				</BUTTON>
+				<FORM ID="FRM_TEXT0" X="12" Y="357" W="385" H="20" FONT="FTcts_13" TEXT="3125" FONT_COLOR_HEX="0xFF8E3206"/>
+				<FORM ID="FRM_EXPLANATION" X="12" Y="382" W="385" H="20" FONT="FTcts_13" TEXT="3126" FONT_COLOR_HEX="0xFF4C2E20"/>
+			</FORM>
+			<FORM ID = "FRM_PAGE1" X="335" Y="0" W="409" H="461" IS_VISIBLE="0">
+				<LOCAL>
+					<NAME ID="JAPAN">
+						<ATTR FONT="Font_Text"/>
+					</NAME>
+				</LOCAL>
+				<ATTR IMG="../Data/6_ui/book/bkBg_Rit10.tga" IMG_W="409" IMG_H="461" T_CENTER="1" T_X="204" T_Y="335" FONT_COLOR_HEX="0xFF4e1d0e" TEXT="3033"/>
+				<FORM ID = "FRM_TITLE1" X="0" Y="20" W="409" H="20" FONT="FT15" FONT_COLOR_HEX="0xFFfff4dd" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFa37a42" T_CENTER="1" T_X="204" TEXT="3306"/>
+				<BUILD ID = "BLD_EQUIP" TARGET_ID="FRM_EQUIP" X="21" Y="55" X_COUNT = "8" Y_COUNT = "2" X_GAB = "46" Y_GAB = "46"/>
+				<FORM ID="FRM_EQUIP" X="0" Y="0" W="40" H="40">
+					<IMG ID="IMG_BG"/>
+					<ICON ID = "ICN_EQUIP" X="0" Y="0" Z="0" W="40" H="40" ICON_GRP="251">
+						<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					</ICON>
+					<IMG ID="IMG_EQUIP_MARK">
+						<ATTR X="0" Y="22" Z="1" W="17" H="18" IS_VISIBLE="0" IS_ENABLE="0" PASS_EVENT="1" NO_FOCUS="1"/>
+						<ATTR IMG="../Data/6_ui/book/bkMarkE.tga" IMG_W="17" IMG_H="18"/>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_TITLE2" X="0" Y="175" W="409" H="20" FONT="FT15" FONT_COLOR_HEX="0xFFfff4dd" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFa37a42" T_CENTER="1" T_X="204" TEXT="3140"/>
+				<BUILD ID = "BLD_MY_EQUIP" TARGET_ID="FRM_MY_EQUIP" X="21" Y="210" X_COUNT = "8" Y_COUNT = "2" X_GAB = "46" Y_GAB = "46"/>
+				<FORM ID="FRM_MY_EQUIP" X="0" Y="0" W="40" H="40">
+					<IMG ID="IMG_BG"/>
+					<ICON ID = "ICN_EQUIP" X="0" Y="0" Z="0" W="40" H="40" ICON_GRP="251">
+						<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					</ICON>
+				</FORM>
+				<BUTTON ID = "BTN_RECOMMEND" X="143" Y="377" W="116" H="28" >
+					<ATTR BTN_IMG="../Data/6_ui/msbook/mbHdB.tga" BTN_IMG_W="232" BTN_IMG_H="56" TEXT="3034" />
+					<ATTR FONT="FTctsBig_14" T_X="58" T_Y="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">OnClickSetBestItem(UISelf:GetParent())</SCRIPT>
+				</BUTTON>
+			</FORM>
+			
+			<FORM ID="FRM_PAGE2" X="335" Y="0" W="409" H="475" IS_VISIBLE="0">
+				<FORM ID="FRM_PAGE0" X="0" Y="0" W="409" H="475" IMG="../Data/6_ui/book/bkBg_Rit08.tga" IMG_X="0" IMG_W="409" IMG_H="461" IS_VISIBLE="1">
+					<FORM ID="FRM_TEXT0" X="15" Y="14" W="375" H="20" FONT="FT15" TEXT="3344" FONT_COLOR_HEX="0xFFFFF4DD" T_X="187" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFA37A42"/>
+					
+					<FORM ID="FRM_TEXT1" X="15" Y="52" W="115" H="20" FONT="Font_Text" TEXT="3310" FONT_COLOR_HEX="0xFFF5E4C2" T_X="57" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<FORM ID="FRM_TEXT2" X="130" Y="52" W="95" H="20" FONT="Font_Text" TEXT="3329" FONT_COLOR_HEX="0xFFF5E4C2" T_X="47" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<FORM ID="FRM_TEXT3" X="225" Y="52" W="165" H="20" FONT="Font_Text" TEXT="3330" FONT_COLOR_HEX="0xFFF5E4C2" T_X="82" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<BUILD ID="BLD_ITEM" TARGET_ID="FRM_ITEM" X="15" Y="82" X_COUNT="1" Y_COUNT="7" Y_GAB="31"/>
+					<FORM ID="FRM_ITEM" X="0" Y="0" W="391" H="20">
+						<FORM ID="FRM_TEXT1" X="0" Y="0" W="115" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="57" T_CENTER="1"/>
+						<FORM ID="FRM_TEXT2" X="115" Y="0" W="95" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="47" T_CENTER="1"/>
+						<FORM ID="FRM_TEXT3" X="210" Y="0" W="165" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="82" T_CENTER="1"/>
+						<SCRIPT ID="ON_BUILD">ItemDisplayExplainBuildPage0TO0(UISelf)</SCRIPT>
+					</FORM>
+					<BUILD ID="BLD_VIEWITEM" TARGET_ID="FRM_VIEWITEM" X="16" Y="304" X_COUNT="2" Y_COUNT="3" X_GAB="194" Y_GAB="48"/>
+					<FORM ID="FRM_VIEWITEM" X="16" Y="296" W="180" H="33" T_X="5" FONT="FTcts_13" TEXT="21" FONT_COLOR_HEX="0xFF00FF00">
+						<FORM ID="FRM_GRADE" X="0" Y="17" W="180" H="16" T_RIGHT="1" T_X="175" FONT="Font_Chat" TEXT="3152" FONT_COLOR_HEX="0xFF00FF00"/>
+						<SCRIPT ID="ON_BUILD">ItemDisplayExplainBuildPage0TO1(UISelf)</SCRIPT>
+					</FORM>
+					<BUTTON ID="BTN_NEXT" X="147" Y="441" W="112" H="35" BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" TEXT="92" FONT="FTcts_13" T_X="56" T_Y="7" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+						<SCRIPT ID="ON_L_BTN_DOWN">ItemDisplayGradeExplainPageSwitch(UISelf:GetParent():GetParent(), 1)</SCRIPT>
+					</BUTTON>
+				</FORM>
+				<FORM ID="FRM_PAGE1" X="0" Y="0" W="409" H="475" IMG="../Data/6_ui/book/bkBg_Rit09.tga" IMG_X="0" IMG_W="409" IMG_H="461" IS_VISIBLE="0">
+					<FORM ID="FRM_TEXT0" X="15" Y="14" W="375" H="20" FONT="FT15" TEXT="3309" FONT_COLOR_HEX="0xFFFFF4DD" T_X="187" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFA37A42"/>
+					<FORM ID="FRM_TEXT1" X="15" Y="52" W="115" H="20" FONT="Font_Text" TEXT="3310" FONT_COLOR_HEX="0xFFF5E4C2" T_X="57" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<FORM ID="FRM_TEXT2" X="130" Y="52" W="58" H="20" FONT="Font_Text" TEXT="3311" FONT_COLOR_HEX="0xFFF5E4C2" T_X="29" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<FORM ID="FRM_TEXT3" X="188" Y="52" W="58" H="20" FONT="Font_Text" TEXT="3312" FONT_COLOR_HEX="0xFFF5E4C2" T_X="29" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<FORM ID="FRM_TEXT4" X="246" Y="52" W="58" H="20" FONT="Font_Text" TEXT="3313" FONT_COLOR_HEX="0xFFF5E4C2" T_X="29" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<FORM ID="FRM_TEXT5" X="304" Y="52" W="87" H="20" FONT="Font_Text" TEXT="3314" FONT_COLOR_HEX="0xFFF5E4C2" T_X="43" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A"/>
+					<BUILD ID="BLD_ITEM" TARGET_ID="FRM_ITEM" X="15" Y="82" X_COUNT="1" Y_COUNT="7" Y_GAB="34"/>
+					<FORM ID="FRM_ITEM" X="0" Y="0" W="391" H="20">
+						<FORM ID="FRM_TEXT1" X="0" Y="0" W="115" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="57" T_CENTER="1"/>
+						<FORM ID="FRM_TEXT2" X="115" Y="0" W="58" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="29" T_CENTER="1"/>
+						<FORM ID="FRM_TEXT3" X="173" Y="0" W="58" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="29" T_CENTER="1"/>
+						<FORM ID="FRM_TEXT4" X="231" Y="0" W="58" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="29" T_CENTER="1"/>
+						<FORM ID="FRM_TEXT5" X="289" Y="0" W="87" H="20" FONT="Font_Text" TEXT="21" FONT_COLOR_HEX="0xFF4C2E20" T_X="43" T_CENTER="1"/>
+						<SCRIPT ID="ON_BUILD">ItemDisplayExplainBuildPage1(UISelf)</SCRIPT>
+					</FORM>
+					<BUTTON ID="BTN_PREV" X="147" Y="441" W="112" H="35" BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" TEXT="95" FONT="FTcts_13" T_X="56" T_Y="7" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+						<SCRIPT ID="ON_L_BTN_DOWN">ItemDisplayGradeExplainPageSwitch(UISelf:GetParent():GetParent(), 0)</SCRIPT>
+					</BUTTON>
+				</FORM>
+			</FORM>
+			<FORM ID="FRM_PAGE3" X="335" Y="0" W="409" H="461" IMG="../Data/6_ui/book/bkBg_Rit03.tga" IMG_W="409" IMG_H="461" IS_VISIBLE="0">
+				<FORM ID="FRM_TEXT0" X="15" Y="14" W="375" H="20" FONT="FT15" TEXT="3113" FONT_COLOR_HEX="0xFFFFF4DD" T_X="187" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFA37A42"/>
+				<FORM ID="FRM_TEXT1" X="21" Y="50" W="85" H="20" FONT="Font_Text" TEXT="3114" FONT_COLOR_HEX="0xFFF5E4C2" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A" T_X="42" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT2" X="115" Y="50" W="85" H="20" FONT="Font_Text" TEXT="3115" FONT_COLOR_HEX="0xFFF5E4C2" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A" T_X="42" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT3" X="201" Y="50" W="67" H="20" FONT="Font_Text" TEXT="3116" FONT_COLOR_HEX="0xFFF5E4C2" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A" T_X="33" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT4" X="263" Y="50" W="58" H="20" FONT="Font_Text" TEXT="3117" FONT_COLOR_HEX="0xFFF5E4C2" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A" T_X="29" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT5" X="322" Y="50" W="58" H="20" FONT="Font_Text" TEXT="3338" FONT_COLOR_HEX="0xFFF5E4C2" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF441B0A" T_X="29" T_CENTER="1"/>
+				<BUILD ID="BUILD_GRADEINFO" X="15" Y="79" X_COUNT="1" Y_COUNT="5" Y_GAB="27" TARGET_ID="FRM_GRADEINFO"/>
+				<FORM ID="FRM_GRADEINFO" X="0" Y="0" W="384" H="20">
+					<FORM ID="FRM_TEXT1" X="6" Y="0" W="85" H="20" FONT="Font_Text" TEXT="" FONT_COLOR_HEX="0xFF4C2E20" T_X="42" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT2" X="100" Y="0" W="85" H="20" FONT="Font_Text" TEXT="" FONT_COLOR_HEX="0xFF4C2E20" T_X="42" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT3" X="186" Y="0" W="67" H="20" FONT="Font_Text" TEXT="" FONT_COLOR_HEX="0xFF4C2E20" T_X="33" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT4" X="248" Y="0" W="58" H="20" FONT="Font_Text" TEXT="" FONT_COLOR_HEX="0xFF4C2E20" T_X="29" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT5" X="307" Y="0" W="58" H="20" FONT="Font_Text" TEXT="" FONT_COLOR_HEX="0xFF4C2E20" T_X="29" T_CENTER="1"/>
+					<SCRIPT ID="ON_BUILD">
+						local Text1 = UISelf:GetControl("FRM_TEXT1")
+						local Text2 = UISelf:GetControl("FRM_TEXT2")
+						local Text3 = UISelf:GetControl("FRM_TEXT3")
+						local Text4 = UISelf:GetControl("FRM_TEXT4")
+						local Text5 = UISelf:GetControl("FRM_TEXT5")
+						if Text1:IsNil() and Text2:IsNil() and Text3:IsNil() and Text4:IsNil() and Text5:IsNil() then
+							return
+						end
+						Text1:SetStaticText(GetTT(3151 + UISelf:GetBuildIndex()):GetStr())
+						Text2:SetStaticText(GetTT(3118 + UISelf:GetBuildIndex()):GetStr())
+						Text3:SetStaticText(GetTT(3165 + UISelf:GetBuildIndex()):GetStr())
+						Text4:SetStaticText(""..UISelf:GetBuildIndex())
+						Text5:SetStaticText(GetTT(3339 + UISelf:GetBuildIndex()):GetStr())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_TEXT6" X="14" Y="355" W="381" H="20" FONT="FTcts_13" TEXT="3123" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_GRADE0" X="14" Y="232" W="110" H="35" TEXT="3156" T_X="3" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF">
+					<FORM ID="FRM_TEXT" X="2" Y="17" W="105" H="20" FONT="Font_Chat" TEXT="3151" FONT_COLOR_HEX="0xFFFFFFFF" T_X="105" T_RIGHT="1"/>
+				</FORM>
+				<FORM ID="FRM_GRADE1" X="149" Y="232" W="110" H="35" TEXT="3156" T_X="3" T_Y="1" FONT_COLOR_HEX="0xFF00E518">
+					<FORM ID="FRM_TEXT" X="2" Y="17" W="105" H="20" FONT="Font_Chat" TEXT="3152" FONT_COLOR_HEX="0xFF00E518" T_X="105" T_RIGHT="1"/>
+				</FORM>
+				<FORM ID="FRM_GRADE2" X="283" Y="232" W="110" H="35" TEXT="3156" T_X="3" T_Y="1" FONT_COLOR_HEX="0xFF66CCFF">
+					<FORM ID="FRM_TEXT" X="2" Y="17" W="105" H="20" FONT="Font_Chat" TEXT="3153" FONT_COLOR_HEX="0xFF66CCFF" T_X="105" T_RIGHT="1"/>
+				</FORM>
+				<FORM ID="FRM_GRADE3" X="149" Y="287" W="110" H="35" TEXT="3156" T_X="3" T_Y="1" FONT_COLOR_HEX="0xFFFFBA21">
+					<FORM ID="FRM_TEXT" X="2" Y="17" W="105" H="20" FONT="Font_Chat" TEXT="3154" FONT_COLOR_HEX="0xFFFFBA21" T_X="105" T_RIGHT="1"/>
+				</FORM>
+				<FORM ID="FRM_GRADE4" X="283" Y="287" W="110" H="35" TEXT="3156" T_X="3" T_Y="1" FONT_COLOR_HEX="0xFFFFD5FF">
+					<FORM ID="FRM_TEXT" X="2" Y="17" W="105" H="20" FONT="Font_Chat" TEXT="3155" FONT_COLOR_HEX="0xFFFFD5FF" T_X="105" T_RIGHT="1"/>
+				</FORM>
+			</FORM>
+			<FORM ID="FRM_PAGE4" X="335" Y="0" W="409" H="461" IMG="../Data/6_ui/book/bkBg_Rit04.tga" IMG_W="409" IMG_H="461" IS_VISIBLE="0">
+				<FORM ID="FRM_TEXT0" X="268" Y="9" W="131" H="20" FONT="Font_Text" TEXT="3137" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT1" X="268" Y="270" W="131" H="20" FONT="Font_Text" TEXT="3138" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT2" X="12" Y="393" W="381" H="20" FONT="FTcts_13" TEXT="3139" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT3" X="20" Y="14" W="200" H="20" FONT="Font_Text" TEXT="1872" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT4" X="76" Y="49" W="200" H="20" FONT="Font_Text" TEXT="1211" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT5" X="68" Y="68" W="300" H="20" FONT="Font_Text" TEXT="3170" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT6" X="148" Y="103" W="105" H="20" FONT="Font_Text" TEXT="3172" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT7" X="148" Y="125" W="200" H="20" FONT="Font_Text" TEXT="3174" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT8" X="148" Y="153" W="105" H="20" FONT="Font_Text" TEXT="3173" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT9" X="148" Y="175" W="200" H="20" FONT="Font_Text" TEXT="3174" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT10" X="76" Y="255" W="200" H="20" FONT="Font_Text" TEXT="1212" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT11" X="68" Y="276" W="300" H="20" FONT="Font_Text" TEXT="3171" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT12" X="19" Y="309" W="200" H="20" FONT="Font_Text" TEXT="1213" FONT_COLOR_HEX="0xFF4C2E20"/>
+				<FORM ID="FRM_TEXT13" X="52" Y="340" W="80" H="20" FONT="Font_Text" TEXT="400609" FONT_COLOR_HEX="0xFF4D3413" T_X="40" T_CENTER="1"/>
+				<FORM ID="FRM_TEXT14" X="140" Y="340" W="80" H="20" FONT="Font_Text" TEXT="3164" FONT_COLOR_HEX="0xFF4D3413" T_X="40" T_CENTER="1"/>
+			</FORM>
+			<FORM ID="FRM_PAGE5" X="335" Y="0" W="409" H="475" IS_VISIBLE="0">
+				<FORM ID="FRM_SUB0" X="0" Y="0" W="409" H="475" IMG="../Data/6_ui/book/bkBg_Rit05.tga" IMG_W="409" IMG_H="461" IS_VISIBLE="1">
+					<FORM ID="FRM_TEXT0" X="14" Y="10" W="360" H="20" FONT="FTcts_13" TEXT="3101" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_TEXT1" X="17" Y="27" W="360" H="20" FONT="Font_Text" TEXT="3102" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT2" X="17" Y="260" W="166" H="20" FONT="Font_Text" TEXT="3103" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT3" X="14" Y="356" W="381" H="40" FONT="FTcts_13" TEXT="3104" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT4" X="14" Y="390" W="381" H="40" FONT="FTcts_13" TEXT="3105" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT5" X="88" Y="149" W="100" H="20" FONT="Font_Text" TEXT="400456" FONT_COLOR_HEX="0xFF4D3413" T_X="50" T_Y="1" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT6" X="88" Y="172" W="100" H="20" FONT="Font_Text" TEXT="3043" FONT_COLOR_HEX="0xFF4D3413" T_X="50" T_Y="1" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT7" X="249" Y="90" W="120" H="20" FONT="Font_Text" TEXT="400452" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT8" X="249" Y="197" W="120" H="20" FONT="Font_Text" TEXT="400453" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT9" X="275" Y="110" W="100" H="20" FONT="Font_Text" TEXT="3157" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT10" X="275" Y="217" W="100" H="20" FONT="Font_Text" TEXT="3158" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT11" X="196" Y="265" W="148" H="20" FONT="Font_Text" TEXT="1445" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT12" X="196" Y="295" W="148" H="20" FONT="Font_Text" TEXT="1446" FONT_COLOR_HEX="0xFF4D3413"/>
+					<BUTTON ID="BTN_NEXT" X="147" Y="441" W="112" H="35" BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" TEXT="92" FONT="FTcts_13" T_X="56" T_Y="7" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+						<SCRIPT ID="ON_L_BTN_DOWN">UI_Click_Book_SoulTabChange(UISelf, 1)</SCRIPT>
+					</BUTTON>
+				</FORM>
+				<FORM ID="FRM_SUB1" X="0" Y="0" W="409" H="475" IMG="../Data/6_ui/book/bkBg_Rit06.tga" IMG_W="409" IMG_H="461" IS_VISIBLE="0">
+					<FORM ID="FRM_TEXT0" X="211" Y="20" W="184" H="20" FONT="Font_Text" TEXT="3108" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT1" X="250" Y="174" W="134" H="20" FONT="Font_Text" TEXT="3109" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT2" X="211" Y="380" W="184" H="20" FONT="Font_Text" TEXT="3110" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT3" X="21" Y="19" W="200" H="20" FONT_COLOR_HEX="0xFFEDCA88">
+						<LOCAL>
+							<NAME ID="DEFAULT">
+								<ATTR FONT="Font_Text_Big" TEXT="3161"/>
+							</NAME>
+							<NAME ID="JAPAN">
+								<SCRIPT ID="ON_CALL"> UISelf:SetStaticText("{T=Font_Text/}" .. GetTT(3161):GetStr()) </SCRIPT>
+							</NAME>
+						</LOCAL>
+					</FORM>
+					<FORM ID="FRM_TEXT4" X="21" Y="52" W="200" H="20" FONT="Font_Chat" TEXT="3159" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<FORM ID="FRM_TEXT5" X="21" Y="379" W="200" H="20" FONT_COLOR_HEX="0xFF00E518">
+						<LOCAL>
+							<NAME ID="DEFAULT">
+								<ATTR FONT="Font_Text_Big" TEXT="3156"/>
+							</NAME>
+							<NAME ID="JAPAN">
+								<SCRIPT ID="ON_CALL"> UISelf:SetStaticText("{T=Font_Text/}" .. GetTT(3156):GetStr()) </SCRIPT>
+							</NAME>
+						</LOCAL>
+					</FORM>
+					<FORM ID="FRM_TEXT6" X="91" Y="396" W="100" H="20" FONT="Font_Chat" TEXT="3152" FONT_COLOR_HEX="0xFF00E518" T_RIGHT="1" T_X="100"/>
+					<FORM ID="FRM_TEXT7" X="21" Y="413" W="200" H="20" FONT="Font_Chat" TEXT="3160" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<FORM ID="FRM_TEXT8" X="22" Y="176" W="120" H="20" FONT="Font_Text" TEXT="406002" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT9" X="34" Y="212" W="200" H="20" FONT="Font_Text" TEXT="406001" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT10" X="74" Y="248" W="200" H="20" FONT="Font_Text" TEXT="3162" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID="FRM_TEXT11" X="47" Y="297" W="80" H="20" FONT="Font_Text" TEXT="3163" FONT_COLOR_HEX="0xFF4D3413" T_X="40" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT12" X="132" Y="297" W="80" H="20" FONT="Font_Text" TEXT="3164" FONT_COLOR_HEX="0xFF4D3413" T_X="40" T_CENTER="1"/>
+					<BUTTON ID="BTN_PREV" X="87" Y="441" W="112" H="35" BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" TEXT="95" FONT="FTcts_13" T_X="56" T_Y="7" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+						<SCRIPT ID="ON_L_BTN_DOWN">UI_Click_Book_SoulTabChange(UISelf, 0)</SCRIPT>
+					</BUTTON>
+					<BUTTON ID="BTN_NEXT" X="207" Y="441" W="112" H="35" BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" TEXT="92" FONT="FTcts_13" T_X="56" T_Y="7" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+						<SCRIPT ID="ON_L_BTN_DOWN">UI_Click_Book_SoulTabChange(UISelf, 2)</SCRIPT>
+					</BUTTON>
+				</FORM>		
+				<FORM ID="FRM_SUB2" X="0" Y="0" W="409" H="475" IMG="../Data/6_ui/book/bkBg_Rit07.tga" IMG_W="409" IMG_H="461" IS_VISIBLE="0">
+					<FORM ID="FRM_TEXT0" X="14" Y="210" W="381" H="40" FONT="FTcts_13" TEXT="3111" FONT_COLOR_HEX="0xFF000000"/>
+					<FORM ID="FRM_TEXT1" X="14" Y="344" W="381" H="40" FONT="FTcts_13" TEXT="3112" FONT_COLOR_HEX="0xFF4C2E20"/>
+					<FORM ID="FRM_TEXT3" X="22" Y="286" W="110" H="20" TEXT="3156" FONT_COLOR_HEX="0xFFFFFFFF">
+						<LOCAL>
+							<NAME ID="DEFAULT">
+								<ATTR FONT="Font_Text_Big"/>
+							</NAME>
+							<NAME ID="JAPAN">
+								<ATTR FONT="FTcts_16"/>
+							</NAME>
+						</LOCAL>
+					</FORM>
+					<FORM ID="FRM_TEXT4" X="23" Y="302" W="100" H="20" FONT="Font_Chat" TEXT="3151" FONT_COLOR_HEX="0xFFFFFFFF" T_X="100" T_RIGHT="1"/>
+					<FORM ID="FRM_TEXT5" X="158" Y="292" W="100" H="20" FONT="FTcts_13" TEXT="1434" FONT_COLOR_HEX="0xFFFFFAA2" T_X="45" T_Y="2" T_CENTER="1"/>
+					<FORM ID="FRM_TEXT6" X="280" Y="286" W="110" H="20" TEXT="3156" FONT_COLOR_HEX="0xFF00E518">
+						<LOCAL>
+							<NAME ID="DEFAULT">
+								<ATTR FONT="Font_Text_Big"/>
+							</NAME>
+							<NAME ID="JAPAN">
+								<ATTR FONT="FTcts_16"/>
+							</NAME>
+						</LOCAL>
+					</FORM>
+					<FORM ID="FRM_TEXT7" X="281" Y="302" W="100" H="20" FONT="Font_Chat" TEXT="3152" FONT_COLOR_HEX="0xFF00E518" T_X="100" T_RIGHT="1"/>
+					<BUTTON ID="BTN_PREV" X="147" Y="441" W="112" H="35" BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" TEXT="95" FONT="FTcts_13" T_X="56" T_Y="7" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4">
+						<SCRIPT ID="ON_L_BTN_DOWN">UI_Click_Book_SoulTabChange(UISelf, 1)</SCRIPT>
+					</BUTTON>
+				</FORM>
+			</FORM>
+			
+			<LOCAL>
+				<NAME ID="DEVELOP"> 
+					<BUILD TARGET_ID = "CBTN_LEFT_TAB" X = "12" Y = "6" X_COUNT = "1" Y_COUNT = "6" X_GAB = "0" Y_GAB = "49"/>
+					<CHECK_BUTTON ID="CBTN_LEFT_TAB" X="0" Y="0" W="273" H="50" BTN_VERTICAL_IMG="1">
+						<ATTR BTN_IMG="../Data/6_ui/book/bkMenuB.tga" BTN_IMG_W = "273" BTN_IMG_H = "200" />
+						<ATTR TEXT="1" T_CENTER="1" T_X="136" T_Y="15" FONT="FT15" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4"/> 
+						<SCRIPT ID="ON_GET_FOCUS"> UI_Click_Book_Item(UISelf) </SCRIPT>
+						<SCRIPT ID="ON_BUILD"> ItemExplainPageBuildButtonText(UISelf) </SCRIPT>
+					</CHECK_BUTTON>
+					<SCRIPT ID = "ON_CALL"> 
+						UI_Click_Book_Tab(UISelf:GetControl("CBTN_TAB0"))
+						UI_Click_Book_Item(UISelf:GetControl("CBTN_LEFT_TAB0"))
+					</SCRIPT>
+				</NAME>
+				<NAME ID="DEFAULT"> <!-- #NOT_OPEN# item grade. if open item grade then del this -->
+					<BUILD TARGET_ID = "CBTN_LEFT_TAB" X = "12" Y = "6" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "49"/>
+					<CHECK_BUTTON ID="CBTN_LEFT_TAB" X="0" Y="0" W="273" H="50" BTN_VERTICAL_IMG="1">
+						<ATTR BTN_IMG="../Data/6_ui/book/bkMenuB.tga" BTN_IMG_W = "273" BTN_IMG_H = "200" />
+						<ATTR TEXT="1" T_CENTER="1" T_X="136" T_Y="15" FONT="FT15" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4"/> 
+						<SCRIPT ID="ON_GET_FOCUS"> UI_Click_Book_Item(UISelf) </SCRIPT>
+						<SCRIPT ID="ON_BUILD"> ItemExplainPageBuildButtonText(UISelf) </SCRIPT>
+					</CHECK_BUTTON>
+					<SCRIPT ID = "ON_CALL"> 
+						UI_Click_Book_Tab(UISelf:GetControl("CBTN_TAB0"))
+						UI_Click_Book_Item(UISelf:GetControl("CBTN_LEFT_TAB0"))
+					</SCRIPT>
+				</NAME>
+			</LOCAL>			
+		</FORM>
+	</FORM>
+
+	<FORM ID = "FRM_BOOK5" ALIGN_X = "50" ALIGN_Y = "50" W ="1024" H ="768" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<IMG ID = "IMG_LEFT_TOP" X="87" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg01.tga" IMG_W = "383" IMG_H = "512"/>
+		<IMG ID = "IMG_LEFT_BOTTOM" X="87" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg01_2.tga" IMG_W = "383" IMG_H = "69"/>
+		<IMG ID = "IMG_RIGHT_TOP" X="470" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg02.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_RIGHT_BOTTOM" X="470" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg02_2.tga" IMG_W = "512" IMG_H = "69"/>
+		<BUTTON ID = "BTN_CLOSE" X="869" Y="124" Z="10" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "70"/>
+			<SCRIPT ID = "ON_L_BTN_UP">UI_Book_OnClose(5) UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID = "1">UI_Book_OnClose(5) UISelf:Close() return true </HOTKEY>
+		<BUILD ID="BLD_TAB" TARGET_ID = "CBTN_TAB" X = "912" Y = "160" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "40" START_INDEX="1"/>
+		<CHECK_BUTTON ID = "CBTN_TAB" X="0" Y="0" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" FONT="FT15"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_BUILD"> UI_Build_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_TAB0" X="912" Y="574" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3036" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<BUTTON ID = "CBTN_TAB6" X="912" Y="494" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3000" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> ActivateUIPriority("FRM_HELP_MAIN", 9) </SCRIPT>
+		</BUTTON>
+		<FORM ID = "FRM_PAGE5" X="153" Y="145" W="740" H="461">
+			<FORM ID="FRM_BG_L" X="0" Y="20" W="317" H="461" Z="-1" IMG="../Data/6_ui/book/bkRankBg01.tga" IMG_W="317" IMG_H="461">
+				<FORM ID="FRM_BG_R" X="317" Y="0" W="427" H="461" Z="-1" IMG="../Data/6_ui/book/bkRankBg02.tga" IMG_W="427" IMG_H="461"/>
+				<FORM ID="FRM_RANK" X="0" Y="20" W="740" H="33" TEXT="300001" T_X="32" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F">
+					<FORM ID="FRM_NAME" X="65" Y="0" W="147" H="33" TEXT="300002" T_X="73" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_ACHIEVE_POINT" X="212" Y="0" W="105" H="33" TEXT="299998" T_X="52" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_GROW" X="317" Y="0" W="85" H="33" TEXT="299997" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_ITEM" X="402" Y="0" W="85" H="33" TEXT="3004" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_QUEST" X="487" Y="0" W="85" H="33" TEXT="3003" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_WORLD" X="572" Y="0" W="85" H="33" TEXT="3002" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_MISSION" X="657" Y="0" W="85" H="33" TEXT="3024" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+				</FORM>
+				<FORM ID="FRM_MY_RANK" X="0" Y="383" W="740" H="33" TEXT="299999" T_X="32" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F">
+					<FORM ID="FRM_NAME" X="65" Y="0" W="147" H="33" TEXT="300002" T_X="73" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_ACHIEVE_POINT" X="212" Y="0" W="105" H="33" TEXT="299998" T_X="52" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_GROW" X="317" Y="0" W="85" H="33" TEXT="299997" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_ITEM" X="402" Y="0" W="85" H="33" TEXT="3004" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_QUEST" X="487" Y="0" W="85" H="33" TEXT="3003" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_WORLD" X="572" Y="0" W="85" H="33" TEXT="3002" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+					<FORM ID="FRM_MISSION" X="657" Y="0" W="85" H="33" TEXT="3024" T_X="42" T_Y="8" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF9E0B0F"/>
+				</FORM>
+			</FORM>
+			
+			<CHECK_BUTTON ID = "CBTN_ACHIEVE_RANK" X="0" Y="0" W="100" H="30">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkMenuSub.tga" BTN_IMG_W = "200" BTN_IMG_H = "60" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF371c0f" BTN_T_INVERTBOLD="1"/>
+				<ATTR FONT="FT15" T_CENTER="1" T_X="45" T_Y="5" TEXT="299996" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5"/>
+				<SCRIPT ID="ON_CREATE">UISelf:CheckState(true) UISelf:LockClick(true)</SCRIPT>
+			</CHECK_BUTTON>
+			
+			<ATTR BTN_IMG="../Data/6_ui/book/bkMenuSub.tga" BTN_IMG_W = "200" BTN_IMG_H = "60" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF371c0f" BTN_T_INVERTBOLD="1"/>
+			<BUILD ID="BLD_RANK" X="0" Y="73" X_COUNT="1" Y_COUNT="10" Y_GAB="31" TARGET_ID="SFRM_RANK"/>
+			<FORM ID="SFRM_RANK" X="0" Y="53" W="740" H="33" TEXT="" T_X="32" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E">
+				<FORM ID="SFRM_NAME" X="65" Y="0" W="147" H="33" TEXT="" T_X="73" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_ACHIEVE_POINT" X="212" Y="0" W="105" H="33" TEXT="" T_X="52" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF9E0B0F"/>
+				<FORM ID="SFRM_GROW" X="317" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_ITEM" X="402" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_QUEST" X="487" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_WORLD" X="572" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_MISSION" X="657" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			</FORM>
+			<FORM ID="SFRM_MY_RANK" X="0" Y="439" W="740" H="33" TEXT="" T_X="32" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E">
+				<FORM ID="SFRM_NAME" X="65" Y="0" W="147" H="33" TEXT="" T_X="73" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_ACHIEVE_POINT" X="212" Y="0" W="105" H="33" TEXT="" T_X="52" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF9E0B0F"/>
+				<FORM ID="SFRM_GROW" X="317" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_ITEM" X="402" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_QUEST" X="487" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_WORLD" X="572" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+				<FORM ID="SFRM_MISSION" X="657" Y="0" W="85" H="33" TEXT="" T_X="42" T_Y="8" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+			</FORM>
+		</FORM>	
+	</FORM>
+
+	<FORM ID = "FRM_BOOK" ALIGN_X = "50" ALIGN_Y = "50" W ="1024" H ="768" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<IMG ID = "IMG_LEFT_TOP" X="87" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg01.tga" IMG_W = "383" IMG_H = "512"/>
+		<IMG ID = "IMG_LEFT_BOTTOM" X="87" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg01_2.tga" IMG_W = "383" IMG_H = "69"/>
+		<IMG ID = "IMG_RIGHT_TOP" X="470" Y="93" Z="-10" W="383" H="512" IMG="../Data/6_ui/book/bkBg02.tga" IMG_W = "512" IMG_H = "512"/>
+		<IMG ID = "IMG_RIGHT_BOTTOM" X="470" Y="605" Z="-10" W="383" H="69" IMG="../Data/6_ui/book/bkBg02_2.tga" IMG_W = "512" IMG_H = "69"/>
+		<BUTTON ID = "BTN_CLOSE" X="869" Y="124" Z="10" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W = "70" BTN_IMG_H = "70"/>
+			<SCRIPT ID = "ON_L_BTN_UP">UI_Book_OnClose(0) UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID = "1">UI_Book_OnClose(0) UISelf:Close() return true </HOTKEY>
+
+		<BUILD ID="BLD_TAB" TARGET_ID = "CBTN_TAB" X = "912" Y = "160" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "40" START_INDEX="1"/>
+		<CHECK_BUTTON ID = "CBTN_TAB" X="0" Y="0" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" FONT="FT15"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_BUILD"> UI_Build_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_TAB0" X="912" Y="574" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3036" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Tab(UISelf) </SCRIPT>
+		</CHECK_BUTTON>
+		<BUTTON ID = "CBTN_TAB6" X="912" Y="494" W="70" H="40">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkTabBg.tga" BTN_IMG_W = "140" BTN_IMG_H = "80" T_CENTER="1" T_X="31" T_Y="10" TEXT="3000" FONT="FT15" />
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="5" T_OUTLINE="1" BTN_T_INVERTBOLD="1" OUTLINE_COLOR_HEX = "0xFF371c0f"/>
+			<SCRIPT ID = "ON_GET_FOCUS"> ActivateUIPriority("FRM_HELP_MAIN", 9) </SCRIPT>
+		</BUTTON>
+
+		<FORM ID = "FRM_PAGE0" X="153" Y="165" W="740" H="461">
+			<IMG ID="IMG_LEFT_PAGE" X="0" Y="0" Z="-1" W="302" H="461">
+				<ATTR IMG="../Data/6_ui/book/bkBg_L01.tga" IMG_W = "302" IMG_H = "461"/>
+				<ATTR TEXT="3005" T_CENTER="1" T_X="151" T_Y="17" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			</IMG>
+				<IMG ID="IMG_RIGHT_PAGE" X="335" Y="0" Z="-1" W="395" H="461">
+				<ATTR IMG="../Data/6_ui/book/bkBg_R01.tga" IMG_W = "409" IMG_H = "461"/>
+				<ATTR TEXT="3006" T_X="16" T_Y="43" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4c2e20"/>
+			</IMG>			
+			<BUILD TARGET_ID = "CBTN_TAB" X = "12" Y = "36" X_COUNT = "1" Y_COUNT = "6" X_GAB = "0" Y_GAB = "49"/>
+			<CHECK_BUTTON ID="CBTN_TAB" X="0" Y="0" W="273" H="50" BTN_VERTICAL_IMG="1">
+				<ATTR BTN_IMG="../Data/6_ui/book/bkMenuB.tga" BTN_IMG_W = "273" BTN_IMG_H = "200" />
+				<ATTR TEXT="1" T_CENTER="1" T_X="136" T_Y="15" FONT="FT15" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4"/> 
+				<SCRIPT ID = "ON_GET_FOCUS"> UI_Click_Book_Help(UISelf) </SCRIPT>
+				<SCRIPT ID = "ON_BUILD"> UISelf:SetStaticTextW(GetTextW(UISelf:GetBuildIndex()+3010)) </SCRIPT>
+			</CHECK_BUTTON>
+		</FORM>
+		<SCRIPT ID = "ON_CALL"> UI_Book_OnCall(UISelf)</SCRIPT>
+	</FORM> 
+
+	<FORM ID = "FRM_BOOK_QUEST_ELE" X="0" Y="0" W="365" H="37">
+		<IMG ID = "IMG_MARK" X="0" Y="2" W="30" H="30" >
+			<ATTR IMG="../Data/6_ui/book/bkQstBx.tga" IMG_W = "120" IMG_H = "120" U="4" V="4" UV_INDEX="1"/>
+			<ATTR FONT="FT15" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF9b743c" T_CENTER="1" T_X="15" T_Y="6"/>
+		</IMG>
+		<BUTTON ID = "BTN_QUEST" X="32" Y="0" W="337" H="37" BTN_VERTICAL_IMG="1">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkMenuS.tga" BTN_IMG_W = "337" BTN_IMG_H = "148" />
+			<ATTR T_CENTER="1" T_X="168" T_Y="7" FONT="FTctsBig_14" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> OnClickBookQuest(UISelf) </SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+	<TREE ID="TRE_BOOK_IMPORTANCE_QUEST_ELE" X="0" Y="0" W="375" H="37" ITEM_X="0" ITEM_Y="36" FONT_COLOR_HEX="0xFFFFFFFF" ELEMENT_ID="FRM_BOOK_IMPORTANCE_QUEST_TRE_ELE">
+		<IMG ID="IMG_EX" X="0" Y="5" W="26" H="26" U="2" V="2" UV_INDEX="1" IMG="../Data/6_ui/book/bkBtPlsMns.tga" IMG_W="52" IMG_H="52" PASS_EVENT="1" NO_FOCUS="1"/>
+		<IMG ID="IMG_SELECT" X="25" Y="0" W="340" H="35" U="1" V="4" UV_INDEX="1" IMG="../Data/6_ui/book/bkQstListBt.tga" IMG_W="340" IMG_H="140" TEXT="" T_X="10" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4E1D0E" PASS_EVENT="1" NO_FOCUS="1"/>
+		<ANI_BAR ID="ANB_PERCENT" X="32" Y="22" Z="1" W="324" H="7" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR BAR_IMG="../Data/6_ui/book/bkQstBar.tga" BAR_IMG_W="324" BAR_IMG_H="7" BAR_COUNT="1"/>
+			<ATTR T_X="10" T_Y="-6" FONT="FTNumber" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/>
+		</ANI_BAR>
+		<SCRIPT ID="ON_L_BTN_DOWN"> OnClickImportanceQuestGroup(UISelf) </SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OVER">OnOverImportanceQuestGroup(UISelf, true)</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">OnOverImportanceQuestGroup(UISelf, false)</SCRIPT>
+	</TREE>
+	<FORM ID = "FRM_BOOK_IMPORTANCE_QUEST_TRE_ELE" X="0" Y="0" W="375" H="29" IMG="../Data/6_ui/book/bkQstSubList.tga" IMG_X="12" IMG_Y="0" IMG_W="352" IMG_H="27">
+		<ATTR T_X="35" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4E1D0E"/>
+		<SCRIPT ID = "ON_L_BTN_DOWN"> OnClickBookQuest(UISelf) </SCRIPT>
+	</FORM>
+	<FORM ID = "FRM_BOOK_QUEST_COMMENT_ELE" X="0" Y="0" W="365" H="180" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+	<FORM ID="FRM_BOOK_MEDAL_ELE" ALIGN_X="50" ALIGN_Y="50" W="366" H="58" U="1" V="2" UV_INDEX="1" IMG="../Data/6_ui/book/bkBg_LhsList.tga" IMG_W="366" IMG_H="116">
+		<IMG ID = "SFRM_TITLE" X="56" Y="3" W="255" H="38" T_X="6" T_Y="2" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>			
+		<IMG ID = "IMG_RANKPOINT" X="315" Y="3" W="50" H="47" T_CENTER="1" TEXT="3158" T_X="25" T_Y="5" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4E1D0E"/>
+		<IMG ID = "IMG_COUNT" X="315" Y="3" W="50" H="47" T_CENTER="1" T_X="25" T_Y="28" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>
+		<IMG ID = "IMG_ITEM" X="7" Y="7" W="40" H="40" STATIC_NUM="35">
+			<SCRIPT ID="ON_DISPLAY"> DrawMissionRewardItem(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">OnClickBookAchieveIcon(UISelf)</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_EQUIP_MARK" X="2" Y="35" W="17" H="18" Z="1" IMG="../Data/6_ui/book/bkMarkE.tga" IMG_W="17" IMG_H="18" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID = "FRM_DISCRIPT" X="56" Y="3" W="255" H="38" STATIC_NUM="35">
+			<ATTR T_X="6" T_Y="17" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+		</FORM>
+		<ANI_BAR ID="ANB_PERCENT" X="57" Y="43" Z="1" W="253" H="7" BAR_SMOOTH="0">
+			<ATTR BAR_IMG="../Data/6_ui/book/bkHsBar.tga" BAR_IMG_W="253" BAR_IMG_H="7" BAR_COUNT="1"/>
+			<ATTR T_X="10" T_Y="-6" FONT="FTNumber" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_CREATE"></SCRIPT>
+		</ANI_BAR>
+	</FORM>
+	<FORM ID = "FRM_BOOK_MEDAL_ELE2" X="0" Y="0" W="365" H="60">
+		<IMG ID = "IMG_ICONBG" X="0" Y="0" Z="-1" W="54" H="54" IMG="../Data/6_ui/book/bkBoxIcon.tga" IMG_W = "54" IMG_H = "54"/>
+		<STATIC_FORM ID = "SFRM_TITLE" X="56" Y="3" W="255" H="48" STATIC_NUM="37" T_X="6" T_Y="2" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>			
+		<IMG ID = "IMG_COUNT" X="315" Y="3" W="51" H="48"  IMG="../Data/6_ui/book/bkBoxYlw.tga" IMG_W = "51" IMG_H = "48" T_CENTER="1" T_X="25" T_Y="17" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF790000"/>
+		<IMG ID = "IMG_LINE" X="0" Y="56" W="365" H="2"  IMG="../Data/6_ui/book/bkLine.tga" IMG_W = "365" IMG_H = "2"/>
+		<IMG ID = "IMG_ITEM" X="7" Y="7" W="40" H="40">
+			<SCRIPT ID="ON_DISPLAY"> DrawMissionRewardItem(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>			
+			<SCRIPT ID = "ON_L_BTN_DOWN">OnClickBookAchieveIcon(UISelf)</SCRIPT>
+		</IMG>
+		<FORM ID = "FRM_DISCRIPT" X="56" Y="3" W="255" H="48">
+			<ATTR T_X="6" T_Y="17" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4e1d0e"/>
+		</FORM>
+	</FORM>
+	<FORM ID = "FRM_BOOK_NPC_COMMENT_ELE" X="0" Y="0" W="365" H="52">
+		<BUILD ID="BLD_NPC_FRM" TARGET_ID = "FRM_NPC" X="0" Y="0" X_COUNT="2" Y_COUNT="1" X_GAB="185"/>	
+		<FORM ID = "FRM_NPC" X="0" Y="0" W="182" H="52">
+			<ATTR IMG="../Data/6_ui/book/bkBoxNpc.tga" IMG_W = "182" IMG_H = "52"/>
+			<ATTR T_X="48" T_Y="11" FONT_COLOR_HEX="0xFF4e1d0e"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">PlaySound("../Sound/U_Sound/button(click).wav") ClickActorSlot(UISelf, 1)</SCRIPT>
+			<IMG ID="IMG_CHECK" X="0" Y="0" W="182" H="52" U="1" V="4" Z="1" UV_INDEX="1" IMG="../Data/6_ui/book/bkListOver.tga" IMG_W="182" IMG_H="208" NO_FOCUS="1" PASS_EVENT="1"/>
+			<ICON ID = "ICN_ICON" X="6" Y="6" Z="1" W="40" H="40" ICON_GRP ="225" ICON_KEY = "1" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+		</FORM>
+	</FORM>
+	<FORM ID = "FRM_BOOK_MONSTER_COMMENT_ELE" X="0" Y="0" W="365" H="52">
+		<BUILD ID="BLD_MON_FRM" TARGET_ID = "FRM_MON" X="0" Y="0" X_COUNT="2" Y_COUNT="1" X_GAB="185"/>	
+		<FORM ID = "FRM_MON" X="0" Y="0" W="182" H="52">
+			<ATTR IMG="../Data/6_ui/book/bkBoxMst.tga" IMG_W = "182" IMG_H = "52"/>
+			<ATTR T_X="48" T_Y="11" FONT_COLOR_HEX="0xFFF4E3C3"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">PlaySound("../Sound/U_Sound/button(click).wav") ClickActorSlot(UISelf, 2)</SCRIPT>
+			<IMG ID="IMG_CHECK" X="0" Y="0" W="182" H="52" U="1" V="4" Z="1" UV_INDEX="1" IMG="../Data/6_ui/book/bkListOver.tga" IMG_W="182" IMG_H="208" NO_FOCUS="1" PASS_EVENT="1"/>
+			<ICON ID = "ICN_ICON" X="6" Y="6" Z="1" W="40" H="40" ICON_GRP ="225" ICON_KEY = "1" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+		</FORM>
+	</FORM>	
+	<FORM ID = "FRM_BOOK_MONSTER_ELE" X="0" Y="0" W="365" H="52">
+		<BUILD ID="BLD_ICON_BG" TARGET_ID = "IMG_ICON_BG" X = "0" Y = "0" X_COUNT = "7" Y_COUNT = "1" X_GAB = "50" Y_GAB = "0"/>
+		<IMG ID = "IMG_ICON_BG" X="0" Y="0" W="44" H="44"  IMG="../Data/6_ui/book/bkIconBg.tga" IMG_W = "44" IMG_H = "44"/>
+		<BUILD ID="BLD_ICON" TARGET_ID = "ICN_MONSTER" X = "2" Y = "2" X_COUNT = "7" Y_COUNT = "1" X_GAB = "50" Y_GAB = "0"/>
+		<ICON ID = "ICN_MONSTER" X="0" Y="0" W="40" H="40" ICON_GRP ="225" ICON_KEY = "0">
+			<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+	</FORM>
+	<BUTTON ID = "BTN_MAP_CANDI_ELE" X="0" Y="0" W="141" H="22">
+		<ATTR BTN_IMG="../Data/6_ui/msbook/mbDrB.tga" BTN_IMG_W = "282" BTN_IMG_H = "44" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+		<ATTR T_CENTER="1" T_X="70" T_Y="3" FONT="FTbt_12"/>
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			UI_Click_Book_MapEle(UISelf)
+			UISelf:GetParent():GetParent():Visible(false)
+			return true
+		</SCRIPT>
+	</BUTTON>
+	<STATIC_FORM ID = "SFRM_BOOK_GET_ACHIEVE_ITEM" ALIGN_X="50" ALIGN_Y="50" W="248" H="171" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID = "SFRM_COLOR" X = "9" Y = "7" Z="-1" W = "230" H = "119" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" >
+			<STATIC_FORM ID="SFRM_SHADOW" X="0" Y="0" W="230" H = "119" STATIC_NUM="3" >
+				<ATTR TEXT="3068" T_CENTER="1" FONT_COLOR_HEX="0xFF4d3413" T_X="115"/>
+				<SCRIPT ID = "ON_CALL"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUTTON ID = "BTN_OK" X = "42" Y = "132" W ="84" H ="26">
+			<ATTR TEXT = "96" FONT = "FTbt_12" T_X = "42" T_Y ="6" T_CENTER = "1" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> 
+				OnClickBookAchieveGetItem(UISelf:GetParent(), true) 
+				UISelf:CloseParent() 
+				return true
+			</SCRIPT>
+			<HOTKEY ID = "59">
+				OnClickBookAchieveGetItem(UISelf:GetParent(), true) 
+				UISelf:CloseParent() 
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X = "128" Y = "132" W ="84" H ="26">
+			<ATTR TEXT = "97" FONT = "FTbt_12" T_X = "42" T_Y ="6" T_CENTER = "1" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID = "1"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID = "60"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	<FORM ID="FRM_ACTOR_MODEL_VIEW" ALIGN_X="50" ALIGN_Y="50" W="321" H="453" IMG="../Data/6_ui/book/bkMoreBg.tga" IMG_W="321" IMG_H="453">
+		<FORM ID="FRM_MODEL" X="30" Y="30" W="260" H="275">
+			<SCRIPT ID="ON_CREATE"> UISelf:InitRenderModel("BookPreview", true, true) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("BookPreview") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("BookPreview") </SCRIPT>
+			<SCRIPT ID="ON_CLOSE"> UISelf:ClearRenderModel("BookPreview")</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_NAME" X="30" Y="324" W="260" H="20" FONT="FTctsBig_14" T_X="130" T_CENTER="1" TEXT="" FONT_COLOR_HEX="0xFFFEE7C1"/>
+		<LIST ID="LST_CONTENT" X="25" Y="350" W="272" H="80" ELEMENT_ID="FRM_ACTOR_VIEW_COMMENT" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="QUEST_LIST_SCROLL_BG">
+			<IMG ID="QUEST_LIST_SCROLL_BG" X="256" Y="20" Z="-1" W="13" H="80" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="80"/>
+			<BUTTON ID="BTN_SCR_UP" X="252" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="252" Y="65" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="254" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			<SCRIPT ID="ON_CREATE">UISelf:AddNewListItemChar("")</SCRIPT>
+		</LIST>		
+		<BUTTON ID="BTN_EXIT" X="265" Y="20" W="35" H="35" Z="1" BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W="70" BTN_IMG_H="70">
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():Close() return true</SCRIPT>
+			<HOTKEY ID="1">UISelf:GetParent():Close() return true</HOTKEY>
+		</BUTTON>
+	</FORM>
+	<FORM ID="FRM_ACTOR_VIEW_COMMENT" X="0" Y="0" W="250" H="100" FONT="Font_Text" TEXT="" FONT_COLOR_HEX="0xFFFEE7C1"/>
+	<FORM ID="FRM_ACHIEVE_GREET_MSG" ALIGN_X="50" ALIGN_Y="40" W="368" H="69" IMG="../Data/6_ui/works/wsMsgBg.tga" IMG_W="368" IMG_H="69">
+		<ATTR TEXT = "" FONT = "Font_Text" T_X = "15" T_Y ="9" FONT_COLOR_HEX="0xFF320005"/>
+		<BUTTON ID="BTN_SEND" X="250" Y="7" W="84" H="23" FONT="FTbt_12" TEXT="2113" T_X="42" T_Y="3" T_CENTER="1" BTN_IMG="../Data/6_ui/event/evtHtBt.tga" BTN_IMG_W="168" BTN_IMG_H="46" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_L_BTN_DOWN">SendAchieveGreetMessage(UISelf:GetParent())</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="337" Y="7" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+		<EDIT ID="EDT_GREET_MSG" X="15" Y="38" W="338" H="21">
+			<ATTR EDIT_T_X="0" EDIT_T_Y="0" EDIT_FONT="Font_Text"/>
+			<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH="40" TEXT="" FONT="Font_Text" T_X="0" T_Y="5" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF4C0B11"/>
+			<HOTKEY ID="28">SendAchieveGreetMessage(UISelf:GetParent())	return true</HOTKEY>
+			<HOTKEY ID="106">SendAchieveGreetMessage(UISelf:GetParent()) return true</HOTKEY>
+			<HOTKEY ID="1">
+				if UISelf:IsEditFocus() then
+					ClearEditFocus()
+					return true
+				end
+			</HOTKEY>
+		</EDIT>
+	</FORM>
+	
+	<FORM ID="FRM_ACHIEVE_NEWS" ALIGN_X="50" ALIGN_Y="0" W="1024" H="32" PASS_EVENT="1">
+		<SCRIPT ID="ON_CALL"> AchieveUserNotifyUISizeSetter(UISelf) </SCRIPT>
+		<STATIC_FORM ID="SFRM_BACKGROUND" X="0" Y="0" W="1024" H="32" STATIC_NUM="35" PASS_EVENT="1"/>
+		<FORM ID="FRM_BORDER" X="0" Y="7" W="900" H="27" PASS_EVENT="1">
+			<FORM_MOVE_ANIMATE_WND ID="FMA_FIRST_ACHIEVEMENT" X="0" Y="0" W="900" H="27" Z="3" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR TEXT = "" FONT="Font_Chat" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/> 
+				<ATTR MOVE_TYPE="0" MOVE_TIME="10000" START_X="900" START_Y="0" END_X="-900" END_Y="0"/>
+				<SCRIPT ID="ON_CALL">UISelf:InitMoveState()</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					local kSelf = UISelf;
+					if kSelf:IsMoveComplate() then
+						UpdateSlideTextViewUI(UISelf:GetParent():GetParent())
+					end
+				</SCRIPT>
+			</FORM_MOVE_ANIMATE_WND>
+		</FORM>
+		<BUTTON ID="BTN_GREET_MSG" X="0" ALIGN_Y="50" Z="4" W="163" H="22" BTN_IMG="../Data/6_ui/works/wsBt.tga" BTN_IMG_W="163" BTN_IMG_H="88" BTN_VERTICAL_IMG="1">
+			<ATTR TEXT = "2803" FONT="Font_Text" T_X="81" T_Y="3" T_OUTLINE="1" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1" OUTLINE_COLOR_HEX="0xFF4C0B11"/> 
+			<SCRIPT ID="ON_L_BTN_DOWN">OnClickAddonButton(UISelf:GetParent())</SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+	<CHECK_BUTTON ID="BTN_CONT_BOOK_ELE" X="0" Y="0" W="268" H="34" BTN_VERTICAL_IMG="1">
+		<ATTR FONT="FTcts_13" T_CENTER="1" T_X="134" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="4"/>
+		<ATTR BTN_IMG="../Data/6_ui/book/bkBtLst1.tga" BTN_IMG_W="268" BTN_IMG_H="136"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">UI_ContEleOnClick(UISelf)</SCRIPT>
+	</CHECK_BUTTON>
+	<CHECK_BUTTON ID="BTN_GROUND_BOOK_ELE" X="0" Y="0" W="260" H="24" BTN_VERTICAL_IMG="1">
+		<ATTR FONT="Font_Text" T_CENTER="1" T_X="130" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="24"/>
+		<ATTR BTN_IMG="../Data/6_ui/book/bkBtLst2_01.tga" BTN_IMG_W="260" BTN_IMG_H="96"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">UI_GroundEleOnClick(UISelf)</SCRIPT>
+	</CHECK_BUTTON>
+
+	<FORM ID = "FRM_BOOK_MARK_ELE" X="0" Y="0" W="267" H="53">
+		<ATTR IMG="../Data/6_ui/book/bkQstMkBg.tga" IMG_W="267" IMG_H="53" T_X="10" T_Y="20"/>
+		<FORM ID="FRM_TEXT" X="49" Y="6" W="208" H="39" FONT="Font_Text" FONT_COLOR_HEX="0xFF4d2718"/>
+		<FORM ID="FRM_IMG" X="10" Y="9" W="32" H="32">
+			<ATTR IMG="../Data/6_ui/main/mnMMicon2.tga" IMG_W="128" IMG_H="320" U="4" V="10" UV_INDEX="1"/>
+		</FORM>
+	</FORM>
+</XUI>

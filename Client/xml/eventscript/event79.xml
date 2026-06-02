@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <CMD type="CloseUI" UIWndName="FRM_REST_MON_NUM"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0" FadeIn="FALSE"/>
+	<CMD TYPE="waittime" time="1"/><!-- 1초 대기(버그 대비용 방어)-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="waittime" time="0"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="MoveCamToPos" TargetPos="970.4894, -630.6306, 1684.328"  MoveTime="0" CamActorDistance="600" CamMoveUpDistance="0" HorizRotAngle="180" VertRotAngle="20"/>
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/><!--화면 밝게 -->
+	<CMD TYPE="WaitFade" time="2"/>
+    <CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="1"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="15" CamActorDistance="500" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="20"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_SpectersTower"/><!-- UI열기-->
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/>
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="true"/>
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_TRUE_TW_MINIMAP"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_GOGO_LEFT"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="waittime" time="0"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="FALSE"/>
+</EVENT_SCRIPT>

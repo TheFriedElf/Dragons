@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Groteas" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Groteas"/>
+		<KFMPATH SCALE="1.6">../Data/2_Mon/M_Groteas/M_Groteas.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="1.6">../Data/2_Mon/M_Groteas/M_Groteas_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.6"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="18"/>
+			<SPHERE TO="p_hit_point_02" SIZE="25"/>
+		</ABV>
+		<SLOT>
+			<!-- 물기 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000063"/>
+			<!-- 던진다 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000061" FIRE_START_NODE="p_ef_shot_01" PROJECTILE_ID="PROJECTILE_Gargoyle_shot_01"/>
+			<!-- 연달알 던지기 -->
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_02" ANIMATION="1000062" FIRE_START_NODE="p_ef_shot_02" PROJECTILE_ID="PROJECTILE_Gargoyle_shot_01"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000027"/>
+			<!-- ITEM NAME="idle_01" ANIMATION="1000000"/ -->
+			<!--ITEM NAME="walk" ANIMATION="1000051"/-->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000055"/-->
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+									<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

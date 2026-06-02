@@ -1,0 +1,32 @@
+<ACTION ID="a_multi_strape_melee" NEXT="a_battle_idle" USE-EVENT="TRUE" USE_CFUNC_ONTARGET="TRUE" ALWAYS_IGNORE_DMG_EFFECT="TRUE" IGNORE_DMG_EFFECT="TRUE">
+	<SLOT NAME="Arc_Bow_skill_Multi_Stripe_03"/>
+	<!--SLOT NAME="attk_01"/-->
+	
+	 <FSM SCRIPT="Skill_MultiStrape_Melee"
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+       HIT_TARGET_EFFECT_ID="ef_boom_01"
+       CHECK_CAN_PREV_ACTION_ID="a_multi_strape_fire"
+	   
+	   SUMMON_CLASSNO="900105"
+       SUMMON_RESERVE_ACTION="a_multi_strape_creature_idle"
+	   	   
+	   FIRE_CASTER_EFFECT_ID="ef_skill_multi_stripe_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID2="ef_skill_multi_stripe_02_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE2="char_root"
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	   
+	   FIRE_SOUND_ID="MultiStripe_02"
+	   />
+	
+	<!--FSM SCRIPT="Skill_MultiStrape_Melee"/-->
+	<!--FSM SCRIPT="Skill_Master_Summon_Finish"
+       
+       FIRE_CASTER_EFFECT_ID="ef_skill_Demolition_Bomber_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID2="ef_skill_Demolition_Bomber_02_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE2="char_root"       
+       DETACH_FIRE_EFFECT_AT_FINISH="TRUE"       
+       /-->
+	   
+</ACTION>

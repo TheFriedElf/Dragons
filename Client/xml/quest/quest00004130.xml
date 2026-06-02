@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4130</ID> <!--T.T.10413001 기상천외 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	반디의 독침 15개 습득 -->
+<!--[완료NPC]	이글거리는 늪지대 - 모나드론-->
+<!--[내용]	모나드론 공작은 단순한 보물 보다 독특한 물건에 애착을 가지는 괴짜 수집가다. 모나드론 공작을 위해 이글거리는 늪지대에서 반디를 퇴치하고 반디의 독침을 15개 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">02C6F249-3507-4598-A325-E42F4B1F84C4</CLIENT> <!--시작NPC 이글거리는 늪지대 - 모나드론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">02C6F249-3507-4598-A325-E42F4B1F84C4</PAYER> <!--완료NPC 이글거리는 늪지대 - 모나드론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">02C6F249-3507-4598-A325-E42F4B1F84C4</AGENT> <!--진행NPC 11 이글거리는 늪지대 - 모나드론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9020300/10000/5000/1/1/160413000">6044100</MONSTER> 
+ <!--MON_NO=6044100/반디,MAP_NO=9020300/이글거리는 늪지대,Item_NO=160413000/[Q.ID:04130] 반디의 독침,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160413000</ITEM> 
+ <!--Item_NO=160413000/[Q.ID:04130] 반디의 독침,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10413011"/> <!--반디의 독침 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10413021" FACE="Monaderon_normal"/> <!--그건 그렇고 말이지… 이 세상에 
+아주 다양한 수집품들이 존재한다는 걸 알고있나?%%
+깊은 동굴 속의 몬스터가 지키고 있는 보물부터
+유적에서 나온 고대의 유물까지 아주 다양한
+종류의 수집품이 존재하지.%%  
+하지만 나는 그런 단순한 보물을 찾는 것에는 흥미가 없어.
+내게 즐거움과 호기심을 일으켜 주는 것은 오로지…
+기상천외한 물건들 뿐이라네. 크하하하하!%%
+누구도 찾지 않지만, 자신을 알아봐달라고 간절하게 기다리는 
+그런 보물들 말일세...  
+알겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10413026" FACE="Monaderon_smile"/> <!--음하하하하! 구해왔구만.
+그래… 수고했어. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10413023" FACE="Monaderon_normal"/> <!--내가 첫번째로 찾고 싶은 물건은 최근 이곳 이글거리는 늪지대에 
+나타나기 시작했다고 하는군. 바로 반디라고 불리우는 독충이지.%% 
+이 반디의 독침은 다른 동물들을 사냥할 때 매우 유용하지.
+그러니 이곳 이글거리는 늪지대에서 반디를 퇴치하고 반디의 독침을 
+구해오도록 하게. %%
+그럼 잘 부탁하네. 음하하하하하! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10413024" FACE="Monaderon_angry"/> <!--자네가 나에 대해 뭔가 잘 못 알고 있는 것 같군. 음…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10413025" FACE="Monaderon_angry"/> <!--반디는 이 곳 이글거리는 늪지대에 우글거린다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10413002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 현재 안쓰임 -->
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="setmoviescene" enable="true" Time="1"/>
+  <CMD type="waittime" time="0"/>
+  
+  <CMD TYPE="SetCameraModeEvent"/>
+  
+  <CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2" />
+  
+  <CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505355" TextTTID="505356"/>
+  <CMD TYPE="WaitDialogue"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+  <CMD TYPE="WaitCamera"/>
+
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+  <CMD TYPE="setmoviescene" enable="false" Time="1"/>
+  <CMD type="waittime" time="0"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

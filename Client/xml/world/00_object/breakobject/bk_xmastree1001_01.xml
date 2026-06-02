@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Bk_XMasTree1001_01" >
+	<WORLDOBJECT>
+		<ICON ID="icon_m_atrocitysheep"/>
+		<KFMPATH SCALE="1.0">../Data/3_World/00_Object/breakObject/Break/Bk_XMasTree1001_01/Bk_XMasTree1001_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="65,65,150"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Action -->
+			<ITEM NAME="dmg" ANIMATION="1000011"/>
+			<ITEM NAME="idle" ANIMATION="1000000"/>
+			<ITEM NAME="die" ANIMATION="1000020"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

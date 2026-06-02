@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4258</ID> <!--T.T.10425801 잭의 작은 성의 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	정체불명의 고물단지 조사-->
+<!--[완료NPC]	밴시협곡 - 정체불명의 고물단지-->
+<!--[내용]	잭은 제스가 모나드론 공작과 맺은 부당한 계약을 파기시켜준 것에 대한 답례로 붉은 여우 삼각지에서 구한 정체불명의 고물단지를 선물해주겠다고 한다. 기계장치가 작동하는 지 살펴보아야 할 것 같다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">26674921-796A-42fa-B57F-434E11EF6101</CLIENT> <!--시작NPC 밴시협곡 - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3E0A6DCD-E50D-4ab9-86F1-2CED7DE8679B</PAYER> <!--완료NPC 밴시협곡 - 정체불명의 고물단지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">26674921-796A-42fa-B57F-434E11EF6101</AGENT> <!--진행NPC 11 밴시협곡 - 잭 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">3E0A6DCD-E50D-4ab9-86F1-2CED7DE8679B</AGENT> <!--진행NPC 12 밴시협곡 - 정체불명의 고물단지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10425811"/> <!--정체불명의 고물단지 조사-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10425821" FACE="Jack_normal"/> <!--아.. 제스 형의 일은 정말 고마워.
+아직 형은 화가 난 것 같지만, 원래부터 나쁜 성격은 아니니까
+금방 풀릴 거라고 생각해. 그건 그렇고 %name%...%%
+이 일에 대한 보답으로 우리가 붉은 여우 삼각지에서
+가져온 물건을 너한테 선물하려고 해. 제스형도 내 맘대로 
+하라는 거 보니까 동의한 것 같은데. 어때? 받아주겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10425826" FACE="kionesque_smile"/> <!--(어느 모로 봐도 도무지 작동할 것 같지 않은 낡은 기계 장치…
+용기를 내어 기계의 이곳 저곳을 살펴보지만 스위치 같은 것은
+보이지 않는다. 그러던 순간, 갑자기 기계 장치에 새겨진 문장에 
+빛이 감돌기 시작한다. 이 고물단지가 작동을 시작한 것일까?)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10425823" FACE="Jack_normal"/> <!--내가 볼 땐 골동품 괘종시계인 것 같긴 한데…
+지금은 고물단지처럼 보이지만, 그래도 손을 본다면
+사용할 수도 있을 거야. 부디 우리들의 성의를 받아줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10425824" FACE="Jack_normal"/> <!--이봐, 네가 제스 형한테 삐진 건 이해하지만 말야.
+원래 그렇게 못된 녀석은 아니야. 내가 보장한다구!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10425825" FACE="Jack_normal"/> <!--어딘가 스위치가 있을 지도 몰라. 일단 기계 구석구석을 좀 살펴봐-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10425802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

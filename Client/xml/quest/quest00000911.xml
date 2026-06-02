@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>911</ID> <!--T.T.10091101 형제를 위하여 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	망각의 협곡[아케이드 모드(F1)] 클리어-->
+<!--[완료NPC]	망각의 협곡 - 우키보키-->
+<!--[내용]	쌍카의 형인 산적두목 쿵카의 상태를 살펴봐야 한다. 쌍카의 얘기를 들어 봤을 때 쿵카는 지금 제정신이 아닐 수 있다. 우선은 쿵카가 있는 망각의 협곡[아케이드 모드(F1)]를 살펴보고, 쿵카의 상태를 파악해 보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6B0DCD65-33E7-4afb-9D95-781D5300833C</CLIENT> <!--시작NPC 배신자의 고개 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6F595857-3096-4313-A650-FC1402234AE5</PAYER> <!--완료NPC 망각의 협곡 - 우키보키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6B0DCD65-33E7-4afb-9D95-781D5300833C</AGENT> <!--진행NPC 11 배신자의 고개 - 토마스 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">6F595857-3096-4313-A650-FC1402234AE5</AGENT> <!--진행NPC 12 망각의 협곡 - 우키보키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010439/1">6030900</MONSTER> 
+ <!--MON_NO=6030900/큰도끼 형제 쿵카,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="502">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10091111"/> <!--망각의 협곡[아케이드 모드(F1)] 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10091121" FACE="Thomas_normal"/> <!--아! 그렇지! 자네! 쌍카를 만나고 오는 길이라 했지?%%
+{C=0xFF4400BB/}(쌍카와 대화한 내용을 토마스에게 얘기했다.)%%
+음.. 그러니까 쌍카가 어떤 여자가 가져다 준 음식을 먹고 정신을 잃었다가 정신을 차리고 보니 자신의 의지와는 상관도 없이 주변 사람들을 공격하기 시작했었단 말이지?%%
+그래서 자네가 쌍카에게 충격을 가하니 정신 나간 쌍카가 정상으로 돌아왔다.....라 이제야 이해가 가는군. 
+(쯧. 개나 사람이나 때리면 정신을 차린다더니…….)%%
+응? 하지만 아직도 의문은 풀리지 않고있어.. 왜 아무 이유 없이 평화롭게 사는 마을 사람들과 쌍카쿵카 형제들 사이를 이간질 시킨 걸까?%%
+지금으로서는 알 수가 없군.
+이 해답을 가지고 있는 사람은 쿵카니까 그를 만나서 자초지종을 들어보기 전까진 알 수가 없지? 안그런가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10091126" FACE="Wookiboki_smile"/> <!--우리 쿵카 두목은 그렇게 난폭한 사람이 아니예요.%% 이건 뭔가 이상해요. 나 우키보키가 조사를 해 봐야 할 거 같아요. 조사가 끝나면 알려 드릴께요-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10091123" FACE="Thomas_smile"/> <!--하지만.. 음… 동생인 쌍카에게도 그런 일이 있었다면 쿵카도 분명히 광분되어 있을거야%%
+만약 쿵카도 쌍카처럼 되어 있거든 쌍카에게 했던 것처럼 쿵카도 정신을 차리게 해줘야 되지 않을까?.%%
+쿵카가 있는 망각의 협곡 미션모드를 조사해 보게나. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10091124" FACE="Thomas_angly"/> <!--해보겠다는 생각이 들거든 날 다시 찾아오게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10091125" FACE="Thomas_normal"/> <!--이 일에 가장 중요한 정보를 가지고 있는 것은 자네니까 책임갖고 해주게나-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10091126" FACE="Wookiboki_normal"/> <!--당신은 누군가요!!. 우리 두목인 쿵카님이 좀 이상한거 같아요… -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10091102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

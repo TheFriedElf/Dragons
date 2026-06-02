@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+	<!--엔딩 끝나고 카메라 연출-->
+	<CMD TYPE="Fade" FadeColor="255,255,255" FadeTime="1" FadeIn="false"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitTime" Time="2"/><!-- 다음 신으로 넘어가는 시간 기다림-->
+	<CMD TYPE="ShowActor" ClassNo="1028909" Show="false"/><!-- 프롤로그 삭제-->
+	<CMD TYPE="RemoveActor" ClassNo="1028909"/><!-- 프롤로그 삭제-->
+	<CMD TYPE="RemoveActor" NameTTID ="522983"/><!-- 카메라 이벤트 삭제-->
+	<CMD TYPE="ClearActorFilter"/>
+    <CMD TYPE="SetCameraModeEvent"/><!-- 다시 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="playBGM" SoundNo = "0"/> <!-- BGM 켜기 -->
+	
+	<!-- 연출신 끝나고 카메라 워크-->
+	<CMD TYPE="MoveCamToPos" TargetPos="2420.019, 269.5898, 404.2311"  MoveTime="0" CamActorDistance="150" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="-50"/>
+	<CMD TYPE="Fade" FadeColor="255,255,255" FadeTime="3" FadeIn="TRUE"/><!-- 화면 밝게-->
+	
+	<CMD TYPE="waittime" time="3"/>
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/><!--나를 활성화 한다 -->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="2" CamActorDistance="400" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="20"/><!--카메라가 나를 따라 온다 -->
+	<CMD TYPE="waittime" time="3"/>
+
+	<!--게임모드로 돌아가기-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/> <!-- 신 카메라를 끈다.-->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+	<CMD TYPE="Balloon" Show="true"/>
+
+</EVENT_SCRIPT>
+

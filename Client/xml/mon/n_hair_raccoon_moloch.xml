@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_hair_raccoon_Moloch" INIT_ACTION="a_opening">
+	<TEXTURE SRC="reflection_metal.dds">../Data/4_Item/1_Armor/1_Male/01_Helm/Texture/reflection_metal.dds</TEXTURE>
+	<TEXTURE SRC="tear.dds">../Data/2_Mon/N_Hair_Raccoon/tear.dds</TEXTURE>
+	<TEXTURE SRC="n_bumblow_reflection.dds">../Data/2_Mon/N_Bumblow/n_bumblow_reflection.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Hair_Raccoon_Moloch"/>
+		<KFMPATH>../Data/2_Mon/N_hair_raccoon_Moloch/N_hair_raccoon_Moloch.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="10"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<!-- 대쉬 -->
+			<ITEM NAME="dash_after_attk_btlidle_01" ANIMATION="1000202"/>
+			<ITEM NAME="dash_after_attk_rush" ANIMATION="1000201" FIRE_EFFECT="ef_PumpkinHead_skill_01_char_root" FIRE_EFFECT_NODE="char_root"/>
+			<ITEM NAME="dash_after_attk_01_02" ANIMATION="1000062"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000051"/-->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

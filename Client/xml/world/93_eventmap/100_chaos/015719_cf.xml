@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_015719_FD">
+	<GSAPATH>../Data/3_World/93_EventMap/100_Chaos/015719_CF.gsa</GSAPATH>
+	<MINIMAP Y="185" H="145">../Data/3_World/93_EventMap/100_Chaos/015719_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1"/>
+	<!-- 포 그 -->
+	<!--EVENT_SCRIPT_ON_ENTER ID="106"/-->
+
+
+<!--// 시나리오 오프닝 시작 -->
+	<EVENT_SCRIPT_ON_ENTER ID="802940" LIMIT_QUEST="294"/>    
+
+
+ <!--//오프닝 시작시 ai 멈춤 -->
+	<EVENT_SCRIPT_STOP_AI NO="802940"/>
+
+
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="2533" COLOR="0,0,0"/>
+</WORLD>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5085</ID> <!--T.T.10508501 참을 만큼 참았어! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 별가사리 루루루와 별가사리 로로로 각 15마리씩 처리하자-->
+<!--[완료NPC]	바람항구 - 크리스핀-->
+<!--[내용]	크리스핀은 이번에 고향으로 가기 위해서 여기저기 알아보고 찾아다녔지만 해적들 때문에 고향으로 갈 배를 찾을 수가 없었다. 다행히 스티븐 2세의 특별령으로 인해 오랫동안 고향을 가지 못한 사람들은 군선을 타고 갈 수 있는 승선증을 발급해 줬다고 한다. 크리스핀은 같이 고향으로 갈 사람들의 승선증도 같이 가지고 있다가 그만 스티븐 무역항에서 잃어버렸다고 한다. 크리스틴이 승선증을 찾으려고 했지만 별가사리 루루루와 별가사리 로로로가 방해를 한다고 한다. 스티븐 무역항의 별가사리 루루루와 별가사리 로로로 를 15마리씩 처리하자.  -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">33FAB5CE-50F9-407E-807C-5F32FA202064</CLIENT> <!--시작NPC 바람항구 - 크리스핀 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">33FAB5CE-50F9-407E-807C-5F32FA202064</PAYER> <!--완료NPC 바람항구 - 크리스핀 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">33FAB5CE-50F9-407E-807C-5F32FA202064</AGENT> <!--진행NPC 11 바람항구 - 크리스핀 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010130/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010130/스티븐 무역항,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010130/1">6011200</MONSTER> 
+ <!--MON_NO=6011200/별가사리 로로로,MAP_NO=9010130/스티븐 무역항,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10508511"/> <!--별가사리 루루루-->
+		<OBJECT2 COUNT="15" TEXT="10508512"/> <!--별가사리 로로로-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508521" FACE="Crispin_normal"/> <!--이런 망할 별가사리들 때문에 약이 올라서 죽겠네.
+아! %class%. 마침 잘 만났네.
+이번에 해적들 때문에 고향에 가지 못하는 사람들을 위해서 스티븐 2세가 특별히 군선을 탈 수 있는 승선증을 발급해준 일에 대해서 알고 있나?%%
+나도 요 몇 년간 고향에 내려가지 못해서, 이번에 가족들을 보러 내려갈 생각으로 승선증을 신청했네. 
+다행히 통과돼서 고향에 갈 날만 기다리고 있었지. 
+나와 같은 고향에서 온 사람들의 승선증도 대표로 내가 맡아놨지.%%
+그런데 볼 일이 있어서 스티븐 무역항에 갔다 오는 길에 그만 별가사리의 공격으로 가방에 구멍이 생겨 승선증을 떨어뜨리고 만 것이네. 
+다행히 떨어뜨린 장소 알고 있어서 찾으러 가는데 별가사리 루루루와 별가사리 로로로가 방해를 하고 있어.%%
+승선증을 찾을 수 있도록 이 녀석들을 좀 막아 주게나.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508526" FACE="Crispin_smile"/> <!--고맙네. 이제 좀 수월하게 찾을 수 있겠지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508523" FACE="Crispin_normal"/> <!--나와 같은 고향 사람들은 여기서 장사를 하느라 벌써 몇 년간 고향에 내려가지 못했지.
+사실 우리 고향이 촌이라서 장사를 하기 마땅치 않았기 때문에 이곳 바람항구로 오게 된 것이네. %%
+가족들을 보고 싶어도 꾹 참고 열심히 장사를 해서 돈은 많이 벌었지만, 이제 가족을 만나지 못한다는 생각을 하니까 가슴이 미어지는군.
+제발 나를 좀 도와주기 바라네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508524" FACE="Crispin_angly"/> <!--거절하는 건가? 이제 고향에 대한 꿈은 버려야 겠군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508525" FACE="Crispin_normal"/> <!--혹시 승선증을 담은 주머니를 누군가 가져가기 전에 별가사리를 처치해줬으면 좋겠어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5023</ID> <!--T.T.10502301 엄마의 물건 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)] - 엄마의 물건 1개 회수-->
+<!--[완료NPC]	바람항구 - 에르실-->
+<!--[내용]	에르실은 엄마가 아끼던 물건을 수염고래 해안가의 상어가 빼앗아 가서 걱정을 하고 있다. 그런 에르실을 위해 엄마의 물건을 되찾아야 한다. 물건은 눈에 차는 것이라고 한다. 수염고래 해안가 [아케이드 모드(F1)]의 상어에게서 엄마의 물건을 되찾자. 엄마의 물건은  여러 지역의 상어가 들고 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</CLIENT> <!--시작NPC 바람항구 - 에르실 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</PAYER> <!--완료NPC 바람항구 - 에르실 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</AGENT> <!--진행NPC 11 바람항구 - 에르실 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010103/10000/8000/1/1/160502300">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010103/수염고래 해안가 아케이드 3,Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160502300</ITEM> 
+ <!--Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010105/10000/8000/1/1/160502300">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010105/수염고래 해안가 아케이드 5,Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160502300</ITEM> 
+ <!--Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010104/10000/8000/1/1/160502300">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010104/수염고래 해안가 아케이드 4,Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160502300</ITEM> 
+ <!--Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010109/10000/8000/1/1/160502300">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010109/캡틴후커 별장,Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160502300</ITEM> 
+ <!--Item_NO=160502300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10502311"/> <!--엄마의 물건-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502321" FACE="ersil_normal"/> <!--이런, 야단났네.
+저기 강해 보이는 %class%님 부탁이 있어요.
+설마 안 들어 주시지는 않겠죠.
+이렇게 귀여운 꼬마가 부탁하는 거에요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502326" FACE="ersil_smile"/> <!--감사해요. 엄마 몰래 가지고 나왔다고 아마 혼났을 것에요.
+엄마는 가끔씩 이 물건을 보면서 무서운 기운을 풍기는 데 왜 그럴까요?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502323" FACE="ersil_normal"/> <!--고마워요. 
+사실은 엄마 몰래 엄머 물건을 가지고 수염고래 해안가에서 놀고 있었어요.%%
+그런데 무섭게 생긴 상어들이 몰려와서 제 물건을 보고 말하는 거에요. 
+"엇! 두목님 물건이다."
+그러더니 엄마의 물건을 빼앗아서 달아나 버렸어요.%%
+엄마는 자기 물건에 손대는 것을 굉장히 싫어해요.
+제발 저를 좀 도와 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502324" FACE="ersil_normal"/> <!--역시 귀여운 꼬마는 별로 먹히지 않는가 보군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502325" FACE="ersil_normal"/> <!--조금 있으면 엄마 올 거에요. 조금 더 빨리 부탁드려요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

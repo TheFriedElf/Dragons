@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="SFRM_COLLECT_ANTIQUE" X="100" Y="91" W="252" H="217" STATIC_NUM="1" CAN_DRAG="1">
+		<SCRIPT ID="ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			UISelf:SetOwnerGuid(GUID(''))
+			CloseUI("Inv")
+		</SCRIPT>
+		<STATIC_FORM ID = "SFRM_ANTIQUE_TITLE" X = "1" Y = "0" W = "250" H = "36" STATIC_NUM = "4">
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR T_CENTER = "1" T_X = "67" T_Y = "4" FONT="FTbt_12" FONT_COLOR_HEX="0xFF4d3413" TEXT="750000"/>
+			</IMG>
+			<BUTTON ID="BTN_CLOSE" X="219" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():CloseParent() return true</SCRIPT>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true</HOTKEY>
+			</BUTTON>
+			<FORM ID="SFRM_BTN_BG" X="219" Y="9" Z="-1" W="12" H="11" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="12" IMG_H="11"/>
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="144" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_COLOR_BG" X="9" Y="35" W="234" H="139" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<STATIC_FORM ID="SFRM_SHADOW_BG" X="0" Y="0" W="234" H="139" STATIC_NUM="3"/>
+			<FORM ID="FRM_ARROW" X="91" Y="39" Z="10" W="55" H="24">
+				<ATTR IMG="../Data/6_UI/mission/msDfsArwAni2.tga" IMG_W="110" IMG_H="48" U="2" V="2" UV_INDEX="2"/>
+				<SCRIPT ID="ON_TICK">
+					UVAnimation(UISelf, 0.13)
+				</SCRIPT>
+			</FORM>
+			<IMG ID="FRM_MATERIAL_ITEM_BG" X="38" Y="30" W="42" H="42" IMG="../Data/6_ui/common/cmSlotBg.tga" IMG_W="42" IMG_H="42"/>
+			<STATIC_FORM ID="FRM_TARGET_ITEM_BG" X="154" Y="30" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<FORM ID="FRM_MATERIAL_ITEM_TEXT" X="7" Y="7" W="104" H="20">
+				<ATTR T_CENTER = "1" T_X = "52" T_Y = "2" FONT="Font_Text" FONT_COLOR_HEX="0xFF4d3413" TEXT="750001"/>
+			</FORM>
+			<FORM ID="FRM_TARGET_ITEM_TEXT" X="123" Y="7" W="104" H="20">
+				<ATTR T_CENTER = "1" T_X = "52" T_Y = "2" FONT="Font_Text" FONT_COLOR_HEX="0xFF4d3413" TEXT="750002"/>
+			</FORM>
+			<STATIC_FORM ID="FRM_HELP_TEXT" X="9" Y="79" W="216" H="51" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR T_CENTER = "1" T_Y_CENTER = "1" T_X = "108" T_Y = "25" FONT="Font_Text" FONT_COLOR_HEX="0xFF4d3413" TEXT="750003"/>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_UP" X="199" Y="34" W="20" H="15" BTN_IMG="../Data/6_ui/CashShop/csGcScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30">
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					ClickAntiqueButtonUpDown(UISelf:GetParent():GetParent(), true)
+					g_TargetIcnAniTime2 = GetAccumTime()
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_DOWN" X="199" Y="52" W="20" H="15" BTN_IMG="../Data/6_ui/CashShop/csGcScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30">
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					ClickAntiqueButtonUpDown(UISelf:GetParent():GetParent(), false)
+					g_TargetIcnAniTime2 = GetAccumTime()
+				</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<ICON ID = "ICN_MATERIAL" X="48" Y="66" Z="10" W="40" H="40" ICON_GRP="240">
+			<SCRIPT ID="ON_CALL">UISelf:ClearCustomData()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				local bRet = OnMouseUpChangeAntiqueIcon(UISelf)
+				if bRet then
+					ShowTargetAntiqueItem(UISelf:GetParent())
+					ClickAntiqueButtonUpDown(UISelf:GetParent(), false)
+					g_TargetIcnAniTime = GetAccumTime()
+				else
+					return
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				if (GetAccumTime() - g_TargetIcnAniTime) > 0.18 then
+					UISelf:DrawIcon()
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<ICON ID = "ICN_TARGET" X="164" Y="66" Z="10" W="40" H="40" ICON_GRP="241">
+			<SCRIPT ID="ON_CALL">
+				g_TargetIcnAniTime = GetAccumTime()
+				g_TargetIcnAniTime2 = g_TargetIcnAniTime
+				UISelf:ClearCustomData()
+			</SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				if (GetAccumTime() - g_TargetIcnAniTime2) > 0.18 then
+					UISelf:DrawIcon()
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_OK" X="41" Y="178" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400700" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400700, 2200) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">ClickChangeAntiqueButton(UISelf:GetParent(), false) return true</SCRIPT>
+			<HOTKEY ID="59">ClickChangeAntiqueButton(UISelf:GetParent(), false) return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="178" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400534" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400534, 2201) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent() return true</SCRIPT>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_EXCHANGE_SOCKETCARD" X="100" Y="91" W="252" H="217" STATIC_NUM="1" CAN_DRAG="1">
+		<SCRIPT ID="ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseUI("Inv")
+		</SCRIPT>
+		<STATIC_FORM ID = "SFRM_TITLE" X = "1" Y = "0" W = "250" H = "36" STATIC_NUM = "4">
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR T_CENTER = "1" T_X = "67" T_Y = "4" FONT="FTbt_12" FONT_COLOR_HEX="0xFF4d3413" TEXT="759903"/>
+			</IMG>
+			<BUTTON ID="BTN_CLOSE" X="219" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():CloseParent() return true</SCRIPT>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true</HOTKEY>
+			</BUTTON>
+			<FORM ID="SFRM_BTN_BG" X="219" Y="9" Z="-1" W="12" H="11" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="12" IMG_H="11"/>
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="144" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_COLOR_BG" X="9" Y="35" W="234" H="139" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<STATIC_FORM ID="SFRM_SHADOW_BG" X="0" Y="0" W="234" H="139" STATIC_NUM="3"/>
+			<FORM ID="FRM_ARROW" X="91" Y="39" Z="10" W="55" H="24">
+				<ATTR IMG="../Data/6_UI/mission/msDfsArwAni2.tga" IMG_W="110" IMG_H="48" U="2" V="2" UV_INDEX="2"/>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.13) </SCRIPT>
+			</FORM>
+			<IMG ID="FRM_MATERIAL_ITEM_BG" X="38" Y="30" W="42" H="42" IMG="../Data/6_ui/common/cmSlotBg.tga" IMG_W="42" IMG_H="42"/>
+			<STATIC_FORM ID="FRM_TARGET_ITEM_BG" X="154" Y="30" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<FORM ID="FRM_MATERIAL_ITEM_TEXT" X="7" Y="7" W="104" H="20">
+				<ATTR T_CENTER = "1" T_X = "52" T_Y = "2" FONT="Font_Text" FONT_COLOR_HEX="0xFF4d3413" TEXT="750001"/>
+			</FORM>
+			<FORM ID="FRM_TARGET_ITEM_TEXT" X="123" Y="7" W="104" H="20">
+				<ATTR T_CENTER = "1" T_X = "52" T_Y = "2" FONT="Font_Text" FONT_COLOR_HEX="0xFF4d3413" TEXT="750002"/>
+			</FORM>
+			<STATIC_FORM ID="FRM_HELP_TEXT" X="9" Y="79" W="216" H="51" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR T_CENTER = "1" T_Y_CENTER = "1" T_X = "108" T_Y = "25" FONT="Font_Text" FONT_COLOR_HEX="0xFF4d3413" TEXT=""/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetStaticTextW(GetTT(759900)) </SCRIPT>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_UP" X="199" Y="34" W="20" H="15" BTN_IMG="../Data/6_ui/CashShop/csGcScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30">
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					ClickItemButtonUpDown(UISelf:GetParent():GetParent(), EGM_SOCKETCARD, true)
+					ShowTargetItem(UISelf:GetParent():GetParent(), EGM_SOCKETCARD)
+					g_TargetIcnAniTime2 = GetAccumTime()
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_DOWN" X="199" Y="52" W="20" H="15" BTN_IMG="../Data/6_ui/CashShop/csGcScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30">
+				<SCRIPT ID="ON_CALL">
+					UISelf:Visible(false)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					ClickItemButtonUpDown(UISelf:GetParent():GetParent(), EGM_SOCKETCARD, false)
+					ShowTargetItem(UISelf:GetParent():GetParent(), EGM_SOCKETCARD)
+					g_TargetIcnAniTime2 = GetAccumTime()
+				</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<ICON ID = "ICN_MATERIAL" X="48" Y="66" Z="10" W="40" H="40" ICON_GRP="253">
+			<SCRIPT ID="ON_CALL"> UISelf:ClearCustomData() </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				local bRet = OnMouseUpChangeIcon(UISelf, EGM_SOCKETCARD)
+				if bRet then
+					ClickItemButtonUpDown(UISelf:GetParent(), EGM_SOCKETCARD, false)
+					ShowTargetItem(UISelf:GetParent(), EGM_SOCKETCARD)
+					g_TargetIcnAniTime = GetAccumTime()
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				if (GetAccumTime() - g_TargetIcnAniTime) > 0.18 then
+					UISelf:DrawIcon()
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<ICON ID = "ICN_TARGET" X="164" Y="66" Z="10" W="40" H="40" ICON_GRP="254">
+			<SCRIPT ID="ON_CALL">
+				g_TargetIcnAniTime = GetAccumTime()
+				g_TargetIcnAniTime2 = g_TargetIcnAniTime
+				UISelf:ClearCustomData()
+			</SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				if (GetAccumTime() - g_TargetIcnAniTime2) > 0.18 then
+					UISelf:DrawIcon()
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_OK" X="41" Y="178" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400700" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400700, 2200) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> ClickChangeItemButton(UISelf:GetParent(), false, EGM_SOCKETCARD) return true </SCRIPT>
+			<HOTKEY ID="59"> ClickChangeItemButton(UISelf:GetParent(), false, EGM_SOCKETCARD) return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="178" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400534" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400534, 2201) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_POINT_COPY_MACHINE" ALIGN_X="100" ALIGN_Y="40" W="222" H="174" CAN_DRAG="1">
+		<ATTR IMG="../Data/6_ui/mission/msF7Box.tga" IMG_W="222" IMG_H="174"/>
+		<SCRIPT ID="ON_CALL">
+			local Info = GetUIWnd("FRM_DEFENCE_STAGE_INFO")
+			if Info:IsNil() then return end
+
+			local Point = Info:GetLocation()
+			local Size = Info:GetSize()
+			UISelf:SetLocation(Point2(Point:GetX(), Point:GetY() + Size:GetY()))
+			
+			g_CopyMaxVisible = false
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			if g_UsingCopyMachine then
+				UISelf:GetControl("SFRM_ARROW_TARGET"):Visible(false)
+			else
+				UISelf:GetControl("SFRM_ARROW_TARGET"):Visible(true)
+				UVAnimation(UISelf:GetControl("SFRM_ARROW_TARGET"), 0.09)
+			end
+		</SCRIPT>
+		<FORM ID="FRM_MARBLE" X="9" Y="8" Z="1" W="56" H="108">
+			<ATTR IMG="../Data/6_ui/mission/msF7Ani.tga" IMG_W="280" IMG_H="324" U="5" V="3" UV_INDEX="1"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetUVIndex(1)
+			</SCRIPT>
+		</FORM>
+		<STATIC_FORM ID="SFRM_ARROW_TARGET" IS_VISIBLE="1" PASS_EVENT="1">
+			<ATTR X="49" Y="8" Z="3" W="20" H="25" IMG="../Data/6_UI/main/mnNpcArw.tga" IMG_W="40" IMG_H="50"/>
+			<ATTR U="2" V="2"/>
+		</STATIC_FORM>
+		<FORM ID="FRM_ITEM_BG" X="34" Y="16" Z="2" W="50" H="51">
+			<ATTR IMG="../Data/6_ui/mission/msNewItemBt.tga" IMG_W="100" IMG_H="102" U="2" V="2"/>
+			<FORM ID="FRM_OUTLINE" X="4" Y="4" Z="20" W="40" H="40" PASS_EVENT="1">
+				<ATTR IMG="../Data/6_ui/main/mnSkillLn.tga" IMG_W="120" IMG_H="120" U="3" V="3"/>
+				<SCRIPT ID="ON_CALL">
+					g_UsingCopyMachine = false
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					if g_UsingCopyMachine then
+						UVAnimation(UISelf, 0.09, 1, 7, 1)
+					end
+				</SCRIPT>
+			</FORM>
+			<ICON ID="ICN_ITEM" X="4" Y="4" Z="10" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_CALL">
+					UISelf:SetCustomDataAsInt(299603120)
+					local itemNo = GetDefence7PointCopyItem()
+					if 0 ~= itemNo then
+						UISelf:SetGrayScale(0)
+					else
+						UISelf:SetGrayScale(1)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">
+					UISelf:DrawIcon()
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_UP">
+					local itemNo = GetDefence7PointCopyItem()
+					if 0 ~= itemNo then
+						DoQuickUseItem(itemNo)
+					else
+						AddWarnDataTT(750037)
+						UISelf:SetGrayScale(1)
+					end
+					itemNo = GetDefence7PointCopyItem()
+					if 0 ~= itemNo then
+						UISelf:SetGrayScale(0)
+					end
+					return true
+				</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			</ICON>
+		</FORM>
+		<FORM ID="FRM_CURRENT_POINT" X="80" Y="10" W="140" H="65">
+			<ATTR TEXT="750028" T_X="5" T_Y="5" FONT="FTcts_13" FONT_COLOR_HEX="0xFFfff799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetCustomDataAsFloat(0)
+				UpdateCopyPointNumber(UISelf)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				AnimateCopyPointAll(UISelf, 0.007)
+			</SCRIPT>
+			<FORM ID="FRM_MAX" X="78" Y="6" W="40" H="30">
+				<ATTR TEXT="" T_X="0" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFFFF0000" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<SCRIPT ID="ON_TICK">
+					UpdateCopyMax(UISelf, 0.8)
+				</SCRIPT>
+			</FORM>
+			<BUILD ID="BLD_POINT" TARGET_ID="FRM_POINT" X="100" Y="20" X_COUNT="6" Y_COUNT="1" X_GAB="-20" Y_GAB="0"/>
+			<FORM ID="FRM_POINT" X="0" Y="0" W="35" H="35">
+				<ATTR IMG="../Data/6_ui/mission/msNumYs.tga" IMG_W="175" IMG_H="70" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+		</FORM>
+		<FORM ID="FRM_NEXT_POINT" X="84" Y="60" W="140" H="65">
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetCustomDataAsFloat(0)
+				UpdateCopyPointNumber(UISelf)
+			</SCRIPT>
+			<ATTR TEXT="750029" T_X="5" T_Y="7" FONT="Font_Text" FONT_COLOR_HEX="0xFFfff799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_TICK">
+				AnimateCopyPointAll(UISelf, 0.007)
+			</SCRIPT>
+			<BUILD ID="BLD_POINT" TARGET_ID="FRM_POINT" X="75" Y="20" X_COUNT="6" Y_COUNT="1" X_GAB="-15" Y_GAB="0"/>
+			<FORM ID="FRM_POINT" X="0" Y="0" W="25" H="25">
+				<ATTR IMG="../Data/6_ui/mission/msNumTmYs2.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+		</FORM>
+		<BUTTON ID="FRM_POINT_EXCHANGE" X="12" Y="119" W="177" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/mission/msF7Bt.tga" BTN_IMG_W="177" BTN_IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="750030" T_X="90" T_Y="3" FONT="Font_Text" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" />
+			<SCRIPT ID="ON_CALL">
+				UISelf:Disable(true)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if IsInParty() then
+					if IsPartyMaster(g_pilotMan:GetPlayerPilotGuid()) then
+						Send_C_M_REQ_EXCHANGE_ACCUMPOINT_TO_STRATEGICPOINT()
+					else
+						g_ChatMgrClient:AddLogMessage(GetTT(799397), true)
+					end
+				else
+					Send_C_M_REQ_EXCHANGE_ACCUMPOINT_TO_STRATEGICPOINT()
+				end
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="FRM_KILL_MONSTER" X="12" Y="141" W="177" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/mission/msF7Bt2.tga" BTN_IMG_W="177" BTN_IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="750045" T_X="90" T_Y="3" FONT="Font_Text" FONT_COLOR_HEX="0xFFF56800" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" />
+			<SCRIPT ID="ON_CALL">
+				UISelf:Disable(true)
+				SetMonsterKillButtonText(0)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if IsInParty() then
+					if IsPartyMaster(g_pilotMan:GetPlayerPilotGuid()) then
+						Send_PT_C_M_REQ_KILL_MONSTER_BY_ACCUMPOINT()
+					else
+						g_ChatMgrClient:AddLogMessage(GetTT(750043), true)
+					end
+				else
+					Send_PT_C_M_REQ_KILL_MONSTER_BY_ACCUMPOINT()
+				end
+			</SCRIPT>
+		</BUTTON>
+		<FORM ID="FRM_INFO" X="191" Y="119" W="20" H="19">
+			<ATTR IMG="../Data/6_ui/mission/msF7MkQ.tga" IMG_W="40" IMG_H="38" U="2" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				UISelf:SetUVIndex(2)
+				CallToolTipText(0, GetTextW(750027), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				UISelf:SetUVIndex(1)
+				CloseToolTip()
+			</SCRIPT>
+		</FORM>
+	</FORM>
+</XUI>

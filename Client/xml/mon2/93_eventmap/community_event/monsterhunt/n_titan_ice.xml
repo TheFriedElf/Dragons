@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Titan_Ice" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Aram_Ara"/>
+		<KFMPATH SCALE="2.0">../Data/2_Mon2/93_EventMap/Community_event/Titan_Ice/Titan_Ice.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+			<EFFECT SCALE="1.5"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="42"/>
+			<SPHERE TO="p_hit_point_02" SIZE="42"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+	        
+			<!-- 휘두르기 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+
+			<!-- 내려찍기 -->
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000207" COMMON_EFFECT_ID="ef_titan_range_01" COMMON_EFFECT_NODE="char_root" COMMON_EFFECT_SCALE="5.3"/> 
+			<ITEM NAME="attk_03_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000209"/>
+
+
+			<!--원거리 2 연속쏘기  -->		
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1000250"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000251"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000252" FIRE_START_NODE0="p_ef_prop_01" PROJECTILE_ID="Projectileefx_ant_skill_shot_02_projectile_ice" IS_FIRE_ONE_SHOT="TRUE"/>
+	    	<ITEM NAME="btlidle_02_skill_shot_middle" ANIMATION="1000252" FIRE_START_NODE0="p_ef_prop_01" PROJECTILE_ID="Projectileefx_ant_skill_shot_02_projectile_ice"/>
+	    	<ITEM NAME="shot_return_02" ANIMATION="1000253"/>
+
+
+			<!-- 크로스 어텍 -->
+			<ITEM NAME="crossattack_01_start" ANIMATION="1000901"CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_01_idle" ANIMATION="1000902"/>
+			<ITEM NAME="crossattack_01_fire" ANIMATION="1000903"  FIRE_EFFECT="EF_Common_Titan_Ice" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+			<ITEM NAME="crossattack_01_finish" ANIMATION="1000904"/>
+
+
+			<!--기모았다가 발산 -->
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION="1000301" COMMON_EFFECT_ID="ef_titan_range_02" COMMON_EFFECT_NODE="char_root" COMMON_EFFECT_SCALE="5.3"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000302"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000303"/>
+
+
+			<!-- 마법진 소환  -->
+			<ITEM NAME="attk_05_01_start" ANIMATION="1000311"/>
+			<ITEM NAME="attk_05_01" ANIMATION="1000312" RANGE_EFFECT="eff_dark_angel_summon_thorns_01"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000313"/>
+
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+
+			<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger" FURY_CAMERA_DISTANCE="350" />
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

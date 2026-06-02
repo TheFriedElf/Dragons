@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2212</ID> <!--T.T.10221201 에너지 전송 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 니콜라와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 니콜라-->
+<!--[내용]	달빛해안 마을 니콜라는 무한에너지를 사용할 수 있는 촉매제인 '공간 에너지큐브'를 완성했다고 한다. 니콜라와 함께 '공간 에너지큐브를' 사용해 보도록 하자.
+.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</CLIENT> <!--시작NPC 달빛해안 마을 - 니콜라 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</PAYER> <!--완료NPC 달빛해안 마을 - 니콜라 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</AGENT> <!--진행NPC 11 달빛해안 마을 - 니콜라 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10221211"/> <!--니콜라와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10221221" FACE="Nikola_smile"/> <!--공간 에너지는 두 가지 특징이 있다고 내가 얘기했었지.
+그 하나는 에너지 응축이 굉장히 오래 걸리는 단점이 있지.
+이제 다른 하나를 설명해 주지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10221226" FACE="Nikola_smile"/> <!--영광인 줄 알게. 이 에너지 전송장치를 실제로 본 사람은 나 말고 자네가 처음이네. 하하하-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10221223" FACE="Nikola_smile"/> <!--이제 또 다른 장점인 두 번째 특징에 대해서 얘기해보도록 하겠네.
+공간 에너지는 특성상 공간을 통해 바로 이동 시킬 수 있다는 장점이 있어.
+간단히 얘기하자면, 전기를 전송하기 위해 전기선이 필요하지만, 공간에너지는
+전기선이 필요가 없다는 말일세.%%
+내가  애초에 만들려던 것은 에너지 전송장치였었네. 장치가 완성단계에 이르자
+나는 상인의 마을에 있는 박사님에게 전송하는 실험을 하기로 했네.
+그 박사님은 과거 파렐과도 절친했던 친구 사이셨지.%%
+아무튼, 전송되어야 할 에너지가 어디론가 사라져 버리고 말았네.
+음,%%
+에너지 보존법칙이라고 들어봤나? 이 세상에 에너지는 절대 사라지지 않아.
+다만 다른 형태로 변경 될 뿐이지. 예를 들면 기름으로 불을 밝히면, 빛과 열이
+나오지. 이것 또한 예로 들 수 있지.%%
+그런데 사라져버린 에너지 때문에 고민하던 차에 갑자기 전송장치가 작동하더니, 
+처음 보는 물건이 놓여져 있더군. 그 물건은 이 세상 물건이 아니었네.
+확실히 다른 차원에서 온 물건이었네.%%
+여기까지가 자네를 만나기 전까지 상황일세. 
+자네가 가져온 고양이 덕에 답을 얻게 된 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10221224" FACE="Nikola_normal"/> <!--듣기 싫으면 말게. 강요할 생각은 없네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10221225" FACE="Nikola_normal"/> <!--얘기를 들을 준비가 되면 얘기하게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10221202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

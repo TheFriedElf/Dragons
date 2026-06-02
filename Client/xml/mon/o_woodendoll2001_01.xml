@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="o_WoodenDoll1001_01">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_WoodenDoll2001_01/N_WoodenDoll2001_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="Dummy01" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg" ANIMATION="0" RANDOM="0" SPEED="1.2"/>
+			<ITEM NAME="dmg" ANIMATION="1" RANDOM="1" SPEED="1.2"/>
+			<ITEM NAME="dmg" ANIMATION="2" RANDOM="2" SPEED="1.2"/>
+		</SLOT>
+		</WORLDOBJECT>
+		
+</ACTOR>

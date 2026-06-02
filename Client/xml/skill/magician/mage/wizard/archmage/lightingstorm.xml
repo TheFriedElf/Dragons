@@ -1,0 +1,24 @@
+<ACTION ID="a_Lighting_Storm" NEXT="a_Lighting_Storm2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE" ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Staff_skill_LightningStorm_01_01" />
+  <SLOT NAME="Staff_skill_LightningStorm_01_02" />
+  <FSM SCRIPT="Skill_Lighting_Storm"
+
+       FIRE_CASTER_EFFECT_ID="ef_skill_lightingstorm_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID2="ef_skill_lightingstorm_03_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE2="char_root"
+       FIRE_SOUND_ID="LightningStorm"
+       DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+
+       HIT_TARGET_EFFECT_ID="ef_skill_lightingstorm_02_char_root"
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+
+       HIT_TIMER_TIME="4"
+       HIT_TIMER_TICK="0.35"
+	   
+	   CASTING_SOUND_ID_MALE="Male_LightningStorm"
+	   CASTING_SOUND_ID_FEMALE="Female_LightningStorm"
+	   MULTIPLE_ATTACK="TRUE"
+       />
+</ACTION>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 켄타를 처리하고 퀘스트 완료를 받으면 -->
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "false"/>  
+  <CMD type="WaitFade" time="1"/>
+  
+  	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD TYPE="MapMove" MapID ="9020500" SpawnIndex="2" />
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+  <CMD TYPE="WaitCamera"/>
+  
+  <CMD type="waittime" time="3"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+  <CMD type="WaitFade" time="1"/>
+  
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

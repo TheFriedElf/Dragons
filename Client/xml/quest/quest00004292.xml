@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4292</ID> <!--T.T.10429200 평화를 찾은 바람항구 -->
+
+
+<!-- 작성자 : 김효중-->
+<!--[완료조건]	마을사람들과 대화
+( 순서대로 대화해야함 )-->
+<!--[완료NPC]	바람항구 - 스티븐 2세-->
+<!--[내용]	왕국에 다시금 활기가 불어오고 있다. 불과 얼마전까지만 하더라도 재정위기를 겪을정도로 힘들었었지만, 무슨일인지 항구엔 사람들이 넘치고 거리엔 활기가 가득하다. 마을 거리로 나가 상인들과 대화하여 어떻게 된 일인지 알아보자.-->
+
+
+<LIMITS>
+
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FED9025-A98B-4B57-A653-512CD83BC40F</CLIENT> <!--시작NPC 바람항구 - 스티븐 2세 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FED9025-A98B-4B57-A653-512CD83BC40F</PAYER> <!--완료NPC 바람항구 - 스티븐 2세 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021" Mark="END">1ACF8B10-CBA7-4931-AD72-438E6A268655</AGENT> <!--진행NPC 1 바람항구 - 부루투스 -->
+		<AGENT TYPE="NPC" EVENTNO="10022" Mark="END">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 2 바람항구 - 다비 -->
+		<AGENT TYPE="NPC" EVENTNO="10023" Mark="END">2913D89A-651D-488d-8C45-8BE6DD37BADE</AGENT> <!--진행NPC 3 바람항구 - 마이스터 -->
+		<AGENT TYPE="NPC" EVENTNO="10024" Mark="END">F6892AEE-C23C-4e4c-848E-93F72A255B05</AGENT> <!--진행NPC 4 바람항구 - 그웬 -->
+		<AGENT TYPE="NPC" EVENTNO="10025" Mark="END">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 5 바람항구 - 제레미 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">8FED9025-A98B-4B57-A653-512CD83BC40F</AGENT> <!--진행NPC 11 바람항구 - 스티븐 2세 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!--NPC_Event=10021/바람항구 - 부루투스,-->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!--NPC_Event=10022/바람항구 - 다비,-->
+		<NPC OBJECTNO="3" TYPE="INCPARAM" VALUE="513/1">10023</NPC> 
+ <!--NPC_Event=10023/바람항구 - 마이스터,-->
+		<NPC OBJECTNO="4" TYPE="INCPARAM" VALUE="514/1">10024</NPC> 
+ <!--NPC_Event=10024/바람항구 - 그웬,-->
+		<NPC OBJECTNO="5" TYPE="INCPARAM" VALUE="515/1">10025</NPC> 
+ <!--NPC_Event=10025/바람항구 - 제레미,-->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="513">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="514">10024</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="515">10025</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10429211"/> <!--요리 전문가 <부루투스>와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10429212"/> <!--대장장이 <다비>와 대화-->
+		<OBJECT3 COUNT="1" TEXT="10429213"/> <!--생산의 거장 <마이스터>와 대화-->
+		<OBJECT4 COUNT="1" TEXT="10429214"/> <!--대마법사 <그웬>과 대화-->
+		<OBJECT5 COUNT="1" TEXT="10429215"/> <!--대현자 <제레미>와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10429221" FACE="Steven_normal"/> <!--이상한 일이지. 얼마전까지 세금이 걷히질 않아서 왕국에 재정위기가 왔었는데 말이야. 최근에 상인들이 그동안 밀린세금도 다 내고 바람항구엔 예전보다 더 많은 사람들이 다녀가고 있다네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10429226" FACE="Steven_smile"/> <!--기후가 안정되면서 모든 것들이 제자리로 돌아 갔다니 다행이야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10429223" FACE="Steven_normal"/> <!--바람항구에 활기찬 바람이 다시 불게된 이유가 궁금하다네. 아무래도 상인들이 최상급의 물건들을 생산하게 되면서 사람들의 왕래가 많아 진게 아닐까 하네. 마을로 가서 상인들과 대화를 해서 그 이유를 좀 알아봐주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10429224" FACE="Steven_angly"/> <!--그저 마을을 돌아보며 대화만 해 달라는 것 뿐인데 어려운겐가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10429225" FACE="Jeremy_normal"/> <!--그뿐인가? 다른 말들은 안하던가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10429202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--기타-->
+			<BODY TEXT="10429251" FACE="Brutus_smile"/> <!--무슨 일인지 질 좋은 재료들이 싸게 들어오니 맛있는 음식들을 넉넉하고 싸게 제공할 수가 있습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--기타-->
+			<BODY TEXT="10429252" FACE="Darby_smile"/> <!--최상급의 광석으로 최고급의 장비를 만드니 사람들이 많이들 사가니, 덕분에 수입도 늘고 밀린 세금도 내었다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="513" > <!--기타-->
+			<BODY TEXT="10429253" FACE="meister_smile"/> <!--대마법사 그웬님의 점성술이 잘 맞아서 농작물도 풍년이도 질좋은 광석도 많이 캐고 있답니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="514" > <!--기타-->
+			<BODY TEXT="10429254" FACE="Gwen_smile"/> <!--별자리가 제자리를 찾으니, 점성술도 제대로 맞아 떨어지고 있어. 이제 한시름 놓겠는 걸.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="515" > <!--기타-->
+			<BODY TEXT="10429255" FACE="Jeremy_smile"/> <!--별자리가 제자리를 찾았네. 농작물이나 가축들도 잘 자라고 있다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

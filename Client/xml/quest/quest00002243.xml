@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2243</ID> <!--T.T.10224301 성공하는 사람들의 3가지 습관 (1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	제시와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 제시-->
+<!--[내용]	달빛해안 마을 제시는 성공하는 사람들은 특별한 습관이 있다고 한다. 제시는 성공하는 방법에 대해 알려주겠다며 믿고 따라와 보라고 한다. 제시가 첫 번째로 말한 성공하는 습관은 계획이라고 한다. 제시에게 계획에 관해 자세히 들어보도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 달빛해안 마을 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 달빛해안 마을 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 달빛해안 마을 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10224311"/> <!--제시와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10224321" FACE="Jessie_normal"/> <!--오랜만에 보는군.
+자네는 인생에 있어 성공이란 무엇이라 생각하나?
+돈을 많이 버는 것? 영웅이 되어 이름을 남기는 것?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10224326" FACE="Jessie_smile"/> <!--성공하는 사람들은 세 가지 습관이 있네.
+첫 번째는 바로 목표일세. 내가 저번에 말한 적이 있을걸세.
+성공하고자 하는 건 달라도 가는 길은 같다고 말이네.%%
+바로 길 자체가 목표가 되는걸세.
+자네도 성공하기 위해 목표부터 세우는 연습을 해두게나.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10224323" FACE="Jessie_smile"/> <!--[목적 없이 존재하는 것은 아무것도 없다.]
+누구나 자신이 생각하는 성공은 다른 법일세.
+누구는 돈을 누구는 명예를 누구는 가족을 갖고 싶어하지.%%
+성공은 분명 같지 않네. 하지만 성공으로 가는 길을 하나라고 봐도 좋을걸세.
+성공한 사람들은 분명 같은 길로 걸었을 테니 말일세.%%
+어떤가? 자네도 그 길을 걷는 법을 배우지 않겠나?
+준비되면 말하게. 내가 자세히 알려주도록 하지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10224324" FACE="Jessie_angly"/> <!--성공에 관심이 없다고?
+믿을 수 없군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10224325" FACE="Jessie_normal"/> <!--배울 준비가 되면 날 다시 찾아오게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10224302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

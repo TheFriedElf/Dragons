@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5027</ID> <!--T.T.10502701 광견병 조심! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 늑대 10마리 처리-->
+<!--[완료NPC]	바람항구 - 에반-->
+<!--[내용]	에반은 지금 광견병에 걸린 늑대들이 마을에 가끔 출몰한다는 이야기를 듣고 걱정하고 있다. 에반의 걱정을 날려주기 위해서 시청 지하수로에 살고 있다는 광견병에 걸린 늑대 10마리를 처리하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">018AF683-1D0B-46CB-BC11-57056D8CDDA4</CLIENT> <!--시작NPC 바람항구 - 에반 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">018AF683-1D0B-46CB-BC11-57056D8CDDA4</PAYER> <!--완료NPC 바람항구 - 에반 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">018AF683-1D0B-46CB-BC11-57056D8CDDA4</AGENT> <!--진행NPC 11 바람항구 - 에반 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010502/1">6004100</MONSTER> 
+ <!--MON_NO=6004100/갈색 늑대,MAP_NO=9010502/파렐 대저택,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010502/1">6004200</MONSTER> 
+ <!--MON_NO=6004200/사나운 늑대,MAP_NO=9010502/파렐 대저택,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010502/1">6004300</MONSTER> 
+ <!--MON_NO=6004300/미친 늑대,MAP_NO=9010502/파렐 대저택,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10502711"/> <!--광견병 걸린 늑대-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502721" FACE="Eavan_normal"/> <!--제군. 이 마을에 큰일이 닥쳤네. 
+제군도 알다시피 이곳 바람항구는 외부의 공격에 상당히 견고하게 방어하도록 시스템이 되어 있지.%%
+그런데 어디선가 광견병에 걸린 늑대가 나타났네.
+도대체 어디서 나타났는지 종잡을 수가 없지만, 일단 나타난 이상 처리할 수밖에 없네.%%
+자네도 주민의 안전을 지키기 위해서 광견병 걸린 늑대 소탕에 동참하게나.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502726" FACE="Eavan_smile"/> <!--잘했네. 역시 자네는 한 사람의 몫을 제대로 하는 친구군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502723" FACE="Eavan_normal"/> <!--다행이 아직 늑대에게 물렸다는 사람은 나오지 않고 있지만, 언제 어떻게 발생할지 모르는 형편이지.%%
+늑대의 정확한 위치는 파악할 수 없었지만 시청 지하수로 쪽에서 자주 봤다는 목격자가 있다네. %%
+자네가 시청 지하수로에 들어가서 늑대들을 소탕하면 이번 임무는 끝날걸세.
+부디 건투를 비네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502724" FACE="Eavan_angly"/> <!--거절하는 이유가 도대체 뭔가? 
+냄새 때문인가?
+지하수로가 냄새나는 건 세상이 다 아는 사실일세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502725" FACE="Eavan_angly"/> <!--여기서 뭐하는 겐가?
+주민의 안전을 위해서 빨리 시청 지하수로로 뛰어 가게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

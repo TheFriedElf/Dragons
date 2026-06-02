@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+	<ID>832</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="508654">대 마법사의 조언</TITLE>
+	<GROUPNAME TEXT="500188">종소리 마을</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="8" MAX="999"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>908</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">D6595D6A-4B8F-4467-8D28-BE803A5B779D</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10001">D6595D6A-4B8F-4467-8D28-BE803A5B779D</AGENT>
+		<AGENT TYPE="NPC" EVENTNO="10002" MARK="END">45FC6A27-3A9B-41ad-B9D0-6AEA178DAFF8</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10003">45FC6A27-3A9B-41ad-B9D0-6AEA178DAFF8</PAYER>
+	</PAYERS>
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/51000110/1">10001</NPC>  <!--Item_NO=51000110/[종소리마을 귀환스크롤] _퀘스트용,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/51000110/1/511">10001</NPC> 
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/51000110/1">10001</NPC> 
+ <!--Item_NO=89008670/[마력추출 재료] _퀘스트용,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10001</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10002</NPC>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="508661"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+	</OBJECTS>
+    <REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50800010</ITEM>
+		</SELECT1>
+    </REWARD>
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="508655" FACE="dag_normal"/>
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="301">
+			<BODY TEXT="508656" FACE="dag_normal"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="401">
+			<BODY TEXT="508657" FACE="dag_normal"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="508658" FACE="dag_normal"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="508659" FACE="Pablo_normal"/>
+			<SELECT ID="30602" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<!--701번은 완료를 허락 하였을 때 뜰창-->
+		<DIALOG ID="701">
+			<BODY TEXT="500017"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--801번은 완료를 거부 하였을 때 뜰창-->
+		<DIALOG ID="801">
+			<BODY TEXT="500018"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="508660"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="502048"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10083201" FACE="dag_normal"/> <!--설마, 설마, 설마! 마력추출 재료를 잃어버리신 거에요? 우웃. 어쩔 수 없죠. 여기 다시 드릴테니 이번에는 잃어버리지 마세요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+	</DIALOGS>
+</QUEST>

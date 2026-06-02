@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_058100_SC" DESCRIPTION="90181000">
+	<GSAPATH>../Data/3_World/01_Felloruss/01_Level/050237_FD.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<!--미니맵-->
+	<MINIMAP Y="160" H="275">../Data/3_World/01_Felloruss/01_Level/050207_FD.dds</MINIMAP>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+	
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	
+	<!--포 그-->
+	<FOG DENSITY="0.360000" FUNC="RANGE_SQ" START="80.000000" END="7600.000000" COLOR="0.927000,0.987000,0.861999"/>
+	<!-- L,o,d -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="2000" LOW_END="3000" USE="1"/>
+
+</WORLD>

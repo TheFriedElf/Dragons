@@ -1,0 +1,12 @@
+<ACTION ID="a_twin_tornado_spin" NEXT="a_jump" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="casting01" LOOP="TRUE"/>  
+  <SLOT NAME="tornado_spin"/>  
+   <FSM SCRIPT="StormBlade"  
+	FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+    FIRE_CASTER_EFFECT_ID="efx_boxing_mc_skill_dft_tornado_spin_01"
+	FIRE_CASTER_EFFECT_SCALE="1"
+    FIRE_SOUND_ID=""	
+	RISING_MOVING_DELTA="50"
+	NO_DAMAGE_HOLD="TRUE"
+  />
+</ACTION>

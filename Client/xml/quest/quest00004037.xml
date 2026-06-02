@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4037</ID> <!--T.T.10403701 신보의 행방을 찾아서(4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	스티븐 무역항 주변의 몬스터 40마리 처치-->
+<!--[완료NPC]	스티븐 무역항 - 크로키-->
+<!--[내용]	알비다의 행방조사를 수월하게 진행하기 위해 스트븐 무역항 주변의 몬스터 40마리를 잡아 보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 스티븐 무역항 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</PAYER> <!--완료NPC 스티븐 무역항 - 크로키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 스티븐 무역항 - 크로키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="KILLMONSTER" VALUE="1">9010130</GROUND> 
+ <!--MAP_NO=9010130/스티븐 무역항,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="40" TEXT="10403711"/> <!--스티븐 무역항 몬스터-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403721" FACE="Kroki_normal"/> <!--비상사태이니, 간단히 용건만을 전하겠소이다.
+집중해서 들어주시오.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403726" FACE="Kroki_normal"/> <!--좋소.
+간만에 마음이 통하는 상대를 만났소이다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403723" FACE="Kroki_normal"/> <!--이 곳 스티븐 무역항은 브리즈국의 가장 커다란 항구였으나
+지금은 후커와 알비다 부부해적단의 손아귀에 있소이다.%%
+브리즈국의 드래곤원정대도 이 문제 때문에 골치를 앓는다는 것은 
+그대도 잘 알고있을 것이외다.%%
+현재 이 부근에 알비다가 숨어들었다는 첩보가 있지만... 
+몬스터들 때문에 자세한 조사가 어렵소이다.%%
+그러하오니 나와 그대가 이곳의 몬스터들을 일망타진한다면
+알비다의 행방을 캐낼 수 있을 것이오. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403724" FACE="Kroki_angly"/> <!--어쩔 수 없는 사정이 있으리라 보오. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403725" FACE="Kroki_normal"/> <!--이곳에서 살아남기 위해서는 체력에 유의해야 할 것이오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

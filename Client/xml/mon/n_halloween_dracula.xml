@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Halloween_dracula">
+	<TEXTURE SRC="mon_eye02.dds">../Data/2_Mon/N_Moth/mon_eye02.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_cleef_Dracula"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_cleef_Dracula/N_cleef_Dracula.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="20"/>
+			<SPHERE TO="p_hit_point_02" SIZE="25"/>
+		</ABV>
+		<SLOT>
+			<!--스킬 리스트 -->
+			<!-- 근접공격 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- 마법탄 8갈래 발사 -->
+			<ITEM NAME="shot_around_01" ANIMATION="1000201"/>
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1000202" FIRE_START_NODE="p_ef_heart" PROJECTILE_ID="PROJECTILE_Dracula_shot_01"/>
+			<!-- 박쥐방어 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000203" CAST_EFFECT="ef_Dracula_skill_02_01_char_root"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000203" CAST_EFFECT="ef_Dracula_skill_02_01_char_root"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000204" CAST_EFFECT="ef_Dracula_skill_02_01_char_root"/>
+			<!-- 분신술 -->
+			<ITEM NAME="attk_03_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000206"/>
+			<!-- 순간이동 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000207" RANGE_EFFECT="ef_Dracula_skill_04_02_p_ef_heart"/>
+			<!--블랙홀 만들기 -->
+			<ITEM NAME="blackhole_01_start" ANIMATION="1000208"/>
+			<ITEM NAME="blackhole_01" ANIMATION="1000209"/>
+			<ITEM NAME="blackhole_01_02" ANIMATION="1000210"/>
+			<!--암흑-->
+			<ITEM NAME="attk_06_01" ANIMATION="1000211"/>
+			<ITEM NAME="attk_06_02" ANIMATION="1000212"/>
+			<!--박쥐떼 날리기-->  
+			<ITEM NAME="Bat_Missile_btlidle_03" ANIMATION="1000213"/>
+			<ITEM NAME="Bat_Missile_fire_03" ANIMATION="1000214" FIRE_START_NODE="p_wp_r_hand" PROJECTILE_ID="PROJECTILE_Dracula_bat_01" FIRE_DELAY="0.1" PROJECTILE_COUNT="10"/>
+			<ITEM NAME="Bat_Missile_finish_03" ANIMATION="1000216"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000021" DIE_ALPHA="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="run" ANIMATION="1000056"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

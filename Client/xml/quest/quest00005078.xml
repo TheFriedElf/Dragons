@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5078</ID> <!--T.T.10507801 현자의 서(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 상어와 갑판상어가 가져간 제레미의 현자의 서 10권을 회수하자-->
+<!--[완료NPC]	바람항구 - 제레미-->
+<!--[내용]	제레미는 스티븐 무역항 쪽으로 빌려준 책을 받아 오다가 상어와 갑판상어에게 책을 도둑 맞았다고 한다. 그냥 보통 책이라면 상관이 없을 테지만, 그 책은 보통 책이 아니라 현자의 서라고 한다. 세상의 온갖 지식들이 담겨 있기 때문에 나쁜 자의 손에 들어가면 좋지 않은 일이 벌어질지도 모른다고 한다. 현자의 서가 악용되기 전에 스티븐 무역항의 상어와 갑판상어에게서 현자의 서 10권을 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</CLIENT> <!--시작NPC 바람항구 - 제레미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</PAYER> <!--완료NPC 바람항구 - 제레미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 11 바람항구 - 제레미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010130/10000/7000/1/1/160507800">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010130/스티븐 무역항,Item_NO=160507800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160507800</ITEM> 
+ <!--Item_NO=160507800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010130/10000/7000/1/1/160507800">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010130/스티븐 무역항,Item_NO=160507800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160507800</ITEM> 
+ <!--Item_NO=160507800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10507811"/> <!--현자의 서-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10507821" FACE="Jeremy_normal"/> <!--허허. 이런 몹쓸 녀석들 같으니라고.
+큰일입니다. %name%님 저에게 있어서 몹시 중요한 현자의 서를 도둑맞았습니다. 
+얼마 전 친구에게 빌려줬던 현자의 서를 가지고 돌아오던 중이었습니다.%% 
+막 스티븐 무역항을 지나오던 그때 상어와 갑판상어가 나타났습니다. 
+그 녀석들은 저에게 가진 것을 다 달라고 했습니다. 
+전 가진 게 책뿐이라고 했습니다. 
+녀석들은 어쩔 수 없다면서 불쏘시개로 쓴다면서 제 책을 가지고 가버렸습니다.%% 
+설마 책을 가져가리라곤 생각도 못했습니다. 
+현자의 서는 세상의 지식들이 담긴 책입니다. 
+악인의 손에 들어가서 악용된다면 좋지 않은 일이 벌어질지도 모릅니다. 
+부디 현자의 서를 되찾아 주시길 부탁드립니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10507826" FACE="Jeremy_angly"/> <!--감사합니다. 응? 이런, 누군가 현자의 서를 더럽혀 놨습니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10507823" FACE="Jeremy_normal"/> <!--불쏘시개로 쓴다고 녀석들이 말했지만, 현자의 서의 정체를 눈치챈다면 분명 악용하려고 할 게 뻔합니다. 
+상어와 갑판상어는 포악하기는 하지만 아주 바보는 아닙니다. 
+분명 제가 들고 가던 책이 무언가 값어치를 한다는 것을 눈치챈 게 분명합니다. 
+%name%님 꼭 좀 부탁드리도록 하겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10507824" FACE="Jeremy_angly"/> <!--지금 없어진 물건이 책이라고 무시하시는 겁니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10507825" FACE="Jeremy_normal"/> <!--현자의 서에 담긴 정보는 큰 파급효과를 가지고 있습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10507802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

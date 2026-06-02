@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5088</ID> <!--T.T.10508801 갈 수 없는 고향(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 [아케이드 모드(F1)]의 몽글과 붉은 안테나 몽글 30마리를 처리하자-->
+<!--[완료NPC]	스티븐 무역항 - 크로키-->
+<!--[내용]	크로키는 승선증의 행방을 알고 싶다면 그만큼의 열의를 보여달라고 한다. 자신은 승선증이 얼마나 가치가 있는지도 모르고, 승선증의 행방을 알려줘도 될만큼 신용을 가지 못했기 때문이다. 크로키에게 승선증의 가치를 알리고 신용을 주기 위해서 스티븐 무역항의 [아케이드 모드(F1)]의 몽글과 붉은 안테나 몽글 30마리를 처리하자. 몽글과 붉은 안테나 몽글은 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 스티븐 무역항 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</PAYER> <!--완료NPC 스티븐 무역항 - 크로키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 스티븐 무역항 - 크로키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010131/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010131/스티븐 무역항 아케이드 1,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010135/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010135/스티븐 무역항 아케이드 5,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010131/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010131/스티븐 무역항 아케이드 1,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010134/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010134/스티븐 무역항 아케이드 4,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10508811"/> <!--몽글과 붉은 안테나 몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508821" FACE="Kroki_normal"/> <!--흠. 승선증 말이오?
+승선증에 대해서는 누군가 이 근방에서 떠드는 것을 들은 적이 있소.
+하지만 그 승선증의 가치가 어느 정도인지 소자는 알지 못하고 있소.%%
+물론 그 승선증이 그대의 아는 사람의 물건이라는 것도 확실히 믿지 못하오.
+그대는 소자에게 승선증의 가치를 증명하고 그대에 대한 신용을 얻게 하고 싶소? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508826" FACE="Kroki_smile"/> <!--그대는 충분히 소자에게 그대의 신용을 보여줬소. 물론 승선증의 가치에 대해서도 말이오.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508823" FACE="Kroki_normal"/> <!--우리 용족은 신용을 얻게 하기 위해서는 그에 동등한 일을 하고 있소.
+우리는 입에 발린 말을 믿지 않고 있기 때문이오. 오직 행동만이 그 사람을 증명하는 것이오.
+소인이 이곳 스티븐 무역항에서 수행한지 꽤 오래 되었소.
+이곳은 수행하기 편한 곳이었지만, 낯선 불청객으로 인해 수행에 곤란을 겪고 있소.
+그대가 낯선 불청객인 스티븐 무역항의 [아케이드 모드(F1)]의 몽글과 붉은 안테나 몽글 30마리를 처리해 주길 바라오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508824" FACE="Kroki_angry"/> <!--그렇다면 도대체 소자에게 왜 온 것이오?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508825" FACE="Kroki_angry"/> <!--그대의 머뭇거림이 신용을 하락하게 만드는 것이오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

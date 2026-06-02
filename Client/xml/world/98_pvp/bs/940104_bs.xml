@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_940104_BS">
+  <GSAPATH>../Data/3_World/98_PVP/01_Level/BS/940104_BS.gsa</GSAPATH>
+  <MINIMAP Y="110" H="260">../Data/3_World/98_PVP/01_Level/BS/940104_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/battlesquare.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0" />
+
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="400"/>
+	</TRIGGER>
+
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1775" MID_END="4000" LOW_END="10000" USE="1"/>
+	<!-- 포 그 -->
+	<FOG DENSITY="0.050000" START="15.000000" END="6155.000000" COLOR="0.826000,0.552000,0.294000"/>
+
+</WORLD>

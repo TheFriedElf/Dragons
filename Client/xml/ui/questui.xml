@@ -1,0 +1,2614 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!-- /////////////////////////////////FORM_MINI_QUEST_LIST///////////////////////////////// -->
+	<!--FORM_MINI_QUEST_LIST ID="FORM_MINI_QUEST_LIST" USE_OFFSCREEN ="1">
+		<ATTR X="807" Y="96" W="216" H="227" CAN_DRAG="1" />
+		
+		<STATIC_FORM ID="SFRM_CLOSE" X="186" Y="4" Z="2" W="24" H="24">
+			<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE">
+				<ATTR X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> GetQuestMan():SetMiniQuestState(false) </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<LIST ID="QUEST_LIST" X="0" Y="14" W="212" H="203">
+			<ATTR ELEMENT_ID="TREE_QUEST_VIEW_STATE" ITEM_X="5" ITEM_Y="5"/>
+			<IMG ID="QUEST_LIST_SCROLL_BG">
+				<ATTR X="198" Y="35" Z="-1" W="13" H="167" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="153"/>
+			</IMG>
+			<BUTTON ID="ScrUp">
+				<ATTR X="194" Y="20" W="20" H="15"/>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown">
+				<ATTR X="194" Y="188" W="20" H="15"/>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle">
+				<ATTR X="196" Y="25" W="18" H="21"/>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="QUEST_LIST_SCROLL_BG"/>
+		</LIST>
+		
+		<STATIC_FORM ID="SFRM_QUEST_INFO" X="0" Y="0" W="216" H="227">
+			<ATTR CAN_DRAG="0" STATIC_NUM="9"/>
+		</STATIC_FORM>
+		
+	</FORM_MINI_QUEST_LIST-->
+
+	<TREE ID="TREE_QUEST_VIEW_STATE" X="0" Y="0" W="185" H="26">
+		<ATTR TEXT="19944" FONT="QTtext" T_X="25" T_Y ="2" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<ATTR ITEM_X="0" ITEM_Y="20"/>
+		<ATTR EXPENSION_BTN_IMG="../Data/6_ui/Common/cmPlusMinus02.tga" EXP_BTN_X="2" EXP_BTN_Y="1"/>
+		<ATTR EXP_BTN_IMG_W="36" EXP_BTN_IMG_H="36" EXP_BTN_W="18" EXP_BTN_H="18"/>
+		<IMG ID="IMG_BG" X="3" Y="2" W="16" H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="16" IMG_H="16"/>
+		<IMG ID="IMG_ROW1_LINE1">
+			<ATTR X="22" Y="18" W="181" H="2" IMG="../Data/6_ui/Common/cmBlLine.tga" IMG_W="181" IMG_H="2"/>
+		</IMG>
+		<ATTR ELEMENT_ID="BTN_QUEST_ELEMENT"/>
+	</TREE>
+	
+	<FORM ID="BTN_QUEST_ELEMENT" X="0" Y="0" W="180" H="20">
+		<ATTR T_X="20" T_Y="0" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_IconAllow" X="5" Y="0" W="19" H="16" >
+			<ATTR IMG="../Data/6_ui/Quest/qsArrow.tga" IMG_W="28" IMG_H="16" U="2" V="1" UV_INDEX="2"/>
+		</IMG>
+		<FORM ID="FRM_RIGHT_COUNT" X="133" Y="0" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="0" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+	</FORM>
+
+	<!-- ///////////////////////////////// MY_QUEST_INFO ///////////////////////////////// -->
+	<!--FORM_QUEST_INFO ID="MY_QUEST_INFO" X="512" Y="91" W="367" H="466" CAN_DRAG="1">
+		<SCRIPT ID="ON_CLOSE"> CloseUI("Giveup_Quest") </SCRIPT>
+		<SCRIPT ID="ON_CALL"> CloseUI("Giveup_Quest") </SCRIPT>
+		
+		<LIST ID="QUEST_LIST" X="10" Y="37" W="335" H="270">
+			<ATTR ITEM_X="5" ITEM_Y="5"/>
+			<IMG ID="QUEST_LIST_SCROLL_BG" X="331" Y="21" W="13" H="236">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="236"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="327" Y="6" W="20" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="327" Y="250" W="20" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="329" Y="21" W="18" H="20">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR ELEMENT_ID="FRM_QUEST_BG"/>
+			<ATTR BTN_UP="ScrUp"/>
+			<ATTR BTN_DOWN="ScrDown"/>
+			<ATTR BTN_MIDDLE="ScrMiddle"/>
+			<ATTR WND_BAR="QUEST_LIST_SCROLL_BG"/>
+			
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				--GetQuestInfoFromList()
+			</SCRIPT>
+		</LIST>
+		
+		<STATIC_FORM ID="Giveup">
+			<ATTR X="17" Y="310" Z="1" W="334" H="28" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="3"/>
+			<ATTR TEXT="19933" FONT="Font_Text" T_X="15" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/>
+			<BUTTON ID="Btn_Giveup" X="250" Y="1" W="84" H="26">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR TEXT="400088" T_X="10" T_Y="4" FONT="FTbt_12" T_OUTLINE="1"/>
+				<ATTR PRESET="BUTTON" />
+				<SCRIPT ID="ON_L_BTN_DOWN"> CallUI("Giveup_Quest") </SCRIPT>
+				<HOTKEY ID="59"> CallUI("Giveup_Quest") </HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_QUEST_INFO">
+			<ATTR ALIGN_X="0" ALIGN_Y="0" W="367" H="358" CAN_DRAG="0" STATIC_NUM="1"/>
+			
+			<STATIC_FORM ID="SFRM_TITLE">
+				<ATTR X="1" Y="0" W="365" H="36" STATIC_NUM="4"/>
+				<STATIC_FORM ID="SFRM_TAB_BG">
+					<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+					<CHECK_BUTTON ID="CBTN_TITLE">
+						<ATTR X="0" Y="0" W="84" H="24" BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+						<ATTR TEXT="400083" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_CLOSE">
+					<ATTR X="334" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+					<BUTTON ID="BTN_CLOSE">
+						<ATTR X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+						<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("MY_QUEST_INFO") </SCRIPT>
+						<HOTKEY ID="1"> CloseUI("MY_QUEST_INFO") return true</HOTKEY>
+					</BUTTON>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			
+			<STATIC_FORM ID="SFRM_BODY">
+				<ATTR X="9" Y="35" W="349" H="311" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SHADOW">
+					<ATTR X="0" Y="0" W="349" H="311" STATIC_NUM="3"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			
+		</STATIC_FORM>
+	</FORM_QUEST_INFO-->
+
+
+	<!-- ///////////////////////////////// FRM_COMPLETE_INFO ///////////////////////////////// -->
+	<!--FORM_QUEST_INFO ID="FRM_COMPLETE_INFO"-->
+
+	<!-- ///////////////////////////////// NPC SELECTIVE_QUEST_LIST ///////////////////////////////// -->
+	<FORM_SELECTIVE_QUEST_LIST ID="SELECTIVE_QUEST_LIST" ALIGN_X="75" ALIGN_Y="70" W="307" H="307">
+		<BUTTON ID="BTN_CUR" X="8" Y="34" Z="2" W="259" H="34" IS_VISIBLE="1">
+			<ATTR BTN_IMG="../Data/6_ui/Community/ptUpImg04.tga" BTN_IMG_W="259" BTN_IMG_H="136" U="1" V="4"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnEnter_SelectiveQuestList() </SCRIPT>
+		</BUTTON>		
+		<STATIC_FORM ID="SFRM_QUEST_GROUP" X="14" Y="40" Z="1" W="250" H="25">
+			<CHECK_BUTTON X="6" Y="5" W="14" H="14" CAN_COLOR_CHANGE="1" BTN_CLICK_LOCK="1">
+				<ATTR  BTN_IMG="../Data/6_ui/Common/cmPlusMinus.tga" BTN_IMG_W="28" BTN_IMG_H="28"/>
+				<ATTR COLOR_CHANGE="1" COLOR_TYPE="4"/>
+			</CHECK_BUTTON>
+			<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2"/>
+			<ATTR TEXT="20007" FONT="Font_Text" T_X="24" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<LIST ID="QUEST_LIST" X="20" Y="67" W="305" H="224">
+			<!--ATTR IMG="../A.tga" IMG_W="225" IMG_H="220"/-->
+			<IMG ID="QUEST_LIST_SCROLL_BG">
+				<ATTR X="271" Y="21" W="13" H="189" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="189"/>
+			</IMG>
+			<BUTTON ID="ScrUp">
+				<ATTR X="250" Y="6" W="19" H="15"/>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown">
+				<ATTR X="250" Y="211" W="19" H="15"/>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle">
+				<ATTR X="252" Y="21" W="18" H="21"/>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR ELEMENT_ID="FRM_NPC_QUEST_TREE_ELEMENT" ITEM_X="5" ITEM_Y="5"/>
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle"/>
+			<ATTR WND_BAR="QUEST_LIST_SCROLL_BG"/>
+		</LIST>
+		
+		<STATIC_FORM ID="SFRM_SELECTIVE_QUEST" ALIGN_X="50" ALIGN_Y="50" Z="-1" W="307" H="307" CAN_DRAG="0" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="305" H="36" STATIC_NUM="4">
+				<STATIC_FORM ID="SFRM_TAB_BG" X="7" Y="4" W="265" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_TAB_BG" X="0" Y="0" W="265" H="24" STATIC_NUM="3"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_CLOSE">
+					<ATTR X="274" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+					<BUTTON ID="BTN_CLOSE">
+						<ATTR X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+						<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("SELECTIVE_QUEST_LIST") </SCRIPT>
+						<HOTKEY ID="1"> CloseUI("SELECTIVE_QUEST_LIST") return true</HOTKEY>
+					</BUTTON>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BODY">
+				<ATTR X="9" Y="35" W="289" H="261" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SHADOW">
+					<ATTR X="0" Y="0" W="289" H="261" STATIC_NUM="3"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			
+			<FORM ID="CBTN_TITLE" X="8" Y="4" W="263" H="24">
+				<!--ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48" BTN_CLICK_LOCK="1"/-->
+				<ATTR TEXT="400036" FONT="FTtitle_14" T_X="131" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFF613629"/>
+				<!--SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT-->
+			</FORM>
+		</STATIC_FORM>
+		
+		<SCRIPT ID="ON_CALL"> RegistUIAction(UISelf, "CloseUI") LockPlayerInputMove(18) LockPlayerInput(18) OnInit_SelectiveQuestList() </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> UnLockPlayerInputMove(18) UnLockPlayerInput(18) return true </SCRIPT>
+		<HOTKEY ID="121"> Move_SelectiveQuestList(-1) return true </HOTKEY>
+		<HOTKEY ID="126"> Move_SelectiveQuestList(1) return true </HOTKEY>
+		<HOTKEY ID="28"> OnEnter_SelectiveQuestList() return true </HOTKEY>
+		<HOTKEY ID="106"> OnEnter_SelectiveQuestList() return true </HOTKEY>
+		<HOTKEY ID="57"> OnEnter_SelectiveQuestList() return true </HOTKEY>
+	</FORM_SELECTIVE_QUEST_LIST>
+	
+	<!-- ///////////////////////////////// Giveup_Quest Dialog ///////////////////////////////// -->
+	<MSG_BOX ID="Giveup_Quest" ALIGN_X="50" ALIGN_Y="25" W="228" H="158" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_BG" Z="-1" W="247" H="158" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_BG_COLOR" X="8" Y="8" Z="0" W="231" H="108" STATIC_NUM="2"  CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="8" Y="8" Z="1" W="231" H="108" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<FORM ID="FRM_MESSAGE" X="8" Y="8" Z="0" W="212" H="108">
+			<ATTR TEXT="400082" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_X="20" T_Y="42"/>
+		</FORM>
+		<BUTTON ID="BTN_OK" X="41" Y="121" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="96" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnGiveUpQuestConfirmed() UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="59"> OnGiveUpQuestConfirmed() UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="127" Y="121" W="79" H="28">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="97" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</MSG_BOX>
+	<!--STATIC_FORM ID="Giveup_Quest">
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="237" H="168" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="235" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID="SFRM_TAB_BG">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<CHECK_BUTTON ID="CBTN_TITLE">
+					<ATTR X="0" Y="0" W="84" H="24" BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+					<ATTR TEXT="400081" FONT="FTbt_12" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+					<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_CLOSE">
+				<ATTR X="204" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<BUTTON ID="BTN_CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("Giveup_Quest") </SCRIPT>
+					<HOTKEY ID="1"> CloseUI("Giveup_Quest") return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_BODY">
+			<ATTR X="9" Y="35" W="219" H="85" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="219" H="85" STATIC_NUM="3"/>
+				<ATTR TEXT="400082" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_X="20" T_Y="35"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BNT_OK">
+			<ATTR X="9" Y="126" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400002" FONT="FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				OnGiveUpQuestConfirmed();
+				CloseUI("Giveup_Quest")
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BNT_CANCEL">
+			<ATTR X="144" Y="126" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400003" FONT="FTbt_12" T_X="42" T_Y ="6" T_CENTER="1" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				CloseUI("Giveup_Quest")
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM-->
+
+	<!-- /////////////////////////////////FORM_MY_QUEST_LIST///////////////////////////////// -->
+	<QUEST_LIST_PANNEL ID="FORM_MY_QUEST_LIST" ALIGN_X="50" ALIGN_Y="50" W="617" H="421" CAN_DRAG="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">		
+		<STATIC_FORM ID="SFRM_MY_QUEST_LIST" X="0" Y="0" W="617" H="421" CAN_DRAG="0" STATIC_NUM="1">
+			<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="617" H="36" STATIC_NUM="4">
+				<STATIC_FORM ID="SFRM_TAB_BG" X="7" Y="4" W="84" H="24">
+					<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+					<CHECK_BUTTON ID="CBTN_TITLE">
+						<ATTR X="0" Y="0" W="84" H="24"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+						<ATTR TEXT="400076" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_CLOSE" X="584" Y="4" W="24" H="24">
+					<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+					<BUTTON ID="BTN_CLOSE">
+						<ATTR X="0" Y="0" W="24" H="24"/>
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+						<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FORM_MY_QUEST_LIST") </SCRIPT>
+						<HOTKEY ID="1"> CloseUI("FORM_MY_QUEST_LIST") return true </HOTKEY>
+					</BUTTON>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			
+			<FORM ID="SFRM_INFO" X="5" Y="32" W="255" H="26">
+				<ATTR IMG="../Data/6_UI/auction/auSchBg.tga" IMG_W="255" IMG_H="33"/>
+				<ATTR TEXT="400077" FONT="Font_Text" T_X="30" T_Y ="7" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+				<CHECK_BUTTON ID="CHKBTN_CHK" X="7" Y="5" W="20" H="20">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+					<SCRIPT ID="ON_CALL">
+						local bMiniQuestVisible = GetQuestMan():GetMiniQuestState()
+						UISelf:CheckState(bMiniQuestVisible)
+					</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_UP">
+						GetQuestMan():SetMiniQuestState(UISelf:GetCheckState())
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</FORM>
+			
+			<FORM ID="SFRM_TITLE_SCENARIO_COUNT" X="180" Y="69" Z="2" W="200" H="24" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="4">
+				<ATTR TEXT="" FONT="Font_Text" T_X="25" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</FORM>
+			<FORM ID="SFRM_TITLE_SCENARIO" X="12" Y="69" Z="1" W="200" H="24" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="4">
+				<IMG ID="IMG_ICON" X="4" Y="0" W="18" H="18" IMG="../Data/6_UI/quest/qsMark.tga" IMG_W="18" IMG_H="18"/>
+				<ATTR TEXT="450071" FONT="Font_Text" T_X="25" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</FORM>
+			<LIST ID="QUEST_SCENARIO_LIST" X="10" Y="91" Z="1" W="235" H="78">
+				<!--ATTR IMG="../A.tga" IMG_W="235" IMG_H="104"/-->
+				<IMG ID="QUEST_LIST_SCROLL_BG">
+					<ATTR X="231" Y="21" W="13" H="70" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="217"/>
+				</IMG>
+				<BUTTON ID="ScrUp">
+					<ATTR X="227" Y="6" W="19" H="15"/>
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrDown">
+					<ATTR X="227" Y="62" W="19" H="15"/>
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle">
+					<ATTR X="229" Y="21" W="15" H="21"/>
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+				</BUTTON>
+				<ATTR ELEMENT_ID="FRM_QUEST_TREE_ELEMENT" ITEM_X="5" ITEM_Y="2"/>
+				<ATTR BTN_UP="ScrUp"/>
+				<ATTR BTN_DOWN="ScrDown"/>
+				<ATTR BTN_MIDDLE="ScrMiddle"/>
+				<ATTR WND_BAR="QUEST_LIST_SCROLL_BG"/>
+			</LIST>
+			
+			<FORM ID="SFRM_TITLE_NORMAL_COUNT" X="180" Y="176" Z="2" W="200" H="24" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"><!--모험 2/3-->
+				<ATTR TEXT="" FONT="Font_Text" T_X="25" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</FORM>
+			<FORM ID="SFRM_TITLE_NORMAL" X="12" Y="176" Z="1" W="200" H="24" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="4">
+				<IMG ID="IMG_ICON" X="4" Y="0" W="18" H="18" IMG="../Data/6_UI/quest/qsMark.tga" IMG_W="18" IMG_H="18"/>
+				<ATTR TEXT="450072" FONT="Font_Text" T_X="25" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</FORM>
+			<LIST ID="QUEST_LIST" X="10" Y="198" Z="1" W="235" H="204">
+				<!--ATTR IMG="../A.tga" IMG_W="235" IMG_H="204"/-->
+				<BUTTON ID="BTN_CUR" X="8" Y="34" Z="2" W="219" H="34" IS_VISIBLE="0">
+					<ATTR BTN_IMG="../Data/6_ui/Community/ptUpImg03.tga" BTN_IMG_W="438" BTN_IMG_H="68"/>
+				</BUTTON>
+				<IMG ID="QUEST_LIST_SCROLL_BG">
+					<ATTR X="231" Y="21" W="13" H="217" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+				</IMG>
+				<BUTTON ID="ScrUp">
+					<ATTR X="227" Y="6" W="19" H="15"/>
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrDown">
+					<ATTR X="227" Y="188" W="19" H="15"/>
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle">
+					<ATTR X="229" Y="21" W="15" H="21"/>
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+				</BUTTON>
+		  
+				<ATTR ELEMENT_ID="TREE_QUEST" ITEM_X="5" ITEM_Y="5"/>
+				<ATTR BTN_UP="ScrUp"/>
+				<ATTR BTN_DOWN="ScrDown"/>
+				<ATTR BTN_MIDDLE="ScrMiddle"/>
+				<ATTR WND_BAR="QUEST_LIST_SCROLL_BG"/>
+			</LIST>
+			
+			<STATIC_FORM ID="SFRM_QUEST_LIST_BG_01" X="9" Y="89" W="249" H="82">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SHADOW" X="0" Y="0" W="249" H="82" STATIC_NUM="3">
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_QUEST_LIST_BG_02" X="9" Y="196" W="249" H="213">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SHADOW" X="0" Y="0" W="249" H="213" STATIC_NUM="3">
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<!-- Start Quest Info -->
+		<FORM_QUEST_INFO ID="MY_QUEST_INFO" X="260" Y="35" W="360" H="466" CAN_DRAG="0">
+			<SCRIPT ID="ON_CLOSE"> CloseUI("Giveup_Quest") </SCRIPT>
+			<SCRIPT ID="ON_CALL"> CloseUI("Giveup_Quest") </SCRIPT>
+			
+			<LIST ID="QUEST_LIST" X="0" Y="4" W="335" H="331">
+				<ATTR ITEM_X="5" ITEM_Y="5"/>
+				<IMG ID="QUEST_LIST_SCROLL_BG" X="331" Y="21" W="13" H="346">
+					<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="317"/>
+				</IMG>
+				<BUTTON ID="ScrUp" X="327" Y="6" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrDown" X="327" Y="311" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="329" Y="21" W="15" H="21">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+				</BUTTON>
+				
+				<ATTR ELEMENT_ID="FRM_QUEST_BG"/>
+				<ATTR BTN_UP="ScrUp"/>
+				<ATTR BTN_DOWN="ScrDown"/>
+				<ATTR BTN_MIDDLE="ScrMiddle"/>
+				<ATTR WND_BAR="QUEST_LIST_SCROLL_BG"/>
+			</LIST>
+			
+			<STATIC_FORM ID="Giveup">
+				<ATTR X="7" Y="341" Z="1" W="334" H="28" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+				<ATTR TEXT="19933" FONT="Font_Text" T_X="15" T_Y="6" FONT_COLOR_HEX="0xFF4D3413" IS_VISIBLE="0"/>
+				<BUTTON ID="Btn_Giveup" X="250" Y="1" W="84" H="26">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT="400088" T_CENTER="1" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<ATTR PRESET="BUTTON" />
+					<SCRIPT ID="ON_L_BTN_DOWN"> CallUI("Giveup_Quest")  return true </SCRIPT>
+					<HOTKEY ID="59"> CallUI("Giveup_Quest")  return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<FORM ID="FORM_REMOTE" X="7" Y="339" Z="1" W="334" H="28" IS_VISIBLE="0">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+				<IMG ID="IMG_LINE_1" X="0" Y="0" W="334" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="334" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="0" Y="1" W="334" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="334" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID="BTN_COMPLETE_REMOTE" X="74" Y="2" Z="1" W="86" H="28" IS_VISIBLE="1">
+					<!--ATTR TEXT="401432" FONT="Font_Text" T_X="15" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/-->
+					<BUTTON ID="BTN_COMPLETE" X="1" Y="1" W="84" H="26">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+						<ATTR TEXT="20001" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+						<SCRIPT ID="ON_CALL">SetTextOnThisUI(20001, 2200)</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN"> ReqQuestRemoteComplete(UISelf:GetParent()) return true </SCRIPT>
+						<HOTKEY ID="59"> ReqQuestRemoteComplete(UISelf:GetParent()) return true </HOTKEY>
+					</BUTTON>
+				</FORM>
+				<FORM ID="BTN_GIVEUP_REMOTE" X="174" Y="2" Z="1" W="86" H="28" IS_VISIBLE="1">
+					<!--ATTR TEXT="401432" FONT="Font_Text" T_X="15" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/-->
+					<BUTTON ID="BTN_GIVEUP" X="1" Y="1" W="84" H="26">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+						<ATTR TEXT="71016" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+						<SCRIPT ID="ON_CALL">SetTextOnThisUI(71016, 2201)</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN"> CallUI("Giveup_Quest") return true </SCRIPT>
+						<HOTKEY ID="60"> CallUI("Giveup_Quest") return true </HOTKEY>
+					</BUTTON>
+				</FORM>
+			</FORM>
+			<STATIC_FORM ID="SFRM_BODY">
+				<ATTR X="0" Y="0" W="349" H="374" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SHADOW">
+					<ATTR X="0" Y="0" W="349" H="374" STATIC_NUM="3"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</FORM_QUEST_INFO>
+		<!-- End Quest Info -->
+		
+		<SCRIPT ID="ON_CLOSE">
+			CloseUI("MY_QUEST_INFO")
+			CloseToolTip()
+		</SCRIPT>
+	</QUEST_LIST_PANNEL> 
+	
+	<!-- -->
+	<BUTTON ID="BTN_QUEST_TALK_ITEM" X="0" Y="0" W="240" H="30">
+		<ATTR BTN_IMG="../Data/6_ui/Common/cmMenuB.tga" BTN_IMG_W="480" BTN_IMG_H="60"/>
+		<ATTR TEXT="400803" T_X="120" T_Y="6" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="0"/>
+		<SCRIPT ID="ON_MOUSE_OVER">OnOverCommonQTalkItem(UISelf)</SCRIPT>
+		<!--SCRIPT ID="ON_L_BTN_DOWN">
+			local kSelf = UISelf
+			local iSelectID = kSelf:GetCustomDataAsInt()
+			OnItemSelected_From_QuestInfo(kSelf, iSelectID)
+		</SCRIPT-->
+	</BUTTON>
+	<!-- -->
+	<BUTTON ID="BTN_NPC_TALK_ITEM" X="0" Y="0" W="240" H="30">
+		<ATTR BTN_IMG="../Data/6_ui/Common/cmMenuB.tga" BTN_IMG_W="480" BTN_IMG_H="60"/>
+		<ATTR TEXT="400803" T_X="120" T_Y="6" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="0"/>
+		<SCRIPT ID="ON_MOUSE_OVER">OnOverCommonTalkItem(UISelf)</SCRIPT>
+	</BUTTON>
+	
+	<!-- /////////////////////////// New PgQuest /////////////////////////// -->
+	<FORM ID="FRM_QUEST_FULLSCREEN" X="0" Y="0" W="1024" H="768" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1" CAN_CLIP="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE" NOT_HIDE="1" PRIORITY="13">
+		<!-- Start Extern Function -->
+		<!-- QUEST Menu -->
+		<FORM ID="FRM_QUEST_MENU" X="382" Y="60" Z="3" W="260" H="463" IS_VISIBLE="0">
+			<FORM ID="IMG_TAB" X="10" W="97" H="23">
+				<ATTR FONT="FTcts_13" T_X="40" T_Y="2" TEXT="20012" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR IMG="../Data/6_UI/Common/cmMenuTab.tga" IMG_W="97" IMG_H="23"/>
+			</FORM>
+			<FORM ID="FRM_CURSOR" X="0" Y="0" W="250" H="38" IMG="../Data/6_ui/common/cmMenuBslt.tga" IMG_W="250" IMG_H="38">
+				<HOTKEY ID="121">OnUp_CommonQTalkMenuCursor(UISelf) return true</HOTKEY>
+				<HOTKEY ID="126">OnDown_CommonQTalkMenuCursor(UISelf) return true</HOTKEY>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickCommonQTalkItem(UISelf) return true</SCRIPT>
+				<HOTKEY ID="28">OnClickCommonQTalkItem(UISelf) return true</HOTKEY>
+				<HOTKEY ID="106">OnClickCommonQTalkItem(UISelf) return true</HOTKEY>
+			</FORM>
+			<LIST ID="LIST_COMMAND" X="10" Y="23" W="240" H="145">
+				<ATTR ELEMENT_ID="BTN_QUEST_TALK_ITEM"/>
+			</LIST>
+		</FORM>
+		<!-- GUILD Menu -->
+		<FORM ID="FRM_GUILD_MENU" X="382" Y="60" Z="3" W="260" H="463" IS_VISIBLE="0">
+			<FORM ID="IMG_TAB" X="10" W="97" H="23">
+				<!--ATTR FONT="FTcts_13" T_X="40" T_Y="2" TEXT="400540" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/-->
+				<ATTR FONT="FTcts_13" T_X="40" T_Y="2" TEXT="400039" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR IMG="../Data/6_UI/Common/cmMenuTab.tga" IMG_W="97" IMG_H="23"/>
+			</FORM>
+			<FORM ID="FRM_CURSOR" X="0" Y="0" W="250" H="38" IMG="../Data/6_ui/common/cmMenuBslt.tga" IMG_W="250" IMG_H="38">
+				<HOTKEY ID="121">OnUp_CommonTalkMenuCursor(UISelf) return true</HOTKEY>
+				<HOTKEY ID="126">OnDown_CommonTalkMenuCursor(UISelf) return true</HOTKEY>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnCommonTalkMenuCommand(UISelf:GetCustomDataAsInt(), UISelf:GetOwnerGuid()) return true</SCRIPT>
+				<HOTKEY ID="28">OnCommonTalkMenuCommand(UISelf:GetCustomDataAsInt(), UISelf:GetOwnerGuid()) return true</HOTKEY>
+				<HOTKEY ID="106">OnCommonTalkMenuCommand(UISelf:GetCustomDataAsInt(), UISelf:GetOwnerGuid()) return true</HOTKEY>
+			</FORM>
+			<LIST ID="LIST_COMMAND" X="10" Y="23" W="240" H="145">
+				<ATTR ELEMENT_ID="BTN_NPC_TALK_ITEM"/>
+			</LIST>
+		</FORM>
+		<!-- Guild Name -->
+		<STATIC_FORM ID="FRM_EDIT" X="400" Y="260" Z="3" W="224" H="152" STATIC_NUM="1" IS_VISIBLE="0">
+			<LOCAL>
+				<NAME ID="DEFAULT">
+					<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="222" H="36" STATIC_NUM="4">
+						<STATIC_FORM ID="FRM_BG" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+						<CHECK_BUTTON ID="CBTN_TITLE" X="7" Y="4" W="104" H="24">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<ATTR TEXT="400831" FONT="FTtitle_14" T_X="46" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+							<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT> 
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+				</NAME>
+				<NAME ID="JAPAN">
+					<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="222" H="36" STATIC_NUM="4">
+						<STATIC_FORM ID="FRM_BG" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+						<CHECK_BUTTON ID="CBTN_TITLE" X="7" Y="4" W="144" H="24">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong2.tga" BTN_IMG_W="144" BTN_IMG_H="96" U="1" V="4" UV_INDEX="3" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<ATTR TEXT="400831" FONT="FTtitle_14" T_X="65" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+							<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+				</NAME>
+			</LOCAL>
+			<STATIC_FORM ID="SFRM_BG_COLOR_1" X="9" Y="35" Z="-2" W="206" H="74" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="9" Y="35" Z="-1" W="206" H="74" STATIC_NUM="3"/>
+			
+			<STATIC_FORM ID="SFRM_TITLE_BG" X="15" Y="46" W="194" H="25" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<ATTR TEXT="400836" FONT="Font_Text" T_X="8" T_Y="4" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="FRM_EDIT" X="16" Y="72" Z="0" W="192" H="25">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+			</STATIC_FORM>
+			<EDIT ID="EDT_NAME" X="16" Y="72" Z="1" W="190" H="16">
+				<ATTR EDIT_BLOCK_IMG="../Data/6_UI/01_main/bgWarn.tga" EDIT_CAROT_IMG="../Data/6_UI/Carot.tga"/>
+				<ATTR EDIT_T_X="4" EDIT_T_Y="5" EDIT_FONT="Font_Text" EDIT_PREVIEW="0" FONT_COLOR_HEX="0xFF4D3413"/>
+				<ATTR EDIT_LIMIT_LENGTH="10" EDIT_PREVIEW="400598" />
+				<SCRIPT ID="ON_CALL">
+					local kSelf = UISelf
+					kSelf:SetEditText("")
+					kSelf:SetCustomDataAsInt(0)
+				</SCRIPT>
+				<SCRIPT ID="ON_LOSE_FOCUS">
+					UISelf:SetCustomDataAsInt(0)
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					local cust = UISelf:GetCustomDataAsInt()
+					if cust == 0 then
+						UISelf:SetEditFocus(true)
+						UISelf:SetCustomDataAsInt(1)					
+					end
+				</SCRIPT>
+				<HOTKEY ID="1">					
+						local kSelf = UISelf
+						kSelf:SetEditText("")
+						kSelf:GetParent():GetParent():Close()
+				</HOTKEY>
+				<HOTKEY ID="59">
+					local kName = UISelf:GetEditText()
+					if 0 ~= kName:Length() then
+						Send_PreCreateGuild(kName)
+					end
+				</HOTKEY>
+				<HOTKEY ID="60">
+						local kSelf = UISelf
+						kSelf:SetEditText("")
+						kSelf:GetParent():GetParent():Close() 
+				</HOTKEY>
+			</EDIT>
+			
+			<BUTTON ID="BTN_SELECT_1" X="27" Y="113" W="84" H="26">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR TEXT="400533" T_X="42" T_Y="5" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					local kParent = kSelf:GetParent()
+					local kEdit = kParent:GetControl("EDT_NAME")
+					local kName = kEdit:GetEditText()
+					if 0 ~= kName:Length() then
+						Send_PreCreateGuild(kName)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400533, 2200) </SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_SELECT_2" X="113" Y="113" W="84" H="26">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR TEXT="400534" T_X="42" T_Y="5" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					OnCommonTalkMenuCommand(0, kSelf:GetOwnerGuid())
+				</SCRIPT>
+				<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400534, 2201) </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<!-- Guild Emblem -->
+		<STATIC_FORM ID="FRM_GUILD_EMBLEM_SELECT" X="85" Y="104" Z="3" W="694" H="429" STATIC_NUM="1" IS_VISIBLE="0">
+			<!--width = 44 * column + 34, height = 44 * row + 121 -->
+			<LOCAL>
+				<NAME ID="DEFALUT">
+					<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="692" H="36" STATIC_NUM="4">
+						<STATIC_FORM ID="FRM_BG" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+						<CHECK_BUTTON ID="CBTN_TITLE" X="7" Y="4" W="104" H="24">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<ATTR TEXT="400830" FONT="FTtitle_14" T_X="46" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+							<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+				</NAME>				
+				<NAME ID="JAPAN">
+					<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="692" H="36" STATIC_NUM="4">
+						<STATIC_FORM ID="FRM_BG" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+						<CHECK_BUTTON ID="CBTN_TITLE" X="7" Y="4" W="144" H="24">							
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong2.tga" BTN_IMG_W="144" BTN_IMG_H="96" U="1" V="4" UV_INDEX="3" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+							<ATTR TEXT="400830" FONT="FTtitle_14" T_X="65" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+							<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+						</CHECK_BUTTON>
+					</STATIC_FORM>
+				</NAME>
+			</LOCAL>				
+			<STATIC_FORM ID="SFRM_BG_COLOR_1" X="9" Y="35" Z="-2" W="676" H="351" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="9" Y="35" Z="-1" W="676" H="351" STATIC_NUM="3"/>
+			<FORM ID="FRM_DESCIPTION" X="20" Y="47" Z="0" W="250" H="20">
+				<ATTR TEXT="400835" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			
+			<BUILD ID="BLD_ICON_BG" TARGET_ID="SFRM_ICON_BG" X="17" Y="73" X_COUNT="15" Y_COUNT="7" X_GAB="44" Y_GAB="44"/>
+			<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" Z="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" PASS_EVENT="1">
+				<SCRIPT ID="ON_BUILD"> OnBuildGuildEmblemImg(UISelf) </SCRIPT>
+			</STATIC_FORM>
+			<BUILD ID="BLD_ICON_IMG" TARGET_ID="IMG_MARK" X="22" Y="78" X_COUNT="15" Y_COUNT="7" X_GAB="44" Y_GAB="44"/>
+			<IMG ID="IMG_MARK" X="0" Y="0" Z="1" W="32" H="32" IMG="../Data/6_ui/guild/GuildIcon01.tga" UV_INDEX="2" U="16" V="16" IMG_W="512" IMG_H="512" PASS_EVENT="1">
+				<SCRIPT ID="ON_BUILD"> OnBuildGuildEmblemImg(UISelf) </SCRIPT>
+			</IMG>
+			<BUILD ID="BLD_ICON_BTN" TARGET_ID="BTN_MARK" X="17" Y="73" X_COUNT="15" Y_COUNT="7" X_GAB="44" Y_GAB="44"/>
+			<BUTTON ID="BTN_MARK" X="17" Y="73" Z="2" W="42" H="42" IS_VISIBLE="1" BTN_IMG="../Data/6_ui/Common/cmIconOver02.tga" BTN_IMG_W="84" BTN_IMG_H="84">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					local kSelectedWnd = kSelf:GetParent():GetControl("IMG_OVER1")
+					if not kSelectedWnd:IsNil() then
+						kSelectedWnd:SetLocation( kSelf:GetLocation() )
+						kSelectedWnd:Visible(true)
+					end
+					SetTempGuildEmblem( kSelf:GetCustomDataAsInt() )
+				</SCRIPT>
+				<SCRIPT ID="ON_BUILD"> OnBuildCanGuildEmblemBtn(UISelf) </SCRIPT>
+			</BUTTON>
+			<IMG ID="IMG_OVER1" X="17" Y="73" Z="3" W="42" H="42" IS_VISIBLE="0" CAN_COLOR_CHANGE="1" COLOR_TYPE="7" >
+				<ATTR IMG="../Data/6_ui/Common/cmIconOver02.tga" IMG_W="84" IMG_H="84" U="2" V="2" UV_INDEX="3"/>
+			</IMG>
+			
+			<BUTTON ID="BTN_SELECT_1" X="262" Y="390" W="84" H="26">
+				<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR T_X="42" T_Y="5" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if 0 > GetTempGuildEmblem() then
+						AddWarnDataTT(400838)
+						return true
+					end
+					local kSelf = UISelf
+					CallNpcFunctionUI(105, kSelf:GetParent():GetOwnerGuid(), "Elvis_normal", 400548);
+				</SCRIPT>
+				<HOTKEY ID="59">  
+					if 0 > GetTempGuildEmblem() then
+						AddWarnDataTT(400838)
+						return true
+					end
+					local kSelf = UISelf
+					CallNpcFunctionUI(105, kSelf:GetParent():GetOwnerGuid(), "Elvis_normal", 400548);
+					return true
+				</HOTKEY>
+			</BUTTON>
+			<BUTTON ID="BTN_SELECT_2" X="348" Y="390" W="84" H="26">
+				<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR T_X="42" T_Y="5" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					OnCommonTalkMenuCommand(0, kSelf:GetParent():GetOwnerGuid())
+				</SCRIPT>
+				<HOTKEY ID="60">
+					local kSelf = UISelf
+					OnCommonTalkMenuCommand(0, kSelf:GetParent():GetOwnerGuid())
+					return true
+				</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<!-- Guild Skill -->
+		<STATIC_FORM ID="SFRM_GUILD_BUY_SKILL" X="369" Y="147" Z="2" W="298" H="326" IS_VISIBLE="0">
+			<ATTR CAN_DRAG = "0" STATIC_NUM="1"/>
+			<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="296" H="36" STATIC_NUM="4">
+				<STATIC_FORM ID="SFRM_TITLE_TEXT" X="7" Y="4" W="84" H="24">
+					<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+					<CHECK_BUTTON ID="CBTN_TITLE" X="0" Y="0" W="84" H="24">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+						<ATTR TEXT="400540" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+						<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+					</CHECK_BUTTON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_CLOSE" X="265" Y="4" W="24" H="24">
+					<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+					<BUTTON ID="BNT_CLOSE" X="0" Y="0" W="24" H="24">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+						<SCRIPT ID="ON_L_BTN_DOWN"> OnCommonTalkMenuCommand(0) </SCRIPT>
+						<HOTKEY ID="1"> OnCommonTalkMenuCommand(0) return true </HOTKEY>
+					</BUTTON>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			
+			<STATIC_FORM ID="SFRM_BG_COLOR">
+				<ATTR X="9" Y="35" Z="-1" W="276" H="280" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+				<STATIC_FORM ID="SFRM_BG_SHADOW" X="0" Y="0" W="276" H="280" STATIC_NUM="3">
+				</STATIC_FORM>
+			</STATIC_FORM>
+			
+			<FORM ID="SFRM_NULL" X="43" Y="150" Z="1" W="200" H="30" IS_VISIBLE="0">
+				<ATTR TEXT="400808" T_X="100" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			
+			<LIST ID="LIST_GUILD_SKILL" X="10" Y="45" W="273" H="255">
+				<IMG ID="QUEST_LIST_SCROLL_BG" X="256" Y="21" Z="-1" W="13" H="200">
+					<ATTR IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="200"/>
+				</IMG>
+				<BUTTON ID="ScrUp" X="252" Y="6" W="20" H="20">
+					<ATTR BTN_IMG = "../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+				</BUTTON>
+				<BUTTON ID="ScrDown" X="252" Y="210" W="20" H="20">
+					<ATTR BTN_IMG = "../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="254" Y="21" W="18" H="20">
+					<ATTR BTN_IMG = "../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W = "30" BTN_IMG_H = "42"/>
+				</BUTTON>
+				<ATTR BTN_UP = "ScrUp"/>
+				<ATTR BTN_DOWN = "ScrDown"/>
+				<ATTR BTN_MIDDLE = "ScrMiddle"/>
+				<ATTR ELEMENT_ID="FRM_GUILD_SKILL_BUY_ITEM"/>
+			</LIST>
+			<SCRIPT ID="ON_CALL"> </SCRIPT>
+		</STATIC_FORM>
+		
+		<!-- Start Quest Form -->
+		<IMG ID="IMG_UPPER" X="0" Y="0" Z="-10" W="1024" H="60">
+			<ATTR IMG="../Data/6_UI/quest/qsBline.tga" IMG_W="1024" IMG_H="60"/>
+			<SCRIPT ID="ON_CALL"> OnCall_QuestFull_IMG_UPPER(UISelf) </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> OnDisplay_QuestFull_IMG_UPPER(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_LOWER" X="0" Y="708" Z="-10" W="1024" H="60" CAN_CLIP="1">
+			<ATTR IMG="../Data/6_UI/quest/qsBline.tga" IMG_W="1024" IMG_H="60"/>
+			<SCRIPT ID="ON_CALL"> OnCall_QuestFull_IMG_LOWER(UISelf) </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> OnDisplay_QuestFull_IMG_LOWER(UISelf) </SCRIPT>
+		</IMG>
+		<!-- Black BG -->
+		<IMG ID="IMG_BLACK_BG_NORMAL" X="0" Y="0" Z="-12" W="1024" H="768" CAN_CLIP="1" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/blackbg.tga" IMG_W="1024" IMG_H="768" ALPHA="100" USE_ALPHA_ANI="1"/>
+		</IMG>
+		<IMG ID="IMG_BLACK_BG_SCENARIO" X="0" Y="0" Z="-12" W="1024" H="768" CAN_CLIP="1" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/blackbg.tga" IMG_W="1024" IMG_H="768" ALPHA="200" USE_ALPHA_ANI="1"/>
+		</IMG>
+		<!-- Stitch Image -->
+		<FORM ID="FRM_STITCH_IMAGE_BG" X="0" Y="0" Z="-11" W="1024" H="768" CAN_CLIP="1">
+			<BUILD ID="BLD_STITCH_IMAGE" TARGET_ID="FRM_STITCH_IMAGE" X="0" Y="0" X_COUNT = "1" Y_COUNT = "10" X_GAB="0" Y_GAB="0"/>
+			<FORM ID="FRM_STITCH_IMAGE" X="0" Y="0" W="512" H="512" IS_VISIBLE="0" CAN_CLIP="1"/>
+			<BUILD ID="BLD_STITCH_TEXT" TARGET_ID="FRM_STITCH_TEXT" X="0" Y="0" X_COUNT = "1" Y_COUNT = "10" X_GAB="0" Y_GAB="0"/>
+			<FORM ID="FRM_STITCH_TEXT" X="0" Y="0" W="512" H="512" TEXT="" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFFFF0000" T_OUTLINE="0" IS_VISIBLE="0" CAN_CLIP="1"/>
+		</FORM>
+		<!-- Title -->
+		<FORM ID="IMG_TITLE_BG_NORMAL" X="313" Y="36" Z="2" W="400" H="105" IS_VISIBLE="0">
+			<IMG ID="IMG_LEFT" X="0" Y="0" Z="1" W="50" H="105" IMG="../Data/6_UI/quest/qsTitleBg01.tga" IMG_W="50" IMG_H="104" />
+			<IMG ID="IMG_CENTER" X="50" Y="0" Z="0" W="300" H="105" IMG="../Data/6_UI/quest/qsTitleBody.tga" IMG_W="300" IMG_H="104" />
+			<IMG ID="IMG_RIGHT" X="350" Y="0" Z="1" W="50" H="105" IMG="../Data/6_UI/quest/qsTitleBg02.tga" IMG_W="50" IMG_H="104" />
+		</FORM>
+		<FORM ID="IMG_TITLE_BG_SCENARIO" X="267" Y="36" Z="2" W="492" H="92" IS_VISIBLE="0">
+			<IMG ID="IMG_LEFT" X="0" Y="0" Z="1" W="96" H="92" IMG="../Data/6_UI/quest/qsTitleH01.tga" IMG_W="96" IMG_H="92" />
+			<IMG ID="IMG_CENTER" X="96" Y="0" Z="0" W="300" H="92" IMG="../Data/6_UI/quest/qsTitleHBody.tga" IMG_W="300" IMG_H="92" />
+			<IMG ID="IMG_RIGHT" X="396" Y="0" Z="1" W="96" H="92" IMG="../Data/6_UI/quest/qsTitleH02.tga" IMG_W="96" IMG_H="92" />
+		</FORM>
+		<FORM ID="IMG_TITLE" X="262" Y="34" Z="3" W="500" H="105" IS_VISIBLE="0">
+			<ATTR TEXT="" FONT="QTtext_Title" FONT_COLOR_HEX="0xFF4D0408" T_X="250" T_Y="36" T_OUTLINE="0" T_CENTER="1"/>
+		</FORM>
+		<!-- 3D Model -->
+		<FORM ID="FRM_MODEL" X="12" Y="0" W="1024" H="768">
+			<SCRIPT ID="ON_CREATE"> UISelf:InitRenderModel("QuestDepend", true) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("QuestDepend") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("QuestDepend") </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP"> return true </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN"> return true </SCRIPT>
+		</FORM>
+		<!-- Face -->
+		<FORM ID="FRM_3DMODEL_NORMAL" X="512" Y="196" Z="1" W="512" H="512" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/quest/17_03.dds" IMG_W="512" IMG_H="512"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">QuestNextDialog(UISelf:GetParent()) return true</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_3DMODEL_SCENARIO" X="256" Y="025" Z="-2" W="512" H="512" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/quest/17_03.dds" IMG_W="512" IMG_H="512"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">QuestNextDialog(UISelf:GetParent()) return true</SCRIPT>
+		</FORM>
+		<!-- Text Form -->
+		<FORM ID="FRM_BG_SET_NORMAL" X="0" Y="507" Z="-1" W="1024" H="201" IS_VISIBLE="0" CAN_CLIP="1">
+			<IMG ID="IMG_BG_LEFT" X="0" Z="-1" W="512" H="201" >
+				<ATTR IMG="../Data/6_UI/quest/qsBG01.tga" IMG_W="512" IMG_H="201"/>
+			</IMG>
+			<IMG ID="IMG_BG_RIGHT" X="512" Z="-1" W="512" H="201" >
+				<ATTR IMG="../Data/6_UI/quest/qsBG02.tga" IMG_W="512" IMG_H="201"/>
+			</IMG>
+		</FORM>
+		<FORM ID="FRM_BG_SET_SCENARIO" X="0" Y="436" Z="-1" W="1024" H="272" IS_VISIBLE="0" CAN_CLIP="1">
+			<IMG ID="IMG_BG_LEFT" X="0" Z="-1" W="512" H="272" >
+				<ATTR IMG="../Data/6_UI/quest/qsBgH01.tga" IMG_W="512" IMG_H="272"/>
+			</IMG>
+			<IMG ID="IMG_BG_RIGHT" X="512" Z="-1" W="512" H="272" >
+				<ATTR IMG="../Data/6_UI/quest/qsBgH02.tga" IMG_W="512" IMG_H="272"/>
+			</IMG>
+		</FORM>
+		<IMG ID="IMG_LEFT" X="5" Y="0" Z="-1" W="105" H="272" IGNORE_PARENT_RECT="1">
+			<ATTR IMG="../Data/6_UI/quest/qsBgH01_2.tga" IMG_W="105" IMG_H="272"/>
+			<SCRIPT ID="ON_CALL">
+				local slf = UISelf
+				local scenario = slf:GetParent():GetControl("FRM_BG_SET_SCENARIO")
+				local pPos = scenario:GetLocation()
+				pPos:SetX(pPos:GetX()-105)
+				slf:SetLocation(pPos)
+
+			</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_RIGHT" X="1024" Y="0" Z="-1" W="104" H="272" IGNORE_PARENT_RECT="1">
+			<ATTR IMG="../Data/6_UI/quest/qsBgH02_2.tga" IMG_W="104" IMG_H="272"/>
+			<SCRIPT ID="ON_CALL">
+				local slf = UISelf
+				local scenario = slf:GetParent():GetControl("FRM_BG_SET_SCENARIO")
+				local pPos = scenario:GetLocation()
+				pPos:SetX(pPos:GetX()+scenario:GetSize():GetX())
+				slf:SetLocation(pPos)
+
+			</SCRIPT>
+		</IMG>
+		<!-- Main Text Contents -->
+		<FORM ID="FRM_MAIN" X="0" Y="507" Z="0" W="1023" H="201" IS_VISIBLE="0">
+			<SCRIPT ID="ON_CLOSE"> CheckNewQuestNfy(2, 0) </SCRIPT>
+			<IMG ID="IMG_NAME_BG_NORMAL" X="22" Y="70" Z="1" W="199" H="61" PASS_EVENT="1">
+				<ATTR IMG="../Data/6_UI/quest/qsNameBG.tga" IMG_W="199" IMG_H="61"/>
+			</IMG>
+			<FORM ID="FRM_NAME_NORMAL" X="40" Y="80" W="180" H="30" Z="10" PASS_EVENT="1">
+				<ATTR TEXT="" FONT="QTtext_Name" FONT_COLOR_HEX="0xFFFFFee8" T_X="90" T_Y="0" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF793b14"/>
+			</FORM>
+			<FORM ID="FRM_NAME_SCENARIO" X="160" Y="40" W="200" H="30" Z="10" PASS_EVENT="1">
+				<ATTR TEXT="" FONT="QTtext_Name" FONT_COLOR_HEX="0xFFFFFee8" T_X="100" T_Y="4" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF793b14"/>
+			</FORM>
+			<FORM ID="FRM_TEXT_BG" X="170" Y="68" Z="0" W="852" H="129" PASS_EVENT="0">
+				<!--ATTR TEXT="" FONT="FTctsBig_14" T_X="60" T_Y="18" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfffbc7"/-->
+				<FORM_TEXT_TYPIST_WND ID="FRM_TEXT" X="0" Y="0" W="600" H="129" Z="10" PASS_EVENT="0">
+					<ATTR TEXT="9020100" FONT="QTtext_Contents" T_X="60" T_Y="18" T_OUTLINE="0" OUTLINE_COLOR_HEX="0xFFfff6ec"/>
+					<ATTR  FONT_COLOR_HEX="0xFF4D0D08" STEP_INTERVAL="5"/>
+					<!-- ATTR UP_SCROLL_BTN="BTN_UP" DOWN_SCROLL_BTN="BTN_DOWN"/>
+					<!--BUTTON ID="BTN_UP" X="100" Y="100" W="19" H="15">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						<SCRIPT ID="ON_L_BTN_UP"> UISelf:GetParent():UpWheal() return true </SCRIPT>
+					</BUTTON>
+					<BUTTON ID="BTN_DOWN" X="200" Y="100" W="19" H="15">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						<SCRIPT ID="ON_L_BTN_UP"> UISelf:GetParent():DownWheal() return true </SCRIPT>
+					</BUTTON-->
+				</FORM_TEXT_TYPIST_WND>
+			</FORM>
+			<SCRIPT ID="ON_L_BTN_DOWN">QuestNextDialog(UISelf:GetParent()) return true</SCRIPT>
+		</FORM>
+		<IMG ID="IMG_ENTER" X="512" Y="720" Z="2" W="82" H="26" IS_VISIBLE="1">
+			<ATTR IMG="../Data/6_ui/Quest/qsEnterKey.tga" IMG_W="164" IMG_H="52" U="2" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">QuestNextDialog(UISelf:GetParent()) return true</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_SKIP" X="870" Y="720" Z="2" W="92" H="26" IS_VISIBLE="1">
+			<ATTR IMG="../Data/6_ui/Quest/qsShiftKey.tga" IMG_W="184" IMG_H="52" U="2" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">g_EnableSkipButton = true return true</SCRIPT>
+		</IMG>
+		
+		<SCRIPT ID="ON_L_BTN_DOWN">QuestNextDialog(UISelf) return true</SCRIPT>
+		<SCRIPT ID="ON_CREATE">  </SCRIPT>
+		<SCRIPT ID="ON_CALL">
+			OnCreate_QuestFullScreenDialog(UISelf)
+			OnCall_QuestFullScreenDialog()
+			OffAllSubMenu(UISelf)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			OnClose_QuestFullScreenDialog()
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			if KeyIsDown(42, true) or KeyIsDown(54, true) or g_EnableSkipButton then
+				if not GetQuestMan():IsMenuDialog() then
+					QuestNextDialog(UISelf)
+				else
+					g_EnableSkipButton = false
+				end
+			end
+		</SCRIPT>
+		<HOTKEY ID="1">
+			if IsCanCancelFullScreenQuestDialog() then
+				SendReqCloseDialog() return true
+			end
+		</HOTKEY>
+		<HOTKEY ID="28"> QuestNextDialog(UISelf) return true </HOTKEY>
+		<HOTKEY ID="57">QuestNextDialog(UISelf) return true </HOTKEY>
+		
+		<!-- /////////////////////////////////////// Accept / Reject / Complete / Close FORM /////////////////////////////////////// -->
+		<FORM_QUEST_INFO ID="FRM_QUEST_REQ" X="0" Y="68" Z="3" W="367" H="476" CAN_DRAG="1" IS_VISIBLE="0">
+			<LIST ID="QUEST_LIST" X="10" Y="37" W="345" H="360">
+				<ATTR ITEM_X="5" ITEM_Y="5"/>
+				<IMG ID="QUEST_LIST_SCROLL_BG" X="331" Y="21" W="13" H="326">
+					<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="326"/>
+				</IMG>
+				<BUTTON ID="ScrUp" X="327" Y="6" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrDown" X="327" Y="340" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="329" Y="21" W="15" H="21">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+				</BUTTON>
+				
+				<ATTR ELEMENT_ID="FRM_QUEST_BG"/>
+				<ATTR BTN_UP="ScrUp"/>
+				<ATTR BTN_DOWN="ScrDown"/>
+				<ATTR BTN_MIDDLE="ScrMiddle"/>
+				<ATTR WND_BAR="QUEST_LIST_SCROLL_BG"/>
+				
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					--GetQuestInfoFromList()
+				</SCRIPT>
+			</LIST>
+			
+			<!-- Accept / Reject Set -->
+			<STATIC_FORM ID="BTN_ACCEPT" X="17" Y="400" Z="1" W="334" H="28" IS_VISIBLE="0">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+				<ATTR TEXT="" FONT="Font_Text" T_X="15" T_Y="6"  FONT_COLOR_HEX="0xFF4D3413"/>
+				<BUTTON ID="BTN_ACCEPT_BTN" X="250" Y="1" W="84" H="26">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT="400085" T_X="42" T_Y="6"  T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_QuestInfoButton(UISelf) </SCRIPT>
+					<HOTKEY ID="59"> OnClick_QuestInfoButton(UISelf) return true </HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="BTN_REJECT" X="17" Y="430" Z="1" W="334" H="28" IS_VISIBLE="0">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+				<ATTR TEXT="" FONT="Font_Text" T_X="15" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/>
+				<BUTTON ID="BTN_REJECT_BTN" X="250" Y="1" W="84" H="26">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT="400086" T_X="42" T_Y="6" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<ATTR PRESET="BUTTON" />
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_QuestInfoButton(UISelf) </SCRIPT>
+					<HOTKEY ID="60"> OnClick_QuestInfoButton(UISelf) return true </HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<!-- Complete Set -->
+			<STATIC_FORM ID="BTN_COMPLETE" X="17" Y="400" Z="1" W="334" H="28" IS_VISIBLE="0">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+				<ATTR TEXT="" FONT="Font_Text" T_X="15" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/>
+				<BUTTON ID="BTN_COMPLETE_BTN" X="250" Y="1" W="84" H="26">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT="400087" T_X="42" T_Y="4" T_CENTER="1" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<ATTR PRESET="BUTTON" />
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_QuestInfoButton(UISelf) </SCRIPT>
+					<HOTKEY ID="59"> OnClick_QuestInfoButton(UISelf) return true </HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SELECT_2" X="17" Y="430" Z="1" W="334" H="28" IS_VISIBLE="0">
+				<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+				<ATTR TEXT="" FONT="Font_Text" T_X="15" T_Y="6" FONT_COLOR_HEX="0xFF4D3413"/>
+				<BUTTON ID="BTN_SELECT_2" X="250" Y="1" W="84" H="26">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<ATTR TEXT="400084" T_X="10" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_QuestInfoButton(UISelf) </SCRIPT>
+					<HOTKEY ID="60"> OnClick_QuestInfoButton(UISelf) return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			
+			<STATIC_FORM ID="SFRM_QUEST_INFO">
+				<ATTR ALIGN_X="0" ALIGN_Y="0" W="367" H="476" CAN_DRAG="0" STATIC_NUM="1"/>
+				<LOCAL>
+					<NAME ID="DEFAULT">
+						<STATIC_FORM ID="SFRM_TITLE">
+							<ATTR X="1" Y="0" W="365" H="36" STATIC_NUM="4"/>
+							<STATIC_FORM ID="SFRM_TAB_BG">
+								<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+								<CHECK_BUTTON ID="CBTN_TITLE">
+									<ATTR X="0" Y="0" W="84" H="24" BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+									<ATTR TEXT="400083" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+									<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+								</CHECK_BUTTON>
+							</STATIC_FORM>
+						</STATIC_FORM>
+					</NAME>
+					<NAME ID="JAPAN">
+						<STATIC_FORM ID="SFRM_TITLE">
+							<ATTR X="1" Y="0" W="365" H="36" STATIC_NUM="4"/>
+								<STATIC_FORM ID="SFRM_TAB_BG">
+									<ATTR X="7" Y="4" W="144" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+									<CHECK_BUTTON ID="CBTN_TITLE">
+										<ATTR X="0" Y="0" W="144" H="24" BTN_IMG="../Data/6_ui/Common/cmTabLong2.tga" BTN_IMG_W="144" BTN_IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+										<ATTR TEXT="400083" FONT="FTtitle_14" T_X="65" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+										<SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+									</CHECK_BUTTON>
+								</STATIC_FORM>
+						</STATIC_FORM>
+					</NAME>
+				</LOCAL>
+				<STATIC_FORM ID="SFRM_BODY">
+					<ATTR X="9" Y="35" W="349" H="429" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+					<STATIC_FORM ID="SFRM_SHADOW">
+						<ATTR X="0" Y="0" W="349" H="429" STATIC_NUM="3"/>
+					</STATIC_FORM>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</FORM_QUEST_INFO>
+	</FORM>
+	<!-- /////////// End New Quset Form /////////// -->
+
+	<STATIC_FORM ID="SFRM_GIVE_ITEM">
+		<ATTR ALIGN_X="50" ALIGN_Y="40" W="214" H="134" STATIC_NUM="30"/>
+		<ATTR TEXT="400089" T_CENTER="1" T_X="107" T_Y="10" T_OUTLINE="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFFAC8"/>
+		<BUILD TARGET_ID="SFRM_ITEM_BG" X="14" Y="44" X_COUNT="4" Y_COUNT="1" X_GAB= "48" Y_GAB="48"/>
+		<STATIC_FORM ID="SFRM_ITEM_BG">
+			<ATTR X="0" Y="0" W="42" H="42" STATIC_NUM="28" />
+			<ICON ID="ICN_REWARD">
+				<ATTR X="1" Y="1" W="40" H="40" />
+				<SCRIPT ID="ON_L_BTN_UP"> </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<FORM ID="FRM_SELECT">
+				<ATTR X="0" Y="0" W="42" H="42"/>
+			</FORM> 
+		</STATIC_FORM>
+		<IMG ID="IMG_LINE_1" X="15" Y="37" W="184" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="184" IMG_H="1" CAN_COLOR_CHANGE="1" >
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetColor(2039833)
+			</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_LINE_2" X="15" Y="38" W="184" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="184" IMG_H="1" CAN_COLOR_CHANGE="1" >
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetColor(11643522)
+			</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_LINE_3" X="15" Y="90" W="184" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="184" IMG_H="1" CAN_COLOR_CHANGE="1" ><SCRIPT ID="ON_CALL">
+				UISelf:SetColor(2039833)
+			</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_LINE_4" X="15" Y="91" W="184" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="184" IMG_H="1" CAN_COLOR_CHANGE="1" ><SCRIPT ID="ON_CALL">
+				UISelf:SetColor(11643522)
+			</SCRIPT>
+		</IMG>
+
+		<BUTTON ID="BTN_OK">
+			<ATTR X="62" Y="98" W="84" H="26" TEXT="400002" T_CENTER="1" T_X="42" T_Y="3" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<FORM ID="SFRM_QUEST_COMPLETE" ALIGN_X="50" ALIGN_Y="40" W="376" H="500">
+		<!--ATTR IMG="../Data/a.tga" IMG_W="316" IMG_H="500"/-->
+		<ATTR  PASS_EVENT="1" ALIVE_TIME_IGNORE_MOUSE_OVER="1"/>
+		<IMG ID="IMG_BG1" X="0" Y="0" Z="-1" W="376" H="78" IMG="../Data/6_UI/quest/qsFnsBg01.tga" IMG_W="376" IMG_H="78"/>
+		<IMG ID="IMG_BG2" X="0" Y="78" Z="-1" W="376" H="30" IMG="../Data/6_UI/quest/qsFnsBgBody.tga" IMG_W="376" IMG_H="30"/>
+		<IMG ID="IMG_BG3" X="0" Y="108" Z="-1" W="376" H="78" IMG="../Data/6_UI/quest/qsFnsBg02.tga" IMG_W="376" IMG_H="78"/>
+		
+		<FORM ID="FRM_TITLE" Y="44" W="376" H="78" PASS_EVENT="1">
+			<ATTR TEXT="450010" T_X="188" T_Y="21" T_OUTLINE="0" T_CENTER="1"/>
+		</FORM>
+		<LIST ID="LST_REWARD_TEXT" X="0" Y="112" W="376" H="315">
+			<ATTR PASS_EVENT="1"/>
+			<ATTR ELEMENT_ID="FRM_REWARD_LIST_ELE" />
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:ClearAllListItem()
+			</SCRIPT>
+		</LIST>
+		<SCRIPT ID="ON_CLOSE"> CallLevelUpMsg() </SCRIPT>
+	</FORM>
+
+	<FORM ID="FRM_REWARD_LIST_ELE" W="376" H="21">
+		<ATTR TEXT="" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFFAC8" T_CENTER="1" T_X="182" T_OUTLINE="0" />
+		<ATTR FONT_COLOR_HEX="0xFF330000" PASS_EVENT="1"/>
+	</FORM>
+
+	<IMG ID="IMG_GOODJOB_QUEST" ALIVE_TIME_IGNORE_MOUSE_OVER="1">
+		<ATTR ALIGN_X="40" ALIGN_Y="40" W="206" H="206" IMG="../Data/6_ui/quest/qsGood.tga" IMG_W="206" IMG_H="206"/>
+		<SCRIPT ID="ON_CALL"> QuakeCamera(0.5,1.5) </SCRIPT>
+		<ATTR PASS_EVENT="1"/>
+		<ATTR ALIVE_TIME="6000"/>
+	</IMG>
+
+	<IMG ID="IMG_FAILD_QUEST" ALIVE_TIME_IGNORE_MOUSE_OVER="1">
+		<ATTR ALIGN_X="40" ALIGN_Y="40" W="206" H="206" IMG="../Data/6_ui/quest/qsBad.tga" IMG_W="206" IMG_H="206"/>
+		<SCRIPT ID="ON_CALL"> QuakeCamera(0.5,1.5) </SCRIPT>
+		<ATTR PASS_EVENT="1"/>
+		<ATTR ALIVE_TIME="6000"/>
+	</IMG>
+
+	<FORM ID="FRM_QUEST_TIMER">
+		<ATTR ALIGN_X="50" ALIGN_Y="0" W="400" H="80"/>
+		<FORM ID="FRM_MIN10" X="116" Y="4" Z="0" W="20" H="50" >
+			<ATTR IMG="../Data/6_ui/Pvp/pvNumSmall.tga" IMG_W="250" IMG_H="100" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_MIN01" X="150" Y="4" Z="0" W="20" H="50" >
+			<ATTR IMG="../Data/6_ui/Pvp/pvNumSmall.tga" IMG_W="250" IMG_H="100" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<IMG ID="IMG_TIMER_SEP" X="195" Y="19" Z="0" W="10" H="21" IMG="../Data/6_ui/Pvp/pvTimeSp.tga" IMG_W="10" IMG_H="21" />
+		<FORM ID="FRM_SEC10" X="200" Y="4" Z="0" W="20" H="50" >
+			<ATTR IMG="../Data/6_ui/Pvp/pvNumSmall.tga" IMG_W="250" IMG_H="100" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC01" X="234" Y="4" Z="0" W="20" H="50" >
+			<ATTR IMG="../Data/6_ui/Pvp/pvNumSmall.tga" IMG_W="250" IMG_H="100" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<SCRIPT ID="ON_DISPLAY">
+			OnDisplay_QuestTimer()
+		</SCRIPT>
+	</FORM>
+	
+	<!--FORM ID="FRM_TUTORIAL_HINT" X="500" Y="415" W="511" H="289" ALIVE_TIME_IGNORE_MOUSE_OVER="1">
+		<IMG ID="IMG_FACE" X="350" Y="0" Z="1" W="161" H="173" IMG="../Data/6_ui/main/TrHelpImg.tga" IMG_W="161" IMG_H="173"/>
+		<IMG ID="IMG_BG" X="0" Y="156" Z="0" W="501" H="116" IMG="../Data/6_ui/main/TrHelpBg.tga" IMG_W="501" IMG_H="116">
+			<ATTR TEXT="500011" T_X="17" T_Y="12" T_OUTLINE="0" FONT="FTtitleBig_16" FONT_COLOR_HEX="0xFF2A0A07" TYPING_EFFECT="0"/>
+		</IMG>
+		<ATTR ALIVE_TIME="15000"/>
+	</FORM-->
+	
+	<FORM ID="FRM_TUTORIAL_HINT" X="500" ALIGN_Y="85" W="511" H="289" ALIVE_TIME_IGNORE_MOUSE_OVER="1">
+		<IMG ID="IMG_FACE" X="350" Y="0" Z="1" W="161" H="173" IMG="../Data/6_ui/main/TrHelpImg.tga" IMG_W="161" IMG_H="173"/>
+		<IMG ID="IMG_BG" X="0" Y="156" Z="0" W="501" H="116" IMG="../Data/6_ui/main/TrHelpBg.tga" IMG_W="501" IMG_H="116">
+			<ATTR TEXT="500011" T_X="17" T_Y="12" T_OUTLINE="0" FONT="FTtitleBig_16" FONT_COLOR_HEX="0xFF2A0A07" TYPING_EFFECT="0"/>
+		</IMG>
+		<ATTR ALIVE_TIME="15000"/>
+	</FORM>
+	
+	<STATIC_FORM ID="FRM_TUTORIAL_SKIP_POS" ALIGN_X="1" ALIGN_Y="50" W="200" H="200" STATIC_NUM="30">
+		<ATTR TEXT="400574" T_X="10" T_Y="50" T_OUTLINE="1" FONT="FTtitleBig_16" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<ATTR ALIVE_TIME="8000" ALIVE_TIME_IGNORE_MOUSE_OVER="0"/>
+		<STATIC_FORM ID="SFRM_CLOSE">
+			<ATTR X="169" Y="7" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE">
+				<ATTR X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_TUTORIAL_SKIP_POS") </SCRIPT>
+				<HOTKEY ID="1"> CloseUI("FRM_TUTORIAL_SKIP_POS") return true </HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_SKIP" X="44" Y="150" W="111" H="41">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtLong.tga" BTN_IMG_W="222" BTN_IMG_H="82" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<ATTR TEXT="400575" FONT="FTtitleBig_16" T_X="54" T_Y="11" T_CENTER="1" T_OUTLINE="1" />
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local kSelf = UISelf
+				local kParent = kSelf:GetParent()
+				if nil ~= kParent and not kParent:IsNil() then
+					local kTrgLoc = kParent:GetCustomDataAsStr()
+					local kPC = g_pilotMan:GetPlayerPilot()
+					if nil ~= kPC and not kPC:IsNil() then
+						local kActor = kPC:GetActor()
+						if nil ~= kActor and not kActor:IsNil() then
+							if nil ~= kTrgLoc and not kTrgLoc:IsNil() then
+								if( CheckNil(g_world == nil) ) then return false end
+								if( CheckNil(g_world:IsNil()) ) then return false end
+								local kTargetPos = g_world:GetObjectPosByName(kTrgLoc:GetStr())
+								if nil ~= kTargetPos and not kTargetPos:IsZero() then
+									local kAction = kActor:ReserveTransitAction("a_teleport")
+									kAction:SetParamAsPoint(1, kTargetPos)
+								end
+							end
+						end
+					end
+				end
+				CloseUI("FRM_TUTORIAL_SKIP_POS")
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>	
+	
+	<FORM ID="FRM_ACCEPT_WANTED_QUEST" ALIGN_X="50" ALIGN_Y="30" W="430" H="505">
+		<ATTR IMG="../Data/6_ui/Quest/qsWanted.tga" IMG_W="430" IMG_H="505"/>
+		<FORM ID="FRM_TITLE" X="46" Y="133" W="365" H="40">
+			<ATTR TEXT="406144" FONT="FT15" T_X="8" T_Y="10" FONT_COLOR_HEX="0xFF9E0B0F"/>
+		</FORM>
+		<FORM ID="FRM_DESC" X="46" Y="178" W="321" H="151">
+			<ATTR TEXT="406145" FONT="FTcts_13" T_X="8" T_Y="10" FONT_COLOR_HEX="0xFF613629"/>
+		</FORM>
+		<FORM ID="FRM_ACCEPT" X="50" Y="387" W="320" H="30">
+			<ATTR TEXT="406146" FONT="FTcts_13" T_X="8" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff0c2" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_DECLINE" X="50" Y="425" W="320" H="30">
+			<ATTR TEXT="406113" FONT="FTcts_13" T_X="8" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff0c2" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_ACCEPT" X="274" Y="386" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70"/>
+			<ATTR TEXT="406157" T_X="56" T_Y="8" FONT="FTbt_12" T_CENTER="1"/>
+			<ATTR PRESET="BUTTON" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendReqBuildWantedQuest() CloseUI("FRM_ACCEPT_WANTED_QUEST") return true </SCRIPT>
+			<HOTKEY ID="59"> SendReqBuildWantedQuest() CloseUI("FRM_ACCEPT_WANTED_QUEST") return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_DECLINE" X="274" Y="423" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70"/>
+			<ATTR TEXT="406158" T_X="56" T_Y="8" FONT="FTbt_12" T_CENTER="1"/>
+			<ATTR PRESET="BUTTON" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">  CloseUI("FRM_ACCEPT_WANTED_QUEST") return true </SCRIPT>
+			<HOTKEY ID="60"> CloseUI("FRM_ACCEPT_WANTED_QUEST") return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="366" Y="29" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W="70" BTN_IMG_H="70"/>			
+			<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_ACCEPT_WANTED_QUEST") </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1"> CloseUI("FRM_ACCEPT_WANTED_QUEST") return true </HOTKEY>
+	</FORM>
+	
+	<FORM ID="FRM_WANTED_QUEST" ALIGN_X="50" IS_ABSOLUTE_Y="1" Y="10" W="510" H="616">		
+		<IMG ID="IMG_BG01" X="0" Y="0" Z="-2" W="510" H="512" IMG="../Data/6_ui/quest/qsWTDbg01.tga" IMG_W="510" IMG_H="512"/>
+		<IMG ID="IMG_BG02" X="0" Y="512" Z="-2" W="510" H="106" IMG="../Data/6_ui/quest/qsWTDbg02.tga" IMG_W="510" IMG_H="106"/>		
+		<!--Left-->		
+		<FORM ID="FRM_MODEL" X="40" Y="123" W="200" H="200">					
+			<SCRIPT ID="ON_CALL"> UISelf:InitRenderModel("QuestWanted", true) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("QuestWanted") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("QuestWanted") </SCRIPT>
+			<SCRIPT ID="ON_CLOSE"> UISelf:DelRenderModel("QuestWanted") </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP"> return true </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN"> return true </SCRIPT>
+		</FORM>
+		<FORM ID="FRM_MARK" X="61" Y="172" Z="1" W="136" H="58" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_ui/quest/qsFnsMk.tga"  IMG_W="136" IMG_H="58"/>
+		</FORM>
+		<FORM ID="FRM_QUEST_INFO" X="44" Y="300" W="200" H="50">
+			<ATTR TEXT="" FONT="FTcts_13" FONT_COLOR_HEX="0xFF613629"/>
+		</FORM>
+		<FORM ID="FRM_EXP">
+			<ATTR X="44" Y="398" W="200" H="21"/>
+			<IMG ID="BTN_EXP" X="0" Y="0" W="84" H="26">
+				<ATTR IMG="../Data/6_ui/quest/qsExpBg.tga" IMG_W="40" IMG_H="20"/>
+				<ATTR TEXT="400112" T_X="10" T_Y="1" FONT="FTtab"/>
+			</IMG>
+			<FORM ID="FRM_EXP_NUM" X="55" Y="2" W="200" H="21" T_OUTLINE="0" T_X="124" T_RIGHT="1">
+				<ATTR TEXT="" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>				
+			</FORM>
+		</FORM>
+		<FORM ID="FRM_GOLD">
+			<ATTR X="58" Y="427" W="176" H="21" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3"/>
+			<IMG ID="IMG_COIN1" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="48" IMG_Y="2"/>
+			<IMG ID="IMG_COIN2" IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="96" IMG_Y="2"/>
+			<IMG ID="IMG_COIN3" IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="144" IMG_Y="2"/>
+			<FORM ID="FRM_GOLD_NUM" X="46" Y="2" W="60" H="16" T_OUTLINE="0">
+				<ATTR TEXT="" FONT="Font_Text" FONT_COLOR_HEX="0xFF3D3413" T_RIGHT="1"/>				
+			</FORM>
+			<FORM ID="FRM_SILVER_NUM" X="76" Y="2" W="37" H="16" T_OUTLINE="0">
+				<ATTR TEXT="" FONT="Font_Text" FONT_COLOR_HEX="0xFF3D3413"/>				
+			</FORM>
+			<FORM ID="FRM_BRONZE_NUM" X="124" Y="2" W="37" H="16" T_OUTLINE="0">
+				<ATTR TEXT="" FONT="Font_Text" FONT_COLOR_HEX="0xFF3D3413"/>				
+			</FORM>			
+		</FORM>
+		<FORM ID="FRM_ITEM" X="48" Y="460"  W="200" H="50">			
+			<ICON ID="ICN_ITEM" X="0" Y="4" W="42" H="42" Z="0" ICON_GRP="254" ICON_KEY="1">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<FORM ID="FRM_ITEM_DESC" X="42" Y="5" W="200" H="21">
+				<ATTR TEXT="406149" FONT="FTcts_13" FONT_COLOR_HEX="0xFF482e26"/>				
+			</FORM>
+		</FORM>
+		<FORM ID="FRM_CLEAR_COUNT" X="50" Y="512"  W="200" H="21">
+			<ATTR TEXT="" T_X="86" FONT="FTcts_13" FONT_COLOR_HEX="0xFF3301D7" T_CENTER="1"/>
+		</FORM>
+		<BUTTON ID="BTN_CLOSE" X="446" Y="29" W="35" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/book/bkBtClose.tga" BTN_IMG_W="70" BTN_IMG_H="70"/>			
+			<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_WANTED_QUEST") CloseToolTip() </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_ACCEPT" X="25" Y="546" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70"/>
+			<ATTR TEXT="406153" FONT="FTbt_12" T_CENTER="1" T_X="56" T_Y="8"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendReqWantedQuestFunc() </SCRIPT>
+			<HOTKEY ID="59"> SendReqWantedQuestFunc() return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_REJECT" X="134" Y="546" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70"/>
+			<ATTR TEXT="406154" FONT="FTbt_12" T_CENTER="1" T_X="56" T_Y="8"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_WANTED_QUEST") CloseToolTip() </SCRIPT>
+			<HOTKEY ID="60"> CloseUI("FRM_WANTED_QUEST") CloseToolTip() return true </HOTKEY>
+		</BUTTON>
+		<!--Right-->
+		<FORM ID="FRM_WANTED_LIST" X="257" Y="55" W="150" H="20">
+			<ATTR TEXT="406151" FONT="FTcts_13" FONT_COLOR_HEX="0xFF613629"/>
+		</FORM>
+		<BUILD ID="BLD_WANTED_QUEST_ITEM" TARGET_ID="FRM_WANTED_QUEST_ITEM" X="254" Y="74" X_COUNT="1" Y_COUNT="8" Y_GAB="63"/>
+		<FORM ID="FRM_WANTED_QUEST_ITEM" X="0" Y="0" W="220" H="48" IS_VISIBLE="0">
+			<SCRIPT ID="ON_CALL">
+				for i = 0, 7 do
+					local kParent = UISelf:GetParent()
+					if not kParent:IsNil() then
+						local kBuildFrm = kParent:GetControl("FRM_WANTED_QUEST_ITEM" .. i)
+						if not kBuildFrm:IsNil() then
+							local kSelect = kBuildFrm:GetControl("IMG_SELECT")
+							if not kSelect:IsNil() then
+								kSelect:SetUVIndex(1)
+							end
+						end
+					end
+				end
+				local kSelect = UISelf:GetParent():GetControl("FRM_WANTED_QUEST_ITEM0")
+				kSelect:GetControl("IMG_SELECT"):SetUVIndex(3)
+		</SCRIPT>
+		<SCRIPT ID="ON_L_BTN_DOWN"> 
+			SelectWantedQuest( UISelf )
+				for i = 0, 7 do
+					local kParent = UISelf:GetParent()
+					if not kParent:IsNil() then						
+						local kBuildFrm = kParent:GetControl("FRM_WANTED_QUEST_ITEM" .. i)
+						if not kBuildFrm:IsNil() then
+							local kSelect = kBuildFrm:GetControl("IMG_SELECT")
+							if not kSelect:IsNil() then
+								if UISelf:GetBuildIndex() == i then
+									kSelect:SetUVIndex(3)
+								else
+									kSelect:SetUVIndex(1)
+								end								
+							end
+						end
+					end
+				end
+		</SCRIPT>
+		<ICON ID="ICN_MONSTER" X="3" Y="3" W="40" H="40" ICON_GRP="225" ICON_KEY="1" PASS_EVENT="1" NO_FOCUS="1">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+			<FORM ID="FRM_MONSTER_NAME" X="52" Y="4" W="220" H="46" PASS_EVENT="1">
+			<ATTR TEXT="" FONT="Font_Text" FONT_COLOR_HEX="0xFFfef2da"/>
+		</FORM>
+			<FORM ID="FRM_QUEST_STATE" X="52" Y="23" W="220" H="36" PASS_EVENT="1">
+			<ATTR TEXT="" FONT="Font_Text" FONT_COLOR_HEX="0xFFE8C88D"/>
+		</FORM>
+			<ANI_BAR ID="ANB_PERCENT" X="3" Y="47" Z="1" W="217" H="11" BAR_SMOOTH="0">
+				<ATTR BAR_IMG="../Data/6_ui/quest/qsBar.tga" BAR_IMG_W="217" BAR_IMG_H="11" BAR_COUNT="1"/>
+				<ATTR TEXT="406152" FONT="Font_Chat" T_Y="-2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_CREATE"></SCRIPT>
+		</ANI_BAR>
+			<FORM ID="IMG_SELECT" X="0" Y="0" Z="1" W="221" H="46" IMG="../Data/6_ui/quest/qsWTDListOver.tga" U="1" V="4" UV_INDEX="1">
+				<ATTR IMG_W="221" IMG_H="184" IGNORE_PARENT_RECT="1" NO_FOCUS="1" PASS_EVENT="1"/>
+		</FORM>
+	</FORM>
+		<HOTKEY ID="1"> CloseUI("FRM_WANTED_QUEST") CloseToolTip() return true </HOTKEY>
+		<SCRIPT ID="ON_CLOSE"> CallWantedQuestBtn() CloseToolTip() </SCRIPT>
+		<SCRIPT ID="ON_CORRECT">
+			local delta = (GetScreenSize():GetY() - 768)*0.5
+			UISelf:SetLocation(Point2(UISelf:GetLocation():GetX(), 10+delta))
+		</SCRIPT>
+	</FORM>
+		
+	<BUTTON ID="BTN_WANTED_QUEST" X="508" Y="658" W="45" H="45" IS_ABSOLUTE_X="1">
+		<ATTR BTN_IMG="../Data/6_ui/quest/qsWTDBt.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+		<SCRIPT ID="ON_L_BTN_DOWN"> 
+			CallWantedQuestUI()
+		</SCRIPT>
+	</BUTTON>
+	
+	<!-- /////////////////////////// Wanted Quest /////////////////////////// -->	
+	<!--FORM_QUEST_INFO ID="FRM_QUEST_WANTED" ALIGN_X="50" ALIGN_Y="50" W="440" H="512">
+		<ATTR IMG="../Data/6_UI/quest/qsWantedBg.tga" IMG_W="440" IMG_H="512"/>
+		
+		<FORM ID="FRM_MODEL" X="60" Y="60" W="320" H="300">
+			<SCRIPT ID="ON_CREATE"> UISelf:InitRenderModel("QuestWanted", true) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("QuestWanted") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("QuestWanted") </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP"> return true </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN"> return true </SCRIPT>
+		</FORM>
+		
+		<FORM ID="FRM_TEXT" X="64" Y="314" Z="1" W="320" H="80">
+			<ATTR TEXT="" FONT="FT15" FONT_COLOR_HEX="0xFF613629"/>
+		</FORM>
+		
+		<BUTTON ID="BTN_ACCEPT" X="111" Y="453" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="400085" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_WantedQuestButton(UISelf) </SCRIPT>
+			<HOTKEY ID="59"> OnClick_WantedQuestButton(UISelf)  return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_REJECT" X="225" Y="453" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="400086" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_WantedQuestButton(UISelf) </SCRIPT>
+			<HOTKEY ID="60"> OnClick_WantedQuestButton(UISelf)  return true</HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1"> SendReqCloseDialog() return true </HOTKEY>
+		<SCRIPT ID="ON_CALL"> OnCall_QuestFullScreenDialog() </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> OnClose_QuestFullScreenDialog() </SCRIPT>
+	</FORM_QUEST_INFO-->
+	
+	<!-- /////////////////////////// Wanted Complete Quest /////////////////////////// -->
+	<!--FORM_QUEST_INFO ID="FRM_QUEST_WANTED_COMPLETE" ALIGN_X="50" ALIGN_Y="50" W="440" H="512">
+		<ATTR IMG="../Data/6_UI/quest/qsWantedBg.tga" IMG_W="440" IMG_H="512"/>
+		
+		<FORM ID="FRM_MODEL" X="60" Y="60" W="320" H="300">
+			<SCRIPT ID="ON_CREATE"> UISelf:InitRenderModel("QuestWanted", true) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("QuestWanted") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("QuestWanted") </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP"> return true </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN"> return true </SCRIPT>
+		</FORM>
+		
+		<FORM ID="FRM_TEXT" X="64" Y="314" Z="1" W="320" H="80">
+			<ATTR TEXT="" FONT="FT15" FONT_COLOR_HEX="0xFF613629"/>
+		</FORM>
+		
+		<BUTTON ID="BTN_COMPLETE" X="161" Y="449" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="400087" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_WantedQuestButton(UISelf) </SCRIPT>
+			<HOTKEY ID="59"> OnClick_WantedQuestButton(UISelf) return true </HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1"> SendReqCloseDialog() return true </HOTKEY>
+		<SCRIPT ID="ON_CALL"> OnCall_QuestFullScreenDialog() </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> OnClose_QuestFullScreenDialog() </SCRIPT>
+	</FORM_QUEST_INFO-->
+	
+	<!-- /////////////////////////// Board Quest /////////////////////////// -->
+	<FORM_QUEST_INFO ID="FRM_VILLAGE_BOARD" ALIGN_X="50" ALIGN_Y="50" W="440" H="512">
+		<ATTR IMG="../Data/6_UI/quest/qsOfferBg.tga" IMG_W="440" IMG_H="512"/>
+		
+		<FORM ID="FRM_TITLE" X="20" Y="55" W="400" H="50">
+			<!--ATTR IMG="../Data/6_UI/main/abc.tga" IMG_W="400" IMG_H="50"/-->
+			<ATTR TEXT="1" T_X="200" T_Y="4" T_CENTER="1" T_OUTLINE="1" FONT="QTtext_Title" FONT_COLOR_HEX="0xFF613629" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		
+		<FORM ID="FRM_MODEL" X="60" Y="60" W="320" H="300">
+			<SCRIPT ID="ON_CALL"> UISelf:InitRenderModel("VillageBoard", true) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("VillageBoard") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("VillageBoard") </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP"> return true </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN"> return true </SCRIPT>
+		</FORM>
+		
+		<FORM ID="FRM_TEXT" X="64" Y="314" Z="1" W="320" H="80">
+			<ATTR TEXT="" T_X="160" T_CENTER="1" FONT="FT15" FONT_COLOR_HEX="0xFF613629"/>
+		</FORM>
+		
+		<BUTTON ID="BTN_ACCEPT" X="111" Y="453" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="400085" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_WantedQuestButton(UISelf) </SCRIPT>
+			<HOTKEY ID="59"> OnClick_WantedQuestButton(UISelf)  return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_REJECT" X="225" Y="453" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="400086" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_WantedQuestButton(UISelf) </SCRIPT>
+			<HOTKEY ID="60"> OnClick_WantedQuestButton(UISelf)  return true</HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1"> SendReqCloseDialog() return true </HOTKEY>
+		<SCRIPT ID="ON_CALL"> OnCall_QuestFullScreenDialog() </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> OnClose_QuestFullScreenDialog() </SCRIPT>
+	</FORM_QUEST_INFO>
+	
+	<!-- /////////////////////////// Letter Item UI /////////////////////////// -->
+	<FORM ID="FRM_LETTER_1" ALIGN_X="35" ALIGN_Y="30" W="434" H="487" CAN_DRAG="1">
+		<ATTR IMG="../Data/6_ui/quest/qsLetterBg.tga" IMG_W="434" IMG_H="487"/>
+		
+		<!--FORM ID="FRM_PAGE" X="364" Y="30" Z="1" W="50" H="20"-->
+		<FORM ID="FRM_PAGE" X="200" Y="425" Z="1" W="50" H="20">
+			<ATTR TEXT="21" FONT="FT15" FONT_COLOR_HEX="0xFF613629"/>
+			<!--ATTR IMG="../Data/a.tga" IMG_W="50" IMG_H="20"/-->
+		</FORM>
+		
+		<FORM ID="FRM_TEXT" X="54" Y="60" Z="1" W="330" H="350">
+			<ATTR TEXT="500083" FONT="FT15" FONT_COLOR_HEX="0xFF613629"/>
+			<!--ATTR IMG="../Data/a.tga" IMG_W="330" IMG_H="350"/-->
+		</FORM>
+		
+		<BUTTON ID="BTN_PREV" X="42" Y="419" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="95" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> GetQuestMan():PrevLetter() </SCRIPT>
+		</BUTTON>
+		
+		<!--BUTTON ID="BTN_NEXT" X="42" Y="419" W="106" H="31"-->
+		<BUTTON ID="BTN_NEXT" X="284" Y="419" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="92" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> GetQuestMan():NextLetter() </SCRIPT>
+		</BUTTON>
+		<STATIC_FORM ID="SFRM_CLOSE" X="380" Y="28" W="24" H="24">
+			<ATTR CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE">
+				<ATTR X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_LETTER_1") </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+	</FORM>
+	
+	<!-- /////////////////////////// Warning Quest /////////////////////////// -->
+	<FORM ID="FRM_QUEST_WARNING" ALIGN_X="50" ALIGN_Y="50" W="440" H="512">
+		<ATTR IMG="../Data/6_UI/quest/qsDangerBg.tga" IMG_W="440" IMG_H="512"/>
+		
+		<FORM ID="FRM_MODEL" X="60" Y="60" W="320" H="300">
+			<SCRIPT ID="ON_CREATE"> UISelf:InitRenderModel("QuestWarning", true) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("QuestWarning") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("QuestWarning") </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP"> return true </SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN"> return true </SCRIPT>
+		</FORM>
+		
+		<FORM ID="FRM_TEXT" X="64" Y="314" Z="1" W="320" H="80">
+			<ATTR TEXT="" FONT="FT15" FONT_COLOR_HEX="0xFF613629" />
+		</FORM>
+		
+		<BUTTON ID="BTN_CLOSE" X="168" Y="453" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR TEXT="400542" FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_QUEST_WARNING") </SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1"> CloseUI("FRM_QUEST_WARNING") return true </HOTKEY>
+	</FORM>
+	
+	<!-- /////////////////////////// New Ing Quest List /////////////////////////// -->
+	<STATIC_FORM ID="SFRM_QUEST_QUICK_INFO" X="200" Y="200" W="200" H="200" STATIC_NUM="36" NO_WORD_WRAP="1" PRIORITY="0" PASS_EVENT="1">
+		<ATTR TEXT="10" FONT="QTtext" T_X="4" T_Y ="4" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+	</STATIC_FORM>
+	<!-- Head -->
+	<FORM_SNAPED_HEAD_WND ID="FRM_QUEST_ING_ITEM_HEAD" ALIGN_X="0" Y="78" W="143" H="22" CAN_DRAG="1" IS_ABSOLUTE_Y="1">
+		<ATTR IMG="../Data/6_UI/quest/qsBxTab.tga" IMG_W="143" IMG_H="88" U="1" V="4" UV_INDEX="1" SNAP_GROUP="1"/>
+		<ATTR TEXT="20012" T_X="72" T_Y="3" T_CENTER="1" T_OUTLINE="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+		<BUTTON ID="BTN_CLOSE" X="122" Y="2" W="18" H="18">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsBtLU.tga" BTN_IMG_W="36" BTN_IMG_H="36"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local kSelf = UISelf
+				local kParent = kSelf:GetParent()
+				if not kParent:IsNil() then
+					kParent:ReLocationSnapChild()
+				end
+				CloseUI("SFRM_QUEST_QUICK_INFO")
+			</SCRIPT>
+		</BUTTON>
+	</FORM_SNAPED_HEAD_WND>
+	<!-- Sub -->
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_1" ALIGN_X="0" Y="100" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_2" ALIGN_X="0" Y="140" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_3" ALIGN_X="0" Y="180" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_4" ALIGN_X="0" Y="220" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_5" ALIGN_X="0" Y="260" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_6" ALIGN_X="0" Y="300" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_7" ALIGN_X="0" Y="340" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_8" ALIGN_X="0" Y="380" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_9" ALIGN_X="0" Y="420" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<FORM_SNAPED_SUB_WND ID="FRM_QUEST_ING_ITEM_10" ALIGN_X="0" Y="460" W="143" H="40" CAN_DRAG="1"  SNAP_GROUP="1" IS_ABSOLUTE_Y="1">
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="1" T_X="72" T_Y="2" T_BOLD="1" T_CENTER="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFF000000" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</FORM>
+		<FORM ID="FRM_SUB_ITEM" X="0" Y="20" W="143" H="20">
+			<ATTR IMG="../Data/6_UI/quest/qsBxBg.tga" IMG_W="143" IMG_H="80" U="1" V="4" UV_INDEX="3"/>
+			<ATTR TEXT="19944" FONT="QTtext" T_X="2" T_Y ="2" T_CENTER="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_RIGHT_COUNT" X="94" Y="20" Z="2" W="45" H="20">
+			<ATTR TEXT="400424" T_X="45" T_Y="2" T_RIGHT="1" T_OUTLINE="1" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<DUMMY ID="DMY_FULL" X="0" Y="0" Z="3" W="143" H="40">
+			<SCRIPT ID="ON_MOUSE_OVER">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_UP">CallQuestMiniIngToolTip( UISelf:GetParent() )</SCRIPT-->
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_QUEST_QUICK_INFO")</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN"> OnDblClick_QuestIngItem(UISelf) </SCRIPT>
+		</DUMMY>
+	</FORM_SNAPED_SUB_WND>
+	<!-- end Sub -->
+	
+	
+	<!-- Start one day quest -->
+	<FORM ID="FRM_ONEDAY_QUEST" ALIGN_X="50" Y="20" W="494" H="680">
+		<IMG ID="IMG_BG01" X="0" Y="0" Z="-2" W="494" H="512" IMG="../Data/6_ui/quest/qs1bg01.tga" IMG_W="494" IMG_H="512"/>
+		<IMG ID="IMG_BG02" X="0" Y="512" Z="-2" W="494" H="168" IMG="../Data/6_ui/quest/qs1bg02.tga" IMG_W="494" IMG_H="168"/>
+		<BUILD ID="BLD_IMG_REWARD_BG" TARGET_ID="IMG_REWARD_BG" X="56" Y="552" Z="-1" X_COUNT="8" Y_COUNT="1" X_GAB="48"/>
+		<IMG ID="IMG_REWARD_BG" X="0" Y="0" W="44" H="44" IMG="../Data/6_ui/quest/qs1iconbg.tga" IMG_W="44" IMG_H="44"/>
+		
+		<FORM ID="FRM_TITLE" X="48" Y="70" W="330" H="20">
+			<ATTR TEXT="10" T_X="0" T_Y="0" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF2e1809"/>
+		</FORM>
+		<FORM ID="FRM_COUNT" X="380" Y="70" W="80" H="20">
+			<ATTR TEXT="916" T_X="40" T_Y="0" T_CENTER="1" T_OUTLINE="1" FONT="FT15" FONT_COLOR_HEX="0xFFFDFDEA" OUTLINE_COLOR_HEX="0xFF3B210F"/>
+		</FORM>
+		<LIST ID="LIST_ONEDAY_QUEST" X="48" Y="111" W="400" H="259">
+			<IMG ID="IMG_BG" X="383" Y="21" W="13" H="80">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="80"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="381" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="381" Y="244" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="383" Y="21" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR ELEMENT_ID="FRM_ONEDAY_QUEST_ITEM"/>
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="IMG_BG"/>
+		</LIST>
+		
+		<FORM ID="FRM_INFO_TITLE" X="48" Y="390" W="400" H="20">
+			<ATTR TEXT="10" T_X="0" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFF9E0B0F"/>
+		</FORM>
+		<LIST ID="LIST_ONEDAY_QUEST_INFO" X="48" Y="410" W="400" H="80">
+			<IMG ID="IMG_BG" X="383" Y="21" W="13" H="80">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="80"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="381" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="381" Y="65" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="383" Y="21" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR ELEMENT_ID="FRM_ONEDAY_INFO_CONTENTS_ITEM"/>
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="IMG_BG"/>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:ClearAllListItem()
+				kSelf:AddNewListItemChar("ASDJ")
+			</SCRIPT>
+		</LIST>
+		
+		<FORM ID="FRM_REWARD_TITLE" X="58" Y="508" W="400" H="40">
+			<ATTR TEXT="19931" T_X="0" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFF9E0B0F"/>
+		</FORM>
+		
+		<BUILD ID="BLD_IMG_REWARD_ITEM" TARGET_ID="REWARD_ITEM" X="58" Y="554" X_COUNT="8" Y_COUNT="1" X_GAB="48"/>
+		<IMG ID="REWARD_ITEM" X="58" Y="554" W="40" H="40" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="40" IMG_H="40" IS_VISIBLE="0">
+			<ATTR T_X="2" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" IS_VISIBLE="1" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		
+		<BUTTON ID="BTN_FUNC1" X="137" Y="617" W="112" H="35">
+			<!--SCRIPT ID="ON_CREATE"> SetTextOnThisUI(401018, 2200) </SCRIPT--> <!-- this text is setted by program !-->
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendDailyQuestPacket() return true </SCRIPT>
+			<HOTKEY ID="59"> SendDailyQuestPacket() return true </HOTKEY>			
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="247" Y="617" W="112" H="35">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(403040, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() return true </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+		
+		<SCRIPT ID="ON_CALL"> OnCall_QuestFullScreenDialog() </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> OnClose_QuestFullScreenDialog() UISelf:ClearCustomData() </SCRIPT>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+	</FORM>
+	<IMG ID="FRM_ONEDAY_QUEST_ITEM" X="0" Y="0" W="377" H="37">
+		<ATTR IMG="../Data/6_ui/quest/qs1Listimg.tga" IMG_W="377" IMG_H="148" UV_INDEX="1" U="1" V="4"/>
+		<ATTR TEXT="" T_X="140" T_Y="8" FONT="FTcts_13" T_CENTER="1" T_OUTLINE="0" FONT_COLOR_HEX="0xFF52322E" OUTLINE_COLOR_HEX="0xFF52322E"/>
+		<IMG ID="IMG_STAR1" X="283" Y="8" W="14" H="14" IMG="../Data/6_ui/mission/msStar.tga" IMG_W="14" IMG_H="14" IS_VISIBLE="1"/>
+		<IMG ID="IMG_STAR2" X="301" Y="8" W="14" H="14" IMG="../Data/6_ui/mission/msStar.tga" IMG_W="14" IMG_H="14" IS_VISIBLE="0"/>
+		<IMG ID="IMG_STAR3" X="319" Y="8" W="14" H="14" IMG="../Data/6_ui/mission/msStar.tga" IMG_W="14" IMG_H="14" IS_VISIBLE="0"/>
+		<IMG ID="IMG_STAR4" X="337" Y="8" W="14" H="14" IMG="../Data/6_ui/mission/msStar.tga" IMG_W="14" IMG_H="14" IS_VISIBLE="0"/>
+		
+		<SCRIPT ID="ON_L_BTN_DOWN"> SelectDailyQuest(UISelf) </SCRIPT>
+	</IMG>
+	<FORM ID="FRM_ONEDAY_INFO_CONTENTS_ITEM" X="0" Y="0" W="380" H="100">
+		<ATTR TEXT="1419" T_X="0" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFF52322E"/>
+	</FORM>
+	<!-- End one day quest -->
+	
+	<!-- Start soulstone trade -->
+	<STATIC_FORM ID="FRM_TRADE_SOULSTONE" ALIGN_X="50" ALIGN_Y="40" W="357" H="403" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="355" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="315" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="400458" T_X="8" T_Y="4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="315" H="24" STATIC_NUM="3"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_3" X="324" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BNT_CLOSE" X="324" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_TRADE_SOULSTONE") </SCRIPT>
+				<HOTKEY ID="1">CloseUI("FRM_TRADE_SOULSTONE") return true</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_UI" X="9" Y="60" Z="-1" W="339" H="332">
+			<STATIC_FORM ID="SFRM_BG_COLOR_1" X="0" Y="0" Z="-2" W="339" H="275" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="0" Y="0" Z="-1" W="339" H="275" STATIC_NUM="3"/>
+			<STATIC_FORM ID="SFRM_BG_COLOR_2" X="0" Y="276" Z="-2" W="339" H="56" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_2" X="0" Y="276" Z="-1" W="339" H="56" STATIC_NUM="3"/>
+			
+			<STATIC_FORM ID="SFRM_ICON_BG" X="10" Y="284" Z="-1" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		</FORM>
+		
+		<STATIC_FORM ID="SFRM_LOCATION" X="10" Y="36" W="156" H="23" STATIC_NUM="16">
+			<ATTR TEXT="700" FONT="Font_Text" T_X="10" T_Y="4" FONT_COLOR_HEX="0xFFFFF6BF"/>
+			<STATIC_FORM ID="SFRM_EDT_BG_SHADOW" X="0" Y="0" W="156" H="23" STATIC_NUM="3" PASS_EVENT="1"/>
+		</STATIC_FORM>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<BUTTON ID="BTN_ITEM_CLASS_DROP" X="144" Y="37" W="21" H="21" BTN_IMG = "../Data/6_ui/post/psDropB.tga" BTN_IMG_W = "42" BTN_IMG_H = "42">
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						local kParent = kSelf:GetParent()
+						local kPopDrop = kParent:GetControl("SFRM_ITEM_CLASS_DROP")
+						if not kPopDrop:IsNil() then
+							kPopDrop:Visible( not kPopDrop:IsVisible() )
+						end
+					</SCRIPT>
+				</BUTTON>
+			</NAME>
+			<NAME ID="THAILAND">
+				<BUTTON ID="BTN_ITEM_CLASS_DROP" X="144" Y="37" W="21" H="21" BTN_IMG = "../Data/6_ui/post/psDropB.tga" BTN_IMG_W = "42" BTN_IMG_H = "42" IS_VISIBLE="0">
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						local kSelf = UISelf
+						local kParent = kSelf:GetParent()
+						local kPopDrop = kParent:GetControl("SFRM_ITEM_CLASS_DROP")
+						if not kPopDrop:IsNil() then
+							kPopDrop:Visible( not kPopDrop:IsVisible() )
+						end
+					</SCRIPT>
+				</BUTTON>
+			</NAME>
+		</LOCAL>
+		<STATIC_FORM ID = "SFRM_ITEM_CLASS_DROP" X="10" Y="58" W="135" H="59" Z="2" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" IGNORE_PARENT_RECT = "0" IS_VISIBLE="0" CAN_CLIP="0">
+			<BUTTON ID = "BTN_LOC1" X="4" Y="4" W="127" H="22" BTN_IMG="../Data/6_ui/Pvp/pvDropB.tga" BTN_IMG_W="254" BTN_IMG_H="44" TEXT="701" FONT="Font_Text" T_X="63" T_Y="2" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					SetSoulStoneTradeLocation(1)
+					UpdateSoulStoneTrade()
+					kSelf:GetParent():Visible(false)
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_LOC2" X="4" Y="27" W="127" H="22" BTN_IMG="../Data/6_ui/Pvp/pvDropB.tga" BTN_IMG_W="254" BTN_IMG_H="44" TEXT="705" FONT="Font_Text" T_X="63" T_Y="2" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					SetSoulStoneTradeLocation(2)
+					UpdateSoulStoneTrade()
+					kSelf:GetParent():Visible(false)
+				</SCRIPT>
+			</BUTTON>
+			<FORM ID = "FRM_BOTTOM" X="-2" Y="49" W="131" H="12" IGNORE_PARENT_RECT = "0" IMG="../Data/6_ui/Pvp/pvDropbottom.tga" IMG_W="139" IMG_H="12" PASS_EVENT="1" NO_FOCUS="1"/>
+			<SCRIPT ID="ON_LOSE_FOCUS">UISelf:Close() return true</SCRIPT>
+		</STATIC_FORM>
+		<LIST ID="LIST_TRADE_LIST" X="19" Y="70" W="320" H="255">
+			<IMG ID="IMG_BG" X="303" Y="21" W="13" H="240">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="80"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="301" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="301" Y="240" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="303" Y="21" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR ELEMENT_ID="FRM_SOULSTONE_TRADE_ITEM"/>
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="IMG_BG"/>
+			<!--SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:ClearAllListItem()
+				kSelf:AddNewListItemChar("ASDJ")
+			</SCRIPT-->
+		</LIST>
+		<IMG ID="ICON_Item" X="20" Y="345" Z="1" W="42" H="42">
+			<SCRIPT ID="ON_CALL">SetSimpleItemIcon(UISelf, 60000960)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">CallSimpleItemToolTip(UISelf, 60000960)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<STATIC_FORM ID="SFRM_RESULT_ITEM" X="69" Y="363" Z="1" W="169" H="22" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="400454" T_X="89" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_COUNT_PAY" X="251" Y="341" Z="1" W="67" H="22" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="420011" T_X="33" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFF3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_COUNT" X="251" Y="363" Z="1" W="67" H="22" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="420011" T_X="33" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<SCRIPT ID="ON_CALL">
+			UISelf:ClearCustomData()
+			RegistUIAction(UISelf, "CloseUI")			
+		</SCRIPT>
+	</STATIC_FORM>
+	<FORM ID="FRM_SOULSTONE_TRADE_ITEM" X="0" Y="0" W="350" H="51">
+		<!--ATTR IMG="../A.tga" IMG_W="250" IMG_H="50"/-->
+		<FORM ID="FRM_ARROW1" X="50" Y="10" W="6" H="6" IMG="../Data/6_ui/common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+		<ATTR TEXT="" T_X="60" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="4" Z="-1" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<STATIC_FORM ID="SFRM_RESULT_ITEM" X="45" Y="22" Z="-1" W="184" H="22" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="400454" T_X="92" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_COUNT" X="232" Y="22" Z="-1" W="67" H="22" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="420011" T_X="33" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<IMG ID="IMG_LINE_1" X="50" Y="49" Z="-1" W="250" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="250" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+		<IMG ID="IMG_LINE_2" X="50" Y="50" Z="-1" W="250" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="250" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+		
+		<IMG ID="ICON_Item" X="1" Y="5" Z="1" W="42" H="42">
+			<SCRIPT ID = "ON_MOUSE_OVER">CallSoulStoneTradeToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		
+		<BUTTON ID="BTN_REQ_TRADE" X="242" Y="0" W="47" H="21">
+			<ATTR  TEXT="400700" T_X="23" T_Y="2" FONT="Font_Text" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" BTN_IMG="../Data/6_ui/common/cmBsm.tga" BTN_IMG_W="94" BTN_IMG_H="42"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendSoulStoneTrade(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEC_COUNT" X="234" Y="24" Z="1" W="18" H="18">
+			<ATTR BTN_IMG="../Data/6_ui/Skill/skDnB.tga" BTN_IMG_W="36" BTN_IMG_H="36"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				IncSoulStoneTradeItemWnd(UISelf:GetParent(), -1)
+				UpdateSoulStoneTrade()
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_INC_COUNT" X="279" Y="24" Z="1" W="18" H="18">
+			<ATTR BTN_IMG="../Data/6_ui/Skill/skUpB.tga" BTN_IMG_W="36" BTN_IMG_H="36"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				IncSoulStoneTradeItemWnd(UISelf:GetParent(), 1)
+				UpdateSoulStoneTrade()
+			</SCRIPT>
+		</BUTTON>
+	</FORM>
+	<!-- End soulstone trade -->
+	<STATIC_FORM ID="SFRM_NEW_QUEST" ALIGN_X="400" ALIGN_Y="91" W="274" H="366" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="272" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="75001" T_X="45" T_Y="4" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="104" H="24" STATIC_NUM="3"/>
+				<FORM ID="FRM_TAB_IMG" X="0" Y="0" W="104" H="24" U="2" V="2" UV_INDEX="3" IMG="../Data/6_ui/common/cmTabLong.tga" IMG_W="208" IMG_H="48"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_3" X="241" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE" X="241" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:GetParent():GetParent():Close() return true</SCRIPT>
+				<HOTKEY ID="1">UISelf:GetParent():GetParent():Close() return true</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<FORM ID="FRM_BACK" X="0" Y="36" W="274" H="291" Z="-1">
+			<ATTR TEXT="75002" FONT="Font_Text" T_X="15" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<STATIC_FORM ID="SFRM_BG" X="9" Y="23" W="256" H="265" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="256" H="265" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</FORM>
+		<LIST ID="QUEST_LIST" X="14" Y="65" W="246" H="253">
+			<ATTR ELEMENT_ID="SFRM_NEWQUEST_ITEM" ITEM_X="0" ITEM_Y="0" BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="QUEST_LIST_SCROLL_BG"/>
+			<IMG ID="QUEST_LIST_SCROLL_BG" X="232" Y="35" Z="-1" W="13" H="253" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="153"/>
+			<BUTTON ID="ScrUp" X="230" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrDown" X="230" Y="238" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrMiddle" X="232" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>			
+		</LIST>
+		<BUTTON ID="BTN_DETAIL" X="50" Y="327" Z="1" W="84" H="26" BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="75003" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<SCRIPT ID="ON_CALL">SetTextOnThisUI(75003, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">OnClickDetailQuestView(UISelf) return true</SCRIPT>
+			<HOTKEY ID="59">OnClickDetailQuestView(UISelf) return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="136" Y="327" Z="1" W="84" H="26" BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="75004" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<SCRIPT ID="ON_CALL">SetTextOnThisUI(75004, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:GetParent():Close() return true</SCRIPT>
+			<HOTKEY ID="60">UISelf:GetParent():Close() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">CloseCheckNewQuestNfy(UISelf:GetCustomDataAsBool())</SCRIPT>
+	</STATIC_FORM>
+	<STATIC_FORM ID="SFRM_NEWQUEST_ITEM" X="0" Y="0" W="225" H="49" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+		<FORM ID="FRM_NAME" X="0" Y="0" W="185" H="49" Z="-1" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="21" FONT="Font_Text" T_X="50" T_Y="17" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		<FORM ID="FRM_GROUP_NAME" X="0" Y="0" W="185" H="49" Z="-1" IS_VISIBLE="0" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="21" FONT="Font_Text" T_X="50" T_Y="17" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_ICONBG" X="4" Y="4" W="40" H="40" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<ICON ID="ICON_NPC" X="4" Y="4" W="40" H="40" Z="1" ICON_GRP="225" ICON_KEY="1" PASS_EVENT="1" NO_FOCUS="1">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>	
+		</ICON>
+		<SCRIPT ID="ON_MOUSE_OVER">OnOverQuestNfyListItem(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_L_BTN_DOWN">OnClickQuestNfyListItem(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_TICK">OnTickChangeTextToQuestNameAndQuestGroup(UISelf, 0.5)</SCRIPT>
+		<FORM ID="FRM_CHECK" X="0" Y="0" W="225" H="48" U="1" V="4" UV_INDEX="1" IMG="../Data/6_ui/book/bkQstClick_01.tga" IMG_W="225" IMG_H="192" PASS_EVENT="1" NO_FOCUS="1">
+			<FORM ID="FRM_CHECK_ICON" X="183" Y="31" W="17" H="17" IMG="../Data/6_ui/book/bkClick.tga" IMG_W="17" IMG_H="17" PASS_EVENT="1" NO_FOCUS="1"/>
+		</FORM>
+		<BUTTON ID="BTN_REMOTE_ACCEPT" X="201" Y="0" W="24" H="24">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsRC_01.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				if true == UISelf:IsGrayScale() then
+					CallToolTipText(0, GetTextW(75005), GetUIWnd("Cursor"):GetLocation())
+				else
+					CallToolTipText(0, GetTextW(75006), GetUIWnd("Cursor"):GetLocation())
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>	
+			<SCRIPT ID="ON_L_BTN_UP">
+				if false == UISelf:IsGrayScale() then
+					GetQuestMan():RemoteAcceptQuest(UISelf)
+				end
+			</SCRIPT>	
+		</BUTTON>
+		<FORM ID="ICON_NEAR_QUEST" X="201" Y="24" W="24" H="24" Z="1" >
+			<ATTR IMG="../Data/6_UI/quest/qsRC_02.tga" IMG_W="24" IMG_H="24"/>
+			<SCRIPT ID="ON_MOUSE_OVER"> CallToolTip_NearQuestIcon(UISelf) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>	
+		</FORM>
+	</STATIC_FORM>
+	<FORM ID="FRM_NEW_QUEST_NOTICE" X="386" Y="613" W="41" H="90" TICK_TIME="250" IS_ABSOLUTE_X="1">
+		<SCRIPT ID="ON_TICK">CheckNfyClickState(UISelf)</SCRIPT>
+		<BUILD ID="BLD_BTN" TARGET_ID="FRM_ITEM" X="0" Y="0" X_COUNT="1" Y_COUNT="2" Y_GAB="45"/>
+		<FORM ID="FRM_ITEM" X="0" Y="0" W="41" H="45" U="2" V="2" UV_INDEX="1" IMG="../Data/6_ui/quest/qsAmMk.tga" IMG_W="82" IMG_H="90" IS_VISIBLE="0">
+			<SCRIPT ID="ON_BUILD">
+				if UISelf:GetBuildIndex() == 0 then
+					UISelf:SetUVIndex(3)
+				else
+					UISelf:SetUVIndex(1)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">TickQuestNfyScriptFunc(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">CallQuestNfyScriptFunc(UISelf)</SCRIPT>
+		</FORM>
+	</FORM>
+	<!--		CallUI("FRM_QUEST_EVENT")		-->
+	<FORM ID="FRM_EVENT_QUEST" ALIGN_X="50" ALIGN_Y="40" W="443" H="611">
+		<LOCAL>
+			<NAME ID="TAIWAN">
+				<FORM ID="FRM_TOP" X="0" Y="0" W="443" H="190" Z="-1" IMG="../Data/6_ui/event/evtQstBg01.tga" IMG_W="443" IMG_H="190"/>
+			</NAME>
+			<NAME ID="DEFAULT">
+				<FORM ID="FRM_TOP" X="0" Y="0" W="443" H="190" Z="-1" IMG="../Data/6_ui/event/evtQstBg01_02.tga" IMG_W="443" IMG_H="190"/>
+			</NAME>
+		</LOCAL>
+		<FORM ID="FRM_MDL" X="0" Y="190" W="443" H="421" Z="-1" IMG="../Data/6_ui/event/evtQstBg02.tga" IMG_W="443" IMG_H="421"/>
+		<LIST ID="LST_PROLOGUE" X="38" Y="228" W="358" H="100" ELEMENT_ID="FRM_ASQ_TEXT_ITEM" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="IMG_SCROLL_BAR">
+			<IMG ID="IMG_SCROLL_BAR" X="342" Y="20" Z="-1" W="13" H="100" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="100"/>
+			<BUTTON ID="BTN_SCR_UP" X="338" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="338" Y="85" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="340" Y="15" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+		</LIST>	
+		<LIST ID="LST_INFO" X="38" Y="335" W="358" H="100"ELEMENT_ID="FRM_ASQ_TEXT_ITEM" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="IMG_SCROLL_BAR">
+			<IMG ID="IMG_SCROLL_BAR" X="342" Y="20" Z="-1" W="13" H="100" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="100"/>
+			<BUTTON ID="BTN_SCR_UP" X="338" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="338" Y="85" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="340" Y="15" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+		</LIST>
+		<FORM ID="FRM_TITLE" X="38" Y="200" W="358" H="20" TEXT="" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>
+		<FORM ID="FRM_REWARD_TEXT" X="42" Y="445" W="358" H="20" TEXT="19931" FONT="FTcts_13" FONT_COLOR_HEX="0xFF9E0B0F"/>
+		<BUILD ID="BLD_REWARD_BG" X="49" Y="467" X_COUNT="7" Y_COUNT="1" X_GAB="48" TARGET_ID="FRM_REWARD_BG"/>
+		<FORM ID="FRM_REWARD_BG" X="0" Y="0" W="44" H="44" IMG="../Data/6_ui/event/evtQstIcBg.tga" IMG_W="44" IMG_H="44"/>
+		<BUILD ID="BLD_REWARD" X="51" Y="469" X_COUNT="7" Y_COUNT="1" X_GAB="48" TARGET_ID="FRM_REWARD"/>
+		<FORM ID="FRM_REWARD" X="0" Y="0" W="40" H="40" Z="1">
+			<ATTR T_X="2" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER"> OnCallQuestRewardItemToolTip(UISelf) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</FORM>
+		
+		<BUTTON ID="BTN_CLOSE" X="179" Y="528" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400542" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400542, 2200) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_EVENT_QUEST") </SCRIPT>
+			<HOTKEY ID="59"> CloseUI("FRM_EVENT_QUEST") return true </HOTKEY>
+			<HOTKEY ID="1"> CloseUI("FRM_EVENT_QUEST") return true </HOTKEY>
+		</BUTTON>
+	</FORM>
+	<FORM ID="FRM_ASQ_TEXT_ITEM" X="0" Y="0" W="338" H="20" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+	
+	<BUTTON ID="BTN_EVENT_QUEST_MINI" X="508" Y="658" W="45" H="45" IS_ABSOLUTE_X="1">
+		<LOCAL>
+			<NAME ID="TAIWAN">
+				<ATTR BTN_IMG="../Data/6_ui/Event/evtQstBt.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+			</NAME>
+			<NAME ID="DEFAULT">
+				<ATTR BTN_IMG="../Data/6_ui/Event/evtQstBt02.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+			</NAME>
+		</LOCAL>
+		<SCRIPT ID = "ON_MOUSE_OVER"> CallEventQuest_StatusToolTip(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("SFRM_QUEST_QUICK_INFO") CallEventQuestInfoUI() </SCRIPT>
+	</BUTTON>
+	
+	<!-- New daily quest -->
+	<FORM ID="FRM_ACCEPT_RANDOM_QUEST" ALIGN_X="50" ALIGN_Y="30" W="365" H="477">
+		<ATTR IMG="../Data/6_ui/Quest/qs1DayBg.tga" IMG_W="365" IMG_H="477"/>
+		<FORM ID="FRM_TITLE" X="0" Y="173" W="365" H="40">
+			<ATTR TEXT="406110" FONT="FTcts_16" T_CENTER="1" T_X="182" T_Y="10" FONT_COLOR_HEX="0xFF38221A"/>
+		</FORM>
+		<FORM ID="FRM_DESC" X="22" Y="228" W="321" H="151">
+			<ATTR TEXT="406111" FONT="FTcts_13" T_X="8" T_Y="10" FONT_COLOR_HEX="0xFFffd385"/>
+		</FORM>
+		<FORM ID="FRM_ACCEPT" X="16" Y="396" W="320" H="30">
+			<ATTR TEXT="406112" FONT="FTcts_13" T_X="8" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff0c2" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_DECLINE" X="16" Y="428" W="320" H="30">
+			<ATTR TEXT="406113" FONT="FTcts_13" T_X="8" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff0c2" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_ACCEPT" X="259" Y="399" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="406114" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1"/>
+			<ATTR PRESET="BUTTON" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(406114, 2200) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendReqBuildRandomQuest() CloseUI("FRM_ACCEPT_RANDOM_QUEST") return true </SCRIPT>
+			<HOTKEY ID="59"> SendReqBuildRandomQuest() CloseUI("FRM_ACCEPT_RANDOM_QUEST") return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_DECLINE" X="259" Y="431" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="406115" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1"/>
+			<ATTR PRESET="BUTTON" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(406115, 2201) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">  CloseUI("FRM_ACCEPT_RANDOM_QUEST") return true </SCRIPT>
+			<HOTKEY ID="60"> CloseUI("FRM_ACCEPT_RANDOM_QUEST") return true </HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1"> CloseUI("FRM_ACCEPT_RANDOM_QUEST") return true </HOTKEY>
+	</FORM>
+	<BUTTON ID="BTN_DAILY_RANDOM_QUEST" X="424" Y="658" W="45" H="45" IS_ABSOLUTE_X="1">
+		<ATTR BTN_IMG="../Data/6_ui/quest/qs1DayBt.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+		<SCRIPT ID="ON_L_BTN_DOWN"> CallRandomQuestUI(true) </SCRIPT>
+	</BUTTON>
+	
+	<!-- New guild daily quest -->
+	<FORM ID="FRM_ACCEPT_TACTICS_RANDOM_QUEST" ALIGN_X="50" ALIGN_Y="30" W="365" H="477">
+		<ATTR IMG="../Data/6_ui/Quest/qsGdBg.tga" IMG_W="365" IMG_H="477"/>
+		<FORM ID="FRM_TITLE" X="0" Y="173" W="365" H="40">
+			<ATTR TEXT="406139" FONT="FTcts_16" T_CENTER="1" T_X="182" T_Y="10" FONT_COLOR_HEX="0xFF38221A"/>
+		</FORM>
+		<FORM ID="FRM_DESC" X="22" Y="228" W="321" H="151">
+			<ATTR TEXT="406140" FONT="FTcts_13" T_X="8" T_Y="10" FONT_COLOR_HEX="0xFFffd385"/>
+		</FORM>
+		<FORM ID="FRM_ACCEPT" X="16" Y="396" W="320" H="30">
+			<ATTR TEXT="406141" FONT="FTcts_13" T_X="8" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff0c2" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_DECLINE" X="16" Y="428" W="320" H="30">
+			<ATTR TEXT="406142" FONT="FTcts_13" T_X="8" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff0c2" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_ACCEPT" X="259" Y="399" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="406114" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1"/>
+			<ATTR PRESET="BUTTON" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(406114, 2200) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendReqBuildTacticsRandomQuest() CloseUI("FRM_ACCEPT_TACTICS_RANDOM_QUEST") return true </SCRIPT>
+			<HOTKEY ID="59"> SendReqBuildTacticsRandomQuest() CloseUI("FRM_ACCEPT_TACTICS_RANDOM_QUEST") return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_DECLINE" X="259" Y="431" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="406115" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1"/>
+			<ATTR PRESET="BUTTON" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(406115, 2201) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">  CloseUI("FRM_ACCEPT_TACTICS_RANDOM_QUEST") return true </SCRIPT>
+			<HOTKEY ID="60"> CloseUI("FRM_ACCEPT_TACTICS_RANDOM_QUEST") return true </HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1"> CloseUI("FRM_ACCEPT_TACTICS_RANDOM_QUEST") return true </HOTKEY>
+	</FORM>
+	<BUTTON ID="BTN_DAILY_TACTICS_RANDOM_QUEST" X="466" Y="658" W="45" H="45" IS_ABSOLUTE_X="1">
+		<ATTR BTN_IMG="../Data/6_ui/quest/qsGdBt.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+		<SCRIPT ID="ON_L_BTN_DOWN"> CallRandomTacticsQuestUI(true) </SCRIPT>
+	</BUTTON>
+	
+	<!-- -->
+	<FORM ID="FRM_RANDOM_QUEST" ALIGN_X="50" ALIGN_Y="50" W="494" H="748">
+		<IMG ID="IMG_BG01" X="0" Y="0" Z="-2" W="494" H="512" IMG="../Data/6_ui/quest/qs1dayBg01.tga" IMG_W="494" IMG_H="512"/>
+		<IMG ID="IMG_BG02" X="0" Y="512" Z="-2" W="494" H="168" IMG="../Data/6_ui/quest/qs1dayBg02.tga" IMG_W="494" IMG_H="236"/>
+		<BUILD ID="BLD_IMG_REWARD_BG" TARGET_ID="IMG_REWARD_BG" X="56" Y="630" Z="-1" X_COUNT="8" Y_COUNT="1" X_GAB="48"/>
+		<IMG ID="IMG_REWARD_BG" X="0" Y="0" W="44" H="44" IMG="../Data/6_ui/quest/qs1iconbg.tga" IMG_W="44" IMG_H="44"/>
+		
+		<FORM ID="FRM_TITLE" X="44" Y="70" W="330" H="20">
+			<ATTR TEXT="406110" T_X="0" T_Y="0" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF2e1809"/>
+		</FORM>
+		<FORM ID="FRM_COUNT" X="380" Y="65" W="80" H="20">
+			<ATTR TEXT="916" T_X="40" T_Y="2" T_CENTER="1" T_OUTLINE="1" FONT="FT15" FONT_COLOR_HEX="0xFFFDFDEA" OUTLINE_COLOR_HEX="0xFF3B210F"/>
+		</FORM>
+		<LIST ID="LIST_RANDOM_QUEST" X="48" Y="101" W="400" H="370">
+			<IMG ID="IMG_BG" X="383" Y="21" W="13" H="80">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="80"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="381" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="381" Y="244" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="383" Y="21" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR ELEMENT_ID="FRM_RANDOM_QUEST_ITEM"/>
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="IMG_BG"/>
+		</LIST>
+		
+		<FORM ID="FRM_INFO_TITLE" X="48" Y="478" W="400" H="20">
+			<ATTR TEXT="10" T_X="0" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFF9E0B0F"/>
+		</FORM>
+		<LIST ID="LIST_ONEDAY_QUEST_INFO" X="48" Y="495" W="400" H="80">
+			<IMG ID="IMG_BG" X="383" Y="21" W="13" H="80">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="80"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="381" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="381" Y="65" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="383" Y="21" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			</BUTTON>
+			
+			<ATTR ELEMENT_ID="FRM_ONEDAY_INFO_CONTENTS_ITEM"/>
+			<ATTR BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="IMG_BG"/>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:ClearAllListItem()
+				kSelf:AddNewListItemChar("ASDJ")
+			</SCRIPT>
+		</LIST>
+		
+		<FORM ID="FRM_REWARD_TITLE" X="58" Y="586" W="400" H="40">
+			<ATTR TEXT="19931" T_X="0" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFF9E0B0F"/>
+		</FORM>
+		
+		<BUILD ID="BLD_IMG_REWARD_ITEM" TARGET_ID="REWARD_ITEM" X="58" Y="632" X_COUNT="8" Y_COUNT="1" X_GAB="48"/>
+		<IMG ID="REWARD_ITEM" X="58" Y="554" W="40" H="40" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="40" IMG_H="40" IS_VISIBLE="0">
+			<ATTR T_X="2" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" IS_VISIBLE="1" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		
+		<BUTTON ID="BTN_FUNC1" X="137" Y="690" W="112" H="35">
+			<!--SCRIPT ID="ON_CREATE"> SetTextOnThisUI(401018, 2200) </SCRIPT--> <!-- this text is setted by program !-->
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendReqRandomQuestFunc(UISelf:GetParent()) return true </SCRIPT>
+			<HOTKEY ID="59"> SendReqRandomQuestFunc(UISelf:GetParent()) return true </HOTKEY>			
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="247" Y="690" W="112" H="35">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(403040, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+			<ATTR FONT="FTctsBig_14" T_X="56" T_Y="8" T_CENTER="1" FONT_COLOR_HEX="0xFF482e26" T_OUTLINE="0" />
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() return true </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+		
+		<SCRIPT ID="ON_CALL"> OnCall_QuestFullScreenDialog() </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> OnClose_QuestFullScreenDialog() UISelf:ClearCustomData() </SCRIPT>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+	</FORM>
+	<IMG ID="FRM_RANDOM_QUEST_ITEM" X="0" Y="0" W="377" H="37">
+		<ATTR IMG="../Data/6_ui/quest/qs1dayListimg.tga" IMG_W="377" IMG_H="148" UV_INDEX="1" U="1" V="4"/>
+		<ATTR TEXT="" T_X="150" T_Y="8" FONT="FTcts_13" T_CENTER="1" T_OUTLINE="0" FONT_COLOR_HEX="0xFF52322E" OUTLINE_COLOR_HEX="0xFF52322E"/>
+		<FORM ID="FRM_EXP_RATE" X="292" Y="4" W="56" H="20">
+			<ATTR TEXT="" T_X="28" T_Y="2" FONT="FTslot" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFffd648" OUTLINE_COLOR_HEX="0xFF000100"/>
+		</FORM>
+		<SCRIPT ID="ON_L_BTN_DOWN"> SelectRandomQuest(UISelf) </SCRIPT>
+	</IMG>
+	
+	<!-- Realm Quest UI -->
+	<STATIC_FORM ID="SFRM_REALM_QUEST" ALIGN_X="50" Y="100" W="383" H="427" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="381" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="460100" T_X="45" T_Y="4" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="104" H="24" STATIC_NUM="3"/>
+				<FORM ID="FRM_TAB_IMG" X="0" Y="0" W="104" H="24" U="2" V="2" UV_INDEX="3" IMG="../Data/6_ui/common/cmTabLong.tga" IMG_W="208" IMG_H="48"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_3" X="350" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE" X="350" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():Close()</SCRIPT>
+				<HOTKEY ID="1">UISelf:GetParent():GetParent():Close() return true</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_BG_01" X="9" Y="35" Z="0" W="365" H="306" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" Z="0" W="365" H="306" STATIC_NUM="3"/>
+			<STATIC_FORM ID="SFRM_BG_2" X="10" Y="190" Z="1" W="345" H="109" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_BG_02" X="10" Y="346" Z="0" W="364" H="69" STATIC_NUM="34">
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_DESC_TITLE" X="9" Y="45" W="365" H="20">
+			<ATTR TEXT="460101" T_X="10" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000"/>
+		</FORM>
+		<FORM ID="FRM_DESC" X="9" Y="65" W="365" H="200">
+			<ATTR TEXT="460200" T_X="10" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		<FORM ID="FRM_REWARD_TITLE" X="15" Y="205" W="345" H="20">
+			<ATTR TEXT="460102" T_X="5" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFF790000"/>
+		</FORM>
+		<FORM ID="FRM_REWARD" X="20" Y="230" W="345" H="89">
+			<ATTR TEXT="460201" T_X="5" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		
+		<FORM ID="FRM_TITLE" X="10" Y="346" W="366" H="20">
+			<ATTR TEXT="460205" T_X="12" T_Y="7" FONT="Font_Text" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff568" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_COUNT" X="25" Y="374" W="300" H="40">
+			<ATTR TEXT="460103" T_X="0" T_Y="0" FONT="FTcts_13" T_OUTLINE="1" FONT_COLOR_HEX="0xFFffffff" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+	</STATIC_FORM>
+	
+	<!-- Realm Quest Mini UI -->
+	<FORM ID="FRM_REALM_QUEST_STATUS" X="390" Y="620" W="246" H="80" ALIVE_TIME="5000" PRIORITY="1" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_ui/quest/qsCrsBg.tga" IMG_W="246" IMG_H="80"/>
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="246" H="20">
+			<ATTR TEXT="460205" T_X="12" T_Y="7" FONT="Font_Text" T_OUTLINE="1" FONT_COLOR_HEX="0xFFfff568" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_COUNT" X="15" Y="32" W="231" H="40">
+			<ATTR TEXT="460103" T_X="0" T_Y="0" FONT="FTcts_13" T_OUTLINE="1" FONT_COLOR_HEX="0xFFffffff" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+	</FORM>
+	
+	<!-- Achievements UI -->
+	<STATIC_FORM ID="SFRM_NEW_ACHIEVEMENTS" ALIGN_X="400" ALIGN_Y="91" W="364" H="391" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="362" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="75010" T_X="62" T_Y="4" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="144" H="24" STATIC_NUM="3"/>
+				<FORM ID="FRM_TAB_IMG" X="0" Y="0" W="144" H="24" U="1" V="4" UV_INDEX="3" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" />
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_3" X="331" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BTN_CLOSE" X="331" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():CloseParent()</SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<FORM ID="FRM_BACK" X="0" Y="36" W="346" H="318" Z="-1">
+			<ATTR TEXT="75011" FONT="Font_Text" T_X="15" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<STATIC_FORM ID="SFRM_BG" X="9" Y="23" W="346" H="290" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="346" H="290" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</FORM>
+		<LIST ID="ACHIEVEMENT_LIST" X="14" Y="65" W="346" H="280">
+			<ATTR ELEMENT_ID="SFRM_NEW_ACHIEVEMENT_ITEM" ITEM_X="2" ITEM_Y="1" BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle" WND_BAR="ACHIEVEMENT_LIST_SCROLL_BG"/>
+			<IMG ID="ACHIEVEMENT_LIST_SCROLL_BG" X="319" Y="0" Z="-1" W="13" H="246" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="153"/>
+			<BUTTON ID="ScrUp" X="319" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrDown" X="319" Y="262" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="ScrMiddle" X="321" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>			
+		</LIST>
+		<BUTTON ID="BTN_GO_BOOK" X="57" Y="354" Z="1" W="124" H="23" BTN_IMG="../Data/6_ui/book/bkWsBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="124" BTN_IMG_H="92">
+			<ATTR TEXT="75012" FONT="FTbt_12" T_X="62" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<SCRIPT ID="ON_CALL">SetTextOnThisUI(75012, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				UISelf:CloseParent()
+				OnClickAchieveBook()
+			</SCRIPT>
+			<HOTKEY ID="59"> 
+				UISelf:CloseParent()
+				OnClickAchievetBook()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="184" Y="354" Z="1" W="124" H="23" BTN_IMG="../Data/6_ui/book/bkWsBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="124" BTN_IMG_H="92">
+			<ATTR TEXT="75004" FONT="FTbt_12" T_X="62" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<SCRIPT ID="ON_CALL">SetTextOnThisUI(75004, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent() return true</SCRIPT>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+	</STATIC_FORM>
+	<FORM ID="SFRM_NEW_ACHIEVEMENT_ITEM" X="0" Y="0" W="313" H="56">
+		<STATIC_FORM ID="SFRM_MAIN" X="0" Y="0" Z="-10" W="313" H="54" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<STATIC_FORM ID="SFRM_ICONBG" X="6" Y="7" W="40" H="40" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<IMG ID="IMG_ITEM" X="6" Y="7" W="40" H="40">
+			<SCRIPT ID="ON_DISPLAY"> DrawMissionRewardItem(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>			
+			<SCRIPT ID = "ON_L_BTN_DOWN">OnClickBookAchieveIcon(UISelf)</SCRIPT>
+		</IMG>
+		<FORM ID="SFRM_TITLE" X="3" Y="0" W="260" H="49" Z="-1" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="21" FONT="Font_Text" T_X="50" T_Y="3" FONT_COLOR_HEX="0xFF9E0B0F"/>
+		</FORM>
+		<FORM ID="FRM_DISCRIPT" X="3" Y="0" W="260" H="49" Z="-1" NO_FOCUS="1" PASS_EVENT="1">
+			<ATTR TEXT="21" FONT="Font_Text" T_X="50" T_Y="20" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		<IMG ID="IMG_PERCENT_BG" X="52" Y="39" Z="-1" W="255" H="9" IMG="../Data/6_ui/book/bkWsBarbg.tga" IMG_W="255" IMG_H="9"/>
+		<ANI_BAR ID="ANB_PERCENT" X="53" Y="40" Z="1" W="255" H="9" BAR_SMOOTH="0">
+			<ATTR BAR_IMG="../Data/6_ui/book/bkHsBar.tga" BAR_IMG_W="253" BAR_IMG_H="7" BAR_COUNT="1"/>
+			<ATTR TEXT="21" T_X="10" T_Y="-6" FONT="FTNumber" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/>
+		</ANI_BAR>
+	</FORM>
+
+	<FORM ID="FMA_ACHIEVEMENT_STATUS" X="424" Y="528" W="266" H="128" PRIORITY="1" CAN_CLIP="1" IS_ABSOLUTE_X="1" ALIVE_TIME="5000">
+		<ATTR PASS_EVENT="1" NO_FOCUS="1"/>
+		<!--ATTR MOVE_TYPE="0" MOVE_TIME="2500" START_X="424" START_Y="768" END_X="424" END_Y="528"/-->
+		<!--SCRIPT ID="ON_CALL">
+			local iScreenY = GetScreenSize():GetY()
+			UISelf:SetupMove(Point2(424,iScreenY), Point2(424,iScreenY-240), 2.5)
+		</SCRIPT-->
+		<!--ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="98" PAUSE_TIME="25000"/-->
+		<FORM ID="FRM_BIG" X="0" Y="0" W="266" H="128" Z="-10" IMG="../Data/6_ui/works/wsNowBgL.tga" IMG_W="266" IMG_H="128">
+			<ATTR PASS_EVENT="1" NO_FOCUS="1"/>
+			<BUILD ID="BLD_ICON_SOON" TARGET_ID="FRM_ICON_SOON" X="13" Y="65" X_COUNT="5" Y_COUNT="1" X_GAB="50" Y_GAB="0"/>
+			<FORM ID="FRM_ICON_SOON" X="0" Y="0" Z="1" W="42" H="54">
+				<IMG ID="IMG_ITEM" X="0" Y="0" Z="1" W="40" H="40" TICK_TIME="300">
+					<SCRIPT ID="ON_TICK">DrawMissionRewardItem(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</IMG>
+				<FORM ID="FRM_PERCENT" X="0" Y="40" Z="1" W="40" H="14">
+					<ATTR TEXT="74005" T_X="24" T_Y="1" T_CENTER="1" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				</FORM>
+			</FORM>
+		</FORM>
+		<FORM ID="FRM_SMALL" X="0" Y="0" W="266" H="63" Z="-10" IS_VISIBLE="0" IMG="../Data/6_ui/works/wsNowBgS.tga" IMG_W="266" IMG_H="63" PASS_EVENT="1" NO_FOCUS="1"/>
+		<BUTTON ID="BTN_CLOSE" X="238" Y="8" W="21" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/main/mnEmotcX.tga" BTN_IMG_W="42" BTN_IMG_H="40"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_SWITCH_CLOSE" X="238" Y="34" W="21" H="22">
+			<ATTR BTN_IMG="../Data/6_ui/TrueTw/ttBtLgSt.tga" BTN_IMG_W="42" BTN_IMG_H="44"/>
+			<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(2806), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">SwitchAchieveStatus(UISelf:GetParent(), false)</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_SWITCH_OPEN" IS_VISIBLE="0" X="238" Y="34" W="21" H="22">
+			<ATTR BTN_IMG="../Data/6_ui/TrueTw/ttBtLgSt2.tga" BTN_IMG_W="42" BTN_IMG_H="44"/>
+			<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(2807), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">SwitchAchieveStatus(UISelf:GetParent(), true)</SCRIPT>
+		</BUTTON>
+		<IMG ID="IMG_ITEM" X="13" Y="12" Z="10" W="40" H="40" TICK_TIME="300">
+			<SCRIPT ID="ON_TICK">DrawMissionRewardItem(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallMissionRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<FORM ID="FRM_TITLE" X="61" Y="10" W="172" H="20" STATIC_NUM="35" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR TEXT="74000" T_X="0" T_Y="0" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_DISCRIPT" X="61" Y="16" W="172" H="25" PASS_EVENT="1" NO_FOCUS="1">
+			<FORM ID="FMA_ABILS" X="0" Y="0" W="1024" H="25" STATIC_NUM="35" CAN_CLIP="1">
+				<ATTR PASS_EVENT="1" NO_FOCUS="1"/>
+				<ATTR MOVE_TYPE="0" MOVE_TIME="10000" START_X="0" START_Y="0" END_X="0" END_Y="0"/>
+				<ATTR T_X="0" T_Y="8" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="0" PAUSE_TIME="3000"/>
+				<!--SCRIPT ID="ON_CALL">
+					local kSelf = UISelf
+					kSelf:SetStartPoint( Point3(0,0,0) )
+					kSelf:SetPauseTime(3000)
+					kSelf:InitMoveState()
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					local kSelf = UISelf;
+					if kSelf:IsMoveComplate() then
+						--[[if kSelf:GetEndPoint():GetX() ~= 0 then
+							local kPoint = kSelf:GetStartPoint()
+							kPoint:SetX(kSelf:GetParent():GetSize():GetX())
+							kSelf:SetStartPoint(kPoint)
+						end]]
+						kSelf:SetPauseTime(1000)
+						UISelf:InitMoveState()
+					end
+				</SCRIPT-->
+			</FORM>
+		</FORM>
+		<ANI_BAR ID="ANB_PERCENT" X="60" Y="44" Z="1" W="173" H="7" BAR_SMOOTH="0">
+			<ATTR BAR_IMG="../Data/6_ui/works/wsNowBar.tga" BAR_IMG_W="173" BAR_IMG_H="7" BAR_COUNT="1"/>
+			<ATTR TEXT="3174" T_X="10" T_Y="-6" FONT="FTNumber" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/>
+		</ANI_BAR>
+		<!--SCRIPT ID="ON_CALL">
+			local kSelf = UISelf
+			kSelf:SetAliveTime(0)
+			kSelf:SetStartPoint( Point3(424,768,0) )
+			kSelf:SetEndPoint( Point3(424,528,0) )
+			kSelf:InitMoveState()
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			local kSelf = UISelf
+			if kSelf:IsMoveComplate() then
+				if kSelf:GetAliveTime() == 0 then
+					kSelf:SetAliveTime(kSelf:GetMoveTime())
+					kSelf:RefreshCalledTime()
+				end
+
+				kSelf:SwapMovePoint()
+				kSelf:InitMoveState()
+			end
+		</SCRIPT-->
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+	</FORM>
+	
+	<BUTTON ID="BTN_ACHIEVEMENT_MINI" X="592" Y="658" W="45" H="45" IS_ABSOLUTE_X="1">
+		<ATTR BTN_IMG="../Data/6_ui/main/mnWorksQBt.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+		<SCRIPT ID = "ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(75014), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_L_BTN_DOWN">UISelf:Close() OpenRecommandAchieveInfo()</SCRIPT>
+	</BUTTON>
+	
+	<FORM ID = "SFRM_SOUL_STREAM" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<SCRIPT ID = "ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetShowWorldFocusFilter(true, "../Data/5_Effect/9_Tex/EF_blackBG.tga", 0.3) 
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			g_world:SetShowWorldFocusFilter(false, "../Data/5_Effect/9_Tex/EF_blackBG.tga", 0.4)
+		</SCRIPT>
+		
+		<FORM ID = "FRM_BG_1">
+			<ATTR X = "15" Y = "111" W = "512" H = "491" />
+			<ATTR IMG = "../Data/6_ui/SoulStr/ssBg01.tga" IMG_W = "512" IMG_H = "491"/>
+		</FORM>
+		<FORM ID = "FRM_BG_2">
+			<ATTR X = "527" Y = "111" W = "466" H = "491" />
+			<ATTR IMG = "../Data/6_ui/SoulStr/ssBg02.tga" IMG_W = "466" IMG_H = "491"/>
+		</FORM>		
+		
+		<BUTTON ID="BTN_OK" X="599" Y="493" W="112" H="35">
+			<ATTR BTN_IMG="../Data/6_ui/quest/qsWantedBt.tga" BTN_IMG_W="224" BTN_IMG_H="70" BTN_ENABLE_CHANGE_COLOR="0"/>
+		</BUTTON>
+	</FORM>	
+</XUI>

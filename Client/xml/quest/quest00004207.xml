@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4207</ID> <!--T.T.10420701 골렘 파타누스의 등장 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	진실의 지도 습득-->
+<!--[완료NPC]	버섯마을 - 마시룬-->
+<!--[내용]	마시룬은 우연히 골렘 파타누스를 만나게 된 것을 커다란 행운이라고 생각한다. 부보부보가 알려 준 시간의 제단의 위치가 새겨진 지도를 찾기 위해서는 골렘파타누스를 퇴치하는 것이 유일한 길이다. 촌장 마시룬의 조언 대로 유혹의 설원[시나리오모드(F5)]에서 골렘파타누스를 퇴치한 후 진실의 지도를 습득하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</CLIENT> <!--시작NPC 버섯마을 - 마시룬 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</PAYER> <!--완료NPC 버섯마을 - 마시룬 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</AGENT> <!--진행NPC 11 버섯마을 - 마시룬 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_M" VALUE="105/5/10000/0/1/1/160420700">6041500</MONSTER> 
+ <!--MON_NO=6041500/파타누스,Mission_Key=105/유혹의 설원 ,Item_NO=160420700/[Q.ID:04207] 진실의 지도,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160420700</ITEM> 
+ <!--Item_NO=160420700/[Q.ID:04207] 진실의 지도,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10420711"/> <!--진실의 지도 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10420721" FACE="Fungarf_normal"/> <!--오오, 골렘 파타누스를 만났다는 게 사실인가?
+그렇다면 지도를 찾는 것도 이젠 시간문제로군 그래.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10420726" FACE="Fungarf_smile"/> <!--이것이 그 지도인가?
+이상하군.. 내 눈엔 그저 평범한 싸구려 정령석에 불과한데 말이야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10420723" FACE="Fungarf_normal"/> <!--부보부보가 말한 골렘 파타누스가 마녀 파리스에 의해 
+부활했다니 어찌보면 이것은 대단한 행운일세. %%
+지금 당장 유혹의 설원[시나리오모드(F5)]에 가서 
+골렘 파타누스를 퇴치한 뒤 진실의 지도를
+찾아오게나.%%
+검은 마녀에게 이 사실이 알려진다면 골렘파타누스를
+찾을 수 있는 길이 사라지고 말걸세.
+서둘러야 하네!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10420724" FACE="Fungarf_angly"/> <!--자네가 이 시점에서 최선을 다하지 않는다면 시간의 제단을
+찾을 수 없을 거야. 힘 내게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10420725" FACE="Fungarf_angly"/> <!--유혹의 설원[시나리오모드(F5)]는 가보았나? 골렘 파타누스는 어떻게 되었지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10420702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_970100_RR" DESCRIPTION="90108010">
+	<GSAPATH>../Data/3_World/93_EventMap/700_RunningRace/970100_RR.gsa</GSAPATH>
+	<MINIMAP Y="96" H="294">../Data/3_World/93_EventMap/700_RunningRace/970100_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+
+		<!--8방향 설정-->
+	<FREE_DIRECTION ALL="TRUE"/>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+
+	<!-- 나가기 버튼 -->
+    <DUNGEON_EXIT_UI/>
+	
+	
+
+	<WORLDEVENT_OBJECT_LIST>			
+
+		<WORLDEVENT_OBJECT ID="1" INIT_STATE="0" TYPE="PUPPET" NAME="Running_startgate1001_01 01"/> <!--시작지점 -->
+		<WORLDEVENT_OBJECT ID="2" INIT_STATE="0" TYPE="PUPPET" NAME="Running_startgate1001_01 02"/> <!--시작지점 -->
+
+		<!--바닥화살표 이펙트 제어-->
+		<WORLDEVENT_OBJECT ID="11" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 01"/>	
+		<WORLDEVENT_OBJECT ID="12" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 02"/>	
+
+
+		
+	</WORLDEVENT_OBJECT_LIST>
+
+	<WORLD_EVENT ID="1" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="EVENT_GROUND_STATE" TARGET_ID="0" EVENT="EQUAL" VALUE="8" /> <!--8 : INDUN_STATE_PLAY 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="1"/>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="0"/>
+		</ACTIVATE_ACTION>
+		<DEACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="0"/>
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="5" EVENT="STATUS" VALUE="0"/>
+		</DEACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<WORLD_EVENT ID="2" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="1" EVENT="ACT_AFTER_TIME" VALUE="1500" />	<!-- 문열리고 1.5초 뒤-->
+			<ACTIVATE_ACTION>
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="SHOW" VALUE="1"/> <!--바닥화살표 -->
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="SHOW" VALUE="1"/> <!--바닥화살표 -->
+			</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	
+	<WORLD_EVENT ID="3" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="2" EVENT="ACT_AFTER_TIME" VALUE="15000" />	<!-- 문열리고 15초 뒤-->
+			<ACTIVATE_ACTION>
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="SHOW" VALUE="0"/> <!--바닥화살표 -->
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="SHOW" VALUE="0"/> <!--바닥화살표 -->
+			</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+
+	<WORLD_EVENT ID="4" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_event_01_01" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="1"/> <!--정예방 문 열기 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<WORLD_EVENT ID="5" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="EVENT_GROUND_STATE" TARGET_ID="0" EVENT="EQUAL" VALUE="64" />	 <!--2 : 이벤트가 시작 전 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="1" EVENT="STATUS" VALUE="0"/>
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="4" EVENT="STATUS" VALUE="0"/>
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+
+  <!-- 결승선 선  -->
+	<TRIGGER ID="Trigger_event_01_01"> 
+			<CONDITION TYPE="touch" ACTION="a_act"/>
+			<ACTION SCRIPT="Map_WorldEventTrigger"/>
+	</TRIGGER>
+
+
+<!--뿔 기둥(세로) 허들 트랩-->
+	<TRIGGER ID="Art_MovingTrap1002_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 08">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Art_MovingTrap1002_01 09">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<!-- 창 트렙 -->
+	<TRIGGER ID="Veta_Trap1002_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 08">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 09">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 10">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 11">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 12">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1002_01 13">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1002_01 14">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+		
+	<TRIGGER ID="Veta_Trap1005_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1005_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+		
+	<TRIGGER ID="Veta_Trap1005_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+		<TRIGGER ID="Veta_Trap1005_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1005_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1005_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1006_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1006_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1006_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1006_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1007_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+		<TRIGGER ID="Veta_Trap1007_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1007_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1007_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+	
+	<TRIGGER ID="Veta_Trap1008_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1008_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1008_01 03">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1008_01 04">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1008_01 05">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1008_01 06">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+		<TRIGGER ID="Veta_Trap1008_01 07">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1008_01 08">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1011_01 01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+	<TRIGGER ID="Veta_Trap1011_01 02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTrap"/>
+	</TRIGGER>
+
+<!-- 트리거 -->
+
+           <TRIGGER ID="RACE_START_POINT01" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box" VALUE = "10">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+
+           <TRIGGER ID="RACE_CHECK_POINT01 01" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "9">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 02" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "8">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 03" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "7">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 04" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "6">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 05" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "5">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 06" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "4">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 07" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "3">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 08" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "2">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+           <TRIGGER ID="RACE_CHECK_POINT01 09" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE = "1">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point"/>
+           </TRIGGER>
+
+           <TRIGGER ID="RACE_FINISH_POINT01" TYPE="RACE_CHECK_POINT" SOUND_ID="roulette_fanfare">
+                <CONDITION TYPE="touch"/>
+				<ACTION SCRIPT="Race_Check_Point" PARAM_STRING="SOUND_PLAY_COUNT" PARAM="1" />
+           </TRIGGER>
+
+<!--카메라--> 
+    <CAMERA_ADJUST ZOOM="50" UP="80" TARGET_Z="50" />
+	<CAMERA_ADJUST WHEEL_MIN_ZOOM="1" WHEEL_MAX_ZOOM="1.5"/>
+	
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="1"/>
+</WORLD>

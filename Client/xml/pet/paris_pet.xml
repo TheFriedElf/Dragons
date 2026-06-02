@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="p_Paris_Pet" INIT_ACTION="a_trace_fly">
+	<RESERVED_ACTION OPENING="a_trace_fly"/>
+	<UIMODEL DRAW_HEIGHT="200"/>
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/3_PET/Paris_pet/Paris_pet.kfm</KFMPATH>
+		<!--SCRIPT SRC="Actor/pet_base.lua">
+			<ITEM NAME="Act_Pet_Follow" TYPE="COMMON"/>
+		</SCRIPT-->
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="5"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="5"/> 
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="run" ANIMATION="1000051" SPEED="2" /> 
+			<ITEM NAME="opening" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

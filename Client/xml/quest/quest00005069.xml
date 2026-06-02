@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5069</ID> <!--T.T.10506901 위험에 대처하는 자세 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 별가사리 루루루와 로로로를 각 20마리씩 처리하자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 위험에 대처하는 자세에 대해서 어떻게 생각하는지 물었다. 무카파가 말하길 위험은 언제 어느 때라도 발생할 수 있다고 한다. 그런 위험에 능동적으로 대처하기 위해서 해야 할 일은 위험인자를 미리 제거하는 것이라고 했다. 그런 점에서 스티븐 무역항의 별가사리 루루루와 별가사리 로로로는 지금 당장 위험은 없지만 개체수가 순식간에 불어나기 때문에 위험하다고 했다. 스티븐 무역항의 별가사리 루루루와 별가사리 로로로를 각 20마리씩 처리하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010130/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010130/스티븐 무역항,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010130/1">6011200</MONSTER> 
+ <!--MON_NO=6011200/별가사리 로로로,MAP_NO=9010130/스티븐 무역항,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10506911"/> <!--별가사리 루루루-->
+		<OBJECT2 COUNT="20" TEXT="10506912"/> <!--별가사리 로로로-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10506921" FACE="Mukapa_normal"/> <!--자네는 위험에 어떻게 대처하는가?
+인간들이 어떻게 하는지 모르겠지만 우리 용족과 많이 다르지는 않을 거라고 보네.
+위험에 능동적으로 대처하기 위해서는 위험인자를 사전에 파악해서 제거하는 일이 중요하네.%%
+그런 점에서 스티븐 무역항의 별가사리 루루루와 별가사리 로로로는 현재는 별 문제가 없지만 잠재적으로 위험인자를 가지고 있네.%%
+그 녀석들 자체는 강하지 않지만 숫자가 급속도로 불어나고 있는 형편이지.
+그런 위험요소를 사전에 제거하는 게 어떤가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10506926" FACE="Mukapa_smile"/> <!--잘해주었네. 자네가 미래의 위험요소를 제거한 셈이네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10506923" FACE="Mukapa_normal"/> <!--별가사리 루루루와 별가사리 로로로는 어떤 환경에서도 잘 자라는 녀석들이지. 하지만 그녀석들 자체로는 그렇게 큰 힘이 없다네.
+문제는 녀석들과 연계하는 다른 못된 녀석들이 있다는 것에 있네.
+아무래도 많은 숫자의 적과 싸우다보면 반드시 우리의 헛점이 드러나게 되어 있지.
+그래서 이번 별가사리 처리에 자네를 부른 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10506924" FACE="Mukapa_angry"/> <!--미래의 위험이 커지는 것을 그저 지켜보겠다는 건가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10506925" FACE="Mukapa_normal"/> <!--별가사리 녀석들 이외의 많은 위험요소가 도처에 깔려 있지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10506902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

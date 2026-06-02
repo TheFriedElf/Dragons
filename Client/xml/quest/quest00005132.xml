@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5132</ID> <!--T.T.10513201 천하제일 요리왕(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	앵무조개선착장 - 갑판상어로부터 샥스핀 20개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 클레아-->
+<!--[내용]	여관주인 클레아는 올해 열리는 세계 라면 왕 선발대회에 참가하기 위해 준비하고 있다. 우승상금으로 아이들을 배불리 먹여주고 싶다고 한다. 클레아가 생각한 라면은 상어의 지느러미를 고명으로 얹은 샥스핀라면이라고 한다. 앵무조개 선착장으로 가서 갑판상어를 잡고 샥스핀 20개를 구해 클레아 아주머니에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6582AB80-AF1C-4798-865E-E113A1241350</CLIENT> <!--시작NPC 달빛해안 마을 - 클레아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6582AB80-AF1C-4798-865E-E113A1241350</PAYER> <!--완료NPC 달빛해안 마을 - 클레아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 11 달빛해안 마을 - 클레아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010200/10000/4500/1/1/160513200">6008200</MONSTER> 
+ <!--MON_NO=6013200/망각의 복서 미라,MAP_NO=9010220/미리내 신전,Item_NO=160513200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160513200</ITEM> 
+ <!--Item_NO=160513200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10513211"/> <!--샥스핀-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10513221" FACE="Floran_normal"/> <!--%name%님 소식 들으셨나요? 조만간 세계 라면 왕 선발대회가 열린다고 하네요.
+작년에는 너무너무 바빠서 신청조차 못 했지만, 이번에는 꼭 나가려고요.%%
+아시다시피 저희 달빛마을에서 제 라면솜씨는 알아준답니다 호호.
+우승상금으로 저희 아이들을 배불리 먹이고 싶어요. 
+바쁘지 않으시면 재료 좀 구해다 주실 수 있으신가요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10513226" FACE="Floran_smile"/> <!--고마워요. 이번에 우승하면 제가 꼭 보답할게요. 일단 사례금 조금 챙겼어요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10513223" FACE="Floran_normal"/> <!--제가 만들 라면은 샥스핀라면이예요. 
+이름만 들어도 맛있을 것 같죠?
+샥스핀을 고명으로 얹을 생각이에요. 호호.%%
+들어가는 재료가 비싸서 엄두도 못 냈지만,
+용사님이 구해다 주신다면 우승은 확실하겠죠? %%
+그러니까 앵무 조개 선착장에서 갑판상어 처리하고 샥스핀 20개만 구해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10513224" FACE="Floran_normal"/> <!--역시 안될까요? 네 그럼 어쩔 수 없네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10513225" FACE="Floran_normal"/> <!--파도 넣고… 무도 넣고... 뭐도 넣고… 뭐도 넣고… (중얼중얼)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10513202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

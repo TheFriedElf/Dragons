@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 레그노 오프닝 1 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<CMD type="AddActorFilter" ClassNo="1028320"/>
+	<CMD TYPE="AddNPC" ClassNo="1028320" NameTTID="521238" SpawnPos="32520.26, 5239.914, 243.3058"/>
+	<CMD TYPE="SetActorDirection" ClassNo="1028320" Direction="1"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1028320" SlotName="opening_movie"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01"/>
+	<CMD TYPE="WaitCamera" time="0"/>
+	<CMD type="waittime" time="0.1"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time=" 0"/>
+	<CMD TYPE="ShowActor" ClassNo="4049170" Show="false"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다. -->
+	<!-- 카메라를 특점 지점에 위치시켜 뒤로 빼면서 대사를 표현한다. -->
+	<CMD TYPE="MoveCamToActor" ClassNo="1028320" MoveTime="0" CamActorDistance="1000" CamMoveUpDistance="500" HorizRotAngle="100"/>
+	<CMD TYPE="WaitCamera" time="0"/>
+	<CMD TYPE="Dialogue" NameTTID="521238" TitleTTID="521211" TextTTID="521218" FaceID="Blair_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="MoveCamToActor" ClassNo="1028320" MoveTime="0" CamActorDistance="1000" CamMoveUpDistance="500" HorizRotAngle="100"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="Dialogue" NameTTID="521238" TextTTID="521228" FaceID="Blair_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="MoveCamToActor" ClassNo="1028320" MoveTime="0" CamActorDistance="1000" CamMoveUpDistance="500" HorizRotAngle="100"/>
+	<CMD TYPE="WaitCamera" time="0"/>
+	<CMD TYPE="Dialogue" NameTTID="521238" TextTTID="521229" FaceID="Blair_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="MoveCamToActor" ClassNo="1028320" MoveTime="0" CamActorDistance="1000" CamMoveUpDistance="500" HorizRotAngle="100"/>
+	<CMD TYPE="WaitCamera" time="0"/>
+	<CMD TYPE="Dialogue" NameTTID="521238" TextTTID="521230" FaceID="Blair_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="MoveCamToActor" ClassNo="1028320" MoveTime="0" CamActorDistance="1000" CamMoveUpDistance="500" HorizRotAngle="100"/>
+	<CMD TYPE="WaitCamera" time="0"/>
+	<CMD TYPE="Dialogue" NameTTID="521238" TextTTID="521231" FaceID="Blair_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="ShowActor" ClassNo="1028320" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1028320"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	<CMD type="ClearActorFilter"/>
+	<CMD type="CallUI" UIWndName="FRM_MISSION_START"/>
+	<!-- 플레이어 이동 가능 -->
+    <CMD TYPE="EnableTrigger" TriggerID="Event_Quest_01" Enable="FALSE"/>
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>
+<!-- GetMyActor():SetTranslate(Point3(28794.3047,5291.2696,211.5729))
+CamActorDistance
+CamMoveUpDistance
+-->

@@ -1,0 +1,11 @@
+<ACTION ID="a_Sharp Shooting" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Bow_skill_SharpShooting_01"/>
+  <SLOT NAME="Bow_skill_SharpShooting_02"/>
+  <FSM SCRIPT="SharpShooting" PROJECTILE_ID ="PROJECTILE_SHARPSHOOTING"
+       HIT_SOUND_ID="SharpShooting"
+       FIRE_SOUND_ID="SharpShooting_Start"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_SharpShooting_01_char_root"
+       />
+</ACTION>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_cleef_C_practiced_celebrant_st" DIE_PARTICLE_ID="ef_monster_die_02_R" DIE_PARTICLE_NODE="p_ef_heart" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_cleef_C_practiced_celebrant"/>
+		<KFMPATH SCALE="0.8">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/cleef_C_practiced_celebrant_demon_ST/cleef_C_practiced_celebrant_demon_ST.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_wizard_idle_R_p_ef_r_hand" TO="p_ef_r_hand"/>
+		<ATTACH TYPE="effect" SLOT="1" EFFECT="ef_wizard_idle_R_p_ef_r_hand" TO="p_ef_l_hand"/>
+		<ATTACH TYPE="effect" SLOT="2" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball01"/>
+		<ATTACH TYPE="effect" SLOT="3" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball02"/>
+		<ATTACH TYPE="effect" SLOT="4" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball03"/>
+		<ATTACH TYPE="effect" SLOT="5" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball04"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="95,18.0" ROTATE="1,0,0,90"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본 공격 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- PC 밀어 내기 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000062"/>
+			<!-- 주변 몬스터에 힐을 한다 -->
+			<ITEM NAME="attk_03_01" ANIMATION="1000201"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000202"/>
+			<!-- 리벤지 스킬 사용 -->
+			<ITEM NAME="attk_04_01" ANIMATION="1000204"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000203"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021" DONT_RELEASE_PARTICLE="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

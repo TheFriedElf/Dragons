@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>129</ID> <!--T.T.10012901 분열체의 증식 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	글레스트 헤임의 이블 드루이드로부터 무럭무럭풀 10포기를 구하자.-->
+<!--[완료NPC]	게펜 - 비닛-->
+<!--[내용]	비닛은 분열체의 수가 모자라기 때문에 분열체를 증식시킬 수 있는 무럭무럭풀이 필요하다고 한다. 글레스트 헤임의 이블 드루이드로부터 무럭무럭풀 10포기를 구하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">18A90539-E61E-4941-A7C8-90F40254BA7A</CLIENT> <!--시작NPC 게펜 - 비닛 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">18A90539-E61E-4941-A7C8-90F40254BA7A</PAYER> <!--완료NPC 게펜 - 비닛 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">18A90539-E61E-4941-A7C8-90F40254BA7A</AGENT> <!--진행NPC 11 게펜 - 비닛 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/5000/1/1/160012900">4702900</MONSTER> 
+ <!--MON_NO=4702900/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160012900/[Q.ID:00129] 무럭무럭풀50%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160012900</ITEM> 
+ <!--Item_NO=160012900/[Q.ID:00129] 무럭무럭풀,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10012911"/> <!--무럭무럭풀-->
+		
+	</OBJECTS>
+
+<LOCAL>
+<NAME ID="DEFAULT">
+		<REWARD>
+		</REWARD>
+	</NAME>
+	<NAME ID="KOREA/DEVELOP">
+
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">99622740</ITEM><!--전체지급/전체/1)/99622740(봉인아님) 1개-레드 젬스톤-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+</LOCAL>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10012921" FACE="Vinit_normal"/> <!--%name% 잘 왔어.
+정말 도움이 필요한 일이 생겼어.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10012926" FACE="Vinit_normal"/> <!--그래 고마워. 이제는 도와주지 않아도 될 거야. 아마도…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10012923" FACE="Vinit_normal"/> <!--전에 내가 이야기했던 박사님 있잖아.
+그분이 네가 가져다준 변종 분열체가 더 필요하다고 이야기하셔서 말이지.
+그래서 변종 분열체를 증식하는 풀이 있는데 그걸 좀 구해줬으면 해서.
+무럭무럭풀은 이블 드루이드한테서 구할 수 있어. 10포기만 부탁할 게. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10012924" FACE="Vinit_normal"/> <!--(디포르테가 비닛은 수상하다고 했지.)
+그래? 역시 그렇구나. 헤헷. 어쩔 수 없지. 
+디포르테 언니의 말이 맞기도 하고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10012925" FACE="Vinit_normal"/> <!--만약 풀을 못 찾는다고 해도 괜찮아.
+(비닛은 작은 목소리로 중얼거린다.)
+아니, 오히려 그편이 더 나아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10012902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

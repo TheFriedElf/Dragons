@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>406</ID> <!--T.T.10040601 NewOrigin오픈(3) - 드래곤이카 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	오징어 몸통과 오징어 다리-->
+<!--[완료NPC]	바람항구 - 가토-->
+<!--[내용]	가토의 이벤트퀘스트를 통해 얻은 오징어 몸통과 오징어 다리가 있으면 가토가 드래곤이카 NewOrigin 풍선을 준다고 한다. 오징어 몸통과 오징어 다리는 달리 사용할 곳이 없으니 풍선아이템을 만들어 보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 바람항구 - 가토 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 바람항구 - 가토 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 바람항구 - 가토 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">398003300</ITEM> 
+ <!--Item_NO=398003300/오징어 몸통,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">398003310</ITEM> 
+ <!--Item_NO=398003310/오징어 다리,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10040611"/> <!--오징어 몸통-->
+		<OBJECT2 COUNT="1" TEXT="10040612"/> <!--오징어 다리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">398003400</ITEM><!--전체지급/전체/1)/398003400(봉인아님) 1개-드래곤이카 NEWORIGIN-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10040621" FACE="gatto_normal"/> <!--이제 내가 준비한 이벤트의 마무리 단계 다옹.
+%name%님이 가지고 있는 오징어 몸통과 오징어 다리를 내게 다오.
+그럼 풍선을 하나 주겠다옹.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10040626" FACE="gatto_normal"/> <!--자 여기 있다옹. 고맙다고 큰 소리로 말하지 않으면 주지 않을 테다옹!!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10040623" FACE="gatto_normal"/> <!--오징어 몸통과 오징어 다리가 있다면 조건만족이다옹.
+%name%님은 오징어의 어디를 좋아하냐옹? 난 다리를 좋아한다옹. 왜냐하면 10개 거든 그중에서 긴다리 2개가 제일 맞있다옹.%%
+여기서 문제 하나 혹시 오징어 하고 똑같이 생긴 '꼴뚜기'를 아냐옹? %%
+그럼 꼴뚜기 다리가 몇 개인지 아냐옹? 숙제다옹. 안해도 그만.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10040624" FACE="gatto_normal"/> <!--안하는 사람이 손해다옹. 난 손해볼게 없다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10040625" FACE="gatto_normal"/> <!--뭔가 부족한거 같다옹. 내가 줬던 선물은 어쨌냐옹??-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10040602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+
+	<!-- 화면을 와이드 화면으로 출력하고 1초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>	<!--카메라를 이벤트 카메라로 만든다-->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>	<!--화면을 와이드로 변경한다-->
+	<CMD TYPE="waittime" time="1"/>	<!--1초간 기다린다.-->
+
+	<!-- 화면을 나무로 이동시킨다 -->
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="FALSE"/> <!-- 나를 바라보는 카메라를 해지시킨다.-->
+	<!--카메라를 해당위치에 위치시킨다.-->
+    <CMD TYPE="MoveCamToPos" TargetPos="6306.144, 1150.364, 60.66472"  MoveTime="1" CamActorDistance="500" CamMoveUpDistance="-10" HorizRotAngle="0" VertRotAngle="10"/> 
+	<CMD TYPE="waittime" time="3"/> <!--3초동안 기다린다. -->
+
+	<CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="1"/> <!--카메라가 나를 보게 한다.-->
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="TRUE"/> <!--카메라가 나를 보게 한다.-->
+
+	<!--케메라가 나에게 오게 한다..-->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="300" CamMoveUpDistance="20" HorizRotAngle="0" VertRotAngle="5"/> 
+	<CMD TYPE="WaitCamera" time="0"/> <!--1초간 기다린다.-->
+
+
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="FALSE" Time="0"/>
+	<CMD TYPE="waittime" time="0"/>
+
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/> <!--게임카메라로 돌아옴-->
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+	<!-- GogoUI호출 -->
+	<CMD TYPE="CallUI" UIWndName="FRM_GOGO_RIGHT"/>
+	<!-- 몬스터 카운트 호출 -->
+	<CMD TYPE="DoScript" OBJECTID="ALiveMonsterCountUI(true)"/>
+	<CMD TYPE="waittime" time="0"/>
+
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="FALSE"/>
+
+</EVENT_SCRIPT>

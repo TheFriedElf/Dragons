@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_LOGO_IMG" X="0" Y="0" W="1600" H="1200" PRIORITY="0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1">
+		<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1600" IMG_H="1200"/>
+		<SCRIPT ID = "ON_CALL">
+			local slf = UISelf
+			slf:SetSize(Point2(GetScreenSize():GetX(),GetScreenSize():GetY()))
+			slf:SetImgSize(Point2(GetScreenSize():GetX(),GetScreenSize():GetY()))
+			slf:SetLocation(Point2(0,0))
+			if false == g_bIsFirstJoin then return end
+			
+			if LOCALE.NC_DEVELOP == GetLocale() then
+				CallUI("FRM_BARUNSON_LOGO")
+				CallUI("FRM_BARUNSON_COPYRIGHT")
+			elseif LOCALE.NC_USA == GetLocale() 
+				or LOCALE.NC_THAILAND == GetLocale()
+			then
+				CallUI("FRM_NOTICE_MAIN")
+				CallUI("FRM_NOTICE_COPY")
+				CallUI("FRM_NOTICE_LOGO")
+			elseif LOCALE.NC_KOREA == GetLocale()
+			then
+				CallUI("FRM_NOTICE_MAIN")
+				CallUI("FRM_NOTICE_MARK")
+			else
+				CallUI("FRM_PUBLISHER_MAIN")
+				CallUI("FRM_PUBLISHER_COPY")
+				CallUI("FRM_PUBLISHER_LOGO")
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseUI("FRM_BARUNSON_LOGO")
+			CloseUI("FRM_BARUNSON_COPYRIGHT")
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_BARUNSON_LOGO" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<ATTR ALIGN_X="50" ALIGN_Y="50" Z="99" W="512" H="512" CAN_DRAG = "0" />
+		<ATTR IMG = "../Data/6_ui/loading/logo_brs.tga" IMG_W = "512" IMG_H = "512"/>
+	</FORM>
+	
+	<FORM ID="FRM_BARUNSON_COPYRIGHT" PRIORITY="2">
+		<ATTR ALIGN_X="50" Y="700" Z="99" W="512" H="32" CAN_DRAG = "0" />
+		<ATTR IMG = "../Data/6_ui/loading/copy_brs.tga" IMG_W = "512" IMG_H = "32"/>
+	</FORM>
+	
+	<FORM ID="FRM_PUBLISHER_MAIN" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<SCRIPT ID="ON_CALL">
+			local kAliveTime = 3000
+			if LOCALE.NC_CHINA == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_USA == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_THAILAND == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_INDONESIA == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_PHILIPPINES == GetLocale() then
+				kAliveTime = 4000
+			end
+			UISelf:SetAliveTime( kAliveTime )
+		</SCRIPT>
+		<LOCAL>
+			<NAME ID="DEFAULT/DEVELOP">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Main.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="KOREA">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Main_kr.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="JAPAN">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Main_jp.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Main_tw.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="CHINA">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Main_cn.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="EUROPE/FRANCE/GERMANY">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_eu.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_ru.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_sg.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_in.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="THAILAND">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_thai.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="AMERICA">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_na.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_ph.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Main_vt.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+		</LOCAL>
+		<SCRIPT ID="ON_CLOSE">
+			CallUI("FRM_BARUNSON_LOGO")
+			CallUI("FRM_BARUNSON_COPYRIGHT")
+			CloseUI("FRM_PUBLISHER_COPY")
+			CloseUI("FRM_PUBLISHER_LOGO")
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_PUBLISHER_COPY" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<LOCAL>
+			<NAME ID="DEVELOP">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Copy.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="KOREA">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Copy_kr.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="JAPAN">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Copy_jp.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="CHINA">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Copy_cn.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Copy_tw.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="EUROPE/FRANCE/GERMAN">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_eu.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_ru.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_sg.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_in.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="THAILAND">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_thai.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_vt.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="AMERICA">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_na.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Publisher_Copy_ph.tga" IMG_W = "512" IMG_H = "32"/>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	
+	<FORM ID="FRM_PUBLISHER_LOGO" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<ATTR X="904" Y="654" W="64" H="64" CAN_DRAG = "0"/>
+		<LOCAL>
+			<NAME ID="KOREA">
+				<ATTR IMG = "../Data/6_ui/loading/publisher_Logo.tga" IMG_W = "64" IMG_H = "64"/>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	
+	<FORM ID="FRM_NOTICE_MAIN" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<SCRIPT ID="ON_CALL">
+			local kAliveTime = 3000
+			if LOCALE.NC_CHINA == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_USA == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_THAILAND == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_INDONESIA == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_PHILIPPINES == GetLocale() then
+				kAliveTime = 4000
+			elseif LOCALE.NC_KOREA == GetLocale() then
+				kAliveTime = 4000
+				local w = Config_GetValue("GAME", "RESOLUTION_WIDTH")
+				local h = Config_GetValue("GAME", "RESOLUTION_HEIGHT")
+			end
+			UISelf:SetAliveTime( kAliveTime )
+			
+		</SCRIPT>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Notice_Main.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="AMERICA">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Notice_na.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="THAILAND">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Notice_thai.tga" IMG_W = "512" IMG_H = "512"/>
+			</NAME>
+			<NAME ID="KOREA">
+				<ATTR ALIGN_X="50" ALIGN_Y="50" W="800" H="650" CAN_DRAG = "0" />
+				<IMG ID="IMG_NOTICE_CONTENT1" X="0" Y="130" W="512" H="512" IMG="../Data/6_UI/loading/ldlvimg01.tga" IMG_W="512" IMG_H="512"/>
+				<IMG ID="IMG_NOTICE_CONTENT2" X="512" Y="130" W="288" H="512" IMG="../Data/6_UI/loading/ldlvimg02.tga" IMG_W="288" IMG_H="512" />
+			</NAME>
+		</LOCAL>
+		<SCRIPT ID="ON_CLOSE">
+			if not GetUIWnd("FRM_LOGO_IMG"):IsNil() then
+				CallUI("FRM_PUBLISHER_MAIN")
+				CallUI("FRM_PUBLISHER_COPY")
+				CallUI("FRM_PUBLISHER_LOGO")
+			end
+			CloseUI("FRM_NOTICE_COPY")
+			CloseUI("FRM_NOTICE_LOGO")
+			CloseUI("FRM_NOTICE_MARK")
+		</SCRIPT>
+	</FORM>			
+	<FORM ID="FRM_NOTICE_COPY" IS_VISIBLE="1" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<LOCAL>
+			<NAME ID="KOREA">
+				<ATTR ALIGN_X="50" ALIGN_Y="95" W="512" H="32" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/Notice_Copy.tga" IMG_W = "512" IMG_H = "32"/>		
+			</NAME>
+		</LOCAL>
+	</FORM>
+	<FORM ID="FRM_NOTICE_LOGO" IS_VISIBLE="1" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<LOCAL>
+			<NAME ID="KOREA">
+				<ATTR X="904" Y="654" W="64" H="64" CAN_DRAG = "0" IS_ABSOLUTE_X="1"/>
+				<ATTR IMG = "../Data/6_ui/loading/Notice_Logo.tga" IMG_W = "64" IMG_H = "64"/>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	<FORM ID="FRM_NOTICE_MARK" IS_VISIBLE="1" PRIORITY="2" ALIVE_TIME_IGNORE_MOUSE_OVER = "1">
+		<LOCAL>
+			<NAME ID="KOREA">
+				<ATTR ALIGN_X="100" ALIGN_Y="0" W="249" H="146" CAN_DRAG = "0" IS_ABSOLUTE_X="1"/>
+				<FORM ID="FRM_NOTICE_MARK_SUB1" X="0" Y="5" W="120" H="141">
+					<ATTR IMG="../Data/6_UI/loading/ldMk01.tga" IMG_W="120" IMG_H="141" />
+				</FORM>
+				<FORM ID="FRM_NOTICE_MARK_SUB2" X="123" Y="5" W="120" H="141">
+					<ATTR IMG="../Data/6_UI/loading/ldMk02.tga" IMG_W="120" IMG_H="141" />
+				</FORM>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	
+	<FORM ID="FRM_NOTICE_INGAME">
+		<LOCAL>
+			<NAME ID="KOREA">
+				<ATTR ALIGN_X="100" ALIGN_Y="0" W="183" H="105" CAN_DRAG = "0" ALIVE_TIME="4000"/>
+				<FORM ID="FRM_NOTICE_MARK_SUB1" X="0" Y="3" W="88" H="102">
+					<ATTR IMG="../Data/6_UI/loading/ldMk01s.tga" IMG_W="88" IMG_H="102" />
+				</FORM>
+				<FORM ID="FRM_NOTICE_MARK_SUB2" X="91" Y="3" W="88" H="102">
+					<ATTR IMG="../Data/6_UI/loading/ldMk02s.tga" IMG_W="88" IMG_H="102" />
+				</FORM>
+				<SCRIPT ID="ON_CLOSE">
+					local iNextTimeInSec = GetNextIngameNoticeShowTimeInSec()
+					GetEventTimer():Add("NOTICE_INGAME", iNextTimeInSec, "CallUI('FRM_NOTICE_INGAME')", 1, false)
+				</SCRIPT>
+			</NAME>
+		</LOCAL>
+	</FORM>
+</XUI>

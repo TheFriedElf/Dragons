@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>296</ID> <!--T.T.10029601 영원한 겨울 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	얼음의 성 [디펜스 모드(F6)]에 갇힌 산타클로스를 구출하자!-->
+<!--[완료NPC]	바람항구 - 니아-->
+<!--[내용]	얼음의 성 [디펜스 모드(F6)]에 갇힌 산타클로스를 얼음의 여왕으로부터 구출하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8CE11B05-75B4-48c7-888E-96D78B794BAD</CLIENT> <!--시작NPC 바람항구 - 니아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8CE11B05-75B4-48c7-888E-96D78B794BAD</PAYER> <!--완료NPC 바람항구 - 니아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8CE11B05-75B4-48c7-888E-96D78B794BAD</AGENT> <!--진행NPC 11 바람항구 - 니아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">117</MISSION> 
+ <!--Mission_Key=114/세상의 끝,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10029611"/> <!--산타클로스 구출-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10029621" FACE="Nia_normal"/> <!--큰일이에요!
+눈의 여왕 바토스가 산타클로스에게 무슨 짓을 저지를지 몰라요.
+제발 산타클로스를 구해 주세요. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10029626" FACE="Nia_smile"/> <!--감사합니다.
+덕분에 제 감정에 솔직해질 수 있게 되었어요.
+%name%님도 좋은 만남이 있기를 기원할게요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10029623" FACE="Nia_cry"/> <!--제가 미처 가보지 못한 곳이 있는데, 그곳에 산타클로스가 갇혀 있는 게 틀림 없어요.%%
+바로 얼음의 성 [디펜스 모드(F6)]라는 곳이에요.%%
+불쌍한 산타클로스… 도움의 손길이 절실할 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10029624" FACE="Nia_cry"/> <!--아! 산타클로스. 이젠, 그 사람을 다신 보지 못하겠네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10029625" FACE="Nia_normal"/> <!--제발! 눈의 여왕 바토스가 먼저 도착하지 않도록...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10029602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

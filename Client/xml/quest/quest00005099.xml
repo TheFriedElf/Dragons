@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5099</ID> <!--T.T.10509901 두 개의 그림자(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 시진과 이야기 해보자-->
+<!--[완료NPC]	스티븐 무역항 - 시진-->
+<!--[내용]	빅터는 스티븐 무역항에 뭔가 불온한 움직임을 시진이 포착했다고 한다. 정확한 사항은 알지 못하지만 시진으로부터 빠른 연락을 바란다는 메시지를 받았지만, 지금 바람항구의 수비군은 대부분 다른 사건에 인력이 투입되었다고 한다. 빅터는 정확한 증거가 없는한 인력을 시진에게 보낼 수 없다고 들었다는 것이다. 시진을 도와주기 위해 스티븐 무역항으로 가보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</CLIENT> <!--시작NPC 바람항구 - 빅터 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">116A12AC-D98A-483a-A1E9-3392632B7CDE</PAYER> <!--완료NPC 스티븐 무역항 - 시진 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</AGENT> <!--진행NPC 11 바람항구 - 빅터 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 12 스티븐 무역항 - 시진 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10509911"/> <!--시진과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509921" FACE="Walter_normal"/> <!--%name%님 큰일입니다. 
+스티븐 무역항의 시진이 불온한 움직임을 포착했다는 연락이 왔는데, 현재 지원 병력이 없습니다. 
+현재 바람항구에 여러 가지 사건들이 발생하고 있기 때문에 각 병력들이 분산되어 사건을 조사하고 있습니다.
+시진이 불온한 움직임을 포착했다고 하더라도 상부에서는 명확한 근거가 없는 한 병력을 보낼 수 없다고 합니다. 
+전 시진의 감을 믿습니다. %name%님이 시진을 도와주시지 않겠습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509926" FACE="Walter_smile"/> <!--아! 저를 도와주시기 위해 파견나오셨군요. 정말 감사합니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509923" FACE="Walter_normal"/> <!--시진은 스티븐 무역항에서 그 누구보다도 해적들의 가까이에서 그들을 살피고 있습니다. 
+그런 시진이 뭔가 움직임을 발견했다는 것은 확실하다는 것과 같다는 것이 제 생각입니다.%% 
+물론 몇 차례의 잘못된 보고가…… 많이 있었지만, 그것은 수용 가능한 범위입니다.
+만약 잘못된 보고가 많았다고 해서 묵살해버린다면 위험이 발생할 가능성을 무시하는 것과 같은 일입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509924" FACE="Walter_angly"/> <!--역시 상부와 비슷한 반응을 보이시는군요.
+아랫사람의 보고는 그냥 무시하는 것입니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509925" FACE="Walter_normal"/> <!--설마 시진에게 무슨 일이 생긴 것은 아닐지 걱정이 됩니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

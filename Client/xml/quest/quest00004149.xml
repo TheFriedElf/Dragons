@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4149</ID> <!--T.T.10414901 무릉도원 (7) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샬바론[아케이드 모드(F1)]에서 자로 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	퀘차 사제는 카즈라 주변의 흉폭해진 동물들을 위한 해독약을 지었다고 한다. 신관 전사들이 수월하게 해독약을 사용할 수 있도록 샬바론[아케이드 모드(F1)]의 자로를 제압하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="110/0/1">3523900</MONSTER> 
+ <!--MON_NO=3523900/자로,Mission_Key=110/샬바론,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10414911"/> <!--자로 [아케이드 모드(F1)]-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10414921" FACE="Quecua_normal"/> <!--네가 %name%이라고? 
+그래, 라노타가 말한 아이로구만.%% 
+나는 바람의 신관에서 신보를 돌보던 퀘차라고 한다.
+라노타에게 지난 번 가져다 준 독을 알아내는 부적을 기억하겠지?
+그걸 떼내오라고 부탁했던 게 나란다.%%
+네가 떼 온 독성진단 부적을 자세히 보니, 
+이 땅에서 나지 않는 독을 이용했더구나.%%
+흔히 인간세계에서 말하는 흑마술로 만들어진 독이었어.
+아주 지독한 술법으로 만들어졌지.%%
+그 독을 치유시키기 위해서 최선을 다해 해독약을 지었단다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10414926" FACE="Quecua_smile"/> <!--무사히 돌아왔구나.
+걱정했는데 다행이다. %name%...
+라노타가 널 급히 찾고 있으니 가보도록 하거라.
+부디 몸조심하거라.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10414923" FACE="Quecua_normal"/> <!--신관전사들에게는 이 약을 에르다 협곡 주변에
+사용하라고 이야기해두었지만...%%
+깊숙한 협곡 속에 있는 샬바론은 워낙 험해서 말이다. 
+아무에게나 일을 맡겼다간 문제가 생길 듯 싶구나.%
+그래서 라노타에게 실력있는 모험자들을 데려오라 
+일렀던 거야..
+샬바론[아케이드 모드(F1)]에는 자로라고 불리는 쿰바가 
+살고 있다. 그곳에서 쿰바 녀석을 혼내주거라. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10414924" FACE="Quecua_angry"/> <!--실력이 없는 게냐? 용기가 부족한 게냐?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10414925" FACE="Quecua_angry"/> <!--쿰바 녀석은 샬바론[아케이드 모드(F1)] 깊숙한 곳에 숨어있을 게다. 잘 찾아보거라. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10414902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

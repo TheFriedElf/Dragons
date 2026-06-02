@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="PROJECTILE_Caster_shot_02">
+
+  <TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+  <!--NIF_PATH>../Data/5_Effect/7_Projectile/ef_arrow_001.nif</NIF_PATH-->
+  <NIF_PATH SCALE="0.1">../Data/5_Effect/2_Mon2/95_Dungeon/efk_polacks_caster/efk_polacks_raser_01.nif</NIF_PATH>
+  <SCRIPT>PROJECTILE_ARROW</SCRIPT>
+  <PARAM SPEED="200.0" ACCEL="500" MASS="0.5"/>
+  <SCRIPT_CALL_EVENT>
+    <EVENT TYPE="ARIVED_AT_TARGET"/>
+  </SCRIPT_CALL_EVENT>
+  <!--TRAIL>
+    <TRAIL_ATTACH>Scene Root</TRAIL_ATTACH>
+    <TRAIL_TEXTURE>../Data/5_Effect/9_Tex/Trail_arc.dds</TRAIL_TEXTURE>
+    <TRAIL_TOTAL_TIME>500</TRAIL_TOTAL_TIME>   
+    <TRAIL_BRIGHT_TIME>250</TRAIL_BRIGHT_TIME>  
+    <TRAIL_EXTEND_LENGTH>0</TRAIL_EXTEND_LENGTH>
+  </TRAIL-->
+  <COLLISION_SPHERE>
+    <COLL_ITEM TARGET_NODE="crash" RANGE="30"/>
+  </COLLISION_SPHERE>
+</PROJECTILE>

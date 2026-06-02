@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="O_MagicCannon1001_01" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/2_Mon/B_MagicCannon1001_01/MagicCannon1001_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="49,8" ROTATE="1,0,0,90" LOCATE="0,-10,0"/>
+		</ABV>
+		<SLOT>
+			<!-- 바닥에 있는 상태 -->
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			
+			<!-- 장전 -->
+			<ITEM NAME="attk_02_02" ANIMATION="1000201"/>
+			<!-- 장전한 상태에서 맞기 -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<!-- 장전한 상태로 대기 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			
+			<!-- 장전한 상태에서 발사 -->
+			<ITEM NAME="shot_magiccannon_01" ANIMATION="1000202" FIRE_START_NODE="p_ef_arrow" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_magic_ball_02" PROJECTILE_SPEED="150" PROJECTILE_SCALE="1.8"/>
+			
+			<ITEM NAME="mgacicannon_onlycast_start_01" ANIMATION="1000201"/>
+			<ITEM NAME="mgacicannon_onlycast_idle_01" ANIMATION="1000005"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

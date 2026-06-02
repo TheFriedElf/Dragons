@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 이동 막기 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 이벤트 모드-->
+
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="0"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2" /> 
+
+	<!-- 대사 시작-->
+	<CMD TYPE="Dialogue" NameTTID="10409651" TitleTTID="10409601" TextTTID="10409661" FaceID="Edeline_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409652" TitleTTID="10409601" TextTTID="10409662" FaceID="Jess_angly"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409651" TitleTTID="10409601" TextTTID="10409663" FaceID="Edeline_angly"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409653" TitleTTID="10409601" TextTTID="10409664" FaceID="Jack_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409654" TitleTTID="10409601" TextTTID="10409665" FaceID="Princessia_angry"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409651" TitleTTID="10409601" TextTTID="10409666" FaceID="Edeline_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409653" TitleTTID="10409601" TextTTID="10409667" FaceID="Jack_angly"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409651" TitleTTID="10409601" TextTTID="10409668" FaceID="Edeline_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409652" TitleTTID="10409601" TextTTID="10409669" FaceID="Jess_angly"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409654" TitleTTID="10409601" TextTTID="10409670" FaceID="Princessia_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="10409651" TitleTTID="10409601" TextTTID="10409671" FaceID="Edeline_smile"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	
+	<CMD TYPE="CLOSE_DAILOGUE"/>  
+	<!-- 대사 종료-->
+
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" /> 
+	<CMD TYPE="WaitCamera" /> 
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME" /> 
+	<!--  카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="0" /> 
+	<CMD type="waittime" time="0" /> 
+	<!--  화면을 다시 정상적으로 보여줌   --> 
+
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<!--이동 가능 -->
+
+</EVENT_SCRIPT>

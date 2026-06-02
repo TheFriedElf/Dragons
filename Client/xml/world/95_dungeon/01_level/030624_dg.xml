@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030624_DG">
+  <GSAPATH>../Data/3_World/95_Dungeon/01_Level/030600/030624_DG.gsa</GSAPATH>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+	
+	
+	
+	<!-- 벽차고 2단점프_01 -->
+    <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="5" />
+    </TRIGGER>
+    <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="5" />
+    </TRIGGER>
+    <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="13" />
+    </TRIGGER>
+     <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="5" />
+    </TRIGGER>
+    <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="5" />
+    </TRIGGER>
+    <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="5" />
+    </TRIGGER>
+
+    <!-- 텔레포트 데미지 이동 -->
+    <TRIGGER ID="Touch_target_01" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+    </TRIGGER>
+
+	<!--// 포털 -->	
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+	<CONDITION TYPE="action" ACTION="a_act"/>
+	<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+    <!--카메라-->
+	<CAMERA_ADJUST ZOOM="-30" UP="200" TARGET_Z="-45" />
+
+</WORLD>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5038</ID> <!--T.T.10503801 낚시왕 에르실 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 상어와 갑판상어에게 물고기 15마리 회수-->
+<!--[완료NPC]	수염고래 해안가 - 프리모-->
+<!--[내용]	낚시왕이 목표인 에르실은 물고기가 많이 잡힌다는 수염고래 해안가로 갔다고 한다. 거기서 프리모를 만나서 서로 누가 물고기를 많이 낚는지 내기를 하고, 서로 다른 곳에서 낚시를 한다. 하지만 갑자기 나타난 상어와 갑판상어에게 낚은 물고기 15마리를 뺐겼고, 결국 그날 14마리의 물고기를 낚은 프리모가 내기에 이겼다고 한다. 에르실은 자신의 낚시 실력이 더 뛰어나다는 것을 보여주기 위해서 물고기를 회수해서 프리모에게 보여주기를 원한다. 진정한 승리자가 누구인지 알려주기 위해서 수염고래 해안가의 상어와 갑판상어에게서 물고기 15마리를 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</CLIENT> <!--시작NPC 바람항구 - 에르실 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D9D4C750-7AE1-4084-B14A-770E1D304FA1</PAYER> <!--완료NPC 수염고래 해안가 - 프리모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</AGENT> <!--진행NPC 11 바람항구 - 에르실 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">D9D4C750-7AE1-4084-B14A-770E1D304FA1</AGENT> <!--진행NPC 12 수염고래 해안가 - 프리모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/5000/1/1/160503800">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010100/수염고래 해안가,Item_NO=160503800/[Q.ID:05038] 물고기,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503800</ITEM> 
+ <!--Item_NO=160503800/[Q.ID:05038] 물고기,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/5000/1/1/160503800">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010100/수염고래 해안가,Item_NO=160503800/[Q.ID:05038] 물고기,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503800</ITEM> 
+ <!--Item_NO=160503800/[Q.ID:05038] 물고기,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10503811"/> <!--물고기-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503821" FACE="ersil_normal"/> <!--크으. %class%님 제 말 좀 들어주세요.
+제 꿈은 낚시왕이 되는 거에요. 
+그래서 여기 저기 많은 곳에서 낚시를 하면서 경험을 쌓고 있었죠.
+그러던 중 수염고래 해안가에서 프리모를 만나게 됐죠.%%
+프리모도 자신이 낚시의 대가라고 했어요. 
+서로의 실력을 겨루자고 해서 수염고래 해안가의 다른 곳에서 낚시를 했어요.
+그런데 갑자기 상어와 갑판상어가 나타나서 제가 낚은 물고기 15마리를 가져가 버린 거에요.%%
+프리모는 14마리를 낚았고 저를 이겼다면서 좋아했죠.
+하지만 진짜로 이긴 건 저에요.%%
+물고기 15마리를 프리모에게 보여준다면 프리모도 제가 이긴 걸 알 거에요.
+제발 제 부탁을 들어 주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503826" FACE="Primo_smile"/> <!--웅? 에르실이 잡은 물고기야?
+난 승부따위는 어떻게 돼도 상관이 없었는데.
+어쨌거나 공짜로 물고기가 생겨서 좋다. 컹컹. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503823" FACE="ersil_normal"/> <!--이번의 승리는 낚시왕으로 가는 저의 시작이 될 거에요.
+제 자존심을 회복시킬 좋은 찬스라고 할 수 있죠.%%
+상어와 갑판상어는 수염고래 해안가에 있어요.
+%class%님이 꼭 제 자존심을 회복시켜 주실거라고 믿고 있을 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503824" FACE="ersil_angly"/> <!--어쩔 수 없군요. 
+어차피 낚시왕의 꿈도 이루어지지 않을 게 분명해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503825" FACE="ersil_normal"/> <!--물고기가 상하면 프리모도 저의 말을 믿어 주지 않을 게 분명해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

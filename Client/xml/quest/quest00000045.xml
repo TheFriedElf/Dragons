@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>45</ID> <!--T.T.10004501 부활절 액세서리를 모으자! (1/3) -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	토끼그림 부활절달걀 7개 - 모든 미션맵(F4)-->
+<!--[완료NPC]	행사도우미 <가토>-->
+<!--[내용]	부활절 행사에 쓸 달걀이 부족하다. 원인은 절구 토끼라는 녀석이 마을의 달걀을 싹쓸이했기 때문이다. 절구 토끼는 지금 신이나서 미션맵을 이리저리 휘졌고 다니고 있다. 어떤 미션맵(F4)에 가더라도 절구 토끼를 만날수 있으니 녀석을 혼내주고 달걀을 찾아 오자.-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 행사도우미 <가토> -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 행사도우미 <가토> -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 행사도우미 <가토> -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">291300030</ITEM> 
+ <!--Item_NO=291300030/토끼 그림 부활절 달걀(공속+10%10뷴),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="7" TEXT="10004511"/> <!--토끼그림 부활절달걀 수집-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">291300050</ITEM><!--전체지급/전체/1)/291300050(봉인아님) 1개-부활절 백합 반지-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10004521" FACE="gatto_normal"/> <!--오.. %name%님 지금 부활절행사를 준비 중이다옹~. 그런데 아이들에게 선물할 달걀이 부족해서 큰일 이다옹. 아마도 절구 토끼라는 녀석이 마을의 달걀을 모두 싹쓸이 해갔기 때문인것 같다옹.%% 녀석에게서 달걀을 가져와야지 부활절 행사를 무사히 마칠수 있을것 같다옹. 나를 도와서 <1일 행사 도우미>가 한번 되어 보는건 어떠냐옹? %%
+물론 선물이 준비되어 있다옹~~ 부활절을 기념해서 특별히 만든 [부활절 백합반지]다옹. 어때 탐나지 안냐옹?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10004526" FACE="gatto_normal"/> <!--%name%님 덕분에 이제 달걀이 부족하지는 않다옹.. 약속대로 [부활절 백합반지]를 선물할테니 잘 착용하고 다녀다옹..-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10004523" FACE="gatto_normal"/> <!--정말 고맙다옹.. 그럼 %name%님을 정식 <1일 행사 도우미> 로 임명한다옹.%%
+부활절 달걀은 미션맵 난이도 4(F4)에서 나오는 절구 토끼에게서 얻을 수 있다옹. 다시는 부활절 행사를 방해하지 못하도록 그 녀석을 혼쭐 내다옹. 어떤 미션맵에 가더라도 절구 토끼는 나온다옹. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10004524" FACE="gatto_normal"/> <!--이거 큰일이다옹~~ 이제 누구에게 부탁을 하냐옹….-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10004525" FACE="gatto_normal"/> <!--서둘러 다옹. 행사 시간이 얼마 남지 않은걸 모르겠냐옹. 곧 아이들이 벌때 처럼 밀려 올것 같다옹.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10004502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

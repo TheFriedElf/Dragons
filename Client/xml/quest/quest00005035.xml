@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5035</ID> <!--T.T.10503501 수행의 길(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 상어와 갑판상어 15마리씩 처리-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 과거 자신이 무사수행을 떠났던 적이 있다고 말한다. 그래서 지금 수염고래 해안가에 만연하고 있는 해적들은 그때의 자신의 피를 뜨겁게 끓어오르게 만든다고 한다. 그런 다비의 뜨거운 피를 차갑게 식혀 주기 위해 수염고래 해안가에서 상어와 갑판상어를 15마리씩 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010100/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010100/수염고래 해안가,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010100/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010100/수염고래 해안가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10503511"/> <!--상어-->
+		<OBJECT2 COUNT="15" TEXT="10503512"/> <!--갑판상어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503521" FACE="Darby_normal"/> <!--우오옷~ 나의 피가 뜨겁게 끓어오르는군.%%
+너무 대장간 일을 열심히 해서 그런거 아니냐고?
+천만에. 내 피가 뜨거운 건 과거 무사수행을 다닐 때가 떠올라서야.%%
+난 너만한 나이에 무사수행을 떠났지. 
+거기서 수많은 악당들이 나의 수행의 재물이 되곤 했지.%%
+어때? 지금 수염고래 해안가에 돌아다니는 해적 녀석들을 해치우는 것은 수행의 좋은 경험이 될 거야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503526" FACE="Darby_smile"/> <!--잘했어! 하지만 이것은 미약한 시작에 불과하다는 것을 알아둬.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503523" FACE="Darby_normal"/> <!--언제부터인가 수염고래 해안가에 해적들이 득실대고 있어.
+아마도 캡틴 후커의 등장과 연관이 있을 것 같기도 해.%% 
+하여간 이 녀석들의 젤 밑의 부하들이 수염고래 해안가에서 돌아다니는 상어와 갑판상어지.
+이 녀석들을 20마리씩 쓰러뜨리다보면 자신감이 붙어 다음의 수행을 더 원활하게 할 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503524" FACE="Darby_normal"/> <!--흠. 거절하다니 어쩔 수 없지. 
+하지만 너에게 있어선 중요한 성장의 기회를 놓친 셈이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503525" FACE="Darby_normal"/> <!--자! 수행에 있어 꾸물거림이란 있을 수 없어. 어서 출발하라고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

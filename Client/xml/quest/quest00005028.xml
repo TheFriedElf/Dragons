@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5028</ID> <!--T.T.10502801 낚였어! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 뚜껑 열린 주주에게서 연애 계약서 1장 회수-->
+<!--[완료NPC]	바람항구 - 로니-->
+<!--[내용]	술에 취한 로니에게 접근한 뚜껑 열린 주주는 로니를 속여서 연애 계약서에 도장을 찍게 만들었다고 한다. 식음을 전폐한 로니를 위해 뚜껑 열린 주주에게서 연애 계약서 1장을 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</CLIENT> <!--시작NPC 바람항구 - 로니 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</PAYER> <!--완료NPC 바람항구 - 로니 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</AGENT> <!--진행NPC 11 바람항구 - 로니 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/0/1/1/160502800">6013500</MONSTER> 
+ <!--MON_NO=6013500/뚜껑열린 주주,MAP_NO=9010502/파렐 대저택,Item_NO=160502800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160502800</ITEM> 
+ <!--Item_NO=160502800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10502811"/> <!--연애 계약서-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502821" FACE="Lonnie_normal"/> <!--이제, 내 인생은 끝이야. 
+크윽, 슬프다 못해 거의 미칠 지경이군.%%
+넌 내 마음을 알 수 있겠어? 아니 모를 거야. 
+이건 당해본 사람만이 느낄 수 있는 고통이니까.%%
+왜 그러냐고?
+좋아. 나와 같은 사람들이 다시는 발생하지 않도록 내가 너에게 특별히 말해주지.
+하지만 날 도와 준다고 약속해야 해.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502826" FACE="Lonnie_smile"/> <!--이얏호! 넌 내 생명의 은인이야.
+이제 앞으로는 정말 술을 끊…지는 못하겠고 조금만 마셔야겠어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502823" FACE="Lonnie_normal"/> <!--때는 며칠 전. 칠흙같이 어두운 밤이었어. 
+난 그날도 루돌프가 운영하는 술집에 가서 야한 농담을 즐기고 있었지.
+그날은 이상하게도 술에 많이 취했어.%% 
+그래서 다른 날들과 다르게 어떤 여인이 찾아왔을 때도 의심을 하지 못했지.
+그 여인은 불우한 아이들을 돕기 위한 서명을 받고 있다고 하더군. 
+난 술에 취해서 아무생각없이 거기 사인을 하고 만거야.%%
+우와아아아앗!
+앗, 미안 생각하니까 또 놀라서 그만.%%
+하여간 그건 불우한 아이들을 위한 서명이 아니었어. 
+나에게 서명을 받아간 여자는 그 악명높은 해적단의 뚜껑 열린 주주였어. 
+내가 한 서명은 연애계약서였고.%%
+뚜껑 열린 주주는 남자친구를 때린다는 무시무시한 소문이 돌고 있는 여자야.
+부탁이야. 
+뚜껑 열린 주주에게서 연애계약서를 찾아다 줘.
+뚜껑 열린 주주는 시청 지하수로 쪽에서 찾아 볼 수 있어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502824" FACE="Lonnie_normal"/> <!--어쩔 수 없군. 
+이대로 주주의 애완동물로서 살 수밖에.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502825" FACE="Lonnie_normal"/> <!--주주가 찾아오기 전에 계약서 찾아 줬으면 좋겠어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

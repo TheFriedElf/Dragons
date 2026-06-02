@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4248</ID> <!--T.T.10424801 공과 사 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	프린세시아와 대화-->
+<!--[완료NPC]	밴시협곡 - 프린세시아-->
+<!--[내용]	저명한 귀족이면서 괴상한 물건을 수집하기로 유명한 모나드론 공작은 공주 후보 프린세시아를 찾는다면서 그녀에게 왕국으로 돌아와 달라는 이야기를 전할 것을 부탁한다. 프린세시아가 밴시협곡에 와 있는 것일까?-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</CLIENT> <!--시작NPC 밴시협곡 - 모나드론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">EBB8ABF8-FB31-4a6c-AE59-112091F16472</PAYER> <!--완료NPC 밴시협곡 - 프린세시아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</AGENT> <!--진행NPC 11 밴시협곡 - 모나드론 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">EBB8ABF8-FB31-4a6c-AE59-112091F16472</AGENT> <!--진행NPC 12 밴시협곡 - 프린세시아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10424811"/> <!--프린세시아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10424821" FACE="Monaderon_normal"/> <!--흐음… 그래, 그 낯익은 얼굴, 체구…
+자네로군. %name%군… 이곳까지 행차하신 걸 보니
+천공계단에 대한 소문이 꽤 멀리 퍼진 걸지도 모르겠어.%%
+어쨌거나… 
+난 공식적으론 천공 세계의 보물과는 아무런 관계가 없어. 
+단지 왕명에 따라 사라진 공주 후보를 찾으러 왔을 뿐이네.%%
+혹시 그녀가 어디있는 지 알고 있나? %name%군.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10424826" FACE="Princessia_normal"/> <!--앗, %name%!
+안 그래도 네가 있었으면 좋겠다 생각했는데, 
+이런 곳에서 만나다니 정말 다행이야. %%
+응? 모나드론 공작이 날 찾고 있다고?
+글쎄.. 사라진 공주 후보를 찾으러 이 먼 곳까지 온 건 
+아닐 것 같은데?%%
+그 사람, 일부러 내가 실종되었다고 보고하고서는
+날 잡으려고 이곳으로 따라온 걸거야.
+내가 잭과 제스랑 만나는 걸 방해하려고 말이야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10424823" FACE="Monaderon_normal"/> <!--뭐, 어쨌건 간에 좋아.
+만약 자네가… 이곳을 돌아다니다가 프린세시아라는
+꼬마숙녀를 만나게 된다면, 왕위후계자 서열 6위인 이 
+모나드론이 직접 찾으러 왔다고 전해주게. 음하하하!%%
+그 사이에 삼촌들 두분이 돌아가셨을 정도로 왕위후계자 중엔 
+젊은 사람이 없으니, 운이 좋다면 그녀가 미래에 내 피앙세가 될 지도 
+모르지 않나. 젊다는 건 좋은 거야. 도피행각도 벌이고 말이지.%%
+왕국에서 모시러 왔으니 순순히 돌아가자라고 전해주게.
+단지 그뿐이야. 음하하하!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10424824" FACE="Monaderon_normal"/> <!--아아, 그 거친 눈빛 마음에 드는군. 아쉬워. 굳이 내가 나-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10424825" FACE="Monaderon_normal"/> <!--프린세시아양을 만나 돌아와 달라는 이야기를 전해주기만 하면 된다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10424802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

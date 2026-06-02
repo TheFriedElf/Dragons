@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020201_DG" DESCRIPTION="90202010">
+  <GSAPATH>../Data/3_World/95_Dungeon/01_Level/020200/020201_DG.gsa</GSAPATH>
+  <MINIMAP>../Data/3_World/95_Dungeon/01_Level/020200/020201_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/sneartrail_bg.mp3</BGSOUND>
+  <SCRIPT>World/95_Dungeon/020201_DG.lua</SCRIPT>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+
+  <!-- 악마의 숨결 포털 -->
+  <TRIGGER ID="gate_020100_base" TYPE="PORTAL" TITLE_TEXT_ID="800034" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9020100" PARAM2="5" />
+  </TRIGGER>
+
+  <TRIGGER ID="gate_020200_base" TYPE="PARTY_PORTAL" TITLE_TEXT_ID="802003" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+	<ACTION SCRIPT="World_Portal" IS_BOSS_TRIGGER="1" PARAM="9020200" PARAM2="1" PARAM3="4138/9020202/1">
+        <ACCESS ERROR_MSG="504220">
+			<LEVEL MIN="40" MAX="100" PARTY="1"/>
+            <USEITEM INV="3" NO="60000030" COUNT="1" CONSUME="1" PARTY="1" GROUP="1"/>
+            <USEITEM INV="3" NO="60000040" COUNT="1" CONSUME="1" PARTY="1" GROUP="2"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+
+  <!-- 나가지 버튼 -->
+  <DUNGEON_EXIT_UI/>
+
+
+	<!-- 던전 진행 UI -->
+	<PROGRESS_MAP W="480" H="120">../Data/6_UI/dungeon/dgMapLn007.tga</PROGRESS_MAP>
+	
+           <TRIGGER ID="progress_sensor_01" TYPE="PROGRESS" VALUE="0"/>
+           <TRIGGER ID="progress_sensor_02" TYPE="PROGRESS" VALUE="1"/>
+		   <TRIGGER ID="progress_sensor_03" TYPE="PROGRESS" VALUE="1"/>
+           <TRIGGER ID="progress_sensor_04" TYPE="PROGRESS" VALUE="2"/>
+		   <TRIGGER ID="progress_sensor_05" TYPE="PROGRESS" VALUE="2"/>
+           <TRIGGER ID="progress_sensor_06" TYPE="PROGRESS" VALUE="3"/>
+		   <TRIGGER ID="progress_sensor_07" TYPE="PROGRESS" VALUE="3"/>
+		   <TRIGGER ID="progress_sensor_08" TYPE="PROGRESS" VALUE="4"/>
+           <TRIGGER ID="progress_sensor_09" TYPE="PROGRESS" VALUE="4"/>
+		   <TRIGGER ID="progress_sensor_10" TYPE="PROGRESS" VALUE="5"/>
+           <TRIGGER ID="progress_sensor_11" TYPE="PROGRESS" VALUE="5"/>
+		   <TRIGGER ID="progress_sensor_12" TYPE="PROGRESS" VALUE="6"/>
+		   <TRIGGER ID="progress_sensor_13" TYPE="PROGRESS" VALUE="6"/>
+		   <TRIGGER ID="progress_sensor_14" TYPE="PROGRESS" VALUE="7"/>
+
+		   <PROGRESS VALUE="0" X="17" Y="44" DIRECTION="RIGHT"/>
+           <PROGRESS VALUE="1" X="67" Y="44" DIRECTION="RIGHT"/>
+		   <PROGRESS VALUE="2" X="117" Y="44" DIRECTION="RIGHT"/>
+           <PROGRESS VALUE="3" X="167" Y="44" DIRECTION="RIGHT"/>
+		   <PROGRESS VALUE="4" X="217" Y="44" DIRECTION="RIGHT"/>
+           <PROGRESS VALUE="5" X="267" Y="44" DIRECTION="RIGHT"/>
+		   <PROGRESS VALUE="6" X="317" Y="44" DIRECTION="RIGHT"/>
+           <PROGRESS VALUE="7" X="367" Y="44" DIRECTION="RIGHT"/>
+           <PROGRESS VALUE="8" X="432" Y="44" DIRECTION="RIGHT"/>
+
+  <!-- 트리거 점프업 -->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="300" />
+  </TRIGGER>
+  <!-- 텔레 점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="300" />
+  </TRIGGER>
+
+  <!--불기둥 트렙-->
+    <TRIGGER ID="Art_FireTrap1001_02 01">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+	  <SKILL ID="5842502"/>
+    </TRIGGER>
+	<TRIGGER ID="Art_FireTrap1001_02 02">
+      <CONDITION TYPE="touch" />
+      <ACTION SCRIPT="DoTrap" />
+	  <SKILL ID="5842502"/>
+    </TRIGGER>
+  
+  <!--추가불 트렙-->
+  <TRIGGER ID="EF_Fire_atk_002 15">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="1.667" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="1.35000" />
+    <PARTICLE EMIT_TOTAL="1.667" />
+    <PARTICLE EMIT_START="0" EMIT_END="1.35000" />
+  </TRIGGER>
+  <!--불 감기트렙-->
+  <TRIGGER ID="EF_Fire_atk_001 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_001 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_001 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_001 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_001 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_001 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_001 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_001 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="0.40" ACTIVE_END="1.20" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+
+  <!--솟아오르는 불 트렙-->
+  <TRIGGER ID="EF_Fire_atk_002 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 14">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 17">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_002 21">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+    <PHYSX ACTIVE_TOTAL="6.00000" />
+    <PHYSX ACTIVE_START="0" ACTIVE_END="2.900000" />
+    <PARTICLE EMIT_TOTAL="6.0000" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.00000" />
+  </TRIGGER>
+  <!--불폭포 트렙-->
+  <TRIGGER ID="EF_Fire_atk_003 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="1.666666" ACTIVE_END="3.333333" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_003 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="1.666666" ACTIVE_END="3.333333" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <TRIGGER ID="EF_Fire_atk_003 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+    <PHYSX ACTIVE_TOTAL="6.666666" />
+    <PHYSX ACTIVE_START="1.666666" ACTIVE_END="3.333333" />
+    <PARTICLE EMIT_TOTAL="6.666666" />
+    <PARTICLE EMIT_START="0" EMIT_END="6.666666" />
+  </TRIGGER>
+  <!--떨어지는 돌 트렙-->
+  <TRIGGER ID="Stalactite1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 14">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 15">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 16">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 17">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 18">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 19">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 20">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 21">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Stalactite1001_01 22">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--마그마 트렙-->
+  <TRIGGER ID="magma_object_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_02_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842501"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+  </TRIGGER>
+  <TRIGGER ID="magma_object_10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+	<SKILL ID="5842502"/>
+  </TRIGGER>
+  <!--솟아나는 돌기둥-->
+  <TRIGGER ID="Art_BlockTrap3001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_BlockTrap3001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_BlockTrap3001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_BlockTrap3001_01 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!-- 텔 레 포 트 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <!-- 텔 레 포 트 트렙-->
+  <TRIGGER ID="teleport_trap_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_05" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_06" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_07" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_08" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_09" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_07" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_trap_target_10" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_trap_zone_07" />
+  </TRIGGER>
+  <!--포그-->
+  <FOG DENSITY="0" FUNC="Z_LINEAR" START="754" END="3583" COLOR="0.5019608,0.2509804,0"/>
+  <!-- L.O.D -->
+  <WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="3000" USE="1" />
+  <STONES />
+  <OBJECT GUID="909ccd11-3af4-41ff-b990-e22141eb26be" RIDABLE="TRUE" SPEED="150" CLASS_NO="5000505">
+    <WayPoint POINT="7587.461, -55, -158.9001" TIME="0.3" />
+    <WayPoint POINT="7584.117, -75, -358.3619" TIME="0.5" />
+  </OBJECT>
+  <OBJECT GUID="e99802d4-2bbe-412d-b923-01828494f721" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000505">
+    <WayPoint POINT="7757.99, -55, -175.6684" TIME="3" />
+    <WayPoint POINT="7764.948, -75, -348.7409" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="e560efd6-6d19-46af-a787-34e6e1e94b95" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000505">
+    <WayPoint POINT="7922.286, -55, -164.248" TIME="1" />
+    <WayPoint POINT="7916.794, -75, -365.5311" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="7ab6a53b-3bca-403e-8649-70bb42b67a22" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000505">
+    <WayPoint POINT="8085.056, -55, -194.3481" TIME="3" />
+    <WayPoint POINT="8085.056, -55, -362.1571" TIME="3" />
+  </OBJECT>
+  <OBJECT GUID="ad38075e-61d5-4001-beb3-bec363d0e70c" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000505">
+    <WayPoint POINT="8253.353, -55, -188.7621" TIME="1" />
+    <WayPoint POINT="8248.114, -75, -356.173" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="f75e3059-5dba-436b-b4d5-f9fdb9e03123" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000505">
+    <WayPoint POINT="8423.052, -55, -182.1009" TIME="2" />
+    <WayPoint POINT="8422.639, -75, -319.8705" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="235a1c2c-096f-4c96-b56c-9de24b90d351" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000505">
+    <WayPoint POINT="8588.573, -55, -190.9839" TIME="2" />
+    <WayPoint POINT="8625.502, -75, -327.4981" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="44e9b17d-0939-4ebb-9368-3588900fbf94" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000506">
+    <WayPoint POINT="855.3749, 6461.555, -206.4735" TIME="1" />
+    <WayPoint POINT="855.8383, 6466.494, -349.8018" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="9586d20a-56f8-4e96-9e80-8cd4bdabc005" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000506">
+    <WayPoint POINT="1081.389, 6460.745, -153.5087" TIME="1" />
+    <WayPoint POINT="1082.068, 6461.79, -289.3547" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="ba08f8b1-86d6-40ec-bc6b-13364612f595" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000507">
+    <WayPoint POINT="1591.871, 12190.47, -193.2943" TIME="3" />
+    <WayPoint POINT="1591.42, 12189.02, -352.3583" TIME="3" />
+  </OBJECT>
+  <OBJECT GUID="b389f1c0-3a31-431d-bf60-3eebe7b150c5" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000507">
+    <WayPoint POINT="9869.34, 6494.297, -200.777" TIME="0.3" />
+    <WayPoint POINT="9660.631, 6495.422, -206.367" TIME="0.3" />
+  </OBJECT>
+  <OBJECT GUID="eb9ff1f3-d257-4d98-a94f-1231d7355cc5" RIDABLE="TRUE" SPEED="50" CLASS_NO="5000520">
+    <WayPoint POINT="2134.21, -122.0153, -169.1217" TIME="0.3" />
+    <WayPoint POINT="2133.686, -121.3377, -223.0391" TIME="0.3" />
+  </OBJECT>
+  <OBJECT GUID="8def217e-62c1-4a9f-937f-ff90197ea48e" RIDABLE="TRUE" SPEED="30" CLASS_NO="5000520">
+    <WayPoint POINT="2310.077, -60.47516, -188.9045" TIME="1" />
+    <WayPoint POINT="2310.662, -185.4271, -186.3523" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="6ea1b6f3-0f97-47ab-b268-89cc796a7849" RIDABLE="TRUE" SPEED="50" CLASS_NO="5000520">
+    <WayPoint POINT="1940.743, -48.82861, -161.3197" TIME="0.3" />
+    <WayPoint POINT="1939.989, -169.675, -177.442" TIME="0.3" />
+  </OBJECT>
+  <OBJECT GUID="767d04b3-8424-44c5-9334-798478393cae" RIDABLE="TRUE" SPEED="80" CLASS_NO="5000520">
+    <WayPoint POINT="4214.353, 3147.159, -177.2215" TIME="0.3" />
+    <WayPoint POINT="4211.8, 3035.081, -158.6466" TIME="0.3" />
+  </OBJECT>
+  <OBJECT GUID="ff26dc6a-0b54-4026-80d0-873973dfcafd" RIDABLE="TRUE" SPEED="50" CLASS_NO="5000520">
+    <WayPoint POINT="3932.035, 3159.577, -195.1626" TIME="0.3" />
+    <WayPoint POINT="3923.081, 3040.096, -196.305" TIME="0.3" />
+  </OBJECT>
+  <OBJECT GUID="e9783de7-2ae8-4a56-83c6-a3f9c91a2978" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000521">
+    <WayPoint POINT="10086.5, 6518.27, -163.3487" TIME="0.3" />
+    <WayPoint POINT="10302.26, 6524.156, -164.011" TIME="0.3" />
+  </OBJECT>
+  <OBJECT GUID="1b0df191-b7e7-4c70-8fc1-8c1e35fcdb90" RIDABLE="TRUE" SPEED="60" CLASS_NO="5000521">
+    <WayPoint POINT="10232.76, 6433.326, -163.3501" TIME="0.3" />
+    <WayPoint POINT="10404.25, 6446.582, -159.8613" TIME="0.3" />
+  </OBJECT>
+  <OBJECT GUID="4a94fc31-27cb-40ee-9b6c-61b266c8158f" RIDABLE="TRUE" SPEED="80" CLASS_NO="5000520">
+    <WayPoint POINT="10543.45, 6504.654, -170.4673" TIME="0.3" />
+    <WayPoint POINT="10742.91, 6464.362, -166.0262" TIME="0.3" />
+  </OBJECT>
+</WORLD>

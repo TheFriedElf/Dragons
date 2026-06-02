@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>243</ID> <!--T.T.10024301 즐거운 곤충채집! 잠자리편 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	잠자리 20마리 채집-->
+<!--[완료NPC]	바람항구 - 혜나-->
+<!--[내용]	가토의 곤충 채집 이벤트 요원을 맡게된 혜나는 채집스킬(벌목, 약초캐기, 낚시, 채굴)과 미션맵 보너스 스테이지의 보물상자 공략을 통해 잠자리 20마리를 잡아 올 경우, 답례로 곤충채집 증명서를 준다고 한다. 곤충채집 증명서가 5개 생기면 가토에게 추가적인 이벤트 퀘스트를 완료할 수 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">975FD858-1F6E-447e-9EED-C83158EC72FC</CLIENT> <!--시작NPC 바람항구 - 혜나 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">975FD858-1F6E-447e-9EED-C83158EC72FC</PAYER> <!--완료NPC 바람항구 - 혜나 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">975FD858-1F6E-447e-9EED-C83158EC72FC</AGENT> <!--진행NPC 11 바람항구 - 혜나 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="20">299602680</ITEM> 
+ <!--Item_NO=299602680/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10024311"/> <!--잠자리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299603110</ITEM><!--전체지급/전체/1)/299603110() 1개-곤충채집 증명서-->
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10024321" FACE="Hyena_normal"/> <!--안녕! 가토의 곤충 채집 이벤트를 돕고 있는 헤나야.
+난 잠자리를 잡고 있는 중인데, 생각보다 재밌다.
+혹시 잠자리 잡아본 적 있어? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10024326" FACE="Hyena_smile"/> <!--잠자리 20마리를 벌써 가져온 거야?
+헤헤 난 아직 다 잡지 못했는데... 자, 가토가 부탁했던
+곤충채집 증명서야. 5장 모으게 되면 가토에게 가봐!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10024323" FACE="Hyena_normal"/> <!--잠자리를 20마리 모아오면 곤충채집 증명서를 줄게.
+이 증명서를 모아가면 가토가 이벤트 가챠를 준다고
+하니까 한번 도전해봐~%%
+잠자리는 다른 곤충들과 마찬가지로 채집스킬을 통해
+잡을 수 있어. 지금 내가 하고 있는 낚시라던가, 벌목,
+약초캐기, 채굴 같은 것들 말이야.%%
+그리고 미션맵을 공략할 때 가끔 마주치게 된다는
+보너스 스테이지에서도 구할 수 있으니 여러 방법으로
+도전하면 쉽게 구할 수 있을 거야!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10024324" FACE="Hyena_normal"/> <!--곤충채집 이벤트를 놓치면 후회할 걸? 
+여름 한정의 스페샬 코스튬을 받을 수 있다고~ -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10024325" FACE="Hyena_normal"/> <!--잠자리를 잡으려면 말이야. 나처럼 낚시를 하던가… 
+아님 그 외에 채집스킬로 구하던가. 그것도 싫으면 미션맵의 
+보너스 스테이지에서 나오는 보물상자에서 구할 수 있어.
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10024302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

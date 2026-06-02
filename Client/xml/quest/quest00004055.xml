@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4055</ID> <!--T.T.10405501 눈물이 없는 아이 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 에델린과 대화-->
+<!--[완료NPC]	바람항구 - 에델린-->
+<!--[내용]	대현자 제레미는 에델린의 개인사를 들려주며 그녀를 잘 보살펴달라고 말했다. 
+바람의 항구에서 상급 법사 에델린을 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</CLIENT> <!--시작NPC 바람항구 - 제레미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER> <!--완료NPC 바람항구 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 11 바람항구 - 제레미 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 12 바람항구 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10405511"/> <!--에델린과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10405521" FACE="Jeremy_normal"/> <!--근래에 파리스라는 마녀가 나타났다지요?
+들어보신 적이 있으실 지 모르겠습니다만…%%
+천년 전에도 파리스라는 마녀가 세계에 커다란 위협을 가지고 왔습니다.
+엘가라는 사악한 흑룡과 함께 브리즈 대륙을 쑥대밭으로 만든 거지요.%%
+파리스라는 마녀에 대해선 어린 학생들이 저보다 더 잘 알고 있어요.
+상급법사인 에델린이 그렇군요.%% 
+나이는 어리지만 총명해서 파리스라는 이름을 발견하자마자
+금새 천년 전의 마녀와 이름이 같다는 것을 알아차렸으니까요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10405526" FACE="Edeline_smile"/> <!--오셨군요.
+대현자님께서 %name%님이 오실 거라는 이야기는 들었습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10405523" FACE="Jeremy_smile"/> <!--박학다식하고 책임감이 강한 아이지만…
+이 늙은이는 그 아이가 참으로 안쓰럽게 느껴집니다.%%
+그 아이의 엄마도 이곳에서 상급법사를 했습니다.
+무척 심성이 곱고 아름다운 사람이었죠.%%
+에델린을 낳을 때 쯤 이유를 알 수 없는 큰 병에 걸렸습니다.
+에델린은 자라면서 항상 병상에 누워있는 엄마를 보았어요.%%
+아픈 엄마를 치료하고 싶다면서 저에게 찾아온 것이
+불과 6살 때 일이었습니다.%%
+그 뒤로 아픈 엄마를 치료하기 위해 연금술을 배웠습니다.
+다른 사람들은 에델린을 천재며 신동이라고 부르지만, 나는 압니다.%%
+산과 들로 나가 온갖 약초를 구해오느라, 그 아이의 손은 늘 엉망이었어요.
+혼자서 얼마나 많이 울었던지, 결국 엄마를 잃고 난 뒤에는...%%
+한방울의 눈물도 흘리지 않더군요. 눈물이 사라져 버린 겝니다.
+지금도 어른처럼 감정을 감추고 자기 일에 열심이지만...%% 
+분명히 마음 속에는 아이의 마음이 있을테지요.
+부디 그 아이를 도와주시기를... 이 늙은이 진심으로 부탁하네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10405524" FACE="Jeremy_angly"/> <!--언젠가 그 아이의 마음을 들여다 볼 수 있을 겝니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10405525" FACE="Jeremy_normal"/> <!--그럼 그 아이를 잘 부탁 드립니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10405502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

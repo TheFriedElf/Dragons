@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5013</ID> <!--T.T.10501301 공감! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	앵무조개 선착장 - 사라피스의 껍질 15개를 데이지에게 전달-->
+<!--[완료NPC]	바람항구 - 데이지-->
+<!--[내용]	제시는 자신의 아버지가 돌아가시기 전까지 많은 근육통에 시달렸다고 한다. 제시는 자신도 근육통이 있지만 제레미는 더욱 심할 거라면서 자신의 비전근육통약을 만들어 주고 싶다고 말했다. 앵무조개 선착장에서 비전근육통약의 주재료인 사라스바티의 껍질 15개를 몽글과 푸른 안테나 몽글 그리고 사라스바티에게서 구해 데이지에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 바람항구 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">928106B8-8596-4E9C-B89A-87772C71A749</PAYER> <!--완료NPC 바람항구 - 데이지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 바람항구 - 제시 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">928106B8-8596-4E9C-B89A-87772C71A749</AGENT> <!--진행NPC 12 바람항구 - 데이지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010140/10000/0/1/1/160501300">6601700</MONSTER> 
+ <!--MON_NO=6601700/사라스바티,MAP_NO=9010140/앵무조개 선착장,Item_NO=160501300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160501300</ITEM> 
+ <!--Item_NO=160501300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010140/10000/6000/1/1/160501300">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010140/앵무조개 선착장,Item_NO=160501300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160501300</ITEM> 
+ <!--Item_NO=160501300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010140/10000/6000/1/1/160501300">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010140/앵무조개 선착장,Item_NO=160501300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160501300</ITEM> 
+ <!--Item_NO=160501300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10501311"/> <!--사라스바티의 껍질-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501321" FACE="Jessie_normal"/> <!--%name% 근육통에 대해서 어떻게 생각하나? 
+하루 자고 일어나면 낫는 단순한 고통이라고?%% 
+단연코 아닐세. 우리와 같은 나이가 되면 이런 근육통은 더욱더 심해지지. 
+그런 의미에서 제레미씨를 보면 정말 가슴이 아프네. 
+자네가 좀 도와주지 않겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501326" FACE="Huerin_normal"/> <!--응? 귀찮은 일은 정말 질색인데. 제시 할아버지의 부탁이니 어쩔 수 없지. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501323" FACE="Jessie_normal"/> <!--제레미씨는 요즘 근육통 때문에 힘들다고 계속 나에게 말하고 있지. 
+그런 제레미씨를 보면 왠지 심하게 공감이 가고 있어.%%
+제레미씨를 돕기 위해서 집안 대대로 내려오는 비전근육통약을 만들어 드리고 싶네.
+그런데 이게 살짝 복잡한 과정을 거쳐야 해서 말일네.%%
+바로 앵무조개 선착장에 살고 있는 사라스바티의 껍질이 필요하네.%%
+안타까게도 사라스바티는 희귀몬스터라서 그 숫자가 정말 적지.
+하지만 걱정말게나 앵무조개 선착장에 살고 있는 몽글과 붉은 안테나 몽글도 사라스바티의 껍질을 주워서 다닌다고 하니 말일세.%%
+사라스바티의 껍질을 구해서 잡화상인 데이지에게 주면 다른 물약과 섞어서 줄 걸세. 
+그 비전근육통약을 제레미씨에게 전해주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501324" FACE="Jessie_angly"/> <!--자네는 늙은이의 간절한 부탁따위는 아랑곳하지 않나 보군,-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501325" FACE="Jessie_normal"/> <!--제레미씨의 고통을 보기 힘드네. 어서 빨리 가주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

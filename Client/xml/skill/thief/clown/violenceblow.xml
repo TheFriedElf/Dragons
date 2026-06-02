@@ -1,0 +1,12 @@
+<ACTION ID="a_Violence Blow" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_ViolenceBlow_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       MULTI_HIT_NUM="5"
+       FIRE_CASTER_EFFECT_TARGET_NODE ="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Com_skill_ViolenceBlow_01_char_root"
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	   FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+       NO_WEAPON_TRAIL="TRUE"
+      />
+</ACTION>

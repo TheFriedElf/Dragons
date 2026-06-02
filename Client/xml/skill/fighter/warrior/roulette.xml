@@ -1,0 +1,11 @@
+<ACTION ID="a_Roulette" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_01"/>
+  <FSM SCRIPT="Skill_Roulette"
+       HIT_SOUND_ID="Dice_Result"
+       NO_USE_TLM="TRUE"
+       FIRE_CASTER_EFFECT_ID="ef_gamble_001_p_ef_star"
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_ef_star"
+       FIND_TARGET_TYPE="SPHERE"
+       />
+</ACTION>

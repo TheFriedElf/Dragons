@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Golem_moss" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Golem_moss"/>
+		<KFMPATH>../Data/2_Mon/N_Golem_moss/N_Golem_moss.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Golem_moss/N_Golem_moss_Die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ATTACH TYPE="effect" SLOT="512521" EFFECT="ef_Golem_idle_01_p_wp_r_hand" TO="p_wp_r_hand"/>
+		<ATTACH TYPE="effect" SLOT="512524" EFFECT="ef_Golem_idle_01_p_wp_l_hand" TO="p_wp_l_hand"/>
+		<ATTACH TYPE="effect" SLOT="512522" EFFECT="ef_Golem_idle_02_char_root" TO="char_root"/>
+		<ATTACH TYPE="effect" SLOT="512523" EFFECT="ef_Golem_idle_03_p_hit_point_01" TO="p_hit_point_01"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="40"/>
+			<SPHERE TO="p_hit_point_02" SIZE="30"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000201"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000006" RANDOM="100"/>
+			<ITEM NAME="shot_02" ANIMATION="1000071" RANDOM="100" FIRE_START_NODE="p_wp_r_hand" PROJECTILE_ID="PROJECTILE_Golem_shot_02" FIRE_START_NODE1="p_wp_l_hand" PROJECTILE_ID1="PROJECTILE_Golem_shot_02"/>
+			<ITEM NAME="shot_02" ANIMATION="1000072" RANDOM="100" FIRE_START_NODE="p_wp_l_hand" PROJECTILE_ID="PROJECTILE_Golem_shot_02"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+	<ID>3617</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="519884">파리스의 상의 제조서 만들기</TITLE>
+	<GROUPNAME TEXT="504957">버섯 마을</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="50" MAX="999"/>
+		<CLASSES>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<QUESTS>
+			<QUEST>3611</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS/>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">5B662D8F-1AD6-4354-AE2F-1BE36DAA6542</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10002">5B662D8F-1AD6-4354-AE2F-1BE36DAA6542</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10003">5B662D8F-1AD6-4354-AE2F-1BE36DAA6542</PAYER>
+	</PAYERS>
+	<EVENTS>
+		<!--NPC와 대화-->
+		<!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+		
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">60003690</ITEM>
+        <ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">79000020</ITEM>
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="519882"/>
+		<OBJECT2 COUNT="100" TEXT="519883"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+	</OBJECTS>
+	<REWARD>
+        <!-- 성기사-->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50600920</ITEM>
+			<CLASS>13</CLASS>
+            <CLASS>21</CLASS>
+		</SELECT1>
+        <!-- 검투사 -->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50600980</ITEM>
+			<CLASS>14</CLASS>
+            <CLASS>22</CLASS>
+		</SELECT1>
+        <!--위자드 -->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50601040</ITEM>
+			<CLASS>15</CLASS>
+            <CLASS>23</CLASS>
+		</SELECT1>
+        <!--워 메이지 -->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50601100</ITEM>
+			<CLASS>16</CLASS>
+            <CLASS>24</CLASS>
+		</SELECT1>
+        <!--트랩퍼 -->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50601160</ITEM>
+			<CLASS>17</CLASS>
+            <CLASS>25</CLASS>
+		</SELECT1>
+        <!--스나이퍼-->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50601220</ITEM>
+			<CLASS>18</CLASS>
+            <CLASS>26</CLASS>
+		</SELECT1>
+        <!--댄서-->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50601280</ITEM>
+			<CLASS>19</CLASS>
+            <CLASS>27</CLASS>
+		</SELECT1>
+        <!--닌자 -->
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50601340</ITEM>
+			<CLASS>20</CLASS>
+            <CLASS>28</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">150601340</ITEM><!--세크메티언 상의 [소환사]제조서-->
+			<CLASS>51/53/55/57</CLASS><!--소환사-->
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">150601400</ITEM><!--세크메티언 상의 [격투가]제조서-->
+			<CLASS>52/54/56/58</CLASS><!--격투가-->
+		</SELECT1>
+
+	</REWARD>
+	<DIALOGS>
+		<!--101번은 퀘스트 의뢰 정보창-->
+		<!--MEMO=201번은 퀘스트 수락/거부 여부창-->
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="519885" FACE="Eavan_normal"/>
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="301">
+			<BODY TEXT="519886" FACE="Eavan_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="401">
+			<BODY TEXT="519887" FACE="Eavan_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="519888" FACE="Eavan_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="519889" FACE="Eavan_smile"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="519890"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="502048"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+	</DIALOGS>
+</QUEST>

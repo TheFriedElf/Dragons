@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4002</ID> <!--T.T.10400201 일어나! 비룡(2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 에이미에게 '비룡 키에로의 알' 전달-->
+<!--[완료NPC]	바람항구 - 에이미-->
+<!--[내용]	키에로가 낳은 알의 상태를 살피기 위해 바람항구의 에이미를 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">13D42615-B039-43f4-B6EB-28918778D237</CLIENT> <!--시작NPC 수염고래 해안가 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</PAYER> <!--완료NPC 바람항구 - 에이미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 11 수염고래 해안가 - 마이트리 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 12 바람항구 - 에이미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160400200/1">10011</NPC> 
+ <!--Item_NO=160400200/[Q.ID:04002] 비룡 키에로의 알,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160400200/1/511">10011</NPC> 
+ <!--Item_NO=160400200/[Q.ID:04002] 비룡 키에로의 알,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160400200/1">10011</NPC> 
+ <!--Item_NO=160400200/[Q.ID:04002] 비룡 키에로의 알,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160400200/1/512">10012</NPC> 
+ <!--Item_NO=160400200/[Q.ID:04002] 비룡 키에로의 알,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160400200/1">10012</NPC> 
+ <!--Item_NO=160400200/[Q.ID:04002] 비룡 키에로의 알,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10400211"/> <!--비룡 키에로의 알 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10400221" FACE="Maitri_normal"/> <!--아아…%%
+이 아이의 몸이 무엇 때문에 그토록 쇠약했던 것인지 이제 알 수 있을 것 같아요%%
+키에로는 그동안 비룡의 알을 뱃속에 품고 있었어요.
+그래서… 아기 비룡이 안전하게 태어날 수 있는 곳을 찾아 무리를 했던 것 같아요.%%
+이것은 키에로가 마지막으로 목숨을 다 해 남긴 비룡의 알이에요.
+이것의 주인이 될 사람은 당신이라고 생각합니다.%% 
+%name%님의 노력이 없었다면…
+이 알이 존재했다는 사실도 까맣게 잊혀졌을테니까요.%%
+이 알을 받아주시겠어요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10400226" FACE="Amy_smile"/> <!--안녕하세요! 펫상점의 에이미입니다!
+무슨 일로 찾아오셨… 에, 에엥?%%
+이건 첨 보는 알인데… 
+헉! 이게 비, 비룡의 알이라구요!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10400223" FACE="Maitri_normal"/> <!--워낙 키에로의 상태가 온전치 못한 상태에서 나온 알이니,
+적절한 조치가 필요할 듯 싶습니다.%%
+이 근처에 인간들이 사는 바람항구라는 도시가 있어요.
+그곳에 가면 펫을 다뤄 본 경험이 많은 에이미라는 사람을
+만날 수 있을 거에요.%%
+그녀에게 이 알에 대해 물어보면 여러가지 조언을 해줄 거라 생각합니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10400224" FACE="Maitri_angry"/> <!--이 알을 이대로 버리고 갈 생각인가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10400225" FACE="Maitri_normal"/> <!--에이미는 바람항구에 있는 펫상점을 운영한다고 들었어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10400202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10400251" FACE="Maitri_angry"/> <!--시간이 없습니다. 빨리 에이미에게 가보세요-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10400252" FACE="Amy_normal"/> <!--제게 무슨 볼일 이시죠?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

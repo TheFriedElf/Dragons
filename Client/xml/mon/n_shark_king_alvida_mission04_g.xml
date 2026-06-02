@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_shark_king_Alvida_Mission04_G">
+	<TEXTURE SRC="reflection_metal.dds">../Data/4_Item/1_Armor/1_Male/01_Helm/Texture/reflection_metal.dds</TEXTURE>
+	<TEXTURE SRC="mon_eye02.dds">../Data/2_Mon/N_Shark_King_Abdula/mon_eye02.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_shark_king_Alvida_Mission04"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Alvida_Mission04/N_Alvida_Mission04.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="1.0">../Data/2_Mon/N_Alvida_Mission04/N_Alvida_Mission04_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="14"/>
+			<SPHERE TO="p_hit_point_02" SIZE="11"/>
+		</ABV>
+		<SLOT>
+			<!--1 Basic Movement -->
+			<!--ITEM NAME="attk_01_01" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000063" RANDOM="100"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000064" RANDOM="100"/-->
+			<!-- 휘두르기-->
+			<!--ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/-->
+			<ITEM NAME="btlidle_01" ANIMATION="1000065" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000066" RANDOM="100"/>
+			<!-- 총쏘기-->
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000075" RANDOM="100"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000076" RANDOM="100" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="Projectile_Shark_King_Abdula_01"/>
+			<!-- 강하게 총쏘기-->
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000205" RANDOM="100"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000206" RANDOM="100" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="Projectile_Shark_King_Abdula_02"/>
+			<!-- 넷바인더 총쏘기-->
+			<ITEM NAME="btlidle_03_skill_shot" ANIMATION="1000209" RANDOM="100"/>
+			<ITEM NAME="skill_shot_03" ANIMATION="1000210" RANDOM="100" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="Projectile_Shark_King_Abdula_03"/>
+			<!-- 스스로 힐하기-->
+			<ITEM NAME="attk_02_01" ANIMATION="1000207" RANDOM="100"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000208" RANDOM="100" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="Projectile_Shark_King_Abdula_03"/>
+			<!-- 단체 힐하기-->
+			<ITEM NAME="attk_03_01" ANIMATION="1000207" RANDOM="100"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000208" RANDOM="100" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="Projectile_Shark_King_Abdula_03"/>
+			<!-- 애들 부르기-->
+			<ITEM NAME="attk_08_01" ANIMATION="1000207" RANDOM="100"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000208" RANDOM="100" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="Projectile_Shark_King_Abdula_03"/>
+			<!-- 별가사리 소환 -->
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000211"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000212" PROJECTILE_ID="Projectile_Alvida_Star"/>
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000207"/>
+			<ITEM NAME="earthquake_fire" ANIMATION="1000208"/>
+
+			<!-- 가디언 저격총 -->
+			<ITEM NAME="attk_05_01" ANIMATION="1000075"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000206" FIRE_START_NODE="p_ef_weapon" FIRE_EFFECT="ef_fire_dmg"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="Opening" ANIMATION="1000082"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000041" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000042" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000041"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000042"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000043"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000044"/>
+		<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 수리 설명 -->
+    <CMD type="waittime" time="2"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="setmoviescene" enable="true" Time="0"/>
+	<CMD type="waittime" time="0"/>
+	<!-- 화면을 와이드 화면으로 출력하고 3초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<!-- 카메라를 이벤트 전용 카메라로 바꾼다. -->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2"/>
+	<!-- 캐릭터가 말을한다. -->
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505830" TextTTID="505821" FaceID="Helper_smile"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="0"/>
+	<CMD type="waittime" time="0"/>
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<!-- 플레이어 이동 가능 -->
+</EVENT_SCRIPT>

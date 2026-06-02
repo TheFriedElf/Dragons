@@ -1,0 +1,7 @@
+<ACTION ID="a_blizzard_pet_c" NEXT="a_trace_ground2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE" OVERRIDE_PACKET="TRUE" >
+  <SLOT NAME="idle_01" LOOP="TRUE"/>
+  <SLOT NAME="buff_01"/>
+  <FSM SCRIPT="Act_Pet_Melee_Default"
+       PROJECTILE_ID="PROJECTILE_Blizzard_pet"
+       FIRE_SOUND_ID="skill-blizzard_pet"/>
+</ACTION>

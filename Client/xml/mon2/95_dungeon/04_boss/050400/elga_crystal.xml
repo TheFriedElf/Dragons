@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Elga_Crystal" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Ryvius"/>
+		<KFMPATH SCALE="1.2">../Data/2_Mon2/99_Boss/050400/Elga_Crystal/Elga_Crystal.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="35"/>
+
+		</ABV>
+		<SLOT>
+			
+			<!-- 보호뼈 생성 a_mon_melee_01 -->
+			<ITEM NAME="btlidle_01_start" ANIMATION="1000001" CAST_EFFECT="eff_elga_crystal_idle_01"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000001"/>
+			
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000081" QUAKE_TIME="1.5" QUAKE_FACTOR="0.8" TT_NO="4002002"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000001"/>
+		
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+		
+
+			<!-- 자의에 의한 사망 -->
+			<ITEM NAME="voluntarily_die_01" ANIMATION="1000021"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

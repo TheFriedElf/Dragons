@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_SHOP" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR X="199" Y="20" W="313" H="462" CAN_DRAG = "1" />
+		<IMG ID = "IMG_POTION" IMG = "../Data/6_ui/shop/shboxImg.tga" X="0" Y="0" Z = "10" W="115" H="105" IMG_W="115" IMG_H="105"/>
+		<IMG ID = "IMG_TOP" IMG = "../Data/6_ui/shop/shboxTop.tga" X="0" Y="61" Z = "5" W="313" H="12" IMG_W="313" IMG_H="12"/>
+		<CHECK_BUTTON ID="CBTN_TAB1" X="102" Y="31" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66" T_OUTLINE="1"/>
+			<ATTR TEXT = "400163" FONT = "FTtitle_14" T_X="27" T_Y ="10" T_CENTER = "1"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 1) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_TAB2" X="152" Y="31" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66"  T_OUTLINE="1"/>
+			<ATTR TEXT = "400164" FONT = "FTtitle_14" T_X="25" T_Y ="10" T_CENTER = "1"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 2) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_TAB3" X="202" Y="31" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66"  T_OUTLINE="1"/>
+			<ATTR TEXT = "400165" FONT = "FTtitle_14" T_X="25" T_Y ="10" T_CENTER = "1"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 3) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_TAB4" X="252" Y="31" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66" T_OUTLINE="1"/>
+			<ATTR TEXT = "400166" FONT = "FTtitle_14" T_X="25" T_Y ="10" T_CENTER = "1"/>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 4) </SCRIPT>
+		</CHECK_BUTTON>
+
+		<STATIC_FORM ID="SFRM_SHOP" X="0" Y="73" Z = "2" W="313" H="389" STATIC_NUM="29">
+			<FORM ID="FRM_TEXT" X="120" Y="0" W="15" H="7">
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="0" T_Y ="-4" T_CENTER = "0"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="280" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_ITEM_BG">
+				<ATTR X="10" Y="32" W="293" H="347" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID = "BTN_BACK" X="185" Y="9" Z="15" W="15" H="19">
+					<ATTR BTN_IMG="../Data/6_ui/pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">
+						OnShopPageBack(UISelf:GetParent())
+						ShopPageNumSetting(UISelf:GetParent())
+					</SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_NEXT" X="250" Y="9" Z="15" W="15" H="19">
+					<ATTR BTN_IMG="../Data/6_ui/pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnShopPageNext(UISelf:GetParent())
+						ShopPageNumSetting(UISelf:GetParent())
+					</SCRIPT>
+				</BUTTON>
+				<FORM ID="FRM_PAGE_NUM" X="210" Y="9" W="50" H="21">
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="14" T_Y ="1" T_CENTER = "1"/>
+					<SCRIPT ID="ON_CALL"> 
+						local kSelf = UISelf
+						kSelf:SetCustomDataAsInt(1) 
+						ShopPageNumSetting(kSelf:GetParent())
+					</SCRIPT>
+				</FORM>
+				<STATIC_FORM ID="SFRM_SDW" X="0" Y="0" W="293" H="393" STATIC_NUM="3">
+					<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIconFast(0) </SCRIPT>						
+					<STATIC_FORM ID="SFRM_DESC" X="0" Y="300" W="293" H="40" STATIC_NUM="0">
+						<ATTR TEXT="400190" T_X="6" T_Y ="5" T_CENTER = "0" />
+					</STATIC_FORM>
+					<FORM ID = "FRM_FILTER" X="0" Y="0" W="87" H="24">
+						<BUTTON ID = "BTN_FILTER" X="6" Y="6" W="87" H="24">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmDropBtDn.tga" BTN_IMG_W="174" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400167" FONT = "FTtitle_14" T_X="35" T_Y ="3" T_CENTER = "1" T_OUTLINE="1"/>
+							<SCRIPT ID = "ON_L_BTN_DOWN"> 
+								local wndDrop = UISelf:GetParent():GetControl("SFRM_DROP")
+								if wndDrop:IsNil() == false then
+									if UISelf:GetParent():GetSize():GetY() == 24 then
+										UISelf:GetParent():SetSize(Point2(90, 212))
+										wndDrop:SetSize(Point2(85,171))
+										wndDrop:Visible(true)
+									else
+										wndDrop:Visible(false)
+										UISelf:GetParent():SetSize(Point2(90, 24))
+										wndDrop:SetSize(Point2(85,0))
+									end
+								end
+							</SCRIPT>
+						</BUTTON>
+						<STATIC_FORM ID = "SFRM_DROP">
+							<ATTR X="6" Y="31" W="85" H="171" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" IGNORE_PARENT_RECT = "1" IS_VISIBLE="0" CAN_CLIP = "0" />
+							<BUTTON ID = "BTN_ALL" X="4" Y="4" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400188" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN">	UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "0", 400167) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_WORRIOR" X="4" Y="27" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400168" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "9133121634", 400191) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_MAGICIAN" X="4" Y="50" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400169" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "18278875524", 400192) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_ARCHER" X="4" Y="73" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400170" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "36608280072", 400193) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_THIEF" X="4" Y="96" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" /> <!-- y+=23-->
+								<ATTR TEXT="400171" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "73418676240", 400194) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_SHAMAN" X="4" Y="119" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" /> <!-- y+=23-->
+								<ATTR TEXT="401800" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "191402984163246080", 401801) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_TWINS" X="4" Y="142" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" /> <!-- y+=23-->
+								<ATTR TEXT="401802" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "382805968326492160", 401803) </SCRIPT>
+							</BUTTON>
+							<FORM ID = "FRM_BOTTOM" X="-2" Y="163" W="89" H="12" IGNORE_PARENT_RECT = "1"> <!-- y+=21-->
+								<ATTR IMG="../Data/6_ui/common/cmDropB.tga" IMG_W="89" IMG_H="12" />
+							</FORM>
+						</STATIC_FORM>
+					</FORM>
+
+					<IMG ID="IMG_LINE1" X="8" Y="32" W="258" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="258" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+					<IMG ID="IMG_LINE2" X="8" Y="33" W="258" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="258" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+	
+					<BUILD TARGET_ID="SFRM_ICON" X="5" Y="35" X_COUNT = "6" Y_COUNT = "6" X_GAB = "44" Y_GAB = "44"/>
+					<STATIC_FORM ID="SFRM_ICON" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		
+					<FORM ID="FRM_ICON" X="6" Y="36" W="262" H="262">
+						<BUILD ID="BLD_ICON" TARGET_ID="InvIcon" X="0" Y="0" X_COUNT = "6" Y_COUNT = "6" X_GAB = "44" Y_GAB = "44"/>
+						<ICON ID="InvIcon" X="0" Y="0" W="40" H="40" ICON_GRP ="220" ICON_KEY="0">
+							<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+							<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+							<SCRIPT ID="ON_R_BTN_DOWN">
+								UISelf:CursorToIconFast(1)
+								CloseToolTip()
+							</SCRIPT>
+							<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>	
+					</FORM>
+					<LIST ID="LST_LIST" X="6" Y="36" W = "260" H = "265" ITEM_X="0" ITEM_Y="0" CAN_SELECT = "1">
+						<BUTTON ID="ScrUp" X="262" Y="0" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+							<FORM ID="FRM_LIST_BG" X="4" Y="13" W="13" H="239" IGNORE_PARENT_RECT = "1">
+								<ATTR IMG="../Data/6_ui/common/cmScrollBg.tga" IMG_W="13" IMG_H="239"/>
+							</FORM>
+						</BUTTON>
+						<BUTTON ID="ScrDown" X="262" Y="250" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle" X="264" Y="0" W="15" H="21">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+						</BUTTON>
+						<ATTR ELEMENT_ID="FRM_INVEN_ELE" BTN_UP = "ScrUp" BTN_DOWN = "ScrDown" BTN_MIDDLE = "ScrMiddle"/>
+					</LIST>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<SCRIPT ID = "ON_CALL">
+			UI_SHOPBTN_OnFocus(UISelf, 1)
+			ChangeShopViewSubOrder("0")
+
+			local wndFilter = UISelf:GetControl("SFRM_SHOP"):GetControl("SFRM_ITEM_BG"):GetControl("SFRM_SDW"):GetControl("FRM_FILTER")
+			if wndFilter:IsNil() == false then
+				wndFilter:GetControl("BTN_FILTER"):SetStaticTextW(GetTextW(400167))
+				wndFilter:GetControl("SFRM_DROP"):Visible(false)
+			end
+			 
+			local wndInv = GetUIWnd("Inv")
+			if wndInv:IsNil() == true then
+				CallUI("Inv")
+			end
+			
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">
+			CloseUI("SFRM_CALCULATOR")
+			CloseUI("Inv")
+			ExitShop()
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 199, 20, 1.16)</SCRIPT>
+	</FORM>
+
+	<FORM ID = "FRM_SHOP_CP">
+		<ATTR X="159" Y="40" W="385" H="478" CAN_DRAG = "1" />
+		<IMG ID = "IMG_FLAG" IMG = "../Data/6_ui/shop/shboxImg2.tga" X="0" Y="0" Z = "10" W="187" H="121" IMG_W="187" IMG_H="121" NO_FOCUS = "1" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_TOP" IMG = "../Data/6_ui/shop/shboxTop.tga" X="42" Y="68" Z = "5" W="313" H="12" IMG_W="313" IMG_H="12"/>
+		<CHECK_BUTTON ID="CBTN_TAB1" X="144" Y="38" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66" T_OUTLINE="1"/>
+			<ATTR TEXT = "400163" FONT = "FTtitle_14" T_X="27" T_Y ="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 1) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_TAB2" X="194" Y="38" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66"  T_OUTLINE="1"/>
+			<ATTR TEXT = "400164" FONT = "FTtitle_14" T_X="25" T_Y ="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 2) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_TAB3" X="244" Y="38" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66"  T_OUTLINE="1"/>
+			<ATTR TEXT = "400165" FONT = "FTtitle_14" T_X="25" T_Y ="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 3) </SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_TAB4" X="294" Y="38" W="50" H="33">
+			<ATTR BTN_IMG="../Data/6_ui/shop/shMenuBg.tga" BTN_IMG_W="100" BTN_IMG_H="66" T_OUTLINE="1"/>
+			<ATTR TEXT = "400166" FONT = "FTtitle_14" T_X="25" T_Y ="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> UI_SHOPBTN_OnFocus(UISelf:GetParent(), 4) </SCRIPT>
+		</CHECK_BUTTON>
+
+		<STATIC_FORM ID="SFRM_SHOP" X="42" Y="80" Z = "2" W="313" H="389" STATIC_NUM="29">
+			<FORM ID="FRM_TEXT" X="120" Y="0" W="150" H="70">
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="0" T_Y ="-4" T_CENTER = "0"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="280" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_ITEM_BG">
+				<ATTR X="10" Y="32" W="293" H="347" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SDW" X="0" Y="0" W="293" H="347" STATIC_NUM="3">
+					<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIconFast(0) </SCRIPT>						
+					<STATIC_FORM ID="SFRM_DESC" X="0" Y="300" W="293" H="40" STATIC_NUM="0">
+						<ATTR TEXT="400190" T_X="6" T_Y ="5" T_CENTER = "0" />
+					</STATIC_FORM>
+					<FORM ID = "FRM_FILTER" X="0" Y="0" W="87" H="24">
+						<BUTTON ID = "BTN_FILTER" X="6" Y="6" W="87" H="24">
+							<ATTR BTN_IMG="../Data/6_ui/common/cmDropBtDn.tga" BTN_IMG_W="174" BTN_IMG_H="48"/>
+							<ATTR TEXT = "400167" FONT = "FTtitle_14" T_X="35" T_Y ="3" T_CENTER = "1" T_OUTLINE="1"/>
+							<SCRIPT ID = "ON_L_BTN_DOWN"> 
+								local wndDrop = UISelf:GetParent():GetControl("SFRM_DROP")
+								if wndDrop:IsNil() == false then
+									if UISelf:GetParent():GetSize():GetY() == 24 then
+										UISelf:GetParent():SetSize(Point2(90, 166))
+										wndDrop:SetSize(Point2(85,125))
+										wndDrop:Visible(true)
+									else
+										wndDrop:Visible(false)
+										UISelf:GetParent():SetSize(Point2(90, 24))
+										wndDrop:SetSize(Point2(85,0))
+									end
+								end
+							</SCRIPT>
+						</BUTTON>
+						<STATIC_FORM ID = "SFRM_DROP">
+							<ATTR X="6" Y="31" W="85" H="125" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" IGNORE_PARENT_RECT = "1" IS_VISIBLE="0" CAN_CLIP = "0" />
+							<BUTTON ID = "BTN_ALL" X="4" Y="4" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400188" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN">	UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "0", 400167) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_WORRIOR" X="4" Y="27" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400168" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "9133121634", 400191) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_MAGICIAN" X="4" Y="50" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400169" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "18278875524", 400192) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_ARCHER" X="4" Y="73" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400170" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "36608280072", 400193) </SCRIPT>
+							</BUTTON>
+							<BUTTON ID = "BTN_THIEF" X="4" Y="96" W="77" H="22">
+								<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+								<ATTR TEXT="400171" FONT="Font_Text" T_X="38" T_Y="2" T_CENTER="1" />
+								<SCRIPT ID="ON_L_BTN_DOWN"> UI_SHOPDROPBTN_OnFocus(UISelf:GetParent(), "73418676240", 400194) </SCRIPT>
+							</BUTTON>
+							<FORM ID = "FRM_BOTTOM" X="-2" Y="117" W="89" H="12" IGNORE_PARENT_RECT = "1">
+								<ATTR IMG="../Data/6_ui/common/cmDropB.tga" IMG_W="89" IMG_H="12" />
+							</FORM>
+						</STATIC_FORM>
+					</FORM>
+					<CHECK_BUTTON ID="CBTN_VIEW_LIST" X="192" Y="8" W="20" H="20">
+						<ATTR BTN_IMG="../Data/6_ui/common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							UISelf:CheckState(true) 
+							UISelf:LockClick(true) 
+							UISelf:GetParent():GetControl("CBTN_VIEW_ICON"):LockClick(false) 
+							UISelf:GetParent():GetControl("CBTN_VIEW_ICON"):CheckState(false) 
+							UISelf:GetParent():GetControl("FRM_ICON"):Visible(false)
+							UISelf:GetParent():GetControl("LST_LIST"):Visible(true)
+							for i=0,35 do
+								UISelf:GetParent():GetControl("SFRM_ICON"..i):Visible(false)
+							end
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<CHECK_BUTTON ID="CBTN_VIEW_ICON" X="98" Y="8" W="20" H="20">
+						<ATTR BTN_IMG="../Data/6_ui/common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							UISelf:CheckState(true) 
+							UISelf:LockClick(true) 
+							UISelf:GetParent():GetControl("CBTN_VIEW_LIST"):LockClick(false) 
+							UISelf:GetParent():GetControl("CBTN_VIEW_LIST"):CheckState(false) 
+							UISelf:GetParent():GetControl("FRM_ICON"):Visible(true)
+							UISelf:GetParent():GetControl("LST_LIST"):Visible(false)
+							for i=0,35 do
+								UISelf:GetParent():GetControl("SFRM_ICON"..i):Visible(true)
+							end
+						</SCRIPT>
+						<SCRIPT ID="ON_CALL">
+							UISelf:CheckState(true) 
+							UISelf:LockClick(true) 
+							UISelf:GetParent():GetControl("CBTN_VIEW_LIST"):LockClick(false) 
+							UISelf:GetParent():GetControl("CBTN_VIEW_LIST"):CheckState(false) 
+							UISelf:GetParent():GetControl("FRM_ICON"):Visible(true)
+							UISelf:GetParent():GetControl("LST_LIST"):Visible(false)
+						</SCRIPT>
+					</CHECK_BUTTON>
+					<FORM ID="FRM_VIEW_LIST" X="214" Y="10" W="64" H="20">
+						<ATTR IMG="../Data/6_ui/skill/skIcon01.tga" IMG_W="17" IMG_H="17"/>
+						<ATTR TEXT = "400128" FONT = "Font_Text" T_X="20" T_Y ="0"/>
+					</FORM>
+					<FORM ID="FRM_VIEW_ICON" X="120" Y="10" W="64" H="20">
+						<ATTR IMG="../Data/6_ui/skill/skIcon02.tga" IMG_W="18" IMG_H="17"/>
+						<ATTR TEXT = "400129" FONT = "Font_Text" T_X="20" T_Y ="0"/>
+					</FORM>
+					<IMG ID="IMG_LINE1" X="8" Y="32" W="258" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="258" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+					<IMG ID="IMG_LINE2" X="8" Y="33" W="258" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="258" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+	
+					<BUILD TARGET_ID="SFRM_ICON" X="5" Y="35" X_COUNT = "6" Y_COUNT = "6" X_GAB = "44" Y_GAB = "44"/>
+					<STATIC_FORM ID="SFRM_ICON" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		
+					<FORM ID="FRM_ICON" X="6" Y="36" W="262" H="262">
+						<BUILD TARGET_ID="InvIcon" X="0" Y="0" X_COUNT = "6" Y_COUNT = "6" X_GAB = "44" Y_GAB = "44"/>
+						<ICON ID="InvIcon" X="0" Y="0" W="40" H="40" ICON_GRP ="220" ICON_KEY="0">
+							<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+							<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+							<SCRIPT ID="ON_R_BTN_DOWN">
+								UISelf:CursorToIconFast(1)
+								CloseToolTip()
+							</SCRIPT>
+							<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>	
+					</FORM>
+					<LIST ID="LST_LIST" X="6" Y="36" W = "260" H = "265" ITEM_X="0" ITEM_Y="0" CAN_SELECT = "1">
+						<BUTTON ID="ScrUp" X="262" Y="0" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+							<FORM ID="FRM_LIST_BG" X="4" Y="13" W="13" H="239" IGNORE_PARENT_RECT = "1">
+								<ATTR IMG="../Data/6_ui/common/cmScrollBg.tga" IMG_W="13" IMG_H="239"/>
+							</FORM>
+						</BUTTON>
+						<BUTTON ID="ScrDown" X="262" Y="250" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle" X="264" Y="0" W="15" H="21">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+						</BUTTON>
+						<ATTR ELEMENT_ID="FRM_INVEN_ELE" BTN_UP = "ScrUp" BTN_DOWN = "ScrDown" BTN_MIDDLE = "ScrMiddle"/>
+					</LIST>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<SCRIPT ID = "ON_CALL">
+			UI_SHOPBTN_OnFocus(UISelf, 1)
+			ChangeShopViewSubOrder("0")
+
+			local wndFilter = UISelf:GetControl("SFRM_SHOP"):GetControl("SFRM_ITEM_BG"):GetControl("SFRM_SDW"):GetControl("FRM_FILTER")
+			if wndFilter:IsNil() == false then
+				wndFilter:GetControl("BTN_FILTER"):SetStaticTextW(GetTextW(400167))
+				wndFilter:GetControl("SFRM_DROP"):Visible(false)
+			end
+			 
+			local wndInv = GetUIWnd("Inv")
+			if wndInv:IsNil() == true then
+				CallUI("Inv")
+			end
+			
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">
+			CloseUI("SFRM_CALCULATOR")
+			CloseUI("Inv")
+		</SCRIPT>
+	</FORM>
+
+	<FORM ID="FRM_SHOP_ELE" X="0" Y="0" W="247" H="44">
+		<STATIC_FORM ID="SFRM_ICON_BG">
+			<ATTR X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<ICON ID="InvIcon" X="1" Y="1" W="40" H="40" ICON_GRP ="220">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+				<SCRIPT ID ="ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+					UISelf:CursorToIconFast(1)
+					CloseToolTip()
+				</SCRIPT>
+			</ICON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_ITEM_NAME">
+			<ATTR X="46" Y="0" W="197" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="13" T_Y ="3"/>
+			<FORM ID="FRM_ARROW" X="5" Y="7" W="6" H="6" COLOR_TYPE="4" CAN_COLOR_CHANGE="1">
+				<ATTR IMG="../Data/6_ui/common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+			</FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_COIN1" X="95" Y="25" W="50" H="16">
+			<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+		</FORM>
+		<FORM ID="FRM_COIN2" X="143" Y="25" W="50" H="16">
+			<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+		</FORM>
+		<FORM ID="FRM_COIN3" X="190" Y="25" W="50" H="16">
+			<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+		</FORM>
+	</FORM>
+
+	<STATIC_FORM ID = "SFRM_CALCULATOR">
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W = "208" H = "267" CAN_DRAG = "1" STATIC_NUM="1" INPUT_KEY_REAL="1"/>
+		<SCRIPT ID = "ON_CALL">
+			CalcValue(-2)
+			SetCalcDigit()
+			CloseToolTip()
+		</SCRIPT>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="215" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_SDW" X="0" Y="0" W="190" H="215" STATIC_NUM="3">
+				<FORM ID = "FRM_ARROW8">
+					<ATTR X="10" Y="10" W="150" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					<ATTR TEXT = "72014" FONT = "Font_Text" T_X = "11" T_Y ="-4" T_OUTLINE="0"/>
+				</FORM>
+				<STATIC_FORM ID = "SFRM_DIGIT">
+					<ATTR X="6" Y="42" W="178" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR TEXT = "" T_X="158" T_Y ="4" T_RIGHT = "1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<FORM ID = "FRM_COUNT">
+						<ATTR X="160" Y="2" W="20" H="20" T_Y ="1" TEXT = "50413" FONT_COLOR_HEX = "0xFF4D3413" T_OUTLINE="0"/>
+					</FORM>
+				</STATIC_FORM>
+
+				<BUTTON ID = "BTN_1" X="37" Y="73" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400178" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(1) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="79">CalcValue(1) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="2">CalcValue(1) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_2" X="66" Y="73" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400179" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(2) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="80">CalcValue(2) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="3">CalcValue(2) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_3" X="95" Y="73" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400180" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(3) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="81">CalcValue(3) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="4">CalcValue(3) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_4" X="37" Y="99" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400181" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(4) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="75">CalcValue(4) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="5">CalcValue(4) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_5" X="66" Y="99" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400182" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(5) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="76">CalcValue(5) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="6">CalcValue(5) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_6" X="95" Y="99" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400183" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(6) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="77">CalcValue(6) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="7">CalcValue(6) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_7" X="37" Y="125" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400184" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(7) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="71">CalcValue(7) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="8">CalcValue(7) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_8" X="66" Y="125" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400185" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(8) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="72">CalcValue(8) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="9">CalcValue(8) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_9" X="95" Y="125" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB01.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<ATTR TEXT = "400186" FONT = "Font_Text" T_X="13" T_Y ="4" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(9) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="73">CalcValue(9) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="10">CalcValue(9) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_0" X="124" Y="99" W="27" H="50">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB03.tga" BTN_IMG_W="54" BTN_IMG_H="100"/>
+					<ATTR TEXT = "400187" FONT = "Font_Text" T_X="13" T_Y ="30" T_CENTER = "1" />
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(0) SetCalcDigit() return true</SCRIPT>
+					<HOTKEY ID="82">CalcValue(0) SetCalcDigit() return true</HOTKEY>
+					<HOTKEY ID="11">CalcValue(0) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_BACK" X="124" Y="73" W="27" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/shop/shNumB02.tga" BTN_IMG_W="54" BTN_IMG_H="48"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(-1) SetCalcDigit()</SCRIPT>
+					<HOTKEY ID="14">CalcValue(-1) SetCalcDigit() return true</HOTKEY>
+				</BUTTON>
+				<BUTTON ID = "BTN_RESET" X="17" Y="156" W="77" H="22">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+					<ATTR TEXT = "400175" FONT = "Font_Text" T_X="38" T_Y ="3" T_CENTER = "1" />
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(-2) SetCalcDigit() return true</SCRIPT>
+				</BUTTON>
+				<BUTTON ID = "BTN_MAX" X="96" Y="156" W="77" H="22">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmDropB01.tga" BTN_IMG_W="154" BTN_IMG_H="44" />
+					<ATTR TEXT = "400176" FONT = "Font_Text" T_X="38" T_Y ="3" T_CENTER = "1" />
+					<SCRIPT ID = "ON_L_BTN_DOWN">CalcValue(-3) SetCalcDigit() return true</SCRIPT>
+				</BUTTON>
+
+				<STATIC_FORM ID = "SFRM_MONEY">
+					<ATTR X="6" Y="185" W="178" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<FORM ID="FRM_COIN1" X="0" Y="4" W="102" H="16" IS_VISIBLE="0">
+						<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="70" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="69" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+					<FORM ID="FRM_COIN2" X="84" Y="4" W="50" H="16" IS_VISIBLE="0">
+						<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+					<FORM ID="FRM_COIN3" X="125" Y="4" W="50" H="16" IS_VISIBLE="0">
+						<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+					<FORM ID="FRM_COIN4" X="0" Y="4" W="178" H="16" TEXT="" FONT="Font_Text" T_X="115" T_Y="1" T_RIGHT="1">
+						<FORM ID="FRM_TEXT" X="140" Y="2" W="38" H="16" TEXT="403021" FONT="Font_Text" T_X="0" T_Y="0"/>
+					</FORM>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+
+		<BUTTON ID = "BTN_BUY" X="19" Y="228" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400172, 2200) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400172" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE">
+				SetTextOnThisUI(400172, 2200)
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> 
+				local digit = tonumber(UISelf:GetParent():GetControl("SFRM_COLOR"):GetControl("SFRM_SDW"):GetControl("SFRM_DIGIT"):GetStaticText():GetStr())
+				if nil~=digit and digit > 0 then
+					DoCalcuratorAction()
+					UISelf:CloseParent()
+				end
+				return true
+			</SCRIPT>
+			<HOTKEY ID = "28">
+				local digit = tonumber(UISelf:GetParent():GetControl("SFRM_COLOR"):GetControl("SFRM_SDW"):GetControl("SFRM_DIGIT"):GetStaticText():GetStr())
+				if nil~=digit and digit > 0 then
+					DoCalcuratorAction()
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+			<HOTKEY ID = "59">
+				local digit = tonumber(UISelf:GetParent():GetControl("SFRM_COLOR"):GetControl("SFRM_SDW"):GetControl("SFRM_DIGIT"):GetStaticText():GetStr())
+				if nil~=digit and digit > 0 then
+					DoCalcuratorAction()
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCEL" X="105" Y="228" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400333, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400333" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent()  return true </SCRIPT>
+			<HOTKEY ID = "1"> UISelf:CloseParent()  return true</HOTKEY>
+			<HOTKEY ID = "60"> UISelf:CloseParent()  return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID = "SFRM_BUY_MSG">
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="188" H="130" CAN_DRAG = "1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="170" H="78" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+
+			<STATIC_FORM ID="SFRM_SDW">
+				<ATTR X="0" Y="0" W="170" H="78" STATIC_NUM="3"/>
+				<ATTR TEXT = "400174" FONT = "Font_Text" T_X = "17" T_Y ="6" T_OUTLINE="0"/>
+				<IMG ID="IMG_ICON_4" X="10" Y="10" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+				<STATIC_FORM ID="SFRM_INPUT_NUM">
+					<ATTR X="6" Y="22" W="158" H="24" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT = "" T_X = "142" T_Y ="4" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID = "FRM_COUNT">
+						<ATTR X="150" Y="0" W="18" H="24"/>
+						<ATTR TEXT = "50413" T_X = "1" T_Y ="4" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					</FORM>
+				</STATIC_FORM>
+
+				<IMG ID="IMG_LINE_1" X="8" Y="49" W="154" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="154" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="8" Y="50" W="154" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="154" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+
+				<FORM ID = "SFRM_MONEY">
+					<ATTR X="6" Y="180" W="158" H="24" />
+					<FORM ID="FRM_COIN1">
+						<ATTR X="0" Y="4" W="82" H="16"/>
+						<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="50" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="49" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+					<FORM ID="FRM_COIN2">
+						<ATTR X="64" Y="4" W="50" H="16"/>
+						<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+					<FORM ID="FRM_COIN3">
+						<ATTR X="105" Y="4" W="50" H="16"/>
+						<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_BUY">
+			<ATTR X="9" Y="90" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400172" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE">
+				SetTextOnThisUI(400172, 2200)
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID = "28">
+				DoCalcuratorAction()
+				UISelf:CloseParent() 
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCEL">
+			<ATTR X="95" Y="90" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400333" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID = "SFRM_SELL_MSG">
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="188" H="130" CAN_DRAG = "1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="170" H="78" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+
+			<STATIC_FORM ID="SFRM_SDW">
+				<ATTR X="0" Y="0" W="170" H="78" STATIC_NUM="3"/>
+				<ATTR TEXT = "400189" FONT = "Font_Text" T_X = "17" T_Y ="6" T_OUTLINE="0"/>
+				<IMG ID="IMG_ICON_4" X="10" Y="10" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+				<STATIC_FORM ID="SFRM_INPUT_NUM">
+					<ATTR X="6" Y="22" W="158" H="24" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ATTR TEXT = "" T_X = "142" T_Y ="4" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<FORM ID = "FRM_COUNT">
+						<ATTR X="150" Y="0" W="18" H="24"/>
+						<ATTR TEXT = "50413" T_X = "1" T_Y ="4" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					</FORM>
+				</STATIC_FORM>
+
+				<IMG ID="IMG_LINE_1" X="8" Y="49" W="154" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="154" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="8" Y="50" W="154" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="154" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+
+				<FORM ID = "SFRM_MONEY">
+					<ATTR X="6" Y="180" W="158" H="24" />
+					<FORM ID="FRM_COIN1">
+						<ATTR X="0" Y="4" W="82" H="16"/>
+						<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="50" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="49" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+					<FORM ID="FRM_COIN2">
+						<ATTR X="64" Y="4" W="50" H="16"/>
+						<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+					<FORM ID="FRM_COIN3">
+						<ATTR X="105" Y="4" W="50" H="16"/>
+						<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+					</FORM>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_BUY">
+			<ATTR X="9" Y="90" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400172" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE">
+				SetTextOnThisUI(400172, 2200)
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID = "28">
+				DoCalcuratorAction()
+				UISelf:CloseParent() 
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCEL">
+			<ATTR X="95" Y="90" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400333" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<FORM ID = "FRM_SHOP_STOCK" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<ATTR X="199" Y="20" W="294" H="448" CAN_DRAG = "1" />
+		<IMG ID = "IMG_GIRL_TEXT" IMG = "../Data/6_ui/event/evtSgTitle.tga" X="9" Y="0" Z = "10" W="281" H="125" IMG_W="281" IMG_H="125" NO_FOCUS="1"/>
+		<CHECK_BUTTON ID="CBTN_TAB3" X="14" Y="122" Z="2" W="113" H="33" BTN_VERTICAL_IMG="1">
+			<ATTR BTN_IMG="../Data/6_ui/event/evtSgTab.tga" BTN_IMG_W="113" BTN_IMG_H="116" T_OUTLINE="1"/>
+			<ATTR TEXT = "2600" FONT = "FTtitle_14" T_X="56" T_Y ="5" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<ATTR BTN_OVER_TEXT_COLOR="0xFFFFFFFF" BTN_DOWN_TEXT_COLOR="0xFF2A0F0B" BTN_T_INVERTBOLD="1"/>
+			<SCRIPT ID="ON_GET_FOCUS"> 
+				UISelf:GetParent():GetControl("SFRM_TEXT_BG"):Visible(false) 
+				local btn = UISelf:GetParent():GetControl("CBTN_TEXT")
+				if false==btn:IsNil() then
+					btn:CheckState(false)
+					btn:LockClick(false)
+				end
+				UISelf:CheckState(true)
+				UISelf:LockClick(true)
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				UISelf:CheckState(true)
+				UISelf:LockClick(true)
+			</SCRIPT>	
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="CBTN_TEXT" X="127" Y="122" Z="2" W="113" H="33" BTN_VERTICAL_IMG="1">
+				<ATTR BTN_IMG="../Data/6_ui/event/evtSgTab.tga" BTN_IMG_W="113" BTN_IMG_H="116" T_OUTLINE="1"/>
+				<ATTR TEXT = "2601" FONT = "FTtitle_14" T_X="56" T_Y ="5" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR BTN_OVER_TEXT_COLOR="0xFFFFFFFF" BTN_DOWN_TEXT_COLOR="0xFF2A0F0B" BTN_T_INVERTBOLD="1"/>
+				<SCRIPT ID="ON_GET_FOCUS"> 
+					UISelf:GetParent():GetControl("SFRM_TEXT_BG"):Visible(true) 
+					local btn = UISelf:GetParent():GetControl("CBTN_TAB3")
+					if false==btn:IsNil() then
+						btn:CheckState(false)
+						btn:LockClick(false)
+					end
+					UISelf:CheckState(true)
+					UISelf:LockClick(true)
+				</SCRIPT>
+				<SCRIPT ID="ON_CALL">
+					UISelf:CheckState(false)
+					UISelf:LockClick(false)
+				</SCRIPT>	
+			</CHECK_BUTTON>
+			<STATIC_FORM ID="SFRM_TEXT_BG" IS_VISIBLE="0">
+				<ATTR X="10" Y="150" Z="10" W="274" H="233" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SDW" X="0" Y="0" W="274" H="233" STATIC_NUM="3">
+					<ATTR TEXT="2603" T_CENTER="1" T_X="137" T_Y="20" FONT="FTctsBig_14"/>
+					<SCRIPT ID = "ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+				</STATIC_FORM>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SHOP" X="0" Y="78" Z = "2" W="294" H="370" STATIC_NUM="30">
+			<BUTTON ID="BTN_RANK" X="105" Y="337" W="84" H="26">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" />
+				<ATTR TEXT = "2602" FONT = "FTbt_12" T_X="42" T_Y ="5" T_CENTER = "1" FONT_COLOR_HEX="0xFF2aofb"/>
+				<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> OpenURL() </SCRIPT>
+			</BUTTON>
+			<FORM ID="FRM_TEXT" X="10" Y="307" W="276" H="92" Z="-1">
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="138" T_Y ="4" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR IMG="../Data/6_ui/event/evtSgbx.tga" IMG_W="276" IMG_H="92" />
+				<IMG ID="BTN_PREV_BG" X="79" Y="10" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<IMG ID="BTN_NEXT_BG" X="190" Y="10" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<SCRIPT ID="ON_CALL"> 
+					local kSelf = UISelf
+					kSelf:SetCustomDataAsInt(0) 
+					local iData = kSelf:GetCustomDataAsInt() 
+					kSelf:SetStaticText("1 ~ "..(iData+1)*30)
+				</SCRIPT>
+			</FORM>
+			<BUTTON ID="BTN_BACK" X="79" Y="311" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">	OnStockShopPageButton(UISelf:GetParent(), -1)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_NEXT" X="200" Y="311" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">	OnStockShopPageButton(UISelf:GetParent(), 1)</SCRIPT>
+			</BUTTON>
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="257" Y="45" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_ITEM_BG">
+				<ATTR X="10" Y="72" W="274" H="233" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID="SFRM_SDW" X="0" Y="0" W="274" H="233" STATIC_NUM="3">
+					<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIconFast(0) </SCRIPT>						
+	
+					<BUILD TARGET_ID="SFRM_ICON" X="6" Y="7" X_COUNT = "6" Y_COUNT = "5" X_GAB = "44" Y_GAB = "44"/>
+					<STATIC_FORM ID="SFRM_ICON" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		
+					<FORM ID="FRM_ICON" X="7" Y="8" W="260" H="216">
+						<BUILD ID="BLD_ICON" TARGET_ID="InvIcon" X="0" Y="0" X_COUNT = "6" Y_COUNT = "5" X_GAB = "44" Y_GAB = "44"/>
+						<ICON ID="InvIcon" X="0" Y="0" W="40" H="40" ICON_GRP ="221" ICON_KEY="0">
+							<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+							<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+							<SCRIPT ID="ON_R_BTN_DOWN">
+								UISelf:CursorToIconFast(1)
+								CloseToolTip()
+							</SCRIPT>
+							<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+							<SCRIPT ID="ON_CALL">
+								local iIndex = UISelf:GetParent():GetParent():GetParent():GetControl("FRM_TEXT"):GetCustomDataAsInt()
+								UISelf:SetIconKey(UISelf:GetBuildIndex()*(iIndex+1))
+							</SCRIPT>
+						</ICON>	
+					</FORM>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<SCRIPT ID = "ON_CALL"> 
+			RegistUIAction(UISelf, "CloseUI")
+			ChangeShopViewGroup(3)
+			local wndInv = GetUIWnd("Inv")
+			if wndInv:IsNil() == true then
+				CallUI("Inv")
+			end
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> ExitShop() CloseUI("Inv") </SCRIPT>
+	</FORM>
+	<!--직업스킬 관련 아이템 판매-->
+	<FORM ID = "FRM_SHOP_JOB" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR X="159" Y="40" W="313" H="475" CAN_DRAG="1" />
+		<SCRIPT ID="ON_CALL">
+			CallJobSkillShop(UISelf)
+			local kInv = GetUIWnd("Inv")
+			if true == kInv:IsNil() then
+				CallUI("Inv")
+			end
+		</SCRIPT>		
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 199, 20, 1.16)</SCRIPT>
+		<IMG ID="IMG_FLAG" IMG="../Data/6_ui/shop/shboxImg3.tga" X="-44" Y="-4" Z="10" W="187" H="121" IMG_W="187" IMG_H="121" NO_FOCUS = "1" PASS_EVENT = "1"/>
+		<IMG ID="IMG_TOP" IMG="../Data/6_ui/shop/shboxTop.tga" X="0" Y="61" Z="5" W="313" H="12" IMG_W="313" IMG_H="12"/>
+		<STATIC_FORM ID="SFRM_SHOP" X="0" Y="73" Z = "2" W="313" H="404" STATIC_NUM="29">
+			<FORM ID="FRM_TEXT" X="120" Y="0" W="15" H="7">
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="0" T_Y ="-4" T_CENTER = "0"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="280" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_ITEM_BG">
+				<ATTR X="10" Y="32" W="293" H="362" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>			
+				<BUTTON ID = "BTN_BACK" X="185" Y="9" Z="15" W="15" H="19">
+					<ATTR BTN_IMG="../Data/6_ui/pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN">
+						OnShopPageBack(UISelf:GetParent())
+						ShopPageNumSetting(UISelf:GetParent())
+					</SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_NEXT" X="250" Y="9" Z="15" W="15" H="19">
+					<ATTR BTN_IMG="../Data/6_ui/pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						OnShopPageNext(UISelf:GetParent())
+						ShopPageNumSetting(UISelf:GetParent())
+					</SCRIPT>
+				</BUTTON>
+				<FORM ID="FRM_PAGE_NUM" X="210" Y="9" W="50" H="21">
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="14" T_Y ="1" T_CENTER = "1"/>
+					<SCRIPT ID="ON_CALL"> 
+						local kSelf = UISelf
+						kSelf:SetCustomDataAsInt(1) 
+						OnShopPageView(kSelf:GetParent(), 1)
+						ShopPageNumSetting(kSelf:GetParent())
+					</SCRIPT>
+				</FORM>
+				<STATIC_FORM ID="SFRM_SDW" X="0" Y="0" W="293" H="362" STATIC_NUM="3">
+					<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIconFast(0) </SCRIPT>						
+					<STATIC_FORM ID="SFRM_DESC" X="0" Y="300" W="293" H="40" STATIC_NUM="0">
+						<ATTR TEXT="400190" T_X="6" T_Y ="5" T_CENTER = "0" />
+					</STATIC_FORM>
+					<IMG ID="IMG_LINE1" X="8" Y="32" W="258" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="258" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+					<IMG ID="IMG_LINE2" X="8" Y="33" W="258" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="258" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+					<BUILD TARGET_ID="SFRM_ICON" X="5" Y="35" X_COUNT = "6" Y_COUNT = "6" X_GAB = "44" Y_GAB = "44"/>
+					<STATIC_FORM ID="SFRM_ICON" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		
+					<FORM ID="FRM_ICON" X="6" Y="36" W="262" H="262">
+						<BUILD ID="BLD_ICON" TARGET_ID="InvIcon" X="0" Y="0" X_COUNT = "6" Y_COUNT = "6" X_GAB = "44" Y_GAB = "44"/>
+						<ICON ID="InvIcon" X="0" Y="0" W="40" H="40" ICON_GRP ="220" ICON_KEY="0">
+							<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+							<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+							<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+							<SCRIPT ID="ON_R_BTN_DOWN">
+								UISelf:CursorToIconFast(1)
+								CloseToolTip()
+							</SCRIPT>
+							<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+							<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						</ICON>	
+					</FORM>
+					<LIST ID="LST_LIST" X="6" Y="36" W = "260" H = "265" ITEM_X="0" ITEM_Y="0" CAN_SELECT = "1">
+						<BUTTON ID="ScrUp" X="262" Y="0" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+							<FORM ID="FRM_LIST_BG" X="4" Y="13" W="13" H="239" IGNORE_PARENT_RECT = "1">
+								<ATTR IMG="../Data/6_ui/common/cmScrollBg.tga" IMG_W="13" IMG_H="239"/>
+							</FORM>
+						</BUTTON>
+						<BUTTON ID="ScrDown" X="262" Y="250" W="19" H="15">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						</BUTTON>
+						<BUTTON ID="ScrMiddle" X="264" Y="0" W="15" H="21">
+							<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+						</BUTTON>
+						<ATTR ELEMENT_ID="FRM_INVEN_ELE" BTN_UP = "ScrUp" BTN_DOWN = "ScrDown" BTN_MIDDLE = "ScrMiddle"/>
+					</LIST>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<SCRIPT ID = "ON_CALL">
+			UI_SHOPBTN_OnFocus(UISelf, 1)
+			ChangeShopViewSubOrder("0")
+			local wndInv = GetUIWnd("Inv")
+			if wndInv:IsNil() == true then
+				CallUI("Inv")
+			end
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">
+			CloseUI("SFRM_CALCULATOR")
+			CloseUI("Inv")
+			CloseToolTip()
+			ExitShop()
+		</SCRIPT>
+	</FORM>
+</XUI>

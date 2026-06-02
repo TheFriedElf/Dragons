@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_920302_KTH">
+	<GSAPATH>../Data/3_World/98_PVP/01_Level/KTH/920302_KTH.GSA</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/warzone_bg.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35"/>
+	<SCRIPT>World/98_PVP/KTH/920302_KTH.lua</SCRIPT>
+	<!-- TYPE - 일반맵 : 1, 인던맵 : 2, PVP_KTH : 32, PVP_DM : 64, 마을맵 : 8, 마이룸 : 16 --> 
+	<MAPVALUE PLAYERKILL="1" TYPE="32"/>
+
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="350"/>
+	</TRIGGER>
+
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="550" />
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="550" />
+	</TRIGGER>
+	
+	<!--KTH 모드 언덕 트리거-->
+	<TRIGGER ID="KingOfTheHill_01">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoKingHillUp01"/>
+	</TRIGGER>
+	<TRIGGER ID="KingOfTheHill_02">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoKingHillUp02"/>
+	</TRIGGER>
+	
+	<PVP>
+		<HILL NO="1" NAME="KingOfTheHill_01" LAMP="PVP_Point_01"/>
+		<HILL NO="2" NAME="KingOfTheHill_02" LAMP="PVP_Point_02"/>
+	</PVP>
+	
+	<!--결과화면 배경-->
+	<COMPLETE_PATH>
+		<ITEM ID = "0" PATH = "../Data/6_UI/pvp/pvpBg001.tga"/>
+		<ITEM ID = "1" PATH = "../Data/6_UI/pvp/pvpBg002.tga"/>
+		<ITEM ID = "2" PATH = "../Data/6_UI/pvp/pvpBg003.tga"/>
+		<ITEM ID = "3" PATH = "../Data/6_UI/pvp/pvpBg004.tga"/>
+	</COMPLETE_PATH>
+	<FOG DENSITY="0.360000" FUNC="RANGE_SQ" START="285.000000" END="3075.000000" COLOR="0.211000,0.101000,0.008000"/>
+</WORLD>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5046</ID> <!--T.T.10504601 해변의 위협 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	톱날꽃게 해변 - 푸른 안테나 몽글 40마리 처치-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 톱날꽃게 해변의 위협이 되어 가고 있는 푸른 안테나 몽글에 대해서 이야기 한다. 무카파는 푸른 안테나 몽글은 이상한 전파를 이용해 일대의 다른 몬스터들과 무리를 형성하려는 정보를 입수했다고 한다. 톱날꽃게 해변의 새로운 위협이 되고 있는 푸른 안테나 몽글 40마리를 처치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010110/1">6012400</MONSTER> 
+ <!--MON_NO=6012400/푸른 안테나 몽글,MAP_NO=9010110/톱날꽃게 해변,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="40" TEXT="10504611"/> <!--푸른 안테나 몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10504621" FACE="Mukapa_normal"/> <!--흠, 카즈라 전령에 따르면 뭔가 심상찮은 기운이 톱날꽃게 해변에 맴돌고 있다고 하네.
+그 주축이 되는 게 바로 푸른 안테나 몽글이지.
+사실 이 녀석들은 상당히 낮은 지능을 가지고 있는 걸로 지금까지 판단하고 있었어.%%
+하지만 최근의 정보에 따르면 이상한 전파를 푸른 안테나 몽글이 발산하고 있다는 거야.
+이 전파가 닿는 거리에 있는 몬스터들은 이상하게 푸른 안테나 몽글의 주위로 몰려 온다는 거지.%%
+문제는 푸른 안테나 몽글이 가만히 있는 게 아니라 마을 쪽으로 몰려들고 있다는 데 있어. 
+자네가 이일을 나서서 해결해 주길 바라네. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10504626" FACE="Mukapa_smile"/> <!--이제 바람의 항구를 위협하던 또 하나의 위기가 해결됐군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10504623" FACE="Mukapa_normal"/> <!--푸른 안테나 몽글이 이렇게 변한 것도 아무래도 파렐과 관련이 있다고 하더군.
+아무래도 푸른 안테나 몽글에게 뭔가 이상한 실험을 한 것 같아.%% 
+바람항구의 주민들이 괴로움을 당하지 않도록 자네가 잘 해결해 줄 것이리라 믿네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10504624" FACE="Mukapa_angry"/> <!--설마 자네 제정신인가? 
+바람항구에 윕협이 닥치는 것을 보고도 외면할 생각인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10504625" FACE="Mukapa_normal"/> <!--어서 빠리 위혐 요소를 제거하게. 
+우물쭈물하다가는 언제나 위협이 커지는 법이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10504602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

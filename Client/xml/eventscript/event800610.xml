@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 발렌타인 플래시 -->
+<CMD TYPE="EscScript" EventID="10001"/>
+
+
+<!-- 플레이어 이동을 막는다.  -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+
+
+<!-- 플래시 이미지  -->
+	<!--검은발톱 둥지 오프닝 -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<!--<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	
+	<CMD TYPE="PlayMovie" MovieName="valentine"/> <!-- 플레쉬 무비 호출 -->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="WaitTime" Time="5"/> <!-- 오프닝 시간을 기다림-->
+
+	
+<!-- 미션 클리어 UI출력  -->
+	<CMD type="CallUI" UIWndName = "FRM_MISSION_END"/>
+	<CMD type="waittime" time="2"/>
+
+
+
+<!-- 페이드아웃 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="ClearActorFilter"/>
+<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--모든 플레이어 보이기 -->    
+
+<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1" />
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="WaitCamera"/>
+
+<!-- 플레이어 이동 가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+
+<!-- 밖으로 나가기 -->
+	<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_END"/>
+	
+<!-- 밖으로 나가기 -->
+</EVENT_SCRIPT>

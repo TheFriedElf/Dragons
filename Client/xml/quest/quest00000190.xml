@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>190</ID> <!--T.T.10019001 무기강화 실전 돌입! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	구피가 준 녹슨 크랩소드를 강화해보자.-->
+<!--[완료NPC]	종소리 마을 - 구피-->
+<!--[내용]	구피는 자신이 준 강화가루를 이용해서 크랩소드를 강화해보라고 한다. 강화는 각 마을의 대장장이에게서 인챈트 하기를 누르면 할 수 있다. 종소리마을의 대장장이 다윈에게 가서 무기를 강화해 보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F21AA8D5-DAA5-4720-B361-43145E25C58B</CLIENT> <!--시작NPC 종소리 마을 - 구피 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F21AA8D5-DAA5-4720-B361-43145E25C58B</PAYER> <!--완료NPC 종소리 마을 - 구피 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F21AA8D5-DAA5-4720-B361-43145E25C58B</AGENT> <!--진행NPC 11 종소리 마을 - 구피 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="PLUS_CHECK" VALUE="">99804250</ITEM> 
+ <!--Item_NO=99804250/녹슨 크랩소드(퀘스트),-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/99804250/1">10011</NPC> 
+ <!--Item_NO=/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/99804250/1/511">10011</NPC> 
+ <!--Item_NO=/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/99804250/1">10011</NPC> 
+ <!--Item_NO=/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10019011"/> <!--녹슨 크랩소드 강화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">99804210</ITEM><!--선택지급/전사/1)/99804210(봉인아님) 1개-[신]크리스탈 소드(퀘스트)-->
+			<CLASS>1/5/13/21/6/14/22</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">99804220</ITEM><!--선택지급/법사/1)/99804220(봉인아님) 1개-[신]크리스탈 스태프(퀘스트)-->
+			<CLASS>2/7/15/23/8/16/24</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">99804230</ITEM><!--선택지급/궁수/1)/99804230(봉인아님) 1개-[신]크리스탈 보우(퀘스트)-->
+			<CLASS>3/9/17/25/10/18/26</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">99804240</ITEM><!--선택지급/도둑/1)/99804240(봉인아님) 1개-[신]크리스탈 클로(퀘스트)-->
+			<CLASS>4/11/19/27/12/20/28</CLASS>
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10019021" FACE="Walter_normal"/> <!--자! 그럼 실전에 돌입하도록 하겠습니다.
+준비 되셨나요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10019026" FACE="Walter_smile"/> <!--강화에 성공하셨군요.!
+수고하셨습니다.%%
+장비강화는 실패하면 무기의 강화가 다시 0으로 됩니다.%%
+장비의 성공률을 높이고, 강화가 0으로 되는 것을 막기위해 캐시샵에서 판매되고 있는 인챈트 보험 스크롤과 인챈트 룬스톤을 사용해 보시길 바랍니다.%% 
+이건 용자님 같은 분들을 위해서 마련한 선물입니다. 
+앞으로 용자님의 활약을 기대하겠습니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10019023" FACE="Walter_normal"/> <!--그럼 제가 무기 강화를 시험할 수 있도록, 녹슨 크랩소드를 드리겠습니다.
+무기를 강화하기 위해서는 제가 아까 드린 무기 강화 가루가 필요합니다.%%
+각 마을의 대장장이에게 가면 무기강화가 가능합니다.
+종소리 마을은 대장장이 다윈에게서 앤챈트하기가 가능합니다.%%
+다윈에게 가서 인챈트 하기를 클릭하면 무기강화 UI가 나옵니다.
+장비 탭에서 강화하려고 하는 무기를 선택하십시오.%% 
+제가 드린 녹슨 크랩소드를 우클릭으로 선택하시고 인챈트 하기(F1)를 클릭하시면 됩니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10019024" FACE="Walter_angly"/> <!--아직 준비가 되시지 않으셨군요. 
+준비가 되시면 말씀해 주시기 바랍니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10019025" FACE="Walter_angly"/> <!--무기강화는 대장장이 다윈에게서 할 수 있습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10019002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10019051" /> <!--이런, 무기를 잃어버리셨군요. 앞으로는 조심하시길 바랍니다.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

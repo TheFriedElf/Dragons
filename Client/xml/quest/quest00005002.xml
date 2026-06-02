@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5002</ID> <!--T.T.10500201 부를 가져오는 상징 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	앵무조개 선착장 - 갑판상어 이빨 10개 입수-->
+<!--[완료NPC]	바람항구 - 제시-->
+<!--[내용]	제시는 자신의 고객의 요구로 부를 가져오는 상징으로 알려진 갑판상어의 이빨 10개가 필요하다고 했다. 고객과의 신용을 지킬 수 있도록 앵무조개 선착장에서 갑판상어의 이빨 10개를 입수해야 한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 바람항구 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 바람항구 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 바람항구 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010140/10000/5000/1/1/160500200">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010140/앵무조개 선착장,Item_NO=160500100/[Q.ID:05002] 갑판상어의 이빨,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160500200</ITEM> 
+ <!--Item_NO=160500200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10500211"/> <!--갑판상어의 이빨-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10500221" FACE="Jessie_normal"/> <!--허허, 부를 가져오는 상징이라!
+자네 혹시 부를 가져오는 상징물에 대해서 알고 있나? 
+뭐 단순히 행운의 상징과는 조금 다른 의미를 가지고 있지.
+괜찮다면 내가 그 이야기를 조금 해줌세. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10500226" FACE="Jessie_smile"/> <!--고맙네. 아무래도 나 혼자서는 갑판상어의 이빨을 도저히 구할 수 없었네.
+응? 왜 갑판상어의 이빨 5개를 주머니에 넣냐고?%%
+사실 나에게도 부를 가져오는 상징이 조금 필요할 거 같아서 말일세.
+미안하지만 고객이 부탁한 것은 5개였네. 나머지 5개는 내 몫으로 부탁한 걸세. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10500223" FACE="Jessie_smile"/> <!--사실 부라는 것은 노력에 의해서 찾아오지 어느 한순간 찾아오는 것은 아닐세. 
+하지만 사람은 누구나 무언가 특별한 것을 바라지.
+그렇기 때문에 허황된 꿈이나 미신이 생기는 걸세.%%
+갑판상어가 상당한 부를 축적하고 있다는 것은 당연히 알고 있을 테지.%%
+그 부는 해적질을 통해서 얻은 거네만.
+이상하게 사람들은 갑판상어의 이빨이 그런 행운을 준다고 생각하기 시작했네.%% 
+이번에 나와 부동산 계약을 체결하기로 한 고객이 자신의 레스토랑에 장식한다며 갑판상어의 이빨을 원하고 있네.%%
+나는 이 고객을 잃고 싶지 않아서 갑판상어의 이빨을 구해주겠다고 했지만 구할 길이 망막하네.%%
+혹시 자네가 좀 도와주지 않겠나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10500224" FACE="Jessie_normal"/> <!--뭐, 그럼 어쩔 수 없지. 갑판상어에게 얻어 맞아 쓰러진 이 늙은의 병문안이나 오게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10500225" FACE="Jessie_normal"/> <!--설마! 자네 지금 중요한 일이 아니라고 대충할 생각인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10500202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

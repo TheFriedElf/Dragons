@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="PROJECTILE_Mutisha_shot_04">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH>../Data/5_Effect/7_Projectile/ef_BossAram_Item02_02.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_ARROW</SCRIPT>
+	<PARAM SPEED="250.0" ACCEL="0" MASS="0.5"/>
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+	</SCRIPT_CALL_EVENT>
+ 	<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="Scene Root" RANGE="70"/>
+	</COLLISION_SPHERE> 
+</PROJECTILE>

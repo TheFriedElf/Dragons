@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4193</ID> <!--T.T.10419301 반인반마의 안식처 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	카르카로스 퇴치-->
+<!--[완료NPC]	신들의 안식처 - 피레이-->
+<!--[내용]	피레이는 무티샤의 목적이 신들의 안식처에 있는 쿤다라의 결계를 파괴하기 위함이라 말해준다. 헬 크라우저가 결계를 푸는 마법의 반지를 가지고 있어서 아직까지는 쿤다라의 결계가 풀리고 있지 않지만, 만약 이것이 풀리는 날엔 커다란 재앙이 일어날 것이라고 경고한다. 켄타우르스 피레이 부탁 대로 신들의 안식처[아케이드 모드(F1)]로 가서, 무티샤에게 영혼을 잠식 당한 카르카로스를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</CLIENT> <!--시작NPC 신들의 안식처 - 피레이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</PAYER> <!--완료NPC 신들의 안식처 - 피레이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</AGENT> <!--진행NPC 11 신들의 안식처 - 피레이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6104453</MONSTER> 
+ <!--MON_NO=6104453/카르카로스,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6104456</MONSTER> 
+ <!--MON_NO=6104456/카르카로스,-->
+
+
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419311"/> <!--카르카로스 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419321" FACE="Pirey_normal"/> <!--무티샤는 처음엔 우리 일족처럼 다리가 넷이라도 달린
+것처럼 굴었지. 여러가지 일들에 조언과 걱정을 보냈다.%%
+그런 모습에 혹한 카르카로스는 결국 무티샤의 흉계에 
+넘어가고 만 거야.%%
+만약 카르카로스의 모습이 궁금하다면 
+신들의 안식처[아케이드 모드(F1)]로 가보렴.%%
+지금 녀석은 이성을 잃고 금단의 영역인 
+쿤다라의 결계를 해제하려고 해.%%
+다행히 미스트엘프인 헬 크라우저가 결계를 푸는
+마법의 반지를 가지고 있기 때문에 아직 정령의 
+수호석들은 온전히 지켜지고 있지만 말이다.%%
+그런데 녀석들이 열쇠를 내가 가지고 있는 줄 아나봐
+날 못잡아먹어서 안달이 난 것처럼 구니 말이다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419326" FACE="Pirey_smile"/> <!--이번에 얻어낸 승리는 나름 중요한 의미를 가졌지만…
+절대로 방심은 금물이라네. 패배를 모르는 저 카르카로스는
+전열을 재정비해 쿤다라의 결계를 풀 준비를 하고 있을테니까…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419323" FACE="Pirey_normal"/> <!--지금 이대로 카르카로스를 내버려 둔다면
+우리들의 보금자리인 신들의 안식처에
+참사가 일어날 지도 모른다.%%
+쿤다라의 결계 속에는 상상도 못할 정도로
+무서운 녀석이 잠들어 있기 때문이야.%%
+젊은 용사여, 부디 신들의 안식처[아케이드모드(F1)]에서
+오염된 영혼을 갖게 된 카르카로스를 퇴치해주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419324" FACE="Pirey_angly"/> <!--자네가 날 돕지 않는다면, 나 또한 이성을 잃어버리고 말 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419325" FACE="Pirey_angly"/> <!--카르카로스는 신들의 안식처[아케이드 모드(F1)]에서 그의 부하들과 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

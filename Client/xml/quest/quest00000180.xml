@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>180</ID> <!--T.T.10018001 새로운 전설 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크필드의 오크 히어로 40마리와 글레스트헤임의 다크 로드 20마리를 처치하자!-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	테일링은 게펜에 제대로 된 전설이 없다면서, 무언가 특별한 전설이 필요하다고 한다. 테일링을 위해 오크필드의 오크 히어로 40마리와 글레스트헤임의 다크 로드 20마리를 처치하고, 특별한 전설이 되어 보자!-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</CLIENT> <!--시작NPC 게펜 - 테일링 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 11 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">4702300</MONSTER> 
+ <!--MON_NO=4702300/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">4703100</MONSTER> 
+ <!--MON_NO=4703100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="40" TEXT="10018011"/> <!--오크 히어로-->
+		<OBJECT2 COUNT="20" TEXT="10018012"/> <!--다크 로드-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">291304370</ITEM><!--전체지급/전체/1)/291304370(봉인아님) 1개-2012 화창한 여름 날씨(소비)-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10018021" FACE="Tailing_normal"/> <!--휴~ 이 지역의 전설은 너무 썰렁해요.
+게펜에도 뭔가 멋진 전설을 만들 수는 없을까요?
+앗! 좋은 방법이 있어요. 하지만 용사님이 도와주셔야 해요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10018026" FACE="Tailing_smile"/> <!--아! 드디어 게펜에 새로운 전설이 탄생했어요.
+이건 용사님을 위해 준비한 스페셜 업적 미드가츠의 전설이에요.
+다음은 더욱 가혹한 시련을 통해, 더 멋진 전설을 만들어 봐요.%%
+(이제 그만 우리 세계로 돌아 가야지…)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10018023" FACE="Tailing_normal"/> <!--용사님도 오셨으니, 새로운 전설이 탄생할 시간이 되었어요.
+바로 오크 필드의 최강 몬스터 오크 히어로와 글레스트 헤임의 최강 몬스터 다크 로드를 처치하는 거에요.%%
+한 마리, 두 마리 정도로는 전설이 될 수 없어요.
+오크 히어로 40마리와 다크 로드 20마리는 돼야, 게펜의 전설이 될 수 있어요.
+자! 용사님 새로운 전설을 우리 함께 만들어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10018024" FACE="Tailing_angly"/> <!--용사님이 이렇게 거절하실 줄이야.
+옛날에 용사는 뭐든 다 도와줘서 청소랑, 설거지도 시켰다고 할아버지는 말씀해 주셨는데. 알고 보니 전부 거짓말이었네요.%%
+(용사가 가정부냐?)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10018025" FACE="Tailing_angly"/> <!--용사님, 늑장을 부릴수록 점점 더 힘든 일이 기다리신다는 것을 기억하세요.
+(…)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10018002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_Lavalon_Meteor_Blue">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="1.5">../Data/5_Effect/7_Projectile/ef_mag_downattk_01_blue.nif</NIF_PATH>
+	<SCRIPT>Projectile_Lavalon_Meteor</SCRIPT>
+	<PARAM SPEED="600.0" ACCEL="5000" MASS="5.5"/>
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+		<EVENT TYPE="UPDATE"/>    
+	</SCRIPT_CALL_EVENT>
+ 	<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="Scene Root" RANGE="50"/>
+	</COLLISION_SPHERE> 
+</PROJECTILE>

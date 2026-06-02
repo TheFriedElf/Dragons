@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4075</ID> <!--T.T.10407501 파리스, 신보를 노리는 자 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	지하묘지에서 몬스터 50마리 처치-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	마이트리는 두번째 신보의 행방에 대해 알리기 위해 바람항구로 돌아가려 한다. 마이트리의 탈출을 수월하게 만들기 위해 지하묘지에서 몬스터 50마리를 퇴치한 뒤 달빛해안 마을의 라르엘에게 가보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">93C71CE7-4E0F-4212-ADA9-B7DAD6F351FB</CLIENT> <!--시작NPC 지하묘지 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">93C71CE7-4E0F-4212-ADA9-B7DAD6F351FB</AGENT> <!--진행NPC 11 지하묘지 - 마이트리 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 12 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="KILLMONSTER" VALUE="1">9010920</GROUND> 
+ <!--MAP_NO=9010910/Lv.35 지하묘지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="502">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="50" TEXT="10407511"/> <!--지하묘지의 몬스터 처치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10407521" FACE="Maitri_normal"/> <!--어쨌거나 이 해석된 나머지 암호가 사실이라면…
+놀라운 사실 하나가 밝혀진 셈이네요.%%
+신보를 훔쳐간 배후세력이 마녀 파리스라고 적혀 있거든요.
+게다가 파리스는 파렐박사에게 신보를 넘겨주었죠.
+아마도 위험한 실험에 사용하려 했던 것 같습니다.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10407526" FACE="Larel_normal"/> <!--오, 왔구나. 드디어 파렐박사의 암호를 마지막까지 해석했어.
+암호에 의하면 파렐박사는 이미…%% 
+신보라고 불리는 카즈라의 정령석을 파리스에게 받아서 연구에 이용했어.
+게다가.. 이건 무슨 말인지 잘은 모르겠지만, 어쨌거나 해석해본다면…%%
+카즈라의 정령석으로 용을 만들겠다-라고 적혀있어.  -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10407523" FACE="Maitri_normal"/> <!--바로 이곳에서 파리스가 파렐 박사에게 두번째 신보를 
+전달했다고는 하지만, 현재로써는 신보의 기운을 느낄 수가 없군요.%%
+파렐박사가 죽고 난 지금은 아무래도 파리스가 신보를 이용하여 
+악행을 저지를 것이 분명해 보입니다.%%
+이곳의 유령들이 나타난 까닭도 분명히 파리스가 훔쳐낸 신보와 
+관계가 깊을 것입니다. 
+한시 바삐 이 소식을 전해야겠습니다. %name%님은 
+이곳의 몬스터들을 정리하신 뒤에 라르엘님을 만나주세요.%%
+라르엘님이 해석이 부족한 나머지 암호에 대해서도 알려주시리라 믿어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10407524" FACE="Maitri_angry"/> <!--여기서 머뭇거리다가는 반드시 파리스라는 마녀에게 뒤쳐지게 될 것입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10407525" FACE="Maitri_normal"/> <!--%name%님께서는 이곳의 몬스터 50마리를 퇴치해 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10407526" FACE="Larel_normal"/> <!--무슨일로 오신거죠? 혹시 마이트리 사제가 보내셨나요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10407502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

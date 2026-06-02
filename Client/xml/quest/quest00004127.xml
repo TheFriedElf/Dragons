@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4127</ID> <!--T.T.10412701 상인들의 구출 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	병사 제이드와 대화-->
+<!--[완료NPC]	악마의 숨결 - 제이드-->
+<!--[내용]	호프먼 대장은 사건의 심각성을 알지만 당장 파견 보낼 병력이 충분치 않다는 이유로  조사를 더 확실히 해야한다고 말한다. 악마의 숨결에 있는 병사 제이드에게 호프먼 대장의 의견을 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2880301C-3CF8-455c-BE54-227116F7914C</CLIENT> <!--시작NPC 상인의 마을 - 호프먼 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</PAYER> <!--완료NPC 악마의 숨결 - 제이드 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2880301C-3CF8-455c-BE54-227116F7914C</AGENT> <!--진행NPC 11 상인의 마을 - 호프먼 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 12 악마의 숨결 - 제이드 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10412711"/> <!--제이드와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10412721" FACE="Hopeman_normal"/> <!--그 입이 가벼운 병사 제이드가 이 사건에 대해 조사를 해냈다고?
+흠… 왠지 찜찜하지만, 파블로님이 심각하다고 하시니... 별 수 없군.%%
+어쩌다가 이 지경까지 간 것인지 모르겠지만. 
+이 일에 대해선 조취를 취하도록 하겠네.%%
+그러나…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10412726" FACE="Walter_smile"/> <!--뭐라고? 지원병력을 보낼 수가 없다고?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10412723" FACE="Hopeman_normal"/> <!--그러나… 지금 당장은 이곳 마을에 침공한 몬스터들 때문에 
+상황이 여의치 않다네. 당장은 파견할 수 있는 병력이 없어.%% 
+확실하지 않은 일에 지원병력을 투입하는 것은 무리지 않은가.
+그러니 지금 당장 악마의 숨결에 있는 제이드를 도와줘.%% 
+이 일에 대한 조사를 이어가야 해... 아직은 뭔가 부족하네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10412724" FACE="Hopeman_angly"/> <!--에잉? 이제 막 중요한 이야기를 하려는데 말이지…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10412725" FACE="Hopeman_angly"/> <!--악마의 숨결에 있는 병사 제이드에게는 다녀왔나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10412702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

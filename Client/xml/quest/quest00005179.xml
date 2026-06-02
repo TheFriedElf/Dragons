@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5179</ID> <!--T.T.10517901 안전한 동굴 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	클레아와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 클레아-->
+<!--[내용]	여관주인 클레아는 아이들과 나들이를 갈만한 장소를 찾고 있다고 한다. 클레아는 아이들이 좋아하는 시원한 동굴에 가고 싶지만 위험해서 걱정이라고 한다. 위험한 동굴이 지금 어떤 상태인지 얼마나 위험한지 알려주도록 하자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6582AB80-AF1C-4798-865E-E113A1241350</CLIENT> <!--시작NPC 달빛해안 마을 - 클레아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6582AB80-AF1C-4798-865E-E113A1241350</PAYER> <!--완료NPC 달빛해안 마을 - 클레아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 11 달빛해안 마을 - 클레아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10517911"/> <!--클레아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10517921" FACE="Floran_normal"/> <!--혹시 위험한 동굴에 가보셨나요?
+다름이 아니라 아이들과 소풍을 갈까 하는데...
+위험한 동굴이 어떨까 해서요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10517926" FACE="Floran_normal"/> <!--(설명해 준다.)
+역시 위험하군요. 다른 곳으로 생각해 봐야겠어요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10517923" FACE="Floran_normal"/> <!--아이들이 제가 싼 도시락을 가지고 놀러 가고 싶다고 난리에요.
+그래서 장소를 정하고 있는데... 위험한 동굴은 역시 위험할지 잘 모르겠네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10517924" FACE="Floran_normal"/> <!--별로 위험하진 않나 봐요?
+그럼 위험한 동굴로 결정해야겠어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10517925" FACE="Floran_normal"/> <!--음...정말 고민이네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10517902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="C_Oldbook" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Monster_Dictionary"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Monster_Dictionary/N_Monster_Dictionary.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="18"/>
+			<SPHERE TO="p_hit_point_02" SIZE="24"/>
+		</ABV>
+		<SLOT>
+			<!-- 책 벌려 물기 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- 책 찍기 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000061"/>
+			<!-- 문자 쏘기 -->
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="breath_01" ANIMATION="1000202"/>
+			<!-- 책 무더기를 불러내서 공중에서 떨어지게 한다 -->
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000204"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000205" PROJECTILE_ID="Projectile_dictionary_skill_03_03_char_root"/>
+			<ITEM NAME="massive_projectile_finish" ANIMATION="1000206"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000203"/-->
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Stun" ANIMATION="1000204"/>
+			<ITEM NAME="Opening" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

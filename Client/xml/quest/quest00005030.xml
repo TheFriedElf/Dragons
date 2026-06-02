@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5030</ID> <!--T.T.10503001 술을 담그는 법 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 스켈레통에게서 오크나무통 15개 획득-->
+<!--[완료NPC]	바람항구 - 루돌프-->
+<!--[내용]	루돌프는 자신이 현재 만들고 있는 술의 맛을 더욱더 좋게 만들고 싶다고 한다. 루돌프가 술의 맛을 결정할 오크나무통을 구하는 중에 스켈레통이 들어 있는 나무통을 발견했다. 루돌프의 부탁으로 오랜 전통의 맛을 살리기 위해 ,시청 지하수로의 스켈레통에게서 오크나무통 15개를 얻어야 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</CLIENT> <!--시작NPC 바람항구 - 루돌프 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</PAYER> <!--완료NPC 바람항구 - 루돌프 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</AGENT> <!--진행NPC 11 바람항구 - 루돌프 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/5000/1/1/160503000">6014200</MONSTER> 
+ <!--MON_NO=6014200/스켈레통,MAP_NO=9010502/파렐 대저택,Item_NO=160503000/[Q.ID:05030] 오크나무통,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503000</ITEM> 
+ <!--Item_NO=160503000/[Q.ID:05030] 오크나무통,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/5000/1/1/160503000">6014100</MONSTER> 
+ <!--MON_NO=6014100/스켈레턴,MAP_NO=9010502/파렐 대저택,Item_NO=160503000/[Q.ID:05030] 오크나무통,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503000</ITEM> 
+ <!--Item_NO=160503000/[Q.ID:05030] 오크나무통,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10503011"/> <!--술통-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503021" FACE="Rudolph_normal"/> <!--으음. 은은한 향기 다가오는 바람의 냄새.
+훗. 혹시 술이 잘 담그기 위해서 필요한 방법에 대해서 알고 있어?
+아무래도 전문가가 아니라면 조금 힘들겠지.%%
+하지만 전문가라고 해도 술을 담는 통에 대해서는 여간 고민이 필요한 게 아니야.
+적당한 온도를 맞춰주고 제대로 밀봉을 해야 하니까.%%
+크~ 우리 집안에 오랫동안 내려오던 전통술 담그는 방법을 찾았어.
+그런데 문제는 이것을 담을 통이 없다는 거야.
+내 문제를 조금 같이 고민해 주지 않겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503026" FACE="Rudolph_smile"/> <!--하하. 고마워. 이제 제대로 된 술을 만들 수 있겠어. 
+하지만 넌 흠~ 아직 한참 있어야 먹을 수 있겠는데.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503023" FACE="Rudolph_normal"/> <!--전통술을 담그는 방법을 잘 살펴보면 술의 재료도 중요하지만 그것을 오랫동안 보관할 방법이 더 중요하다고 되어 있어.
+그래서 만든게 바로 오크나무로 만든 통이지.%%
+이 지역에서는 오크나무로 만든 통을 찾긴 너무 힘들지.
+하지만 결국 발견하고 말았어. 
+말해줘도 잘 못 믿겠지만 시청 지하수로에 있는 걸 말이야.%%
+그러나 역시 문제는 있더군. 
+그게 단순한 오크나무통이 아니고 안에 스켈레통이라는 이상한 녀석들이 들어 있더란 말이지.%%
+우리 집안의 장인정신을 이어갈 수 있도록 나무통을 꼭 구해줬으면 좋겠어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503024" FACE="Rudolph_angly"/> <!--어쩔 수 없군. 아직 어려서 사태의 중요성을 파악하고 있지 못하니.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503025" FACE="Rudolph_normal"/> <!--술맛을 보여 줄 수 없다는 게 원통할 따름이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

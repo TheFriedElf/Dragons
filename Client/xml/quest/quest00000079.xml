@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>79</ID> <!--T.T.10007901 즉석요리란? -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 상어에게서 나무땔감 10개를 구하자-->
+<!--[완료NPC]	바람항구 - 부루투스-->
+<!--[내용]	부루투스는 요리를 배우기 위해서 필요한 것은 열정이라고 했다. 그런 열정을 보이기 위해서 나무땔감이 떨어져서 제 시간에 요리를 만들지 못하게 된 자신을 도와달라고 한다. 나무땔감은 수염고래 해안가의 상어에게서 구할 수 있다. 나무땔감 10개를 구해서 부루투스에게 가져가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">1ACF8B10-CBA7-4931-AD72-438E6A268655</CLIENT> <!--시작NPC 바람항구 - 부루투스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">1ACF8B10-CBA7-4931-AD72-438E6A268655</PAYER> <!--완료NPC 바람항구 - 부루투스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">1ACF8B10-CBA7-4931-AD72-438E6A268655</AGENT> <!--진행NPC 11 바람항구 - 부루투스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/5000/1/1/20301183">6013100</MONSTER> 
+ <!--MON_NO=6013100/해당값 없거나 입력 안함!! 확인요망 ,MAP_NO=9010100/수염고래 해안가,Item_NO=20301183/나무땔감,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">20301183</ITEM> 
+ <!--Item_NO=20301183/나무땔감,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10007911"/> <!--나무땔감-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">89008600</ITEM><!--전체지급/전체/1)/89008600(봉인아님) 1개-[즉석가공] 요리 배우기 -->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10007921" FACE="Brutus_normal"/> <!--응? 요리를 배우기 위해서 왔는가?
+내가 처음에 요리를 배우기 시작한 계기가 있지.
+과거에 나는 그 유명한 시저 장군의 병사로서 활약을 했었지.%%
+하지만 이곳 저곳을 여행하다가 드디어 깨달은 걸세.
+무엇을 깨달았는지 자네도 알고 싶나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10007926" FACE="Brutus_smile"/> <!--하하. 고맙네. 덕분에 지금 만들고 있는 요리를 완성할 수 있겠군.%%
+그럼 자네의 열정을 본 만큼 나도 보답을 하기로 하지.
+즉석요리 기술을 내가 가르쳐 줄테니 유용하게 사용하게나.%%
+내가 준 즉석요리 배우기를 클릭하면 즉석요리를 배울 수 있지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10007923" FACE="Brutus_normal"/> <!--여러 곳의 전장을 돌다니나 병사에게 가장 기운을 내게 하는 게 뭔지 알고 있나? 바로 요리일세. %%
+요리만큼 사람의 힘을 내게 만드는 것도 없지. 여러 지역을 다니면서 많은 음식을 먹었지.
+하지만 누군가 만들어 준 요리를 먹기엔 상황이 여의치 않았지. 그래서 요리를 배우기 시작했네.%%
+처음에는 자신이 먹기 위해서 시작했지만 결국에는 다른 사람이 먹고 기뻐하는 즐거움을 알게 되었지.%%
+이런 즉석요리 기술을 자네에게도 가르쳐 줄 용의가 있네. 
+하지만 우선 자네의 열정을 봐야겠어.%%
+지금 마침 요리하기 위해 준비한 땔감을 상어들이 훔쳐가서 곤란한 참이야.
+자네가 수염고래 해안가의 상어에게서 나무땔감 10개를 구해 온다면 내가 즉석요리 기술을 가르쳐 주도록 하지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10007924" FACE="Brutus_angly"/> <!--자네는 지금 일생에 한번 올까말까한 기회를 포기한 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10007925" FACE="Brutus_angly"/> <!--지금 내 요리를 기다리는 사람들이 목이 빠지게 기다리고 있네. 얼른 갔다 오게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10007902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

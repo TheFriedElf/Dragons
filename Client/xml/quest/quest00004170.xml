@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4170</ID> <!--T.T.10417001 혼돈의 시간 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	장로 오추쿠와 대화-->
+<!--[완료NPC]	카즈라 마을 - 오추쿠-->
+<!--[내용]	아키아 동굴에서 신관 전사로서의 시험을 보고 있는 사이, 마을에서는 아키아 동굴을 정찰하고 온 전사들이 정신착란 현상을 겪었다고 한다. 신관 전사 임명 받으러 오추쿠 장로를 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">48AB8C5A-FB6A-467d-B914-01514408440A</PAYER> <!--완료NPC 카즈라 마을 - 오추쿠 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">48AB8C5A-FB6A-467d-B914-01514408440A</AGENT> <!--진행NPC 12 카즈라 마을 - 오추쿠 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10417011"/> <!--오추쿠와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10417021" FACE="Quecua_normal"/> <!--%name% 네가 자릴 비운 동안, 이곳은 커다란 혼란에
+빠져있었단다. %%
+신보의 오염 때문에 우리 드라칸의 정신에 이상현상이
+나타나기 시작했던 게다.%%
+신관 전사 몇 명이 아키아 동굴을 탐색하다가
+정신착란을 일으켰단다. 유령 같은 헛것이 보이더니
+이성을 잃고 쓰러졌다지 뭐냐.%%
+이대로 가다간 우리 드라칸 일족이 일찍이 태초에
+그랬던 것처럼 세상에 멸망을 일으킬 정도로 흉폭해지는 
+건 아닌 지 모르겠구나.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10417026" FACE="Ocuku_smile"/> <!--%name%! 드디어 모든 시험을 통과하였군요.
+이제 당신을 신관전사로 임명합니다.
+부디 이 카즈라와 세상의 앞날을 위해
+노력해 주시오.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10417023" FACE="Quecua_normal"/> <!--너도 아키아 동굴로 시험을 치르러갔기 때문에
+혹여나 이상한 혼돈 상태를 겪는 것은 아닌지
+걱정했단다. %%
+혹시 아키아 동굴에서 혹시 헛것을 보거나 한 것은 
+아닐테지? 그래, 다행이로구나.%%
+어쨌거나 이제 아카나이를 찾을 시간이 왔으니
+오추쿠님에게 신관 전사 임명을 받도록 하거라-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10417024" FACE="Quecua_angry"/> <!--신관 전사가 되는 것을 포기할 생각인게냐?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10417025" FACE="Quecua_angry"/> <!--준비가 되는 대로 오추쿠 장로님을 찾아가거라. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10417002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

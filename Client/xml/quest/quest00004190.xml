@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4190</ID> <!--T.T.10419001 신이 잠든 곳으로 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	피레이와 대화-->
+<!--[완료NPC]	신들의 안식처 - 피레이-->
+<!--[내용]	나오이는 자신이 꿈에서 보았던 용사와 %name%의 모습이 똑같다는 것에 감격해 하는 눈치다. 나오이는 신들의 안식처를 지키고 있는 신성한 존재 켄타우르스를 찾아가면 도움을 얻을 수 있을 것이라 말한다. 신들의 안식처로 찾아가 켄타우르스 피레이를 찾아 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DD8F04C8-7041-4c0b-86D2-A7DC6A523E01</CLIENT> <!--시작NPC 솔방울 언덕 - 나오이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</PAYER> <!--완료NPC 신들의 안식처 - 피레이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DD8F04C8-7041-4c0b-86D2-A7DC6A523E01</AGENT> <!--진행NPC 11 솔방울 언덕 - 나오이 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</AGENT> <!--진행NPC 12 신들의 안식처 - 피레이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419011"/> <!--피레이와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419021" FACE="Naoi_normal"/> <!--아… 용사님…
+제 꿈이 틀림이 없었군요.%%
+이곳을 지나쳐 신들의 안식처로 가시는 모습이
+그날 밤 꿈에서 본 모습과 꼭 같아요. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419026" FACE="Pirey_smile"/> <!--아이쿠!
+깜짝 놀랐네…%%
+너 혹시… 카르카로스가 보낸 첩자는 아니겠지?
+저, 정체를 밝혀라!
+(이게 그… 신성한 수호자란 건가…?)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419023" FACE="Naoi_normal"/> <!--신들의 안식처로 가면 피레이라는 켄타우르스가
+살고 있답니다.%%
+오래 전 에아님은 거인족 엘드리스와 기나긴 전쟁을
+끝마치고, 이곳 신록의 숲 부근으로 들어와
+깊은 휴식을 취하기로 하셨답니다. %%
+누구에게도 방해받지 않는 안식을 원했던 에아님은
+미스트엘프와 켄타우르스 두 종족을 만들어 이곳에
+살게하셨다고 합니다.%%
+켄타우르스는 신화에서 말하는 것처럼 오랜 시간 동안
+신들의 안식처를 지키고 있는 신성한 존재입니다.
+피레이는 분명히 용사님에게 도움을 주실 거에요.%%
+그럼... 용사님의 앞길에 늘 행운이 가득하기를...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419024" FACE="Naoi_angly"/> <!--아아.. 만약 준비가 되신다면 제가 도움이 될만한 이야기를 
+들려드리겠습니다. 꼭 저를 찾아주시길…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419025" FACE="Naoi_angly"/> <!--피레이님은 신들의 안식처를 지키는 신성한 켄타우르스랍니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

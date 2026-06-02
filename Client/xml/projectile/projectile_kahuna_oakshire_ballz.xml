@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_kahuna_oakshire_ballz">
+
+  <TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+  <NIF_PATH>../Data/5_Effect/7_Projectile/ef_kahuna_oakshire_ltem.nif</NIF_PATH>
+  <SCRIPT>PROJECTILE_Parabola</SCRIPT>
+  <PARAM SPEED="150.0" ACCEL="0" MASS="0.5"/>
+  <SCRIPT_CALL_EVENT>
+    <EVENT TYPE="LOADING_START"/>
+    <EVENT TYPE="LOADING"/>
+    <EVENT TYPE="FLYING_START"/>
+    <EVENT TYPE="FLYING"/>
+    <EVENT TYPE="ARIVED_AT_TARGET"/>
+    <EVENT TYPE="ANIMATION"/>
+  </SCRIPT_CALL_EVENT>
+  
+</PROJECTILE>

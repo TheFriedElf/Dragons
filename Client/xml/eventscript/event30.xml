@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 베가스 처리하고 NPC 클릭 하면 -->
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505862" TextTTID="505759" FaceID = "Helper_angly"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+          
+  <CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505862" TextTTID="505760" FaceID = "Helper_normal"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  <CMD TYPE="CLOSE_DAILOGUE"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "false"/>  
+  <CMD type="WaitFade" time="1"/>
+  
+  	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD TYPE="MapMove" MapID ="9010330" SpawnIndex="2" />
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+  <CMD TYPE="WaitCamera"/>
+  
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+  <CMD type="WaitFade" time="1"/>
+  
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

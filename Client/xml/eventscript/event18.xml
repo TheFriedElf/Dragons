@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD type="WaitTime" time="7"/>
+    <!-- 알비다 엔딩 -->
+    <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="false"/>
+    <CMD TYPE="setmoviescene" enable="true"/>
+    <CMD type="waittime" time="0"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "1" FadeIn = "false"/>
+    <CMD type="WaitFade" time="1"/>
+    
+    <CMD TYPE="ShowActor" ClassNo ="6013800" Show="false"/>
+    <CMD TYPE="AddNPC" ClassNo ="1028177" NameTTID ="505660" SpawnPos = "2143.224609,181.215927,328.677551"/>
+    <CMD TYPE="SetActorDirection" NameTTID="505660"  Direction="2" />
+    <CMD type="WaitTime" time="1"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="505660" CameraID="Camera01" UseActorPositionAsSoundListener="true"/>
+    
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "1" FadeIn = "true"/>
+    <CMD type="WaitFade" time="1"/>  
+    
+    <CMD TYPE="PlayAnimation" NameTTID="505660" SlotName="action_01"/>
+    
+    <CMD type="WaitTime" time="6"/>
+    <CMD TYPE="ShowActor" NameTTID ="505660" Show="false"/>
+    <CMD TYPE="RemoveActor" NameTTID ="505660"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    
+    <CMD TYPE="AddNPC" ClassNo ="1028178" NameTTID ="505661" SpawnPos = "2143.224609,181.215927,328.677551"/>
+    <CMD TYPE="SetActorDirection" NameTTID="505661"  Direction="0" />
+    <CMD TYPE="MoveCamToActor" NameTTID="505661"  MoveTime="0"/>
+    <CMD TYPE="PlayAnimation" NameTTID="505661" SlotName="action_01"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="505661" CameraID="Camera01" UseActorPositionAsSoundListener="true"/>
+	<CMD TYPE="Dialogue" NameTTID="521966" TitleTTID="521928" TextTTID="521937" FaceID="Alvida_angly"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>      
+    <CMD TYPE="WaitTime" Time="13"/>
+    <CMD type="CallUI" UIWndName = "FRM_MISSION_END"/>
+    <CMD TYPE="PlaySound" NameTTID ="505661"  SlotNumber="1" SoundID="Guild_LV_UP"/>
+    <CMD type="waittime" time="4"/>
+    <CMD TYPE="StopSound" NameTTID ="505661"  SlotNumber="1"/>
+	<CMD type="waittime" time="1"/>
+    
+    <CMD TYPE="ShowActor" NameTTID ="505661" Show="false"/>
+    <CMD TYPE="RemoveActor" NameTTID ="505661"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/>
+    
+    
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "1" FadeIn = "false"/>
+    <CMD type="WaitFade" time="1"/>
+    <CMD type="waittime" time="1"/>
+    
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="0"/>    
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    <CMD type="waittime" time="1"/>
+    
+    <CMD type="ClearActorFilter"/>
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD TYPE="MapMove" MapID ="9010130" SpawnIndex="2" />
+    <CMD type="waittime" time="2"/>
+    
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "1" FadeIn = "true"/>
+    <CMD type="WaitFade" time="1"/>
+    
+    <CMD TYPE="setmoviescene" enable="false" Time="1"/>
+    <CMD type="waittime" time="0"/>
+    
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

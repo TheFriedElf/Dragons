@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_cleef_demon_Dread_weaver_call" DIE_PARTICLE_ID="ef_monster_die_02_V" DIE_PARTICLE_NODE="p_ef_heart" INIT_ACTION="a_opening">
+	<TEXTURE SRC="n_cleef_dread_weaver_01.dds">../Data/2_Mon/N_Cleef_C_dread_weaver/n_cleef_demon_dread_weaver_01.dds</TEXTURE>
+	<TEXTURE SRC="n_cleef_dread_weaver_02.dds">../Data/2_Mon/N_Cleef_C_dread_weaver/n_cleef_demon_dread_weaver_02.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_cleef_demon_Dread_weaver"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Cleef_C_dread_weaver/N_Cleef_C_dread_weaver.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_wizard_idle_G_p_ef_r_hand" TO="p_ef_r_hand"/>
+		<ATTACH TYPE="effect" SLOT="1" EFFECT="ef_wizard_idle_G_p_ef_r_hand" TO="p_ef_l_hand"/>
+		<ATTACH TYPE="effect" SLOT="2" EFFECT="ef_wizard_idle_G_p_ef_heart" TO="p_ef_heart"/>
+		<ATTACH TYPE="effect" SLOT="5" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball01"/>
+		<ATTACH TYPE="effect" SLOT="3" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball02"/>
+		<ATTACH TYPE="effect" SLOT="4" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball03"/>
+		<ATTACH TYPE="effect" SLOT="6" EFFECT="ef_wizard_idle_B_p_ef_ball01" TO="p_ef_ball04"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="95,18.0" ROTATE="1,0,0,90"/>
+		</ABV>
+		<SLOT>
+			<ITEM NAME="move_01" ANIMATION="1000055"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021" DONT_RELEASE_PARTICLE="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4005</ID> <!--T.T.10400501 일어나! 비룡(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 펫상인 에이미와의 대화-->
+<!--[완료NPC]	바람항구 - 에이미-->
+<!--[내용]	비룡을 부화시키기 위한 인큐베이터가 완성이 되었다. 하지만 아직 비룡이 부화하기 위해서는 시간이 좀 남았는데, 비룡이 깨어났을때 바로 먹일 수 있는 것이 무었이 있을지 펫상인 에이미에게 물어 보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT> <!--시작NPC 바람항구 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</PAYER> <!--완료NPC 바람항구 - 에이미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 11 바람항구 - 에델린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 12 바람항구 - 에이미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10400511"/> <!--펫상인 에이미와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">65002115</ITEM><!--전체지급/전체/1)/65002115() 1개-[전투펫] 펫 사료 (7일) - 퀘스트-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10400521" FACE="Edeline_normal"/> <!--인큐베이터를 만들어 알을 부화시키려면
+아무래도 시간이 좀 필요할 것 같아요.%%
+-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10400526" FACE="Amy_smile"/> <!--안녕하세요. %name%님~
+와아… 인큐베이터라니… 우리 가게에도 꼭 필요한 물건 같은데요.%%
+네? 
+비룡의 사료라구요?%%
+저희 가게의 펫들이 애용하는 펫사료로는 
+왠지 영양부족을 일으키지 않을까 싶은데...%%
+라이딩펫으로 잘 자라려면 아무래도 캐쉬샵의 펫사료가
+적합할 것 같네요.%%
+하지만… 비룡이 언제 태어날 지 모르는 상황이니
+이번만 축하하는 의미에서 특별히 선물을 드리도록 할게요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10400523" FACE="Edeline_normal"/> <!--알이 부화되는 동안... 
+아기비룡의 육아용품을 가져다 주셨으면 합니다.%%
+우선은 아기비룡에게 줄 사료가 필요하니 
+펫상점의 에이미씨에게 어떤 사료가 좋을 지 물어봐 주세요.     -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10400524" FACE="Edeline_angly"/> <!--이게 무슨 힘든 일이라고…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10400525" FACE="Edeline_angly"/> <!--깨어났을 때 배고파할 지도 모르잖아요. 서둘러 펫상인 에이미씨에게…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10400526" FACE="Amy_angly"/> <!--사용 않함-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10400502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

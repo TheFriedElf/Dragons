@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4238</ID> <!--T.T.10423801 카즈라의 은밀한 지령 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	말린 자두 주머니 습득-->
+<!--[완료NPC]	바티카 구릉 - 치치-->
+<!--[내용]	최고의 요리사를 꿈꾸는 드라칸의 잡화상 치치는 환상의 요리재료들을 찾아 크로키를 따라나섰으나, 크로키가 비밀지령 때문에 바빠지자, 꿔다놓은 보릿자루 신세가 되어버렸다. 바티카 구릉의 구릉 놀 종류 몬스터들을 퇴치하고 치치의 부탁인 말린 자두 주머니를 찾아 전달해주자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DF5F598B-5CD5-40a1-9B5F-81ED1B018872</CLIENT> <!--시작NPC 바티카 구릉 - 치치 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DF5F598B-5CD5-40a1-9B5F-81ED1B018872</PAYER> <!--완료NPC 바티카 구릉 - 치치 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DF5F598B-5CD5-40a1-9B5F-81ED1B018872</AGENT> <!--진행NPC 11 바티카 구릉 - 치치 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/9000/1/1/160423800">3400700</MONSTER> 
+ <!--MON_NO=3400700/구릉 놀 보초병,Item_NO=160423800/말린자두 주머니10%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160423800</ITEM> 
+ <!--Item_NO=160423800/말린자두 주머니,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/9500/1/1/160423800">3400900</MONSTER> 
+ <!--MON_NO=3400900/구릉 놀 주술사 ,Item_NO=160423800/말린자두 주머니5%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160423800</ITEM> 
+ <!--Item_NO=160423800/말린자두 주머니,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/9000/1/1/160423800">3400800</MONSTER> 
+ <!--MON_NO=3400800/구릉 놀 궁수 ,Item_NO=160423800/말린자두 주머니10%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160423800</ITEM> 
+ <!--Item_NO=160423800/말린자두 주머니,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10423811"/> <!--말린 자두 주머니 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10423821" FACE="Cici_normal"/> <!--그런데 자네 말이야~ 자네도 모험가 맞지?
+전투도 좀 하고 말이야….%%
+하… 이거 어릴 적 친구라고 믿고 따라나섰건만
+크로키가 긴급한 지령을 맡은 뒤로는 내 일을 
+도와주지 못할 정도로 바빠졌어.%%
+이대로 그냥 확 카즈라로 돌아가 버릴까도 생각 중이네.
+혹시 말이지 자네 날 좀 도와줄 생각 없나?
+그렇게 어려운 일은 아닌데 말이지…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10423826" FACE="Cici_smile"/> <!--이 주머니에 가득 들어있는 게…
+내가 부탁한 바티카의 말린 자두가 맞는 거지?
+일단 맛부터 한번 봐야겠네…%%
+음… 쩝… 냠냠…%%
+오오! 이것이야말로…!%%
+음… 마치 혼돈대륙과 바람대륙의 중간적인 맛이 
+많이 나고…
+음… 굳이 표현을 하자면…
+굉장히 낯설지만 친숙하기도 한 풍경!%%
+마치, 버섯마을 촌장이 부보부보와 라틴댄스를
+추는 듯한…. 하지만 그 광경이 왠지 어색하지만은
+않은 그런 느낌이로군!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10423823" FACE="Cici_normal"/> <!--난 잡화상이지만, 원래 꿈은 최고의 요리사 식신이
+되는거였징. 지금도 물론 다양한 식재료나 향신료를
+모아 전설의 요리에 도전하고 있다구.%%
+이곳에 온 이유도 바로 최고의 요리재료들을 구하기 
+위해서지. 자네에게 부탁하고 싶은 게 바로 그거라네.
+내가 찾는 재료는 다름 아닌 말린 자두야.%%
+최고의 플럼케익을 만들고 싶지만 저 밖의 몬스터들 
+앞에서 알짱거리다간 내가 되려 요리재료가 될 판이니 
+말이야.%%
+그런데 얼핏 살펴보니 저 흉악한 구릉놀의 주머니에 
+말린 플럼이 가득하다는 사실을 알게 되었네.
+녀석들을 혼내주고 말린 자두 주머니를 좀 가져다 
+준다면 좋겠어. 이렇게 간절히 부탁하네!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10423824" FACE="Cici_normal"/> <!--자네마져 이렇게 매몰차게 구니, 집으로 돌아가야할 때인가...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10423825" FACE="Cici_normal"/> <!--구릉 놀들이 말린 자두 주머니를 가지고 있을 거라고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10423802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

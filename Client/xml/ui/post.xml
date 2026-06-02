@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_POST" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR ALIGN_X = "30" ALIGN_Y = "50" W = "362" H = "482" STATIC_NUM = "1" CAN_DRAG = "1" />
+		<IMG ID = "IMG_ICON" X = "-4" Y = "-9" Z = "10" IMG = "../Data/6_ui/post/psImg.tga" W = "70" H = "70" IMG_W = "70" IMG_H = "70" IGNORE_PARENT_RECT = "1"/>
+		<STATIC_FORM ID = "SFRM_TITLE" X = "1" Y = "0" Z = "-1" W = "360" H = "36" STATIC_NUM = "4" />
+		<STATIC_FORM ID = "SFRM_TAB_BG1" X = "68" Y = "4" W = "84" H = "24" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+		<STATIC_FORM ID = "SFRM_TAB_BG2" X = "154" Y = "4" W = "84" H = "24" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+		<STATIC_FORM ID = "SFRM_TAB_BG3" X = "240" Y = "4" W = "84" H = "24" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+		<IMG ID = "IMG_CLOSE_BG" X = "336" Y = "10" W = "12" H = "11" IMG_W="12" IMG_H="11" IMG="../Data/6_ui/Common/cmBody.tga" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+		<BUILD TARGET_ID="CBTN_POST" X="68" Y="4" X_COUNT = "3" Y_COUNT = "1" X_GAB = "86" Y_GAB = "0"/>
+		<CHECK_BUTTON ID="CBTN_POST" X="68" Y="4" Z="1" W="84" H="24" TEXT = "900">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48" T_OUTLINE="0"/>
+			<ATTR FONT = "FTtitle_14" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" T_CENTER = "1" T_X = "35" T_Y = "4" />
+			<SCRIPT ID = "ON_BUILD"> UISelf:SetStaticTextW(GetTextW(900+UISelf:GetBuildIndex())) </SCRIPT>
+			<SCRIPT ID = "ON_CALL"> 
+				local bSet = (0 == UISelf:GetBuildIndex())
+				UISelf:CheckState(bSet)
+				UISelf:LockClick(bSet)
+			</SCRIPT>
+			<SCRIPT ID = "ON_GET_FOCUS" >
+				local wndParent = UISelf:GetParent()
+				local idx = UISelf:GetBuildIndex()
+				for i=0,2 do
+					local wndOther = wndParent:GetControl("CBTN_POST"..i)
+					if false == wndOther:IsNil() then
+						wndOther:CheckState(idx==i)
+						wndOther:LockClick(idx==i)
+					end
+					local wndPost = wndParent:GetControl("FRM_POST"..i)
+					if false == wndPost:IsNil() then
+						wndPost:Visible(idx==i)
+						if idx==i and 2==i then
+							local lst = wndPost:GetControl("LST_INV")
+							if 0>= lst:GetListItemCount() then
+								lst:AddNewListItemChar("")
+							end
+							local item = lst:ListFirstItem()
+							local wnd = item:GetWnd();
+							local Ele = wnd:GetControl("FRM_INVEN0")
+							if false == Ele:IsNil() then
+								CanAddToMail(Ele)
+							end
+						end
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">OnClickPostCheckBtn(UISelf)</SCRIPT>
+		</CHECK_BUTTON>
+		<BUTTON ID="BNT_CLOSE" X="330" Y="4" Z="1" W="24" H="24">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1"> UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<FORM ID = "FRM_POST0" X = "0" Y = "36" W = "362" H = "446"  IS_VISIBLE = "1">
+			<SCRIPT ID = "ON_CALL"> MakeMailList(UISelf) </SCRIPT>
+			<CHECK_BUTTON ID = "BTN_ALL" X="61" Y="0" W="71" H="22">
+				<ATTR BTN_IMG="../Data/6_ui/post/psCheckBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="71" BTN_IMG_H="88" TEXT="999"/>
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xffffe9af" T_X="22" T_Y="3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="17"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">OnClickPostAllSelect(UISelf)</SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+			</CHECK_BUTTON>
+			<BUTTON ID = "BTN_DEL" X = "134" Y = "0" W = "71" H = "22">
+				<ATTR BTN_IMG = "../Data/6_ui/post/psBt.tga" BTN_IMG_W="142" BTN_IMG_H="44" TEXT = "903"/>
+				<ATTR FONT = "Font_Text" FONT_COLOR_HEX = "0xffffe9af" T_CENTER = "1" T_X = "35" T_Y = "3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 
+					if CheckedMailCount(UISelf:GetParent():GetParent()) > 0 then
+						CallUI("SFRM_MSG_DEL_MAIL", true) 
+					else
+						AddWarnDataTT(939)
+					end
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_GET" X = "207" Y = "0" W = "71" H = "22">
+				<ATTR BTN_IMG = "../Data/6_ui/post/psBt.tga" BTN_IMG_W="142" BTN_IMG_H="44" TEXT = "904"/>
+				<ATTR FONT = "Font_Text" FONT_COLOR_HEX = "0xffffe9af" T_CENTER = "1" T_X = "35" T_Y = "3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 
+					if CheckedMailCount(UISelf:GetParent():GetParent()) > 0 then
+						GetAnnexAll() 
+					else
+						AddWarnDataTT(939)
+					end
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_RETURN" X = "280" Y = "0" W = "71" H = "22">
+				<ATTR BTN_IMG = "../Data/6_ui/post/psBt.tga" BTN_IMG_W="142" BTN_IMG_H="44" TEXT = "905"/>
+				<ATTR FONT = "Font_Text" FONT_COLOR_HEX = "0xffffe9af" T_CENTER = "1" T_X = "35" T_Y = "3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					if CheckedMailCount(UISelf:GetParent():GetParent()) > 0 then
+						CallYesNoMsgBox( GetTT(962), GUID(), MBT_CONFIRM_RETURN_MAIL_ALL ) 
+					else
+						AddWarnDataTT(939)
+					end
+				</SCRIPT>
+			</BUTTON>
+			<STATIC_FORM ID = "SFRM_COLOR" X = "9" Y = "25" Z = "-2" W = "344" H = "410" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			<STATIC_FORM ID = "SFRM_SDW" X = "9" Y = "25" Z = "-1" W = "344" H = "410" STATIC_NUM = "3" >
+				<ATTR T_X = "10" T_Y = "385" TEXT = "907" FONT = "Font_Text" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<BUTTON ID = "BTN_PREV" X = "221" Y = "384" W = "15" H = "15">
+					<ATTR BTN_IMG="../Data/6_ui/Pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN"> 
+						PrevMailPage()
+						ClearPostAllSelect()
+					</SCRIPT>
+				</BUTTON>
+				<BUTTON ID = "BTN_NEXT" X = "317" Y = "384" W = "15" H = "15">
+					<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+					<SCRIPT ID = "ON_L_BTN_DOWN"> 
+						NextMailPage()
+						ClearPostAllSelect()
+					</SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_PAGE" X = "248" Y = "408" W = "78" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR FONT_COLOR_HEX = "0xFF4D3413" T_CENTER = "1" T_X = "39" T_Y = "2" />
+			</STATIC_FORM>
+			<BUILD ID="BLD_LETTER" TARGET_ID="FRM_LETTER" X="9" Y="26" X_COUNT = "1" Y_COUNT = "8" X_GAB = "0" Y_GAB = "47"/>
+			<FORM ID = "FRM_LETTER" X = "0" Y = "0" W = "334" H = "47" T_X = "75" T_Y = "28" FONT_COLOR_HEX = "0xFF4D3413">
+				<!--SCRIPT ID = "ON_L_BTN_DBL_DOWN" > OpenMail(UISelf) </SCRIPT-->
+				<IMG ID = "IMG_ARROW_RETURN" X="14" Y="33" Z="4" W="14" H="12" IMG_W="14" IMG_H="12" IMG="../Data/6_ui/Post/psArrow.tga" PASS_EVENT="1" NO_FOCUS="1" IS_VISIBLE="0"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN" > OpenMail(UISelf) return true </SCRIPT>
+				<CHECK_BUTTON ID = "CBTN_CHECK" X = "9" Y = "4" W = "20" H = "20">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+				</CHECK_BUTTON>
+				<IMG ID = "IMG_LETTER" X = "11" Y = "29" W = "16" H = "14">
+					<ATTR IMG="../Data/6_ui/post/psLtImg.tga" IMG_W="32" IMG_H="14" U="2" V = "1" IS_VISIBLE = "1" />
+				</IMG>
+				<STATIC_FORM ID = "SFRM_ITEM" X = "31" Y = "2" Z = "-1" W = "42" H = "43" STATIC_NUM = "5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<FORM ID = "FRM_EXPCARD">
+					<ATTR X="32" Y="3" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+					<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+					<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+					<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+				</FORM>
+				<ICON ID = "ICN_ITEM" X = "32" Y = "3" W = "40" H = "40" ICON_GRP ="130" ICON_STATIC = "1">
+					<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_CALL"> UISelf:SetIconKey(UISelf:GetParent():GetBuildIndex()) </SCRIPT>
+				</ICON>
+				<STATIC_FORM ID = "SFRM_TITLE" X = "75" Y = "5" W = "200" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<ATTR FONT_COLOR_HEX = "0xFF4D3413" T_X = "3" T_Y = "2" PASS_EVENT = "1" NO_FOCUS = "1" FONT="Font_Text"/>
+				</STATIC_FORM>
+				<FORM ID="FRM_NAME" X="75" Y="28" W="200" H="21" PASS_EVENT="1" NO_FOCUS="1">
+					<ATTR FONT_COLOR_HEX="0xFF4D3413" T_X="0" T_Y="0" FONT="Font_Text"/>
+				</FORM>
+				<IMG ID="IMG_LINE1" X="8" Y="46" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE2" X="8" Y="47" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID = "FRM_DATE" X = "250" Y = "7" W = "83" H = "21" T_RIGHT = "1" T_X = "83" FONT_COLOR_HEX = "0xFF4D3413" PASS_EVENT = "1" NO_FOCUS = "1"/>
+				<FORM ID="FRM_COIN0" X="203" Y="26" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+				<FORM ID="FRM_COIN1" X="244" Y="26" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+				<FORM ID="FRM_COIN2" X="285" Y="26" W="50" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+			</FORM>
+			<SCRIPT ID = "ON_CALL"> UISelf:Visible(true) </SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_POST1" X = "0" Y = "36" W = "362" H = "446" IS_VISIBLE = "0">
+			<ATTR TEXT = "917" T_X = "70" T_Y = "2" FONT = "Font_Text" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1"/>
+			<STATIC_FORM ID = "SFRM_COLOR" X = "9" Y = "25" Z = "-2" W = "344" H = "352" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			<STATIC_FORM ID = "SFRM_SDW" X = "9" Y = "25" Z = "-1" W = "344" H = "352" STATIC_NUM = "3" >
+				<IMG ID="IMG_ARROW1" X="11" Y="17" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+				<FORM ID = "FRM_TEXT1" X="18" Y="12" W="60" H="20" TEXT = "911" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<STATIC_FORM ID = "SFRM_TITLE" X = "80" Y = "10" W = "252" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<STATIC_FORM ID = "SFRM_CONTENTS" X = "12" Y = "34" W = "320" H = "199" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="IMG_LINE1" X="8" Y="239" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE2" X="8" Y="240" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				
+				<BUTTON ID="BTN_REMOVE" X="10" Y="263" W="77" H="22" >
+					<ATTR BTN_IMG="../Data/6_ui/info/ifPetBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="77" BTN_IMG_H="88" TEXT="1000"/>
+					<ATTR FONT="FTcts_13" FONT_COLOR_HEX="0xfffffcea" T_CENTER="1" T_X="38" T_Y="3" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5e2f00"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">ClearPostSendItem()</SCRIPT>
+				</BUTTON>
+				<STATIC_FORM ID = "SFRM_ITEM" X = "90" Y = "245" W = "42" H = "43" STATIC_NUM = "5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<IMG ID="IMG_ARROW2" X="12" Y="251" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" />
+				<FORM ID = "FRM_TEXT2" X="19" Y="246" W="70" H="20" TEXT = "919" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<FORM ID = "FRM_TEXT3" X="135" Y="246" W="200" H="20" TEXT = "920" FONT_COLOR_HEX = "0xFFa0410d">
+					<LOCAL>
+						<NAME ID="JAPAN">
+							<SCRIPT ID="ON_CALL">UISelf:SetStaticText("{T=Font_Text/}" .. GetTextW(920):GetStr())</SCRIPT>
+						</NAME>
+					</LOCAL>
+				</FORM>
+				<IMG ID="IMG_LINE3" X="8" Y="292" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE4" X="8" Y="293" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<IMG ID="IMG_ARROW3" X="12" Y="306" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" />
+				<FORM ID = "FRM_TEXT5" X="240" Y="300" W="100" H="20" TEXT = "923" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<FORM ID = "FRM_TEXT6" X="240" Y="323" W="100" H="20" TEXT = "924" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<STATIC_FORM ID = "SFRM_COIN0" X = "12" Y = "320" W = "37" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<STATIC_FORM ID = "SFRM_COIN1" X = "74" Y = "320" W = "27" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<STATIC_FORM ID = "SFRM_COIN2" X = "126" Y = "320" W = "27" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="IMG_COIN1" X="51" Y="322" W="50" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" />
+				<IMG ID="IMG_COIN2" X="103" Y="322" W="50" H="16" IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" />
+				<IMG ID="IMG_COIN3" X="156" Y="322" W="50" H="16" IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" />
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR1" X = "9" Y = "377" Z = "-2" W = "344" H = "26" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			<STATIC_FORM ID = "SFRM_SDW1" X = "9" Y = "377" Z = "-1" W = "344" H = "26" STATIC_NUM = "3" />
+			<STATIC_FORM ID = "SFRM_TO_COLOR" X = "106" Y = "0" Z = "-2" W = "140" H = "21" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			<STATIC_FORM ID = "SFRM_TO_SDW" X = "106" Y = "0" Z = "-1" W = "140" H = "21" STATIC_NUM = "3" T_CENTER = "1" T_X = "55" T_Y = "3" >
+				<ATTR FONT = "Font_Text" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+			<EDIT ID = "EDT_TO" X = "109" Y = "3" W = "135" H = "21" FONT_COLOR_HEX = "0xFF4D3413" EDIT_LIMIT_LENGTH = "10" EDIT_PREVIEW="" EDIT_ORDER_LANK="1">
+				<ATTR EDIT_FONT="Font_Text"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>				
+				<HOTKEY ID="28"> return OnKey_Post_Enter(UISelf:GetParent(), "EDT_TITLE") </HOTKEY>				
+				<HOTKEY ID="59"> REQ_MAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60"> UISelf:GetParent():CloseParent()  return true </HOTKEY>
+				<HOTKEY ID="1"> UISelf:GetParent():CloseParent()  return true </HOTKEY>
+			</EDIT>
+			<STATIC_FORM ID="SFRM_LIST_BG" X="106" Y="22" Z = "10" W="150" H="12" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" IS_VISIBLE = "0" NO_FOCUS = "0">
+				<LIST ID = "LST_TO" X = "2" Y = "3" Z = "10" W = "150" H = "46" ELEMENT_ID="BTN_ELE_TO" >
+					<IMG ID="IMG_LIST_SCROLL_BG" NO_FOCUS = "1"> 
+						<ATTR X="115" Y="15" Z="-1" W="13" H="146" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="146"/>
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</IMG>
+					<BUTTON ID="ScrUp" X="128" Y="0" W="19" H="15" NO_FOCUS = "1">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</BUTTON>
+					<BUTTON ID="ScrDown" X="128" Y="31" W="19" H="15" NO_FOCUS = "1">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</BUTTON>
+					<BUTTON ID="ScrMiddle" X="130" Y="0" W="15" H="21" NO_FOCUS = "1">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</BUTTON>
+					<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown" BTN_MIDDLE = "ScrMiddle" WND_BAR="IMG_LIST_SCROLL_BG" NO_FOCUS = "1"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:ClearAllListItem() </SCRIPT>
+				</LIST>
+				<!--IMG ID = "IMG_BOTTOM" X = "-2" Y = "46" W = "139" H = "12" IMG="../Data/6_ui/pvp/pvDropbottom.tga" IMG_W = "139" IMG_H = "12" IGNORE_PARENT_RECT = "1" CAN_CLIP = "1" NO_FOCUS = "1"/-->
+				<SCRIPT ID = "ON_LOSE_FOCUS"> UISelf:Visible(false) return true </SCRIPT>
+			</STATIC_FORM>
+			<BUTTON ID = "BTN_DROPDOWN" X = "225" Y = "0" W = "21" H = "21">
+				<ATTR BTN_IMG="../Data/6_ui/post/psDropB.tga" BTN_IMG_W="42" BTN_IMG_H="42"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					local bg = UISelf:GetParent():GetControl("SFRM_LIST_BG")
+					local list = bg:GetControl("LST_TO")
+					if false==bg:IsNil() then
+						local bv = bg:IsVisible()
+						if true==bv then	
+							bg:Visible(false)
+						else
+							local count = g_FriendMgr:Friend_Count()
+							if 0 >= count then 
+								bg:Visible(false)								
+							else
+								bg:Visible(true)	
+								list:ClearAllListItem()
+								for i=0,count do
+									local friend = g_FriendMgr:FriendItem_ByAt(i)
+									if false == friend:IsNil() then
+										list:AddNewListItem(friend:CharacterName())
+									end
+								end
+								local size = math.min(4,count)
+								local pt = Point2(list:GetSize():GetX(), size*22)
+								list:SetSize(pt)
+								bg:GetControl("IMG_BOTTOM"):SetLocation(Point2(-1, pt:GetY()))
+								pt:IncY(6)
+								bg:SetSize(pt)
+								bg:SetImgSize(pt)
+							end
+						end
+					end
+					return true
+				</SCRIPT>
+			</BUTTON>
+			<FORM ID = "FRM_TEXT1" X = "205" Y = "2" W = "157" H = "16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="125" IMG_Y="0"/>
+				<ATTR FONT = "Font_Text" FONT_COLOR_HEX = "0xFFFFFFFF" TEXT = "918" T_OUTLINE = "1" T_RIGHT = "1" T_X = "122"/>
+			</FORM>
+			<EDIT ID = "EDT_TITLE" X = "100" Y = "38" W = "240" H = "21" FONT_COLOR_HEX = "0xFF4D3413" EDIT_LIMIT_LENGTH = "21" EDIT_PREVIEW="929" EDIT_ORDER_LANK="2">
+				<ATTR EDIT_FONT="Font_Text"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+				<HOTKEY ID="28"> return OnKey_Post_Enter(UISelf:GetParent(), "MEDT_CONTENTS") </HOTKEY>				
+				<HOTKEY ID="59">REQ_MAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true </HOTKEY>
+			</EDIT>
+			<EDIT_MULTI ID = "MEDT_CONTENTS" X = "24" Y = "62" W = "314" H = "193" EDIT_ORDER_LANK="3">
+				<ATTR EDIT_FONT="Font_Text"/>
+				<ATTR EDIT_MULTI_LINE_COUNT = "11" FONT_COLOR_HEX = "0xFF4D3413" EDIT_LIMIT_LENGTH = "200" EDIT_PREVIEW=""/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+				<HOTKEY ID = "28">return true</HOTKEY>				
+				<HOTKEY ID="59">REQ_MAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<FORM ID = "FRM_LEN" X = "255" Y = "179" W = "70" H = "20" NO_FOCUS = "1" PASS_EVENT = "1" FONT_COLOR_HEX = "0xFF4D3413">
+					<SCRIPT ID = "ON_TICK"> 
+						local self = UISelf
+						if self:GetParent():IsVisible() then
+							local eText = self:GetParent():GetEditText()
+							self:SetStaticText(eText:Length() .. "/200")
+						end
+					</SCRIPT>
+				</FORM>
+			</EDIT_MULTI>
+			<FORM ID = "FRM_EXPCARD">
+				<ATTR X="100" Y="271" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+				<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+				<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+				<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+			</FORM>
+			<ICON ID = "ICN_ITEM" X = "100" Y = "271" W = "40" H = "40" ICON_GRP ="131">
+				<SCRIPT ID = "ON_R_BTN_DOWN">ClearPostSendItem()</SCRIPT>
+				<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_DOWN">OnLBtnDownPostSendItem()</SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_UP">OnLBtnUpPostSendItem(UISelf) </SCRIPT>
+			</ICON>
+			<FORM ID = "FRM_TEXT4" X="28" Y="326" W="100" H="20" TEXT = "922" FONT_COLOR_HEX = "0xFF4D3413"/>
+			<CHECK_BUTTON ID = "CBTN_SEND_MONEY" X = "226" Y = "323" W = "20" H = "20" >
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:CheckState(true) </SCRIPT>
+				<SCRIPT ID = "ON_GET_FOCUS" >
+					local wndParent = UISelf:GetParent()
+					local wndOther = wndParent:GetControl("CBTN_REQ_MONEY")
+					if false == wndOther:IsNil() then
+						wndOther:CheckState(false)
+						wndOther:LockClick(false)
+						UISelf:CheckState(true)
+						UISelf:LockClick(true)
+						wndParent:GetControl("FRM_TEXT4"):SetStaticTextW(GetTextW(922))
+					end	
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID = "CBTN_REQ_MONEY" X = "226" Y = "346" W = "20" H = "20" >
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" />
+				<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+				<SCRIPT ID = "ON_GET_FOCUS" >
+					local wndParent = UISelf:GetParent()
+					local wndOther = wndParent:GetControl("CBTN_SEND_MONEY")
+					if false == wndOther:IsNil() then
+						wndOther:CheckState(false)
+						wndOther:LockClick(false)
+						UISelf:CheckState(true)
+						UISelf:LockClick(true)						
+						wndParent:GetControl("FRM_TEXT4"):SetStaticTextW(GetTextW(921))
+					end
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<EDIT ID = "EDT_COIN0" X = "25" Y = "348" W = "36" H= "21" FONT_COLOR_HEX = "0xFF4D3413" EDIT_ORDER_LANK="4">
+				<ATTR EDIT_FONT="Font_Text"/>
+				<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "4"  EDIT_ONLY_NUM = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>				
+				<HOTKEY ID="59">REQ_MAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true </HOTKEY>
+			</EDIT>
+			<EDIT ID = "EDT_COIN1" X = "87" Y = "348" W = "26" H= "21" FONT_COLOR_HEX = "0xFF4D3413" EDIT_ORDER_LANK="5">
+				<ATTR EDIT_FONT="Font_Text"/>
+				<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "2"  EDIT_ONLY_NUM = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>				
+				<HOTKEY ID="59">REQ_MAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true </HOTKEY>
+			</EDIT>
+			<EDIT ID = "EDT_COIN2" X = "139" Y = "348" W = "26" H= "21" FONT_COLOR_HEX = "0xFF4D3413" EDIT_ORDER_LANK="6">
+				<ATTR EDIT_FONT="Font_Text"/>
+				<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "2"  EDIT_ONLY_NUM = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>				
+				<HOTKEY ID="59">REQ_MAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true </HOTKEY>
+			</EDIT>
+			<FORM ID="FRM_COIN0" X="210" Y="382" W="80" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_TICK">UISelf:DrawMoney(1)</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN1" X="254" Y="382" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_TICK">UISelf:DrawMoney(2)</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN2" X="295" Y="382" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_TICK">UISelf:DrawMoney(3)</SCRIPT>
+			</FORM>
+			<BUTTON ID = "BTN_SEND" X = "96" Y = "408" W = "84" H = "26" >
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(928, 2200) </SCRIPT>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR TEXT="928" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> REQ_MAIL_SEND(UISelf:GetParent()) </SCRIPT>
+				<HOTKEY ID="59">REQ_MAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+			</BUTTON>
+			<BUTTON ID = "BTN_CLOSE" X = "182" Y = "408" W = "84" H = "26" >
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(915, 2201) </SCRIPT>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:GetParent():CloseParent() </SCRIPT>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<ATTR TEXT="915" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			</BUTTON>
+			<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			<SCRIPT ID="ON_GET_FOCUS">
+				local kEditTo=UISelf:GetControl("EDT_TO")
+				if not kEditTo:IsNil() then
+					kEditTo:SetCustomDataAsInt(0)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local kEditTo=UISelf:GetControl("EDT_TO")
+				if not kEditTo:IsNil() then
+					local cust = kEditTo:GetCustomDataAsInt()
+					if cust == 0 then
+						kEditTo:SetEditFocus(true)
+						kEditTo:SetCustomDataAsInt(1)
+					end
+				end
+			</SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_POST2" X = "0" Y = "36" W = "362" H = "446" IS_VISIBLE = "0">
+			<ATTR TEXT = "917" T_X = "70" T_Y = "2" FONT = "Font_Text" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1"/>
+			<STATIC_FORM ID = "SFRM_COLOR" X = "9" Y = "25" Z = "-2" W = "344" H = "352" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			<STATIC_FORM ID = "SFRM_SDW" X = "9" Y = "25" Z = "-1" W = "344" H = "352" STATIC_NUM = "3" >
+				<IMG ID="IMG_ARROW1" X="11" Y="17" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+				<FORM ID = "FRM_TEXT1" X="18" Y="12" W="60" H="20" TEXT = "911" FONT_COLOR_HEX = "0xFF4D3413"/>				
+				<STATIC_FORM ID = "SFRM_TITLE" X = "80" Y = "10" W = "252" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+
+				<STATIC_FORM ID = "SFRM_CONTENTS" X = "12" Y = "59" W = "319" H = "255" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<!--IMG ID="IMG_ARROW3" X="12" Y="306" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" /-->
+				<!--IMG ID="IMG_LINE3" X="8" Y="292" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE4" X="8" Y="293" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID = "FRM_TEXT5" X="290" Y="300" W="57" H="20" TEXT = "923" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<FORM ID = "FRM_TEXT6" X="290" Y="323" W="57" H="20" TEXT = "924" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<STATIC_FORM ID = "SFRM_COIN0" X = "12" Y = "320" W = "37" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<STATIC_FORM ID = "SFRM_COIN1" X = "74" Y = "320" W = "27" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<STATIC_FORM ID = "SFRM_COIN2" X = "126" Y = "320" W = "27" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="IMG_COIN1" X="51" Y="322" W="50" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" />
+				<IMG ID="IMG_COIN2" X="103" Y="322" W="50" H="16" IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" />
+				<IMG ID="IMG_COIN3" X="156" Y="322" W="50" H="16" IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" /-->
+				<FORM ID = "FRM_TEXT7" X="30" Y="327" W="150" H="20" TEXT = "927" FONT_COLOR_HEX = "0xFF4D3413" T_RIGHT = "1" T_X = "150"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR1" X = "9" Y = "377" Z = "-2" W = "344" H = "26" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			<STATIC_FORM ID = "SFRM_SDW1" X = "9" Y = "377" Z = "-1" W = "344" H = "26" STATIC_NUM = "3" />
+			<STATIC_FORM ID = "SFRM_TO_COLOR" X = "106" Y = "0" Z = "-2" W = "150" H = "21" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			<STATIC_FORM ID = "SFRM_TO_SDW" X = "106" Y = "0" Z = "-1" W = "150" H = "21" STATIC_NUM = "3" T_CENTER = "1" T_X = "55" T_Y = "3" >
+				<ATTR FONT = "Font_Text" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+			<EDIT ID = "EDT_TO" X = "109" Y = "3" W = "135" H = "21" FONT_COLOR_HEX = "0xFF4D3413" EDIT_LIMIT_LENGTH = "10" EDIT_PREVIEW="" >
+				<ATTR EDIT_FONT="Font_Text"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>				
+				<HOTKEY ID="28"> return OnKey_Post_Enter(UISelf:GetParent(), "EDT_TITLE") </HOTKEY>				
+				<HOTKEY ID="59">REQ_MASSMAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true </HOTKEY>
+			</EDIT>
+			<STATIC_FORM ID="SFRM_LIST_BG" X="106" Y="22" Z = "10" W="150" H="12" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" IS_VISIBLE = "0" NO_FOCUS = "0">
+				<LIST ID = "LST_TO" X = "2" Y = "3" Z = "10" W = "150" H = "46" ELEMENT_ID="BTN_ELE_TO" >
+					<IMG ID="IMG_LIST_SCROLL_BG" NO_FOCUS = "1"> 
+						<ATTR X="115" Y="15" Z="-1" W="13" H="146" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="146"/>
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</IMG>
+					<BUTTON ID="ScrUp" X="128" Y="0" W="19" H="15" NO_FOCUS = "1">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</BUTTON>
+					<BUTTON ID="ScrDown" X="128" Y="31" W="19" H="15" NO_FOCUS = "1">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</BUTTON>
+					<BUTTON ID="ScrMiddle" X="130" Y="0" W="15" H="21" NO_FOCUS = "1">
+						<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+						<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+					</BUTTON>
+					<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown" BTN_MIDDLE = "ScrMiddle" WND_BAR="IMG_LIST_SCROLL_BG" NO_FOCUS = "1"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:ClearAllListItem() </SCRIPT>
+				</LIST>
+				<!--IMG ID = "IMG_BOTTOM" X = "-2" Y = "46" W = "139" H = "12" IMG="../Data/6_ui/pvp/pvDropbottom.tga" IMG_W = "139" IMG_H = "12" IGNORE_PARENT_RECT = "1" CAN_CLIP = "1" NO_FOCUS = "1"/-->
+				<SCRIPT ID = "ON_LOSE_FOCUS"> UISelf:Visible(false) return true </SCRIPT>
+			</STATIC_FORM>
+			<BUTTON ID = "BTN_DROPDOWN" X = "235" Y = "0" W = "21" H = "21">
+				<ATTR BTN_IMG="../Data/6_ui/post/psDropB.tga" BTN_IMG_W="42" BTN_IMG_H="42"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					local bg = UISelf:GetParent():GetControl("SFRM_LIST_BG")
+					local list = bg:GetControl("LST_TO")
+					if false==bg:IsNil() then
+						local bv = bg:IsVisible()
+						if true==bv then	
+							bg:Visible(false)
+						else
+							local count = g_FriendMgr:Friend_Count()
+							if 0 >= count then 
+								bg:Visible(false)								
+							else
+								bg:Visible(true)	
+								list:ClearAllListItem()
+								for i=0,count do
+									local friend = g_FriendMgr:FriendItem_ByAt(i)
+									if false == friend:IsNil() then
+										list:AddNewListItem(friend:CharacterName())
+									end
+								end
+								local size = math.min(5,count)
+								local pt = Point2(list:GetSize():GetX(), size*22)
+								list:SetSize(pt)
+								bg:GetControl("IMG_BOTTOM"):SetLocation(Point2(-1, pt:GetY()))
+								pt:IncY(6)
+								bg:SetSize(pt)
+								bg:SetImgSize(pt)
+							end
+						end
+					end
+					return true
+				</SCRIPT>
+			</BUTTON>
+	
+			<EDIT ID = "EDT_TITLE" X = "100" Y = "38" W = "240" H = "21" FONT_COLOR_HEX = "0xFF4D3413" EDIT_LIMIT_LENGTH = "21" EDIT_PREVIEW="929" >
+				<ATTR EDIT_FONT="Font_Text"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:GetParent():GetControl("SFRM_LIST_BG"):Visible(false) </SCRIPT>
+				<HOTKEY ID="59">REQ_MASSMAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+				<HOTKEY ID="60">UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true </HOTKEY>				
+			</EDIT>
+			<FORM ID = "FRM_COUNT" X="232" Y="62" W="100" H="20" TEXT = "925" FONT_COLOR_HEX = "0xFF4D3413" T_RIGHT = "1" T_X = "100"/>
+			<FORM ID = "FRM_AVAILABLE" X="32" Y="90" W="200" H="20" TEXT = "926" FONT_COLOR_HEX = "0xFF4D3413" />
+			
+			<BUILD TARGET_ID="CBTN_CATEGORY" X="28" Y="63" X_COUNT = "4" Y_COUNT = "1" X_GAB = "52" Y_GAB = "0"/>
+			<CHECK_BUTTON ID = "CBTN_CATEGORY" X = "0" Y = "0" W = "50" H = "21" >
+				<ATTR BTN_IMG="../Data/6_ui/main/mnChatTab.tga" BTN_IMG_W="100" BTN_IMG_H="42" T_CENTER = "1" T_X = "25" T_Y = "3" T_OUTLINE = "1" BTN_T_INVERTBOLD="1"/>
+				<SCRIPT ID = "ON_CALL"> 
+					local bSet = (0 == UISelf:GetBuildIndex())
+					UISelf:CheckState(bSet)
+					UISelf:LockClick(bSet)
+				</SCRIPT>
+				<SCRIPT ID = "ON_BUILD">
+					UISelf:SetStaticTextW(GetTextW(400124+UISelf:GetBuildIndex()))
+				</SCRIPT>
+				<SCRIPT ID = "ON_GET_FOCUS" >
+					local self = UISelf
+					CategoryBtnInit(self)
+				</SCRIPT>
+			</CHECK_BUTTON>
+
+			<LIST ID = "LST_INV" X="50" Y="108" W="285" H="220" ITEM_X="0" ITEM_Y="0">
+				<ATTR ELEMENT_ID="FRM_ELE_POST" />
+				<IMG ID="IMG_LIST_SCROLL_BG" X="265" Y="15" Z="-1" W="13" H="146" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="146"/>
+				<BUTTON ID="ScrUp" X="266" Y="0" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrDown" X="266" Y="205" W="19" H="15">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+				</BUTTON>
+				<BUTTON ID="ScrMiddle" X="268" Y="0" W="15" H="21">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+				</BUTTON>
+				<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown" BTN_MIDDLE = "ScrMiddle" WND_BAR="IMG_LIST_SCROLL_BG"/>
+			</LIST>
+
+			<FORM ID="FRM_POSTAGE0" X="209" Y="353" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			</FORM>
+			<FORM ID="FRM_POSTAGE1" X="253" Y="353" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			</FORM>
+			<FORM ID="FRM_POSTAGE2" X="294" Y="353" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			</FORM>
+			<!--FORM ID = "FRM_TEXT4" X="28" Y="326" W="60" H="20" TEXT = "922" FONT_COLOR_HEX = "0xFF4D3413"/>
+			<CHECK_BUTTON ID = "CBTN_SEND_MONEY" X = "276" Y = "323" W = "20" H = "20" >
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:CheckState(true) </SCRIPT>
+				<SCRIPT ID = "ON_GET_FOCUS" >
+					local wndParent = UISelf:GetParent()
+					local wndOther = wndParent:GetControl("CBTN_REQ_MONEY")
+					if false == wndOther:IsNil() then
+						wndOther:CheckState(false)
+						wndOther:LockClick(false)
+						UISelf:CheckState(true)
+						UISelf:LockClick(true)
+						wndParent:GetControl("FRM_TEXT4"):SetStaticTextW(GetTextW(922))
+					end	
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID = "CBTN_REQ_MONEY" X = "276" Y = "346" W = "20" H = "20" >
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtRadio.tga" BTN_IMG_W="40" BTN_IMG_H="40" />
+				<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+				<SCRIPT ID = "ON_GET_FOCUS" >
+					local wndParent = UISelf:GetParent()
+					local wndOther = wndParent:GetControl("CBTN_SEND_MONEY")
+					if false == wndOther:IsNil() then
+						wndOther:CheckState(false)
+						wndOther:LockClick(false)
+						UISelf:CheckState(true)
+						UISelf:LockClick(true)						
+						wndParent:GetControl("FRM_TEXT4"):SetStaticTextW(GetTextW(921))
+					end
+				</SCRIPT>
+			</CHECK_BUTTON>
+			<EDIT ID = "EDT_COIN0" X = "25" Y = "348" W = "36" H= "21" FONT_COLOR_HEX = "0xFF4D3413">
+				<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "4"  EDIT_ONLY_NUM = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+			</EDIT>
+			<EDIT ID = "EDT_COIN1" X = "87" Y = "348" W = "26" H= "21" FONT_COLOR_HEX = "0xFF4D3413">
+				<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "2"  EDIT_ONLY_NUM = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+			</EDIT>
+			<EDIT ID = "EDT_COIN2" X = "139" Y = "348" W = "26" H= "21" FONT_COLOR_HEX = "0xFF4D3413">
+				<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "2"  EDIT_ONLY_NUM = "1"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+			</EDIT-->
+			<FORM ID="FRM_COIN0" X="210" Y="382" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_TICK">UISelf:DrawMoney(1)</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN1" X="254" Y="382" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_TICK">UISelf:DrawMoney(2)</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN2" X="295" Y="382" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_TICK">UISelf:DrawMoney(3)</SCRIPT>
+			</FORM>
+			<BUTTON ID = "BTN_SEND" X = "96" Y = "408" W = "84" H = "26" >
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(928, 2200) </SCRIPT>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<ATTR TEXT="928" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> REQ_MASSMAIL_SEND(UISelf:GetParent()) </SCRIPT>
+				<HOTKEY ID="59">REQ_MASSMAIL_SEND(UISelf:GetParent()) return true </HOTKEY>
+			</BUTTON>
+			<BUTTON ID = "BTN_CLOSE" X = "182" Y = "408" W = "84" H = "26" >
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(915, 2201) </SCRIPT>
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:GetParent():CloseParent() </SCRIPT>
+				<HOTKEY ID="60"> UISelf:GetParent():CloseParent() return true </HOTKEY>
+				<ATTR TEXT="915" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			</BUTTON>
+			<SCRIPT ID = "ON_CALL"> 
+				UISelf:Visible(false) 
+				local kEditTo=UISelf:GetControl("EDT_TO")
+				if not kEditTo:IsNil() then
+					kEditTo:SetCustomDataAsInt(0)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_GET_FOCUS">
+				local kEditTo=UISelf:GetControl("EDT_TO")
+				if not kEditTo:IsNil() then					
+					kEditTo:SetCustomDataAsInt(0)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local kEditTo=UISelf:GetControl("EDT_TO")
+				if not kEditTo:IsNil() then
+					local cust = kEditTo:GetCustomDataAsInt()
+					if cust == 0 then
+						kEditTo:SetEditFocus(true)
+						kEditTo:SetCustomDataAsInt(1)
+					end
+				end
+			</SCRIPT>
+			<!--SCRIPT ID = "ON_GET_FOCUS"> UISelf:GetControl("SFRM_LIST_BG"):Visible(false) </SCRIPT-->			
+		</FORM>
+		<SCRIPT ID = "ON_CALL"> InitMailUI(UISelf) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> CloseMailUI() </SCRIPT>
+	</STATIC_FORM>
+	<FORM ID = "FRM_ELE_POST" X = "0" Y = "0" W = "262" H = "524">
+		<FORM ID = "FRM_INVEN0" X = "0" Y = "0" W = "262" H = "524">
+			<BUILD TARGET_ID="SFRM_ITEM" X="0" Y="0" X_COUNT = "6" Y_COUNT = "12" X_GAB = "44" Y_GAB = "44"/>
+			<STATIC_FORM ID = "SFRM_ITEM" X = "0" Y = "0" W = "42" H = "43" STATIC_NUM = "5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<FORM ID = "FRM_EXPCARD">
+					<ATTR X="2" Y="2" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+					<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+					<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+					<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+				</FORM>
+				<IMG ID = "IMG_INV" X = "1" Y = "1" W = "40" H = "40" FONT_COLOR_HEX="0xffffffff" T_OUTLINE = "1">
+					<SCRIPT ID="ON_MOUSE_OVER">OnCallItemInPostToolTip(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>		
+				</IMG>
+				<CHECK_BUTTON ID = "CBTN_CHECK" X = "21" Y = "21" W="20" H="20" Z="2" IS_VISIBLE="0">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN"> CheckMassItem(UISelf) </SCRIPT>
+				</CHECK_BUTTON>
+				<SCRIPT ID="ON_BUILD"> UISelf:GetControl("IMG_INV"):SetBuildIndex(UISelf:GetBuildIndex()) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:GetControl("IMG_INV"):SetCustomDataAsInt(1) </SCRIPT>
+			</STATIC_FORM>
+			<SCRIPT ID="ON_CALL">UISelf:SetCustomDataAsInt(1)</SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_INVEN1" X = "0" Y = "0" W = "262" H = "524" IS_VISIBLE = "0">
+			<BUILD TARGET_ID="SFRM_ITEM" X="0" Y="0" X_COUNT = "6" Y_COUNT = "12" X_GAB = "44" Y_GAB = "44"/>
+			<STATIC_FORM ID = "SFRM_ITEM" X = "0" Y = "0" W = "42" H = "43" STATIC_NUM = "5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<FORM ID = "FRM_EXPCARD">
+					<ATTR X="2" Y="2" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+					<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+					<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+					<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+				</FORM>
+				<IMG ID = "IMG_INV" X = "1" Y = "1" W = "40" H = "40" FONT_COLOR_HEX = "0xffffffff" T_OUTLINE = "1">
+					<SCRIPT ID="ON_MOUSE_OVER">OnCallItemInPostToolTip(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>		
+				</IMG>
+				<CHECK_BUTTON ID = "CBTN_CHECK" X = "21" Y = "21" W="20" H="20" Z="2" IS_VISIBLE="0">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN"> CheckMassItem(UISelf) </SCRIPT>
+				</CHECK_BUTTON>
+				<SCRIPT ID="ON_BUILD"> UISelf:GetControl("IMG_INV"):SetBuildIndex(UISelf:GetBuildIndex()) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:GetControl("IMG_INV"):SetCustomDataAsInt(2) </SCRIPT>
+			</STATIC_FORM>
+			<SCRIPT ID="ON_CALL">UISelf:SetCustomDataAsInt(2)</SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_INVEN2" X = "0" Y = "0" W = "262" H = "524" IS_VISIBLE = "0">
+			<BUILD TARGET_ID="SFRM_ITEM" X="0" Y="0" X_COUNT = "6" Y_COUNT = "12" X_GAB = "44" Y_GAB = "44"/>
+			<STATIC_FORM ID = "SFRM_ITEM" X = "0" Y = "0" W = "42" H = "43" STATIC_NUM = "5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<FORM ID = "FRM_EXPCARD">
+					<ATTR X="2" Y="2" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+					<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+					<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+					<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+				</FORM>
+				<IMG ID = "IMG_INV" X = "1" Y = "1" W = "40" H = "40" FONT_COLOR_HEX = "0xffffffff" T_OUTLINE = "1">
+					<SCRIPT ID="ON_MOUSE_OVER">OnCallItemInPostToolTip(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>		
+				</IMG>
+				<CHECK_BUTTON ID = "CBTN_CHECK" X = "21" Y = "21" W="20" H="20" Z="2" IS_VISIBLE="0">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN"> CheckMassItem(UISelf) </SCRIPT>
+				</CHECK_BUTTON>
+				<SCRIPT ID="ON_BUILD"> UISelf:GetControl("IMG_INV"):SetBuildIndex(UISelf:GetBuildIndex()) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:GetControl("IMG_INV"):SetCustomDataAsInt(3) </SCRIPT>
+			</STATIC_FORM>
+			<SCRIPT ID="ON_CALL">UISelf:SetCustomDataAsInt(3)</SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_INVEN3" X = "0" Y = "0" W = "262" H = "524" IS_VISIBLE = "0">
+			<BUILD TARGET_ID="SFRM_ITEM" X="0" Y="0" X_COUNT = "6" Y_COUNT = "12" X_GAB = "44" Y_GAB = "44"/>
+			<STATIC_FORM ID = "SFRM_ITEM" X = "0" Y = "0" W = "42" H = "43" STATIC_NUM = "5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<FORM ID = "FRM_EXPCARD">
+					<ATTR X="2" Y="2" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+					<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+					<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+					<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+				</FORM>
+				<IMG ID = "IMG_INV" X = "1" Y = "1" W = "40" H = "40" FONT_COLOR_HEX = "0xffffffff" T_OUTLINE = "1">
+					<SCRIPT ID="ON_MOUSE_OVER">OnCallItemInPostToolTip(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>		
+				</IMG>
+				<CHECK_BUTTON ID = "CBTN_CHECK" X = "21" Y = "21" W="20" H="20" Z="2" IS_VISIBLE="0">
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN"> CheckMassItem(UISelf) </SCRIPT>
+				</CHECK_BUTTON>
+				<SCRIPT ID="ON_BUILD"> UISelf:GetControl("IMG_INV"):SetBuildIndex(UISelf:GetBuildIndex()) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:GetControl("IMG_INV"):SetCustomDataAsInt(4) </SCRIPT>
+			</STATIC_FORM>
+			<SCRIPT ID="ON_CALL">UISelf:SetCustomDataAsInt(4)</SCRIPT>
+		</FORM>
+	</FORM>
+
+	<BUTTON ID="BTN_ELE_TO" X="0" Y="0" W="132" H="22" NO_FOCUS = "1">
+		<ATTR BTN_IMG="../Data/6_ui/pvp/pvDropB.tga" BTN_IMG_W="254" BTN_IMG_H="44" />
+		<ATTR TEXT="" FONT="Font_Text" T_X="4" T_Y="4" FONT_COLOR_HEX="0xFF4D3413" T_OUTLINE = "1" />
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			local parent = UISelf:GetParent():GetParent()
+			local edit_to = parent:GetParent():GetControl("EDT_TO")
+			if false==edit_to:IsNil() then
+				edit_to:SetEditTextW(UISelf:GetStaticText())
+			end
+			parent:Visible(false) 
+			return OnKey_Post_Enter(UISelf:GetParent():GetParent():GetParent(), "EDT_TITLE")
+		</SCRIPT>
+		<SCRIPT ID="ON_R_BTN_DOWN"> UISelf:GetParent():GetParent():Visible(false) </SCRIPT>
+		<SCRIPT ID = "ON_LOSE_FOCUS"> return true </SCRIPT>
+	</BUTTON>
+	<STATIC_FORM ID = "SFRM_LETTER" PRIORITY="1">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "50" W = "362" H = "396" STATIC_NUM = "1" CAN_DRAG = "1" />
+		<SCRIPT ID = "ON_CLOSE"> CloseToolTip() </SCRIPT>
+		<IMG ID = "IMG_ICON" X = "-4" Y = "-9" Z = "10" IMG = "../Data/6_ui/post/psImg.tga" W = "70" H = "70" IMG_W = "70" IMG_H = "70" IGNORE_PARENT_RECT = "1"/>
+		<STATIC_FORM ID = "SFRM_TITLE" X = "1" Y = "0" Z = "-1" W = "360" H = "36" STATIC_NUM = "4" TEXT = "909" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1" FONT = "FTtitle_14" T_X = "80" T_Y = "5"/>
+		<IMG ID = "IMG_CLOSE_BG" X = "336" Y = "10" W = "12" H = "11" IMG_W="12" IMG_H="11" IMG="../Data/6_ui/Common/cmBody.tga" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+		<BUTTON ID="BNT_CLOSE" X="330" Y="4" Z="1" W="24" H="24">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() return true </SCRIPT>
+			<HOTKEY ID="1"> UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<FORM ID = "FRM_TEXT1" X = "55" Y = "38" W = "57" H = "21" TEXT = "910" FONT_COLOR_HEX = "0xFFffe9af" FONT = "FTtitle_14" T_RIGHT = "1" T_X = "57" T_OUTLINE = "1"/>
+		<IMG ID = "IMG_LINE1" X = "116" Y = "39" W = "2" H = "15" IMG = "../Data/6_ui/myhome/mhLine.tga" IMG_W = "2" IMG_H = "15"/>
+		<STATIC_FORM ID = "SFRM_COLOR" X = "9" Y = "61" Z = "-2" W = "344" H = "292" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+		<STATIC_FORM ID = "SFRM_SDW" X = "9" Y = "61" Z = "-1" W = "344" H = "292" STATIC_NUM = "3" T_X = "8" T_Y = "42" FONT = "FTtitle_14" FONT_COLOR_HEX = "0xFF4D3413">
+			<IMG ID="IMG_ARROW1" X="11" Y="16" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<FORM ID = "FRM_TEXT1" X="20" Y="12" W="50" H="20" TEXT = "911" FONT_COLOR_HEX = "0xFF4D3413"/>
+			</NAME>
+			<NAME ID="JAPAN">
+				<FORM ID = "FRM_TEXT1" X="20" Y="12" W="50" H="20" TEXT = "911" FONT="Font_Text" FONT_COLOR_HEX = "0xFF4D3413"/>
+			</NAME>
+		</LOCAL>
+			<IMG ID="IMG_LINE3" X="8" Y="35" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE4" X="8" Y="36" W="328" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="328" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<STATIC_FORM ID = "SFRM_TITLE_TEXT" X = "7" Y = "235" Z = "-1" W = "330" H = "50" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" FONT_COLOR_HEX = "0xFF4D3413" T_X = "15" T_Y = "4" TEXT = "912" FONT="Font_Text">
+				<LOCAL>
+					<NAME ID="JAPAN">
+						<SCRIPT ID="ON_CALL">
+							local kPos = UISelf:GetTextPos()
+							kPos:SetY(6)
+							UISelf:SetTextPos(kPos)
+							UISelf:SetStaticText("{T=FT11/}"..GetTT(912):GetStr())
+						</SCRIPT>
+					</NAME>
+				</LOCAL>	
+			</STATIC_FORM>
+			<IMG ID="IMG_ARROW2" X="11" Y="245" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+			<STATIC_FORM ID = "SFRM_ITEM" X = "95" Y = "240" W = "42" H = "43" STATIC_NUM = "5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_TITLE_TEXT" X = "91" Y = "71" Z = "10" W = "252" H = "21" STATIC_NUM = "6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" FONT_COLOR_HEX = "0xFF4D3413" T_X = "11" T_Y = "2" FONT="Font_Text"/>
+		<FORM ID = "FRM_FROM" X = "122" Y = "38" W = "200" H = "21" TEXT = "" FONT_COLOR_HEX = "0xFFffFFFF" FONT = "FTtitle_14" T_OUTLINE = "1"/>
+		<FORM ID="FRM_COIN0" X="150" Y="303" Z = "2" W="50" H="16">
+			<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		<FORM ID="FRM_COIN1" X="197" Y="303" Z = "2" W="50" H="16">
+			<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		<FORM ID="FRM_COIN2" X="240" Y="303" Z = "2" W="50" H="16">
+			<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</FORM>
+		<BUTTON ID = "BTN_GET_ITEM" X = "294" Y = "320" W = "47" H = "21">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBsm.tga" BTN_IMG_W="94" BTN_IMG_H="42"/>
+			<ATTR TEXT = "400533" FONT_COLOR_HEX = "0xFFFFFFFF" T_CENTER = "1" T_X = "23" T_Y = "2" T_OUTLINE = "1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> GetAnnex(UISelf:GetParent())</SCRIPT>
+		</BUTTON>
+		<FORM ID = "FRM_EXPCARD">
+			<ATTR X="105" Y="302" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+			<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+			<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+			<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+		</FORM>
+		<ICON ID = "ICN_ITEM" X = "105" Y = "302" W = "40" H = "40" ICON_GRP ="130" ICON_STATIC = "1">
+			<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<BUTTON ID = "BTN_RETURN" X = "53" Y = "358" W = "84" H = "26" >
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(913, 2200) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="913" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> ReplyMail(UISelf:GetParent()) </SCRIPT>
+			<HOTKEY ID="59"> ReplyMail(UISelf:GetParent())  return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_DEL" X = "139" Y = "358" W = "84" H = "26" >
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(914, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="914" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> CallYesNoMsgBox( GetTT(965), GUID(), MBT_CONFIRM_DELETE_MAIL, UISelf:GetParent():GetCustomDataAsInt() ) </SCRIPT>
+			<HOTKEY ID="60"> CallYesNoMsgBox( GetTT(965), GUID(), MBT_CONFIRM_DELETE_MAIL, UISelf:GetParent():GetCustomDataAsInt() ) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CLOSE" X = "225" Y = "358" W = "84" H = "26" >
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(915, 2202) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="915" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="61"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_DEL_MAIL" ALIGN_X="50" Y="180" W="208" H="177" CAN_DRAG="1" STATIC_NUM="1">	
+		<STATIC_FORM ID="SFRM_COLOR" X="9" Y="7" W="190" H="125" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFR_SDW" X="0" Y="0" W="190" H="125" STATIC_NUM="3">
+				<ATTR TEXT="960" FONT="Font_Text" T_X="95" T_Y="13" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID = "ON_CALL">
+					local t = UISelf:GetStaticText()
+					local t_y = 55-t:Length()*0.5
+					local tpos = UISelf:GetTextPos()
+					tpos:SetY(t_y)
+					UISelf:SetTextPos(tpos)
+				</SCRIPT>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_OK" X="18" Y="138" W="84" H="26">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_UP">
+				DeleteMail()
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				DeleteMail()
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="104" Y="138" W="84" H="26">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+</XUI>

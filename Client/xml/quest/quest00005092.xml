@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5092</ID> <!--T.T.10509201 뛰어난 걸작(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	갑판상어 부둣가의 몽글과 붉은 안테나 몽글에게서 하얗고 동그란 조각품 1개를 회수하자-->
+<!--[완료NPC]	스티븐 무역항 - 시진-->
+<!--[내용]	시진은 얼마 전에 갑판상어 부둣가에 정찰을 나갔다가 무언가 물건을 두고 온 것 같은 기분이 들었는데, 그게 빅터의 예술품인 것 같다고 한다. 그 지역의 몽글과 붉은 안테나 몽글이 잡동사니를 잘 주워 다니는데 혹시 빅터의 예술품이 있을지 모른다고 한다. 빅터의 예술품은 하얗고 동그란 조각품이라고 한다. 갑판상어 부둣가의 몽글과 붉은 안테나 몽글에게서 시진의 예술품인 하얗고 동그란 조각품 1개를 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">116A12AC-D98A-483a-A1E9-3392632B7CDE</CLIENT> <!--시작NPC 스티븐 무역항 - 시진 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">116A12AC-D98A-483a-A1E9-3392632B7CDE</PAYER> <!--완료NPC 스티븐 무역항 - 시진 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 11 스티븐 무역항 - 시진 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010120/10000/9200/1/1/160509200">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010120/갑판상어 부둣가,Item_NO=160509200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160509200</ITEM> 
+ <!--Item_NO=160509200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010120/10000/9200/1/1/160509200">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010120/갑판상어 부둣가,Item_NO=160509200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160509200</ITEM> 
+ <!--Item_NO=160509200/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10509211"/> <!--하얗고 동그란 조각품-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509221" FACE="Walter_normal"/> <!--빅터의 예술품이라. 도대체 어디에 놔뒀지?
+우왓! 큰일이에요. 어제 갑판상어 부둣가에 정찰을 나갔다가 뭔가 놔두고 온 느낌이 들어서 뭔가 꺼림직했는데, 그게 빅터의 예술품이었나 봅니다.%%
+빅터는 자기 예술품에 엄청난 애착을 가지고 있어서 저를 얼마나 들볶을지 짐작도 할 수가 없어요.
+%class%님 지금 근무중이라 찾으러 갈 수가 없습니다. 제발 저 좀 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509226" FACE="Walter_normal"/> <!--감사합니다. 이제 빅터의 시달림으로부터 탈출할 수 있을 것 같네요. 
+응? 이건? 한 달 전에 빅터의 시달림으로부터 탈출하기 위해 만들었다 버린 해골 조각품입니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509223" FACE="Walter_normal"/> <!--빅터와 전 예전부터 아는 사이였습니다.
+서로 통하는 게 많아서 친하게 지냈습니다.
+그런데 빅터 이 녀석이 갑자기 예술에 눈을 뜨게 되었다면서 저도 동참하라는 거에요.
+전 너무 싫었지만 친구라는 이유 때문에 어쩔 수 없이 동참하게 되었습니다.%%
+이번에 빅터는 자기의 최고의 걸작이라면서 잔뜩 기대를 하고 있어요.
+만약 잃어버렸다는 사실을 알게 된다면 아마 평생 들볶일지도 모르겠습니다.
+갑판상어 부둣가의 몽글과 붉은 안테나 몽글이 잡동사니를 자주 수집하고 있습니다.
+아마 몽글과 붉은 안테나 몽글에게서 시진이 만든 하얗고 동그란 조각품을 찾을 수 있을 것입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509224" FACE="Walter_angly"/> <!--아! 저의 괴로움을 그저 지켜만 보고 계시는 겁니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509225" FACE="Walter_normal"/> <!--아우, 조각상이 깨지는 날에는 어떻게 될지 상상도 안 되네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2221</ID> <!--T.T.10222101 하임의 지적 호기심 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 하임과 대화-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	달빛해안 마을 도구상인 하임은 몇 일간 신기하게 생긴 아이템을 획득했다고 한다.
+무슨 아이템이었는지, 궁금한 하임은 책을 다 뒤졌봤지만 나오지 않았다고 한다.
+혹시 모르니, 차원교환기에 그 아이템을 넣어보도록 하자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3CD863C-444D-40ee-B976-083D98067B1B</CLIENT> <!--시작NPC 달빛해안 마을 - 하임 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 11 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10222111"/> <!--하임과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">79653190</ITEM><!--전체지급/전체/1)/79653190(봉인아님) 1개-아이템없음-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10222121" FACE="Coneil_normal"/> <!--최근에 물약값을 못 받고 대신 받은 물건이 하나 있는데 말이예요. 
+이게 무슨 물건인지 당최 모르겠어요.
+그래서 혹시나 차원교환기를 이용해 보면 되지 않을까요? 네?
+-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10222126" FACE="Coneil_smile"/> <!--약속을 했으니 믿어야죠. 자!
+여기 아이템이 있습니다. 다녀 오세요-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10222123" FACE="Coneil_smile"/> <!--역시 그렇게 생각하시고 계신가요?
+저는 장사만 하긴 했어도, 지적 호기심도 많은 사람이거든요.
+그러니 이 아이템을 가져가서 차원교환을 시도해 주세요.
+그런 후 무엇이 나왔는지 저한테 꼭 알려 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10222124" FACE="Coneil_normal"/> <!--역시 안될까요? 흠,
+네 알았어요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10222125" FACE="Coneil_normal"/> <!--무엇이 나올까? 궁금해 죽겠군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10222102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

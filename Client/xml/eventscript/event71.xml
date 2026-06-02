@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 사망유희 히든 퀘스트 클리어 한 후 밖으로 내보내기 -->
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "false"/>  
+  <CMD type="WaitFade" time="1"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD TYPE="MapMove" MapID ="9018100" SpawnIndex="1" />
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+  <CMD type="WaitFade" time="1"/>
+  
+</EVENT_SCRIPT>

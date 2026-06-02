@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="010502_DG" DESCRIPTION="90105020">
+  <GSAPATH>../Data/3_World/95_Dungeon/01_Level/010502_DG.GSA</GSAPATH>
+  <MINIMAP Y="86" H="356">../Data/3_World/95_Dungeon/01_Level/010502_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/silenceisland_bg.mp3</BGSOUND>
+  <SCRIPT>World/95_Dungeon/010502_DG.lua</SCRIPT>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" />
+  <!-- FOG DEPTH="1.0" FAR="1000" COLOR="0.87,0.34,0.3"/ -->
+  <!--MAP TYPE설정-->
+  <!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+  <MAPVALUE PLAYERKILL="0" TYPE="2" />
+  <!--포털-->
+  <TRIGGER ID="gate_018100_base" TYPE="PORTAL" TITLE_TEXT_ID="801001" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9018100" PARAM2="2" />
+  </TRIGGER>
+  <TRIGGER ID="gate_010503_base" TYPE="PORTAL" TITLE_TEXT_ID="802001" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,60" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9010503" PARAM2="1">
+		<ACCESS ERROR_MSG="506156">
+			<LEVEL MIN="20" MAX="100" PARTY="1"/>
+			<USEITEM INV="3" NO="60000630" COUNT="1" CONSUME="1" PARTY="1" GROUP="1"/>
+			<USEITEM INV="3" NO="60000640" COUNT="1" CONSUME="1" PARTY="1" GROUP="2"/>
+			<USEITEM INV="3" NO="60000650" COUNT="1" CONSUME="1" PARTY="1" GROUP="3"/>
+			<USEITEM INV="3" NO="60000660" COUNT="1" CONSUME="1" PARTY="1" GROUP="4"/>
+			<USEITEM INV="3" NO="60000670" COUNT="1" CONSUME="1" PARTY="1" GROUP="5"/>
+		</ACCESS>
+	</ACTION>
+    
+  </TRIGGER>
+
+  <!-- 엔터던전 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_05" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_06" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_07" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_08" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_09" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_10" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_11" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_11" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_12" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_12" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_13" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_13" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_14" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_14" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_15" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_15" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_16" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_16" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_17" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_17" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_18" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_18" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_19" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_19" />
+  </TRIGGER>
+
+  <!-- 텔레포트 데미지 이동 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_1" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_2" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_3" />
+  </TRIGGER>
+  <!-- 텔레점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="5" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="10" />
+  </TRIGGER>
+
+  <!-- 트렙-->
+  <TRIGGER ID="poison_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="poison_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_13">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_14">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--레이저 트렙-->
+  <TRIGGER ID="laser_trap_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="laser_trap_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="laser_trap_03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="laser_trap_04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="laser_trap_05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="laser_trap_06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="laser_trap_07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  
+  <!--// 퀘스트 트리거 -->
+    <TRIGGER ID="Quest_Trigger1342" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="1342" />
+  </TRIGGER>
+   
+  <OBJECT GUID="04ad7494-0022-4881-a3f8-df9e6e5a2e54" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000519">
+    <WayPoint POINT="2214.144, -2402.887, 972.3817" TIME="1" />
+    <WayPoint POINT="2384.62, -2403.642, 972.3817" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="b5474c44-deec-4f03-a0c1-6f762d1fb358" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000519">
+    <WayPoint POINT="2381.921, -2533.665, 972.3817" TIME="1" />
+    <WayPoint POINT="2542.464, -2534.466, 972.3817" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="4b4e46b7-0f54-4ad5-85f8-066ec1195c66" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000519">
+    <WayPoint POINT="2557.111, -2405.062, 972.3817" TIME="1" />
+    <WayPoint POINT="2694, -2402.942, 972.3817" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="e841a304-1920-4670-9561-9b2209ccd10c" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000519">
+    <WayPoint POINT="1628.247, -2535.218, 972.3817" TIME="1" />
+    <WayPoint POINT="1792.938, -2536.87, 972.3817" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="22790231-f0da-4804-b748-2146192cd0e2" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000519">
+    <WayPoint POINT="-110.344, -2540.51, 972.3817" TIME="1" />
+    <WayPoint POINT="99.27893, -2537.785, 972.3817" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="60d5eeec-aad9-4bc0-81ff-906fbce4c72b" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000519">
+    <WayPoint POINT="-362.2467, -2414.308, 972.3817" TIME="1" />
+    <WayPoint POINT="-116.4185, -2416.642, 972.3817" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="c9af2d22-8260-469c-a352-8a5924f37727" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000519">
+    <WayPoint POINT="1431.717, -2404.925, 972.3817" TIME="1" />
+    <WayPoint POINT="1611.325, -2406.088, 972.3817" TIME="1" />
+  </OBJECT>
+</WORLD>

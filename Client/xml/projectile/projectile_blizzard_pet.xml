@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="PROJECTILE_Blizzard_pet">
+
+  <TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+  <NIF_PATH SCALE="1.0">../Data/5_Effect/7_Projectile/ef_blizzard_pet_01.nif</NIF_PATH>
+  <SCRIPT>PROJECTILE_Blizzard_pet</SCRIPT>
+  <PARAM SPEED="700.0" ACCEL="0" MASS="0.5"/>
+  <SCRIPT_CALL_EVENT>
+    <EVENT TYPE="ARIVED_AT_TARGET"/>
+    <EVENT TYPE="FLYING_START"/>
+    <EVENT TYPE="UPDATE"/>
+    
+  </SCRIPT_CALL_EVENT>
+  <COLLISION_SPHERE>
+    <COLL_ITEM TARGET_NODE="crash" RANGE="30" COLL_IS_ONLY_TARGETLOC="TRUE"/>
+  </COLLISION_SPHERE>
+</PROJECTILE>

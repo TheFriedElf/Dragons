@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4155</ID> <!--T.T.10415501 재앙의 전조 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	퀘차와 대화-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	퀘차 사제는 검은 마녀에 의해 신보가 오염되면서 카즈라에 서서히 재앙이 닥쳐오고 있음을 감지한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10415511"/> <!--퀘차와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10415521" FACE="Quecua_normal"/> <!--아무 것도 아닌 것처럼 보일 지 모르겠지만
+이 세상의 모든 것은 신비스러운 것이란다.%%
+불이 왜 뜨겁고, 바람이 어디서 불어오는 지 
+생각해 본 적이 있느냐?%% 
+드넓은 대지와 바다, 번개, 빛과 그림자…
+너무나 자연스러워서 미처 자각하지 못할 뿐.%%
+우리는 거대한 기적 속에서 살아가고 있는 거란다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10415526" FACE="Quecua_smile"/> <!--부디 이 재앙을 막아다오.
+이 늙은이 부탁이구나. %name%...-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10415523" FACE="Quecua_normal"/> <!--그러나... 
+우리가 이 평화를 즐길 날도 이제 얼마 남지 않았구나.%%
+그동안 고요히 잠들어 있던 신보가 흉악한 본성을 일깨우고,
+오랫 동안 마법진에 둘러쌓여 있던 이 카즈라 마저도
+세상에 모습을 드러낸 것이 단순한 우연이 아니란다.%%
+누군가 독을 이용해 포치를 중독시키자, 
+이곳 동물들 전체가 흉악해진 것과 마찬가지로…%%
+검은 마녀 때문에 신보가 오염되면서 생긴 작은 변화가 
+곧 우리 카즈라 전체에 영향을 끼칠테니 말이다.%%
+드라칸에게 신이 내린 숙명은 파멸...
+서서히 때가 오는 것일테지...
+하지만 만약 그럴 수만 있다면, 이 운명을 바꿔보고 싶구나-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10415524" FACE="Quecua_angry"/> <!--이 늙은이 말에 일일이 신경 쓸 필요는 없다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10415525" FACE="Quecua_angry"/> <!--(없음)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10415502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

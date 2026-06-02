@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_MOVIE_IN" ALIGN_X = "0" ALIGN_Y = "0" W ="100" H ="60" USE_ALPHA_ANI = "0" HIDE_OTHER="1" NOT_HIDE="1">
+		<IMG ID = "IMG_UPPER" X = "0" Y= "0" W ="50" H ="50" >
+			<ATTR IMG = "../Data/6_ui/BlackBg.tga" IMG_W = "1024" IMG_H = "100"/>
+			<SCRIPT ID = "ON_TICK">
+				if fMovieStartTime ~= nil and fMovieStartTime == 0 then
+					fMovieStartTime = GetAccumTime()
+				end
+				size = UISelf:GetImgSize()
+				if 100 > size:GetY() then
+					fDelta = GetAccumTime() - fMovieStartTime
+					if fMovieTime > fDelta then
+						size:SetY(UISelf:GetParent():GetSize():GetY()*fDelta/fMovieTime)
+					else 
+						size:SetY(UISelf:GetParent():GetSize():GetY())
+					end
+					UISelf:SetImgSize( size )
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				size = UISelf:GetImgSize()
+				size:SetX(GetScreenSize():GetX())
+				size:SetY(0)
+				UISelf:SetImgSize( size )
+			</SCRIPT>
+		</IMG>
+
+		<IMG ID = "IMG_LOWER" X = "0" ALIGN_Y= "100" W ="50" H ="50" >
+			<ATTR IMG = "../Data/6_ui/BlackBg.tga" IMG_W = "1024" IMG_H = "100"/>
+			<SCRIPT ID = "ON_TICK">
+				if fMovieStartTime ~= nil and fMovieStartTime == 0 then
+					fMovieStartTime = GetAccumTime()
+				end
+				fDeltaL = GetAccumTime() - fMovieStartTime
+				scr_size = GetScreenSize()
+				loc = UISelf:GetLocation()
+
+				if fMovieTime > fDeltaL then
+					iMovieRate = UISelf:GetParent():GetSize():GetY()*fDeltaL/fMovieTime
+					size:SetY(iMovieRate)
+					UISelf:SetImgSize( size )
+					loc:SetY(scr_size:GetY()- iMovieRate)
+					UISelf:SetLocation(loc)
+				else 
+					size:SetY(UISelf:GetParent():GetSize():GetY())
+					UISelf:SetImgSize( size )
+					scr_size:SetY(scr_size:GetY() - UISelf:GetParent():GetSize():GetY())
+					scr_size:SetX(0)
+					UISelf:SetLocation(scr_size)
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				scr_size = GetScreenSize()
+
+				scr_size:SetX(0)
+				UISelf:SetLocation(scr_size)
+
+				size = UISelf:GetImgSize()
+				size:SetY(0)
+				UISelf:SetImgSize( size )
+			</SCRIPT>
+		</IMG>
+		<SCRIPT ID = "ON_CALL">		
+			fMovieTime = 2
+			fMovieStartTime = 0
+			local size = UISelf:GetImgSize()
+			size:SetX(GetScreenSize():GetX())
+			size:SetY(0)
+			UISelf:SetImgSize( size )
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> fMovieTime = 2</SCRIPT>
+	</FORM>
+
+	<FORM ID = "FRM_MOVIE_OUT" ALIGN_X = "0" ALIGN_Y = "0" W ="100" H ="60" USE_ALPHA_ANI = "0" HIDE_OTHER="1" NOT_HIDE="1">
+		<IMG ID = "IMG_UPPER" X = "0" Y= "0" W ="50" H ="50" USE_ALPHA_ANI = "0" >
+			<ATTR IMG = "../Data/6_ui/BlackBg.tga" IMG_W = "1024" IMG_H = "100"/>
+			<SCRIPT ID = "ON_TICK">
+				size = UISelf:GetImgSize()
+				if size:GetY() > 1 then
+					fDelta = GetAccumTime() - fMovieOutStartTime
+					size:SetY(UISelf:GetParent():GetSize():GetY() - UISelf:GetParent():GetSize():GetY()*fDelta/fMovieTime)
+					UISelf:SetImgSize( size )
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				size = UISelf:GetImgSize()
+				size:SetX(GetScreenSize():GetX())
+				size:SetY(100)
+				UISelf:SetImgSize( size )
+			</SCRIPT>
+		</IMG>
+
+		<IMG ID = "IMG_LOWER" X = "0" ALIGN_Y= "100" W ="50" H ="50" USE_ALPHA_ANI = "0" >
+			<ATTR IMG = "../Data/6_ui/BlackBg.tga" IMG_W = "1024" IMG_H = "100"/>
+			<SCRIPT ID = "ON_TICK">
+				scr_size = GetScreenSize()
+				loc = UISelf:GetLocation()
+				if  scr_size:GetY() >= loc:GetY() then 
+					fDeltaL = GetAccumTime() - fMovieOutStartTime
+					iMovieRate = UISelf:GetParent():GetSize():GetY()*fDeltaL/fMovieTime
+					loc:SetY(scr_size:GetY()-UISelf:GetParent():GetSize():GetY()+ iMovieRate)
+					UISelf:SetLocation(loc)
+					size = UISelf:GetImgSize()
+					if size:GetY() > 0 then
+						size:SetY(UISelf:GetParent():GetSize():GetY() - UISelf:GetParent():GetSize():GetY()*fDeltaL/fMovieTime)
+						UISelf:SetImgSize( size )
+					end
+				else
+					UISelf:CloseParent()	
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				scr_size = GetScreenSize()
+
+				scr_size:SetX(0)
+				scr_size:SetY(scr_size:GetY()-100)
+				UISelf:SetLocation(scr_size)
+
+				size = UISelf:GetImgSize()
+				size:SetX(GetScreenSize():GetX())
+				size:SetY(100)
+				UISelf:SetImgSize( size )
+			</SCRIPT>
+		</IMG>
+		<SCRIPT ID = "ON_CALL">
+			CloseUI("FRM_MOVIE_IN")
+			fMovieTime = 2
+			fMovieOutStartTime = GetAccumTime()
+			local size = UISelf:GetImgSize()
+			size:SetX(GetScreenSize():GetX())
+			UISelf:SetImgSize( size )
+		</SCRIPT>
+
+		<SCRIPT ID = "ON_CLOSE"> fMovieTime = 2</SCRIPT>
+	</FORM>
+</XUI>

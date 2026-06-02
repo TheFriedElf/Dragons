@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Guardian_Aram" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Totem_Pole"/>
+		<KFMPATH SCALE="1.1">../Data/2_Mon/Guardian_Aram/Guardian_Aram.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.30"/>
+		<ABV>
+		
+		</ABV>
+		<SLOT>
+			<!-- 가장 아랫단에서 쏘기 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000380"/>
+
+
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="Stun" ANIMATION="1000001"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,12 @@
+<ACTION ID="a_shieldstrike" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Fig_Onehand_skill_Shield_Strike_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_TARGET_NODE_TO_WORLD_POS_WITH_ROTATE="char_root"
+       FIRE_CASTER_EFFECT_ID="eff_Shield_Strike_char_root"
+       NO_WEAPON_TRAIL="TRUE"
+       FIRE_SOUND_ID=""      
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	   FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+       />
+</ACTION>

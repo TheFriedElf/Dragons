@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Dark_Chef" INIT_ACTION="a_opening">
+	<TEXTURE SRC="JP_Light1001_01.dds">../Data/3_World/Map_Textures/JP_Light1001_01.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Ceremics_1004_01.dds">../Data/3_World/Map_Textures/JPS_Ceremics_1004_01.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Drink1001_01.dds">../Data/3_World/Map_Textures/JPS_Drink1001_01.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Fish1001_01.dds">../Data/3_World/Map_Textures/JPS_Fish1001_01.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Frame1001_01.dds">../Data/3_World/Map_Textures/JPS_Frame1001_01.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Frame1001_02.dds">../Data/3_World/Map_Textures/JPS_Frame1001_02.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Frame1001_03.dds">../Data/3_World/Map_Textures/JPS_Frame1001_03.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Godgate1001_01.dds">../Data/3_World/Map_Textures/JPS_Godgate1001_01.dds</TEXTURE>
+	<TEXTURE SRC="JPS_Light3001_01.dds">../Data/3_World/Map_Textures/JPS_Light3001_01.dds</TEXTURE>
+<TEXTURE SRC="JPS_Road1001_01.dds">../Data/3_World/Map_Textures/JPS_Road1001_01.dds</TEXTURE>
+<TEXTURE SRC="JPS_Road1001_02..dds">../Data/3_World/Map_Textures/JPS_Road1001_02..dds</TEXTURE>
+<TEXTURE SRC="JPS_Sakurabar_1001_01.dds">../Data/3_World/Map_Textures/JPS_Sakurabar_1001_01.dds</TEXTURE>
+<TEXTURE SRC="JPS_Sakurabar_1001_02.dds">../Data/3_World/Map_Textures/JPS_Sakurabar_1001_02.dds</TEXTURE>
+<TEXTURE SRC="JPS_SArmor_1001_01.dds">../Data/3_World/Map_Textures/JPS_SArmor_1001_01.dds</TEXTURE>
+<TEXTURE SRC="JPS_Scroll1001_01.dds">../Data/3_World/Map_Textures/JPS_Scroll1001_01.dds</TEXTURE>
+<TEXTURE SRC="JPS_Wall1001_01.dds">../Data/3_World/Map_Textures/JPS_Wall1001_01.dds</TEXTURE>
+
+	<!--Scale이 제일먼저 정의 되어 있어야 합니다.-->
+	<!--<COLORSHADOW SCALE="1.5" PARTICLE="e_ef_colorshadow_monster" MAX="500.0"/>-->
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_BadCompanyBoss"/>
+		<KFMPATH>../Data/2_Mon/M_Dark_Chef/M_Dark_Chef.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/M_Dark_Chef/M_Dark_Chef_opening_01.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+<!--		<ATTACH TYPE="effect" SLOT="5166420" EFFECT="ef_parel_idle_01_p_pt_back" TO="p_pt_back"/>
+		<ATTACH TYPE="effect" SLOT="5166421" EFFECT="ef_parel_idle_01_Dummy03" TO="Dummy03"/>
+		<ATTACH TYPE="effect" SLOT="5166422" EFFECT="ef_parel_idle_01_Bip01_R_Hand" TO="Bip01 R Hand"/>
+		<ATTACH TYPE="effect" SLOT="5166423" EFFECT="ef_parel_idle_01_Bip01_R_Hand" TO="Bip01 L Hand"/>-->
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="16"/>
+			<SPHERE TO="p_hit_point_02" SIZE="27"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000002"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000000"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000002"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000001"/>
+			<!-- 바닥 찍기 -->
+			<ITEM NAME="attk_03_01" ANIMATION="1000003"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000009"/>
+			<!-- 보석 던지기 -->
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000201"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000202" FIRE_START_NODE="p_ef_l_hand" PROJECTILE_ID="ef_Dark_Chef_shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000203"/>
+			<!-- 점프해서 바닥 내려 찍기 -->
+			<ITEM NAME="jumpdowncrash_up" ANIMATION="1000014"/>
+			<ITEM NAME="jumpdowncrash_down" ANIMATION="1000015" SOUND_ID="Dark_Chef"/>
+			<ITEM NAME="jumpdowncrash_getup" ANIMATION="1000016"/>
+			<!-- 돌격-->
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000019"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000025"/>
+			<ITEM NAME="die_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000005" DIE_ALPHA="1"/>
+	
+			<ITEM NAME="Opening" ANIMATION="1000082" OPENING_ACTOR="6132200"/>
+			<ITEM NAME="idle_01" ANIMATION="1000003"/>
+			<ITEM NAME="idle_01" ANIMATION="1000004" RANDOM="100"/>
+			<!--ITEM NAME="knockdown_01" ANIMATION="1000005"/>
+			<ITEM NAME="knockdown_idle_01" ANIMATION="1000006"/>
+			<ITEM NAME="knockdown_up_01" ANIMATION="1000007"/-->
+			<ITEM NAME="walk" ANIMATION="1000008" SPEED="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000018"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000026"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000027" DIE_ALPHA="1"/>
+				<ITEM NAME="StandUp" ANIMATION="1000007"/>
+										<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000002"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000002"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000002" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000002"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

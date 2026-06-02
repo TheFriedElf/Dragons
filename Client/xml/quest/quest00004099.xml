@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4099</ID> <!--T.T.10409901 초마법 시전! 레.누.보. (4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	에델린과 대화-->
+<!--[완료NPC]	망자의 탑 - 에델린-->
+<!--[내용]	에델린은 초마법이 실패했다고 생각한다. 에델린과 대화해 보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4D69D120-8EF6-451f-B348-3C01345299FD</CLIENT> <!--시작NPC 망자의 탑 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4D69D120-8EF6-451f-B348-3C01345299FD</PAYER> <!--완료NPC 망자의 탑 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">4D69D120-8EF6-451f-B348-3C01345299FD</AGENT> <!--진행NPC 11 망자의 탑 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409911"/> <!--에델린과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409921" FACE="hyena_normal"/> <!--모두 어렵게 도와줘서 여기까지 오게되었는데…
+이번 실험은 실패한 것 같아요.. 면목이 없습니다.%% -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409926" FACE="hyena_normal"/> <!--그럼 전 이만 바람 항구로 돌아가겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409923" FACE="hyena_normal"/> <!--막상 과거를 볼 수 있다고 하니까…
+중요한 마법의 시전인데도 잡념이 껴들고 말았네요.%%
+개인적으로 보고 싶어했던 일들이
+천년 전의 과거를 실현시키는데 방해가 되었던 것 같습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409924" FACE="hyena_angly"/> <!--이제 돌아가셔야죠.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409925" FACE="hyena_normal"/> <!--처음 봤어요.
+엄마가 건강하게 살아있을 때의 모습은…%%
+그 모습을 보고 싶다고 계속 생각했던 것 같아요.
+그래서 실패한 것 같아요.-->
+			<SELECT ID="601"  TEXT="500002">계속</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

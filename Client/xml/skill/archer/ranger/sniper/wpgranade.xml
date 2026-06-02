@@ -1,0 +1,8 @@
+<ACTION ID="a_WP Granade" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE"  IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP = "true"/>
+  <SLOT NAME="Com_shot_04"/>
+  <FSM SCRIPT="Projectile_HandGrenade" PROJECTILE_ID ="PROJECTILE_HEGrenade" 
+       ATTACH_NODE_ID="p_wp_r_hand" 
+       HIDE_WEAPON="TRUE"
+       HIT_SOUND_ID="WP_Granade_Fire"/>
+</ACTION>

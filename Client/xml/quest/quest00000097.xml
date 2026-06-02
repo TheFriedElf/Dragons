@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>97</ID> <!--T.T.10009701 조금은 쓸만한 녀석 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	게펜의 테일링과 이야기 하자.-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	디포르테는 조금은 쓸만한 녀석이라며 테일링에게 가보라고 한다. 게펜의 테일링과 이야기하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">644911B5-D0CF-45c0-B654-28FFCDED339C</CLIENT> <!--시작NPC 게펜 - 디포르테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">644911B5-D0CF-45c0-B654-28FFCDED339C</AGENT> <!--진행NPC 11 게펜 - 디포르테 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 12 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10009711"/> <!--테일링과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10009721" FACE="Deforte_normal"/> <!--뭐, 그러적럭 쓸만한 녀석이란 건 알았어.%%
+(비닛이 또 쫑알댄다.)
+"사실 말하자면 디포르테 언니보다 훨씬 다용도로 사용할 수 있을 거 같은데. 언니는 사실 별로 쓸 데가 없어."%%
+큭, 비닛! 너 입 다물고 있으라고 했지.
+비닛 저딴 녀석과 이야기하지 않는 게 좋아. 아마 속이 터져 죽을지도 몰라. 알겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10009726" FACE="Tailing_smile"/> <!--아! 마침 잘 오셨어요. 
+현재 박사님의 이론을 증명하기 위해서 꼭 필요한 게 있었는데 구하질 못해서 발만 동동 구르고 있었어요. %%
+보세요. 지금도 이렇게 발을 구르고 있잖아요.
+(테일링이 스텝댄스를 춘다)%%
+(도대체 뭘 하고 싶은 거야?)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10009723" FACE="Deforte_normal"/> <!--그래, 잘 생각했어.
+내가 점점 성격이 안 좋아진 것도 저 녀석과 함께 한 후인 것 같아.
+테일링이 클라인 박사님과 만나고 온 것 같아. 테일링에게 가봐.
+다시 한번 말하지만 비닛 저 녀석과 가까이 하지 마!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10009724" FACE="Deforte_normal"/> <!--그래 끼리끼리 논다고, 볼 때부터 알아봤어. 당장 저리로 꺼져!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10009725" FACE="Deforte_normal"/> <!--비닛만 멀리 떨어진다면, 차원의 균열 따윈 고마운 마음으로 받아들일 수 있겠어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10009702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

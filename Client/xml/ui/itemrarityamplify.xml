@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_ITEM_RARITY_AMPLIFY" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR X = "240" Y = "91" W ="255" H ="453" CAN_DRAG = "1" STATIC_NUM = "1"/>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="253" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="222" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="213" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" TEXT="1524" T_X="10" T_Y="4" W="213" H="24" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<IMG ID="IMG_LINE_1" X="5" Y="275" W="245" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="245" IMG_H="2" />
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="280" Z="-2" W="237" H="130" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID = "SFRM_SHADOW" X = "9" Y = "280" Z="-1" W="237" H="130" STATIC_NUM = "3" >
+			<ATTR TEXT = "" FONT_COLOR_HEX="0xFF4D3413" T_X = "10" T_Y = "10"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<IMG ID="IMG_LINE_1" X="6" Y="98" W="224" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="224" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE_2" X="6" Y="99" W="224" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="224" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN1" X="7" Y="102" Z="-2" W="116" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN2" X="140" Y="102" Z="-2" W="30" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN3" X="187" Y="102" Z="-2" W="30" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<FORM ID="FRM_COIN1" X="87" Y="105" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					UISelf:DrawMoneyByValue(1, GetAmplifyNeedMoney())
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN2" X="134" Y="105" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					UISelf:DrawMoneyByValue(2, GetAmplifyNeedMoney())
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN3" X="181" Y="105" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					UISelf:DrawMoneyByValue(3, GetAmplifyNeedMoney())
+				</SCRIPT>
+			</FORM>	
+		</STATIC_FORM>
+		<IMG ID="IMG_STONE_BG" X="12" Y="38" Z="-2" W="231" H="230" IMG="../Data/6_ui/stone/stCraftBg.tga" IMG_W="231" IMG_H="230"/>
+		<FORM ID = "FRM_UIMODEL" X="12" Y="38" Z="1" W="231" H="230" PASS_EVENT="1">
+			<SCRIPT ID="ON_TICK">				
+				OnTick_RarityAmplify(UISelf:GetTotalLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">
+				OnDisplay_RarityAmplify()
+			</SCRIPT>
+		</FORM>
+		<IMG ID="IMG_STONE_SLOT" X="42" Y="67" Z="-1" W="172" H="172" IMG="../Data/6_ui/stone/stCraftSlot.tga" IMG_W="172" IMG_H="172">
+			<STATIC_FORM ID = "SFRM_COLOR_SLOT" X="65" Y="65" Z="-2" W="42" H="42" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW_SLOT" X = "65" Y = "65" Z="-1" W="42" H="42" STATIC_NUM = "3" />
+		</IMG>		
+		<IMG ID = "IMG_ITEM" X="108" Y="134" W="40" H="40" IMG="../Data/6_ui/info/ifIconWp.tga" IMG_W = "40" IMG_H="40" PASS_EVENT="1">
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(true)
+			</SCRIPT>
+		</IMG>
+
+		<ICON ID = "ICN_SRC" X="108" Y="134" Z="0" W="40" H="40" ICON_GRP ="171" ICON_KEY = "0">			
+			<SCRIPT ID = "ON_L_BTN_UP"> UISelf:CursorToIcon() </SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY"> DisplaySrcIcon_RarityAmplify() </SCRIPT>
+		</ICON>
+		<ICON ID = "ICN_MATERIAL_0" X="43" Y="69" W="40" H="40" ICON_GRP ="173" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_DISPLAY"> 
+				local location = UISelf:GetTotalLocation()
+				DisplayNeedItemIcon_RarityAmplify(0, location) 
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+
+		<IMG ID = "IMG_LOCK0" X="43" Y="69" Z="1" W="40" H="40" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40"/>
+		<ICON ID = "ICN_MATERIAL_2" X="43" Y="199" W="40" H="40" ICON_GRP ="173" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_DISPLAY"> 
+				local location = UISelf:GetTotalLocation()
+				DisplayNeedItemIcon_RarityAmplify(2, location) 
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_REG1" X="69" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UseInsureItem_RarityAmplify(false) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEREG1" X="43" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UseInsureItem_RarityAmplify(true) </SCRIPT>
+		</BUTTON>
+		<ICON ID = "ICN_MATERIAL_3" X="173" Y="199" W="40" H="40" ICON_GRP ="173" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_DISPLAY"> 
+				local location = UISelf:GetTotalLocation()
+				DisplayNeedItemIcon_RarityAmplify(3, location) 
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_REG3" X="199" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UseInsureItem_RarityAmplify(true) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEREG3" X="173" Y="225" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UseInsureItem_RarityAmplify(false) </SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_LOCK3" X="173" Y="199" W="40" H="40" Z="3" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40">
+			<SCRIPT ID = "ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</IMG>
+		<ICON ID = "ICN_MATERIAL_1" X="173" Y="69" W="40" H="40" ICON_GRP ="173" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_DISPLAY"> 
+				local location = UISelf:GetTotalLocation()
+				DisplayNeedItemIcon_RarityAmplify(1, location) 
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+
+		<BUTTON ID = "BTN_TRY_REFINE" X="44" Y="414" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				if Check_RarityAmplify() == false then
+					return
+				end
+				if true==IsUseInsureItem_RarityAmplify() then
+					Start_RarityAmplify()
+				else
+					CallYesNoMsgBox( GetTT(1544), GUID(), 55 ) 
+				end
+			</SCRIPT> 
+			<HOTKEY ID="59"> 
+				if Check_RarityAmplify() == false then
+					return
+				end
+				if true==IsUseInsureItem_RarityAmplify() then
+					Start_RarityAmplify()
+				else
+					CallYesNoMsgBox( GetTT(1544), GUID(), 55 ) 
+				end
+			</HOTKEY>
+			<SCRIPT ID = "ON_CALL"> UISelf:Disable(true) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="130" Y="414" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if( Cancle_RarityAmplify() == true ) then
+					UISelf:CloseParent() 
+				end
+			</SCRIPT>
+			<HOTKEY ID="60">
+				if( Cancle_RarityAmplify() == true ) then
+					UISelf:CloseParent() 
+				end
+			</HOTKEY>
+			<HOTKEY ID="1">
+				if( Cancle_RarityAmplify() == true ) then
+					UISelf:CloseParent() 
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			Clear_RarityAmplify()
+			CloseUI("Inv")
+		</SCRIPT> 
+		<SCRIPT ID = "ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+			PreChangeInvViewGroupTop(1)
+			SetReqInvWearableUpdate(true);
+			Clear_RarityAmplify()
+			CloseUI("SFRM_MSG_TRADE")
+			CloseUI("SFRM_MSG_TRADE_REQUEST")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 241, 91)</SCRIPT>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="ITEM_RARITY_AMPLIFY_SELECT" ALIGN_X="50" ALIGN_Y="50" W="271" H="345" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="269" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="238" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent()</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="229" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" T_X="10" T_Y="4" W="229" H="24" STATIC_NUM="3" TEXT="1524" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_SCRIPT" X="9" Y="35" STATIC_NUM="34" W="254" H="199">
+			<FORM ID="FRM_TEXT1" X="7" Y="7" W="230" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="1">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="1526" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT2" X="7" Y="46" W="230" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="2">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="1527" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT3" X="7" Y="83" W="230" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="1528" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT4" X="7" Y="120" W="230" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="4">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="1529" T_X="18" T_Y="-1"/>
+			</FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="236" Z="-1" W="253" H="66" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID = "SFRM_SHADOW" W="253" H="66" STATIC_NUM="3" TEXT="50805" FONT_COLOR_HEX="0xFF4D3413" T_X = "16" T_Y="8">
+				<IMG ID="IMG_ARROW" X="9" Y="13" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+				<IMG ID="IMG_LINE_1" X="8" Y="27" W="237" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="237" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="8" Y="28" W="237" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="237" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<STATIC_FORM ID = "SFRM_BTN_BG" X="8" Y="31" W="237" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+					<ATTR TEXT="1511" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_SELECT" X="185" Y="270" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2200) </SCRIPT>
+			<ATTR TEXT="400084" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() CallItemAmplifyUI()</SCRIPT>
+			<HOTKEY ID="59"> UISelf:CloseParent() CallItemAmplifyUI() </HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="88" Y="306" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="97" FONT="FTtitle_14" T_X="42" T_Y="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CALL">RegistUIAction(UISelf, "CloseUI")</SCRIPT>
+	</STATIC_FORM>	
+</XUI>

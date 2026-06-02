@@ -1,0 +1,8 @@
+<ACTION ID="a_Kozaks Dance" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Skill_StripWeapon_01"/>
+  <FSM SCRIPT="Skill_InstallDefault"
+       INSTALL_EFFECT_ID="ef_KazaksDance_02_char_root"
+       INSTALL_EFFECT_TARGET_NODE="char_root"
+       HIT_SOUND_ID="Cossack"/>
+</ACTION>

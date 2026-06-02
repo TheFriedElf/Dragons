@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4183</ID> <!--T.T.10418301 벌목꾼의 등장 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	난폭한 나무꾼 30 마리 퇴치-->
+<!--[완료NPC]	솔방울 언덕 - 오르하-->
+<!--[내용]	오르하의 말에 따르면, 신록의 숲으로 진입하는 관문은 고대의 마법진에 의해 봉쇄되어 허락된 자만이 출입할 수 있다고 한다. 이 때문에 검은마녀의 사주를 받은 나무꾼 버나언의 무리들이 신록의 숲으로 들어가는 길을 내기 위해 솔방울 언덕에서부터 신록의 나무들을 벌목하고 있다고 한다. 무녀 오르하를 위해 솔방울 언덕[미션 모드]에 있는 난폭한 나무꾼 30마리를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">1394F78B-CF1A-4fa3-B7CE-039585625C17</CLIENT> <!--시작NPC 솔방울 언덕 - 오르하 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">1394F78B-CF1A-4fa3-B7CE-039585625C17</PAYER> <!--완료NPC 솔방울 언덕 - 오르하 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">1394F78B-CF1A-4fa3-B7CE-039585625C17</AGENT> <!--진행NPC 11 솔방울 언덕 - 오르하 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9020435/1">6017100</MONSTER> 
+ <!--MON_NO=6017100/난폭한 나무꾼,MAP_NO=9020435/솔방울 언덕 아케이드 5,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9020436/1">6017100</MONSTER> 
+ <!--MON_NO=6017100/난폭한 나무꾼,MAP_NO=9020436/솔방울 언덕 아케이드 6,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9022435/1">6017100</MONSTER> 
+ <!--MON_NO=6017100/난폭한 나무꾼,MAP_NO=9022435/솔방울 언덕 카오스 5,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9022436/1">6017100</MONSTER> 
+ <!--MON_NO=6017100/난폭한 나무꾼,MAP_NO=9022436/솔방울 언덕 카오스 6,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10418311"/> <!--난폭한 나무꾼-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418321" FACE="Orha_normal"/> <!--후훗.. 그러고보니…
+샹도르가 믿음직한 친구가 손님으로 왔다고 하던데
+바로 용사님이 나오이가 꿈에 봤던 그 용사님이시군요.%%
+그럼 안심할게요. 휴우… 아깐 얼마나 깜짝 놀랐는지 몰라요.
+제가 이곳에 나와 있는 건… 신록의 움직임을 관찰하기 위해서에요.%%
+원래 신록의 숲은 선택받은 사람이 들어갈 수 있어요.
+주변이 미로처럼 복잡하게 꼬여있지요.%%
+이곳 솔방울 언덕은 신록의 숲으로 진입하는 관문으로…
+수천년 된 나무들이 빽빽하게 들어차 있는 데다가...%%
+신록의 진이라고 하는 고대의 마법진에 의해서 숲의 모양이
+시시각각 변화한답니다. 아무나 쉽게 들어갈 수 있는 곳이 아니에요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418326" FACE="Orha_smile"/> <!--나무꾼들의 움직임이 조금 둔화되었더군요. 
+용사님이 가세해 공격했던 것이 효과 만점인 것 같아요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418323" FACE="Orha_normal"/> <!--우리 미카 일족은 특별한 사연 때문에 신록의 숲을 
+통과하는 것이 허락되어 있답니다.
+신의 나무들이 저희들이 가는 길을 인도해 주지요.%%
+하지만 지금은 모든 것이 엉망이 되어버렸어요.
+바로 검은 마녀의 사주를 받은 나무꾼 버나언들이
+이곳에서 신의 나무들을 베어내고 있기 때문이에요.%%
+만약 당신이 정말 나오이가 꿈에서 본 진정한 용사라면
+저희들을 도와주세요.%% 
+솔방울 언덕[미션 모드]에 쳐들어온 나무꾼들을 퇴치하는 일을 도와
+주셨으면 합니다. 상처받은 신록을 위해 힘을 더해주세요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418324" FACE="Orha_normal"/> <!--지금은 절 도와주실 수 있는 상황이 아닌가 보군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418325" FACE="Orha_normal"/> <!--난폭한 나무꾼들은 이 솔방울 언덕[미션 모드]를 배회하고 있습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

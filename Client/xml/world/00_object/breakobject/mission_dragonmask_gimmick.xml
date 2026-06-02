@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="DragonMask_Gimmick">
+
+<APPEARANCE_CHANGE>
+    <CONDITION HP_MIN="50" HP_MAX="100">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Mission/DragonMask/DragonMask_Level01.kfm"/>
+    </CONDITION>
+    <CONDITION HP_MIN="20" HP_MAX="50">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Mission/DragonMask/DragonMask_Level02.kfm"/>
+    </CONDITION>
+    <CONDITION HP_MIN="0" HP_MAX="20">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Mission/DragonMask/DragonMask_Level03.kfm"/>
+    </CONDITION>
+</APPEARANCE_CHANGE>
+	<WORLDOBJECT>
+
+		<KFMPATH SCALE="1.0">../Data/3_World/00_Object/breakObject/Mission/DragonMask/DragonMask_Level01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<sphere TO="p_hit_point_01" SIZE="24.715"/>
+			<sphere TO="p_hit_point_02" SIZE="23.0"/>
+			<sphere TO="p_hit_point_03" SIZE="23.0"/>
+		</ABV> 
+
+<!--		<ATTACH TYPE="effect" SLOT="53912" EFFECT="ef_PVP_Maincore1002_01_char_root" TO="char_root"/>-->
+		<SLOT>
+			<!-- Basic Movement -->
+			<!--ITEM NAME="openinge_01" ANIMATION="1000081"/-->
+			<ITEM NAME="appearance_change_01" ANIMATION="1000021"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

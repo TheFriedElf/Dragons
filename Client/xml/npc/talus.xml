@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Talus" INIT_ACTION="a_idle">
+<NPCMARK NAME="e_ef_colorshadow_npc" ATTATCH_TO="char_root"/>
+	<WORLDOBJECT>
+		<ICON ID = "icon_n_Talus" />
+		<KFMPATH SCALE="1.1">../Data/1_Cha/2_NPC/Item_Change_NPC/Item_Change_NPC.kfm</KFMPATH>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+		</SLOT>
+		<EFFECT>
+			<SLOT NAME="cast" GUID="2DB6C5D5-2391-409a-AE4D-80BA5373AC94"/>
+		</EFFECT>
+	</WORLDOBJECT>
+</ACTOR>

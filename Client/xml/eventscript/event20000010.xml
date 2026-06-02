@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- ESC키 눌렀을때 반응 -->
+	<!-- 꼭 해야 되는 연출 -->
+	<!-- 유닛 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/>
+	<!-- 로켓타고 내려오기 -->
+	<CMD TYPE="PlayAction" SpecialActor="ME" ActionName="a_teleport_rocket_out" IPARAM_1="100" IVALUE_1="6"/>
+	<!-- 전체 UI 보이기 -->
+	<CMD TYPE="HideUI" enable="false"/>
+
+
+	<!-- 카메라로 연출 -->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="0"/>
+
+	<!-- PC외 UI 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/>
+
+	<!-- 별자리 던전 시작 UI 출력 -->
+	<CMD type="CallUI" UIWndName="FRM_CONSTELLATION_START"/>
+</EVENT_SCRIPT>

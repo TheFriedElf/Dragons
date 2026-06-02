@@ -1,0 +1,8 @@
+<ACTION ID="a_bonedragon_summon_monster" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" BIDIRECTION="TRUE">
+	<SLOT NAME="bonedragon_summon_monster_start"/>
+	<SLOT NAME="bonedragon_summon_monster_battleidle" LOOP="TRUE"/>
+	<SLOT NAME="bonedragon_summon_monster_attack"/>
+	<SLOT NAME="bonedragon_summon_monster_loop" LOOP="TRUE"/>
+	<SLOT NAME="bonedragon_summon_monster_finish"/>
+	<FSM SCRIPT="Act_BoneDragon_Summon_Monster"/>
+</ACTION>

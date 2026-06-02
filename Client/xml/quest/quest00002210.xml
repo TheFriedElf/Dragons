@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2210</ID> <!--T.T.10221001 공간 에너지 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 니콜라와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 니콜라-->
+<!--[내용]	달빛해안 마을 니콜라는 고양이를 통해 무언가 굉장한 깨달음을 얻었다고 한다.
+니콜라가 얻은 깨달음이 무엇인지 물어보도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</CLIENT> <!--시작NPC 달빛해안 마을 - 니콜라 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</PAYER> <!--완료NPC 달빛해안 마을 - 니콜라 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</AGENT> <!--진행NPC 11 달빛해안 마을 - 니콜라 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10221011"/> <!--니콜라와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10221021" FACE="Nikola_normal"/> <!--자네가 궁금하다면 차원 아이템에 대해서 설명을 해주겠네.
+설명전에 내가 만든 장치부터 이해할 필요가 있네. 
+듣고 싶은가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10221026" FACE="Nikola_normal"/> <!--그래서 무한 에너지 본론을 지금부터 얘기하자면… … ...
+(지금 시작하는 것 같다. 일단 바쁘다며 자리를 피하고 보자.)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10221023" FACE="Nikola_smile"/> <!--내가 관심을 갖고 있는 분야는 '에너지'이네.
+내가 말하는 '에너지'는 현대과학에 입각한 자연에너지나 인공에너지가 아닐세.
+그런 일은 내가 아니고서도 여기저기서 연구하고 상용화되고 있는 실정일세.%%
+아쉽게도 상용화가 안되고 사라지는 이론도 많지. 온라인게임처럼 말일세.
+요즘 내가 즐기는 게임은 '드래고니카'라고 재미있는 게임이 하나 있지.
+앗! 나의 취미 생활과 관련 된 얘기를 해버렸군. %%
+다시 본론으로 돌아와 내가 연구하는 분야는  무한대의 에너지일세.
+그 에너지는 분명 존재하고 있어. 그걸 나는 공간에너지(Space Energy) 혹은 
+자유 에너지(Free Energy)라고 부르고 있네.%%
+다른 과학자들은 그 에너지를 연구해보지도 않은 채 부정하고 있어.
+하지만 나는 이 장치를 이용해, 그 에너지를 압축하는데 성공했네.%%
+이 에너지는 무한대로 사용할 수 있는 에너지일세. 그러게 되면 더 이상 전기세도
+보일러비도 내지 않아도 된다네. 생각만해도 기쁘지 않은가?
+자네도 내 말을 믿지 못하는건가? 표정이 왜 그런가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10221024" FACE="Nikola_normal"/> <!--고양이만도 못한 녀석. 쳇!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10221025" FACE="Nikola_normal"/> <!--지금부터 설명해주겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10221002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

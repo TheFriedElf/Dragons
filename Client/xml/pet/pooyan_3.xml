@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="p_Pooyan_3" INIT_ACTION="a_trace_ground2">
+	<TEXTURE SRC="P03_C03_Head_0101.dds">../Data/4_item/4_Pet/P03_Pooyan/Class_03/01_Helmet/Texture/P03_C03_Head_0103.dds</TEXTURE>
+	<TEXTURE SRC="P03_C03_Body_0101.dds">../Data/4_item/4_Pet/P03_Pooyan/Class_03/02_Wear/Texture/P03_C03_Body_0103.dds</TEXTURE>
+	<RESERVED_ACTION OPENING="a_trace_ground2"/>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="0.55">../Data/1_Cha/3_Pet/P03_Pooyan/Class_03/P03_C03.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="2"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="1"/>
+			<ITEM NAME="idle_02" ANIMATION="1000003" RANDOM="100"/>
+			<!--상태아이들-->
+			<ITEM NAME="idle_02" ANIMATION="1000004" RANDOM="100"/>
+			<!--상태아이들-->
+			<ITEM NAME="idle_03" ANIMATION="1000005" RANDOM="100"/>
+			<!--상태아이들-->
+			<ITEM NAME="hungry" ANIMATION="1000091" RANDOM="100"/>
+			<!--배고픔-->
+			<ITEM NAME="sleep" ANIMATION="1000092" RANDOM="100"/>
+			<!--졸기-->
+			<ITEM NAME="annoy" ANIMATION="1000093" RANDOM="100"/>
+			<!--삐짐-->
+			<ITEM NAME="meal" ANIMATION="1000071" RANDOM="100"/>
+			<!--먹기-->
+			<ITEM NAME="exercise" ANIMATION="1000072" RANDOM="100" TIME="3"/>
+			<!--운동-->
+			<ITEM NAME="play" ANIMATION="1000073" RANDOM="100"/>
+			<!--놀기-->
+			<ITEM NAME="walk" ANIMATION="1000055" SPEED="1.5" MIN_DIST="55"/>
+			<ITEM NAME="run" ANIMATION="1000055" SPEED="3" MAX_DIST="70"/>
+			<ITEM NAME="opening" ANIMATION="1000000"/>
+			<ITEM NAME="jump_01" ANIMATION="1000101"/>
+			<ITEM NAME="jump_02" ANIMATION="1000102"/>
+			<ITEM NAME="jump_03" ANIMATION="1000103"/>
+			<!--점프아이들-->
+			<ITEM NAME="jump_04" SPEED="0.7" ANIMATION="1000104"/>
+			<ITEM NAME="buff_01" ANIMATION="1000231"/>
+			<ITEM NAME="shot_01" ANIMATION="1000211"/>
+			<ITEM NAME="dash_01" ANIMATION="1000221"/>
+			<ITEM NAME="die" ANIMATION="1000021"/>
+
+      <ITEM NAME="wheelwind_01" ANIMATION="1000251"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

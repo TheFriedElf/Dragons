@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 벚꽃 이벤트 엔딩 -->
+<EVENT_SCRIPT>
+    <CMD type="WaitTime" time="4"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD type="WaitTime" time="2"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/>
+    <CMD type="WaitTime" time="2"/>
+    <CMD type="CallUI" UIWndName = "FRM_MISSION_END"/>
+    <CMD TYPE="PlaySound" SpecialActor="ME"  SlotNumber="1" SoundID="Guild_LV_UP"/>
+    <CMD type="waittime" time="5"/>
+    <CMD TYPE="StopSound" SpecialActor="ME"  SlotNumber="1"/>
+    <CMD type="waittime" time="1"/>
+
+    <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="setmoviescene" enable="true"/>
+    <CMD type="waittime" time="0"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/> 
+    <CMD TYPE="SetCameraModeEvent"/>
+
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    <CMD TYPE="setmoviescene" enable="false" Time="1"/>
+    <CMD type="waittime" time="0"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD TYPE="MapMove" MapID ="9018100" SpawnIndex="1" />
+</EVENT_SCRIPT>

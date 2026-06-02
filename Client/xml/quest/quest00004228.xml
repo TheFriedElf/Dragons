@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4228</ID> <!--T.T.10422801 흑룡왕 엘가와의 사투!!! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	흑룡왕 엘가 퇴치-->
+<!--[완료NPC]	검은발톱 전초기지 - 콜린-->
+<!--[내용]	드디어 결전의 시간이 찾아왔다. 인간과 드라칸, 그 외에 무수한 종족들이 모두 모여 세상을 위협하는 엘가와 오리진 앞에 당도했다. 공격대를 조직하여 검은 발톱 둥지를 공략하라. 완전한 부활을 기다리고 있는 흑룡왕 엘가를 황급히 퇴치하는 것이 목표다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">790D25EB-B83D-4da9-A4CD-66620CF815F9</CLIENT> <!--시작NPC 검은발톱 전초기지 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">790D25EB-B83D-4da9-A4CD-66620CF815F9</PAYER> <!--완료NPC 검은발톱 전초기지 - 콜린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">790D25EB-B83D-4da9-A4CD-66620CF815F9</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 콜린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">3542120</MONSTER> 
+ <!--MON_NO=3542120/흑룡왕 엘가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10422811"/> <!--흑룡왕 엘가 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10422821" FACE="Colin_normal"/> <!--드디어 때가 되었다!%%
+흑룡왕 엘가가 바로 저 너머 검은발톱 둥지에서 
+사악한 이빨을 드리우고 있다.
+그대들은 저 거대한 악룡과 대적할 준비가 되었는가!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10422826" FACE="Colin_smile"/> <!--오오! 그대야말로 진정한 영웅이요, 위기에 빠진 
+브리즈 대륙을 구한 구세주라네!!!!%%
+엘가와 마녀 파리스를 지배했던 사념체 오리진을 물리치고,
+진정한 평화를 맞이하는 그 날까지 그대의 활약을 기대하겠네.
+그럼 편히 쉬도록 하게!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10422823" FACE="Colin_smile"/> <!--드디어 우리 앞에 결전의 시간이 찾아왔다.%% 
+엘가에 의해 사라진 평화롭던 어제를 기억하라.
+오늘 우리가 목숨을 걸고 싸워 승리를 쟁취한다면
+영광스러운 내일이 기다릴 것이다.%%
+전군, 진격하라!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10422824" FACE="Colin_angly"/> <!--아아.. 엘가의 마수로부터 세계를 구원할 용자는 정녕 사라진 것인가!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10422825" FACE="Colin_normal"/> <!--만약 우리가 한순간이라도 주저하게 된다면, 
+저 가공할 어둠의 왕 엘가는 완전한 부활을 하게 될 것이네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10422802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

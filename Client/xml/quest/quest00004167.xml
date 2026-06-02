@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4167</ID> <!--T.T.10416701 불의 시험 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	아키아 동굴의 원한의 정령 퇴치-->
+<!--[완료NPC]	아키아 동굴(박쥐 거미 근처) - 루-->
+<!--[내용]	%name%을 인정할 수 없다던 루는 부재 중인 사제장을 대신해 불의 시험을 시작한다. 불의 시험을 통과하기 위해 아키아 동굴로 침입해 온 원한의 정령을 퇴치한 후, 아키아 동굴의 박쥐 거미가 있는 근방의 루 사제를 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C5283C43-DA26-44bf-BF96-CA9780804EDA</CLIENT> <!--시작NPC 아키아 동굴(원한의 정령 근처) - 루 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">0C51E6F8-3DB9-42fe-98B8-E71496F62510</PAYER> <!--완료NPC 아키아 동굴(박쥐 거미 근처) - 루 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C5283C43-DA26-44bf-BF96-CA9780804EDA</AGENT> <!--진행NPC 11 아키아 동굴(원한의 정령 근처) - 루 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">0C51E6F8-3DB9-42fe-98B8-E71496F62510</AGENT> <!--진행NPC 12 아키아 동굴(박쥐 거미 근처) - 루 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3530400</MONSTER> 
+ <!--MON_NO=3530400/원한의 정령,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416711"/> <!--원한의 정령 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="5">50130090</ITEM><!--전체지급/전체/1)/50130090(봉인아님) 5개-최상급 체력 회복 포션-->
+			<ITEM COUNT="5">50130100</ITEM><!--전체지급/전체/2)/50130100(봉인아님) 5개-최상급 마나 회복 포션-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416721" FACE="Lwu_normal"/> <!--이것도 오래된 전통이니까 시험을 통과한 것으로 
+인정해야겠지만… 
+아직 신관 전사가 되는 것을 허락할 수 없어.%%
+너에게 몇가지 시험을 더 내도록 하지.
+만약 모두 통과한다면, 그림자의 사제로서
+너의 실력을 인정하도록 할게.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416726" FACE="Lwu_normal"/> <!--… ...
+많이…%%
+많이 힘들었던 모양이구나.
+포션 몇 개 줄테니 체력 회복부터 하렴.%%
+원한의 정령을 해치웠다니…. 분명 사제장님은 
+너에게 분명히 합격을 줬을거야.%%
+수고했어… 
+그리고 다음부턴 너무 무리하지마.%%
+죽으면 아무 소용 없는 거니까.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416723" FACE="Lwu_angry"/> <!--이곳에 얼마 전부터 검은 마녀가 보낸 몬스터들이 
+출현하고 있어. 그중에 복수의 정령이란 녀석들은
+아주, 아아주 짜증나는 녀석들이야.%%
+몇번이나 퇴치했는데도 끊임 없이 밀려드는 
+바퀴벌레 같은 녀석들이랄까. 아마도 차원의 틈을 통해 
+이곳으로 침입해 오는 것 같더라.%%
+그런데 얼마 전 복수의 정령을 지휘하는 녀석을 
+아키아 동굴의 더 깊숙한 곳에서 발견했어.%%
+원한의 정령이라 불리는 그 몬스터를 퇴치해.
+그게 너의 새로운 시험이다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416724" FACE="Lwu_normal"/> <!--이쯤에서 그만 두는 것이 좋지 않을까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416725" FACE="Lwu_normal"/> <!--원한의 정령은 주의를 기울이는 게 좋을 거야. 
+녀석을 퇴치한 후엔 박쥐 거미가 있는 곳으로 찾아와.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

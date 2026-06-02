@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5084</ID> <!--T.T.10508401 이가 없으면 잇몸으로 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 꼬깨에게서 꼬깨맛살 15개를 구하자-->
+<!--[완료NPC]	바람항구 - 크리스핀-->
+<!--[내용]	크리스핀은 장비를 팔 때 가장 중요한 광택제가 그만 다 떨어졌다고 한다. 지금 해적들 때문에 무역이 제대로 이루어지지 않고 있기 때문에 당분간은 광택제를 대체할만한 것이 필요하다고 한다. 광택제를 대체할만한 것은 스티븐 무역항에 살고 있는 꼬깨의 맛살인데 꼬깨가 난폭하기 때문에 구하기 어렵다고 한다. 크리스핀의 장비에 윤이 반짝반짝 나도록 스티븐 무역항에서 꼬깨맛살 15개를 구하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">33FAB5CE-50F9-407E-807C-5F32FA202064</CLIENT> <!--시작NPC 바람항구 - 크리스핀 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">33FAB5CE-50F9-407E-807C-5F32FA202064</PAYER> <!--완료NPC 바람항구 - 크리스핀 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">33FAB5CE-50F9-407E-807C-5F32FA202064</AGENT> <!--진행NPC 11 바람항구 - 크리스핀 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010130/10000/5000/1/1/160508400">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,MAP_NO=9010130/스티븐 무역항,Item_NO=160508400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160508400</ITEM> 
+ <!--Item_NO=160508400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10508411"/> <!--꼬깨맛살-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508421" FACE="Crispin_normal"/> <!--%class% 미안하지만 제 이야기 좀 들어줄 수 있나?
+내가 장비상점을 수 년간 운영하면서 세운 첫번째 원칙이 바로 광택이네.
+장비를 고를 때 손님들은 실용적인 것도 물론 보지.%% 
+하지만 그보다 중요한 것이 바로 광택이네. 
+번쩍번쩍 빛나는 장비들을 보면 누구나 구입하고 싶은 욕구를 불러 일으키지.%%
+지금 이런 광택제가 몽땅 떨어져버렸네. 
+광택제를 구할 수 있도록 나를 좀 도와 주실 수 있나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508426" FACE="Crispin_smile"/> <!--고맙네. 덕분에 다시 장비들을 번쩍번쩍 빛나게 할 수 있겠군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508423" FACE="Crispin_normal"/> <!--광택제는 이 근방에서 구할 수가 없어서 멀리 다른 지방에서 수입한 것을 쓰고 있지.
+그런데 알다시피 해적들이 출몰한 이후에는 무역자체가 쉽게 이뤄지지 않고 있어.
+그래서 내가 수입하던 광택제를 구할 길이 없어져버렸네.%% 
+하지만 다행이 광택제를 대용할만한 게 있어. 
+바로 스티븐 무역항의 꼬깨에게서 얻을 수 있는 꼬깨맛살이지.%%
+꼬깨맛살의 특수한 기름 성분이 광택제와 같은 역할을 해주기 때문이야.
+나에게 꼬깨맛살을 꼭 구해줬으면 고맙겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508424" FACE="Crispin_normal"/> <!--어쩔 수가 없군. 광택제를 구하는 것도 쉬운 일이 아니니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508425" FACE="Crispin_normal"/> <!--광택제 대신 침을 써봤는데, 손님들의 반응이 좋지 않더군, 너무 냄새게 난다고 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

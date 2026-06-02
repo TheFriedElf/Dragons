@@ -1,0 +1,9 @@
+<ACTION ID="a_Shout" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_Shout_01"/>
+  <FSM SCRIPT="Act_Melee_Default" 
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Shout_01_char_root"
+       FIND_TARGET_TYPE="SPHERE"
+       HIT_SOUND_ID="shout"/>
+</ACTION>

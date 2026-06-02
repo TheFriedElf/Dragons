@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Ro_Elga" INIT_ACTION="a_opening" SHOW_WARNING="FALSE">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_elga02"/>
+		<KFMPATH SCALE="0.8">../Data/2_Mon2/99_Boss/050400/Elga_02/Elga_02.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="40"/>
+			<SPHERE TO="p_hit_point_02" SIZE="50"/>
+			<SPHERE TO="p_hit_point_03" SIZE="60"/>
+			<SPHERE TO="p_hit_point_04" SIZE="40"/>
+			<SPHERE TO="p_hit_point_05" SIZE="35"/>
+			<SPHERE TO="p_hit_point_06" SIZE="40"/>
+			<SPHERE TO="p_hit_point_07" SIZE="35"/>
+			<CAPSULE TO="p_hit_point_08" SIZE="135,27"/>
+			<SPHERE TO="p_hit_point_09" SIZE="50"/>
+			<SPHERE TO="p_hit_point_10" SIZE="50"/>
+
+		</ABV>
+		<SLOT>
+			
+		
+
+
+
+
+		<!-- 마법진 생기고 소환한발-->
+
+			<ITEM NAME="btlidle_03_skill_shot_start" ANIMATION="1000353" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="btlidle_03_skill_shot" ANIMATION="1000354" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="skill_shot_03" ANIMATION="1000355" FIRE_START_NODE="p_ef_mouth" PROJECTILE_ID="PROJECTILE_elga_shot_01" Z_FACTOR="1.0"/>
+			<ITEM NAME="shot_return_03" ANIMATION="1000356"/>
+				
+					
+		<!-- 입에서 알 토하기 -->
+			<ITEM NAME="touch_up_02_start" ANIMATION="1000353" RANGE_EFFECT="ef_Aram_skill_02_05_char_root"/>
+			<ITEM NAME="touch_up_02_idle" ANIMATION="1000354"/>
+			<ITEM NAME="touch_up_02_fire" ANIMATION="1000355" RANDOM="100" FIRE_START_NODE="p_ef_mouth" 
+				PROJECTILE_ID="Projectile_Touch_up_02" FIRE_TERM="0.03" PROJECTILE_COUNT="1"
+				PROJECTILE_SPEED="800"
+				Z_FACTOR="2"
+				UP_ACTION_NO="1"
+				UP_FIRE_SOUND="elga_summon_egg"
+				UP_FIRE_EFFECT="efx_elgar_02_summon_thorns_fire_01_target"
+				UP_FIRE_EFFECT_SCALE="1.3"
+				UP_PROJECTILE_SPEED="80"
+				UP_PROJECTILE_SCALE="4"
+				UP_PROJECTILE_ALPHA="1"
+				UP_PROJECTILE_HEIGHT="1"
+				/>
+			<ITEM NAME="touch_up_02_finish" ANIMATION="1000356"/>
+
+
+
+	        <!--근거리 1 오른팔-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000301"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000302"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000303"/>
+         	<!--근거리 2 왼팔-->
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000304"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000305"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000306"/>
+	        <!--근거리 3꼬리-->
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000307"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000308"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000309"/>
+
+
+	        <!--근거리 3 막기-->
+			<ITEM NAME="attk_05_01_start" ANIMATION="1000418"/>
+			<ITEM NAME="attk_05_01" ANIMATION="1000419"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000420"/>
+
+
+	        <!--근거리 6 분노-->
+			<ITEM NAME="attk_06_01_start" ANIMATION="1000005"/>
+			<ITEM NAME="attk_06_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_06_02" ANIMATION="1000900"/>
+
+
+	        <!-- 연속불쏘기 -->
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000311"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000312" FIRE_START_NODE="p_ef_r_hand" PROJECTILE_ID="PROJECTILE_m_snowballz" Z_FACTOR="10.0"/>
+			<!-- ITEM NAME="btlidle_02_skill_shot_middle" ANIMATION="1000313" FIRE_START_NODE="p_ef_mouth" PROJECTILE_ID="Projectile_arial_shot_re" PROJECTILE_TYPE="BOOMERANG"/-->
+			<ITEM NAME="shot_return_02" ANIMATION="1000314"/>
+
+            <!--유도탄-->
+			<ITEM NAME="shot_around_01_start" ANIMATION="1000418"/>
+			<ITEM NAME="shot_around_01" ANIMATION="1000419"/>
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1000420" FIRE_START_NODE="p_ef_r_hand" FIRE_START_NODE1="p_ef_mouth" FIRE_START_NODE2="p_ef_star" PROJECTILE_ID="PROJECTILE_elga_shot_01" PROJECTILE_ID1="PROJECTILE_elga_shot_01" PROJECTILE_ID2="PROJECTILE_elga_shot_01" PROJECTILE_SPEED="250" PROJECTILE_SCALE="4.0" PROJECTILE_SCALE1="4.0" PROJECTILE_SCALE2="4.0"/>
+
+            <!--화염 회오리  -->			
+			<ITEM NAME="touch_up_start" ANIMATION="1000310" RANGE_EFFECT="ef_Aram_skill_02_05_char_root"/>
+			<ITEM NAME="touch_up_idle" ANIMATION="1000311"/>
+			<ITEM NAME="touch_up_fire" ANIMATION="1000312" RANDOM="100" FIRE_START_NODE="p_ef_mouth" 
+				PROJECTILE_ID="Projectile_Touch_up" FIRE_TERM="0.03" PROJECTILE_COUNT="1"
+				PROJECTILE_SPEED="800"
+				Z_FACTOR="2"
+				UP_ACTION_NO="3542134"
+				UP_FIRE_EFFECT="efx_elgar_02_skill_shot_01_target"
+				UP_FIRE_EFFECT_SCALE="1.2"
+				UP_PROJECTILE_SPEED="180"
+				UP_PROJECTILE_SCALE="4"
+				UP_PROJECTILE_ALPHA="0"
+				/>
+			<ITEM NAME="touch_up_finish" ANIMATION="1000314"/>
+
+ 	    	<!-- 몬스터 소환 -->
+	 		<ITEM NAME="attk_fin_01_start" ANIMATION="1000353"/>
+			<ITEM NAME="attk_fin_01" ANIMATION="1000354"/>
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1000355" FIRE_EFFECT_NODE="char_root" FIRE_EFFECT="ef_cleef_BoneDragon_skill_02_loop_char_root"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000356"/>
+
+        	<!--포효-->
+			<ITEM NAME="energy_explosion_btlidle_start" ANIMATION="1000376" RANGE_EFFECT="NONE"/>
+			<ITEM NAME="energy_explosion_btlidle" ANIMATION="1000375"/>
+			<ITEM NAME="energy_explosion_fire" ANIMATION="1000345" FIRE_EFFECT="NONE"
+				QUAKE_TIME="3" QUAKE_FACTOR="1.2" FIRE_TERM="0.2"/>
+
+        	<!--암흑번개 4방1-->
+			<ITEM NAME="crossattack_01_start" ANIMATION="1000395"/>
+			<ITEM NAME="crossattack_01_idle" ANIMATION="1000396" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_01_fire" ANIMATION="1000397" FIRE_EFFECT="eff_elgar_02_crossattack_00" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+			<ITEM NAME="crossattack_01_finish" ANIMATION="1000398"/>
+
+			<!--암흑번개 4방2-->
+			<ITEM NAME="crossattack_02_start" ANIMATION="1000400"/>
+			<ITEM NAME="crossattack_02_idle" ANIMATION="1000401" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_02_fire" ANIMATION="1000402" FIRE_EFFECT="eff_elgar_02_crossattack_00" QUAKE_TIME="2" QUAKE_FACTOR="4"/>
+		   <ITEM NAME="crossattack_02_finish" ANIMATION="1000403"/>
+
+             <!--대쉬공격  -->
+			<ITEM NAME="dash_after_attk_btlidle_01_start" ANIMATION="1000414" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_btlidle_01" ANIMATION="1000415" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_rush" ANIMATION="1000416" FIRE_EFFECT="NONE" LOOP="FALSE"/>
+			<ITEM NAME="dash_after_attk_01_02" ANIMATION="1000417" FIRE_EFFECT="NONE"/>
+
+            <!--좌우 화이어 브레스-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000451"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000452"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000453" FIRE_START_NODE="p_ef_mouth" SHOT_INTER_TIME="0.3" GROUND_EFFECT="NONE" PROJECTILE_SCALE="6" PROJECTILE_ID="PROJECTILE_elga02_breath"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000454"/>
+
+
+	        <!-- 공중폭격 시퀀스	No.3542200 -->
+	        <!-- 공중폭격 시작 a_mon_melee_07		No.3542201   -->
+			<ITEM NAME="attk_07_01_start" ANIMATION="1000338" CAST_EFFECT="efx_elga_02_massive_projectile_jump_start"/>
+			<ITEM NAME="attk_07_01" ANIMATION="1000339"/>
+			<ITEM NAME="attk_07_02" ANIMATION="1000339"/>
+
+	        <!-- 공중폭격 다운 a_mon_melee_loop_01		No.3542202 -->
+			<ITEM NAME="btlidle_loop_01_start" ANIMATION="1000344" CAST_EFFECT="se_stun_mon_01" CAST_EFFECT_NODE="p_ef_groggy" CAST_EFFECT_SCALE="3"/>
+			<ITEM NAME="btlidle_loop_01" ANIMATION="1000025"/>
+			<ITEM NAME="attk_loop_01" ANIMATION="1000025"/>
+			<ITEM NAME="attk_after_loop_01" ANIMATION="1000025"/>
+			<ITEM NAME="finish_loop_01" ANIMATION="1000345" USE_DETACH_CAST_EFFECT="TRUE"/>
+			
+         	<!-- 공중폭격 시전 a_mon_elga02_air_strike	No.3542114 -->
+			<ITEM NAME="elga02_air_strike_start" ANIMATION="1000340" CAST_EFFECT="efx_elga_02_massive_projectile_jump_start" RANGE_EFFECT="ef_Aram_skill_02_05_char_root"/>
+			<ITEM NAME="elga02_air_strike_btlidle" ANIMATION="1000341"/>
+			<ITEM NAME="elga02_air_strike_fire" ANIMATION="1000342" FIRE_START_NODE="p_ef_mouth" SHOT_INTER_TIME="0.04" PROJECTILE_ID="PROJECTILE_elga_airshot" PROJECTILE_SCALE="2.5" GROUND_EFFECT="NONE"/>
+			<ITEM NAME="elga02_air_strike_finish" ANIMATION="1000343"/>
+
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000900" QUAKE_TIME="1.5" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000019" QUAKE_TIME="3" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			
+
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000013" VELOCITY="1" VELOCITY_INIT="1"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000013"/>
+			<ITEM NAME="StandUp" ANIMATION="1000005"/>
+
+			<ITEM NAME="Stun" ANIMATION="1000306"/>
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+	     	<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000005" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000005" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000005" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

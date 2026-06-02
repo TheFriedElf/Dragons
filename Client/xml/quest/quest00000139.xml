@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>139</ID> <!--T.T.10013901 위기의 세계 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	글레스트 헤임의 다크로드로부터 에너지체의 결정 1개를 구하자.-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	현재 클라인 박사가 반역을 꾀하려는 죄로 잡혀 있다고 한다. 클라인 박사의 무죄를 증명할 또 다른 에너지체의 결정 1개를 글레스트 헤임의 다크로드에게서 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">18A90539-E61E-4941-A7C8-90F40254BA7A</CLIENT> <!--시작NPC 게펜 - 비닛 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">18A90539-E61E-4941-A7C8-90F40254BA7A</AGENT> <!--진행NPC 11 게펜 - 비닛 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 12 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">4703100</MONSTER> 
+ <!--MON_NO=4703100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160013900</ITEM> 
+ <!--Item_NO=160013900/[Q.ID:00139] 에너지체의 결정(글레스트 헤임),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10013911"/> <!--에너지체의 결정-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10013921" FACE="Vinit_cry"/> <!--큰일이야.
+과격파가 클라인 박사님을 다른 차원과 스파이 행위를 했다고 고발했어.
+지금 클라인 박사님은 감금실에 갇히게 되셨어.%%
+테일링과 디포르테 언니에게 말했지만, 이제 내 말은 더는 믿지 않겠대.
+마지막으로 믿을 사람은 %name% 너뿐이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10013926" FACE="Tailing_normal"/> <!--아! 클라인 박사님이 말씀하신 에너지체의 결정이군요.
+비닛의 말이 사실이었어요!
+제가 온건파 박사님에게 에너지체의 결정을 가져가겠어요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10013923" FACE="Vinit_cry"/> <!--클라인 박사님이 풀려나실 방법은 하나뿐이야.
+에너지체의 결정을 구해서 온건파에게 전해줘야 해.%%
+칼루자 박사님은 에너지체가 두 개로 나뉘어 오크 히어로와 다크 로드에게 결합했다고 했어.%%
+하지만 이미 오크 히어로의 에너지체의 결정은 칼루자 박사님의 손에 들어갔어.
+남은 에너지체의 결정을 다크 로드에게서 구해야 해. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10013924" FACE="Vinit_normal"/> <!--(더는 비닛을 믿을 수 없어. 저렇게 웃고 있는 게 수상해.)%%
+하하! 난 체질상 괴로우면 웃음이 나오는 것뿐이야. 믿어줘!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10013925" FACE="Vinit_cry"/> <!--아무쪼록 빨리 부탁할 게. 칼루자 박사님은 이미 %name%의 세계를 공격할 준비를 끝낸 거 같아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10013902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

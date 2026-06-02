@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_050200_FD" DESCRIPTION="90502000">
+	<GSAPATH>../Data/3_World/01_Felloruss/01_Level/050200_FD.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/the_End_of_the_World.BGM.mp3</BGSOUND>
+	<!--미니맵-->
+	<MINIMAP Y="120" H="280">../Data/3_World/01_Felloruss/01_Level/050200_MM.dds</MINIMAP>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+
+	<!--엘로라 주둔지 -->
+	<TRIGGER ID="gate_038200_base" TYPE="PORTAL" TITLE_TEXT_ID="801004" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9038200" PARAM2="4"/>
+	</TRIGGER>
+	
+   <!-- 드래곤 계곡 미션 게이트 -->
+	<TRIGGER ID="gate_050201_base" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal" PARAM="95020" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms030710_0" MISSION_DISCRIPTION_TEXT_NUM="9050200"/>
+	</TRIGGER>
+	
+	<!--날개 협곡 -->
+	<TRIGGER ID="gate_050220_base" TYPE="PORTAL" TITLE_TEXT_ID="800083" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9050220" PARAM2="1"/>
+	</TRIGGER>
+
+	<!-- 엔터 던전 -->
+    <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+        <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="4" PARAM2="8"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="4" PARAM2="8"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+        <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" PARAM="4" PARAM2="8"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" PARAM="4" PARAM2="8"/>
+    </TRIGGER>
+
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="180"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="200"/>
+	</TRIGGER>
+
+	<!--트리거 점프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="350" />
+	</TRIGGER>
+
+		
+	<!--포 그-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="662" END="4240" COLOR="0.7529412,0.7529412,0.7529412"/>
+	<!-- L,o,d -->
+	<WORLD_QUALITY HIGH_END="1000" MID_END="1500" LOW_END="9000" USE="1"/>
+
+</WORLD>

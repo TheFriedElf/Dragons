@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5003</ID> <!--T.T.10500301 제시의 두통 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	앵무조개 선착장 - 상어 30마리 처리-->
+<!--[완료NPC]	바람항구 - 제시-->
+<!--[내용]	제시는 고객이 자꾸 까다롭게 요구한다면서 이번에는 고객이 앵무조개 선착장의 상어를 처리 해줄 것을 요구하고 있다고 한다. 제시의 두통을 제거하기 위해 앵무조개 선착장에서 상어 30마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 바람항구 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 바람항구 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 바람항구 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010140/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010140/앵무조개 선착장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10500311"/> <!--상어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10500321" FACE="Jessie_normal"/> <!--정말 곤란하군. 곤란해. 이처럼 골치아픈 고객은 처음이군.
+음? %name% 자네군. 저번에는 고마웠네.%% 
+두통 때문에 머리가 지끈거리는군.
+왜 그러냐고? 내 이야기 좀 들어보겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10500326" FACE="Jessie_smile"/> <!--고맙네. 이제 이 골치 아픈 고객과 드디어 계약을 할 수 있겠군.
+만약 또 다른 것을 요구한다면, 이제는 내 쪽에서 거절할 걸세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10500323" FACE="Jessie_smile"/> <!--저번에 앵무조개 선착장에 고객이 테마 레스토랑을 내려고 한다는 이야기는 잘 들었을 걸세. 
+그랬는데 고객이 이번에 또 다른 요구를 하지 뭔가.%%
+공포 레스토랑에 작살총을 들고 다니는 상어는 도무지 어울리지 않는다는 말을 하는 걸세.
+공포에 어울리는 것은 칼이나 도끼 같은 거라고 말일세.%%
+사실 공포 레스토랑이라고 해봤자. 내부만 잘 꾸미면 되지 않겠나?
+도대체 밖에 돌아다니는 상어에게 왜 신경을 쓰는 것인지.%%
+하여간 고객은 앵무조개 선착장에 돌아다니는 상어가 정리되지 않는 이상 계약을 할 수 없다고 엄포를 놨네.%% 
+자네가 날 좀 도와서 앵무조개 선착장의 상어를 좀 처리해 주지 않겠나?
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10500324" FACE="Jessie_angly"/> <!--허허, 아픈 노인네의 청을 거절할 정도로 요즘 젊은이들은 예의가 없어졌군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10500325" FACE="Jessie_normal"/> <!--내 두통의 치료를 위해 조금 더 빨리 해결해 주지 않을텐가? 
+현재 먹은 약값만 해도 집 한 채는 살 수 있을 정도네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10500302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="C_Kirin" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Penryl_Snowfield"/>
+		<KFMPATH SCALE="1.8">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Penryl_Snowfield/Penryl_Snowfield.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+		    <!-- 뿔로찍기 -->
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000203"/>
+		
+				<!-- 뒷다리차기 -->
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+			<!-- 뿔로 난도질 -->
+
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000207"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000209"/>
+		
+		
+			<!-- 뿔로 반달 날리기 -->
+
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000214"/>
+			<ITEM NAME="shot_01" ANIMATION="1000215" FIRE_START_NODE="p_ef_shot_01" PROJECTILE_ID="Peojectile_IceBoomerang_Rotate_Shot_01"/>
+
+			<!--주변에 도넛모양으로 얼음송곳 소환-->
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION="1000301"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000302"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000303" FIRE_EFFECT_FRONT="70" FIRE_EFFECT="EF_Common_Mon_IcePick_04"/>
+		
+		
+			<!-- 대쉬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000328" FIRE_EFFECT="NONE"/>				
+
+
+			
+		
+		
+					
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,2272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dragonica_INB_Adept|Win32">
+      <Configuration>Dragonica_INB_Adept</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dragonica_INB_America|Win32">
+      <Configuration>Dragonica_INB_America</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dragonica_INB_G|Win32">
+      <Configuration>Dragonica_INB_G</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dragonica_INB_H_AUTO|Win32">
+      <Configuration>Dragonica_INB_H_AUTO</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dragonica_INB_H_UNAUTO|Win32">
+      <Configuration>Dragonica_INB_H_UNAUTO</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dragonica_INB_Korea|Win32">
+      <Configuration>Dragonica_INB_Korea</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dragonica_INB|Win32">
+      <Configuration>Dragonica_INB</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ExternalRelease_America|Win32">
+      <Configuration>ExternalRelease_America</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ExternalRelease_G|Win32">
+      <Configuration>ExternalRelease_G</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ExternalRelease_H_AUTO|Win32">
+      <Configuration>ExternalRelease_H_AUTO</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ExternalRelease_H_UNAUTO|Win32">
+      <Configuration>ExternalRelease_H_UNAUTO</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ExternalRelease_Korea|Win32">
+      <Configuration>ExternalRelease_Korea</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ExternalRelease|Win32">
+      <Configuration>ExternalRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>Dragonica</ProjectName>
+    <ProjectGuid>{2CD41BDE-C5CD-4417-A560-EEF97EE2F734}</ProjectGuid>
+    <RootNamespace>mobilesuit</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_America|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_America|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_America|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_America|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28127.55</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_America|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_America|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">
+    <OutDir>../../../Dragonica_Exe/SFreedom_Dev/Release\</OutDir>
+    <IntDir>../out/MobileSuit/$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>cd ../../
+MakeActionDataCode.bat
+</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm400
+
+ %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;_DEBUG;_WINDOWS;NIDEBUG;STRICT;_MDd_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>lua_lib_MDd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)_InternalD.exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/DebugLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/DebugLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <Profile>false</Profile>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command>cd ../../
+MakeActionDataCode.bat
+</Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>-Zm433 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NIRELEASE;STRICT;_MD_;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <OpenMPSupport>false</OpenMPSupport>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>lua_lib_MD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName)_Internal.exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ReleaseLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ReleaseLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <TargetMachine>MachineX86</TargetMachine>
+      <Profile>false</Profile>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426
+
+ %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;UNICODE;_MDo_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;USE_INB;_MDo_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;USE_INB;_MTo_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingMTLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingMTLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AssemblyDebug>
+      </AssemblyDebug>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>
+      </OptimizeReferences>
+      <EnableCOMDATFolding>
+      </EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libcmt.lib;LIBCPMT.LIB;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;USE_INB;_MDo_;USE_GAMEGUARD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_INB;USE_GAMEGUARD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;USE_INB;_MDo_;USE_HACKSHIELD;HACKSHIELD_AUTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_INB;USE_HACKSHIELD;HACKSHIELD_AUTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;USE_INB;_MDo_;USE_HACKSHIELD;HACKSHIELD_UNAUTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_INB;USE_HACKSHIELD;HACKSHIELD_UNAUTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;UNICODE;_MDo_;USE_GAMEGUARD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_GAMEGUARD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName)_$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426
+
+ %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;UNICODE;_MDo_;USE_HACKSHIELD;HACKSHIELD_AUTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_HACKSHIELD;HACKSHIELD_AUTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName)_$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426
+
+ %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;UNICODE;_MDo_;HACKSHIELD_UNAUTO;USE_HACKSHIELD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_HACKSHIELD;HACKSHIELD_UNAUTO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName)_$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_America|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;UNICODE;_MDo_;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)DragonSaga.exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <FixedBaseAddress>false</FixedBaseAddress>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_America|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;USE_INB;_MDo_;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_INB;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)DragonSaga_INB.exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;USE_INB;_MDo_;USE_HACKSHIELD;HACKSHIELD_UNAUTO;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_INB;USE_HACKSHIELD;HACKSHIELD_UNAUTO;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/nodefaultlib:libcmt %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <TargetMachine>MachineX86</TargetMachine>
+      <FixedBaseAddress />
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <AdditionalOptions>/Zm426
+ %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>../../cosmos/DirectXSDK/include;../../cosmos/PlatformSDK/include;../../cosmos/Gamebryo_2.2.2/Include;../../cosmos/Include;../../cosmos/include/FreeType;../../cosmos/include/zlib;../../cosmos/PhysX/Include;../../Archangel/Weapons;../../cosmos/FxStudio/Win32/Include;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NISHIPPING;STRICT;EXTERNAL_RELEASE;UNICODE;_MDo_;USE_HACKSHIELD;HACKSHIELD_UNAUTO;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;EXTERNAL_RELEASE;USE_HACKSHIELD;HACKSHIELD_UNAUTO;DragonSaga;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(ProjectName)_$(Configuration).exe</OutputFile>
+      <AdditionalLibraryDirectories>../../cosmos/DirectXSDK/lib/x86;../../cosmos/lib;../../cosmos/Gamebryo_2.2.2/Lib/ShippingLib;../../cosmos/PhysX/Lib;../../Archangel/Weapons/Lib;../../cosmos/FxStudio/Win32/Lib/ShippingLib;../../cosmos/FxStudio/Win32/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libcpmt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug />
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
+      <MapExports>true</MapExports>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <TerminalServerAware>false</TerminalServerAware>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Data">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Xml">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AbilTextHelper.cpp" />
+    <ClCompile Include="AlramMissionClient.cpp" />
+    <ClCompile Include="BrightBloom.cpp" />
+    <ClCompile Include="ClientUtil.cpp" />
+    <ClCompile Include="CTButton.cpp" />
+    <ClCompile Include="CustomContent\Chat\CustomChat.cpp" />
+    <ClCompile Include="CustomContent\Chat\CustomChatbar.cpp" />
+    <ClCompile Include="CustomContent\Chat\CustomChatColors.cpp" />
+    <ClCompile Include="CustomContent\Chat\CustomEmoticons.cpp" />
+    <ClCompile Include="CustomContent\CustomCharacterJumping.cpp" />
+    <ClCompile Include="CustomContent\CustomMinimap.cpp" />
+    <ClCompile Include="FreedomDef.cpp" />
+    <ClCompile Include="FreedomPool.cpp" />
+    <ClCompile Include="HandlePacket.cpp" />
+    <ClCompile Include="HandlePacket01.cpp" />
+    <ClCompile Include="HardCoreDungeon.cpp" />
+    <ClCompile Include="HBitmap.cpp" />
+    <ClCompile Include="HDRScene.cpp" />
+    <ClCompile Include="lwAction.cpp" />
+    <ClCompile Include="lwActionResult.cpp" />
+    <ClCompile Include="lwActionTargetInfo.cpp" />
+    <ClCompile Include="lwActionTargetList.cpp" />
+    <ClCompile Include="lwActionTargetTransferInfoMan.cpp" />
+    <ClCompile Include="lwActor.cpp" />
+    <ClCompile Include="lwArray.cpp" />
+    <ClCompile Include="lwAttackEffect.cpp" />
+    <ClCompile Include="lwBase.cpp" />
+    <ClCompile Include="lwBaseItemSet.cpp" />
+    <ClCompile Include="lwCameraModeEvent.cpp" />
+    <ClCompile Include="lwCashItem.cpp" />
+    <ClCompile Include="lwCashShop.cpp" />
+    <ClCompile Include="lwCharacterCard.cpp" />
+    <ClCompile Include="lwChatMgrClient.cpp" />
+    <ClCompile Include="lwCoinChanger.cpp" />
+    <ClCompile Include="lwComboAdvisor.cpp" />
+    <ClCompile Include="lwCommonSkillUtilFunc.cpp" />
+    <ClCompile Include="lwCommonSkillUtilFunc_FSM.cpp" />
+    <ClCompile Include="lwCommonSkillUtilFunc_Moving.cpp" />
+    <ClCompile Include="lwCouple.cpp" />
+    <ClCompile Include="lwDateTime.cpp" />
+    <ClCompile Include="lwDeathSnatchSkillScriptHelpFunc.cpp" />
+    <ClCompile Include="lwDefenceMode.cpp" />
+    <ClCompile Include="lwDropBox.cpp" />
+    <ClCompile Include="lwEditUI.cpp" />
+    <ClCompile Include="lwEffect.cpp" />
+    <ClCompile Include="lwEffectDef.cpp" />
+    <ClCompile Include="lwElementDungeonUI.cpp" />
+    <ClCompile Include="lwEventScriptCmd.cpp" />
+    <ClCompile Include="lwEventScriptSystem.cpp" />
+    <ClCompile Include="lwEventTimer.cpp" />
+    <ClCompile Include="lwEventView.cpp" />
+    <ClCompile Include="lwFindTargetParam.cpp" />
+    <ClCompile Include="lwFriendItem.cpp" />
+    <ClCompile Include="lwFriendMgr.cpp" />
+    <ClCompile Include="lwFurniture.cpp" />
+    <ClCompile Include="lwGUID.cpp" />
+    <ClCompile Include="lwGuildUI.cpp" />
+    <ClCompile Include="lwHelpObject.cpp" />
+    <ClCompile Include="lwHelpSystem.cpp" />
+    <ClCompile Include="lwHome.cpp" />
+    <ClCompile Include="lwHomeTown.cpp" />
+    <ClCompile Include="lwHomeUI_Script.cpp" />
+    <ClCompile Include="lwInputSlotInfo.cpp" />
+    <ClCompile Include="lwInt64.cpp" />
+    <ClCompile Include="lwInventoryUI.cpp" />
+    <ClCompile Include="lwItemSkillView.cpp" />
+    <ClCompile Include="lwJobSkillItem.cpp" />
+    <ClCompile Include="lwJobSkillLearn.cpp" />
+    <ClCompile Include="lwJobSkillView.cpp" />
+    <ClCompile Include="lwLinkedPlane.cpp" />
+    <ClCompile Include="lwLuckyStarUI.cpp" />
+    <ClCompile Include="lwMail.cpp" />
+    <ClCompile Include="lwMarket.cpp" />
+    <ClCompile Include="lwMessageLogger.cpp" />
+    <ClCompile Include="lwMinimap_Script.cpp" />
+    <ClCompile Include="lwMissionScoreUIMgr.cpp" />
+    <ClCompile Include="lwMonsterKillUIMgr.cpp" />
+    <ClCompile Include="lwMToMChat.cpp" />
+    <ClCompile Include="lwNet.cpp" />
+    <ClCompile Include="lwObject.cpp" />
+    <ClCompile Include="lwOXQuizUI.cpp" />
+    <ClCompile Include="lwPacket.cpp" />
+    <ClCompile Include="lwParticle.cpp" />
+    <ClCompile Include="lwParticleMan.cpp" />
+    <ClCompile Include="lwPartyUI.cpp" />
+    <ClCompile Include="lwPilot.cpp" />
+    <ClCompile Include="lwPilotMan.cpp" />
+    <ClCompile Include="lwPlayTime.cpp" />
+    <ClCompile Include="lwPoint2.cpp" />
+    <ClCompile Include="lwPoint2F.cpp" />
+    <ClCompile Include="lwPoint3.cpp" />
+    <ClCompile Include="lwProjectile.cpp" />
+    <ClCompile Include="lwProjectileMan.CPP" />
+    <ClCompile Include="lwPuppet.cpp" />
+    <ClCompile Include="lwQuaternion.cpp" />
+    <ClCompile Include="lwQuestMan.cpp" />
+    <ClCompile Include="lwQuestNfy.cpp" />
+    <ClCompile Include="lwRenderMan.cpp" />
+    <ClCompile Include="lwRope.cpp" />
+    <ClCompile Include="lwSelectStage.cpp" />
+    <ClCompile Include="lwSItem.cpp" />
+    <ClCompile Include="lwSkillDef.cpp" />
+    <ClCompile Include="lwSkillSet.cpp" />
+    <ClCompile Include="lwSkillTargetMan.cpp" />
+    <ClCompile Include="lwSkillTree.cpp" />
+    <ClCompile Include="lwSoulTransfer.cpp" />
+    <ClCompile Include="lwSoundMan.cpp" />
+    <ClCompile Include="lwStatusEffect.cpp" />
+    <ClCompile Include="lwStyleString.cpp" />
+    <ClCompile Include="lwSummon_Info.cpp" />
+    <ClCompile Include="lwTeleCardUI.cpp" />
+    <ClCompile Include="lwTrade.cpp" />
+    <ClCompile Include="lwTransTower.cpp" />
+    <ClCompile Include="lwTrigger.cpp" />
+    <ClCompile Include="lwUI.cpp" />
+    <ClCompile Include="lwUIActiveStatus.cpp" />
+    <ClCompile Include="lwUIBook.cpp" />
+    <ClCompile Include="lwUICharInfo.cpp" />
+    <ClCompile Include="lwUICostumeMix.cpp" />
+    <ClCompile Include="lwUICSGacha.cpp" />
+    <ClCompile Include="lwUIEffect.cpp" />
+    <ClCompile Include="lwUIFireLove.cpp" />
+    <ClCompile Include="lwUIGamePad.cpp" />
+    <ClCompile Include="lwUIGemStore.cpp" />
+    <ClCompile Include="lwUIIconProcess.cpp" />
+    <ClCompile Include="lwUIIGGacha.cpp" />
+    <ClCompile Include="lwUIItemBind.cpp" />
+    <ClCompile Include="lwUIItemConvertSystem.cpp" />
+    <ClCompile Include="lwUIItemCooking.cpp" />
+    <ClCompile Include="lwUIItemEventBox.cpp" />
+    <ClCompile Include="lwUIItemGamble.cpp" />
+    <ClCompile Include="lwUIItemJewelBox.cpp" />
+    <ClCompile Include="lwUIItemLottery.cpp" />
+    <ClCompile Include="lwUIItemMaking.cpp" />
+    <ClCompile Include="lwUIItemPlusUpgrade.cpp" />
+    <ClCompile Include="lwUIItemRarityAmplify.cpp" />
+    <ClCompile Include="lwUIItemRarityBuildUp.cpp" />
+    <ClCompile Include="lwUIItemRarityUpgrade.cpp" />
+    <ClCompile Include="lwUIItemRepair.cpp" />
+    <ClCompile Include="lwUIItemSocketSystem.cpp" />
+    <ClCompile Include="lwUILogin.cpp" />
+    <ClCompile Include="lwUIManufacture.cpp" />
+    <ClCompile Include="lwUIMemTransCard.cpp" />
+    <ClCompile Include="lwUIMission.cpp" />
+    <ClCompile Include="lwUIPet.cpp" />
+    <ClCompile Include="lwUIPetition.cpp" />
+    <ClCompile Include="lwUIQuest.cpp" />
+    <ClCompile Include="lwUISealProcess.cpp" />
+    <ClCompile Include="lwUIShineStone.cpp" />
+    <ClCompile Include="lwUIToolTip.cpp" />
+    <ClCompile Include="lwUITreasureChest.cpp" />
+    <ClCompile Include="lwUnit.cpp" />
+    <ClCompile Include="lwUNIT_PTR_ARRAY.cpp" />
+    <ClCompile Include="lwVendor.cpp" />
+    <ClCompile Include="lwWorld.cpp" />
+    <ClCompile Include="lwWorldActionMan.cpp" />
+    <ClCompile Include="lwWorldActionObject.cpp" />
+    <ClCompile Include="lwWString.cpp" />
+    <ClCompile Include="lwZoneDrawing.cpp" />
+    <ClCompile Include="MasterPropertyAccumulator.cpp" />
+    <ClCompile Include="NewWare\Game\AttachObjects.cpp" />
+    <ClCompile Include="NewWare\NewWare.cpp" />
+    <ClCompile Include="NewWare\Renderer\ArtificialDrawer.cpp" />
+    <ClCompile Include="NewWare\Renderer\DrawUtils.cpp" />
+    <ClCompile Include="NewWare\Renderer\DrawWorkflow.cpp" />
+    <ClCompile Include="NewWare\Renderer\Kernel\BatchRenderUtils.cpp" />
+    <ClCompile Include="NewWare\Renderer\Kernel\GroupAccumulator.cpp" />
+    <ClCompile Include="NewWare\Renderer\Kernel\RenderGroup.cpp" />
+    <ClCompile Include="NewWare\Renderer\Kernel\RenderQueue.cpp" />
+    <ClCompile Include="NewWare\Renderer\Kernel\RenderStateBlockCache.cpp" />
+    <ClCompile Include="NewWare\Renderer\Kernel\RenderStateTagExtraData.cpp" />
+    <ClCompile Include="NewWare\Renderer\Line3DDrawer.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\FrontToBackSorter.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\HW\OcclusionCuller.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="NewWare\Renderer\OCuller\HW\OcclusionDepthTestD3D.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\HW\OcclusionQueryD3D.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\HW\OcclusionRenderStateD3D.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\HW\OcclusionScene.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\HW\OcclusionSorter.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\HW\OcclusionTimeController.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\SW\Occluder.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="NewWare\Renderer\OCuller\SW\OcclusionCuller.cpp" />
+    <ClCompile Include="NewWare\Renderer\OCuller\SW\PlanarOccluder.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="NewWare\Renderer\PrimitiveCreator.cpp" />
+    <ClCompile Include="NewWare\Renderer\RenderedTexture.cpp" />
+    <ClCompile Include="NewWare\Renderer\SceneCuller.cpp" />
+    <ClCompile Include="NewWare\Renderer\SceneDrawer.cpp" />
+    <ClCompile Include="NewWare\Renderer\SceneDrawerDebug.cpp" />
+    <ClCompile Include="NewWare\Renderer\SceneDrawerLegacy.cpp" />
+    <ClCompile Include="NewWare\Renderer\StreamPack.cpp" />
+    <ClCompile Include="NewWare\Renderer\Task\Flipper.cpp" />
+    <ClCompile Include="NewWare\Renderer\Task\OverlayDrawer.cpp" />
+    <ClCompile Include="NewWare\Renderer\TextBoardTextures.cpp" />
+    <ClCompile Include="NewWare\Scene\ApplyProperty.cpp" />
+    <ClCompile Include="NewWare\Scene\ApplyTraversal.cpp" />
+    <ClCompile Include="NewWare\Scene\AssetLoader.cpp" />
+    <ClCompile Include="NewWare\Scene\AssetManager.cpp" />
+    <ClCompile Include="NewWare\Scene\AssetUtils.cpp" />
+    <ClCompile Include="NewWare\Scene\DomainNodeManager.cpp" />
+    <ClCompile Include="NewWare\Scene\FindTraversal.cpp" />
+    <ClCompile Include="NewWare\Scene\NodeTraversal.cpp" />
+    <ClCompile Include="NewWare\Scene\PhysXSystem.cpp" />
+    <ClCompile Include="NewWare\Scene\SceneLensFilter.cpp" />
+    <ClCompile Include="NewWare\Scene\SceneProperty.cpp" />
+    <ClCompile Include="NewWare\Scene\SceneSpacePartition.cpp" />
+    <ClCompile Include="NewWare\Tools\CommonTools.cpp" />
+    <ClCompile Include="NiApplication\NiApplication.cpp" />
+    <ClCompile Include="NiApplication\NiApplicationMetrics.cpp" />
+    <ClCompile Include="NiApplication\NiAppMain.cpp" />
+    <ClCompile Include="NiApplication\NiAppWindow.cpp" />
+    <ClCompile Include="NiApplication\NiCommand.cpp" />
+    <ClCompile Include="NiApplication\NiDX9Select.cpp" />
+    <ClCompile Include="NiApplication\NiFrameRate.cpp" />
+    <ClCompile Include="NiOcclusionCuller.cpp" />
+    <ClCompile Include="NMInclude.cpp" />
+    <ClCompile Include="Occluder.cpp" />
+    <ClCompile Include="Pg2DString.cpp" />
+    <ClCompile Include="PgAchievementTitle.cpp" />
+    <ClCompile Include="PgAchieveNfyMgr.cpp" />
+    <ClCompile Include="PgAction.cpp" />
+    <ClCompile Include="PgActionEffect.cpp" />
+    <ClCompile Include="PgActionFSMFuncMgr.cpp" />
+    <ClCompile Include="PgActionFSMFuncs.cpp" />
+    <ClCompile Include="PgActionPool.cpp" />
+    <ClCompile Include="PgActionSlot.cpp" />
+    <ClCompile Include="PgActionTargetList.cpp" />
+    <ClCompile Include="PgActionXmlData.cpp" />
+    <ClCompile Include="PgActor.cpp" />
+    <ClCompile Include="PgActorAppearanceMan.cpp" />
+    <ClCompile Include="PgActorManager.cpp" />
+    <ClCompile Include="PgActorMonster.cpp" />
+    <ClCompile Include="PgActorNpc.cpp" />
+    <ClCompile Include="PgActorPet.cpp" />
+    <ClCompile Include="PgActorSubPlayer.cpp" />
+    <ClCompile Include="PgActorUtil.cpp" />
+    <ClCompile Include="PgAlphaAccumulator.cpp" />
+    <ClCompile Include="PgAMPool.cpp" />
+    <ClCompile Include="PgAMPool2.cpp" />
+    <ClCompile Include="PgAppProtect.cpp" />
+    <ClCompile Include="PgAVObjectAlphaProcessManager.cpp" />
+    <ClCompile Include="PgAXPlay.cpp" />
+    <ClCompile Include="PgBackgroundThread.cpp" />
+    <ClCompile Include="PgBalloon.cpp" />
+    <ClCompile Include="PgBalloonEmoticonData.cpp" />
+    <ClCompile Include="PgBalloonEmoticonInstance.cpp" />
+    <ClCompile Include="PgBalloonEmoticonMgr.cpp" />
+    <ClCompile Include="PgBaseItemSet.cpp" />
+    <ClCompile Include="PgBatchRender.cpp" />
+    <ClCompile Include="PgBattleSquare.cpp" />
+    <ClCompile Include="PgBowString.cpp" />
+    <ClCompile Include="PgBreakableObject.cpp" />
+    <ClCompile Include="PgBriefingLoadUIMgr.cpp" />
+    <ClCompile Include="PgBuilding.cpp" />
+    <ClCompile Include="PgCameraMan.cpp" />
+    <ClCompile Include="PgCameraModeAni.cpp" />
+    <ClCompile Include="PgCameraModeBox.cpp" />
+    <ClCompile Include="PgCameraModeCircle.cpp" />
+    <ClCompile Include="PgCameraModeEvent.cpp" />
+    <ClCompile Include="PgCameraModeFollow.cpp" />
+    <ClCompile Include="PgCameraModeFollow2.cpp" />
+    <ClCompile Include="PgCameraModeFree.cpp" />
+    <ClCompile Include="PgCameraModeMovie.cpp" />
+    <ClCompile Include="PgCameraModeScript.cpp" />
+    <ClCompile Include="PgCashShop.cpp" />
+    <ClCompile Include="PgChainAttack.cpp" />
+    <ClCompile Include="PgChatMgrClient.cpp" />
+    <ClCompile Include="PgChatWindow.cpp" />
+    <ClCompile Include="PgCircleShadow.cpp" />
+    <ClCompile Include="PgClientExpedition.CPP" />
+    <ClCompile Include="PgClientParty.CPP" />
+    <ClCompile Include="PgCmdlineParse.cpp" />
+    <ClCompile Include="PgComboAdvisor.cpp" />
+    <ClCompile Include="PgCommandMgr.cpp" />
+    <ClCompile Include="PgCommonSkillActionFSM.cpp" />
+    <ClCompile Include="PgCommunityEvent.cpp" />
+    <ClCompile Include="PgConstellation.cpp" />
+    <ClCompile Include="PgContentsBase.cpp" />
+    <ClCompile Include="PgContentsBase_Script.cpp" />
+    <ClCompile Include="PgControllerSequenceManager.cpp" />
+    <ClCompile Include="PgCoupleMgr.cpp" />
+    <ClCompile Include="PgCustomUI_Summmoner.cpp" />
+    <ClCompile Include="PgDailyQuestUI.cpp" />
+    <ClCompile Include="PgDamageNumMan.cpp" />
+    <ClCompile Include="PgDamper.cpp" />
+    <ClCompile Include="PgDepthOfField.cpp" />
+    <ClCompile Include="PgDirectionArrow.cpp" />
+    <ClCompile Include="PgDropBox.cpp" />
+    <ClCompile Include="PgDshowPlay.cpp" />
+    <ClCompile Include="PgDuelTitle.cpp" />
+    <ClCompile Include="PgDungeonMinimap.cpp" />
+    <ClCompile Include="PgDynamicTextureMan.cpp" />
+    <ClCompile Include="PgEffectCountDown.cpp" />
+    <ClCompile Include="PgElementMark.cpp" />
+    <ClCompile Include="PgEmoticonFont.cpp" />
+    <ClCompile Include="PgEmporiaAdministrator.cpp" />
+    <ClCompile Include="PgEmporiaBattleClient.cpp" />
+    <ClCompile Include="PgEmporiaBattleClient_ProtectDragon.cpp" />
+    <ClCompile Include="PgEmporiaMgr.cpp" />
+    <ClCompile Include="PgEnergyGaugeBig.cpp" />
+    <ClCompile Include="PgEnergyGuage.cpp" />
+    <ClCompile Include="PgEntityZone.cpp" />
+    <ClCompile Include="PgEnvElement.CPP" />
+    <ClCompile Include="PgEnvElementSakura.cpp" />
+    <ClCompile Include="PgEnvElementSimple.cpp" />
+    <ClCompile Include="PgEnvElementSnow.cpp" />
+    <ClCompile Include="PgEnvironmentMan.cpp" />
+    <ClCompile Include="PgEnvStateSet.cpp" />
+    <ClCompile Include="PgEqItemMixCreator.cpp" />
+    <ClCompile Include="PgError.cpp" />
+    <ClCompile Include="PgErrorCodeTable.cpp" />
+    <ClCompile Include="PgEventCamera.cpp" />
+    <ClCompile Include="PgEventQuestUI.cpp" />
+    <ClCompile Include="PgEventScriptCmd.cpp" />
+    <ClCompile Include="PgEventScriptData.cpp" />
+    <ClCompile Include="PgEventScriptDataMan.cpp" />
+    <ClCompile Include="PgEventScriptInstance.cpp" />
+    <ClCompile Include="PgEventScriptSystem.cpp" />
+    <ClCompile Include="PgEventTimer.cpp" />
+    <ClCompile Include="PgExpeditionBalloon.cpp" />
+    <ClCompile Include="PgFontSwitchTable.cpp" />
+    <ClCompile Include="PgFriendMgr.cpp" />
+    <ClCompile Include="PgFSAA2.cpp" />
+    <ClCompile Include="PgFurniture.cpp" />
+    <ClCompile Include="PgFxAllocator.cpp" />
+    <ClCompile Include="PgFxAssetManager.cpp" />
+    <ClCompile Include="PgFxBankFile.cpp" />
+    <ClCompile Include="PgFxParticle.cpp" />
+    <ClCompile Include="PgFxParticleStream.cpp" />
+    <ClCompile Include="PgFxSoundManager.cpp" />
+    <ClCompile Include="PgFxStudio.cpp" />
+    <ClCompile Include="PgGMCommand.cpp" />
+    <ClCompile Include="PgGuardianMark.cpp" />
+    <ClCompile Include="PgGuild.cpp" />
+    <ClCompile Include="PgGuildMark.cpp" />
+    <ClCompile Include="PgHeadBuffIcon.cpp" />
+    <ClCompile Include="PgHelpSystem.cpp" />
+    <ClCompile Include="PgHome.cpp" />
+    <ClCompile Include="PgHomeRenew.cpp" />
+    <ClCompile Include="PgHomeTown.cpp" />
+    <ClCompile Include="PgHomeUI.cpp" />
+    <ClCompile Include="PgHouse.cpp" />
+    <ClCompile Include="PgICameraMode.cpp" />
+    <ClCompile Include="PgIInputManager.cpp" />
+    <ClCompile Include="PgIInputObserver.cpp" />
+    <ClCompile Include="PgInput.cpp" />
+    <ClCompile Include="PgInputSystem.cpp" />
+    <ClCompile Include="PgInterpolator.cpp" />
+    <ClCompile Include="PgInventoryUI.cpp" />
+    <ClCompile Include="PgIPostProcessEffect.cpp" />
+    <ClCompile Include="PgIResourceLoadController.cpp" />
+    <ClCompile Include="PgIScene.cpp" />
+    <ClCompile Include="PgItemEx.cpp" />
+    <ClCompile Include="PgItemMan.cpp" />
+    <ClCompile Include="PgItemMixBase.cpp" />
+    <ClCompile Include="PgItemMix_Script.cpp" />
+    <ClCompile Include="PgItemUseChecker.cpp" />
+    <ClCompile Include="PgIWorldObject.cpp" />
+    <ClCompile Include="PgIWorldObjectBase.cpp" />
+    <ClCompile Include="PgIXmlObject.cpp" />
+    <ClCompile Include="PgJobSkillLearn.cpp" />
+    <ClCompile Include="PgJobSkillLocationInfo.cpp" />
+    <ClCompile Include="PgLegendItemMakeHelpMng.cpp" />
+    <ClCompile Include="PgLetterDialog.cpp" />
+    <ClCompile Include="PgLinkedPlane.cpp" />
+    <ClCompile Include="PgLocalManager.cpp" />
+    <ClCompile Include="PgMacroCheck.cpp" />
+    <ClCompile Include="PgMail.cpp" />
+    <ClCompile Include="PgMarkBalloon.cpp" />
+    <ClCompile Include="PgMarket.cpp" />
+    <ClCompile Include="PgMarketDef.cpp" />
+    <ClCompile Include="PgMath.cpp" />
+    <ClCompile Include="PgMemStatusManager.cpp" />
+    <ClCompile Include="PgMemTracker.cpp" />
+    <ClCompile Include="PgMessageUtil.cpp" />
+    <ClCompile Include="PgMinimap.cpp" />
+    <ClCompile Include="PgMissionCard.cpp" />
+    <ClCompile Include="PgMissionComplete.cpp" />
+    <ClCompile Include="PgMissionQuestMan.cpp" />
+    <ClCompile Include="PgMobileSuit.cpp" />
+    <ClCompile Include="PgMonsterCardMixer.cpp" />
+    <ClCompile Include="PgMoveAnimateWnd.cpp" />
+    <ClCompile Include="PgMovieMgr.cpp" />
+    <ClCompile Include="PgMToMChat.cpp" />
+    <ClCompile Include="PgMultiThreadSceneGraphUpdater.cpp" />
+    <ClCompile Include="PgMyActorViewMgr.cpp" />
+    <ClCompile Include="PgMyhomeMark.cpp" />
+    <ClCompile Include="PgNetwork.cpp" />
+    <ClCompile Include="PgNiEntityStreamingAscii.cpp" />
+    <ClCompile Include="PgNiFile.cpp" />
+    <ClCompile Include="PgNifMan.cpp" />
+    <ClCompile Include="PgNifOptimizer.cpp" />
+    <ClCompile Include="PgNifParticle.cpp" />
+    <ClCompile Include="PgNifParticleStream.cpp" />
+    <ClCompile Include="PgObject.cpp" />
+    <ClCompile Include="PgObserverMode.cpp" />
+    <ClCompile Include="PgOctree.cpp" />
+    <ClCompile Include="PgOption.cpp" />
+    <ClCompile Include="PgPage.cpp" />
+    <ClCompile Include="PgParticle.cpp" />
+    <ClCompile Include="PgParticleCache.cpp" />
+    <ClCompile Include="PgParticleMan.cpp" />
+    <ClCompile Include="PgParticleProcessor.cpp" />
+    <ClCompile Include="PgParticleProcessorAttachToNode.cpp" />
+    <ClCompile Include="PgParticleProcessorAutoGround.cpp" />
+    <ClCompile Include="PgParticleProcessorCamFrontParticle.cpp" />
+    <ClCompile Include="PgParticleProcessorFadeIn.cpp" />
+    <ClCompile Include="PgParticleProcessorFadeOut.cpp" />
+    <ClCompile Include="PgParticleProcessorRotateToTarget.cpp" />
+    <ClCompile Include="PgParticleProcessorSound.cpp" />
+    <ClCompile Include="PgParticleProcessorSpriteAnimation.cpp" />
+    <ClCompile Include="PgParticleStream.cpp" />
+    <ClCompile Include="PgParticleStreamManager.cpp" />
+    <ClCompile Include="PgPartyBalloon.cpp" />
+    <ClCompile Include="PgPathData.cpp" />
+    <ClCompile Include="PgPetitionMgr.cpp" />
+    <ClCompile Include="PgPhysXUtil.cpp" />
+    <ClCompile Include="PgPilot.cpp" />
+    <ClCompile Include="PgPilotMan.cpp" />
+    <ClCompile Include="PgPostProcessMan.cpp" />
+    <ClCompile Include="PgPostProcessMRT.cpp" />
+    <ClCompile Include="PgPOTParticle.cpp" />
+    <ClCompile Include="PgProcessChecker.cpp" />
+    <ClCompile Include="PgProjectile.cpp" />
+    <ClCompile Include="PgProjectileMan.cpp" />
+    <ClCompile Include="PgPSRoom.cpp" />
+    <ClCompile Include="PgPSRoomGroup.cpp" />
+    <ClCompile Include="PgPSysBoundedPositionModifier.cpp" />
+    <ClCompile Include="PgPSysColorModifierDecorator.cpp" />
+    <ClCompile Include="PgPuppet.cpp" />
+    <ClCompile Include="PgPvPGame.cpp" />
+    <ClCompile Include="PgPvPGame_Script.cpp" />
+    <ClCompile Include="PgQuest.cpp" />
+    <ClCompile Include="PgQuestDialog.cpp" />
+    <ClCompile Include="PgQuestFullScreenDialog.cpp" />
+    <ClCompile Include="PgQuestIngList.cpp" />
+    <ClCompile Include="PgQuestMan.cpp" />
+    <ClCompile Include="PgQuestMarkHelp.cpp" />
+    <ClCompile Include="PgQuestSelectiveList.cpp" />
+    <ClCompile Include="PgQuestUI.CPP" />
+    <ClCompile Include="PgRaceEvent.cpp" />
+    <ClCompile Include="PgRadialBlur.cpp" />
+    <ClCompile Include="PgRagnarokGroundUI.cpp" />
+    <ClCompile Include="PgRealmQuestEvent.cpp" />
+    <ClCompile Include="PgRemoteManager.cpp" />
+    <ClCompile Include="PgRenderer.cpp" />
+    <ClCompile Include="PgRendererUtil.cpp" />
+    <ClCompile Include="PgRenderMan.cpp" />
+    <ClCompile Include="PgResourceIcon.cpp" />
+    <ClCompile Include="PgResourceMonitor.cpp" />
+    <ClCompile Include="PgRewardBox.cpp" />
+    <ClCompile Include="PgRope.cpp" />
+    <ClCompile Include="PgRscContainer.cpp" />
+    <ClCompile Include="PgRscLoader.cpp" />
+    <ClCompile Include="PgSafeFoamMgr.cpp" />
+    <ClCompile Include="PgScreenBreak.cpp" />
+    <ClCompile Include="PgScreenEffect.cpp" />
+    <ClCompile Include="PgScreenUpdateThread.cpp" />
+    <ClCompile Include="PgScripting.cpp" />
+    <ClCompile Include="PgSelectStage.cpp" />
+    <ClCompile Include="PgShadowVolume.cpp" />
+    <ClCompile Include="PgShineStone.cpp" />
+    <ClCompile Include="PgSkillOption.cpp" />
+    <ClCompile Include="PgSkillOptionCommandKey.cpp" />
+    <ClCompile Include="PgSkillOptionData.cpp" />
+    <ClCompile Include="PgSkillOptionDataFile.cpp" />
+    <ClCompile Include="PgSkillOptionFactory.cpp" />
+    <ClCompile Include="PgSkillOptionLoader.cpp" />
+    <ClCompile Include="PgSkillOptionMan.cpp" />
+    <ClCompile Include="PgSkillOptionSaver.cpp" />
+    <ClCompile Include="PgSkillTargetMan.cpp" />
+    <ClCompile Include="PgSkillTree.cpp" />
+    <ClCompile Include="PgSky.cpp" />
+    <ClCompile Include="PgSoundMan.cpp" />
+    <ClCompile Include="PgSpotLight.cpp" />
+    <ClCompile Include="PgStat.cpp" />
+    <ClCompile Include="PgStatusEffect.cpp" />
+    <ClCompile Include="PgStitchImageMng.cpp" />
+    <ClCompile Include="PgSuperGroundUI.cpp" />
+    <ClCompile Include="PgSystemInventory.cpp" />
+    <ClCompile Include="PgTextBalloon.cpp" />
+    <ClCompile Include="PgTextDialogMng.cpp" />
+    <ClCompile Include="PgTextObject.CPP" />
+    <ClCompile Include="PgTextTable.CPP" />
+    <ClCompile Include="PgTextTypistWnd.cpp" />
+    <ClCompile Include="PgTrail.cpp" />
+    <ClCompile Include="PgTrigger.cpp" />
+    <ClCompile Include="PgUICalculator.cpp" />
+    <ClCompile Include="PgUIDataMgr.cpp" />
+    <ClCompile Include="PgUIDrawObject.cpp" />
+    <ClCompile Include="PgUIModel.cpp" />
+    <ClCompile Include="PgUIScene.cpp" />
+    <ClCompile Include="PgUISound.cpp" />
+    <ClCompile Include="PgUtilAction.cpp" />
+    <ClCompile Include="PgVendor.cpp" />
+    <ClCompile Include="PgVendorBalloon.cpp" />
+    <ClCompile Include="PgVmr.cpp" />
+    <ClCompile Include="PgWall.cpp" />
+    <ClCompile Include="PgWarningDialog.cpp" />
+    <ClCompile Include="PgWater.cpp" />
+    <ClCompile Include="PgWeaponSoundMan.cpp" />
+    <ClCompile Include="PgWeather.cpp" />
+    <ClCompile Include="PgWebLogin.cpp" />
+    <ClCompile Include="PgWEClientObjectMgr.cpp" />
+    <ClCompile Include="PgWEObjectState.cpp" />
+    <ClCompile Include="PgWorkerThread.cpp" />
+    <ClCompile Include="PgWorld.cpp" />
+    <ClCompile Include="PgWorldActionMan.cpp" />
+    <ClCompile Include="PgWorldActionObject.cpp" />
+    <ClCompile Include="PgWorldElementFog.cpp" />
+    <ClCompile Include="PgWorldEventClientMgr.cpp" />
+    <ClCompile Include="PgWorldGsa.cpp" />
+    <ClCompile Include="PgWorldMapPopUpUI.cpp" />
+    <ClCompile Include="PgWorldMapUI.cpp" />
+    <ClCompile Include="PgWorldObjectPool.cpp" />
+    <ClCompile Include="PgWorldPhysX.cpp" />
+    <ClCompile Include="PgXmlLoader.cpp" />
+    <ClCompile Include="PgZoneDrawing.cpp" />
+    <ClCompile Include="PlanarOccluder.cpp" />
+    <ClCompile Include="Ranking\PgRankingMgr.cpp" />
+    <ClCompile Include="ResourcePool.cpp" />
+    <ClCompile Include="ServerLib.cpp" />
+    <ClCompile Include="ShaderHelper.cpp" />
+    <ClCompile Include="ShadowGeometry.cpp" />
+    <ClCompile Include="ShadowObject.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_America|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_America|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Utility\ComputerInfo.cpp" />
+    <ClCompile Include="Utility\ErrorReportFile.cpp" />
+    <ClCompile Include="Utility\ExceptionHandler.cpp" />
+    <ClCompile Include="Utility\md5.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_America|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_G|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_AUTO|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_H_UNAUTO|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Korea|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Dragonica_INB_Adept|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_America|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_G|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_AUTO|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_H_UNAUTO|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease_Korea|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ExternalRelease|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Utility\MiniDump.cpp" />
+    <ClCompile Include="Utility\NiSceneGraphPrinter.cpp" />
+    <ClCompile Include="Utility\ProcessChecker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\DB.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\LockUtil.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\LogGroup.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\Lohengrin.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\networkfunc.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\packetstruct.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\PacketStruct4Map.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\packettype.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\processconfig.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\ServerType.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Lohengrin\SwitchManager.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\Bag.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\constant.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\CUnit.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\dbtables.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\Def.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\DefAbilType.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\Effect.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\EnchantInfo.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\idobject.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\IGObject.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\Inventory.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\Item.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\ItemDefMgr.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\monsterdef.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\MonsterDefMgr.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\PetDefMgr.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\PgBoss.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\PgMonster.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\PgMyQuest.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\pgnpc.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\PgParty.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\pgpartymgr.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\PgPet.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\PgPlayer.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\skill.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\SkillInv.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\stdafx.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\tabledatamanager.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\TDefMgr.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\unit.h" />
+    <ClInclude Include="..\..\Archangel\Weapons\Variant\Variant.h" />
+    <ClInclude Include="AbilTextHelper.h" />
+    <ClInclude Include="AlramMissionClient.h" />
+    <ClInclude Include="BrightBloom.h" />
+    <ClInclude Include="BuildNumber.h" />
+    <ClInclude Include="ClientUtil.h" />
+    <ClInclude Include="CTButton.h" />
+    <ClInclude Include="CustomContent\Chat\CustomChatbar.h" />
+    <ClInclude Include="CustomContent\Chat\CustomChat.h" />
+    <ClInclude Include="CustomContent\Chat\CustomChatColors.h" />
+    <ClInclude Include="CustomContent\Chat\CustomEmoticons.h" />
+    <ClInclude Include="CustomContent\CustomCharacterJumping.h" />
+    <ClInclude Include="CustomContent\CustomMinimap.h" />
+    <ClInclude Include="DefColor.h" />
+    <ClInclude Include="Definitions.h" />
+    <ClInclude Include="FreedomDef.h" />
+    <ClInclude Include="FreedomPool.h" />
+    <ClInclude Include="HandlePacket.h" />
+    <ClInclude Include="HandlePacket01.h" />
+    <ClInclude Include="HardCoreDungeon.h" />
+    <ClInclude Include="HBitmap.h" />
+    <ClInclude Include="HDRScene.h" />
+    <ClInclude Include="lwAction.h" />
+    <ClInclude Include="lwActionResult.h" />
+    <ClInclude Include="lwActionTargetInfo.H" />
+    <ClInclude Include="lwActionTargetList.H" />
+    <ClInclude Include="lwActionTargetTransferInfoMan.h" />
+    <ClInclude Include="lwActor.h" />
+    <ClInclude Include="lwArray.h" />
+    <ClInclude Include="lwAttackEffect.h" />
+    <ClInclude Include="lwBase.h" />
+    <ClInclude Include="lwBaseItemSet.h" />
+    <ClInclude Include="lwCameraModeEvent.H" />
+    <ClInclude Include="lwCashItem.h" />
+    <ClInclude Include="lwCashShop.h" />
+    <ClInclude Include="lwCharacterCard.h" />
+    <ClInclude Include="lwChatMgrClient.h" />
+    <ClInclude Include="lwComboAdvisor.h" />
+    <ClInclude Include="lwCommonSkillUtilFunc.h" />
+    <ClInclude Include="lwCouple.h" />
+    <ClInclude Include="lwDateTime.h" />
+    <ClInclude Include="lwDeathSnatchSkillScriptHelpFunc.h" />
+    <ClInclude Include="lwDefenceMode.h" />
+    <ClInclude Include="lwDropBox.h" />
+    <ClInclude Include="lwEffect.h" />
+    <ClInclude Include="lwEffectDef.H" />
+    <ClInclude Include="lwElementDungeonUI.h" />
+    <ClInclude Include="lwEventScriptCmd.h" />
+    <ClInclude Include="lwEventScriptSystem.h" />
+    <ClInclude Include="lwEventTimer.h" />
+    <ClInclude Include="lwEventView.h" />
+    <ClInclude Include="lwFindTargetParam.H" />
+    <ClInclude Include="lwFriendItem.h" />
+    <ClInclude Include="lwFriendMgr.h" />
+    <ClInclude Include="lwFurniture.h" />
+    <ClInclude Include="lwGUID.h" />
+    <ClInclude Include="lwGuildUI.h" />
+    <ClInclude Include="lwHelpObject.h" />
+    <ClInclude Include="lwHelpSystem.H" />
+    <ClInclude Include="lwHome.h" />
+    <ClInclude Include="lwHomeTown.h" />
+    <ClInclude Include="lwHomeUI_Script.h" />
+    <ClInclude Include="lwInputSlotInfo.h" />
+    <ClInclude Include="lwInt64.h" />
+    <ClInclude Include="lwInventoryUI.h" />
+    <ClInclude Include="lwItemSkillView.h" />
+    <ClInclude Include="lwJobSkillItem.h" />
+    <ClInclude Include="lwJobSkillLearn.h" />
+    <ClInclude Include="lwJobSkillView.h" />
+    <ClInclude Include="lwLinkedPlane.H" />
+    <ClInclude Include="lwLuckyStarUI.h" />
+    <ClInclude Include="lwMarket.h" />
+    <ClInclude Include="lwMinimap_Script.h" />
+    <ClInclude Include="lwMissionScoreUIMgr.h" />
+    <ClInclude Include="lwMonsterKillUIMgr.h" />
+    <ClInclude Include="lwMToMChat.h" />
+    <ClInclude Include="lwNet.h" />
+    <ClInclude Include="lwObject.H" />
+    <ClInclude Include="lwOXQuizUI.h" />
+    <ClInclude Include="lwPacket.h" />
+    <ClInclude Include="lwParticle.h" />
+    <ClInclude Include="lwParticleMan.h" />
+    <ClInclude Include="lwPartyUI.h" />
+    <ClInclude Include="lwPilot.h" />
+    <ClInclude Include="lwPilotMan.h" />
+    <ClInclude Include="lwPlayTime.h" />
+    <ClInclude Include="lwPoint2.h" />
+    <ClInclude Include="lwPoint2F.h" />
+    <ClInclude Include="lwPoint3.h" />
+    <ClInclude Include="lwProjectile.H" />
+    <ClInclude Include="lwProjectileMan.H" />
+    <ClInclude Include="lwPuppet.h" />
+    <ClInclude Include="lwQuaternion.h" />
+    <ClInclude Include="lwQuestMan.H" />
+    <ClInclude Include="lwQuestNfy.h" />
+    <ClInclude Include="lwRenderMan.h" />
+    <ClInclude Include="lwRope.h" />
+    <ClInclude Include="lwSelectStage.h" />
+    <ClInclude Include="lwSItem.h" />
+    <ClInclude Include="lwSkillDef.H" />
+    <ClInclude Include="lwSkillSet.h" />
+    <ClInclude Include="lwSkillTargetMan.H" />
+    <ClInclude Include="lwSkillTree.H" />
+    <ClInclude Include="lwSoulTransfer.h" />
+    <ClInclude Include="lwSoundMan.h" />
+    <ClInclude Include="lwStatusEffect.H" />
+    <ClInclude Include="lwStyleString.h" />
+    <ClInclude Include="lwSummon_Info.h" />
+    <ClInclude Include="lwTeleCardUI.h" />
+    <ClInclude Include="lwTrade.h" />
+    <ClInclude Include="lwTransTower.h" />
+    <ClInclude Include="lwTrigger.h" />
+    <ClInclude Include="lwUI.h" />
+    <ClInclude Include="lwUIActiveStatus.h" />
+    <ClInclude Include="lwUIBook.h" />
+    <ClInclude Include="lwUICharInfo.h" />
+    <ClInclude Include="lwUICostumeMix.h" />
+    <ClInclude Include="lwUICSGacha.h" />
+    <ClInclude Include="lwUIFireLove.h" />
+    <ClInclude Include="lwUIGamePad.h" />
+    <ClInclude Include="lwUIGemStore.h" />
+    <ClInclude Include="lwUIIGGacha.h" />
+    <ClInclude Include="lwUIItemBind.h" />
+    <ClInclude Include="lwUIItemConvertSystem.h" />
+    <ClInclude Include="lwUIItemCooking.h" />
+    <ClInclude Include="lwUIItemEventBox.h" />
+    <ClInclude Include="lwUIItemGamble.h" />
+    <ClInclude Include="lwUIItemJewelBox.h" />
+    <ClInclude Include="lwUIItemLottery.h" />
+    <ClInclude Include="lwUIItemMaking.h" />
+    <ClInclude Include="lwUIItemPlusUpgrade.h" />
+    <ClInclude Include="lwUIItemRarityAmplify.h" />
+    <ClInclude Include="lwUIItemRarityBuildUp.h" />
+    <ClInclude Include="lwUIItemRarityUpgrade.h" />
+    <ClInclude Include="lwUIItemRepair.h" />
+    <ClInclude Include="lwUIItemSocketSystem.h" />
+    <ClInclude Include="lwUILogin.h" />
+    <ClInclude Include="lwUIManufacture.h" />
+    <ClInclude Include="lwUIMemTransCard.h" />
+    <ClInclude Include="lwUIMission.h" />
+    <ClInclude Include="lwUIPet.h" />
+    <ClInclude Include="lwUIPetition.h" />
+    <ClInclude Include="lwUIQuest.h" />
+    <ClInclude Include="lwUISealProcess.h" />
+    <ClInclude Include="lwUIShineStone.h" />
+    <ClInclude Include="lwUITreasureChest.h" />
+    <ClInclude Include="lwUnit.h" />
+    <ClInclude Include="lwUNIT_PTR_ARRAY.h" />
+    <ClInclude Include="lwVendor.h" />
+    <ClInclude Include="lwWorld.h" />
+    <ClInclude Include="lwWorldActionMan.h" />
+    <ClInclude Include="lwWorldActionObject.H" />
+    <ClInclude Include="lwWString.h" />
+    <ClInclude Include="lwZoneDrawing.h" />
+    <ClInclude Include="MasterPropertyAccumulator.h" />
+    <ClInclude Include="NewWare\Game\AttachObjects.h" />
+    <ClInclude Include="NewWare\Game\ProcessManager.h" />
+    <ClInclude Include="NewWare\NewWare.h" />
+    <ClInclude Include="NewWare\Renderer\ArtificialDrawer.h" />
+    <ClInclude Include="NewWare\Renderer\DrawBound.h" />
+    <ClInclude Include="NewWare\Renderer\DrawOptions.h" />
+    <ClInclude Include="NewWare\Renderer\DrawUtils.h" />
+    <ClInclude Include="NewWare\Renderer\DrawWorkflow.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\BatchRenderUtils.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\GroupAccumulator.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\RenderGroup.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\RenderGroupPool.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\RenderQueue.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\RenderStateBit.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\RenderStateBlockCache.h" />
+    <ClInclude Include="NewWare\Renderer\Kernel\RenderStateTagExtraData.h" />
+    <ClInclude Include="NewWare\Renderer\Line3DDrawer.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\FrontToBackSorter.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\HW\OcclusionCuller.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\HW\OcclusionDepthTestD3D.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\HW\OcclusionQueryD3D.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\HW\OcclusionRenderStateD3D.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\HW\OcclusionScene.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\HW\OcclusionSorter.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\HW\OcclusionTimeController.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\SW\Occluder.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\SW\OcclusionCuller.h" />
+    <ClInclude Include="NewWare\Renderer\OCuller\SW\PlanarOccluder.h" />
+    <ClInclude Include="NewWare\Renderer\PrimitiveCreator.h" />
+    <ClInclude Include="NewWare\Renderer\RenderedTexture.h" />
+    <ClInclude Include="NewWare\Renderer\SceneCuller.h" />
+    <ClInclude Include="NewWare\Renderer\SceneDrawer.h" />
+    <ClInclude Include="NewWare\Renderer\SceneDrawerDebug.h" />
+    <ClInclude Include="NewWare\Renderer\SceneDrawerLegacy.h" />
+    <ClInclude Include="NewWare\Renderer\StreamPack.h" />
+    <ClInclude Include="NewWare\Renderer\TaskDecorator.h" />
+    <ClInclude Include="NewWare\Renderer\Task\Flipper.h" />
+    <ClInclude Include="NewWare\Renderer\Task\OverlayDrawer.h" />
+    <ClInclude Include="NewWare\Renderer\TextBoardTextures.h" />
+    <ClInclude Include="NewWare\Scene\ApplyProperty.h" />
+    <ClInclude Include="NewWare\Scene\ApplyTraversal.h" />
+    <ClInclude Include="NewWare\Scene\AssetLoader.h" />
+    <ClInclude Include="NewWare\Scene\AssetManager.h" />
+    <ClInclude Include="NewWare\Scene\AssetUtils.h" />
+    <ClInclude Include="NewWare\Scene\DomainNodeManager.h" />
+    <ClInclude Include="NewWare\Scene\FindTraversal.h" />
+    <ClInclude Include="NewWare\Scene\NodeTraversal.h" />
+    <ClInclude Include="NewWare\Scene\PhysXSystem.h" />
+    <ClInclude Include="NewWare\Scene\SceneLensFilter.h" />
+    <ClInclude Include="NewWare\Scene\SceneProperty.h" />
+    <ClInclude Include="NewWare\Scene\SceneSpacePartition.h" />
+    <ClInclude Include="NewWare\Tools\BitFlag.h" />
+    <ClInclude Include="NewWare\Tools\CommonTools.h" />
+    <ClInclude Include="NewWare\Tools\Compiles.h" />
+    <ClInclude Include="NewWare\Tools\CreateProxy.h" />
+    <ClInclude Include="NewWare\Tools\MemPool.h" />
+    <ClInclude Include="NewWare\Tools\Noncopyable.h" />
+    <ClInclude Include="NewWare\Tools\Singleton.h" />
+    <ClInclude Include="NiApplication\NiApplication.h" />
+    <ClInclude Include="NiApplication\NiApplicationMetrics.h" />
+    <ClInclude Include="NiApplication\NiAppWindow.h" />
+    <ClInclude Include="NiApplication\NiCommand.h" />
+    <ClInclude Include="NiApplication\NiDX9Select.h" />
+    <ClInclude Include="NiApplication\NiFrameRate.h" />
+    <ClInclude Include="NiOcclusionCuller.h" />
+    <ClInclude Include="Occluder.h" />
+    <ClInclude Include="Pg2DString.H" />
+    <ClInclude Include="PgAchievementTitle.h" />
+    <ClInclude Include="PgAchieveNfyMgr.h" />
+    <ClInclude Include="PgAction.h" />
+    <ClInclude Include="PgActionEffect.H" />
+    <ClInclude Include="PgActionFSMFuncMgr.h" />
+    <ClInclude Include="PgActionFSMFuncs.h" />
+    <ClInclude Include="PgActionPool.h" />
+    <ClInclude Include="PgActionSlot.h" />
+    <ClInclude Include="PgActionTargetList.h" />
+    <ClInclude Include="PgActionXmlData.h" />
+    <ClInclude Include="PgActor.h" />
+    <ClInclude Include="PgActorAppearanceMan.H" />
+    <ClInclude Include="PgActorManager.H" />
+    <ClInclude Include="PgActorMonster.h" />
+    <ClInclude Include="PgActorNpc.h" />
+    <ClInclude Include="PgActorPet.h" />
+    <ClInclude Include="PgActorSubPlayer.h" />
+    <ClInclude Include="PgActorUtil.h" />
+    <ClInclude Include="PgAlphaAccumulator.h" />
+    <ClInclude Include="PgAMPool.h" />
+    <ClInclude Include="PgAMPool2.h" />
+    <ClInclude Include="PgAppProtect.h" />
+    <ClInclude Include="PgAVObjectAlphaProcessManager.h" />
+    <ClInclude Include="PgAXPlay.h" />
+    <ClInclude Include="PgBackgroundThread.h" />
+    <ClInclude Include="PgBalloon.h" />
+    <ClInclude Include="PgBalloonEmoticonData.h" />
+    <ClInclude Include="PgBalloonEmoticonInstance.h" />
+    <ClInclude Include="PgBalloonEmoticonMgr.h" />
+    <ClInclude Include="PgBaseItemSet.h" />
+    <ClInclude Include="PgBatchRender.h" />
+    <ClInclude Include="PgBattleSquare.h" />
+    <ClInclude Include="PgBowString.H" />
+    <ClInclude Include="PgBreakableObject.H" />
+    <ClInclude Include="PgBriefingLoadUIMgr.h" />
+    <ClInclude Include="PgBuilding.h" />
+    <ClInclude Include="PgCameraMan.h" />
+    <ClInclude Include="PgCameraModeAni.h" />
+    <ClInclude Include="PgCameraModeBox.h" />
+    <ClInclude Include="PgCameraModeCircle.h" />
+    <ClInclude Include="PgCameraModeEvent.h" />
+    <ClInclude Include="PgCameraModeFollow.h" />
+    <ClInclude Include="PgCameraModeFollow2.H" />
+    <ClInclude Include="PgCameraModeFree.H" />
+    <ClInclude Include="PgCameraModeMovie.h" />
+    <ClInclude Include="PgCameraModeScript.H" />
+    <ClInclude Include="PgCashShop.h" />
+    <ClInclude Include="PgChainAttack.h" />
+    <ClInclude Include="PgChatMgrClient.h" />
+    <ClInclude Include="PgChatWindow.H" />
+    <ClInclude Include="PgCircleShadow.h" />
+    <ClInclude Include="PgClientExpedition.H" />
+    <ClInclude Include="PgClientParty.H" />
+    <ClInclude Include="PgCmdlineParse.h" />
+    <ClInclude Include="PgComboAdvisor.h" />
+    <ClInclude Include="PgCommandMgr.h" />
+    <ClInclude Include="PgCommonSkillActionFSM.h" />
+    <ClInclude Include="PgCommunityEvent.h" />
+    <ClInclude Include="PgConstellation.h" />
+    <ClInclude Include="PgContentsBase.h" />
+    <ClInclude Include="PgControllerSequenceManager.h" />
+    <ClInclude Include="PgCoupleMgr.h" />
+    <ClInclude Include="PgCustomUI_Summmoner.h" />
+    <ClInclude Include="PgDailyQuestUI.h" />
+    <ClInclude Include="PgDamageNumMan.h" />
+    <ClInclude Include="PgDamper.h" />
+    <ClInclude Include="PgDepthOfField.H" />
+    <ClInclude Include="PgDirectionArrow.h" />
+    <ClInclude Include="PgDropBox.h" />
+    <ClInclude Include="PgDshowPlay.h" />
+    <ClInclude Include="PgDuelTitle.h" />
+    <ClInclude Include="PgDungeonMinimap.h" />
+    <ClInclude Include="PgDynamicTextureMan.H" />
+    <ClInclude Include="PgEffectCountDown.h" />
+    <ClInclude Include="PgElementMark.h" />
+    <ClInclude Include="PgEmoticonFont.H" />
+    <ClInclude Include="PgEmporiaAdministrator.h" />
+    <ClInclude Include="PgEmporiaBattleClient.h" />
+    <ClInclude Include="PgEmporiaBattleClient_ProtectDragon.h" />
+    <ClInclude Include="PgEmporiaMgr.h" />
+    <ClInclude Include="PgEnergyGaugeBig.h" />
+    <ClInclude Include="PgEnergyGuage.H" />
+    <ClInclude Include="PgEntityZone.h" />
+    <ClInclude Include="PgEnvElement.H" />
+    <ClInclude Include="PgEnvElementFactory.H" />
+    <ClInclude Include="PgEnvElementSakura.H" />
+    <ClInclude Include="PgEnvElementSimple.h" />
+    <ClInclude Include="PgEnvElementSnow.H" />
+    <ClInclude Include="PgEnvironmentMan.H" />
+    <ClInclude Include="PgEnvStateSet.H" />
+    <ClInclude Include="PgEqItemMixCreator.h" />
+    <ClInclude Include="PgError.h" />
+    <ClInclude Include="PgErrorCodeTable.h" />
+    <ClInclude Include="PgEventCamera.h" />
+    <ClInclude Include="PgEventQuestUI.h" />
+    <ClInclude Include="PgEventScriptCmd.H" />
+    <ClInclude Include="PgEventScriptData.H" />
+    <ClInclude Include="PgEventScriptDataMan.H" />
+    <ClInclude Include="PgEventScriptInstance.H" />
+    <ClInclude Include="PgEventScriptSystem.H" />
+    <ClInclude Include="PgEventTimer.h" />
+    <ClInclude Include="PgExpeditionBalloon.h" />
+    <ClInclude Include="PgFontSwitchTable.h" />
+    <ClInclude Include="PgFriendMgr.h" />
+    <ClInclude Include="PgFSAA2.h" />
+    <ClInclude Include="PgFurniture.h" />
+    <ClInclude Include="PgFxAllocator.h" />
+    <ClInclude Include="PgFxAssetManager.H" />
+    <ClInclude Include="PgFxBankFile.h" />
+    <ClInclude Include="PgFxParticle.H" />
+    <ClInclude Include="PgFxParticleStream.H" />
+    <ClInclude Include="PgFxSoundManager.H" />
+    <ClInclude Include="PgFxStudio.H" />
+    <ClInclude Include="PgGMCommand.h" />
+    <ClInclude Include="PgGuardianMark.h" />
+    <ClInclude Include="PgGuild.h" />
+    <ClInclude Include="PgGuildMark.h" />
+    <ClInclude Include="PgHeadBuffIcon.H" />
+    <ClInclude Include="PgHelpSystem.H" />
+    <ClInclude Include="PgHome.h" />
+    <ClInclude Include="PgHomeRenew.h" />
+    <ClInclude Include="PgHomeTown.h" />
+    <ClInclude Include="PgHomeUI.h" />
+    <ClInclude Include="PgHouse.h" />
+    <ClInclude Include="PgICameraMode.h" />
+    <ClInclude Include="PgIInputManager.h" />
+    <ClInclude Include="PgIInputObserver.h" />
+    <ClInclude Include="PgInput.h" />
+    <ClInclude Include="PgInputSystem.h" />
+    <ClInclude Include="PgInterpolator.h" />
+    <ClInclude Include="PgInventoryUI.h" />
+    <ClInclude Include="PgIPostProcessEffect.h" />
+    <ClInclude Include="PgIResourceLoadController.h" />
+    <ClInclude Include="PgIScene.h" />
+    <ClInclude Include="PgItemEx.h" />
+    <ClInclude Include="PgItemMan.h" />
+    <ClInclude Include="PgItemMixBase.h" />
+    <ClInclude Include="PgItemMix_Script.h" />
+    <ClInclude Include="PgItemUseChecker.h" />
+    <ClInclude Include="PgItemUtil.h" />
+    <ClInclude Include="PgIWorldObject.h" />
+    <ClInclude Include="PgIWorldObjectBase.h" />
+    <ClInclude Include="PgIXmlObject.h" />
+    <ClInclude Include="PgJobSkillLearn.h" />
+    <ClInclude Include="PgJobSkillLocationInfo.h" />
+    <ClInclude Include="PgLegendItemMakeHelpMng.h" />
+    <ClInclude Include="PgLetterDialog.h" />
+    <ClInclude Include="PgLinearInterpolation.h" />
+    <ClInclude Include="PgLinkedPlane.H" />
+    <ClInclude Include="PgLocalManager.h" />
+    <ClInclude Include="PgMacroCheck.h" />
+    <ClInclude Include="PgMail.h" />
+    <ClInclude Include="PgMarkBalloon.h" />
+    <ClInclude Include="PgMarket.h" />
+    <ClInclude Include="PgMarketDef.h" />
+    <ClInclude Include="PgMath.H" />
+    <ClInclude Include="PgMemStatusManager.H" />
+    <ClInclude Include="PgMemTracker.H" />
+    <ClInclude Include="PgMessageUtil.h" />
+    <ClInclude Include="PgMinimap.h" />
+    <ClInclude Include="PgMinimapType.h" />
+    <ClInclude Include="PgMissionCard.h" />
+    <ClInclude Include="PgMissionComplete.h" />
+    <ClInclude Include="PgMissionQuestMan.h" />
+    <ClInclude Include="PgMobileSuit.h" />
+    <ClInclude Include="PgMonsterCardMixer.h" />
+    <ClInclude Include="PgMoveAnimateWnd.h" />
+    <ClInclude Include="PgMovieMgr.h" />
+    <ClInclude Include="PgMToMChat.h" />
+    <ClInclude Include="PgMultiThreadSceneGraphUpdater.H" />
+    <ClInclude Include="PgMyActorViewMgr.h" />
+    <ClInclude Include="PgMyhomeMark.h" />
+    <ClInclude Include="PgNetwork.h" />
+    <ClInclude Include="PgNiEntityStreamingAscii.h" />
+    <ClInclude Include="PgNiFile.h" />
+    <ClInclude Include="PgNifMan.H" />
+    <ClInclude Include="PgNifOptimizer.h" />
+    <ClInclude Include="PgNifParticle.H" />
+    <ClInclude Include="PgNifParticleStream.H" />
+    <ClInclude Include="PgNodeMng.h" />
+    <ClInclude Include="PgObject.H" />
+    <ClInclude Include="PgObserverMode.h" />
+    <ClInclude Include="PgOctree.H" />
+    <ClInclude Include="PgOption.h" />
+    <ClInclude Include="PgPage.h" />
+    <ClInclude Include="PgParticle.h" />
+    <ClInclude Include="PgParticleCache.H" />
+    <ClInclude Include="PgParticleMan.h" />
+    <ClInclude Include="PgParticleProcessor.H" />
+    <ClInclude Include="PgParticleProcessorAttachToNode.H" />
+    <ClInclude Include="PgParticleProcessorAutoGround.H" />
+    <ClInclude Include="PgParticleProcessorCamFrontParticle.H" />
+    <ClInclude Include="PgParticleProcessorFadeIn.H" />
+    <ClInclude Include="PgParticleProcessorFadeOut.H" />
+    <ClInclude Include="PgParticleProcessorRotateToTarget.H" />
+    <ClInclude Include="PgParticleProcessorSound.H" />
+    <ClInclude Include="PgParticleProcessorSpriteAnimation.h" />
+    <ClInclude Include="PgParticleStream.H" />
+    <ClInclude Include="PgParticleStreamManager.H" />
+    <ClInclude Include="PgPartyBalloon.h" />
+    <ClInclude Include="PgPathData.H" />
+    <ClInclude Include="PgPetitionMgr.h" />
+    <ClInclude Include="PgPhysXUtil.H" />
+    <ClInclude Include="PgPilot.h" />
+    <ClInclude Include="PgPilotMan.h" />
+    <ClInclude Include="PgPostProcessMan.h" />
+    <ClInclude Include="PgPostProcessMRT.h" />
+    <ClInclude Include="PgPOTParticle.h" />
+    <ClInclude Include="PgProcessChecker.h" />
+    <ClInclude Include="PgProjectile.H" />
+    <ClInclude Include="PgProjectileMan.H" />
+    <ClInclude Include="PgPSRoom.H" />
+    <ClInclude Include="PgPSRoomGroup.H" />
+    <ClInclude Include="PgPSysBoundedPositionModifier.H" />
+    <ClInclude Include="PgPSysColorModifierDecorator.H" />
+    <ClInclude Include="PgPuppet.h" />
+    <ClInclude Include="PgPvPGame.h" />
+    <ClInclude Include="PgQuest.H" />
+    <ClInclude Include="PgQuestDialog.h" />
+    <ClInclude Include="PgQuestFullScreenDialog.h" />
+    <ClInclude Include="PgQuestIngList.h" />
+    <ClInclude Include="PgQuestMan.h" />
+    <ClInclude Include="PgQuestMarkHelp.h" />
+    <ClInclude Include="PgQuestSelectiveList.h" />
+    <ClInclude Include="PgQuestUI.H" />
+    <ClInclude Include="PgRaceEvent.h" />
+    <ClInclude Include="PgRadialBlur.H" />
+    <ClInclude Include="PgRagnarokGroundUI.h" />
+    <ClInclude Include="PgRealmQuestEvent.h" />
+    <ClInclude Include="PgRemoteManager.h" />
+    <ClInclude Include="PgRenderer.h" />
+    <ClInclude Include="PgRendererUtil.H" />
+    <ClInclude Include="PgRenderMan.h" />
+    <ClInclude Include="PgResourceIcon.h" />
+    <ClInclude Include="PgResourceMonitor.h" />
+    <ClInclude Include="PgRewardBox.h" />
+    <ClInclude Include="PgRope.h" />
+    <ClInclude Include="PgRscContainer.h" />
+    <ClInclude Include="PgRscLoader.h" />
+    <ClInclude Include="PgSafeFoamMgr.h" />
+    <ClInclude Include="PgScreenBreak.h" />
+    <ClInclude Include="PgScreenEffect.h" />
+    <ClInclude Include="PgScreenUpdateThread.h" />
+    <ClInclude Include="PgScripting.h" />
+    <ClInclude Include="PgSelectStage.h" />
+    <ClInclude Include="PgShadowVolume.h" />
+    <ClInclude Include="PgShineStone.h" />
+    <ClInclude Include="PgSkillOption.H" />
+    <ClInclude Include="PgSkillOptionCommandKey.H" />
+    <ClInclude Include="PgSkillOptionData.H" />
+    <ClInclude Include="PgSkillOptionDataFile.H" />
+    <ClInclude Include="PgSkillOptionFactory.H" />
+    <ClInclude Include="PgSkillOptionLoader.H" />
+    <ClInclude Include="PgSkillOptionMan.H" />
+    <ClInclude Include="PgSkillOptionSaver.H" />
+    <ClInclude Include="PgSkillTargetMan.H" />
+    <ClInclude Include="PgSkillTree.H" />
+    <ClInclude Include="PgSky.H" />
+    <ClInclude Include="PgSoundMan.h" />
+    <ClInclude Include="PgSpotLight.h" />
+    <ClInclude Include="PgStat.h" />
+    <ClInclude Include="PgStatusEffect.H" />
+    <ClInclude Include="PgStitchImageMng.h" />
+    <ClInclude Include="PgSuperGroundUI.h" />
+    <ClInclude Include="PgSystemInventory.h" />
+    <ClInclude Include="PgTextBalloon.h" />
+    <ClInclude Include="PgTextDialogMng.h" />
+    <ClInclude Include="PgTextObject.H" />
+    <ClInclude Include="PgTextTable.H" />
+    <ClInclude Include="PgTextTypistWnd.h" />
+    <ClInclude Include="PgTrail.H" />
+    <ClInclude Include="PgTrigger.h" />
+    <ClInclude Include="PgUICalculator.h" />
+    <ClInclude Include="PgUIDataMgr.h" />
+    <ClInclude Include="PgUIDrawObject.h" />
+    <ClInclude Include="PgUIModel.h" />
+    <ClInclude Include="PgUIScene.h" />
+    <ClInclude Include="PgUISound.h" />
+    <ClInclude Include="PgUtilAction.h" />
+    <ClInclude Include="PgVendor.h" />
+    <ClInclude Include="PgVendorBalloon.h" />
+    <ClInclude Include="PgVmr.h" />
+    <ClInclude Include="PgWall.h" />
+    <ClInclude Include="PgWarningDialog.h" />
+    <ClInclude Include="PgWater.H" />
+    <ClInclude Include="PgWeaponSoundMan.h" />
+    <ClInclude Include="PgWeather.H" />
+    <ClInclude Include="PgWebLogin.h" />
+    <ClInclude Include="PgWEClientObjectMgr.h" />
+    <ClInclude Include="PgWEObjectState.H" />
+    <ClInclude Include="PgWorkerThread.h" />
+    <ClInclude Include="PgWorld.h" />
+    <ClInclude Include="PgWorldActionMan.h" />
+    <ClInclude Include="PgWorldActionObject.H" />
+    <ClInclude Include="PgWorldElementFog.H" />
+    <ClInclude Include="PgWorldEventClientMgr.h" />
+    <ClInclude Include="PgWorldMapPopUpUI.h" />
+    <ClInclude Include="PgWorldMapUI.h" />
+    <ClInclude Include="PgWorldObjectPool.H" />
+    <ClInclude Include="PgXmlLoader.h" />
+    <ClInclude Include="PgZoneDrawing.h" />
+    <ClInclude Include="PlanarOccluder.h" />
+    <ClInclude Include="Ranking\PgRankingMgr.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourcePool.h" />
+    <ClInclude Include="ServerLib.h" />
+    <ClInclude Include="ShaderHelper.h" />
+    <ClInclude Include="ShadowGeometry.h" />
+    <ClInclude Include="ShadowObject.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Utility\ComputerInfo.h" />
+    <ClInclude Include="Utility\ErrorReportFile.h" />
+    <ClInclude Include="Utility\ExceptionHandler.h" />
+    <ClInclude Include="Utility\md5.h" />
+    <ClInclude Include="Utility\NiSceneGraphPrinter.h" />
+    <ClInclude Include="Utility\ProcessChecker.h" />
+    <ClInclude Include="Utility\SimpleTimer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CustomUtility.inl" />
+    <None Include="NiApplication\NiApplication.inl" />
+    <None Include="NiApplication\NiAppWindow.inl" />
+    <None Include="NiApplication\NiFrameRate.inl" />
+    <None Include="ShadowGeometry.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="mobilesuit.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="mobilesuit.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="Dragonica.exe.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Archangel\Weapons\Collins\Collins.vcxproj">
+      <Project>{de46ddcc-66ed-4713-98e1-629f66e191f5}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Archangel\Weapons\Lohengrin\Lohengrin.vcxproj">
+      <Project>{77f61351-ad25-4faf-9b3d-e9df557011d7}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Archangel\Weapons\Variant\Variant.vcxproj">
+      <Project>{b70e3b9f-702a-4081-b800-0561ae064326}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Archangel\Weapons\XUI\XUI.vcxproj">
+      <Project>{51e41dcb-7808-431c-ab3b-aa2b1d432680}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="CustomContent\Chat\emoticonfont.xml" />
+    <Xml Include="CustomContent\Chat\interface.xml" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

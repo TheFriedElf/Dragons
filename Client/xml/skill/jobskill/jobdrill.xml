@@ -1,0 +1,25 @@
+<ACTION ID="a_Job_Drill" NEXT="a_Job_Drill_End" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" OVERRIDE_PACKET="TRUE" TYPE="JOB_SKILL">	
+	<SLOT NAME="Common_Com_Job_Mining_Drill_01"/>	
+	<SLOT NAME="Common_Com_Job_Mining_Drill_02"/>
+	<FSM SCRIPT="JobSkill_Begin"
+	
+		JOB_SKILL_TOOL_EFFECT_ID1="ef_Job_Drill_01"
+		JOB_SKILL_TOOL_TARGET_NODE1="p_pt_r_hand"
+		JOB_SKILL_TOOL_SOUND1="job_mining_drill__01"
+		JOB_SKILL_EFFECT_ID1=""
+		JOB_SKILL_EFFECT_TARGET_NODE1=""
+		
+		JOB_SKILL_TOOL_EFFECT_ID2="ef_Job_Drill_02"
+		JOB_SKILL_TOOL_TARGET_NODE2="p_pt_r_hand"
+		JOB_SKILL_TOOL_SOUND2="job_mining_drill__02"
+		JOB_SKILL_EFFECT_ID2="eff_com_job_mining_drill"
+		JOB_SKILL_EFFECT_TARGET_NODE2="char_root"
+		
+		JOB_SKILL_CRITICAL_EFFECT_ID="eff_etc_change_00"
+		JOB_SKILL_CRITICAL_TARGET_NODE="char_root"
+		JOB_SKILL_CRITICAL_SOUND="job-cri"
+		
+		HIDE_WEAPON="TRUE"
+		NO_WEAPON_TRAIL="TRUE"
+	/>
+</ACTION>

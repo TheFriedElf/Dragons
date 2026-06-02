@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4234</ID> <!--T.T.10423401 흑룡왕의 장갑 제조서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	검은 발톱의 파편 입수-->
+<!--[완료NPC]	검은발톱 전초기지 - 토마스-->
+<!--[내용]	토마스 대장은 병사들의 사기 진작을 위해 검은 발톱 파편을 가져오는 사람에게 흑룡왕의 장갑을 상품으로 주는 내기를 걸었다고 한다. 서둘러 엘가를 퇴치하고, 토마스에게 검은 발톱의 파편을 가져다 주자.  -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7076ED5A-1112-4bd5-87A2-5092259E86B5</CLIENT> <!--시작NPC 검은발톱 전초기지 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7076ED5A-1112-4bd5-87A2-5092259E86B5</PAYER> <!--완료NPC 검은발톱 전초기지 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7076ED5A-1112-4bd5-87A2-5092259E86B5</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/0/1/1/160422900">3542120</MONSTER> 
+ <!--MON_NO=3542120/흑룡왕 엘가,Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160422900</ITEM> 
+ <!--Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10423411"/> <!--검은 발톱의 파편 입수-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300412</ITEM><!--전체지급/기사/1)/119300372(봉인아님) 1개-(일반) 흑룡왕의 장갑 (용기사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>5/13/21</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300552</ITEM><!--전체지급/투사/1)/119300512(봉인아님) 1개-(일반) 흑룡왕의 장갑 (파괴자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>6/14/22</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300342</ITEM><!--전체지급/메이지/1)/119300302(봉인아님) 1개-(일반) 흑룡왕의 장갑 (아크메이지) 제조서(필요)[Elements],[Count]-->
+			<CLASS>7/15/23</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300482</ITEM><!--전체지급/전투법사/1)/119300442(봉인아님) 1개-(일반) 흑룡왕의 장갑 (워로드) 제조서(필요)[Elements],[Count]-->
+			<CLASS>8/16/24</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300132</ITEM><!--전체지급/사냥꾼/1)/119300092(봉인아님) 1개-(일반) 흑룡왕의 장갑 (수호자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>9/17/25</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300272</ITEM><!--전체지급/레인저/1)/119300232(봉인아님) 1개-(일반) 흑룡왕의 장갑 (스트라이커) 제조서(필요)[Elements],[Count]-->
+			<CLASS>10/18/26</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300062</ITEM><!--전체지급/광대/1)/119300022(봉인아님) 1개-(일반) 흑룡왕의 장갑 (매니악) 제조서(필요)[Elements],[Count]-->
+			<CLASS>11/19/27</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300202</ITEM><!--전체지급/암살자/1)/119300162(봉인아님) 1개-(일반) 흑룡왕의 장갑 (쉐도우) 제조서(필요)[Elements],[Count]-->
+			<CLASS>12/20/28</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">340351052</ITEM><!--전체지급/소환사/1)/340351012(봉인아님) 1개-(일반) 흑룡왕의 장갑 (소환사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>51/53/55/57</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">330351052</ITEM><!--전체지급/쌍둥이/1)/330351012(봉인아님) 1개-(일반) 흑룡왕의 장갑 (격투가) 제조서(필요)[Elements],[Count]-->
+			<CLASS>52/54/56/58</CLASS>
+		</SELECT1>	
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10423421" FACE="Thomas_normal"/> <!--크하하하! 자네로군. 
+오늘은 내가 용병대의 병사들에게 내기를 걸기로 했지.
+상품은 흑룡왕의 장갑 제조서라고…%%
+어때 참여할 생각이 있나? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10423426" FACE="Thomas_smile"/> <!--흠.. 역시 자네가 이 일을 가장 빠르게 처리할 거라
+예상했어. 수고했네.%%
+자, 그럼 금번 용병대 내기의 승자는….
+%name%이다! 크하하하!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10423423" FACE="Thomas_smile"/> <!--룰은 상당히 간단하지.%%
+엘가의 망령을 퇴치하고 검은 발톱의 파편을 가져오는
+사람에게 흑룡왕 장갑을 만들 수 있는 제조서를 
+상품으로 줄 걸세.%%
+자, 이제 슬슬 시작해야겠구만. 그럼 출발하게!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10423424" FACE="Thomas_angly"/> <!--뭐, 상관 없어. 어차피 자네가 참가하면 긴장감이 떨어지니 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10423425" FACE="Thomas_angly"/> <!--뭐야? 서둘러야지!
+이러다가 상품을 놓쳐도 난 모른다고!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10423402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

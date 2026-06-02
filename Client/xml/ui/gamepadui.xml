@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+  <!--Pad No Exist Warning UI start-->
+  <STATIC_FORM ID="SFRM_PADNOEXIST" ALIGN_X="50" Y="180" W="300" H="136" CAN_DRAG="1" STATIC_NUM="1">
+	<!--Titlebar Start-->
+	<STATIC_FORM ID="SFRM_TITLEBAR" X="1" Y="0" W="298" H="36" Z="1" STATIC_NUM="4">
+	  <STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="142" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+	  <IMG ID="IMG_TITLE_TAB" X="7" Y="4" Z="1" W="114" H="24" NO_FOCUS="1" T_CENTER = "1" T_X = "67" T_Y = "4">
+		<ATTR FONT="FTbt_12" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" TEXT="90003011" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+	  </IMG>
+	  <BUTTON ID="BTN_CLOSE" X="267" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+		<SCRIPT ID="ON_L_BTN_UP">UISelf:GetParent():CloseParent()</SCRIPT>
+	  </BUTTON>
+	</STATIC_FORM>
+	<!--Titlebar End-->
+	<!--Background start-->
+	<STATIC_FORM ID="SFRM_BACK" X="8" Y="35" Z="-1"  W="284" H="90" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+	  <ATTR TEXT="90003010" FONT="FTbt_12" T_X="142" T_Y="20" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+	</STATIC_FORM>
+	<BUTTON ID="BTN_CONFIRM" X="110" Y="90" W="84" H="26">
+	  <ATTR TEXT="400533" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1"/>
+	  <ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+	  <SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+	</BUTTON>
+	<!--Background End-->
+	<SCRIPT ID="ON_CLOSE">
+		CloseUI("SFRM_GAMEPAD")
+		CallUI("SFRM_KEYSET")
+	</SCRIPT>
+	<HOTKEY ID="1">UISelf:Close() return true</HOTKEY>
+  </STATIC_FORM>
+  <!--Pad Not Exist Warning UI end-->
+  
+  <!--GamePad UI start-->
+  <STATIC_FORM ID="SFRM_GAMEPAD" ALIGN_X="50" Y="90" W="826" H="480" CAN_DRAG="1" STATIC_NUM="1" >
+	<SCRIPT ID="ON_CALL">
+	  if false == GetGamePadUI():IsPadExist() then
+		 CallUI("SFRM_PADNOEXIST", 1)
+		 return
+	  end
+	  GetGamePadUI():BackupSetting()
+	  for i=1, 24 do
+		local PadButtonName = GetGamePadUI():GetPadButtonBindWithUIButton(i);
+		local UIFrameName = "SFRM_BUTTONFRAME"..i
+		local UIButtonName = "BTN_INDEX"..i
+	  
+		UISelf:GetControl("SFRM_BACK"):GetControl(UIFrameName):GetControl(UIButtonName):SetStaticText(PadButtonName:GetStr())
+	  end
+	</SCRIPT>
+	<SCRIPT ID="ON_TICK">
+	  local iTwinkelButtonIndex = GetGamePadUI():GetUIButtonIndexByPressedPadButton()
+	  if 0 ~= iTwinkelButtonIndex then
+		local UIFrameName = "SFRM_BUTTONFRAME"..iTwinkelButtonIndex
+		local UIButtonName = "BTN_INDEX"..iTwinkelButtonIndex
+		UISelf:GetControl("SFRM_BACK"):GetControl(UIFrameName):GetControl(UIButtonName):SetTwinkle(1000, 100)
+		GetGamePadUI():UnbindButton(iButtonIndex);
+	  end
+
+	</SCRIPT>
+	<!--
+	  게임패드 UI xml
+		 	
+	   -->
+
+	<!--Titlebar Start-->
+	<STATIC_FORM ID="SFRM_TITLEBAR" X="1" Y="0" W="826" H="36" Z="1" STATIC_NUM="4">
+	  <STATIC_FORM ID="SFRM_KEY">
+		<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		<CHECK_BUTTON ID="CBTN_KEYSET">
+		  <ATTR X="0" Y="0" W="84" H="24" />
+		  <ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+		  <ATTR TEXT="400038" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+		  <SCRIPT ID="ON_CALL">UISelf:CheckState(false)</SCRIPT>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			GetGamePadUI():RestoreSetting()
+			CallUI("SFRM_KEYSET")
+			CloseUI("SFRM_GAMEPAD")
+		  </SCRIPT>
+		</CHECK_BUTTON>
+	  </STATIC_FORM>
+	  <STATIC_FORM ID="SFRM_PAD">
+		<ATTR X="96" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		<CHECK_BUTTON ID="CBTN_GAMEPAD">
+		  <ATTR X="0" Y="0" W="84" H="24"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48"/>
+		  <ATTR TEXT="90003000" FONT="FTtitle_14" T_X="36" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+		  <SCRIPT ID="ON_CALL">UISelf:CheckState(true)</SCRIPT>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+		  </SCRIPT>
+		</CHECK_BUTTON>
+	  </STATIC_FORM>
+		<BUTTON ID="BTN_CLOSE" X="794" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+  		  <SCRIPT ID="ON_L_BTN_UP">
+			GetGamePadUI():RestoreSetting()
+			CloseUI("SFRM_GAMEPAD")
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+	<!--Titlebar end-->
+	<!--Binding instruction start-->
+	<IMG ID="IMG_BINDINGINSTRUCTION" X="4" Y="32" W="816" H="44" NO_FOCUS="1">
+	  <ATTR IMG="../Data/6_ui/Key/keyJtBg.tga" IMG_W="816" IMG_H="44" TEXT="90003006" FONT="Font_Text"/>
+	  <ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF000000" TEXT="90003006" T_X="40" T_Y="13" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFAC4" />
+
+	  <IMG ID="IMG_BINDINGINSTRUCTION1" X="167" Y="5" W="202" H="31" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_ui/Key/keyJtBox.tga" IMG_W="202" IMG_H="31" TEXT="90003006" FONT="Font_Text"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF000000" TEXT="90003007" T_CENTER = "1" T_X="101" T_Y="7" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF" />
+	  </IMG>
+
+	  <IMG ID="IMG_RIGHTARROW1" X="368" Y="10" W="18" H="20" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_ui/Key/keyJarw.tga" IMG_W="18" IMG_H="20"/>
+	  </IMG>
+
+	  <IMG ID="IMG_BINDINGINSTRUCTION2" X="387" Y="5" W="202" H="31" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_ui/Key/keyJtBox.tga" IMG_W="202" IMG_H="31" TEXT="90003006" FONT="Font_Text"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF000000" TEXT="90003008" T_CENTER = "1" T_X="101" T_Y="7" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF" />
+	  </IMG>
+
+	  <IMG ID="IMG_RIGHTARROW2" X="588" Y="10" W="20" H="18" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_ui/Key/keyJarw.tga" IMG_W="18" IMG_H="20"/>
+	  </IMG>
+
+	  <IMG ID="IMG_BINDINGINSTRUCTION3" X="607" Y="5" W="202" H="31" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_ui/Key/keyJtBox.tga" IMG_W="202" IMG_H="31" TEXT="90003006" FONT="Font_Text"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF000000" TEXT="90003009" T_CENTER = "1" T_X="101" T_Y="7" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF" />
+	  </IMG>	  
+	</IMG>
+	<!--Binding instruction end-->	
+
+	<!--Background Start-->
+	<STATIC_FORM ID="SFRM_BACK" X="9" Y="81" Z="-1"  W="808" H="341" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+	  <!--Column Divider Start-->
+	  <STATIC_FORM ID="SFRM_BASIC_DIV" X="6" Y="5" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+		<STATIC_FORM ID="SFRM_INNER" X="4" Y="4" W="255" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90003001" FONT="FTbt_12" T_X="131" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+	  </STATIC_FORM>
+	  <STATIC_FORM ID="SFRM_QUICK_DIV" X="272" Y="5" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+		<STATIC_FORM ID="SFRM_INNER" X="4" Y="4" W="255" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90003002" FONT="FTbt_12" T_X="131" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+	  </STATIC_FORM>
+	  <STATIC_FORM ID="SFRM_EXTQUICK_DIV" X="538" Y="5" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+		<STATIC_FORM ID="SFRM_INNER" X="4" Y="4" W="255" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90003003" FONT="FTbt_12" T_X="131" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF" />
+		</STATIC_FORM>
+	  </STATIC_FORM>
+	  <!--Column Divider End-->
+	  <!--Button Descs and Buttons start-->
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME1" X="6" Y="42" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2">
+		<STATIC_FORM ID="SFRM_BUTTONNAME1" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002001" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX1" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002001):GetStr())
+			GetGamePadUI():RecordPressedUkey(1121)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(1)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME2" X="6" Y="79" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME2" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002002" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX2" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002002):GetStr())
+			GetGamePadUI():RecordPressedUkey(1126)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(2)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+	
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME3" X="6" Y="116" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME3" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002003" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX3" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002003):GetStr())
+			GetGamePadUI():RecordPressedUkey(1123)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(3)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME4" X="6" Y="153" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME4" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002004" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX4" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002004):GetStr())
+			GetGamePadUI():RecordPressedUkey(1124)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(4)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME5" X="6" Y="190" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME5" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002005" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX5" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002005):GetStr())
+			GetGamePadUI():RecordPressedUkey(1044)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(5)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME6" X="6" Y="227" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME6" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002006" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX6" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002006):GetStr())
+			GetGamePadUI():RecordPressedUkey(1045)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(6)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME7" X="6" Y="264" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME7" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002007" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX7" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002007):GetStr())
+			GetGamePadUI():RecordPressedUkey(1046)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(7)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME8" X="6" Y="301" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME8" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002008" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX8" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002008):GetStr())
+			GetGamePadUI():RecordPressedUkey(1057)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(8)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME9" X="272" Y="42" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME9" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002009" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX9" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002009):GetStr())
+			GetGamePadUI():RecordPressedUkey(1016)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(9)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME10" X="272" Y="79" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME10" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002010" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX10" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002010):GetStr())
+			GetGamePadUI():RecordPressedUkey(1017)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(10)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME11" X="272" Y="116" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME11" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002011" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX11" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002011):GetStr())
+			GetGamePadUI():RecordPressedUkey(1018)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(11)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME12" X="272" Y="153" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME12" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002012" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX12" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002012):GetStr())
+			GetGamePadUI():RecordPressedUkey(1019)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(12)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME13" X="272" Y="190" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME13" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002013" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX13" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002013):GetStr())
+			GetGamePadUI():RecordPressedUkey(1030)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(13)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME14" X="272" Y="227" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME14" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002014" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX14" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002014):GetStr())
+			GetGamePadUI():RecordPressedUkey(1031)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(14)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME15" X="272" Y="264" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME15" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002015" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX15" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002015):GetStr())
+			GetGamePadUI():RecordPressedUkey(1032)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(15)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME16" X="272" Y="301" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME16" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002016" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX16" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002016):GetStr())
+			GetGamePadUI():RecordPressedUkey(1033)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(16)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME17" X="538" Y="42" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME17" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002017" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX17" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002017):GetStr())
+			GetGamePadUI():RecordPressedUkey(1002)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(17)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME18" X="538" Y="79" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME18" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002018" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX18" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002018):GetStr())
+			GetGamePadUI():RecordPressedUkey(1003)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(18)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME19" X="538" Y="116" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME19" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002019" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX19" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002019):GetStr())
+			GetGamePadUI():RecordPressedUkey(1004)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(19)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+	 
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME20" X="538" Y="153" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME20" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002020" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX20" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002020):GetStr())
+			GetGamePadUI():RecordPressedUkey(1005)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(20)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME21" X="538" Y="190" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME21" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002021" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX21" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002021):GetStr())
+			GetGamePadUI():RecordPressedUkey(1006)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(21)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME22" X="538" Y="227" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME22" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002022" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX22" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002022):GetStr())
+			GetGamePadUI():RecordPressedUkey(1007)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(22)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME23" X="538" Y="264" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME23" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002023" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX23" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002023):GetStr())
+			GetGamePadUI():RecordPressedUkey(1008)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(23)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>
+	  </STATIC_FORM>
+
+	  <STATIC_FORM ID="SFRM_BUTTONFRAME24" X="538" Y="301" W="263" H="32" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="1">
+		<STATIC_FORM ID="SFRM_BUTTONNAME24" X="4" Y="4" W="160" H="23" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3">
+		  <ATTR TEXT="90002024" FONT="FTbt_12" T_X="80" T_Y="3" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+		</STATIC_FORM>
+		<BUTTON ID="BTN_INDEX24" X="163" Y="0" W="101" H="23">
+		  <ATTR TEXT="90001000" FONT="FTbt_12" T_X="50" T_Y="6" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		  <ATTR BTN_IMG="../Data/6_ui/Key/keyJBt.tga" BTN_IMG_W="101" BTN_IMG_H="124" U="1" V="4" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+		  <SCRIPT ID="ON_L_BTN_DOWN">
+			local kText = WideString(GetTT(90002024):GetStr())
+			GetGamePadUI():RecordPressedUkey(1009)
+			GetGamePadUI():RecordPressedButtonName(kText)
+			GetGamePadUI():RecordPressedButtonIndex(24)
+			CallUI("SFRM_BUTTONLISTNER",1)
+		  </SCRIPT>
+		</BUTTON>		
+	  </STATIC_FORM>
+	  <!--Button Descs and Buttons end-->
+	</STATIC_FORM>
+	<!--Background end-->
+	<BUTTON ID="BTN_SETCONFIRM" X="310" Y="433" W="84" H="26">
+		<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400533, 2200) </SCRIPT>
+	  <ATTR TEXT="400533" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+	  <ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" U="2" V="2" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+	  <SCRIPT ID="ON_L_BTN_DOWN">
+		Option_OnKeySet_Accept()
+		CloseUI("SFRM_GAMEPAD")
+	  </SCRIPT>
+	  <HOTKEY ID="59">
+		Option_OnKeySet_Accept()
+		CloseUI("SFRM_GAMEPAD")
+		return true
+	  </HOTKEY>
+	</BUTTON>
+
+	<BUTTON ID="BTN_SETCANCEL" X="409" Y="433" W="84" H="26">
+		<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400534, 2201) </SCRIPT>
+	  <ATTR TEXT="400534" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" FONT_COLOR_HEX = "0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+	  <ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" U="2" V="2" UV_INDEX="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+	  <SCRIPT ID="ON_L_BTN_DOWN">
+		GetGamePadUI():RestoreSetting()
+		CloseUI("SFRM_GAMEPAD")
+	  </SCRIPT>
+	  <HOTKEY ID="60">
+		GetGamePadUI():RestoreSetting()
+		CloseUI("SFRM_GAMEPAD")
+		return true
+	  </HOTKEY>
+	</BUTTON>
+  </STATIC_FORM>
+  <!--GamePad UI end-->
+
+  <!--Button listner UI Start-->
+  <STATIC_FORM ID="SFRM_BUTTONLISTNER" ALIGN_X="50" Y="180" W="300" H="136" CAN_DRAG="1" STATIC_NUM="1">
+	<SCRIPT ID="ON_CALL">
+	  local kText = GetGamePadUI():GetPressedButtonName()
+	  UISelf:GetControl("SFRM_TITLEBAR"):GetControl("IMG_TITLE_TAB"):SetStaticText(kText:GetStr())
+	</SCRIPT>
+	<SCRIPT ID="ON_TICK">
+	  local kButtonName = GetGamePadUI():GetPadButtonNameOnTextTableAndBindPadButton()
+	  if "" ~= kButtonName:GetStr() then
+		local iButtonIndex = GetGamePadUI():GetPressedButtonIndex()
+		local UIFrameName = "SFRM_BUTTONFRAME"..iButtonIndex
+		local UIButtonName = "BTN_INDEX"..iButtonIndex
+
+		local iUnbindButtonIndex = GetGamePadUI():GetUnbindedUIButtonIndex();
+		local UnbindFrameName = "SFRM_BUTTONFRAME"..iUnbindButtonIndex;
+		local UnbindButtonName = "BTN_INDEX"..iUnbindButtonIndex;
+		
+		GetUIWnd("SFRM_GAMEPAD"):GetControl("SFRM_BACK"):GetControl(UnbindFrameName):GetControl(UnbindButtonName):SetStaticText(GetTT(90001000):GetStr())
+		GetGamePadUI():EraseUnbindButtonInfo()
+		GetUIWnd("SFRM_GAMEPAD"):GetControl("SFRM_BACK"):GetControl(UIFrameName):GetControl(UIButtonName):SetStaticText(kButtonName:GetStr())
+		
+		CloseUI("SFRM_BUTTONLISTNER")
+	  end
+	</SCRIPT>
+
+	<!--Titlebar Start-->
+	<STATIC_FORM ID="SFRM_TITLEBAR" X="1" Y="0" W="298" H="36" Z="1" STATIC_NUM="4">
+	  <STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="142" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+	  <IMG ID="IMG_TITLE_TAB" X="7" Y="4" Z="1" W="114" H="24" NO_FOCUS="1" T_CENTER = "1" T_X = "67" T_Y = "4">
+		<ATTR FONT="FTbt_12" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" TEXT="" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+	  </IMG>
+	  <BUTTON ID="BTN_CLOSE" X="267" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+		<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_BUTTONLISTNER") </SCRIPT>
+	  </BUTTON>
+	</STATIC_FORM>
+	<!--Titlebar End-->
+	<!--Background start-->
+	<STATIC_FORM ID="SFRM_BACK" X="8" Y="35" Z="-1"  W="284" H="90" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+	  <ATTR TEXT="90003004" FONT="FTbt_12" T_X="142" T_Y="20" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+	</STATIC_FORM>
+	<BUTTON ID="BTN_ERASEBIND" X="110" Y="90" W="84" H="26">
+	  <ATTR TEXT="90003005" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1"/>
+	  <ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+	  <SCRIPT ID="ON_L_BTN_DOWN">
+		local iButtonIndex = GetGamePadUI():GetPressedButtonIndex()
+		local UIFrameName = "SFRM_BUTTONFRAME"..iButtonIndex
+		local UIButtonName = "BTN_INDEX"..iButtonIndex
+		local GamePadUI = GetUIWnd("SFRM_GAMEPAD")
+		if true == GamePadUI:IsNil() then
+		  return
+		end
+		
+		GetUIWnd("SFRM_GAMEPAD"):GetControl("SFRM_BACK"):GetControl(UIFrameName):GetControl(UIButtonName):SetStaticText(GetTT(90001000):GetStr())
+		GetGamePadUI():UnbindButton(iButtonIndex);
+		CloseUI("SFRM_BUTTONLISTNER")
+	  </SCRIPT>
+	</BUTTON>
+	<!--Background End-->
+
+  </STATIC_FORM>
+  <!--Button listner UI End-->
+</XUI>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030501_DG" DESCRIPTION="90206010">
+  <GSAPATH>../Data/3_World/95_Dungeon/01_Level/030501_DG.gsa</GSAPATH>
+  <MINIMAP Y="246" H="110">../Data/3_World/95_Dungeon/01_Level/030501_DG.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Van_Cliff.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+  <FREE_DIRECTION ALL="TRUE"/><!--8방향-->
+  <!-- 잿빛안개 마을 -->
+  <TRIGGER ID="gate_030130_base" TYPE="PORTAL" TITLE_TEXT_ID="801009" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9038300" PARAM2="3"/>
+  </TRIGGER>
+  <!-- 2층 도서관 -->
+  
+  <TRIGGER ID="gate_030502_base" TYPE="PORTAL" TITLE_TEXT_ID="802008" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030502" PARAM2="1">
+    <ACCESS>
+			<LEVEL MIN="60" MAX="100" PARTY="1"/>
+			<!--<USEITEM INV="3" NO="51100280" COUNT="1" CONSUME="1" PARTY="1" GROUP="1"/>-->
+		</ACCESS>
+    </ACTION>
+  </TRIGGER>
+  
+  
+  
+  <!-- 지하 1층 전시실 -->
+  <TRIGGER ID="gate_030510_base" TYPE="PORTAL" TITLE_TEXT_ID="802011" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030510" PARAM2="1" MOVETYPE="3">
+    <ACCESS ERROR_MSG="509207">
+			<LEVEL MIN="60" MAX="100" PARTY="1"/>
+			<USEITEM INV="3" NO="51100260" COUNT="1" CONSUME="1" PARTY="1" GROUP="1"/>
+			</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!-- 지하 4층 지하감옥 -->
+  <TRIGGER ID="gate_030520_base" TYPE="PORTAL" TITLE_TEXT_ID="802015" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030520" PARAM2="1" MOVETYPE="3">
+    <ACCESS ERROR_MSG="509209">
+			<LEVEL MIN="63" MAX="100" PARTY="1"/>
+			<USEITEM INV="3" NO="51100270" COUNT="1" CONSUME="1" PARTY="1" GROUP="1"/>
+		</ACCESS>
+</ACTION>
+  </TRIGGER>
+  
+  <!-- 트리거 점프업 -->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="250" />
+  </TRIGGER>
+
+  <!-- 텔 레 포 트 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+
+  <!--// 퀘스트 트리거 -->
+  <TRIGGER ID="Quest_Trigger853" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="853" />
+  </TRIGGER>
+  <!--NPC-->
+  <NPC NAME="1028236" ACTOR="c_Veronica_IN" SCRIPT="NPC_Click" KID="1028236" GUID="2DAA2D7A-9615-4bf9-BF10-64ED704A6AF5" TYPE="FIXED" LOCATION="85.88428, 38.98102, 3.067421" DIRECTION="-1,-1,0">
+  </NPC>
+ 
+  <!--포그-->
+  <FOG DENSITY="0.050000" START="1500.000000" END="3000.000000" COLOR="0.000000,0.000000,0.000000"/>
+  <!-- L.O.D -->
+  <WORLD_QUALITY HIGH_END="300" MID_END="1500" LOW_END="3000" USE="1"/>
+  <!-- 샤인스톤 -->
+</WORLD>

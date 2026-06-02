@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5144</ID> <!--T.T.10514401 죽마고우(3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	바람항구 - 빅터에게 집게 발 도시락 배달-->
+<!--[완료NPC]	바람항구 - 빅터-->
+<!--[내용]	달빛해안 마을 스웰은 집게 발을 가지고 맛있는 요리를 했다고 한다. 그 맛있는 요리를 빅터에게 전해주고 싶다고 한다. 스웰이 맛있게 요리한 집게 발 도시락을 바람항구 빅터에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DB9DFA7F-7F14-4530-A367-DCA447537B2F</CLIENT> <!--시작NPC 달빛해안 마을 - 스웰 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</PAYER> <!--완료NPC 바람항구 - 빅터 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DB9DFA7F-7F14-4530-A367-DCA447537B2F</AGENT> <!--진행NPC 11 달빛해안 마을 - 스웰 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</AGENT> <!--진행NPC 12 바람항구 - 빅터 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160514410/1">10011</NPC> 
+ <!--Item_NO=160514410/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160514410/1/511">10011</NPC> 
+ <!--Item_NO=160514410/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160514410/1">10011</NPC> 
+ <!--Item_NO=160514410/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160514410/1/512">10012</NPC> 
+ <!--Item_NO=160514410/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160514410/1">10012</NPC> 
+ <!--Item_NO=160514410/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10514411"/> <!--집게 발 도시락 배달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10514421" FACE="Walter_smile"/> <!--또 뵙네요. 혹시 맛있는 냄새 나지 않으세요? 헤헤.
+저번에 용사님이 갖다 주신 집게 발로 맛있는 요리를 만들었어요.%%
+그래서 배불리 먹고 남은 걸로 도시락을 만든 거예요.
+도시락을 왜 만들었는지 궁금하지 않으세요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10514426" FACE="Walter_smile"/> <!--이게 뭔가요? 맛있는 냄새가 나는걸요?
+네 ? 스웰이 싼 집게 발 도시락이요? 와 정말 맛있겠다!
+고맙습니다. 용사님.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10514423" FACE="Walter_normal"/> <!--용사님은 모험을 좋아하니, 또 바람항구로 갈 일이 있으실 거 같아서요.
+부탁 좀 드릴게요. 이 맛있는 집게 발 도시락을 바람항구 빅터에게 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10514424" FACE="Walter_normal"/> <!--역시 안 되겠죠? 제 친구는 다시는 집게 발을 먹을 수 없겠죠? 역시 안 되겠죠?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10514425" FACE="Walter_normal"/> <!--음식이 식고 있어요. 죄송하지만 서둘러 주세요. 
+음식은 따뜻할 때 먹어야 맛있는 거 알죠?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10514402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10514451" FACE="Walter_normal"/> <!--도시락은 어디 간거예요? 먹었어요? 먹은 것 같은데...-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10514452" FACE="Walter_normal"/> <!--저도 집게발 요리를 좋아하는데, 정말 군침이 도네요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

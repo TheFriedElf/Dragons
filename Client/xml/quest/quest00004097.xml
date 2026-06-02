@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4097</ID> <!--T.T.10409701 초마법 시전! 레.누.보. (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	제스, 잭, 프린세시아와 대화 후 에델린에게 보고-->
+<!--[완료NPC]	망자의 탑 - 에델린-->
+<!--[내용]	초마법 레누보의 시전을 준비하는 에델린은 다른 동료들에게 참가 의향을 물어봐 달라고 한다. 옆에 있는 제스, 잭, 프린세시아와 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4D69D120-8EF6-451f-B348-3C01345299FD</CLIENT> <!--시작NPC 망자의 탑 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4D69D120-8EF6-451f-B348-3C01345299FD</PAYER> <!--완료NPC 망자의 탑 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021">B80BDF67-15D0-459d-A293-1C2E0066F769</AGENT> <!--진행NPC 1 망자의 탑 (정상) - 제스 -->
+		<AGENT TYPE="NPC" EVENTNO="10022">FA879C67-33DA-47e1-833A-82C88D74F823</AGENT> <!--진행NPC 2 망자의 탑 (정상) - 잭 -->
+		<AGENT TYPE="NPC" EVENTNO="10023">C8E5676B-7BE4-4648-B212-AB0505BE2926</AGENT> <!--진행NPC 3 망자의 탑 (정상) - 프린세시아 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">4D69D120-8EF6-451f-B348-3C01345299FD</AGENT> <!--진행NPC 11 망자의 탑 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="3" TYPE="INCPARAM" VALUE="513/1">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="513">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409711"/> <!--제스와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10409712"/> <!--잭과 대화-->
+		<OBJECT3 COUNT="1" TEXT="10409713"/> <!--프린세시아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409721" FACE="hyena_normal"/> <!--그렇다면 이제 레누보를 시전할 때가 되었으니
+모두에게 이 천년 전의 체험에 참여할 것인지 물어봐 주시겠어요? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409726" FACE="hyena_normal"/> <!--여러분들의 뜻을 잘 알았어요. 그럼 모두 같이 체험하기로 해요.
+어차피 과거를 체험하는 일일 뿐이니 위험한 일은 없겠지만… %%
+특별한 종류의 정령석을 소비하는 거라… 두번 시도하는 것은 어렵습니다.
+그러니 모두 마음을 편하게 가다듬어 주세요.%%
+그럼 이제 초마법 레누보의 주문을 시전하겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409723" FACE="hyena_normal"/> <!--왠지 저 마녀가 우릴 알고 있는 것 같지 않았나요?
+수 없이 나쁜 일을 저지른 마녀라지만, 왠지 이상하더군요.%%
+마녀가... 우리 모두에게 특별한 인연이라고 했으니
+레누보에 모두 참여하는 것도 나쁘진 않을 것 같아요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409724" FACE="hyena_angly"/> <!--모두에게 의견을 물어봐야 원하지 않는 사람이 초마법에 휘말리는 것을 막을 수 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409725" FACE="hyena_normal"/> <!--망자의 탑에 올라온 친구들에게 의견을 구하는게 좋겠어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10409751" FACE="jess_normal"/> <!--그 낡은 책을 가지고 천년 전과 같은 장소에 와있다는 것만으로 
+과거를 볼 수 있다니.. 도저히 믿겨지지 않지만….%%
+어쨌거나 확률이 수억분의 일이라 할 지라도, 
+전설 속의 벨칸님을 볼 수 있다면 난 목숨도 내놓을 준비가 되어있어.%%
+나도 함게 가겠어!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10409752" FACE="jack_normal"/> <!--형.. 이거 왠지 무서워… 
+알았어. 알았다고… 나도 갈게... -->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="513" > <!--진행중-->
+			<BODY TEXT="10409753" FACE="Princessia_nomal"/> <!--나도 천년 전에 무슨 일이 일어났는지 알고 싶어.%%
+아빠도 분명히 그 사건 때문에 이곳에 왔던 것이 틀림 없을테니까.-->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

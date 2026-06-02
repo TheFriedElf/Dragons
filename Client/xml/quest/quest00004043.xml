@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4043</ID> <!--T.T.10404301 상어는 원래 의심이 많다 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	몽글이와 붉은 안테나 몽글이 * 20 퇴치-->
+<!--[완료NPC]	칼리곤 선단 - 죠니-->
+<!--[내용]	위심 많은 해적 상어 죠니는 앵무조개 선착장의 몽글이와 붉은 안테나 몽글이 20마리의 퇴치를 원하고 있다. 그의 부탁을 들어주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">98B00461-1DCF-4215-B7DB-FD8344F891BE</CLIENT> <!--시작NPC 칼리곤 선단 - 죠니 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">98B00461-1DCF-4215-B7DB-FD8344F891BE</PAYER> <!--완료NPC 칼리곤 선단 - 죠니 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">98B00461-1DCF-4215-B7DB-FD8344F891BE</AGENT> <!--진행NPC 11 칼리곤 선단 - 죠니 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10404311"/> <!--몽글이와 붉은 안테나 몽글이-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10404321" FACE="Johny_normal"/> <!--아까 네가 잡은 해적 녀석들은 사실 나를 잡기 위해 찾아온 옛동료들이지.
+난 오래 전부터 후커와 알비다의 해적단에서 일하던 해적선원이었다.%%
+지금?
+지금은 물론 그들을 배신했지…%%
+왜 배신했냐고?
+크크… 크크크.. 키득키득… 크하하하하…%%
+그~냥!%%
+그래! 별 이유 없어... 
+단지 그 둘을 깜짝 놀래키려 했다 -라고 대답하면 공감이 되려나…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10404326" FACE="Johny_normal"/> <!--잘했어. 
+하지만…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10404323" FACE="Johny_normal"/> <!--사실 그들을 배반한 진짜 목적은 심플하고 다이렉트하다.
+어느 날 알비다 선장실 주변을 청소하고 있는데…%%
+선장과 검은 로브를 입은 마녀가 
+자물쇠로 꽁꽁 잠궈놓은 상자를 사이에 두고 흥정을 하고 있더군.%%
+그래… 그곳에 아주 중요한 보물이 들어있을 거라 생각했다.
+그리고 선원들 모두가 진탕 퍼마시고 뻗은 다음 날 밤…%% 
+그 상자를 훔쳐내어 비밀 장소에 숨기려 했어.%%
+그 때 나를 돕겠다고 나선 녀석이 바로 칼리곤이다.
+녀석도 나랑 세계관이 비슷해서 우린 금새 의기투합했지.%%
+이렇게 길게 이야기를 늘려 하는 것도 새로운 패턴으로 느낄 지 모르겠지만
+그냥 무능력한 작가 녀석 탓을 해라. 흐흐흐%%
+어쨌거나 내 부탁은 심플하고 다이렉트하다.
+앵무조개선착장에 멀리 도망가려고 작은 배를 마련해두었는데...%%
+몽글이 녀석들 때문에 근처로 갈 엄두를 못내고 있다.
+왠지 함정 같단 말이지...%%
+앵무조개 선착장에 가서 몽글이와 붉은 안테나 몽글이를 처치해줘.
+그래야 안심할 수 탈출할 수 있을 것 같아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10404324" FACE="Johny_normal"/> <!--설마 나 같은 해적졸병에게 얼간이 소릴 듣고 싶은 건 아니겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10404325" FACE="Johny_normal"/> <!--몽글이들은 여기저기 있다고, 너무 많아서 탈이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10404302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

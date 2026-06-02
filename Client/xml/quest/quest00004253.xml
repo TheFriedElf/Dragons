@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4253</ID> <!--T.T.10425301 공작의 괴상한 콜렉션, 시즌2 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	메탈캄파링의 무쇠턱 습득-->
+<!--[완료NPC]	밴시협곡 - 모나드론-->
+<!--[내용]	모나드론은 제스의 계약서를 무효화하는 조건으로 붉은 여우 삼각지에서 세개의 물건을 가져오라고 말한다. 그 중 마지막 물건은 메탈캄파링의 무쇠턱이라고 한다. 붉은 여우 삼각지의 정예 몬스터 메탈캄파링을 퇴치한 뒤 습득할 수 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</CLIENT> <!--시작NPC 밴시협곡 - 모나드론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</PAYER> <!--완료NPC 밴시협곡 - 모나드론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</AGENT> <!--진행NPC 11 밴시협곡 - 모나드론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160425300">3571300</MONSTER> 
+ <!--MON_NO=3571300/메탈 캄파링,Item_NO=160425300/메탈캄파링의 무쇠턱100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160425300</ITEM> 
+ <!--Item_NO=160425300/메탈캄파링의 무쇠턱,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10425311"/> <!--메탈캄파링의 무쇠턱 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10425321" FACE="Monaderon_normal"/> <!--그래, 이제 마지막 부탁이 남았군 %name%군.
+자네는 언제나 나를 놀래킨다네. 남을 위해 이런
+희생을 할 수 있다는 것은 무척 놀라운 일이지만…%%
+그렇다고 비굴하게 구는 사람들을 무조건적으로
+힐난하는 우를 범하진 말게나. 원래 인간들의 사회란 건
+비겁함이 미덕인 경우가 더 많기 때문이야.%%
+마지막 부탁을 들어준다면 약속대로…
+제스라는 저 좀도둑 꼬마의 계약서를 넘겨주겠어.
+준비되는 대로 시작해보자구.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10425326" FACE="Monaderon_smile"/> <!--음하하하! 그래, 이것이 바로 메탈 캄파링의 무쇠턱이로군.
+이로써 혼드골렘의 무쇠뿔과, 기니어 배럴의 무쇠꼬리,
+메탈캄파링의 무쇠턱을 구하게 된 셈이로군. %%
+이건 모두 자네 덕분이야. 약속한 대로 제스군에게 
+계약서를 넘겨주고, 모든 계약을 없었던 것으로 해주겠네.
+행운을 빈다네. %name%군… 음하하하! -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10425323" FACE="Monaderon_normal"/> <!--붉은 여우 삼각지에서 내가 구하고 싶은 마지막 물건은
+메탈 캄파링의 기계턱이라네. 이런 뚱딴지 같은 것들을
+모으는 일에 대해선 당연한 궁금증이 일 것이네만... %%
+후후후… 뭐 어리석어 보이게 행동하는 것도, 그 때문에 
+비웃음을 사는 일도 다 세상을 살다보면 피할 수 없는
+일이라네. %%
+자넨 바로 붉은 여우 삼각지로 들어가 메탈 캄파링이라는 
+정예 몬스터를 해치우고, 메탈캄파링의 무쇠턱을 가져와
+주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10425324" FACE="Monaderon_normal"/> <!--마지막 한 개의 물건을 더 가져오면 제스군의 계약은 무효화가 돼. 설마 잊은 건가? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10425325" FACE="Monaderon_normal"/> <!--메탈 캄파링이란 몬스터는 아마도 지금까지 겪었던 붉은 삼각지의 정예 몬스터 중 가장 힘든 상대가 될 것이네. 그럼 부탁하네! 흐흐흐…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10425302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

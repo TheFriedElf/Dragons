@@ -1,0 +1,9 @@
+<ACTION ID="a_Detection" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_01"/>
+  <FSM SCRIPT="Act_Melee_Default" HIT_CASTER_EFFECT_ID="ef_skill_discovery" HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+		HIT_CASTER_EFFECT_TARGET_NODE2="char_root"
+		HIT_CASTER_EFFECT_ID2="eff_pc_detection00"
+		HIT_CASTING_EFFECT_SIZE_TO_SKILLRANGE_FACTOR2="10"	   
+       HIT_SOUND_ID="Detection"/>
+</ACTION>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Palis_Summons_01" EVENT_SCRIPT_ON_DIE="70">
+
+<APPEARANCE_CHANGE>
+    <CONDITION HP_MIN="30" HP_MAX="100">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Quest/Palis_Summons/Palis_Summons.kfm"/>
+    </CONDITION>
+    <CONDITION HP_MIN="0" HP_MAX="30">
+      <CHANGE_ITEM TYPE="KFM" KFMPATH="../Data/3_World/00_Object/breakObject/Quest/Palis_Summons/Palis_Summons_02.kfm"/>
+    </CONDITION>
+</APPEARANCE_CHANGE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1">../Data/3_World/00_Object/breakObject/Quest/Palis_Summons/Palis_Summons.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="62,62,105"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="appearance_change_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

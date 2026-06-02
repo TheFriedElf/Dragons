@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_DarkElemental_MagmaPiston" ALWAYS_GLOWMAP="TRUE">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.2">../Data/1_Cha/9_SSKill/MagmaPiston/MagmaPiston.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="MagmaPiston_Skill_01_start" ANIMATION="1000000" />
+      <ITEM NAME="MagmaPiston_Skill_01_attack" ANIMATION="1000001" />
+	  <ITEM NAME="MagmaPiston_Skill_01_finish" ANIMATION="1000002" />
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

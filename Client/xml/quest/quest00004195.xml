@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4195</ID> <!--T.T.10419501 친애하는 헬크라우저에게 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	신들의 안식처에서 헬크라우저와 대화-->
+<!--[완료NPC]	신들의 안식처 - 헬 크라우저-->
+<!--[내용]	피레이는 자신을 도와준 대가로 무슨 일이건 해주겠다고 말한다. 헬 크라우저에게 관한 이야기를 전해듣고 자신이 헬 크라우저를 설득할 편지를 써준다. 신들의 안식처로 헬 크라우저를 찾아가 피레이의 편지를 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</CLIENT> <!--시작NPC 신들의 안식처 - 피레이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7942D9DB-011C-43fd-ABA5-311C51001397</PAYER> <!--완료NPC 신들의 안식처 - 헬 크라우저 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</AGENT> <!--진행NPC 11 신들의 안식처 - 피레이 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">7942D9DB-011C-43fd-ABA5-311C51001397</AGENT> <!--진행NPC 12 신들의 안식처 - 헬 크라우저 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160419500/1">10011</NPC> 
+ <!--Item_NO=160419500/[Q.ID:04195] 피레이의 편지,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160419500/1/511">10011</NPC> 
+ <!--Item_NO=160419500/[Q.ID:04195] 피레이의 편지,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="501/160419500/1">10011</NPC> 
+ <!--Item_NO=160419500/[Q.ID:04195] 피레이의 편지,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160419500/1/512">10012</NPC> 
+ <!--Item_NO=160419500/[Q.ID:04195] 피레이의 편지,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160419500/1">10012</NPC> 
+ <!--Item_NO=160419500/[Q.ID:04195] 피레이의 편지,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419511"/> <!--피레이의 편지 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419521" FACE="Pirey_normal"/> <!--네가 내 목숨을 구한 거나 다름 없으니…
+생명의 은인에게 뭔가 소원을 들어주고 싶구나.%%
+널 위해 도울 일이 있다면 기꺼이 돕겠어.
+무엇이든지 말해보렴-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419526" FACE="Hell_krauser_smile"/> <!--편지?
+피레이라고? 
+왜, 그... 혼자 오염으로부터 벗어난 비겁한 켄타 말인가?%%
+흠.. 그럼.. 어디 한번 읽어보도록 하지.
+… …
+… …%%
+그런데 난 켄타우르스의 글을 못 읽는데 말이지.
+무슨 추천하는 편지를 이런 식으로 보낼 수 있는 건가?%%
+크하하하!
+엉성하기 짝이 없는 게, 그 얼간이 켄타우르스가 보낸 
+편지가 맞는 것 같군.%%
+자, 그래 그럼 자네의 이야기를 들어보겠네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419523" FACE="Pirey_normal"/> <!--엥? 헬 크라우저의 오해를 풀고 싶다고?
+글쎄다. 분명 미스트엘프들이 까칠한 구석이
+있는 것은 사실이다만…
+네 말을 듣고 보니 헬 크라우저가 경솔했던 것 같구나.%%
+그렇다면 이건 어떨까?%%
+내가 직접 헬 크라우저에게 정성껏 편지를 써줄테니
+그걸 가져다가 헬 크라우저에게 보여주렴. %%
+아무리 콧대 높은 헬 크라우저라 해도, 네 진심을 
+결국 이해해줄 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419524" FACE="Pirey_angly"/> <!--그러지 말고, 무슨 일이건 부탁하라고.. 널 위해 내가 실력을 발휘해 보마.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419525" FACE="Pirey_normal"/> <!--헬크라우저에게 가면 분명히 널 도와줄거야. 걱정말고 편지를 가져가렴-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10419551" FACE="Pirey_normal"/> <!--헬크라우저에게 가면 분명히 널 도와줄거야. 걱정말고 편지를 가져가렴-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10419552" FACE="Hell_krauser_normal"/> <!--무슨 일인가? 내게 무슨 용건이라도 있는 겐가?-->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

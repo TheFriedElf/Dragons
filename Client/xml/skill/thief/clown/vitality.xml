@@ -1,0 +1,16 @@
+<ACTION ID="a_Vitality" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Skill_Buff"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       NO_WEAPON_TRAIL="TRUE"
+       HIT_CASTER_EFFECT_ID="ef_Mask_Vitality_01_char_root"
+       HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+       HIT_TARGET_EFFECT_ID="ef_Mask_Vitality_02_char_root"
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_area_circle_B_001"
+       CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+       DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+       CASTING_EFFECT_SIZE_TO_SKILLRANGE="TRUE"
+       HIT_SOUND_ID="Dexterity"
+       FIND_TARGET_TYPE="SPHERE"/>
+</ACTION>

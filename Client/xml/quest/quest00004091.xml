@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4091</ID> <!--T.T.10409101 의미심장한 우연(4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	망자의 탑(4층)에서 원령 나무꾼 폴 버나언 퇴치-->
+<!--[완료NPC]	망자의 탑 (4층) - 프린세시아-->
+<!--[내용]	4층의 가로막혀진 문을 열기 위해 망자의 탑(4층)의 원령 나무꾼 폴 버나언을 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6033A670-A3C8-4cbe-B4DB-E252A9479740</CLIENT> <!--시작NPC 망자의 탑 (4층) - 프린세시아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6033A670-A3C8-4cbe-B4DB-E252A9479740</PAYER> <!--완료NPC 망자의 탑 (4층) - 프린세시아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6033A670-A3C8-4cbe-B4DB-E252A9479740</AGENT> <!--진행NPC 11 망자의 탑 (4층) - 프린세시아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6125400</MONSTER> 
+ <!--MON_NO=6125400/나무꾼 폴 버나언,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409111"/> <!--원령 나무꾼 폴 버나언 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409121" FACE="Princessia_normal"/> <!--헐...  너구나.
+이거 무자수행치곤 너무 힘든 곳을 들어와 버렸네.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409126" FACE="Princessia_normal"/> <!--너 제법 강하구나.
+나중에 공주가 되면 너한테 경호원 해달라고 부탁해야겠는데…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409123" FACE="Princessia_normal"/> <!--저번에 말했던 것처럼 드래곤의 탑을 찾고 있는 중이야..
+이 근방에 탑은 여기 뿐이라 올라온 거지만, 정말 힘들다.%%
+너도 눈치 챘는 지 모르겠지만, 이곳은 각층의 원령을 처치해야만
+다음 층으로 올라 갈 수 있는 입구가 열리는 구조야.%%
+그래서 부탁인데… 4층의 원령 나무꾼 폴 버나언을 퇴치해서
+길을 열어주었으면 해.  최정상까진 한번 올라가 봐야지~%%
+그럼 부탁한다~ -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409124" FACE="Princessia_angry"/> <!--너도 유령이 무섭다거나 하는 건 아니겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409125" FACE="Princessia_normal"/> <!--원령 나무꾼 폴 버나언은 4층에 있어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

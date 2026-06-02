@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_SOCKET_SYSTEM" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR ALIGN_X = "30" ALIGN_Y = "30" W ="255" H ="403" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<FORM ID="SFRM_EXPLANE0" TEXT="790399" Z="-1" T_X="130" T_Y="40" W="250" H="24" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFd7d7d7">
+			<SCRIPT ID = "ON_CALL"> 
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd == nil then
+					return
+				end						
+				local iMenu = wnd:GetMenuType()
+				local iText = 790399
+				if 1 == iMenu then
+				iText = 790399
+				elseif 2 == iMenu then
+				iText = 790137
+				elseif 3 == iMenu then
+				iText = 790139
+				else
+				iText = 790164
+				end						
+				UISelf:SetStaticTextW( GetTT(iText) ) 
+			</SCRIPT>		
+		</FORM>
+		<FORM ID="SFRM_EXPLANE1" TEXT="" Z="-1" T_X="130" T_Y="240" W="213" H="24" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFd7d7d7">
+			<SCRIPT ID = "ON_CALL"> 
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd == nil then
+					return
+				end						
+				local iMenu = wnd:GetMenuType()
+				local iText = 790105
+				if 1 == iMenu then
+				iText = 790105
+				elseif 2 == iMenu then
+				iText = 790138
+				elseif 3 == iMenu then
+				iText = 790140
+				else
+				iText = 790105
+				end						
+				UISelf:SetStaticTextW( GetTT(iText) ) 
+			</SCRIPT>		
+		
+		</FORM>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="253" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="222" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="213" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" TEXT="790103" T_X="10" T_Y="4" W="213" H="24" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413">
+					<SCRIPT ID = "ON_CALL"> 
+						local wnd = ItemSocketSystemWnd(UISelf)
+						if wnd == nil then
+							return
+						end						
+						local iMenu = wnd:GetMenuType()
+						local iText = 790130
+						if 1 == iMenu then
+						iText = 790130
+						elseif 2 == iMenu then
+						iText = 790131
+						elseif 3 == iMenu then
+						iText = 790132
+						else
+						iText = 790163
+						end						
+						UISelf:SetStaticTextW( GetTT(iText) ) 
+					</SCRIPT>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<CHECK_BUTTON ID="BTN_1" X="102" Y="112" W="18" H="16" BTN_IMG="../Data/6_ui/etc/etcNum01.tga" BTN_IMG_W="36" BTN_IMG_H="32">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				IsSocketIndexCheck(UISelf, 1)
+				local iMenu = wnd:GetMenuType()
+				if 4 == iMenu then
+					local wnd = ItemSocketSystemWnd(UISelf)
+					wnd:SetMateriaItemExtractionBtn(-1,0)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				UISelf:CheckState(false)
+				UISelf:LockClick(true)
+				UISelf:Visible(false)
+			</SCRIPT>		
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID="BTN_2" X="120" Y="112" W="18" H="16" BTN_IMG="../Data/6_ui/etc/etcNum02.tga" BTN_IMG_W="36" BTN_IMG_H="32">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				IsSocketIndexCheck(UISelf, 2)
+				local iMenu = wnd:GetMenuType()
+				if 4 == iMenu then
+					local wnd = ItemSocketSystemWnd(UISelf)
+					wnd:SetMateriaItemExtractionBtn(-1,0)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				UISelf:CheckState(false)
+				UISelf:LockClick(true)
+				UISelf:Visible(false)
+			</SCRIPT>		
+		</CHECK_BUTTON>		
+		<CHECK_BUTTON ID="BTN_3" X="138" Y="112" W="18" H="16" BTN_IMG="../Data/6_ui/etc/etcNum03.tga" BTN_IMG_W="36" BTN_IMG_H="32">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				IsSocketIndexCheck(UISelf, 3)
+				local iMenu = wnd:GetMenuType()
+				if 4 == iMenu then
+					local wnd = ItemSocketSystemWnd(UISelf)
+					wnd:SetMateriaItemExtractionBtn(-1,0)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				UISelf:CheckState(false)
+				UISelf:LockClick(true)
+				UISelf:Visible(false)
+			</SCRIPT>		
+		</CHECK_BUTTON>		
+			
+		<IMG ID="IMG_LINE_1" X="5" Y="275" W="245" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="245" IMG_H="2" />
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="280" Z="-2" W="237" H="80" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID = "SFRM_SHADOW" X = "9" Y = "280" Z="-1" W="237" H="80" STATIC_NUM = "3" >
+			<ATTR TEXT = "" FONT_COLOR_HEX="0xFF4D3413" T_X = "55" T_Y = "8"/>
+			<STATIC_FORM ID="SFRM_SOULITEM_BG" X="8" Y="8" W="42" H="42" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<STATIC_FORM ID="SFRM_BG_1" X="0" Y="0" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			</STATIC_FORM>			
+			<ICON ID = "ICN_SOULITEM" X="9" Y="9" W="40" H="40" Z="0" ICON_GRP ="254" ICON_KEY = "0"  IS_VISIBLE="0" >
+				<FORM ID="FRM_SOULITEM_TEXT" X="50" Y="0" W="200" H="40" Z="0" TEXT = "" FONT_COLOR_HEX="0xFF4D3413" T_X = "0" T_Y = "3"/>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>			
+			</ICON>
+			
+			<ICON ID = "ICN_IN_GAME_ITEM" X="9" Y="9" W="40" H="40" Z="1" ICON_GRP ="254" ICON_KEY = "0"  IS_VISIBLE="0">		
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>			
+			</ICON>
+			
+			<STATIC_FORM ID = "SFRM_COLOR_ITEM_NEED" X="52" Y="28" Z="-2" W="180" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" IS_VISIBLE="1" >
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="6" T_Y ="2"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText( string.format(GetTextW(790177):GetStr(), 0) ) </SCRIPT>
+			</STATIC_FORM>		
+			
+			<STATIC_FORM ID = "SFRM_COLOR_COIN1" X="7" Y="53" Z="-2" W="116" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT = "790107" FONT = "Font_Text" T_X="6" T_Y ="2" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN2" X="140" Y="53" Z="-2" W="30" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID = "SFRM_COLOR_COIN3" X="187" Y="53" Z="-2" W="30" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<FORM ID="FRM_COIN1" X="87" Y="56" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					wnd = ItemSocketSystemWnd(UISelf)
+					local iCount = 0
+					local iMenu = wnd:GetMenuType()
+					if 1 == iMenu then
+						iCount = wnd:GetUpgradeCreateNeedMoney()
+					elseif 2 == iMenu then
+						iCount = wnd:GetUpgradeRemoveNeedMoney()					
+					elseif 3 == iMenu then
+						iCount = wnd:GetUpgradeResetNeedMoney()					
+					else 
+						iCount = wnd:GetUpgradeExtractionNeedMoney()					
+					end
+					UISelf:DrawMoneyByValue(1, iCount)
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN2" X="134" Y="56" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					wnd = ItemSocketSystemWnd(UISelf)
+					local iCount = 0
+					local iMenu = wnd:GetMenuType()
+					if 1 == iMenu then
+						iCount = wnd:GetUpgradeCreateNeedMoney()
+					elseif 2 == iMenu then
+						iCount = wnd:GetUpgradeRemoveNeedMoney()					
+					elseif 3 == iMenu then
+						iCount = wnd:GetUpgradeResetNeedMoney()					
+					else 
+						iCount = wnd:GetUpgradeExtractionNeedMoney()			
+					end
+					UISelf:DrawMoneyByValue(2, iCount)
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_COIN3" X="181" Y="56" W="50" H="16">
+				<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+				<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_DISPLAY">
+					wnd = ItemSocketSystemWnd(UISelf)
+					local iCount = 0
+					local iMenu = wnd:GetMenuType()
+					if 1 == iMenu then
+						iCount = wnd:GetUpgradeCreateNeedMoney()
+					elseif 2 == iMenu then
+						iCount = wnd:GetUpgradeRemoveNeedMoney()					
+					elseif 3 == iMenu then
+						iCount = wnd:GetUpgradeResetNeedMoney()					
+					else 
+						iCount = wnd:GetUpgradeExtractionNeedMoney()						
+					end
+					UISelf:DrawMoneyByValue(3, iCount)
+				</SCRIPT>
+			</FORM>	
+		</STATIC_FORM>
+		<IMG ID="IMG_STONE_BG" X="12" Y="38" Z="-2" W="231" H="230" IMG="../Data/6_ui/stone/stCraftBg.tga" IMG_W="231" IMG_H="230"/>
+		<FORM ID = "FRM_UIMODEL" X="12" Y="38" Z="1" W="231" H="230" PASS_EVENT="1">
+			<SCRIPT ID="ON_TICK">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:OnTick(UISelf)
+			</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:OnDisplay()
+			</SCRIPT>
+			<!--SCRIPT ID="ON_CALL"> gWheel=0  gRotX = 0 gRotY = 0</SCRIPT>
+			<SCRIPT ID="ON_WHEEL_UP">
+				gWheel=gWheel+2
+				ODS("ON_WHEEL_UP " ..gWheel .."\n",false,1509)
+			</SCRIPT>
+			<SCRIPT ID="ON_WHEEL_DOWN">
+				gWheel=gWheel-2
+				ODS("ON_WHEEL_DOWN " ..gWheel .."\n",false,1509)
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				UISelf:RenderModelCameraZoom("ef_UImix_01", gWheel)
+			</SCRIPT-->
+		</FORM>
+		<IMG ID="IMG_STONE_SLOT" X="42" Y="67" Z="-1" W="176" H="170" IMG="../Data/6_ui/stone/stSkSlot.tga" IMG_W="176" IMG_H="170">			
+			<STATIC_FORM ID = "SFRM_COLOR_SLOT" X="67" Y="65" Z="-2" W="42" H="42" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW_SLOT" X = "67" Y = "65" Z="-1" W="42" H="42" STATIC_NUM = "3" />
+		</IMG>
+		<IMG ID = "IMG_ITEM" X="110" Y="133" W="40" H="40" IMG="../Data/6_ui/info/ifIconWp.tga" IMG_W = "40" IMG_H="40" PASS_EVENT="1">
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(true)
+			</SCRIPT>
+		</IMG>
+		<ICON ID = "ICN_SRC" X="110" Y="133" W="40" H="40" ICON_GRP ="160" ICON_KEY = "0">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemSocketSystemWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP"> 
+				UISelf:CursorToIcon() 
+				CheckMenuSocketItem(UISelf)
+				SocketSystemUIUpdate(UISelf,0)
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd ~= nil then
+					wnd:SetSocketItemMenuUIUpdate()
+				end				
+			</SCRIPT><!--kScrp:SetStaticTextW(wnd:GetExplane())					-->
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:DisplaySrcIcon()
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<!--<ICON ID = "ICN_MATERIAL0" X="110" Y="68" W="40" H="40" ICON_GRP ="0" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemSocketSystemWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:DisplayNeedItemIcon(2)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> OnCallMissionRewardItemToolTip(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>-->
+
+		<ICON ID = "ICN_MATERIAL1" X="45" Y="176" W="40" H="40" Z="1" ICON_GRP ="117" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemSocketSystemWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:DisplayNeedItemIcon(1)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		
+		<ICON ID = "ICN_MATERIAL_EXTRACTION" X="45" Y="176" W="40" H="40" Z="1" ICON_GRP ="254" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemSocketSystemWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				UISelf:DrawIcon()
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		
+		<STATIC_FORM ID = "SFRM_MATERIAL_ITEM_COUNT" X="45" Y="216" Z="1" W="40" H="20" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IS_VISIBLE="0">
+			<ATTR TEXT = "790168" FONT_COLOR_HEX="0xFF4D3413" T_X = "9" T_Y = "2"/>
+		</STATIC_FORM>	
+		
+		<BUTTON ID="BTN_EXTRACTION_REG" X="71" Y="202" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="0">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">				
+				SocketSystemUIUpdate(UISelf,0)
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMateriaItemExtractionBtn(1,1)	
+			</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_EXTRACTION_DEREG" X="45" Y="202" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="0">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				SocketSystemUIUpdate(UISelf,0)
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMateriaItemExtractionBtn(-1,0)
+			</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_REG1" X="71" Y="202" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">				
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMaterialItem(1,false)	
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEREG1" X="45" Y="202" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMaterialItem(1, true)
+			</SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_LOCK1" X="45" Y="176" Z="3" W="40" H="40" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+			<!--<SCRIPT ID = "ON_CALL">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetLockSlot(1)
+			</SCRIPT>-->
+		</IMG>
+		<ICON ID = "ICN_MATERIAL2" X="110" Y="68" W="40" H="40" ICON_GRP ="117" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemSocketSystemWnd(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:DisplayNeedItemIcon(2)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_REG2" X="136" Y="94" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">				
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMaterialItem(2, false, false)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEREG2" X="110" Y="94" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMaterialItem(2, true)
+			</SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_LOCK2" X="110" Y="68" Z="3" W="40" H="40" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+			<!--<SCRIPT ID = "ON_CALL">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetLockSlot(1)
+			</SCRIPT>-->
+		</IMG>		
+		<ICON ID = "ICN_MATERIAL3" X="175" Y="176" W="40" H="40" ICON_GRP ="116" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_L_BTN_DOWN"> local wnd = ItemSocketSystemWnd(UISelf) </SCRIPT>
+			<!--<SCRIPT ID = "ON_L_BTN_UP"> UISelf:CursorToIcon() </SCRIPT>-->
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:DisplayNeedItemIcon(3)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_REG3" X="202" Y="202" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMaterialItem(3, false, false)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEREG3" X="175" Y="202" W="14" H="14" Z="2" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="1">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetMaterialItem(3, true)				
+			</SCRIPT>
+		</BUTTON>
+		<IMG ID = "IMG_LOCK3" X="175" Y="176" W="40" H="40" Z="3" IMG="../Data/6_ui/stone/stLock.tga" IMG_W = "40" IMG_H="40">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(true)</SCRIPT>
+			<!--<SCRIPT ID = "ON_CALL">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:SetLockSlot(3)
+			</SCRIPT>-->
+		</IMG>
+		<!--<ICON ID = "ICN_MATERIAL_SOUL" X="173" Y="69" W="40" H="40" ICON_GRP ="0" ICON_KEY = "0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF">
+			<SCRIPT ID = "ON_DISPLAY">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				wnd:DisplayNeedItemIcon(0)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON>-->
+
+		<BUTTON ID = "BTN_TRY_REFINE" X="44" Y="364" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd:InProgress() == true then return end
+
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallComfirmMessageBox()
+				else
+					AddWarnDataTT(iError)
+				end
+			</SCRIPT> 
+			<HOTKEY ID="59">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd:InProgress() == true then return end
+
+				wnd = ItemSocketSystemWnd(UISelf)
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallComfirmMessageBox()
+				else
+					AddWarnDataTT(iError)
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE" X="130" Y="364" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd:InProgress() == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemSocketSystemWnd(UISelf)
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+					CallSocketMenuUI()
+				end
+			</SCRIPT>
+			<HOTKEY ID="1">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd:InProgress() == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemSocketSystemWnd(UISelf)
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+					CallSocketMenuUI()
+				end
+				return true
+			</HOTKEY>
+			<HOTKEY ID="60">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd:InProgress() == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemSocketSystemWnd(UISelf)
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			local wnd = ItemSocketSystemWnd(UISelf)
+			wnd:Clear(true)
+			CloseUI("Inv")
+		</SCRIPT> 
+		<SCRIPT ID = "ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+			PreChangeInvViewGroupTop(1)
+			local wnd = ItemSocketSystemWnd(UISelf)
+			wnd:Clear()
+			CloseUI("SFRM_MSG_TRADE")
+			CloseUI("SFRM_MSG_TRADE_REQUEST")							
+		</SCRIPT>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_SOCKETSYSTEM_REFINE">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="177" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="125" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="125" STATIC_NUM="3" />
+				<ATTR TEXT="" FONT="Font_Text" T_X="95" T_Y="62" T_CENTER="1" T_Y_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID = "ON_CALL">
+					UISelf:SetStaticText("")			
+				</SCRIPT>
+				<!--SCRIPT ID = "ON_DISPLAY">
+					local t = UISelf:GetStaticText()
+					local t_y = 55-t:Length()*0.5
+					local tpos = UISelf:GetTextPos()
+					tpos:SetY(t_y)
+					UISelf:SetTextPos(tpos)
+				</SCRIPT-->
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_TRY_REFINE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR X="18" Y="138" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_DOWN">					
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd:InProgress() == true then 
+					return 
+				end
+
+				local bCreate = wnd:GetSocketSystemEmpty()
+				local bSocketCreate = false
+				if true == bCreate then
+					bSocketCreate = false
+				else
+					bSocketCreate = true
+				end
+					
+				if wnd:SendReqSocketSystem(bSocketCreate) == false then
+					AddWarnDataTT(790115)
+				else
+					UISelf:CloseParent()
+					g_bOnUpgrade = true
+					g_fUpgradeStartTime = GetAccumTime() 
+					g_bUpgradeSound = false
+					local	kActor = GetMyActor()
+					if false == kActor:IsNil() then
+						kActor:AttachSound(2998, "Enchant")
+					end
+				end
+				wnd:SetSoulText()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local wnd = ItemSocketSystemWnd(UISelf)
+				if wnd:InProgress() == true then 
+					return true
+				end
+
+				local bCreate = wnd:GetSocketSystemEmpty()
+				local bSocketCreate = false
+				if true == bCreate then
+					bSocketCreate = false
+				else
+					bSocketCreate = true
+				end
+				
+				if wnd:SendReqSocketSystem(bSocketCreate) == false then
+					AddWarnDataTT(790115)
+				else
+					UISelf:CloseParent()
+					g_bOnUpgrade = true
+					g_fUpgradeStartTime = GetAccumTime()
+					g_bUpgradeSound = false
+					local	kActor = GetMyActor()
+					if false == kActor:IsNil() then
+						kActor:AttachSound(2998, "Enchant")
+					end
+				end
+				wnd:SetSoulText()
+				return true
+			</HOTKEY>		
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR X="104" Y="138" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<FORM ID="FRM_ITEM_LIST" X="0" Y="0" W="237" H="50" USE_OFFSCREEN ="1" IS_VISIBLE="1">			
+		<IMG ID="IMG_LINE_1" X="6" Y="53" W="206" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="206" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+		<IMG ID="IMG_LINE_2" X="6" Y="54" W="206" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="206" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+		<STATIC_FORM ID="SFRM_ICON_BG">
+			<ATTR X="8" Y="8" W="42" H="42" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		</STATIC_FORM>
+		<IMG ID = "IMG_ICON" X="8" Y="8" W="42" H="42" Z="1" IMG_X="1" IMG_Y="1" FONT_COLOR_HEX="0xffffffff" T_OUTLINE = "1">
+			<SCRIPT ID="ON_TICK">ItemSealProcessIconDraw(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">ItemSealProcessIconToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>		
+			<SCRIPT ID="ON_L_BTN_DOWN">SocketSystemProcessListSelect(UISelf)</SCRIPT>
+			<CHECK_BUTTON ID="CBTN_ITEM_SELECT">
+				<ATTR X="0" Y="0" W="42" H="42" Z="1" BTN_CLICK_LOCK="1" PASS_EVENT="1"/>
+				<ATTR BTN_IMG="../Data/6_ui/common/cmIconOver02.tga" BTN_IMG_W="84" BTN_IMG_H="84" IS_VISIBLE="1"/>
+			</CHECK_BUTTON>
+		</IMG>
+		<STATIC_FORM ID = "SFRM_ITEM_NAME" X="52" Y="15" Z="-2" W="180" H="30" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="6" T_Y ="6"/>
+		</STATIC_FORM>
+	</FORM>	
+	<!-- H +60 +12 CallUI("SFRM_MONSTER_CARD") -->
+	<STATIC_FORM ID = "SFRM_MONSTER_CARD" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<ATTR X = "240" Y = "91" W ="255" H ="510" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<FORM ID = "SFRM_TITLE_VIEW" TEXT="" X="54" Y="40" W="196" H="70" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413"/>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="253" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="222" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="213" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" TEXT="" T_X="10" T_Y="4" W="213" H="24" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SOULITEM_BG">
+			<ATTR X="8" Y="39" W="42" H="42" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		</STATIC_FORM>		
+		<ICON ID = "ICN_CARDITEM" X="9" Y="40" W="40" H="40" FONT_COLOR_HEX="0xffffffff" T_OUTLINE = "1" ICON_GRP="254">
+			<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="111" Z="-2" W="237" H="254" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID = "SFRM_SHADOW" X = "9" Y = "111" Z="-1" W="237" H="254" STATIC_NUM = "3" />
+		<STATIC_FORM ID = "SFRM_AUBOX" X="9" Y="368" W="237" H="28" STATIC_NUM="34">
+			<ATTR TEXT="" T_X="10" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_INSURANCE" X="9" Y="397" W="237" H="72" STATIC_NUM="34">
+			<ATTR TEXT="" T_X="53" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<STATIC_FORM ID="SFRM_INSURANCE_ITEM_BG">
+				<ATTR X="8" Y="15" W="42" H="42" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			</STATIC_FORM>
+			<FORM ID="FRM_NUM_BG" X="10" Y="16" W="40" H="40" PASS_EVENT="1">
+				<ATTR TEXT="" FONT="FTtab" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/> 
+			</FORM>
+			<ICON ID="INC_INSURANCE">
+				<ATTR X="10" Y="16" W="40" H="40" ICON_GRP="254"/>
+				<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<BUTTON ID="BTN_PLUS" X="33" Y="42"  W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBUp.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_UP"> AddSocketInsurance() </SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_MINUS" X="11" Y="42" W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_UP"> DelSocketInsurance() </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_OK" X="43" Y="471" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400533" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SocketSystemProcessItemCommit(UISelf:GetParent())  </SCRIPT>
+			<HOTKEY ID="59">  SocketSystemProcessItemCommit(UISelf:GetParent()) </HOTKEY>						
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="129" Y="471" Z="3" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400534" T_X="42" T_Y="4" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1">  UISelf:CloseParent() </HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() </HOTKEY>			
+		</BUTTON>
+
+		<LIST ID="LST_MONSTERCARD_LIST" X="6" Y="108" Z="1" W="237" H="250">
+			<ATTR ELEMENT_ID="FRM_ITEM_LIST" ITEM_X="0" ITEM_Y="0" CAN_SELECT = "1"/>
+			<!--<SCRIPT ID="ON_CALL">
+				UISelf:ClearAllListItem()
+				UISelf:AddNewListItemChar("AAA"):GetWnd():SetCustomDataAsInt(55555)
+				UISelf:AddNewListItemChar("BBB"):GetWnd():SetCustomDataAsInt(77777)
+				UISelf:AddNewListItemChar("CCC"):GetWnd():SetCustomDataAsInt(99999)				
+			</SCRIPT>-->
+<!--
+				UISelf:AddNewListItemChar(""):GetWnd():SetCustomDataAsInt(55555)
+				UISelf:AddNewListItemChar(""):GetWnd():SetCustomDataAsInt(77777)
+				UISelf:AddNewListItemChar(""):GetWnd():SetCustomDataAsInt(99999)
+-->				
+			<IMG ID="IMG_LIST_SCROLL_BG" X="219" Y="21" Z="-1" W="13" H="239">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="239"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="215" Y="6" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="215" Y="233" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="217" Y="21" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP="ScrUp" />
+			<ATTR BTN_DOWN="ScrDown" />
+			<ATTR BTN_MIDDLE="ScrMiddle" />
+			<ATTR WND_BAR="IMG_LIST_SCROLL_BG"/>			
+		</LIST>		
+		<STATIC_FORM ID="SFRM_EXTRACTION_BG">
+			<ATTR X="1" Y="504" W="253" H="50" Z="-1" STATIC_NUM="35" COLOR_TYPE="1" T_X="30" T_Y="10" FONT="FTtitle_14"  TEXT="790178" />
+		</STATIC_FORM>			
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_SOCKET_MAKE" ALIGN_X="50" ALIGN_Y="50" W="330" H="510" CAN_DRAG="1" STATIC_NUM="1">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="329" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="298" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent()</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="289" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" T_X="10" T_Y="4" W="289" H="24" STATIC_NUM="3" TEXT="790103" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_SCRIPT" X="9" Y="35" STATIC_NUM="34" W="314" H="295">
+			<FORM ID="FRM_TEXT0" X="7" Y="7" W="290" H="14">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="790151" T_X="2" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT1" X="7" Y="30" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="1">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="790152" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT2" X="7" Y="80" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="2">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="790153" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT3" X="7" Y="130" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="790154" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT4" X="7" Y="183" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="4">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="790155" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT5" X="7" Y="250" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="5">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="790162" T_X="18" T_Y="-1"/>
+			</FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="336" Z="-1" W="313" H="126" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BTN_BG_1" X="8" Y="4" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="790130" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>			
+			<STATIC_FORM ID="SFRM_BTN_BG_2" X="8" Y="34" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="790131" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BTN_BG_3" X="8" Y="64" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="790132" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BTN_BG_4" X="8" Y="94" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="790163" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>
+			
+			<BUTTON ID="BTN_SELECT_1" X="235" Y="7" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2200) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()					
+					CallSocketSystemUI(kOwnerGuid, 1)
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</SCRIPT>
+				<HOTKEY ID="59"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()					
+					CallSocketSystemUI(kOwnerGuid, 1)										
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</HOTKEY>
+			</BUTTON>			
+			<BUTTON ID="BTN_SELECT_2" X="235" Y="37" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2201) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()
+					CallSocketSystemUI(kOwnerGuid, 2)		
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</SCRIPT>
+				<HOTKEY ID="60"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()
+					CallSocketSystemUI(kOwnerGuid, 2)
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</HOTKEY>
+			</BUTTON>
+			<BUTTON ID="BTN_SELECT_3" X="235" Y="67" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2202) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()
+					CallSocketSystemUI(kOwnerGuid, 3)
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</SCRIPT>
+				<HOTKEY ID="61"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()
+					CallSocketSystemUI(kOwnerGuid, 3)					
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</HOTKEY>
+			</BUTTON>
+			<BUTTON ID="BTN_SELECT_4" X="235" Y="97" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2203) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()
+					CallSocketSystemUI(kOwnerGuid, 4)	
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</SCRIPT>
+				<HOTKEY ID="62"> 					
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					UISelf:GetParent():CloseParent()
+					CallSocketSystemUI(kOwnerGuid, 4)	
+					local wnd = ItemSocketSystemWnd(UISelf)
+				</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<BUTTON ID = "BTN_CANCLE" X="125" Y="470" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="" FONT="FTtitle_14" T_X="42" T_Y="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400534, 2204) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="63">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+	</STATIC_FORM>		
+	<STATIC_FORM ID="SFRM_NO_CASH_ITEM_MESSAGEBOX" PRIORITY="90">	
+		<ATTR ALIGN_X="50" ALIGN_Y="45" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW" X="0" Y="0" W="190" H="75" STATIC_NUM="3" >
+				<ATTR TEXT="400720" FONT="FTbt_12" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK" X="62" Y="88" W="79" H="28" >
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR TEXT="400002" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				UISelf:CloseParent()
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+</XUI>

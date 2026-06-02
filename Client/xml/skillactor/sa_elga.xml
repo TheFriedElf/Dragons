@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_elga" DIE_PARTICLE_ID="EF_Common_Dmg_Ice_00">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSkill/Claymore/Claymore.kfm</KFMPATH>
+		<SCRIPT SRC="SkillActor/SummonThorn.lua">
+			<ITEM NAME="elga_Initialize" TYPE="INIT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="idle_01" ANIMATION="1000000" />
+      <ITEM NAME="breath_btlidle_01_start" ANIMATION="1000000" />
+	  <ITEM NAME="breath_btlidle_01" ANIMATION="1000000" />
+	  <ITEM NAME="breath_01" ANIMATION="1000000" />
+
+	  	<!-- 자폭 -->
+	
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000000" DIEBLINK="se_damage_blink_blue"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000000" />
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

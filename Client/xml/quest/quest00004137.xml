@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4137</ID> <!--T.T.10413701 대결을 위한 의지 -->
+
+
+<!-- 작성자 : 김광중-->
+<!--[완료조건]	대마법사 파블로와 대화-->
+<!--[완료NPC]	상인의 마을 - 파블로-->
+<!--[내용]	호프먼 대장은 호위대의 지원 없이 단신으로 라발론을 퇴치하겠다는 것에 우려를 나타내지만, 만약 파블로에게 허락을 받으면 출동을 허락하겠다고 한다. 상인의 마을에 있는 대마법사 파블로를 찾아가자.  -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2880301C-3CF8-455c-BE54-227116F7914C</CLIENT> <!--시작NPC 상인의 마을 - 호프먼 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">30B65084-661B-41bc-AB4B-D5CC8A113ADE</PAYER> <!--완료NPC 상인의 마을 - 파블로 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2880301C-3CF8-455c-BE54-227116F7914C</AGENT> <!--진행NPC 11 상인의 마을 - 호프먼 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">30B65084-661B-41bc-AB4B-D5CC8A113ADE</AGENT> <!--진행NPC 12 상인의 마을 - 파블로 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10413711"/> <!--파블로와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10413721" FACE="Hopeman_normal"/> <!--뭐라고? 자네가 직접 드레이크 라발론을 찾아나서겠다고?
+자네의 용기는 가상하지만 자네를 사지에 내몰 수는 없어!%%
+게다가 이미 이 마을로 밀려드는 몬스터들 때문에 골치가 
+아픈 상황에서, 용암던젼의 화염문을 열기까지 한다면, 
+마을로 밀려드는 몬스터들의 수가 기하급수적으로 늘어날 걸세.%%  
+그러나... %name%... 자네의 각오가 가상하니 내가 특별히 
+자네의 힘을 시험해 보도록 하겠네. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10413726" FACE="Pablo_smile"/> <!--%name%....
+오오.. 원정대의 젊은 전사여…%%
+자네의 뜨거운 용기와 정의감을 마주하고 있자니,
+내 주름진 심장이 다시금 젊었을 적으로 돌아가는 것 같네.%% 
+자네는 반드시 라발론을 퇴치하고, 검은 마녀의 음모를 
+막아낼 수 있을 것이네.  -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10413723" FACE="Hopeman_normal"/> <!--만약 파블로님이 이 일에 대해 허락하신다면 자네가 라발론을 
+퇴치할 수 있도록 화염문을 통과할 수 있게 하겠네.
+서둘러 파블로님을 만나보게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10413724" FACE="Hopeman_angly"/> <!--원치 않는 일에 목숨을 걸 필요는 없다네. 이쯤에서 없었던 일로 하겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10413725" FACE="Hopeman_angly"/> <!--파블로님은 뭐라 하시던가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10413702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,8 @@
+<ACTION ID="a_mon_massive_projectile_move" NEXT="a_idle" USE-EVENT="TRUE" IGNORE_DMG_EFFECT="TRUE" DONT_LOOK_TARGET="TRUE" CAN_CHANGE_ACTOR_POS="TRUE">
+  <SLOT NAME="massive_projectile_btlidle_start"/>
+  <SLOT NAME="massive_projectile_btlidle" LOOP="TRUE"/>
+  <SLOT NAME="massive_projectile_fire"/>
+  <SLOT NAME="idle_01"/>
+  <SLOT NAME="massive_projectile_finish"/>
+  <FSM SCRIPT="Act_Mon_MassiveProjectile_Move"/>
+</ACTION>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_040110_FD" DESCRIPTION="90401100">
+  <GSAPATH>../Data/3_World/04_Lavita/01_Level/040110_FD.gsa</GSAPATH>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!-- 엔터던전 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_05" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_06" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_07" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_08" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_09" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09" />
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_10" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10" />
+  </TRIGGER>
+  <!-- 데미지 텔레포트 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_04" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_05" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_06" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_07" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_07" />
+  </TRIGGER>
+  <STONES />
+  <OBJECT GUID="deb812bb-9161-4c1c-9bff-103fff075d98" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-269.3521, -1196.118, 280.5262" TIME="1" />
+    <WayPoint POINT="-269.3521, -1196.118, 683.4086" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="f384d578-19ec-41f1-82f3-d5a3319e050d" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="124.0461, -1195.028, -124.8398" TIME="1" />
+    <WayPoint POINT="124.1647, -1194.982, -1121.637" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="286fd9b2-aa20-40c5-af45-3548175e607b" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="1124.035, -130.8031, -141.2394" TIME="1" />
+    <WayPoint POINT="1124.052, -130.8437, 275.5757" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="6ffd6b78-a0e4-425f-8c92-68cb28983884" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-2982.514, 1094.523, 679.9772" TIME="1" />
+    <WayPoint POINT="-2982.607, 1094.702, 277.6754" TIME="1" />
+    <WayPoint POINT="-2982.656, 1095.029, -119.4345" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="471ef61f-5cd9-4c6c-909e-4575de52a3b3" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-3394.777, 1091.681, 272.7223" TIME="1" />
+    <WayPoint POINT="-3394.592, 1091.924, 674.5685" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="6aa2aea4-469f-458a-b813-3fc3bbd8660e" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-6499.909, 797.4544, 636.6019" TIME="1" />
+    <WayPoint POINT="-6499.841, 797.6176, -169.9885" TIME="1" />
+    <WayPoint POINT="-6500.032, 797.6708, -1169.651" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="c095e2b3-16aa-4649-8b13-149b6bb0831b" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-4280.885, 1090.912, -1829.676" TIME="1" />
+    <WayPoint POINT="-4281.186, 1091.021, -1126.753" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="7d13de22-5a39-4eba-8d7a-ff93a47b87f1" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-2791.221, -1199.245, -1832.049" TIME="1" />
+    <WayPoint POINT="-2791.676, -1199.484, -1126.609" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="10e2592e-4d9b-464a-b9fb-9bde43da6f44" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-2791.626, -1198.599, 675.0019" TIME="1" />
+    <WayPoint POINT="-2791.349, -1198.746, 270.6149" TIME="1" />
+    <WayPoint POINT="-2791.547, -1199.051, -133.7718" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="49978553-e27f-4bf0-98ac-daca2df9aa96" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000542">
+    <WayPoint POINT="-3274.902, 1325.374, -1112.228" TIME="1" />
+    <WayPoint POINT="-3986.167, 1325.374, -1112.228" TIME="1" />
+  </OBJECT>
+</WORLD>

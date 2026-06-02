@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Mentha_Longifolia" DIE_PARTICLE_ID="ef_Mentha_Longifolia_die_01_char_root">
+	<TEXTURE SRC="N_Mentha_Longifolia01_glow.dds">../Data/2_Mon/N_Mentha_Longifolia/N_Mentha_Longifolia01_glow.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Mentha_Longifolia_Mission04"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Mentha_Longifolia_Mission04/N_Mentha_Longifolia_Mission04.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Mentha_Longifolia_Mission04/N_Mentha_Longifolia_Mission04_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_Mentha_idle_p_wp_r_hand" TO="p_wp_r_hand"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_Mentha_idle_p_wp_l_hand" TO="p_wp_l_hand"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_Mentha_idle_p_ef_r_gas" TO="ef_r_gas"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_Mentha_idle_p_ef_l_gas" TO="ef_l_gas"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="22"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<!-- 기본 공격 1-->
+			<ITEM NAME="btlidle_01" ANIMATION="1000065"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000066"/>
+			<!-- 기본 공격 2-->
+			<ITEM NAME="attk_02_01" ANIMATION="1000068"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000067"/>
+			<!-- 요요 던졌다 받기 스킬1-->
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000205"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000206" FIRE_START_NODE="p_wp_l_hand" PROJECTILE_ID="PROJECTILE_Mentha_shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000214"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000207"/>
+			<!-- 해골 유도탄 쏘기 스킬 2-->
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000208"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000209" FIRE_START_NODE="p_wp_r_hand" PROJECTILE_ID="PROJECTILE_Mentha_shot_02"/>
+			<!-- 회전하며 검은 포탄 쏘기 스킬3-->
+			<ITEM NAME="360_btlidle_01" ANIMATION="1000210"/>
+			<ITEM NAME="360_01" ANIMATION="1000211" FIRE_START_NODE="p_wp_r_hand" PROJECTILE_ID="PROJECTILE_MAGIC_MISSILE_03"/>
+			<!-- 보호막 생성-->
+			<ITEM NAME="blocking_01" ANIMATION="1000000" FIRE_EFFECT_NODE = "char_root" FIRE_EFFECT = "ef_Mentha_Longifolia_skill_04_02_char_root"/>
+			<ITEM NAME="blocking_01_idle" ANIMATION="1000212" FIRE_EFFECT_NODE = "char_root" FIRE_EFFECT = "ef_Mentha_Longifolia_skill_04_02_char_root"/>
+			<!--ITEM NAME="attk_03_02" ANIMATION="1000212"/-->
+			<!-- 스스로 힐-->
+			<ITEM NAME="attk_04_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000213"/>
+			<!--아이들 부르기-->
+			<ITEM NAME="attk_08_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000213"/>
+			<!-- 기본 능력치-->
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="die_blending_01" ANIMATION="1000021"/>
+			<ITEM NAME="die_01" ANIMATION="1000020" QUAKE_TIME="0.5" QUAKE_FACTOR="1.5" REMAIN_BODY="true"/>
+			<ITEM NAME="die_01_loop" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="0.4" QUAKE_FACTOR="0.6"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000041" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000042" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000041"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000042"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000043"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000044"/>
+	<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+				<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

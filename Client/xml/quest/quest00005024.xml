@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5024</ID> <!--T.T.10502401 바다 사나이 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가  [아케이드 모드(F1)] - 캡틴 후커의 모자 구하기-->
+<!--[완료NPC]	바람항구 - 신디-->
+<!--[내용]	신디는 도둑들의 명예를 실추시키고 있는 캡틴 후커가 마음에 들지 않는다고 한다. 그래서 해적의 상징인 모자를 빼앗아 벌을 주고 싶다고 한다. 신디의 부탁을 들어 주기 위해서 수염고래 해안가 [아케이드 모드(F1)]에서 캡틴 후커의 모자를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</CLIENT> <!--시작NPC 바람항구 - 신디 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</PAYER> <!--완료NPC 바람항구 - 신디 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</AGENT> <!--진행NPC 11 바람항구 - 신디 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010109/10000/0/1/1/160502400">6013900</MONSTER> 
+ <!--MON_NO=6013900/캡틴 후커,MAP_NO=9010109/캡틴후커 별장,Item_NO=160502400/[Q.ID:05024] 캡틴후커의 모자,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160502400</ITEM> 
+ <!--Item_NO=160502400/[Q.ID:05024] 캡틴후커의 모자,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10502411"/> <!--캡틴 후커의 모자-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502421" FACE="Cindy_normal"/> <!--으드득. 우리 도적의 명예를 실추시키다니.
+응? 넌 싸움 좀 할 거 같은데.
+자신의 실력을 시험해 보고 싶다는 생각한 적 없어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502426" FACE="Cindy_smile"/> <!--좋았어. 흠 모자가 생각보다 근사한데.
+이번 기회에 나도 해적으로 진로를 좀 바꿔볼까?
+호홋 농담이야. 그런 눈으로 바라보진 마.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502423" FACE="Cindy_normal"/> <!--좋아. 잘 선택했어. 
+지금 우리 도적들의 명예를 더럽히고 있는 캡틴 후커라는 녀석을 손 봐줘야 해.%%
+물론 내가 직접 하고 싶지만, 그 뭐랄까. 같은 업종에 있는 사람끼리는 서로 눈감아 주는 나쁜 관습이랄까.%%
+뭐 복잡 미묘한 전통 때문에 내가 어떻게 할 수가 없어서 분통만 터뜨리는 중이었어.
+하지만 너 같은 사람이라면 괜찮지. 
+암, 얼마든지 괜찮고 말이야. %%
+그 녀석 도둑이라면서 가난한 사람들에게서 돈을 빼앗고 있어.
+그것으로 그치는 아니라 협박을 통해서 사람들을 괴롭히고 있지.%%
+도둑은 자고로 부자들의 물건 중에 가장 비싼 것을 아무도 모르게 훔치는 거지.
+뭐? 가난한 사람에게 나눠주진 않냐고? 
+그거야 훔치는 녀석들 맘에 따라 다르지.%%
+하여간 그 녀석의 얼간이 같은 행동을 응징하기 위해서 그녀석이 소중히 하는 모자를 좀 빼앗아 와 줬으면 좋겠어.
+그렇게 하면 녀석도 조금 정신을 차리겠지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502424" FACE="Cindy_angly"/> <!--뭐야? 왜 거절하는 거야. 넌 그 못된 녀석을 혼내주고 싶지 않은 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502425" FACE="Cindy_normal"/> <!--흐흐. 그 녀석이 얼마나 얼빠져 하고 있을지 기대되는 걸. 얼른 갔다 와.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

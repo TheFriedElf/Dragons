@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<XUI>	
+	<WARNING ID="WarnOut_102" ALIGN_X="50" Y="693" W="700" H="64" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="6000">
+		<ATTR FONT="Font_Warn" TEXT="1" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>
+	<WARNING ID="WarnOut_101" ALIGN_X="50" Y="629" W="700" H="64" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="6000">
+		<ATTR FONT="Font_Warn" TEXT="1" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>
+	<WARNING ID="WarnOut_100" ALIGN_X="50" Y="565" W="700" H="64" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="6000">
+		<ATTR FONT="Font_Warn" TEXT="1" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>	
+	<WARNING ID="WarnOut_3" ALIGN_X="50" Y="115" W="700" H="64" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="6000">
+		<ATTR FONT="Font_Warn" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>
+	<WARNING ID="WarnOut_2" ALIGN_X="50" Y="179" W="700" H="64" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="6000">
+		<ATTR FONT="Font_Warn" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>
+	<WARNING ID="WarnOut_1" ALIGN_X="50" Y="243" W="700" H="64" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="6000">
+		<ATTR FONT="Font_Warn" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>
+	<WARNING ID="WarnOut_0" ALIGN_X="50" Y="307" W="700" H="64" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="6000">
+		<ATTR FONT="Font_Warn" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>
+
+	<WARNING ID="WarnOut_PlayerPlayTime" ALIGN_X="50" PASS_EVENT="1" NO_FOCUS="1" ALIVE_TIME="20000">
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<ATTR Y="221" W="700" H="64"/>
+			</NAME>
+			<NAME ID="CHINA/VIETNAM">
+				<ATTR Y="181" W="700" H="64"/>
+			</NAME>
+		</LOCAL>
+		<ATTR FONT="Font_Warn" T_X="350" T_Y="0" T_OUTLINE="1" PRIORITY="99" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		<IMG ID="IMG_BG" X="94" Y="0" W="512" H="64" IMG="../Data/6_UI/common/cmNoticeBg.tga" IMG_W="512" IMG_H="64"/>
+	</WARNING>
+	
+	<FORM ID = "QuestOut" ALIGN_X="50" ALIGN_Y="23" W="1000" H="300" PASS_EVENT="1" PRIORITY="100">
+		<FORM ID="FRM_QuestOut1">
+			<ATTR X="0" Y="0" W="1000" H="30" T_CENTER="1" PASS_EVENT="1"/>
+			<ATTR TEXT="1" FONT="Font_QuestWarn" T_X="500" T_Y="0" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<SCRIPT ID = "ON_CLOSE"> UISelf:SetStaticText("") </SCRIPT>
+		</FORM>
+		<FORM ID="FRM_QuestOut2">
+			<ATTR X="0" Y="30" W="1000" H="30" T_CENTER="1" PASS_EVENT="1"/>
+			<ATTR TEXT="1" FONT="Font_QuestWarn" T_X="500" T_Y="0" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<SCRIPT ID = "ON_CLOSE"> UISelf:SetStaticText("") </SCRIPT>
+		</FORM>
+		<FORM ID="FRM_QuestOut3">
+			<ATTR X="0" Y="60" W="1000" H="30" T_CENTER="1" PASS_EVENT="1"/>
+			<ATTR TEXT="1" FONT="Font_QuestWarn" T_X="500" T_Y="0" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<SCRIPT ID = "ON_CLOSE"> UISelf:SetStaticText("") </SCRIPT>
+		</FORM>
+		<SCRIPT ID = "ON_DISPLAY">
+			 GetQuestMan():UpdateQuestOut(UISelf)
+		</SCRIPT>
+	</FORM>
+	<!--FORM ID="QuestOut" ALIGN_X="50" ALIGN_Y="25" W="500" H="320" PASS_EVENT="1">
+		<LIST ID="WarnQuestOut" W="500" H="320">
+			<ATTR ITEM_X="0" ITEM_Y="0"/>
+			<ATTR PASS_EVENT="1" PRIORITY="99"/>
+			<ATTR ELEMENT_ID="FRM_QuestOut"/>
+		</LIST>
+	</FORM-->
+	<FORM ID="FRM_QuestOut" X="0" Y="0" W="500" H="30">
+		<ATTR TEXT="1" FONT="Font_QuestWarn" T_X="350" T_Y="0" T_OUTLINE="1"/>
+		<ATTR T_CENTER="1" PASS_EVENT="1" ALIVE_TIME="6000"/>
+	</FORM>
+</XUI>

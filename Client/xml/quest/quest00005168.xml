@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5168</ID> <!--T.T.10516801 부자가 되는 방법(3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴 몬스터 100마리 처리-->
+<!--[완료NPC]	달빛해안 마을 - 제시-->
+<!--[내용]	제시는 투자자를 다치게 한 두두들에게 복수를 했다고 한다. 투자자인 월리암은 크게 다쳐 화가 난 상태였지만 자신의 복수를 한 제시에게 감동받아 그 주변 몬스터를 깨끗하게 청소하면 투자를 하겠다고 한다. 제스를 위험한 동굴 몬스터 100마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 달빛해안 마을 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 달빛해안 마을 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 달빛해안 마을 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM_IN" VALUE="9010600/1">6059100</MONSTER> 
+ <!--MON_NO=6059100/두두,MAP_NO(선택)=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6059300</MONSTER> 
+ <!--MON_NO=6059300/주술사 두두,MAP_NO=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6059300</MONSTER> 
+ <!--MON_NO=6059300/주술사 두두,MAP_NO=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6007400</MONSTER> 
+ <!--MON_NO=6007400/호박머리 너구리,MAP_NO=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6014200</MONSTER> 
+ <!--MON_NO=6014200/스켈레통,MAP_NO=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6024100</MONSTER> 
+ <!--MON_NO=6024100/펑프,MAP_NO=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6024200</MONSTER> 
+ <!--MON_NO=6024200/암살자 펑프,MAP_NO=9010600/위험한 동굴,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010600/1">6039400</MONSTER> 
+ <!--MON_NO=6039400/불찌,MAP_NO=9010600/위험한 동굴,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="100" TEXT="10516811"/> <!--위험한 동굴 몬스터 100마리 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10516821" FACE="Jessie_normal"/> <!--이보게! 날 한 번만 더 도와주게!
+저번에 부상당한 월리암씨가 자네가 한 복수의 감동을 한 것 같아.%%
+자네가 한 번만 더 도와주면 내가 돈을 벌 수 있을 것 같네.
+어때? 도와주겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10516826" FACE="Jessie_smile"/> <!--고맙네 고마워. 
+이건 사례금이네. 이걸로 포션이라도 배불리 사 먹게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10516823" FACE="Jessie_normal"/> <!--그곳에 있는 몬스터를 깨끗이 청소하면 투자를 해줄 것 같아.
+위험한 동굴로 가서 조금만 더 힘 써주게. 100마리 정도만 처리하면 월리암씨도
+만족할 것 같으니 마지막으로 부탁 좀 하겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10516824" FACE="Jessie_angly"/> <!--좀 도와주게. 내가 가서 잡을 수 있는 건 아니지 않나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10516825" FACE="Jessie_normal"/> <!--아직 출발 안 했나? 좀만 더 서둘러 주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10516802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

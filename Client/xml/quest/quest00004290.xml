@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4290</ID> <!--T.T.10429000 하나된 열쇠 -->
+
+
+<!-- 작성자 : 김효중-->
+<!--[완료조건]	성좌의 고리-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	뱀주인 자리로 들어가기 위해서는 5개의 열쇠를 하나로 합친 성좌의 고리가 필요하다. 크레테와 대화하여 성좌의 고리를 만들어야 한다.
+-->
+
+
+<LIMITS>
+
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000300</ITEM> 
+ <!--Item_NO=82000300/[13_01 별자리] 성좌의고리,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10429011"/> <!--성좌의 고리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10429021" FACE="Crete_normal"/> <!--여러분의 노력으로 5개의 열쇠가 모였어요. 하지만 5개의 열쇠로는 뱀주인 자리로 들어 갈 수가 없습니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10429026" FACE="Crete_smile"/> <!--성좌의 고리를 완성하셨군요. 이제 뱀주인자리로 들어가실수 있어요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10429023" FACE="Crete_normal"/> <!--5개의 열쇠를 하나로 모으면 모든 별자리를 이어주는 성좌의 고리가 된답니다. 그 성좌의 고리만이 뱀주인 자리로 들어 갈 수 있는 열쇠랍니다. 5개의 열쇠를 가지고 아이템조합을 통해 성좌의 고리를 만들어서 제게 가져와 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10429024" FACE="Crete_cry"/> <!--5개의 열쇠를 하나로 모으지 않으면 뱀주인자리로 들어가실수 없어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10429025" FACE="Crete_normal"/> <!--성좌의 고리는 어디있죠?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10429002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

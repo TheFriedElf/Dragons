@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4081</ID> <!--T.T.10408101 툼레이더(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	위험한 동굴[시나리오 모드(F5)]에서 아투 처치-->
+<!--[완료NPC]	위험한 동굴 - 잭-->
+<!--[내용]	잭은 위험한 동굴 미션맵[시나리오 모드(F5)]에 대단한 보물이 숨겨져 있다고 생각한다. 하지만 정말 있을지는 의심스럽다. [시나리오 모드(F5)]에 진입하여 아투를 처치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">A9F524A1-84FD-436f-8168-709A55165360</CLIENT> <!--시작NPC 위험한 동굴 - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">A9F524A1-84FD-436f-8168-709A55165360</PAYER> <!--완료NPC 위험한 동굴 - 잭 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">A9F524A1-84FD-436f-8168-709A55165360</AGENT> <!--진행NPC 11 위험한 동굴 - 잭 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="7/4/1">6059400</MONSTER> 
+ <!--MON_NO=6059400/아투,Mission_Key=7/위험한 동굴 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="7/4/1">6024900</MONSTER> 
+ <!--MON_NO=6059400/아투,Mission_Key=7/위험한 동굴 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10408111"/> <!--아투 처치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10408121" FACE="Jack_normal"/> <!--히야.. 이제 이 일을 어쩌지?
+이번엔 제스 형 도움 없이 혼자서 한탕 크게 해결하고 싶은데…%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10408126" FACE="Jack_smile"/> <!--흠.. 대지의 정령 수호석은 이미 펑프들이 가져간 뒤였나 보네.%%
+그래도 너 참 대단하구나.
+그 무서워 보이는 아투를 한방에 보내버리다니 말이야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10408123" FACE="Jack_smile"/> <!--엥?%%
+뭐라고?%%
+혼자서 아투를 잡아보겠다고?%%
+진짜...?%% 
+정말…?
+아무래도 힘들지 않겠어?%% 
+좋아… 알았어. 그럼 만반의 준비를 하고 아투를 잡아줘.
+난, 그 동안 아투의 주변에 보물을 숨긴 곳이 있는지 찾아볼테니까.%%
+그리고 말이지… 
+만약 아투 사냥에 성공한다면 내가 특별한 선물을 줄게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10408124" FACE="Jack_angly"/> <!--그래. 아무리 생각해도 이건 너 혼자선 무리인 거 같아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10408125" FACE="Jack_normal"/> <!--[시나리오 모드(F5)]로 들어가려면 [아케이드 모드(F1)]을 클리어해야 한다는 건 잘 알고 있겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10408102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

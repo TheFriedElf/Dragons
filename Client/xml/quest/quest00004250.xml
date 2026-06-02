@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4250</ID> <!--T.T.10425001 공과 사 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	모나드론과 대화-->
+<!--[완료NPC]	밴시협곡 - 모나드론-->
+<!--[내용]	잭의 이야기에 따르면 모나드론 공작이 잭에게 누명을 씌워 제스에게 부당한 계약서를 쓰게 한 것 같다. 잭은 자신의 형인 제스가 위험한 지역에서 도굴을 하다가 목숨을 잃을 지도 모른다며 밴시협곡의 모나드론 공작과 담판을 지어주길 원하고 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">26674921-796A-42fa-B57F-434E11EF6101</CLIENT> <!--시작NPC 밴시협곡 - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</PAYER> <!--완료NPC 밴시협곡 - 모나드론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">26674921-796A-42fa-B57F-434E11EF6101</AGENT> <!--진행NPC 11 밴시협곡 - 잭 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</AGENT> <!--진행NPC 12 밴시협곡 - 모나드론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10425011"/> <!--모나드론과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10425021" FACE="Jack_normal"/> <!--하아…
+형은 망자의 탑에 다녀온 이후로 다른 사람이 되버렸어.
+결국 저기 있는 공작의 일을 돕게된 후로 상황은 더 꼬였고
+말이야.%%
+내가 자꾸 그만두자고 말해도 오히려 형은 화만 내.
+옛날의 형이 아니야. 벌써 붉은 여우 삼각지에 다녀왔는데…
+너무 위험해서 관두자고 말려봤지만 내 말은 들은 척도 안해.%%
+부디 부탁이야. 네가 모나드론 공작에게 부탁을 좀 해봐.
+제스 형이 이 일을 관둘 수 있도록 말이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10425026" FACE="Monaderon_smile"/> <!--흐흐흐… 그 표정을 보니 무슨 이야기를 하려는지 알겠군.
+저기 있는 좀도둑 친구들과 친분이 있는 것 같던데 말이야.
+이거 얘기가 재밌게 흘러가는군. 음하하하!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10425023" FACE="Jack_normal"/> <!--이게 다 제스형이 저 못된 공작에게 말려들고 만 탓이야.
+모나드론 공작은… 내가 훔치지도 않았는데, 날 도둑으로 
+내몰아서 형이 억지스러운 계약서에 사인을 하게 만들었어.%%
+붉은 여우 삼각지에서 모나드론 공작이 원하는 물건을 
+구해와야만 나를 감옥에 보내지 않겠다고 하면서 말이야.
+모나드론 공작이 거짓말을 하고 있지만, 형은 날 믿지 않는다구…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10425024" FACE="Jack_normal"/> <!--네가 도와주지 않으면, 저 기계로 된 폐허더미가 제스형의 무덤이 될 지도 몰라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10425025" FACE="Jack_normal"/> <!--모나드론 공작을 설득시켜줘. 우릴 괴롭히지 말라고 말이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10425002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

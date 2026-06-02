@@ -1,0 +1,7 @@
+<ACTION ID="a_mon_touch_up" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" BIDIRECTION="TRUE">
+	<SLOT NAME="touch_up_start"/>
+	<SLOT NAME="touch_up_idle" LOOP="TRUE"/>
+	<SLOT NAME="touch_up_fire"/>
+	<SLOT NAME="touch_up_finish"/>
+	<FSM SCRIPT="Act_Mon_Touch_up"/>
+</ACTION>

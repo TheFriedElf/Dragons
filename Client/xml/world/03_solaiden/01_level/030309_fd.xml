@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030309_FD">
+	<GSAPATH>../Data/3_World/03_Solaiden/01_Level/030309_FD.gsa</GSAPATH>
+	<MINIMAP Y="170" H="290">../Data/3_World/03_Solaiden/01_Level/030309_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DragonMage.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+  <!--용의탑 8층-->
+  <TRIGGER ID="gate_030308_base" TYPE="PORTAL" TITLE_TEXT_ID="800073" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030308" PARAM2="3" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!--용의탑 10층-->
+  <TRIGGER ID="gate_030310_base" TYPE="PORTAL" TITLE_TEXT_ID="800075" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030310" PARAM2="1" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+
+  <!--트리거점프-->
+<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoHighJump" PARAM="400" />
+</TRIGGER>
+<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoHighJump" PARAM="500" />
+</TRIGGER>
+<TRIGGER ID="trigger_jump_3" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoHighJump" PARAM="500" />
+</TRIGGER>
+<TRIGGER ID="trigger_jump_4" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+  <CONDITION TYPE="touch"/>
+  <ACTION SCRIPT="DoHighJump" PARAM="300" />
+</TRIGGER>
+<!--엔터던전-->
+ <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+ </TRIGGER>
+ <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+   <CONDITION TYPE="touch" ACTION="a_act" />
+   <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" HIDE_MINIMAP="1" />
+ </TRIGGER>
+
+ <!--//불 트렙//-->
+ <TRIGGER ID="Art_FireTrap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_FireTrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_FireTrap1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_FireTrap1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_FireTrap1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_FireTrap1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+ <!--나오는기둥-->
+ <TRIGGER ID="Art_StonePillarTrap2001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StonePillarTrap2001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StonePillarTrap2001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StonePillarTrap2001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StonePillarTrap2001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+ <!--//주먹트렙 //-->
+ <TRIGGER ID="Art_StoneHandTrap3001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StoneHandTrap3001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StoneHandTrap3001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="Art_StoneHandTrap3001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+ <!--//가시트렙 01//-->
+ <TRIGGER ID="DU_GT_MTA2001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_01 06">
+   <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+ <!--//가시트렙 02//-->
+ <TRIGGER ID="DU_GT_MTA2001_02 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_02 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_02 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_02 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_02 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA2001_02 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+ <!--//가시트렙 03//-->
+ <TRIGGER ID="DU_GT_MTA2001_03 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+ <!--//가시봉트렙//-->
+ <TRIGGER ID="DU_GT_MTA3001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+ <TRIGGER ID="DU_GT_MTA3001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+ </TRIGGER>
+
+<FOG DENSITY="0.050000" START="75.000000" END="2950.000000" COLOR="0.000000,0.000000,0.000000"/>
+</WORLD>

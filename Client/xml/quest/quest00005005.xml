@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5005</ID> <!--T.T.10500501 제법 강한 녀석 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	앵무조개 선착장 - 몬스터 40마리 쓰러뜨리기-->
+<!--[완료NPC]	바람항구 - 신디-->
+<!--[내용]	신디는 아무리 날쌔다고 해다 강한 힘이 없으면 다른 사람에게 인정을 받기 어렵다고 한다. 신디는 만약에 강함이 있다면 자신에게 증명하라고 한다. 그 증명을 보여주기 위해서 앵무조개 선착장에서 몬스터 40마리를 쓰러뜨리자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</CLIENT> <!--시작NPC 바람항구 - 신디 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</PAYER> <!--완료NPC 바람항구 - 신디 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</AGENT> <!--진행NPC 11 바람항구 - 신디 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="KILLMONSTER" VALUE="1">9010140</GROUND> 
+ <!--MAP_NO=9010140/앵무조개 선착장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="40" TEXT="10500511"/> <!--앵무조개 선착장 몬스터-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10500521" FACE="Cindy_normal"/> <!--흐응. %name% 저번의 성공으로 인해 상당히 우쭐하고 있는데.
+좋아. 네가 제법 재빠르다는 것은 나도 인정하겠어.%%
+하지만 재빠르기만 하다고 그 사람이 진정한 실력자라고 볼 순 없지.
+무슨 이야긴 줄 알겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10500526" FACE="Cindy_smile"/> <!--정말 이번에는 쪼오금 놀랐어. 생각보다 넌 강한 녀석이었군.%%
+훗. 너무 좋아하지마. 네가 강하다는 것은 여기 저기 사람들에게 시달리게 된다는 뜻이니까.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10500523" FACE="Cindy_normal"/> <!--나비처럼 날아서 벌처럼 쏜다는 이야기 알고 있어. 
+우아하고 재빠르게 공격한다는 의미지. 하지만 벌침에 맞고 아파하는 녀석들이 있는 반면, 벌침을 툭툭 털어버리는 녀석도 있지.
+결국은 재빠름을 능가하는 강함이 필요하다는 것이야. 
+어때 %name% 너에겐 강함이 있다고 생각해?
+오호 제법 그럴싸한 투기를 내뿜는 걸. 하지만 현실은 좀 더 냉혹한 편이지. 
+만약 네가 정말 강하다면 앵무조개 선착장에서 몬스터 40마리를 쓰러뜨려봐봐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10500524" FACE="Cindy_normal"/> <!--그래? 거절할 줄 알았어. 사실 강함은 쉽게 얻을 수 있는 게 아니니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10500525" FACE="Cindy_angly"/> <!--설마? 자신 없는 거야? 도대체 여기서 뭐하고 있는 거야!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10500502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

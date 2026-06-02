@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4006</ID> <!--T.T.10400601 일어나! 비룡(6) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 에델린과의 대화-->
+<!--[완료NPC]	바람항구 - 에델린-->
+<!--[내용]	사료도 받았으니, 비룡의 부화상태를 보러 바람항구의 상급법사 에델린에게 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</CLIENT> <!--시작NPC 바람항구 - 에이미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</PAYER> <!--완료NPC 바람항구 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 11 바람항구 - 에이미 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 12 바람항구 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10400611"/> <!--에델린과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">65100045</ITEM><!--전체지급/전체/1)/65100045(봉인아님) 1개-[라이딩] 펠리온 알 1-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10400621" FACE="Amy_normal"/> <!--라이딩펫이 될 비룡과 그리폰의 사료는
+캐쉬샵에서 팔고 있어요. 하지만…%%
+적당한 재료 아이템들을 구하신다면
+라이딩펫들의 사료를 직접 만들어 낼수도 있답니다.%%
+아이들이 굶지 않게 신경 써주세요~-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10400626" FACE="Edeline_smile"/> <!--빨리! 빨리 서둘러요. %name%님!
+지금 막 비룡이 부화하려는 중이에요.%%
+각인효과라고 하죠? 
+비룡도 알에서 태어났을 때 처음 본 사람을 따른다고 해요.%%
+이제 이 비룡은 %name%님의 아이가 되는 거랍니다.%%
+(에델린이 희미하게 웃음을 짓는다.)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10400623" FACE="Amy_normal"/> <!--그럼 어서 에델린에게 가보세요. 
+행운을 빌어요!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10400624" FACE="Amy_angly"/> <!--후후후… 아기 비룡을 저한테 넘기신다는 의미로 받아들여도 될까요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10400625" FACE="Amy_angly"/> <!--늑장 피우다가 아기 비룡이 알을 깨고 나오는 모습을 놓칠 지도 몰라요. 고고고!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10400626" FACE="Edeline_angly"/> <!--없음-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10400602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

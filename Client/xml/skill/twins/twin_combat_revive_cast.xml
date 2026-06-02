@@ -1,0 +1,7 @@
+<ACTION ID="a_twin_combat_revive_cast" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="combat_revive_cast" LOOP="true"/>
+  <SLOT NAME="combat_revive_fire"/>
+  <FSM SCRIPT="CommonSkillAction" 
+	USE_TLM="TRUE"
+  />
+</ACTION>

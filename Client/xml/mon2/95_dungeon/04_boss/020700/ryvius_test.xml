@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Ryvius_test" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Ryvius"/>
+		<KFMPATH>../Data/2_Mon2/95_Dungeon/04_Boss/020700/Ryvius_test/Ryvius.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="90"/>
+			<SPHERE TO="p_hit_point_02" SIZE="90"/>
+		</ABV>
+		<SLOT>
+			
+		
+
+			<!-- 브래스 소리지르기 -->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347"/>
+			
+		<!-- 브래스 소리지르기2 -->
+		
+			<ITEM NAME="breath_btlidle_02" ANIMATION="1000346"/>
+			<ITEM NAME="breath_02" ANIMATION="1000418"/>
+			<ITEM NAME="breath_02_finish" ANIMATION="1000348"/>
+
+			
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000900" QUAKE_TIME="1.5" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000019" QUAKE_TIME="3" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			
+
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000013" VELOCITY="1" VELOCITY_INIT="1"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000013"/>
+			<ITEM NAME="StandUp" ANIMATION="1000005"/>
+
+			<ITEM NAME="Stun" ANIMATION="1000306"/>
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+					<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

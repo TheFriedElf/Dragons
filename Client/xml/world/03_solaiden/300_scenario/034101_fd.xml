@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_034101_FD">
+  <GSAPATH>../Data/3_World/03_Solaiden/300_Scenario/034101_FD.gsa</GSAPATH>
+  <MINIMAP Y="150" H="250">../Data/3_World/03_Solaiden/300_Scenario/034101_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!--MAP TYPE설정-->
+  <!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+  <MAPVALUE PLAYERKILL="0" TYPE="128" />
+  <!--// 포털 -->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+
+  <!-- 트리거 점프 -->
+    <TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_2" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_3" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_3" PARAM="200" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_4" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_4" PARAM="150" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_5" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_5" PARAM="250" />
+  </TRIGGER>
+  <TRIGGER ID="trigger_jump_6" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_6" PARAM="100" />
+  </TRIGGER>
+
+  <!-- 텔 레 포 트 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_01" />
+  </TRIGGER>
+
+  <!-- 포  그 -->
+  <FOG DENSITY="0.050000" START="180.000000" END="4995.000000" COLOR="0.894999,0.880999,0.596000" />
+  <STONES />
+  <OBJECT GUID="52c5ca78-d277-4633-8ba9-b5cf5e4a0399" RIDABLE="TRUE" SPEED="150" CLASS_NO="5000514">
+    <WayPoint POINT="1240, -605, 514.2101" TIME="1.5" />
+    <WayPoint POINT="1240, -605, 637.9313" TIME="1.5" />
+  </OBJECT>
+  <OBJECT GUID="cfd82cf6-b49b-4e1b-a37a-86033540f46f" RIDABLE="TRUE" SPEED="150" CLASS_NO="5000514">
+    <WayPoint POINT="1518.757, -580, 204.0102" TIME="1.5" />
+    <WayPoint POINT="1518.757, -580, 316.2278" TIME="1.5" />
+  </OBJECT>
+</WORLD>

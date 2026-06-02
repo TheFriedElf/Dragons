@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="SFRM_GUILD_INVENTORY" CALL_SOUND="Button_UI_Open" CLOSE_SOUND="Button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR X="160" Y="91" W="380" H="379" CAN_DRAG="1" STATIC_NUM="1"/>
+		<SCRIPT ID="ON_CALL">
+		RegistUIAction(UISelf, "CloseUI")
+		ActivateUI("Inv")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 160, 91)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> 
+			CloseToolTip() 
+			UISelf:SetCursorState(0) 
+			SendGuildInvClose()
+			local kInv = GetUIWnd("Inv")
+			if not kInv:IsNil() then
+				CloseUI("Inv")
+			end
+		</SCRIPT>
+		<STATIC_FORM ID="SFRM_LINE_EXTEND_GUIDE" IS_VISIBLE="0" X="16" Y="214" W="348" H="128" Z="10" STATIC_NUM="16">
+			<ATTR TEXT="401094" FONT="Font_Text" T_X="174" T_Y="48" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" PASS_EVENT="1" NO_FOCUS="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_TAB_EXTEND_GUIDE" IS_VISIBLE="0" X="16" Y="42" W="348" H="260" Z="10" STATIC_NUM="16">
+			<ATTR TEXT="401094" FONT="Font_Text" T_X="174" T_Y="112" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" PASS_EVENT="1" NO_FOCUS="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="378" H="36" Z="-1" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BTN_BG" X="347" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_EXIT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_GUILD_INVENTORY") </SCRIPT>
+					<HOTKEY ID="1"> CloseUI("SFRM_GUILD_INVENTORY") return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<!-- 금고1 ~ 금고4 버튼 -->
+		<BUILD ID="BLD_TITLE_BTN_BG" X="7" Y="4" X_COUNT="4" Y_COUNT="1" X_GAB="56" TARGET_ID="SFRM_BTN_BG"/>
+		<STATIC_FORM ID="SFRM_BTN_BG" X="0" Y="0" Z="1" W="54" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<BUILD ID="BLD_TITLE_BTN" X="7" Y="4" X_COUNT="4" Y_COUNT="1" X_GAB="56" TARGET_ID="CBTN_BAG"/>
+		<CHECK_BUTTON ID="CBTN_BAG" X="0" Y="0" Z="2" W="54" H="24" TEXT="" FONT="FTtitle_14" T_X="20" T_Y="3" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabBs.tga" BTN_IMG_W="108" BTN_IMG_H="48">
+			<SCRIPT ID="ON_BUILD">UISelf:SetStaticText(GetTT(2900):GetStr()..(UISelf:GetBuildIndex()+1))</SCRIPT>			
+			<SCRIPT ID="ON_GET_FOCUS">ChangeGuildInvTab(UISelf:GetBuildIndex()+1)</SCRIPT> <!-- 1 == IT_GUILD_INVENTORY_1-->
+			<SCRIPT ID="ON_MOUSE_OVER"></SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"></SCRIPT>
+		</CHECK_BUTTON>
+		<FORM ID="FRM_BG" X="0" Y="0" W="380" H="375" Z="-2">
+			<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="362" H="273" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="362" H="273" Z="-1" STATIC_NUM="3"/>
+				<BUILD ID="BLD_INV_BG_ICON" X="6" Y="6" X_COUNT="8" Y_COUNT="6" X_GAB=" 44" Y_GAB="44" TARGET_ID="SFRM_ICON_BG"/>
+				<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>			
+			</STATIC_FORM>
+		</FORM>
+		<!-- 마우스 오버 위에 이미지-->
+		<IMG ID = "IMG_CURSOR" X = "-1" Y = "-1" Z = "-1" W = "42" H = "42" IMG="../Data/6_ui/common/cmIconOver02.tga" IMG_W= "84" IMG_H="84" U="2" V="2">
+			<ATTR UV_INDEX = "2" IGNORE_PARENT_RECT="1" IS_VISIBLE ="0" PASS_EVENT="1" NO_FOCUS="1"/>
+			<SCRIPT ID ="ON_TICK">UISelf:Visible(UISelf:PtInUI(GetCursorPos())) </SCRIPT>
+		</IMG>
+		<!-- 인벤토리 빌드 8*6-->
+		<BUILD ID="BLD_INV_ICON" X="16" Y="42" X_COUNT="8" Y_COUNT="6" X_GAB="44" Y_GAB="44" TARGET_ID="ICON_ITEM"/>
+		<ICON ID="ICON_ITEM" X="0" Y="0" W="40" H="40" ICON_GRP ="100" ICON_KEY="0"><!-- KUIG_GUILD_INV_VIEW = 100 -->
+			<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local self = UISelf
+				self:CallIconToolTip()
+				local b = true
+				local cur = self:GetParent():GetControl("IMG_CURSOR")
+				if false == cur:IsNil() then
+					cur:Visible(b)
+					if b then
+						local pos = self:GetLocation()
+						pos:SetX(pos:GetX()-1)
+						pos:SetY(pos:GetY()-1)
+						cur:SetLocation(pos)
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor()</SCRIPT>
+			<SCRIPT ID="ON_R_BTN_DOWN">UISelf:IconToCursor() UISelf:CursorToIcon(true)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+				UISelf:CursorToIconFast(1)
+				CloseToolTip()
+			</SCRIPT>
+		</ICON>
+		<!-- 하단 골드 표시-->
+		<STATIC_FORM ID="SFRM_MONEY_BG">
+			<ATTR X="8" Y="310" W="364" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_SDW" X="0" Y="0" W="364" H="26" STATIC_NUM="3">
+				<FORM ID="FRM_GOLD" X="278" Y="5" W="138" H="16">
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="60" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="59" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+					 UISelf:DrawMoney(6)
+					</SCRIPT>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<!-- 하단 출금 입금 내역보기-->
+		<BUTTON ID="BTN_OUT" X="20" Y="340" W="97" H="28" >
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(401096, 2200) </SCRIPT>
+			<ATTR FONT="FTbt_12" T_X="48" T_Y="4" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBgLg.tga" BTN_IMG_W="194" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">	CallUI("SFRM_GUILD_INVENTORY_GOLD_OUT") </SCRIPT>
+			<HOTKEY ID="59"> CallUI("SFRM_GUILD_INVENTORY_GOLD_OUT") return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_IN" X="140" Y="340" W="97" H="28" >
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(401095, 2201) </SCRIPT>
+			<ATTR FONT="FTbt_12" T_X="48" T_Y="4" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBgLg.tga" BTN_IMG_W="194" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> CallUI("SFRM_GUILD_INVENTORY_GOLD_IN") </SCRIPT>
+			<HOTKEY ID="60"> CallUI("SFRM_GUILD_INVENTORY_GOLD_IN") return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_LOG" X="260" Y="340" W="97" H="28" >
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(401097, 2202) </SCRIPT>
+			<ATTR FONT="FTbt_12" T_X="48" T_Y="4" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBgLg.tga" BTN_IMG_W="194" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">RequestGuildInvLog(UISelf)</SCRIPT>
+			<HOTKEY ID="61"> RequestGuildInvLog(UISelf) return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<!-- 입금 팝업-->
+	<STATIC_FORM ID="SFRM_GUILD_INVENTORY_GOLD_IN">
+		<ATTR ALIGN_X="50" ALIGN_Y="30" W="249" H="198" CAN_DRAG="1" STATIC_NUM="1"/>
+		<HOTKEY ID="1"> UISelf:Close() return true</HOTKEY>
+		<SCRIPT ID="ON_CALL">
+		local kTemp = GetUIWnd("SFRM_GUILD_INVENTORY_GOLD_OUT")
+			if not kTemp:IsNil() then
+				kTemp:Close()
+			end
+		</SCRIPT>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="247" H="36" Z="-1" STATIC_NUM="4">
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="7" Y="4" W="144" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR T_X="8" T_Y = "4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4d3413" TEXT="401095"/>
+			</IMG>
+			<STATIC_FORM ID="SFRM_BTN_BG" X="216" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_EXIT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> UISelf:GetParent():GetParent():GetParent():Close() </SCRIPT>					
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_BG" X="0" Y="0" W="249" H="198" Z="-2">
+			<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="231" H="120" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SD" X="9" Y="35" W="231" H="120" Z="-1" STATIC_NUM="3"/>			
+		</FORM>
+		<FORM ID="FRM_DESC_TITLE" X="9" Y="35" W="231" H="120" T_X ="10" T_Y = "12" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF7D0000" TEXT="401098"/>
+		<FORM ID="FRM_DESC" X="9" Y="35" W="231" H="120" T_X ="8" T_Y = "32" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413" TEXT="401076"/>		
+		<STATIC_FORM ID="SFRM_MONEY_BG" X="17" Y="126" W="215" H="20" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3" PASS_EVENT="1"/>
+		<IMG ID="IMG_COIN_IMG" X="210" Y="128" W="20" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" PASS_EVENT="1"/>
+		<EDIT ID="EDT_MONEY" X="17" Y="126" W="215" H="20" EDIT_ORDER_LANK="1" EDIT_DONT_LOSTFOCUS="1">
+			<ATTR EDIT_T_X="4" EDIT_T_Y="3" EDIT_FONT="Font_Text"/>
+			<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH="4" TEXT="" FONT="Font_Text" T_X="0" T_Y="5" FONT_COLOR_HEX = "0xFF4D3413"  EDIT_ONLY_NUM="1"/>
+			<HOTKEY ID="59">SendGuildMoney(1) UISelf:CloseParent()</HOTKEY>
+			<HOTKEY ID="60">UISelf:CloseParent()</HOTKEY>
+			<HOTKEY ID="1">UISelf:CloseParent()</HOTKEY>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetEditText("")
+				UISelf:SetCustomDataAsInt(0)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local kTemp = UISelf:GetCustomDataAsInt()
+				if kTemp == 0 then					
+					UISelf:SetEditFocus(true)
+					UISelf:SetCustomDataAsInt(1)
+				end
+			</SCRIPT>
+		</EDIT>
+		<BUTTON ID="BTN_OK" X="40" Y="159" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" TEXT="21" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(400533, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				SendGuildMoney(1) UISelf:CloseParent() return
+			</SCRIPT>
+			<HOTKEY ID="59">
+				SendGuildMoney(1) UISelf:CloseParent()
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="126" Y="159" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" TEXT="21" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(400534, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60"></HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<!--출금 팝업-->
+	<STATIC_FORM ID="SFRM_GUILD_INVENTORY_GOLD_OUT">
+		<ATTR ALIGN_X="50" ALIGN_Y="30" W="249" H="198" CAN_DRAG="1" STATIC_NUM="1"/>
+		<HOTKEY ID="1"> UISelf:Close() return true</HOTKEY>
+		<SCRIPT ID="ON_CALL">
+			local kTemp = GetUIWnd("SFRM_GUILD_INVENTORY_GOLD_IN")
+			if not kTemp:IsNil() then
+				kTemp:Close()
+			end
+		</SCRIPT>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="247" H="36" Z="-1" STATIC_NUM="4">
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="7" Y="4" W="144" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR T_X="8" T_Y = "4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4d3413" TEXT="401096"/>
+			</IMG>
+			<STATIC_FORM ID="SFRM_BTN_BG" X="216" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_EXIT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> UISelf:GetParent():GetParent():GetParent():Close() </SCRIPT>					
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_BG" X="0" Y="0" W="249" H="198" Z="-2">
+			<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="231" H="120" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SD" X="9" Y="35" W="231" H="120" Z="-1" STATIC_NUM="3"/>			
+		</FORM>
+		<FORM ID="FRM_DESC_TITLE" X="9" Y="35" W="231" H="120" T_X ="10" T_Y = "12" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF7D0000" TEXT="401099"/>
+		<FORM ID="FRM_DESC" X="9" Y="35" W="231" H="120" T_X ="8" T_Y = "32" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413" TEXT="401077"/>		
+		<STATIC_FORM ID="SFRM_MONEY_BG" X="17" Y="126" W="215" H="20" CAN_COLOR_CHANGE="1" STATIC_NUM="6" COLOR_TYPE="3" PASS_EVENT="1"/>
+		<IMG ID="IMG_COIN_IMG" X="210" Y="128" W="20" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" PASS_EVENT="1"/>
+		<EDIT ID="EDT_MONEY" X="17" Y="126" W="215" H="20" EDIT_ORDER_LANK="2" EDIT_DONT_LOSTFOCUS="1">
+			<ATTR EDIT_T_X="4" EDIT_T_Y="3" EDIT_FONT="Font_Text"/>
+			<ATTR EDIT_PREVIEW="" EDIT_LIMIT_LENGTH="4" TEXT="" FONT="Font_Text" T_X="0" T_Y="5" FONT_COLOR_HEX = "0xFF4D3413"  EDIT_ONLY_NUM="1"/>
+			<HOTKEY ID="59">SendGuildMoney(2) UISelf:CloseParent() return</HOTKEY>
+			<HOTKEY ID="60">UISelf:CloseParent()</HOTKEY>
+			<HOTKEY ID="1">UISelf:CloseParent()</HOTKEY>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetEditText("")
+				UISelf:SetCustomDataAsInt(0)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				local kTemp = UISelf:GetCustomDataAsInt()
+				if kTemp == 0 then					
+					UISelf:SetEditFocus(true)
+					UISelf:SetCustomDataAsInt(1)
+				end
+			</SCRIPT>
+		</EDIT>
+		<BUTTON ID="BTN_OK" X="40" Y="159" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" TEXT="21" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(400533, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				SendGuildMoney(2) UISelf:CloseParent() return
+			</SCRIPT>
+			<HOTKEY ID="59">
+				SendGuildMoney(2) UISelf:CloseParent()
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="126" Y="159" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" TEXT="21" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(400534, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60"></HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+	<!-- 로그 -->
+	<STATIC_FORM ID="SFRM_GUILD_INVENTORY_LOG">
+		<ATTR ALIGN_X="50" ALIGN_Y="30" W="624" H="452" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="626" H="36" Z="-1" STATIC_NUM="4">
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="7" Y="4" W="144" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR T_CENTER = "1" T_X = "67" T_Y = "4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4d3413" TEXT="401074"/>
+			</IMG>
+			<STATIC_FORM ID="SFRM_BTN_BG" X="595" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_EXIT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_GUILD_INVENTORY_LOG")  </SCRIPT>
+					<HOTKEY ID="1"> CloseUI("SFRM_GUILD_INVENTORY_LOG") return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_TYPEBAR_BG" X="5" Y="32" W="613" H="33" Z="0" IMG="../Data/6_ui/Auction/auSchBg.tga" IMG_W="613" IMG_H="33"/>
+		<FORM ID="FRM_TEXT" X="16" Y="40" W="530" H="20" TEXT="401075" FONT="Font_Text" T_X="0" T_Y="0" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<FORM ID="FRM_BG" X="0" Y="0" W="410" H="375" Z="-2">
+			<STATIC_FORM ID="SFRM_BG" X="12" Y="70" W="600" H="302" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SD" X="12" Y="70" W="600" H="302" Z="-1" STATIC_NUM="3"/>			
+		</FORM>
+		<STATIC_FORM ID="SFRM_MENU_DATE" X="18" Y="76" W="152" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" TEXT="401700" T_X="66" T_Y="6" T_CENTER="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_MENU_CHARACTER" X="172" Y="76" W="118" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" TEXT="401701" T_X="59" T_Y="6" T_CENTER="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_MENU_TYPE" X="292" Y="76" W="80" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" TEXT="" T_X="40" T_Y="6" T_CENTER="1"/>
+			<SCRIPT ID="ON_CREATE">
+				UISelf:SetStaticText(GetTT(401702):GetStr() .." / ".. GetTT(401703):GetStr())
+			</SCRIPT>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_MENU_DETAILS" X="374" Y="76" W="148" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" TEXT="401704" T_X="74" T_Y="6" T_CENTER="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_MENU_COUNT" X="524" Y="76" W="82" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" TEXT="401705" T_X="41" T_Y="6" T_CENTER="1"/>
+		</STATIC_FORM>		
+		<BUILD ID="BLD_LOG_CONTENT" X="18" Y="108" X_COUNT="1" Y_COUNT="10" Y_GAB="26" TARGET_ID="FRM_LOG_CONTENT"/>
+		<FORM ID="FRM_LOG_CONTENT" X="0" Y="0" W="590" H="400">
+			<STATIC_FORM ID="SFRM_DATE" X="0" Y="0" W="152" H="23" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF7D0000" T_CENTER="1" T_X="76" T_Y="4"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_CHARACTER" X="154" Y="0" W="118" H="23" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3" FONT="Font_Text">
+				<ATTR  FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1" T_X="59" T_Y="4"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_TYPE" X="274" Y="0" W="80" H="23" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1" T_X="40" T_Y="4"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_DETAILS" X="356" Y="0" W="148" H="23" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_X="2" T_Y="4"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_COUNT" X="506" Y="0" W="82" H="23" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_RIGHT="1" T_X="56" T_Y="4"/>
+				<FORM ID="FRM_COUNT_GOLD" X="0" Y="0" W="20" H="16" IS_VISIBLE="0">
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="60" IMG_Y="4"/>
+				</FORM>
+			</STATIC_FORM>
+		</FORM>
+		<BUTTON ID ="BTN_PREV_PAGE_5" X="146" Y="378" Z="1" W="23" H="19">
+			<ATTR BTN_IMG="../Data/6_ui/pvp/pvBack2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">GuildLogPageMove(-5)</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_PREV_PAGE_1" X="196" Y="378" Z="1" W="15" H="19">
+			<ATTR BTN_IMG="../Data/6_ui/Pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">GuildLogPageMove(-1)</SCRIPT>
+		</BUTTON>
+		<FORM ID ="FRM_PAGE" X="182" Y="378" Z="1" W="274" H="23">
+			<BUILD ID="BLD_LINE" X="0" Y="0" X_COUNT="8" Y_COUNT="1" X_GAB="40" TARGET_ID="IMG_LINE"/>
+			<IMG ID="IMG_LINE" X="0" Y="0" Z="-1" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>			
+			<BUILD ID="BLD_NUM" TARGET_ID ="CBTN_NUM" X ="48" Y="0" X_COUNT ="5" Y_COUNT ="1" X_GAB ="40" Y_GAB ="0" IS_VISIBLE="0"/>
+			<CHECK_BUTTON ID="CBTN_NUM" X="0" Y="0" W="40" H="21" T_CENTER="1" T_X="13" T_Y="-1" FONT="FTcts_16" BTN_CLICK_LOCK="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1">				
+				<SCRIPT ID="ON_L_BTN_DOWN"> RequestGuildInvLog(UISelf) </SCRIPT>
+			</CHECK_BUTTON>
+		</FORM>
+		<BUTTON ID="BTN_NEXT_PAGE_1" X="438" Y="378" Z="1" W="15" H="19">
+			<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">GuildLogPageMove(1)</SCRIPT>
+		</BUTTON>
+		<BUTTON ID ="BTN_NEXT_PAGE_5" X="478" Y="378" Z="1" W="23" H="19">
+			<ATTR BTN_IMG="../Data/6_ui/pvp/pvNext2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">GuildLogPageMove(5)</SCRIPT>
+		</BUTTON>
+		<IMG ID="IMG_LINE" X="21" Y="404" W="598" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="582" IMG_H="2"/>
+		<BUTTON ID="BTN_CONFIRM" X="267" Y="411" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="21" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(400533, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="59"> UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+</XUI>

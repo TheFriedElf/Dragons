@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_040111_FD">
+  <GSAPATH>../Data/3_World/04_Lavita/01_Level/040111_FD.gsa</GSAPATH>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+ 
+   <!-- 포탈-->
+  
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+	<CONDITION TYPE="action" ACTION="a_act"/>
+	<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+  </TRIGGER>
+  
+  
+   <!-- 엘리베이터-->
+  <STONES />
+  <OBJECT GUID="33cb0fc7-2960-4e74-90ee-ed4c9e8b11ff" RIDABLE="TRUE" SPEED="120" CLASS_NO="5000542">
+    <WayPoint POINT="-2721.904, -1445.069, 667.5278" TIME="1" />
+    <WayPoint POINT="-2721.904, -1445.069, 368.4045" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="0f5565e6-2b07-44fa-b6df-8b2c98d59bd3" RIDABLE="TRUE" SPEED="120" CLASS_NO="5000542">
+    <WayPoint POINT="-4826.032, -1438.67, 285.9377" TIME="1" />
+    <WayPoint POINT="-4826.032, -1438.67, -23.95076" TIME="1" />
+  </OBJECT>
+</WORLD>

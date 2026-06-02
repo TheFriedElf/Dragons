@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5142</ID> <!--T.T.10514201 죽마고우(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	바람항구 - 빅터와 대화-->
+<!--[완료NPC]	바람항구 - 빅터-->
+<!--[내용]	경비병 스웰은 바람항구 빅터와 어렸을 적부터 둘도 없는 친구 사이였다고 한다. 하지만 다른 마을로 배정 받으면서 멀리 떨어져 서로의 안부도 묻지 못한 채 살아가고 있다고 한다. 스웰에 안부를 바람항구 빅터에게 전해주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DB9DFA7F-7F14-4530-A367-DCA447537B2F</CLIENT> <!--시작NPC 달빛해안 마을 - 스웰 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</PAYER> <!--완료NPC 바람항구 - 빅터 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DB9DFA7F-7F14-4530-A367-DCA447537B2F</AGENT> <!--진행NPC 11 달빛해안 마을 - 스웰 -->
+		<AGENT TYPE="NPC" EVENTNO="10012"  MARK="END">5A11BBAA-114F-4c60-9DAE-A17B7F9ED56B</AGENT> <!--진행NPC 12 바람항구 - 빅터 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10514211"/> <!--빅터와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10514221" FACE="Walter_normal"/> <!--안녕하세요.%name%님.
+용사님께서는 여행을 자주 가니까 많은 곳을 가보셨나요? 
+그럼 바람항구도 가보셨나요? %%
+바람항구에도 저처럼 마을을 지키는 경비병이 있어요.
+바람항구는 빅터가 지키고 있는데 혹시 본 적 있으세요? 
+빅터랑 저랑 어린 시절부터 둘도 없는 친구 사이였어요.%%
+용사님께서는 모험을 많이 하니까 바람항구에 가시면 빅터에게 안부 좀 전해주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10514226" FACE="Walter_smile"/> <!--네? 스웰의 안부를 전하러 오셨다고요? 정말 반갑네요.
+저도 어떻게 지내는지 궁금하던 참이었어요.
+스웰도 잘 지내고 있죠?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10514223" FACE="Walter_normal"/> <!--감사해요. 가서 제 안부를 꼭 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10514224" FACE="Walter_normal"/> <!--안되나요? 바쁘시면 어쩔 수 없죠. 빅터도 잘 지내고 있을 거예요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10514225" FACE="Walter_normal"/> <!--바람항구가 가까운 거리가 아니라 보고 싶어도 볼 수가 없어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10514202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

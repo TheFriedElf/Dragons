@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_038100_BC" DESCRIPTION="90381000">
+  <GSAPATH>../Data/3_World/03_Solaiden/01_Level/038100_BC.gsa</GSAPATH>
+  <SCRIPT>World/03_Solaiden/038100_BC.lua</SCRIPT>
+  <BGSOUND VOLUME="1.0">../BGM/delhapa_bg.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0" />
+  <!--MAP TYPE설정-->
+  <!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+  <MAPVALUE PLAYERKILL="0" TYPE="8" />
+  <!-- 텔레점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400" />
+  </TRIGGER>
+  <!-- 텔레포트 데미지 이동 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEJUMP" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEJUMP" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEJUMP" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_04" TYPE="TELEJUMP" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_05" TYPE="TELEJUMP" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_06" TYPE="TELEJUMP" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_05" />
+  </TRIGGER>
+
+  <!--// 움직이는 오브젝트 -->
+  <OBJECT GUID="22790231-f0da-4804-b748-2146192cd0e2" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000541">
+    <WayPoint POINT="669.8582, 895.3317, 1484.714" TIME="1" />
+    <WayPoint POINT="670.3299, 896.3063, 805.0104" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="60d5eeec-aad9-4bc0-81ff-906fbce4c72b" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000541">
+    <WayPoint POINT="-413.959, -1641.968, 804.5709" TIME="1" />
+    <WayPoint POINT="-413.1132, -1644.84, 124.5265" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="c9af2d22-8260-469c-a352-8a5924f37727" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000541">
+    <WayPoint POINT="-2108.279, 70.57074, 809.5923" TIME="1" />
+    <WayPoint POINT="-2107.269, 69.35226, 1481.486" TIME="1" />
+  </OBJECT>
+  <STONES />
+</WORLD>

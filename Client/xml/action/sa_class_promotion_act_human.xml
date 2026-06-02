@@ -1,0 +1,16 @@
+<ACTION ID="a_sa_class_promotion_act_human" NEXT="a_idle" USE_CFUNC_ONTARGET="TRUE"  USE_CFUNC="TRUE" USE-EVENT="TRUE">
+	<SLOT NAME="human" LOOP="TRUE"/>
+	<SLOT NAME="human"/>
+  	<FSM SCRIPT="CommonSkillAction"		
+		USE_TLM="FALSE"
+		REMOVE_ON_NEXTUPDATE="TRUE"
+		
+		C_CAM_MSG_KEEP="0"
+		C_CAM_MSG_TYPE_1="10010"
+		C_CAM_MSG_CAMERA_NAME_1="camera01"
+				
+		MSG_ALPHA_START_1="1"
+		MSG_ALPHA_END_1="0"
+		MSG_ALPHA_TIME_1="0.5"	
+	/>
+</ACTION>

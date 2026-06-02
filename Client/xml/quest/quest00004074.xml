@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4074</ID> <!--T.T.10407401 미처 알지 못했던 사정 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	파렐의 암호해석집 하편 전달(지하묘지 마이트리)-->
+<!--[완료NPC]	지하묘지 - 마이트리-->
+<!--[내용]	라르엘에 의하면, 파렐박사의 암호 해석을 의뢰한 마이트리는 달빛해안 마을의 지하묘지를 조사하러 들어갔다고 한다. 지하묘지의 마이트리를 찾아 파렐의 암호해석집 하편을 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">93C71CE7-4E0F-4212-ADA9-B7DAD6F351FB</PAYER> <!--완료NPC 지하묘지 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">93C71CE7-4E0F-4212-ADA9-B7DAD6F351FB</AGENT> <!--진행NPC 12 지하묘지 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160407400/1">10011</NPC> 
+ <!--Item_NO=160407400/[Q.ID:04074] 파렐의 암호 해석집 하편,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160407400/1/511">10011</NPC> 
+ <!--Item_NO=160407400/[Q.ID:04074] 파렐의 암호 해석집 하편,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160407400/1">10011</NPC> 
+ <!--Item_NO=160407400/[Q.ID:04074] 파렐의 암호 해석집 하편,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160407400/1/502">10012</NPC> 
+ <!--Item_NO=160407400/[Q.ID:04074] 파렐의 암호 해석집 하편,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160407400/1">10012</NPC> 
+ <!--Item_NO=160407400/[Q.ID:04074] 파렐의 암호 해석집 하편,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10407411"/> <!--파렐의 암호해석집 하편 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10407421" FACE="Larel_normal"/> <!--방금 전에 드라칸족의 사제가 다녀갔었지.
+이름이 뭐라더라… 그… 무슨 트리…%%
+그렇군. 마이트리. 암튼 그 드라칸의 여자 사제가 아직 채 풀지 못한 
+파렐박사의 암호에 대해 물어보더군.%%
+알다시피 내가 요즘 통 잠을 자지 못한 것 때문에
+신경이 곤두서있기 때문에 암호 해독 작업이 좀 늦어졌어.%% -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10407426" FACE="Maitri_normal"/> <!--아, 반갑군요. 이런 곳에서까지 만나게 될 줄은 몰랐어요.
+라르엘 수사님이 벌써 암호해석을 해냈다고요? 설마...%%
+원정대 분들에게 듣기에는 일전에 암호를 해석할 때
+상당한 시간이 들었다고 하던데…%%
+(이게 바로 사랑의 힘입니다. 마이트리씨 from 라르엘)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10407423" FACE="Larel_normal"/> <!--어쨌거나 그녀는 지하묘지로부터 예사롭지 않은 기운이 흐른다면서
+그 유령들의 소굴로 쏙, 들어가 버리더군.%%
+완전 멋졌음. 후후후… 수도사만 아니었다면 대쉬했을텐데.
+앗.. 이럴 때가 아니지.%%
+지하묘지에서 그녀를 찾아서 이 암호해독 결과를 전해줘.
+암호의 해독결과에 대해서는… 콜린대장의 허가를 받아왔더군.%%
+파렐 박사의 암호는 드래곤 원정대와 신보 탈환대 모두에게 
+결과를 알려줘도 된다고 하니까 특별한 문제는 없을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10407424" FACE="Larel_angly"/> <!--이봐… 그 연약한 드라칸 처자를 수많은 유령들 틈 속에 혼자 내버려 둘거냐!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10407425" FACE="Larel_normal"/> <!--지하묘지로 빨리 가봐. 마이트리 사제가 기다리고 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10407427" FACE="Maitri_normal"/> <!--갑자기 무슨 일이신가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10407402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10407451" FACE="Larel_normal"/> <!--지하묘지로 빨리 가봐. 마이트리 사제가 기다리고 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

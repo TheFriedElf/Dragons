@@ -1,0 +1,12 @@
+<ACTION ID="a_Gust Slash" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Twohand_skill_GustSlash_01" />
+  <FSM SCRIPT="Act_Melee_Default"
+       MULTI_HIT_NUM="3"
+       FIRE_CASTER_EFFECT_ID="ef_Gustslash_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       NO_DAMAGE_HOLD="TRUE"
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	   FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+       />
+</ACTION>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	
+	<!-- 카메라로 연출 -->
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/>
+
+	<CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="0"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="0" />
+
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="FALSE"/>
+
+	<CMD type="waittime" time="1.0"/>
+
+	<CMD type="CallUI" UIWndName = "FRM_MISSION_START_F7"/>	
+
+
+
+</EVENT_SCRIPT>
+
+
+

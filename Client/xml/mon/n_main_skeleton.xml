@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Maid_Skeleton" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Maid_Skeleton"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Maid/N_Maid_Skeleton.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="9"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<!--ITEM NAME="walk" ANIMATION="1000051"/-->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000055"/-->
+			<ITEM NAME="Opening" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

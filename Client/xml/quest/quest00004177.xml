@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4177</ID> <!--T.T.10417701 고대의 숲이 부른다. (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	날다람쥐와 나무 날다람쥐 10마리씩 퇴치-->
+<!--[완료NPC]	솔방울 언덕 - 샹도르-->
+<!--[내용]	샹도르는 미카족의 일원임을 자랑스럽게 생각하는 젊은 전사이다. 헬크라우져에 대한 정보를 알고 싶다면 능력을 증명하라고 한다. 솔방울 언덕에서 날다람쥐와 나무 날다람쥐를 각각 10마리씩 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C9AAFA6C-C0F3-4afe-A775-67E66989B1FC</CLIENT> <!--시작NPC 솔방울 언덕 - 샹도르 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C9AAFA6C-C0F3-4afe-A775-67E66989B1FC</PAYER> <!--완료NPC 솔방울 언덕 - 샹도르 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C9AAFA6C-C0F3-4afe-A775-67E66989B1FC</AGENT> <!--진행NPC 11 솔방울 언덕 - 샹도르 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6063100</MONSTER> 
+ <!--MON_NO=6063100/날 다람쥐,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">6063200</MONSTER> 
+ <!--MON_NO=6063200/나무 날 다람쥐,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10417711"/> <!--날다람쥐 퇴치-->
+		<OBJECT2 COUNT="10" TEXT="10417712"/> <!--나무 날다람쥐 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10417721" FACE="Syangdoreu_normal"/> <!--내 이름은 샹도르, 미카족 최고의 전사라고 할까…
+다른 건 참아도 우리 미카족을 욕하는 건 참지 못해.%%
+드래곤 원정대건, 드라칸이건 뭐건 우리 일족을
+험담했다간 모두 발칵 뒤집어주고 말겠어.%%
+근데 넌 가만 보니, 평범한 모험자 같진 않구나.
+이곳은 무슨 일로 찾아온 거야? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10417726" FACE="Syangdoreu_normal"/> <!--제법이네?
+낙법은 확실히 익혀둔 거겠지?%%
+날다람쥐 같은 녀석을 상대하려면, 넘어지는 순간
+방향키와 동시에 점프버튼을 눌러 사용하는 낙법을
+불시에 사용할 수 있어야 할 거다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10417723" FACE="Syangdoreu_normal"/> <!--신록의 숲으로 가겠다고? 헬크라우져를 만나러?
+후우.. 때를 잘못 고른 것 같구나.%%
+지금 이곳 신록의 숲 근방은 온 숲이 말썽이야.
+쩝, 말이 많았군.%%
+정보를 더 원한다면 네 능력을 보여줘.
+난 강하지 않은 녀석과 상대하는 건 딱 질색이야.%%
+몸이 날래기로 소문난 날다람쥐와 나무 날다람쥐를
+10마리씩 잡아와.%% 
+솔방울 언덕에서 그 정도 몬스터에 낑낑댄다면,
+신록의 숲으로 들어간다는 건 말도 안될 일이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10417724" FACE="Syangdoreu_angly"/> <!--후후, 싱거운 녀석 같으니…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10417725" FACE="Syangdoreu_angly"/> <!--날다람쥐와 나무 날다람쥐는 어떻게 된 거야? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10417702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

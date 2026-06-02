@@ -1,0 +1,7 @@
+<ACTION ID="a_dragon_tooth" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" OVERRIDE_PACKET="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="dragon_tooth"/>
+  <FSM SCRIPT="Skill_Multiple_Shot"
+       PROJECTILE_ID="PROJECTILE_DRAGON_TOOTH"
+	HIT_TARGET_EFFECT_TARGET_NODE="p_ef_heart"
+	HIT_TARGET_EFFECT_ID="eff_sum_common_hit02" />
+</ACTION>

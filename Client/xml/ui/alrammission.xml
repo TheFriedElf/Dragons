@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_ALRAM_MISSION" ALIGN_X="100" Y="55" W="247" H="120" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1" CAN_DRAG="0">
+		<SCRIPT ID="ON_DISPLAY">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			local UIPos = UISelf:GetLocation()
+			if GATTR_BATTLESQUARE == g_world:GetAttr() then
+				UISelf:SetLocation(Point2(0, 156))
+			else
+				local iScreenX = GetScreenSize():GetX()
+				local iPosY = 80
+				if iScreenX >= 1600 then
+					iPosY = 0
+				elseif iScreenX == 1024 then
+					iPosY = 55
+				end
+				UISelf:SetAlignX(100)
+				local kPos = UISelf:GetLocation()
+				UISelf:SetLocation(Point2(kPos:GetX(), iPosY))
+			end
+		</SCRIPT>
+		<ATTR IMG="../Data/6_UI/war/wrNmissionBg.tga" IMG_W="247" IMG_H="120"/>
+		<ATTR TEXT="120100" T_X="10" T_Y="8" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<FORM ID="FRM_TIMER" X="18" Y="42" W="82" H="25" NO_FOCUS="1" TICK_TIME="1000">
+			<IMG ID="IMG_DIGIT_4" X="0" Y="0" W="21" H="25">
+				<ATTR IMG="../Data/6_UI/war/wrDgTmNm.tga" IMG_W="105" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+			</IMG>
+			<IMG ID="IMG_DIGIT_3" X="16" Y="0" W="21" H="25">
+				<ATTR IMG="../Data/6_UI/war/wrDgTmNm.tga" IMG_W="105" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+			</IMG>
+			<IMG ID="IMG_DIGIT_2" X="41" Y="0" W="21" H="25">
+				<ATTR IMG="../Data/6_UI/war/wrDgTmNm.tga" IMG_W="105" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+			</IMG>
+			<IMG ID="IMG_DIGIT_1" X="57" Y="0" W="21" H="25">
+				<ATTR IMG="../Data/6_UI/war/wrDgTmNm.tga" IMG_W="105" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+			</IMG>
+			<SCRIPT ID="ON_TICK">OnUITimer(UISelf,1)</SCRIPT>
+			<!--SCRIPT ID="ON_CALL">SetUITimer(UISelf,180)</SCRIPT-->
+		</FORM>
+		<FORM ID="FRM_TITLE" X="110" Y="37" W="120" H="30">
+			<ATTR TEXT="" T_X="60" T_Y="0" T_CENTER="1" FONT="Font_Text" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFCE1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_TOTAL" X="110" Y="87" W="120" H="30">
+			<ATTR TEXT="120101" T_X="60" T_Y="0" T_CENTER="1" FONT="Font_Text" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_POINT" X="18" Y="75" W="80" H="17">
+			<ATTR TEXT="120103" T_X="0" T_Y="0" FONT="FTtabS" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_EXP" X="18" Y="92" W="80" H="17">
+			<ATTR TEXT="120102" T_X="0" T_Y="0" FONT="FTtabS" T_OUTLINE="1" FONT_COLOR_HEX="0xFFF9F600" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+	</FORM>
+</XUI>

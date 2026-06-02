@@ -1,0 +1,171 @@
+<QUEST>
+	<ID>1747</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="513708">대탐색 (6)</TITLE>
+	<GROUPNAME TEXT="505693">위험한 동굴</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="13" MAX="999"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>1746</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10002">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10003">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER>
+	</PAYERS>
+	<EVENTS>
+		<!--NPC와 대화-->
+		<!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+		<!--2000번 NPC에 항상 1101 대화를 띄운다-->
+		<!--습득해야할 Item-->
+		<!--위치-->
+		<!--<LOCATION OBJECTNO="4">1000</LOCATION>-->
+		<!--시간-->
+		<!--<TIME OBJECTNO="5">60</TIME>-->
+		<!-- 미션4 두두-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102238</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102239</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102240</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102241</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102242</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102243</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102244</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">8102254</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">8102255</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">8102256</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102278</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102279</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102280</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102281</MONSTER>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6102282</MONSTER>
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<!--
+완료 조건(목적): 최대 5가지 조건 시스템 고정
+TYPE = NOSTEP : 1~5 까지 진행 함에 있어 2의 조건을 충족 하기 위해 1을 먼저 완료 해야 한다.
+TYPE = NOSTEP : 1~5 까지 진행 함에 있어 2의 조건을 충족 하기 위해 1을 먼저 완료 하지 않아도 된다.
+!!!위의 NOSTEP은 아직 미구현!!!
+		-->
+		<OBJECT1 COUNT="20" TEXT="513714"/>
+		<!--
+아래 나머지 OBJECT2~OBJECT5의 항목은 필요시마다 참고하여 쓴다.
+아래의 형식의 형태를 유지하며
+<OBJECT? MEMO="메모내용" TYPE="퀘스트유형 종류" COUNT="수 최소1 ~ 최대255">퀘스트 유형의 간략설명</OBJECT2>
+
+<OBJECT? 에서 ? 에 들어갈 숫자의 범위는 1~5이며 절대로 중복되어저서는 안된다.
+
+!!!! 07년05월22일 현재 가능한 기능으로는 대화, 사냥, 수집 까지이다. !!!!
+26일 완료 목표를 가지는 기능으로는 제한시간과 아이템 사용이 있다.
+		<OBJECT2 MEMO="사냥" TYPE="MONSTER" COUNT="0" TTW="0">설명문</OBJECT2>
+		<OBJECT3 MEMO="수집" TYPE="ITEM" COUNT="0" TTW="0">설명문</OBJECT3>
+		<OBJECT4 MEMO="위치발견" TYPE="LOCATION" COUNT="0" TTW="0"></OBJECT4>
+		<OBJECT5 MEMO="제한시간" TYPE="TIME" COUNT="0" TTW="0"></OBJECT5>
+		-->
+	</OBJECTS>
+	<REWARD/>
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="513709" FACE="Kalligon_angly"/>
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="301">
+			<BODY TEXT="513710" FACE="Kalligon_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="401">
+			<BODY TEXT="513711" FACE="Kalligon_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="513712" FACE="Kalligon_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="513713" FACE="Kalligon_angly"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<!--701번은 완료를 허락 하였을 때 뜰창-->
+		<DIALOG ID="701">
+			<BODY TEXT="500017"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--801번은 완료를 거부 하였을 때 뜰창-->
+		<DIALOG ID="801">
+			<BODY TEXT="500018"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="513715"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="500089"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+	</DIALOGS>
+</QUEST>

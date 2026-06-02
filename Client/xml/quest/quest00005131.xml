@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5131</ID> <!--T.T.10513101 귀여운 화석 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	팔미르 신전 - 그리드 용기사로부터 귀여운 화석 20개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 클레아-->
+<!--[내용]	에이미는 클레아로부터 여관을 장식할 귀여운 화석을 구해달라는 부탁을 받았다고 한다. 에이미는 화석을 구해 돌아오던 중 팔미르 신전에 있는 그리드 용기사에게 화석을 모두 빼앗겼다고 한다. 팔미르 신전에서 그리드 용기사를 처리하고 귀여운 화석 20개를 획득해 클레아에게 가져다주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">062B8C20-77FF-4af8-A8FC-001471B7D64F</CLIENT> <!--시작NPC 달빛해안 마을 - 에이미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6582AB80-AF1C-4798-865E-E113A1241350</PAYER> <!--완료NPC 달빛해안 마을 - 클레아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">062B8C20-77FF-4af8-A8FC-001471B7D64F</AGENT> <!--진행NPC 11 달빛해안 마을 - 에이미 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 12 달빛해안 마을 - 클레아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010230/10000/5000/1/1/160513100">6009400</MONSTER> 
+ <!--MON_NO=6009400/그리드 용기사,MAP_NO=9010230/팔미르 신전,Item_NO=160513100/[Q.ID:05131] 귀여운 화석,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160513100</ITEM> 
+ <!--Item_NO=160513100/[Q.ID:05131] 귀여운 화석,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10513111"/> <!--귀여운 화석 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10513121" FACE="Amy_normal"/> <!--큰일났어요. 클레아아주머니랑 약속했는데... 모두 소용없어졌어요.
+클레아 아주머니가 저에게 여관을 장식할 화석을 부탁하셨는데...%% 
+밤을 새워 겨우 찾은 화석을 모두 도둑맞고 말았어요. 전 이제 어쩌죠? 
+클레아아주머니께 드릴 말씀이 없네요..%class%님이 도와주시면 안 될까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10513126" FACE="Floran_smile"/> <!--오 ~ 이제 우리 여관을 아름답게 꾸밀 수 있겠네요. 고마워요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10513123" FACE="Amy_smile"/> <!--다시 찾아 주실 수 있으신가요?
+부탁 좀 드릴게요. 잃어버린 화석은 모두 20개예요.%%
+팔미르 신전에 그리드 용기사가 가져갔어요. 
+다시 찾아서 클레아 아주머니에게 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10513124" FACE="Amy_normal"/> <!--안되나요? 그렇다면 할 수 없네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10513125" FACE="Amy_normal"/> <!--클레아 아주머니에게 뭐라고 말하지…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10513102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>250</ID> <!--T.T.10025001 여름축제 - 타코야키의 생명. 문어다리 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	하루카에게 문어다리 1개를 가져가자!-->
+<!--[완료NPC]	바람항구 - 하루카-->
+<!--[내용]	하루카는 여름축제를 위해서 특별히 타코야키 노점상을 운영하는 나츠키씨에게 큰일이 생겼다고 했다. 타코야키의 핵심이라고 할 수 있는 문어다리를 도둑맞은 것이다. 그 도둑으로 보이는 것이 바로 하루카가 키우던 수박이었다. 하루카는 왠지 자신의 잘못같이 느껴진다면서 도움을 청한다. 자책하는 하루카를 위해서 수박으로부터 문어다리를 얻어야 한다. 수박을 부수면 여러 가지 아이템과 같이 문어다리가 떨어진다. 하지만 가끔 안 나오는 경우도 있으니 너무 상심하지 말자.  수박은 톱날꽃게 해변, 스티븐 무역항, 칼리곤 선단, 작은 파도 해안, 바람항구 채집농장에 가끔 등장하니 꾸준히 기다려보자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</CLIENT> <!--시작NPC 바람항구 - 하루카 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</PAYER> <!--완료NPC 바람항구 - 하루카 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</AGENT> <!--진행NPC 11 바람항구 - 하루카 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">299602940</ITEM> 
+ <!--Item_NO=299602940/문어다리[2011 여름이벤트],-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10025011"/> <!--문어다리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299603000</ITEM><!--전체지급/전체/1)/299603000(봉인아님) 1개-타코야키[2011 여름이벤트]-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10025021" FACE="Haruka_normal"/> <!--이거 어쩌면 좋을지 모르겠습니다. 
+여름축제를 맞이해 특별히 타코야키 노점상을 하시는 나츠키씨에게 큰일이 생겼기 때문입니다.%% 
+바로 타코야키의 생명이라고 할 수 있는 문어다리를 도둑맞았기 때문입니다.
+도둑맞은 문어다리는 정말 말하기 힘들지만, 제가 재배하던 수박들이 가져갔습니다. %%
+이상한 아저씨가 약을 뿌린 후에 수박들은 살아서 움직이기 시작했습니다. 
+그런 수박들이 나츠키씨의 문어다리를 모두 가져간 것입니다. 
+제발 용사님께서 문어다리를 찾아주실 순 없겠습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10025026" FACE="Haruka_normal"/> <!--감사합니다. 저도 더 이상 자책하지 않아도 될 것 같습니다. 
+보답으로 나츠키씨가 만든 타코야키를 드리겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10025023" FACE="Haruka_normal"/> <!--나츠키씨의 타코야키는 입소문을 타고 타지역에서 먹으러 올 정도로 맛이 좋습니다. 
+하지만 문어가 들어 있지 않은 타코야키를 그 누가 좋아할지 모르겠습니다.%%
+문어 없는 타코야키는 단팥 없는 단팥빵이며 붕어 없는 붕어빵입니다. 
+앗, 붕어빵은 아니군요. 하지만 다른 지역에서는 붕어빵에 붕어를 넣어서 판다는 이야기를 들은 적은 있습니다. %%
+하여간 문어가 들어 있지 않은 타코야키를 팔다가는 사기꾼이라며 손님들로부터 나츠키씨가 얻어맞을지도 모르는 일입니다. 
+전 왠지 저 때문인 것 같아서 마음이 너무 아픕니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10025024" FACE="Haruka_angly"/> <!--어쩔 수 없군요. 문어 없는 타코야키를 파는 나츠키씨를 볼 수밖에 없을 것 같습니다.
+귓가에 나츠키씨가 손님들에게 둘러쌓여서 맞고 있는 소리가 들리는 것 같습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10025025" FACE="Haruka_angly"/> <!--문어다리가 상하기 전에 가져다 주실 수는 없겠습니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10025002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

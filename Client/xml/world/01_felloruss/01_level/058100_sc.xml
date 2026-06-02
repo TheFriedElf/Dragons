@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_058100_SC" DESCRIPTION="90581000">
+	<!--이벤트 시간 설정(이벤트의 개수 만큼 시간설정)-->
+	<TIME_EVENT ID="1" FROM="2011,11,16,00,00" TO="2011,12,26,24,00"/>	<!--크리스마스 이벤트-->
+	<TIME_EVENT ID="2" FROM="2012,11,29,14,00" TO="2012,02,25,23,59"/>	<!--겨울맵 이벤트-->
+	<TIME_EVENT ID="3" FROM="2012,10,15,12,00" TO="2012,11,08,23,59" /> <!--할로윈 이벤트-->
+	<TIME_EVENT ID="4" FROM="2010,12,02,15,00" TO="2010,12,02,15,30"/>	<!--추석 이벤트-->
+	<!--이벤트 맵 설정(이벤트시간에 따라 변화될 맵 설정)-->
+	<GSAPATH>
+		<CONDITION TYPE="DEFAULT">../Data/3_World/01_Felloruss/01_Level/058100_SC.gsa</CONDITION>		<!--디폴트-->
+		<CONDITION ID="1">../Data/3_World/01_Felloruss/01_Level/058100_SC_CH.gsa</CONDITION>		<!--크리스마스 이벤트-->
+		<CONDITION ID="2">../Data/3_World/01_Felloruss/01_Level/058100_SC_w.gsa</CONDITION>		<!--겨울맵 이벤트-->
+		<CONDITION ID="3">../Data/3_World/01_Felloruss/01_Level/058100_SC_HW.gsa</CONDITION>		<!--할로윈 이벤트-->
+		<CONDITION ID="4">../Data/3_World/01_Felloruss/01_Level/058100_SC_CS.gsa</CONDITION>		<!--추석 이벤트-->
+	</GSAPATH>
+	<!--이벤트 사운드 설정(이벤트에 맞는 사운드 설정)-->
+	<BGSOUND VOLUME="1.0">../BGM/Kazra.BGM.mp3</BGSOUND>	<!--디폴트-->
+	<BGSOUND_SUB VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND_SUB>	<!--디폴트 서브 퀘스트 진행시에만 출력-->
+	<BGSOUND ID="1" VOLUME="1.0">../BGM/Chrismas.wav</BGSOUND>	<!--크리스마스이벤트-->
+	<BGSOUND ID="2" VOLUME="1.0">../BGM/Kazra.mp3</BGSOUND>	<!--겨울맵 이벤트-->
+	<BGSOUND ID="3" VOLUME="1.0">../BGM/Hill_backup.mp3</BGSOUND>	<!--할로윈 이벤트-->
+	<BGSOUND ID="4" VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND>	<!--추석 이벤트-->
+	<!--이벤트 포그설정(이벤트에 맞는 사운드 설정)-->
+	<FOG DENSITY="0.050000" START="2000" END="12000" COLOR="0.858000,0.910990,0.903999"/>	<!--디폴트-->
+	<FOG ID="1" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="20250" COLOR="0,0,0"/>	<!--크리스마스 이벤트-->
+	<FOG ID="2" DENSITY="0" FUNC="Z_LINEAR" START="0" END="3899" COLOR="0.3490196,0.6431373,0.7490196"/>	<!-- 겨울맵 이벤트-->
+	<FOG ID="3" DENSITY="0" FUNC="Z_LINEAR" START="0" END="6431" COLOR="0.1568628,0.1019608,0.1568628"/>	<!-- 할로윈 이벤트-->
+	<FOG ID="4" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="12000" COLOR="0.858000,0.910990,0.903999"/>	<!-- 추석 이벤트-->
+
+	<!--미니맵-->
+	<MINIMAP Y="150" H="220">../Data/3_World/01_Felloruss/01_Level/058100_MM.dds</MINIMAP>
+	<!--8방향 설정-->
+	<FREE_DIRECTION ALL="TRUE"/>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+
+	<!-- 에르다 협곡 포탈-->
+	<TRIGGER ID="gate_050120_base" TYPE="PORTAL" TITLE_TEXT_ID="800074" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9050120" PARAM2="3">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 샬바론 포탈-->
+	<TRIGGER ID="gate_050100_base" TYPE="PORTAL" TITLE_TEXT_ID="800075" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9050100" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="39"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 라미예타 포탈-->
+	<TRIGGER ID="gate_050110_base" TYPE="PORTAL" TITLE_TEXT_ID="800076" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9050110" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="40"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 아키아의 동굴 포탈-->
+	<TRIGGER ID="gate_050301_base" TYPE="PARTY_MEMBER_PORTAL" TITLE_TEXT_ID="802047" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,58" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Dungeon_Portal" PARAM="9050301" PARAM2="1" SHOW_PARTY_UI="TRUE" IMPORTANT_MONSTER_0="3530822">
+			<ACCESS>
+				<QUEST NO="4164" CHECK="5" PARTY="0" GROUP="1"/><!--입장(선행)-->
+				<QUEST NO="4172" CHECK="5" PARTY="0" GROUP="1"/><!--야나이-->
+				<QUEST NO="4221" CHECK="5" PARTY="0" GROUP="1"/><!--용족전용 -->
+				<QUEST NO="4222" CHECK="5" PARTY="0" GROUP="1"/><!--공통 -->
+				<LEVEL MIN="45" MAX="100" PARTY="1"/> <!--레벨제한 40 -->
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!-- 엔터 던전 -->
+    <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+        <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="4" PARAM2="8"/>
+    </TRIGGER>
+    <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="4" PARAM2="8"/>
+    </TRIGGER>
+
+
+
+
+	<!-- 채집맵  -->
+	<LOCAL>
+	<NAME ID="DEFAULT">
+		<TRIGGER ID="gate_990200_base" TYPE="PORTAL" TITLE_TEXT_ID="810017" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,105" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+			<CONDITION TYPE="action" ACTION="a_act"/>
+			<ACTION SCRIPT="World_Portal" PARAM="9990200" PARAM2="1">
+				<ACCESS>
+					<LEVEL MIN="0"/>
+				</ACCESS>
+			</ACTION>
+		</TRIGGER>
+	</NAME>
+	<NAME ID="CHINA/BRAZIL">
+	</NAME>
+	</LOCAL>
+
+
+
+	<!--카메라-->
+	<CAMERA_ADJUST ZOOM="0" UP="0" TARGET_Z="0"/>
+	<!-- L,o,d -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="2000" LOW_END="3000" USE="1"/>
+</WORLD>

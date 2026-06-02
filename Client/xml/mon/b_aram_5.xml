@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="B_Aram_5" INIT_ACTION="a_idle" ALWAYS_GLOWMAP="TRUE">
+	<WORLDOBJECT>
+		<ICON ID="Icon_B_Aram"/>
+		<KFMPATH>../Data\2_Mon/B_Aram/B_Aram.kfm</KFMPATH>
+		<!--<SCRIPT SRC="WorldAction/WA_SAPHIREBOSS_APPEAR.lua">
+			<ITEM NAME="Actor_FossilEarth_Hit" TYPE="EVENT" />
+		</SCRIPT>-->
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<!--EFFECT SCALE = "3.0"	/-->
+		<ABV>
+			<!--CAPSULE TO="p_hit_point_01" SIZE="170,30" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_02" SIZE="200,35" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_03" SIZE="250,48" ROTATE="1,0,0,90" LOCATE="0,0,40"/-->
+			<CAPSULE TO="p_hit_point_04" SIZE="170,30" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_05" SIZE="200,35" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_06" SIZE="250,48" ROTATE="1,0,0,90" LOCATE="0,0,-40"/>
+			<!--CAPSULE TO="p_hit_point_07" SIZE="90,20" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_08" SIZE="102,24" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_09" SIZE="130,30" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_10" SIZE="150,44" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<CAPSULE TO="p_hit_point_11" SIZE="185,48" ROTATE="1,0,0,90" LOCATE="0,0,0"/-->
+		</ABV>
+		<SLOT>
+			<!-- 바닥 쓸기 1_1 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000000"/>
+			<ITEM NAME="attk_fin_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1000061" QUAKE_TIME="1.5" QUAKE_FACTOR="2.5"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000062"/>
+			<ITEM NAME="attk_fin_01_fin_02" ANIMATION="1000063"/>
+			<ITEM NAME="attk_fin_01_fin_03" ANIMATION="1000064"/>
+			<!-- 바닥 쓸기 2_1 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000000"/>
+			<ITEM NAME="attk_fin_02" ANIMATION="1000000"/>
+			<ITEM NAME="attk_fin_02_fire" ANIMATION="1000065" QUAKE_TIME="1.5" QUAKE_FACTOR="2.5"/>
+			<ITEM NAME="attk_fin_02_fin_01" ANIMATION="1000066"/>
+			<ITEM NAME="attk_fin_02_fin_02" ANIMATION="1000067"/>
+			<ITEM NAME="attk_fin_02_fin_03" ANIMATION="1000068"/>
+			<!-- 바닥 내려쳐서 돌 위로 올라오게 하기 -->
+			<ITEM NAME="summon_thorns_btlidle_start" ANIMATION="1000205" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="summon_thorns_btlidle" ANIMATION="1000206"/>
+			<ITEM NAME="summon_thorns_fire" ANIMATION="1000207" FIRE_START_NODE="" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_BossAram_Item03_01" QUAKE_TIME="1" QUAKE_FACTOR="3" HIT_SOUND_ID="Aram_Skill02"/>
+			<ITEM NAME="summon_thorns_finish" ANIMATION="1000208"/>
+			<!-- 위로 손을 올려 위에서 돌이 떨어지게 하기 -->
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000211" RANGE_EFFECT="ef_Aram_skill_02_05_char_root"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000212"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000213" RANDOM="100" FIRE_START_NODE="" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_BossAram_Item01" FIRE_TERM="0.03" PROJECTILE_COUNT="40" QUAKE_TIME="1" QUAKE_FACTOR="2"/>
+			<ITEM NAME="massive_projectile_finish" ANIMATION="1000214"/>
+			<!-- 뒤로 걸어 들어가기 -->
+			<ITEM NAME="aram_backward_skill_start" ANIMATION="1000000"/>
+			<ITEM NAME="aram_backward_skill_01" ANIMATION="1000209"/>
+			<ITEM NAME="aram_backward_skill_02" ANIMATION="1000210"/>
+			<ITEM NAME="aram_backward_skill_03" ANIMATION="1000001"/>
+			<!-- 걸어서 나오기 -->
+			<ITEM NAME="aram_frontward_skill_start" ANIMATION="1000001"/>
+			<ITEM NAME="aram_frontward_skill_01" ANIMATION="1000201"/>
+			<ITEM NAME="aram_frontward_skill_02" ANIMATION="1000202"/>
+			<ITEM NAME="aram_frontward_skill_03" ANIMATION="1000000"/>
+			<!-- 앞에서 공격할 때의 배틀 -->
+			<!--ITEM NAME="battle_idle" ANIMATION="1000000"/-->
+			<ITEM NAME="btlidle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="SpecificIdle_02" ANIMATION="1000000"/>			
+			<!-- 뒤에 대기 상태의 아이들 -->
+			<ITEM NAME="SpecificIdle_01" ANIMATION="1000001"/>			
+			<!-- 기본정보 -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="Opening" ANIMATION="1000001"/>
+			<ITEM NAME="opening_01" ANIMATION="1000001"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

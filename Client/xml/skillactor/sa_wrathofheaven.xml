@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_Death_HellShout" ALWAYS_GLOWMAP="TRUE">
+	<TEXTURE SRC="lightning_magnet.dds">../Data/1_Cha/9_SSkill/Lighting_Margnet/lightning_magnet.dds</TEXTURE>
+	<TEXTURE SRC="reflection_metal.dds">../Data/1_Cha/9_SSkill/Lighting_Margnet/reflection_metal.dds</TEXTURE>
+	<TEXTURE SRC="lightning_magnet_glow.dds">../Data/1_Cha/9_SSkill/Lighting_Margnet/lightning_magnet_glow.dds</TEXTURE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.2">../Data/1_Cha/9_SSKill/RaceOfHeaven/RaceOfHeaven.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+		<ITEM NAME="RaceOfHeaven_skill_01" ANIMATION="1000000" />
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

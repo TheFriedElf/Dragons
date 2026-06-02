@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4162</ID> <!--T.T.10416201 대지의 시험 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람의 사제 퀘차와 대화-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	샤리는 두번째 시험을 바람의 사제인 퀘차가 주관한다고 알려준다. 카즈라 마을의 퀘차 사제를 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">96F19874-A786-4851-B336-0D67FF9B2282</CLIENT> <!--시작NPC 카즈라 마을 - 샤리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">96F19874-A786-4851-B336-0D67FF9B2282</AGENT> <!--진행NPC 11 카즈라 마을 - 샤리 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 12 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416211"/> <!--퀘차 사제와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416221" FACE="Shari_normal"/> <!--우선 지금 카즈라에 남아있는 사제분들에게 나머지 시험을 
+치르시면 될 겁니다. 우선 제 시험을 통과했으니, 다음으로는…%%
+퀘차님과, 야나이님의 시험을 통과하시면 될 듯 하군요.
+그럼 다음 시험을 주관하실 분을 알려드리죠.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416226" FACE="Quecua_smile"/> <!--그래... 왔구나. %name%
+나는 두번째 시험을 맡게된 바람의 사제 퀘차란다.
+그럼 정식으로 너의 능력을 시험할테니 준비해두렴.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416223" FACE="Shari_normal"/> <!--바람의 사제이신 퀘차님을 찾아가세요.%%
+퀘차님의 시험과 야나이님의 시험을 통과하셔서
+꼭, 아카나이 정화 작전에서 함께하기를
+기대하겠습니다. 건투를 빌어요. 후훗!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416224" FACE="Shari_angry"/> <!--무슨 급한 일이라도 있으신 건가요? 퀘차님이 기다리고 계실텐데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416225" FACE="Shari_angry"/> <!--퀘차님에게 가보세요. 서두르시는 게 좋을 것 같습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

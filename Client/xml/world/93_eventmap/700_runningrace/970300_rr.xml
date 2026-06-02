@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_970300_RR" DESCRIPTION="90108010">
+  <GSAPATH>../Data/3_World/93_EventMap/700_RunningRace/970300_RR.gsa</GSAPATH>
+  <MINIMAP Y="133" H="250">../Data/3_World/93_EventMap/700_RunningRace/970300_MM.dds</MINIMAP>
+ <BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" />
+
+  <!--8방향 설정-->
+  <FREE_DIRECTION ALL="TRUE" />
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0" />
+
+  <!-- 나가지 버튼 -->
+  <DUNGEON_EXIT_UI />
+
+
+	<WORLDEVENT_OBJECT_LIST>	
+	
+		<!-- 문 제어-->
+		<WORLDEVENT_OBJECT ID="1" INIT_STATE="0" TYPE="PUPPET" NAME="Running_startgate1001_01 01"/> <!--시작지점 -->
+		<WORLDEVENT_OBJECT ID="2" INIT_STATE="0" TYPE="PUPPET" NAME="Running_startgate1001_01 02"/> <!--결승선 지점 -->
+
+		<!--바닥화살표 이펙트 제어-->
+		<WORLDEVENT_OBJECT ID="11" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 01"/>	
+		<WORLDEVENT_OBJECT ID="12" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 02"/>	
+
+
+		
+	</WORLDEVENT_OBJECT_LIST>
+
+	<WORLD_EVENT ID="1" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="EVENT_GROUND_STATE" TARGET_ID="0" EVENT="EQUAL" VALUE="8" /> 
+		
+		<!--8 : INDUN_STATE_PLAY 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="1"/> <!-- 문 열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="0"/> <!-- 문 닫기 -->
+		</ACTIVATE_ACTION>
+		<DEACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="0"/> <!-- 문 닫기 -->
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="5" EVENT="STATUS" VALUE="0"/>
+		</DEACTIVATE_ACTION>
+	
+
+	</WORLD_EVENT>
+	<WORLD_EVENT ID="2" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="1" EVENT="ACT_AFTER_TIME" VALUE="1500" />	<!-- 문열리고 1.5초 뒤-->
+			
+
+			<ACTIVATE_ACTION>
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="SHOW" VALUE="1"/> <!--바닥화살표 -->
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="SHOW" VALUE="1"/> <!--바닥화살표 -->
+			</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	
+	<WORLD_EVENT ID="3" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="2" EVENT="ACT_AFTER_TIME" VALUE="15000" />	<!-- 문열리고 15초 뒤-->
+			<ACTIVATE_ACTION>
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="SHOW" VALUE="0"/> <!--바닥화살표 -->
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="SHOW" VALUE="0"/> <!--바닥화살표 -->	
+			</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<WORLD_EVENT ID="4" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_event_01_01" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION> 
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="1"/> <!-- 문 열기 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+
+	<WORLD_EVENT ID="5" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="EVENT_GROUND_STATE" TARGET_ID="0" EVENT="EQUAL" VALUE="64" />	 <!--2 : 이벤트가 시작 전 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="1" EVENT="STATUS" VALUE="0"/>
+			<ACTION TARGET_TYPE="WORLD_EVENT" TARGET_ID="4" EVENT="STATUS" VALUE="0"/>
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+  <!-- 결승선 선  -->
+	<TRIGGER ID="Trigger_event_01_01"> 
+			<CONDITION TYPE="touch" ACTION="a_act"/>
+			<ACTION SCRIPT="Map_WorldEventTrigger"/>
+	</TRIGGER>
+
+
+  <!-- 레이스 트리거 -->
+  <TRIGGER ID="RACE_START_POINT01" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box" VALUE="8">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="Race_Check_Point" />
+  </TRIGGER>
+  <TRIGGER ID="RACE_CHECK_POINT01 01" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box" VALUE="7">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="Race_Check_Point" />
+  </TRIGGER>
+  <TRIGGER ID="RACE_CHECK_POINT01 02" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box" VALUE="6">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="Race_Check_Point" />
+  </TRIGGER>
+  <TRIGGER ID="RACE_CHECK_POINT01 03" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box"VALUE="5">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="Race_Check_Point" />
+  </TRIGGER>
+  <TRIGGER ID="RACE_CHECK_POINT01 04" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box" VALUE="4">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="Race_Check_Point" />
+  </TRIGGER>
+  <TRIGGER ID="RACE_CHECK_POINT01 05" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box" VALUE="3">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="Race_Check_Point" />
+  </TRIGGER>
+  <TRIGGER ID="RACE_CHECK_POINT01 06" TYPE="RACE_CHECK_POINT" SOUND_ID="Event_Box" VALUE="2">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="Race_Check_Point" />
+  </TRIGGER>
+
+  <TRIGGER ID="RACE_FINISH_POINT01" TYPE="RACE_CHECK_POINT" SOUND_ID="roulette_fanfare">
+      <CONDITION TYPE="touch"/>
+	  <ACTION SCRIPT="Race_Check_Point" PARAM_STRING="SOUND_PLAY_COUNT" PARAM="1" />    <!--사운드 1회만 출력-->
+  </TRIGGER>
+
+
+  <!-- 텔레포트 데미지 이동 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_1" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_2" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT">
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_2" />
+  </TRIGGER>
+
+	<!-- 트리거 점프 -->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_1" PARAM="800"/>
+	</TRIGGER>
+
+  <!-- 텔레점프 -->  
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="3" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="1" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="1" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="1" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="1" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="50" />
+  </TRIGGER>
+
+  <!--도끼 트렙 -->
+  <TRIGGER ID="Art_Trap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Trap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Trap1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <!-- 회전 가시 트랩-->
+  <TRIGGER ID="Art_ToothedTarp1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_ToothedTarp1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_ToothedTarp1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_ToothedTarp1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_ToothedTarp1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_ToothedTarp1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+    <TRIGGER ID="Art_ToothedTarp1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+    <TRIGGER ID="Art_ToothedTarp1001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+    <TRIGGER ID="Art_ToothedTarp1001_01 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+      <TRIGGER ID="Art_ToothedTarp1001_01 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <!-- 낙하 가시 트랩-->
+  <TRIGGER ID="trap_03 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_03 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_03 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_03 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="trap_03 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+   <!--구르는 호박 트랩-->
+
+  <TRIGGER ID="Van_BallTrap 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <TRIGGER ID="Van_BallTrap 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <TRIGGER ID="Van_BallTrap 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <TRIGGER ID="Van_BallTrap 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <TRIGGER ID="Van_BallTrap 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  
+  <TRIGGER ID="Van_BallTrap 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  
+  <TRIGGER ID="Van_BallTrap 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+    <TRIGGER ID="Van_BallTrap 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+    <TRIGGER ID="Van_BallTrap 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+    <TRIGGER ID="Van_BallTrap 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+    <TRIGGER ID="Van_BallTrap 11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+      <TRIGGER ID="Van_BallTrap 12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+      <TRIGGER ID="Van_BallTrap 13">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <!--레이저 트렙-->
+  <TRIGGER ID="laser_trap_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <SKILL ID="5842201" />
+  </TRIGGER>
+  <TRIGGER ID="laser_trap_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <SKILL ID="5842201" />
+  </TRIGGER>
+
+  <!--전기 톱날 트랩-->
+  <TRIGGER ID="Art_SawTarp1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+    <!--지형 가시 트랩-->
+  	  <TRIGGER ID="Art_Starfish1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+	  <TRIGGER ID="Art_Starfish1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  	  <TRIGGER ID="Art_Starfish1001_01 12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+    	  <TRIGGER ID="Art_Starfish1001_01 13">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <!--지형 가시 트랩-->
+  <TRIGGER ID="DU_GT_MTA1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="DU_GT_MTA1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <!--독 트랩-->
+  <TRIGGER ID="poison_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="poison_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <!--카메라-->
+  <CAMERA_ADJUST ZOOM="50" UP="80" TARGET_Z="50" />
+  <CAMERA_ADJUST WHEEL_MIN_ZOOM="1" WHEEL_MAX_ZOOM="1" />
+
+  <!--엘리베이터-->
+  <STONES />
+  <OBJECT GUID="b5543262-5670-45c8-8d48-eb1c77d69090" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000519">
+    <WayPoint POINT="820.8521, -2493.292, 966.9279" TIME="1" />
+    <WayPoint POINT="1321.495, -2493.292, 966.9279" TIME="1" />
+  </OBJECT>
+</WORLD>

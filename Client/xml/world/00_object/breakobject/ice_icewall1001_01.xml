@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Ice_IceWall1001_01">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1">../Data/3_World/95_Dungeon/02_Modeling/00_Object/01_BreakObject/IceDungeon_breakObject/Ice_IceWall1001_01/Ice_IceWall1001_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="30,180,155"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

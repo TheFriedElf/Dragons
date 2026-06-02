@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_012606_CF">
+	<GSAPATH>../Data/3_World/01_Ingrid/100_Chaos/012606_CF.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!-- 텔 레 포 트 트렙-->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_03" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+
+	<TRIGGER ID="teleport_target_05" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_06" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_07" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_08" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+
+	<TRIGGER ID="teleport_target_09" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_09"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_10" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_09"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_11" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_09"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_12" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_09"/>
+	</TRIGGER>
+	
+
+    <!--카오스 셋팅 -->
+	<SPOTLIGHT BGCOLOR="70,8,80"/>
+	<FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="50.000000" END="6000.000000" COLOR="0.001,0.001,0.008"/>
+
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="0"/>
+</WORLD>

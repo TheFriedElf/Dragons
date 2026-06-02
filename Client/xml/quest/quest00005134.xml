@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5134</ID> <!--T.T.10513401 천하제일 요리왕(3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	미리내 신전 -붉은 철퇴 미라로부터 육포 20개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	용병 토마스는 매년 열리는 세계 라면 왕 선발대회에 출전한다고 한다. 자신이 어렸을 때 먹었던 라면이라면 우승할 수 있다고 한다. 어머니가 끓여줬던 라면은 고기 맛이 진해 한 번 먹으면 잊을 수 없는 맛으로, 우승할 자신이 있다고 한다. 프랑크를 도와 라면의 재료인 미라 육포를 붉은 철퇴 미라로부터 20개만 구해다주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010200/10000/4000/1/1/160513400">6008100</MONSTER> 
+ <!--MON_NO=6008100/붉은 철퇴 미라,MAP_NO=9010200/미리내 신전,Item_NO=160513400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160513400</ITEM> 
+ <!--Item_NO=160513400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10513411"/> <!--미라 육포 20개 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10513421" FACE="Thomas_normal"/> <!--거기! 풋내기 용사! 어딜 그리 바쁘게 가시나?
+출출해 보이는데? 자네를 보니 어렸을 적 먹던 라면이 생각나는군.
+무슨 라면인지 궁금하지 않나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10513426" FACE="Thomas_smile"/> <!--잠깐! 이게 맞는지 한번 먹어보고.
+(질겅질겅)%%
+음! 이 맛이야! 고맙네. 정말 고마워.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10513423" FACE="Thomas_normal"/> <!--내가 어렸을 적 어머니가 끓여준 라면이 있었네.
+그 라면은 육포를 넣어 진하게 끓였는데 국물 맛이 정말 일품이었지.
+그 라면을 가지고 세계 라면 왕 선발대회에 나갈 생각이네.%%
+용병단을 만들기 위해선 돈이 필요하니 우승 상금을 탄다면 반드시 도움이 될 거야.
+그래서 말인데 자네가 미라육포 20개만 구해다 주게. 
+미리내 신전 붉은 철퇴미라한테 구할 수 있을 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10513424" FACE="Thomas_angly"/> <!--라면왕이 되면 자네에게 포션을 하나 사주려고 했는데… 뭐? 있다고?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10513425" FACE="Thomas_normal"/> <!--육포는 오래 씹을수록 맛있어지네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10513402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4186</ID> <!--T.T.10418601 숲의 내일을 위해 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	오르하와 대화-->
+<!--[완료NPC]	솔방울 언덕 - 오르하-->
+<!--[내용]	오르하는 미카족의 불행한 역사에 대해 설명한다. 천년 전 신성제국의 추기경은 게시를 받는 무녀가 존재한다는 이유 하나만으로, 미카족을 이단으로 몰아 학살했다고 한다. 천년 전 미카족은 비극을 겪은 뒤 카르피르라는 무녀의 지도 아래, 신들의 안식처로 향했다고 한다. 무녀 오르하의 이야기를 들어보자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">1394F78B-CF1A-4fa3-B7CE-039585625C17</CLIENT> <!--시작NPC 솔방울 언덕 - 오르하 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">1394F78B-CF1A-4fa3-B7CE-039585625C17</PAYER> <!--완료NPC 솔방울 언덕 - 오르하 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">1394F78B-CF1A-4fa3-B7CE-039585625C17</AGENT> <!--진행NPC 11 솔방울 언덕 - 오르하 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10418611"/> <!--오르하와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418621" FACE="Orha_normal"/> <!--지난 번에 우리 미카족이 아주 오래전 이곳을 찾았던
+이야기를 들려드린 적이 있었죠?%%
+우리 일족은 원래 천년 전까지만 하더라도 이곳으로부터
+머나먼 동쪽에 있는 아카샤 지역에 살고 있었지요.%%
+그러나 천년 전 엘가가 등장하기 직전, 신성제국의 침략을 
+겪게 되었어요. 신성제국의 추기경들은 단지 우리가 꿈을
+통해 신의 게시를 받는다는 이유로 이단으로 몰아세웠고…%%
+곧이어 쳐들어온 제국의 기사단은 애와 여자를 가리지 않고
+사람들을 잔인하게 학살했답니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418626" FACE="Orha_smile"/> <!--그 뒷 이야기는 잘 아시겠지만, 흑룡왕 엘가가 나타나
+세상을 파멸 직전으로 몰고 갔지요. 각지는 화염으로 물들고
+신성제국은 엘가에 의해 무너졌습니다.%%
+하지만 우리는 그런 난리의 와중에도 무사할 수 있었지요.
+엘가가 다행히도 에아님이 잠들었다고 전해지는 
+신록의 숲 지역은 공격하지 않았으니까요.%%
+이곳은 그래서인지 우리에게 제 2의 고향과도 같은 곳입니다.
+그래서 더욱 이 숲이 상처 받는 것에 괴로워 하는 것이죠.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418623" FACE="Orha_normal"/> <!--그 뒤로 살아남은 미카족들이 고통에 떨고 있을 때,
+무녀인 카르피르님이 등장했지요.%% 
+악룡이 나타나 온 세상을 화염으로 물들이는 꿈이었어요.
+악몽에 시달리던 카르피르님은 수일 동안 먹지도 마시지도
+않은 채 기도를 한 끝에 응답을 얻었습니다.%%
+그 때 신성제국의 공포에 억눌려있던 수많은 사람들은
+카르피르님의 말을 묵살하고, 오히려 신성제국에 
+홀로 살아남은 무녀 카르피르님을 고발했답니다.%%
+별 수 없이 몇 되지 않는 미카족의 일원을 이끌고
+게시가 가리키는 대로, 신의 안식처로 향했습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418624" FACE="Orha_normal"/> <!--이런 얘기를 듣는 것이 부담스러우신가 봅니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418625" FACE="Orha_normal"/> <!--(없음)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

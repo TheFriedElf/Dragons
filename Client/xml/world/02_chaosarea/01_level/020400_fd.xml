@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020400_FD" DESCRIPTION="90204000">
+	<GSAPATH>../Data/3_World/02_ChaosArea/01_Level/020400_FD.gsa</GSAPATH>
+	<MINIMAP Y="70" H="365">../Data/3_World/02_ChaosArea/01_Level/020400_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="0.8">../BGM/BigTrees.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+	<!-- 넝쿨 숲 포탈 -->
+	<TRIGGER ID="gate_020410_base" TYPE="PORTAL" TITLE_TEXT_ID="800046" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9020410" PARAM2="4">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+	<!-- 큰나무 지대 미션포탈 -->
+	<TRIGGER ID="gate_020401_base" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal" PARAM="90204" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms020400_0" MISSION_DISCRIPTION_TEXT_NUM="9020400"/>
+	</TRIGGER>
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="200"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_10" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_10" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_11" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_11" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_12" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_13" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_14" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_15" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="150"/>
+	</TRIGGER>
+	<!-- 트리거점프 -->
+	<TRIGGER ID="trigger_jump_1" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_2" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_3" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_4" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_5" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_6" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_7" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="150"/>
+	</TRIGGER>
+
+	<!-- 포 그 -->
+	<FOG DENSITY="0.050000" START="95.000000" END="6410.000000" COLOR="0.733999,0.799999,0.609000"/>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1"/>
+</WORLD>

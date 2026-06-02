@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_cronlaser_shot_01">
+
+  <TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+  <NIF_PATH SCALE="1.1" COLLISION_SCALE="2.0">../Data/5_Effect/7_Projectile/efk_laser_projectile.nif</NIF_PATH>
+  <SCRIPT>PROJECTILE_CRON_LASER</SCRIPT>
+           
+           <PARAM SPEED="1000" ACCEL="2" MASS="2.5" STAY_TIME="3.1"/>
+
+ 
+  
+  
+             <COLLISION_SPHERE>
+                     <COLL_ITEM TARGET_NODE="ef00" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef01" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef02" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef03" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef04" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef05" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef06" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef07" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef08" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef09" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef10" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef11" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef12" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef13" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef14" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef15" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef16" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef17" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef18" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef19" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef20" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef21" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef22" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef23" RANGE="300"/>       
+                     <COLL_ITEM TARGET_NODE="ef24" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef25" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef26" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef27" RANGE="300"/>       
+                     <COLL_ITEM TARGET_NODE="ef28" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef29" RANGE="300"/>
+                     <COLL_ITEM TARGET_NODE="ef30" RANGE="300"/>
+           </COLLISION_SPHERE>
+
+  
+  
+  
+  
+  
+  <SCRIPT_CALL_EVENT>
+    <EVENT TYPE="ARIVED_AT_TARGET"/>
+	<EVENT TYPE="UPDATE"/>
+  </SCRIPT_CALL_EVENT>
+  
+</PROJECTILE>

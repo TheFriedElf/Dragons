@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<TOOL_TIP ID="M_ToolTip" X="100" Y="100" W="230" H="500" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" CAN_DRAG="1" USE_ALPHA_ANI="0" PRIORITY="99" PASS_EVENT="1" NO_FOCUS="1">
+		<FORM ID="ToolTip_Image" X="4" Y="4" W="40" H="40" U="12" V="12" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/map/mapNpc.tga" IMG_W="480" IMG_H="480" PASS_EVENT="1" NO_FOCUS="1"/>
+		<SCRIPT ID="ON_TICK">
+			point = GetCursorPos()
+			point:IncX(30)
+			point:IncY(40)
+			local iDelta = point:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				point:IncX(-iDelta)
+			end
+		
+			iDelta = point:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				point:IncY(-iDelta)
+			end
+			UISelf:SetLocation(point)
+		</SCRIPT>
+	</TOOL_TIP>	
+	<TOOL_TIP ID="M_ToolTip2" X="100" Y="100" W="230" H="500" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" CAN_DRAG="1" USE_ALPHA_ANI="0" PRIORITY="99" PASS_EVENT="1" NO_FOCUS="1">
+		<FORM ID="ToolTip_Image" X="4" Y="4" W="40" H="40" U="12" V="12" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/map/mapNpc2.tga" IMG_W="480" IMG_H="480" PASS_EVENT="1" NO_FOCUS="1"/>
+		<SCRIPT ID="ON_TICK">
+			point = GetCursorPos()
+			point:IncX(30)
+			point:IncY(40)
+			local iDelta = point:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				point:IncX(-iDelta)
+			end
+		
+			iDelta = point:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				point:IncY(-iDelta)
+			end
+			UISelf:SetLocation(point)
+		</SCRIPT>
+	</TOOL_TIP>	
+
+	<TOOL_TIP ID = "ToolTip2" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<FORM ID="SFRM_TTEA_BOX">
+			<ATTR X="130" Y="16" W="230" H="28"/>
+			<ATTR FONT="Font_Chat" T_X="220" T_Y="4" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+			<SCRIPT ID = "ON_CALL">
+				local Parent = UISelf:GetParent()
+				local PSize = Parent:GetSize()
+				local MSize = UISelf:GetSize()
+				UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+				UISelf:SetStaticText("") 
+			</SCRIPT>
+		</FORM>
+		<SCRIPT ID = "ON_TICK">
+			local BeforeLoc = GetCursorPos()
+			local BeforeSize = UISelf:GetSize()
+			BeforeLoc:IncX(30)
+			BeforeLoc:IncY(30)
+			local iDelta = BeforeLoc:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				BeforeLoc:IncX(-iDelta)
+			end
+		
+			iDelta = BeforeLoc:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				BeforeLoc:IncY(-iDelta)
+			end
+
+			local wEquip = GetUIWnd("ToolTip_Equip")
+			local wExtend = GetUIWnd("ToolTip2_Extend")
+			local wExtendEquip = GetUIWnd("ToolTip_Equip_Extend")
+			local wItemExtend = GetUIWnd("ToolTipItemExtend")
+
+			local Loc = wItemExtend:GetLocation()
+			local Size = wItemExtend:GetSize()
+			local Size2 = wEquip:GetSize()
+
+			if false == wExtend:IsNil() then
+				Size2:IncX(wExtend:GetSize():GetX())
+			end
+			if false == wExtendEquip:IsNil() then
+				Size2:IncX(wExtendEquip:GetSize():GetX())
+			end
+
+			iDelta = BeforeLoc:GetY() + Size:GetY() - 768 - UISelf:GetResolutionGap():GetY()
+
+			Loc:SetX(BeforeLoc:GetX() + BeforeSize:GetX())
+			if iDelta > 0 then
+				Loc:SetY(BeforeLoc:GetY() - iDelta)
+			else
+				Loc:SetY(BeforeLoc:GetY())
+			end
+
+			wItemExtend:SetLocation(Loc)
+			
+			iDelta = BeforeLoc:GetX() + BeforeSize:GetX() + Size:GetX() + Size2:GetX() - 1012 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				BeforeLoc:IncX(-iDelta)
+			end
+
+			UISelf:SetLocation(BeforeLoc)
+		</SCRIPT> 
+	</TOOL_TIP>
+	
+	<TOOL_TIP ID = "TOOLTIP_PACKAGEITEM" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "101" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<BUILD ID="BLD_ITEM_SLOT" TARGET_ID="FRM_ITEM_SLOT" X="3" Y="50" X_COUNT="1" Y_COUNT="20" Y_GAB="48"/>
+		<IMG ID="FRM_ITEM_SLOT" X="0" Y="0" W="40" H="40" U="12" V="12" UV_INDEX="0" IMG="" IMG_W="480" IMG_H="480" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="SFRM_TTEA_BOX">
+			<ATTR X="130" Y="16" W="100" H="28"/>
+			<ATTR FONT="Font_Chat" T_X="90" T_Y="1" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+			<SCRIPT ID = "ON_CALL">
+				local Parent = UISelf:GetParent()
+				local PSize = Parent:GetSize()
+				local MSize = UISelf:GetSize()
+				UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+				UISelf:SetStaticText("") 
+			</SCRIPT>
+		</FORM>		
+		<SCRIPT ID = "ON_TICK">
+			local BeforeLoc = GetCursorPos()
+			local BeforeSize = UISelf:GetSize()
+			BeforeLoc:IncX(30)
+			BeforeLoc:IncY(30)
+			local iDelta = BeforeLoc:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				BeforeLoc:IncX(-iDelta)
+			end
+		
+			iDelta = BeforeLoc:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				BeforeLoc:IncY(-iDelta)
+			end
+
+			local wEquip = GetUIWnd("ToolTip_Equip")
+			if wEquip:IsNil() == false then
+				local Loc = wEquip:GetLocation()
+				local Size = wEquip:GetSize()
+			
+				iDelta = BeforeLoc:GetX() + BeforeSize:GetX() + Size:GetX() - 1012 - UISelf:GetResolutionGap():GetX()
+				if iDelta > 0 then
+					BeforeLoc:IncX(-iDelta)
+				end
+				
+				iDelta = BeforeLoc:GetY() + Size:GetY() - 768 - UISelf:GetResolutionGap():GetY()
+				
+				Loc:SetX(BeforeLoc:GetX() + BeforeSize:GetX())
+				if iDelta > 0 then
+					Loc:SetY(BeforeLoc:GetY() - iDelta)
+				else
+					Loc:SetY(BeforeLoc:GetY())
+				end
+				wEquip:SetLocation(Loc)
+			end
+			UISelf:SetLocation(BeforeLoc)
+		</SCRIPT> 
+	</TOOL_TIP>
+	
+	<TOOL_TIP ID = "TOOLTIP_FIX_POS" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<BUILD ID="BLD_ITEM_SLOT" TARGET_ID="FRM_ITEM_SLOT" X="3" Y="50" X_COUNT="1" Y_COUNT="10" Y_GAB="48"/>
+		<IMG ID="FRM_ITEM_SLOT" X="0" Y="0" W="40" H="40" U="12" V="12" UV_INDEX="0" IMG="" IMG_W="480" IMG_H="480" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="SFRM_TTEA_BOX">
+			<ATTR X="130" Y="16" W="100" H="28"/>
+			<ATTR FONT="Font_Chat" T_X="90" T_Y="1" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+			<SCRIPT ID="ON_CALL">
+				local Parent = UISelf:GetParent()
+				local PSize = Parent:GetSize()
+				local MSize = UISelf:GetSize()
+				UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+				UISelf:SetStaticText("") 
+				g_fAutoExitTooltipFixPos = GetAccumTime()
+			</SCRIPT>
+		</FORM>
+		<SCRIPT ID="ON_TICK">
+			if g_fAutoExitTooltipFixPos ~= nil then
+				if GetAccumTime() - g_fAutoExitTooltipFixPos > 10 then
+					UISelf:Close()
+				end
+			end
+		</SCRIPT>
+	</TOOL_TIP>
+	
+	<TOOL_TIP ID = "ToolTip_CloseBtn" >
+		<ATTR X = "100" Y = "100" W ="260" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<FORM ID="SFRM_TTEA_BOX">
+			<ATTR X="160" Y="26" W="70" H="28"/>
+			<ATTR FONT="Font_Chat" T_X="60" T_Y="1" T_RIGHT="1"/>
+			<SCRIPT ID = "ON_CALL">
+				local Parent = UISelf:GetParent()
+				local PSize = Parent:GetSize()
+				local MSize = UISelf:GetSize()
+				UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+				UISelf:SetStaticText("")
+			</SCRIPT>
+		</FORM>
+		<BUTTON ID="BNT_CLOSE">
+			<ATTR X="231" Y="4" W="24" H="24" />
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W = "48" BTN_IMG_H = "48"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+				local SubWnd = GetUIWnd("ToolTip_CloseBtn_Extend")
+				if false == SubWnd:IsNil() then
+					SubWnd:Close()
+				end
+			</SCRIPT>
+		</BUTTON>
+  </TOOL_TIP>
+  <TOOL_TIP ID = "ToolTip_SkillDebug" >
+    <ATTR X = "100" Y = "100" W ="400" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+    <ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+    <FORM ID="SFRM_TTEA_BOX">
+		<ATTR X="150" Y="16" W="60" H="20"/>
+		<ATTR FONT="Font_Text" T_X="50" T_Y="1" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>	  
+		<SCRIPT ID = "ON_CALL">UISelf:SetStaticText("")</SCRIPT>
+    </FORM>    
+		<SCRIPT ID = "ON_TICK">
+		point = GetCursorPos()
+		point:IncX(30)
+		point:IncY(40)
+		local iDelta = point:GetX() + UISelf:GetSize():GetX() + 12 - 1024 - UISelf:GetResolutionGap():GetX()
+		if iDelta > 0 then
+		point:IncX(-iDelta)
+		end
+
+		iDelta = point:GetY() + UISelf:GetSize():GetY() + 12 - 768 - UISelf:GetResolutionGap():GetY()
+		if iDelta > 0 then
+		point:IncY(-iDelta)
+		end
+
+		local wEquip = GetUIWnd("ToolTip_Equip")
+		if wEquip:IsNil() == false then
+		local pos = wEquip:GetLocation()
+		ODS("Position : " .. pos:GetX() + wEquip:GetSize():GetX() .. "\n")
+		if pos:GetX() + wEquip:GetSize():GetX() >= 1012 + UISelf:GetResolutionGap():GetX() then
+		ODS("Before : " .. point:GetX() .. "\n")
+		point:SetX(1024 + UISelf:GetResolutionGap():GetX() - wEquip:GetSize():GetX() - UISelf:GetSize():GetX() - 36)
+		ODS("Revise : " .. UISelf:GetResolutionGap():GetX() + 1024-wEquip:GetSize():GetX() - UISelf:GetSize():GetX() - 36 .. "\n")
+		end
+		end
+
+		point:SetX(20);
+		point:SetY(20);
+
+		UISelf:SetLocation(point)
+    </SCRIPT>
+  </TOOL_TIP>
+  <TOOL_TIP ID = "ToolTip_EffectDebug" >
+    <ATTR X = "100" Y = "100" W ="400" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+    <ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+    <FORM ID="SFRM_TTEA_BOX">
+      <ATTR X="150" Y="16" W="60" H="20"/>
+      <ATTR FONT="Font_Text" T_X="50" T_Y="1" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+      <SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+    </FORM>
+    <SCRIPT ID = "ON_TICK">
+      point = GetCursorPos()
+      point:IncX(450)
+      point:IncY(40)
+      local iDelta = point:GetX() + UISelf:GetSize():GetX() + 12 - 1024 - UISelf:GetResolutionGap():GetX()
+      if iDelta > 0 then
+      point:IncX(-iDelta)
+      end
+
+      iDelta = point:GetY() + UISelf:GetSize():GetY() + 12 - 768 - UISelf:GetResolutionGap():GetY()
+      if iDelta > 0 then
+      point:IncY(-iDelta)
+      end
+
+      local wEquip = GetUIWnd("ToolTip_Equip")
+      if wEquip:IsNil() == false then
+      local pos = wEquip:GetLocation()
+      ODS("Position : " .. pos:GetX() + wEquip:GetSize():GetX() .. "\n")
+      if pos:GetX() + wEquip:GetSize():GetX() >= 1012 + UISelf:GetResolutionGap():GetX() then
+      ODS("Before : " .. point:GetX() .. "\n")
+      point:SetX(1024 + UISelf:GetResolutionGap():GetX() - wEquip:GetSize():GetX() - UISelf:GetSize():GetX() - 36)
+      ODS("Revise : " .. UISelf:GetResolutionGap():GetX() + 1024 - wEquip:GetSize():GetX() - UISelf:GetSize():GetX() - 36 .. "\n")
+      end
+      end
+
+      point:SetX(460);
+      point:SetY(20);
+
+      UISelf:SetLocation(point)
+    </SCRIPT>
+  </TOOL_TIP>
+
+	<TOOL_TIP ID = "ToolTip_Timer" >
+		<ATTR X = "100" Y = "100" W ="200" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text"/>
+		<ATTR ALIVE_TIME = "5000"/>
+	</TOOL_TIP>
+
+	<TOOL_TIP ID = "ToolTip_Equip" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<FORM ID="SFRM_TTEA_BOX">
+			<ATTR X="150" Y="16" W="150" H="44"/>
+			<ATTR FONT="Font_Chat" T_X="141" T_Y="1" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+			<SCRIPT ID = "ON_CALL">
+				local Parent = UISelf:GetParent()
+				local PSize = Parent:GetSize()
+				local MSize = UISelf:GetSize()
+				UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+				UISelf:SetStaticText("") 
+			</SCRIPT>
+		</FORM>		
+		<SCRIPT ID = "ON_TICK">
+			local tooltip2 = GetUIWnd("ToolTip2")
+			local tooltip2_ex = GetUIWnd("ToolTip2_Extend")
+			
+			if tooltip2:IsNil() == true then return end
+			
+			local point = tooltip2:GetLocation()
+			local size = tooltip2:GetSize()
+				
+			if tooltip2_ex:IsNil() == true then
+				point:IncX(size:GetX())
+			else
+				point:IncX(size:GetX() * 2)
+			end
+		
+			iDelta = point:GetY() + UISelf:GetSize():GetY() + 12 - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				point:IncY(-iDelta)
+			end
+
+			UISelf:SetLocation(point)
+		</SCRIPT> 	
+	</TOOL_TIP>
+		
+	<TOOL_TIP ID = "ToolTip_Skill" >
+		<ATTR X = "100" Y = "100" W ="250" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text"/>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<FORM ID="SFRM_TTEA_BOX">
+					<ATTR X="100" Y="16" W="150" H="28"/>
+					<ATTR FONT="Font_Chat" T_X="140" T_Y="1" FONT_COLOR_HEX="0xFF00ff06" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+					<SCRIPT ID = "ON_CALL">
+						local Parent = UISelf:GetParent()
+						local PSize = Parent:GetSize()
+						local MSize = UISelf:GetSize()
+						UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+					</SCRIPT>
+				</FORM>
+			</NAME>
+			<NAME ID="TAIWAN/CHINA">
+				<FORM ID="SFRM_TTEA_BOX">
+					<ATTR X="180" Y="16" W="70" H="28"/>
+					<ATTR FONT="Font_Chat" T_X="60" T_Y="1" FONT_COLOR_HEX="0xFF00ff06" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+					<SCRIPT ID = "ON_CALL">
+						local Parent = UISelf:GetParent()
+						local PSize = Parent:GetSize()
+						local MSize = UISelf:GetSize()
+						UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+					</SCRIPT>
+				</FORM>
+			</NAME>
+		</LOCAL>
+		<SCRIPT ID = "ON_TICK">
+			point = GetCursorPos()			
+			point:IncX(30)
+			point:IncY(40)			
+			local iDelta = point:GetX() + UISelf:GetSize():GetX() + 12 - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then 
+				point:IncX(-iDelta)
+			end
+		
+			iDelta = point:GetY() + UISelf:GetSize():GetY() + 12 - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				point:IncY(-iDelta)
+			end
+
+			local wEquip = GetUIWnd("ToolTip_Equip")
+			if wEquip:IsNil() == false then
+				local pos = wEquip:GetLocation()
+				ODS("Position : " .. pos:GetX() + wEquip:GetSize():GetX() .. "\n")
+				if pos:GetX() + wEquip:GetSize():GetX() >= 1012 + UISelf:GetResolutionGap():GetX() then
+					ODS("Before : " .. point:GetX() .. "\n")
+					point:SetX(1024 + UISelf:GetResolutionGap():GetX() -wEquip:GetSize():GetX() - UISelf:GetSize():GetX() - 36)
+					ODS("Revise : " .. 1024 + UISelf:GetResolutionGap():GetX() -wEquip:GetSize():GetX() - UISelf:GetSize():GetX() - 36 .. "\n")
+				end
+			end			
+			UISelf:SetLocation(point)
+		</SCRIPT> 
+	</TOOL_TIP>
+	
+	<TOOL_TIP ID="TOOLTIP_PVP_HANDYCAP">
+		<ATTR X="0" Y="0" W="50" H="50" CAN_DRAG ="1" USE_ALPHA_ANI= "0" PRIORITY= "99" PASS_EVENT="1" NO_FOCUS="1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<SCRIPT ID = "ON_TICK">
+			point = GetCursorPos()
+			point:IncY(-50)
+			local iDelta = point:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				point:IncX(-iDelta)
+			end
+			iDelta = point:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				point:IncY(-iDelta)
+			end
+			UISelf:SetLocation(point)
+		</SCRIPT>
+	</TOOL_TIP>
+
+	<TOOL_TIP ID = "TOOLTIP_SYSTEM_MENU" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+	</TOOL_TIP>	
+	
+	<TOOL_TIP ID = "ToolTipMonsterCard" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<FORM ID="ToolTip_Image" X="80" Y="8" W="70" H="70" U="1" V="1" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/icon/socketCard/01_01.tga" IMG_W="70" IMG_H="70"/>
+		<FORM ID="ToolTip_Image_Add01" X="80" Y="8" Z="1" W="70" H="70" U="1" V="1" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/icon/socketCard/01_01.tga" IMG_W="70" IMG_H="70"/>
+		<FORM ID="ToolTip_Image_Add02" X="80" Y="8" Z="2" W="70" H="70" U="1" V="1" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/icon/socketCard/01_01.tga" IMG_W="70" IMG_H="70"/>
+		<FORM ID="ToolTip_Image_Add03" X="80" Y="8" Z="3" W="70" H="70" U="1" V="1" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/icon/socketCard/01_01.tga" IMG_W="70" IMG_H="70"/>
+		<SCRIPT ID = "ON_TICK">
+			local BeforeLoc = GetCursorPos()
+			local BeforeSize = UISelf:GetSize()
+			BeforeLoc:IncX(30)
+			BeforeLoc:IncY(30)
+			local iDelta = BeforeLoc:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				BeforeLoc:IncX(-iDelta)
+			end
+		
+			iDelta = BeforeLoc:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				BeforeLoc:IncY(-iDelta)
+			end
+
+			local wEquip = GetUIWnd("ToolTip_Equip")
+			if wEquip:IsNil() == false then
+				local Loc = wEquip:GetLocation()
+				local Size = wEquip:GetSize()
+			
+				iDelta = BeforeLoc:GetX() + BeforeSize:GetX() + Size:GetX() - 1012 - UISelf:GetResolutionGap():GetX()
+				if iDelta > 0 then
+					BeforeLoc:IncX(-iDelta)
+				end
+				
+				iDelta = BeforeLoc:GetY() + Size:GetY() - 768 - UISelf:GetResolutionGap():GetY()
+				
+				Loc:SetX(BeforeLoc:GetX() + BeforeSize:GetX())
+				if iDelta > 0 then
+					Loc:SetY(BeforeLoc:GetY() - iDelta)
+				else
+					Loc:SetY(BeforeLoc:GetY())
+				end
+				wEquip:SetLocation(Loc)
+			end
+			UISelf:SetLocation(BeforeLoc)
+		</SCRIPT> 
+	</TOOL_TIP>	
+	
+	<TOOL_TIP ID="ToolTipSkillExtend" USE_DRAW_RECT="1">
+		<ATTR X="100" Y="100" W="230" H="500" CAN_DRAG="1" USE_ALPHA_ANI="0" PRIORITY="99" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="ToolTip_Image" X="80" Y="8" W="70" H="70" U="1" V="1" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/icon/socketCard/01_01.tga" IMG_W="70" IMG_H="70" PASS_EVENT="1" NO_FOCUS="1"/>
+		<SCRIPT ID = "ON_TICK">
+			local BeforeLoc = GetCursorPos()
+			local BeforeSize = UISelf:GetSize()
+			BeforeLoc:IncX(30)
+			BeforeLoc:IncY(30)
+			local iDelta = BeforeLoc:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				BeforeLoc:IncX(-iDelta)
+			end
+		
+			iDelta = BeforeLoc:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				BeforeLoc:IncY(-iDelta)
+			end
+
+			local wEquip = GetUIWnd("ToolTip_Equip")
+			if wEquip:IsNil() == false then
+				local Loc = wEquip:GetLocation()
+				local Size = wEquip:GetSize()
+			
+				iDelta = BeforeLoc:GetX() + BeforeSize:GetX() + Size:GetX() - 1012 - UISelf:GetResolutionGap():GetX()
+				if iDelta > 0 then
+					BeforeLoc:IncX(-iDelta)
+				end
+				
+				iDelta = BeforeLoc:GetY() + Size:GetY() - 768 - UISelf:GetResolutionGap():GetY()
+				
+				Loc:SetX(BeforeLoc:GetX() + BeforeSize:GetX())
+				if iDelta > 0 then
+					Loc:SetY(BeforeLoc:GetY() - iDelta)
+				else
+					Loc:SetY(BeforeLoc:GetY())
+				end
+				wEquip:SetLocation(Loc)
+			end
+			UISelf:SetLocation(BeforeLoc)
+		</SCRIPT> 
+		<FORM ID="FRM_SLOT_POS" X="0" Y="0" W="230" H="0" PASS_EVENT="1" NO_FOCUS="1">
+			<BUILD ID="BLD_SLOT" TARGET_ID="FRM_SLOT" X="11" Y="0" X_COUNT="1" Y_COUNT="10" X_GAB="0" Y_GAB="42"/>
+			<FORM ID="FRM_SLOT" X="0" Y="0" W="225" H="40" STATIC_NUM="34" PASS_EVENT="1" NO_FOCUS="1">
+				<ICON ID="ICN_SLOT" X="0" Y="0" W ="40" H ="40" ICON_GRP="102" ICON_STATIC="1">
+					<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				</ICON>
+				<FORM ID="FRM_TEXT" X="50" Y="0" W="175" H="40">
+					<ATTR TEXT="790461" FONT="Font_Chat" T_X="0" T_Y="5" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</FORM>
+				<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			</FORM>
+		</FORM>
+	</TOOL_TIP>
+
+	<TOOL_TIP ID = "ToolTipSuperGirl" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<FORM ID="ToolTip_Image" X="55" Y="15" W="120" H="90" U="1" V="1" UV_INDEX="1" IS_VISIBLE="0" IMG="../data/6_ui/icon/socketCard/01_01.tga" IMG_W="120" IMG_H="90"/>
+		<SCRIPT ID = "ON_TICK">
+			local BeforeLoc = GetCursorPos()
+			local BeforeSize = UISelf:GetSize()
+			BeforeLoc:IncX(30)
+			BeforeLoc:IncY(30)
+			local iDelta = BeforeLoc:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				BeforeLoc:IncX(-iDelta)
+			end
+		
+			iDelta = BeforeLoc:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				BeforeLoc:IncY(-iDelta)
+			end
+
+			local wEquip = GetUIWnd("ToolTip_Equip")
+			if wEquip:IsNil() == false then
+				local Loc = wEquip:GetLocation()
+				local Size = wEquip:GetSize()
+			
+				iDelta = BeforeLoc:GetX() + BeforeSize:GetX() + Size:GetX() - 1012 - UISelf:GetResolutionGap():GetX()
+				if iDelta > 0 then
+					BeforeLoc:IncX(-iDelta)
+				end
+				
+				iDelta = BeforeLoc:GetY() + Size:GetY() - 768 - UISelf:GetResolutionGap():GetY()
+				
+				Loc:SetX(BeforeLoc:GetX() + BeforeSize:GetX())
+				if iDelta > 0 then
+					Loc:SetY(BeforeLoc:GetY() - iDelta)
+				else
+					Loc:SetY(BeforeLoc:GetY())
+				end
+				wEquip:SetLocation(Loc)
+			end
+			UISelf:SetLocation(BeforeLoc)
+		</SCRIPT> 
+	</TOOL_TIP>
+	<TOOL_TIP ID = "ToolTipItemExtend" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<SCRIPT ID = "ON_TICK">
+			local tooltip2 = GetUIWnd("ToolTip2")
+			if tooltip2:IsNil() == true then
+				return
+			end
+
+			local point = GetCursorPos()
+			local size2 = tooltip2:GetSize()
+			point:IncX(size2:GetX() + 53)
+			point:IncY(40)
+			local iDelta = point:GetX() + UISelf:GetSize():GetX() + 12 - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				point:IncX(-iDelta)
+			end
+		
+			iDelta = point:GetY() + UISelf:GetSize():GetY() + 12 - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				point:IncY(-iDelta)
+			end
+
+			UISelf:SetLocation(point)
+		</SCRIPT> 	
+	</TOOL_TIP>
+	<TOOL_TIP ID = "ToolTip2_Extend" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<SCRIPT ID = "ON_TICK">
+			local CallWnd = GetUIWnd("ToolTip2")
+			if CallWnd:IsNil() == true then
+				return
+			end
+
+			local point = CallWnd:GetLocation()
+			local size2 = CallWnd:GetSize()
+			point:IncX(size2:GetX())
+			local iDelta = point:GetX() + UISelf:GetSize():GetX() + 12 - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				point:IncX(-iDelta)
+			end
+
+			UISelf:SetLocation(point)
+		</SCRIPT> 	
+	</TOOL_TIP>
+	<TOOL_TIP ID = "ToolTip_Equip_Extend" >
+		<ATTR X = "100" Y = "100" W ="230" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<SCRIPT ID = "ON_TICK">
+			local CallWnd = GetUIWnd("ToolTip2")
+			local SubWnd = GetUIWnd("ToolTip2_Extend")
+			local ParentWnd = GetUIWnd("ToolTip_Equip")
+
+			if CallWnd:IsNil() == true then return end
+			if ParentWnd:IsNil() == true then return end
+			
+			local point = CallWnd:GetLocation()
+			local size = CallWnd:GetSize()
+			
+			if true == SubWnd:IsNil() then
+				point:IncX(size:GetX() * 2)
+			else
+				point:IncX(size:GetX() * 3)
+			end
+
+			point:SetY(ParentWnd:GetLocation():GetY())
+
+			UISelf:SetLocation(point)
+		</SCRIPT>
+	</TOOL_TIP>
+	<TOOL_TIP ID = "ToolTip_CloseBtn_Extend" >
+		<ATTR X = "100" Y = "100" W ="260" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<SCRIPT ID = "ON_TICK">
+			local ParentWnd = GetUIWnd("ToolTip_CloseBtn")
+
+			if ParentWnd:IsNil() == true then return end
+			
+			local point = ParentWnd:GetLocation()
+			local size = ParentWnd:GetSize()
+			
+			point:IncX(size:GetX())
+
+			UISelf:SetLocation(point)
+		</SCRIPT>
+	</TOOL_TIP>
+	
+	<TOOL_TIP ID = "ToolTip_Premium" >
+		<ATTR X = "100" Y = "100" W ="250" H ="500" CAN_DRAG = "1" USE_ALPHA_ANI = "0" PRIORITY = "99" PASS_EVENT = "1" NO_FOCUS = "1"/>
+		<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<FORM ID="SFRM_TTEA_BOX">
+			<ATTR X="130" Y="16" W="230" H="28"/>
+			<ATTR FONT="Font_Chat" T_X="220" T_Y="4" T_RIGHT="1" PASS_EVENT="1" NO_FOCUS="1"/>
+			<SCRIPT ID = "ON_CALL">
+				local Parent = UISelf:GetParent()
+				local PSize = Parent:GetSize()
+				local MSize = UISelf:GetSize()
+				UISelf:SetLocation(Point2(PSize:GetX() - MSize:GetX(), MSize:GetY()))
+				UISelf:SetStaticText("") 
+			</SCRIPT>
+		</FORM>		
+		<SCRIPT ID = "ON_TICK">
+			local BeforeLoc = GetCursorPos()
+			local BeforeSize = UISelf:GetSize()
+			BeforeLoc:IncX(30)
+			BeforeLoc:IncY(30)
+			local iDelta = BeforeLoc:GetX() + UISelf:GetSize():GetX() - 1024 - UISelf:GetResolutionGap():GetX()
+			if iDelta > 0 then
+				BeforeLoc:IncX(-iDelta)
+			end
+		
+			iDelta = BeforeLoc:GetY() + UISelf:GetSize():GetY() - 768 - UISelf:GetResolutionGap():GetY()
+			if iDelta > 0 then
+				BeforeLoc:IncY(-iDelta)
+			end
+
+			UISelf:SetLocation(BeforeLoc)
+		</SCRIPT> 
+	</TOOL_TIP>
+</XUI>

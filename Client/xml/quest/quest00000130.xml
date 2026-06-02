@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>130</ID> <!--T.T.10013001 순진한 녀석? 멍청한 녀석! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	게펜의 비닛과 이야기 하자.-->
+<!--[완료NPC]	게펜 - 비닛-->
+<!--[내용]	디포르테는 비닛이 과격파와 자주 만남다는 것을 알아냈다고 한다. 진실을 알기 위해 비닛과 이야기하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">644911B5-D0CF-45c0-B654-28FFCDED339C</CLIENT> <!--시작NPC 게펜 - 디포르테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">18A90539-E61E-4941-A7C8-90F40254BA7A</PAYER> <!--완료NPC 게펜 - 비닛 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">644911B5-D0CF-45c0-B654-28FFCDED339C</AGENT> <!--진행NPC 11 게펜 - 디포르테 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">18A90539-E61E-4941-A7C8-90F40254BA7A</AGENT> <!--진행NPC 12 게펜 - 비닛 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10013011"/> <!--비닛과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10013021" FACE="Deforte_normal"/> <!--내가 이럴 줄 알았어. 
+너, 또 비닛에게 부탁받은 일이 있지?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10013026" FACE="Vinit_cry"/> <!--미안해. 정말 미안해.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10013023" FACE="Deforte_angly"/> <!--(비닛에게 부탁받은 일을 말하자.)%%
+이런 순진한 녀석. 
+아니! 이런 바보 멍청이 같은 녀석.
+잘 들어. 내가 알아본 바로는 비닛은 과격파와 자주 만나고 있었어.%%
+아마 너에게 한 부탁들은 과격파와 연관된 게 분명해.
+만약 내 말이 의심스러우면 직접 비닛에게 물어봐.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10013024" FACE="Deforte_angly"/> <!--(비닛이 옆에 손을 흔든다.)
+"도와줘서 고마워"%%
+거짓말 하지 마! 그럼 비닛이 왜 저렇게 말하는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10013025" FACE="Deforte_normal"/> <!--도대체, 비닛에게 무슨 약점을 잡혔길래 일을 돕는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10013002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

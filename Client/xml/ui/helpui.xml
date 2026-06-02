@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!--	CallUI("FRM_HELP_CENTER")	-->
+	<FORM ID="FRM_HELP_CENTER" ALIGN_X="50" ALIGN_Y="15" W="512" H="118">
+		<FORM ID="FRM_HELP_CENTER" X="0" Y="0" W="512" H="83" Z="-1" IMG="../Data/6_ui/guide/gdFstBoxBg.tga" IMG_W="414" IMG_H="83"/>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+		<FORM ID="FRM_TEXT" X="25" Y="20" W="385" H="30" TEXT="" T_X="0" T_Y="0" FONT="FTcts_16" FONT_COLOR_HEX="0xFFFFDB86" T_OUTLINE="1"/>
+		<BUTTON ID="BTN_CLOSE" X="374" Y="16" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+			<SCRIPT ID="ON_L_BTN_UP"> UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DETAILVIEW" X="218" Y="70" W="196" H="35" BTN_IMG="../Data/6_ui/guide/gdBt.tga" BTN_IMG_W="392" BTN_IMG_H="105" U="2" V="3">
+			<ATTR TEXT="3182" T_X="98" T_Y="9" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">OnClickDetailHelpView(UISelf:GetParent())</SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+	<FORM ID="FRM_HELP_MAIN" ALIGN_X="50" ALIGN_Y="40" W="512" H="465" IMG="../Data/6_ui/guide/gdBg01.tga" IMG_W="512" IMG_H="465" CAN_DRAG="0">
+		<ATTR TEXT="400902" T_X="65" T_Y="12" T_CENTER="1" FONT="Font_Warn" FONT_COLOR_HEX="0xFFFFDB86" T_OUTLINE="1"/>
+		<BUILD ID="BLD_BTN" X="28" Y="57" TARGET_ID="BTN_HELP_SLOT" X_COUNT = "1" Y_COUNT="10" X_GAB="0" Y_GAB="32"/>
+		<BUTTON ID="BTN_HELP_SLOT" >
+			<ATTR X="0" Y="0" W="457" H="25" BTN_IMG="../Data/6_ui/guide/gdBt01.tga" BTN_IMG_W="457" BTN_IMG_H="100" BTN_VERTICAL_IMG="1" />
+			<ATTR T_X="9" T_Y="3" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2" FONT="FTbt_12"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">OnClickDetailHelpViewMain(UISelf, true) UISelf:CloseParent()</SCRIPT>
+			<SCRIPT ID="ON_CREATE">UI_T_Y_ToCenter(UISelf)</SCRIPT>
+		</BUTTON>
+		<FORM ID = "FRM_PAGE" X="117" Y="386" Z="1" W="274" H="23">
+			<BUILD ID="BLD_LINE" X="30" Y="2" X_COUNT="8" Y_COUNT="1" X_GAB="30" TARGET_ID="IMG_LINE"/>
+			<IMG ID="IMG_LINE" X="0" Y="0" W="2" H="19" IMG="../Data/6_UI/Common/cmBlackLine.tga" IMG_W="2" IMG_H="19"/>
+			
+			<IMG ID="BTN_FIRST_BG" X="19" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="BTN_PREV_BG" X="48" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="BTN_NEXT_BG" X="219" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<IMG ID="BTN_END_BG" X="249" Y="9" Z="-1" W="4" H="6" IMG="../Data/6_UI/Common/cmBody.tga" IMG_W="4" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID = "BTN_FIRST" X="0" Y="2" W="23" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/pvp/pvBack2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local HelpMgr = GetHelpSystem()
+					HelpMgr:OnClickHelpBeginPage(UISelf)
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_PREV" X="38" Y="2" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local HelpMgr = GetHelpSystem()
+					HelpMgr:OnClickHelpNextPage(UISelf, true)
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_NEXT" X="219" Y="2" W="15" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local HelpMgr = GetHelpSystem()
+					HelpMgr:OnClickHelpNextPage(UISelf)
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_END" X="249" Y="2" W="23" H="19">
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/pvNext2.tga" BTN_IMG_W="46" BTN_IMG_H="38"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local HelpMgr = GetHelpSystem()
+					HelpMgr:OnClickHelpEndPage(UISelf)
+				</SCRIPT>
+			</BUTTON>
+			<BUILD ID="BLD_PAGENUM" TARGET_ID = "CBTN_NUM" X = "68" Y = "4" X_COUNT = "5" Y_COUNT = "1" X_GAB = "30" Y_GAB = "0"/>
+			<CHECK_BUTTON ID="CBTN_NUM" X="0" Y="0" W="17" H="14" TEXT="5002">
+				<ATTR TEXT="" FONT="Font_Text" T_X="8" T_Y="0" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<ATTR BTN_IMG="../Data/6_ui/Pvp/_NumFrame.tga" BTN_IMG_W="34" BTN_IMG_H="28" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="1"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local HelpMgr = GetHelpSystem()
+					HelpMgr:OnClickHelpPage(UISelf)
+				</SCRIPT>
+				<SCRIPT ID="ON_CREATE">UI_T_Y_ToCenter(UISelf)</SCRIPT>
+			</CHECK_BUTTON>
+			<SCRIPT ID="ON_CALL">
+				local HelpMgr = GetHelpSystem()
+				if false==UISelf:GetControl("CBTN_NUM0"):IsNil() then
+					UISelf:GetControl("CBTN_NUM0"):CheckState(false)
+					HelpMgr:OnClickHelpPage(UISelf:GetControl("CBTN_NUM0"))
+				end
+				HelpMgr:OnClickHelpBeginPage(UISelf:GetControl("BTN_FIRST"))
+			</SCRIPT>
+			<SCRIPT ID="ON_CREATE">
+				local HelpMgr = GetHelpSystem()
+				HelpMgr:InitHelpMain(UISelf)
+			</SCRIPT>
+		</FORM>
+		<BUTTON ID="BTN_HOTLINK" X="60" Y="415" W="196" H="35" BTN_IMG="../Data/6_ui/guide/gdBt.tga" BTN_IMG_W="392" BTN_IMG_H="105" U="2" V="3">
+			<ATTR TEXT="370" T_X="98" T_Y="9" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local self = UISelf
+				CallUI("FRM_BOOK") 
+				self:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local self = UISelf
+				ActivateUI("FRM_BOOK") 
+				self:CloseParent()
+				return true
+			</HOTKEY>
+			<SCRIPT ID="ON_CALL">
+				local bView = true
+				for i=0,BOOK_TAB_COUNT do
+					local kName = "FRM_BOOK"
+					if i>0 then
+						kName = kName..i
+					end
+					local kBook = GetUIWnd(kName)
+					if false==kBook:IsNil() then
+						bView = false
+						break
+					end
+				end
+				UISelf:Visible(bView)
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="0" Y="415" W="196" H="35" BTN_IMG="../Data/6_ui/guide/gdBt.tga" BTN_IMG_W="392" BTN_IMG_H="105" U="2" V="3">
+			<ATTR TEXT="371" T_X="98" T_Y="9" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<SCRIPT ID="ON_CALL">
+				
+				local bView = true
+				for i=0,BOOK_TAB_COUNT do
+					local kName = "FRM_BOOK"
+					if i>0 then
+						kName = kName..i
+					end
+					local kBook = GetUIWnd(kName)
+					if false==kBook:IsNil() then
+						bView = false
+						break
+					end
+				end
+
+				local kPos = Point2(270, 415)
+				if false==bView then
+					kPos:SetX(UISelf:GetParent():GetSize():GetX()*0.5-UISelf:GetSize():GetX()*0.5)
+				end
+				UISelf:SetLocation(kPos)
+			</SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1"> UISelf:Close() return true </HOTKEY>
+	</FORM>
+
+	<!--	CallUI("FRM_HELP_BIG")	-->
+	<FORM ID="FRM_HELP_BIG_ITEM" X="0" Y="0" W="447" H="10" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+	<FORM ID="FRM_HELP_BIG" ALIGN_X="50" ALIGN_Y="40" W="512" H="465" IMG="../Data/6_ui/guide/gdBg.tga" IMG_W="512" IMG_H="465">
+		<ATTR TEXT="400902" T_X="65" T_Y="12" T_CENTER="1" FONT="Font_Warn" FONT_COLOR_HEX="0xFFFFDB86" T_OUTLINE="1"/>
+		<HOTKEY ID="60">UISelf:Close() ActivateUI("FRM_HELP_MAIN") return true</HOTKEY>
+		<HOTKEY ID="1">UISelf:Close() return true </HOTKEY>
+		<FORM ID="FRM_TITLE" X="18" Y="45" W="450" H="24" NUM="2" TEXT="" T_X="5" T_Y="3" FONT="FT15" FONT_COLOR_HEX="0xFFFFE9AF" T_OUTLINE="1"/>
+		<LIST ID="LST_CONTENTS" X="22" Y="78" W="467" H="188" ELEMENT_ID="FRM_HELP_BIG_ITEM" ITEM_X="0" ITEM_Y="0" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="IMG_SCR_BG">
+			<IMG ID="IMG_SCR_BG" X="451" Y="20" Z="-1" W="13" H="148" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="148"/>
+			<BUTTON ID="BTN_SCR_UP" X="447" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="447" Y="173" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="449" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+		</LIST>
+		<IMG ID="IMG_PREVIEW" X="18" Y="277" W="475" H="137" IMG="../Data/6_ui/guide/gdImg01.tga" IMG_W="475" IMG_H="137"/>
+		<BUTTON ID="BTN_CLOSE" X="471" Y="45" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:CloseParent() return true </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_HOTLINK" X="60" Y="423" W="196" H="35" BTN_IMG="../Data/6_ui/guide/gdBt.tga" BTN_IMG_W="392" BTN_IMG_H="105" U="2" V="3">
+			<ATTR TEXT="" T_X="98" T_Y="9" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("FRM_HELP_MAIN") OnClickExBtn(UISelf:GetParent(), UISelf:GetCustomDataAsInt())</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSELINK" X="270" Y="423" W="196" H="35" BTN_IMG="../Data/6_ui/guide/gdBt.tga" BTN_IMG_W="392" BTN_IMG_H="105" U="2" V="3">
+			<ATTR TEXT="165" T_X="98" T_Y="9" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent() ActivateUI("FRM_HELP_MAIN")</SCRIPT>
+		</BUTTON>
+	</FORM>
+
+	<FORM ID="FRM_HELP_MINI">
+		<ATTR X="506" Y="564" W="508" H="127"/>
+		<ATTR IMG="../Data/6_ui/main/mnHelpBg.tga" IMG_W="508" IMG_H="127"/>
+		<SCRIPT ID="ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			FHM_PrevTime = g_world:GetAccumTime()
+		</SCRIPT>
+		<FORM ID="FRM_BIG_ICON" X="12" Y="13" W="60" H="63">
+			<ATTR IMG="../Data/6_ui/main/mnHelpIcon.tga" IMG_W="120" IMG_H="126" U="2" V="2" UV_INDEX="3"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> CallUI(UISelf:GetCustomDataAsStr():GetStr()) </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">
+				local FHM_UV = UISelf:GetUVIndex()
+				if FHM_UV ~= 3 then
+					if( CheckNil(g_world == nil) ) then return false end
+					if( CheckNil(g_world:IsNil()) ) then return false end
+					local FHM_NextTime = g_world:GetAccumTime()
+					if FHM_NextTime - FHM_PrevTime > 1 then
+						FHM_PrevTime = FHM_NextTime
+						if FHM_UV == 1 then
+							UISelf:SetUVIndex(FHM_UV+1)
+						else
+							UISelf:SetUVIndex(FHM_UV-1)
+						end
+					end
+				end
+			</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_HELP_TITLE" X="95" Y="13" W="400" H="15">
+			<ATTR TEXT="" T_X="0" T_Y="0" FONT="QTtext" FONT_COLOR_HEX="0xFFFFF55A" T_OUTLINE="1" T_BOLD="1"/>
+		</FORM>
+		<FORM ID="FRM_HELP_CONTENTS" X="95" Y="30" W="400" H="60">
+			<ATTR TEXT="" T_X="0" T_Y="0" FONT="QTtext" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		</FORM>
+		<!--BUTTON ID="BTN_HELP_PREV" X="23" Y="96" W="27" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/msbook/mbLeftB.tga" BTN_IMG_W="54" BTN_IMG_H="52" />
+			<ATTR TEXT="95" T_CENTER="1" T_X="42" T_Y="6" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local HelpMgr = GetHelpSystem()
+				if HelpMgr:IsNil() ~= true then
+					HelpMgr:ActivatePrevObject()
+				end
+			</SCRIPT>
+		</BUTTON-->
+		<!--BUTTON ID="BTN_HELP_NEXT" X="144" Y="96" W="27" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/msbook/mbRightB.tga" BTN_IMG_W="54" BTN_IMG_H="52" />
+			<ATTR TEXT="92" T_CENTER="1" T_X="-15" T_Y="6" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local HelpMgr = GetHelpSystem()
+				if HelpMgr:IsNil() ~= true then
+					HelpMgr:ActivateNextObject()
+				end
+			</SCRIPT>
+		</BUTTON-->
+		<!--CHECK_BUTTON ID="CBTN_HELP_IS_SHOW" X="262" Y="100" W="20" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40" />
+			<SCRIPT ID="ON_CALL">UISelf:CheckState(false)</SCRIPT>
+		</CHECK_BUTTON>
+		<FORM ID="FRM_HELP_IS_SHOW" X="292" Y="100" W="120" H="20">
+			<ATTR TEXT="400901" T_CENTER="1" T_X="50" T_Y="2" FONT="FTcts_13" FONT_COLOR_HEX="0xFFF8E3B1" T_OUTLINE="1"/>
+		</FORM-->
+		<BUTTON ID="FRM_HELP_CLOSE" X="427" Y="97" W="75" H="23">
+			<ATTR BTN_IMG="../Data/6_ui/main/mnHelpBt.tga" BTN_IMG_W="130" BTN_IMG_H="46"/>
+			<ATTR TEXT="400542" T_X="32" T_Y="4" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local HelpMgr = GetHelpSystem()
+				if HelpMgr:IsNil() ~= true then
+					local HelpObj = HelpMgr:GetActivatedObject()
+					if HelpObj:IsNil() ~= true then
+						local HelpUI = GetHelpSystem()
+						if UISelf:GetParent():GetControl("CBTN_HELP_IS_SHOW"):GetCheckState() == true then
+							HelpObj:SetDoNotActivateAgain(true)
+							HelpUI:SaveHelpInfoFile(g_pilotMan:GetPlayerPilotGuid())
+						else
+							HelpObj:SetDoNotActivateAgain(false)
+							HelpUI:SaveHelpInfoFile(g_pilotMan:GetPlayerPilotGuid())
+						end
+					end
+				end
+				CloseUI("FRM_HELP_MINI")
+			</SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+	<FORM ID="FRM_HELP_BASIC_SKILLSET">
+		<ATTR X="506" Y="564" W="508" H="127"/>
+		<ATTR IMG="../Data/6_ui/main/mnHelpBg2.tga" IMG_W="508" IMG_H="127"/>
+		<FORM ID="FRM_HELP_TITLE" X="94" Y="14" W="400" H="15">
+			<ATTR TEXT="" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFF55A" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_HELP_CONTENTS" X="95" Y="34" W="400" H="60">
+			<ATTR TEXT="" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_HELP_CONTENTS_SUB" X="32" Y="101" W="400" H="15">
+			<ATTR TEXT="799410" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFfff799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<STATIC_FORM ID="SFRM_SKILLSET" X="29" Y="18" Z="0" W="40" H="40" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ICON ID="ICN_SKILLSET" X="0" Y="0" Z="1" W="40" H="40" IMG_W="40" IMG_H="40" ICON_GRP="245" ICON_KEY = "">
+				<SCRIPT ID="ON_DISPLAY">
+					UISelf:DrawIcon()
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+		</STATIC_FORM>
+		<BUTTON ID="FRM_HELP_AUTOSET" X="11" Y="64" W="77" H="22">
+			<ATTR BTN_IMG="../Data/6_ui/info/ifPetBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="77" BTN_IMG_H="88"/>
+			<ATTR TEXT="799405" T_X="38" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFfffcea" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5e2f00"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local UIParent = UISelf:GetParent()
+				local iSetNo = GetHelpSkillSetNo(UIParent)
+				if 31 == iSetNo then
+					CallHelpSkillSetToolTip(iSetNo, GetUIWnd("Cursor"):GetLocation())
+				elseif 32 == iSetNo then
+					CallHelpSkillSetToolTip(iSetNo, GetUIWnd("Cursor"):GetLocation())
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local iSetNo = GetHelpSkillSetNo(UISelf:GetParent())
+				local iQuickInvSlot = iSetNo - 27
+				SetQuickInvBasicSkillSet(iQuickInvSlot, iSetno)
+			</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="FRM_HELP_CALL_SKILLSET" X="11" Y="64" W="77" H="22">
+			<ATTR BTN_IMG="../Data/6_ui/info/ifPetBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="77" BTN_IMG_H="88"/>
+			<ATTR TEXT="799413" T_X="38" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFfffcea" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5e2f00"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local kSelf = UISelf
+				CallUI("SFRM_SKILLSET")
+				kSelf:GetParent():Close()
+			</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="FRM_HELP_CLOSE" X="427" Y="97" W="75" H="23">
+			<ATTR BTN_IMG="../Data/6_ui/main/mnHelpBt.tga" BTN_IMG_W="130" BTN_IMG_H="46"/>
+			<ATTR TEXT="400542" T_X="32" T_Y="4" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:GetParent():Close()
+			</SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+	<FORM ID="FRM_HELP_CONTROL" ALIGN_X="50" IS_ABSOLUTE_Y="1" Y="105" W="554" H="124">
+		<ATTR IMG="../Data/6_UI/main/mnTtrlBg.tga" IMG_W="554" IMG_H="124"/>
+		<ATTR TEXT="10" T_X="277" T_Y="6" T_CENTER="1" FONT="QTtext_Name" FONT_COLOR_HEX="0xFFFFB15C" T_OUTLINE="1"/>
+		
+		<IMG ID="IMG_1" X="70" Y="35" W="118" H="77" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlMove.tga" IMG_W="118" IMG_H="154" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_2" X="70" Y="60" W="118" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlC.tga" IMG_W="118" IMG_H="74" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_3" X="70" Y="60" W="118" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlX.tga" IMG_W="118" IMG_H="74" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_4" X="70" Y="60" W="118" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlZ.tga" IMG_W="118" IMG_H="74" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_5" X="90" Y="60" W="78" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlDash.tga" IMG_W="78" IMG_H="111" U="1" V="3" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_6" X="60" Y="60" W="138" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlDashC.tga" IMG_W="138" IMG_H="111" U="1" V="3" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_7" X="50" Y="50" W="139" H="42" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlNpc.tga" IMG_W="139" IMG_H="84" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_8" X="30" Y="60" W="158" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlQ.tga" IMG_W="158" IMG_H="74" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_9" X="110" Y="60" W="118" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrln.tga" IMG_W="38" IMG_H="74" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_10" X="80" Y="60" W="98" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlXdown.tga" IMG_W="98" IMG_H="74" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_11" X="50" Y="35" W="98" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlKeyBoard.tga" IMG_W="161" IMG_H="204" U="1" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_12" X="140" Y="35" W="98" H="37" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlMus.tga" IMG_W="102" IMG_H="77" U="2" V="1" UV_INDEX="1"/>
+			<SCRIPT ID="ON_TICK"> OnTick_ControlHelp(UISelf) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_QuestMark" X="100" Y="19" W="118" H="100" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/mnTtrlMark.tga" IMG_W="270" IMG_H="200" U="3" V="2" UV_INDEX="1"/>
+		</IMG>
+		
+		<FORM ID="FRM_CONTENTS" X="220" Y="35" W="300" H="85">
+			<ATTR TEXT="505781" T_X="0" T_Y="0" FONT="QTtext_Contents" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF4F4F4F"/>
+		</FORM>
+		<SCRIPT ID="ON_CALL"> g_kCurHelpTime = 0 </SCRIPT>
+	</FORM>
+</XUI>

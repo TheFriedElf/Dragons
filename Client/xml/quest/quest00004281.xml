@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4281</ID> <!--T.T.10428100 하늘을 나는말 페가수스 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	페가수스자리 던전에서 페가수스의 깃털 얻어오기-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	전갈자리의 괴물전갈에게서 네번째 열쇠인 녹색성좌의 열쇠를 얻을 수 있다. 하지만 그곳에 가는 길은 지금 독무로 가득차 있어서 걸어서는 갈 수 없다. 하늘을 나는 말 페가수스가 있다면 도움이 될것이다. 목요일에 열리는 페가수스자리에 가서 페가수스의 도움을 받도록하자.-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000170</ITEM> 
+ <!--Item_NO=82000170/[13_01 별자리] 페가수스의 깃털,-->
+		<MISSION OBJECTNO="2" TYPE="STRATEGY_DEFENCE_STAGE_CLEAR" VALUE="40">118</MISSION> 
+ <!--Mission_Key=118/[별자리]페가수스/ 처녀자리,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10428111"/> <!--페가수스의 깃털-->
+		<OBJECT2 COUNT="1" TEXT="10428112"/> <!--페가수스자리던전 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10428121" FACE="Crete_normal"/> <!--네번째 열쇠는 목요일에 열리는 전갈자리에서 얻을 수 있어요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10428126" FACE="Crete_smile"/> <!--페가수스의 깃털은 몸을 가볍게 해주기 때문에 짧은 시간동안 하늘을 날아서 독무를 피해갈 수 는 있을 겁니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10428123" FACE="Crete_normal"/> <!--하지만 그곳은 지금 독무로 가득차 있어서 걸어서는 갈 수가 없답니다. 별자리에는 페가수스라는 하늘을 나는 말이 있는데, 페가수스가 도움을 줄 수도 있을 거예요. 하지만 페가수스가 워낙 귀한 말이다 보니 그 말을 노리는 자들이 많답니다. 특히 하데스… 
+지옥의 신 하데스는 부하들을 시켜서 호시탐탐 페가수스를 잡아오라고 시키더군요. 혹시 그말이 위험에 처해 있다면 꼭 도와주세요-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10428124" FACE="Crete_cry"/> <!--%name%님.. 많이 지치셨군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10428125" FACE="Crete_normal"/> <!--언제쯤 별자리에 다시 평화가 찾아 올까…  %name%님만 믿고 있겠습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10428102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

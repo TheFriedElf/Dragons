@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5158</ID> <!--T.T.10515801 도전장(5) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	벨칸신전 - 붉은 철퇴 미라로부터 초록 허브 20개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	하임은 프랑크와 매출로 대결을 펼치고 있다고 한다. 프랑크는 자존심을 상하게 하는 프랑크를 상대로 이번 경기를 꼭 이기기 위해, 특제 포션을 완성시키려 한다. 포션의 완성을 위해 초록허브가 필요하다고 한다. 초록허브는 벨칸신전에서 붉은 철퇴 미라가 가지고 있다고 한다. 붉은 철퇴 미라를 처리하고 초록 허브 20개를 획득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3CD863C-444D-40ee-B976-083D98067B1B</CLIENT> <!--시작NPC 달빛해안 마을 - 하임 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 11 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010220/10000/6000/1/1/160515800">6008100</MONSTER> 
+ <!--MON_NO=6008100/붉은 철퇴 미라,MAP_NO=9010220/벨칸 신전,Item_NO=160515800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160515800</ITEM> 
+ <!--Item_NO=160515800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10515811"/> <!--초록 허브 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10515821" FACE="Coneil_normal"/> <!--서두르자! 
+날 위해 포션 1000개만 살 수 없어? 
+그 정도만 사준다면 프랑크아저씨를 이길 수 있을 것 같아.%%
+역시 안되겠지? 그렇다면 날 위해 부탁 하나만 들어줄 순 없을까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10515826" FACE="Coneil_smile"/> <!--고마워. 이제부터는 장사하는 일만 남았군. 장사꾼의 자존심을 보여주겠어!!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10515823" FACE="Coneil_normal"/> <!--네가 구해다 준 빨간 허브를 포션에다가 넣었어. 
+그랬더니 맛은 좋았지만 효과는 떨어졌어.
+그러니 소비자들이 또 싫어해. 빨리 중화시켜 효과를 올려야겠어.%%
+그러기 위해선 초록허브가 필요해.
+초록 허브는 벨칸신전 붉은 철퇴 미라가 가지고 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10515824" FACE="Coneil_angly"/> <!--거절한다.%%
+네가 거절한 걸 내가 거절한다!! 쳇.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10515825" FACE="Coneil_normal"/> <!--이 정도 매출이면 이길 수 없을 거야. 역시 특제 포션이 필요해. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10515802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

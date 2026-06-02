@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5185</ID> <!--T.T.10518501 죠이스 해적단의 전설 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	칼리곤과 대화-->
+<!--[완료NPC]	위험한 동굴 - 칼리곤-->
+<!--[내용]	칼리곤은 죠이스해적단을 이끌고 있는 바다의 해적이라고 한다. 그런 칼리곤은 바다에서 겪은 전설에 대해 얘기하고 싶다고 한다. 위험한 동굴 칼리곤에게 죠이스해적단 전설을들어보도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</CLIENT> <!--시작NPC 위험한 동굴 - 칼리곤 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER> <!--완료NPC 위험한 동굴 - 칼리곤 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011"  MARK="END">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT> <!--진행NPC 11 위험한 동굴 - 칼리곤 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10518511"/> <!--칼리곤과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10518521" FACE="Kalligon_normal"/> <!--친구 죠이스 해적단의 전설을 알고 있나?
+죠이스 해적단이 대왕문어와 싸운얘기야. 
+그 전설에 대해 얘기해줄까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10518526" FACE="Kalligon_normal"/> <!--다음에 더 많은 얘기를 해주도록 하지. 하하하!%%
+으악!!! 네 발 밑에 쥐다 !!쥐야 !!! 으악 !!!
+나 좀 살려줘!!!!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10518523" FACE="Kalligon_smile"/> <!--1년 전이었어. 우린 스티븐 무역항을 출발하여 톱날꼬깨 해변으로 가던 길이었지.
+그때 갑자기 천둥이 치고 하늘이 어두워지더군.%%
+하지만 나 칼리곤은 용기로 똘똘 뭉쳐있기 때문에 두렵지 않았지.
+근데 갑자기 커다란 문어 다리가 우리를 공격하기 시작했어.%%
+우린 필사적으로 막았지.
+2박 3일 동안 우리는 싸우고 싸웠다네. 그리고 대왕문어를 어렵게 물리친 적이 있다네.
+그때 이후로 나는 두려운 것이 없다네. 하하하하!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10518524" FACE="Kalligon_normal"/> <!--궁금하지 않으면 말게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10518525" FACE="Kalligon_normal"/> <!--대왕문어가 어머어마했어. 10미터도 넘는 크기였지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10518502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<PUPPET NAME="o_Lever" USE_PHYSX="1">
+  <WORLDOBJECT>
+    <KFMPATH SCALE="1">../Data/3_World/00_Object/Event/Event_Ani/Van_testswich1001_01/Van_testswich1001_01.kfm</KFMPATH>
+    <SLOT>
+      <!-- Basic Movement -->
+      <ITEM NAME="down_01" ANIMATION="1000011"/>
+      <ITEM NAME="downidle_01" ANIMATION="1000000"/>
+
+      <ITEM NAME="up_01" ANIMATION="1000030"/>
+      <ITEM NAME="upidle_01" ANIMATION="1000020" />
+    </SLOT>
+  </WORLDOBJECT>
+
+  <WORLD_EVENT_STATE_INFO>
+
+    <STATE ID="0" SLOT="downidle_01" />
+    <STATE ID="1" SLOT="upidle_01"/>
+
+    <TRANSIT FROM="0" TO="1" SLOT="up_01"/>
+    <TRANSIT FROM="1" TO="0" SLOT="down_01"/>
+
+  </WORLD_EVENT_STATE_INFO>
+
+</PUPPET>

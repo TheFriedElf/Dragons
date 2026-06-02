@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4040</ID> <!--T.T.10404001 사건의 일단락 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 무카파와 대화-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	크로키의 말 대로 바람항구로 가서 신보탈환 대장 무카파를 만나 그간의 사정을 보고하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 스티븐 무역항 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 스티븐 무역항 - 크로키 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 12 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10404011"/> <!--무카파와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10404021" FACE="Kroki_normal"/> <!--아쉽게도 신보를 탈환하는 것에는 실패했습니다.
+그러나 우리는 검은 로브를 쓴 마녀에 대한 중요한 정보를 얻어냈습니다.%%
+당신이 없었더라면 불가능한 일이었을 지도 몰라요. 
+진심으로 감사를 표합니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10404026" FACE="Mukapa_smile"/> <!--물의 신보에 대한 일은 전해 들었네.
+포기하지 말게… 우린 반드시 신보를 되찾게 될 걸세.%%-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10404023" FACE="Kroki_normal"/> <!--비록 신보를 되찾은 것은 아니라 하더라도, 우리에겐 아직 희망이 있습니다.
+바람항구로 돌아가셔서 무카파님께 그간의 이야기를 전해주십시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10404024" FACE="Kroki_angly"/> <!--무카파님께는 당신이 직접 가시는 것이 좋을듯 합니다만…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10404025" FACE="Kroki_angly"/> <!--무카파님은 잘 아시는 듯이 바람항구에 계십니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10404002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

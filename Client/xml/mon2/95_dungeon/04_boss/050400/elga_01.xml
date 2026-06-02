@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_elga01" INIT_ACTION="a_opening" SHOW_WARNING="FALSE">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_elga01"/>
+		<KFMPATH SCALE="1">../Data/2_Mon2/99_Boss/050400/Elga_01/Elga_01.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="35"/>
+			<SPHERE TO="p_hit_point_02" SIZE="40"/>
+			<SPHERE TO="p_hit_point_03" SIZE="60"/>
+		
+			<CAPSULE TO="p_hit_point_04" SIZE="5,120"/>
+			<CAPSULE TO="p_hit_point_05" SIZE="5,120"/>
+		</ABV>
+		<SLOT>
+			
+			<!--근거리 1 오른팔-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000301"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000302"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000303"/>
+			<!--근거리 2 왼팔-->
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000304"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000305"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000306"/>
+			<!--근거리 3꼬리-->
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000307"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000308"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000309"/>
+
+			<!--오른팔 뻗으며 대시-->
+			<ITEM NAME="dash_piercing_attk_btlidle_01_start" ANIMATION="1000329" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_piercing_attk_btlidle_01_start" ANIMATION="1000330" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_piercing_attk_rush" ANIMATION="1000331" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_piercing_attk_finish" ANIMATION="1000332" FIRE_EFFECT="NONE"/>
+
+			<!--돌 떨구기-->
+			<ITEM NAME="attk_fin_01_start" ANIMATION="1000353"/>
+			<ITEM NAME="attk_fin_01" ANIMATION="1000354"/>
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1000355"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000356"/>
+
+			<!--포효-->
+			<ITEM NAME="energy_explosion_btlidle_start" ANIMATION="1000374" RANGE_EFFECT="NONE"/>
+			<ITEM NAME="energy_explosion_btlidle" ANIMATION="1000375"/>
+			<ITEM NAME="energy_explosion_fire" ANIMATION="1000376" FIRE_EFFECT="NONE"
+				FIRE_START_NODE="p_ef_r_hand" FIRE_START_EFFECT="Projectile_kahuna_oakshire_ball" PROJECTILE_ID="Projectile_kahunaOakshire_magic_01"
+				QUAKE_TIME="3" QUAKE_FACTOR="1.2" FIRE_TERM="0.2"/>
+
+			<!--사선 점프-->
+			<ITEM NAME="jumpdowncrash_diag_up" ANIMATION="1000411" GROUND_EFFECT="efx_elgar_02_jumpdowncrash" GROUND_EFFECT_SCALE="0.6" IS_CAST_TIME="TRUE"/>
+			<ITEM NAME="jumpdowncrash_diag_down" ANIMATION="1000412" DELAY_DOWN="0"/>
+			<ITEM NAME="jumpdowncrash_diag_getup" ANIMATION="1000113" QUAKE_TIME="1" QUAKE_FACTOR="1"/>
+
+			<!--유도탄-->
+			<ITEM NAME="shot_around_01_start" ANIMATION="1000418"/>
+			<ITEM NAME="shot_around_01" ANIMATION="1000419"/>
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1000420"
+				FIRE_START_NODE="p_ef_r_hand" FIRE_START_NODE1="p_ef_r_hand" FIRE_START_NODE2="p_ef_r_hand" 
+				PROJECTILE_ID="PROJECTILE_elga_shot_01" PROJECTILE_ID1="PROJECTILE_elga_shot_01" PROJECTILE_ID2="PROJECTILE_elga_shot_01" 
+				PROJECTILE_SPEED="250" PROJECTILE_SCALE="1.0" PROJECTILE_SCALE1="1.0" PROJECTILE_SCALE2="1.0"
+				PROJECTILE_COUNT="12"
+				HIT_TARGET_EFFECT_ID="efx_elgar_01_shot_around_01_dmg" HIT_TARGET_EFFECT_TARGET_NODE="Bip01 Spine1"/>
+
+
+			<!--순간 이동-->
+			<ITEM NAME="teleport_skill_01_start" ANIMATION="1000448"/>
+			<ITEM NAME="teleport_skill_01_btlidle" ANIMATION="1000449" CASTING_EFFECT="eff_elgar_01_teleport_skill_01"/>
+			<ITEM NAME="teleport_skill_01" ANIMATION="1000450"/>
+			
+            <!--화염 브레스-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000451"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000452"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000453" PROJECTILE_ID="Projectile_Elga_01_shot_01" FIRE_START_NODE="p_ef_mouth" SHOT_INTER_TIME="0.3" GROUND_EFFECT="NONE"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000454"/>
+			
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000900" QUAKE_TIME="1.5" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000019" QUAKE_TIME="3" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			
+
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000013" VELOCITY="1" VELOCITY_INIT="1"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000013"/>
+			<ITEM NAME="StandUp" ANIMATION="1000005"/>
+			<ITEM NAME="Stun" ANIMATION="1000306"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+
+			<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

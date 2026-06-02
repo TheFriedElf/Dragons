@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_fly_globefish_bone" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_fly_ globefish_bone"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_fly_globefish_bone/N_fly_globefish_bone.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_fly_globefish_bone/N_fly_globefish_bone_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_fly_globefish_01_p_ef_head" TO="p_ef_head"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="24,9.5"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

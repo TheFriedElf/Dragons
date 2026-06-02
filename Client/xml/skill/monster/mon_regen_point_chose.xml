@@ -1,0 +1,7 @@
+<ACTION ID="a_mon_regen_point_chose" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" BIDIRECTION="TRUE">
+	<SLOT NAME="regen_point_chose_btlidle_start"/>
+	<SLOT NAME="regen_point_chose_btlidle" LOOP="TRUE"/>
+	<SLOT NAME="regen_point_chose_attk"/>
+	<SLOT NAME="idle_01"/>
+		<FSM SCRIPT="Act_Mon_RegenPointChoose"/>
+</ACTION>

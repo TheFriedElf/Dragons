@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5125</ID> <!--T.T.10512501 철없는 해골 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전[아케이드 모드(F3)] - 스켈레톤 엉클 15마리 처치-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	묘지기 라르엘은 묘를 자꾸 훼손하는 스켈레톤 엉클 때문에 속상하다고 한다. 스카이피 신전[아케이드 모드(F3)]에 철 없는 스켈레톤 엉클 15마리를 처리하고 라르엘에게 보고하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010213/1">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9010213/스카이피 신전 아케이드 3,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10512511"/> <!--스켈레톤 엉클 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10512521" FACE="Larel_angly"/> <!--정말 참을 수 없군.
+%name%아. 
+부탁 하나만 해도 될까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10512526" FACE="Larel_smile"/> <!--이제 좀 조용할 것 같군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10512523" FACE="Larel_normal"/> <!--스카이피 신전[아케이드 모드(F3)]에 있는 스켈레톤 엉클 15마리만 처리해 줘.
+스켈레톤 엉클녀석들이 내가 지키는 묘에 와서 묘를 훼손하고 있어.%%
+그런 짓을 장난으로 하다니 아무리 생각이 없다지만 정말 철이 없는 것 같아.
+이럴 때일수록 혼을 내줘야 정신을 차리겠지? 미안한데, 부탁 좀 할게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10512524" FACE="Larel_angly"/> <!--네가 날 안 도와주다니... 대체 어떻게 된 일이지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10512525" FACE="Larel_normal"/> <!--아직도 여기서 뭐 하는 거야? 나는 시간이 없는 거 네가 더 잘 알잖아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10512502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

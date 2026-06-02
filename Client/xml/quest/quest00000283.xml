@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>283</ID> <!--T.T.10028301 산타클로스의 행방을 찾아서 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구의 봄의 요정 왈츠와 이야기 해보자.-->
+<!--[완료NPC]	바람항구 - 왈츠-->
+<!--[내용]	뭔가 수상쩍은 니아. 니아의 옆에 있는 봄의 요정 왈츠에게 산타클로스의 행방을 물어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8CE11B05-75B4-48c7-888E-96D78B794BAD</CLIENT> <!--시작NPC 바람항구 - 니아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">A10A65F2-5334-4bfe-8F6C-E0BF0FC7B626</PAYER> <!--완료NPC 바람항구 - 왈츠 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8CE11B05-75B4-48c7-888E-96D78B794BAD</AGENT> <!--진행NPC 11 바람항구 - 니아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">A10A65F2-5334-4bfe-8F6C-E0BF0FC7B626</AGENT> <!--진행NPC 12 바람항구 - 왈츠 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10028311"/> <!--왈츠와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10028321" FACE="Nia_normal"/> <!--그, 글쎄요. 본 거 같기도 하고요.
+아마! 제 옆에 있는 왈츠가 산타클로스에 대해서 알고 있을 거에요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10028326" FACE="Waltz_smile"/> <!--아! 산타클로스요?
+물론 알고 있죠.%%
+지금 입고 있는 옷도 산타클로스가 날개옷을 빌려주는 조건으로 준 거에요.%%
+(왈츠가 한 바퀴 빙그르르 돈다)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10028323" FACE="Nia_normal"/> <!--자! 빨리 가보세요.
+저는 더 이상 자세한 사항은 알지 못해요.%%
+(니아의 얼굴이 이상하게 상기되어 있다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10028324" FACE="Nia_cry"/> <!--저… 저는 산타클로스에 대해서 잘 모른다니깐요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10028325" FACE="Nia_cry"/> <!--그, 그만 물어봐 주세요. 정말 자세히는 몰라요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10028302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

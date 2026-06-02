@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4194</ID> <!--T.T.10419401 반인반마의 안식처 (2)  -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	신들의 안식처[시나리오 모드(F5)] 클리어-->
+<!--[완료NPC]	신들의 안식처 - 피레이-->
+<!--[내용]	피레이는 자신이 성질이 나쁜 탓에 따돌림을 당했기 때문에 무티샤의 저주마법으로부터 무사했다고 생각한다. 모두가 이성을 잃고 자신을 공격했기 때문에 스스로 오염된 켄타들에게 끌려갈까 생각했으나, %name% 덕분에 희망을 품게 되었다고 전한다. 켄타우르스 피레이를 위해 신들의 안식처[시나리오 모드(F5)]에 있는 오염된 켄타우르스들과 카르카로스를 비롯한 모든 몬스터를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</CLIENT> <!--시작NPC 신들의 안식처 - 피레이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</PAYER> <!--완료NPC 신들의 안식처 - 피레이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</AGENT> <!--진행NPC 11 신들의 안식처 - 피레이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="102/5/1">6104400</MONSTER> 
+ <!--MON_NO=6104400/카르카로스,Mission_Key=102/신들의안식처 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419411"/> <!--신들의 안식처[시나리오 모드(F5)] 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419421" FACE="Pirey_normal"/> <!--오래 살다보니… 이런 날도 찾아오는 군.
+난 사실 선량한 켄타가 아니야. 
+원래는 그 반대였지.%%
+늘 불평불만이 많고. 만사를 귀찮아 여겨
+원래 주변으로부터 소외 받은 왕따였다네.%%
+진짜 선량한 켄타우르스는 사실 사악한 저주에
+빠지기 전의 카르카로스였어.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419426" FACE="Pirey_smile"/> <!--너의 용맹함 덕분에 쿤다라의 결계가 열리는 것을 
+가까스로 막아낸 것 같다. 재앙을 막은 거나 다름 없어.
+대단하구나. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419423" FACE="Pirey_normal"/> <!--다른 켄타무리들과 어울리지 못하다 보니…
+오히려 그 덕분에 무티샤의 저주로부터 무사할 수 있었지.%%
+헬 크라우저에게 듣기로는 이 사악한 저주를 푸는 방법이
+없다고 하더군. 이제 어쩌면 난 영원히 외톨이가 될 지도…%%
+사실 나도 이대로 끌려가 오염된 켄타의 일원이 될까
+고민도 했었다. 하지만 널 만나고 생각이 달라졌다.%%
+아무 상관이 없는 나를 위해 이렇게 애써주다니
+난생 처음 친구가 소중하다는 생각을 하게 하는구나.%%
+자, 이제 카르카로스를 처단할 때가 왔다!
+안타깝지만 카르카로스와 나머지 오염된 켄타들을 퇴치해다오.
+그들은 신들의 안식처[시나리오 모드(F5)]에 집결해 있을 거다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419424" FACE="Pirey_angly"/> <!--만약 네가 돕지 않는다 해도 상관 없어. 이젠 나 혼자 만의 싸움이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419425" FACE="Pirey_angly"/> <!--신들의 안식처[시나리오 모드(F5)]를 클리어해다오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

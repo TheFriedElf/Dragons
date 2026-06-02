@@ -1,0 +1,13 @@
+<ACTION ID="a_Joint Break" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Onehand_skill_JointBreak_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="Onehand_skill_JointBreak_01_char_root"
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	   FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+       NO_WEAPON_TRAIL="TRUE"
+       FIRE_SOUND_ID="Jointbreak_Start"
+       WEAPON_XML="Item/Common/12_Weapon/09_special/comic_bat.xml"
+       />
+</ACTION>

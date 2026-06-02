@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5181</ID> <!--T.T.10518101 칼리곤에게 배달하기(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	하임과 대화-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	프랑크는 칼리곤에게 무기를 배달하기로 했다고 한다. 프랑크는 하임에게 같이 배달을 부탁했다. 하지만 무기가 언제 도착할 지 모른다고 한다. 배달을 부탁한 하임에게 칼리곤의 검이 도착했는지 물어보도록 하자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">381631BA-E014-402f-BD24-4C501F3E611B</CLIENT> <!--시작NPC 달빛해안 마을 - 프랑크 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">381631BA-E014-402f-BD24-4C501F3E611B</AGENT> <!--진행NPC 11 달빛해안 마을 - 프랑크 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 12 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10518111"/> <!--하임과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10518121" FACE="Crispin_angly"/> <!--용사님이 골라주신 검은 아직 도착하지 않았어요.
+하임이 물약을 배달시킬 일이 있다고 해서 같이 부탁해놨는데...%%
+도착했을지 잘 모르겠네요.
+용사님이 대신 물어봐 주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10518126" FACE="Coneil_angly"/> <!--사실은 일이 좀 생겨서 물건을 받지 못했어. 
+마침 잘 됐다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10518123" FACE="Crispin_angly"/> <!--하임에게 부탁을 해놨으니 한번 물어봐 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10518124" FACE="Crispin_angly"/> <!--별로 힘든 일도 아닌데... 섭섭하네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10518125" FACE="Crispin_angly"/> <!--물어봐 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10518102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4204</ID> <!--T.T.10420401 천이백살입니다! 뿌우! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	잊혀진 마을[아케이드모드(F1)] 클리어-->
+<!--[완료NPC]	버섯마을 - 마시룬-->
+<!--[내용]	마시룬은 잊혀진 마을에 사는 천이백살 먹은 부엉이 현자 부보부보에 대해 알려준다. 부보부보를 찾아가려면 잊혀진 마을[아케이드모드(F1)]를 클리어해야 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</CLIENT> <!--시작NPC 버섯마을 - 마시룬 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</PAYER> <!--완료NPC 버섯마을 - 마시룬 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</AGENT> <!--진행NPC 11 버섯마을 - 마시룬 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6052600</MONSTER> 
+ <!--MON_NO=6052600/부보부보,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10420411"/> <!--잊혀진 마을[아케이드모드(F1)] 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10420421" FACE="Fungarf_normal"/> <!--오오.. 그래… 부보부보가 있는 곳을 알려주기로 했지. 맞아.
+부보부보는 원래 대단한 현자라네. 천이백년이나 살았다고 
+하지.%%
+그 긴 시간 동안 수없이 많은 지식과 지혜를 공부했으니
+살아있는 백과사전이라 할 수 있지 않겠나.
+덕분에 우리 펑가스 일족도 대대로 신세를 졌다고 하더군%%
+허나, 지금은 세월이 흘러 치매에 걸리고 말았으니
+아쉽게도 이젠 성미 사나운 몬스터에 불과하지 않다네.
+세월 앞에는 장사도 없고, 현자도 없는 법이지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10420426" FACE="Fungarf_smile"/> <!--아아, 안타깝군 그래.. 전혀 대화가 통하지 않았다고 하니
+내가 자네를 위해 나설 때가 된 것 같구만.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10420423" FACE="Fungarf_normal"/> <!--부보부보는 잊혀진 마을[아케이드모드(F1)]에 있다고 들었네.
+물론 그를 만나기 위해 잊혀진 마을[아케이드모드(F1)]의 
+클리어가 필수겠지. 그럼 행운을 빌겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10420424" FACE="Fungarf_angly"/> <!--자네 시간의 제단에 대한 행방을 찾는다고 하지 않았나? 쩝…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10420425" FACE="Fungarf_angly"/> <!--부보부보를 만나기 위해선 잊혀진 마을[아케이드모드(F1)]를
+클리어해야 하네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10420402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

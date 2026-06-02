@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!-- 커뮤니티 이벤트 입장 UI -->
+	<STATIC_FORM ID="SFRM_COMMUNITY_EVENT" ALIGN_X="50" ALIGN_Y="50" W="336" H="284" STATIC_NUM="1" CAN_DRAG = "1">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="334" H="36" STATIC_NUM="4">
+			<!-- TITLE COLOR BOX -->
+			<STATIC_FORM ID="SFRM_COLOR_BOX1" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<IMG IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<STATIC_FORM ID="SFRM_SHADOW_BOX" X="0" Y="0" W="144" H="24" STATIC_NUM="3" PASS_EVENT="1" NO_FOCUS="1">
+					<ATTR TEXT="302104" FONT="Font_Text" T_X="7" T_Y="12" T_Y_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_COLOR_BOX" X="9" Y="34" W="317" H="205" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_SHADOW_BOX" X="0" Y="0" W="317" H="205" STATIC_NUM="3" PASS_EVENT="1" NO_FOCUS="1"/>
+		</STATIC_FORM>
+		
+		<!-- 스크롤 -->
+		<LIST ID="LST_SEARCH_EVENT_LIST" X="15" Y="40" Z="4" W="289" H="193">
+			<ATTR ELEMENT_ID="FRM_SEARCH_EVENT_ITEM" ITEM_X="0" ITEM_Y="0"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="292" Y="16" Z="-1" W="13" H="193" IGNORE_PARENT_RECT="1" >
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="193"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="288" Y="1" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrDown" X="288" Y="179" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="290" Y="16" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP="ScrUp" />
+			<ATTR BTN_DOWN="ScrDown" />
+			<ATTR BTN_MIDDLE="ScrMiddle" />
+			<ATTR WND_BAR="IMG_LIST_SCROLL_BG"/>
+		</LIST>
+		
+		<BUTTON ID="BNT_CLOSE" X="303" Y="4" Z="4" W="24" H="24">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:GetParent():Close() </SCRIPT>
+			<HOTKEY ID="1"> UISelf:GetParent():Close() return true </HOTKEY>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_REFRESH" X="13" Y="245" W="25" H="25">
+			<ATTR BTN_IMG="../Data/6_UI/Community/ptSwitchB.tga" BTN_IMG_W="50" BTN_IMG_H="50"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				g_CommunityEventType = "COMMUNITYEVENT"
+				g_CommunityEventMode = nil
+				g_CommunityEventTopWnd = true
+				g_BattleSquareTopWnd = false
+				if GetAccumTime() > g_fCommunityEventRefreshTime then
+					g_fCommunityEventRefreshTime = GetAccumTime() + 3.0
+					SendReqEventProgressInfo()
+				else
+					SetEventList(UISelf:GetParent(), g_CommunityEventType, g_CommunityEventMode)
+				end
+			</SCRIPT>
+		</BUTTON>
+				
+		<BUTTON ID="BTN_OK" X="106" Y="245" W="124" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Myhome/mhBt2.tga" BTN_IMG_W="124" BTN_IMG_H="104" U="1" V="4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="2"/>
+			<ATTR TEXT="710012" FONT="FTbt_12" T_X="62" T_Y="4" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				if 0 == g_SelectedCommunityEventNo then
+					g_ChatMgrClient:AddLogMessage(GetTextW(302114), true, 0, 12)
+				else
+					SendReqCommunityEventEnter(g_SelectedCommunityEventNo)
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				if 0 == g_SelectedCommunityEventNo then
+					g_ChatMgrClient:AddLogMessage(GetTextW(302114), true, 0, 12)
+				else
+					SendReqCommunityEventEnter(g_SelectedCommunityEventNo)
+				end
+				return
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			g_CommunityEventType = "COMMUNITYEVENT"
+			g_CommunityEventMode = nil
+			g_CommunityEventTopWnd = true
+			g_BattleSquareTopWnd = false
+			if GetAccumTime() > g_fCommunityEventRefreshTime then
+				g_fCommunityEventRefreshTime = GetAccumTime() + 3.0
+				SendReqEventProgressInfo()
+			else
+				SetEventList(UISelf, g_CommunityEventType, g_CommunityEventMode)
+			end
+			g_SelectedCommunityEventNo = 0
+			RegistUIAction(UISelf, "CloseUI")
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+		</SCRIPT>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_COMMUNITY_EVENT_WAIT_TIMER" TICK_TIME="1000">
+		<SCRIPT ID="ON_CALL">
+			g_NowEventTime = 0
+			MakeWaitTimeText()
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			g_NowEventTime = g_NowEventTime + 1
+			if 60 == g_CommunityEventWaitTime - g_NowEventTime then
+				MakeWaitTimeText()
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_SEARCH_EVENT_ITEM" X="0" Y="0" W="284" H="39">
+		<STATIC_FORM ID="SFRM_COLOR_BOX" X="0" Y="0" W="284" H="36" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<STATIC_FORM ID="SFRM_COLOR_BOX2" X="38" Y="5" Z="1" W="241" H="25" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="" FONT="Font_Text" T_X="5" T_Y="12" T_Y_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<FORM ID="FRM_CONDITION_CHECK_TEXT" X="276" Y="5" Z="2" W="90" H="25" IS_VISIBLE="0">
+			<ATTR TEXT="302113" FONT="Font_Text" T_Y="12" T_RIGHT="1" T_Y_CENTER="1" FONT_COLOR_HEX="0xFF7F7F7F"/>
+		</FORM>
+		
+		<IMG ID="IMG_OX" X="5" Y="5" IMG="../Data/6_ui/event/evtOX.tga" IMG_W="30" IMG_H="50" U="1" V="2" UV_INDEX="1"/>
+		<IMG ID="IMG_OX_OVER" X="0" Y="0" IMG="../Data/6_ui/event/evtOXover.tga" IMG_W="284" IMG_H="140" U="1" V="4" UV_INDEX="2" IS_VISIBLE="0"/>
+
+		<DUMMY ID="DMY_ITEM" X="0" Y="0" Z="3" W="284" H="36">
+			<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+				g_SelectedCommunityEventNo = UISelf:GetParent():GetCustomDataAsInt()
+				if g_SelectedCommunityEventNo then
+					SendReqCommunityEventEnter(g_SelectedCommunityEventNo)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				OnClick_Community_Event(UISelf:GetParent())
+				g_SelectedCommunityEventNo = UISelf:GetParent():GetCustomDataAsInt()
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				CallEventScheduleToolTip(UISelf:GetParent():GetCustomDataAsInt(), GetCursorPos())
+				local Index = UISelf:GetParent():GetControl("IMG_OX_OVER"):GetUVIndex()
+				if Index == 3 then return end
+				UISelf:GetParent():GetControl("IMG_OX_OVER"):SetUVIndex(2)
+				UISelf:GetParent():GetControl("IMG_OX_OVER"):Visible(true)
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				CloseToolTip()
+				local Index = UISelf:GetParent():GetControl("IMG_OX_OVER"):GetUVIndex()
+				if Index == 3 then return end
+				UISelf:GetParent():GetControl("IMG_OX_OVER"):Visible(false)
+			</SCRIPT>
+		</DUMMY>
+	</FORM>	
+	
+	<!-- 커뮤니티이벤트 시작 연출 -->
+	<FORM ID="FRM_COMMUNITY_EVENT_START">
+		<SCRIPT ID="ON_CALL">
+			UISelf:CloseParent()
+			CallUI("FRM_COMMUNITY_EVENT_ANI_START")
+		</SCRIPT>
+	</FORM>
+		
+	<!--커뮤니티 이벤트 스타트-->
+	<FORM ID = "FRM_COMMUNITY_EVENT_ANI_START" PRIORITY="99" NO_FOCUS="1">
+		<ATTR ALIGN_X="50" Y="78" W="1023" H="550" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_START" X = "-330" Y="5" W="301" H="91" IMG = "../Data/6_ui/mission/msStartT02.tga" IMG_W = "301" IMG_H = "91"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<SCRIPT ID = "ON_CALL">
+			local ms = UISelf:GetControl("IMG_START")
+			ms:SetLocation( Point2(-330, ms:GetLocation():GetY()) )
+			g_StartUIState = 1
+			g_StartUITimeStamp = GetAccumTime()	
+			
+			PlaySoundByID("defence-start")
+			if 0 ~= GetCopyPointChargeCount() then
+				GetUIWnd("FRM_POINT_COPY_MACHINE"):GetControl("FRM_KILL_MONSTER"):Disable(false)
+			end
+		</SCRIPT>
+		<SCRIPT ID = "ON_DISPLAY">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local ms = UISelf:GetControl("IMG_START")
+			local msLoc = ms:GetLocation()
+
+			if g_StartUIState == 1 then
+				local iX = 370
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = -330 + iDelta/0.3*600
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 2.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = -300
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 270 + iDelta/0.3*754
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID = "FRM_COMMUNITY_EVENT_DELAY" ALIGN_X="50" ALIGN_Y="30" W="300" H="200" PASS_EVENT="1">
+		<FORM ID="FRM_TEN" X="110" Y="0" W="50" H="50" IMG="../Data/6_ui/mission/msNumYb.tga" IMG_W="250" IMG_H="100" U="5" V="2" CAN_COLOR_CHANGE="1"/>
+		<FORM ID="FRM_ONE" X="150" Y="0" W="50" H="50" IMG="../Data/6_ui/mission/msNumYb.tga" IMG_W="250" IMG_H="100" U="5" V="2" CAN_COLOR_CHANGE="1"/>
+		<SCRIPT ID = "ON_TICK">
+			if g_mode7_fDeadTime ~= nil then
+				local fDeadTime = GetAccumTime() - g_mode7_fDeadTime
+				if fDeadTime >= 1 then
+					g_mode7_fDeadTime = GetAccumTime()
+					g_mode7_fDeadCount = g_mode7_fDeadCount - math.floor(fDeadTime)
+					if g_mode7_fDeadCount == -1 then
+						UISelf:Close()
+						return
+					end
+					g_mode7_iTenNum = math.floor(g_mode7_fDeadCount / 10)
+					g_mode7_iOneNum = math.floor(g_mode7_fDeadCount % 10) + 1
+					if (false == g_mode7_wndTen:IsNil()) and (true == g_mode7_wndTen:IsVisible()) and (g_mode7_iTenNum > 0) then
+						g_mode7_wndTen:SetUVIndex(g_mode7_iTenNum + 1)
+					elseif (nil ~= g_mode7_wndTen) then
+						g_mode7_wndTen:Visible(false)
+					end
+					if false == g_mode7_wndOne:IsNil() then
+						g_mode7_wndOne:SetUVIndex(g_mode7_iOneNum)
+						
+						if g_mode7_iTenNum==0 and 7 > g_mode7_iOneNum then
+							PlaySoundByID("Bomb_Clock")
+						end
+					end					
+				end
+			end
+		</SCRIPT>
+		<SCRIPT ID = "ON_CALL">			
+			g_mode7_wndTen = UISelf:GetControl("FRM_TEN")
+			g_mode7_wndOne = UISelf:GetControl("FRM_ONE")
+			g_mode7_fDeadTime = GetAccumTime()
+			g_mode7_fDeadCount = 10
+			g_mode7_iTenNum = math.floor(g_mode7_fDeadCount / 10)
+			g_mode7_iOneNum = math.floor(g_mode7_fDeadCount % 10) + 1
+			if (false == g_mode7_wndTen:IsNil()) and (g_mode7_iTenNum > 0) then
+				g_mode7_wndTen:Visible(true)
+				g_mode7_wndTen:SetUVIndex(g_mode7_iTenNum + 1)
+			end
+			if false == g_mode7_wndOne:IsNil() then
+				g_mode7_wndOne:SetUVIndex(g_mode7_iOneNum)
+			end
+			GetEventTimer():Add("DEFENCE_NEXT_DELAY", g_mode7_fDeadCount, "CallUI('FRM_STRATAGEMISSION_STAGE_END')", 1, false)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			GetEventScriptSystem():ActivateEvent(g_world:GetMapNo())
+			GetEventTimer():Del("DEFENCE_NEXT_DELAY")
+		</SCRIPT>
+	</FORM>
+
+	<FORM ID = "FRM_COMMUNITY_EVENT_MINICARD" PASS_EVENT="1">
+		<ATTR ALIGN_X = "100" ALIGN_Y = "0" W ="218" H ="113"/>
+		<ATTR TEXT = "" FONT = "Font_Text" T_X = "8" T_Y ="10" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		<SCRIPT ID = "ON_CALL"> 
+				if( CheckNil(g_world == nil) ) then return false end
+				if( CheckNil(g_world:IsNil()) ) then return false end
+						
+				if g_world:GetAttr() == GATTR_RACE_GROUND then
+					UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(),2 ) )
+				else
+					UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(),50 ) )
+				end
+		</SCRIPT>
+		<FORM ID = "FRM_BG">
+		<ATTR ALIGN_X = "100" ALIGN_Y = "0" W = "218" H = "113" IMG = "../Data/6_ui/mission/msIngTxtBg.tga" IMG_W = "216" IMG_H = "113"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "8" T_Y ="7" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<FORM ID = "FRM_DIFF" PASS_EVENT="1"> 
+					<ATTR X = "8" Y = "40" W = "200" H = "21"/>
+					<ATTR TEXT = "400201" FONT = "Font_Text" T_X = "0" T_Y ="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</FORM>
+			<BUILD TARGET_ID = "FRM_STAR" X = "54" Y = "40" X_COUNT = "4" Y_COUNT = "1" X_GAB = "16" Y_GAB = "0"/>
+			<FORM ID = "FRM_STAR" PASS_EVENT="1">
+				<ATTR X="0" Y="0" W="14" H="14"/>
+				<ATTR IMG = "../Data/6_ui/mission/msStar.tga" IMG_W = "14" IMG_H = "14"/>
+				<SCRIPT ID = "ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			</FORM>
+			<FORM ID = "FRM_MEMBER" PASS_EVENT="1">
+				<ATTR X = "8" Y = "58" W ="131" H ="20" />
+				<ATTR TEXT = "" FONT = "Font_Text" T_X = "0" T_Y ="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			</FORM>
+			<BUTTON ID = "BTN_EXIT">
+				<ATTR X="60" Y="79" W="84" H="26"/>
+				<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+				<ATTR TEXT = "400220" FONT = "Font_Text" T_X = "40" T_Y ="4" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					CallUI("SFRM_MSG_EVENT_EXIT")
+				</SCRIPT>
+			</BUTTON>
+			<SCRIPT ID = "ON_MOUSE_OVER">
+				CallEventScheduleToolTip(UISelf:GetParent():GetCustomDataAsInt(), GetCursorPos())
+			</SCRIPT>
+			<SCRIPT ID ="ON_MOUSE_OUT">
+				CloseToolTip()
+			</SCRIPT>
+		</FORM>
+		<SCRIPT ID = "ON_CALL"> 
+			CloseCurrentMiniMap()
+		</SCRIPT>
+	</FORM>
+
+	<!--스테이지 방어 성공-->
+	<FORM ID = "FRM_COMMUNITY_EVENT_SUCCESS" PRIORITY="99" NO_FOCUS="1">
+		<ATTR ALIGN_X="50" Y="250" W="1024" H="332" PASS_EVENT = "1" IS_ABSOLUTE_Y="1"/>
+		<IMG ID = "IMG_SUCCESS" X = "-330" Y="5" W="512" H="91" IMG = "../Data/6_ui/mission/msSuccess.tga" IMG_W = "512" IMG_H = "91"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<SCRIPT ID = "ON_CALL">
+			local ms = UISelf:GetControl("IMG_SUCCESS")
+			ms:SetLocation( Point2(-330, ms:GetLocation():GetY()) )
+			g_StartUIState = 1
+			g_StartUITimeStamp = GetAccumTime()	
+			CloseUI("FRM_DEFENCE_TIMELIMIT")
+			PlaySoundByID("defence-success")
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">
+			g_ChatMgrClient:AddLogMessage(GetTextW(302110), true, 0, 12)
+		</SCRIPT>
+		<SCRIPT ID = "ON_DISPLAY">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local ms = UISelf:GetControl("IMG_SUCCESS")
+			local msLoc = ms:GetLocation()
+
+			if g_StartUIState == 1 then
+				local iX = 258
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = -330 + iDelta/0.3*600
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 2.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = -500
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 258 + iDelta/0.3*754
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	<!--스테이지 방어 실패-->
+	<FORM ID = "FRM_COMMUNITY_EVENT_FAILED" PRIORITY="99" NO_FOCUS="1">
+		<ATTR ALIGN_X="50" Y="250" W="1023" H="550" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_FAILED" X = "-330" Y="5" W="331" H="91" IMG = "../Data/6_ui/mission/msFailedT.tga" IMG_W = "331" IMG_H = "91"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<SCRIPT ID = "ON_CALL">
+			local ms = UISelf:GetControl("IMG_FAILED")
+			ms:SetLocation( Point2(-330, ms:GetLocation():GetY()) )
+			g_StartUIState = 1
+			g_StartUITimeStamp = GetAccumTime()
+			CloseUI("FRM_DEFENCE_TIMELIMIT")
+			PlaySoundByID("defence-missionfail")
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">
+			g_ChatMgrClient:AddLogMessage(GetTextW(302110), true, 0, 12)
+		</SCRIPT>
+		<SCRIPT ID = "ON_DISPLAY">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local ms = UISelf:GetControl("IMG_FAILED")
+			local msLoc = ms:GetLocation()
+
+			if g_StartUIState == 1 then
+				local iX = 349
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = -330 + iDelta/0.3*600
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 7.2 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = -330
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 349 + iDelta/0.3*754
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+
+	<STATIC_FORM ID="DeadDlg_NoRevive">
+		<ATTR ALIGN_X="50" Y="180" W="240" H="167" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="220" H="100" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="220" H="100" STATIC_NUM="3"/>
+				<ATTR TEXT="3" FONT="Font_Text" T_X="110" T_Y="10" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<FORM ID="SFRM_ANIBAR_BG">
+			<ATTR X="7" Y="113" Z="1" W="221" H="15"/>
+			<ATTR IMG="../Data/6_ui/common/cmEgBg.tga" IMG_W="221" IMG_H="15"/>
+			<ANI_BAR ID="BAR_TIMER" X= "3" Y="1" Z="1" W="217" H="11">
+				<ATTR BAR_COUNT = "1" BAR_TYPE = "1"/>
+				<ATTR BAR_IMG="../Data/6_ui/mission/msRkTime.tga" BAR_IMG_W="217" BAR_IMG_H="11" U="1" V="1"/>
+				<ATTR TEXT="" FONT="Font_Text"  FONT_COLOR_HEX="0xFFB00D0D" T_X="110" T_Y ="-25" T_CENTER="1"/>
+				<SCRIPT ID="ON_DISPLAY">
+					OnDisplay_DeadDlg_AniBar(UISelf)
+				</SCRIPT>
+				<SCRIPT ID="ON_BAR_FULL"></SCRIPT>
+				<SCRIPT ID="ON_BAR_CLOSE"></SCRIPT>
+				<SCRIPT ID="ON_CALL">UISelf:SetStartTime(1000 * 60)</SCRIPT>
+			</ANI_BAR>
+		</FORM>
+		<BUTTON ID = "BTN_USE_COIN" X="27" Y="129" W="84" H="26">
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "42" T_Y ="4" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_CALL">
+				SetTextOnThisUI(80028, 2201)
+			</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				if true == GetUIWnd("SFRM_REBIRTH_REQ"):IsNil() then
+					CallMissionRebirthUI(true)
+				end
+			</SCRIPT>
+			<HOTKEY ID="60">
+				if true == GetUIWnd("SFRM_REBIRTH_REQ"):IsNil() then
+					CallMissionRebirthUI(true)
+				end
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_OK" X="128" Y="129" W="84" H="26">
+			<ATTR TEXT="" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_CALL">
+				SetTextOnThisUI(50601, 2202)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnClick_DeadDlg_BtnOK() </SCRIPT>
+			<HOTKEY ID="61"> OnClick_DeadDlg_BtnOK() </HOTKEY>
+
+		</BUTTON>
+		
+		<SCRIPT ID="ON_CALL">
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+			local fInterval = 60.0
+			g_kRevivalTime = g_world:GetAccumTime() + fInterval
+			local kScript = "OnClick_DeadDlg_BtnOK()"
+			GetEventTimer():Add("EVENT_DEAD_COUNTDOWN", fInterval, kScript, 1, false)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			GetEventTimer():Del("EVENT_DEAD_COUNTDOWN")
+		</SCRIPT>
+	</STATIC_FORM>
+	
+	<!-- 달리기 이벤트 승리 연출 -->
+	<FORM ID="FRM_RUNNING_EVENT_WIN">
+		<SCRIPT ID="ON_CALL">
+			UISelf:CloseParent()
+			CallUI("FRM_RUNNING_EVENT_ANI_WIN")
+		</SCRIPT>
+	</FORM>
+		
+	<!--달리기 이벤트 승리 연출-->
+	<FORM ID = "FRM_RUNNING_EVENT_ANI_WIN" PRIORITY="99" NO_FOCUS="1">
+		<ATTR ALIGN_X="50" Y="33" W="1024" H="550" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_WIN" X = "-330" Y="5" W="301" H="91" IMG = "../Data/6_ui/pvp/WarRTwin.tga" IMG_W = "301" IMG_H = "100"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<SCRIPT ID = "ON_CALL">
+			local ms = UISelf:GetControl("IMG_WIN")
+			ms:SetLocation( Point2(-330, ms:GetLocation():GetY()) )
+			g_StartUIState = 1
+			g_StartUITimeStamp = GetAccumTime()
+			CloseUI("FRM_DEFENCE_TIMELIMIT")
+			PlaySoundByID("defence-missionfail")
+		</SCRIPT>
+		<SCRIPT ID = "ON_TICK">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local ms = UISelf:GetControl("IMG_WIN")
+			local msLoc = ms:GetLocation()
+
+			if g_StartUIState == 1 then
+				local iX = 410
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = -330 + iDelta/0.3*600
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 7.2 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = -330
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 410 + iDelta/0.3*754
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<!-- 달리기 이벤트 패배 연출 -->
+	<FORM ID="FRM_RUNNING_EVENT_LOSE">
+		<SCRIPT ID="ON_CALL">
+			UISelf:CloseParent()
+			CallUI("FRM_RUNNING_EVENT_ANI_LOSE")
+		</SCRIPT>
+	</FORM>
+		
+	<!--달리기 이벤트 패배 연출-->
+	<FORM ID = "FRM_RUNNING_EVENT_ANI_LOSE" PRIORITY="99" NO_FOCUS="1">
+		<ATTR ALIGN_X="50" Y="33" W="1024" H="550" PASS_EVENT = "1"/>
+		<IMG ID = "IMG_LOSE" X = "-330" Y="5" W="301" H="91" IMG = "../Data/6_ui/pvp/WarRTlose.tga" IMG_W = "301" IMG_H = "100"  CAN_CLIP = "1" IGNORE_PARENT_RECT = "1"/>
+		<SCRIPT ID = "ON_CALL">
+			local ms = UISelf:GetControl("IMG_LOSE")
+			ms:SetLocation( Point2(-330, ms:GetLocation():GetY()) )
+			g_StartUIState = 1
+			g_StartUITimeStamp = GetAccumTime()
+			CloseUI("FRM_DEFENCE_TIMELIMIT")
+			PlaySoundByID("defence-missionfail")
+		</SCRIPT>
+		<SCRIPT ID = "ON_TICK">
+			local iDelta = GetAccumTime() - g_StartUITimeStamp
+			local ms = UISelf:GetControl("IMG_LOSE")
+			local msLoc = ms:GetLocation()
+
+			if g_StartUIState == 1 then
+				local iX = 370
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = -330 + iDelta/0.3*600
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 2 then
+				if iDelta > 7.2 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				end
+			elseif g_StartUIState == 3 then
+				local iX = -330
+				if iDelta > 0.3 then
+					g_StartUIState = g_StartUIState + 1
+					g_StartUITimeStamp = GetAccumTime()
+				else
+					iX = 370 + iDelta/0.3*754
+				end
+				msLoc:SetX(iX)
+				ms:SetLocation(msLoc)
+			elseif g_StartUIState == 4 then
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+		
+	<!--달리기 이벤트 순위 UI -->
+	<FORM ID="FRM_RUNNING_RANKING"  ALIGN_X="0"  Y="120" W="202" H="240">
+		<BUILD ID="BLD_RUNNIG_SLOT" TARGET_ID="FRM_RUNNING_EVENT_RANKING" X="0" Y="0" X_COUNT = "1" Y_COUNT = "4" Y_GAB = "45"/>
+		<FORM_MOVE_ANIMATE_WND ID = "FRM_RUNNING_EVENT_RANKING" IS_ABSOLUTE_Y="1" IS_VISIBLE="0" CAN_CLIP="0" >
+			<ATTR MOVE_TYPE="0" MOVE_TIME="0" />
+			<ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="0" PAUSE_TIME="100"/>
+			<ATTR X = "1" Y = "120" Z = "1" W ="202" H ="59" />
+			<IMG ID = "IMG_BG1">
+				<ATTR X = "-5" Y = "0" Z ="-1" W = "295" H= "34" IMG="../Data/6_ui/pvp/pvRmNmBg.tga" IMG_W="295" IMG_H="34" />
+			</IMG>
+			<IMG ID="RANKINGLOW10" X="0" Y="5" Z="0" W="40" H="40" >
+				<ATTR IMG="../Data/6_ui/pvp/pvListNum_small.tga"  X = "0" Y = "-5" IMG_W="150" IMG_H="72" U="5" V="2" UV_INDEX="1"/>
+			</IMG>
+			<IMG ID="RANKINGLOW1" X="0" Y="5" Z="0" W="40" H="40" >
+				<ATTR IMG="../Data/6_ui/pvp/pvListNum_small.tga"  X = "23" Y = "-5" IMG_W="150" IMG_H="72" U="5" V="2" UV_INDEX="1"/>
+			</IMG>
+			<IMG ID="RANKINGTOP" X="0" Y="5" Z="0" W="40" H="40" >
+				<ATTR IMG="../Data/6_ui/pvp/pvListNum.tga"  X = "0" Y = "-26" IMG_W="210" IMG_H="118" U="5" V="2" UV_INDEX="11"/>
+			</IMG>
+			<IMG ID="IMG_TIMER_SEP0" X="50" Y="3" Z="0" W="11" H="25" IMG="../Data/6_ui/mission/msTimeYdot.tga" IMG_W="11" IMG_H="25" />
+			<FORM ID="FRM_MIN10" X="186" Y="2" Z="0" W="40" H="40" >
+				<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+			<FORM ID="FRM_MIN1" X="205" Y="2" Z="0" W="40" H="40" >
+				<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+			<IMG ID="IMG_TIMER_SEP" X="227" Y="6" Z="0" W="11" H="25" IMG="../Data/6_ui/mission/msTimeYdot.tga" IMG_W="11" IMG_H="25" />
+			<FORM ID="FRM_SEC10" X="232" Y="2" Z="0" W="40" H="40" >
+				<ATTR IMG="../Data/6_UI/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+			<FORM ID="FRM_SEC1" X="250" Y="2" Z="0" W="40" H="40" >
+				<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+			<!--<IMG ID="IMG_TIMER_SEP1" X="144" Y="11" Z="0" W="16" H="250" IMG="../Data/6_ui/mission/msTmPt.tga" IMG_W="16" IMG_H="29" />-->
+			<FORM ID="FRM_SEC1000" X="271" Y="7" Z="0" W="30" H="30" >
+				<ATTR IMG="../Data/6_ui/mission/msNumTmYs2.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+			<FORM ID="FRM_SEC100" X="285" Y="7" Z="0" W="30" H="30" >
+				<ATTR IMG="../Data/6_ui/mission/msNumTmYs2.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+			</FORM>
+			<FORM ID ="USER_ID" X="60" Y="2" Z="0" W="160" H="50" >
+				<ATTR T_X="5" T_Y="4" FONT="FTcts_16" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			</FORM>
+			<IMG ID ="IMG_USER_POS" X="140" Y="-13" Z="0" W="52" H="52" IS_VISIBLE="1" >
+				<ATTR IMG="../Data/6_ui/event/runvent/runiconArea.tga" IMG_W="312" IMG_H="520" U="6" V="10" UV_INDEX="1" />
+				<SCRIPT ID="ON_TICK">
+					local kCurIndex = UISelf:GetUVIndex()
+					if kCurIndex > 0 and math.floor(kCurIndex % 6) > 0 then
+						UISelf:SetUVIndex(kCurIndex + 1)
+					end
+				</SCRIPT>
+			</IMG>
+			<IMG ID ="IMG_USER_ARRIVE" X="140" Y="-13" Z="0" W="52" H="52" IS_VISIBLE="0" >
+				<ATTR IMG="../Data/6_ui/event/runvent/runiconArrive.tga" IMG_W="312" IMG_H="52" U="6" V="1" UV_INDEX="1" />
+				<SCRIPT ID="ON_TICK">
+					local kCurIndex = UISelf:GetUVIndex()
+					if kCurIndex > 0 and math.floor(kCurIndex % 6) > 0 then
+						UISelf:SetUVIndex(kCurIndex + 1)
+					end
+				</SCRIPT>
+			</IMG>
+
+			<SCRIPT ID = "ON_BUILD">
+				local index = UISelf:GetBuildIndex()
+			
+				if 3 == index then
+					UISelf:SetLocation(Point2(UISelf:GetLocation():GetX(), UISelf:GetLocation():GetY()+23))
+				end
+			</SCRIPT>
+		</FORM_MOVE_ANIMATE_WND>
+	</FORM>
+	
+	<!--달리기 이벤트 결과창-->
+	<FORM ID="SFRM_RUNNING_RANKING_EVENT_RESULT"  ALIGN_X="50" ALIGN_Y="17" W="567" H="304" CAN_DRAG = "0" PASS_EVENT="1" NO_FOCUS="1">
+		<ATTR IMG="../Data/6_UI/event/runvent/runBkbox.tga" IMG_W="567" IMG_H="304" CAN_COLOR_CHANGE="0"/>	
+		<FORM ID="FRM_TITLE" X="185" Y="33" Z="3" W="215" H="25" T_X="107" T_Y="16" T_CENTER="1" T_Y_CENTER="1">
+			<ATTR TEXT="" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFD7AF80" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUILD ID="BLD_PLAYER" TARGET_ID="FRM_PLAYER_RESULT" X="0" Y="75" Z="1" X_COUNT="1" Y_COUNT="4" Y_GAB="47"/>
+		<FORM ID="FRM_PLAYER_RESULT" X="0" Y="0" Z="1" W="567" H="47">
+			<FORM ID="FORM_RANK" X="0" Y="0" Z="2" W="130" H="47" TEXT="" T_RIGHT="1" T_X="125" T_Y_CENTER="23" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFE777" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<FORM ID="FORM_NAME" X="142" Y="0" Z="2" W="118" H="47" TEXT="" T_LEFT="1" T_Y_CENTER="23" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<FORM ID="FORM_ARRIVE_TIME" X="264" Y="2" Z="2" W="96" H="47" T_X="90" TEXT="" T_Y_CENTER="23" T_RIGHT="1" FONT="FTctsBig_14" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<BUILD ID = "BLD_ITEM_SLOT" TARGET_ID= "IMG_ITEM_SLOT" X="380" Y="2" Z="1" W="42" H="42"  X_COUNT = "4" Y_COUNT = "1" X_GAB = "45"/>
+			<IMG ID="IMG_ITEM_SLOT" X="20" Y="193" Z="1" W="42" H="42"  X_COUNT = "4" Y_COUNT = "1" X_GAB = "42" IMG="../Data\6_UI\event\runvent\runiconBox.tga" IMG_W="42" IMG_H="42"/>
+			<BUILD ID = "BLD_ITEM_ICON_SLOT" TARGET_ID= "FRM_ITEM_SLOT" X="380" Y="2" Z="2" W="42" H="42"  X_COUNT = "4" Y_COUNT = "1" X_GAB = "45"/>
+			<ICON ID = "FRM_ITEM_SLOT" X="20" Y="193" W="42" H="42" Z="2" ICON_GRP ="254" ICON_KEY = "0">
+				<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+				<SCRIPT ID = "ON_L_BTN_UP"> UISelf:CursorToIcon() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER">
+					local iItemNo = UISelf:GetCustomDataAsInt()
+					if iItemNo ~= 0 then
+						UISelf:CallIconToolTip()
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+			<SCRIPT ID="ON_BUILD">
+				local index = UISelf:GetBuildIndex()
+				if 3 == index then
+					UISelf:SetLocation(Point2(UISelf:GetLocation():GetX(), UISelf:GetLocation():GetY()+31))
+				end
+			</SCRIPT>
+		</FORM>
+	</FORM>
+
+	<FORM ID = "FRM_RACE_EVENT_DELAY" ALIGN_X="50" ALIGN_Y="30" W="300" H="200" PASS_EVENT="1">
+		<FORM ID="FRM_TEN" X="110" Y="0" W="50" H="50" IMG="../Data/6_ui/mission/msNumYb.tga" IMG_W="250" IMG_H="100" U="5" V="2" CAN_COLOR_CHANGE="1"/>
+		<FORM ID="FRM_ONE" X="150" Y="0" W="50" H="50" IMG="../Data/6_ui/mission/msNumYb.tga" IMG_W="250" IMG_H="100" U="5" V="2" CAN_COLOR_CHANGE="1"/>
+		<SCRIPT ID = "ON_TICK">
+			if g_mode7_fDeadTime ~= nil then
+				local fDeadTime = GetAccumTime() - g_mode7_fDeadTime
+				if fDeadTime >= 1 then
+					g_mode7_fDeadTime = GetAccumTime()
+					g_mode7_fDeadCount = g_mode7_fDeadCount - math.floor(fDeadTime)
+					if g_mode7_fDeadCount == -1 then
+						UISelf:Close()
+						return
+					end
+					g_mode7_iTenNum = math.floor(g_mode7_fDeadCount / 10)
+					g_mode7_iOneNum = math.floor(g_mode7_fDeadCount % 10) + 1
+					if (false == g_mode7_wndTen:IsNil()) and (true == g_mode7_wndTen:IsVisible()) and (g_mode7_iTenNum > 0) then
+						g_mode7_wndTen:SetUVIndex(g_mode7_iTenNum + 1)
+					elseif (nil ~= g_mode7_wndTen) then
+						g_mode7_wndTen:Visible(false)
+					end
+					if false == g_mode7_wndOne:IsNil() then
+						g_mode7_wndOne:SetUVIndex(g_mode7_iOneNum)
+						
+						if g_mode7_iTenNum==0 and 7 > g_mode7_iOneNum then
+							PlaySoundByID("Bomb_Clock")
+						end
+					end					
+				end
+			end
+		</SCRIPT>
+		<SCRIPT ID = "ON_CALL">			
+			g_mode7_wndTen = UISelf:GetControl("FRM_TEN")
+			g_mode7_wndOne = UISelf:GetControl("FRM_ONE")
+			g_mode7_fDeadTime = GetAccumTime()
+			g_mode7_fDeadCount = 10
+			g_mode7_iTenNum = math.floor(g_mode7_fDeadCount / 10)
+			g_mode7_iOneNum = math.floor(g_mode7_fDeadCount % 10) + 1
+			if (false == g_mode7_wndTen:IsNil()) and (g_mode7_iTenNum > 0) then
+				g_mode7_wndTen:Visible(true)
+				g_mode7_wndTen:SetUVIndex(g_mode7_iTenNum + 1)
+			end
+			if false == g_mode7_wndOne:IsNil() then
+				g_mode7_wndOne:SetUVIndex(g_mode7_iOneNum)
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID = "FRM_RUNNING_EVENT_TIMER" IS_ABSOLUTE_Y="1">
+		<ATTR ALIGN_X="110" Y="0" Z = "1" W ="202" H ="59" />
+			<SCRIPT ID = "ON_CALL"> 
+				if( CheckNil(g_world == nil) ) then return false end
+				if( CheckNil(g_world:IsNil()) ) then return false end
+						
+				if g_world:GetAttr() == GATTR_RACE_GROUND then
+					UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(),112 ) )
+				else
+					UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(),160 ) )
+				end
+		</SCRIPT>
+		<IMG ID = "IMG_BG1">
+			<ATTR ALIGN_X = "110" Y = "0" Z ="-1" W = "217" H= "56" IMG="../Data/6_ui/mission/msTimeBgR.tga" IMG_W="217" IMG_H="56" />
+		</IMG>
+		<FORM ID="FRM_MIN10" X="32" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_MIN1" X="55" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<IMG ID="IMG_TIMER_SEP" X="87" Y="15" Z="0" W="11" H="25" IMG="../Data/6_ui/mission/msTimeYdot.tga" IMG_W="11" IMG_H="25" />
+		<FORM ID="FRM_SEC10" X="92" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_UI/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC1" X="115" Y="5" Z="0" W="40" H="40" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<!--<IMG ID="IMG_TIMER_SEP1" X="144" Y="11" Z="0" W="16" H="250" IMG="../Data/6_ui/mission/msTmPt.tga" IMG_W="16" IMG_H="29" />-->
+		<FORM ID="FRM_SEC1000" X="142" Y="18" Z="0" W="30" H="30" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC100" X="156" Y="18" Z="0" W="30" H="30" >
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="125" IMG_H="50" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<SCRIPT ID = "ON_DISPLAY"> DisplayRunningEventTimer(UISelf) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> 
+			g_iRaceAccumTime = 0
+			g_iRaceRecentTime = 0
+			g_bRaceStopTime = true
+		</SCRIPT>
+		<SCRIPT ID = "ON_CALL"> 
+			g_iRaceRecentTime = GetCurrentTimeInSec() * 1000
+		</SCRIPT>
+	</FORM>	
+	
+	<FORM ID="FRM_RACE_EVENT_WAIT_BEGIN_TIMER" ALIGN_X="100" Y="112" Z="1" W ="218" H ="86" PASS_EVENT="1" IS_ABSOLUTE_Y="1" TICK_TIME="1000">
+		<SCRIPT ID="ON_CALL">
+			RunningEvent_DisplayWaitTimer(UISelf, g_dwRunningEventBeginTime)
+			return true
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			if g_dwRunningEventBeginTime > 1000 then
+				g_dwRunningEventBeginTime = g_dwRunningEventBeginTime - 1000
+				RunningEvent_DisplayWaitTimer(UISelf, g_dwRunningEventBeginTime)
+			else
+				UISelf:Close()
+			end
+			return true
+		</SCRIPT>
+		<IMG ID="IMG_BG1" PASS_EVENT="1">
+			<ATTR X="0" Y="0" Z ="-1" W="217" H= "86" IMG="../Data/6_UI/event/runvent/runTimeBg.tga" IMG_W="218" IMG_H="86" />
+		</IMG>
+		<FORM ID="FRM_TITLE" X="0" Y="8" Z="0" W="200" H="22">
+			<ATTR TEXT="799231" FONT="FT15" T_X="105" T_CENTER="1" FONT_COLOR_HEX="0xFFfff55a" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		</FORM>
+		<FORM ID="FRM_MIN10" X="30" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_MIN1" X="60" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<IMG ID="IMG_TIMER_SEP" X="100" Y="43" Z="0" W="11" H="25" IMG="../Data/6_ui/mission/msTimeYdot.tga" IMG_W="11" IMG_H="25" />
+		<FORM ID="FRM_SEC10" X="111" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_UI/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC1" X="141" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+	</FORM>	
+
+	<FORM ID="FRM_RACE_EVENT_WAIT_FINISH_TIMER" >
+		<ATTR ALIGN_X="50" ALIGN_Y="20" W="700" H="300" PASS_EVENT = "1" />	
+		<FORM ID = "FRM_COUNT">
+			<ATTR X="450" Y="0" W="130" H="65" />
+			<FORM ID = "FRM_TEN">
+				<ATTR X="0" Y="0" W="65" H="65" />
+				<ATTR IMG = "../Data/6_ui/event/runvent/runRtNumR.tga" IMG_W = "325" IMG_H = "130" U = "5" V = "2" CAN_COLOR_CHANGE="1"/>
+			</FORM>
+			<FORM ID = "FRM_ONE">
+				<ATTR X="55" Y="0" W="65" H="65" />
+				<ATTR IMG = "../Data/6_ui/event/runvent/runRtNumR.tga" IMG_W = "325" IMG_H = "130" U = "5" V = "2" CAN_COLOR_CHANGE="1"/>
+			</FORM>
+			<SCRIPT ID = "ON_TICK">
+				local wndTen = UISelf:GetControl("FRM_TEN")
+				local wndOne = UISelf:GetControl("FRM_ONE")
+				if g_fFinishTime ~= nil then
+					local loc = UISelf:GetLocation()
+					local MinWall = 310
+					if 10 > g_fFinishCount then
+						MinWall = 342
+					end
+					if false == wndTen:IsVisible() then
+						MinWall = MinWall - 64
+					end
+					if loc:GetX() > MinWall then
+						loc:IncX(-30)
+						UISelf:SetLocation(loc)
+					else
+						if g_bDeadQuake == false then
+							QuakeCamera(0.3, 1.5-g_fFinishCount*0.04)
+							g_bDeadQuake = true
+						end
+						loc:SetX(MinWall)
+						UISelf:SetLocation(loc)
+					end
+					if GetAccumTime() - g_fFinishTime >= 1 then
+						g_fFinishTime = GetAccumTime()
+						g_fFinishCount = g_fFinishCount - 1
+						if g_fFinishCount == 0 then
+							CloseUI("FRM_RACE_EVENT_WAIT_FINISH_TIMER")
+							return
+						end
+						g_iTenNum = math.floor(g_fFinishCount / 10)
+						g_iOneNum = math.floor(g_fFinishCount % 10) + 1
+						if (false == wndTen:IsNil()) and (true == wndTen:IsVisible()) and (g_iTenNum > 0) then
+							wndTen:SetUVIndex(g_iTenNum + 1)
+						elseif (nil ~= wndTen) then
+							wndTen:Visible(false)
+						end
+						if false == wndOne:IsNil() then
+							wndOne:SetUVIndex(g_iOneNum)
+						end
+						g_bDeadQuake = false
+						loc:SetX(450)
+						UISelf:SetLocation(loc)
+
+						if 10 >= g_fFinishCount then
+							PlaySoundByID("run_rank_finish_wait")
+						end
+					else
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				local wndTen = UISelf:GetControl("FRM_TEN")
+				local wndOne = UISelf:GetControl("FRM_ONE")
+				g_bDeadQuake = false
+				g_fFinishTime = GetAccumTime()
+				g_fFinishCount = 30
+				g_iTenNum = math.floor(g_fFinishCount / 10)
+				g_iOneNum = math.floor(g_fFinishCount % 10) + 1
+				if (false == wndTen:IsNil()) and (g_iTenNum > 0) then
+					wndTen:Visible(true)
+					wndTen:SetUVIndex(g_iTenNum + 1)
+					wndTen:SetColor(16713533)					
+				end
+				if false == wndOne:IsNil() then
+					wndOne:SetUVIndex(g_iOneNum)
+					wndOne:SetColor(16713533)
+				end
+				QuakeCamera(0.3, 1.5-g_fFinishCount*0.1)
+			</SCRIPT>
+		</FORM>	
+	</FORM>
+
+	<FORM ID = "FRM_RACE_COUNTDOWN10">
+		<ATTR ALIGN_X="50" ALIGN_Y="20" W="700" H="300" PASS_EVENT = "1"/>	
+		<FORM ID = "FRM_COUNT">
+			<ATTR X="450" Y="0" W="256" H="170" />
+			<FORM ID = "FRM_TEN">
+				<ATTR X="0" Y="0" W="128" H="170" />
+				<ATTR IMG = "../Data/6_ui/mission/msNum.tga" IMG_W = "512" IMG_H = "510" U = "4" V = "3" CAN_COLOR_CHANGE="1"/>
+			</FORM>
+			<FORM ID = "FRM_ONE">
+				<ATTR X="128" Y="0" W="128" H="170" />
+				<ATTR IMG = "../Data/6_ui/mission/msNum.tga" IMG_W = "512" IMG_H = "510" U = "4" V = "3" CAN_COLOR_CHANGE="1"/>
+			</FORM>
+			<SCRIPT ID = "ON_TICK">
+				if g_fDeadTime ~= nil then
+					local loc = UISelf:GetLocation()
+					local MinWall = 225
+					if false == g_wndTen:IsVisible() then
+						MinWall = MinWall - 64
+					end
+					if loc:GetX() > MinWall then
+						loc:IncX(-30)
+						UISelf:SetLocation(loc)
+					else
+						if g_bDeadQuake == false then
+							QuakeCamera(0.3, 1.5-g_fDeadCount*0.04)
+							g_bDeadQuake = true
+						end
+						loc:SetX(MinWall)
+						UISelf:SetLocation(loc)
+					end
+					if GetAccumTime() - g_fDeadTime >= 1 then
+						g_fDeadTime = GetAccumTime()
+						g_fDeadCount = g_fDeadCount - 1
+						if g_fDeadCount == 0 then
+							CloseUI("FRM_RACE_COUNTDOWN10")
+							return
+						end
+						g_iTenNum = math.floor(g_fDeadCount / 10)
+						g_iOneNum = math.floor(g_fDeadCount % 10) + 1
+						if (false == g_wndTen:IsNil()) and (true == g_wndTen:IsVisible()) and (g_iTenNum > 0) then
+							g_wndTen:SetUVIndex(g_iTenNum + 1)
+						elseif (nil ~= g_wndTen) then
+							g_wndTen:Visible(false)
+						end
+						if false == g_wndOne:IsNil() then
+							g_wndOne:SetUVIndex(g_iOneNum)
+						end
+						g_bDeadQuake = false
+						loc:SetX(450)
+						UISelf:SetLocation(loc)
+
+						local SoundID = "PVP_Count_" .. "0" .. g_iOneNum-1
+						PlaySoundByID(SoundID)
+					else
+					
+					end
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				g_wndTen = UISelf:GetControl("FRM_TEN")
+				g_wndOne = UISelf:GetControl("FRM_ONE")
+				g_bDeadQuake = false
+				g_fDeadTime = GetAccumTime()
+				g_fDeadCount = 10
+				g_iTenNum = math.floor(g_fDeadCount / 10)
+				g_iOneNum = math.floor(g_fDeadCount % 10) + 1
+				if (false == g_wndTen:IsNil()) and (g_iTenNum > 0) then
+					g_wndTen:Visible(true)
+					g_wndTen:SetUVIndex(g_iTenNum + 1)
+					g_wndTen:SetColor(16713533)					
+				end
+				if false == g_wndOne:IsNil() then
+					g_wndOne:SetUVIndex(g_iOneNum)
+					g_wndOne:SetColor(16713533)
+				end
+				QuakeCamera(0.3, 1.5-g_fDeadCount*0.1)
+				PlaySoundByID("PVP_Count_10")
+			</SCRIPT>
+		</FORM>	
+	</FORM>
+	
+	<FORM ID="FRM_RACE_START" ALIGN_X="0" ALIGN_Y="0" W="471" H="162" SCALE_CENTER_X="0.5" SCALE_CENTER_Y="0.5">
+		<ATTR ALIVE_TIME="1400" ALIVE_TIME_IGNORE_MOUSE_OVER="1" CAN_CLIP="1"/>
+		<SCRIPT ID="ON_CALL">
+			CloseUI("FRM_PVP_COUNTDOWN")
+			PlaySoundByID("start")
+			PVP_START_UI_OnCall(UISelf)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK"> PVP_START_UI_OnTick(UISelf) </SCRIPT>
+		<ATTR IMG="../Data/6_ui/Pvp/pvStartText.tga" IMG_W="471" IMG_H="162"/>
+	</FORM>
+
+</XUI>

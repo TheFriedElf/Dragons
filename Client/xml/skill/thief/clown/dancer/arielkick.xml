@@ -1,0 +1,9 @@
+<ACTION ID="a_Ariel Kick" NEXT="a_battle_idle" CHECK_CAN_ENTER="TRUE" USE-EVENT="TRUE" CAN_CHANGE_ACTOR_POS="TRUE" >
+	<SLOT NAME="Com_skill_ArielKick_01"/>
+  <SLOT NAME="jump_04"/>
+	<FSM SCRIPT="Skill_Melee_Drop"
+       FIRE_CASTER_EFFECT_TARGET_NODE ="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_ArielKick_01_char_root" 
+       NO_WEAPON_TRAIL="TRUE"
+       HIT_SOUND_ID="Ariel_Kick"/>
+</ACTION>

@@ -1,0 +1,33 @@
+<ACTION ID="a_ReverseGravity" NEXT="a_idle" USE-EVENT="TRUE">
+<!--
+-- ReverseGravity
+-- ani slot : 0 - idle, 1 - casting, 2 - casting idle, 3 - down
+-- camera는 SkillTime 동안 천천히 움직이고, Fallen 된 후에 다시 원래대로 돌아간다.
+-- SKILL_RANGE : 어느 범위 안에 있는 몬스터들이 맞을 것인가?
+-- SKILL_TIME : Skill 시전시간 - 올라가는 시간
+-- SKILL_MAX_HEIGHT : 어디까지 들어 올릴것인가?
+-- CASTING_EFFECT_ID : 캐스팅 시작할 때 붙는 Effect
+-- PC_UP_EFFECT_ID : 올라가기 시작할 때 붙는 Effect
+-- PC_DOWN_EFFECT_ID : 내려오기 시작할 때 붙는 Effect
+-- MONSTER_UP_EFFECT_ID : 몬스터를 들어올릴때의 Effect
+-- MONSTER_DOWN_EFFECT_ID : 몬스터를 들어올릴때의 Effect
+-- MONSTER_FALLEN_EFFECT_ID : 몬스터들이 땅에 떨어진 후의 Effect
+-- CAMERA_Z_UP : 위로/아래로 움직이는 거리
+-- CAMERA_Z_ROT : 위/아래로 회전하는 각도
+-- CAMERA_ZOOM : 앞/뒤로 Zoom되는 거리
+-->
+<!--		
+-- CAMERA1_Z_UP="-120"	CAMERA1_Z_ROT="60"	CAMERA1_ZOOM="100"  <- 뒤로 빠지면서 아래로 내려가고 위쪽을 바라보는 카메라
+-- CAMERA2_Z_UP="200"	CAMERA2_Z_ROT="-40"	CAMERA2_ZOOM="100"  <- 뒤로 빠지면서 위로 올라가고 아래쪽을 바라보는 카메라
+-- CAMERA3_Z_UP="-50"	CAMERA3_Z_ROT="80"	CAMERA3_ZOOM="-20" <- 앞으로 살짝 줌인되면서 아래로 내려가고 위쪽으로 바라보는 카메라.
+ -->
+	<SLOT NAME="a_idle"/>
+	<SLOT NAME="spell_casting_begin"/>
+	<SLOT NAME="spell_casting_idle"/>
+	<SLOT NAME="spell_casting_end"/>	
+	<FSM SCRIPT="Skill_ReverseGravity" 
+		SKILL_RANGE="60" SKILL_TIME="2" SKILL_MAX_HEIGHT="150"
+		CAMERA_Z_UP="-190"	CAMERA_Z_ROT="100"	CAMERA_ZOOM="40"
+		CASTING_EFFECT_ID="e_skill_reverse_gravity_casting" PC_UP_EFFECT_ID="e_skill_reverse_gravity_up" PC_DOWN_EFFECT_ID=""
+		MONSTER_UP_EFFECT_ID="e_jump" MONSTER_DOWN_EFFECT_ID="" MONSTER_FALLEN_EFFECT_ID="e_skill_reverse_gravity_mon_fallen"/>
+</ACTION>

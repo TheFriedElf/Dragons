@@ -1,0 +1,12 @@
+<ACTION ID="a_AwakeCharge" NEXT="a_battle_idle" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">  
+  <SLOT NAME="Awake_Charge_Cast"/>
+  <SLOT NAME="Awake_Charging" LOOP="TRUE"/>
+  <FSM SCRIPT="AwakeCharge"
+       NO_WEAPON_TRAIL="TRUE"
+	   FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Awakeharge_01_char_root"
+	   DETACH_FIRE_EFFECT_AT_LEAVE="TRUE"
+       FIRE_SOUND_ID="awakecharge_skill_fire"	   
+	   />
+	   <!--LOOP_SOUND_ID="awakeCharge_skill_loop"-->
+</ACTION>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5067</ID> <!--T.T.10506701 소문은 바람을 타고(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 갑판상어에게서 유성의 파편 10개 회수하자-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 상어의 잘못된 소문이 시작된 이후 이번에는 또 다른 녀석들이 찾아왔다고 했다. 갑판상어들은 상어에게서 무엇이든지 준다는 소문을 들었다면서 다비에게 물건을 요구했다고 한다. 다행히 별 다른 물건이 없어서 안심하고 있었는데 갑판상어들이 대장간에 전시해 둔 유성의 파편을 훔쳐갔다고 한다. 유성의 파편은 다비가 나중에 멋진 물건을 만들기 위해서 놔둔 소중한 물건이라고 한다. 스티븐 무역항의 갑판상어에게서 유성의 파편 10개를 회수하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010130/10000/0/1/1/160506700">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010130/스티븐 무역항,Item_NO=160506700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160506700</ITEM> 
+ <!--Item_NO=160506700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10506711"/> <!--유성의 파편-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10506721" FACE="Darby_normal"/> <!--이건 정말 끝이 없군.
+도대체 상어 녀석들이 어떤 소문을 흘리고 다녔는지 모르겠지만, 이제 갑판상어까지 찾아왔어.
+녀석들은 우리 대장간에 오자마자 물건을 내놓으라고 생떼를 썼지. 다행히 값나가는 게 없어서 안심하고 있었지.%%
+하지만 문제는 다른 곳에 있었어.
+내가 나중에 다듬어 보려고 대장간에 장식해 놓은 유성의 파편을 녀석들이 가져가 버린 거야.%%
+다른 사람에게는 별 것 아닌 것일지 몰라도 나에게는 소중한 물건이야. 
+갑판상어로부터 내 유성의 파편을 좀 찾아줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10506726" FACE="Darby_smile"/> <!--고마워. 자네가 날 계속 도와줘서 계속해서 일할 희망이 생겼어. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10506723" FACE="Darby_normal"/> <!--몇 년 전 산에 우연히 갔다가 하늘에서 떨어지는 유성을 봤어.
+그곳에 갔더니 커다란 웅덩이가 파여있고, 빛나는 돌의 파편들이 흩어져 있었지.
+난 그 파편을 이용해서 뭔가 근사한 것을 만들 수 있겠다 싶어서 가지고 왔지.%%
+하지만 아직 내 기술이 부족해서 그런지 유성의 파편을 연마할 수 없었어.
+나의 생에 가장 큰 목표가 바로 유성의 파편을 연마해서 물건을 만드는 거야.
+하지만 내 생의 목표를 지금 갑판상에게 빼앗겨 버렸지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10506724" FACE="Darby_angly"/> <!--그래 자네에게 있어서 유성의 파편은 단순한 돌조각에 불과하겠지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10506725" FACE="Darby_normal"/> <!--갑판상어 녀석들 도대체 자기들이 가져간 게 뭔지나 알고 있을까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10506702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

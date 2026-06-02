@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4213</ID> <!--T.T.10421301 이변의 감지 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	무녀 오르하와 대화-->
+<!--[완료NPC]	드래곤 계곡 - 오르하-->
+<!--[내용]	나오이는 새로운 게시를 받고 세상의 끝으로 향하는 중이라고 말한다. 그녀가 말한 대로 드래곤 계곡에 있다는 무녀 오르하를 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">AD6FF6BC-A50D-42e8-9765-E000B2C9CA07</CLIENT> <!--시작NPC 드래곤 계곡 - 나오이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6E42C944-61BD-4592-915E-0347C234FD36</PAYER> <!--완료NPC 드래곤 계곡 - 오르하 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">AD6FF6BC-A50D-42e8-9765-E000B2C9CA07</AGENT> <!--진행NPC 11 드래곤 계곡 - 나오이 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">6E42C944-61BD-4592-915E-0347C234FD36</AGENT> <!--진행NPC 12 드래곤 계곡 - 오르하 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10421311"/> <!--무녀 오르하와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10421321" FACE="Naoi_normal"/> <!--저희가 이곳 드래곤 계곡으로 오게 된 것은
+역시 제가 꾸게된 예지몽과 관련이 있답니다.%%
+언젠가 말씀 드렸던 세상을 모두 삼켜버린 
+검은 어둠에 대해 기억하시나요?
+얼마 전 저는 그 꿈을 다시 꾸게 되었답니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10421326" FACE="Orha_smile"/> <!--아, %name%이잖아요!
+이런 곳에서 마주칠 줄 상상도 못했어요.
+그동안 잘 지내셨는지요?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10421323" FACE="Naoi_normal"/> <!--검은 심연이 이 드래곤 계곡을 지나 세상의 끝에서
+아른거리고 있었지요. 이제 더 이상 게시도 들리지 않았고,
+그저 망연히 재앙을 피할 수 없으리라고 직감했습니다.%%
+고민하던 저희들은 미카족의 젊은 전사들의 도움으로 
+세상의 끝을 향하는 중입니다. 그곳에 우리를 기다리고
+있는 것이 무엇인지 확인해야 할 것 같아서요.%%
+언니인 오르하도 %name%님을 무척 보고 싶어하세요.
+오르하님을 찾아가 보시겠어요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10421324" FACE="Naoi_angly"/> <!--네, 그저 얼굴을 본 것만으로 좋습니다. 이제 더 이상 볼 수 없을테니…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10421325" FACE="Naoi_angly"/> <!--오르하님은 드래곤 계곡 안에 있습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10421302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

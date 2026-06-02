@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5001</ID> <!--T.T.10500101 사업 성공의 길 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	앵무조개 선착장 - 몽글, 붉은 안테나 몽글을 각 15마리씩 처리-->
+<!--[완료NPC]	바람항구 - 제시-->
+<!--[내용]	제시의 신용을 지키기 위해서 앵무조개 선착장에서 고객의 눈에 거슬리는 몽글과, 붉은 안테나 몽글을 각 15마리씩 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 바람항구 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 바람항구 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 바람항구 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010140/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010140/앵무조개 선착장,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010140/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010140/앵무조개 선착장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10500111"/> <!--몽글-->
+		<OBJECT2 COUNT="15" TEXT="10500112"/> <!--붉은 안테나 몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10500121" FACE="Jessie_normal"/> <!--이런, 이런. 고객의 만족에 최선을 다해야 하는 것이 숙명이거늘.
+자네는 알고 있나? 사업 성공 길에 대해서 말일세.%%
+내가 사업 성공의 길을 알려 주겠네.
+대신 내 작은 부탁 하나만 들어주지 않겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10500126" FACE="Jessie_smile"/> <!--고맙네. 이로서 고객과 나의 신용은 더욱더 높아졌네.%%
+물론 자네와 나의 신용은 말할 것도 없다네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10500123" FACE="Jessie_smile"/> <!--사업에서 가장 중요한 것은 고객의 어떤 요구라도 겸허하게 수용한다는 것일세.%%
+자네 혹시 앵무조개 선착장에 대해서 알고 있나?
+다른 사람들은 어둡고 침침하다고 해서 잘 접근하지 않는 곳이지.%%
+하지만 난 그쪽 땅이 반드시 큰 돈벌이…가 아니라 고객의 수요가 있을 거라는 것을 알고 있었네.%%
+바로 테마 레스토랑일세.
+앵무조개 선착장의 어두운 분위기를 이용한 공포 레스토랑!
+하지만 그 쪽 땅을 계약한 고객이 공포 레스토랑과 몽글과 붉은 안테나 몽글은 어울리지 않다고 해서 말일세.%%
+난 몽글과 붉은 안테나 몽글을 처리하겠다고 단언했지.
+하지만 나이가 있어서 그런지 생각보다 쉽지 않은 일이라는 걸 깨달았네.%% 
+미안하지만 고객과의 신용을 지키기 위해 몽글과 붉은 안테나 몽글을 처리해 주지 않겠나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10500124" FACE="Jessie_normal"/> <!--뭐 사업에 관심이 없다고 하더라도 어쩔 수 없지.%%
+하지만 인생의 변화는 사소한 조언으로 이루어진다는 걸 명심하게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10500125" FACE="Jessie_normal"/> <!--젊은이! 늙은이를 기다리게 하는 게 아닐세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10500102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

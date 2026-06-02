@@ -1,0 +1,10 @@
+<ACTION ID="a_Weapon Freezing" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Onehand_skill_WeaponFreezing_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_wp_r_hand"
+       FIRE_CASTER_EFFECT_ID="ef_WeaponFreezing_01_p_wp_hand"
+       HIT_SOUND_ID="Weaponfreeze"
+       WEAPON_XML="Item/Common/12_Weapon/09_special/WeaponFreezing.xml"
+       />
+</ACTION>

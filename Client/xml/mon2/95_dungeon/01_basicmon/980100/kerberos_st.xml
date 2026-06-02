@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Kerberos_st" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Kerberos"/>
+		<KFMPATH SCALE="1.2">../Data/2_Mon2/95_Dungeon/02_RareMon/980100/Kerberos_ST/Kerberos_ST.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+				<SPHERE TO="p_hit_point_01" SIZE="50"/>
+			<SPHERE TO="p_hit_point_02" SIZE="50"/>
+		</ABV>
+		<SLOT>
+
+			<!--근거리 1-->	    
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000202"/>
+			<ITEM NAME="breath_01" ANIMATION="1000203"/>
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000207"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000209"/>
+
+			<!--원거리 1-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000214"/>
+			<ITEM NAME="shot_01" ANIMATION="1000215" FIRE_START_NODE="p_eff_breathLhead_00" PROJECTILE_ID="Projectile_IcePick_Keroberos"/>
+
+
+			<!--원거리 2-->
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1000217"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000218"/>
+			<ITEM NAME="shot_02" ANIMATION="1000219" FIRE_START_NODE="p_eff_breathRhead_00" PROJECTILE_ID="Projectile_keroberos_Shot_01"/>
+
+
+			<!--대쉬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000328" FIRE_EFFECT="NONE"/>
+	
+			<!--기모았다가 발산 -->
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION="1000374"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000375"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000376"/>
+	
+			<!--더블 브레스 -->
+			<ITEM NAME="breath_btlidle_02_start" ANIMATION="1000459"/>
+			<ITEM NAME="breath_btlidle_02" ANIMATION="1000460"/>
+			<ITEM NAME="breath_02" ANIMATION="1000461" USE_ABIL_TIME="FALSE"/>
+			<ITEM NAME="breath_02_finish" ANIMATION="1000462"/>
+			<ITEM NAME="breath_btlidle_03" ANIMATION="1000005"/>
+			<ITEM NAME="breath_03" ANIMATION="1000463" USE_ABIL_TIME="FALSE"/>
+			<ITEM NAME="breath_03_finish" ANIMATION="1000462"/>
+
+	     	<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000082"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		
+			<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000001" HIT_SOUND_ID="pattern-brake"/>
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger" FURY_CAMERA_DISTANCE="350" />
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

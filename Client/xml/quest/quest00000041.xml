@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>41</ID> <!--T.T.10004101 사랑에 필요한 것 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람의 항구의 에이미와 이야기 해보자.-->
+<!--[완료NPC]	바람항구 - 에이미-->
+<!--[내용]	월터는 사실 친한 친구가 별로 없다고 말한다. 하지만 이왕 자신에게 왔으니, 부탁을 들어 달라고 한다. 에이미에게 월터가 주문해 놓은 초콜릿이 잘 도착했는지 물어보러 가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">922256EB-5BF6-4B25-BC1A-8B378FC002E6</CLIENT> <!--시작NPC 바람항구 - 월터 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</PAYER> <!--완료NPC 바람항구 - 에이미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">922256EB-5BF6-4B25-BC1A-8B378FC002E6</AGENT> <!--진행NPC 11 바람항구 - 월터 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 12 바람항구 - 에이미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10004111"/> <!--에이미와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10004121" FACE="Walter_normal"/> <!--전 사랑에 증거가 필요하다고 생각해요.
+사랑의 증거란 바로 물질적인 것이죠.
+하지만 제겐 그렇게 많은 돈이 없어요.%%
+그래서 발렌타인 데이를 이용해서 저렴하게 초코릿을 선물하려고 생각하고 있죠. 
+저기 죄송하지만, 제 작은 부탁 하나만 들어주실 수 있을까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10004126" FACE="Amy_normal"/> <!--네? 월터씨가 저에게 초콜릿을 보냈다고요?
+그런데 왜 월터씨가 저에게 초콜릿을 보낸 걸까요?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10004123" FACE="Walter_smile"/> <!--발렌타인 데이는 기본적으로 여자가 남자에게 초콜릿을 준다고 알려졌죠.
+하지만, 이런 날 반대로 남자가 여자에게 초콜릿을 준다면 어떨까요?
+아마 저에게 상당한 호감을 느낄 게 분명해요.%%
+그래서 에이미에게 제 사랑의 증거로 초콜릿을 주문했어요.
+에이미에게 제가 준 초콜릿이 잘 도착했는지 좀 물어봐 주세요. 앗, 잠깐!%%
+(월터는 수줍어하면서 속삭인다)
+그리고 제가 정말 괜찮은 사람이라는 이야기를 살짝, 티 안 나게 해 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10004124" FACE="Walter_angly"/> <!--에휴, 그러시겠죠. 아무렴 저 같은 녀석의 부탁을 누가 들어주기나 하겠어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10004125" FACE="Walter_normal"/> <!--요즘엔 여자들이 초콜릿은 기본에 뭔가 반짝이는 물건을 원한다던데 거짓말이겠죠?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10004102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

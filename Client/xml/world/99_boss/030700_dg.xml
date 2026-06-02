@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030500_DG">
+	<!--<DISABLE_RANDOM_ANI>
+		<ITEM OBJECT_NAME ="00000"/>
+	</DISABLE_RANDOM_ANI> /-->
+	<GSAPATH>../Data/3_World/99_Boss/01_Level/030500/030500_DG.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Van_Cliff.mp3</BGSOUND>
+
+	<SCRIPT INIT="Init_030500" READY="Ready_030500" UPDATE="Update_030500" START="Start_030500">World/99_Boss/030500_DG.lua</SCRIPT>
+	<OPENING_MOVIE NAME="B_BoneDragon_opening 01"/>
+
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.75" GLOW="0.25" HIGHLIGHT="0" />
+    <!--변경될 카메라 위치 /--> 
+	<CAMERA_ADJUST UP="50" ZOOM="300" TARGET_Z="50"/>
+	<CAMERA_ADJUST MAX_ZOOM="0" />
+	<VIEW_DISTANCE USE="1" HIGH_END="10000"/>
+	
+	<COMPLETE_PATH>
+		<ITEM ID = "0" PATH = "../Data/6_UI/mission/msRtBoneDragon000.dds"/>
+		<ITEM ID = "1" PATH = "../Data/6_UI/mission/msRtBoneDragon001.dds"/>
+		<ITEM ID = "2" PATH = "../Data/6_UI/mission/msRtBoneDragon002.dds"/>
+		<ITEM ID = "3" PATH = "../Data/6_UI/mission/msRtBoneDragon003.dds"/>
+	</COMPLETE_PATH>
+<FOG DENSITY="0.001000" FUNC="RANGE_SQ" START="500" END="5000" COLOR="0.06,0.04,0.10"/>
+</WORLD>

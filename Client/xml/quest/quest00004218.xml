@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4218</ID> <!--T.T.10421801 지옥의 문이 열린다. -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	세상의 끝 몬스터 100마리 퇴치-->
+<!--[완료NPC]	세상의 끝 - 무카파-->
+<!--[내용]	무카파는 세상의 끝에서 한도 끝도 없이 밀려드는 원념체를 상대하는 것에 부담감을 느낀다. 무카파 사제장을 위해 세상의 끝에 출현하는 몬스터를 종류에 상관 없이 100마리 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6F251C62-CEDD-4044-AAE7-2E724D6A6380</CLIENT> <!--시작NPC 세상의 끝 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6F251C62-CEDD-4044-AAE7-2E724D6A6380</PAYER> <!--완료NPC 세상의 끝 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">6F251C62-CEDD-4044-AAE7-2E724D6A6380</AGENT> <!--진행NPC 11 세상의 끝 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="KILLMONSTER" VALUE="1">9050230</GROUND> 
+ <!--MAP_NO=9050230/세상의 끝,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="100" TEXT="10421811"/> <!--세상의 끝(필드) 몬스터-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10421821" FACE="Mukapa_normal"/> <!--아아.. 이곳의 상황은 갈수록 악화되고 있네. 
+파리스의 몸에서 빠져나온 오리진과 사라진 엘가를
+찾는 일은 답보 상태에 무물고 있지만…%%
+저기 저 검은 심연의 입구에서는 매일 같이 원념체들이
+쏟아져 나오고 있어. 그 몬슽들을 막기 위해 매일 같이
+병사들이 희생되고 있네.%%
+이 일을 해결하지 못한다면, 엘가와 오리진을 찾는다 해도
+병력이 지금의 반 밖에 남지 않을 거야. 절망적이지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10421826" FACE="Mukapa_smile"/> <!--오오! 이 얼마 만의 쾌거인가!
+자네가 세상의 끝에 넘쳐나는 원념체들을 줄여준 덕에
+이곳으로 집결 중인 우리 측 병사들의 피해가 격감했네.
+수고했어!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10421823" FACE="Mukapa_normal"/> <!--우선 이 상황을 타개하기 위해서는 세상의 끝을
+맴도는 사악한 원념체들의 수를 줄여야만 하네.%%
+지금 바로 출진이 가능하겠는가?
+좋다! 세상의 끝으로 나가 우리의 성전을 방해하는
+저 원념체들을 처단하게!%%
+자네라면 능히 100마리 정도의 몬스터들을 상대할 수
+있을 걸세. 서두르게!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10421824" FACE="Mukapa_angry"/> <!--아아, 자넨 이 일의 심각성을 이해하지 못하고 있어!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10421825" FACE="Mukapa_angry"/> <!--자, 세상의 끝으로 나가 100마리의 몬스터들을 상대해 주게나!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10421802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

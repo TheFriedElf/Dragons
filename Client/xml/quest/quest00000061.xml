@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>61</ID> <!--T.T.10006101 사랑의 다리 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	과자공장 초콜릿 보관소(F7)의 쿠피에게 필리아를 소개해 주자.-->
+<!--[완료NPC]	바람항구(발렌타인) - 고든-->
+<!--[내용]	고든은 외로움으로 벌어진 사건이니, 쿠피와 필리아를 서로 맺어 줘야겠다고 한다. 필리아를 만나기 전까지 과자공장 초콜릿 보관소(F7) 40 스테이지에 있는 쿠피가 더 이상 범죄를 저지르지 못하도록 하자. 쿠피는 과자공장 초콜릿 보관소(F7)에 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</CLIENT> <!--시작NPC 바람항구(발렌타인) - 고든 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</PAYER> <!--완료NPC 바람항구(발렌타인) - 고든 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 11 바람항구(발렌타인) - 고든 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MISSION OBJECTNO="1" TYPE="STRATEGY_DEFENCE_STAGE_CLEAR" VALUE="40">116</MISSION> 
+ <!--Mission_Key=116/[이벤트]초코장인의 집(과자공장) (F7),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10006111"/> <!--쿠피에게 필리아 소개-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">291303520</ITEM><!--전체지급/전체/1)/291303520(봉인아님) 1개-러블리 골드 벨트-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10006121" FACE="Goden_normal"/> <!--자네도 뭔가 감이 오지 않나?
+필리아와 쿠피 이 두 녀석 말일세.
+심층적으로 그들이 왜 그렇게 되었는지 그 원인을 찾아보잔 말일세.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10006126" FACE="Goden_smile"/> <!--허허. 역시 내 생각이 맞았군.
+그들이 오랜 기간 기다린 동안 자신의 짝을 찾게 된 거야.%%
+자네도 짝을 찾는데, 너무 안달하지 말게나.
+자네의 짝은 분명히 어디선가 자네를 기다리고 있을 테니 말일세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10006123" FACE="Goden_normal"/> <!--바로, 외로움일세.
+그들이 그렇게 비뚤어질 수밖에 없었던 것은 외롭기 때문일세.
+하지만 그 둘을 서로 이어준다면 이런 사건은 가볍게 해결이 된다는 것이지.
+뭐, 서로 마음이 있어야 하지만…%%
+그래도 충분하지 않겠나? 오랜 기간 외롭게 지낸 녀석들이라 서로 알아볼 걸세.
+내가 필리아에게 말해 놓겠네. 자네는 먼저 초콜릿 보관소(F7)로 가서, 쿠피가 더는 범죄를 저지르지 못하도록 막아주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10006124" FACE="Goden_angly"/> <!--그렇게 관심이 없어서 어디 쓰겠는가? 사회적 무관심은 악행의 다른 얼굴일세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10006125" FACE="Goden_normal"/> <!--쿠피가 더는 범죄를 저지르지 못하도록 어서 빨리 막아주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10006102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

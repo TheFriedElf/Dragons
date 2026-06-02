@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4244</ID> <!--T.T.10424401 천공 산책 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샤말키와 대화-->
+<!--[완료NPC]	밴시협곡 - 모하모-->
+<!--[내용]	모하모는 부스터 백팩의 업그레이드를 부탁할 동안 밴시협곡의 샤말키를 찾아가 르고르의 메시지를 전달해달라고 부탁한다. 르고르는 팔미르의 화살을 찾아났으니 샤말키가 마을로 돌아오길 바란다고 전달하고 다시 모하모에게 돌아오면, 업그레이드 된 부스터 백팩을 받을 수 있을 것이다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</CLIENT> <!--시작NPC 밴시협곡 - 모하모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</PAYER> <!--완료NPC 밴시협곡 - 모하모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">E4F6A5DF-A32B-4a26-84C3-E4F1C610882E</AGENT> <!--진행NPC 11 밴시협곡 - 모하모 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">156AB74D-9EC3-4058-A901-C34D2BE356FB</AGENT> <!--진행NPC 12 밴시협곡 - 샤말키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10424411"/> <!--샤말키와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299602660</ITEM><!--전체지급/전체/1)/299602660(봉인아님) 1개-부스터 백팩 [시그너스] -붉은여우 삼각지-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10424421" FACE="Mohamo_normal"/> <!--르고르란 미카족 대장장이가 나한테 특별한 부탁을 하더라고, 
+샤말키란 여자 아이가 이곳 밴시협곡에 나와있을테니
+이야기를 전해달라고 하던데...%%
+난 바로 이동포탈로 르고르에게 가서 백팩 업그레이드 키트를 
+손 봐올테니까, 그 동안 샤말키라는 미카족 여자아이에게 
+르고르의 메시지를 말해줘. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10424426" FACE="Mohamo_smile"/> <!--엥? 걘 정말 아주 못말리는 말괄량이로구나. 
+헤헤.. 200년 전 내 모습하고 딱 똑같네.
+돌아가는 길에 르고르에겐 잘 전해줄게.%%
+그건 그렇고 말이지. 
+짜잔~ 
+드디어 백팩 업그레이트 키트의 정비가 끝났어.%%
+수리된 업그레이드 키트와 아람던젼에서 구한
+또 하나의 부스터 백팩 [페리]를 결합시켜 나온
+강화형 부스터 백팩 [시그너스] 신등장!%%
+어서 착용해봐!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10424423" FACE="Mohamo_normal"/> <!--내용은… 그, 뭐였드라…. 아! 맞아.
+팔미르의 화살촉을 찾았으니까, 위험한 일은 관두고 솔방울 언덕으로 
+돌아오라고 전해달랬어. 빨리 샤말키란 아이를 찾아보라구.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10424424" FACE="Mohamo_normal"/> <!--업그레이드된 부스터 백팩을 받기 싫다는 의사로 봐도 되려나…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10424425" FACE="Mohamo_normal"/> <!--뭐하고 있는 거야? 아직도 샤말키를 못 만난 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10424402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10424451" FACE="Syamalki_normal"/> <!--뭐? 르고르가 화살촉을 찾았으니 돌아오라고 했다고?
+우왕~ 역시 르고르는 미카족 최고의 대인배였어.
+하지만… 르고르가 화살촉을 찾았다는 말은 분명 날
+안심시키기 위해 하는 거짓말일 거야. %%
+역시 르고르에게 줄 선물을 구할 때까진 모험을 계속 
+이어나갈 수 밖에 없어. 그게 바로 미카족의 방식이야.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

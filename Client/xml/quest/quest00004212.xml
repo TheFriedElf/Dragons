@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4212</ID> <!--T.T.10421201 절반의 희망 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	무녀 나오이와 대화-->
+<!--[완료NPC]	드래곤 계곡 - 나오이-->
+<!--[내용]	헬 크라우져는 검은 심연이 출현한 것에 불안함을 감추지 못한다. 때 마침 드래곤계곡에 게시를 얻어 찾아온 미카족의 무녀 나오이가 있다고 하니 그녀를 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7916D548-1032-44e4-85ED-983F3FFD01CE</CLIENT> <!--시작NPC 엘로라주둔지 - 헬 크라우저 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">AD6FF6BC-A50D-42e8-9765-E000B2C9CA07</PAYER> <!--완료NPC 드래곤 계곡 - 나오이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7916D548-1032-44e4-85ED-983F3FFD01CE</AGENT> <!--진행NPC 11 엘로라주둔지 - 헬 크라우저 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">AD6FF6BC-A50D-42e8-9765-E000B2C9CA07</AGENT> <!--진행NPC 12 드래곤 계곡 - 나오이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10421211"/> <!--나오이와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10421221" FACE="Hell_krauser_normal"/> <!--브리즈국의 콜린대장이 간과하고 있는 것이 있어.
+파리스는 이곳에 잠시나마 검은 시연의 차원을 열었다.
+영계를 떠도는, 천년 전 죽은 영혼들을 불러낸 것이다.%%
+파리스가 죽었다고 하나, 무너진 최상층의 잔해에서
+아직 시신이 발견되지 않았다고 하니, 안심할 상황은 아니지.%%
+또한 파리스로부터 빠져나와 흑룡왕 엘가에게 씌워진
+검은 정령 오리진이 마음에 걸리는군.%%
+아마도 그 오리진은 여태까지 파리스의 영혼을 잠식해
+악행을 저질러오다가 마지막 남은 파리스의 정령석이
+나타나 파리스가 해방되자, 엘가에게 잠식해 들어간 거겠지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10421226" FACE="Naoi_normal"/> <!--이렇게 다시 만나다니 꿈만 같군요.
+솔방울 언덕을 떠나오면서 다시는 용사님을
+못 만날 줄 알았답니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10421223" FACE="Hell_krauser_normal"/> <!--최근 근방의 드래곤 계곡에서 미카족의 무녀를 만났다.
+그녀들이 엘가에 대해 뭔가 게시를 받은 것 같은 눈치더군.%%
+지금 바로 드래곤계곡으로 가서 무녀 나오이를 만나거라.
+한시라도 늦어진다면 우리는 완전히 부활한 엘가와
+마주하게 될 것이다. 서둘러!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10421224" FACE="Hell_krauser_angly"/> <!--이 상황에서 머뭇거리다니, 제 정신인 거야!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10421225" FACE="Hell_krauser_angly"/> <!--드래곤계곡에서 무녀 나오이를 찾아. 한시가 급하다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10421202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

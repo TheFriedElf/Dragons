@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5086</ID> <!--T.T.10508601 갈 수 없는 고향(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항의 상어와 갑판상어가 주워간 주머니 10개를 회수하자-->
+<!--[완료NPC]	바람항구 - 크리스핀-->
+<!--[내용]	크리스핀은 스티븐 무역항에 승선증이 담긴 주머니를 찾으러 갔지만, 이미 상어와 갑판상어가 주머니를 주워버렸다고 한다. 크리스핀은 두려움을 참고 상어와 갑판상어에게 주머니를 달라고 했지만 상어는 코웃음치며 가버렸다고 한다. 남의 물건을 가지고 의기양양한 스티븐 무역항의 상어와 갑판상어에게서 크리스핀의 주머니 10개를 회수하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">33FAB5CE-50F9-407E-807C-5F32FA202064</CLIENT> <!--시작NPC 바람항구 - 크리스핀 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">33FAB5CE-50F9-407E-807C-5F32FA202064</PAYER> <!--완료NPC 바람항구 - 크리스핀 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">33FAB5CE-50F9-407E-807C-5F32FA202064</AGENT> <!--진행NPC 11 바람항구 - 크리스핀 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010130/10000/6000/1/1/160508600">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010130/스티븐 무역항,Item_NO=160508600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160508600</ITEM> 
+ <!--Item_NO=160508600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010130/10000/6000/1/1/160508600">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010130/스티븐 무역항,Item_NO=160508600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160508600</ITEM> 
+ <!--Item_NO=160508600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10508611"/> <!--크리스핀의 주머니-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508621" FACE="Crispin_normal"/> <!--이제 고향에 대한 희망은 없어져 버렸네. 
+내가 승선증이 담긴 주머니를 찾으러 간 게 한 발 늦어버렸어.
+주머니가 있던 장소는 이미 상어와 갑판상어가 몰려와 있더군.%%
+녀석들이 주머니를 챙기고 있길래, 두려움을 참고 내 주머니를 돌려 달라고 했지.
+하지만 역시나 녀석들은 그냥 코웃음 치면서 가버렸어.
+부탁하네. 내것은 상관없지만 다른 고향사람들의 승선증은 꼭 찾아야 하네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508626" FACE="Crispin_normal"/> <!--아, 찾아 왔군. 응? 이런! 주머니 안 이 비어 있네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508623" FACE="Crispin_normal"/> <!--나 혼자만이라면 상관없지만 나에게 승선증을 맡긴 고향 사람들의 얼굴을 어떻게 봐야 할 지 모르겠군.
+고향 사람들에게 나는 선배와 같은 역할을 해왔기 때문에 나에게 믿고 승선증을 맡긴 것이지.%% 
+일종의 신뢰의 표시야. 하지만 그런 신뢰를 이렇게 저버리는 일을 할지 나 자신도 꿈에도 몰랐어.
+조심하기 위해서 몸에 지니고 다녔던 게 가장 큰 실수였어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508624" FACE="Crispin_angly"/> <!--나를 위해서가 아니라 내 고향 사람들을 위해서네. 그래도 안 되겠나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508625" FACE="Crispin_normal"/> <!--만약 승선증을 되찾지 못하는 경우가 생긴다면 내 전 재산을 팔아서라도 구하겠네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <CMD type="WaitTime" time="8"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/>
+	<!-- 베가본드 엔딩 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="false"/>
+    <CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="1"/>
+	<CMD TYPE="setmoviescene" enable="true"/>
+	<CMD type="waittime" time="0"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="false"/>
+	<CMD type="WaitFade" time="1"/>
+	<CMD TYPE="ShowActor" ClassNo="6004900" Show="false"/>
+    <CMD TYPE="ShowActor" ActorGUID="F9980AC7-E5B3-4b71-96F6-928B0DF8A239" Show="false"/>
+    <CMD TYPE="RemoveActor" ActorGUID="F9980AC7-E5B3-4b71-96F6-928B0DF8A239"/>
+	<CMD type="WaitTime" time="1"/>
+	<CMD TYPE="AddNPC" ClassNo="1028165" NameTTID="502921" SpawnPos="-1370.422, 884.8857,35.077579"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="502921" CameraID="Camera01"/>
+	<CMD type="WaitTime" time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+	<CMD TYPE="PlayAnimation" NameTTID="502921" SlotName="ending_01_01"/>	
+	<CMD TYPE="WaitTime" Time="1.667"/>
+	<CMD TYPE="PlayAnimation" NameTTID="502921" SlotName="ending_01_03"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="502921" CameraID="Camera01"/>
+	<CMD TYPE="WaitTime" Time="9"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="false"/>
+	<CMD type="WaitFade" time="1"/>
+	<CMD TYPE="ShowActor" NameTTID="502921" Show="false"/>
+	<CMD TYPE="RemoveActor" NameTTID="502921"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="AddNPC" ClassNo="1028154" NameTTID="505568" SpawnPos="-1674.4619, 654.8842, 35.3012"/>
+	<CMD TYPE="MoveCamToActor" NameTTID="505568" MoveTime="0" CamActorDistance="300" CamMoveUpDistance="-35"/>
+	<CMD type="WaitTime" time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+    <CMD TYPE="playBGM" SoundNo = "1"/>
+	<CMD TYPE="PlayAnimation" NameTTID="505568" SlotName="ending_02_01"/>
+	<CMD type="WaitTime" time="4"/>
+	<CMD TYPE="ShowActor" NameTTID="505568" Show="false"/>
+	<CMD TYPE="RemoveActor" NameTTID="505568"/>
+	<CMD TYPE="ShowActor" ActorGUID="EEF9039F-F219-463c-9727-9BADE3F1D992" Show="true"/>
+	<CMD type="WaitTime" time="3"/>
+	<CMD TYPE="SetActorPosition" SpecialActor="ME" TargetPos="-1749.4722, 654.8842, 35.3012"/>
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/>
+	<CMD type="WaitTime" time="1"/>
+	
+	<CMD type="CallUI" UIWndName="FRM_MISSION_END"/>
+    <CMD TYPE="PlaySound" SpecialActor="ME"  SlotNumber="1" SoundID="Guild_LV_UP"/>
+    <CMD type="waittime" time="3"/>
+    <CMD TYPE="StopSound" SpecialActor="ME"  SlotNumber="1"/>
+    
+    <CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+    
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

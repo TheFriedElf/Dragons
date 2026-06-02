@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_OPEN_DUNGEUN_INIT">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "45" W ="278" H ="333" CAN_DRAG = "1" />
+		<ATTR IMG = "../Data/6_ui/15_OpenDungeun/OpenDGbg.tga" IMG_W = "278" IMG_H = "333"/>
+		<LIST ID = "LST_DUNGEUN_LIST">
+			<ATTR X = "7" Y = "34" W ="243" H ="244" ITEM_X = "0" ITEM_Y = "0" />
+			<BUTTON ID = "ScrUp">
+				<ATTR X = "244" Y = "0" W ="20" H ="20" />
+				<ATTR BTN_IMG = "../Data/6_ui/01_main/scrollUp.tga" BTN_IMG_W = "64" BTN_IMG_H = "64"/>
+	      		</BUTTON>
+			<BUTTON ID = "ScrDown">
+				<ATTR X = "244" Y = "233" W ="20" H ="20" />
+				<ATTR BTN_IMG = "../Data/6_ui/01_main/scrollDown.tga" BTN_IMG_W = "64" BTN_IMG_H = "64"/>
+			</BUTTON>
+			<BUTTON ID = "ScrMiddle">
+				<ATTR X = "245" Y = "21" W ="26" H ="24" />
+				<ATTR BTN_IMG = "../Data/6_ui/01_main/scrollmove.tga" BTN_IMG_W = "64" BTN_IMG_H = "64" />
+			</BUTTON>
+
+			<ATTR BTN_UP = "ScrUp" />
+			<ATTR BTN_DOWN = "ScrDown" />
+			<ATTR BTN_MIDDLE = "ScrMiddle" />
+
+			<ATTR ELEMENT_ID = "BTN_OPEN_DUNGEUN_INIT_ELE" />
+
+		</LIST>
+		<BUTTON ID = "Min">
+			<ATTR X = "223" Y = "4" W ="26" H ="24" />
+			<ATTR BTN_IMG = "../Data/6_ui/01_main/popBminimize.tga" BTN_IMG_W = "64" BTN_IMG_H = "64"/>
+
+		</BUTTON>
+		<BUTTON ID = "Close">
+			<ATTR X = "248" Y = "4" W ="26" H ="24" />
+			<ATTR BTN_IMG = "../Data/6_ui/01_main/popBclose.tga" BTN_IMG_W = "64" BTN_IMG_H = "64"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID = "1">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<ATTR X = "100" Y = "296" W ="79" H ="28" />
+			<ATTR BTN_IMG = "../Data/6_ui/01_main/cmBcancel.tga" BTN_IMG_W = "256" BTN_IMG_H = "64"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID = "60">UISelf:CloseParent()</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID = "ON_CALL">
+		</SCRIPT>
+	</FORM> 
+
+	<BUTTON ID = "BTN_OPEN_DUNGEUN_INIT_ELE">
+		<ATTR X = "0" Y = "0" W ="243" H ="61"/>
+		<ATTR TEXT = " " FONT = "Font_Text" T_X = "65" T_Y = "11" />
+		<ATTR BTN_IMG = "../Data/6_ui/15_OpenDungeun/OpenDGlistB.tga" BTN_IMG_W = "486" BTN_IMG_H = "122"/>
+		<ICON ID = "ICN_KEY">
+			<ATTR X = "7" Y = "6" W ="48" H ="48"/>
+			<SCRIPT ID = "ON_DISPLAY">UISelf:DrawIconByNo()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<FORM ID = "FRM_TEXT1">
+			<ATTR X = "65" Y = "11" W ="174" H ="20"/>
+		</FORM>
+		<FORM ID = "FRM_TEXT2">
+			<ATTR X = "65" Y = "36" W ="174" H ="20"/>
+		</FORM>
+		<SCRIPT ID = "ON_L_BTN_DOWN">
+			CloseUI("FRM_OPEN_DUNGEUN_INIT")
+			Net_ReqMapMove(UISelf:GetCustomDataAsInt(),1)
+		</SCRIPT>
+
+	</BUTTON>
+</XUI>

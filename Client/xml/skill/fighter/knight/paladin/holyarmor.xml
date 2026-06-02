@@ -1,0 +1,11 @@
+<ACTION ID="a_Holy Armor" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_04"/>  
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Holyarmor_01_char_root"
+       HIT_SOUND_ID="HolyArmor"
+       SHOW_TEXT_TARGETLIST_COUNT_NUM="1"
+       SHOW_TEXT_TARGETLIST_TEXTNO="41001"
+       />
+</ACTION>

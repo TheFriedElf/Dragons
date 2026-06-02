@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_ShadowBlade">
+	<TEXTURE SRC="Cross_Blade_01.dds">../Data/1_Cha/9_SSkill/Cross_Blade/Cross_Blade_01.dds</TEXTURE>
+	<TEXTURE SRC="Cross_Blade_02.dds">../Data/1_Cha/9_SSkill/Cross_Blade/Cross_Blade_02.dds</TEXTURE>
+	<TEXTURE SRC="Cross_Blade_glow_01.dds">../Data/1_Cha/9_SSkill/Cross_Blade/Cross_Blade_glow_01.dds</TEXTURE>
+	<TEXTURE SRC="Cross_Blade_glow_02.dds">../Data/1_Cha/9_SSkill/Cross_Blade/Cross_Blade_glow_02.dds</TEXTURE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.2">../Data/1_Cha/9_SSKill/Shadow_Blade/Shadow_Blade.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="Skill_ShadowBlade_01_01" ANIMATION="1000000"/>
+      <ITEM NAME="Skill_ShadowBlade_01_02" ANIMATION="1000001"/>
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

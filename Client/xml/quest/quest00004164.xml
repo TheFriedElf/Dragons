@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4164</ID> <!--T.T.10416401 그림자의 시험 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	아키아 동굴의 루와 대화-->
+<!--[완료NPC]	아키아 동굴 - 루-->
+<!--[내용]	그림자의 사제 루는 빛의 사제인 야나이의 쌍둥이 동생이다. 퀘차 사제는 하나뿐인 혈육을 잃게된 루에 대한 걱정 때문에 그녀를 찾아달라고 부탁한다. 아키아 동굴로 그림자의 사제 루를 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">70925968-3056-4c39-A4C1-8109F1DFADA5</PAYER> <!--완료NPC 아키아 동굴 - 루 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">70925968-3056-4c39-A4C1-8109F1DFADA5</AGENT> <!--진행NPC 12 아키아 동굴 - 루 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416411"/> <!--루와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416421" FACE="Quecua_normal"/> <!--그나저나 지금 같은 시기에 그림자 사제인 루가 보이지 않으니
+걱정이로구나.%%
+그 아이도 내색 하진 않지만 그래도 유일한 혈육인 쌍둥이 언니
+야나이가 죽은 이후로 예전 같지 않아.%%
+이 일을 어이할꼬….-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416426" FACE="Lwu_smile"/> <!--뭐야.. 넌?!
+엇 그러고보니 많이 보던 얼굴인데…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416423" FACE="Quecua_normal"/> <!--루가 언니를 잃어버린 이후로는 독자적으로 행동하는 것 같더구나.
+아마도 스스로를 압박할수록 나아진다고 생각하는 건지도 모르지.%%
+어쨌거나 그림자의 시험을 치르려면 그 아이를 만나야지.
+신관 전사들의 이야기를 들어보니, 지금은 아키아 동굴 인근에
+있다는구나. 어서 그림자 사제 루를 찾아가거라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416424" FACE="Quecua_angry"/> <!--거절하는 게 능사가 아닐텐데.. 후후…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416425" FACE="Quecua_angry"/> <!--널 기다리고 있을게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

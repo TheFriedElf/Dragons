@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_SHINESTONE_MAIN" X="807" Y="48" W="216" H="48" CAN_CLIP = "1">
+		<ATTR IMG="../Data/6_UI/main/mnStoneBg.tga" IMG_W="216" IMG_H="48"/>
+		
+		<IMG ID="STONE_1" X="4" Y="0" Z="0" UV_INDEX="1" U="12" V="12">
+			<ATTR IMG="../Data/6_ui/icon/IconSys01.tga" W="40" H="40" IMG_W="480" IMG_H="480" T_OUTLINE="1" />
+			<ATTR TEXT = "" FONT="FTslot" T_X="20" T_Y="28" T_CENTER = "1" FONT_COLOR_HEX="0xFFFAE26D"/> 
+			<SCRIPT ID="ON_TICK"> ChangeShineStoneCount(UISelf, 20700010) </SCRIPT>
+		</IMG>
+		<IMG ID="STONE_2" X="46" Y="0" Z="0" UV_INDEX="2" U="12" V="12">
+			<ATTR IMG="../Data/6_ui/icon/IconSys01.tga" W="40" H="40" IMG_W="480" IMG_H="480" T_OUTLINE="1" />
+			<ATTR TEXT = "" FONT="FTslot" T_X="20" T_Y="28" T_CENTER = "1" FONT_COLOR_HEX="0xFFFAE26D"/> 
+			<SCRIPT ID="ON_TICK"> ChangeShineStoneCount(UISelf, 20700020) </SCRIPT>
+		</IMG>
+		<IMG ID="STONE_3" X="88" Y="0" Z="0" UV_INDEX="3" U="12" V="12">
+			<ATTR IMG="../Data/6_ui/icon/IconSys01.tga" W="40" H="40" IMG_W="480" IMG_H="480" T_OUTLINE="1" />
+			<ATTR TEXT = "" FONT="FTslot" T_X="20" T_Y="28" T_CENTER = "1" FONT_COLOR_HEX="0xFFFAE26D"/> 
+			<SCRIPT ID="ON_TICK"> ChangeShineStoneCount(UISelf, 20700030) </SCRIPT>
+		</IMG>
+		<IMG ID="STONE_4" X="130" Y="0" Z="0" UV_INDEX="4" U="12" V="12">
+			<ATTR IMG="../Data/6_ui/icon/IconSys01.tga" W="40" H="40" IMG_W="480" IMG_H="480" T_OUTLINE="1" />
+			<ATTR TEXT = "" FONT="FTslot" T_X="20" T_Y="28" T_CENTER = "1" FONT_COLOR_HEX="0xFFFAE26D"/> 
+			<SCRIPT ID="ON_TICK">ChangeShineStoneCount(UISelf, 20700040)</SCRIPT>
+		</IMG>
+		<IMG ID="STONE_5" X="172" Y="0" Z="0" UV_INDEX="5" U="12" V="12">
+			<ATTR IMG="../Data/6_ui/icon/IconSys01.tga" W="40" H="40" IMG_W="480" IMG_H="480" T_OUTLINE="1" />
+			<ATTR TEXT = "" FONT="FTslot" T_X="20" T_Y="28" T_CENTER = "1" FONT_COLOR_HEX="0xFFFAE26D"/> 
+			<SCRIPT ID="ON_TICK">ChangeShineStoneCount(UISelf, 20700050)</SCRIPT>
+		</IMG>
+	</FORM>
+
+	<STATIC_FORM ID="SFRM_SHINESTONE_UPGRADE">
+		<ATTR X = "240" Y = "91" W ="272" H ="237" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<SCRIPT ID = "ON_CALL"> 
+			RegistUIAction(UISelf, "CloseUI")
+			kStoneWnd = ShineStoneUpgradeWnd(UISelf)
+			kStoneWnd:SetDefShineStone(1, 20700010, 78)
+			kStoneWnd:SetDefShineStone(2, 20700020, 79)
+			kStoneWnd:SetDefShineStone(3, 20700030, 80)
+			kStoneWnd:SetDefShineStone(4, 20700040, 81)
+			kStoneWnd:SetDefShineStone(5, 20700050, 82)
+			--CallUI("Inv")
+			--CloseUI("SFRM_MSG_REPAIR_ALL") 
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			local wnd = ShineStoneUpgradeWnd(UISelf)
+			wnd:Clear()
+		</SCRIPT>
+
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="270" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID="SFRM_CLOSE_BG">
+				<ATTR X="239" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID="Close">
+					<ATTR X="0" Y="0" W="24" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<IMG ID = "IMG_TAB">
+					<ATTR X="0" Y="0" W="84" H="24" U = "2" V = "2" UV_INDEX = "3"/>
+					<ATTR IMG = "../Data/6_ui/common/cmTabB.tga" IMG_W = "168" IMG_H = "48" />
+					<ATTR TEXT = "400600" FONT = "FTtitle_14" T_X = "38" T_Y ="4" T_OUTLINE="0" T_CENTER = "1"/>
+				</IMG>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR1">
+			<ATTR X="9" Y="35" W="254" H="128" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="254" H="128" STATIC_NUM = "3" />
+				<STATIC_FORM ID = "SFRM_ICON_BG1">
+					<ATTR X="14" Y="37" W="42" H="42" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ICON ID = "ICN_ITEM">
+						<ATTR TEXT="" FONT="Font_Warn" T_X="20" T_Y="9" T_CENTER = "1" />
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="107" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_L_BTN_DOWN">
+							local wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:Clear()
+						</SCRIPT>
+						<SCRIPT ID = "ON_L_BTN_UP">
+							UISelf:CursorToIcon()
+						</SCRIPT>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:DisplaySrcIcon()
+						</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID = "SFRM_ICON_BG2">
+					<ATTR X="104" Y="37" W="42" H="42" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ICON ID = "ICN_ITEM">
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="107" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_L_BTN_DOWN">
+						</SCRIPT>
+						<SCRIPT ID = "ON_L_BTN_UP">
+						</SCRIPT>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:DisplayDestIcon()
+						</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<BUTTON ID = "POINT_UP">
+					<ATTR X = "72" Y = "38" W ="18" H ="18" />
+					<ATTR BTN_IMG = "../Data/6_ui/skill/skUpB.tga" BTN_IMG_W = "36" BTN_IMG_H = "36"/>
+					<SCRIPT ID = "ON_L_BTN_UP">
+						local wnd = ShineStoneUpgradeWnd(UISelf)
+						wnd:StoneCountChange(1)
+						--UI_SKILLWND_ON_LEVELUP_CLICK(UISelf);
+					</SCRIPT>
+					<ATTR TOOL_TIP_TEXT = "10003" />
+				</BUTTON>
+				<BUTTON ID = "POINT_DOWN">
+					<ATTR X = "72" Y = "58" W ="18" H ="18" />
+					<ATTR BTN_IMG = "../Data/6_ui/skill/skDnB.tga" BTN_IMG_W = "36" BTN_IMG_H = "36"/>
+					<SCRIPT ID = "ON_L_BTN_UP">
+						local wnd = ShineStoneUpgradeWnd(UISelf)
+						wnd:StoneCountChange(-1)
+						--UI_SKILLWND_ON_LEVELDOWN_CLICK(UISelf);
+					</SCRIPT>
+				</BUTTON>
+
+				<!--
+				<STATIC_FORM ID = "SFRM_NAME">
+					<ATTR X="60" Y="58" W="183" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR T_X="4" T_Y="4" FONT_COLOR_HEX="0xFF4D3413" />
+				</STATIC_FORM>
+				<FORM ID = "FRM_NAME">
+					<ATTR X = "60" Y = "36" W ="106" H ="21" />
+					<ATTR TEXT = "400602" FONT = "Font_Text" T_X = "7" T_Y ="3" T_OUTLINE="0"/>
+					<FORM ID = "FRM_ARROW">
+						<ATTR X="0" Y="8" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					</FORM>
+				</FORM>
+				-->
+			</STATIC_FORM>
+
+			<!--/STATIC_FORM-->
+		</STATIC_FORM>
+
+		<STATIC_FORM ID = "SFRM_COLOR2">
+			<ATTR X="9" Y="165" W="254" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="254" H="26" STATIC_NUM = "3" />
+				<ATTR TEXT = "400604" T_X="13" T_Y ="6" />
+
+				<IMG ID="IMG_LINE_1" X="54" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="55" Y="7" W="1" H="12" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="12" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<FORM ID="FRM_COIN1">
+					<ATTR X="98" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ShineStoneUpgradeWnd(UISelf)
+						UISelf:DrawMoneyByValue(1, wnd:GetNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN2">
+					<ATTR X="146" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ShineStoneUpgradeWnd(UISelf)
+						UISelf:DrawMoneyByValue(2, wnd:GetNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN3">
+					<ATTR X="193" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						local wnd = ShineStoneUpgradeWnd(UISelf)
+						UISelf:DrawMoneyByValue(3, wnd:GetNeedMoney())
+					</SCRIPT>
+				</FORM>
+
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<BUTTON ID = "BTN_UPGRADE">
+			<ATTR X="51" Y="197" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400605" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				CallUI("SFRM_MSG_SHINESTONE_UPGRADE")
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCEL">
+			<ATTR X="137" Y="197" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400333" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+	<STATIC_FORM ID="SFRM_MSG_SHINESTONE_UPGRADE">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="75" STATIC_NUM="3" />
+				<ATTR TEXT="400606" FONT="Font_Text" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK">
+			<ATTR X="20" Y="88" W="79" H="28" />
+			<ATTR TEXT="400002" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ShineStoneUpgradeWnd(UISelf)
+				wnd:SendReqUpgrade()
+				UISelf:CloseParent()
+				--
+				local wnd = ItemRepairWnd(UISelf)
+				wnd:SendReqRepair(false)
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="28">
+				--
+				local wnd = ItemRepairWnd(UISelf)
+				wnd:SendReqRepair(false)
+				UISelf:CloseParent()
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL">
+			<ATTR X="104" Y="88" W="79" H="28" />
+			<ATTR TEXT="400333" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:OnOk()
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+
+	<!-- //////////////////////////////////////////////////////////////////////////-->
+	<!-- //////////////////// ShineStone Lottery ////////////////////-->
+	<STATIC_FORM ID="SFRM_SHINESTONE_LOTTERY">
+		<ATTR X="260" Y="90" W="242" H="338" STATIC_NUM = "1" CAN_DRAG="1"/>
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="240" H="36" STATIC_NUM="4" />
+			<STATIC_FORM ID="SFRM_TITLE_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+				<CHECK_BUTTON ID="CBTN_TITLE">
+					<ATTR X="0" Y="0" W="84" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<ATTR TEXT = "1651" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" />
+					<SCRIPT ID = "ON_CALL">
+						local kSelf = UISelf
+						kSelf:CheckState(true)
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+
+			<STATIC_FORM ID="SFRM_BTN_CLOSE">
+				<ATTR X="209" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<BUTTON ID="BNT_CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						UISelf:GetParent():GetParent():CloseParent()
+					</SCRIPT>
+					<HOTKEY ID="1">
+						UISelf:GetParent():GetParent():CloseParent() return true
+					</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID="SFRM_COLOR_MAIN">
+			<ATTR X="9" Y="35" W="224" H="258" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="224" H="258" STATIC_NUM="3" PASS_EVENT="1"/>
+			</STATIC_FORM>
+			
+			<BUILD TARGET_ID="FRM_MATERIAL" X="12" Y="10" X_COUNT = "1" Y_COUNT = "5" X_GAB = "0" Y_GAB = "49"/>
+			<FORM ID="FRM_MATERIAL">
+				<ATTR X="12" Y="10" W="212" H="45"/>
+				<ICON ID="FRM_SET_MATERIAL">
+					<ATTR X="0" Y="0" W="212" H="45"/>
+					<ATTR ICON_GRP ="123" ICON_KEY = "0"/>
+					<SCRIPT ID = "ON_L_BTN_UP">
+						UISelf:CursorToIcon()
+					</SCRIPT>
+					<SCRIPT ID = "ON_CALL">
+						UISelf:SetBuildIndex(UISelf:GetParent():GetBuildIndex())
+					</SCRIPT>
+				</ICON>
+				<STATIC_FORM ID="COLORBOX_1">
+					<ATTR X="0" Y="0" W="42" H="43" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2" />
+					<ICON ID = "ICN_MATERIAL">
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="123" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							wnd = ItemLotteryWnd(UISelf)
+							wnd:DisplaySrcItem()
+						</SCRIPT>
+						<SCRIPT ID = "ON_L_BTN_UP">
+							UISelf:CursorToIcon()
+						</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER"> OnCallMissionRewardItemToolTip(UISelf) </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>	
+						<SCRIPT ID = "ON_CALL">
+							UISelf:SetBuildIndex(UISelf:GetParent():GetParent():GetBuildIndex())
+						</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_MATERIAL_NAME">
+					<ATTR X="50" Y="0" W="200" H="43" PASS_EVENT="1"/>
+					<IMG ID="IconArrow" X="0" Y="6" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="10" T_Y ="1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="stXImg">
+					<ATTR X="60" Y="23" W="14" H="14" PASS_EVENT="1"/>
+					<IMG ID="Icon_stXimg" X="0" Y="0" W="14" H="14" IMG="../Data/6_ui/stone/stXimg.tga" IMG_W="14" IMG_H="14" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_MATERIAL_COUNT">
+					<ATTR PASS_EVENT="1" />
+					<ATTR X="82" Y="19" W="119" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="3" />
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="6" T_Y ="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</FORM>
+
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_OK">
+			<ATTR X="36" Y="299" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "1652" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				wnd = ItemLotteryWnd(UISelf)
+				if wnd:IsAvailable() == true then
+					CallUI("FRM_LOTTERY_REQUEST")
+				end
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCEL">
+			<ATTR X="122" Y="299" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400333" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				CloseUI("FRM_LOTTERY_REQUEST")
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+
+		<SCRIPT ID = "ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			wnd = ItemLotteryWnd(UISelf)
+			if wnd ~= nil then
+				wnd:Clear()
+			end
+			local wnd = ActivateUI("Inv")
+			PreChangeInvViewGroupTop(2)
+			SetReqInvWearableUpdate(true)
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">
+			SetReqInvWearableUpdate(true)
+			CloseUI("Inv")
+		</SCRIPT>
+	</STATIC_FORM>
+
+	<!-- FRM_LOTTERY_REQUEST 이 네이밍은 소스코드에서도 쓴다.-->
+	<FORM ID = "FRM_LOTTERY_REQUEST">
+		<ATTR ALIVE_TIME="2300" ALIVE_TIME_IGNORE_MOUSE_OVER = "1" ALIGN_X = "50" ALIGN_Y = "50" W ="298" H ="87" CAN_DRAG = "1"/>
+		<STATIC_FORM ID = "SFRM_BG">
+			<ATTR X = "0" Y = "4" W = "298" H = "82" STATIC_NUM = "1" />
+			<IMG ID="IMG_ROW1_LINE1">
+				<ATTR X="72" Y="36" W="210" H="1" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="210" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			</IMG>
+			<IMG ID="IMG_ROW1_LINE2">
+				<ATTR X="72" Y="37" W="210" H="1" CAN_COLOR_CHANGE="1" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="210" IMG_H="1" COLOR_TYPE="6"/>
+			</IMG>
+
+			<STATIC_FORM ID = "SFRM_BAR_BG">
+				<ATTR X = "70" Y = "15" W = "214" H = "20" STATIC_NUM = "11" />
+				<ANI_BAR ID = "BAR_TIME_LIMIT">
+					<ATTR X= "1" Y = "1" W ="214" H ="16" />				
+					<ATTR BAR_COUNT = "1"/>
+					<ATTR BAR_IMG = "../Data/6_ui/indun/idBoxBar.tga" BAR_IMG_W = "214" BAR_IMG_H = "16"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "107" T_Y ="1" T_CENTER = "1"/>
+					<SCRIPT ID = "ON_DISPLAY">
+						UISelf:DisplayTimeBar(true)
+					</SCRIPT>
+					<SCRIPT ID = "ON_CALL">
+						UISelf:SetStartTime(2000)
+					</SCRIPT>
+					<SCRIPT ID = "ON_BAR_FULL">
+						ODS("Todo! \n")
+						wnd = ItemLotteryWnd(UISelf)
+						wnd:SendReqItemLottery(true)
+						CloseUI("FRM_LOTTERY_REQUEST")
+					</SCRIPT>
+				</ANI_BAR>
+			</STATIC_FORM>
+
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X = "70" Y = "40" W = "214" H = "24" STATIC_NUM = "2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<STATIC_FORM ID = "SFRM_SHADOW">
+					<ATTR X = "0" Y = "0" W = "214" H = "24" STATIC_NUM = "3" />
+					<ATTR TEXT = "1656" FONT = "Font_Text" T_X = "107" T_Y = "4" T_CENTER = "1" T_OUTLINE="1"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM> 
+		<FORM ID = "FRM_GEAR" >
+			<ATTR X = "9" Y = "0" W ="73" H ="86" />
+			<ATTR IMG = "../Data/6_ui/indun/idWheel.tga" IMG_W = "146" IMG_H = "172" U = "2" V = "2"/>
+		</FORM>
+
+		<SCRIPT ID = "ON_CALL">		
+			iGearNum = 1
+			fGearTime = GetAccumTime()
+		</SCRIPT>	
+		<SCRIPT ID = "ON_CLOSE">
+
+		</SCRIPT>
+		<SCRIPT ID = "ON_DISPLAY">		
+			local wndGear = UISelf:GetControl("FRM_GEAR")
+			if wndGear:IsNil() == false then
+				if fGearTime ~= nil and GetAccumTime() - fGearTime > 0.5 then
+					if iGearNum ~= nil then
+						iGearNum = iGearNum + 1
+						if iGearNum > 4 then
+							iGearNum  = 1
+						end
+						wndGear:SetUVIndex(iGearNum)
+					end
+				end
+			end
+		</SCRIPT> 
+	</FORM>
+
+	<!-- //////////////////// ShineStone Change ////////////////////-->
+	<STATIC_FORM ID="SFRM_SHINESTONE_CHANGE">
+		<ATTR X="260" Y="90" W="242" H="232" STATIC_NUM = "1" CAN_DRAG="1"/>
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="240" H="34" STATIC_NUM="4" />
+			<STATIC_FORM ID="SFRM_TITLE_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+				<CHECK_BUTTON ID="CBTN_TITLE">
+					<ATTR X="0" Y="0" W="84" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<ATTR TEXT = "1701" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" />
+					<SCRIPT ID = "ON_CALL">
+						local kSelf = UISelf
+						kSelf:CheckState(true)
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+
+			<STATIC_FORM ID="SFRM_BTN_CLOSE">
+				<ATTR X="209" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<BUTTON ID="BNT_CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						UISelf:GetParent():GetParent():CloseParent()
+					</SCRIPT>
+					<HOTKEY ID="1">
+						UISelf:GetParent():GetParent():CloseParent() return true
+					</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID="SFRM_COLOR_MAIN">
+			<ATTR X="9" Y="35" W="224" H="182" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" Z="-2" W="224" H="182" STATIC_NUM="3" PASS_EVENT="1"/>
+			</STATIC_FORM>
+
+			<SCRIPT ID="ON_CALL">
+				wnd = ShineStoneUpgradeWnd(UISelf)
+				wnd:Clear()
+				wnd:SetDefItemMakingNo(0, 1016)
+				wnd:SetDefItemMakingNo(1, 1017)
+				wnd:SetDefItemMakingNo(2, 1018)
+				wnd:SetDefItemMakingNo(3, 1019)
+			</SCRIPT>
+
+			
+			<BUILD TARGET_ID="FRM_MATERIAL" X="12" Y="10" X_COUNT = "4" Y_COUNT = "1" X_GAB = "53" Y_GAB = "0"/>
+			<FORM ID="FRM_MATERIAL">
+				<ATTR X="12" Y="10" W="45" H="85"/>
+				<STATIC_FORM ID="COLORBOX_1">
+					<ATTR X="0" Y="0" W="42" H="43" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2" />
+					<ICON ID = "ICN_MATERIAL">
+						<ATTR X="1" Y="1" Z="2" W="40" H="40"/>
+						<ATTR ICON_GRP ="123" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:DisplayTodoItem()
+						</SCRIPT>
+						<SCRIPT ID = "ON_L_BTN_UP">
+							wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:SelectItem()
+						</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER">
+							wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:MouseOver()
+						</SCRIPT>
+						<SCRIPT ID = "ON_CALL">
+							UISelf:SetBuildIndex(UISelf:GetParent():GetParent():GetBuildIndex())
+						</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_MATERIAL_NAME">
+					<ATTR X="0" Y="45" W="42" H="43" />
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="21" T_Y ="0" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</FORM>
+
+			<STATIC_FORM ID="Body1">
+				<ATTR X="59" Y="10" W="1" H="77" />
+				<IMG ID="cmBody1" X="0" Y="0" W="1" H="77" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="77" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="cmBody2" X="1" Y="0" W="1" H="77" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="77" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="Body2">
+				<ATTR X="112" Y="10" W="1" H="77" />
+				<IMG ID="cmBody1" X="0" Y="0" W="1" H="77" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="77" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="cmBody2" X="1" Y="0" W="1" H="77" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="77" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="Body3">
+				<ATTR X="165" Y="10" W="1" H="77" />
+				<IMG ID="cmBody1" X="0" Y="0" W="1" H="77" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="77" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="cmBody2" X="1" Y="0" W="1" H="77" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="1" IMG_H="77" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			</STATIC_FORM>
+
+			<STATIC_FORM ID="COLORBOX">
+				<ATTR X="12" Y="122" W="201" H="48" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="3" />
+				<FORM ID="NAME">
+					<ATTR X="0" Y="5" W="201" H="48" />
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="100" T_Y ="0" T_CENTER="1"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ShineStoneUpgradeWnd(UISelf)
+						wnd:DisplayDetailText()
+					</SCRIPT>
+				</FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<!--BUTTON ID = "BTN_CANCEL">
+			<ATTR X="79" Y="193" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400333" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON-->
+		<SCRIPT ID = "ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+		</SCRIPT>
+	</STATIC_FORM>
+
+	<!-- //////////////////// ShineStone Change Detail ////////////////////-->
+	<STATIC_FORM ID="SFRM_SHINESTONE_CHANGE_DETAIL">
+		<ATTR X="260" Y="90" W="242" H="288" STATIC_NUM = "1" CAN_DRAG="1"/>
+		<SCRIPT ID = "ON_CALL"> RegistUIAction(UISelf, "CloseUI") </SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="240" H="34" STATIC_NUM="4" />
+			<STATIC_FORM ID="SFRM_TITLE_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+				<CHECK_BUTTON ID="CBTN_TITLE">
+					<ATTR X="0" Y="0" W="84" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmTabB.tga" BTN_IMG_W="168" BTN_IMG_H="48" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<ATTR TEXT = "1701" FONT = "FTtitle_14" T_X="36" T_Y ="4" T_CENTER="1" BTN_CLICK_LOCK="1" />
+					<SCRIPT ID = "ON_CALL">
+						local kSelf = UISelf
+						kSelf:CheckState(true)
+					</SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+
+			<STATIC_FORM ID="SFRM_BTN_CLOSE">
+				<ATTR X="209" Y="4" W="24" H="24" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+				<BUTTON ID="BNT_CLOSE">
+					<ATTR X="0" Y="0" W="24" H="24" />
+					<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						UISelf:GetParent():GetParent():CloseParent()
+					</SCRIPT>
+					<HOTKEY ID="1">
+						UISelf:GetParent():GetParent():CloseParent() return true
+					</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID="SFRM_COLOR_MAIN">
+			<ATTR X="9" Y="35" W="224" H="208" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFRM_SHADOW">
+				<ATTR X="0" Y="0" W="224" H="208" STATIC_NUM="3" PASS_EVENT="1"/>
+			</STATIC_FORM>
+
+			<FORM ID="SHINE_1">
+				<ATTR X="12" Y="10" W="212" H="45"/>
+				<STATIC_FORM ID="COLORBOX_1">
+					<ATTR X="0" Y="0" W="42" H="43" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2" />
+					<ICON ID = "ICN_MATERIAL">
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="123" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:DisplayDetailSrcItem()
+						</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER"> OnCallMissionRewardItemToolTip(UISelf) </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>	
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_MATERIAL_NAME">
+					<ATTR X="50" Y="0" W="200" H="43" />
+					<IMG ID="IconArrow" X="0" Y="6" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="10" T_Y ="1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="stXImg">
+					<ATTR X="60" Y="23" W="14" H="14" />
+					<IMG ID="Icon_stXimg" X="0" Y="0" W="14" H="14" IMG="../Data/6_ui/stone/stXimg.tga" IMG_W="14" IMG_H="14" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_MATERIAL_COUNT">
+					<ATTR X="82" Y="19" W="119" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="3" />
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="6" T_Y ="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</FORM>
+
+
+			<FORM ID = "FRM_DOWN_ARROW_BG" >
+				<ATTR X="90" Y="60" W="44" H="92" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<ATTR IMG="../Data/6_ui/stone/stArwBg.tga" IMG_W="44" IMG_H="92"/>
+				<IMG ID="IMG_ARROW">
+					<ATTR X="0" Y="0" W="44" H="92" IMG="../Data/6_ui/stone/stArw.tga" IMG_W="44" IMG_H="92" />
+					<SCRIPT ID = "ON_DISPLAY">
+						local kSize = UISelf:GetSize()
+						if g_bOnShineChange == nil or g_bOnShineChange == false then
+							UISelf:SetImgSize(kSize)
+							return
+						end
+						if g_fShineChangeStartTime == nil then
+							return
+						end
+						local fDelta = GetAccumTime() - g_fShineChangeStartTime
+						local fMaxTime = 1.2
+						if fDelta >= fMaxTime then
+							g_bOnShineChange = false
+							local wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:SendReqUpgrade(true)
+							wnd:Clear()
+							UISelf:GetParent():GetParent():CloseParent()
+							ActivateUI("SFRM_SHINESTONE_CHANGE")
+						else
+							local iH = fDelta/fMaxTime*kSize:GetY()
+							local iMinH = math.min(iH, kSize:GetY())
+							kSize:SetY(iMinH)
+							UISelf:SetImgSize(kSize)
+						end
+					</SCRIPT>
+				</IMG>
+			</FORM>
+
+
+
+			
+			<STATIC_FORM ID="ARROW_EXT">
+				<ATTR X="60" Y="50" W="150" H="160"/>
+				<IMG ID="cmBody1" X="0" Y="6" W="150" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="cmBody2" X="0" Y="7" W="150" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<!--
+				<IMG ID="stArwBg" X="30" Y="10" W="44" H="92" IMG="../Data/6_ui/stone/stArwBg.tga" IMG_W="44" IMG_H="92" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<IMG ID="stArw" X="30" Y="10" W="44" H="92" IMG="../Data/6_ui/stone/stArw.tga" IMG_W="44" IMG_H="92" />
+				-->
+				<IMG ID="cmBody3" X="0" Y="104" W="150" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="cmBody4" X="0" Y="105" W="150" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			</STATIC_FORM>
+
+			<FORM ID="SHINE_2">
+				<ATTR X="12" Y="157" W="212" H="45"/>
+				<STATIC_FORM ID="COLORBOX_1">
+					<ATTR X="0" Y="0" W="42" H="43" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="2" />
+					<ICON ID = "ICN_MATERIAL">
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="123" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							wnd = ShineStoneUpgradeWnd(UISelf)
+							wnd:DisplayDetailDestItem()
+						</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER"> OnCallMissionRewardItemToolTip(UISelf) </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>	
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_MATERIAL_NAME">
+					<ATTR X="50" Y="0" W="200" H="43" />
+					<IMG ID="IconArrow" X="0" Y="6" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="10" T_Y ="1" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="stXImg">
+					<ATTR X="60" Y="23" W="14" H="14" />
+					<IMG ID="Icon_stXimg" X="0" Y="0" W="14" H="14" IMG="../Data/6_ui/stone/stXimg.tga" IMG_W="14" IMG_H="14" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_MATERIAL_COUNT">
+					<ATTR X="82" Y="19" W="119" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="5" COLOR_TYPE="3" />
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="6" T_Y ="2" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_OK">
+			<ATTR X="36" Y="249" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "1702" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				g_bOnShineChange = true
+				g_fShineChangeStartTime = GetAccumTime() 
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCEL">
+			<ATTR X="122" Y="249" W="84" H="26"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT = "400333" FONT = "FTbt_12" T_X="42" T_Y ="3" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				if g_bOnShineChange == true then 
+					g_bOnShineChange = false
+					AddWarnDataTT(1710)
+					wnd = ItemCookingWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+			</SCRIPT>
+			<HOTKEY ID="1">
+				if g_bOnShineChange == true then 
+					g_bOnShineChange = false
+					AddWarnDataTT(1710)
+					wnd = ItemCookingWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent() return true
+				end
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+
+</XUI>

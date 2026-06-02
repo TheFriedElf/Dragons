@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!--스킬 UI 출력 맺기-->
+	<CMD TYPE="WaitDialogue"/>
+    <CMD type="CallUI" UIWndName="SFRM_SKILL_WINDOW"/>
+	<!-- event script 락이 아닌, 퀘스트 대화창 락 풀기 -->
+    <CMD TYPE="LockPlayerInput" Lock="false" LockType="2"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false" LockType="2"/>
+</EVENT_SCRIPT>

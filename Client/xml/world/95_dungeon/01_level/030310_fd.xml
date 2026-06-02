@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030310_FD">
+	<GSAPATH>../Data/3_World/95_Dungeon/01_Level/030300/030310_FD.gsa</GSAPATH>
+	<MINIMAP Y="165" H="145">../Data/3_World/95_Dungeon/01_Level/030300/030310_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DragonMage.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<EVENT_SCRIPT_STOP_AI NO="10003"/> <!--해당 이벤트 스크립트가 실행시에는 AI가 멈춤-->
+	<EVENT_SCRIPT_NO_LOCK NO="9030300,9030500"/> <!-- 해당 이벤트 스크립트 실행시 ai가 멈추지 않음-->
+  <!--용의탑 11층-->
+  <TRIGGER ID="gate_dungeon_next_base" TYPE="SUPER_GROUND" ENABLE="0" >
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_SuperGround_Portal_NextFloor" PARAM="1"/>
+  </TRIGGER>
+
+	<!-- 월드 이벤트 오브젝트 정의 -->
+	<WORLDEVENT_OBJECT_LIST>
+		<!--문 /열린 -->
+		<WORLDEVENT_OBJECT ID="1" INIT_STATE="1" TYPE="PUPPET" NAME="MazeDoor1001_03 01"/> <!--문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="2" INIT_STATE="1" TYPE="PUPPET" NAME="Veta_Gate1001_01 01"/>	<!--문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="3" INIT_STATE="1" TYPE="PUPPET" NAME="Veta_Gate1001_01 02"/>	<!--문/ 열린 -->
+		<!--문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="4" INIT_STATE="0" TYPE="PUPPET" NAME="MazeDoor1001_05 01"/> <!--문/ 닫힌 -->
+		
+		<!--이펙트 제어-->
+		<WORLDEVENT_OBJECT ID="11" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="KeyGide_Z_Jump 01"/>	<!--이펙트/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="12" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="EF_Acc_hilight_001 01"/>	<!--이펙트/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="13" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_sunshine_01 01"/>	<!--이펙트/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="14" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_Ice_SlidingRoomObj1001_01 01"/> <!--이펙트/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="15" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="EF_DungeonWall1001_02 01"/>  <!--이펙트/ 게이트 -->
+	</WORLDEVENT_OBJECT_LIST>
+
+	<!-- 발동 트리거 정의-->
+	<TRIGGER ID="01_start_gate"> <!--입장 문닫기용-->
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_WorldEventTrigger"/>
+	</TRIGGER>
+	<TRIGGER ID="02_boss_gate" ENABLE="0" > <!--정예방 문닫기용-->
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_WorldEventTrigger"/>
+	</TRIGGER>
+	<TRIGGER ID="03_exit_gate" ENABLE="0" > <!--나가는 문열기용-->
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_WorldEventTrigger"/>
+	</TRIGGER>
+	
+	<!-- 스타트 문 닫기 이벤트 -->
+	<WORLD_EVENT ID="1" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="01_start_gate" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="0"/> <!--시작 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="0"/> <!--정예방 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="0"/> <!--정예방 문닫기 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	<!--모든 몬스터 죽은 후 문열기 -->
+	<WORLD_EVENT ID="2" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="0" EVENT="EQUAL" VALUE="0"/><!--모든 몬스터가 죽으면 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="1"/> <!--정예방 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="1"/> <!--정예방 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="15" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="gate_teleport_target_01" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="02_boss_gate" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	
+	<!-- 정예방 문닫기 -->
+	<WORLD_EVENT ID="3" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="02_boss_gate" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="0"/> <!--정예방 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="0"/> <!--정예방 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="15" EVENT="SHOW" VALUE="0"/> <!-- 이펙트/ 게이트 비활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="gate_teleport_target_01" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="CALL_SG_BOSS_NAMED_UI(45)" EVENT="SCRIPT"/> <!--정예이름 UI호출 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!-- 트리거 비활성화 -->
+	<WORLD_EVENT ID="4" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="3" EVENT="ACT_AFTER_TIME" VALUE="500" /> <!--0.5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="02_boss_gate" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!-- 잡몹소환 -->
+	<WORLD_EVENT ID="5" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="4" EVENT="ACT_AFTER_TIME" VALUE="1000" /> <!--1초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="99" EVENT="ACTIVE" VALUE="1"/>	<!--잡몹 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+		<!-- 정예소환 -->
+	<WORLD_EVENT ID="6" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="5" EVENT="ACT_AFTER_TIME" VALUE="1000" /> <!--1초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-1" EVENT="ACTIVE" VALUE="1"/>	<!--정예 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--정예 몬스터 죽은 후 잡몹 제거 -->
+	<WORLD_EVENT ID="7" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-1" EVENT="EQUAL" VALUE="0"/> <!--모든 몬스터가 죽으면 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(9030500)" EVENT="SCRIPT"/> <!--미니맵 열고, 정예UI닫기(이벤트 스크립트 콜하기)-->
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="99" EVENT="REMOVE" VALUE="1"/>	<!-- 1층 정예몬스터가 죽으면 잡몹 제거 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!-- 문열기 -->
+	<WORLD_EVENT ID="8" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="7" EVENT="ACT_AFTER_TIME" VALUE="2000" /> <!--2초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="1"/><!--정예방 문열기-->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="13" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="14" EVENT="SHOW" VALUE="1"/> <!-- 이펙트/ 게이트 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="03_exit_gate" EVENT="ENABLE" VALUE="1"/><!--트리거 활성화-->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	
+	<!-- 나가기 문열기 -->
+	<WORLD_EVENT ID="9" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="03_exit_gate" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="4" EVENT="STATUS" VALUE="1"/> <!-- 문열기 --> 
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="gate_dungeon_next_base" EVENT="ENABLE" VALUE="1"/>	<!-- 게이트 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	
+	<!-- 게이트 텔 레 포 트 -->
+	<TRIGGER ID="gate_teleport_target_01" TYPE="TELEPORT" ENABLE="0" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="gate_teleport_zone_01" PARAM="2" PARAM2="2"/> <!--파티함께 이동 -->
+	</TRIGGER>
+ 
+ <!--엔터던전-->
+   <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+   </TRIGGER>
+   <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+      <CONDITION TYPE="touch" ACTION="a_act" />
+      <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+   </TRIGGER>
+
+	<WORLD_QUALITY HIGH_END="600" MID_END="1000" LOW_END="1500" USE="1"/>
+	
+</WORLD>

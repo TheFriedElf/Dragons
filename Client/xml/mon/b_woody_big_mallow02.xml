@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Woody_Big_mallow02" INIT_ACTION="a_opening">
+	<TEXTURE SRC="Jeffrey_body.dds">../Data/1_Cha/2_NPC/[Scenario_Quest]/Tutorial_01/Jeffrey_body.dds</TEXTURE>
+	<TEXTURE SRC="mathew_body.dds">../Data/1_Cha/2_NPC/[Scenario_Quest]/Tutorial_01/mathew_body.dds</TEXTURE>
+	<TEXTURE SRC="mathew_head.dds">../Data/1_Cha/2_NPC/[Scenario_Quest]/Tutorial_01/mathew_head.dds</TEXTURE>
+	<TEXTURE SRC="priomo.dds">../Data/1_Cha/2_NPC/[Scenario_Quest]/Tutorial_01/priomo.dds</TEXTURE>
+	<TEXTURE SRC="Glog_Cookie_Road1001_01.dds">../Data/3_World/Map_Textures/Glog_Cookie_Road1001_01.dds</TEXTURE>
+	<TEXTURE SRC="Glog_Cookie_Bgwall1001_01.dds">../Data/3_World/Map_Textures/Glog_Cookie_Bgwall1001_01.dds</TEXTURE>
+	
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Woody_Big_Jaco"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/B_Woody_Big_mallow/B_Woody_Big_mallow.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/B_Woody_Big_mallow/B_Woody_Big_mallow_die_03.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="65,27" ROTATE="1,0,0,90" LOCATE="0,0,-20"/>
+			<CAPSULE TO="p_hit_point_01" SIZE="65,15" ROTATE="1,0,0,90" LOCATE="0,0,-20"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- 돌면서 앞으로 전진 -->
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000201"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000202"/>
+			<ITEM NAME="whirlwind_01_finish" ANIMATION="1000203"/>
+			<!-- 멜로우 발사  -->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000204"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000205"/>
+			<ITEM NAME="shot_01" ANIMATION="1000206" FIRE_START_NODE="p_wp_l_hand" PROJECTILE_ID="Projectile_Big_mallow_shot_01"/>
+			<!-- 쓰러지기 -->
+			<ITEM NAME="only_ani_start_01" ANIMATION="1000023"/>
+			<ITEM NAME="only_ani_idle_01" ANIMATION="1000022"/>
+			<ITEM NAME="only_ani_01_01" ANIMATION="1000022"/>
+			<ITEM NAME="only_ani_01_02" ANIMATION="1000025"/>
+		
+			<!-- 일어나기 -->
+			<ITEM NAME="only_ani_idle_02" ANIMATION="1000022"/>
+			<ITEM NAME="only_ani_02_01" ANIMATION="1000024"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Opening" ANIMATION="1000082" OPENING_ACTOR="6118101"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000027" DIE_ALPHA="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+										<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

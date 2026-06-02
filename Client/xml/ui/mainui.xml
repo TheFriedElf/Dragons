@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_MESSAGE_DATA" X="0" Y="0" W="366" H="17" NO_FOCUS="1">
+		<FORM ID="FRM_ID_RECT" X="10" Y="0" W="366" H="17">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local Text = UISelf:GetCustomDataAsStr():GetStr()
+				g_ChatMgrClient:CheckChatCommand(WideString("/MODE 4 "..Text))
+			</SCRIPT>
+			<SCRIPT ID="ON_R_BTN_DOWN">
+				ProcessChatUserPopup(UISelf)
+			</SCRIPT>
+		</FORM>
+		<ATTR CAN_DRAG="0" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<ATTR TEXT="" FONT="Font_Chat" T_X="10" T_Y="1" T_OUTLINE="1" USE_ALPHA_ANI="0"/>
+	</FORM>
+	
+	<FORM ID="FRM_NFY_CONN" X="400" Y="562" W="266" H="52" IMG="../Data/6_ui/main/mnSpan.tga" IMG_W="266" IMG_H="52" IS_ABSOLUTE_X="1" CAN_CLIP="1" NO_FOCUS="1" ALIVE_TIME="5000">
+		<SCRIPT ID = "ON_CLOSE">
+			g_ChatMgrClient:PopNotifyList()
+		</SCRIPT>
+		<ATTR TEXT="" FONT="Font_Text" T_X="60" T_Y="10" T_OUTLINE="1" BTN_T_INVERTBOLD="0"/>
+		<IMG ID="IMG_GUILD_MARK" X="20" Y="10" W="32" H="32" IS_VISLBLE="0">
+			<ATTR IMG="../Data/6_UI/guild/GuildIcon01.tga" IMG_W="512" IMG_H="512"  U="16" V="16" UV_INDEX="1" />
+		</IMG>
+		<IMG ID="IMG_CLASS" X="22" Y="12" W="26" H="26" IS_VISLBLE="0">
+			<ATTR IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1"/>
+		</IMG>
+		<IMG ID="IMG_COUPLE" X="10" Y="5" W="45" H="41" IS_VISLBLE="0">
+			<ATTR IMG="../Data/6_ui/community/cpMWImg.tga" IMG_W="45" IMG_H="41"/>
+		</IMG>
+		<BUTTON ID="FRM_EXIT" X="235" Y="8" W="42" H="40" NO_FOCUS="1">
+			<ATTR BTN_IMG="../Data/6_ui/main/mnEmotcX.tga" BTN_IMG_W="42" BTN_IMG_H="40"/>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:GetParent():Close()</SCRIPT>
+		</BUTTON>
+		<!--SCRIPT ID="ON_TICK">
+			local kSelf = UISelf
+			local fAlpha = kSelf:GetAlpha() - 0.1
+			if( 0 >= fAlpha) then
+				fAlpha = 0
+				kSelf:Close()
+			end
+			kSelf:SetAlpha(fAlpha)
+		</SCRIPT-->
+		<FORM ID="FRM_ID_RECT" X="80" Y="10" W="300" H="17">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local Text = UISelf:GetCustomDataAsStr():GetStr()
+				g_ChatMgrClient:CheckChatCommand(WideString("/MODE 4 "..Text))
+			</SCRIPT>
+			<SCRIPT ID="ON_R_BTN_DOWN">
+				ProcessNotifyUserPopup(UISelf)
+			</SCRIPT>
+		</FORM>
+	</FORM>
+	
+	<FORM ID="SysChatOut" IGNORE_PARENT_RECT="1" X="0" Y="434" W="384" H="100" IS_ABSOLUTE_X="1" CAN_DRAG="1">
+		<SCRIPT ID="ON_CALL">
+			if false == g_AutoHideOption then
+				GetEventTimer():Add("SysChatOutHide", 3.0, "OnOver_SysChatHistory(GetUIWnd('SysChatOut'), false)", 1, false)
+			end
+			if true == g_ChatMgrClient:GetSysOutHide() then
+				UISelf:Visible(false)
+			end
+			return true
+		</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> g_ChatMgrClient:SetSysChatOutDefaultPos(UISelf) </SCRIPT>
+		<SCRIPT ID = "ON_WHEEL_UP">return true</SCRIPT>
+		<SCRIPT ID = "ON_WHEEL_DOWN">return true</SCRIPT>
+		<DUMMY ID="SYS_DMY_CHAT" X="0" Y="0" Z="2" W="384" H="80">
+			<SCRIPT ID="ON_MOUSE_OUT">
+				if false == g_AutoHideOption then
+					GetEventTimer():Add("SysChatOutHide", 2.0, "OnOver_SysChatHistory(GetUIWnd('SysChatOut'), false)", 1, false)
+				end
+				return true
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				if false == g_AutoHideOption then
+					GetEventTimer():Del("SysChatOutHide")
+				end
+				return OnOver_SysChatHistory(UISelf:GetParent(), true)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				local bSnap = g_ChatMgrClient:GetSysChatOutSnap()
+				if false == bSnap then
+					local point = GetCursorPos()
+					g_ChatMgrClient:CheckSnapPos(point)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				g_ChatMgrClient:SetSysChatOutSnap(false)
+			</SCRIPT>
+		</DUMMY>
+		
+		<FORM ID="SYSCHAT_BG" X="0" Y="0" Z="0" W="374" H="80" PASS_EVENT = "0" NO_FOCUS="1" >
+			<STATIC_FORM ID="SFRM_CHATOUT_BG" X="0" Y="21" W="384" H="85" STATIC_NUM="9">
+				<ATTR TEXT = "" FONT="Font_Text" T_X="10" T_Y="4" />
+			</STATIC_FORM>			
+		</FORM>
+		
+		<LIST ID="LIST_CHAT_SYSTEM" USE_ALPHA_ANI="0" IS_VISIBLE="1" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR X="0" Y="27" Z="1" W="366" H="70" ITEM_X="0" ITEM_Y="0" CAN_SELECT="1"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="346" Y="15" Z="-1" W="13" H="70">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="362" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      	</BUTTON>
+			<BUTTON ID="ScrDown" X="362" Y="60" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="364" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_MESSAGE_DATA" />
+		</LIST>
+	</FORM>
+	
+	<FORM ID="ChatOut" IGNORE_PARENT_RECT="1" X="0" Y="550" W="384" H="120" IS_ABSOLUTE_X="1" CAN_DRAG="1">
+		<SCRIPT ID="ON_CALL">
+			if false == g_AutoHideOption then
+				GetEventTimer():Add("ChatOutHide", 3.0, "OnOver_ChatHistory(GetUIWnd('ChatOut'), false)", 1, false)
+			end
+			return true
+		</SCRIPT>
+		<SCRIPT ID = "ON_WHEEL_UP">return true</SCRIPT>
+		<SCRIPT ID = "ON_WHEEL_DOWN">return true</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> g_ChatMgrClient:SetChatOutDefaultPos(UISelf) </SCRIPT>
+		<DUMMY ID="DMY_CHAT" X="0" Y="0" Z="2" W="374" H="120">
+			<SCRIPT ID="ON_MOUSE_OUT">
+				local kChatToolTip = GetUIWnd("FRM_CHAT_TOOLTIP")
+					if kChatToolTip:IsNil() == false then						
+						return true
+					end
+					
+				local point = GetCursorPos()
+				local px = point:GetX()
+				local py = point:GetY()
+				local chatwy =  UISelf:GetTotalLocation():GetY() + UISelf:GetSize():GetY()
+				if 0 >= px or py >= chatwy then
+					return
+				end
+				
+				if false == g_AutoHideOption then
+					GetEventTimer():Add("ChatOutHide", 2.0, "OnOver_ChatHistory(GetUIWnd('ChatOut'), false)", 1, false)
+				end
+				return true
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				if false == g_AutoHideOption then
+					GetEventTimer():Del("ChatOutHide")
+				end
+				return OnOver_ChatHistory(UISelf:GetParent(), true)
+			</SCRIPT>
+		</DUMMY>
+		
+		
+		
+		<FORM ID="CHAT_BG" X="0" Y="0" Z="0" W="374" H="98" PASS_EVENT = "0" NO_FOCUS="1">
+			<FORM ID="FRM_COLOR_BG" X="32" Y="4" Z="-1" W="90" H="16">
+				<BUILD TARGET_ID="IMG_BTN_BG" X="0" Y="0" X_COUNT="4" Y_COUNT="1" X_GAB="51"/>
+				<IMG ID="IMG_BTN_BG" X="0" Y="0"  W="46" H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<ATTR IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="44" IMG_H="17"/>
+				</IMG>
+			</FORM>
+			<BUTTON ID="BTN_HELP" X="7" Y="2" W="21" H="16">
+				<ATTR BTN_IMG="../Data/6_ui/Main/mnBhelp.tga" BTN_IMG_W="42" BTN_IMG_H="38" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local Tooltip = GetUIWnd("FRM_CHAT_TOOLTIP")
+					if false == Tooltip:IsNil() then
+						return
+					end
+					CallToolTipText(0, GetTT(401203), UISelf:GetLocation()) 
+					--CallToolTipText(0, GetTT(401203), UISelf:GetLocation(), "ToolTipChat")
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					if kSelf:GetCheckState() == false then
+						CallUI("FRM_CHAT_TOOLTIP")
+						CloseToolTip()
+					end
+				</SCRIPT>
+				<HOTKEY ID="1">
+					local kChatToolTip = GetUIWnd("FRM_CHAT_TOOLTIP")
+					if kChatToolTip:IsNil() == false then
+						kChatToolTip:Close()
+						if false == g_AutoHideOption then
+							GetEventTimer():Add("ChatOutHide", 2.0, "OnOver_ChatHistory(GetUIWnd('ChatOut'), false)", 1, false)
+						end
+						return true
+					end					
+				</HOTKEY>
+			</BUTTON>
+			<CHECK_BUTTON ID="BTN_CHATFILTER_CHAT" X="29" Y="0" W="50" H="21">
+				<ATTR TEXT="799335" FONT="Font_Text" T_X="25" T_CENTER="1" T_Y="4" T_OUTLINE="1" BTN_T_INVERTBOLD="1"/>
+				<ATTR BTN_IMG="../Data/6_ui/main/mnChatTab.tga" BTN_IMG_W="100" BTN_IMG_H="42" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_CALL">
+					if g_kSaveChatTapNo == 1 then
+						UISelf:CheckState(true)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					if kSelf:GetCheckState() == false then
+						g_ChatMgrClient:CheckChatCommand(WideString("/MODE 2"))
+						ChatMode_FilterSet(kSelf:GetParent(), 1)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799322), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="BTN_CHATFILTER_PARTY" X="80" Y="0" W="50" H="21">
+				<ATTR TEXT="404002" FONT="Font_Text" T_X="25" T_CENTER="1" T_Y="4" T_OUTLINE="1" BTN_T_INVERTBOLD="1"/>
+				<ATTR BTN_IMG="../Data/6_ui/main/mnChatTab.tga" BTN_IMG_W="100" BTN_IMG_H="42" BTN_CLICK_LOCK="1"/>
+				<FORM ID="FRM_NEW_CHATLOG" X="-4" Y="-2" W="100" H="42" PASS_EVENT="1" NO_FOCUS="1" IS_VISIBLE = "0" >
+					<ATTR TEXT="404002" FONT="Font_Text" T_X="29" T_CENTER="1" T_Y="6" T_OUTLINE="1" BTN_T_INVERTBOLD="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<ATTR IMG="../Data/6_ui/main/mnChatTabHt.tga" IMG_W="58" IMG_H="24" USE_ALPHA_ANI = "1" />
+					<ATTR U="1" V="1"/>						
+					<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+					<SCRIPT ID="ON_TICK"> 
+						if true == UISelf:GetParent():GetCheckState() then
+							UISelf:Visible(false)
+						end
+						UVAnimation(UISelf, 0.5, 1, 2, 1)
+					</SCRIPT>
+				</FORM>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					kSelf:GetControl("FRM_NEW_CHATLOG"):Visible(false)
+					if kSelf:GetCheckState() == false then
+						g_ChatMgrClient:CheckChatCommand(WideString("/MODE 3"))
+						ChatMode_FilterSet(kSelf:GetParent(), 3)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799323), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="BTN_CHATFILTER_GUILD" X="131" Y="0" W="50" H="21">
+				<ATTR TEXT="404001" FONT="Font_Text" T_X="25" T_CENTER="1" T_Y="4" T_OUTLINE="1" BTN_T_INVERTBOLD="1"/>
+				<ATTR BTN_IMG="../Data/6_ui/main/mnChatTab.tga" BTN_IMG_W="100" BTN_IMG_H="42" BTN_CLICK_LOCK="1"/>
+				<FORM ID="FRM_NEW_CHATLOG" X="-4" Y="-2" W="100" H="42" PASS_EVENT="1" NO_FOCUS="1" IS_VISIBLE = "0" >
+					<ATTR TEXT="404001" FONT="Font_Text" T_X="29" T_CENTER="1" T_Y="6" T_OUTLINE="1" BTN_T_INVERTBOLD="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<ATTR IMG="../Data/6_ui/main/mnChatTabHt.tga" IMG_W="58" IMG_H="24" USE_ALPHA_ANI = "1" />
+					<ATTR U="1" V="1"/>						
+					<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+					<SCRIPT ID="ON_TICK"> 
+						if true == UISelf:GetParent():GetCheckState() then
+							UISelf:Visible(false)
+						end
+						UVAnimation(UISelf, 0.5, 1, 2, 1)
+					</SCRIPT>
+				</FORM>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					kSelf:GetControl("FRM_NEW_CHATLOG"):Visible(false)
+					if kSelf:GetCheckState() == false then
+						g_ChatMgrClient:CheckChatCommand(WideString("/MODE 6"))
+						ChatMode_FilterSet(kSelf:GetParent(), 2)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799324), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</CHECK_BUTTON>
+			<CHECK_BUTTON ID="BTN_CHATFILTER_TRADE" X="182" Y="0" W="50" H="21">
+				<ATTR TEXT="404003" FONT="Font_Text" T_X="25" T_CENTER="1" T_Y="4" T_OUTLINE="1" BTN_T_INVERTBOLD="1"/>
+				<ATTR BTN_IMG="../Data/6_ui/main/mnChatTab.tga" BTN_IMG_W="100" BTN_IMG_H="42" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kSelf = UISelf
+					if kSelf:GetCheckState() == false then
+						g_ChatMgrClient:CheckChatCommand(WideString("/MODE 39"))
+						ChatMode_FilterSet(kSelf:GetParent(), 4)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799325), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</CHECK_BUTTON>
+			<BUTTON ID="BTN_FILTER_OPTION" X="254" Y="2" W="21" H="16">
+				<ATTR BTN_IMG="../Data\6_UI\main\mnBchatopt.tga" BTN_IMG_W="42" BTN_IMG_H="38" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if not UISelf:IsDisable() then
+						CallUI("SFRM_CHAT_OPTION")
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799326), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_TEXT_COLOR" X="280" Y="2" W="21" H="16">		  
+				<ATTR BTN_IMG="../Data/6_ui/main/mnBftcl.tga" BTN_IMG_W="42" BTN_IMG_H="38" BTN_CLICK_LOCK="1"/>			
+				<SCRIPT ID="ON_L_BTN_UP">
+					CloseUI("FRM_MYHOME_CHAT_COLOR")
+					CallUI("FRM_CHAT_COLOR")
+				</SCRIPT>
+				<HOTKEY ID="1"> 
+					local kChatColor = GetUIWnd("FRM_CHAT_COLOR")
+					if kChatColor:IsNil() == false then
+						kChatColor:Close()
+						return true 
+					end
+				</HOTKEY>
+				<STATIC_FORM ID="FRM_COLOR_VIEW" X="2" Y="2" W="17" H="17" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" PASS_EVENT="1">
+					<SCRIPT ID="ON_DISPLAY">
+						UISelf:SetColor(g_ChatMgrClient:GetFontColor())
+					</SCRIPT>
+				</STATIC_FORM>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799328), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_EMOTICON" X="306" Y="2" W="21" H="16">
+				<ATTR BTN_IMG="../Data/6_ui/main/mnBemo.tga" BTN_IMG_W="42" BTN_IMG_H="38" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_L_BTN_UP">
+					CloseUI("FRM_MYHOME_EMOTICON")
+					CallUniEmotiUI()
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799327), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</BUTTON>
+			<STATIC_FORM ID="SFRM_EMO_BG">
+				<ATTR X="8" Y="5" W="21" H="16" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+				<SCRIPT ID="ON_TICK">
+					local UIFriend = UISelf:GetParent():GetControl("BTN_EMOTION")
+					if false == UIFriend:IsNil() then
+						UISelf:SetLocation(UIFriend:GetLocation())
+					end
+				</SCRIPT>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_EMOTION" X="332" Y="2" W="21" H="16">
+				<!--ATTR BTN_IMG="../Data/6_ui/main/mnBemotion.tga" BTN_IMG_W="48" BTN_IMG_H="48" /-->
+				<ATTR BTN_IMG="../Data/6_ui/main/mnBplus.tga" BTN_IMG_W="42" BTN_IMG_H="38" BTN_CLICK_LOCK="1"/>
+				<!--SCRIPT ID="ON_L_BTN_UP">CommonMsgBox(GetTextW(66):GetStr())</SCRIPT-->
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if true ~= g_ChatMgrClient:CheckChatOut() then
+						if not UISelf:IsDisable() then
+							ChangeChatOutSize(1)
+						end
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799329), UISelf:GetLocation())	</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+			</BUTTON>
+			<LOCAL>
+				<NAME ID="KOREA">
+				<BUTTON ID="BTN_CALL_CHAT_DLG" IS_VISIBLE = "0">
+				</BUTTON>	
+				</NAME>
+				<NAME ID="DEFAULT">
+				<BUTTON ID="BTN_CALL_CHAT_DLG" X="358" Y="2" W="21" H="19">
+					<ATTR BTN_IMG="../Data/6_ui/main/mnBchat.tga" BTN_IMG_W="42" BTN_IMG_H="38"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> CreateChatDlg() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">CallToolTipText(0, GetTextW(404023), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+				</NAME>
+			</LOCAL>
+			<STATIC_FORM ID="SFRM_CHATOUT_BG" X="0" Y="21" W="384" H="98" STATIC_NUM="9">
+				<ATTR TEXT = "" FONT="Font_Text" T_X="10" T_Y="4" />
+			</STATIC_FORM>
+			<SCRIPT ID="ON_CALL">
+				ChatMode_FilterSet(UISelf, 0)
+				UISelf:Close()
+			</SCRIPT>
+		</FORM>
+		
+		<LIST ID="LIST_CHAT_NORMAL" USE_ALPHA_ANI="0" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR X="0" Y="27" Z="1" W="366" H="87" ITEM_X="0" ITEM_Y="0" CAN_SELECT="1"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="346" Y="15" Z="-1" W="13" H="70">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="362" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+			<BUTTON ID="ScrDown" X="362" Y="71" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="364" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_MESSAGE_DATA" />			
+		</LIST>
+		<LIST ID="LIST_CHAT_TRADE" USE_ALPHA_ANI="0" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR X="0" Y="27" Z="1" W="366" H="87" ITEM_X="0" ITEM_Y="0" CAN_SELECT="1"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="346" Y="15" Z="-1" W="13" H="70">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="362" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+			<BUTTON ID="ScrDown" X="362" Y="71" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="364" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_MESSAGE_DATA" />
+		</LIST>
+		<LIST ID="LIST_CHAT_GUILD" USE_ALPHA_ANI="0" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR X="0" Y="27" Z="1" W="366" H="87" ITEM_X="0" ITEM_Y="0" CAN_SELECT="1"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="346" Y="15" Z="-1" W="13" H="70">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="362" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+			<BUTTON ID="ScrDown" X="362" Y="71" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="364" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_MESSAGE_DATA" />
+		</LIST>
+		<LIST ID="LIST_CHAT_PARTY" USE_ALPHA_ANI="0" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR X="0" Y="27" Z="1" W="366" H="87" ITEM_X="0" ITEM_Y="0" CAN_SELECT="1"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="346" Y="15" Z="-1" W="13" H="70">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="362" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+			<BUTTON ID="ScrDown" X="362" Y="71" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="364" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_MESSAGE_DATA" />
+		</LIST>
+		<LIST ID="LIST_CHAT_WHISPER" USE_ALPHA_ANI="0" IS_VISIBLE="0" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR X="0" Y="27" Z="1" W="366" H="87" ITEM_X="0" ITEM_Y="0" CAN_SELECT="1"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="346" Y="15" Z="-1" W="13" H="70">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="70"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="362" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+	      		</BUTTON>
+			<BUTTON ID="ScrDown" X="362" Y="71" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="364" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP = "ScrUp" BTN_DOWN = "ScrDown"  BTN_MIDDLE = "ScrMiddle" WND_BAR= "IMG_LIST_SCROLL_BG" ELEMENT_ID="FRM_MESSAGE_DATA" />
+		</LIST>
+	</FORM>
+	
+	<FORM ID="FRM_FRAN" X = "478" Y = "683" W = "288" H = "22" USE_OFFSCREEN="1" IS_VISIBLE="0">
+		<FORM ID="FRM_FRAN_BG" X="0" Y="0" W="288" H="22" IMG = "../Data/6_ui/community/fdFranBg.tga" IMG_W = "288" IMG_H = "22">
+			<ATTR TEXT="401114" FONT="FTtab" T_X="19" T_Y="1" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_FRAN_BAR" X="38" Y="3" W="197" H="10">
+			<ANI_BAR ID="FRAN" X="0" Y="0" W="187" H="12">
+				<ATTR BAR_IMG="../Data/6_ui/community/fdFpBar.tga" BAR_IMG_W="187" BAR_IMG_H="12"/>
+				<ATTR BAR_COUNT="1"/>
+				<SCRIPT ID="ON_TICK">
+					UISelf:SetPilotBar(9)
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					CallToolTipText(0, GetTextW(550011), GetUIWnd("Cursor"):GetLocation())
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ANI_BAR>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				CallToolTipText(0, GetTextW(550011), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>			
+		</FORM>
+		<STATIC_FORM ID="FRM_FRAN_TEXT">
+			<ATTR X="226" Y="3" W="58" Z="2" H="12" STATIC_NUM = "2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+			<ATTR TEXT = "400112" FONT="FTnumber" T_X="28" T_Y="-2" T_CENTER = "1" FONT_COLOR_HEX = "0xFF4D3413"/>
+			<SCRIPT ID="ON_TICK"> UISelf:SetPilotBarInfo(9) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				CallToolTipText(0, GetTextW(550011), GetUIWnd("Cursor"):GetLocation())
+			</SCRIPT>		
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</STATIC_FORM>
+		<SCRIPT ID="ON_MOUSE_OVER">
+			CallToolTipText(0, GetTextW(550011), GetUIWnd("Cursor"):GetLocation())
+		</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>			
+	</FORM>
+	<FORM ID="FormHero" X ="381" Y="696" W="367" H="56" IS_ABSOLUTE_X="1">
+		<STATIC_FORM ID="SFRM_HPMP_BG" X = "0" Y="0" W="368" H="56" STATIC_NUM = "7">
+			<STATIC_FORM ID="FRM_LV">
+				<ATTR X = "8" Y = "9" W ="46" H ="41" STATIC_NUM="24" IMG = "../Data/6_ui/main/mnLvBg.tga" IMG_W = "43" IMG_H = "38" IMG_X = "1" IMG_Y = "1" />
+				<ATTR TEXT = "400109" FONT="Font_Text" T_X="23" T_Y="1" T_CENTER = "1" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					if UISelf:IsTwinkle() == true then
+						ActivateUI("SFRM_SKILL_WINDOW")
+					end
+				</SCRIPT>
+				<FORM ID="FRM_LV_TEXT" X="0" Y="15" W="66" H="41" >
+					<ATTR TEXT = "" FONT="FTlevel" T_X="23" T_Y="1" T_CENTER = "1" T_OUTLINE="1" FONT_COLOR_HEX = "0xFFF7EA96" />
+					<SCRIPT ID = "ON_L_BTN_DOWN">
+						if UISelf:IsTwinkle() == true then
+							ActivateUI("SFRM_SKILL_WINDOW")
+						end
+					</SCRIPT>
+					<SCRIPT ID="ON_CALL"> DrawPlayerLv(UISelf) </SCRIPT>
+				</FORM>
+				<IMG ID ="IMG_TWINKLE">
+					<ATTR X="-3" Y="-3" Z = "1" W="51" H="47" IMG = "../Data/6_ui/main/mnLvUpB.tga" IMG_W = "51" IMG_H = "94" U="1" V="2" UV_INDEX = "1" IGNORE_PARENT_RECT = "1"/>
+					<SCRIPT ID="ON_CALL">
+					</SCRIPT>
+					<SCRIPT ID = "ON_DISPLAY">
+						if UISelf:IsTwinkle() == false then
+							UISelf:Visible(false)
+						else
+							local kClickWnd = GetUIWnd("FRM_LVUPCLICK")
+							if kClickWnd:IsNil() then
+								CallUI("FRM_LVUPCLICK")
+							end
+						end
+						local iUV = 1
+						if UISelf:NowTwinkleOn() == true then
+							iUV = 2
+						end
+						UISelf:SetUVIndex(iUV)
+					</SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN">
+						UISelf:Visible(false)
+						if UISelf:IsTwinkle() == true then
+							ActivateUI("SFRM_SKILL_WINDOW")
+						end
+						CloseUI("FRM_LVUPCLICK")
+					</SCRIPT>
+				</IMG>
+			</STATIC_FORM>
+			<FORM ID="FRM_HP_TAB" X="55" Y="9" W="39" H="20" >
+				<ATTR IMG = "../Data/6_ui/main/mnTab.tga" IMG_W="39" IMG_H="20"/>
+				<ATTR TEXT = "400110" FONT="Font_Text" T_X="17" T_Y="1" T_CENTER = "1" T_OUTLINE="1" />
+			</FORM>
+			<FORM ID="FRM_MP_TAB" X="55" Y="31" W="39" H="20" >
+				<ATTR IMG = "../Data/6_ui/main/mnTab.tga" IMG_W="39" IMG_H="20"/>		
+				<ATTR TEXT = "400111" FONT="Font_Text" T_X="17" T_Y="1" T_CENTER = "1" T_OUTLINE="1" />
+			</FORM>
+			<STATIC_FORM ID="SFRM_HP_BG" X="56" Y="9" W="305" H="20" STATIC_NUM="11" >
+				<ANI_BAR ID="HP_TICK" X="34" Y="2" W="269" H="16">
+					<ATTR BAR_IMG="../Data/6_ui/main/mnHpBar2.tga" BAR_IMG_W="269" BAR_IMG_H="16" BAR_COUNT="1" />
+				</ANI_BAR>
+				<ANI_BAR ID="HP" X="34" Y="2" W="269" H="16" Z="1">
+					<ATTR BAR_IMG="../Data/6_ui/main/mnHpBar.tga" BAR_IMG_W="269" BAR_IMG_H="16" BAR_COUNT="1" />
+					<ATTR TEXT = "" FONT="Font_Text" T_X="134" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER = "1" /> 
+					<SCRIPT ID="ON_TICK">
+						UISelf:SetPilotBar(1)
+						UISelf:SetPilotBarInfo(1)
+					</SCRIPT>
+				</ANI_BAR>
+				<SCRIPT ID="ON_MOUSE_OVER">CallToolTipStatus(7001, GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_MP_BG" X="56" Y="31" W="305" H="20" STATIC_NUM="12" >
+				<ANI_BAR ID="MP_TICK" X="34" Y="2" W="269" H="16">
+					<ATTR BAR_IMG="../Data/6_ui/main/mnMpBar2.tga" BAR_IMG_W="269" BAR_IMG_H="16" BAR_COUNT="1" />
+				</ANI_BAR>
+				<ANI_BAR ID="MP" X="34" Y="2" W="269" H="16" Z="1">
+					<ATTR BAR_IMG="../Data/6_ui/main/mnMpBar.tga" BAR_IMG_W="269" BAR_IMG_H="16"/>
+					<ATTR BAR_COUNT="1" />
+					<ATTR TEXT = "" FONT="Font_Text" T_X="134" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER = "1" /> 
+					<SCRIPT ID="ON_TICK">
+						UISelf:SetPilotBar(2)
+						UISelf:SetPilotBarInfo(2)
+					</SCRIPT>
+				</ANI_BAR>
+				<SCRIPT ID="ON_MOUSE_OVER">CallToolTipStatus(7021, GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<!-- todo -->
+		<!--SCRIPT ID="ON_TICK"> MiniQuestList_Check() </SCRIPT--> 
+	</FORM>
+	
+	<FORM ID="FRM_LVUPCLICK" X="100" Y="100" Z="10" W="70" H="65" U="1" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnLvupCl.tga" IMG_W="70" IMG_H="130" TICK_TIME="150" PASS_EVENT="1" PRIORITY="10">
+		<SCRIPT ID="ON_CALL">
+			local kMainWnd = GetUIWnd("FormHero")
+			if kMainWnd:IsNil() then
+				return false
+			end
+			local ptPos = kMainWnd:GetLocation()
+			local kBgWnd = kMainWnd:GetControl("SFRM_HPMP_BG")
+			if kBgWnd:IsNil() then
+				return false
+			end
+			ptPos:SetX(ptPos:GetX() + kBgWnd:GetLocation():GetX())
+			ptPos:SetY(ptPos:GetY() + kBgWnd:GetLocation():GetY())
+			local kLvWnd = kBgWnd:GetControl("FRM_LV")
+			if kLvWnd:IsNil() then
+				return false
+			end
+			ptPos:SetX(ptPos:GetX() + kLvWnd:GetLocation():GetX() + 8)
+			ptPos:SetY(ptPos:GetY() + kLvWnd:GetLocation():GetY() - 50)
+			UISelf:SetLocation(ptPos)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			local UVIndex = UISelf:GetUVIndex()
+			if 1 == UVIndex then
+				UISelf:SetUVIndex(2)
+			else
+				UISelf:SetUVIndex(1)
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="QuickInvEx" X="0" Y="652" W="384" H="49" IMG="../Data/6_ui/main/mnSlotBg.tga" IMG_W="384" IMG_H="49" IS_ABSOLUTE_X="1">
+		<BUILD ID="BLD_QUICK" TARGET_ID="QUICK" X = "25" Y = "5" X_COUNT = "8" Y_COUNT = "1" X_GAB = "42" Y_GAB = "47"/>
+		<ICON ID = "QUICK" X = "0" Y = "0" W ="40" H ="40">
+			<ATTR TEXT="" FONT="FTslot" T_OUTLINE="1" T_X="21" T_Y="25" T_CENTER="1" FONT_COLOR_HEX="0xFFf9e36c" />
+			<ATTR ICON_GRP ="101" ICON_KEY = "101"/>
+			<SCRIPT ID = "ON_OUT_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+			<SCRIPT ID = "ON_R_BTN_DOWN">UISelf:IconDoAction() </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DBL_DOWN">UISelf:DeleteIcon() </SCRIPT>
+			<SCRIPT ID = "ON_BUILD">UISelf:SetBuildIndex(UISelf:GetBuildIndex() + 8) UISelf:SetBuildIconKey()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<!--SCRIPT ID="ON_CALL">QuickSlotDoBuild(UISelf)</SCRIPT-->
+			<FORM ID="COOLTIME" X="0" Y="0" W="40" H="40" IS_ENABLE = "0">
+				<ATTR TEXT="" FONT="Font_Chat" T_X="20" T_Y="9" T_CENTER = "1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" T_BOLD = "1"/>
+				<SCRIPT ID = "ON_TICK">
+					local kSelf = UISelf
+					if kSelf:IsVisible() then
+						kSelf:QuickSlotIcon_OnDisplay()
+					end
+				</SCRIPT>
+				<SCRIPT ID = "ON_R_BTN_DOWN">UISelf:GetParent():IconDoAction() </SCRIPT>
+			</FORM>
+			<FORM ID = "FRM_COOTIME_IMG"  X="0" Y="0" W="40" H="40" IS_ENABLE = "0">
+				<ATTR IMG = "../Data/6_ui/main/mnGraybox.tga" IMG_X="0" IMG_Y="0" IMG_W = "40" IMG_H = "40"/>
+				<SCRIPT ID = "ON_CALL">	UISelf:SetImgSize( Point2( UISelf:GetSize():GetX(), 0 ) ) </SCRIPT>
+				<SCRIPT ID = "ON_R_BTN_DOWN">UISelf:GetParent():IconDoAction() </SCRIPT>
+			</FORM>
+			<FORM ID = "FRM_TOGGLE_IMG"  X="0" Y="0" Z = "1" W="40" H="40" IS_ENABLE = "0" PASS_EVENT = "1" IS_VISIBLE = "0">
+				<ATTR IMG = "../Data/6_ui/main/mnSkillLn.tga" IMG_W = "120" IMG_H = "120" U = "3" V = "3" UV_INDEX = "1"/>
+				<SCRIPT ID = "ON_TICK"> 
+					if UISelf:IsVisible() then
+						if( CheckNil(g_world == nil) ) then return false end
+						if( CheckNil(g_world:IsNil()) ) then return false end
+						UISelf:SetUVIndex(math.floor(math.mod(g_world:GetAccumTime()*10,6))+1) 
+						local kParent = UISelf:GetParent()
+						if(false == kParent:IsNil()) then							
+							if(false == IsQuickSkillSlotActive(kParent:IconKey())) then
+								UISelf:Visible(false)
+							end
+						end
+					end
+				</SCRIPT>
+			</FORM>
+			<FORM ID = "FRM_HOT_KEY"  X="0" Y="0" Z = "2" W="40" H="40" IS_ENABLE = "0" PASS_EVENT = "1" >
+				<ATTR TEXT="" FONT="FTslot" T_OUTLINE="1" T_X="21" T_Y="25" T_CENTER="1" FONT_COLOR_HEX="0xFFf9e36c" />
+				<SCRIPT ID="ON_CALL">QuickSlotDoBuild(UISelf, UISelf:GetParent():IconKey())</SCRIPT>
+			</FORM>
+		</ICON>
+	</FORM>
+
+	<STATIC_FORM ID = "QuickInv" CAN_CLIP = "1" ALIGN_X ="0" Y ="696" W ="391" H ="56" STATIC_NUM = "7" USE_OFFSCREEN="1">
+		<FORM ID = "FRM_UP_BG"  X = "12" Y = "9" W ="8" H ="9">
+			<ATTR IMG = "../Data/6_ui/common/cmBody.tga" IMG_W = "8" IMG_H = "9"/>
+		</FORM>
+		<FORM ID = "FRM_DOWM_BG" X = "12" Y = "40" W ="8" H ="9">
+			<ATTR IMG = "../Data/6_ui/common/cmBody.tga" IMG_W = "8" IMG_H = "9"/>
+		</FORM>
+		<FORM ID = "FRM_NUM_BG" X = "8" Y = "23" W ="16" H ="14">
+			<ATTR IMG = "../Data/6_ui/main/mnPgBg.tga" IMG_W = "16" IMG_H = "14"/>
+			<ATTR TEXT = "" FONT="FTtab" T_X="7" T_Y="0" T_CENTER = "1" FONT_COLOR_HEX="0xFFE1E1E1"/> 
+			<SCRIPT ID = "ON_CALL">
+				UISelf:SetStaticText(tostring(GetQuickSlotViewPage()))
+			</SCRIPT>
+		</FORM>
+		<FORM ID = "FRM_BG" X = "0" Y = "2" W ="391" H ="52">
+			<BUTTON ID="BTN_OPEN_EX_SLOT" X="365" Y="9" W="18" H="22" BTN_IMG="../Data/6_ui/main/mnSlotBt2.tga" BTN_IMG_W="36" BTN_IMG_H="44">
+				<SCRIPT ID="ON_L_BTN_DOWN">CallQuickSlotEx(true)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_CLOSE_EX_SLOT" X="365" Y="9" W="18" H="22" BTN_IMG="../Data/6_ui/main/mnSlotBt.tga" BTN_IMG_W="36" BTN_IMG_H="44" IS_VISIBLE="0">
+				<SCRIPT ID="ON_L_BTN_DOWN">CallQuickSlotEx(true)</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_PAGE_UP" X = "7" Y = "7" W ="17" H ="14">
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnPgUpB.tga" BTN_IMG_W = "34" BTN_IMG_H = "28"/>	
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					local wndPage = UISelf:GetParent():GetParent():GetControl("FRM_NUM_BG")
+					ChageQuickSlot(	wndPage, 1)
+				</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> CallToolTipText(0, GetTextW(60077), GetUIWnd("Cursor"):GetLocation())	</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_LOSE_FOCUS"> CloseToolTip() </SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_PAGE_DOWN" X = "7" Y = "35" W ="17" H ="14">
+				<ATTR BTN_IMG = "../Data/6_ui/main/mnPgDownB.tga" BTN_IMG_W = "34" BTN_IMG_H = "28"/>	
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					local wndPage = UISelf:GetParent():GetParent():GetControl("FRM_NUM_BG")
+					ChageQuickSlot(	wndPage, -1)
+				</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER"> CallToolTipText(0, GetTextW(60078), GetUIWnd("Cursor"):GetLocation())	</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID = "ON_LOSE_FOCUS"> CloseToolTip() </SCRIPT>
+			</BUTTON>
+			<BUILD TARGET_ID = "SFRM_QUICK_COLOR" X = "26" Y = "7" X_COUNT = "8" Y_COUNT = "1" X_GAB = "42" Y_GAB = "47"/>
+			<STATIC_FORM ID = "SFRM_QUICK_COLOR">
+				<ATTR X = "0" Y = "0" W ="42" H ="42" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+				<STATIC_FORM ID = "SFRM_SHADOW" X = "0" Y = "0" W ="42" H ="42" STATIC_NUM = "3">
+					<IMG ID = "IMG_LIGHT" IMG = "../Data/6_ui/main/mnSlotLight.tga" IMG_W = "42" IMG_H = "24"/>
+				</STATIC_FORM>
+			</STATIC_FORM> 
+
+			<FORM ID = "FRM_ICON" X = "27" Y = "0" W ="336" H ="52">
+				<BUILD ID="BLD_QUICK" TARGET_ID = "QUICK" X = "0" Y = "8" X_COUNT = "8" Y_COUNT = "1" X_GAB = "42" Y_GAB = "47"/>
+				<ICON ID = "QUICK" X = "0" Y = "0" W ="40" H ="40">
+					<ATTR TEXT="" FONT="FTslot" T_OUTLINE="1" T_X="21" T_Y="25" T_CENTER="1" FONT_COLOR_HEX="0xFFf9e36c" />
+					<ATTR ICON_GRP ="101" ICON_KEY = "101"/>
+					<SCRIPT ID = "ON_OUT_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+					<SCRIPT ID = "ON_R_BTN_DOWN">UISelf:IconDoAction() </SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_UP">UISelf:CursorToIcon() </SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DBL_DOWN">UISelf:DeleteIcon() </SCRIPT>
+					<SCRIPT ID = "ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<!--SCRIPT ID="ON_CALL">QuickSlotDoBuild(UISelf)</SCRIPT-->
+					<FORM ID="COOLTIME" X="0" Y="0" W="40" H="40" IS_ENABLE = "0">
+						<ATTR TEXT="" FONT="Font_Chat" T_X="20" T_Y="9" T_CENTER = "1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" T_BOLD = "1"/>
+						<SCRIPT ID = "ON_TICK">
+							local kSelf = UISelf
+							if kSelf:IsVisible() then
+								kSelf:QuickSlotIcon_OnDisplay()
+							end
+						</SCRIPT>
+						<SCRIPT ID = "ON_R_BTN_DOWN">UISelf:GetParent():IconDoAction() </SCRIPT>
+					</FORM>
+					<FORM ID = "FRM_COOTIME_IMG"  X="0" Y="0" W="40" H="40" IS_ENABLE = "0">
+						<ATTR IMG = "../Data/6_ui/main/mnGraybox.tga" IMG_X="0" IMG_Y="0" IMG_W = "40" IMG_H = "40"/>
+						<SCRIPT ID = "ON_CALL">	UISelf:SetImgSize( Point2( UISelf:GetSize():GetX(), 0 ) ) </SCRIPT>
+						<SCRIPT ID = "ON_R_BTN_DOWN">UISelf:GetParent():IconDoAction() </SCRIPT>
+					</FORM>
+					<FORM ID = "FRM_TOGGLE_IMG"  X="0" Y="0" Z = "1" W="40" H="40" IS_ENABLE = "0" PASS_EVENT = "1" IS_VISIBLE = "0">
+						<ATTR IMG = "../Data/6_ui/main/mnSkillLn.tga" IMG_W = "120" IMG_H = "120" U = "3" V = "3" UV_INDEX = "1"/>
+						<SCRIPT ID = "ON_TICK"> 
+							if UISelf:IsVisible() then
+								if( CheckNil(g_world == nil) ) then return false end
+								if( CheckNil(g_world:IsNil()) ) then return false end
+								UISelf:SetUVIndex(math.floor(math.mod(g_world:GetAccumTime()*10,6))+1) 
+								local kParent = UISelf:GetParent()
+								if(false == kParent:IsNil()) then							
+									if(false == IsQuickSkillSlotActive(kParent:IconKey())) then
+										UISelf:Visible(false)
+									end
+								end
+							end
+						</SCRIPT>
+					</FORM>
+					<FORM ID = "FRM_HOT_KEY"  X="0" Y="0" Z = "2" W="40" H="40" IS_ENABLE = "0" PASS_EVENT = "1" >
+						<ATTR TEXT="" FONT="FTslot" T_OUTLINE="1" T_X="21" T_Y="25" T_CENTER="1" FONT_COLOR_HEX="0xFFf9e36c" />
+						<SCRIPT ID="ON_CALL">QuickSlotDoBuild(UISelf, UISelf:GetParent():IconKey())</SCRIPT>
+					</FORM>
+				</ICON>
+			</FORM>
+		</FORM>
+	</STATIC_FORM>
+	<FORM ID="SFRM_SYSTEMMENU" ALIGN_X = "100" ALIGN_Y="100" W="278" H="35" CAN_CLIP = "1" USE_OFFSCREEN="1">
+		<ATTR IMG="../Data/6_ui/main/mnMenuBox.tga" IMG_W="278" IMG_H="35"/>
+		<FORM ID="FRM_Start_BG" X="213" Y="3" W="62" H="29">
+			<STATIC_FORM ID="SFRM_BG" X="49" Y="3" W="12" H="23" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="Start" X="0" Y="0" W="62" H="29" IGNORE_PARENT_RECT = "1" >
+				<ATTR BTN_IMG = "../Data/6_ui/common/cmMnBg01.tga" BTN_IMG_W = "124" BTN_IMG_H = "58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+				<ATTR TEXT = "400115" FONT="FTtitleBig_16" T_X="31" T_Y="4" T_CENTER = "1" T_OUTLINE="1" /> 
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if(true == IsOnMacroCheck()) then  
+						return	
+					end
+					CallUI("Option")
+				</SCRIPT>
+				<SCRIPT ID="ON_R_BTN_DOWN">				
+					if(true == IsOnMacroCheck()) then  
+						return	
+					end
+					CallUI("Option")
+				</SCRIPT>
+				<HOTKEY ID="1">
+					if(true == IsOnMacroCheck()) then  
+						return true
+					end
+					
+					local kTemp = GetUIWnd("SFRM_COUPLE_AUTO_MATCH")			
+					if kTemp:IsNil() == false then
+						CloseUI("SFRM_COUPLE_AUTO_MATCH")
+						return true
+					end
+					
+					CallUI("Option") return true
+				</HOTKEY>
+				<SCRIPT ID="ON_MOUSE_OVER">
+						local ptCursor = UISelf:GetTotalLocation()
+						ptCursor:IncY(-76)
+						CallToolTipText(0, GetTextW(799100), ptCursor, "TOOLTIP_SYSTEM_MENU")
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</BUTTON>
+		</FORM>
+		<BUTTON ID="BTN_AUCTION" X="67" Y="3" W="62" H="29">
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmMnBg01.tga" BTN_IMG_W = "124" BTN_IMG_H = "58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<ATTR TEXT = "403000" FONT="FTtitleBig_16" T_X="31" T_Y="4" T_CENTER = "1" T_OUTLINE="1" />
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if(true == IsOnMacroCheck()) then  
+					return	
+				end
+				if IsExistUniqueType("NO_DUPLICATE") == true then return end
+				local wndTrade = GetUIWnd("SFRM_TRADE")
+				if false == wndTrade:IsNil() then
+					return 
+				end
+				ClearChatBar()				
+				CallOpenMarket()
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+						local ptCursor = UISelf:GetTotalLocation()
+						ptCursor:IncY(-92)
+						CallToolTipText(0, GetTextW(403151), ptCursor, "TOOLTIP_SYSTEM_MENU")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</BUTTON>
+		<LOCAL>
+			<!--NAME ID="TAIWAN">
+				<IMG ID = "IMG_CASH" X="130" Y="3" W="62" H="29">
+					<ATTR IMG = "../Data/6_ui/common/cmMnBg01.tga" IMG_W = "124" IMG_H = "58" U="2" V="2" UV_INDEX="1"/>
+				</IMG>
+			</NAME>
+			<NAME ID="EUROPE">
+				<IMG ID = "IMG_CASH" X="130" Y="3" W="62" H="29">
+					<ATTR IMG = "../Data/6_ui/common/cmMnBg01.tga" IMG_W = "124" IMG_H = "58" U="2" V="2" UV_INDEX="1"/>
+				</IMG>
+			</NAME>
+			<NAME ID="FRANCE">
+				<IMG ID = "IMG_CASH" X="130" Y="3" W="62" H="29">
+					<ATTR IMG = "../Data/6_ui/common/cmMnBg01.tga" IMG_W = "124" IMG_H = "58" U="2" V="2" UV_INDEX="1"/>
+				</IMG>
+			</NAME>
+			<NAME ID="GERMANY">
+				<IMG ID = "IMG_CASH" X="130" Y="3" W="62" H="29">
+					<ATTR IMG = "../Data/6_ui/common/cmMnBg01.tga" IMG_W = "124" IMG_H = "58" U="2" V="2" UV_INDEX="1"/>
+				</IMG>
+			</NAME-->
+			<NAME ID="DEFAULT">
+				<BUTTON ID="BTN_CASH" X="130" Y="3" W="82" H="29">
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmMnBg03.tga" BTN_IMG_W = "164" BTN_IMG_H = "58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+					<ATTR TEXT = "400114" FONT="FTtitleBig_16" T_X="41" T_Y="4" T_CENTER = "1" T_OUTLINE="1" />
+					<SCRIPT ID="ON_L_BTN_DOWN"> 
+						if(true == IsOnMacroCheck()) then  
+							return	
+						end
+						CallCashShop() 
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">
+						local ptCursor = UISelf:GetTotalLocation()
+						ptCursor:IncY(-76)
+						CallToolTipText(0, GetTextW(799101), ptCursor, "TOOLTIP_SYSTEM_MENU")
+					</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+			</NAME>
+		</LOCAL>
+		<BUTTON ID="BTN_PVP" X="4" Y="3" W="62" H="29" >
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmMnBg01.tga" BTN_IMG_W = "124" BTN_IMG_H = "58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+			<ATTR TEXT = "400113" FONT="FTtitleBig_16" T_X="31" T_Y="4" T_CENTER = "1" T_OUTLINE="1" /> 
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				if IsInExpedition() then
+					Notice_Show( GetTextW(720051), 1 )
+				else
+					if(true == IsOnMacroCheck()) then
+						return
+					end
+					OnClickPvP()
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local ptCursor = UISelf:GetTotalLocation()
+				ptCursor:IncY(-76)
+				CallToolTipText(0, GetTextW(799102), ptCursor, "TOOLTIP_SYSTEM_MENU")
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</BUTTON>
+	</FORM>
+	
+	<FORM ID = "QuickMenu" ALIGN_X = "100" Y = "500" W ="282" H ="236" CAN_CLIP = "1" USE_OFFSCREEN="0" PASS_EVENT="1">
+		<FORM ID="FRM_KILL_COUNT" X="20" Y="80" Z="-2" W="240" H="80" IMG_X="40" IMG_Y="0" IMG="../Data/6_ui/main/mnMstCbg.tga" IMG_W="200" IMG_H="80" IS_VISIBLE="0">
+			<FORM ID="FRM_TITLE" X="0" Y="0" W="240" H="20" TEXT="400491" T_X="135" T_Y="4" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF221009" PASS_EVENT="1"/>
+			<FORM ID="FRM_COUNT" X="0" Y="24" W="115" H="40" PASS_EVENT="1">
+				<FORM ID="FRM_THOUSAND" X="0" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCyl.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+				<FORM ID="FRM_HUNDRED" X="25" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCyl.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+				<FORM ID="FRM_TEN" X="50" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCyl.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+				<FORM ID="FRM_ONE" X="75" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCyl.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+			</FORM>
+			<FORM ID="FRM_CRI_COUNT" X="0" Y="24" W="115" H="40" IS_VISIBLE="0" PASS_EVENT="1">
+				<FORM ID="FRM_THOUSAND" X="0" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCrd.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+				<FORM ID="FRM_HUNDRED" X="25" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCrd.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+				<FORM ID="FRM_TEN" X="50" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCrd.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+				<FORM ID="FRM_ONE" X="75" Y="0" W="40" H="40" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCrd.tga" IMG_W="200" IMG_H="80" PASS_EVENT="1"/>
+			</FORM>
+			<FORM ID="FRM_TARGET_COUNT" X="114" Y="45" W="65" H="30" Z="1" PASS_EVENT="1">
+				<FORM ID="FRM_THOUSAND" X="0" Y="0" W="20" H="30" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCor.tga" IMG_W="100" IMG_H="60" PASS_EVENT="1"/>
+				<FORM ID="FRM_HUNDRED" X="15" Y="0" W="20" H="30" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCor.tga" IMG_W="100" IMG_H="60" PASS_EVENT="1"/>
+				<FORM ID="FRM_TEN" X="30" Y="0" W="20" H="30" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCor.tga" IMG_W="100" IMG_H="60" PASS_EVENT="1"/>
+				<FORM ID="FRM_ONE" X="45" Y="0" W="20" H="30" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/main/mnNmMstCor.tga" IMG_W="100" IMG_H="60" PASS_EVENT="1"/>
+			</FORM>
+			<IMG ID="ICON_REWARD" X="182" Y="30" W="40" H="40" PASS_EVENT="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(400492), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</FORM>
+	
+		<STATIC_FORM ID="SFRM_BG" X="0" Y="200"  Z="-1" W="282" H="36" STATIC_NUM="4" CAN_CLIP="1"/>
+		<FORM_ANI_MOVE_WND ID="IMG_ANIMATED" X="0" Y="0" Z="0" W="262" H="236" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_UI/Icon/IconComic01.tga" IMG_X="200" IMG_Y="40" IMG_W="480" IMG_H="480" UVINDEX="1" U="12" V="12" />
+		</FORM_ANI_MOVE_WND>
+		<IMG ID="IMG_EFFECT" X="-2" Y="129" Z="2" W="128" H="128" IS_VISIBLE="0" PASS_EVENT="1">
+			<ATTR IMG="../Data/5_Effect/4_UI/ef_Box_count_01.tga" IMG_W="512" IMG_H="512" UV_INDEX="4" U="4" V="4" />
+			<SCRIPT ID="ON_TICK"> OnTick_InvenEffect(UISelf) </SCRIPT>
+		</IMG>
+		
+		<BUTTON ID = "BTN_MAIN1">
+			<ATTR X = "2" Y = "201" Z="1" W ="40" H ="30" T_OUTLINE="1" T_RIGHT = "1" T_X = "35" T_Y = "13" FONT = "FTslot"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnIcon02.tga" BTN_IMG_W = "80" BTN_IMG_H = "60"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local ptCursor = UISelf:GetTotalLocation()
+				ptCursor:IncY(-60)
+				CallToolTipText(0, MakeHotKeyText(60025, 1022), ptCursor, "TOOLTIP_SYSTEM_MENU")
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				local kTemp = GetUIWnd("FRM_AUCTION_MAIN")			
+				if kTemp:IsNil() == false then
+					return 
+				end
+				CallUI("CharInfo")
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_MAIN2">
+			<ATTR X = "42" Y = "201" Z="1" W ="40" H ="30" T_OUTLINE="1" T_RIGHT = "1" T_X = "35" T_Y = "13" FONT = "FTslot"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnIcon01.tga" BTN_IMG_W = "80" BTN_IMG_H = "60"/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local ptCursor = UISelf:GetTotalLocation()
+				ptCursor:IncY(-60)
+				CallToolTipText(0, MakeHotKeyText(60026, 1023), ptCursor, "TOOLTIP_SYSTEM_MENU")
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">CallUI("Inv")</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_MAIN3">
+			<ATTR X = "82" Y = "201" Z="1" W ="40" H ="30" T_OUTLINE="1" T_RIGHT = "1" T_X = "35" T_Y = "13" FONT = "FTslot"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnIcon05.tga" BTN_IMG_W = "80" BTN_IMG_H = "60"/>
+			<SCRIPT ID="ON_MOUSE_OVER">	
+				local ptCursor = UISelf:GetTotalLocation()
+				ptCursor:IncY(-60)
+				CallToolTipText(0, MakeHotKeyText(60027, 1037), ptCursor, "TOOLTIP_SYSTEM_MENU")
+				SetSkillIconBlink_InMainUI(false)
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				local kTemp = GetUIWnd("FRM_AUCTION_MAIN")			
+				if kTemp:IsNil() == false then
+					return 
+				end
+				CallUI("SFRM_SKILL_WINDOW")
+			</SCRIPT>
+			<IMG ID="IMG_OUTLINE" Y="-4" IMG="..\Data\6_UI\main\mnIconLine.tga" IMG_W="40" IMG_H="40" U="1" V="1" UV_INDEX="1" IS_VISIBLE="0"/>
+		</BUTTON>
+		<BUTTON ID = "BTN_MAIN4">
+			<ATTR X = "122" Y = "201" Z="1" W ="40" H ="30" T_OUTLINE="1" T_RIGHT = "1" T_X = "35" T_Y = "13" FONT = "FTslot"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnIcon04.tga" BTN_IMG_W = "80" BTN_IMG_H = "60"/>
+			<SCRIPT ID="ON_MOUSE_OVER">	
+				local ptCursor = UISelf:GetTotalLocation()
+				ptCursor:IncY(-60)
+				CallToolTipText(0, MakeHotKeyText(60028, 1038), ptCursor, "TOOLTIP_SYSTEM_MENU")
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				local kTemp = GetUIWnd("FRM_AUCTION_MAIN")			
+				if kTemp:IsNil() == false then
+					return 
+				end
+				Show_IngQuestInterface()
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_MAIN7">
+			<ATTR X = "162" Y = "201" Z="1" W ="40" H ="30" T_OUTLINE="1" T_RIGHT = "1" T_X = "35" T_Y = "13" FONT = "FTslot"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnIcon08.tga" BTN_IMG_W = "80" BTN_IMG_H = "60"/>
+			<SCRIPT ID="ON_MOUSE_OVER">	
+				local ptCursor = UISelf:GetTotalLocation()
+				ptCursor:IncY(-60)
+				CallToolTipText(0, MakeHotKeyText(60086, 1034), ptCursor, "TOOLTIP_SYSTEM_MENU")
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">CallGuildUI()</SCRIPT>
+		</BUTTON>
+		<BUTTON ID = "BTN_MAIN5">
+			<ATTR X = "202" Y = "201" Z="1" W ="40" H ="30" T_OUTLINE="1" T_RIGHT = "1" T_X = "35" T_Y = "13" FONT = "FTslot"/>
+			<ATTR BTN_IMG = "../Data/6_ui/main/mnIcon06.tga" BTN_IMG_W = "80" BTN_IMG_H = "60"/>
+			<SCRIPT ID="ON_MOUSE_OVER">	
+				local ptCursor = UISelf:GetTotalLocation()
+				ptCursor:IncY(-60)
+				CallToolTipText(0, MakeHotKeyText(60072, 1021), ptCursor, "TOOLTIP_SYSTEM_MENU")
+			</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN">CallUI("SFRM_COMMUNITY")</SCRIPT>
+		</BUTTON>
+		<LOCAL>
+			<!--NAME ID="TAIWAN">
+				<IMG ID = "BTN_MAIN6" UV_INDEX="4" U="2" V="2">
+					<ATTR X = "210" Y = "201" Z="1" W ="40" H ="30" />
+					<ATTR IMG = "../Data/6_ui/main/mnIcon07.tga" IMG_W = "80" IMG_H = "60"/>
+				</IMG>
+			</NAME-->
+			<NAME ID="DEFAULT">
+				<BUTTON ID = "BTN_MAIN6">
+					<ATTR X = "242" Y = "201" Z="1" W ="40" H ="30" />
+					<ATTR BTN_IMG = "../Data/6_ui/main/mnIcon07.tga" BTN_IMG_W = "80" BTN_IMG_H = "60"/>
+					<SCRIPT ID="ON_MOUSE_OVER">
+						local ptCursor = UISelf:GetTotalLocation()
+						ptCursor:IncY(-60)
+						CallToolTipText(0, MakeHotKeyText(60083, 1036), ptCursor, "TOOLTIP_SYSTEM_MENU")
+					</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_L_BTN_DOWN">
+						local kTemp = GetUIWnd("FRM_AUCTION_MAIN")			
+						if kTemp:IsNil() == false then
+							return 
+						end
+						local wndBook = CallUI("FRM_BOOK")
+						if wndBook:IsNil() then
+							if( CheckNil(g_world == nil) ) then return false end
+							if( CheckNil(g_world:IsNil()) ) then return false end
+							local filter = g_world:GetWorldFocusFilterAlpha()
+							if (filter >= 0.8) and (0.89 > filter) then
+								g_world:SetShowWorldFocusFilter(false) 
+							end
+						end
+					</SCRIPT>
+				</BUTTON>
+			</NAME>
+		</LOCAL>
+	</FORM>
+	<FORM ID="Bg_XP_Bar" ALIGN_X="0" ALIGN_Y="100" W="746" H="18" USE_OFFSCREEN="1">
+		<ANI_BAR ID="XP" X="39" Y="4" W="640" H="10">
+			<ATTR BAR_IMG="../Data/6_ui/main/mnExpBar.tga" BAR_IMG_W="660" BAR_IMG_H="10" BAR_COUNT="1"/>			
+			<ATTR TEXT = "" FONT="Font_Text" T_X="280" T_Y="-2"/> 
+			<SCRIPT ID="ON_TICK"> UISelf:SetPilotBar(4) </SCRIPT>
+		</ANI_BAR>
+		
+		<ANI_BAR ID="REST_XP_BAR" X="39" Y="4" W="640" H="10" IS_VISIBLE="0" Z="1">
+			<ATTR BAR_IMG="../Data/6_UI/main/mnExpBar_Bl.tga" BAR_IMG_W="660" BAR_IMG_H="10" BAR_COUNT="1"/>			
+			<ATTR TEXT = "" FONT="Font_Text" T_X="280" T_Y="-2"/> 
+			<SCRIPT ID="ON_TICK"> UISelf:SetPilotBar(4) </SCRIPT>
+		</ANI_BAR>
+		<ANI_BAR ID="REST_XP_LIMIT_BAR" X="39" Y="4" W="640" H="10" IS_VISIBLE="0">
+			<ATTR BAR_IMG="../Data/6_UI/main/mnExpBar_Bl2.tga" BAR_IMG_W="660" BAR_IMG_H="10" BAR_COUNT="1"/>			
+			<ATTR TEXT = "" FONT="Font_Text" T_X="280" T_Y="-2"/> 
+			<SCRIPT ID="ON_TICK"> UISelf:SetPilotBar(5) </SCRIPT>
+		</ANI_BAR>
+		
+		<STATIC_FORM ID="SFRM_EXP_COVER" X="0" Y="0" Z="3" W="745" H="18" STATIC_NUM="13">
+			<ATTR TEXT = "400112" FONT="Font_Text" T_X="18" T_Y="1" T_CENTER = "1" T_OUTLINE="1" />
+			<SCRIPT ID="ON_MOUSE_OVER">	
+				local XPWnd = UISelf:GetParent():GetControl("XP")
+				if(true == XPWnd:IsNil()) then return end
+				if(true == XPWnd:IsVisible()) then 
+					CallToolTipText(0, GetTextW(60024), GetUIWnd("Cursor"):GetLocation()) 
+				else
+					CallXPBarTooltip()
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</STATIC_FORM>
+		<ATTR IMG = "../Data/6_ui/main/mnExpBrBg.tga" IMG_W="680" IMG_H="11" IMG_X = "5" IMG_Y = "3"/>
+		<STATIC_FORM ID="FRM_EXPTEXT_BG1">
+			<ATTR X="682" Y="2" W="59" Z="2" H="14" STATIC_NUM = "2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+			<ATTR TEXT = "400112" FONT="FTnumber" T_X="29" T_Y="-2" T_CENTER = "1" FONT_COLOR_HEX = "0xFF4D3413" />
+			<SCRIPT ID="ON_TICK"> UISelf:SetPilotBarInfo(4) </SCRIPT>
+		</STATIC_FORM>
+	</FORM>
+	<FORM ID="FRM_GIFT_RECV" X="750" Y="91" W="50" H="58" U="2" V="1" UV_INDEX="1" IMG="../Data/6_ui/main/mnCashBox.tga" IMG_W="100" IMG_H="58" TICK_TIME="200" IS_ABSOLUTE_Y="1">
+		<SCRIPT ID="ON_TICK">
+			local UVIndex = UISelf:GetUVIndex()
+			if 1 == UVIndex then
+				UISelf:SetUVIndex(2)
+			else
+				UISelf:SetUVIndex(1)
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_L_BTN_DOWN"> CallCashShop() </SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, UISelf:GetCustomDataAsStr(), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+		<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+	</FORM>
+	<LIST ID="LST_EFFECT_TIME" ALIGN_X="50" Y="120" W="285" H="27">
+		<ATTR ELEMENT_ID="FRM_ETTECT_TIME_ELE"/>
+	</LIST>
+	<FORM ID="FRM_ETTECT_TIME_ELE" X="0" Y="0" W="285" H="27" NO_FOCUS="1" PASS_EVENT="1">
+		<ATTR IMG="../Data/6_ui/main/mnMskBarbg.tga" IMG_W="285" IMG_H="27"/>
+		<ANI_BAR ID="BAR_TIME" X="4" Y="3" W="278" H="27" BAR_SMOOTH="0">
+			<ATTR BAR_IMG="../Data/6_ui/main/mnMskBar.tga" BAR_IMG_W="278" BAR_IMG_H="18" BAR_COUNT="1"/>
+			<ATTR TEXT = "" FONT="FTctsBig_14" T_X="10" T_Y="0" T_BOLD="0" T_CENTER="0" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/> 
+		</ANI_BAR>
+	</FORM>
+			
+	<FORM ID="FRM_RESERVE_NOTICE_REST_EXP" X="0" Y="0" W="285" H="27" NO_FOCUS="1" PASS_EVENT="1" ALIVE_TIME="10000">
+		<SCRIPT ID = "ON_CLOSE"> NoticeRestExpUI_OnClose() </SCRIPT>
+	</FORM>	
+	
+	<FORM ID="FRM_NOTICE_PARTY_FUNCTION" X="0" Y="0" W="285" H="27" NO_FOCUS="1" PASS_EVENT="1" ALIVE_TIME="300000">
+		<SCRIPT ID="ON_CLOSE"> NotifyPartyFunction() </SCRIPT>
+	</FORM>
+
+	<STATIC_FORM ID="SFRM_WARNNING_LOW_HEALTH" X="0" Y="0" W="1024" H="768" STATIC_NUM="40" NO_FOCUS="1" PASS_EVENT="1" ALPHA="0" USE_ALPHA_ANI="0" TICK_TIME="50">
+		<SCRIPT ID="ON_CALL">
+			local ptScreenSize = GetScreenSize()
+			UISelf:SetSize(ptScreenSize)
+			UISelf:SetLocation(Point2(0, 0))
+			UISelf:SetAlpha(0)
+			UISelf:SetMaxAlpha(0)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			UpdateLowHPWarnAlpha(UISelf)
+		</SCRIPT>
+	</STATIC_FORM>
+	
+</XUI>

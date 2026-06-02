@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4205</ID> <!--T.T.10420501 치매 걸린 현자 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	부보부보 퇴치-->
+<!--[완료NPC]	버섯마을 - 마시룬-->
+<!--[내용]	마시룬은 자신이 기회를 보아 각성의 피리를 이용할테니 난폭해진 부보부보를 제압해달라고 한다. 촌장 마시룬을 위해 잊혀진 마을[시나리오 모드(F5)]에서 현자 부보부보를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</CLIENT> <!--시작NPC 버섯마을 - 마시룬 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</PAYER> <!--완료NPC 버섯마을 - 마시룬 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</AGENT> <!--진행NPC 11 버섯마을 - 마시룬 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="103/5/1">6052600</MONSTER> 
+ <!--MON_NO=6052600/부보부보,Mission_Key=103/잊혀진 마을 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10420511"/> <!--부보부보[시나리오 모드(F5)] 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10420521" FACE="Fungarf_normal"/> <!--부보부보 그 영감도 이제 살아갈 날이 얼마 남지 않은 게로군.
+어쨌거나 정상적인 대화가 불가능하다고 하니
+내가 도와주겠네.%%
+잊혀진 마을[시나리오모드(F5)]로 찾아가게.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10420526" FACE="Fungarf_smile"/> <!--다행히 각성의 피리 덕분에 현자 부보부보의 이야기를 
+들을 수 있게되었군.%%
+하지만 골렘 파타누스가 엘가의 화염 때문에 천년 전
+사라졌다고 하니, 그의 몸에 새겨진 시간에 제단에
+대한 지도는 찾을 길이 없어진 거로군.%%
+안타깝구만…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10420523" FACE="Fungarf_normal"/> <!--그곳에서 부보부보 영감을 잠시 제압해준다면
+내가 타이밍을 보았다가 끼어들어 각성의 피리를
+사용할 생각이네. 그럼 잊혀진 마을[시나리오모드(F5)]로
+들어가 부보부보를 제압해 주게-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10420524" FACE="Fungarf_angly"/> <!--흠… 준비가 아직 덜 된 건가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10420525" FACE="Fungarf_angly"/> <!--잊혀진 마을[시나리오모드(F5)]에서 부보부보를 제압해주란 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10420502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

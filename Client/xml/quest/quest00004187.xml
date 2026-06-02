@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4187</ID> <!--T.T.10418701 숲의 내일을 위해 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샹도르, 샤말키와 대화-->
+<!--[완료NPC]	솔방울 언덕 - 오르하-->
+<!--[내용]	오르하는 버나언의 동태를 파악하기 위해, 샹도르와 샤말키에게 정찰을 시켰다고 한다. 이 둘에게 나무꾼들의 상태가 어떠한 지 물어본 후, 무녀 오르하에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">1394F78B-CF1A-4fa3-B7CE-039585625C17</CLIENT> <!--시작NPC 솔방울 언덕 - 오르하 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">1394F78B-CF1A-4fa3-B7CE-039585625C17</PAYER> <!--완료NPC 솔방울 언덕 - 오르하 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021" MARK="END">C9AAFA6C-C0F3-4afe-A775-67E66989B1FC</AGENT> <!--진행NPC 1 솔방울 언덕 - 샹도르 -->
+		<AGENT TYPE="NPC" EVENTNO="10022" MARK="END">2E1A237B-B19A-4c34-97C3-52FF26DBEB6A</AGENT> <!--진행NPC 2 솔방울 언덕 - 샤말키 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">1394F78B-CF1A-4fa3-B7CE-039585625C17</AGENT> <!--진행NPC 11 솔방울 언덕 - 오르하 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10418711"/> <!--샹도르와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10418712"/> <!--샤말키와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418721" FACE="Orha_normal"/> <!--미카족의 어린 전사들에게 버나언의 동태를 파악하라고
+일러두었습니다.%%
+만약 버나언이 이곳의 나무를 베는 것을 강행한다면…
+우리도 결전을 치를 각오가 되어 있습니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418726" FACE="Orha_smile"/> <!--이대로 버나언을 내버려 두었다간 솔방울 언덕에
+파국이 닥칠 지도 모르겠군요. 
+결전의 준비를 서둘러야 하겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418723" FACE="Orha_normal"/> <!--샹도르를 찾아가 버나언의 상황에 대해 들어주세요.
+또, 샤말키도 사냥 도중 무언가 보고 들은 것이 있을 지 모르니.
+그녀의 이야기도 도움이 될 것입니다.%%
+전 이곳에서 신록의 상태를 관찰하고 있을테니
+두 사람의 이야기를 듣고 돌아와 제게 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418724" FACE="Orha_normal"/> <!--저희의 결의를 부디 외면하지 말아주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418725" FACE="Orha_normal"/> <!--샹도르와 샤말키의 이야기는 들어보셨나요?
+두 사람의 이야기를 듣고 제게 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10418751" FACE="Syangdoreu_normal"/> <!--상황이 더 안 좋은 쪽으로 돌아가고 있어.
+버나언 녀석들 말이야. 더 강력한 장비를 갖춰
+반격준비를 하고 있더라고.%%
+내 생각엔 녀석들이 공격을 감행하기 전에
+우리가 먼저 선수를 치는 게 나을 것 같아.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10418752" FACE="Syamalki_normal"/> <!--언덕의 남쪽에서 새들이 떼지어 날아 올랐어.
+분명 근방에 있는 나무꾼들이 움직이기 시작한 거겠지.%%
+그리고, 기름! 버나언 녀석들의 거처에서 기름 냄새가 
+진동하고 있어. 녀석들이 산불을 내려고 하는 걸지도 몰라.-->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

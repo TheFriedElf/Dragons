@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>184</ID> <!--T.T.10018401 몬스터가 너무 쎄다고요? -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	종소리마을 구피와 이야기해보자.-->
+<!--[완료NPC]	종소리 마을 - 구피-->
+<!--[내용]	구피는 강한 몬스터를 상대하기 위해서 필요한 방법에 대해서 알려 준다고 한다. 구피와 이야기 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F21AA8D5-DAA5-4720-B361-43145E25C58B</CLIENT> <!--시작NPC 종소리 마을 - 구피 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F21AA8D5-DAA5-4720-B361-43145E25C58B</PAYER> <!--완료NPC 종소리 마을 - 구피 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">F21AA8D5-DAA5-4720-B361-43145E25C58B</AGENT> <!--진행NPC 11 종소리 마을 - 구피 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10018411"/> <!--구피와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">79000010</ITEM><!--전체지급/전체/1)/79000010(봉인아님) 1개-무기 강화 가루-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10018421" FACE="Walter_normal"/> <!--아! %name%님 다시 만났군요.
+전에 갑옷을 수리하신 일은 정말 감사드립니다. %%
+흠, 그런데 혹시 몬스터 때문에 힘들진 않으십니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10018426" FACE="Walter_smile"/> <!--또 무기 강화 가루가 있으면 무기를 강화할 수 있습니다. 
+다행히 저에게 무기 강화 가루의 여분이 있으니, 이걸 드리도록하겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10018423" FACE="Walter_normal"/> <!--역시 힘드시군요.
+몬스터를 조금 더 쉽게 상대하기 위해서는 무기와 방어구를 강화할 필요가 있습니다.
+제가 전에 드린 방어구 강화 가루를 이용하면 방어구를 강화시킬 수 있습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10018424" FACE="Walter_angly"/> <!--힘들지 않으시군요. 그럼 수고하십시오!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10018425" FACE="Walter_normal"/> <!--해석 불필요(x)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10018402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

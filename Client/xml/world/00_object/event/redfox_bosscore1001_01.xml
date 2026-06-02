@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<PUPPET NAME="Redfox_Bosscore1001_01" USE_PHYSX="1">
+  <WORLDOBJECT>
+    <KFMPATH SCALE="1">../Data/3_World/95_Dungeon/02_Modeling/00_Object/03_Event/Redfox_Bosscore1001_01/Redfox_Bosscore1001_01.kfm</KFMPATH>
+    <SLOT>
+   <!-- Basic Movement -->
+		<ITEM NAME="01_opening_01" ANIMATION="1000001"/>
+		<ITEM NAME="02_action_01" ANIMATION="1000002"/>
+		<ITEM NAME="03_ending_01" ANIMATION="1000003"/>
+		<ITEM NAME="04_finish_01" ANIMATION="1000004"/>
+	
+	 </SLOT>
+  </WORLDOBJECT>
+
+  <WORLD_EVENT_STATE_INFO>
+
+    <STATE ID="0" SLOT="01_opening_01"/>
+    <STATE ID="1" SLOT="02_action_01"/>
+	<STATE ID="2" SLOT="04_finish_01"/>
+
+
+	<TRANSIT FROM="0" TO="1" SLOT="02_action_01"/>
+    <TRANSIT FROM="1" TO="2" SLOT="03_ending_01"/>
+	
+
+  </WORLD_EVENT_STATE_INFO>
+
+</PUPPET>
+	
+	  
+
+   

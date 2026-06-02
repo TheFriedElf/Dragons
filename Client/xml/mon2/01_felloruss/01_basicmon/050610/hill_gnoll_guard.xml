@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Hill_Gnoll_Guard" INIT_ACTION="a_opening">
+
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Gnoll_Guard"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/01_Felloruss/01_BasicMon/050610/Hill_Gnoll_Guard/Hill_Gnoll_Guard.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			<!-- 도끼두번휘두르기-->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000205"/>
+			<ITEM NAME="breath_01" ANIMATION="1000206"/>
+		
+			<!-- 도끼 크게내려치기퀘이크-->
+			<ITEM NAME="earthquake_battleidle_start" ANIMATION="1000207"/>
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000208"/>
+		    <ITEM NAME="earthquake_fire" ANIMATION="1000209" QUAKE_TIME="NONE"/>
+		
+
+			<!-- 도끼던지고받기 -->
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000311"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000312"  FIRE_START_NODE="p_wp_hand" PROJECTILE_ID="Projectile_Hill_Gnoll_Guard_shot" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000313"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000314"/>
+	
+			<!-- 대쉬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="NONE"/>
+	        <ITEM NAME="dashattk_finish" ANIMATION="1000328" FIRE_EFFECT="NONE"/>
+
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+		    <ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

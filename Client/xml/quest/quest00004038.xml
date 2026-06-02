@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4038</ID> <!--T.T.10403801 신보의 행방을 찾아서(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	갑판상어 부둣가에서 몽글 10마리, 붉은 안테나 몽글 10마리 -->
+<!--[완료NPC]	스티븐 무역항 - 크로키-->
+<!--[내용]	갑판상어 부둣가를 뒤흔들어 알비다를 은신처인 미션맵으로 유인한다. 이를 위해 갑판상어 부둣가의 몽글 10마리, 붉은 안테나 몽글 10마리를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 스티븐 무역항 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</PAYER> <!--완료NPC 스티븐 무역항 - 크로키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 스티븐 무역항 - 크로키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10403811"/> <!--몽글-->
+		<OBJECT2 COUNT="10" TEXT="10403812"/> <!--붉은 안테나 몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403821" FACE="Kroki_normal"/> <!--스티븐 무역항에 있는 해적단은 이미 만반의 태세를 취하고
+우리를 기다릴 것이오.%%
+지극히 불리한 상황이지만, 방법이 아주 없는 것은 아니오.
+먼 옛날의 유명한 전략가의 말씀에 의하면…%%
+동쪽에서는 소리를 지르고, 실제로는 서쪽을 공격하라는 말이 있소.
+우리도 그러한 전략을 짜보는 것이 어떠하겠소이까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403826" FACE="Kroki_smile"/> <!--조금 더 상황을 지켜보아야 하겠지만,
+우리의 작전은 일단 성공한 것 같소이다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403823" FACE="Kroki_normal"/> <!--만약 우리가 스티븐 무역항이 아닌 갑판상어 부둣가를 강하게 공격한다면
+놀란 알비다는 되려 이곳의 은신처로 돌아올 지 모르는 일 아니겠소?%%
+개울가에서 물고기를 모는 기분으로…
+허허허… 그러고 보니 알비다도 따지자면 물고기로군요.%%
+자, 갑판상어 부둣가에서 한바탕 소란을 피워봅시다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403824" FACE="Kroki_angly"/> <!--우리는 서로 생각하는 방식에 차이가 있는 것 같소이다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403825" FACE="Kroki_angly"/> <!--자, 서둘러서 갑판상어 부둣가의 몬스터들을 해치워주시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

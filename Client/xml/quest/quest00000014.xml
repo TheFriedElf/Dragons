@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>14</ID> <!--T.T.10422401 라이딩펫 1차전직 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	전투펫 전직키트-->
+<!--[완료NPC]	바람항구 - 에이미-->
+<!--[내용]	라이딩펫을 1차 전직시키기 위해서는 전투펫 전직키트가 필요하다. 전투펫 전직키트는 잡화상인에게 골드만 지급하면 쉽게 얻을 수 있다.-->
+
+
+	<LIMITS>
+		<PET_CLASS TYPE="2" LEVEL="0"/>
+		
+<PET_LEVEL MIN="20" MAX="99"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</CLIENT> <!--시작NPC 바람항구 - 에이미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</PAYER> <!--완료NPC 바람항구 - 에이미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 11 바람항구 - 에이미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160419600</ITEM> 
+ <!--Item_NO=160419600/[Q.ID:04196] 전투펫 전직 키트,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10001411"/> <!--전투펫 전직키트-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">265002270</ITEM><!--전체지급/전체/1)/265002270(봉인아님) 1개-[전투펫] 변화의 수정-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10001421" FACE="Amy_normal"/> <!--%class%님 라이딩펫을 가지고 계시군요. 
+그것도 곳 전직할 수 있는 레벨이 된 펫이네요. 
+전직만 한다면 펫에게 전투 기능이 생기겠어요. 
+제가 펫을 전직 할 수 있는 방법을 알려 드리죠. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10001426" FACE="Amy_smile"/> <!--자 여기 변화의 수정이 있습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10001423" FACE="Amy_smile"/> <!--방법은 간단합니다. 잡화상인에게서 전투펫 전직키트를 구해다 주세요. 가격이 저렴하지 않다는 것 말고는 간단하죠. ^^-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10001424" FACE="Amy_angly"/> <!--아쉽네요. 전직을 한다면 무한한 가능성이 있는 펫인데..-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10001425" FACE="Amy_angly"/> <!--전투펫 전직키트는 잡화상인에게 구할 수 있다니까요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10422402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

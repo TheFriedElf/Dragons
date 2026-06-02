@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4252</ID> <!--T.T.10425201 공작의 괴상한 콜렉션, 시즌2 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	기니어배럴의 무쇠꼬리 습득-->
+<!--[완료NPC]	밴시협곡 - 모나드론-->
+<!--[내용]	모나드론 공작은 제스와 계약을 무효로 돌리려면 세가지 물건을 구해주어야 한다고 한다. 그 중 두번째 요구조건인 기니어배럴의 무쇠 꼬리는 붉은 여우 삼각지의 기니어 배럴을 퇴치함으로써 구해낼 수 있다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</CLIENT> <!--시작NPC 밴시협곡 - 모나드론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</PAYER> <!--완료NPC 밴시협곡 - 모나드론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8D4A5BC0-7690-4f1d-988C-94D45598B6FD</AGENT> <!--진행NPC 11 밴시협곡 - 모나드론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160425200">3571100</MONSTER> 
+<!--MON_NO=3571100/혼드 골렘,Item_NO=160425200/혼드 골렘의 무쇠꼬리100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160425200</ITEM> 
+ <!--Item_NO=160425200/혼드 골렘의 무쇠꼬리100%,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10425211"/> <!--혼드골렘의 무쇠꼬리 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10425221" FACE="Monaderon_normal"/> <!--내가 원하는 물건들은 모두 붉은 여우 삼각지에서 
+구할 수 있는 것들이지. 그러니 몇 번 쯤은 그 던젼에
+다녀올 각오를 해야할 것이네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10425226" FACE="Monaderon_smile"/> <!--오, 역시 생각했던 것 만큼이나 나름대로 괜찮아 보이는군.
+완전 나의 미적 감각을 충족시키는 시덥잖은 디자인이야.
+음하하하!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10425223" FACE="Monaderon_normal"/> <!--내가 원하는 두번째 물건은 기니어 배럴의 무쇠꼬리라네.
+베르타디움이 가득 들어 있어서 제 아무리 강한 무기로
+공격해도 끄떡하지 않는다고 들었어.%%
+붉은 여우 삼각지에서 기니어 배럴을 물리치고 그 녀석의
+무쇠꼬리를 가져오길 바라네. 흐흐흐…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10425224" FACE="Monaderon_normal"/> <!--그렇다면, 이미 구해온 보물들은 아쉽지만, 계약 건은 없었던 것으로 하겠네…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10425225" FACE="Monaderon_normal"/> <!--어차피 붉은 여우 삼각지에 수시로 드나들어야 할 상황 아닌가? 어서 가서 기니어 배럴을 퇴치하고 오게. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10425202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_barricade">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.4">../Data/1_Cha/9_SSKill/Barricade/Barricade.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000000" />
+      <ITEM NAME="battle_idle" ANIMATION="1000000" />
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+      <ITEM NAME="run" ANIMATION="1000051"/>
+      <ITEM NAME="dash" ANIMATION="1000051"/>      
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

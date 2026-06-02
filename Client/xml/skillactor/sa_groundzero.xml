@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_groundzero">	
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSKill/Ground_Zero/Ground_Zero.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/pc_base.lua">
+			<ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="char_root" SIZE="0,0,0" LOCATE="0,0,0" ROTATE="0,0,0,0"/>
+		</ABV>
+		<SLOT>
+		  <ITEM NAME="battle_idle" ANIMATION="1000000"/>
+		  <ITEM NAME="idle_01" ANIMATION="1000000"/>
+		  <ITEM NAME="btlidle_01" ANIMATION="1000000"/>      
+		  <ITEM NAME="melee_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

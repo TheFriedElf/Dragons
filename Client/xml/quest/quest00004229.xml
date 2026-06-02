@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4229</ID> <!--T.T.10422901 흑룡왕의 망토 제조서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	검은 발톱의 파편 입수-->
+<!--[완료NPC]	검은발톱 전초기지 - 바론-->
+<!--[내용]	엘가와의 결전의 장소가 되었던 검은 발톱 둥지는 그랑누아르의 영향으로 시공간이 뒤틀려 엘가의 망령이 출현한다고 한다. 흑마법사 바론은 이곳에서 엘가의 망령을 잡아 얻을 수 있는 검은 발톱의 파편을 가져 오면 흑룡왕의 망토 레시피를 넘겨주겠다고한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4C4C7579-4910-4a86-B21C-8740690E53FE</CLIENT> <!--시작NPC 검은발톱 전초기지 - 바론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4C4C7579-4910-4a86-B21C-8740690E53FE</PAYER> <!--완료NPC 검은발톱 전초기지 - 바론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4C4C7579-4910-4a86-B21C-8740690E53FE</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 바론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/0/1/1/160422900">3542120</MONSTER> 
+ <!--MON_NO=3542120/흑룡왕 엘가,Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160422900</ITEM> 
+ <!--Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10422911"/> <!--검은 발톱의 파편 입수-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300005</ITEM><!--전체지급/전체/1)/119300005(봉인아님) 1개-흑룡왕드랍 [레어]어드벤스아이템 레시피[망토 제조]-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10422921" FACE="Waren_normal"/> <!--이 퀘스트를 수락하게 되면 
+퀘스트를 완료하거나, 취소하기 전까지
+다른 제조서 퀘스트를 받을 수 없으니 주의해!%%
+오리진은 죽은 게 아니야. 그저 잠시 사라진 것 뿐이다.
+초마법 그랑누아르가 발동되면서 주변의 시공간은
+심하게 일그러지고 말았다.%%
+과거와 현재와 미래가 마구 뒤섞여 있는 셈이지. 
+그 덕분에 엘가의 망령이 나타난다고 하더군. 후후후...%%
+불가사의한 영향 덕분에 검은 발톱 둥지에는 
+아직 엘가의 기운이 남아있어…%%
+엘가의 망령을 퇴치하고 이런 불가사의한 재료들을 
+모아온다면 특별한 무기나 방어구를 제작할 수 있을 것이다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10422926" FACE="Waren_smile"/> <!--그래… 이것이 바로 검은 발톱의 파편이로군.
+제조서에 적힌 아이템을 모두 모아 흑룡왕의 망토를
+만들 수 있어.%% 
+흑룡왕 장비가 가진 힘을 충분히 만끽하도록 해라.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10422923" FACE="Waren_smile"/> <!--시공이 뒤틀린 검은 발톱 둥지에서 엘가의 망령을 퇴치해 재료가
+되는 아이템들을 얻게된다면 흑룡왕의 장비를 만들 수 있다.
+그러나 이 과정에 꼭 필요한 것은 흑룡왕 세트의 제조서야. %%
+만약 흑룡왕의 망토 레시피를 얻고 싶다면 내 부탁을 들어다오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10422924" FACE="Waren_angly"/> <!--훗, 복에 겨운 녀석… 흑룡왕의 장비 따윈 안중에도 없다는 건가.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10422925" FACE="Waren_normal"/> <!--다른 녀석들도 검은 발톱의 파편을 찾으려고 혈안이더군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10422902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

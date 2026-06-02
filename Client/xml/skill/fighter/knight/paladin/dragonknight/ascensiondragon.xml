@@ -1,0 +1,13 @@
+<ACTION ID="a_AscensionDragon" NEXT="a_jump" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="AscensionDragon_01_01"/>
+  <SLOT NAME="AscensionDragon_01_02"/>
+  <SLOT NAME="AscensionDragon_01_03"/>
+  <FSM SCRIPT="Skill_DragonKnight_AscensionDragon"
+       CASTING_EFFECT_EFFECT_ID="ef_skill_Ascension_Dragon_01_char_root"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_skill_Ascension_Dragon_Dragon_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_SOUND_ID="AscensionDragon"
+	   MULTI_HIT_NUM="10"
+	   />
+</ACTION>

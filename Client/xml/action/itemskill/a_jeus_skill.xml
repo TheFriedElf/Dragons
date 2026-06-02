@@ -1,0 +1,19 @@
+<ACTION ID="a_jeus_skill" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="com_shot_01"/>
+<FSM SCRIPT="Act_Melee_Default"
+  
+		CASTING_EFFECT_EFFECT_ID="ef_area_circle_B_001"
+		CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+		DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+		CASTING_EFFECT_SIZE_TO_SKILLRANGE="TRUE"
+		
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+        FIRE_CASTER_EFFECT_ID="ef_Resurrection_01_02_char_root"
+		ENTER_SOUND_ID=""
+		FIRE_SOUND_ID="buff_skill_give"
+		
+		MARK_EFFECT_ID="e_ef_archer_friendship"
+		
+  />
+</ACTION>

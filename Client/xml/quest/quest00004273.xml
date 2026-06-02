@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4273</ID> <!--T.T.10427300 피오스의 연인 크레테 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	크레테와 대화-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	크레테는 자신의 약혼자인 10성좌의 주인 피오스를 찾아달라고 한다. 피오스는 신비한 뱀 서펜즈에게 의술을 전수 받고 성격이 변하기 시작하더니 지금은 11번째 성좌 뱀주인자리에 들어가서 좀처럼 모습을 드러내지 않는다고 한다. 크레테에게 무슨일이 있었는지 잘 들어보자-->
+
+
+<LIMITS>
+
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" Mark="END">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427311"/> <!--크레테와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427321" FACE="Crete_cry"/> <!--제발 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427326" FACE="Crete_smile"/> <!--제 약혼자인 피오스님은 지금 뱀주인 자리에 계시답니다. 이제 부터 그곳에 가는 방법을 알려드릴께요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427323" FACE="Crete_normal"/> <!--제 약혼자인 10성좌의 주인 피오스님이 사라졌답니다. 그가 없어져서 지금 별자리세계에는 큰 혼돈이 찾아왔어요. 그로 인제 별이 보이는 모든 지역에도 않좋은 영향을 끼치고 있답니다. 
+
+피오스님은 의술에 띄어난 별자리세계의 주인이었어요. 새로운 의술을 배우기 위해서는 어디든지 달려가는 열의를 가진 분이었죠. 그 의술로 별자리의 모든 사람들을 치료하기 때문에 존경을 받는 사람이었습니다. 
+그러던 어느날 서펜즈라고 불리우는 뱀이 나타나 신비한 의술을 가르쳐 주겠다고 하더군요. 이를 거절할리 없는 피오스님은 당연히 의술을 배웠고, 그 의술로 그동안 치료못하던 병도 치료하게 되었답니다. 
+그런데 피오스님의 성격이 점점 변하기 시작했어요. 말이 없어지고, 화를 자주 내더군요. 그러다가 홀연히 사라져 버렸어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427324" FACE="Crete_cry"/> <!--너무 해요. %name%님은 드래고니카와 별자리의 운명을 한번에 몰락시켰네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427325" FACE="Crete_normal"/> <!--없음-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 파리스1차 오프닝-->
+	<CMD TYPE="HideUI" enable="true"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="2"/> <!-- 신 카메라를 켠다.-->
+	<CMD TYPE="stopBGM" SoundNo = "0"/> <!-- BGM 끄기 -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+
+	<CMD TYPE="AddActorFilter" ClassNo="6126293"/>
+	<CMD TYPE="AddNPC" ClassNo="6126293" NameTTID="521238" SpawnPos="-7305.282, 4503.172, 4563.379"/><!-- 프롤로그 1번-->
+	<CMD TYPE="PlayAnimation" ClassNo="6126293" SlotName="opening_01"/><!-- 프롤로그 1-1번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" /><!--프롤로그 카메라로 변경 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+
+	<CMD TYPE="WaitTime" Time="0.1"/>
+	<CMD TYPE="Dialogue" NameTTID="503039" TextTTID="503043"/><!-- 파리스 대사 -->
+	<CMD TYPE="WaitTime" Time="4.5"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="0.5"/>
+	<CMD TYPE="Dialogue" NameTTID="503037" TextTTID="503049" FaceID="DragonBaby_surprise" /><!-- 용아 대사 -->
+	<CMD TYPE="WaitTime" Time="3"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="503039" TextTTID="506596"/><!-- 파리스 대사 -->
+	
+	<CMD TYPE="WaitTime" Time="3"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="3.3"/> <!-- 프롤로그 시간을 기다림-->
+
+	<!--오프닝 끝나고 돌아가기-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="2"/>
+	<CMD TYPE="ShowActor" ClassNo="6126293" Show="false"/><!-- 엔딩 삭제-->
+	<CMD TYPE="RemoveActor" ClassNo="6126293"/><!-- 엔딩 삭제-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--모든 플레이어 보이기 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="playBGM" SoundNo = "0"/> <!-- BGM 켜기 -->
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/> <!-- 신 카메라를 끈다.-->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+	<CMD TYPE="HideUI" enable="false"/>
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_WARNING"/>
+
+</EVENT_SCRIPT>
+

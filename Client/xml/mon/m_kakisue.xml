@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Kakisue" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Kakisue"/>
+		<KFMPATH SCALE="1.5">../Data/2_Mon/M_Kakisue/M_Kakisue.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="20"/>
+			<SPHERE TO="p_hit_point_02" SIZE="26"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본 공격 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000063" RANDOM="100"/>
+		
+			
+			<!--무기던지기-->
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000005"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000071" FIRE_START_NODE="p_ef_r_hand" PROJECTILE_ID="PROJECTILE_ef_Kakisue_shot" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000072"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000073"/>
+		
+			<!-- 휠 윈드 스킬 -->
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000201"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="whirlwind_01" ANIMATION="1000202" /> <!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+            <ITEM NAME="whirlwind_01_finish" ANIMATION="1000005"/>
+
+
+
+			<!--대지의 분노 -->
+					
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000005" CAST_EFFECT="ef_deathmaster_skill_04_01_Bip01 Prop1"/>
+			<ITEM NAME="earthquake_fire" ANIMATION="1000203"  CAST_EFFECT="ef_deathmaster_skill_04_01_Bip01 Prop1" FIRE_EFFECT="ef_deathmaster_skill_04_03_char_root" FIRE_EFFECT2="ef_deathmaster_skill_04_02_char_root"/>
+
+
+			<!-- 기본 동작 -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020" DIE_ALPHA="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+							<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

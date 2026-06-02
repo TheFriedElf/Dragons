@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4110</ID> <!--T.T.10411001 궁극의 필살 무예! 쌍둥이에서 미라지로 전직! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	파이와 대화-->
+<!--[완료NPC]	카즈라 마을 - 파이-->
+<!--[내용]	현자 타루부 노인은 상급격투가 미라지로 전직을 하라면서, 파이를 찾아가라 말한다. 상급격투가 파이를 찾아가 전직하자!-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</CLIENT> <!--시작NPC 카즈라 마을 - 타루부 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">1734DA00-FC79-4381-B0DB-04D594B56873</PAYER> <!--완료NPC 카즈라 마을 - 파이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</AGENT> <!--진행NPC 11 카즈라 마을 - 타루부 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">1734DA00-FC79-4381-B0DB-04D594B56873</AGENT> <!--진행NPC 12 카즈라 마을 - 파이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10411011"/> <!--파이와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<CHANGECLASS PREVCLASS="54" MINLEVEL="40">56</CHANGECLASS>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1" RARITY="102" SEAL="1">330100120</ITEM>
+		</SELECT1>
+		<SELECT2 COUNT="0">
+          	<ITEM COUNT="1">20202050</ITEM>
+        </SELECT2>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411021" FACE="Tarubu_normal"/> <!--내 너의 실력을 그간 눈여겨 보았느니라. 
+악마와 대적할만한 재주와 용맹함을 가지고 있으니, 
+어찌 너를 최고의 전사라고 하지 않겠느냐?%%
+하여 특별히 우리 용족을 위해 애써준 너를 위해 
+답례를 내리기로 했다. 마다하지 말거라.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411026" FACE="Fai_smile"/> <!--%name%? 아... 그래 타루부 할아버님이 부탁했던 사람이 너구나.
+그럼 지금부터 상급격투가 미라지로 전직을 시작할거야.%%
+명심해... 충분히 실전을 거쳐야 기술이 완성된다는 사실을... -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411023" FACE="Tarubu_smile"/> <!--%name%, 너는 격투가로서 재주가 특별하니, 내가 상급 격투가에게
+특별히 새로운 기술을 일러주라 부탁을 하였다. 부근에 상급격투가 
+파이를 찾아가면 너에게 고급기술을 알려줄게야. 어서 가보거라.    -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411024" FACE="Tarubu_angry"/> <!--자기 복을 자기 발로 걷어찬 것이니, 나중에 후회하지 말거라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411025" FACE="Tarubu_normal"/> <!--상급격투가 파이를 찾아가거라. 
+미리 말은 일러두었으니 알아서 잘 처리해줄게야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

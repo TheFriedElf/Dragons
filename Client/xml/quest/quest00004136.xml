@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4136</ID> <!--T.T.10413601 드라군쿨르스 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	호프먼 대장과 대화-->
+<!--[완료NPC]	상인의 마을 - 호프먼-->
+<!--[내용]	노엘박사는 파렐박사의 연구를 검토한 결과, 파렐 박사가 드래곤을 복제 배양하고 있다는 사실을 알아낸다. 이 사실을 상인의 마을에 있는 호프먼 대장에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</CLIENT> <!--시작NPC 상인의 마을 - 노엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2880301C-3CF8-455c-BE54-227116F7914C</PAYER> <!--완료NPC 상인의 마을 - 호프먼 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 11 상인의 마을 - 노엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2880301C-3CF8-455c-BE54-227116F7914C</AGENT> <!--진행NPC 12 상인의 마을 - 호프먼 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10413611"/> <!--호프먼과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10413621" FACE="noel_normal"/> <!--지금까지 드러난 사실로 보건대… 
+파렐은 건너서는 안될 강을 건너고 말았구만.%% 
+%name% 자네가 가져온 연구 자료들과 
+용암지대의 사건들을 고려했을 때…%%
+분명히 용암지역 어딘가에 정령석으로 만들어진 
+거대한 용이 존재하고 있다는 것은 분명하네.%% 
+놀라운 일이야. 
+과학과 연금술의 힘으로 가장 최고의 생명체라고 
+불리우는 용을 만들어내다니…%% 
+파렐과 검은 마녀가 엘가의 부활을 위해 
+이 일을 벌인 것이 분명해.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10413626" FACE="Hopeman_smile"/> <!--오.. 왔구만... %name%
+흠 그래.. 노엘 박사가 내게 전하는 말이 있다고....%%
+(노엘박사에게 들은 이야기를 호프먼 대장에게 전해주었다)%%
+노엘박사가 파렐의 연구자료로 만든 가디언 덕분에 
+마을의 수비에 지대한 영향을 끼친 것은 사실이네.%%
+그러나 지금 같은 어수선한 시기에 추측에 불과한 이야기 때문에
+전 병력을 용암지대로 보낸다는 것은 불가능해.%%
+설사 거대한 악의 화신이 존재한다고 할지라도. 
+우리는 이 마을을 포기할 수 없으니 말이지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10413623" FACE="noel_normal"/> <!--이 일을 위해선 원정대의 도움이 절대적으로 필요하네!%% 
+호프먼 호위대장이 이 일에 동의하지 않는다면, 
+모두 허사가 될테니 이 일을 호프먼 대장에게 전해주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10413624" FACE="noel_angly"/> <!--이 일을 전하지 못한다면 앞으로 어떤 재앙이 들이닥칠 지 몰라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10413625" FACE="noel_angly"/> <!--호프먼 대장에게 이야기를 전했는가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10413602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

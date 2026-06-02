@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_014301_FD">
+	<GSAPATH>../Data/3_World/01_Ingrid/300_Scenario/014301_FD.gsa</GSAPATH>
+	<MINIMAP Y="185" H="185">../Data/3_World/01_Ingrid/300_Scenario/014301_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 --> 
+	<MAPVALUE PLAYERKILL="0" TYPE="129"/>
+	<!--// 포털 -->
+    
+    <EVENT_SCRIPT_ON_ENTER ID="6"/>
+    
+    
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!-- All_NPC
+
+    <NPC NAME="1028119" ACTOR="c_DangerBoard" SCRIPT="NPC_Warning" KID="1028119" GUID="C79F2218-9735-423d-A895-DF748A9EE07A" TYPE="FIXED" LOCATION="2018.727, 766.7124, 9.784863">
+    <SAY TYPE="WARNING" TTW="503488" FACE="m_Vagabond" FACE_ANI="1000207"/>
+    </NPC>
+ -->
+
+
+<!--
+    <TRIGGER ID="Event_Quest00001" TYPE="EVENT">
+    <CONDITION TYPE="touch"/>
+    <ACTION SCRIPT="ActivateEventEx" PARAM ="6"/>  
+    </TRIGGER>
+    -->
+   <!--
+    <NPC NAME="1028160" ACTOR="c_vagabone_opening1" SCRIPT="NPC_Click" KID="1028160" GUID="C7A241BB-61F3-4853-8893-A82158323E61" TYPE="FIXED" LOATION="-2224.545, 642.9012, 12.32655" HIDDEN = "false"/>
+    <NPC NAME="1028161" ACTOR="c_vagabone_opening2" SCRIPT="NPC_Click" KID="1028161" GUID="0FFB729E-F399-4bfe-BF48-D1EF1A32E266" TYPE="FIXED" LOCATION="-2224.545, 642.9012, 12.32655" HIDDEN ="false"/>
+	-->
+<FOG DENSITY="0.360000" FUNC="RANGE_SQ" START="135.000000" END="5450.000000" COLOR="0.378000,0.342000,0.322000"/>	
+</WORLD>

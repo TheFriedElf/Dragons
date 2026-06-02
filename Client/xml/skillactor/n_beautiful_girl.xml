@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_beautifulgirl" INIT_ACTION="a_idle">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.2">../Data/1_Cha/9_SSKill/Sexy_girl/sexy_girl.kfm</KFMPATH>
+    <SCRIPT SRC="SkillActor/BeautifulGirl.lua">
+      <ITEM NAME="BeautifulGirl_OnInit" TYPE="INIT"/>
+      <ITEM NAME="BeautifulGirl_OnUpdate" TYPE="COMMON"/>      
+    </SCRIPT>
+    <EFFECT SCALE="1.0"/>
+    <ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_decoy_01_char_root" TO="char_root"/>
+		<ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000000" />
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

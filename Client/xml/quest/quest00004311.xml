@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4311</ID> <!--T.T.10431100 미녀는 괴로워 -->
+
+
+<!-- 작성자 : 김효중-->
+<!--[완료조건]	페르세포네 구출-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	페르세포네가 하데스에게 또 잡혔다고 한다. 페르세포네의 미모를 보고 하데스는 포기를 할수 없는지 계속 괴롭히고 있다. 이번에야 말로 하데스를 처치하고 페르세포네를 구해주자.-->
+
+
+<LIMITS>
+<DAYOFWEEK>4</DAYOFWEEK>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">9</MISSION> <!--Mission_Key=118/[별자리]페가수스/ 처녀자리,-->
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">10</MISSION>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">11</MISSION>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">12</MISSION>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10431111"/> <!--페르세포네 구출-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">82000880</ITEM>
+			<ITEM COUNT="1">82000940</ITEM>
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10431121" FACE="Crete_normal"/> <!--페르세포네가 또 잡혔다고 연락이 왔어요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10431126" FACE="Crete_smile"/> <!--미인은 언제나 피곤하답니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10431123" FACE="Crete_normal"/> <!--하데스가 또 나타나서 페르세포네를 괴롭히고 있다고 해요. 이번에야 말로 하데스가 두번다시 페르세포네를 괴롭히지 못하게 혼내주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10431124" FACE="Crete_cry"/> <!--페르세포네는 미인인데, 후회하실 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10431125" FACE="Crete_normal"/> <!--페르세포네가 걱정이 된답니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10431102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

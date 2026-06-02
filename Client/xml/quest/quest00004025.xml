@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4025</ID> <!--T.T.10402501 드래곤 원정대의 감사표시 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	콜린의 감사장 전달-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	바람항구의 무카파에게 콜린의 감사장을 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2FF6590B-6648-4D73-9A61-7B4FA9065498</CLIENT> <!--시작NPC 바람항구 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2FF6590B-6648-4D73-9A61-7B4FA9065498</AGENT> <!--진행NPC 11 바람항구 - 콜린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 12 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160402500/1">10011</NPC> 
+ <!--Item_NO=160402500/[Q.ID:04025] 콜린의 감사장,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160402500/1/511">10011</NPC> 
+ <!--Item_NO=160402500/[Q.ID:04025] 콜린의 감사장,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160402500/1">10011</NPC> 
+ <!--Item_NO=160402500/[Q.ID:04025] 콜린의 감사장,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160402500/1/502">10012</NPC> 
+ <!--Item_NO=160402500/[Q.ID:04025] 콜린의 감사장,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160402500/1">10012</NPC> 
+ <!--Item_NO=160402500/[Q.ID:04025] 콜린의 감사장,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10402511"/> <!--콜린의 감사장 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10402521" FACE="Colin_normal"/> <!--오오…!
+이게 누군가 드라칸의 용사님 아니신가!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10402526" FACE="Mukapa_smile"/> <!--뭐라고?
+드래곤 원정대장의 감사장?%%
+크하하하! 이렇게 기쁜 일이 있을 수 있나!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10402523" FACE="Colin_normal"/> <!--이번 파렐박사의 처단 작전에 여러가지 도움을 주었다고 들었네.
+바람항구의 위협요소를 제거하게 된 데에 깊은 감사를 표하는 바일세.%%
+그래서 특별히 이 감사장을 드라칸의 무카파님에게 전하고자 하니,
+자네가 전달해주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10402524" FACE="Colin_angly"/> <!--그럼 준비가 되면 말해주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10402525" FACE="Colin_normal"/> <!--이 감사장을 무카파님에게 전해주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10402527" FACE="Mukapa_normal"/> <!--무슨 일인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10402502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10402551" FACE="colin_angly"/> <!--아주 중요한 것을 잊고 갔더구만… 쯧쯧…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4257</ID> <!--T.T.10425701 팔미르의 문장 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샤말키의 양피지 전달-->
+<!--[완료NPC]	밴시협곡 - 정체불명의 사냥꾼-->
+<!--[내용]	미카족의 샤말키는 자신의 우상이자 롤모델인 팔미르가 등장했다는 사실에 흥분한다. 샤말키는 르고르가 가보로 가지고 있었던 화살촉에 새겨진 팔미르의 문장을 양피지에 그려넣는다. 샤말키의 양피지를 정체불명의 사냥꾼에게 가져다주면 그녀가 기억을 되찾는데 도움이 될 것이다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">156AB74D-9EC3-4058-A901-C34D2BE356FB</CLIENT> <!--시작NPC 밴시협곡 - 샤말키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2A1F4D35-EE66-4298-93EE-FB165CFE7692</PAYER> <!--완료NPC 밴시협곡 - 정체불명의 사냥꾼 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">156AB74D-9EC3-4058-A901-C34D2BE356FB</AGENT> <!--진행NPC 11 밴시협곡 - 샤말키 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2A1F4D35-EE66-4298-93EE-FB165CFE7692</AGENT> <!--진행NPC 12 밴시협곡 - 정체불명의 사냥꾼 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160425700/1">10011</NPC> 
+ <!--Item_NO=160425700/샤말키의 양피지,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160425700/1/511">10011</NPC> 
+ <!--Item_NO=160425700/샤말키의 양피지,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160425700/1">10011</NPC> 
+ <!--Item_NO=160425700/샤말키의 양피지,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160425700/1/512">10012</NPC> 
+ <!--Item_NO=160425700/샤말키의 양피지,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160425700/1">10012</NPC> 
+ <!--Item_NO=160425700/샤말키의 양피지,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10425711"/> <!--샤말키의 양피지 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10425721" FACE="Syamalki_normal"/> <!--음, 나라면 이렇게 하겠어…
+오, 그래... 잠시만 기다려봐.%%
+(샤말키는 양피지 한장을 꺼내 문장 하나를 그려 넣는다)
+바로 이... 이 문장이 팔미르의 문장이야!
+내가 잃어버린 르고르의 가보, 팔미르의 화살촉에
+그려져 있었던 게 이런 모양이라고!%%
+이 양피지를 네가 가져가 보여주면, 자기 자신이 팔미르란 걸 
+기억할 수 있을 거야!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10425726" FACE="Palmir_normal"/> <!--(팔미르에게 샤말키가 준 양피지의 문장을 보여준다.)%%
+이, 이건…
+분명히 내 화살촉에 그려진 문장이야. 
+이걸 어떻게 알고 있는 거지?%%
+그럼 진짜로… 내가… 천년 전의 영웅... 
+팔미르란 말인가…%%
+하지만 난… 기억나는 것이 전혀 없어.
+누군가 나를 아는 사람을 만난다면 기억이 돌아오지 않을까 
+기대했지만 말이야.%%
+내가 유일하게 기억하는 과거란 건… 
+칠흑 같이 깊은 어둠 속에서 끝 없이 잠을 잤다는 거야.
+이따금씩 깨어나긴 했지만 그 때 마다 기억을 잃곤 했지.%%
+유일하게 기억하는 것은 시계 바늘, 키오네스크라는 이름…
+네 말 대로라면 누군가 검은 심연의 차원에 있던 나를
+이곳으로 데려다 준 것일지도 모르지.%%
+어쨌거나 고맙구나. %name%...
+앞으로도 내 기억을 찾을 수 있도록 도와준다면 좋겠어.
+특히, 키오네스크에 대해 소식을 듣는다면 내게 찾아와 주렴.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10425723" FACE="Syamalki_normal"/> <!--미카족 사냥꾼은 단체 사냥 중에 누구의 화살이 사냥감의
+숨통을 끊었는지 확인하기 위해서, 화살에다가 독특한
+자신만의 문장을 새겨 넣는다고!%%
+르고르의 조상님은 대대로 대장장이를 하면서 천년 전 
+팔미르의 화살촉을 보관하고 있었고 말이야. 만약
+그 정체 불명의 사냥꾼이 진짜 팔미르라면 팔미르의
+문장이 새겨진 화살을 가지고 있을 거야. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10425724" FACE="Syamalki_normal"/> <!--정체 불명의 사냥꾼이 진짜 팔미르가 맞는 거라면… 
+이대로 넘어갈 순 없어!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10425725" FACE="Syamalki_normal"/> <!--자, 양피지를 가져가도록 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10425702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10425751" /> <!--양피지를 가지고 팔미르님에게 보여주세요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10425752" /> <!--양피지? 양피지를 깜빡잊고 안받아왔다고?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

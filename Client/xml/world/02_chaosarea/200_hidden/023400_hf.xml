@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_023400_HF" DESCRIPTION="90234000">
+	<GSAPATH>../Data/3_World/02_ChaosArea/200_Hidden/023400_HF.gsa</GSAPATH>
+	<MINIMAP Y="100" H="310">../Data/3_World/02_ChaosArea/200_Hidden/023400_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/sneartrail_bg.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+	<!-- 포털 -->
+	<TRIGGER ID="gate_030200_base" TYPE="PORTAL" TITLE_TEXT_ID="830000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="-5,0,55" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018320" PARAM2="3"/>
+	</TRIGGER>
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="600"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="500"/>
+	</TRIGGER>
+	<!-- 데미지텔레포트  -->
+	<TRIGGER ID="Touch_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="Touch_target_02" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02"/>
+	</TRIGGER>
+	<TRIGGER ID="Touch_target_03" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03"/>
+	</TRIGGER>
+	<!-- 엔터던전  -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_05" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_06" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_07" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_08" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_09" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_10" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10"/>
+	</TRIGGER>
+	<!--  NPC 추가-->
+	<NPC NAME="1028233" ACTOR="c_Wookiboki" SCRIPT="NPC_Click" KID="1028233" GUID="D907FDD3-9443-4c7f-ACCC-3183A93FE7E2" TYPE="FIXED" LOCATION="-3774.4102, 1541.8730, -610.6209" DIRECTION="0,0,0">
+		<SAY TYPE="IDLE" TTW="521310" UPTIME="7" DELAY="10" ACTION=""/>
+		<SAY TYPE="CLICK" TTW="521310" UPTIME="7" DELAY="10" ACTION=""/>
+		<SAY TYPE="TALK" TTW="521311" UPTIME="" DELAY="" ACTION="" SOUND="" MIN_LEVEL="1" FACE="Wookiboki_smile" MAX_LEVEL="80"/>
+    </NPC>
+    <OBJECT GUID="709e7040-a8ea-45a2-83c4-70d0df148fe0" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000522">
+		<WayPoint POINT="2528.541, 4470.842, -346.1964" TIME="1"/>
+		<WayPoint POINT="3132.093, 4471.186, -14.38167" TIME="1"/>
+	</OBJECT>
+	<OBJECT GUID="cac71aa4-cd0f-4ac2-ad92-314483bd6bd5" RIDABLE="TRUE" SPEED="100" CLASS_NO="5000522">
+		<WayPoint POINT="3856.988, 4424.633, 164.6648" TIME="1"/>
+		<WayPoint POINT="4431.156, 4424.804, 164.0967" TIME="1"/>
+	</OBJECT>
+	<!-- 포 그 -->
+	<FOG FUNC="Z_LINEAR" DENSITY="0.05" START="95" END="6410" COLOR="0.6333333,0.5960784,0.4078432"/>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1"/>
+</WORLD>

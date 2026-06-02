@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_phantom_ninja" ALWAYS_GLOWMAP="TRUE">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSKill/Cross_Blade/Cross_Blade.kfm</KFMPATH>
+    <SCRIPT SRC="Actor/pc_base.lua">
+      <ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+    </SCRIPT>
+    <ATTACH TYPE="effect" SLOT="10000" EFFECT="ef_Metamorphosis_sword_01_p_ef_weapon_r" TO="p_ef_weapon_r"/>
+    <ATTACH TYPE="effect" SLOT="10001" EFFECT="ef_Metamorphosis_sword_01_p_ef_weapon_l" TO="p_ef_weapon_l"/>
+    <ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+      <ITEM NAME="battle_idle" ANIMATION="1000005"/>
+
+      <ITEM NAME="melee_01" ANIMATION="1000061"/>
+      <ITEM NAME="melee_02" ANIMATION="1000062"/>
+      <ITEM NAME="melee_03" ANIMATION="1000063"/>
+
+      <ITEM NAME="dash_attk_01" ANIMATION="1000211"/>
+      
+      <ITEM NAME="melee_blow_up" ANIMATION="1000068"/>
+      <ITEM NAME="melee_knock_back" ANIMATION="1000066"/>
+
+      <ITEM NAME="attk_down_01" ANIMATION="1000065"/>
+      <ITEM NAME="attk_down_02" ANIMATION="1000066"/>
+      <ITEM NAME="attk_down_03" ANIMATION="1000067"/>
+      <ITEM NAME="attk_down_fly" ANIMATION="1000068"/>
+
+      <ITEM NAME="idle_01" ANIMATION="1000000" />
+
+      <ITEM NAME="run" ANIMATION="1000055"/>
+      <ITEM NAME="dash" ANIMATION="1000210"/>
+      <ITEM NAME="back_step" ANIMATION="1000043"/>
+
+      <ITEM NAME="Com_spell_01" ANIMATION="1000200"/>
+      <ITEM NAME="Com_skill_FallingLeaf_01" ANIMATION="1000201"/>
+      <ITEM NAME="Com_skill_SakuraSprinkle_01" ANIMATION="1000206"/>
+      <ITEM NAME="Com_skill_KillingMist_01" ANIMATION="1000202"/>
+      
+      <ITEM NAME="Com_skill_LightningSlash_01" ANIMATION="1000203"/>
+      <ITEM NAME="Com_skill_LightningSlash_02" ANIMATION="1000208"/>
+
+    </SLOT>
+  </WORLDOBJECT>
+</ACTOR>

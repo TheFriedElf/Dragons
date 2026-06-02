@@ -1,0 +1,10 @@
+<ACTION ID="a_Sum_Rifle_ChargeShot" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="charge_01"/>
+  <SLOT NAME="charge_02" LOOP="TRUE"/>
+  <SLOT NAME="charge_03"/>
+  <FSM SCRIPT="Sum_Rifle_ChargeShot"
+	PROJECTILE_ID="PROJECTILE_RIFLE_CHARGE_SHOT"
+	HIT_TARGET_EFFECT_TARGET_NODE="p_ef_heart"
+	HIT_TARGET_EFFECT_ID="eff_sum_common_hit00"
+	/>
+</ACTION>

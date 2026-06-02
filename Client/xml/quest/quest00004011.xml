@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4011</ID> <!--T.T.10401101 탈환대의 부름 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	무카파에게 신관사제의 추천서 전달-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	마이트리 사제에게 받은 신관사제의 추천서를 가지고, 바람항구에 있는 신관사제장 무카파를 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">13D42615-B039-43f4-B6EB-28918778D237</CLIENT> <!--시작NPC 수염고래 해안가 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 11 수염고래 해안가 - 마이트리 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 12 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160401100/1">10011</NPC> 
+ <!--Item_NO=160401100/[Q.ID:04011] 신관사제의 추천서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160401100/1/511">10011</NPC> 
+ <!--Item_NO=160401100/[Q.ID:04011] 신관사제의 추천서,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160401100/1">10011</NPC> 
+ <!--Item_NO=160401100/[Q.ID:04011] 신관사제의 추천서,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160401100/1/512">10012</NPC> 
+ <!--Item_NO=160401100/[Q.ID:04011] 신관사제의 추천서,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160401100/1">10012</NPC> 
+ <!--Item_NO=160401100/[Q.ID:04011] 신관사제의 추천서,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10401111"/> <!--신관사제의 추천서 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">51000050</ITEM><!--바람항구 귀환 스크롤 1-->
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10401121" FACE="Maitri_normal"/> <!--일전에도 이야기했던 것처럼…
+이미 바람항구에는 우리 용족의 전사들이 상당 수 모여있습니다.%%
+신보를 찾아내기 위해 한사람 한사람의 힘이 시급한 상황입니다.
+부디 힘을 보태주시지 않겠습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10401126" FACE="Mukapa_smile"/> <!--여어! 반갑네!
+그래, 마이트리 사제의 추천이라니... 기대하겠네!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10401123" FACE="Maitri_normal"/> <!--바람항구에는 신전의 사제들을 통솔하는 신관사제장 무카파님이 계십니다.
+또한 저와 같은 신관사제 바티님이 무카파님을 보필하고 있지요.%%
+부디 바람항구로 가서 신보의 탈환에 협력해주십시오. 
+제가 추천서를 적어드릴테니, 바티님을 만나주십시오.%%
+그리고 신보를 잃어버린 것에는 너무 심려치 마세요.
+어릴 적부터 지켜왔던 터라 저는 특별히 느낄 수 있습니다.%%
+신보는 멀지 않은 곳에 있어요.
+반드시 탈환대에 들어가셔서 잃어버린 신보를 되찾으시길 바랍니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10401124" FACE="Maitri_angry"/> <!--다시 한번 생각해 주시길 바랍니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10401125" FACE="Maitri_angry"/> <!--무카파님은 바람항구에 계십니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10401102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10401151" FACE="Maitri_angly"/> <!--무카파님은 바람항구에 계십니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10401152" FACE="Mukapa_normal"/> <!--무슨 이유로 나를 찾와 왔는가?-->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

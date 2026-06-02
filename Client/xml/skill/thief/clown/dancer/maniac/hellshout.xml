@@ -1,0 +1,12 @@
+<ACTION ID="a_HellShout" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="Claw_skill_HellShouting_01"/>
+  <FSM SCRIPT="Skill_Maniac_HellShout"
+       CASTING_EFFECT_EFFECT_ID="ef_skill_hell_shouting_01_char_root"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID=""
+       FIRE_CASTER_EFFECT_TARGET_NODE=""
+       FIRE_SOUND_ID="HellShout"
+	   MULTI_HIT_NUM="10"
+       />
+</ACTION>
+

@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+<!-- 직업기술 배우기 -->
+	<STATIC_FORM ID="SFRM_JOB_SKILL_LEARN" ALIGN_X="80" ALIGN_Y="50" W="327" H="403" STATIC_NUM="1" CAN_DRAG="1">
+		<!-- NPC랑 멀어지면 자동닫힘 -->
+		<SCRIPT ID="ON_CALL"> RegistUIAction(UISelf, "CloseUI")</SCRIPT>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="325" H="36" STATIC_NUM = "4">
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR TEXT="799500" T_CENTER = "1" T_X = "67" T_Y = "4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4d3413" />
+			</IMG>	
+			<BUTTON ID="BTN_CLOSE" X="294" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_JOB_SKILL_LEARN") </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_LEARN_COLOR" X="9" Y="36"  W="309" H="288" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFRM_LEARN_SHADOW" X="9" Y="36" Z="1" W="309" H="288" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_ITEM_LINE" X="9" Y="125" W="291" H="2">
+				<IMG ID="IMG_LINE1" W="291" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="291" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			</FORM>
+			<BUILD ID="BLD_VIEW_ICON" X="28" Y="30" TARGET_ID="SFRM_ICON" X_COUNT="4" Y_COUNT="2" X_GAB="70" Y_GAB="46"/>
+			<STATIC_FORM ID="SFRM_ICON" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<ICON ID = "JS_Icon" >
+					<ATTR X="1" Y="1" W="40" H="40" ICON_GRP="180" ICON_KEY="0" ICON_STATIC="1"/>
+					<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<!-- 설명 -->
+		<FORM ID="FRM_TITLE1" X="28" Y="45" W="280" H="20" TEXT="799513" FONT="Font_Text" FONT_COLOR_HEX="0XFF790000"/>		
+		<FORM ID="FRM_TITLE2" X="28" Y="168" W="280" H="20" TEXT="799510" FONT="Font_Text" FONT_COLOR_HEX="0XFF790000"/>
+		<FORM ID="FRM_INFO1" X="28" Y="181" W="280" H="200">
+			<ATTR TEXT="799511" T_X="0" T_Y="4" FONT="Font_Text" />
+		</FORM>
+		<FORM ID="FRM_INFO2" X="28" Y="245" W="280" H="200">
+			<ATTR TEXT="799507" T_X="0" T_Y="4" FONT="Font_Text" />
+		</FORM>
+		<BUTTON ID="BTN_OPEN_JOB_SKILL_ITEM" X="108" Y="331" Z="2" W="119" H="22" BTN_IMG="../Data/6_ui/tech/tchpBt.tga" BTN_IMG_W="238" BTN_IMG_H="44" BTN_T_COLOR_TYPE="23" >
+			<ATTR TEXT="799512" T_X="58" T_Y="3" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0XFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0XFF5E2F00"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> CallJobSkillItemUI() </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="125" Y="363" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0XFF2A0F0B"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(915, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_JOB_SKILL_LEARN") </SCRIPT>
+			<HOTKEY ID = "1"> CloseUI("SFRM_JOB_SKILL_LEARN") return true</HOTKEY>
+			<HOTKEY ID = "60"> CloseUI("SFRM_JOB_SKILL_LEARN") return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+		</SCRIPT>
+	</STATIC_FORM>
+<!-- 배운 직업 기술 목록  -->
+	<STATIC_FORM ID="SFRM_JOB_SKILL_VIEW" ALIGN_X="40" ALIGN_Y="50" W="327" H="403" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="325" H="36" STATIC_NUM = "4">
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR TEXT="799530" T_CENTER = "1" T_X = "67" T_Y = "4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4d3413" />
+			</IMG>	
+			<BUTTON ID="BTN_CLOSE" X="294" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_JOB_SKILL_VIEW") </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>		
+		<!-- 직업기술 목록-->
+		<STATIC_FORM ID="SFRM_VIEW_COLOR" X="9" Y="36"  W="309" H="290" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFRM_VIEW_SHADOW" X="9" Y="36" Z="1" W="309" H="290" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_ITEM_LINE" X="9" Y="62" W="291" H="2">
+				<IMG ID="IMG_LINE1" W="291" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="291" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE2" Y="1" W="291" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="291" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			</FORM>
+			<!-- 대표스킬 목록 -->
+			<FORM ID="FRM_MAJORSKILL_ICON" X="9" Y="12" W="43" H="43">
+				<STATIC_FORM ID="SFRM_ICON" W="42" H="43"  STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+					<ICON ID = "JS_Icon" >
+						<ATTR X = "1" Y = "1" W ="40" H ="40" ICON_GRP ="180" ICON_KEY="" ICON_STATIC="1"/>
+						<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+						<SCRIPT ID="ON_R_BTN_DOWN">UISelf:IconDoAction()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor()</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+			</FORM>
+			<!-- 숙련도 타이틀 -->
+			<FORM ID="FRM_EXPERTNESS_TEXT_TITLE" X="15" Y="71" W="148" H="10">
+				<ATTR TEXT="799535" FONT="Font_Text" FONT_COLOR_HEX="0XFF4D3413"/>
+			</FORM>
+			<!--스킬 목록-->
+			<BUILD ID="BLD_VIEW_LIST" X="0" Y="92" TARGET_ID="FRM_VIEW_"  X_COUNT="2" Y_COUNT="4" X_GAB="150" Y_GAB="46"/>
+			<FORM ID="FRM_VIEW_" W="148" H="43">
+				<STATIC_FORM ID="SFRM_ICON" X="9" Y="8" W="42" H="43"  STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+					<ICON ID = "JS_Icon" >
+						<ATTR X = "1" Y = "1" W ="40" H ="40" ICON_GRP ="180" ICON_KEY = "0" ICON_STATIC="1"/>
+						<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_TEXT" X="53" Y="8" W="96" H="42" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<FORM ID="FRM_TEXT_TITLE" W="96" H="10">
+						<ATTR TEXT="" T_X="4" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0XFF790000"/>
+					</FORM>
+					<FORM ID="FRM_TEXT_INFO" Y="16" W="96" H="10">
+						<ATTR TEXT="" T_X="4" T_Y="6" FONT="Font_Text" FONT_COLOR_HEX="0XFF4D3413"/>
+					</FORM>
+				</STATIC_FORM>
+				<IMG ID="IMG_ENALBE_SUBTOOL" X="127" Y="11" W="20" H="20" IMG="../Data/6_ui/main/mntooltipview.tga" IMG_W="40" IMG_H="20">
+					<ATTR U="2" V="1" UV_INDEX="2" />
+					<SCRIPT ID = "ON_MOUSE_OVER"> CallToolTip_EnableSubTool(UISelf, GetCursorPos()) </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				</IMG>
+			</FORM>
+		</STATIC_FORM>
+		<!-- 배운 스킬이 없는 경우 나오는 UI -->
+		<FORM ID="FRM_NOT_HAVE_SKILL" X="9" Y="73" Z="5" W="309" H="272" PASS_EVENT="1" IS_VISIBLE="0">
+			<ATTR TEXT="799538" T_X="158" T_Y="100" FONT="FTctsBig_14" T_CENTER="1" FONT_COLOR_HEX="0XFF4D3413"/>
+		</FORM>
+		<!-- 배운 아이템 버튼-->
+		<BUTTON ID="BTN_LEARNED_ITEM" X="104" Y="340" W="119" H="22" BTN_IMG="../Data/6_ui/tech/tchpBt.tga" BTN_IMG_W="238" BTN_IMG_H="44" BTN_T_COLOR_TYPE="23" >
+			<ATTR TEXT="799531" T_X="58" T_Y="3" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0XFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0XFF5E2F00"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> CallJobSkillItemUI() </SCRIPT>
+		</BUTTON>
+		<!-- 피로도(가제) -->
+		<FORM ID="FRM_TIRED" X="9" Y="370" W="309" H="21">
+			<ATTR IMG="../Data/6_ui/tech/tcBarBg.tga" IMG_W="309" IMG_H="21"/>
+			<ATTR TEXT="799534" FONT="Font_Text" T_X="35" T_Y="1" T_CENTER="1" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<ANI_BAR ID="FRM_GAUGE" X="64" Y="4" Z="1" W="241" H="10" >
+				<ATTR BAR_IMG="../Data/6_ui/tech/tcBarR.tga" BAR_IMG_W="241" BAR_IMG_H="10" BAR_COUNT="1" NO_FOCUS="1" PASS_EVENT="1"/>
+				<ATTR TEXT="" FONT="Font_Text_Small" T_X="93" T_Y="0" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</ANI_BAR>
+		</FORM>		
+		<HOTKEY ID = "1"> return CloseUI("SFRM_JOB_SKILL_VIEW") </HOTKEY>
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+		</SCRIPT>
+	</STATIC_FORM>
+
+	<!-- 배운 아이템 UI -->
+	<STATIC_FORM ID="SFRM_JOB_SKILL_ITEM" ALIGN_X="50" ALIGN_Y="50" W="327" H="435" STATIC_NUM="1" CAN_DRAG="1">
+		<HOTKEY ID="1"> CloseJobSkillItemUI() return true </HOTKEY>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="325" H="36" STATIC_NUM = "4">
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR TEXT="799580" T_CENTER = "1" T_X = "67" T_Y = "4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4d3413" />
+			</IMG>	
+			<BUTTON ID="BTN_CLOSE" X="294" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_UP"> CloseJobSkillItemUI() </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<!--아이템 타입 필터링 -->
+		<STATIC_FORM ID = "SFRM_JOB_SELECT_COLOR" X="9" Y="37"  W="122" H="23" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFRM_JOB_SELECT_SHADOW" X="9" Y="37" Z="1" W="122" H="23" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR TEXT="799501" FONT="Font_Text" T_X="50" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xff4D3413" />
+			<SCRIPT ID="ON_CALL">UISelf:SetStaticTextW(GetTT(799501)) </SCRIPT>
+			<BUTTON ID="BTN_ITEM_TYPE" X="101" Y="1" W="21" H="21" BTN_IMG = "../Data/6_ui/post/psDropB.tga" BTN_IMG_W = "42" BTN_IMG_H = "42">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kParent = UISelf:GetParent():GetParent()
+					if false == kParent:IsNil() then
+						local kList = kParent:GetControl("SFRM_SELECT_ITEMTYPE_LIST")
+						if false == kList:IsNil() then
+							kList:Visible(true)
+						end
+					end
+				</SCRIPT>
+			</BUTTON>	
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SELECT_ITEMTYPE_LIST" X="10" Y="60" Z="2" W="122" H="" PASS_EVENT="1" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<LIST ID="LST_SELECT_TYPE" X="0" Y="0" W="122" H="" ITEM_X="0" ITEM_Y="0" >
+				<ATTR ELEMENT_ID="SFRM_FILTER_JOB_ITEM"/>
+			</LIST>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Visible(false) return true </SCRIPT>
+			<SCRIPT ID="ON_GET_FOCUS">
+				local kSelf = UISelf
+				local kList = UISelf:GetControl("LST_SELECT_TYPE")
+				if false == kList:IsNil() then
+					local kItem = kList:ListFirstItem()
+					if false == kItem:IsNil() then
+						SetJobSkillFilterSize(kSelf, kList, kItem)
+					end
+				end
+			</SCRIPT>
+		</STATIC_FORM>
+		<!--페이지 이동 -->
+		<BUTTON ID="BTN_PAGE_L" X="223" Y="39" Z="1" W="15" H="19" BTN_IMG="../Data/6_ui/cashShop/csGcBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38">
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				JobSkillItem_BeforePage()
+			</SCRIPT>
+		</BUTTON>
+		<FORM ID="FRM_PAGE_BG" X=" 240" Y="37" W="63" H="24" IMG="../Data/6_ui/tech/tcpageBg.tga" IMG_W="63" IMG_H="24">
+			<ATTR TEXT=""  FONT="Font_Text" T_X="30" T_Y="4" T_CENTER="1"  T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		</FORM>
+		<BUTTON ID="BTN_PAGE_R" X="304" Y="39" Z="1" W="15" H="19" BTN_IMG="../Data/6_ui/cashShop/csGcNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38">
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				JobSkillItem_NextPage()
+			</SCRIPT>
+		</BUTTON>		
+		<STATIC_FORM ID="SFRM_ITEM_COLOR" X="9" Y="63"  W="309" H="289" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFRM_ITEM_SHADOW" X="9" Y="63" Z="1" W="309" H="289" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<BUILD ID="BLD_ITEM_LIST" TARGET_ID="FRM_ITEM" X_COUNT="1" Y_COUNT="6" Y_GAB="46"/>
+			<FORM ID="FRM_ITEM"  W="289" H="43">
+				<STATIC_FORM ID="SFRM_ICON" X="9" Y="8" W="42" H="43" PASS_EVENT="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+					<ICON ID = "JS_Icon">
+						<ATTR X = "1" Y = "1" W ="40" H ="40" ICON_GRP="180" ICON_KEY = "0" ICON_STATIC="1"/>
+						<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_TEXT" X="53" Y="8" W="247" H="42" PASS_EVENT="1" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<FORM ID="FRM_TEXT_TITLE" X="4" W="247" H="10" PASS_EVENT="1" >
+						<ATTR TEXT="" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0XFF790000"/>
+					</FORM>
+					<FORM ID="FRM_TEXT_INFO" X="4" Y="16" W="247" H="10" PASS_EVENT="1" >
+						<ATTR TEXT="" T_Y="6" FONT="Font_Text" FONT_COLOR_HEX="0XFF4D3413"/>
+					</FORM>
+				</STATIC_FORM>
+			</FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_INFO" X="9" Y="355" W="309" H="40">
+			<ATTR TEXT="799582" T_X="155" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0XFF000000"/>
+		</FORM>
+		<FORM ID="FRM_TEXT_ONLY_LEARN" X="50" Y="395" W="200" H="20">
+			<ATTR TEXT="799591" T_LEFT="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" />
+		</FORM>
+		<CHECK_BUTTON ID="CBTN_FILTER_ONLY_LEARN" X="28" Y="395" W="20" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> 
+				local bCheck = UISelf:GetCheckState()
+				if true == bCheck then
+					LearnFilter_JobSkillItem(false)
+				else
+					LearnFilter_JobSkillItem(true)
+				end
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+		</SCRIPT>
+	</STATIC_FORM>
+	
+	<!-- 구매UI 직업 필터 -->
+	<STATIC_FORM ID="SFRM_FILTER_LEARN_JOBSKILL" X="0" Y="0" Z="3" W="122" H="23" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+		<ATTR TEXT="" FONT="Font_Text" T_X="60" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			SetFilterJobType(UISelf:GetCustomDataAsInt())
+		</SCRIPT>
+	</STATIC_FORM>	
+	<!-- 배운아이템 타입 필터 -->
+	<STATIC_FORM ID="SFRM_FILTER_JOB_ITEM" X="0" Y="0" Z="3" W="122" H="23" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+		<ATTR TEXT="" FONT="Font_Text" T_X="60" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			SetGatherType(UISelf:GetStaticText(), UISelf:GetCustomDataAsInt())
+		</SCRIPT>
+	</STATIC_FORM>	
+
+	<STATIC_FORM ID="SFRM_JOB_HELP" ALIGN_X="50" ALIGN_Y="50" W="260" H="120" STATIC_NUM="1" PRIORITY="99" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+		<ATTR TEXT="799808" T_X="130" T_Y="10" T_CENTER="1" FONT="FTbt_12" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFF00" />
+		
+		<BUILD ID="BLD_ICON" TARGET_ID="FRM_ICON" X="18" Y="32" X_COUNT="5" Y_COUNT="1" X_GAB="46" Y_GAB="0"/>
+		<FORM ID="FRM_ICON" IS_VISIBLE="1" X="6" Y="26" Z="2" W="40" H="40" IMG="../Data/6_ui/icon/iconSkill3.tga" IMG_W="480" IMG_H="480" U="12" V="12" UV_INDEX="81" >
+			<SCRIPT ID="ON_MOUSE_OVER"> UISelf:GetParent():GetControl("IMG_SLOT_ANI"..UISelf:GetBuildIndex()):Visible(true)  JobSkill_HelpSkillIconToolTip(UISelf:GetCustomDataAsInt()) </SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">  UISelf:GetParent():GetControl("IMG_SLOT_ANI"..UISelf:GetBuildIndex()):Visible(false) CloseToolTip() </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP"> JobSkill_SendHelpJobSkill(UISelf:GetCustomDataAsInt())  CloseUI("SFRM_JOB_HELP") </SCRIPT>
+		</FORM>
+		
+		<BUILD ID="BLD_ANI" TARGET_ID="IMG_SLOT_ANI" X="11" Y="25" X_COUNT="5" Y_COUNT="1" X_GAB="46" Y_GAB="0"/>
+		<IMG ID="IMG_SLOT_ANI" X="3" Y="0" W="42" H="42" Z="-1" IMG="../Data/6_ui/cashShop/csCtSlotAni.tga" IMG_W="216" IMG_H="162" IS_VISIBLE="0" U="4" V="3" PASS_EVENT="1" NO_FOCUS="1">
+			<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.09)  </SCRIPT>
+		</IMG>
+			
+		<BUTTON ID="BTN_CLOSE" X="85" Y="80" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="75004" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0xFF2A0F0B"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(75004, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_JOB_HELP")  </SCRIPT>
+			<HOTKEY ID = "1">  CloseUI("SFRM_JOB_HELP") return true</HOTKEY>
+			<HOTKEY ID = "59"> CloseUI("SFRM_JOB_HELP") return true</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>	
+			
+	
+	<FORM ID="FRM_JOB_GATHER_PROGRESS" ALIGN_X="50" ALIGN_Y="50" W="70" H="70" NO_FOCUS="1">		
+		<SCRIPT ID="ON_TICK">
+			UISelf:SetLocationToMyActor(Point2(-33,-150),"p_ef_star")
+		</SCRIPT>
+		<FORM ID="FRM_EXPERTNESS" X="0" Y="-20" W="70" H="17" Z="2"  NO_FOCUS="1">
+			<ATTR TEXT="" FONT="FT15" T_X="34" T_Y="45" T_CENTER="1" FONT_COLOR_HEX="0xFFfff568" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_BG" W="70" H="70" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_ui/tech/tcGgBg.tga" IMG_W="70" IMG_H="70"/>
+		</FORM>
+		<FORM ID="FRM_TURNTIME" Z="1" W="70"H="28" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_ui/tech/tcGgG.tga" IMG_W="350" IMG_H="140" U="5" V="2" UV_INDEX="10"/>
+			<SCRIPT ID="ON_CALL">
+				JobSkillGatherTimerSet()
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">
+				JobSkillGatherTimerTick(UISelf)
+			</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_EXHAUSTION" Z="1" W="70"H="28" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_ui/tech/tcGgR.tga" IMG_W="350" IMG_H="140" U="5" V="2" UV_INDEX="10"/>
+		</FORM>
+	</FORM>
+	<!--군수물품조달UI/-->
+	<STATIC_FORM ID="GATHER_STORE" ALIGN_X="50" ALIGN_Y="50" W="330" H="410" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="329" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="298" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent()</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="289" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" T_X="10" T_Y="4" W="289" H="24" STATIC_NUM="3" TEXT="799640" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_SCRIPT" X="9" Y="35" STATIC_NUM="34" W="314" H="264">
+			<FORM ID="FRM_TEXT0" X="7" Y="7" W="290" H="14">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799641" T_X="2" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT1" X="7" Y="130" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="1">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799642" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT2" X="7" Y="160" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="2">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799643" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT3" X="7" Y="190" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799644" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT4" X="7" Y="233" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="4">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799645" T_X="18" T_Y="-1"/>
+			</FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="301" Z="-1" W="313" H="66" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BTN_BG_GATHER" X="8" Y="4" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="799646" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>			
+			<BUTTON ID="BTN_SELECT_GATHER" X="235" Y="7" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2200) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					SendReqDefGemStore(kOwnerGuid, 3)
+					CloseUI("GATHER_STORE")
+				</SCRIPT>
+				<HOTKEY ID="59"> 
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					SendReqDefGemStore(kOwnerGuid, 3)
+					CloseUI("GATHER_STORE")
+				</HOTKEY>
+			</BUTTON>
+			<STATIC_FORM ID="SFRM_BTN_BG_PROCESS" X="8" Y="34" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="799647" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>			
+			<BUTTON ID="BTN_SELECT_PROCESS" X="235" Y="37" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2201) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> 
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					SendReqDefGemStore(kOwnerGuid, 4)
+					CloseUI("GATHER_STORE")
+				</SCRIPT>
+				<HOTKEY ID="60"> 
+					local kOwnerGuid = UISelf:GetParent():GetParent():GetCustomDataAsGuid()
+					SendReqDefGemStore(kOwnerGuid, 4)
+					CloseUI("GATHER_STORE")
+				</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<BUTTON ID = "BTN_CANCLE" X="125" Y="371" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="" FONT="FTtitle_14" T_X="42" T_Y="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400534, 2202) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="61">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+	</STATIC_FORM>	
+
+	<!-- 3차 아이템 제작 SFRM_JL3_ITEM_CREATE-->
+	<STATIC_FORM ID="SFRM_JL3_ITEM_CREATE" X="145" ALIGN_Y="35" W="432" H="498" CAN_DRAG="1" STATIC_NUM="1">
+		<ATTR T_X="194" T_Y="0" T_CENTER="1" FONT="Font_Text" TEXT="" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="430" H="36" STATIC_NUM="4">
+			<IMG ID="IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR T_X="10" T_Y="4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413" TEXT="799546"/>
+			</IMG>
+			<BUTTON ID="BTN_CLOSE" X="399" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<HOTKEY ID="1">UISelf:GetParent():CloseParent() return true</HOTKEY>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():CloseParent() return true</SCRIPT>
+			</BUTTON>
+			<FORM ID="SFRM_BTN_BG" X="399" Y="9" Z="-1" W="12" H="11" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="12" IMG_H="11"/>
+			<STATIC_FORM ID="SFRM_TAB_BG" X="8" Y="5" W="144" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+		</STATIC_FORM>
+		<!-- TOP UI -->
+		<IMG ID="IMG_TOP_BG" X="10" Y="35" Z="-1" W="413" H="83" IMG="../Data/6_UI/tech/tc3stbg01.tga" IMG_W="413" IMG_H="83">
+			<FORM ID="SFRM_COLOR" X="110" Y="0" Z="1" W="303" H="21">
+				<ATTR T_X="151" T_Y="7" T_CENTER="1" FONT="Font_Text" TEXT="799548" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</FORM>
+			<IMG ID="IMG_SELECT_SLOT" X="32" Y="4" Z="-1" W="50" H="50" IMG="../Data/6_ui/etc/etcCrftItemBg.tga" IMG_W="400" IMG_H="150" U="8" V="3" UV_INDEX="1"/>
+			<BUILD ID="BLD_SELECT_SLOT" TARGET_ID="IMG_HISTORY_SELECT_SLOT" X="133" Y="29" X_COUNT="6" Y_COUNT="1" X_GAB="43" Y_GAB="0"/>
+			<IMG ID="IMG_HISTORY_SELECT_SLOT" X="0" Y="0" Z="-1" W="42" H="42" IMG="../Data/6_ui/common/cmSlotBg.tga" IMG_W="42" IMG_H="42"/>
+		</IMG>
+		<!-- MIDDLE UI -->
+		<IMG ID="IMG_TAB" X="15" Y="121" W="115" H="25" IMG="../Data/6_ui/tech/tcTab.tga" IMG_W="115" IMG_H="25">
+			<ATTR T_CENTER="1" T_X="50" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" TEXT="799554" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</IMG>
+		<IMG ID="IMG_HELP" X="397" Y="127" W="21" H="16" IMG="../Data/6_ui/Main/mnBhelp.tga" IMG_W="42" IMG_H="38" U="2" V="2">
+			<SCRIPT ID="ON_CALL">UISelf:SetUVIndex(1)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				UISelf:SetUVIndex(2)
+				CallToolTipText(0, GetTT(799824), UISelf:GetLocation())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				UISelf:SetUVIndex(1)
+				CloseToolTip()
+			</SCRIPT>
+		</IMG>
+		<STATIC_FORM ID="SFRM_RES_BG" X="10" Y="146" Z="-10" W="412" H="179" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_SHADOW" X="0" Y="0" W="412" H="179" STATIC_NUM="3"/>
+			
+			<BUILD ID="BLD_NEED_ITEM" TARGET_ID="FRM_SLOT" X="0" Y="0" X_COUNT="1" Y_COUNT="4" X_GAB="0" Y_GAB="43"/>
+			<FORM ID="FRM_SLOT" X="0" Y="0" W="412" H="179">
+				<STATIC_FORM ID="SFRM_NEED_BG" X="4" Y="4" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<BUILD ID="BLD_RES_ITEM" TARGET_ID="SFRM_RES_SLOT_BG" X="195" Y="5" X_COUNT="5" Y_COUNT="1" X_GAB="43" Y_GAB="0"/>
+				<STATIC_FORM ID="SFRM_RES_SLOT_BG" X="0" Y="0" W="40" H="40" PASS_EVENT="1" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+				<IMG ID="IMG_LINE1" X="48" Y="46" W="140" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="140" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5">
+					<SCRIPT ID="ON_CALL">UISelf:Visible( 3~=UISelf:GetParent():GetBuildIndex() )</SCRIPT>
+				</IMG>
+				<IMG ID="IMG_LINE2" X="48" Y="47" W="140" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="140" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6">
+					<SCRIPT ID="ON_CALL">UISelf:Visible( 3~=UISelf:GetParent():GetBuildIndex() )</SCRIPT>
+				</IMG>
+			</FORM>
+		</STATIC_FORM>
+		<!-- BOTTOM UI -->
+		<IMG ID="IMG_BOTTOM_BG" X="7" Y="361" W="418" H="94" IMG="../Data/6_ui/tech/tcRsBg.tga" IMG_W="418" IMG_H="94">
+			<ATTR TEXT="799550" T_X="209" T_Y="72" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</IMG>
+
+		<IMG ID="IMG_ARROW_INIT" X="187" Y="325" W="58" H="39" IMG="../Data/6_ui/tech/tc3stArw.tga" IMG_W="58" IMG_H="39"/>
+		<IMG ID="IMG_ARROW_USE"  X="187" Y="325" W="58" H="39" IMG="../Data/6_ui/tech/tc3stArw2.tga" IMG_W="58" IMG_H="39"/>
+		<IMG ID="IMG_ARROW_PLAY" X="187" Y="325" W="58" H="39" IMG="../Data/6_ui/tech/tc3stArwAni.tga" IMG_W="116" IMG_H="78" U="2" V="2">
+			<SCRIPT ID="ON_TICK">
+				UVAnimation(UISelf, 0.09, 1, 3)
+				JobSkillItem3_UpdateSendCreateItem(UISelf:GetParent())
+			</SCRIPT>
+		</IMG>
+		
+		<ICON ID="ICN_SELECT" ICON_GRP="254" ICON_STATIC="1" IGNORE_PARENT_RECT="1">
+			<ATTR X="47" Y="44" Z="1" W="40" H="40" IMG_W="40" IMG_H="40"/>
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<BUTTON ID="BTN_ITEM_SELECT" X="23" Y="91" Z="1" W="89" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/Community/fdBt.tga" BTN_IMG_W="89" BTN_IMG_H="80" U="1" V="4" UV_INDEX="1"/>
+			<ATTR TEXT="799549" T_X="44" T_Y="2" FONT="Font_Text" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF5e2f00"/>
+			<SCRIPT ID="ON_L_BTN_UP">CallJobSkill3ItemUI()</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_PAGE_L" X="126" Y="76" Z="1" W="15" H="19" BTN_IMG="../Data/6_ui/cashShop/csGcBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38">
+			<SCRIPT ID="ON_L_BTN_DOWN">OnHistoryItemChangePage(UISelf:GetParent(), -1)</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_PAGE_R" X="402" Y="76" Z="1" W="15" H="19" BTN_IMG="../Data/6_ui/cashShop/csGcNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38">
+			<SCRIPT ID="ON_L_BTN_DOWN">OnHistoryItemChangePage(UISelf:GetParent(), 1)</SCRIPT>
+		</BUTTON>
+		<BUILD ID="BLD_HISTORY_SLOT" TARGET_ID="ICN_HISTORY" X="143" Y="64" X_COUNT="6" Y_COUNT="1" X_GAB="43" Y_GAB="0"/>
+		<ICON ID="ICN_HISTORY" ICON_GRP="254" ICON_STATIC="1" IGNORE_PARENT_RECT="1">
+			<ATTR X="0" Y="0" Z="1" W="40" H="40" IMG_W="40" IMG_H="40"/>
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local iSaveIdx = UISelf:GetControl("DMY_SAVEIDX"):GetCustomDataAsInt()
+				if 0 ~= iSaveIdx then
+					JobSkillItem3_SelectMakeItem(iSaveIdx)
+				end
+			</SCRIPT>
+			<DUMMY ID="DMY_SAVEIDX"/>
+		</ICON>
+
+		<BUILD ID="BLD_NEED_SLOT" TARGET_ID="FRM_NEED_SLOT" X="10" Y="151" X_COUNT="1" Y_COUNT="4" X_GAB="0" Y_GAB="43"/>
+		<FORM ID="FRM_NEED_SLOT" X="0" Y="0" W="413" H="40">
+			<ATTR TEXT="799552" T_X="50" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<ICON ID="ICN_NEED" ICON_GRP="254" ICON_STATIC="1" IGNORE_PARENT_RECT="1">
+				<ATTR X="5" Y="1" Z="1" W="40" H="40" IMG_W="40" IMG_H="40"/>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"></SCRIPT>
+			</ICON>
+			<BUILD ID="BLD_SRC_SLOT" TARGET_ID="FRM_SRC_SLOT" X="196" Y="0" X_COUNT="5" Y_COUNT="1" X_GAB="43" Y_GAB="0"/>
+			<FORM ID="FRM_SRC_SLOT" X="0" Y="0" W="41" H="41">
+				<ICON ID="ICON_SRC_SLOT" X="1" Y="0" Z="-1" W="40" H="40" ICON_GRP="183" ICON_STATIC="1" IGNORE_PARENT_RECT="1">
+					<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_DOWN">JobSkillItem3_ClearResItemSlot(UISelf)</SCRIPT>
+					<SCRIPT ID="ON_R_BTN_DOWN">JobSkillItem3_FullResItemSlot(UISelf)</SCRIPT>
+				</ICON>
+				<BUTTON ID="BTN_DEREG" X="-1" Y="27" W="14" H="14" Z="1" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+					<SCRIPT ID="ON_L_BTN_DOWN">JobSkillItem3_SetResItemSlot(UISelf:GetParent(), false)</SCRIPT>
+				</BUTTON>
+				<BUTTON ID="BTN_REG" X="27" Y="27" W="14" H="14" Z="1" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+					<SCRIPT ID="ON_L_BTN_DOWN">JobSkillItem3_SetResItemSlot(UISelf:GetParent(), true)</SCRIPT>
+				</BUTTON>
+			</FORM>
+		</FORM>
+
+		<!--AddChild : FMA_JS3_TRG_SLOT-->
+		<DUMMY ID="DMY_TRG_ITEM" X="10" Y="368" W="413" H="66" IS_CHILD_DISPLAY="1"/>
+		
+		<FORM ID="FRM_EFFECT_MODEL" X="10" Y="368" W="413" H="66" PASS_EVENT="1" NO_FOCUS="1" Z="3">			
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("JS3_CREATE_ITEM_EFFECT", false, false)				
+				kSelf:AddRenderModelNIFByPath("JS3_CREATE_ITEM_EFFECT", "Success", "../Data/5_Effect/4_UI/ef_UImix_02_succ.nif", false, true)				
+				kSelf:SetRenderModelCameraZoomMinMax("JS3_CREATE_ITEM_EFFECT", -300, 300)
+				kSelf:RenderModelCameraZoom("JS3_CREATE_ITEM_EFFECT", 210.0)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("JS3_CREATE_ITEM_EFFECT") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:AddToDrawListRenderModel("JS3_CREATE_ITEM_EFFECT") </SCRIPT>
+			<SCRIPT ID="ON_CLOSE"> UISelf:ClearRenderModel("JS3_CREATE_ITEM_EFFECT") </SCRIPT>
+		</FORM>
+		<!--STATIC_FORM ID="SFRM_BOTTOM_BG_TEST" Z="10" X="10" Y="368" W="370" H="66" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/-->
+
+		<BUTTON ID="BTN_OK" X="133" Y="458" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0XFF2A0F0B"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(799551, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">
+				if false==UISelf:IsDisable() then
+					JobSkillItem3_DoActionCreateItem(UISelf:GetParent())
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				if false==UISelf:IsDisable() then
+					JobSkillItem3_DoActionCreateItem(UISelf:GetParent())
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="219" Y="458" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0XFF2A0F0B"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(799514, 2201)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="60">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			SetJobSkill3CreateItem(UISelf, 0)
+			OnHistoryItemChangePage(UISelf, 0)
+			RegistUIAction(UISelf, "CloseUI")
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">JobSkillItem3_Tick(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseUI("SFRM_JL3_ITEM_SELECT")</SCRIPT>
+	</STATIC_FORM>
+
+	<FORM_MOVE_ANIMATE_WND ID="FMA_JS3_TRG_SLOT" X="0" Y="0" W="50" H="66" CAN_CLIP="1">
+		<ATTR PASS_EVENT="1" NO_FOCUS="1"/>
+		<ATTR MOVE_TYPE="0" MOVE_TIME="0" START_X="0" START_Y="0" END_X="0" END_Y="0"/>
+		<ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="0" PAUSE_TIME="200"/>
+		<IMG ID="IMG_SLOT_BG" X="4" Y="3" W="42" H="42" IMG="../Data/6_ui/common/cmSlotBg.tga" IMG_W="42" IMG_H="42"/>
+		<ICON ID="ICON_TRG_SLOT" ICON_GRP="254" ICON_STATIC="1" IGNORE_PARENT_RECT="1">
+			<ATTR X="5" Y="4" Z="1" W="40" H="40" IMG_W="40" IMG_H="40"/>
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<IMG ID="IMG_CLOSED" X="4" Y="3" Z="2" W="42" H="42" IMG="../Data/6_ui/TrueTw/ttXimg.tga" IMG_W="42" IMG_H="42" IS_VISIBLE="0"/>
+		<IMG ID="IMG_REMAIN" X="4" Y="3" Z="2" W="42" H="42" IMG="../Data/6_ui/common/cmSlotQ.tga" IMG_W="84" IMG_H="42" U="2" V="1" IS_VISIBLE="0">
+			<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(799555), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<IMG ID="IMG_SLOT_ANI" X="0" Y="0" Z="5" W="50" H="51" PASS_EVENT="1" NO_FOCUS="1">
+			<ATTR IMG="../Data/6_ui/tech/tcBoxLine01.tga" IMG_W="150" IMG_H="102" U="3" V="2"/>
+			<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.09) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_COUNT" X="5" Y="50" W="40" H="14" IMG="../Data/6_UI/mission/msNumBg.tga" IMG_W="40" IMG_H="14">
+			<ATTR FONT="Font_Chat" T_CENTER="1" T_X="19" T_Y="0" FONT_COLOR_HEX="0xFFFFF568"/>
+		</IMG>
+	</FORM_MOVE_ANIMATE_WND>
+	
+	<!-- 배운아이템 타입 필터 -->
+	<STATIC_FORM ID="SFRM_FILTER_JOB3_ITEM" X="0" Y="0" Z="3" W="122" H="23" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+		<ATTR TEXT="" FONT="Font_Text" T_X="60" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		<SCRIPT ID="ON_L_BTN_DOWN">
+			JobSkillItem3_SetGatherType(UISelf:GetStaticText(), UISelf:GetCustomDataAsInt())
+		</SCRIPT>
+	</STATIC_FORM>	
+	
+	<!-- 3차 아이템 선택 -->
+	<!-- 세로로 만들어지는 리스트가 아니라 인벤 스타일의 리스트로 제작하기 -->
+	<STATIC_FORM ID="SFRM_JL3_ITEM_SELECT" ALIGN_X="50" ALIGN_Y="50" W="307" H="435" STATIC_NUM="1" CAN_DRAG="1">
+		<HOTKEY ID="1"> CloseJobSkill3ItemUI() return true </HOTKEY>
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="305" H="36" STATIC_NUM = "4">
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+			<IMG ID = "IMG_TITLE_TAB" X="7" Y="4" Z="1" W="144" H="24" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<ATTR TEXT="799549" T_CENTER = "1" T_X = "67" T_Y = "4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4d3413" />
+			</IMG>	
+			<BUTTON ID="BTN_CLOSE" X="274" Y="4" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_UP"> CloseJobSkill3ItemUI() </SCRIPT>
+			</BUTTON>
+		</STATIC_FORM>
+		<!--아이템 타입 필터링 -->
+		<STATIC_FORM ID = "SFRM_JOB_SELECT_COLOR" X="9" Y="37"  W="122" H="23" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFRM_JOB_SELECT_SHADOW" X="9" Y="37" Z="1" W="122" H="23" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR TEXT="799501" FONT="Font_Text" T_X="50" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xff4D3413" />
+			<SCRIPT ID="ON_CALL">UISelf:SetStaticTextW(GetTT(799501)) </SCRIPT>
+			<BUTTON ID="BTN_ITEM_TYPE" X="101" Y="1" W="21" H="21" BTN_IMG = "../Data/6_ui/post/psDropB.tga" BTN_IMG_W = "42" BTN_IMG_H = "42">
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					local kParent = UISelf:GetParent():GetParent()
+					if false == kParent:IsNil() then
+						local kList = kParent:GetControl("SFRM_SELECT_ITEMTYPE_LIST")
+						if false == kList:IsNil() then
+							kList:Visible(true)
+						end
+					end
+				</SCRIPT>
+			</BUTTON>	
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_SELECT_ITEMTYPE_LIST" X="10" Y="60" Z="2" W="122" H="" PASS_EVENT="1" STATIC_NUM="8" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<LIST ID="LST_SELECT_TYPE" X="0" Y="0" W="122" H="" ITEM_X="0" ITEM_Y="0" >
+				<ATTR ELEMENT_ID="SFRM_FILTER_JOB3_ITEM"/>
+			</LIST>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<SCRIPT ID="ON_LOSE_FOCUS"> UISelf:Visible(false) return true </SCRIPT>
+			<SCRIPT ID="ON_GET_FOCUS">
+				local kSelf = UISelf
+				local kList = UISelf:GetControl("LST_SELECT_TYPE")
+				if false == kList:IsNil() then
+					local kItem = kList:ListFirstItem()
+					if false == kItem:IsNil() then
+						SetJobSkillFilterSize(kSelf, kList, kItem)
+					end
+				end
+			</SCRIPT>
+		</STATIC_FORM>
+		<!--페이지 이동 -->
+		<BUTTON ID="BTN_PAGE_L" X="203" Y="39" Z="1" W="15" H="19" BTN_IMG="../Data/6_ui/cashShop/csGcBack1.tga" BTN_IMG_W="30" BTN_IMG_H="38">
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				JobSkillItem3_BeforePage()
+			</SCRIPT>
+		</BUTTON>
+		<FORM ID="FRM_PAGE_BG" X=" 220" Y="37" W="63" H="24" IMG="../Data/6_ui/tech/tcpageBg.tga" IMG_W="63" IMG_H="24">
+			<ATTR TEXT=""  FONT="Font_Text" T_X="30" T_Y="4" T_CENTER="1"  T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		</FORM>
+		<BUTTON ID="BTN_PAGE_R" X="284" Y="39" Z="1" W="15" H="19" BTN_IMG="../Data/6_ui/cashShop/csGcNext1.tga" BTN_IMG_W="30" BTN_IMG_H="38">
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				JobSkillItem3_NextPage()
+			</SCRIPT>
+		</BUTTON>
+		<STATIC_FORM ID="SFRM_ITEM_COLOR" X="9" Y="63"  W="289" H="289" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" />
+		<STATIC_FORM ID="SFRM_ITEM_SHADOW" X="9" Y="63" Z="1" W="289" H="289" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<BUILD ID="BLD_ITEM_LIST" TARGET_ID="FRM_ITEM" X_COUNT="6" Y_COUNT="6" X_GAB="46" Y_GAB="46"/>
+			<FORM ID="FRM_ITEM"  W="42" H="43">
+				<STATIC_FORM ID="SFRM_ICON" X="9" Y="8" W="42" H="43" PASS_EVENT="1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+					<ICON ID = "JS_Icon">
+						<ATTR X = "1" Y = "1" W ="40" H ="40" ICON_GRP="182" ICON_KEY = "0" ICON_STATIC="1"/>
+						<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+						<SCRIPT ID = "ON_L_BTN_DOWN">UISelf:IconDoAction()</SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+			</FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_INFO" X="9" Y="351" W="289" H="40">
+			<ATTR TEXT="799582" T_X="144" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0XFF000000"/>
+		</FORM>
+		
+		<FORM ID="FRM_TEXT_ONLY_LEARN" X="52" Y="375" W="200" H="20">
+			<ATTR TEXT="799591" T_LEFT="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" />
+		</FORM>
+		<CHECK_BUTTON ID="CBTN_FILTER_ONLY_LEARN" X="28" Y="375" W="20" H="20">
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_DOWN"> 
+				local bCheck = UISelf:GetCheckState()
+				if true == bCheck then
+					JobSkillItem3_FilterOnlyLearn(false)
+				else
+					JobSkillItem3_FilterOnlyLearn(true)
+				end
+				JobSkillItem3_ShowSelectItemList()
+			</SCRIPT>
+		</CHECK_BUTTON>
+
+		<BUTTON ID="BTN_CLOSE" X="111" Y="397" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10">
+			<ATTR TEXT="" T_X="42" T_Y="4" FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0XFF2A0F0B"/>
+			<SCRIPT ID="ON_CREATE">SetTextOnThisUI(915, 2200)</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_UP">CloseJobSkill3ItemUI()</SCRIPT>
+			<HOTKEY ID="59">CloseJobSkill3ItemUI() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			CloseToolTip()
+		</SCRIPT>
+		<SCRIPT ID="ON_CALL">
+			DoUIAutoPosition(UISelf, "SFRM_JL3_ITEM_CREATE", 0, true)
+			JobSkillItem3_FilterOnlyLearn(false)
+		</SCRIPT>
+	</STATIC_FORM>
+	<!-- 영력 추출/삽입 UI -->
+	<!-- 추출 확인 창 -->
+	<STATIC_FORM ID="SFRM_CONFIRM_SOULABIL_TRANSFER" ALIGN_X="50" ALIGN_Y="50" W="330" H="440" CAN_DRAG="1" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="329" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="298" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent()</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_COLOR" X="7" Y="4" W="289" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_TITLE_SDW" T_X="10" T_Y="4" W="289" H="24" STATIC_NUM="3" TEXT="799848" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_SCRIPT" X="9" Y="35" STATIC_NUM="34" W="314" H="285">
+			<FORM ID="FRM_TEXT1" X="7" Y="7" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="1">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799851" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT2" X="7" Y="105" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="2">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799866" T_X="18" T_Y="-1"/>
+			</FORM>
+			<FORM ID="FRM_TEXT3" X="7" Y="185" W="290" H="14" IMG="../Data/6_ui/etc/etcCstNum.tga" IMG_X="0" IMG_Y="0" IMG_W="28" IMG_H="28" U="2" V="2" UV_INDEX="3">
+				<ATTR FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" TEXT="799868" T_X="18" T_Y="-1"/>
+			</FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="325" Z="-1" W="313" H="70" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFRM_BTN_BG_EXTRACT" X="8" Y="4" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="799858" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_SELECT_EXTRACT" X="235" Y="7" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2200) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					CloseUI("SFRM_CONFIRM_SOULABIL_TRANSFER")
+					CallSoulTransferUI(0)				
+				</SCRIPT>
+				<HOTKEY ID="59"> 
+					CloseUI("SFRM_CONFIRM_SOULABIL_TRANSFER")
+					CallSoulTransferUI(0)
+					return true
+				</HOTKEY>
+			</BUTTON>
+			<STATIC_FORM ID="SFRM_BTN_BG_TRANSITION" X="8" Y="36" W="297" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+				<ATTR TEXT="799865" FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+			</STATIC_FORM>
+			<BUTTON ID="BTN_SELECT_TRANSITION" X="235" Y="39" Z="1" W="67" H="21" BTN_IMG="../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W="134" BTN_IMG_H="42">
+				<ATTR TEXT="" FONT="FTtitle_14" T_X="10" T_Y="2" T_OUTLINE="1"/>
+				<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400084, 2201) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					CloseUI("SFRM_CONFIRM_SOULABIL_TRANSFER")
+					CallSoulTransferUI(1)				
+				</SCRIPT>
+				<HOTKEY ID="60"> 
+					CloseUI("SFRM_CONFIRM_SOULABIL_TRANSFER")
+					CallSoulTransferUI(1)
+					return true
+				</HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+		<BUTTON ID = "BTN_CANCLE" X="125" Y="400" W="84" H="26" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="" FONT="FTtitle_14" T_X="42" T_Y="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400534, 2202) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:CloseParent()</SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="61">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+		</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+	</STATIC_FORM>	
+	<!-- 2. 추출/삽입 창 -->
+	<STATIC_FORM ID="SFRM_SOULABIL_TRANSFER" X="30" Y="50" W="375" H="338" CAN_DRAG="1" STATIC_NUM="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="373" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="342" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_SOULABIL_TRANSFER") </SCRIPT>
+					<HOTKEY ID="1">CloseUI("SFRM_SOULABIL_TRANSFER") return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_COLOR" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+				<STATIC_FORM ID="SFRM_TITLE_SDW" TEXT="" T_X="65" T_Y="4" T_CENTER="1" W="144" H="24" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>	
+		<FORM ID="FRM_MAIN_FRAME" X="8" Y="35" W="359" H="199">
+			<ATTR IMG="../Data/6_ui/etc/etcMvBg.tga" IMG_W="359" IMG_H="199"/>
+			<!--영력추출대상/영력보관구슬 아이템-->
+			<FORM ID="FRM_RESOURCE_ANI" X="10" Y="48" Z="-1" W="50" H="50" IMG="../Data/6_ui/etc/etcCrftItemBg.tga" IMG_W="400" IMG_H="150" U="8" V="3">
+				<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.06, 1, 20, 1)</SCRIPT>
+			</FORM>
+			<STATIC_FORM ID="SFRM_RESOURCE_ITEM" X="15" Y="53" Z="2" W="40" H="40" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ICON ID="Icon">
+					<ATTR W="40" H="40" ICON_GRP="253" ICON_STATIC="1"/>
+					<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_UP">
+						if true == IsEndSoulTransProgress() then
+							if true == AutoInsertItem() then
+								SoulTrans_IconAni("FRM_RESOURCE_ANI", true)
+								if false == IsSoulInsertUI() then
+									if true == SetExtractitem() then
+										SoulTrans_IconAni("FRM_DEST_ANI", true)
+										SetSoulTrans_ResultItem()
+									end
+								end
+								SetSoulTransText()
+							end
+						end
+					</SCRIPT>
+					<SCRIPT ID="ON_R_BTN_UP">
+						if true == IsEndSoulTransProgress() then
+							UISelf:ClearCustomData()
+							SoulTrans_IconAni("FRM_RESOURCE_ANI", false)
+							local kDestItem = UISelf:GetParent():GetParent():GetControl("SFRM_DEST_ITEM")
+							if false == kDestItem:IsNil() then
+								local kDestIcon = kDestItem:GetControl("Icon")
+								if false == kDestIcon:IsNil() then
+									kDestIcon:ClearCustomData()
+									SoulTrans_IconAni("FRM_DEST_ANI", false)
+								end
+							end
+							if true == IsSoulInsertUI() then
+								SetAdditionItem()
+								PreChangeInvViewGroupTop(2)
+							end
+							SetSoulTrans_ResultItem()
+							SetSoulTransText()
+						end
+					</SCRIPT>
+				</ICON>
+			</STATIC_FORM>
+			<!--영력삽입대상아이템-->
+			<FORM ID="FRM_DEST_ANI" X="10" Y="108" Z="-1" W="50" H="50" IMG="../Data/6_ui/etc/etcCrftItemBg.tga" IMG_W="400" IMG_H="150" U="8" V="3">
+				<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.06, 1, 20, 1)</SCRIPT>
+			</FORM>
+			<!--FORM ID="FRM_DEST_BIND" X="14" Y="112" Z="4" W="42" H="42" IMG="../Data/6_ui/common/cmBnditem.tga" IMG_W="42" IMG_H="42"/-->
+			<STATIC_FORM ID="SFRM_DEST_ITEM" X="15" Y="113" Z="2" W="40" H="40" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="11">
+				<ICON ID="Icon">
+					<ATTR W="40" H="40" ICON_GRP="253" ICON_STATIC="1"/>
+					<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_UP"> 
+						if true == IsEndSoulTransProgress() and
+						   true == IsSoulInsertUI() then
+							if true == AutoInsertItem() then
+								SoulTrans_IconAni("FRM_DEST_ANI", true)
+								SetSoulTrans_ResultItem()
+								SetAdditionItem()
+							end
+						end
+					</SCRIPT>
+					<SCRIPT ID="ON_R_BTN_UP">
+						if true == IsEndSoulTransProgress() and
+						   true == IsSoulInsertUI() then
+							UISelf:ClearCustomData()
+							SoulTrans_IconAni("FRM_DEST_ANI", false)
+							SetSoulTrans_ResultItem()
+							SetSoulTransText()
+							SetAdditionItem()
+						end
+					</SCRIPT>
+				</ICON>
+			</STATIC_FORM>
+			<!--보험아이템-->
+			<FORM ID="FRM_INSURANCE_BIND" X="93" Y="7" Z="4" W="42" H="42" IMG="../Data/6_ui/common/cmBnditem.tga" IMG_W="42" IMG_H="42"/>
+			<FORM ID="SFRM_INSURANCE_ITEM" X="94" Y="8" Z="2" W="40" H="40">
+				<ICON ID="Icon">
+					<ATTR W="40" H="40" ICON_GRP="184" ICON_STATIC="1"/>
+					<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+			</FORM>
+			<BUTTON ID="BTN_DEL_INSURANCE_ITEM" X="93" Y="35" Z="3" W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_UP">
+					if true == IsEndSoulTransProgress() then
+						DelInsuranceItem()
+					end
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_ADD_INSURANCE_ITEM" X="121" Y="35" Z="3" W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_UP">
+					if true == IsEndSoulTransProgress() then
+						AddInsuranceItem()
+					end
+				</SCRIPT>
+			</BUTTON>
+			<!--확률증가아이템-->
+			<FORM ID="FRM_RATEUP_BIND" X="141" Y="7" Z="4" W="42" H="42" IMG="../Data/6_ui/common/cmBnditem.tga" IMG_W="42" IMG_H="42"/>
+			<FORM ID="SFRM_RATEUP_ITEM" X="142" Y="8" Z="2" W="40" H="40">
+				<ICON ID="Icon">
+					<ATTR W="40" H="40" ICON_GRP="184" ICON_STATIC="1"/>
+					<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+			</FORM>
+			<BUTTON ID="BTN_DEL_RATEUP_ITEM" X="141" Y="35" Z="3" W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_UP">
+					if true == IsEndSoulTransProgress() then
+						DelRateUpItem()
+					end
+				</SCRIPT>
+			</BUTTON>
+			<BUTTON ID="BTN_ADD_RATEUP_ITEM" X="169" Y="35" Z="3" W="14" H="14" BTN_IMG="../Data/6_UI/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28">
+				<SCRIPT ID="ON_L_BTN_UP">
+					if true == IsEndSoulTransProgress() then
+						AddRateUpItem()
+					end
+				</SCRIPT>
+			</BUTTON>
+			<FORM ID="FORM_RESULT" X="284" Y="65" W="76" H="74" Z="2" IMG="../Data/6_UI/etc/etcIctSlot.tga" IMG_W="76" IMG_H="74" PASS_EVENT="1"/>
+			<FORM ID="FRM_RESULT_ANI" X="285" Y="65" W="76" H="74" Z="3" IMG="../Data/6_UI/etc/etcIctSlotFn.tga" IMG_W="228" IMG_H="148" U="3" V="2" PASS_EVENT="1">
+				<SCRIPT ID="ON_CALL"> UISelf:SetUVIndex(1) </SCRIPT>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.06, 1, 6, 1)</SCRIPT>
+			</FORM>
+			<FORM ID="SFRM_RESULT_ITEM" X="302" Y="82" Z="2" W="40" H="40">
+				<ICON ID="Icon">
+					<ATTR W="40" H="40" ICON_GRP="184" ICON_STATIC="1"/>
+					<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+			</FORM>
+			<!-- 성공확률증가 -->
+			<FORM ID="FRM_SUCCESS_RATE" X="188" Y="7" Z="2" W="161" H="42" IMG="../Data/6_ui/etc/etcMvBox.tga" IMG_W="161" IMG_H="42">
+				<FORM ID="FRM_TITLE_TEXT" W="161" H="20" TEXT="" FONT="Font_Text" T_X="80" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<FORM ID="FRM_CURRENT_TEXT" X="7" Y="22" W="80" H="20" TEXT="799843" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<FORM ID="FRM_CURRENT_PER" X="76" Y="22" W="161" H="20" TEXT="799845" FONT="Font_Text" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<FORM ID="FRM_MAX_TEXT" X="85" Y="22" W="80" H="20" TEXT="799844" FONT="Font_Text" T_LEFT="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				<FORM ID="FRM_MAX_PER" X="154" Y="22" W="161" H="20" TEXT="799845" FONT="Font_Text" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFF598" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+				
+			</FORM>
+			<!--화살표 연출-->
+			<FORM ID="FRM_PROGRESS_MAIN" X="60" Y="56" Z="2" W="244" H="96" IMG="../Data/6_ui/etc/etcMvAw01.tga" IMG_W="244" IMG_H="96" />
+			<FORM ID="FRM_PROGRESS_INSURANCE" X="89" Y="49" Z="2" W="49" H="50" IMG="../Data/6_ui/etc/etcMvAw02.tga" IMG_W="49" IMG_H="50" />
+			<FORM ID="FRM_PROGRESS_RATEUP" X="138" Y="49" Z="2" W="49" H="50" IMG="../Data/6_ui/etc/etcMvAw02.tga" IMG_W="49" IMG_H="50" />
+			<!--제한 레벨-->
+			<FORM ID="FRM_LIMIT_MAIN" X="100" Y="120" W="161" H="20" TEXT="" FONT="Font_Text" T_LEFT="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<!--삽입가능 부위 / 가능 영력-->
+			<FORM ID="FRM_LIMIT_SUB" X="100" Y="138" W="161" H="20" TEXT="" FONT="Font_Text" T_LEFT="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<!--필요소울-->
+			<FORM ID="FRM_NEED_SOUL" X="10" Y="175" W="161" H="20" TEXT="" FONT="Font_Text" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<!--필요골드-->
+			<FORM ID="FRM_NEED_GOLD" X="155" Y="175" W="80" H="20" TEXT="799841" FONT="Font_Text" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<FORM ID="FRM_GOLD" X="205" Y="175" W="44" H="16" IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="24" IMG_Y="0" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR TEXT="" FONT="Font_Text" T_X="22" T_RIGHT="1" FONT_COLOR_HEX="0xFF00FF00" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</FORM>
+			<FORM ID="FRM_SILVER" X="255" Y="175" W="44" H="16" IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="24" IMG_Y="0" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR TEXT="" FONT="Font_Text" T_X="22" T_RIGHT="1" FONT_COLOR_HEX="0xFF00FF00" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</FORM>
+			<FORM ID="FRM_COPPER" X="305" Y="175" W="44" H="16" IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="24" IMG_Y="0" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR TEXT="" FONT="Font_Text" T_X="22" T_RIGHT="1" FONT_COLOR_HEX="0xFF00FF00" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			</FORM>
+			<SCRIPT ID="ON_TICK">
+				UpdateSoulTransProgress();
+			</SCRIPT>
+		</FORM>		
+		<STATIC_FORM ID="SFRM_INFO_COLOR" X="10" Y="234" Z="1" W="356" H="60" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_INFO_SHADOW" X="10" Y="234" Z="2" W="356" H="60" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<ATTR TEXT="" FONT="Font_Text" T_X="178" T_Y="15" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_PROCESS_START" X="72" Y="298" Z="1" W="144" H="104">
+			<ATTR BTN_IMG="../Data/6_ui/community/cpBtLong.tga" BTN_IMG_W="144" BTN_IMG_H="104"/>
+			<ATTR TEXT="" T_X="72" T_Y="4" FONT="Font_Text" T_CENTER="1" U = "1" V = "4" UV_INDEX = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if true == CanStartSoulTransProgress() and 
+				   true == IsEndSoulTransProgress() then
+					if true == IsSoulInsertUI() then
+						if false == IsHaveRarity() then
+							local kPacket = NewPacket()
+							CallCommonMsgYesNoBox(GetTT(799876):GetStr(), kPacket, true, 74)							
+							DeletePacket(kPacket)
+						elseif false == UseInsuranceItem() then
+							local kPacket = NewPacket()
+							CallCommonMsgYesNoBox(GetTT(799877):GetStr(), kPacket, true, 76)							
+							DeletePacket(kPacket)
+						else
+							StartSoulTransProgress(4.0)
+						end
+					else
+						StartSoulTransProgress(4.0)
+					end
+				else
+					SetAdditionItem()
+				end
+			</SCRIPT>
+		<HOTKEY ID="59"> 
+				if true == CanStartSoulTransProgress() and 
+				   true == IsEndSoulTransProgress() then
+					if true == IsSoulInsertUI() then
+						if false == IsHaveRarity() then
+							local kPacket = NewPacket()
+							CallCommonMsgYesNoBox(GetTT(799876):GetStr(), kPacket, true, 74)							
+							DeletePacket(kPacket)
+						elseif false == UseInsuranceItem() then
+							local kPacket = NewPacket()
+							CallCommonMsgYesNoBox(GetTT(799877):GetStr(), kPacket, true, 76)							
+							DeletePacket(kPacket)
+						else
+							StartSoulTransProgress(4.0)
+						end
+					else
+						StartSoulTransProgress(4.0)
+					end
+				else
+					SetAdditionItem()
+				end
+				return true
+			 </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="219" Y="298" Z="1" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP="1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> CloseUI("SFRM_SOULABIL_TRANSFER")	</SCRIPT>
+			<HOTKEY ID="60"> CloseUI("SFRM_SOULABIL_TRANSFER") return true </HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 160, 91)</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">OnClose_SOULABIL_TRANSFER()</SCRIPT>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_NFY_SAVEIDX" ALIGN_X="50" ALIGN_Y="80" W="266" H="63" Z="-10" IS_VISIBLE="0" IMG="../Data/6_ui/works/wsNowBgSS.tga" IMG_W="266" IMG_H="63">
+		<ATTR PRIORITY="3" PASS_EVENT="1" NO_FOCUS="1"/>
+		<FORM ID="SFRM_ICON"	X="12" Y="12" W="42" H="43" >
+			<ICON ID = "JS_Icon">
+				<ATTR X = "1" Y = "1" W ="40" H ="40" ICON_GRP="180" ICON_KEY = "0" ICON_STATIC="1"/>
+				<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</ICON>
+		</FORM>
+		<FORM ID="FRM_TEXT" X="60" Y="17" W="170" H="30" >
+			<ATTR TEXT="" FONT="FTbt_12" FONT_COLOR_HEX="0XFFFFFCEA" T_OUTLINE="1" OUTLINE_COLOR_HEX="0XFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_CLOSE" X="235" Y="7" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+				<SCRIPT ID="ON_L_BTN_UP"> CloseUI("FRM_NFY_SAVEIDX") </SCRIPT>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+			local UIPos = UISelf:GetLocation()
+			UISelf:SetLocation(Point2(UIPos:GetX(), GetScreenSize():GetY()-130 ));
+			
+			local kAliveTime = 3000
+			UISelf:SetAliveTime( kAliveTime )
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			JSNfySaveIdx_UpdateUI();
+		</SCRIPT>
+	</FORM>
+</XUI>

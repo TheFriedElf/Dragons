@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5054</ID> <!--T.T.10505401 위기의 고래들(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)]의 몽글과 푸른 안테나 몽글 50마리를 처리하자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	수염고래 해안가는 예전분터 수염고래가 많기로 유명했던 곳이다. 하지만 수염고래 해안가에 해적들이 오면서 수염고래의 수는 급격히 줄기 시작했다. 무카파는 그런 수염고래를 보호하기 위해서 수염고래가 살 수 있는 환경을 오염시키는 몽글과 붉은 안테나 몽글을 처리해 달라고 한다. 수염고래를 지키기 위해 수염고래 해안가 [아케이드 모드(F1)]의 몽글과 붉은 안테나 몽글 50마리를 처리하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010101/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010101/수염고래 해안가 아케이드 1,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010102/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010102/수염고래 해안가 아케이드 2,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010105/1">6012100</MONSTER> 
+ <!--MON_NO=6012100/몽글 ,MAP_NO=9010105/수염고래 해안가 아케이드 5,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010101/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010101/수염고래 해안가 아케이드 1,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010104/1">6012500</MONSTER> 
+ <!--MON_NO=6012500/붉은 안테나 몽글,MAP_NO=9010104/수염고래 해안가 아케이드 4,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="50" TEXT="10505411"/> <!--몽글과 붉은 안테나 몽글-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10505421" FACE="Mukapa_normal"/> <!--%name% 이곳 수염고래 해안은 수염고래들이 많기로 유명한 곳으로 들었네.
+하지만 지금은 무슨 이유에선가 수염고래를 찾기가 어려워졌지.%%
+그래서 특별히 조사단을 파견해서 알아 본 결과, 수염고래 해안가는 수염고래가 살기 어려운 곳이 되어 버리고 말았지.
+그 이유에 대해서 자세히 알고 싶나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10505426" FACE="Mukapa_smile"/> <!--잘했네. 이제 바다는 더 이상 산성으로 오염되지 않을 걸세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10505423" FACE="Mukapa_normal"/> <!--바로 몽글과 붉은 안테나 몽글 때문이라네. 
+이 녀석들은 산성의 성질을 가진 액체로 바다를 산성화시키고 있지.%%
+이래서야 수염고래 뿐만 아니라 다른 물고기들도 모두 오염되어 그 수가 줄어들고 말겠지.
+바다를 오염시키고 있는 저 몽글과 붉은 안테나 몽글을 잡아 주게나. 
+몽글과 붉은 안테나 몽글은 수염고래 해안가 [아케이드 모드(F1)]에 서식하고 있다는 정보를 입수했네.
+상당히 까칠한 녀석들이니까 조심해야 될 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10505424" FACE="Mukapa_angry"/> <!--자네 지금 바다의 오염을 수수방관할 셈인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10505425" FACE="Mukapa_angry"/> <!--지금도 바다는 계속 산성으로 침식되어 가고 있네. 서두르게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10505402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4272</ID> <!--T.T.10427200 운석의 충돌 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	운석이 떨어진 지역 정찰
+( 정찰이 끝나면 원격완료가능 )-->
+<!--[완료NPC]	바람항구 - 콜린-->
+<!--[내용]	호위대장 콜린은 외계에서 운석이 떨어졌다는 정보를 듣고 상당히 불안해 한다. 왕국에 위협이 될까봐 그런것이다. 이는 드래고니카세계에 큰 위협이 될 수도 있으니 그곳을 정찰하여 이상유무를 확인해 보자.-->
+
+
+<LIMITS>
+
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2FF6590B-6648-4D73-9A61-7B4FA9065498</CLIENT> <!--시작NPC 바람항구 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2FF6590B-6648-4D73-9A61-7B4FA9065498</PAYER> <!--완료NPC 바람항구 - 콜린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2FF6590B-6648-4D73-9A61-7B4FA9065498</AGENT> <!--진행NPC 11 바람항구 - 콜린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<LOCATION OBJECTNO="1" TYPE="LOCATION_ENTER" VALUE="9018100">2</LOCATION> 
+ <!--MAP_NO=9018100/[20]바람항구 [마을],-->
+		<LOCATION OBJECTNO="2" TYPE="LOCATION_ENTER" VALUE="9018100">3</LOCATION> 
+ <!--MAP_NO=9018100/[20]바람항구 [마을],-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427211"/> <!--운석이 떨어진 곳 정찰-->
+		<OBJECT2 COUNT="1" TEXT="10427212"/> <!--좀 더 깊숙한 곳 정찰-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427221" FACE="Colin_normal"/> <!--백성들이 웅성웅성되는 소리를 들었는데…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427226" FACE="Colin_smile"/> <!--정말 운석이 떨어졌군.. 
+남아서 그곳을 면밀히 조사해 주게나. 부탁하네-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427223" FACE="Colin_normal"/> <!--바람항구 어딘가에 운석이 떨어졌다는 정보가 있네. 자네가 그곳을 좀 조사해 줘야 겠어. 정확한 위치를 모르니까 꼼꼼히 조사해 주게나. 그 위치를 찾거든 그 주변도 면밀히 조사해서 우리에게 위협이 될만한 것들이 있는지 확인해 주게나. 
+자네만 믿겠네. 보이지 않는 위험이 있는지 꼭 찾아주도록.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427224" FACE="Colin_angly"/> <!--자네가 그러고도 원정대의 일원이라고 할 수 있나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427225" FACE="Colin_normal"/> <!--운석이 떨어진 위치는 바람항구 중앙 섬의 마이홈이 있는 위치쯤 인것 같네. 그곳에 차원의 통로로 있다고 하더군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

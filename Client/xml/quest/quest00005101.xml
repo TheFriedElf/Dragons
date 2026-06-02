@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5101</ID> <!--T.T.10510101 두 개의 그림자(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항 [카오스 모드(F2)]의 상어로부터 작전지령서 5장을 구하자-->
+<!--[완료NPC]	스티븐 무역항 - 시진-->
+<!--[내용]	시진은 바람항구 습격과 관련한 또 다른 정보를 얻었다고 한다. 바로 작전지령서라는 이름의 종이에 습격에 관한 자세한 정보가 적혀 있다고 한다. 작전지령서는 현재 스티븐 무역항 [카오스 모드(F2)]의 상어들이 가지고 있는데, 습격을 앞둔 만큼 상어들이 사납게 반격할지도 모른다고 한다. 바람항구의 습격을 저지하기 위해 스티븐 무역항 [카오스 모드(F2)]의 상어로부터 작전지령서 5장을 구하자. 상어는 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">116A12AC-D98A-483a-A1E9-3392632B7CDE</CLIENT> <!--시작NPC 스티븐 무역항 - 시진 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">116A12AC-D98A-483a-A1E9-3392632B7CDE</PAYER> <!--완료NPC 스티븐 무역항 - 시진 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">116A12AC-D98A-483a-A1E9-3392632B7CDE</AGENT> <!--진행NPC 11 스티븐 무역항 - 시진 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9012133/10000/7000/1/1/160510100">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9012133/스티븐 무역항 카오스 3,Item_NO=160510100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160510100</ITEM> 
+ <!--Item_NO=160510100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9012134/10000/7000/1/1/160510100">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9012134/스티븐 무역항 카오스 4,Item_NO=160510100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160510100</ITEM> 
+ <!--Item_NO=160510100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9012139/10000/7000/1/1/160510100">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9012139/분노의 캡틴 알비다,Item_NO=160510100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160510100</ITEM> 
+ <!--Item_NO=160510100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10510111"/> <!--작전지령서-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10510121" FACE="Walter_normal"/> <!--바람항구의 습격과 관련한 또 다른 정보를 얻었습니다.
+바로 작전지령서라는 이름의 종이에 습격에 대한 자세한 정보가 적혀 있다고 합니다.%% 
+작전지령서는 현재 스티븐 무역항 [카오스 모드(F2)]의 상어가 가지고 있습니다. 
+상어로부터 작전지령서를 회수해 주시기 바랍니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10510126" FACE="Walter_normal"/> <!--수고하셨습니다. 작전지령서의 내용을 분석해 바람항구 습격에 대비해야 겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10510123" FACE="Walter_normal"/> <!--이번 정보 역시 별가사리 라라라에게 들었습니다. 
+사실 역정보가 아닌지 의심해 보았습니다만, 저번의 정보도 있고 술취해서 하는 말을 듣고 사실이라는 믿음이 생겼습니다.%%
+조금만 술취했으면 믿지 않았을 테지만 곁에서 코를 잡고 있어야 할 정도로 심한 술냄새였습니다.
+그래도 약간 의심은 나지만 확인을 부탁드립니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10510124" FACE="Walter_normal"/> <!--어쩔 수 없군요. 상부에 다시 한번 도움을 요청해야 겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10510125" FACE="Walter_normal"/> <!--별가사리 라라라 녀석 왠지 따돌림을 당하는 것 같았습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10510102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

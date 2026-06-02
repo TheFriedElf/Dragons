@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4159</ID> <!--T.T.10415901 신성한 시험 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	오추쿠와 대화-->
+<!--[완료NPC]	카즈라 마을 - 오추쿠-->
+<!--[내용]	칠성팔괘를 찾아낸 뒤로 카즈라의 유명인사가 되어버린 %name%, 퀘차사제는 뛰어난 활약에 감명 받은 오추쿠 장로가 %name%을 찾고 있다 말해준다. 카즈라 마을의 장로 오추쿠를 찾아가도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">48AB8C5A-FB6A-467d-B914-01514408440A</PAYER> <!--완료NPC 카즈라 마을 - 오추쿠 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">48AB8C5A-FB6A-467d-B914-01514408440A</AGENT> <!--진행NPC 12 카즈라 마을 - 오추쿠 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10415911"/> <!--오추쿠와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10415921" FACE="Quecua_normal"/> <!--이번에 네가 활약해 준 덕에 카즈라의 모든 드라칸들이
+너에 대해 이야기하는 것 같더구나. 흘흘…%%
+오추쿠님도 신보를 찾은 이야기를 듣더니 너를 찾고 계신다.
+아마도… 유래가 없지만, 너를 특별히 신관 전사로 
+임명하시려는 것 같구나%%
+무척 명예로운 일이 될 터인데… 도전해 볼 의향이 있느냐?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10415926" FACE="Ocuku_smile"/> <!--반갑소! %name$군!
+그대의 이야기가 카즈라 곳곳에 퍼져나오고 있어.
+이곳의 상황이 점차 좋아지고 있으니
+이는 모두 %name%군의 덕이 아니겠소이까!
+움하하하하! -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10415923" FACE="Quecua_normal"/> <!--이제 얼마 지나지 않아 칠성팔괘를 이용해 아카나이를 
+찾을 거란다. 신관 전사가 된다면 아카나이 정화 작전에
+참가할 수 있을 거야.%%
+… …%%
+만약 마음이 동한다면, 오추쿠 장로님을 찾아가도록 하거라.
+장로님은 이곳을 책임지는 가장 큰 어른이시야.
+부디 실례되는 일 없도록 바르게 행동해야 한다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10415924" FACE="Quecua_angry"/> <!--너는 명예보다 중요시 여기는 일이 있는 게로구나. 어쩔 수 없지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10415925" FACE="Quecua_normal"/> <!--오추쿠 장로님을 찾아가렴. 마을 안에서 기다리고 계신 것 같더구나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10415902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

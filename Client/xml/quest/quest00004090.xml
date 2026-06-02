@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4090</ID> <!--T.T.10409001 의미심장한 우연(3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	망자의 탑에서 에델린과 대화-->
+<!--[완료NPC]	망자의 탑 - 에델린-->
+<!--[내용]	에델린은 망자의 탑을 조사하겠다며, 망자의 탑 정상에서 만나자고 한다. 망자의 탑에서 에델린과 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">199A0D0F-7991-483e-A812-8F8143F35C26</CLIENT> <!--시작NPC 팔미르 신전 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4D69D120-8EF6-451f-B348-3C01345299FD</PAYER> <!--완료NPC 망자의 탑 - 에델린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">199A0D0F-7991-483e-A812-8F8143F35C26</AGENT> <!--진행NPC 11 팔미르 신전 - 에델린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">4D69D120-8EF6-451f-B348-3C01345299FD</AGENT> <!--진행NPC 12 망자의 탑 - 에델린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409011"/> <!--에델린과 대화 (망자의 탑)-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409021" FACE="Edeline_normal"/> <!--그러고 보니 두루마리에 그려진 탑의 그림…
+다시 생각하니 바로 이곳이었어요.%%
+그렇다면 저도 서둘러 탑에 올라가 봐야겠어요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409026" FACE="Edeline_smile"/> <!--잭과 제스, 그리고 프린세시아의 말에 의한다면 분명히 이곳 망자의 탑이 신화에 등장하는 드래곤의 탑인 것이 분명해졌어요. 
+이곳에서 레누보를 신전해볼 수 있을 것 같습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409023" FACE="Edeline_smile"/> <!--이곳이 과연 전설에 등장하는 곳인지 자세한 조사가 필요할 겁니다.
+저 혼자 차분히 둘러볼테니 잠시 후에 꼭대기에서 저와 만나기로 해요.%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409024" FACE="Edeline_angly"/> <!--급한 일이 있다면 모르겠지만…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409025" FACE="Edeline_normal"/> <!--그럼 망자의 탑 정상에서 만나기로 해요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

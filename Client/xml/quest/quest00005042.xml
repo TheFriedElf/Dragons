@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5042</ID> <!--T.T.10504201 레오의 작은 선물(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 상어와 갑판상어로부터 상어꼬리 15개 습득-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	레오가 만든 요리를 데이지에게 맛보여줬더니 뭔가 부족하다고 했다. 데이지는 고민하더니 바로 고급스러움이 부족해서 그런 거였다고 한다. 레오의 요리에 고급스러움을 채우기 위해서는 상어꼬리가 필요하다고 한다. 레오의 요리에 고급스러움을 추가시키기 위해서 수염고래 해안가의 상어와 갑판상어로부터 상어꼬리 15개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/5000/1/1/160504200">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010100/수염고래 해안가,Item_NO=160504200/[Q.ID:05042] 상어꼬리,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160504200</ITEM> 
+ <!--Item_NO=160504200/[Q.ID:05042] 상어꼬리,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/5000/1/1/160504200">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9010100/수염고래 해안가,Item_NO=160504200/[Q.ID:05042] 상어꼬리,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160504200</ITEM> 
+ <!--Item_NO=160504200/[Q.ID:05042] 상어꼬리,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10504211"/> <!--상어꼬리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10504221" FACE="Leo_normal"/> <!--흐음. 응? %name%님이시군요.
+저번의 꼬깨껍질은 정말 감사했어요.
+꼬깨껍질을 갈아서 요리를 만들었어요.%%
+그 요리를 먼저 제가 사랑하는 사람에게 주기 전에 다른 사람에게 맛을 보여주고 싶었어요.
+그래서 미식가로 소문난 데이지씨에게 맛을 보여줬죠.%%
+데이지씨는 한 입 먹어보고는 뭔가 부족하다고 했어요.
+한참을 고민하던 데이지씨가 뭐라고 했는지 궁금하세요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10504226" FACE="Leo_normal"/> <!--아! 이게 그 고급스러움의 상징이라는 상어꼬리군요.
+%name%님 덕분에 제 요리가 더 값어치 있게 되었어요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10504223" FACE="Leo_normal"/> <!--바로 상어꼬리라고 하더군요.
+상어꼬리는 해산물 요리의 꽃이라고 하면서요.
+그런데 상어꼬리는 상당히 귀하기 때문에 제가 구하기 힘들 거래요.%%
+수염고래 해안가의 상어와 갑판상어에게 있기 때문에요.
+정말 사랑하는 사람에게 좋은 요리를 만들어 주고 싶어요. 
+상어 꼬리 15개만 부탁드려도 될까요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10504224" FACE="Leo_angly"/> <!--할 수 없군요. 부족한 것은 정성으로 해결해야 할 것 같아요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10504225" FACE="Leo_normal"/> <!--더욱 괜찮아진 제 요리가 기대가 돼요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10504202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

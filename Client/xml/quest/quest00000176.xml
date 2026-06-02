@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>176</ID> <!--T.T.10017601 해바라기를 키우자! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	해바라기 펫을 2차 전직시키고, 60레벨까지 키우자!-->
+<!--[완료NPC]	바람항구 - 클리티에-->
+<!--[내용]	클리티에는 축제기간 동안, 해바라기 꽃밭을 사람들에게 보여주려고 한다. 하지만 해바라기를 키우는 시간이 부족하다고 한다. 클리티에를 도와서 해바라기 펫을 2차 전직시키고, 60레벨까지 키워서 클리티에에게 가져가자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">75E2C9E1-F32C-4b97-B738-64B3D8C89D17</CLIENT> <!--시작NPC 바람항구 - 클리티에 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">75E2C9E1-F32C-4b97-B738-64B3D8C89D17</PAYER> <!--완료NPC 바람항구 - 클리티에 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">75E2C9E1-F32C-4b97-B738-64B3D8C89D17</AGENT> <!--진행NPC 11 바람항구 - 클리티에 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="PET_CHECK" VALUE="60">65202130</ITEM> 
+ <!--Item_NO=65202150/해바라기 3차 -꽃,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+			<OBJECT1 COUNT="1" TEXT="10017612"/> <!--해바라기 펫 60레벨 달성-->
+		
+	</OBJECTS>
+<LOCAL>
+	 <NAME ID="DEFAULT">
+
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">291304320</ITEM><!--전체지급/전체/1)/291304320(봉인아님) 1개-2012 화창한 여름 날씨(소비)-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+
+ <NAME ID="KOREA">
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">291304450</ITEM><!--전체지급/전체/1)/291304320(봉인아님) 1개-2012 청명한 가을 날씨(소비)-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+</LOCAL>
+
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10017621" FACE="Clytie_normal"/> <!--해바라기 꽃밭을 가꿔야 하는데, 이거 큰일이네.
+아! 거기 가시는 빛이 반짝반짝 나게 멋진 용사님!
+제발 해바라기 꽃밭을 가꾸는 걸 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10017626" FACE="Clytie_smile"/> <!--감사합니다. 덕분에 해바라기 꽃밭을 제시간 안에 가꿀 수 있게 되었어요.
+용사님에게 어울리는 칭호를 선물로 드릴게요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10017623" FACE="Clytie_normal"/> <!--감사합니다. 사실 이번에 여름에 마을에서 커다란 축제가 열리기로 되어 있어요.
+전 마을에 꽃밭을 만들어서 사람들에게 보여 주기로 약속했었어요.%%
+어느 꽃을 키울까 고민하다가 해바라기를 키우기로 했죠.
+하지만 고민을 너무 오랫동안 해서 시간이 너무 많이 지나가 버린 거에요.
+전, 다 자란 커다란 해바라기들을 사람들에게 보여 주고 싶어요.%%
+용사님이 해바라기 펫을 60레벨까지 만드시는 걸 도와주시면 정말 감사할 거에요.
+마법식물의 씨앗 퀘스트를 수행하시면, 마법식물의 씨앗을 얻으실 수 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10017624" FACE="Clytie_cry"/> <!--흑흑, 이제 전 마을에서 거짓말쟁이로 소문이 날 거에요.
+이럴 줄 알았으면, 하루 만에 자란다는 콩나물이나 키울걸.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10017625" FACE="Clytie_cry"/> <!--용사님 지체할 시간이 없어요. 빨리 부탁할게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10017602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="952" > <!--60레벨 달성 후, 펫 착용시-->
+			<BODY TEXT="10017729" FACE="Clytie_normal" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>	
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

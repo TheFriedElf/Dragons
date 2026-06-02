@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4158</ID> <!--T.T.10415801 파멸의 숙명 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	단쿠와 대화-->
+<!--[완료NPC]	카즈라 마을 - 단쿠-->
+<!--[내용]	카즈라 마을에서 우연히 마주친 단쿠라는 노인은, 마치 실성한 것처럼 영문도 모를 말을 남긴다. 그러나 그가 말하는 드라칸의 전설 속에 등장하는 오리진이라는 여신의 이야기는 기이한 감정을 불러일으킨다. 단쿠의 이야기를 들어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4A58ECF6-9494-4623-AD5C-2FC56020133F</CLIENT> <!--시작NPC 카즈라 마을 - 단쿠 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4A58ECF6-9494-4623-AD5C-2FC56020133F</PAYER> <!--완료NPC 카즈라 마을 - 단쿠 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">4A58ECF6-9494-4623-AD5C-2FC56020133F</AGENT> <!--진행NPC 11 카즈라 마을 - 단쿠 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10415811"/> <!--단쿠와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10415821" FACE="Dankoo_normal"/> <!--쿨럭, 쿨럭… 흐으…
+그래… 쿨럭.. 훔…. 네가.. %name%....
+여기저기서 소문이 들리는 그 꼬마 녀석이로구나.%%
+크크크크….%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10415826" FACE="Dankoo_smile"/> <!--하지만… 꼬마...
+이것만은 반드시 기억해두길 바란다.
+오추쿠와 신관 사제들을 믿지마!%%
+그들은 온갖 거짓말로 우리 드라칸들을 속박하지.
+결국 진실은 곧 밝혀질 것이다. 잊지 말거라.%%
+이제 곧 오리진님이 강림하신다.%%
+봉인된 일곱 정령들이 해방되는 순간,
+우리 어머니신은 반드시 다시 돌아온다 약속하셨어. 흐흐흐….
+암… 암… 
+크크크크…%%
+크하하하... 크하하하하하!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10415823" FACE="Dankoo_normal"/> <!--선대의 우리 조상 드라칸들은 어찌 보면 오랜 세월 동안 
+이 좁은 산맥 안에 갇혀 있었지. 왜 그런 줄 알고 있나?%%
+우리 드라칸에게는 태어날 때부터 타고난 숙명이 있어.
+우리는 신이 내린 숙명에 의해 파멸의 요정으로 태어났다.%%
+태초에 천신 에아는 거인족과의 전쟁을 종결짓기 위해
+우리를 만들었지. 가장 신성한 생물체인 드래곤의 알에
+신의 유전자를 집어넣은 것이지.%% 
+그렇게 가장 최초의 드라칸인 오리진님이 태어나게 되었지만...%%
+오오... 우리의 어머니신인 오리진님이 가진 힘은 너무나 
+어둡고 강력한 것이었어.%%
+모든 것을 파멸시킬 강력한 어둠, 그 자체...
+결국 천신 에아는 오리진님을 검은 심연이라는 차원에
+가둬버렸다. 쿨럭, 쿨럭....-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10415824" FACE="Dankoo_normal"/> <!--케케케… 그래, 언젠가 너도 알게되는 날이 올 것이다.
+지금의 이 평화를… 마음 껏 즐기도록 하거라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10415825" FACE="Dankoo_normal"/> <!--(없음)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10415802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

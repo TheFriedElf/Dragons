@@ -1,0 +1,13 @@
+<ACTION ID="a_Final Decision" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_FinalDecision_01"/>
+  <FSM SCRIPT="Skill_FinalDecision" 
+       MULTI_HIT_NUM="9"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID ="ef_Com_skill_FinalDecision_01_char_root"
+       NO_WEAPON_TRAIL="TRUE"
+       NO_DAMAGE_HOLD="TRUE"
+       HIT_SOUND_ID="FinalDecision"
+       FIND_TARGET_TYPE="SPHERE"
+      />
+</ACTION>

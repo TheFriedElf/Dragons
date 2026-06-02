@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+
+
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD TYPE="AddActorFilter" ClassNo="1029585"/>
+    <CMD TYPE="AddNPC" ClassNo="1029585" NameTTID="521238" SpawnPos="10040.3,1900.864,-204.536"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1029585" SlotName="final_02"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" />
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" Time="1"/>
+	<CMD TYPE="WaitTime" Time="2.0"/><!-- 오프닝 시간을 기다림-->
+
+  <!--포트레이트-->
+
+    <CMD TYPE="Dialogue" NameTTID="99801051" TextTTID="99803043" FaceID="Crete_cry"/><!-- 크레테 대사 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1.0"/>
+	
+	<CMD TYPE="Dialogue" NameTTID="99801052" TextTTID="99803044" FaceID="Phius_normal"/><!-- 피오스 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1.0"/>
+	
+	<CMD TYPE="Dialogue" NameTTID="99801052" TextTTID="99803045" FaceID="Phius_smile"/><!-- 피오스 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1.0"/>
+	
+	<CMD TYPE="Dialogue" NameTTID="99801052" TextTTID="99803046" FaceID="Phius_angry"/><!-- 피오스 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1.0"/>
+	
+	<CMD TYPE="Dialogue" NameTTID="99801051" TextTTID="99803047" FaceID="Crete_cry"/><!-- 크레테 대사 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1.0"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801051" TextTTID="99803048" FaceID="Crete_cry"/><!-- 크레테 대사 -->
+	<CMD TYPE="WaitTime" Time="1.0"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="WaitTime" Time="2.0"/><!-- 오프닝 시간을 기다림-->
+	
+	<!-- 엔딩 시간을 기다림-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1029585" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1029585"/>
+
+
+
+	<!--엔딩3-->
+    <CMD TYPE="AddNPC" ClassNo="1029585" NameTTID="522959" SpawnPos="10040.3,1900.864,-204.536"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1029585" SlotName="final_03"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="522959" CameraID="Camera01" UseActorPositionAsSoundListener="true" />
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" Time="1"/>
+	<CMD TYPE="WaitTime" Time="5"/><!-- 오프닝 시간을 기다림-->
+
+	
+	
+	
+	<!--CMD TYPE="WaitTime" Time="6.5"/ --><!-- 오프닝 시간을 기다림-->
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1029585" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1029585"/>
+
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/><!---->
+	<CMD TYPE="ShowActor" UnitType="UT_BOSSMONSTER" Show="true"/><!--보스몬스터 감추기-->
+	<CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="true"/> <!--드랍아이템를 숨기기 -->
+
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="HideUI" enable="false"/>
+
+	
+
+    <!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980117"/>
+
+	
+</EVENT_SCRIPT>

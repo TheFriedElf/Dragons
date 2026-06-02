@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_MANUFACTURE_GAUGE" X="0" Y="0" W="433" H="44" TICK_TIME="1">
+		<ATTR TEXT="26000" FONT="Font_Text" T_X="109" T_Y="-9" T_CENTER="1" FONT_COLOR_HEX = "0xFF0046FF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFFFFFFFF"/>
+		
+		<IMG ID="IMG_BG_BAR" X="5" Y="5" Z="0" W="223" H="34">
+			<ATTR IMG="../Data/6_UI/tech/tcMgG01.tga" IMG_W="223" IMG_H="34" />
+		</IMG>
+		<IMG ID="IMG_HIT_POINT01" X="107" Y="13" Z="1" W="20" H="10">
+			<ATTR IMG="../Data/6_UI/tech/tcMgG02.tga" IMG_W="20" IMG_H="14" />
+		</IMG>
+		<IMG ID="IMG_HIT_POINT02" X="111" Y="13" Z="2" W="11" H="10">
+			<ATTR IMG="../Data/6_UI/tech/tcMgG03.tga" IMG_W="11" IMG_H="14" />
+		</IMG>
+		
+		<IMG ID="IMG_ARROW" X="50" Y="6" Z="3" W="15" H="29">
+			<ATTR IMG="../Data/6_UI/tech/tcMgG04.tga" IMG_W="15" IMG_H="29" />
+		</IMG>
+		<FORM ID="FRM_INPUT_AREA" X="0" Y="0" Z="4" W="233" H="44" >
+			<!-- 입력 받을때 자식 윈도우에 영향 받지 않기 위해 전체로 덮힌 투명폼을 사용 -->
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				OnActionKeyManufactureGaugeUI()
+				return
+			</SCRIPT>
+			<HOTKEY ID="57">
+				OnActionKeyManufactureGaugeUI()
+				return
+			</HOTKEY>
+		</FORM>
+		
+		<FORM ID="FRM_HIT_EFFECT" X="4" Y="5" Z="0" W="225" H="34" IS_VISIBLE="0">
+			<IMG ID="IMG_HIT_EFFECT" X="0" Y="0" Z="1" W="225" H="34">
+				<ATTR IMG="../Data/6_UI/tech/tcMgHR.tga" IMG_W="225" IMG_H="34" />
+			</IMG>
+			<SCRIPT ID="ON_TICK">
+				ShowHitEffectManufactureGaugeUI(UISelf)
+			</SCRIPT>
+		</FORM>
+		
+		<SCRIPT ID="ON_CALL">
+			InitManufactureGaugeUI()
+		</SCRIPT>
+		<!--
+		<SCRIPT ID="ON_DISPLAY">
+			UpdateManufactureGaugeUI(UISelf)
+		</SCRIPT>
+		-->
+		<SCRIPT ID="ON_TICK">
+			UpdateManufactureGaugeUI(UISelf)
+		</SCRIPT>	
+	</FORM>
+	
+	<STATIC_FORM ID="FRM_BUNDLE_MANUFACTURE" ALIGN_X="50" ALIGN_Y="40" W="242" H="288" STATIC_NUM="1" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<STATIC_FORM ID="SFRM_TITLE_BG" X="1" Y="0" Z="1" W="240" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BG_1" X="7" Y="4" W="200" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<ATTR TEXT="26010" T_X="8" T_Y="4" FONT="FTtitle_14" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="200" H="24" STATIC_NUM="3"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_3" X="209" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<BUTTON ID="BNT_CLOSE" X="209" Y="4" Z="1" W="24" H="24">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+				<SCRIPT ID="ON_L_BTN_DOWN"> CloseUI("FRM_BUNDLE_MANUFACTURE") </SCRIPT>				
+			</BUTTON>
+		</STATIC_FORM>
+		
+		<FORM ID="FRM_UI" X="9" Y="35" Z="-1" W="224">
+			<STATIC_FORM ID="SFRM_BG_COLOR_1" X="0" Y="0" Z="-2" W="224" H="208" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_BG_SHADOW_1" X="0" Y="0" Z="-1" W="224" H="208" STATIC_NUM="3"/>
+			<STATIC_FORM ID="SFRM_BG_SOUL" X="12" Y="10" Z="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<IMG ID="IMG_ICON_CURSOR1" X="62" Y="16" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+			<FORM ID="FRM_SOUL_NAME" X="72" Y="11" W="100" H="20" TEXT="26014" T_X="0" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<IMG ID="IMG_ICON_CROSS1" X="72" Y="33" W="14" H="14" IMG="../Data/6_ui/Stone/stXimg.tga" IMG_W="14" IMG_H="14" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<IMG ID="IMG_LINE_1" X="60" Y="56" W="289" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE_2" X="60" Y="57" W="289" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<IMG ID="IMG_ARROW" X="92" Y="61" W="40" H="55" IMG="../Data/6_ui/Stone/stArw2.tga" IMG_W="40" IMG_H="55">
+				<SCRIPT ID = "ON_DISPLAY"> OnProgressUnsealingScroll(UISelf) </SCRIPT>
+			</IMG>
+			<IMG ID="IMG_LINE_3" X="60" Y="119" W="289" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE_4" X="60" Y="120" W="289" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="150" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<STATIC_FORM ID="SFRM_BG_UNSEALINGSCROLL" X="12" Y="122" Z="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<IMG ID="IMG_ICON_CURSOR2" X="62" Y="128" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+			<FORM ID="FRM_SCROLL_NAME" X="72" Y="123" W="200" H="20" TEXT="26015" T_X="0" T_Y="0" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<IMG ID="IMG_ICON_CROSS2" X="72" Y="145" W="14" H="14" IMG="../Data/6_ui/Stone/stXimg.tga" IMG_W="14" IMG_H="14" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<STATIC_FORM ID="SFRM_COUNT" X="12" Y="174" Z="0" W="198" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="400454" T_X="8" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</FORM>
+		<IMG ID="ICON_Item1" X="22" Y="46" Z="1" W="42" H="42">
+			<ATTR IMG="../Data/6_ui/Common/cmSlotBg.tga" IMG_W="42" IMG_H="42" />
+			<!--
+			<SCRIPT ID="ON_CALL">SetSimpleItemIcon(UISelf, 79000030)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">CallSimpleItemToolTip(UISelf, 79000030)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			-->
+		</IMG>
+		<ICON ID="ICON_MATERIAL" X="23" Y="47" Z="2" W="40" H="40" ICON_GRP ="91">
+			<SCRIPT ID = "ON_DISPLAY"> DrawChestIcon(UISelf) </SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_R_BTN_DOWN"> RemoveBundleManMtrl() </SCRIPT>
+			<SCRIPT ID = "ON_L_BTN_UP"> UISelf:CursorToIcon() </SCRIPT>
+		</ICON>
+		<IMG ID="ICON_Item2" X="22" Y="158" Z="1" W="42" H="42">
+			<ATTR IMG="../Data/6_ui/Common/cmSlotQ.tga" IMG_W="84" IMG_H="42" U="2" V="1" UV_INDEX="1" />
+			<!--
+			<SCRIPT ID="ON_CALL">SetSimpleItemIcon(UISelf, 79000040)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">CallSimpleItemToolTip(UISelf, 79000040)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			-->
+		</IMG>
+
+		<STATIC_FORM ID="SFRM_MTRL_COUNT" X="100" Y="64" Z="1" W="119" H="22" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="400454" T_X="8" T_Y="2" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetCustomDataAsInt(0)
+				UISelf:SetStaticText(UISelf:GetCustomDataAsInt())
+			</SCRIPT>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_RESULT_COUNT" X="100" Y="176" Z="1" W="119" H="22" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="400454" T_X="8" T_Y="2" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetCustomDataAsInt(0)
+				UISelf:SetStaticText(UISelf:GetCustomDataAsInt())
+			</SCRIPT>
+		</STATIC_FORM>
+		
+		<BUTTON ID="BTN_INC_COUNT" X="98" Y="213" Z="1" W="18" H="18">
+			<ATTR BTN_IMG="../Data/6_ui/Skill/skUpB.tga" BTN_IMG_W="36" BTN_IMG_H="36"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnIncCountBundleManUI(UISelf:GetParent(), true) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DEC_COUNT" X="118" Y="213" Z="1" W="18" H="18">
+			<ATTR BTN_IMG="../Data/6_ui/Skill/skDnB.tga" BTN_IMG_W="36" BTN_IMG_H="36"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnIncCountBundleManUI(UISelf:GetParent(), false) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_MAX_COUNT" X="140" Y="211" Z="1" W="76" H="22">
+			<ATTR BTN_IMG="../Data/6_ui/Community/gdBt.tga" BTN_IMG_W="152" BTN_IMG_H="44"/>
+			<ATTR TEXT="400455" T_X="38" T_Y="2" FONT="Font_Text" T_OUTLINE="1" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> OnMaxTradeUnsealingScrollCount(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_OK" X="36" Y="249" Z="3" W="84" H="26" IS_ENABLE="0">			
+			<SCRIPT ID="ON_CREATE">
+				SetTextOnThisUI(400700, 2200)
+			</SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">  SendReqBundleMan()	</SCRIPT>
+			<HOTKEY ID="59">  SendReqBundleMan()	return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="122" Y="249" Z="3" W="84" H="26">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400534, 2201) </SCRIPT>
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL">
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+		</SCRIPT>
+	</STATIC_FORM>
+	
+	<BUTTON ID="BTN_GUIDE_LEARN_MANUFACTURE" X="545" Y="658" W="45" H="45" IS_ABSOLUTE_X="1">
+		<ATTR BTN_IMG="../Data/6_ui/main/mnWorksQBt.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+		<!--
+		<SCRIPT ID = "ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(75014), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		-->
+		<SCRIPT ID="ON_L_BTN_DOWN">UISelf:Close() OnClickDetailHelpViewMainByID(1, false)</SCRIPT>
+	</BUTTON>
+	
+</XUI>

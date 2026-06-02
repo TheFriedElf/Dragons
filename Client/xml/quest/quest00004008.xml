@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4008</ID> <!--T.T.10400801 전령의 죄책감은 어디에서 오는가 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	톱날꽃게 해변에서 꼬깨 게맛살 10개 습득-->
+<!--[완료NPC]	톱날꽃게 해변 - 가누-->
+<!--[내용]	배고픈 이 용족 노인을 위한 유일한 방법은 톱날꽃게 해변의 꼬깨들로부터 꼬깨 게맛살 10개를 구해오는 것 뿐. 서두르자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C021FDA9-4516-4076-8305-CEE6BD133408</CLIENT> <!--시작NPC 톱날꽃게 해변 - 가누 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C021FDA9-4516-4076-8305-CEE6BD133408</PAYER> <!--완료NPC 톱날꽃게 해변 - 가누 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C021FDA9-4516-4076-8305-CEE6BD133408</AGENT> <!--진행NPC 11 톱날꽃게 해변 - 가누 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160400800">6010100</MONSTER> 
+ <!--MON_NO=6010100/꼬깨 ,Item_NO=160400800/[Q.ID:04008] 꼬깨 게맛살100%,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/4000/1/1/160400800">6010900</MONSTER> 
+ <!--MON_NO=6010900/톱날꼬깨,Item_NO=160400800/[Q.ID:04008] 꼬깨 게맛살60%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160400800</ITEM> 
+ <!--Item_NO=160400800/[Q.ID:04008] 꼬깨 게맛살,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10400811"/> <!--꼬깨 게맛살-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10400821" FACE="Ganu_normal"/> <!--크… 아아... 이거, 몸을 제대로 움직일 수가 없구만…
+아… 뭐, 뭐라고?%%
+마이트리님이 나를 찾았다고?
+아... 이거… 카즈라에 있는 동족들을 볼 면목이 없네.%%
+오추쿠 장로님이 친히 보낸 서찰을 잃어버렸으니…
+게다가 아무 기억도 나지 않아.. 크헉!%%
+나 같은 퇴물은... 이 무능하고 몹쓸 나이만 먹은 고물단지는…
+이대로 그냥 확 저 바닷물 속으로…!%%
+그래… 하지만... 이보게, 젊은 용사 양반…
+갈 때 가더라도... 부디 이 노인네의 마지막 부탁을 들어주지 않겠는가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10400826" FACE="Ganu_normal"/> <!--아.. 그래…. 이거 정말 고맙구만! 크허허!
+일단.. 염치불구하고…%%
+우적.. 우적… 얌냠냠.. 쩝쩝…
+음…! 딜리샤스… 역시…%%
+부드럽게 감기는 게맛이 일품이구만…
+우적… 우적.. 얌냠냠…%%
+끄어억...!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10400823" FACE="Ganu_normal"/> <!--꼬륵…%%
+꼬르륵…%%
+으흠… 하필이면.. 이런 때에…
+아, 이거 면목이 없구만.%%
+카즈라에서 이곳까지 오는 동안 변변찮게 먹은 것이 없다보니…
+아.. 늙으면 죽어야지… 커흑…%%
+배가 고프니, 이거 원… 어디서 작전명령서를 잃어버린 건지 
+아무런 기억이 나질 않네… 꺼이꺼이!%%
+부탁이네, 젊은이… 내게 먹을 것을 좀 구해다주지 않겠는가?
+이 은혜는 내 죽는 날까지...%% 
+꼬르륵… 꼬륵….-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10400824" FACE="Ganu_angry"/> <!--아, 그래... 그래... 괜찮아… 어여 가게.
+이 늙은이 그냥 이대로 홀로 방치되어 굶어 죽으면 된다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10400825" FACE="Ganu_normal"/> <!--꼬르륵…
+으으… 게… 맛… 살…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10400802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

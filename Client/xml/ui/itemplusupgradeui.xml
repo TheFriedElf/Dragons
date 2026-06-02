@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_ITEM_PLUS_UPGRADE" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<ATTR X = "240" Y = "91" W ="272" H ="412" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="270" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID="SFRM_CLOSE_BG">
+				<ATTR X="239" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID="Close">
+					<ATTR X="0" Y="0" W="24" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">
+						if g_bOnUpgrade == true then 
+							g_bOnUpgrade = false
+							AddWarnDataTT(1221)
+							ArrowReset(UISelf:GetParent():GetParent():GetParent())
+							return 
+						else							
+							UISelf:GetParent():GetParent():CloseParent()
+						end	
+					</SCRIPT>
+					<!--HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY-->
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<IMG ID = "IMG_TAB">
+					<ATTR X="0" Y="0" W="84" H="24" U = "2" V = "2" UV_INDEX = "3"/>
+					<ATTR IMG = "../Data/6_ui/common/cmTabB.tga" IMG_W = "168" IMG_H = "48"/>
+					<ATTR TEXT = "1210" FONT = "FTtitle_14" T_X = "35" T_Y ="5" T_OUTLINE="0" T_CENTER = "1"/>
+				</IMG>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<IMG ID = "IMG_ITEM" X="16" Y="41" W="40" H="40" IMG_W = "40" IMG_H="40" PASS_EVENT="1">			
+			<LOCAL>
+				<NAME ID="DEVELOP">
+					<ATTR IMG="../Data/6_ui/info/ifIconWp.tga"/>
+				</NAME>
+			</LOCAL>
+			<SCRIPT ID="ON_CALL">
+				UISelf:Visible(true)
+			</SCRIPT>
+		</IMG>
+		<STATIC_FORM ID = "SFRM_COLOR">
+			<ATTR X="9" Y="35" W="254" H="304" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="254" H="304" STATIC_NUM = "3" />
+				<STATIC_FORM ID = "SFRM_SRC">
+					<ATTR X="6" Y="6" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>					
+					<ICON ID = "ICN_SRC">
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="110" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_L_BTN_DOWN">
+							local wnd = ItemPlusUpgradeWnd(UISelf)
+							--wnd:ClearUpgradeData()
+						</SCRIPT>
+						<SCRIPT ID = "ON_L_BTN_UP">
+							UISelf:CursorToIcon()
+						</SCRIPT>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemPlusUpgradeWnd(UISelf)
+							wnd:DisplaySrcIcon()
+						</SCRIPT>
+						<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+							
+						<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+					</ICON>
+				</STATIC_FORM>
+				<FORM ID = "FRM_ARROW1" X="56" Y="3" W="100" H="24">
+					<IMG ID="IMG_ARROW" X="0" Y="9" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					<ATTR TEXT = "1211" FONT = "Font_Text" T_X = "7" T_Y ="5" T_OUTLINE="0" />
+				</FORM>
+				<STATIC_FORM ID = "SFRM_SRC_NAME">
+					<ATTR X="52" Y="25" W="196" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "4" T_Y ="4" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</STATIC_FORM>
+				<IMG ID="IMG_LINE_1" X="49" Y="49" W="197" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="197" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="49" Y="50" W="197" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="197" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<BUILD TARGET_ID="FRM_MATERIAL" X="86" Y="57" X_COUNT = "1" Y_COUNT = "3" X_GAB = "0" Y_GAB = "49"/>
+				
+				<LOCAL>
+					<NAME ID="DEVELOP">
+						<STATIC_FORM ID="SFRM_SUC_RATE" X="86" Y="201" W="162" H="45" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" T_X="81" T_Y="3" T_CENTER="1" TEXT="1244" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413">
+							<FORM ID="FRM_BG" X="3" Y="20" W="155" H="22" Z="-1" IMG="../Data/6_ui/etc/etcICT.tga" IMG_W="155" IMG_H="22"/>
+							<FORM ID="FRM_NOW_T" X="4" Y="21" W="39" H="20" T_X="37" T_Y="2" T_RIGHT="1" TEXT="1245" FONT="FT11" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+							<FORM ID="FRM_NOW" X="43" Y="22" W="37" H="18" T_X="33" T_Y="2" T_RIGHT="1" TEXT="" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFF45C" T_OUTLINE="1"/>
+							<FORM ID="FRM_MAX_T" X="80" Y="21" W="39" H="20" T_X="37" T_Y="2" T_RIGHT="1" TEXT="1236" FONT="FT11" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+							<FORM ID="FRM_MAX" X="119" Y="22" W="37" H="18" T_X="33" T_Y="2" T_RIGHT="1" TEXT="" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+						</STATIC_FORM>
+					</NAME>
+				</LOCAL>
+
+				<FORM ID = "FRM_MATERIAL">
+					<ATTR X="0" Y="0" W="162" H="45"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "47" T_Y ="24" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<STATIC_FORM ID = "SFRM_MATERIAL">
+						<ATTR X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>		
+						<ICON ID = "ICN_MATERIAL" X="1" Y="1" W="40" H="40">
+							<ATTR ICON_GRP ="254" ICON_KEY = "0"/>
+							<SCRIPT ID = "ON_DISPLAY">
+								local wnd = ItemPlusUpgradeWnd(UISelf)
+								wnd:DisplayNeedItemIcon()
+							</SCRIPT>
+							<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip()  </SCRIPT>
+							<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+							<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+							<!--SCRIPT ID = "ON_L_BTN_UP">
+								local BuildIdx = UISelf:GetParent():GetParent():GetBuildIndex()
+								if 1 == BuildIdx then
+									UISelf:SetIconGroup(111)
+								elseif 2 == BuildIdx then
+									UISelf:SetIconGroup(112)
+								end
+								UISelf:CursorToIcon() 
+							</SCRIPT-->
+						</ICON>
+					</STATIC_FORM>
+					<STATIC_FORM ID = "SFRM_MATERIAL_NAME">
+						<ATTR X="46" Y="0" W="116" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+						<ATTR TEXT = "" FONT = "Font_Text" T_X = "4" T_Y ="4" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					</STATIC_FORM>
+					<IMG ID="IMG_LINE_1" X="3" Y="44" W="159" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="159" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+					<IMG ID="IMG_LINE_2" X="3" Y="45" W="159" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="159" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+					<BUTTON ID="BTN_REG" X="27" Y="27" W="14" H="14" Z="1" BTN_IMG="../Data/6_ui/skill/skBup.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="0">
+						<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local wnd = ItemPlusUpgradeWnd(UISelf:GetParent())
+							wnd:SetMaterialItem(false)
+						</SCRIPT>
+					</BUTTON>
+					<BUTTON ID="BTN_DEREG" X="1" Y="27" W="14" H="14" Z="1" BTN_IMG="../Data/6_ui/skill/skBdown.tga" BTN_IMG_W="28" BTN_IMG_H="28" IS_VISIBLE="0">
+						<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+						<SCRIPT ID="ON_L_BTN_DOWN">
+							local kSelf = UISelf:GetParent()
+							local wnd = ItemPlusUpgradeWnd(kSelf)
+							if kSelf:GetBuildIndex() == 2 then
+								wnd:SetProbabilityMinus()
+							else
+								wnd:SetMaterialItem(true)						
+							end
+						</SCRIPT>
+					</BUTTON>
+				</FORM>
+
+				<STATIC_FORM ID = "SFRM_DEST">
+					<ATTR X="6" Y="256" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<ICON ID = "ICN_DEST">
+						<ATTR X="1" Y="1" W="40" H="40"/>
+						<ATTR ICON_GRP ="105" ICON_KEY = "0"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							wnd = ItemPlusUpgradeWnd(UISelf)
+							wnd:DisplayResultItemIcon()
+						</SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+						<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+						<IMG ID = "IMG_Q" W = "40" H = "40" IMG_W = "40" IMG_H = "40" IMG="../Data/6_ui/icon/IconQmark.tga" IS_VISIBLE = "0"/>
+					</ICON>
+				</STATIC_FORM>
+
+				<STATIC_FORM ID = "SFRM_DEST_NAME">
+					<ATTR X="52" Y="275" W="196" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "4" T_Y ="4" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+				</STATIC_FORM>
+
+				<FORM ID = "FRM_ARROW2" X="56" Y="254" W="100" H="24">
+					<IMG ID="IMG_ARROW" X="0" Y="9" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+					<ATTR TEXT = "1212" FONT = "Font_Text" T_X = "7" T_Y ="5" T_OUTLINE="0" />
+				</FORM>
+				<IMG ID="IMG_LINE_3" X="49" Y="254" W="197" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="197" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_4" X="49" Y="255" W="197" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="197" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<FORM ID = "FRM_DOWN_ARROW_BG" >
+					<ATTR X="15" Y="48" W="24" H="208" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow01.tga" IMG_W = "24" IMG_H = "208"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="24" H="208" IMG="../Data/6_ui/refine/rfArrow01cl.tga" IMG_W="24" IMG_H="208" />
+						<SCRIPT ID = "ON_DISPLAY">
+							local kSize = UISelf:GetSize()
+							if g_bOnUpgrade == nil or g_bOnUpgrade == false then
+								kSize:SetY(0)
+								UISelf:SetImgSize(kSize)
+								return
+							end
+							if g_fUpgradeStartTime == nil then
+								return
+							end
+							local fDelta = GetAccumTime() - g_fUpgradeStartTime
+							if fDelta >= 1.2 then
+								g_bOnUpgrade = false
+								local wnd = ItemPlusUpgradeWnd(UISelf)
+								wnd:SendReqPlusUpgrade(true)
+							else
+								local iH = fDelta/1.2*kSize:GetY()
+								local iMinH = math.min(iH, kSize:GetY())
+								kSize:SetY(iMinH)
+								UISelf:SetImgSize(kSize)
+								if fDelta >=2 and nil ~= g_bUpgradeSound then
+									if g_bUpgradeSound == false then
+										g_bUpgradeSound = true
+
+									end
+								end
+							end
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_ARROW_BG1" >
+					<ATTR X="33" Y="67" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow02cl.tga" IMG_W="54" IMG_H="22" />
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemPlusUpgradeWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 0, 0.15, 0.1, g_bOnUpgrade, g_fUpgradeStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_ARROW_BG2" >
+					<ATTR X="33" Y="116" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow03cl.tga" IMG_W="54" IMG_H="22" NO_OFFSCREEN = "1"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemPlusUpgradeWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 1, 0.15, 0.35, g_bOnUpgrade, g_fUpgradeStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<FORM ID = "FRM_ARROW_BG3" >
+					<ATTR X="33" Y="165" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow04cl.tga" IMG_W="54" IMG_H="22" NO_OFFSCREEN = "1"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemPlusUpgradeWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 2, 0.15, 0.6, g_bOnUpgrade, g_fUpgradeStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM>
+				<!--FORM ID = "FRM_ARROW_BG4" >
+					<ATTR X="33" Y="214" W="54" H="22" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+					<ATTR IMG = "../Data/6_ui/refine/rfArrow02.tga" IMG_W = "54" IMG_H = "22"/>
+					<IMG ID="IMG_ARROW">
+						<ATTR X="0" Y="0" W="54" H="22" IMG="../Data/6_ui/refine/rfArrow05cl.tga" IMG_W="54" IMG_H="22" NO_OFFSCREEN = "1"/>
+						<SCRIPT ID = "ON_DISPLAY">
+							local wnd = ItemPlusUpgradeWnd(UISelf)
+							ArrowDisplay(UISelf, wnd, 3, 0.3, 1.6, g_bOnUpgrade, g_fUpgradeStartTime)
+						</SCRIPT>
+					</IMG>
+				</FORM-->
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR2">
+			<ATTR X="9" Y="341" W="254" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W="254" H="26" STATIC_NUM = "3" />
+				<ATTR TEXT = "1213" FONT = "Font_Text" T_X = "12" T_Y ="5" T_OUTLINE="0" />
+				<FORM ID="FRM_COIN1">
+					<ATTR X="92" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemPlusUpgradeWnd(UISelf)
+						UISelf:DrawMoneyByValue(1, wnd:GetUpgradeNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN2">
+					<ATTR X="140" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemPlusUpgradeWnd(UISelf)
+						UISelf:DrawMoneyByValue(2, wnd:GetUpgradeNeedMoney())
+					</SCRIPT>
+				</FORM>
+				<FORM ID="FRM_COIN3">
+					<ATTR X="187" Y="5" W="50" H="16"/>
+					<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1" FONT_COLOR_HEX="0xFF4D3413"/>
+					<SCRIPT ID="ON_DISPLAY">
+						wnd = ItemPlusUpgradeWnd(UISelf)
+						UISelf:DrawMoneyByValue(3, wnd:GetUpgradeNeedMoney())
+					</SCRIPT>
+				</FORM>
+
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUTTON ID = "BTN_TRY_REFINE">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(1214, 2200)	</SCRIPT>
+			<ATTR X="51" Y="373" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if g_bOnUpgrade == true then 
+					return 
+				end
+				local wnd = ItemPlusUpgradeWnd(UISelf)
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallCheckInsureItem()
+				else
+					CommonMsgBoxByTextTable(iError, true)
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				if g_bOnUpgrade == true then 
+					return 
+				end
+				local wnd = ItemPlusUpgradeWnd(UISelf)
+				local iError = wnd:CheckOK()
+				if iError == 0 then
+					wnd:CallCheckInsureItem()
+				else
+					CommonMsgBoxByTextTable(iError, true)
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400003, 2201)	</SCRIPT>
+			<ATTR X="137" Y="373" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if g_bOnUpgrade == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemPlusUpgradeWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+			</SCRIPT>
+			<HOTKEY ID="1">
+				if g_bOnUpgrade == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemPlusUpgradeWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+			<HOTKEY ID="60">
+				if g_bOnUpgrade == true then 
+					g_bOnUpgrade = false
+					AddWarnDataTT(1221)
+					wnd = ItemPlusUpgradeWnd(UISelf)
+					wnd:Clear()
+					ArrowReset(UISelf:GetParent())
+					return 
+				else
+					UISelf:CloseParent()
+				end
+				return true
+			</HOTKEY>
+			
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			local wnd = ItemPlusUpgradeWnd(UISelf)
+			wnd:Clear(true)
+			CloseUI("Inv")
+		</SCRIPT> 
+		<SCRIPT ID = "ON_CALL">
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+			local wnd = ItemPlusUpgradeWnd(UISelf)
+			wnd:Clear()
+			ArrowReset(UISelf)
+			CloseUI("SFRM_MSG_TRADE")
+			CloseUI("SFRM_MSG_TRADE_REQUEST")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 240, 91)</SCRIPT>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_REFINE">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="122" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="70" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="70" STATIC_NUM="3" />
+				<ATTR TEXT="" FONT="Font_Text" T_X="95" T_Y="13" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID = "ON_CALL">
+					UISelf:SetStaticText("")			
+				</SCRIPT>
+				<!--SCRIPT ID = "ON_DISPLAY">
+					local t = UISelf:GetStaticText()
+					local ts = t:Length()
+					local t_y = 55-ts*0.5
+					UISelf:SetTextPos(Point2(95,t_y))
+				</SCRIPT-->
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID = "BTN_TRY_REFINE">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(1214, 2200)	</SCRIPT>
+			<ATTR X="18" Y="83" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				if g_bOnUpgrade == true then 
+					return 
+				end
+				local wnd = ItemPlusUpgradeWnd(UISelf)
+
+				if wnd:SendReqPlusUpgrade(false) == false then
+					AddWarnDataTT(60003)
+				else
+					UISelf:CloseParent()
+					g_bOnUpgrade = true
+					g_fUpgradeStartTime = GetAccumTime() 
+					g_bUpgradeSound = false
+					local	kActor = GetMyActor()
+					if false == kActor:IsNil() then
+						kActor:AttachSound(2998, "Enchant")
+					end
+				end
+			</SCRIPT>
+			<HOTKEY ID="59">
+				if g_bOnUpgrade == true then 
+					return  true
+				end
+				local wnd = ItemPlusUpgradeWnd(UISelf)
+
+				if wnd:SendReqPlusUpgrade(false) == false then
+					AddWarnDataTT(60003)
+				else
+					UISelf:CloseParent()
+					g_bOnUpgrade = true
+					g_fUpgradeStartTime = GetAccumTime()
+					g_bUpgradeSound = false
+					local	kActor = GetMyActor()
+					if false == kActor:IsNil() then
+						kActor:AttachSound(2998, "Enchant")
+					end
+				end
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR X="104" Y="83" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="1">	 UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<FORM ID = "FRM_ITEM_PLUS_UPGRADE_STATE">
+  		<ATTR ALIGN_X = "50" ALIGN_Y = "40" W ="265" H ="77" CAN_DRAG = "0" />
+		<ATTR IMG = "../Data/6_ui/12_ItemPlusUpgrade/RefineTbg.tga" IMG_W = "265" IMG_H = "77"/>
+		<ATTR FONT = "Font_Text" TEXT = "1200" T_X = "40" T_Y ="45" T_OUTLINE ="0"/>
+
+		<ANI_BAR ID = "BAR_TIMER">
+			<ATTR X= "10" Y = "12" W ="240" H ="20" />
+			<ATTR U = "1" V = "1" /> 
+			<ATTR BAR_COUNT = "1"/>
+			<ATTR BAR_IMG = "../Data/6_ui/12_ItemPlusUpgrade/RefineTbar.tga" BAR_IMG_W = "240" BAR_IMG_H = "20"/>	
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "110" T_Y ="3" />
+			<SCRIPT ID = "ON_DISPLAY">
+				UISelf:DisplayTimeBar(true)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				UISelf:SetStartTime(5000)
+			</SCRIPT>
+			<SCRIPT ID = "ON_BAR_FULL">
+				wnd = ItemPlusUpgradeWnd(UISelf)
+				wnd:SendReqPlusUpgrade(true)
+				wnd:ClearUpgradeData()
+			</SCRIPT>
+		</ANI_BAR>
+
+	</FORM>
+</XUI>

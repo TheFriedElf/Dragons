@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4105</ID> <!--T.T.10410501 파멸의 삼위일체 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	카즈라 마을에서 타루부와 대화-->
+<!--[완료NPC]	카즈라 마을 - 타루부-->
+<!--[내용]	타루부는 용족 전사들의 귀환을 방해하는 마물에 대해 알고 있다고 한다. 카즈라 마을에서 현자 타루부와 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D66550AB-63CC-4ea1-881C-0EBB953E2D94</CLIENT> <!--시작NPC 카즈라 마을 - 라노타 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</PAYER> <!--완료NPC 카즈라 마을 - 타루부 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D66550AB-63CC-4ea1-881C-0EBB953E2D94</AGENT> <!--진행NPC 11 카즈라 마을 - 라노타 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</AGENT> <!--진행NPC 12 카즈라 마을 - 타루부 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10410511"/> <!--타루부와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10410521" FACE="Lanota_normal"/> <!--해방된 아카나이를 추적하기 위해 우리 신관 전사 전원은 
+바삐 움직이고 있지만, 터무니 없을 정도로 상황이 열악하다.%%
+카즈라 외부로 나간 신보 탈환대의 지원이 절실한 상황인데...
+우리 용족 전사들의 귀환을 방해하는 존재를 포착했다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10410526" FACE="Tarubu_smile"/> <!--왔구나. %name%....
+너도 잘 알 것이니라. 
+소혼강령의 술법은 생명이 없는 물질 속에 생명과 이성을 집어 넣는 술법…%%
+우리 카즈라의 소환사들이 사용하는 소환술법도 이와 원리가 같다.
+물론 사악한 용의 아이들을 봉인시켜놓은 신보는 더할 나위 없지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10410523" FACE="Lanota_smile"/> <!--타루부님에게 가면 이 사악한 존재들에 대해 이야기를 들을 수 
+있을 것이다. 서둘러 현자 타루부님께 가보도록. 이상!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10410524" FACE="Lanota_angry"/> <!--귀관의 요청을 거부한 너의 얼굴을 똑똑히 기억할 것이다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10410525" FACE="Lanota_normal"/> <!--타루부님은 이곳 카즈라 마을에 계신다. 서둘러 가보도록!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10410502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,6 @@
+<ACTION ID="a_Use Enchant" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_04"/>  
+  <FSM SCRIPT="Act_Use_UICall"
+       CALL_UI_NAME="SFRM_ITEM_PLUS_UPGRADE"/>
+</ACTION>

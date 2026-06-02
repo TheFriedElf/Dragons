@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_Mon_blzard">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSkill/Claymore/Claymore.kfm</KFMPATH>
+		<SCRIPT SRC="SkillActor/SummonThorn.lua">
+			<ITEM NAME="SummonHand_Initialize" TYPE="INIT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      
+    
+	        <ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000000" RANGE_EFFECT="EF_Pattern_BlizzardRing"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000000" RANGE_EFFECT="EF_Pattern_BlizzardRing"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000001" RANGE_EFFECT="EF_Pattern_BlizzardRing" PROJECTILE_ID="PROJECTILE_Blizzard_mon" PROJECTILE_SCALE="2.5" PROJECTILE_COUNT="30" FIRE_TERM="0.2" PROJECTILE_QUAKE_FACTOR="0.5" ARRIVED_EFFECT="ef_Blizzard_00002" ARRIVED_EFFECT_SCALE="1.5"/>
+	
+	
+	
+	</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

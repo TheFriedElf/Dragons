@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030110_FD" DESCRIPTION="90301100">
+  <GSAPATH>../Data/3_World/03_Solaiden/01_Level/030110_FD.gsa</GSAPATH>
+  <MINIMAP Y="120" H="300">../Data/3_World/03_Solaiden/01_Level/030110_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/SilentForest.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!-- 버섯마을 게이트 -->
+  <TRIGGER ID="gate_028100_base" TYPE="PORTAL" TITLE_TEXT_ID="801003" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9028100" PARAM2="4" />
+  </TRIGGER>
+  <!-- 잊혀진 마을 게이트 -->
+  <TRIGGER ID="gate_030100_base" TYPE="PORTAL" TITLE_TEXT_ID="800055" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030100" PARAM2="1" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!-- 부서진 버섯공장 게이트 -->
+  <TRIGGER ID="gate_030140_base" TYPE="PORTAL" TITLE_TEXT_ID="800058" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030140" PARAM2="4" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!-- 텔레 점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="550" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="550" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="350" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="350" />
+  </TRIGGER>
+
+  <WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1" />
+  <FOG DENSITY="0" FUNC="Z_LINEAR" START="1825" END="6084" COLOR="0.8352941,0.8,0.7411765"/>
+</WORLD>

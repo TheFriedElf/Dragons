@@ -1,0 +1,10 @@
+<ACTION ID="a_Sleep Smell" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_SleepSmell_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_TARGET_NODE_TO_WORLD_POS_WITH_ROTATE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_SleepSmell_01_char_root"
+       NO_WEAPON_TRAIL="TRUE"
+       HIT_SOUND_ID="SleepSmell"
+       FIND_TARGET_TYPE="SPHERE"/>
+</ACTION>

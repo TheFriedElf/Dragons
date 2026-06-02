@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="o_BoxWood">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.5">../Data/2_Mon/N_BoxWood/N_BoxWood.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="20"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="break_01" ANIMATION="1000011"/>
+			<ITEM NAME="shake_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

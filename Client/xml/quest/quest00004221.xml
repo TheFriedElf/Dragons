@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4221</ID> <!--T.T.10422101 빛의 신보, 정화… -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	빛의 신보 정화-->
+<!--[완료NPC]	빛의 신보-->
+<!--[내용]	빛의 신보로부터 해방된 고대의 드라칸 정령 아카나이를 막기 위해… 수많은 드라칸 전사들이 아키아 동굴로 향했으나 대부분 중상을 입었다. 특히 해방된 아카나이를 신보에 구속시키려 했던 그림자의 사제 루는 자신의 목숨을 희생하여 신보의 오염도를 낮추는 가루다의 술법을 사용하였으나 미지의 힘에 의해 사라지고 만다. 희생된 사제들과 전사들을 위하여 아키아 동굴에서 빛의 신보를 찾아 정화시키자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">48AB8C5A-FB6A-467d-B914-01514408440A</CLIENT> <!--시작NPC 카즈라 마을 - 오추쿠 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D9A7AA4-A048-4955-941D-B1B72174FED8</PAYER> <!--완료NPC 빛의 신보 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">48AB8C5A-FB6A-467d-B914-01514408440A</AGENT> <!--진행NPC 11 카즈라 마을 - 오추쿠 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">3D9A7AA4-A048-4955-941D-B1B72174FED8</AGENT> <!--진행NPC 12 빛의 신보 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10422111"/> <!--빛의 신보 정화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10422121" FACE="Ocuku_normal"/> <!--오오… 야나이와 루, 두 사제들의 일은 무척 서글픈 일이라오.
+사악한 아카나이 때문에 한사람은 죽고, 또 한사람은
+영영 사라져버렸으니 말이오…%%
+이런 비극이 다시금 이어지게 해서는 아니되오.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10422126" FACE="cintamani_smile"/> <!--(빛의 신보가 지금까지와는 다른 신비한 기운을 내뿜기 시작한다.) -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10422123" FACE="Ocuku_normal"/> <!--우리 드라칸 일족의 생텀 가디언…
+신관의 전사, %name%이시어!
+부디 두 자매의 비극이 깃든 저 빛의 신보를 정화해 주시오.%%
+오늘 그대가 이 장엄한 사명을 이루어낸다면…
+하늘의 별이 되어버린 야나이 사제도, 
+안개 속으로 자취를 감춘 루 사제도%%
+분명히 당신을 자랑스러워 할 것이오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10422124" FACE="Ocuku_angry"/> <!--부디 이 슬픔을 딛고, 마음의 평정을 찾아야 할 것이오. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10422125" FACE="Ocuku_angry"/> <!--빛의 신보는 정화되었소이까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10422102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

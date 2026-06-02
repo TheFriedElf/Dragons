@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Kampa_muchine" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+		<KFMPATH SCALE="0.7">../Data/2_Mon2/95_Dungeon/03_EliteMon/050601/Kampa_muchine/Kampa_muchine.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="0.7">../Data/2_Mon2/95_Dungeon/03_EliteMon/050601/Kampa_muchine/Kampa_muchine_die.kfm</SUB_KFMPATH>
+
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="85,110,160"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000000"/>
+
+
+			<!-- 몬스터 여러번 소환-->
+
+		    <ITEM NAME="btlidle_loop_01_start"  ANIMATION="1000631"/>
+			<ITEM NAME="btlidle_loop_01" LOOP="TRUE" ANIMATION="1000632"/>
+			<ITEM NAME="attk_loop_01" ANIMATION="1000633"/>
+			<ITEM NAME="attk_after_loop_01" LOOP="TRUE" ANIMATION="1000633"/>
+			<ITEM NAME="finish_loop_01" ANIMATION="1000635"/>
+			<ITEM NAME="idle_01"/>
+
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="Opening" ANIMATION="1000000"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000013" VELOCITY="1" VELOCITY_INIT="1"/>
+	
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2233</ID> <!--T.T.10223301 고요한 묘지 만들기 대작전 (1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 스미스와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 스미스-->
+<!--[내용]	스미스는 달빛해안 마을에 있는 지하묘지에서 나는 소음을 이대로 두고 볼 수 없다고 한다. 원인을 파악하고 해결해야 한다는 스미스와 얘기해 보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B62D7CB2-0B35-402f-9117-43AA95707E9E</CLIENT> <!--시작NPC 달빛해안 마을 - 스미스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B62D7CB2-0B35-402f-9117-43AA95707E9E</PAYER> <!--완료NPC 달빛해안 마을 - 스미스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011"  MARK="END">B62D7CB2-0B35-402f-9117-43AA95707E9E</AGENT> <!--진행NPC 11 달빛해안 마을 - 스미스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10223311"/> <!--스미스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10223321" FACE="Darby_normal"/> <!--이거 마음이 편하지가 않아.
+돌아가신 분들도 마음이 편치 않을 거야.
+지하묘지 말이야. 그곳에서 나는 소음이 보통 문제가 아니야.
+네 생각은 어때?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10223326" FACE="Darby_smile"/> <!--묘를 지키는 라르엘과 얘기해 보는 게 좋을 것 같아.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10223323" FACE="Darby_smile"/> <!--너도 역시 그렇게 생각하는 거지?
+라르엘이 묘를 지키고 있긴 하지만 해결되는 것 같지 않아서 신경이 쓰여.%%
+나라도 나서서 해결할 필요가 있겠어.
+어때? 너와 함께하고 싶은데, 도와 줄거지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10223324" FACE="Darby_angly"/> <!--알 필요가 없다고?
+너 정말 너무 냉정한 거 아니야? 
+우리들의 조상이라고!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10223325" FACE="Darby_normal"/> <!--방법이 있을 텐데...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10223302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

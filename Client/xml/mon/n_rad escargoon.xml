@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Rad Escargoon" INIT_ACTION="a_opening">
+	<TEXTURE SRC="n_escargoon01.dds">../Data/2_Mon/N_Escargoon/n_rad escargoon01.dds</TEXTURE>
+	<TEXTURE SRC="n_escargoon02.dds">../Data/2_Mon/N_Escargoon/n_rad escargoon02.dds</TEXTURE>
+	<TEXTURE SRC="n_escargoon01_glow.dds">../Data/2_Mon/N_Escargoon/n_rad escargoon01_glow.dds</TEXTURE>
+	<TEXTURE SRC="n_escargoon02_glow.dds">../Data/2_Mon/N_Escargoon/n_rad escargoon02_glow.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Rad Escargoon"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Escargoon/N_Escargoon.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Escargoon/N_Rad Escargoon_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="45,14" ROTATE="1,0,0,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"  VELOCITY="50" VELOCITY_INIT="60"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_Marionette" ALWAYS_GLOWMAP="TRUE">
+	<TEXTURE SRC="Club_Mania_Devil_shouting.dds">../Data/1_Cha/9_SSkill/Hell_Shouting/Club_Mania_Devil_shouting.dds</TEXTURE>
+	<TEXTURE SRC="Club_Mania_Devil_shouting_Glow.dds">../Data/1_Cha/9_SSkill/Hell_Shouting/Club_Mania_Devil_shouting_Glow.dds</TEXTURE>
+	<TEXTURE SRC="Club_Mania_Devil02.dds">../Data/1_Cha/9_SSkill/Club_Mania/Club_Mania_Devil02.dds</TEXTURE>
+	<TEXTURE SRC="Club_Mania_Devil02_Glow.dds">../Data/1_Cha/9_SSkill/Club_Mania/Club_Mania_Devil02_Glow.dds</TEXTURE>
+	<TEXTURE SRC="rope.dds">../Data/1_Cha/9_SSkill/Marionette/rope.dds</TEXTURE>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.2">../Data/1_Cha/9_SSKill/Marionette/Marionette.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="Marionette_skill_01" ANIMATION="1000000"/>
+      <ITEM NAME="Marionette_skill_02" ANIMATION="1000001"/>
+	  <ITEM NAME="Marionette_skill_03" ANIMATION="1000002"/>
+	  <ITEM NAME="Marionette_skill_04" ANIMATION="1000003"/>
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

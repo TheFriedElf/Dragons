@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 미션(아케이드) 첫 진입 -->
+    <CMD type="waittime" time="1"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<!-- 카메라를 이벤트 전용 카메라로 바꾼다. -->
+	<!-- 캐릭터가 말을한다. -->
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505818" TextTTID="505813" FaceID="Helper_smile"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD type="waittime" time="0"/>
+	<!-- 플레이어 이동 가능 -->
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+</EVENT_SCRIPT>

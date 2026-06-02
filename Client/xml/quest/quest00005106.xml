@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5106</ID> <!--T.T.10510601 던지지마! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스카이피 신전의 스켈레톤 투척병 25마리를 처리하자-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	제시는 스카이피 신전에 약초를 캐러 갔다가 뭔가 딱딱한 것에 머리를 맞았다고 한다. 그래서 놀라서 살펴 보니까 스켈레톤 투척병이 자신에게 뭔가를 던지고 있었다고 한다. 던지는 것중에는 위험한 물건도 있어서 얼른 자리를 피했지만 상당히 위험한 순간이었다고 한다. 스카이피 신전에서 아무 물건이나 집어 던지는 스켈레톤 투척병 25마리의 버릇을 고쳐주자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3CD863C-444D-40ee-B976-083D98067B1B</CLIENT> <!--시작NPC 달빛해안 마을 - 하임 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 11 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010210/1">6014600</MONSTER> 
+ <!--MON_NO=6014600/스켈레톤 투척병,MAP_NO=9010210/스카이피 신전,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="25" TEXT="10510611"/> <!--스켈레톤 투척병-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10510621" FACE="Coneil_normal"/> <!--크- 머리에 혹이 생겼어. 어제 스카이피 신전에 필요한 약재가 있어서 찾으러 갔었어.
+그런데 갑자기 머리에 뭔가 뼈다귀 같은 것이 날아온 거야. 
+딱! 소리와 함께 머리에 혹이 생기고 말았어.%%
+깜짝 놀라서 주위를 둘러 보니까. 스켈레톤 투척병이 있었어. 
+녀석들 뼈다귀 뿐만 아니라 위험한 도끼 같은 것도 던지고 있었어.%%
+급하게 빠져 나왔지만 머리에 혹은 생기고 말았지.
+위험하게 물건을 함부로 던지는 스켈레톤 투척병의 버릇을 고쳐줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10510626" FACE="Coneil_smile"/> <!--고마워. 이제 안심하고 약초를 캐러 갈 수 있겠어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10510623" FACE="Coneil_normal"/> <!--도대체 녀석들 뭐가 문제이지 모르겠군.
+아마 가정에서 보살핌을 받지 못했을 거야.
+녀석들 삐적 말라서 뼈만 나와 있잖아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10510624" FACE="Coneil_angly"/> <!--쳇, 도와주지 않겠다는 거야? 내가 찾으려는 약초는 굉장히 귀한 약초야.
+나중에 필요하다고 생떼를 써도 주지 않을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10510625" FACE="Coneil_normal"/> <!--뼈다귀에 맞아서 다행이 다른 것에 맞았으면, 어휴 생각만해도 무섭군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10510602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

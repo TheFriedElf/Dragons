@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Ryvius" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="124">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Ryvius"/>
+		<KFMPATH>../Data/2_Mon2/95_Dungeon/04_Boss/020700/Ryvius/Ryvius.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="90"/>
+			<SPHERE TO="p_hit_point_02" SIZE="90"/>
+		</ABV>
+		<SLOT>
+			
+				<!-- 2단치기 -->
+			<ITEM NAME="breath_btlidle_02_start" ANIMATION="1000301"/>
+			<ITEM NAME="breath_btlidle_02" ANIMATION="1000302" QUAKE_TIME="0.5" QUAKE_FACTOR="0.7"/>
+			<ITEM NAME="breath_02" ANIMATION="1000303"/>
+			
+			
+			
+			
+			<!-- 쓰러지기 스킬 -->
+			<ITEM NAME="btlidle_02_skill_attk_start" ANIMATION="1000304"/>
+			<ITEM NAME="btlidle_02_skill_attk" ANIMATION="1000305"/>
+			<ITEM NAME="skill_attk_02" ANIMATION="1000306"/>
+			
+
+				<!-- 꼬리치기 -->
+			<ITEM NAME="btlidle_03_skill_attk_start" ANIMATION="1000307"/>
+			<ITEM NAME="btlidle_03_skill_attk" ANIMATION="1000308" QUAKE_TIME="0.5" QUAKE_FACTOR="0.7"/>
+			<ITEM NAME="skill_attk_03" ANIMATION="1000309"/>
+			
+
+			
+						
+				<!-- 버섯소환 -->
+
+			<ITEM NAME="attk_03_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000900"/>
+			
+			
+			
+			<!-- 연속쏘기 -->
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000311"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000312" FIRE_START_NODE="p_ef_mouth" PROJECTILE_ID="Projectile_Spikewall" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000313" FIRE_START_NODE="p_ef_mouth" PROJECTILE_ID="Projectile_Spikewall" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000314"/>
+		
+
+					<!-- 쏘기 -->
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000311"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000312" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_Icewall" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="shot_return_02" ANIMATION="1000314"/>
+
+			<!-- 브래스 소리지르기 -->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347"/>
+			<ITEM NAME="breath_01_finish" ANIMATION="1000348"/>
+
+				<!--뛰어들어물기 -->
+			<ITEM NAME="dash_after_attk_btlidle_01_start" ANIMATION="1000414" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_btlidle_01" ANIMATION="1000415" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_rush" ANIMATION="1000416" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_01_02" ANIMATION="1000417" FIRE_EFFECT="NONE"/>
+
+			
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000900" QUAKE_TIME="1.5" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000019" QUAKE_TIME="3" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			
+
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000013"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000013" VELOCITY="1" VELOCITY_INIT="1"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000013"/>
+			<ITEM NAME="StandUp" ANIMATION="1000005"/>
+
+			<ITEM NAME="Stun" ANIMATION="1000306"/>
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+					<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

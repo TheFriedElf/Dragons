@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4184</ID> <!--T.T.10418401 벌목꾼의 등장 (3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	구식 원형 톱날 12개 습득-->
+<!--[완료NPC]	솔방울 언덕 - 오르하-->
+<!--[내용]	오르하는 나무꾼들을 퇴치하는 것도 좋은 방법이지만, 나무꾼들이 쓰는 벌목 장비를 빼앗는 것이 더욱 효과적일 것이라 생각한다. 무녀 오르하를 위해 솔방울 언덕의 톱날 나무꾼들로부터 구식 원형 톱날을 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">1394F78B-CF1A-4fa3-B7CE-039585625C17</CLIENT> <!--시작NPC 솔방울 언덕 - 오르하 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">1394F78B-CF1A-4fa3-B7CE-039585625C17</PAYER> <!--완료NPC 솔방울 언덕 - 오르하 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">1394F78B-CF1A-4fa3-B7CE-039585625C17</AGENT> <!--진행NPC 11 솔방울 언덕 - 오르하 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/5000/1/1/160418400">6017300</MONSTER> 
+ <!--MON_NO=6017300/톱날 나무꾼,Item_NO=160418400/[Q.ID:04184] 구식 원형톱날50%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160418400</ITEM> 
+ <!--Item_NO=160418400/[Q.ID:04184] 구식 원형톱날,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10418411"/> <!--구식 원형 톱날 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418421" FACE="Orha_normal"/> <!--나무꾼들을 퇴치하는 것도 물론 중요한 일이지만, 날이 갈수록
+버나언들이 늘어나고 있으니 고민이에요.%%
+나무꾼들이 가진 장비를 빼았는 것이 좋겠지만 저희들로선
+역부족이지요.%%
+만약 용사님이 도와주신다면 시도해 볼 수 있을텐데...-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418426" FACE="Orha_smile"/> <!--용사님 덕분에 나무꾼들에게 치명적인 타격을 입힌 것 같아요.
+정말 다행스러운 일입니다. 진심으로 감사드려요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418423" FACE="Orha_normal"/> <!--아아… 감사합니다. 
+이렇게 도와주신다니… 은혜를 어떻게 갚아야 할 지…%%
+솔방울 언덕의 톱날 나무꾼들에게서 구식 원형 톱날을 
+빼앗아 주세요. 벌목장비를 빼앗기면 버나언 무리들에게
+큰 타격이 될 것입니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418424" FACE="Orha_normal"/> <!--저희에게 도움을 주신다면 은혜는 꼭 갚도록 하겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418425" FACE="Orha_normal"/> <!--구식 원형 톱날을 가지고 있는 것은 솔방울 언덕에 있는 톱날 나무꾼들이랍니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

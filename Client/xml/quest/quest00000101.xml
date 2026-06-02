@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>101</ID> <!--T.T.10010101 클라인 박사의 이론 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크 필드의 하이오크로부터 결합체의 핵 3개를 구하자.-->
+<!--[완료NPC]	게펜 - 테일링-->
+<!--[내용]	클라인 박사는 에너지체가 무수히 분열된 것이 아니라, 특정 몬스터와 결합후, 결합체가 되어 다른 몬스터에게 영향을 주고 있다고 한다. 이 이론을 뒷받침할만한 증거로 오크 필드의 하이오크로부터 결합체의 핵 3개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</CLIENT> <!--시작NPC 게펜 - 테일링 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</PAYER> <!--완료NPC 게펜 - 테일링 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3D7A233E-1E4A-4b1a-9FFA-EA3822932944</AGENT> <!--진행NPC 11 게펜 - 테일링 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160010100">4702200</MONSTER> 
+ <!--MON_NO=4702200/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160010100/[Q.ID:00101] 결합체의 핵(오크 필드)100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160010100</ITEM> 
+ <!--Item_NO=160010100/[Q.ID:00101] 결합체의 핵(오크 필드),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="3" TEXT="10010111"/> <!--결합체의 핵-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10010121" FACE="Tailing_normal"/> <!--놀라운 사실을 알아냈어요.
+에너지체가 최초로 이곳에 왔을 때, 칼루자 박사님은 무수히 분열됐다고 했어요.%%
+물론 지금은 지속적으로 %name%님의 세계에서 보낸다는 걸로 바꾸셨지만 말이에요.
+어쨌든 클라인 박사님은 에너지체가 몬스터와 결합 후, 결합체가 되어 다른 몬스터에게 영향을 준다는 사실을 알아내셨어요.%%
+이 이론을 뒷받침할만한 증거가 필요해요.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10010126" FACE="Tailing_smile"/> <!--이게 결합체의 핵이군요.
+조금씩 클라인 박사님의 이론을 증명할 수 있는 증거가 모이고 있어요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10010123" FACE="Tailing_normal"/> <!--클라인 박사님은 오크필드의 하이오크로부터 결합체의 핵을 구할 수 있을 거라고 하셨어요.%%
+예전에 몬스터의 내성이 심하지 않았을 때, 발견한 적이 있다고 하셨거든요.
+지금은 모든 자료를 칼루자 박사님이 독점적으로 관리하고 있어서 접근할 수 없지만 말이에요.%%
+하이오크는 무섭게 생겼으니까. 조심하세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10010124" FACE="Tailing_smile"/> <!--거절하시면 어쩔 수 없이 저의 매력을 발산할 수밖에 없겠군요.
+(테일링이 머리카락을 찰랑거리며 윙크를 한다.)%%
+어때요? 저를 돕고 싶은 마음이 솟구치죠?
+(멀리하고 싶은 마음이 솟구친다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10010125" FACE="Tailing_normal"/> <!--하이오크는 왠지 누군가를 닮았어요. 누구였지?
+앗! 알아냈다. 바로 %name%님이에요.
+(뭘 말하고 싶은 거냐?)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10010102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

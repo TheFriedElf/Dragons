@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_ChangeMahalka">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/2_Mon/N_Mahalka/N_Mahalka_Quest.kfm</KFMPATH>
+    <SCRIPT SRC="Actor/pc_base.lua">
+      <ITEM NAME="Actor_PC_Base" TYPE="EVENT"/>
+    </SCRIPT>
+    <ABV>
+			<BOX TO="char_root" SIZE="80,80,80" LOCATE="0,0,10" ROTATE="0,0,1,90"/>
+		</ABV>
+		<SLOT>
+      <ITEM NAME="battle_idle" ANIMATION="1000005"/>
+
+      <ITEM NAME="shot_01" ANIMATION="1000061"/>
+      <ITEM NAME="attk_01" ANIMATION="1000061"/>
+      
+      <ITEM NAME="melee_01" ANIMATION="1000061"/>
+      <ITEM NAME="melee_02" ANIMATION="1000061"/>
+      <ITEM NAME="melee_03" ANIMATION="1000061"/>
+      <ITEM NAME="melee_04" ANIMATION="1000061"/>
+      <ITEM NAME="melee_05" ANIMATION="1000061"/>
+
+      <ITEM NAME="dash_attk_01" ANIMATION="1000061"/>
+      
+      <ITEM NAME="jump_attk_01" ANIMATION="1000061"/>
+      <ITEM NAME="jump_attk_02" ANIMATION="1000061"/>
+      
+      <ITEM NAME="melee_blow_up" ANIMATION="1000061"/>
+      <ITEM NAME="melee_knock_back" ANIMATION="1000061"/>
+
+      <ITEM NAME="jump_down_attk" ANIMATION="1000061"/>
+      <ITEM NAME="jump_down_attk_up" ANIMATION="1000061"/>
+
+      <ITEM NAME="attk_down_01" ANIMATION="1000061"/>
+      <ITEM NAME="attk_down_02" ANIMATION="1000061"/>
+      <ITEM NAME="attk_down_03" ANIMATION="1000061"/>
+      <ITEM NAME="attk_down_fly" ANIMATION="1000061"/>
+
+      <ITEM NAME="dmg_01" ANIMATION="1000011"/>
+      <ITEM NAME="dmg_02" ANIMATION="1000012"/>
+
+      <ITEM NAME="idle_01" ANIMATION="1000000" />
+
+      <ITEM NAME="ladder_up" ANIMATION="1100101"/>
+      <ITEM NAME="ladder_down" ANIMATION="1100102"/>
+      <ITEM NAME="ladder_idle" ANIMATION="1100103"/>
+
+      <ITEM NAME="knockdown_01" ANIMATION="1000011"/>
+      <ITEM NAME="knockdown_idle" ANIMATION="1000011"/>
+      <ITEM NAME="knockdown_up" ANIMATION="1000011"/>
+
+      <ITEM NAME="run" ANIMATION="1000204"/>
+      <ITEM NAME="dash" ANIMATION="1000211"/>
+
+      <ITEM NAME="jump_01" ANIMATION="1000251"/>
+      <ITEM NAME="jump_02" ANIMATION="1000252"/>
+      <ITEM NAME="jump_03" ANIMATION="1000253"/>
+      <ITEM NAME="jump_04" SPEED="0.7" ANIMATION="1000254"/>
+      <ITEM NAME="dash_jump_01" ANIMATION="1000255"/>
+      <ITEM NAME="dash_jump_02" SPEED="0.7" ANIMATION="1000252"/>
+      <ITEM NAME="dash_jump_idle" ANIMATION="1000253"/>
+
+      <ITEM NAME="BlowUp_Down" ANIMATION="1000042"/>
+      <ITEM NAME="BlowUp_Loop" ANIMATION="1000041"/>
+      <ITEM NAME="StandUp" ANIMATION="1000047"/>      
+      
+    </SLOT>
+  </WORLDOBJECT>
+</ACTOR>

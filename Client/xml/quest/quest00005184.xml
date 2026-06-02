@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5184</ID> <!--T.T.10518401 칼리곤에게 배달하기(5) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	칼리곤에게 해적검 배달-->
+<!--[완료NPC]	위험한 동굴 - 칼리곤-->
+<!--[내용]	프랑크는 칼리곤에게 해적용 검을 주문받았다고 한다. 프랑크는 해적들이 사용하기 좋은 해적검을 어렵게 구했다. 어렵게 구한 해적검을 위험한 동굴 칼리곤에게 전달해 주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">381631BA-E014-402f-BD24-4C501F3E611B</CLIENT> <!--시작NPC 달빛해안 마을 - 프랑크 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER> <!--완료NPC 위험한 동굴 - 칼리곤 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">381631BA-E014-402f-BD24-4C501F3E611B</AGENT> <!--진행NPC 11 달빛해안 마을 - 프랑크 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT> <!--진행NPC 12 위험한 동굴 - 칼리곤 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160518400/1">10011</NPC> 
+ <!--Item_NO=160518400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160518400/1/511">10011</NPC> 
+ <!--Item_NO=160518400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160518400/1">10011</NPC> 
+ <!--Item_NO=160518400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160518400/1/512">10012</NPC> 
+ <!--Item_NO=160518400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160518400/1">10012</NPC> 
+ <!--Item_NO=160518400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10518411"/> <!--칼리곤에게 해적검 배달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10518421" FACE="Crispin_normal"/> <!--용사님 정말 염치없는 건 알지만...
+한 가지만 더 부탁할 게 있어요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10518426" FACE="Kalligon_normal"/> <!--이 검인가? 보기에도 멋져 보이는군.
+고맙군. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10518423" FACE="Crispin_smile"/> <!--무슨 부탁인지 이미 감을 잡으셨죠?
+역시 눈치가 백단이시네요.
+이 해적검을 위험한 동굴에 있는 칼리곤에게 전달해 주세요.%%
+부탁할게요. 용사님은 배달에 소질이 있으신 것 같네요.
+제가 배달음식점 차리면 아르바이트 부탁할게요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10518424" FACE="Crispin_normal"/> <!--마지막 부탁인데 이러실 거에요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10518425" FACE="Crispin_normal"/> <!--마지막 부탁이라고요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10518402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10518451" /> <!--검을 잃어버렸다고요?
+잠시만요.
+하나 더 드릴게요.
+대신 조심좀 해주세요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10518452" /> <!--검은 언제 갖고 올 생각인거지?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

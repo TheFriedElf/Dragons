@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5121</ID> <!--T.T.10512101 신전의 두가지 보물(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전 [아케이드(F6)] - 스켈레톤 엉클로부터 첫 번째 보물 획득-->
+<!--[완료NPC]	달빛해안 마을 - 제스-->
+<!--[내용]	제스는 어느 날 흥미로운 소문을 들었다고 한다. 그 소문에 따르면 용맹한 전사가 마을을 지키기 위해 싸우다 죽었는데, 그 전사와 함께 보물 두 가지를 묻어 신전을 만들었다고 한다. 스카이피 신전으로 가서 스켈레톤 엉클을 처리하고 첫 번째 보물을 찾아보도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">89F4650C-E372-4716-B958-5C321BB62C51</CLIENT> <!--시작NPC 달빛해안 마을 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">89F4650C-E372-4716-B958-5C321BB62C51</PAYER> <!--완료NPC 달빛해안 마을 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 11 달빛해안 마을 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010216/10000/8500/1/1/160512100">6014400</MONSTER> 
+ <!--MON_NO=6014400/스켈레톤 엉클,MAP_NO=9010216/스카이피 신전 아케이드 6,Item_NO=160512100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160512100</ITEM> 
+ <!--Item_NO=160512100/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10512111"/> <!--첫 번째 보물 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10512121" FACE="Jess_normal"/> <!--이봐! 친구! 내가 굉장한 소문을 들었어. 
+누가 들을지도 모르니까 이쪽으로 가까이...%%
+마을 뒤쪽에 있는 스카이피 신전 알지?
+거기에 관한 소문인데 관심 있어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10512126" FACE="Jess_normal"/> <!--이게 보물이라고? 전혀 비싸 보이지 않는군.
+미안해. 내가 괜한 고생만 시켰군.
+큰돈은 나도 없어서 줄 수 없지만, 보답은 해야겠지. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10512123" FACE="Jess_normal"/> <!--며칠 전에 우연히 알게 된 사실인데...
+신전에 굉장한 보물이 있다는 거 알고 있어? 
+전설의 의하면 마을을 지키는 영웅이 있었는데, 그 영웅이 마을을 지키다 죽은 뒤 
+두 가지 보물과 함께 무덤을 만들어 묻었다고 하더군.%%
+죽은 영웅이 부활해서 보물을 지키고 있다는 소문이 들려오긴 하지만, 
+그건 어디까지나 소문일 뿐이니 겁먹을 필요 없어.%%
+스카이피 신전에서 스켈레톤 엉클을 처리하고 첫 번째 보물 5개만 구해와.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10512124" FACE="Jess_normal"/> <!--쳇? 돈이 급하지 않은 거야? 그것만 찾으면 우리는 부자라고!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10512125" FACE="Jess_normal"/> <!--보물의 냄새가 난다고... 어서 신전으로 출발해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10512102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+    <ID>302</ID>
+    <GROUPNO>0</GROUPNO>
+    <TITLE TEXT="500406">위험에 빠진 바람의 항구 (1)</TITLE>
+    <GROUPNAME TEXT="500188">종소리 마을</GROUPNAME>
+    <LIMITS>
+        <LEVEL MIN="11" MAX="999" />
+        <CLASSES>
+            <CLASS MEMO="Thief">4</CLASS>
+        </CLASSES>
+        <!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+        <QUESTS>
+            <QUEST>301</QUEST>
+            <QUEST>0</QUEST>
+        </QUESTS>
+        <LOCATIONS>
+            <!-- <LOCATION>2</LOCATION>-->
+        </LOCATIONS>
+        <PARTY MIN="1" MAX="1" />
+    </LIMITS>
+    <CLIENTS>
+        <CLIENT TYPE="NPC" EVENTNO="10000">C70570C1-38D4-4009-BDAB-3EE2DE038BC6</CLIENT>
+    </CLIENTS>
+    <AGENTS>
+        <AGENT TYPE="NPC" EVENTNO="10001">C70570C1-38D4-4009-BDAB-3EE2DE038BC6</AGENT>
+        <AGENT TYPE="NPC" EVENTNO="10002" MARK="END">2FF6590B-6648-4D73-9A61-7B4FA9065498</AGENT>
+    </AGENTS>
+    <PAYERS>
+        <PAYER TYPE="NPC" EVENTNO="10003">2FF6590B-6648-4D73-9A61-7B4FA9065498</PAYER>
+    </PAYERS>
+    <EVENTS>
+        <!--NPC와 대화-->
+        <!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+        <NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+        <!--사용자가 퀘스트를 하락 했을 때(=301번 다이얼로그가 뜰때) 아이템 10000번을 1개 지급한다-->
+        <NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/20301192/1">10001</NPC>
+        <!--1번 목표를 끝마치지 않았으면 2000번 NPC에서 501 다이얼로그를 띄운다-->
+        <NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10001</NPC>
+        <!--501 다이얼로그에서 502로 갈 때 10000번 아이템 1개를 검사 하여 없으면 551로 보낸다.-->
+        <NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/20301192/1/551">10001</NPC>
+        <NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="551/20301192/1">10001</NPC>
+        <!--502 다이얼로그가 뜨면 10000번 아이템을 1개 회수하고
+			20000번 아이템을 1개 주고
+			목표 1을 증가 시킨다.-->
+        <NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10002</NPC>
+        <NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/20301192/1/552">10002</NPC>
+        <NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="602/20301192/1">10002</NPC>
+        <NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10002</NPC>
+        <NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+        <!--2000번 NPC에 항상 1101 대화를 띄운다-->
+        <!--습득해야할 Item-->
+        <!--위치-->
+        <!--<LOCATION OBJECTNO="4">1000</LOCATION>-->
+        <!--시간-->
+        <!--<TIME OBJECTNO="5">60</TIME>-->
+    </EVENTS>
+    <OBJECTS TYPE="NOSTEP">
+        <OBJECT1 COUNT="1" TEXT="501180" />
+        <OBJECT2 COUNT="0" TEXT="0" />
+        <OBJECT3 COUNT="0" TEXT="0" />
+        <OBJECT4 COUNT="0" TEXT="0" />
+        <OBJECT5 COUNT="0" TEXT="0" />
+    </OBJECTS>
+    <DIALOGS>
+        <!--101번은 퀘스트 의뢰 정보창-->
+        <!--MEMO=201번은 퀘스트 수락/거부 여부창-->
+        <DIALOG ID="101" TYPE="PROLOG">
+            <BODY TEXT="502274" FACE="Alvin_normal" />
+            <SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+            <SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+        </DIALOG>
+        <!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+        <DIALOG ID="301">
+            <BODY TEXT="502275" FACE="Alvin_smile" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+        <DIALOG ID="401">
+            <BODY TEXT="502276" FACE="Alvin_angly" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="501">
+            <BODY TEXT="502277" FACE="Alvin_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="551">
+            <BODY TEXT="500407" FACE="Alvin_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="552">
+            <BODY TEXT="502037" FACE="Colin_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+        <DIALOG ID="601" TYPE="COMPLETE">
+            <BODY TEXT="502278" FACE="Colin_normal" />
+            <SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+        </DIALOG>
+        <!--701번은 완료를 허락 하였을 때 뜰창-->
+        <DIALOG ID="701">
+            <BODY TEXT="500017" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--801번은 완료를 거부 하였을 때 뜰창-->
+        <DIALOG ID="801">
+            <BODY TEXT="500018" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+        <DIALOG ID="901" TYPE="INFO">
+            <BODY TEXT="502279" />
+            <SELECT ID="0" TEXT="19933">포기</SELECT>
+        </DIALOG>
+        <!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+        <DIALOG ID="902">
+            <BODY TEXT="500020" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="903">
+            <BODY TEXT="501835" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+    </DIALOGS>
+</QUEST>

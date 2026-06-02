@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4203</ID> <!--T.T.10420301 피리를 훔쳐간 두목 원숭이 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	각성의 피리 습득-->
+<!--[완료NPC]	버섯마을 - 마시룬-->
+<!--[내용]	잠자는 마을로 숨어든 벌룬이 마시룬에게서 각성의 피리를 훔쳤다고 한다. 이 피리를 이용하면 시간의 제단에 대해 알고 있는 부보부보를 깨울 수 있을 것이라 한다. 촌장 마시룬을 위해 잠자는 마을[시나리오 모드(F5)]에서 두목 원숭이 벌룬을 퇴치하고, 각성의 피리를 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</CLIENT> <!--시작NPC 버섯마을 - 마시룬 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</PAYER> <!--완료NPC 버섯마을 - 마시룬 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">cee5462a-ac74-4b0d-a47a-7d3a2fae1972</AGENT> <!--진행NPC 11 버섯마을 - 마시룬 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_M" VALUE="104/5/10000/0/1/1/160420300">6025900</MONSTER> 
+ <!--MON_NO=6025900/벌룬,Mission_Key=104/잠자는 마을 ,Item_NO=160420300/[Q.ID:04196] 전투펫 전직키트,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160420300</ITEM> 
+ <!--Item_NO=160420300/[Q.ID:04196] 전투펫 전직키트,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10420311"/> <!--각성의 피리 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10420321" FACE="Fungarf_normal"/> <!--버섯 재배의 달인인 우리 펑가스족에게는
+대대로 촌장에게 전해지는 각성의 피리라는 보물이 있네.%%
+독버섯은 많이 섭취하면 위험해질 수 있으니, 
+잘못 복용해 이성을 잃었을 경우에 정신을 차릴 수
+있도록 하는 피리란 거야.%%
+이 피리의 위력은 대단해서, 제 정신을 차리지 못하는
+모든 증상에 뛰어난 효과를 발휘하지.%%
+예를 들어 치매가 걸렸을 때도, 비록 잠깐 뿐이긴 하지만 
+이 피리소리를 들으면 제 정신을 되찾는다고 하네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10420326" FACE="Fungarf_smile"/> <!--오오… 그 난폭하고 괘씸한 두목 원숭이를 혼내줬다는
+것도 매우 기쁜 일이지만, 녀석이 훔쳐간 피리를 되찾은 것도 
+무척 다행스런 일이야!%%
+고맙네!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10420323" FACE="Fungarf_normal"/> <!--그런데… 이 벌룬 녀석이 이 피리에 눈독을 들이고
+있었다는 걸 미처 눈치채지 못했어. 어느 날 보니 피리를 훔쳐
+자신의 동료 원숭이들에게 불러주더라고…%%
+정신을 차린 원숭이들은 벌룬을 따라 도망갔네.
+이 지역의 난폭한 원숭이들과 간신히 친해졌다고
+생각했는데… 결국 이 지경이 되고 말았군. %%
+자네가 벌룬 녀석에게 이 피리를 되찾아 온다면 
+나도 자네를 위해 부보부보의 행방을 일러주겠네.%%
+벌룬에게 되찾은 피리를 이용하면 이 근방의 현자인
+부보부보에게 중요한 정보를 얻을 수 있을 거야.%%
+지금 당장 잠자는 마을[시나리오모드(F5)]로 가서 
+벌룬을 퇴치하고, 각성의 피리를 되찾아주게!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10420324" FACE="Fungarf_angly"/> <!--각성의 피리를 되찾아야, 자네를 도울 수 있는데 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10420325" FACE="Fungarf_angly"/> <!--잠자는 마을[시나리오모드(F5)]에서 벌룬을 혼내주고 
+각성의 피리를 찾아주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10420302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

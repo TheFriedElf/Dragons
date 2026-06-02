@@ -1,0 +1,7 @@
+<ACTION ID="a_HealingWave" NEXT="a_battle_idle" CHECK_CAN_ENTER="TRUE" CAN_CHANGE_ACTOR_POS="TRUE" >
+  <SLOT NAME="skill_healing_wave_01"/>
+  <SLOT NAME="skill_healing_wave_02" LOOP="TRUE"/>
+  <SLOT NAME="skill_healing_wave_03"/>
+  <FSM SCRIPT="Skill_HealingWave"
+       HIT_SOUND_ID="HealingWave_Heal"/>
+</ACTION>

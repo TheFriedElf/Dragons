@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Kasandra" DIE_PARTICLE_ID="ef_monster_die_04_B" DIE_PARTICLE_NODE="p_ef_die" INIT_ACTION="a_opening">
+	<TEXTURE SRC="nobility_guest_sunshade_body.dds">../Data/2_Mon/N_Nobility_guest_sunshade/nobility_guest_sunshade_body.dds</TEXTURE>
+	<TEXTURE SRC="nobility_guest_sunshade_head.dds">../Data/2_Mon/N_Nobility_guest_sunshade/nobility_guest_sunshade_head.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Kasandra"/>
+		<KFMPATH SCALE="1.3">../Data/2_Mon/N_Kasandra/N_Kasandra.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.3"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="19"/>
+			<SPHERE TO="p_hit_point_02" SIZE="17"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000201"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000202"/>
+			<!-- 소리 지르기 -->
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000203"/>
+			<ITEM NAME="breath_01" ANIMATION="1000204"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021" DONT_RELEASE_PARTICLE="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000201"/>
+			<!--ITEM NAME="walk" ANIMATION="1000050"/-->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000055"/-->
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

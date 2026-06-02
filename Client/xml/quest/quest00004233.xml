@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4233</ID> <!--T.T.10423301 흑룡왕의 어깨 제조서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	검은 발톱의 파편 입수-->
+<!--[완료NPC]	검은발톱 전초기지 - 모하모-->
+<!--[내용]	모하모는 검은 발톱 둥지에 오게 된 것을 기념하기 위해 검은 발톱 파편을 가지고 싶다고 말한다. 미스트엘프 모하모에게 엘가를 퇴치하고 얻은 검은 발톱의 파편을 가져다주자. 흑룡왕의 어깨 제조서를 얻을 수 있다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">90D2781C-5299-4f12-BFBD-EA4296803C18</CLIENT> <!--시작NPC 검은발톱 전초기지 - 모하모 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">90D2781C-5299-4f12-BFBD-EA4296803C18</PAYER> <!--완료NPC 검은발톱 전초기지 - 모하모 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">90D2781C-5299-4f12-BFBD-EA4296803C18</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 모하모 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/0/1/1/160422900">3542120</MONSTER> 
+ <!--MON_NO=3542120/흑룡왕 엘가,Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160422900</ITEM> 
+ <!--Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10423311"/> <!--검은 발톱의 파편 입수-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+			<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300402</ITEM><!--전체지급/기사/1)/119300372(봉인아님) 1개-(일반) 흑룡왕의 어깨 (용기사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>5/13/21</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300542</ITEM><!--전체지급/투사/1)/119300512(봉인아님) 1개-(일반) 흑룡왕의 어깨 (파괴자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>6/14/22</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300332</ITEM><!--전체지급/메이지/1)/119300302(봉인아님) 1개-(일반) 흑룡왕의 어깨 (아크메이지) 제조서(필요)[Elements],[Count]-->
+			<CLASS>7/15/23</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300472</ITEM><!--전체지급/전투법사/1)/119300442(봉인아님) 1개-(일반) 흑룡왕의 어깨 (워로드) 제조서(필요)[Elements],[Count]-->
+			<CLASS>8/16/24</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300122</ITEM><!--전체지급/사냥꾼/1)/119300092(봉인아님) 1개-(일반) 흑룡왕의 어깨 (수호자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>9/17/25</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300262</ITEM><!--전체지급/레인저/1)/119300232(봉인아님) 1개-(일반) 흑룡왕의 어깨 (스트라이커) 제조서(필요)[Elements],[Count]-->
+			<CLASS>10/18/26</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300052</ITEM><!--전체지급/광대/1)/119300022(봉인아님) 1개-(일반) 흑룡왕의 어깨 (매니악) 제조서(필요)[Elements],[Count]-->
+			<CLASS>11/19/27</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300192</ITEM><!--전체지급/암살자/1)/119300162(봉인아님) 1개-(일반) 흑룡왕의 어깨 (쉐도우) 제조서(필요)[Elements],[Count]-->
+			<CLASS>12/20/28</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">340351042</ITEM><!--전체지급/소환사/1)/340351012(봉인아님) 1개-(일반) 흑룡왕의 어깨 (소환사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>51/53/55/57</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">330351042</ITEM><!--전체지급/쌍둥이/1)/330351012(봉인아님) 1개-(일반) 흑룡왕의 어깨 (격투가) 제조서(필요)[Elements],[Count]-->
+			<CLASS>52/54/56/58</CLASS>
+		</SELECT1>	
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10423321" FACE="Mohamo_normal"/> <!--정찰 다니던 중에 흑룡왕의 견갑을 만들 수 있는 제조서를 
+어쩌다 구했는데… 검은 발톱 둥지를 공략해야 재료를 얻을 수
+있다길래 그냥 포기하기로 했어.%%
+이거 가질래?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10423326" FACE="Mohamo_smile"/> <!--와아!
+그래, 이거구나…%%
+생각했던 것 보다 훨씬 이쁜 것 같아.
+고마워~-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10423323" FACE="Mohamo_normal"/> <!--후후, 그래도 공짜로 주긴 뭐 한걸…
+아아… 어쩐다…%%
+그래…! 엘가를 퇴치하고 검은 발톱의 파편이란 걸 구해줘.
+그래도 이곳에 왔으니 기념품으로 하나 가져가고 싶네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10423324" FACE="Mohamo_normal"/> <!--제조서… 이미 구한 거야? 그런 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10423325" FACE="Mohamo_normal"/> <!--엘가를 퇴치하기 위해 검은발톱둥지에 들어가려면... 
+역시 그 원정대 코인이란 게 필요할텐데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10423302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

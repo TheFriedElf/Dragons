@@ -1,0 +1,10 @@
+<ACTION ID="a_Double Crash" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_DoubleCrash_01"/>
+  <FSM SCRIPT="Act_Melee_Default" MULTI_HIT_NUM="2"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID ="ef_Com_skill_DoubleCrash_01_char_root"
+       NO_WEAPON_TRAIL="TRUE"
+       HIT_SOUND_ID="DoubleCrash"
+       />
+</ACTION>

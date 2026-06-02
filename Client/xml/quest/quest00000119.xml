@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>119</ID> <!--T.T.10011901 글레스트 헤임으로 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	게펜의 아리엘과 이야기 하자.-->
+<!--[완료NPC]	게펜 - 아리엘-->
+<!--[내용]	아리엘은 전장의 여신 발키리의 힘이 깃든 장비가 글레스트 헤임에서 발견되었다고 한다. 글레스트 헤임으로 차원의 결계를 중화하기 위해서는 블루 젬스톤이 필요하다. 게펜의 아리엘과 이야기 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5579E956-CAD6-4819-93F1-B2C74DC2AB05</CLIENT> <!--시작NPC 게펜 - 아리엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031" MARK="END">5579E956-CAD6-4819-93F1-B2C74DC2AB05</PAYER> <!--완료NPC 게펜 - 아리엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5579E956-CAD6-4819-93F1-B2C74DC2AB05</AGENT> <!--진행NPC 11 게펜 - 아리엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10011911"/> <!--아리엘과 대화-->
+		
+	</OBJECTS>
+
+<LOCAL>
+	<NAME ID="DEFAULT">
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">99803660</ITEM><!--전체지급/전체/1)/99622740(봉인아님) 1개 - 블루 젬스톤 퀘스트-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+	<NAME ID="KOREA">
+		<REWARD>
+			<SELECT1 COUNT="0">
+				<ITEM COUNT="1">99622740</ITEM><!--전체지급/전체/1)/99622770(봉인아님) 2개-블루 젬스톤-->
+			</SELECT1>
+		</REWARD>
+	</NAME>
+</LOCAL>
+
+
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10011921" FACE="Ariel_angly"/> <!--응? 무슨 일로 왔어?
+설마 글레스트 헤임으로 들어가려고?
+이런 귀찮아 죽겠네.%%
+글레스트 헤임에 그냥은 들어갈 수 없어.
+들어가려면 필요한 게 있거든.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10011926" FACE="Ariel_smile"/> <!--글레스트 헤임에는 발키리의 유물이 잠들어 있다고 하던데.
+칫, 봉사활동만 아니면 나도 들어 갈텐데.%%
+마침 남는 블루 젬스톤 한 개가 있으니까 선물로 주도록 하지.
+대신 더 이상 날 귀찮게 하지 마!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10011923" FACE="Ariel_angly"/> <!--쳇, 내가 무슨 고생인지.
+게펜에서 불법 워프로 돈을 벌다가 걸려서, 지금 이 고생을 하고 있어.
+하여간 아엘이 살살 꼬드겨서 시작한 일이었는데…%%
+차원의 결계를 중화하기 위해서는 블루 젬스톤이란 게 필요해.
+기억해 둬! 블루 젬스톤이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10011924" FACE="Ariel_angly"/> <!--뭐야? 그럼 공짜로 들어갈 생각이었던 거야?
+내가 지금 봉사활동이라도 하는 것 같아?
+앗! 봉사활동이지. 그래도 공짜는 안 돼~-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10011925" FACE="Ariel_angly"/> <!--해석 불필요(x)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10011902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

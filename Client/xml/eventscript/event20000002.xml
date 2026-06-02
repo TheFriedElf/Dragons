@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 전체 UI 보이기 -->
+	<CMD TYPE="HideUI" enable="false"/>
+	<!-- 유닛 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="true"/>
+	<!-- 맵기제 보이기 -->
+	<CMD TYPE="MAPOBEJCT" id="starstory_waitingroom1001_01" enable="true"/>
+	<CMD TYPE="MAPOBEJCT" id="efk_starstory_main_02" enable="true"/>
+	<CMD TYPE="MAPOBEJCT" id="starstory_waitingroom1001_02 01" enable="true"/>
+	<CMD TYPE="MAPOBEJCT" id="KeyGide_Z_Jump 11" enable="true"/>
+	<!-- 카메라로 연출 -->
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="0"/>
+</EVENT_SCRIPT>

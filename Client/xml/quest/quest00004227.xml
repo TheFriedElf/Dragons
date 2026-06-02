@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4227</ID> <!--T.T.10422701 신영웅전설 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	마르후와 로푸에게 정보 얻기-->
+<!--[완료NPC]	검은발톱 전초기지 - 무카파-->
+<!--[내용]	무카파는 마르후와 로프 두 척후병들에게 검은발톱둥지에 대한 정보를 얻으라고 말한다. 마르후와 로푸에게 정찰 정보를 들어보자.-->
+
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">6CF9206A-F578-436c-BC14-07B50AC1DC12</CLIENT> <!--시작NPC 검은발톱 전초기지 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6CF9206A-F578-436c-BC14-07B50AC1DC12</PAYER> <!--완료NPC 검은발톱 전초기지 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021">9B9C0841-D99B-4a25-B136-F14C0A9D6F7C</AGENT> <!--진행NPC 1 검은발톱 전초기지 - 마르후 -->
+		<AGENT TYPE="NPC" EVENTNO="10022">E0289E21-9AE8-447f-BDD6-57DB95D9E5CC</AGENT> <!--진행NPC 2 검은발톱 전초기지 - 로푸 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">6CF9206A-F578-436c-BC14-07B50AC1DC12</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10422711"/> <!--마르후와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10422712"/> <!--로푸와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10422721" FACE="Mukapa_normal"/> <!--그들을 우연히 보았네…
+스카이피와 미리내, 벨칸, 그리고 팔미르…%%
+천년 전의 영웅들이 내 눈 앞에 나타난 것을 보니
+믿겨지지 않더군. 하긴, 엘가도 천년 전의 망령이었지…%%
+아, 그래… 우리 전사들이 검은발톱 둥지의 깊숙한 곳까지
+정찰을 했다는 것을 알고 있나? 죽음을 각오한 전사들 덕분에
+우리는 아주 귀중한 정보를 얻게 되었네. 만약 검은 발톱으로
+들어가겠다고 마음 먹었다면 반드시 들어둬야 할 것이네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10422726" FACE="Mukapa_smile"/> <!--전사들의 이야기는 들었는가? 
+라노타 전사장이 들려준 바에 의하면 검은발톱둥지의 3층에는
+더 가공할만한 방해물들이 가득하다고 하는군. %%
+너무 위협적이어서 아직 제대로 접근 조차 하지 못하고 있는 
+상황이라네. 부끄럽구만…%%
+부디 자네가 이 난관들을 뛰어넘어 흑룡왕 엘가에게 향하는 
+진격로를 뚫어주게나. 부디 이 결전에서 활약을 보여주게.
+자네는 부디 새로운 시대의 영웅이 되어야 하네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10422723" FACE="Mukapa_smile"/> <!--이제 물러설 곳이 없어. 엘가도 우리도 막다른 곳에
+서있는 것일세. 다행히 검은발톱 둥지에 관해 정보가
+있으니 조금은 마음에 의지가 될 것이네.%%
+내 옆에 있는 마르후와 로푸 두 전사가 척후병으로 검은발톱에
+다녀왔던 경험을 이야기 해줄 것이니 잘 들어보도록 하게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10422724" FACE="Mukapa_angry"/> <!--그래, 물론 결전을 앞둔 터라 살펴야 할 일이 많을 것이네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10422725" FACE="Mukapa_normal"/> <!--마르후와 로푸에게 이야기를 전해들었는가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10422702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10422751" FACE="Marhoo_normal"/> <!--내가 겪은 곳은 검은발톱 둥지의 첫번째 층이었지.
+무수히 몰려있는 적들을 피해 다음 층으로 올라가는 입구에
+도착했는데, 그곳엔 케르베로스라는 괴물이 있더군.%%
+다음층으로 올라가는 입구를 만난다면 만반의 준비를 
+하는 것이 좋을 거야.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10422752" FACE="Rofu_angry"/> <!--페이롱을 타고 검은 발톱의 두번째 층에 몰래 착륙했었지.
+정말 앞이 막막해지더군.%%
+첫번째 층과 다름 없이 몬스터가 많은데다가... 보기만 해도 
+질릴 것 같은 무시무시한 트랩들이 즐비했지.%%
+이 트랩들 때문에 우리들의 공격은 쉽게 분산되고 말거야.
+데비리치라는 사신이 다음층으로 가는 길목에 숨어 있는데,
+뿔뿔히 흩어진 우리 병사들의 목을 가져갈 것 같구만. -->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

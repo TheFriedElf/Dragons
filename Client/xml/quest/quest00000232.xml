@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구에서 용아의 퀴즈 풀기-->
+<!--[완료NPC]	바람항구 - 용아-->
+<!--[내용]	용아가 New Origin 업데이트에 대해 질문을 한다. 바람항구에서 용아가 내는 퀴즈를 풀어보자.-->
+<QUEST>
+	<ID>232</ID> <!-- 당신이 알고 있는 신직업의 모든 것 -->
+    <GROUPNO>0</GROUPNO>
+	<TITLE TEXT="523427">당신이 알고 있는 신직업의 모든 것</TITLE>
+	<GROUPNAME TEXT="500009">바람항구 브리즈</GROUPNAME>
+	<LIMITS>
+	<DAYOFWEEK>7/1</DAYOFWEEK>
+		<LEVEL MIN="20" MAX="99"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">26F850D3-9822-49f9-9740-8BCD36FC240B</CLIENT> <!--시작NPC 바람항구 - 용아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">26F850D3-9822-49f9-9740-8BCD36FC240B</PAYER> <!--완료NPC 바람항구 - 용아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">26F850D3-9822-49f9-9740-8BCD36FC240B</AGENT> <!--진행NPC 11 바람항구 - 용아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+        <NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC>
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="523429"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+	</OBJECTS>
+
+
+	<REWARD>
+	<SELECT1 COUNT="0">
+	<ITEM COUNT="3">231001090</ITEM>
+	</SELECT1>		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="523430" FACE="DragonBaby_normal"/> <!--신나는 주말~ New Origin 업데이트에 대한 퀴즈 시간이 찾아왔습니다. 
+와아~ -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="523431" FACE="DragonBaby_normal"/> <!--이번 주 바람항구에 드라칸의 직업 상급자가 도착했다는 것은 
+이미 알고 있겠지?%%
+자, 그렇다면 이번 시간엔 드라칸 전사들의 직업에 대해 
+얼마나 알고 있는 지 시험하기 위한 퀴즈를 내주지.%%
+소환사에 대한 %name%의 관심도는 어느 정도인지… 
+자 그럼, 지금부터 시작하겠어!-->
+			<SELECT ID="502" TEXT="500002">다음</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="523432" FACE="DragonBaby_angry"/> <!--엥? 이런 기회는 흔치 않아!
+카즈라 코인도 듬뿍 얻어낼 수 있는 찬스란 말이야!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="523546" FACE="DragonBaby_think"/> <!--(한번 더 진행해볼까?)-->
+			<SELECT ID="502"  TEXT="500002">계속</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" />
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> 
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="523428" />
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+			<DIALOG ID="502" TYPE="MENU">
+			<BODY TEXT="523435" FACE="DragonBaby_normal"/>
+			<SELECT ID="507" TEXT="523436">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523437">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="503" TEXT="523438">정답 퀴즈 퀘스트1 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523439">퀘스트 오답 실패 (닫기)</SELECT>
+		</DIALOG>
+		<DIALOG ID="503" TYPE="MENU">
+			<BODY TEXT="523440" FACE="DragonBaby_smile"/>
+			<SELECT ID="507" TEXT="523441">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523442">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523443">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="504" TEXT="523444">정답 퀴즈 퀘스트2 (닫기)</SELECT>
+		</DIALOG>
+		<DIALOG ID="504" TYPE="MENU">
+			<BODY TEXT="523445" FACE="DragonBaby_normal"/>
+			<SELECT ID="507" TEXT="523446">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="505" TEXT="523447">정답 퀴즈 퀘스트3 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523448">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523449">퀘스트 오답 실패 (닫기)</SELECT>
+		</DIALOG>
+		<DIALOG ID="505" TYPE="MENU">
+			<BODY TEXT="523450" FACE="DragonBaby_smile"/>
+			<SELECT ID="507" TEXT="523451">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523452">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="507" TEXT="523453">퀘스트 오답 실패 (닫기)</SELECT>
+			<SELECT ID="601" TEXT="523454">정답 퀴즈 퀘스트4 (닫기)</SELECT>
+		</DIALOG>
+		<DIALOG ID="507">
+			<BODY TEXT="523548" FACE="DragonBaby_normal"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="523434" FACE="DragonBaby_smile"/> <!--히히히~ 퀴즈를 푸느라 수고가 많았어. 오늘은 특별히 더 많은 카즈라 코인으로 보답할게!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+	</DIALOGS>
+</QUEST>

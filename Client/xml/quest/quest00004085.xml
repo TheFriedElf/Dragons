@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4085</ID> <!--T.T.10408501 조이스 해적단의 비밀(3) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	채굴지대에서 성난 돌연변이 불찌 *10, 성난 불찌 *10 퇴치-->
+<!--[완료NPC]	위험한 동굴 - 칼리곤-->
+<!--[내용]	벨칸의 단검을 구하러 온 칼리곤을 위해, 채굴지대의 성난 돌연변이 불찌와 성난 불찌를 각각 10마리 씩 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</CLIENT> <!--시작NPC 위험한 동굴 - 칼리곤 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER> <!--완료NPC 위험한 동굴 - 칼리곤 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT> <!--진행NPC 11 위험한 동굴 - 칼리곤 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010620/1">6039600</MONSTER> 
+ <!--MON_NO=6039600/성난 돌연변이 불찌,MAP_NO=9010620/채굴지대,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010620/1">6039500</MONSTER> 
+ <!--MON_NO=6039500/성난 불찌,MAP_NO=9010620/채굴지대,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10408511"/> <!--성난 돌연변이 불찌 퇴치-->
+		<OBJECT2 COUNT="10" TEXT="10408512"/> <!--성난 불찌 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10408521" FACE="Kalligon_normal"/> <!--조이스의 보물들 중에서 죠니와 내가 가장 찾고 싶어하는 것은
+다름 아닌 벨칸의 단검이야.%% 
+벨칸은 세상 모든 도적의 왕이라 불리우는 전설적인 인물이야.
+벨칸이 흑룡과 싸움에서 사용했던 무기가 벨칸의 단검이지.%% 
+바람의 정령 수호석이라는 보석이 박혀 있는 엄청난 보물이라구!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10408526" FACE="Kalligon_smile"/> <!--그러나 벨칸은 그 마지막 싸움 이후로 자취를 감췄지.
+조이스 해적단이 감췄다고 하거든. 일단 뮤르달을 한번 더 조사해봐야겠어. 채굴지대의 뮤르달을 퇴치해줘.
+뮤르달은 과거의 망령에 불과한 거로군. 흠 그래도 난 포기하지 않겠어. 크하하핫~-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10408523" FACE="Kalligon_smile"/> <!--벨칸은 엘가라는 흑룡과의 싸움 이후로 자취를 감췄지. 
+듣기로는 흑룡을 다른 세계로 봉인하던 중에 휘말리고 말았다더군.%%
+어쨌거나 그 이후로 벨칸의 단검을 차지한 것이 조이스 해적단인데…
+바람의 정령석 때문인지. 이후 엄청난 세력을 갖게 됐다고 해.
+그러니 우리 같은 해적들이 그 단검에 사죽을 못 쓰는 거라고…%%
+일단 이 채굴지대도 한번 조사해 봐야겠어. 
+하지만 이곳에도 우리를 방해하는 불찌들이 가득하군.%%
+불찌라는 녀석들을 제거한다면 채굴지대 조사가 수월해질 거야.
+부탁해! 성난 돌연변이 불찌 10마리와 성난 불찌 10마리만 맡아줘!%%
+나도 어떻게든 분발해볼게! 하하하!  -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10408524" FACE="Kalligon_angly"/> <!--엥? 너 진짜 벨칸의 단검에 관심 없는 거야? 진짜? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10408525" FACE="Kalligon_normal"/> <!--채굴지대에 있는 불찌들은 유난히 강한 것 같단 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10408502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_chiron_boomarrow_01" AUTO_GROUND_Z="5">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="1.1">..Data/5_Effect/2_Mon2/95_Dungeon/efk_chiron/efk_chiron_boomarrow_01.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_ARROW</SCRIPT>
+	<PARAM SPEED="255.0" ACCEL="50" MASS="0.5" HOMING_TIME = "3.5" HOMING_DELAY_TIME="0.5"/>
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+	</SCRIPT_CALL_EVENT>
+		<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="EF_Link01" RANGE="30"/>
+		<COLL_ITEM TARGET_NODE="EF_Link02" RANGE="30"/>
+		<COLL_ITEM TARGET_NODE="EF_Link" RANGE="30"/>
+	</COLLISION_SPHERE>
+</PROJECTILE>

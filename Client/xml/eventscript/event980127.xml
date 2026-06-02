@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+	<!--CMD TYPE="WaitTime" Time="6.5"/ --><!-- 오프닝 시간을 기다림-->
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1029495" Show="false"/>
+
+	<CMD TYPE="RemoveActor" ClassNo="1029495"/>
+
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오세 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+
+	<CMD TYPE="setmoviescene" enable="false" Time="0"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/><!---->
+
+
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="HideUI" enable="false"/>
+
+	<CMD TYPE="waittime" time="1"/>
+	
+	<!-- 연출 준비-->
+	<CMD TYPE="IngQuestDoEvent" SpecialActor="ME" QUEST="4276" Event ="980126"/>
+
+	<CMD TYPE="EscScript" EventID="980117"/>
+	
+    <CMD TYPE="Dialogue" NameTTID="99801055" TextTTID="99801251" FaceID="Europe_normal" /><!-- 유로페 슬픔-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801252" FaceID="User_normal" /><!-- 유저-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801055" TextTTID="99801253" FaceID="Europe_smile" /><!-- 유로페 놀람-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801254" FaceID="User_normal" /><!-- 유저-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	
+	
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980117"/>
+
+	
+</EVENT_SCRIPT>

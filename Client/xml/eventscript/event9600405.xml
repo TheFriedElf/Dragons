@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+	<!--할로윈 테마 잭오랜턴 엔딩-->
+
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="WaitTime" Time="1"/><!-- 오프닝 시간을 기다림-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade"/>
+
+	<CMD TYPE="HideUI" enable="TRUE"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->	
+	
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD TYPE="AddActorFilter" ClassNo="1029629"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--소환체를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/><!---->
+
+	<CMD TYPE="AddNPC" ClassNo="1029629" NameTTID="521238" SpawnPos="0.9142,-587.0161,30.9772"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1029629" SlotName="ending_01"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" />
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="96004001" TextTTID="96004007" FaceID="Jlantern_angry" /><!-- 잭오랜턴 화남-->
+	<CMD TYPE="WaitTime" Time="3.5"/>
+
+    <CMD TYPE="Dialogue" NameTTID="524105" TextTTID="96004008" FaceID="User_normal" /><!-- 유저-->
+	<CMD TYPE="WaitTime" Time="2"/>
+
+	<CMD TYPE="Dialogue" NameTTID="96004001" TextTTID="96004009" FaceID="Jlantern_smile" /><!-- 잭오랜턴 웃음-->
+	<CMD TYPE="WaitTime" Time="3.5"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="WaitTime" Time="0.5"/><!-- 오프닝 시간을 기다림-->
+
+   
+	<!--CMD TYPE="WaitTime" Time="6.5"/ --><!-- 오프닝 시간을 기다림-->
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1029629" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1029629"/>
+
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/><!---->
+
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+
+    <CMD TYPE="setmoviescene" enable="false" Time="0.5"/>
+	<CMD TYPE="HideUI" enable="false"/><!--UI보이기 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	
+
+
+ 
+    <!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="MapMove" MapID="9018100" SpawnIndex="2"/>
+
+	
+</EVENT_SCRIPT>
+

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>245</ID> <!--T.T.10024501 즐거운 곤충 채집! 투구벌레편 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	투구벌레 20마리 채집-->
+<!--[완료NPC]	달빛해안 마을 - 제스-->
+<!--[내용]	가토의 곤충 채집 이벤트 요원을 맡게된 제스는 채집스킬(벌목, 약초캐기, 낚시, 채굴)과 미션맵 보너스 스테이지의 보물상자 공략을 통해 투구벌레 20마리를 잡아 올 경우, 답례로 곤충채집 증명서를 준다고 한다. 곤충채집 증명서가 5개 생기면 가토에게 추가적인 이벤트 퀘스트를 완료할 수 있다.  -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">89F4650C-E372-4716-B958-5C321BB62C51</CLIENT> <!--시작NPC 달빛해안 마을 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">89F4650C-E372-4716-B958-5C321BB62C51</PAYER> <!--완료NPC 달빛해안 마을 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 11 달빛해안 마을 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="20">299602700</ITEM> 
+ <!--Item_NO=299602700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10024511"/> <!--투구벌레-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299603110</ITEM><!--전체지급/전체/1)/299603110() 1개-곤충채집 증명서-->
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10024521" FACE="Jess_normal"/> <!--아아... 이게 뭐람. 아무리 요즘 건수가 없다지만,
+곤충채집이나 돕는 아르바이트를 맡게됐다니...
+미래의 대도적 제스의 체면이 말이 아니군, 그래.%%
+%name%... 난 지금 투구벌레를 잡아온 녀석들에게 
+곤충채집 증명서를 주고 있는 중이야.
+너도 혹시 투구벌레를 잡아온 거냐?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10024526" FACE="Jess_smile"/> <!--아.. 이거 투구벌레인가? 20마리나 되는 거야?
+의외로 귀엽구나. 투구벌레란 건...
+자, 여기 있어. 곤충채집 증명서 받아 가.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10024523" FACE="Jess_smile"/> <!--투구벌레 잡으려면 채집스킬을 사용해야 해.
+낚시, 채굴, 약초캐기, 벌목 같은 일 말이야.
+그런 걸로 벌레들을 잡는다고 들었어.%%
+나 같은 타입은 그런 자잘한 일들은 흥미가 없어서
+미션맵의 보너스 스테이지를 노리겠지만 말이야.%%
+보너스 스테이지에 출현하는 보물상자 안에도
+무슨 일인지 모르겠지만 벌레들이 들어있다고
+하더군.%%
+어쨌거나 투구벌레 20마리 구하게 되면 나한테 와.
+곤충채집 증명서인가를 줄테니까 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10024524" FACE="Jess_angly"/> <!--에에… 거절이냐.
+나라면 이왕 시작한 것… 
+여름 한정 코스튬을 얻을 때까진 도전해보겠는데 말야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10024525" FACE="Jess_angly"/> <!--투구벌레 잡는 데엔 두가지 선택지가 있지.%%
+쉽지만 끈기 있게 채집스킬을 노릴 것인지…
+아니면 과감하게 미션맵의 보너스 스테이지를 
+공략할 건지 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10024502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

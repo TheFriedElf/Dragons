@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Machine_choco">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Machine_choco"/>
+		<KFMPATH>../Data/2_Mon/N_Machine_choco/N_Machine_choco.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+    	<CAPSULE TO="p_hit_point_01" SIZE="35,138"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000201"/>
+			<!-- 초콜렛 발 -->
+			<ITEM NAME="Bat_Missile_start_01" ANIMATION="1000202"/>
+			<ITEM NAME="Bat_Missile_01" ANIMATION="1000203" FIRE_START_NODE="Box07" PROJECTILE_ID="PROJECTILE_Choco_shot_01" PROJECTILE_COUNT="3" NO_VERICAL_RANDOM="0" FIRE_DELAY="1.0"/>
+      <!--기본동작-->
+			<ITEM NAME="dmg_01" ANIMATION="1000025"/>
+			<ITEM NAME="die_01" ANIMATION="1000005" DIE_ALPHA="0"/>
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

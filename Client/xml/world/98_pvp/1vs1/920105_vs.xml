@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_920105_VS">
+  <GSAPATH>../Data/3_World/98_PVP/01_Level/1vs1/920105_VS.gsa</GSAPATH>
+  <MINIMAP>../Data/3_World/98_PVP/01_Level/1vs1/920105_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/whitecliff_bg.mp3</BGSOUND>
+  <SCRIPT>World/98_PVP/1vs1/920105_VS.lua</SCRIPT>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!--MAP TYPE설정-->
+  <!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+  <MAPVALUE PLAYERKILL="0" TYPE="64" />
+  <!--// 점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400" />
+  </TRIGGER>
+  
+  <FOG DENSITY="0.360000" FUNC="RANGE_SQ" START="245.000000" END="11170.000000" COLOR="0.298000,0.768990,0.827999" />
+ 
+</WORLD>

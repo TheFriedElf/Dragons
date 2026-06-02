@@ -1,0 +1,8 @@
+<ACTION ID="a_titanium_body" NEXT="a_trace_ground2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="idle_01" LOOP="TRUE"/>
+  <SLOT NAME="buff_01"/>
+  <FSM SCRIPT="Act_Pet_Melee_Default" 
+       FIRE_CASTER_EFFECT_ID="ef_Pet_buf_01_p_ef_star" 
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_ef_star" 
+       NO_DEFAULT_HIT_EFFECT="TRUE"/>
+</ACTION>

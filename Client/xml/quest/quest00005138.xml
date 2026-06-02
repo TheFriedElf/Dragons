@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5138</ID> <!--T.T.10513801 상인의 규율 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 스미스와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 스미스-->
+<!--[내용]	장비상인 프랑크는 영수증을 버렸다가 스미스에 신고로 잡혀, 벌금을 냈다고 한다. 불경기라 어쩔 수 없었다는 프랑크는 스미스에게 섭섭하다고 한다. 프랑크와 스미스에 틀어진 우정을 풀어주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">381631BA-E014-402f-BD24-4C501F3E611B</CLIENT> <!--시작NPC 달빛해안 마을 - 프랑크 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B62D7CB2-0B35-402f-9117-43AA95707E9E</PAYER> <!--완료NPC 달빛해안 마을 - 스미스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">381631BA-E014-402f-BD24-4C501F3E611B</AGENT> <!--진행NPC 11 달빛해안 마을 - 프랑크 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">B62D7CB2-0B35-402f-9117-43AA95707E9E</AGENT> <!--진행NPC 12 달빛해안 마을 - 스미스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10513811"/> <!--스미스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10513821" FACE="Crispin_normal"/> <!--안녕하세요. 용사님.
+요즘 불경기라 정말 힘드네요. 
+사실 얼마 전에 나쁜 짓을 했다가 벌을 받고 말았어요. %%
+역시 나쁜 짓은 하면 안 되나 봐요.
+벌 받을 짓을 했으니 벌 받는 건 당연한 건데, 
+사람이기에 신고한 스미스에게 섭섭하긴 하네요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10513826" FACE="Darby_normal"/> <!--왔어?프랑크가 많이 섭섭해한다고?
+나도 그 일이 잘한 건 줄 모르겠어. 
+그래도 다 같이 잘 살아야 한다는 마음의
+신고를 한 건데… 나도 마음이 무겁다.%%
+일부러 와줘서 고마워. 일단 가서 잘 말해봐야겠어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10513823" FACE="Crispin_normal"/> <!--휴.. 답답하군요.
+(스미스에게 한번 가 보는 게 좋겠다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10513824" FACE="Crispin_normal"/> <!--불경기는 언제 끝날까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10513825" FACE="Crispin_normal"/> <!--휴…답답하네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10513802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

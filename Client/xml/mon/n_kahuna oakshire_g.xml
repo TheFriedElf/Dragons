@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Kahuna Oakshire_G" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Kahuna Oakshire"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Kahuna Oakshire/N_Kahuna Oakshire.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Lard Berkshire/Orc_Meat.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="13"/>
+			<SPHERE TO="p_hit_point_02" SIZE="12"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005" RANDOM="100"/>
+			<ITEM NAME="shot_01" ANIMATION="1000071" FIRE_START_NODE="p_ef_Weapon" FIRE_START_EFFECT="Projectile_kahuna_oakshire_ball" PROJECTILE_ID="PROJECTILE_magic_ball_blue_01"/>
+
+			<!-- 오크셔가디언 스킬 곡사포 -->
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000071"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000071"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000071" FIRE_START_NODE="p_ef_Weapon" FIRE_START_EFFECT="Projectile_kahuna_oakshire_ballz" PROJECTILE_ID="PROJECTILE_magic_ball_blue_01"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="shot_return_02" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_02_skill_shot_middle" ANIMATION="1000005"/>
+			<!--가디언 발사후 마법진-->
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000349" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000350" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000351" FIRE_START_NODE="p_ef_Weapon" PROJECTILE_ID="PROJECTILE_m_IceGrenade" Z_FACTOR="1.0"/>
+
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="electricshock_01" ANIMATION="1000014"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000056"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022" />
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

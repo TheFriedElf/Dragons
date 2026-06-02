@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_CHANNEL">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "50" W ="520" H ="292" CAN_DRAG = "0" STATIC_NUM = "1" />
+		<STATIC_FORM ID = "SFRM_CHANNEL">
+			<ATTR X = "178" Y = "0" W ="342" H ="292" CAN_DRAG = "0" STATIC_NUM = "1" />
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X = "9" Y = "7" W ="324" H ="240" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+				<STATIC_FORM ID = "SFRM_SDW">
+					<ATTR X = "0" Y = "0" W ="324" H ="240" STATIC_NUM = "3" />
+					<BUILD TARGET_ID="SFRM_DETAIL_CHANNEL_" X="5" Y="5" X_COUNT="2" Y_COUNT="5" X_GAB="157" Y_GAB="46" /> 
+					<STATIC_FORM ID="SFRM_DETAIL_CHANNEL_" >
+						<ATTR X="0" Y="0" W="157" H="46" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" IS_VISIBLE = "0" /> 
+						<STATIC_FORM ID = "SFRM_BAR_BG" >
+							<ATTR X="4" Y="23" Z = "0" W="147" H="19" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3"/> 
+							<ANI_BAR ID = "BAR_CHENNEL">
+								<ATTR X="3" Y="3" W="141" H="13" />
+								<ATTR BAR_IMG="../Data/6_ui/server/svBar.tga" BAR_IMG_W="141" BAR_IMG_H="13" BAR_COUNT="1"/>
+							</ANI_BAR>
+						</STATIC_FORM>
+						<BUTTON ID = "BTN_DETAIL_CHANNEL">
+							<ATTR X="0" Y="0" Z = "10" W="157" H="46" BTN_IMG = "../Data/6_ui/server/svCnOverB.tga" BTN_IMG_W = "314" BTN_IMG_H = "92"/>
+							<ATTR FONT = "FTbt_12" T_X = "78" T_Y ="6" T_CENTER = "1" T_OUTLINE="1"/>
+							<SCRIPT ID="ON_L_BTN_DOWN">
+								local wnd = ChannelWnd(UISelf)
+								wnd:LoginToChannel()
+							</SCRIPT> 
+						</BUTTON>
+						<!--SCRIPT ID="ON_BUILD">UISelf:SetBuildIChannelBtn()</SCRIPT-->
+					</STATIC_FORM>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<BUTTON ID = "BTN_BACK">
+				<ATTR X = "162" Y = "253" W ="84" H ="26" />
+				<ATTR TEXT = "400121" FONT = "FTbt_12" T_X = "42" T_Y ="6" T_CENTER = "1" />
+				<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN">
+					CallUI("QuitMessageBox", true)
+					-- OnClick_Channel_BackLogin()
+				</SCRIPT>
+				<LOCAL>
+					<NAME ID="DEFAULT">
+						<HOTKEY ID = "1"> return OnClick_Channel_BackLogin() </HOTKEY>
+						<HOTKEY ID = "14"> return OnClick_Channel_BackLogin() </HOTKEY>
+					</NAME>
+					<NAME ID="JAPAN/CHINA/TAIWAN"/>
+				</LOCAL>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTextW(60034), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</BUTTON>
+			<BUTTON ID = "BTN_ENTER">
+				<ATTR X = "248" Y = "253" W ="84" H ="26" />
+				<ATTR TEXT = "400120" FONT = "FTbt_12" T_X = "42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTextW(60007), GetUIWnd("Cursor"):GetLocation()) </SCRIPT>
+				<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<LOCAL>
+					<NAME ID="DEFAULT">
+						<SCRIPT ID = "ON_L_BTN_DOWN">
+							OnClick_Channel_BackLogin()
+						</SCRIPT>
+					</NAME>
+					<NAME ID="JAPAN/CHINA/TAIWAN"/>
+				</LOCAL>
+			</BUTTON>
+		</STATIC_FORM>
+
+		<STATIC_FORM ID = "FRM_BASIC">
+			<ATTR X = "0" Y = "0" W ="178" H ="292" CAN_DRAG = "0" STATIC_NUM = "1" IGNORE_PARENT_RECT = "1" />
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X = "9" Y = "7" W ="160" H ="273" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+				<STATIC_FORM ID = "SFRM_SDW">
+					<ATTR X = "0" Y = "0" W ="160" H ="273" STATIC_NUM = "3" />
+				</STATIC_FORM>
+			</STATIC_FORM> 
+			<LIST ID = "CHANNEL_LIST">
+				<BUTTON ID = "ScrUp">
+					<ATTR X = "133" Y = "0" W ="19" H ="15" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+		      		</BUTTON>
+				<BUTTON ID = "ScrDown">
+					<ATTR X = "133" Y = "252" W ="19" H ="15" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+				</BUTTON>
+				<BUTTON ID = "ScrMiddle">
+					<ATTR X = "135" Y = "0" W ="15" H ="21" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W = "30" BTN_IMG_H = "42" />
+				</BUTTON>
+				<FORM ID = "ScrollBG">
+					<ATTR X = "142" Y = "21" W ="13" H ="235" />
+					<ATTR IMG = "../Data/6_ui/common/cmScrollBg.tga" IMG_W = "13" IMG_H = "235"/>
+				</FORM>
+	
+				<ATTR BTN_UP = "ScrUp" />
+				<ATTR BTN_DOWN = "ScrDown" />
+				<ATTR BTN_MIDDLE = "ScrMiddle" />
+				<ATTR WND_BAR = "ScrollBG" />
+
+				<ATTR ELEMENT_ID = "FRM_CHANNEL_DETAIL" />
+				<ATTR X = "14" Y = "11" W = "226" H = "263" ITEM_X = "0" ITEM_Y = "0" CAN_SELECT = "1" />
+				<SCRIPT ID="ON_CALL">
+					UISelf:ClearAllListItem()
+				</SCRIPT>
+			</LIST>
+
+
+		</STATIC_FORM>
+
+		<SCRIPT ID = "ON_CALL">
+			CloseUI("LoginBg")
+			basic = UISelf:GetControl("FRM_BASIC")
+			if basic:IsNil() == false then
+				basic:Visible(true)
+			else
+				return
+			end
+		</SCRIPT>
+	</FORM>
+
+	<STATIC_FORM ID="FRM_REALM_ITEM" X="0" Y="0" W="131" H="44" CAN_DRAG="0" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2" FONT="FTctsBig_14"T_X="65"T_Y="12" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413">
+		<FORM ID="FRM_NOTIFY_IMG" X="0" Y="0" W="32" H="26" IS_VISIBLE="0" IMG="../data/6_ui/server/svNew.tga" IMG_W="32" IMG_H="26"/><!--U="" V="" UV_INDEX=""-->
+		<BUTTON ID="BTN_CONNECT" X="0" Y="0" W="131" H="44" FONT="FTctsBig_14" T_X="65" T_Y="14" T_CENTER="1" BTN_IMG="../Data/6_ui/server/svOverB.tga" BTN_IMG_W="262" BTN_IMG_H="88" T_OUTLINE="1">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local UILogin = ChannelWnd(UISelf)
+				local UITemp = UISelf:GetParent():GetParent():GetParent():GetParent():GetControl("SFRM_REALM_CONTENTS")
+				if not UITemp:IsNil() then
+					local UIText = UITemp:GetControl("SFRM_SDW")
+					if not UIText:IsNil() then
+						local str = string.format(GetTT(460003):GetStr(), UISelf:GetParent():GetStaticText():GetStr())
+						UIText:SetStaticText(str)
+					end
+					UILogin:SelectItem(UITemp:GetControl("BTN_ENTER"))			
+				end
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>	
+	
+	<FORM ID="FRM_SV_CH_SELECT_TITLE" ALIGN_X="50" W="365" H="83" IS_ABSOLUTE_Y="1" IMG="../Data/6_ui/server/svTitleBg.tga" IMG_W="365" IMG_H="83" IGNORE_PARENT_RECT="1">
+		<SCRIPT ID="ON_CALL">
+			local kPos = UISelf:GetLocation()
+			local kBg = GetUIWnd("FRM_SERVER_BG")
+			kPos:SetY( kBg:GetLocation():GetY() + 20 )			
+			UISelf:SetLocation(kPos)
+		</SCRIPT>
+		<FORM ID="FRM_TITLE_TEXT" X="0" Y="0" W="365" H="83" TEXT="400651" T_X="182" T_Y="9" T_CENTER="1" FONT="FTtext_25" FONT_COLOR_HEX="0xFFF7EA96" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<FORM ID="FRM_SUB_TEXT" X="0" Y="0" W="365" H="83" TEXT="400652" T_X="182" T_Y="52" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>		
+	</FORM>
+	<STATIC_FORM ID="FRM_DEFAULT_REALM">
+		<ATTR ALIGN_X="50" ALIGN_Y="40" W="976" H="246" STATIC_NUM="1"/>
+		<FORM ID="FRM_BACKGROUND" X="0" Y="0" W="880" H="214" Z="-1">
+			<IMG ID="IMG_LINE1" X="12" Y="193" W="944" H="2" IMG="../Data/6_ui/Pvp/pvLine.tga" IMG_W="944" IMG_H="2"/>
+		</FORM>
+		<BUILD ID="BLD_SERVER_ITEM" TARGET_ID="FRM_SERVER_ITEM" X="6" Y="4" X_COUNT="8" Y_COUNT="1" X_GAB="119"/>
+		<FORM ID="FRM_SERVER_ITEM" X="0" Y="0" W="125" H="191" T_X="62" T_Y="30" T_CENTER="1" FONT="FTcts_16" T_OUTLINE="1" U="2" V="2" UV_INDEX="4" IMG="../Data/6_ui/server/svBcard01.tga" IMG_W="250" IMG_H="382">
+			<FORM ID="FRM_PREPARE" X="0" Y="100" W="125" H="35" TEXT="400654" T_X="62" T_Y="0" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF9FA7B4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF070303" PASS_EVENT="1"/>
+			<!--SCRIPT ID="ON_BUILD">
+				UISelf:ChangeImage("../Data/6_ui/server/svBcard0"..(UISelf:GetBuildIndex()+1)..".tga")
+			</SCRIPT-->
+			<SCRIPT ID="ON_MOUSE_OVER">
+				if 3 > UISelf:GetUVIndex() then
+					PlaySound("../Sound/U_Sound/button(rollover).wav")
+					UISelf:SetUVIndex(2)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				if 3 > UISelf:GetUVIndex() then
+					UISelf:SetUVIndex(1)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if 4 > UISelf:GetUVIndex() then
+					PlaySound("../Sound/U_Sound/button(click).wav")
+					UIItemDeSelect(UISelf:GetParent(), "FRM_SERVER_ITEM", 10)
+					UISelf:SetUVIndex(3)
+					UISelf:SetFontColor(4286119936)
+					local UILogin = ChannelWnd(UISelf)
+					UILogin:SelectItem(UISelf:GetParent():GetControl("BTN_SELECT"), true)
+					UILogin:SendRealm()
+				end
+			</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_DBL_DOWN">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendRealm()
+			</SCRIPT-->
+			<IMG ID ="IMG_NEW">
+				<ATTR IS_VISIBLE="0" X="5" Y="-7" Z = "3" W="51" H="47" IMG = "../Data/6_ui/server/svNew.tga"/>
+				<ATTR IMG_W = "86" IMG_H = "72" U="2" V="2" UV_INDEX="1" IGNORE_PARENT_RECT = "1" PASS_EVENT="1" NO_FOCUS="1"/>
+				<SCRIPT ID="ON_TICK"> NewRealmMarkDisplay(UISelf) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:SetCustomDataAsFloat(0) </SCRIPT>
+			</IMG>
+			<IMG ID ="IMG_EVENT">
+				<ATTR IS_VISIBLE="0" X="5" Y="-7" Z = "3" W="51" H="47" IMG = "../Data/6_ui/server/svNew.tga"/>
+				<ATTR IMG_W = "86" IMG_H = "72" U="2" V="2" UV_INDEX="1" IGNORE_PARENT_RECT = "1" PASS_EVENT="1" NO_FOCUS="1"/>
+				<!--SCRIPT ID="ON_TICK"> </SCRIPT-->
+				<!--SCRIPT ID="ON_CALL">  </SCRIPT-->
+			</IMG>
+			<IMG ID ="IMG_RECMD">
+				<ATTR IS_VISIBLE="0" X="5" Y="-7" Z = "3" W="51" H="47" IMG = "../Data/6_ui/server/svRcm.tga"/>
+				<ATTR IMG_W = "64" IMG_H = "49" U="1" V="1" UV_INDEX="1" IGNORE_PARENT_RECT = "1" PASS_EVENT="1" NO_FOCUS="1"/>				
+			</IMG>
+		</FORM>
+		<BUTTON ID="BTN_SELECT" X="432" Y="196" W="122" H="39" TEXT="400660" FONT="FT15" T_X="61" T_Y="10" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF842E00" BTN_IMG="../Data/6_ui/Server/svMenu.tga" BTN_IMG_W="244" BTN_IMG_H="78" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="3" IS_VISIBLE="0" >	
+			<SCRIPT ID="ON_L_BTN_UP">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendRealm()
+			</SCRIPT>
+			<HOTKEY ID="28">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendRealm()
+			</HOTKEY>
+			<HOTKEY ID="106">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendRealm()
+			</HOTKEY>				
+		</BUTTON>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<BUTTON ID="BTN_BACK" X="451" Y="199" W="84" H="26" TEXT="400659" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" IS_VISIBLE="1">
+					<ATTR  BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<SCRIPT ID="ON_L_BTN_UP">return OnClick_Channel_BackLogin(UISelf:GetParent())</SCRIPT>
+					<HOTKEY ID="1">return OnClick_Channel_BackLogin(UISelf:GetParent())</HOTKEY>
+					<HOTKEY ID="14">return OnClick_Channel_BackLogin(UISelf:GetParent())</HOTKEY>
+					<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(60007), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+			</NAME>
+			<NAME ID="KOREA/JAPAN">
+				<BUTTON ID="BTN_BACK" X="451" Y="199" W="84" H="26" TEXT="400659" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" IS_VISIBLE="0">
+					<ATTR  BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>					
+				</BUTTON>
+			</NAME>
+		</LOCAL>
+	</STATIC_FORM>
+	<STATIC_FORM ID="FRM_MANY_REALM">
+		<ATTR X="0" ALIGN_Y="38" W="1024" H="343" IS_ABSOLUTE_X="1"/>
+		<SCRIPT ID="ON_CALL">
+			UISelf:SetSize( Point2( GetScreenSize():GetX(), UISelf:GetSize():GetY() ) )
+		</SCRIPT>
+		<IMG ID="IMG_REALMBG" Z="-1" IMG="../Data/6_ui/server/svSltBg.tga" IMG_W="1600" IMG_H="343">
+			<SCRIPT ID="ON_CALL">
+				local kWnd = UISelf
+				local kScreenSize = GetScreenSize()
+				kWnd:SetSize( Point2( kScreenSize:GetX(), kWnd:GetImgSize():GetY() ) )
+				kWnd:SetImgSize( Point2( kScreenSize:GetX(), kWnd:GetImgSize():GetY() ) )
+			</SCRIPT>
+		</IMG>
+		<BUILD ID="BLD_SERVER_ITEM" TARGET_ID="FRM_SERVER_ITEM" X="32" Y="2" X_COUNT="10" Y_COUNT="2" X_GAB="96" Y_GAB="150">
+			<!--SCRIPT ID="ON_CREATE"> OnCreate_RePos_ChannelCard(UISelf) </SCRIPT-->
+		</BUILD>
+		<FORM ID="FRM_SERVER_ITEM" X="0" Y="0" W="105" H="156" T_X="52" T_Y="30" T_CENTER="1" FONT="FTcts_16" T_OUTLINE="1" U="2" V="2" UV_INDEX="4" IMG="../Data/6_ui/server/svBcd01.tga" IMG_W="210" IMG_H="312">			
+			<FORM ID="FRM_PREPARE" X="0" Y="100" W="105" H="35" TEXT="400654" T_X="52" T_Y="0" T_CENTER="1" FONT="FTctsBig_14" FONT_COLOR_HEX="0xFF9FA7B4" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF070303" PASS_EVENT="1"/>
+			<!--SCRIPT ID="ON_BUILD">
+				local index = UISelf:GetCustomDataAsShort()
+				UISelf:ChangeImage("../Data/6_ui/server/svBcd0"..(index)..".tga")
+			</SCRIPT-->
+			<SCRIPT ID="ON_MOUSE_OVER">
+				if 3 > UISelf:GetUVIndex() then
+					PlaySound("../Sound/U_Sound/button(rollover).wav")
+					UISelf:SetUVIndex(2)
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">
+				if 3 > UISelf:GetUVIndex() then
+					UISelf:SetUVIndex(1)
+				end
+			</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+				if 4 > UISelf:GetUVIndex() then
+					PlaySound("../Sound/U_Sound/button(click).wav")
+					UIItemDeSelect(UISelf:GetParent(), "FRM_SERVER_ITEM", 20)
+					UISelf:SetUVIndex(3)
+					UISelf:SetFontColor(4286119936)
+					local UILogin = ChannelWnd(UISelf)
+					UILogin:SelectItem(UISelf:GetParent():GetControl("BTN_SELECT"), true)
+					UILogin:SendRealm()
+				end
+			</SCRIPT>
+			<!--SCRIPT ID="ON_L_BTN_DBL_DOWN">
+				if( GetLocale() ~= LOCALE.NC_TAIWAN) then
+					local UILogin = ChannelWnd(UISelf)
+					UILogin:SendRealm()
+				end
+			</SCRIPT-->
+			<IMG ID ="IMG_NEW">
+				<ATTR IS_VISIBLE="0" X="5" Y="-7" Z = "3" W="51" H="47" IMG = "../Data/6_ui/server/svNew.tga"/>
+				<ATTR IMG_W = "86" IMG_H = "72" U="2" V="2" UV_INDEX="1" IGNORE_PARENT_RECT = "1" PASS_EVENT="1" NO_FOCUS="1"/>
+				<SCRIPT ID="ON_TICK"> NewRealmMarkDisplay(UISelf) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:SetCustomDataAsFloat(0) </SCRIPT>
+			</IMG>
+			<IMG ID ="IMG_EVENT">
+				<ATTR IS_VISIBLE="0" X="5" Y="-7" Z = "3" W="51" H="47" IMG = "../Data/6_ui/server/svNew.tga"/>
+				<ATTR IMG_W = "86" IMG_H = "72" U="2" V="2" UV_INDEX="1" IGNORE_PARENT_RECT = "1" PASS_EVENT="1" NO_FOCUS="1"/>
+				<!--SCRIPT ID="ON_TICK"> </SCRIPT-->
+				<!--SCRIPT ID="ON_CALL">  </SCRIPT-->
+			</IMG>
+			<IMG ID ="IMG_RECMD">
+				<ATTR IS_VISIBLE="0" X="5" Y="-7" Z = "3" W="51" H="47" IMG = "../Data/6_ui/server/svRcm.tga"/>
+				<ATTR IMG_W = "64" IMG_H = "49" U="1" V="1" UV_INDEX="1" IGNORE_PARENT_RECT = "1" PASS_EVENT="1" NO_FOCUS="1"/>				
+			</IMG>
+		</FORM>
+		<BUTTON ID="BTN_SELECT" X="453" Y="162" W="122" H="39" TEXT="400660" FONT="FT15" T_X="61" T_Y="10" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF842E00" BTN_IMG="../Data/6_ui/Server/svMenu.tga" BTN_IMG_W="244" BTN_IMG_H="78" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="3" IS_VISIBLE="0">
+			<SCRIPT ID="ON_L_BTN_UP">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendRealm()
+			</SCRIPT>
+			<HOTKEY ID="28">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendRealm()
+			</HOTKEY>
+			<HOTKEY ID="106">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendRealm()
+			</HOTKEY>
+		</BUTTON>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<BUTTON ID="BTN_BACK" ALIGN_X="50" Y="310" W="84" H="26" TEXT="400659" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" IS_VISIBLE="1">
+					<ATTR  BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+					<SCRIPT ID="ON_L_BTN_UP">return OnClick_Channel_BackLogin(UISelf:GetParent())</SCRIPT>
+					<HOTKEY ID="1">return OnClick_Channel_BackLogin(UISelf:GetParent())</HOTKEY>
+					<HOTKEY ID="14">return OnClick_Channel_BackLogin(UISelf:GetParent())</HOTKEY>
+					<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(60007), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+			</NAME>
+			<NAME ID="KOREA">
+				<BUTTON ID="BTN_BACK" X="474" Y="310" W="84" H="26" TEXT="400659" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" IS_VISIBLE="0">
+					<ATTR  BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>					
+				</BUTTON>
+			</NAME>
+		</LOCAL>
+	</STATIC_FORM>
+	<STATIC_FORM ID="FRM_DEFAULT_CHANNEL" ALIGN_X="50" W="814" H="197" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" STATIC_NUM="1">
+		<SCRIPT ID="ON_CALL">
+			local kRealm = GetUIWnd("FRM_DEFAULT_REALM")
+			if kRealm:IsNil() then
+				kRealm = GetUIWnd("FRM_MANY_REALM")
+				if kRealm:IsNil() then
+					return false
+				end
+			end
+			UISelf:SetLocation( Point2( UISelf:GetLocation():GetX(), kRealm:GetLocation():GetY() + kRealm:GetSize():GetY() + 10 ) )
+		</SCRIPT>
+		<FORM ID="FRM_BACKGROUND" X="0" Y="0" W="660" H="214" Z="-1">
+			<IMG ID="IMG_LINE1" X="5" Y="142" W="804" H="2" IMG="../Data/6_ui/Pvp/pvLine.tga" IMG_W="804" IMG_H="2"/>
+		</FORM>		
+		<BUILD TARGET_ID="FRM_CHANNEL_ITEM" X="12" Y="10" X_COUNT="5" Y_COUNT="2" X_GAB="159" Y_GAB="67"/>
+		<FORM ID="FRM_CHANNEL_ITEM" X="0" Y="0" W="154" H="61" IMG="../Data/6_ui/server/svCnSlotBg.tga" IMG_W="154" IMG_H="61">
+			<ANI_BAR ID="BAR_CHENNEL" X="7" Y="23" W="141" H="10" BAR_IMG="../Data/6_ui/server/svCnBar.tga" BAR_IMG_W="141" BAR_IMG_H="10" BAR_COUNT="1">
+				<ATTR TEXT="" T_X="139" FONT="Font_Chat" T_Y="-3" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+				<SCRIPT ID="ON_CALL"></SCRIPT>
+			</ANI_BAR>			
+			<FORM ID="FRM_CHECK_BTN" X="0" Y="0" W="154" H="61" Z="1" U="2" V="2" UV_INDEX="1" IMG="../Data/6_ui/server/svCnSlotOv.tga" IMG_W="308" IMG_H="122">
+				<SCRIPT ID="ON_CALL">UISelf:SetUVIndex(4)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if 4 ~= UISelf:GetUVIndex() then
+						PlaySound("../Sound/U_Sound/button(click).wav")
+						UIItemDeSelect2(UISelf:GetParent():GetParent(), "FRM_CHANNEL_ITEM", 12)
+						UISelf:SetUVIndex(3)
+						local UILogin = ChannelWnd(UISelf:GetParent())
+						UILogin:SelectItem(UISelf:GetParent():GetParent():GetControl("BTN_CONNECT"), false)			
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					if 1 == UISelf:GetUVIndex() then
+						PlaySound("../Sound/U_Sound/button(rollover).wav")
+						UISelf:SetUVIndex(2)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">
+					if 2 == UISelf:GetUVIndex() then
+						UISelf:SetUVIndex(1)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+					local UILogin = ChannelWnd(UISelf:GetParent())
+					UILogin:SendChannel()
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_CHANNEL_NAME" X="0" Y="0" W="154" H="16" TEXT="" T_X="7" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<FORM ID="FRM_CHANNEL_STATE" X="0" Y="0" W="154" H="16" TEXT="" T_X="147" T_Y="4" T_RIGHT="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFEEC79" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>			
+			<FORM ID="FRM_CHANNEL_LEVEL" X="5" Y="36" W="154" H="16" TEXT="" T_X="7" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_EXIT" IS_VISIBLE="0" X="718" Y="149" W="84" H="26" TEXT="400542" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:GetParent():Close()</SCRIPT>
+			<HOTKEY ID="1">UISelf:GetParent():Close() return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_DISCONNECT" X="718" Y="149" W="84" H="26" TEXT="400663" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<SCRIPT ID = "ON_L_BTN_UP">CallUI("QuitMessageBox", true)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(60034), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CONNECT" X="346" Y="146" W="122" H="39" TEXT="400664" FONT="FT15" T_X="61" T_Y="10" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF842E00" BTN_IMG="../Data/6_ui/Server/svMenu.tga" BTN_IMG_W="244" BTN_IMG_H="78" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="3">
+			<SCRIPT ID="ON_L_BTN_UP">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendChannel()
+				DoFileInitLua()
+			</SCRIPT>
+			<HOTKEY ID="28">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendChannel()
+				DoFileInitLua()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="106">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendChannel()
+				DoFileInitLua()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1">
+			local kMyPilot = g_pilotMan:GetPlayerPilot()
+			if nil ~= kMyPilot and false == kMyPilot:IsNil() then
+				UISelf:Close()
+			else
+				OnClick_Channel_BackLogin(UISelf)
+			end
+			return true
+		</HOTKEY>
+	</STATIC_FORM>
+		
+	<FORM ID="FRM_TRADE_CHANNEL_TIP">
+		<ATTR ALIGN_X="50" ALIGN_Y="99" W="500" H="30" TEXT="400666" />		
+		<ATTR FONT="FTctsBig_14" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER="1" T_X="250" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>		
+	</FORM>
+	
+	<!--STATIC_FORM ID="FRM_DEFAULT_CHANNEL2" ALIGN_X="50" ALIGN_Y="91" W="660" H="219" STATIC_NUM="30" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<FORM ID="FRM_BACKGROUND" X="0" Y="0" W="660" H="214" Z="-1">
+			<IMG ID="IMG_LINE1" X="17" Y="172" W="628" H="2" IMG="../Data/6_ui/Pvp/pvLine.tga" IMG_W="628" IMG_H="2"/>
+		</FORM>
+		<FORM ID="FRM_TITLE_BG" X="74" Y="3" W="512" H="32" TEXT="21" T_X="256" T_Y="6" T_CENTER="1" FONT="FT15" FONT_COLOR_HEX="0xFFF7EA96" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" IMG="../Data/6_ui/server/svCnTbg.tga" IMG_W="512" IMG_H="32"/>
+		<BUILD TARGET_ID="FRM_CHANNEL_ITEM" X="17" Y="40" X_COUNT="4" Y_COUNT="3" X_GAB="158" Y_GAB="44"/>
+		<FORM ID="FRM_CHANNEL_ITEM" X="0" Y="0" W="154" H="39" IMG="../Data/6_ui/server/svCnSlotBg.tga" IMG_W="154" IMG_H="39">
+			<ANI_BAR ID="BAR_CHENNEL" X="7" Y="23" W="141" H="10" BAR_IMG="../Data/6_ui/server/svCnBar.tga" BAR_IMG_W="141" BAR_IMG_H="10" BAR_COUNT="1">
+				<SCRIPT ID="ON_CALL"></SCRIPT>
+			</ANI_BAR>
+			<FORM ID="FRM_CHECK_BTN" X="0" Y="0" W="154" H="39" Z="1" U="2" V="2" UV_INDEX="1" IMG="../Data/6_ui/server/svCnSlotOv.tga" IMG_W="308" IMG_H="78">
+				<SCRIPT ID="ON_CALL">UISelf:SetUVIndex(4)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">
+					if 4 ~= UISelf:GetUVIndex() then
+						PlaySound("../Sound/U_Sound/button(click).wav")
+						UIItemDeSelect(UISelf:GetParent():GetParent(), "FRM_CHANNEL_ITEM", 12)
+						UISelf:SetUVIndex(3)
+						local UILogin = ChannelWnd(UISelf)
+						UILogin:SelectItem(UISelf:GetParent():GetParent():GetControl("BTN_CONNECT"), false)			
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					if 2 > UISelf:GetUVIndex() then
+						PlaySound("../Sound/U_Sound/button(rollover).wav")
+						UISelf:SetUVIndex(2)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">
+					if 3 > UISelf:GetUVIndex() then
+						UISelf:SetUVIndex(1)
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+					local UILogin = ChannelWnd(UISelf:GetParent())
+					UILogin:SendChannel()
+					DoFileInitLua()
+				</SCRIPT>
+			</FORM>
+			<FORM ID="FRM_CHANNEL_NAME" X="0" Y="0" W="154" H="16" TEXT="" T_X="7" T_Y="4" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<FORM ID="FRM_CHANNEL_STATE" X="0" Y="0" W="154" H="16" TEXT="" T_X="147" T_Y="4" T_RIGHT="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFEEC79" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<BUTTON ID="BTN_EXIT" IS_VISIBLE="0" X="560" Y="178" W="84" H="26" TEXT="400542" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<SCRIPT ID="ON_L_BTN_UP">UISelf:GetParent():Close()</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_DISCONNECT" X="560" Y="178" W="84" H="26" TEXT="400663" FONT="FTbt_12" T_X="42" T_Y="4" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<SCRIPT ID = "ON_L_BTN_UP">CallUI("QuitMessageBox", true)</SCRIPT>
+			<HOTKEY ID = "1">CallUI("QuitMessageBox", true) return true</HOTKEY>
+			<HOTKEY ID = "14">CallUI("QuitMessageBox", true) return true</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CONNECT" X="268" Y="174" W="122" H="39" TEXT="400664" FONT="FT15" T_X="61" T_Y="10" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF842E00" BTN_IMG="../Data/6_ui/Server/svMenu.tga" BTN_IMG_W="244" BTN_IMG_H="78" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="3">
+			<SCRIPT ID="ON_L_BTN_UP">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendChannel()
+				DoFileInitLua()
+			</SCRIPT>
+			<HOTKEY ID="28">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendChannel()
+				DoFileInitLua()
+			</HOTKEY>
+			<HOTKEY ID="106">
+				local UILogin = ChannelWnd(UISelf)
+				UILogin:SendChannel()
+				DoFileInitLua()
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM-->	
+
+	<STATIC_FORM ID="FRM_CHANNEL_DETAIL">
+		<ATTR X="0" Y="0" W="131" H="44" CAN_DRAG="0" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<ATTR FONT="FTctsBig_14"T_X="65"T_Y="12" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		<BUTTON ID="BTN_CONNECT">
+			<ATTR X="0" Y="0" W="131" H="44"/>
+			<ATTR FONT="FTctsBig_14" T_X="65" T_Y="14" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/server/svOverB.tga" BTN_IMG_W="262" BTN_IMG_H="88" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				local wnd = ChannelWnd(UISelf)
+				wnd:ReqChannelInfo()
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<FORM ID = "FRM_CHANNEL_CHANGE">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "50" W ="342" H ="342" CAN_DRAG = "1" STATIC_NUM = "1" />
+		<STATIC_FORM ID = "SFRM_CHANNEL">
+			<ATTR X = "0" Y = "0" W ="342" H ="342" CAN_DRAG = "0" STATIC_NUM = "1" />
+			<STATIC_FORM ID = "SFRM_COLOR_TITLE">
+				<ATTR X = "9" Y = "7" Z = "1" W ="324" H ="45" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_SDW_TITLE">
+				<ATTR X = "9" Y = "7" Z ="2" W ="324" H ="45" STATIC_NUM = "3" />
+				<ATTR T_CENTER = "1" T_X = "162" T_Y = "13" FONT = "FTtitleBig_16" FONT_COLOR_HEX = "0xFFFFFFFF" T_OUTLINE = "1" TEXT = "400116"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X = "9" Y = "57" W ="324" H ="240" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" />
+				<STATIC_FORM ID = "SFRM_SDW">
+					<ATTR X = "0" Y = "0" W ="324" H ="240" STATIC_NUM = "3" />
+					<BUILD TARGET_ID="SFRM_DETAIL_CHANNEL_" X="5" Y="5" X_COUNT="2" Y_COUNT="5" X_GAB="157" Y_GAB="46" /> 
+					<STATIC_FORM ID="SFRM_DETAIL_CHANNEL_" >
+						<ATTR X="0" Y="0" W="157" H="46" STATIC_NUM = "5" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "2" IS_VISIBLE = "0" /> 
+						<STATIC_FORM ID = "SFRM_BAR_BG" >
+							<ATTR X="4" Y="23" Z = "0" W="147" H="19" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3"/> 
+							<ANI_BAR ID = "BAR_CHENNEL">
+								<ATTR X="3" Y="3" W="141" H="13" />
+								<ATTR BAR_IMG="../Data/6_ui/server/svBar.tga" BAR_IMG_W="141" BAR_IMG_H="13" BAR_COUNT="1"/>
+							</ANI_BAR>
+						</STATIC_FORM>
+						<BUTTON ID = "BTN_DETAIL_CHANNEL">
+							<ATTR X="0" Y="0" Z = "10" W="157" H="46" BTN_IMG = "../Data/6_ui/server/svCnOverB.tga" BTN_IMG_W = "314" BTN_IMG_H = "92"/>
+							<ATTR FONT = "FTbt_12" T_X = "78" T_Y ="6" T_CENTER = "1" T_OUTLINE="1"/>
+							<SCRIPT ID="ON_L_BTN_DOWN">
+								local nChannelNo = UISelf:GetCustomDataAsShort()
+								Net_ReqChannelChange(nChannelNo)
+							</SCRIPT>
+						</BUTTON>
+						<!--SCRIPT ID="ON_BUILD">UISelf:SetBuildIChannelBtn()</SCRIPT-->
+					</STATIC_FORM>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<BUTTON ID = "BTN_BACK">
+				<ATTR X = "248" Y = "303" W ="84" H ="26" />
+				<ATTR TEXT = "400542" FONT = "FTbt_12" T_X = "42" T_Y ="6" T_CENTER = "1" />
+				<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+				<SCRIPT ID = "ON_L_BTN_DOWN"> return CloseUI("FRM_CHANNEL_CHANGE") </SCRIPT>
+				<HOTKEY ID = "1"> return CloseUI("FRM_CHANNEL_CHANGE") </HOTKEY>
+				<HOTKEY ID = "14"> return return CloseUI("FRM_CHANNEL_CHANGE") </HOTKEY>
+			</BUTTON>
+		</STATIC_FORM>
+
+		<!--STATIC_FORM ID = "FRM_BASIC">
+			<ATTR X = "0" Y = "0" W ="178" H ="292" CAN_DRAG = "0" STATIC_NUM = "1" IGNORE_PARENT_RECT = "1" NO_OFFSCREEN="1"/>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X = "9" Y = "7" W ="160" H ="273" STATIC_NUM = "2" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "1" NO_OFFSCREEN="1"/>
+				<STATIC_FORM ID = "SFRM_SDW">
+					<ATTR X = "0" Y = "0" W ="160" H ="273" STATIC_NUM = "3" NO_OFFSCREEN="1"/>
+				</STATIC_FORM>
+			</STATIC_FORM> 
+			<LIST ID = "CHANNEL_LIST">
+				<BUTTON ID = "ScrUp">
+					<ATTR X = "133" Y = "0" W ="19" H ="15" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollUp.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+		      		</BUTTON>
+				<BUTTON ID = "ScrDown">
+					<ATTR X = "133" Y = "252" W ="19" H ="15" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollDn.tga" BTN_IMG_W = "38" BTN_IMG_H = "30"/>
+				</BUTTON>
+				<BUTTON ID = "ScrMiddle">
+					<ATTR X = "135" Y = "0" W ="15" H ="21" />
+					<ATTR BTN_IMG = "../Data/6_ui/common/cmScrollBar.tga" BTN_IMG_W = "30" BTN_IMG_H = "42" />
+				</BUTTON>
+				<FORM ID = "ScrollBG">
+					<ATTR X = "142" Y = "21" W ="13" H ="235" NO_OFFSCREEN="1"/>
+					<ATTR IMG = "../Data/6_ui/common/cmScrollBg.tga" IMG_W = "13" IMG_H = "235"/>
+				</FORM>
+	
+				<ATTR BTN_UP = "ScrUp" />
+				<ATTR BTN_DOWN = "ScrDown" />
+				<ATTR BTN_MIDDLE = "ScrMiddle" />
+				<ATTR WND_BAR = "ScrollBG" />
+
+				<ATTR ELEMENT_ID = "FRM_CHANNEL_DETAIL" />
+				<ATTR X = "14" Y = "11" W = "226" H = "263" ITEM_X = "0" ITEM_Y = "0" CAN_SELECT = "1" NO_OFFSCREEN="1"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:ClearAllListItem()
+				</SCRIPT>
+			</LIST>
+		</STATIC_FORM-->
+	</FORM>
+	
+	<STATIC_FORM ID="FRM_CHANNEL_CHANGING" ALIGN_X="50" ALIGN_Y="50" W="270" H="82" CAN_DRAG="0" STATIC_NUM="1">
+		<STATIC_FORM ID="SFRM_ANIBAR_BG" X="10" Y="10" Z="-1" W="244" H="24" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+		<ATTR TEXT="154" T_X="135" T_Y="40" T_CENTER="1" T_OUTLINE="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF"/>	
+		<ANI_BAR ID="BAR_TIMER">
+			<ATTR X= "12" Y="12" W="240" H="20"/>
+			<ATTR U="1" V="1"/> 
+			<ATTR BAR_COUNT = "1"/>	
+			<ATTR BAR_TYPE = "1"/>
+			<ATTR BAR_IMG="../Data/6_ui/Pvp/_RefineTbar.tga" BAR_IMG_W="240" BAR_IMG_H="20"/>	
+			<ATTR TEXT="" FONT="Font_Text"  FONT_COLOR_HEX="0xFF555555" T_X="120" T_Y ="3" T_CENTER="1"/>
+			<SCRIPT ID="ON_DISPLAY">
+				UISelf:DisplayTimeBarMsg(nil, false )
+			</SCRIPT>
+			<SCRIPT ID="ON_BAR_FULL">
+				local kParent = UISelf:GetParent()
+				if false == kParent:IsNil() then
+					kParent:ClearCustomData()
+				end
+			</SCRIPT>
+		</ANI_BAR>
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<SCRIPT ID="ON_CLOSE">
+					UI_ChannelChangingClose( UISelf:GetCustomDataAsShort() )
+				</SCRIPT>
+			</NAME>
+			<NAME ID="JAPAN/CHINA/TAIWAN"/>
+		</LOCAL>
+	</STATIC_FORM>
+</XUI>
+

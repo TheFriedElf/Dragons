@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Greed Doyen Attls_true" INIT_ACTION="a_opening">
+	<TEXTURE SRC="reflection_metal.dds">../Data/4_Item/1_Armor/1_Male/01_Helm/Texture/reflection_metal.dds</TEXTURE>
+	<TEXTURE SRC="reflection_cubic.dds">../Data/4_Item/1_Armor/1_Male/01_Helm/Texture/reflection_cubic.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Greed Doyen Attls_Mission04"/>
+		<KFMPATH SCALE="1.3">../Data/2_Mon/N_Greed Doyen Attls_true/N_Greed Doyen Attls_true.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="9"/>
+			<SPHERE TO="p_hit_point_02" SIZE="8"/>
+		</ABV>
+		<ATTACH TYPE="effect" SLOT="53911" EFFECT="ef_Greed_idle_01_p_pt_ride" TO="p_pt_ride"/>
+		<ATTACH TYPE="effect" SLOT="53912" EFFECT="ef_Greed_idle_02_p_ef_weapon" TO="p_ef_weapon"/>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000061"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000062"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000063"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000064"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000065"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000066"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000073"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000074" TARGET_EFFECT_NODE="p_wp_r_hand" TARGET_START_EFFECT="" TARGET_EFFECT="e_m_Yakut_cast_p_wp_r_hand"/>
+			<ITEM NAME="btlidle_02_skill_sttk" ANIMATION="1000075"/>
+			<ITEM NAME="skill_attk_02" ANIMATION="1000076" TARGET_EFFECT_NODE="p_ef_head" TARGET_START_EFFECT="" TARGET_EFFECT="e_m_flower_shot_02_p_ef_head"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000075"/>
+			<ITEM NAME="shot_01" ANIMATION="1000076" FIRE_START_NODE="p_ef_fire_02" PROJECTILE_ID="Projectile_lightball_02"/>
+			<!-- 발사체 공격 -->
+			<!--
+			<ITEM NAME="skill_attk_03" ANIMATION="1000202" TARGET_EFFECT_NODE="p_ef_fire_02" TARGET_START_EFFECT="" TARGET_EFFECT="e_m_flower_shot_02_p_ef_head"/>
+			-->
+			<!-- 대지의 분노 스킬 공격 -->
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000073"/>
+			<ITEM NAME="earthquake_fire" ANIMATION="1000074" FIRE_EFFECT="ef_boom_01" RANDOM_SCALE="1.0"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000082"/>
+			<!-- 다이-->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000030"/>
+
+				<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

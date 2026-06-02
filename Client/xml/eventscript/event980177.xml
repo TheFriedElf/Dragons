@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+
+<!-- 별자리 페가수스 결산 종료연출 -->
+
+	
+
+
+<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="0.5" />
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="0.01"/>
+	<CMD TYPE="WaitCamera"/>
+
+<!-- 플레이어 이동 가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+
+<!-- 밖으로 나가기 -->
+	<CMD TYPE="HideUI" enable="false"/><!--UI보이기 -->
+
+
+</EVENT_SCRIPT>
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="c_Mirinai" INIT_ACTION="a_idle">
+	<NPCMARK NAME="e_ef_colorshadow_npc" ATTATCH_TO="char_root"/>
+    <TEXTURE SRC="102_Glv_1000_0101.dds">../Data/4_Item/1_Armor/1_Male/06_Glove/Texture/102_Glv_1000_0101.dds</TEXTURE>
+	<TEXTURE SRC="102_Shd_1000_0101.dds">../Data/4_Item/1_Armor/1_Male/10_Shoulder/Texture/102_Shd_1000_0101.dds</TEXTURE>
+	<TEXTURE SRC="102_Sho_1000_0101.dds">../Data/4_Item/1_Armor/1_Male/07_Shoes/Texture/102_Sho_1000_0101.dds</TEXTURE>
+	<TEXTURE SRC="202_Dwa_1000_0101.dds">../Data/4_Item/1_Armor/2_Female/05_D_Armor/Texture/202_Dwa_1000_0101.dds</TEXTURE>
+	<TEXTURE SRC="202_Hem_1000_0101.dds">../Data/4_Item/1_Armor/2_Female/01_Helm/Texture/202_Hem_1000_0101.dds</TEXTURE>
+	<TEXTURE SRC="202_Upa_1000_0101.dds">../Data/4_Item/1_Armor/2_Female/04_U_Armor/Texture/202_Upa_1000_0101.dds</TEXTURE>
+	<TEXTURE SRC="crystal.dds">../Data/4_Item/2_Equip/1_Weapon/03_stf/Texture/stf_10008.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_n_Mirinai"/>
+		<KFMPATH SCALE="1.1">../Data/1_Cha/2_NPC/Mirinai/Mirinai.kfm</KFMPATH>
+		
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>
+			<ITEM NAME="emotion_talk_01" ANIMATION="1000005" RANDOM="100"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

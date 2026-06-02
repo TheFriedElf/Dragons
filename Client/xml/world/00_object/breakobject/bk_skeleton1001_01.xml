@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Bk_Skeleton1001_01" DIE_PARTICLE_ID="ef_Skeleton1001_01_die">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_atrocitysheep"/>
+		<KFMPATH SCALE="1.0">../Data/3_World/00_Object/breakObject/Break/Bk_Skeleton1001_01/Bk_Skeleton1001_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="31,34,33"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Action -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>
+
+

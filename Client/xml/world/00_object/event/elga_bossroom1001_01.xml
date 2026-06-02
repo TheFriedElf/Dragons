@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<PUPPET NAME="Elga_Bossroom1001_01" USE_PHYSX="1">
+  <WORLDOBJECT>
+    <KFMPATH SCALE="1">../Data/3_World/99_Boss/02_Modeling/Block/050400/Elga_Bossroom1001_01/Elga_Bossroom1001_01.kfm</KFMPATH>
+    <SLOT>
+      <!-- Basic Movement -->
+		<ITEM NAME="elga_01" ANIMATION="1000011"/>
+		<ITEM NAME="elga_01_trans" ANIMATION="1000020"/>
+		<ITEM NAME="elga_02" ANIMATION="1000021"/>
+		<ITEM NAME="elga_02_trans" ANIMATION="1000030"/>
+		<ITEM NAME="elga_03" ANIMATION="1000031"/>
+		<ITEM NAME="elga_03_trans" ANIMATION="1000032"/>
+		<ITEM NAME="elga_04" ANIMATION="1000033"/>
+		
+	 </SLOT>
+  </WORLDOBJECT>
+
+  <WORLD_EVENT_STATE_INFO>
+
+    <STATE ID="0" SLOT="elga_01"/>
+    <STATE ID="1" SLOT="elga_02"/>
+    <STATE ID="2" SLOT="elga_03"/>
+	<STATE ID="3" SLOT="elga_04"/>
+
+
+	<TRANSIT FROM="0" TO="1" SLOT="elga_01_trans"/>
+    <TRANSIT FROM="1" TO="2" SLOT="elga_02_trans"/>
+	<TRANSIT FROM="2" TO="3" SLOT="elga_03_trans"/>
+	<TRANSIT FROM="3" TO="2" SLOT="elga_04"/>
+
+  </WORLD_EVENT_STATE_INFO>
+
+</PUPPET>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="euc-kr"?>
+	<ACTOR NAME="m_Dragoon" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<!--ICON ID="icon_m_Rock_Gorgon"/-->
+		<KFMPATH SCALE="1.1">../Data/1_Cha/9_SSkill/Summon/SumDragoon/SumDragoon.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="15"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="100"/>			
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000001" />
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000001"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000001"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000001" VELOCITY="50" VELOCITY_INIT="50"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000001"/>				
+			<ITEM NAME="StandUp" ANIMATION="1000001"/>
+			<ITEM NAME="Stun" ANIMATION="1000001"/>
+			
+			<ITEM NAME="die_01" ANIMATION="1000110"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="run" ANIMATION="1000055" USE_AUTO_ANI_SPEED="FALSE"/>
+			<ITEM NAME="Opening" ANIMATION="1000081" QUAKE_FACTOR="2" QUAKE_TIME="0.9" />
+
+			<!-- 지뢰진 (다운 리액션->기본스킬) a_mon_earthquake-->
+			<ITEM NAME="attk_fin_01_start" ANIMATION="1000386" />
+			<ITEM NAME="attk_fin_01" ANIMATION="1000387" />
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1000388" 
+				FIRE_TEXTKEY="eff01" FIRE_TEXTKEY_EFFECT="eff_dragoon_earthquake_02" FIRE_TEXTKEY_NODE="p_efx_earthquake" FIRE_TEXTKEY_SCALE="3.5"
+				QUAKE_FACTOR="5" QUAKE_TIME="1" DO_DAMAGE="TRUE"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000389" />
+			
+			<!-- 드래곤 스핀(힐윈드,연타) a_mon_whirlwind_move -->
+			<ITEM NAME="whirlwind_btlidle_01_start" ANIMATION="1000201" />
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000204" />
+			<ITEM NAME="whirlwind_01" ANIMATION="1000202" FIRE_EFFECT_NODE="char_root" FIRE_EFFECT="eff_dragoon_dragon_spin_01"/>
+			<ITEM NAME="whirlwind_01_finish" ANIMATION="1000203" />	
+			
+			<!-- 호밍 붐(유도 발사체) a_mon_shot_01-->
+			<ITEM NAME="shot_around_01_start" ANIMATION="1000312" />
+			<ITEM NAME="shot_around_01" ANIMATION="1000310" />
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1000310"
+				ENTER_EFFECT_NODE="Bip01 Spine2" ENTER_EFFECT="eff_dragoon_shot_loop00"
+				FIRE_START_NODE="Bip01 Spine2" FIRE_START_NODE1="Bip01 Spine2" FIRE_START_NODE2="Bip01 Spine2" 
+				PROJECTILE_ID="PROJECTILE_Dragoon_shot_01" PROJECTILE_ID1="PROJECTILE_Dragoon_shot_01" PROJECTILE_ID2="PROJECTILE_Dragoon_shot_01" 
+				PROJECTILE_SPEED="350" PROJECTILE_SCALE="1.0" PROJECTILE_SCALE1="1.0" PROJECTILE_SCALE2="1.0"
+				PROJECTILE_COUNT="1"
+				HIT_TARGET_EFFECT_ID="efx_elgar_01_shot_around_01_dmg" HIT_TARGET_EFFECT_TARGET_NODE="Bip01 Spine1"
+			/>
+			<ITEM NAME="shot_around_01_finish" ANIMATION="1000313" />
+			
+			<!-- 자의에 의한 사망 -->
+			<ITEM NAME="voluntarily_die_01" ANIMATION="1000110"/>
+			
+			<!-- 순간이동 -->
+			<ITEM NAME="Warp" ANIMATION="1000081"/>
+			
+			<!-- 자폭 -->
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000000"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000110"/>
+			
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>
+

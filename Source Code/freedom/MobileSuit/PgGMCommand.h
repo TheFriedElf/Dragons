@@ -1,0 +1,11 @@
+#ifndef FREEDOM_DRAGONICA_GMCOMMAND_PGGMCOMMAND_H
+#define FREEDOM_DRAGONICA_GMCOMMAND_PGGMCOMMAND_H
+
+#define USE_GM
+
+namespace GMCOMMAND
+{
+	extern void ProcessPacket( BM::Stream &kPacket );
+};
+
+#endif // FREEDOM_DRAGONICA_GMCOMMAND_PGGMCOMMAND_H

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+    <ID>886</ID>
+    <GROUPNO>0</GROUPNO>
+    <TITLE TEXT="509025">에반의 질문공세</TITLE>
+    <GROUPNAME TEXT="504957">엘로라 주둔지</GROUPNAME>
+    <LIMITS>
+        <LEVEL MIN="50" MAX="999" />
+        <CLASSES>
+            <CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+        </CLASSES>
+        <!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+        <QUESTS>
+            <QUEST>0</QUEST>
+            <QUEST>0</QUEST>
+        </QUESTS>
+        <LOCATIONS>
+            <!-- <LOCATION>2</LOCATION>-->
+        </LOCATIONS>
+        <PARTY MIN="1" MAX="1" />
+    </LIMITS>
+    <CLIENTS>
+        <CLIENT TYPE="NPC" EVENTNO="10000">5B662D8F-1AD6-4354-AE2F-1BE36DAA6542</CLIENT>
+    </CLIENTS>
+    <AGENTS>
+        <AGENT TYPE="NPC" EVENTNO="10001">5B662D8F-1AD6-4354-AE2F-1BE36DAA6542</AGENT>
+    </AGENTS>
+    <PAYERS>
+        <PAYER TYPE="NPC" EVENTNO="10002">5B662D8F-1AD6-4354-AE2F-1BE36DAA6542</PAYER>
+    </PAYERS>
+    <EVENTS>
+        <NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10001</NPC>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10001</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10002</NPC>
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="509061"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+    </OBJECTS>
+    <REWARD>
+    </REWARD>
+    <DIALOGS>
+        <!--MEMO=201번은 퀘스트 수락/거부 여부창-->
+        <DIALOG ID="101" TYPE="PROLOG">
+            <BODY TEXT="509026" FACE="Eavan_normal"/>
+            <SELECT ID="10502" TYPE="ACCEPT" TEXT="500229">수락</SELECT>
+            <SELECT ID="20000" TYPE="REJECT" TEXT="500230">거절</SELECT>
+        </DIALOG>
+        <!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+        <DIALOG ID="301">
+			<BODY TEXT="509027" FACE="Eavan_normal"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+        <DIALOG ID="401">
+            <BODY TEXT="509058" FACE="Eavan_angly"/>
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+    
+        <DIALOG ID="501">
+            <BODY TEXT="509059" FACE="Eavan_normal"/>
+            <SELECT ID="502" TEXT="500002">다음</SELECT>
+        </DIALOG>
+        
+        <DIALOG ID="502" TYPE="MENU">
+            <BODY TEXT="509028" FACE="Eavan_normal"/>
+            <SELECT ID="508" TEXT="509029">정답 퀴즈 퀘스트1 (정답)</SELECT>
+            <SELECT ID="503" TEXT="509030">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509031">퀘스트 오답 실패 (닫기)</SELECT>
+		    <SELECT ID="508" TEXT="509032">퀘스트 오답 실패 (닫기)</SELECT>
+	    </DIALOG>
+        
+        <DIALOG ID="503" TYPE="MENU">
+            <BODY TEXT="509033" FACE="Eavan_normal"/>
+            <SELECT ID="508" TEXT="509034">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509035">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509036">퀘스트 오답 실패 (닫기)</SELECT>
+		    <SELECT ID="504" TEXT="509037">정답 퀴즈 퀘스트2 (정답)</SELECT>
+	    </DIALOG>
+        
+        <DIALOG ID="504" TYPE="MENU">
+            <BODY TEXT="509038" FACE="Eavan_normal"/>
+            <SELECT ID="508" TEXT="509039">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509040">퀘스트 오답 실패 (닫기)</SELECT>
+		    <SELECT ID="505" TEXT="509041">정답 퀴즈 퀘스트3 (정답)</SELECT>
+            <SELECT ID="508" TEXT="509042">퀘스트 오답 실패 (닫기)</SELECT>
+	    </DIALOG>
+        
+        <DIALOG ID="505" TYPE="MENU">
+            <BODY TEXT="509043" FACE="Eavan_normal"/>
+            <SELECT ID="508" TEXT="509044">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509045">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509046">퀘스트 오답 실패 (닫기)</SELECT>
+		    <SELECT ID="506" TEXT="509047">정답 퀴즈 퀘스트4 (정답)</SELECT>
+	    </DIALOG>
+        
+        <DIALOG ID="506" TYPE="MENU">
+            <BODY TEXT="509048" FACE="Eavan_normal"/>
+            <SELECT ID="508" TEXT="509049">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509050">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509051">퀘스트 오답 실패 (닫기)</SELECT>
+		    <SELECT ID="507" TEXT="509052">정답 퀴즈 퀘스트5 (정답)</SELECT>
+	    </DIALOG>
+        
+        <DIALOG ID="507" TYPE="MENU">
+            <BODY TEXT="509053" FACE="Eavan_normal"/>
+            <SELECT ID="508" TEXT="509054">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="508" TEXT="509055">퀘스트 오답 실패 (닫기)</SELECT>
+            <SELECT ID="601" TEXT="509056">정답 퀴즈 퀘스트6 (정답)</SELECT>
+		    <SELECT ID="508" TEXT="509057">퀘스트 오답 실패 (닫기)</SELECT>
+	    </DIALOG>
+        
+        <DIALOG ID="508">
+            <BODY TEXT="509058" FACE="Eavan_angly"/>
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+	    </DIALOG>
+        
+        <!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+        <DIALOG ID="601" TYPE="COMPLETE">
+            <BODY TEXT="509060" FACE="Eavan_smile"/>
+            <SELECT ID="30999" TYPE="COMPLETE" TEXT="507278">완료</SELECT>
+        </DIALOG>
+        <!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+        <DIALOG ID="901" TYPE="INFO">
+            <BODY TEXT="509062" />
+            <SELECT ID="0" TEXT="19933">포기</SELECT>
+        </DIALOG>
+        <!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+        <DIALOG ID="902">
+            <BODY TEXT="502048" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="903">
+            <BODY TEXT="501835" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+    </DIALOGS>
+    
+</QUEST>

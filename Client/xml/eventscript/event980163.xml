@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+<!-- 처녀자리 엔딩. -->
+
+  <CMD TYPE="ShowActor" ActorGUID="8C106791-5985-48f4-96A9-8302BAD31330" Show="true"/>
+  
+  <CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="false"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="2"/>
+  <CMD TYPE="stopBGM" SoundNo = "0"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  <CMD TYPE="setmoviescene" enable="true"/>
+  <CMD TYPE="playBGM" SoundNo = "1"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+
+  
+  
+  <!-- 포트레이트 -->
+    <CMD TYPE="Dialogue" NameTTID="99801062" TextTTID="99801641" FaceID="Persephone_smile" /><!-- 페르세포네 웃음-->
+	<CMD TYPE="WaitTime" Time="4"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801642" FaceID="User_normal" /><!-- 유 저-->
+	<CMD TYPE="WaitTime" Time="5"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801062" TextTTID="99801643" FaceID="Persephone_normal" /><!-- 페르세포네 일반-->
+	<CMD TYPE="WaitTime" Time="2.5"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801062" TextTTID="99801644" FaceID="Persephone_normal" /><!-- 페르세포네 일반-->
+	<CMD TYPE="WaitTime" Time="4"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+
+<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+
+<!-- 화면을 와이드 화면으로 출력하고 1초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+	<CMD type="waittime" time="1"/>
+	
+<!-- 미션 클리어 UI출력  -->
+	<CMD type="CallUI" UIWndName = "FRM_MISSION_END"/>
+	<CMD type="waittime" time="2"/>
+
+
+<!-- 페이드아웃 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/>
+	<CMD type="waittime" time="1"/>
+    
+
+<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1" />
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="WaitCamera"/>
+
+<!-- 플레이어 이동 가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+
+<!-- 밖으로 나가기 -->
+	<!--<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_END"/>-->
+	
+	
+</EVENT_SCRIPT>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="B_Aram_Mutisha" DIE_PARTICLE_ID="ef_Mutisha_die_01_char_root" DIE_PARTICLE_NODE="char_root" INIT_ACTION="a_opening">
+	<TEXTURE SRC="reflection_metal.dds">../Data/4_Item/1_Armor/1_Male/01_Helm/Texture/reflection_metal.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_B_Aram_Mutisha"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/B_Aram_Mutisha/B_Aram_Mutisha.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="92,15" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+			<!--SPHERE TO="p_hit_point_01" SIZE="10"/-->
+		</ABV>
+		<SLOT>
+			<!-- 배틀 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!-- 전방으로 양손을 뻗으면 검은 기가 몰아치며 앞으로 나간다 -->
+      <ITEM NAME="btlidle_01" ANIMATION="1000061"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062"/>
+			<!-- 기를 모아 던진다 -->
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000063"/>
+			<ITEM NAME="shot_01" ANIMATION="1000064" FIRE_START_NODE="p_wp_r_hand" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_Mutisha_shot_01"/>
+			<!-- 기를 모아 천정을 향해 기를 발사 하면 바닥에 벼락이 떨어질 위치 3곳이 그려진 후 떨어진다 -->
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000065" RANGE_EFFECT="ef_Mutisha_skill_01_04_char_root"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000066" FIRE_START_NODE="p_wp_r_hand" PROJECTILE_ID="PROJECTILE_Mutisha_shot_02" PROJECTILE_COUNT="3" PROJECTILE_SPEED="400"/>
+			<!-- 기를 모으면 돌 무데기가 빨려와서 8방향 향해 날아간다 -->
+			<ITEM NAME="shot_around_01_start" ANIMATION="1000067" CAST_EFFECT="ef_Mutisha_skill_02_01_char_root"/>
+			<ITEM NAME="shot_around_01" ANIMATION="1000068"/>
+			<ITEM NAME="shot_around_01_fire" ANIMATION="1000069" FIRE_START_NODE="p_hit_point_01" FIRE_START_NODE1="p_hit_point_01" FIRE_START_NODE2="p_hit_point_01" PROJECTILE_ID="PROJECTILE_Mutisha_shot_06" PROJECTILE_ID1="PROJECTILE_Mutisha_shot_07" PROJECTILE_ID2="PROJECTILE_Mutisha_shot_08" PROJECTILE_SPEED="250" PROJECTILE_SCALE="2.0" PROJECTILE_SCALE1="2.0" PROJECTILE_SCALE2="2.0"/>
+			<!-- 기를 모으면 돌 무데기가   pc를 향해 날아간다 -->
+			<ITEM NAME="shot_around_02_start" ANIMATION="1000067" CAST_EFFECT="ef_Mutisha_skill_02_01_char_root"/>
+			<ITEM NAME="shot_around_02" ANIMATION="1000068"/>
+			<ITEM NAME="shot_around_02_fire" ANIMATION="1000069" FIRE_START_NODE="p_hit_point_01" FIRE_START_NODE1="p_hit_point_01" FIRE_START_NODE2="p_hit_point_01" PROJECTILE_ID="PROJECTILE_Mutisha_shot_06" PROJECTILE_ID1="PROJECTILE_Mutisha_shot_07" PROJECTILE_ID2="PROJECTILE_Mutisha_shot_08" PROJECTILE_SPEED="250" PROJECTILE_SCALE="2.0" PROJECTILE_SCALE1="2.0" PROJECTILE_SCALE2="2.0"/>
+			<!-- 기를 모으면 돌 무데기가 빨려와서 양 방향 향해 날아간다 -->
+			<ITEM NAME="shot_around_03_start" ANIMATION="1000067" CAST_EFFECT="ef_Mutisha_skill_02_01_char_root"/>
+			<ITEM NAME="shot_around_03" ANIMATION="1000068"/>
+			<ITEM NAME="shot_around_03_fire" ANIMATION="1000069" FIRE_START_NODE="p_hit_point_01" FIRE_START_NODE1="p_hit_point_01" FIRE_START_NODE2="p_hit_point_01" PROJECTILE_ID="PROJECTILE_Mutisha_shot_03" PROJECTILE_ID1="PROJECTILE_Mutisha_shot_04" PROJECTILE_ID2="PROJECTILE_Mutisha_shot_05" PROJECTILE_SPEED="250" PROJECTILE_SCALE="2.0" PROJECTILE_SCALE1="2.0" PROJECTILE_SCALE2="2.0"/>
+			<!-- 아람으로 들어가기 -->
+			<ITEM NAME="a_mutisha_inaram_skill_start" ANIMATION="1000070" FIRE_EFFECT_NODE="p_hit_point_01" FIRE_EFFECT="ef_Mutisha_opennig_01_char_root"/>
+			<ITEM NAME="a_mutisha_inaram_skill_btlidle" ANIMATION="1000071"/>
+			<ITEM NAME="a_mutisha_inaram_skill" ANIMATION="1000072" FIRE_START_NODE="p_hit_point_01" PROJECTILE_ID="PROJECTILE_TeleportBall" PROJECTILE_SPEED="0" PROJECTILE_SCALE="2.0"/>
+			<!-- 순간이동 -->
+			<ITEM NAME="teleport_skill_01_start" ANIMATION="1000073"/>
+			<ITEM NAME="teleport_skill_01_btlidle" ANIMATION="1000074"/>
+			<ITEM NAME="teleport_skill_01" ANIMATION="1000075"/>
+			<!-- Basic Movement -->
+			<!--ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/-->
+			<!--ITEM NAME="die_01" ANIMATION="1000021"/-->
+			<ITEM NAME="mutisha_die_idle" ANIMATION="1000020"/>
+			<ITEM NAME="mutisha_die" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/-->
+			<ITEM NAME="Opening" ANIMATION="1000055"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

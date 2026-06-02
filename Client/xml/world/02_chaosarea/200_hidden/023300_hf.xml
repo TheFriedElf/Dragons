@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_023300_HF" DESCRIPTION="90233000">
+	<GSAPATH>../Data/3_World/02_ChaosArea/200_Hidden/023300_HF.gsa</GSAPATH>
+	<MINIMAP Y="117" H="314">../Data/3_World/02_ChaosArea/200_Hidden/023300_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/sneartrail_bg.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+	<!-- 포털 -->
+	<TRIGGER ID="gate_020300_base" TYPE="PORTAL" TITLE_TEXT_ID="830000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018320" PARAM2="3"/>
+	</TRIGGER>
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="150"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_10" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_10" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_11" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_11" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_12" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_13" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_13" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_14" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_14" PARAM="300"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_15" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_15" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_16" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_16" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_17" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_17" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_18" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_18" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_19" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_19" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_20" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_20" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_21" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_21" PARAM="400"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_22" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_22" PARAM="430"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_23" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_23" PARAM="430"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_24" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_24" PARAM="430"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_25" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_25" PARAM="430"/>
+	</TRIGGER>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1775" MID_END="4000" LOW_END="10000" USE="1"/>
+	<!-- NPC -->
+	<NPC NAME="1028256" ACTOR="c_Umai_N" SCRIPT="NPC_Click" KID="1028256" GUID="6B82F470-22BD-4978-9388-EAE439116C24" TYPE="FIXED" LOCATION="-2783.0259, -2486.3450, -44.2766" DIRECTION="0,0,0">
+		<SAY TYPE="IDLE" TTW="521308" UPTIME="7" DELAY="10" ACTION=""/>
+		<SAY TYPE="CLICK" TTW="521308" UPTIME="7" DELAY="10" ACTION=""/>
+		<SAY TYPE="TALK" TTW="521309" UPTIME="" DELAY="" ACTION="" SOUND="" MIN_LEVEL="1" FACE="Umai_normal" MAX_LEVEL="80"/>
+    </NPC>	
+    <!-- 포 그 -->
+	<FOG DENSITY="0.050000" START="15.000000" END="6155.000000" COLOR="0.826000,0.552000,0.294000"/>
+</WORLD>

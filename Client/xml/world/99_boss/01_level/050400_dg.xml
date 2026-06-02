@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_050400_DG" DESCRIPTION="90504000">
+	<GSAPATH>../Data/3_World/99_Boss/01_Level/050400/050400_DG.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Dark_Dragon_Boss.BGM.mp3</BGSOUND>
+	<BGSOUND_SUB VOLUME="1.0">../BGM/battlesquare.mp3</BGSOUND_SUB>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<FREE_DIRECTION ALL="TRUE"/>
+	<EVENT_SCRIPT_ON_ENTER ID="128" /><!--엘가 오프닝-->
+	<MAP_MOVE_COMPLETE_FADE FADE_COLOR="0,0,0" FADE_TIME="0.01" FADE_IN="FALSE"/><!--맵로딩후 Fade 상태-->
+	<EVENT_SCRIPT_STOP_AI NO="128,129,130,135"/>
+	<MONSTER MAX_REGEN_COUNT="30"/>
+
+	<!-- 엔터던전 -->
+    <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" ENABLE="0">
+		<CONDITION TYPE="touch" ACTION="a_act" />
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="4" PARAM2="2"/>
+    </TRIGGER>
+ 
+	<!-- 월드 이벤트 오브젝트 정의 -->
+	<WORLDEVENT_OBJECT_LIST>
+		<!--엘가 스테이지 -->
+		<WORLDEVENT_OBJECT ID="1" INIT_STATE="0" TYPE="PUPPET" NAME="Elga_Bossroom1001_01 01"/>	<!--문/ 열린 -->
+		<!--3차 이펙트 -->
+		<WORLDEVENT_OBJECT ID="10" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="Elga_Bossroom_Hero 01"/>
+        <WORLDEVENT_OBJECT ID="24" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 01"/>
+    </WORLDEVENT_OBJECT_LIST>
+	
+	<!-- 엘가 1 죽은 후 -->
+	<WORLD_EVENT ID="1" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="0" EVENT="EQUAL" VALUE="0"/>	<!-- 0구간 몬스터가 죽으면 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(129)" EVENT="SCRIPT"/>	<!--엘가 1차 엔딩 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	
+	<!-- 1차 엔딩 후 2차 소환  -->
+	<WORLD_EVENT ID="2" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="1" EVENT="ACT_AFTER_TIME" VALUE="17000" /> <!--16.0초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="1"/> <!-- 1번 스테이지로 바꾸기 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+
+	<!-- 1차 엔딩 후 2차 소환  -->
+	<WORLD_EVENT ID="3" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="2" EVENT="ACT_AFTER_TIME" VALUE="11000" /> <!--11.0초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="22" EVENT="ACTIVE" VALUE="1"/>	<!--2차 엘가 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<WORLD_EVENT ID="4" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="22" EVENT="EQUAL" VALUE="0"/>	<!-- 2차 엘가 죽으면  -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(130)" EVENT="SCRIPT"/>	<!--엘가 2차 엔딩 소환 -->
+			<ACTION TARGET_TYPE="MOVE_UNIT" TARGET_ID="UT_PLAYER" EVENT="STATUS" VALUE="char_spawn_1"/> <!--트리거 지역으로 이동 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!-- 2차 엔딩 후 3차 소환  -->
+	<WORLD_EVENT ID="5" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="4" EVENT="ACT_AFTER_TIME" VALUE="16000" /> <!--16.0초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="2"/> <!-- 2번 스테이지로 바꾸기 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!-- 2차 엔딩 후 3차 소환  -->
+	<WORLD_EVENT ID="6" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="5" EVENT="ACT_AFTER_TIME" VALUE="24000" /> <!--24.0초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="33" EVENT="ACTIVE" VALUE="1"/>	<!--2차 엘가 소환 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="10" EVENT="SHOW" VALUE="1"/><!--4대영웅 보이기-->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+    <!-- 3차 소환  스턴 -->
+    <WORLD_EVENT ID="7" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_EFFECT" TARGET_ID="3542120" EVENT="EQUAL" VALUE="3542525" /> <!--엘가가 스턴상태에 빠지면 이벤트 실행 -->
+			<ACTIVATE_ACTION>
+                <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="24" EVENT="SHOW" VALUE="1"/>
+                <ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_01" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+            </ACTIVATE_ACTION>
+			<DEACTIVATE_ACTION>
+				<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="24" EVENT="SHOW" VALUE="0"/>
+                <ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_01" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+            </DEACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<WORLD_EVENT ID="8" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="33" EVENT="EQUAL" VALUE="0"/>	<!-- 3차 엘가 죽으면  -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="10" EVENT="SHOW" VALUE="0"/><!--4대영웅 안보이기-->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(131)" EVENT="SCRIPT"/>	<!--엘가 3차 엔딩 소환 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="3"/> <!-- 3번 스테이지로 바꾸기 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--카메라-->
+    <CAMERA_ADJUST ZOOM="50" UP="120" TARGET_Z="60" />
+	<CAMERA_ADJUST WHEEL_MIN_ZOOM="0" WHEEL_MAX_ZOOM="1.5"/>
+	<VIEW_DISTANCE USE="1" HIGH_END="15000"/> <!--랜더러 카메라 값을 설정된 값으로 변경하겠다 -->
+
+	<!--카메라 연출-->
+	<TRIGGER ID="camera_in" CAMERA_TYPE = "in">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH = "0" ZOOM="0" UP="0" TARGET_X="0" TARGET_Y="0" TARGET_Z="0"  GROUP="1"/>
+	</TRIGGER>
+	<TRIGGER ID="camera_out" CAMERA_TYPE = "out">
+		<CONDITION TYPE="touch"/>
+		<CAMERA_ADJUST WIDTH = "0" ZOOM="50" UP="120" TARGET_X="0" TARGET_Y="0" TARGET_Z="60"  GROUP="1"/>
+	</TRIGGER>
+
+	<!--카메라 연출용 트리거-->
+	<TRIGGER ID="Elga_heartroom_camera">
+        <CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="elga_room_of_heart"/>
+	</TRIGGER>
+	
+	<!--결산창 이미지-->
+	<COMPLETE_PATH>
+		<ITEM ID = "0" PATH = "../Data/6_UI/mission/msRtElga000.tga"/>
+		<ITEM ID = "1" PATH = "../Data/6_UI/mission/msRtElga001.tga"/>
+		<ITEM ID = "2" PATH = "../Data/6_UI/mission/msRtElga002.tga"/>
+		<ITEM ID = "3" PATH = "../Data/6_UI/mission/msRtElga003.tga"/>
+	</COMPLETE_PATH>
+
+	<!-- L.O.D -->	
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1"/>
+
+</WORLD>

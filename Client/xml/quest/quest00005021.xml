@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5021</ID> <!--T.T.10502101 치사하지만 무서운 녀석 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)] - 상어 15마리 처리-->
+<!--[완료NPC]	바람항구 - 데이지-->
+<!--[내용]	데이지는 자신의 상점에 찾아와 행패를 부린 상어들에 대해서 분개한다. 상어에게 복수하려는 데이지를 도와야 한다. 수염고래 해안가 [아케이드 모드(F1)]에서 상어 15마리를 처리하자. 상어는 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">928106B8-8596-4E9C-B89A-87772C71A749</CLIENT> <!--시작NPC 바람항구 - 데이지 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">928106B8-8596-4E9C-B89A-87772C71A749</PAYER> <!--완료NPC 바람항구 - 데이지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">928106B8-8596-4E9C-B89A-87772C71A749</AGENT> <!--진행NPC 11 바람항구 - 데이지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010104/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010104/수염고래 해안가 아케이드 4,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010103/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010103/수염고래 해안가 아케이드 3,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010105/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010105/수염고래 해안가 아케이드 5,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010109/1">6013100</MONSTER> 
+ <!--MON_NO=6013100/상어 ,MAP_NO=9010109/캡틴후커 별장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10502111"/> <!--상어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502121" FACE="Huerin_normal"/> <!--이것들이 보자보자 하니까.
+정말 세상 살다 보니까. 별 이상한 꼴을 다 보겠네.
+얼마 전 상어 녀석들이 항구에 들어왔어.%%
+녀석들은 술이나 먹고 가자는 생각으로 왔겠지만, 정말 참을 수 없는 일을 저지른 거야.
+자세히 알고 싶어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502126" FACE="Huerin_smile"/> <!--후아. 속이 다 후련해졌어. 너 꽤 좋은 녀석이구나.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502123" FACE="Huerin_normal"/> <!--바로.
+바로.
+내가 열심히 만들어 놓은 물약들을 몽땅 깨 버리고 간 거야.%%
+뭐야 지금 그 허탈하다는 눈빛은?
+나에게 있어 물약은 생활의 수단이 되는 거라고.%%
+난 녀석들에게 변상하라고 소리쳤지.
+하지만그 녀석들 변상할 생각도 없이 웃고 떠들면서 가버렸어.%%
+그 녀석들이 돈이 있을 거라고 생각되지 않아. 
+그래서 돈을 받을 생각은 없지만 자신의 과오를 뉘우치는 고통은 받았으면 좋겠어.
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502124" FACE="Huerin_angly"/> <!--거절하지마!
+거절하지마!
+거절하지마!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502125" FACE="Huerin_normal"/> <!--복수는 빠르게 빚은 천천히라는 말도 몰라? 얼른 녀석들을 혼내줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

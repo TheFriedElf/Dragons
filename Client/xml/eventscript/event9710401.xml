@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 자연정령던전 입장 -->
+	<!-- <CMD TYPE="HideUI" enable="true"/> 전체 UI 숨기기 /워닝도 안뜸-->
+	<!-- <CMD TYPE="setmoviescene" enable="TRUE" Time="1"/> 신 카메라를 켠다.-->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--모든 플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false" /> <!--모든 몬스터 숨기기 -->
+<!--1차-->
+	<CMD TYPE="MoveCamToPos" TargetPos="46827.86, 719.3507, -244.5988"  MoveTime="0" CamActorDistance="100" CamMoveUpDistance="-10" HorizRotAngle="0" VertRotAngle="30"/><!--카메라를 특정 좌표로 이동, 이동 시간,액터와의 거리, 카메라위로, 수평값, 수직값-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="CALLDESCUI" TextTableID="1850008" ALIVE_TIME="18000"/> <!--설명 UI출력 -->
+    <CMD TYPE="waittime" time="1"/>
+	
+
+	<CMD TYPE="MoveCamToPos" TargetPos="35542.87, 719.3507, -244.5988"  MoveTime="15" CamActorDistance="100" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="20"/><!--카메라를 특정 지역으로 이동시킨다. -->
+	<CMD TYPE="waittime" time="7"/>
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="1"/>
+
+<!--2차-->
+	<CMD TYPE="MoveCamToPos" TargetPos="-16312.27, 3781.147, 2785.566"  MoveTime="0" CamActorDistance="130" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="40"/><!--카메라를 특정 좌표로 이동, 이동 시간,액터와의 거리, 카메라위로, 수평값, 수직값-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<!--<CMD TYPE="waittime" time="1"/>-->
+	<CMD TYPE="WaitFade" time="1"/>
+ 
+	<CMD TYPE="MoveCamToPos" TargetPos="-12381.5, 3967.17, 2817.686"  MoveTime="7" CamActorDistance="100" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="35"/><!--카메라를 특정 지역으로 이동시킨다. -->
+	<CMD TYPE="waittime" time="7"/>
+
+
+	<!-- 끝나고 돌아가기-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--모든 플레이어 보이기 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<!-- <CMD TYPE="setmoviescene" enable="false" Time="1"/>  신 카메라를 끈다.-->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/> <!--모든 몬스터 보이기 -->
+	<!-- <CMD TYPE="HideUI" enable="false"/>  전체 UI 보여주기 -->
+	<CMD TYPE="DoScript" OBJECTID="ALiveMonsterCountUI(true)"/><!-- 몬스터 카운트 호출 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+
+</EVENT_SCRIPT>
+

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+    <ID>299</ID>
+    <GROUPNO>0</GROUPNO>
+    <TITLE TEXT="502303">핏빛 일기 (6)</TITLE>
+    <GROUPNAME TEXT="500188">바람의 항구</GROUPNAME>
+    <LIMITS>
+        <LEVEL MIN="8" MAX="999" />
+        <CLASSES>
+            <CLASS MEMO="Thief">4</CLASS>
+        </CLASSES>
+        <QUESTS>
+            <QUEST>298</QUEST>
+            <QUEST>0</QUEST>
+        </QUESTS>
+        <LOCATIONS>
+            <!-- <LOCATION>2</LOCATION>-->
+        </LOCATIONS>
+        <PARTY MIN="1" MAX="1" />
+    </LIMITS>
+    <CLIENTS>
+        <CLIENT TYPE="NPC" EVENTNO="10000">B55363FD-2D1B-48d8-AE5B-B6EADE224359</CLIENT>
+    </CLIENTS>
+    <AGENTS>
+        <AGENT TYPE="NPC" EVENTNO="10001">B55363FD-2D1B-48d8-AE5B-B6EADE224359</AGENT>
+        <AGENT TYPE="NPC" EVENTNO="10002" MARK="END">C70570C1-38D4-4009-BDAB-3EE2DE038BC6</AGENT>
+    </AGENTS>
+    <PAYERS>
+        <PAYER TYPE="NPC" EVENTNO="10003">C70570C1-38D4-4009-BDAB-3EE2DE038BC6</PAYER>
+    </PAYERS>
+    <EVENTS>
+        <NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+        <NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/20300035/1">10001</NPC>
+        <NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10001</NPC>
+        <NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/20300035/1/551">10001</NPC>
+        <NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="551/20300035/1">10001</NPC>
+        <NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10002</NPC>
+        <NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/20300035/1/552">10002</NPC>
+        <NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="602/20300035/1">10002</NPC>
+        <NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10002</NPC>
+        <NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+    </EVENTS>
+    <OBJECTS TYPE="NOSTEP">
+        <OBJECT1 COUNT="1" TEXT="500731" />
+        <OBJECT2 COUNT="0" TEXT="0" />
+        <OBJECT3 COUNT="0" TEXT="0" />
+        <OBJECT4 COUNT="0" TEXT="0" />
+        <OBJECT5 COUNT="0" TEXT="0" />
+    </OBJECTS>
+    <REWARD>
+        <EXP>2240</EXP>
+        <GOLD>672</GOLD>
+        <SELECT1 COUNT="0" />
+        <SELECT2 COUNT="0" />
+    </REWARD>
+    <DIALOGS>
+        <DIALOG ID="101" TYPE="PROLOG">
+            <BODY TEXT="502253" FACE="Huerin_normal" />
+            <SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+            <SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+        </DIALOG>
+        <!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+        <DIALOG ID="301">
+            <BODY TEXT="502254" FACE="Huerin_smile" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+        <DIALOG ID="401">
+            <BODY TEXT="502255" FACE="Huerin_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="501">
+            <BODY TEXT="502256" FACE="Huerin_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="551">
+            <BODY TEXT="502256" FACE="Huerin_smile" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="552">
+            <BODY TEXT="500844" FACE="Alvin_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+        <DIALOG ID="601" TYPE="COMPLETE">
+            <BODY TEXT="502257" FACE="Alvin_smile" />
+            <SELECT ID="30602" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+        </DIALOG>
+        <!--701번은 완료를 허락 하였을 때 뜰창-->
+        <DIALOG ID="701">
+            <BODY TEXT="500017" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--801번은 완료를 거부 하였을 때 뜰창-->
+        <DIALOG ID="801">
+            <BODY TEXT="500018" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+        <DIALOG ID="901" TYPE="INFO">
+            <BODY TEXT="502258" />
+            <SELECT ID="0" TEXT="19933">포기</SELECT>
+        </DIALOG>
+        <!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+        <DIALOG ID="902">
+            <BODY TEXT="502048" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="903">
+            <BODY TEXT="501835" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+    </DIALOGS>
+</QUEST>

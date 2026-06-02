@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4124</ID> <!--T.T.10412401 불안한 로커 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	악마의 숨결[아케이드 모드(F1)] 정예방 진입-->
+<!--[완료NPC]	악마의 숨결 - 제이드-->
+<!--[내용]	제이드는 족장 로커의 조사에 대한 지원 병력을 요청했다가 거절당한다. 병사 제이드를 위해 화암산호족의 본거지인 악마의 숨결[아케이드 모드(F1)]의 정예방을 조사하자. 로커와 싸울 필요는 없다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</CLIENT> <!--시작NPC 악마의 숨결 - 제이드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</PAYER> <!--완료NPC 악마의 숨결 - 제이드 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 11 악마의 숨결 - 제이드 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<LOCATION OBJECTNO="1" TYPE="LOCATION_ENTER" VALUE="9020109">1</LOCATION> 
+ <!--MAP_NO=9020109/부족장 로커,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10412411"/> <!--악마의 숨결[아케이드 모드(F1)] 정예방 진입-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10412421" FACE="Walter_normal"/> <!--뭐, 뭐, 뭐야...
+화암산호족의 본거지가 바로 이 부근에 있다는 거야?%%
+흠.. 그렇다면… 네가 한번 그 악마의 숨결[아케이드 모드(F1)]에 있는
+화암산호족의 거처에서 족장 로커가 있는지 확인해보지 않을래?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10412426" FACE="Walter_smile"/> <!--쳇… 그 멍청한 호위대 같으니라구!
+나같은 말단의 이야기는 전혀 믿어주질 않아.%%
+명확한 증거로 호위대 부관에게 횃불도 가져갔지만, 
+내 이야기가 잘 전해지지 않았는지… %%
+호프먼 대장은 평범한 횃불 자루라고 했다고 하는군. 
+너도 한번 생각해봐. %%
+사람 살려달라고 쓰여진 횃불자루가 평범해?! 평범해?!
+크악! 짜증나!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10412423" FACE="Walter_normal"/> <!--꼬마…. 난, 그동안 지원병을 요청해올테니까 말이지.
+너무 무리하지 말고, 들키면 안되니까 잘 숨어다녀야 한다.
+알았지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10412424" FACE="Walter_angly"/> <!--너 이런 중요한 때에… 거, 겁을 집어... 머, 먹으면... 
+어, 어, 어쩌자는 거냣!  흐덜덜덜덜…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10412425" FACE="Walter_angly"/> <!--로커가 있는 장소에 들어가게 되면, 위치를 잘 기억해두라고… 알았지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10412402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

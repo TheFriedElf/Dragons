@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Agnis_mission" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="108">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_agnis"/>
+		<KFMPATH SCALE="2.2">../Data/2_Mon2/03_Solaiden/03_EliteMon/030700/Agnis/Agnis.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="30"/>
+		</ABV>
+		<SLOT>
+		
+			
+				<!-- 오른주먹3개 -->
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000203"/>
+			
+			<!-- 팔방치기 -->
+
+			<ITEM NAME="attk_fin_01_start" ANIMATION="1000301"/>
+			<ITEM NAME="attk_fin_01" ANIMATION="1000302"/>
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1000303"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1000304"/>
+		
+			
+		
+			<!--가로 크로스 -->
+
+			
+			<ITEM NAME="crossattack_01_idle" ANIMATION="1000361" CAST_EFFECT="e_ef_fossilearth_target_01" />
+			<ITEM NAME="crossattack_01_fire" ANIMATION="1000362" FIRE_EFFECT="EF_Common_Mon_IcePick_golrem" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+			<ITEM NAME="crossattack_01_finish" ANIMATION="1000363"/>
+			<!--세로 크로스 -->
+
+			<ITEM NAME="crossattack_02_idle" ANIMATION="1000361" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_02_fire" ANIMATION="1000362" FIRE_EFFECT="EF_Common_Mon_IcePick_golrem" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+	    	<ITEM NAME="crossattack_02_finish" ANIMATION="1000363" />
+		    <!--크로스 -->
+
+		
+			<ITEM NAME="crossattack_03_idle" ANIMATION="1000367" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_03_fire" ANIMATION="1000368" FIRE_EFFECT="EF_Common_Mon_IcePick_golrem" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+		    <ITEM NAME="crossattack_03_finish" ANIMATION="1000369" />
+			<!-- 휠윈드 -->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000378" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000379" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="breath_01" ANIMATION="1000380"/>
+			
+				<!-- 대쉬에프터 -->
+			<ITEM NAME="dash_after_attk_btlidle_01_start" ANIMATION="1000414" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_btlidle_01" ANIMATION="1000415" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_01_02" ANIMATION="1000417" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_rush" ANIMATION="1000416" FIRE_EFFECT="NONE"/>	
+			
+			
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020" DIE_ALPHA="1"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="1.0" QUAKE_FACTOR="1"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+				<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

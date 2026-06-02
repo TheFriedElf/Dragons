@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4199</ID> <!--T.T.10419901 대지의 신보를 찾아서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샤리와 대화-->
+<!--[완료NPC]	카즈라 마을 - 샤리-->
+<!--[내용]	신록의 숲에서 대지의 신보가 감지되었다고 한다. 오추쿠는 %name%이 신록의 숲과 신보에 대한 정보를 알아내주길 바란다. 신록의 숲을 향한 본격적인 모험을 떠나기 전에, 카즈라 마을에서 대지의 신관 사제 샤리를 만나 대화하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">48AB8C5A-FB6A-467d-B914-01514408440A</CLIENT> <!--시작NPC 카즈라 마을 - 오추쿠 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">96F19874-A786-4851-B336-0D67FF9B2282</PAYER> <!--완료NPC 카즈라 마을 - 샤리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">48AB8C5A-FB6A-467d-B914-01514408440A</AGENT> <!--진행NPC 11 카즈라 마을 - 오추쿠 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">96F19874-A786-4851-B336-0D67FF9B2282</AGENT> <!--진행NPC 12 카즈라 마을 - 샤리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419911"/> <!--샤리와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419921" FACE="Ocuku_normal"/> <!--오오... %name%!
+그대에게 오늘은 특별히 부탁할 것이 있소이다.%%
+정체를 감춘 모험자가 되어 각지를 돌아다니며
+신보에 대한 정보를 알아내주었으면 하는데,
+어떻겠소이까?%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419926" FACE="Shari_smile"/> <!--오셨군요…%%
+루의 일은…
+참으로 유감스럽습니다.%% 
+빛의 사제에 이어 그림자의 사제까지 신보를 지키기 위해 
+희생되었으니, 이는 우리 모두에게 견디기 힘든 시련이군요.%%
+이럴 때일수록 우리는 주어진 사명에 전력을 다하는 수 밖에
+없습니다. 
+대지의 신보를…%%
+대지의 신보를 하루 속히 찾아내 정화해 주십시오.
+그럼 서둘러 솔방울 언덕으로 가주십시오.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419923" FACE="Ocuku_normal"/> <!--이곳에서 혼돈대륙의 내륙쪽으로 향하면 솔방울 언덕이
+나올 것이오. 그곳은 태고적부터 자라온 원시림이 시작되는 곳...%%
+우리는 그 숲의 이름을 신록의 숲이라 부른다오.
+팔괘로 탐지해본 결과, 그 근방에 대지의 신보가
+있을 것이라 하오.%%
+그러나 신록의 숲 역시 카즈라와 마찬가지로 고대의 마법진에 
+의해 보호되는 신성한 곳이라, 아무나 들어갈 수 없다고 하니…%%
+신록의 숲의 입구인 솔방울 언덕에서 신보의 행방에 대해 
+조사해주길 바라는 것이오.%%
+지금 바로 서둘러 샤리 사제를 찾아가시오. 그녀가 모험을 위한 
+준비를 도와줄 것이외다.
+에아님의 축복이 그대를 항상 옳은 길로 인도할 것이오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419924" FACE="Ocuku_angry"/> <!--뜻이 정히 그렇다면 어쩔 수 없군. 물러가시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419925" FACE="Ocuku_angry"/> <!--솔방울 언덕으로 가기 전에 샤리 사제를 만나보시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,7 @@
+<ACTION ID="a_Silence Trap" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_RatTrap_01"/>
+  <SLOT NAME="Bow_Skill_JumpTrap_01"/>
+  <FSM SCRIPT="Skill_InstallDefault"
+       FIRE_SOUND_ID="Freezing_Trap"/>
+</ACTION>

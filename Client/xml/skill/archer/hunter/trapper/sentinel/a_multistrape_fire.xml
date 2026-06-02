@@ -1,0 +1,12 @@
+<ACTION ID="a_multi_strape_fire" NEXT="a_multi_strape_melee" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE" ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Arc_Bow_skill_Multi_Stripe_02" LOOP="TRUE"/>
+  <FSM SCRIPT="Skill_Multi_Strape_Fire" PROJECTILE_ID="PROJECTILE_MULTISTRAPE_ARROW"
+  	   
+	   FIRE_CASTER_EFFECT_ID="ef_skill_multi_stripe_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID2="ef_skill_multi_stripe_02_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE2="char_root"
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	/>
+	  
+</ACTION>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Core_patroller_XG" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+		<KFMPATH SCALE="0.7">../Data/2_Mon2/95_Dungeon/03_EliteMon/050601/Core_patroller_XG/Core_patroller_XG.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="85,110,160"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000001"/>
+		
+
+			<!-- 세티로스방 안타레스 U 레이저 -->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1001151"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1001152"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1001153"  FIRE_START_NODE="p_ef_shot_01" SHOT_INTER_TIME="0.3"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1001154"/>
+
+
+
+			<!-- 세티로스방 안타레스  M 레이저_02 -->
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1001151"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1001152"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1001155"  FIRE_START_NODE="p_ef_shot_01" SHOT_INTER_TIME="0.3"/>
+			<ITEM NAME="shot_return_02" ANIMATION="1001156"/>
+
+
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+
+	
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

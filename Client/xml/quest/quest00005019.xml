@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5019</ID> <!--T.T.10501901 쉽다고 하기에는 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 수염고래 해안가에서 콤보 300회 달성-->
+<!--[완료NPC]	바람항구 - 챤피오-->
+<!--[내용]	챤피오는 수염고래 해안가에서 콤보를 제대로 달성하는 사람이 없다고 푸념한다. 그런 푸념 중에 혹시 콤보가 가능하다면 도전해 보라고 약을 올린다. 챤파오에게 실력을 제대로 보여주기 위해, 수염고래 해안가에서 콤보 300회를 달성하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</CLIENT> <!--시작NPC 바람항구 - 챤피오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</PAYER> <!--완료NPC 바람항구 - 챤피오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</AGENT> <!--진행NPC 11 바람항구 - 챤피오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="300/1">9010100</GROUND> 
+ <!--MAP_NO=9010100/수염고래 해안가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10501911"/> <!--콤보 300회-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501921" FACE="Campiu_normal"/> <!--흐음, 정말 그곳이 그렇게 어렵다는 건가?
+응? 너 수염고래 해안가의 녀석들을 어떻게 생각해?%%
+내가 상대하기에는 너무 쉬운 녀석들이지만, 이상하게 여기 용사가 되기 위해 온 녀석들은 아닌 것 같아.
+어때 너는 그 녀석들보다 잘 할 수 있을 것 같아?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501926" FACE="Campiu_smile"/> <!--흐음. 꽤 잘 하는군. 하지만 말이야. 아직 한참 멀었어. 더 수련에 힘 써야 할 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501923" FACE="Campiu_normal"/> <!--요즘 이쪽으로 오는 용사 지망생들이 제법 많아져서 이야기를 듣고 있는데.
+이상하게도 수염고래 해안가에서 콤보 300회 달성하기가 너무 힘들다는 거야.%%
+그래서 정말 어려운가 시험해봤더니, 나한테는 너무 쉬운 일이었어.
+만약 네가 성공한다면 그 녀석들의 실력이 형편없었다는 것을 증명하는 셈이지.%%
+네 실력을 증명할 좋은 기회야.
+한번 힘내서 해보도록 해!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501924" FACE="Campiu_angry"/> <!--뭐, 역시나 거절하는군. 괜찮은 녀석들은 이 근처에서 씨가 말랐다니까.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501925" FACE="Campiu_angry"/> <!--그렇게 자신만만한 거야. 도대체 여기서 뭐하는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

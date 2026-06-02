@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="EscScript" EventID="9020106"/>
+
+<!-- PC로 돌아오기 -->
+	<CMD TYPE="CloseMovieScene" Time="1"/>
+	<CMD type="waittime" time="2"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="1"/>
+
+<!-- PC이동가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	
+	<CMD type="CallUI" UIWndName = "FRM_MISSION_START_F7"/>
+</EVENT_SCRIPT>

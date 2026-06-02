@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_core_helix" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_core_helix"/>
+		<KFMPATH>../Data/2_Mon/N_core_helix/N_core_helix.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000005"/>
+			<!-- 자폭 -->
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000013"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000011"/>			
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000011"/>
+			<ITEM NAME="StandUp" ANIMATION="1000011"/>
+			<ITEM NAME="Stun" ANIMATION="1000011"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

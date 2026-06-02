@@ -1,0 +1,8 @@
+<ACTION ID="a_Pin-Point Attack" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="csb_skill_PinpointShot_01_01" LOOP="TRUE"/>
+  <SLOT NAME="csb_skill_PinpointShot_01_02"/>
+  <FSM SCRIPT="Projectile_Default"
+      HIT_CASTER_EFFECT_TARGET_NODE="p_ef_head" 
+      HIT_CASTER_EFFECT_ID="ef_Pinpoint_01_char_root"     
+/>
+</ACTION>

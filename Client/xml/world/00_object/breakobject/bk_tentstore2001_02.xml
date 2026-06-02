@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Bk_TentStore2001_02" DIE_PARTICLE_ID="ef_TentStore2001_01_die">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_atrocitysheep"/>
+		<KFMPATH SCALE="1.0">../Data/3_World/00_Object/breakObject/Collapse/Bk_TentStore2001_02/Bk_TentStore2001_02.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="11,90"/>
+			<CAPSULE TO="p_hit_point_02" SIZE="11,90"/>
+			<CAPSULE TO="p_hit_point_03" SIZE="11,90"/>
+			<CAPSULE TO="p_hit_point_04" SIZE="11,90"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Action -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>
+
+

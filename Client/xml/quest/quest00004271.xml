@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4271</ID> <!--T.T.10427100 왕국의 재정파탄 위기 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	마을사람들과 대화
+( 순서대로 대화해야함 )-->
+<!--[완료NPC]	바람항구 - 스티븐 2세-->
+<!--[내용]	브리즈 왕국의 군주 스티븐 2세가 세금이 줄어 들어 고민이다. 듣기로는 농작물의 수확량이 줄어 세금이 적게 걷히기 때문이라고 한다. 마을사람들과 대화하여 정확한 원인을 알아 보자. -->
+
+
+<LIMITS>
+
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FED9025-A98B-4B57-A653-512CD83BC40F</CLIENT> <!--시작NPC 바람항구 - 스티븐 2세 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FED9025-A98B-4B57-A653-512CD83BC40F</PAYER> <!--완료NPC 바람항구 - 스티븐 2세 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021" Mark="END">1ACF8B10-CBA7-4931-AD72-438E6A268655</AGENT> <!--진행NPC 1 바람항구 - 부루투스 -->
+		<AGENT TYPE="NPC" EVENTNO="10022" Mark="END">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 2 바람항구 - 다비 -->
+		<AGENT TYPE="NPC" EVENTNO="10023" Mark="END">2913D89A-651D-488d-8C45-8BE6DD37BADE</AGENT> <!--진행NPC 3 바람항구 - 마이스터 -->
+		<AGENT TYPE="NPC" EVENTNO="10024" Mark="END">F6892AEE-C23C-4e4c-848E-93F72A255B05</AGENT> <!--진행NPC 4 바람항구 - 그웬 -->
+		<AGENT TYPE="NPC" EVENTNO="10025" Mark="END">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 5 바람항구 - 제레미 -->
+		<AGENT TYPE="NPC" EVENTNO="10011">8FED9025-A98B-4B57-A653-512CD83BC40F</AGENT> <!--진행NPC 11 바람항구 - 스티븐 2세 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!--NPC_Event=10021/바람항구 - 부루투스,-->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!--NPC_Event=10022/바람항구 - 다비,-->
+		<NPC OBJECTNO="3" TYPE="INCPARAM" VALUE="513/1">10023</NPC> 
+ <!--NPC_Event=10023/바람항구 - 마이스터,-->
+		<NPC OBJECTNO="4" TYPE="INCPARAM" VALUE="514/1">10024</NPC> 
+ <!--NPC_Event=10024/바람항구 - 그웬,-->
+		<NPC OBJECTNO="5" TYPE="INCPARAM" VALUE="515/1">10025</NPC> 
+ <!--NPC_Event=10025/바람항구 - 제레미,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="513">10023</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="514">10024</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="515">10025</NPC> 
+ <!----> 
+
+
+	</EVENTS>
+
+
+	<OBJECTS TYPE="STEPBYSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427111"/> <!--요리 전문가 <부루투스>와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10427112"/> <!--대장장이 <다비>와 대화-->
+		<OBJECT3 COUNT="1" TEXT="10427113"/> <!--생산의 거장 <마이스터>와 대화-->
+		<OBJECT4 COUNT="1" TEXT="10427114"/> <!--대마법사 <그웬>과 대화-->
+		<OBJECT5 COUNT="1" TEXT="10427115"/> <!--대현자 <제레미>와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427121" FACE="Steven_normal"/> <!--이거 정말 큰일이야.. 
+얼마전 부터 세금이 줄어 들고 있어서 왕국의 재정이 파탄에 이르게 생겼다네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427126" FACE="Steven_smile"/> <!--기후의 변화때문이라.. 
+이거 큰일이군 이렇게 계속 가다가는 왕국의 재정을 떠나서 백성들의 삶이 어려워 지는 것이 더 걱정이군.  -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427123" FACE="Steven_normal"/> <!--내가 가장 신뢰하는 집사의 말에 의하면 작물의 생산량이 줄어 들어서 어쩔 수 없다고 하더군.
+내가 백성들을 못믿어서 그런건 아니지만, 정확한 원인을 자네가 좀 조사해 주게나.
+고맙네. 우선 상인들에게 먼저 가보게나. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427124" FACE="Steven_angly"/> <!--도대체가 이 나라를 걱정하는 젊은이들이 없군.
+나라가 없으면 백성들도 없다는 사실을 꼭 기억해 두게..-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427125" FACE="Steven_normal"/> <!--뭣 좀 알아 온것이 있나?
+표정을 보니 아직 인것 같군. 
+결코 남의 일이 아니니까 서둘러 주게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--기타-->
+			<BODY TEXT="10427151" FACE="Brutus_angly"/> <!--재료값이 올라서 재료를 충분히 살 수가 없을 지경이야. 그러니 음식을 넉넉히 만들지도 못해서 수익이 많이 줄었지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--기타-->
+			<BODY TEXT="10427152" FACE="Darby_angly"/> <!--무기를 만들기 위해서는 질좋은 철광석이 필요한데. 요즘 들어오는 광석은 질이 아주 형편이 없더라고. 그러니 무기나 갑옷을 많이 만들 수가 없어 그러니 나도 수익이 줄어 들고 세금을 많이 낼수가 없군-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="513" > <!--기타-->
+			<BODY TEXT="10427153" FACE="meister_angly"/> <!--채집농장의 작물들이 잘 자라지 않는다고 하더라고. 광물의 질도 떨어져서 쓸수가 없다고 하던데. 광부들의 말로는 대마법사 그웬님이 별자리 점을 쳐서 수확하기 좋은 시기를 알려주었는데 요즘은 통 맞질 않는다고 하더군. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="514" > <!--기타-->
+			<BODY TEXT="10427154" FACE="Gwen_angry"/> <!--농부들이나 낚시꾼 그리고 광부들도 일을 하기 전에는 나에게 와서 물어 보지. 
+언제가 가장 수확하기 좋은 시기인지를..
+내가 점성술로 그 시기를 가르쳐 주면 거의 틀리지 않았었거든. 그런데 요즘은 자꾸 틀리고 있다오. 그래서 백성들의 수확량도 줄어 들었다고 하더군요. 대현자 제레미 님이라면 원인을 알 수 있지 않을까 하는 생각이 드네. 한번 현자님을 찾아가 보시오. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="515" > <!--기타-->
+			<BODY TEXT="10427155" FACE="Jeremy_normal"/> <!--점성술이 틀리고 있다.. 음.. 
+그렇지 않아도 요즘 별자리가 바뀐것을 보고 이상하다 생각을 하고 있었지. 별자리가 바뀌면 기후에 변화가 생기고 그러면 생물들의 성장에 영향을 미치지. 그 영향은 인간들에게도 곧 올거야. 이대로 계속가다가는 어떤 재앙이 올지도 몰라. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

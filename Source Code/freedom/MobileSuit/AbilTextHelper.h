@@ -1,0 +1,8 @@
+#ifndef FREEDOM_DRAGONICA_SCRIPTING_UI_ABILTEXTHELPER_H
+#define FREEDOM_DRAGONICA_SCRIPTING_UI_ABILTEXTHELPER_H
+
+namespace AbilTextHelper
+{
+	bool ReplaceText(CItemDef const* pkItemDef, BM::vstring& rkTempMsg);
+};
+#endif // FREEDOM_DRAGONICA_SCRIPTING_UI_ABILTEXTHELPER_H

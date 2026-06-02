@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4214</ID> <!--T.T.10421401 용이 잠드는 곳에 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	무찌와 순찰자 무찌 각각 30마리 퇴치-->
+<!--[완료NPC]	드래곤 계곡 - 샹도르-->
+<!--[내용]	샹도르는 나오이와 오르하가 게시에서 본 종말의 장소로 가는 것을 호위하기 위해 이곳까지 따라왔다고 한다. 무녀들의 안전을 위협하는 몬스터들이 많다며 걱정하는 눈치다. 드래곤계곡에서 무찌와 순찰자 무찌를 각각 30마리씩 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F745766E-D68F-49b7-8EDF-CBDEACF9C90D</CLIENT> <!--시작NPC 드래곤 계곡 - 샹도르 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F745766E-D68F-49b7-8EDF-CBDEACF9C90D</PAYER> <!--완료NPC 드래곤 계곡 - 샹도르 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F745766E-D68F-49b7-8EDF-CBDEACF9C90D</AGENT> <!--진행NPC 11 드래곤 계곡 - 샹도르 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3529000</MONSTER> 
+ <!--MON_NO=3529000/무찌,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">3529200</MONSTER> 
+ <!--MON_NO=3529200/순찰자 무찌,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10421411"/> <!--무찌-->
+		<OBJECT2 COUNT="30" TEXT="10421412"/> <!--순찰자 무찌-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10421421" FACE="Syangdoreu_normal"/> <!--여어, 반갑다. %name%!
+뭐야? 넌 여전히 변한 게 없구나.%%
+용이 수명이 다할 때 죽음을 맞이하러 찾아온다는
+장소에서 만나다니, 우린 대단한 인연인가 보다.%%
+그래, 이곳은 예전 같으면 엄두도 못 낼 위험한 곳이야.
+하지만 나오이님을 지키기 위해 어쩔 수 없이 온 거지.%%
+그래도 소문처럼 바로 죽음을 맞이한 것은 아니지만
+왠지 살아있다는 실감이 나질 않아.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10421426" FACE="Syangdoreu_normal"/> <!--고맙다. 실력은 여전하구나.
+과연 나오이의.. 아니 나오이님의 꿈에 나올만한 자격이 있네.%%
+나도 언젠가는 그녀의 꿈속에 등장할 수 있을 지 모르겠다. 후후..-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10421423" FACE="Syangdoreu_normal"/> <!--일단 자릴 잡긴 했지만, 아직 이곳이 그렇게 안전한 곳으로
+보이진 않아. 특히 우리 주위를 맴도는 저 무찌와 순찰자 무찌가
+거슬리는구나%%
+너, 아직 실력이 녹쓸진 않았겠지?
+우리 미카족의 무녀님들의 아전을 확보해주지 않겠어?
+난 다른 녀석들을 손 볼테니, 네가 이곳 드래곤 계곡에서
+무찌와 순찰자 무찌를 30마리씩 잡아주면 좋겠어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10421424" FACE="Syangdoreu_angly"/> <!--내 기대를 저버리는 건 아니겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10421425" FACE="Syangdoreu_angly"/> <!--무찌와 순찰자 무찌를 해치워 줘. 나와 샤말키는 다른 녀석들을 맡을테니.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10421402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

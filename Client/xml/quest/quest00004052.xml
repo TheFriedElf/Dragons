@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4052</ID> <!--T.T.10405201 투, 투.. 투시 장치라굽쇼?(2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 펫상인 에이미와의 대화-->
+<!--[완료NPC]	바람항구 - 에이미-->
+<!--[내용]	에델린이 만든 투시장치는 이미 에이미에게 보내졌다고 한다. 바람항구의 펫상인 에이미를 만나서 정체불명의 펫알에 뭐가 들었는지 확인해 보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT> <!--시작NPC 바람항구 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</PAYER> <!--완료NPC 바람항구 - 에이미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 11 바람항구 - 에델린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 12 바람항구 - 에이미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10405211"/> <!--에이미와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10405221" FACE="Edeline_normal"/> <!--일전에 상인의 마을에서 노엘박사님과 만난 적이 있었는데...
+친구인 파렐박사님을 천재라고 칭찬하시더군요.%%
+다만…
+워낙 괴짜라고 하시던데….%%
+이 장치들을 보고 있으니 더더욱 그런 생각이 드네요. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10405226" FACE="Amy_smile"/> <!--안녕하세요. %name%님~
+안 그래도 %name%님께 전할 말이 있었어요!%%
+드디어…... 
+에델린이 보낸 투시장치로 결과가 나왔어요!%%
+자그마치 알 속에 들어있는 건…..
+그리퐁이었어요!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10405223" FACE="Edeline_smile"/> <!--그럼 투시장치 만드는 걸 마무리해서 에이미씨에게 보낼테니
+시간이 나실 때 펫상점에 들르도록 하세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10405224" FACE="Edeline_angly"/> <!--여기서 포기하실건가요. 흠… 이 때까지 들어간 정성이 아깝네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10405225" FACE="Edeline_normal"/> <!--투시장치는 벌써 보내두었답니다. 펫상인 에이미씨에게 가보세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10405202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

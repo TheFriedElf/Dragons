@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4262</ID> <!--T.T.10426201 제스의 적대심 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	잭과 대화-->
+<!--[완료NPC]	밴시협곡 - 잭-->
+<!--[내용]	제스는 키오네스크의 이야기를 듣다가 초마법이라는 단어가 나오자 기분이 언짢아졌는지, 키오네스크는 자신의 것이라며 마을로 돌아가 즉시 팔아버리겠다고 한다. 동생인 잭의 이야기를 들어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">668EEA35-D03A-4890-9624-22D3ED0A7ECA</CLIENT> <!--시작NPC 밴시협곡 - 제스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">26674921-796A-42fa-B57F-434E11EF6101</PAYER> <!--완료NPC 밴시협곡 - 잭 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">668EEA35-D03A-4890-9624-22D3ED0A7ECA</AGENT> <!--진행NPC 11 밴시협곡 - 제스 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">26674921-796A-42fa-B57F-434E11EF6101</AGENT> <!--진행NPC 12 밴시협곡 - 잭 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10426211"/> <!--잭과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10426221" FACE="Jess_normal"/> <!--저 기계의 주인은 나야. 내가 데리고 가겠어. 
+초마법이라고! 차원이동이라고! 흥! 언제 들어도 우습구나! 
+하지만 말하는 로봇이라니, 제법 값을 받을 수 있겠어.%%
+이 녀석을 주겠다고 한 건 내 동생이지만, 원래 찾은 건 나야. 
+그러니 너 같은 녀석에게 내 물건을 줄 수 없어. 빨리 가 버려!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10426226" FACE="Jack_smile"/> <!--아…  %name%....
+정말 미안해…
+형은 이제 완전히 다른 사람처럼 변해버렸어.%%
+이게 모두 아버지 때문이야. 어렸을 때 우릴 버리고 달아난…
+형은 아버지를 엄청 증오하고 있어. 그래서 벨칸이 아버지와
+묘하게 닮았다는 사실에 많이 속상해 있거든.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10426223" FACE="Jess_normal"/> <!--이걸 팔 수 없겠냐고?
+너 같은 사기꾼 녀석에게 팔 생각은 전혀 없어.
+계약서? 그것도 네가 모나드론 공작과 꾸민 짓이겠지.%%
+난 네가 예전에도 모나드론 공작의 부탁을 들어준 것을
+알고 있어. 모나드론도 입버릇처럼 그랬다고…
+%name%같은 믿음직한 녀석이 별로 없다고 말이야!%%
+그러니 너랑 상대하고 싶지 않아.  난 이 녀석을 데리고
+근처 잿빛 안개 마을의 상인에게 찾아가 당장 팔아버릴 거다.
+그러니까 거기 가서나 알아보라고…%%
+(옆에 있는 잭이 무언가 할 말이 있는 것 같다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10426224" FACE="Jess_normal"/> <!--그래, 앞으로는 길가에서 마주치더라도 아는 척 하지말자고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10426225" FACE="Jess_normal"/> <!--(옆에 있는 잭이 무언가 할 말이 있는 것 같다.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10426202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

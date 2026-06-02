@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4189</ID> <!--T.T.10418901 배반자의 속셈 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	헬 크라우저와 대화-->
+<!--[완료NPC]	신들의 안식처 - 헬 크라우저-->
+<!--[내용]	나무꾼들을 신록의 숲으로 끌어들인 것은 검은 마녀의 하수인인 흑마법사 무티샤라고 한다. 신들의 안식처를 지키는 헬 크라우저가 무티샤를 쫓고 있다고 하니, 신들의 안식처에 있는 미스트 엘프 헬 크라우저에게 찾아가 대화해 보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">1394F78B-CF1A-4fa3-B7CE-039585625C17</CLIENT> <!--시작NPC 솔방울 언덕 - 오르하 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7942D9DB-011C-43fd-ABA5-311C51001397</PAYER> <!--완료NPC 신들의 안식처 - 헬 크라우저 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">1394F78B-CF1A-4fa3-B7CE-039585625C17</AGENT> <!--진행NPC 11 솔방울 언덕 - 오르하 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">7942D9DB-011C-43fd-ABA5-311C51001397</AGENT> <!--진행NPC 12 신들의 안식처 - 헬 크라우저 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10418911"/> <!--헬 크라우저와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10418921" FACE="Orha_normal"/> <!--이 일에는 분명 무티샤라는 이름을 가진 저주 받은 흑마법사가
+관여하고 있을 것입니다. 그는 비뚫어진 생각으로 사악한 저주 
+마법을 연마하다가 인간들에 의해 고향에서 쫓겨났습니다.%%
+그러나 반성하기는 커녕 자신을 배척한 사람들에게 앙심을 품고
+검은 마녀의 하수인을 자처한 것이죠. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10418926" FACE="Hell_krauser_smile"/> <!--넌 누구냐? 어째서 신성한 장소에 함부로 발을 들였는가?
+썩 물러가지 않으면, 크게 후회할 일을 겪게 될 것이다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10418923" FACE="Orha_normal"/> <!--이 무티샤를 잡아낸다면, 틀림없이 당신이 찾고있는 
+검은 마녀의 행방에 대해 알아낼 수 있을 것입니다.%%
+신들의 안식처로 가신다면 헬 크라우저님을 찾아가 보세요.
+그는 오랜 세월 동안 신들의 안식처와 신록의 숲을 지킨
+미스트엘프입니다.%%
+헬 크라우저님도 무티샤를 쫓고 계신다고 하니, 
+분명 도움을 주실 것입니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10418924" FACE="Orha_normal"/> <!--헬 크라우저님을 찾으신다고 들었습니다만… 마음이 변하신 모양이로군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10418925" FACE="Orha_normal"/> <!--신들의 안식처에서 헬 크라우저님을 찾아보세요. 분명히 도움을 주실 겁니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10418902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

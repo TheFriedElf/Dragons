@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>103</ID> <!--T.T.10010301 변종 분열체 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	오크 필드의 오크 워리어로부터 변종 분열체 10개를 구하자.-->
+<!--[완료NPC]	게펜 - 비닛-->
+<!--[내용]	비닛은 클라인박사를 도와주는 연구가가 분열체를 연구 중, 분열체의 변종을 발견했다고 한다. 오크 필드의 오크 워리어로부터 변종 분열체 10개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">18A90539-E61E-4941-A7C8-90F40254BA7A</CLIENT> <!--시작NPC 게펜 - 비닛 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">18A90539-E61E-4941-A7C8-90F40254BA7A</PAYER> <!--완료NPC 게펜 - 비닛 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">18A90539-E61E-4941-A7C8-90F40254BA7A</AGENT> <!--진행NPC 11 게펜 - 비닛 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/7000/1/1/160010300">4702100</MONSTER> 
+ <!--MON_NO=4702100/해당값 없거나 입력 안함!! 확인요망 ,Item_NO=160010300/[Q.ID:00103] 변종 분열체30%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160010300</ITEM> 
+ <!--Item_NO=160010300/[Q.ID:00103] 변종 분열체,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10010311"/> <!--변종 분열체-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10010321" FACE="Vinit_normal"/> <!--오! 대발견이야.
+이봐 재미있게 생긴 사람 잠깐 서봐.
+(모른척하고 가자.)%%
+앗, 그냥 가지마! 미안해 용서해 줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10010326" FACE="Vinit_normal"/> <!--정말 예쁘지 않게 생겼군.
+변종 분열체는 아마 사랑을 많이 못 받았을 거야.
+그래서 외롭기 때문에 이렇게 늘어난 걸지도 모르겠어.%%
+%name%도 곧 이렇게 늘어나겠지?
+(…)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10010323" FACE="Vinit_normal"/> <!--고마워 용서해 준다는 의미로 부탁 좀 들어줘.
+전에 클라인 박사님을 도와주고 있다는 이야기했었지?
+그 박사님이 분열체의 변종을 발견했다고 해서 말이야.%%
+변종 분열체는 하나만 분열되는 게 아니라 여러 개로 분열된다고 말씀하셨어.
+오크필드의 오크 워리어로부터 변종 분열체 10개만 구해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10010324" FACE="Vinit_angly"/> <!--설마 삐친 거야? 그런 거야?%%
+속이 좁아터진 거야? 성격이 나쁜 거야?%%
+인격이 덜 완성 된 거야? 태어날 때부터 성격이 삐뚤어진 거야?
+(이제 그만 좀 해라!)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10010325" FACE="Vinit_normal"/> <!--만약 내가 여러 명으로 분열된다면 어떨까?
+세상이 조금 더 즐거워지겠지?
+(위염 환자가 늘어날지도...)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10010302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

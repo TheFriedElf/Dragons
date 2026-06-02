@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Mahalka_02" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="14">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Mahalka"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Mahalka/N_Mahalka.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<!--ITEM NAME="btlidle_01" ANIMATION="1000005" RANDOM="100"/-->
+			<ITEM NAME="btlidle_01" ANIMATION="1000067" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000068" RANDOM="100"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000204"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000205" FIRE_START_NODE="p_wp_r_hand" PROJECTILE_ID="PROJECTILE_Mahalka_shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000211"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000206"/>
+			<!-- 휠윈드, 휠윈드 이동 공용 사용-->
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000207" RANDOM="100"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000208"/>
+			<!-- 돌격-->
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000209"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000210"/>
+			<!--아이들 부르기-->
+			<ITEM NAME="attk_08_01" ANIMATION="1000067"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000068"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="electricshock_01" ANIMATION="1000014" RANDOM="100"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000014" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022" VELOCITY="50" VELOCITY_INIT="50"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000082"/>
+							<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

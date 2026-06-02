@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Olm_lava" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Olm_lava"/>
+		<KFMPATH>../Data/2_Mon/N_Olm_lava/N_Olm_lava.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_Olm_idle_03_p_ef_head" TO="p_ef_head"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="39"/>
+			<SPHERE TO="p_hit_point_02" SIZE="50"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000071" FIRE_START_NODE="shot_dummy" PROJECTILE_ID="PROJECTILE_magic_ball_blue_02" PROJECTILE_SPEED="350" PROJECTILE_SCALE="1.0"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000201"/>
+			<ITEM NAME="shot_02" ANIMATION="1000202" FIRE_START_NODE="fire_dummy" PROJECTILE_ID="PROJECTILE_mag_cannon_05" PROJECTILE_SPEED="350" PROJECTILE_SCALE="1.0"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="close_01" ANIMATION="1000085"/>
+			<ITEM NAME="close_idle_01" ANIMATION="1000086"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

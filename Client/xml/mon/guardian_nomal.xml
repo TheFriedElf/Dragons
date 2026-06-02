@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Guardian_Nomal" INIT_ACTION="a_opening">
+	
+	<!--TEXTURE SRC="Guardian_Lightning_ST.dds">..\Data\2_Mon\Guardian_Lightning\Guardian_Lightning_ST.dds</TEXTURE-->
+	
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Totem_Pole"/>
+		<KFMPATH SCALE="1.06">../Data/2_Mon/Guardian_Lightning/Guardian_Lightning_st.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+			<EFFECT SCALE="0.85"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="92,16" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="battle_idle" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

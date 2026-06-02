@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5155</ID> <!--T.T.10515501 도전장(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	 달빛해안 마을 - 하임과 대화-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	프랑크와 하임의 장사대결은 점점 더 뜨거워지고 있다고 한다. 하임의 도전장을 받은 프랑크는 도전과제를 전달해달라고 한다. 프랑크가 내 준 도전과제를 하임에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">381631BA-E014-402f-BD24-4C501F3E611B</CLIENT> <!--시작NPC 달빛해안 마을 - 프랑크 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">381631BA-E014-402f-BD24-4C501F3E611B</AGENT> <!--진행NPC 11 달빛해안 마을 - 프랑크 -->
+		<AGENT TYPE="NPC" EVENTNO="10012"  MARK="END">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 12 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10515511"/> <!--하임과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10515521" FACE="Crispin_smile"/> <!--안녕하세요. 저번에 전해주신 도전장을 잘 읽어봤습니다. 과연 풋내기 상인답게 제 말 한마디, 한마디에 발끈하니, 도전을 안 받아줄 수 없겠더군요. 그래서 제가 %name%님께 부탁 하나만 드려도 될까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10515526" FACE="Coneil_sorrow"/> <!--오호! 그런 방법으로 승부를 하자는 건가?
+좋아! 재미있어지겠어. 고마워 친구!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10515523" FACE="Crispin_smile"/> <!--내일부터 일주일간 서로간의 매출을 비교해 승부를 결정하자고 전해주세요.
+정말 재미있어지겠네요. 장사란 무엇인지 제대로 알려주겠어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10515524" FACE="Crispin_normal"/> <!--왜요? 한쪽방향에만 전해주고 한쪽방향은 무시하면 어떻게 하나요? 
+저는 보시다시피 바빠서 가지도 못 한다고요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10515525" FACE="Crispin_normal"/> <!--한 달 동안 매출이 승부를 결정지을 거예요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10515502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

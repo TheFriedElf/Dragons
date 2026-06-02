@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4140</ID> <!--T.T.10414001 드라칸 정령석의 메커니즘 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	호프먼 대장과 대화-->
+<!--[완료NPC]	상인의 마을 - 호프먼-->
+<!--[내용]	노엘 박사는 드라칸의 고향인 카즈라 마을에서 신보에 대한 조사를 해주기를 기대하고 있다. 노엘박사는 나머지 이야기를 상인의 마을에 있는 호프먼 대장과 나누어보라고 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</CLIENT> <!--시작NPC 상인의 마을 - 노엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2880301C-3CF8-455c-BE54-227116F7914C</PAYER> <!--완료NPC 상인의 마을 - 호프먼 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 11 상인의 마을 - 노엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2880301C-3CF8-455c-BE54-227116F7914C</AGENT> <!--진행NPC 12 상인의 마을 - 호프먼 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10414011"/> <!--호프먼과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10414021" FACE="noel_normal"/> <!--마그마 드레이크 라발론을 부활시키는 데에 핵심적인 역할을 한 것은 
+바로 드라칸들이 잃어버렸다고 하는 신보라네. 
+그러니 우리 인간들도 이 신보의 행방에 주의를 기울여야 하는 것이지.%% 
+최근에 이 근처로 찾아온 드라칸 모험자들에게 들은 이야기가 있어.
+바로 그들의 고향인 카즈라에서 오염된 신보가 나타났다고 하네!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10414026" FACE="Hopeman_smile"/> <!--자네로군. %name%
+기다리고 있었네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10414023" FACE="noel_normal"/> <!--만약 이 아카나이라는 신보에 대한 정보를 알아낸다면 
+파렐의 연구 뿐만 아니라 검은 마녀의 계획을 입증하는데 
+커다란 도움이 될 것이네.%%
+이 일에 대해서는 호프먼 대장님과 어느 정도 진행된 이야기가 
+있으니, 대장님을 찾아가 자세한 이야기를 들어보길 바란다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10414024" FACE="noel_angly"/> <!--자네를 꽤 신뢰하고 있었네만… 다른 사람을 알아봐야 하겠구만,.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10414025" FACE="noel_angly"/> <!--호프먼 대장과 대화를 나누어봤는가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10414002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

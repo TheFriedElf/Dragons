@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Baulk_st" INIT_ACTION="a_opening">
+<TEXTURE SRC="Frostwolf_01.dds">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Frostwolf/Frostwolf_01.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Frostwolf"/>
+		<KFMPATH SCALE="1">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Baulk_ST/Baulk_ST.kfm</KFMPATH>
+	
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+	<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+			<!-- 몽둥이 내려치기 -->
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000203"/>
+		
+			
+			<!-- 몽둥이 크게 내려치기-->
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+		
+			<!-- 몽둥이던지고받기 -->
+
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000005"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000312"  FIRE_START_NODE="p_wp_hand" PROJECTILE_ID="Projectile_Frostwolf_shot" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000313"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000314"/>
+
+			<!-- 대쉬 -->
+
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000328" FIRE_EFFECT="NONE"/>
+			
+
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

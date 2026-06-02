@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Szaffi_call" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Szaffi"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Szaffi/N_Szaffi.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="-1" EFFECT="ef_Szaffi_idle_B_p_ef_heart" TO="p_ef_heart"/>
+		<ATTACH TYPE="effect" SLOT="1" EFFECT="ef_Szaffi_idle_B_p_ef_r_eye" TO="p_ef_r_eye"/>
+		<ATTACH TYPE="effect" SLOT="2" EFFECT="ef_Szaffi_idle_B_p_ef_r_eye" TO="p_ef_l_eye"/>
+		<ATTACH TYPE="effect" SLOT="3" EFFECT="ef_Szaffi_idle_BK_p_ef_tail01" TO="p_ef_tail01"/>
+		<ATTACH TYPE="effect" SLOT="4" EFFECT="ef_Szaffi_idle_BK_p_ef_tail02" TO="p_ef_tail02"/>
+		<ATTACH TYPE="effect" SLOT="5" EFFECT="ef_Szaffi_idle_BK_p_ef_tail03" TO="p_ef_tail03"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="27"/>
+			<SPHERE TO="p_hit_point_02" SIZE="18"/>
+		</ABV>
+		<SLOT>
+			<ITEM NAME="move_01" ANIMATION="1000055"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<!--ITEM NAME="walk" ANIMATION="1000050"/-->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<!--ITEM NAME="run" ANIMATION="1000055"/-->
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

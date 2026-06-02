@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!--EscScript 공통-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.01" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="0.01"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--모든 플레이어 보이기 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/><!-- 카메라가 나를 다시 따라오세 한다.-->
+	<CMD TYPE="DoScript" OBJECTID="ALiveMonsterCountUI(true)"/><!-- 몬스터 카운트 호출 -->
+	<CMD TYPE="waittime" time="3"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+    <CMD TYPE="setmoviescene" enable="false" Time="0.5"/>     
+	<CMD TYPE="CallUI" UIWndName="FRM_GOGO_RIGHT"/><!-- GogoUI호출 -->
+	<CMD TYPE="waittime" time="0.5"/>
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+
+</EVENT_SCRIPT>

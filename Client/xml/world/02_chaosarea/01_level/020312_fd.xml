@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020312_FD" DESCRIPTION="90203000">
+  <GSAPATH>../Data/3_World/02_ChaosArea/01_Level/020312_FD.gsa</GSAPATH>
+  <MINIMAP Y="105" H="310">../Data/3_World/02_ChaosArea/01_Level/020312_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+ 
+  <!--// 포털 -->
+	<TRIGGER ID="gate_next_base"  TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+  <!-- 텔레 점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="250" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="300" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="300" />
+  </TRIGGER>
+   
+  <!-- 물결 표현 -->
+  <WAVE_EFFECT ENTITY_ID="ChaosArea_swamp1001_01 01" STOP_EFFECT_ID="ef_walkwave_01" MOVE_EFFECT_ID="ef_walkwave_02"/>
+
+  <!-- 포 그 -->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="5131" COLOR="0.2784314,0.1960784,0.3058824"/>
+</WORLD>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Tamer_Bighon_Marker" INIT_ACTION="a_opening">
+	<TEXTURE SRC="reflection_metal.dds">../Data/2_Mon/N_DeathMaster/reflection_metal.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Aram_Ara"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/M_Tamer_Bighon/M_Tamer_Bighon.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="75"/>
+			<SPHERE TO="p_hit_point_02" SIZE="55"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<!-- 기본공격 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000062"/>
+			<!-- 조련사 활쏘기 -->
+			<ITEM NAME="attk_05_01" ANIMATION="1000201"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000202" FIRE_EFFECT="ef_Tamer_Bighon_skill_01_02_char_root" FIRE_EFFECT_FRONT="300"/>
+			<!-- 두발로 내려치기 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000203"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000204"/>
+			<!-- 대쉬 어택 -->
+			<ITEM NAME="dash_after_attk_btlidle_02_start" ANIMATION="1000205"/>
+			<ITEM NAME="dash_after_attk_rush_02" ANIMATION="1000206" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dash_after_attk_02_02" ANIMATION="1000207"/>
+			<!-- 변신 -->
+			<ITEM NAME="attk_04_02" ANIMATION="1000061"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000081"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+					<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

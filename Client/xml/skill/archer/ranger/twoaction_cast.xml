@@ -1,0 +1,16 @@
+<ACTION ID="a_twoaction_cast" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Arc_Csb_skill_TwoActionshot_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_SOUND_ID="TwoActionShot_01"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_twoactionshot_01_char_root"
+       />
+	   <!--
+	   HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+       HIT_CASTER_EFFECT_ID="ef_twoactionshot_02_char_root"
+	   
+	   DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+       CASTING_EFFECT_ID_DEFAULT_DETACH="TRUE" 
+	   -->
+</ACTION>

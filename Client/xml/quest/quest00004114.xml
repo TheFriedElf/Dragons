@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4114</ID> <!--T.T.10411401 행방불명된 상인들 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	호프먼 대장과 대화-->
+<!--[완료NPC]	상인의 마을 - 호프먼-->
+<!--[내용]	상인의 마을을 호위하는 호위대장 호프먼은 용병단장 토마스에게 지원병력을 요청한다.
+토마스는 %name%을 적임자로 추천한다. 상인의 마을에서 호프먼 대장을 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2880301C-3CF8-455c-BE54-227116F7914C</PAYER> <!--완료NPC 상인의 마을 - 호프먼 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2880301C-3CF8-455c-BE54-227116F7914C</AGENT> <!--진행NPC 12 상인의 마을 - 호프먼 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10411411"/> <!--호프먼과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411421" FACE="Thomas_normal"/> <!--젊은 시절 내가 브리즈국의 기사단에 있을 때, 
+나와 대등한 솜씨를 가진 기사는 그가 유일했지.%% 
+바로 상인의 마을에 주둔해 있는 호프먼을 말하는 거라고. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411426" FACE="Hopeman_smile"/> <!--뭐라고? 
+이곳에 토마스가 보내서 오게 된 거라고?%%
+흠.. 건방진 녀석... 역시 기사단을 때려치고 용병단장이 
+되더니, 윗사람의 부탁을 완전히 무시하는군.
+이런 꼬마를 지원 병력으로 보내다니...-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411423" FACE="Thomas_normal"/> <!--원정대의 호위대장이 된 호프먼이 나에게 마침 이런 전보를 보내왔네.%%
+상인의 마을에서 상인들 다수 행방불명. 도움을 청하네. 호프먼%%
+호프먼은 나와 라이벌이자, 믿을 수 있는 친구지. 
+지금이라도 당장 그 친구를 돕고 싶지만, 
+이곳의 상황이 급박하니 그럴 여유가 없지 뭔가.%% 
+그래서 자네를 대신 보내고 싶네. 
+자네 생각은 어때?%%
+이 편지를 들고 호프먼을 찾아가 보게. 
+그는 사나이 중에 사나이라 자넬 반겨 맞아줄 것이라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411424" FACE="Thomas_angly"/> <!--이런 믿었던 도끼에 발등을 찍히는구만. 쩝…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411425" FACE="Thomas_angly"/> <!--호프먼은 상인의 마을에 가면 금방 찾을 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

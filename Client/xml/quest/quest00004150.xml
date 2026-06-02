@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4150</ID> <!--T.T.10415001 무릉도원 (8) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	샬바론[시나리오 모드(F5)]에서 자로 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 라노타-->
+<!--[내용]	라노타 전사장은 쿰바에게 무예를 가르쳐 준 것에 대해 자책하고 있는 것 같다. 샬바론[시나리오 모드(F5)]로 들어가 쿰바의 왕 자로를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D66550AB-63CC-4ea1-881C-0EBB953E2D94</CLIENT> <!--시작NPC 카즈라 마을 - 라노타 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D66550AB-63CC-4ea1-881C-0EBB953E2D94</PAYER> <!--완료NPC 카즈라 마을 - 라노타 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D66550AB-63CC-4ea1-881C-0EBB953E2D94</AGENT> <!--진행NPC 11 카즈라 마을 - 라노타 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="110/4/1">3523900</MONSTER> 
+ <!--MON_NO=3523900/자로,Mission_Key=110/샬바론,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10415011"/> <!--자로 [시나리오 모드(F5)]-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10415021" FACE="Lanota_normal"/> <!--카즈라를 둘러싸고 있는 마시람 산맥에는 두 곳의 신성한 
+장소가 있네. 그 중 하나인 샬바론은 오래 전부터 무예를 
+수련하는 곳이었고, 라미에타는 도술을 수련하는 곳이었지.%%
+모두, 우리 드라칸에게는 무릉도원과도  같은 곳이지. 
+우리 신관의 전사들은 샬바론에서 무예를 수련하다가 
+자로라는 녀석을 알게되었지. 아주 어리고 나약한 쿰바였어.%% 
+우리들은 매번 동료들에게 따돌림 당하고 괴롭힘 당하는 
+자로에게 측은함을 느꼈지. 
+그래서 녀석에게 무예를 조금씩 가르치게 되었다네.%%
+녀석은 몸은 약했지만, 머리 만큼은 어느 쿰바 보다 
+영리했기 때문에 가르쳐 주는 대로 곧 잘 따라하곤 했지.%%
+그렇게 자로는 이 마시람 산맥에 사는 쿰바들의 왕이 되었다네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10415026" FACE="Lanota_smile"/> <!--자로를 제압한 것에 깊은 감사를 표하는 바이네. 
+허나 낙원과도 같았던 카즈라가 이 지경이 되었으니
+기뻐할 수만은 없는 일이로군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10415023" FACE="Lanota_normal"/> <!--하지만 자로 녀석도 최근에 일어난 재앙을 피하지 못했지.
+그 때문에 녀석도 흉폭해졌어. 게다가 영리하기까지 해서…
+이대로 내버려두었다간 큰 사고가 일어날까 걱정이네.%%    
+내 손으로 자로 녀석을 붙잡고 싶네만, 지금은 사라진 
+바람의 신보를 찾는 일 때문에 어찌 손을 써 볼 겨를이 없네.%%
+%name%! 부탁하네. 
+샬바론[시나리오 모드(F5)]으로 들어가 쿰바들의 우두머리를 
+맡고있는 자로를 퇴치해주게나! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10415024" FACE="Lanota_angry"/> <!--정녕 자로를 막을 방법이 없는 건가… 이제 내가 나서야 할 때가 됐군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10415025" FACE="Lanota_angry"/> <!--쿰바는 샬바론[시나리오 모드(F5)]에 있으니 주의해야 할걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10415002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

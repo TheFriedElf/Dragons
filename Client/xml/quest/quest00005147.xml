@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5147</ID> <!--T.T.10514701 환경 보호(2) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	팔미르 신전 - 돌 망치 미라, 쇠 망치 미라로부터 렌즈 20개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	도구 상인 하임은 에이미의 부탁으로 태양열을 모을 수 있는 렌즈를 제작 했다고 한다. 완성 된 렌즈를 배달하러 가던 중 팔미르 신전에서 돌 망치 미라와 쇠 망치 미라가 렌즈를 모두 빼앗아버렸다고 한다. 팔미르 신전으로 가서 렌즈 20개를 되찾아 하임에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3CD863C-444D-40ee-B976-083D98067B1B</CLIENT> <!--시작NPC 달빛해안 마을 - 하임 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 11 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010230/10000/7000/1/1/160514700">6008500</MONSTER> 
+ <!--MON_NO=6008500/돌 망치 미라,MAP_NO=9010230/팔미르 신전,Item_NO=160514700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160514700</ITEM> 
+ <!--Item_NO=160514700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010230/10000/7000/1/1/160514700">6008600</MONSTER> 
+ <!--MON_NO=6008600/쇠 망치 미라,MAP_NO=9010230/팔미르 신전,Item_NO=160514700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160514700</ITEM> 
+ <!--Item_NO=160514700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10514711"/> <!--렌즈 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10514721" FACE="Coneil_angly"/> <!--으악! 제길.
+내가 그걸 어떻게 만들었는데... 이제 난 큰일이야!!
+이봐! 내가 사례금을 줄 테니 내 부탁을 들어줘.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10514726" FACE="Coneil_smile"/> <!--고마워. 나머지는 서둘러 만들어야지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10514723" FACE="Coneil_angly"/> <!--사실 얼마 전에 바람항구 에이미가 태양에너지로 움직이는 기계를 발명했다면서, 
+나한테 태양열을 모을 수 있는 렌즈를 만들어 달라더군.%%
+흔쾌히 승낙하고 잠도 못 자면서 렌즈 25개를 만들었지. 
+그리고 어제 렌즈를 배달하다가… %%
+팔미르 신전에서 쇠 망치 미라랑 돌 망치 미라한테 모두 뺏기고 말았어.
+제발 다시 찾아와 줘. 부탁이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10514724" FACE="Coneil_angly"/> <!--널 믿었는데...-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10514725" FACE="Coneil_angly"/> <!--렌즈는 찾았어? 조금만 서둘러 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10514702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

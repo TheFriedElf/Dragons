@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4</ID> <!--T.T.10000401 마력의 책 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	마력추출 재료를 사용해 휴대용 마법책 1권을 만들자-->
+<!--[완료NPC]	종소리 마을 - 쥴리-->
+<!--[내용]	쥴리는 마력추출 재료를 주면서 방어구 키트를 만들어보라고 한다. 마력추출 재료를 컨트롤+마우스더블클릭으로 소비하면 UI가 나오고 클릭하면 휴대용 마법책이 생성된다. 마력추출재료를 사용해서 휴대용 마법책을 1권을 만들어 쥴리에게 가져가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DD343923-1FAA-4e83-87CB-9861329FD82B</CLIENT> <!--시작NPC 종소리 마을 - 쥴리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DD343923-1FAA-4e83-87CB-9861329FD82B</PAYER> <!--완료NPC 종소리 마을 - 쥴리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DD343923-1FAA-4e83-87CB-9861329FD82B</AGENT> <!--진행NPC 11 종소리 마을 - 쥴리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/89008670/1">10011</NPC> 
+ <!--Item_NO=89008670/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/89008670/1/511">10011</NPC> 
+ <!--Item_NO=89008670/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/89008670/1">10011</NPC> 
+ <!--Item_NO=89008670/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">89008700</ITEM> 
+ <!--Item_NO=89008700/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10000411"/> <!--휴대용 마법책-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10000421" FACE="Jewelry_normal"/> <!--그런데 정말 잘 사용하실 수 있겠어요?
+할아버지 말씀에 따르면 뭔가를 알려 주면 마무리를 확실하게 하라고 하셨어요.%%
+그래서 그 마무리 때문에 그런데요. 마력추출을 제대로 활용할 수 있는지 시험해 볼래요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10000426" FACE="Jewelry_normal"/> <!--흠, 역시 제대로 휴대용 마법책이 완성되었군요.
+이제 저도 할아버지에게 맘 놓고 이야기 해도 되겠군요.
+오늘도 한 명의 손님을 낚았다고요. 매번 감사합니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10000423" FACE="Jewelry_normal"/> <!--지금부터 제 이야기 잘 들으세요.
+중간에 딴 짓하다가 못들어도 책임 못지니까요.%%
+모험가님이 하셔야 될 것은 휴대용 마법책 1권을 만드는 거에요.
+마력추출 재료를 컨트롤+마우스더블클릭으로 소비하면 UI가 나오고 클릭하면 휴대용 마법책을 만드실 수 있을 거에요.
+그 휴대용 마법책을 저에게 가져오시면 시험 종료에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10000424" FACE="Jewelry_normal"/> <!--역시나 쉽게 되는 건 없나 보네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10000425" FACE="Jewelry_normal"/> <!--얼른 만들어 보세요. 지금 전 다른 할 일이 많아요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10000402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10000451" /> <!--설마, 설마, 설마! 마력추출 재료를 잃어버리신 거에요? 우웃. 어쩔 수 없죠. 여기 다시 드릴테니 이번에는 잃어버리지 마세요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

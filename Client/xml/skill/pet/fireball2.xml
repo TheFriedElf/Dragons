@@ -1,0 +1,9 @@
+<ACTION ID="a_fire_ball_pet2" NEXT="a_trace_ground2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="idle_01" LOOP="TRUE"/>
+  <SLOT NAME="shot_01"/>
+  <FSM SCRIPT="Act_Pet_Melee_Default"
+       USE_PROJECTILE="TRUE"
+       PROJECTILE_ID="PROJECTILE_MAGICIAN_DEFAULT_SHOT"
+       ATTACH_NODE_ID="p_ef_mouth"
+       FIRE_SOUND_ID="pingmao-skill-fire_ball_pet"/>
+</ACTION>

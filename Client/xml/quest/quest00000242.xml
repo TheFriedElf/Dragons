@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>242</ID> <!--T.T.10024201 즐거운 곤충채집! 사슴벌레편 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	사슴 벌레 20마리 채집-->
+<!--[완료NPC]	바람항구 - 에르실-->
+<!--[내용]	가토의 곤충 채집 이벤트 요원을 맡게된 에르실은 채집스킬(벌목, 약초캐기, 낚시, 채굴)과 미션맵 보너스 스테이지의 보물상자 공략을 통해 사슴벌레 20마리를 잡아 올 경우, 답례로 곤충채집 증명서를 준다고 한다. 곤충채집 증명서가 5개 생기면 가토에게 추가적인 이벤트 퀘스트를 완료할 수 있다.   -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</CLIENT> <!--시작NPC 바람항구 - 에르실 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</PAYER> <!--완료NPC 바람항구 - 에르실 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">63EBCE1D-C7B9-4270-9D06-714AD5C4C103</AGENT> <!--진행NPC 11 바람항구 - 에르실 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="20">299602670</ITEM> 
+ <!--Item_NO=299602670/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10024211"/> <!--사슴벌레-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299603110</ITEM><!--전체지급/전체/1)/299603110() 1개-곤충채집 증명서-->
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10024221" FACE="ersil_normal"/> <!--안녕하세요! 가토의 곤충 채집 이벤트를 돕고 있는
+에르실이에요. 전 사슴벌레를 잡아온 분들에게 곤충
+채집 증명서를 드리고 있어요.%%
+혹시 사슴벌레를 가져오셨나요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10024226" FACE="ersil_smile"/> <!--와아! 아주 튼튼하게 생긴 녀석들이군요.
+자… 사슴벌레 20마리 접수하였습니다. 
+약속한 대로 곤충채집 증명서를 드릴게요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10024223" FACE="ersil_normal"/> <!--사슴벌레는 벌목, 약초캐기, 낚시, 채굴 같은 채집
+스킬로 얻으실 수 있어요. 그 밖에도 미션맵 공략 시 
+보너스 스테이지의 보물상자에서도 구하실 수 있어요.%%
+사슴벌레 20마리를 잡아 오시면, 곤충채집 증명서로
+교환해드리고 있으니까, 꼭 기억해두시길 바래요. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10024224" FACE="ersil_normal"/> <!--곤충채집 이벤트를 통해서 여름 한정의 스페샬 코스튬을 
+장만할 기회를 놓치지 마세요!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10024225" FACE="ersil_normal"/> <!--사슴벌레를 잡으시려면 말씀드렸던 대로, 채집스킬이나 미션맵의 보너스 스테이지를 노리셔야 해요!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10024202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

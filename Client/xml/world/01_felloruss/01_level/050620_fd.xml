@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_050620_FD" DESCRIPTION="90506200">
+	<GSAPATH>../Data/3_World/01_Felloruss/01_Level/050620_FD.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Water_Dungeon.mp3</BGSOUND>
+	<!--미니맵-->
+	<MINIMAP Y="180" H="210">../Data/3_World/01_Felloruss/01_Level/050620_MM.dds</MINIMAP>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="1.0"/>
+
+	<!-- 바티카 구릉 게이트 -->
+		<TRIGGER ID="gate_050610_base" TYPE="PORTAL" TITLE_TEXT_ID="800080" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75"       TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9050610" PARAM2="3"/>
+	</TRIGGER>
+
+	
+	
+	<!-- 잿빛 안개 마을 게이트 -->
+	<LOCAL>
+	<NAME ID="DEFAULT">
+	<TRIGGER ID="gate_038300_base" TYPE="PORTAL" TITLE_TEXT_ID="801009" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75"   TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1"> 
+		<CONDITION TYPE="action" ACTION="a_act"/>
+			<ACTION SCRIPT="World_Portal" PARAM="9038300" PARAM2="1"/>
+	</TRIGGER>	
+	</NAME>
+
+	<NAME ID="SINGAPORE">
+	<TRIGGER ID="gate_038300_base" TYPE="PORTAL" TITLE_TEXT_ID="801009" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75"   TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1"> 
+		<CONDITION TYPE="action" ACTION="a_act"/>
+			<ACTION SCRIPT="World_Portal" PARAM="9038300" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="61"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+	</NAME>
+	</LOCAL>
+
+	<!-- 붉은 여우 삼각지 게이트-->
+	<TRIGGER ID="gate_050601_base" TYPE="PARTY_MEMBER_PORTAL" TITLE_TEXT_ID="802053" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75"   TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1"> 
+    	<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Dungeon_Portal" PARAM="9050601" PARAM2="1" SHOW_PARTY_UI="TRUE" IMPORTANT_MONSTER_0="3571462">
+		<ACCESS ERROR_MSG="523334">
+				<LEVEL MIN="55" MAX="100" PARTY="TRUE"/>
+				<QUEST NO="4242" CHECK="5" PARTY="0"/>
+				<USEITEM INV="7" NO="299602650" COUNT="1" CONSUME="0" PARTY="0" GROUP="1"/>
+				<USEITEM INV="7" NO="299602660" COUNT="1" CONSUME="0" PARTY="0" GROUP="1"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+ 
+
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="350"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_10" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_10" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_11" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_11" PARAM="250"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_12" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_12" PARAM="250"/>
+	</TRIGGER>
+
+		
+	<!--포 그-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="19325" END="19325" COLOR="0.2470588,0.2705882,0.2117647"/>
+	<!-- L,o,d -->
+	<WORLD_QUALITY HIGH_END="2700" MID_END="2750" LOW_END="8000" USE="1"/>
+
+</WORLD>

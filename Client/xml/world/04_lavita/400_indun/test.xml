@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030310_FD">
+	<GSAPATH>../Data/3_World/04_Lavita/400_InDun/test_01.gsa</GSAPATH>
+	<MINIMAP Y="190" H="260">../Data/3_World/04_Lavita/400_InDun/030310_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DragonMage.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!--용의탑 9층-->
+  <TRIGGER ID="gate_030309_base" TYPE="PORTAL" TITLE_TEXT_ID="800074" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030309" PARAM2="3" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+  <!--용의탑 11층-->
+  <TRIGGER ID="gate_030311_base" TYPE="PORTAL" TITLE_TEXT_ID="800076" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030311" PARAM2="1" >
+	<ACCESS>
+		<LEVEL MIN= "0"/>
+		</ACCESS>
+	</ACTION>
+  </TRIGGER>
+
+
+	<!-- 텔레포트  -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" />
+	</TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" />
+	</TRIGGER>
+
+    <!--//트리거 점프//-->
+    <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="450" />
+    </TRIGGER>
+	<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="450" />
+    </TRIGGER>
+	<TRIGGER ID="trigger_jump_3" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="600" />
+    </TRIGGER>
+
+	<!--//불 트렙//-->
+    <TRIGGER ID="Art_FireTrap1001_01 01">
+       <CONDITION TYPE="touch" />
+       <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+   
+
+
+  <CAMERA_ADJUST ZOOM="20" UP="215" TARGET_Z="-40" />
+ <!--카메라 
+<FOG DENSITY="0.050000" START="75.000000" END="2950.000000" COLOR="0.000000,0.000000,0.000000"/>-->
+</WORLD>

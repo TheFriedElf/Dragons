@@ -1,0 +1,17 @@
+<ACTION ID="a_head_spin" NEXT="a_battle_idle" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" CAN_CHANGE_ACTOR_POS="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Thi_Claw_skill_HeadSpin_01"/>
+  <SLOT NAME="Thi_Claw_skill_HeadSpin_01_finish"/>
+  <FSM SCRIPT="Skill_HeadSpin"
+       HIT_SOUND_ID=""
+		
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		FIRE_CASTER_EFFECT_ID="efx_skill_add_headspin"
+		
+		FIRE_CASTER_EFFECT_TARGET_NODE2="char_root"
+		FIRE_CASTER_EFFECT_ID2="ef_Windmill_01_char_root"
+		
+		ENTER_TIMER_TIME="5"
+		ENTER_TIMER_TICK="0.3"
+	   />
+</ACTION>

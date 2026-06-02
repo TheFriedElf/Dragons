@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="euc-kr"?>
+
+<COMBO_TREE>
+  
+  <COMBO_TREE_ICON>
+	<!-- 예시용 IconRext -->
+	<!-- X : IconRect="64,32,32,32"/ -->
+	<!-- Z : IconRect="0,32,32,32"/ --> 
+	<!-- X차지 : IconRect="166,90,38,38"/--> 
+	<!-- Z차지 : IconRect="128,90,38,38"/--> 
+	
+	<!-- 위쪽 X 	: IconRect="0,64,64,32"/--> 
+	<!-- 아래쪽 X 	: IconRect="64,64,64,32"/--> 
+	<!-- 왼쪽 X 	: IconRect="0,64,64,32"/--> 
+	<!-- 오른쪽 X	: IconRect="64,96,64,32"/--> 
+	
+	<!-- 위쪽 Z		: IconRect="0,128,64,32"/--> 
+	<!-- 아래쪽 Z	: IconRect="64,128,64,32"/-->
+	<!-- 왼쪽 Z	:  IconRect="0,160,64,32"/-->
+	<!-- 오른쪽 Z 	: IconRect="64,160,64,32"/--> 
+	
+    <!-- x,y,w,h -->
+    <ACTION ID="a_melee_01" IconRect="64,32,32,32"/>
+    <ACTION ID="a_melee_02" IconRect="64,32,32,32"/>
+    <ACTION ID="a_melee_03" IconRect="64,32,32,32"/>
+    <ACTION ID="a_melee_04" IconRect="64,32,32,32"/>
+    <ACTION ID="a_melee_05" IconRect="64,32,32,32"/>
+
+    <ACTION ID="a_thi_melee_01" IconRect="64,32,32,32"/>
+    <ACTION ID="a_thi_melee_02" IconRect="64,32,32,32"/>
+    <ACTION ID="a_thi_melee_03" IconRect="64,32,32,32"/>
+    <ACTION ID="a_thi_melee_04" IconRect="64,32,32,32"/>
+    <ACTION ID="a_thi_melee_05" IconRect="64,32,32,32"/>
+
+    <ACTION ID="a_float_melee_01" IconRect="64,32,32,32"/>
+    <ACTION ID="a_float_melee_02" IconRect="64,32,32,32"/>
+    <ACTION ID="a_float_melee_03" IconRect="64,32,32,32"/>
+    <ACTION ID="a_jump" IconRect="32,32,32,32"/>
+    <ACTION ID="a_melee_blow_up" IconRect="0,64,64,32"/>
+    <ACTION ID="a_thi_melee_blow_up" IconRect="0,64,64,32"/>
+    <!--ACTION ID="a_melee_knock_back" DIR="RIGHT" IconRect="64,96,64,32"/>
+    <ACTION ID="a_melee_knock_back" DIR="LEFT" IconRect="0,96,64,32"/>
+    <ACTION ID="a_thi_melee_knock_back" DIR="RIGHT" IconRect="64,96,64,32"/>
+    <ACTION ID="a_thi_melee_knock_back" DIR="LEFT" IconRect="0,96,64,32"/-->
+    <ACTION ID="a_melee_drop" IconRect="64,64,64,32"/>
+    <ACTION ID="a_thi_melee_drop" IconRect="64,64,64,32"/>
+    <ACTION ID="a_dash" DIR="LEFT" IconRect="64,0,32,32"/>
+    <ACTION ID="a_dash" DIR="RIGHT" IconRect="96,0,32,32"/>
+    <ACTION ID="a_dash_attack" IconRect="64,32,32,32"/>
+    <ACTION ID="a_thi_dash_attack" IconRect="64,32,32,32"/>
+    <ACTION ID="a_dash_jump" IconRect="32,32,32,32"/>
+    <ACTION ID="a_down_attack" IconRect="64,32,32,32"/>
+    <!--ACTION ID="a_melee_charge_attack" IconRect="0,32,32,32"/-->
+    <!--ACTION ID="a_thief_charge_attack" IconRect="0,32,32,32"/-->
+    <ACTION ID="a_fig_floatdownblow1" DIR="RIGHT" IconRect="64,96,64,32"/>
+    <ACTION ID="a_fig_floatdownblow2" DIR="LEFT" IconRect="0,96,64,32"/>
+    <ACTION ID="a_fig_floatdownblow1" DIR="RIGHT" IconRect="64,96,64,32"/>
+    <ACTION ID="a_fig_floatdownblow2" DIR="LEFT" IconRect="0,96,64,32"/>
+    <ACTION ID="a_dash_blowup" IconRect="0,64,64,32"/>
+    <ACTION ID="a_clown_sliding_tackle" IconRect="64,64,64,32"/>
+    <ACTION ID="a_thief_float_melee_01" IconRect="64,32,32,32"/>
+
+    <ACTION ID="a_magician_down_explosion" IconRect="64,32,32,32"/>
+    <ACTION ID="a_down_kick" IconRect="64,32,32,32"/>
+
+    <ACTION ID="a_archer_backstep_shot" IconRect="64,32,32,32"/>
+    <ACTION ID="a_back_step" IconRect="128,0,64,32"/>
+
+    <ACTION ID="a_MagicianShot_01" IconRect="64,32,32,32"/>  <!-- x,y,w,h -->
+    <ACTION ID="a_MagicianFloatShot_01" IconRect="64,32,32,32"/>
+    <ACTION ID="a_MagicianFloatShot_02" IconRect="64,32,32,32"/>
+    <ACTION ID="a_MagicianFloatShot_03" IconRect="64,32,32,32"/>
+    <ACTION ID="a_magician_down_shot" IconRect="64,64,64,32"/>
+    
+    <!--ACTION ID="a_ArcherFloatShot_01" IconRect="0,32,32,32"/-->    
+    <ACTION ID="a_archer_back_jump_shot" IconRect="64,64,64,32"/>    
+    <ACTION ID="a_archer_charge_shot" IconRect="0,32,32,32"/>
+    <ACTION ID="a_archer_down_shot" IconRect="64,64,64,32"/>    
+    <ACTION ID="a_archer_jump_shot" IconRect="0,64,64,32"/>    
+    <ACTION ID="a_archer_melee" IconRect="64,32,32,32"/>  
+    <ACTION ID="a_archer_shot_01" IconRect="64,32,32,32"/>  
+    <ACTION ID="a_archer_power_shot" DIR="RIGHT" IconRect="64,96,64,32"/>
+    <ACTION ID="a_archer_power_shot" DIR="LEFT" IconRect="0,96,64,32"/>
+
+	<!-- 한손검 기본 연계 콤보 -->
+    <ACTION ID="a_ohs_combo_a" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ohs_combo_b" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ohs_combo_c" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ohs_combo_d" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ohs_combo_e" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_ohs_combo_a_2" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ohs_combo_a_3" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_ohs_combo_a_4" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ohs_combo_a_5" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ohs_combo_a_6" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_ohs_combo_b_3" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ohs_combo_b_4" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ohs_combo_b_5" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ohs_combo_c_4" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ohs_combo_c_5" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_ohs_combo_c_6" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_ohs_combo_d_5" IconRect="0,32,32,32"/>			<!--Z-->
+			<ACTION ID="a_ohs_combo_c_4_5" IconRect="0,32,32,32"/>			<!--Z-->
+			<ACTION ID="a_ohs_combo_c_4_6" IconRect="64,32,32,32"/>			<!--X-->
+	<!-- 한손검 기본 연계 콤보_대쉬-->
+	 <!--  <ACTION ID="a_ohs_combo_k_a" IconRect="64,32,32,32"/>	 -->		<!--X-->
+		<!--  <ACTION ID="a_ohs_combo_k_a_2" IconRect="0,32,32,32"/> -->			<!--Z-->
+		 <!-- <ACTION ID="a_ohs_combo_k_a_3" IconRect="64,32,32,32"/> -->			<!--X-->
+		<!-- <ACTION ID="a_ohs_combo_k_a_4" IconRect="0,32,32,32"/>	 -->		<!--Z-->
+	<!-- <ACTION ID="a_ohs_combo_k_b" IconRect="64,32,32,32"/>	-->		<!--X-->
+		<!-- <ACTION ID="a_ohs_combo_k_b_3" IconRect="0,32,32,32"/>	-->		<!--Z-->
+		<!-- <ACTION ID="a_ohs_combo_k_b_4" IconRect="0,32,32,32"/>	-->		<!--Z-->
+	<!-- <ACTION ID="a_ohs_combo_k_c" IconRect="64,32,32,32"/> -->			<!--X-->
+		<!-- <ACTION ID="a_ohs_combo_k_c_4" IconRect="0,32,32,32"/>	-->		<!--Z-->
+	<!-- <ACTION ID="a_ohs_combo_k_d" IconRect="64,32,32,32"/>	 -->		<!--X-->
+	<!-- 양손검 기본 연계 콤보 -->
+    <ACTION ID="a_ths_combo_a" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ths_combo_b" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ths_combo_c" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ths_combo_d" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_ths_combo_d_5" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ths_combo_a_2" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_ths_combo_a_3" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_ths_combo_a_4" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_ths_combo_a_5" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_ths_combo_b_3" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ths_combo_b_4" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ths_combo_b_5" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_ths_combo_c_4" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_ths_combo_c_5_C" IconRect="166,90,38,38"/>		<!--X차지-->
+			<ACTION ID="a_ths_combo_a_3_4" IconRect="64,32,32,32"/>		<!--X-->
+			<ACTION ID="a_ths_combo_a_3_5" IconRect="0,32,32,32"/>		<!--Z-->
+	<!-- 양손검 기본 연계 콤보_대쉬-->
+		<!--  <ACTION ID="a_ths_combo_k_a" IconRect="64,32,32,32"/>	-->		<!--X-->
+		<!--  	<ACTION ID="a_ths_combo_k_a_2" IconRect="0,32,32,32"/>	-->	<!--Z-->
+		<!--  	<ACTION ID="a_ths_combo_k_a_3" IconRect="0,32,32,32"/>-->		<!--Z-->
+		<!--  	<ACTION ID="a_ths_combo_k_a_4" IconRect="64,32,32,32"/>-->		<!--X-->
+		<!--  <ACTION ID="a_ths_combo_k_b" IconRect="64,32,32,32"/>		-->	<!--X-->
+		<!--  	<ACTION ID="a_ths_combo_k_b_3" IconRect="0,32,32,32"/>	-->	<!--Z-->
+		<!--  	<ACTION ID="a_ths_combo_k_b_4" IconRect="64,32,32,32"/>	-->	<!--X-->
+		<!--  <ACTION ID="a_ths_combo_k_c" IconRect="64,32,32,32"/>		-->	<!--X-->
+		<!--  <ACTION ID="a_ths_combo_k_d" IconRect="64,32,32,32"/>		-->	<!--X-->
+	<!-- 스태프 기본 연계 콤보 -->
+	<!-- 창 기본 연계 콤보 -->
+	
+	<!-- 클러 기본 연계 콤보 -->
+
+	
+    <ACTION ID="a_cl_combo_a" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cl_combo_b" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cl_combo_c" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cl_combo_d" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cl_combo_e" IconRect="64,32,32,32"/>			<!--X-->
+
+		<ACTION ID="a_cl_combo_d_5" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cl_combo_d_6" IconRect="0,32,32,32"/>			<!--Z-->
+		
+		<ACTION ID="a_cl_combo_c_4" IconRect="0,32,32,32"/>		<!--z-->
+		<ACTION ID="a_cl_combo_c_5" IconRect="64,32,32,32"/>		<!--X-->
+		<ACTION ID="a_cl_combo_c_6"  IconRect="0,32,32,32"/>		<!--z-->
+
+
+		<ACTION ID="a_cl_combo_b_3" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cl_combo_b_4" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cl_combo_b_5" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_cl_combo_b_6" IconRect="0,32,32,32"/>			<!--Z-->
+		<!--ACTION ID="a_cl_combo_b_7" IconRect="0,32,32,32"/-->			<!--Z 보너스동작-->
+		<ACTION ID="a_cl_combo_a_2" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cl_combo_a_3" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cl_combo_a_4" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_cl_combo_a_5" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_cl_combo_a_6" IconRect="64,32,32,32"/>			<!--X-->
+		<!--ACTION ID="a_cl_combo_a_7" IconRect="64,32,32,32"/-->			<!--X 보너스동작-->
+		<ACTION ID="a_cl_combo_a_5_6" IconRect="0,32,32,32"/>			<!--Z-->
+			
+
+
+	
+	<!-- 카타르 기본 연계 콤보 -->
+	
+    <ACTION ID="a_cu_combo_a" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cu_combo_b" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cu_combo_c" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cu_combo_d" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cu_combo_e" IconRect="64,32,32,32"/>			<!--X-->
+
+		<ACTION ID="a_cu_combo_d_5" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cu_combo_d_6" IconRect="0,32,32,32"/>			<!--Z-->
+
+		<ACTION ID="a_cu_combo_c_4" IconRect="0,32,32,32"/>			<!--z-->
+		<ACTION ID="a_cu_combo_c_5" IconRect="64,32,32,32"/>		<!--X-->
+		<ACTION ID="a_cu_combo_c_6"  IconRect="0,32,32,32"/>		<!--z-->
+
+		<ACTION ID="a_cu_combo_b_3" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cu_combo_b_4" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cu_combo_b_5" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_cu_combo_b_6" IconRect="0,32,32,32"/>			<!--Z-->
+
+		<!--ACTION ID="a_cu_combo_b_7" IconRect="0,32,32,32"/-->			<!--Z 보너스동작-->
+		<ACTION ID="a_cu_combo_a_2" IconRect="0,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_cu_combo_a_3" IconRect="0,32,32,32"/>			<!--Z-->
+
+		<ACTION ID="a_cu_combo_a_4" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_cu_combo_a_5" IconRect="64,32,32,32"/>			<!--X-->
+		<ACTION ID="a_cu_combo_a_6" IconRect="64,32,32,32"/>			<!--X-->
+		<!--ACTION ID="a_cu_combo_a_7" IconRect="64,32,32,32"/-->			<!--X 보너스동작-->
+		<ACTION ID="a_cu_combo_a_5_6" IconRect="0,32,32,32"/>			<!--Z-->
+
+	<!-- 보우 기본 연계 콤보 -->
+
+	<ACTION ID="a_bw_combo_a" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_bw_combo_b" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_bw_combo_c" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_bw_combo_d" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_bw_combo_e" IconRect="64,32,32,32"/>			<!--X-->
+	<ACTION ID="a_bw_combo_c_4_C" IconRect="0,32,32,32"/>		<!--Z-->
+		
+	<ACTION ID="a_bw_combo_Z_4_1" DIR="RIGHT" IconRect="0,160,64,32"/>   <!-- 뒤로왼쪽 z -->
+	<ACTION ID="a_bw_combo_Z_4_1" DIR="LEFT" IconRect="64,160,64,32"/>  <!-- 뒤로왼쪽 z -->
+
+	<ACTION ID="a_bw_combo_Z_1_1" DIR="RIGHT" IconRect="64,160,64,32"/>     <!-- 오른쪽 Z 전방 -->
+	<ACTION ID="a_bw_combo_Z_1_1" DIR="LEFT" IconRect="0,160,64,32"/>     <!-- 오른쪽 Z 전방 -->
+
+	<ACTION ID="a_bw_combo_Z_1_2" IconRect="0,32,32,32"/>		<!--Z-->
+	<ACTION ID="a_bw_combo_Z_1_3" IconRect="0,32,32,32"/>		<!--Z-->
+
+	<ACTION ID="a_bw_combo_Z_2_1" IconRect="64,128,64,32"/>    <!--Z아래쪽-->
+	<ACTION ID="a_bw_combo_Z_2_2" IconRect="0,32,32,32"/>		<!--Z-->
+		
+	<ACTION ID="a_bw_combo_Z_3_1" IconRect="0,128,64,32"/>      <!-- 위쪽 z -->
+	<ACTION ID="a_bw_combo_Z_3_2" IconRect="0,32,32,32"/>		<!-- Z -->
+	<ACTION ID="a_bw_combo_Z_3_1_2" IconRect="64,32,32,32"/>	<!-- X -->
+
+		
+
+	<!-- 석궁 기본 연계 콤보 -->
+	
+	<ACTION ID="a_cbw_combo_a" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cbw_combo_b" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cbw_combo_c" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cbw_combo_d" IconRect="64,32,32,32"/>			<!--X-->
+    <ACTION ID="a_cbw_combo_e" IconRect="64,32,32,32"/>			<!--X-->
+	<ACTION ID="a_cbw_combo_c_4_C" IconRect="0,32,32,32"/>		<!--Z-->
+		
+	<ACTION ID="a_cbw_combo_Z_4_1" DIR="RIGHT" IconRect="0,160,64,32"/>   <!-- 뒤로왼쪽 z -->
+	<ACTION ID="a_cbw_combo_Z_4_1" DIR="LEFT" IconRect="64,160,64,32"/>  <!-- 뒤로왼쪽 z -->
+
+	<ACTION ID="a_cbw_combo_Z_1_1" DIR="RIGHT" IconRect="64,160,64,32"/>     <!-- 오른쪽 Z 전방 -->
+	<ACTION ID="a_cbw_combo_Z_1_1" DIR="LEFT" IconRect="0,160,64,32"/>     <!-- 오른쪽 Z 전방 -->
+
+	<ACTION ID="a_cbw_combo_Z_1_2" IconRect="0,32,32,32"/>		<!--Z-->
+	<ACTION ID="a_cbw_combo_Z_1_3" IconRect="0,32,32,32"/>		<!--Z-->
+
+	<ACTION ID="a_cbw_combo_Z_2_1" IconRect="64,128,64,32"/>    <!--Z아래쪽-->
+	<ACTION ID="a_cbw_combo_Z_2_2" IconRect="0,32,32,32"/>		<!--Z-->
+		
+	<ACTION ID="a_cbw_combo_Z_3_1" IconRect="0,128,64,32"/>      <!-- 위쪽 z -->
+	<ACTION ID="a_cbw_combo_Z_3_2" IconRect="0,32,32,32"/>		<!-- Z -->
+	<ACTION ID="a_cbw_combo_Z_3_1_2" IconRect="64,32,32,32"/>	<!-- X -->
+	
+
+	<!-- 스태프 기본 콤보-->
+		<ACTION ID="a_st_combo_a" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_st_combo_b" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_st_combo_c" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_st_combo_d" IconRect="64,32,32,32"/>	<!-- X -->
+
+		<ACTION ID="a_st_combo_z_1" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_st_combo_z_2" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_st_combo_z_3" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_st_combo_z_4" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_st_combo_z_3_4" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_st_combo_z_2_3" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_st_combo_z_2_4" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_st_combo_z_2_3_4" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_st_combo_z_1_2" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_st_combo_z_1_3" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_st_combo_z_1_2_3" IconRect="64,32,32,32"/>	<!-- X -->
+
+		<!-- 스태프 기본 콤보-->
+		<ACTION ID="a_sp_combo_a" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_sp_combo_b" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_sp_combo_c" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_sp_combo_d" IconRect="64,32,32,32"/>	<!-- X -->
+
+		<ACTION ID="a_sp_combo_z_1" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_sp_combo_z_2" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_sp_combo_z_3" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_sp_combo_z_4" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_sp_combo_z_3_4" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_sp_combo_z_2_3" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_sp_combo_z_2_4" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_sp_combo_z_2_3_4" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_sp_combo_z_1_2" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_sp_combo_z_1_3" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_sp_combo_z_1_2_3" IconRect="64,32,32,32"/>	<!-- X -->
+	<!-- 건스태프 기본 연계 콤보 -->
+			<ACTION ID="a_gs_combo_a" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_gs_combo_b" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_gs_combo_c" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_gs_combo_d" IconRect="64,32,32,32"/>	<!-- X -->
+
+		<ACTION ID="a_gs_combo_c_4_F0"IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_gs_combo_z_1" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_gs_combo_z_2" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_gs_combo_z_3" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_gs_combo_z_4" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_gs_combo_z_3_4" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_gs_combo_z_2_3" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_gs_combo_z_2_4" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_gs_combo_z_2_3_4" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_gs_combo_z_1_2" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_gs_combo_z_1_3" IconRect="64,32,32,32"/>			<!--Z-->
+		<ACTION ID="a_gs_combo_z_1_2_3" IconRect="0,32,32,32"/>	<!-- X -->
+	<!-- 글러브 기본 연계 콤보 -->
+	
+		<ACTION ID="a_pg_combo_a" IconRect="64,32,32,32"/>	<!-- X -->
+		<ACTION ID="a_pg_combo_b" IconRect="64,32,32,32"/>	<!-- X -->
+		
+		<ACTION ID="a_pg_combo_c" IconRect="64,32,32,32"/>	<!-- X -->
+			<ACTION ID="a_pg_combo_c_s" IconRect="64,32,32,32"/>	<!-- X -->
+			<ACTION ID="a_pg_combo_c_f" IconRect="64,32,32,32"/>	<!-- X -->
+
+
+		<ACTION ID="a_pg_combo_d" IconRect="64,32,32,32"/>	<!-- X -->
+			<ACTION ID="a_pg_combo_d_f" IconRect="64,32,32,32"/>	<!-- X -->
+
+		<ACTION ID="a_pg_combo_e" IconRect="64,32,32,32"/>	<!-- X -->
+			<ACTION ID="a_pg_combo_e_s" IconRect="64,32,32,32"/>	<!-- X -->
+			<ACTION ID="a_pg_combo_e_f" IconRect="64,32,32,32"/>	<!-- X -->
+
+		<ACTION ID="a_pg_combo_d_5" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_pg_combo_d_5_s" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_pg_combo_d_5_f" IconRect="0,32,32,32"/>		<!--Z-->
+
+
+
+	<ACTION ID="a_pg_combo_c_4" IconRect="0,32,32,32"/>		<!--Z-->
+	<ACTION ID="a_pg_combo_c_5" IconRect="64,32,32,32"/>	<!-- X -->
+	<ACTION ID="a_pg_combo_c_5_f" IconRect="64,32,32,32"/>	<!-- X -->
+	<ACTION ID="a_pg_combo_c_5_s" IconRect="64,32,32,32"/>	<!-- X -->
+
+	<ACTION ID="a_pg_combo_b_3" IconRect="0,32,32,32"/>		<!--Z-->
+	<ACTION ID="a_pg_combo_b_4" IconRect="0,32,32,32"/>		<!--Z-->
+	<ACTION ID="a_pg_combo_b_5" IconRect="64,32,32,32"/>	<!-- X -->
+	<ACTION ID="a_pg_combo_b_5_s" IconRect="64,32,32,32"/>	<!-- X -->
+	<ACTION ID="a_pg_combo_b_5_f" IconRect="64,32,32,32"/>	<!-- X -->
+
+	<ACTION ID="a_pg_combo_a_2" IconRect="0,32,32,32"/>		<!--Z-->
+	<ACTION ID="a_pg_combo_a_3" IconRect="64,32,32,32"/>	<!-- X -->
+	<ACTION ID="a_pg_combo_a_3_f" IconRect="64,32,32,32"/>	<!-- X -->
+	<ACTION ID="a_pg_combo_a_3_s" IconRect="64,32,32,32"/>	<!-- X -->
+	
+	<ACTION ID="a_pg_combo_a_4" IconRect="64,32,32,32"/>	<!-- X -->
+
+	<ACTION ID="a_pg_combo_a_5" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_pg_combo_a_5_f" IconRect="0,32,32,32"/>		<!--Z-->
+		<ACTION ID="a_pg_combo_a_5_s" IconRect="0,32,32,32"/>		<!--Z-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </COMBO_TREE_ICON>
+
+  <!-- 
+  <COMB_TREE_DATA BASE_CLASS_ID="1"> 
+    
+    <ACTION ID="a_melee_01">
+      <ACTION ID="a_melee_02">
+        <ACTION ID="a_melee_01">
+
+          <ACTION ID="a_melee_02">
+             <ACTION ID="a_melee_03">
+            </ACTION>
+            <ACTION ID="a_melee_blow_up">
+            </ACTION>
+            <ACTION ID="a_melee_knock_back">
+            </ACTION>
+            
+          </ACTION>
+            
+          <ACTION ID="a_melee_blow_up">
+          </ACTION>
+          <ACTION ID="a_melee_knock_back">
+          </ACTION>
+          
+          
+        </ACTION>
+        
+        <ACTION ID="a_melee_blow_up">
+        </ACTION>
+        <ACTION ID="a_melee_knock_back">
+        </ACTION>
+        
+        
+      </ACTION>
+    </ACTION>
+  </COMB_TREE_DATA>
+  -->
+  
+  
+  
+</COMBO_TREE>
+
+

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4143</ID> <!--T.T.10414301 무릉도원 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	전사장 라노타와 대화-->
+<!--[완료NPC]	카즈라 마을 - 라노타-->
+<!--[내용]	오추쿠 장로는 낙원과 같았던 카즈라 마을이 점점 위기에 빠지는 것을 안타깝게 여기고 있다. 전사장인 라노타에게 마을을 찾은 전사들의 안내를 부탁했다고 하니, 카즈라 마을의 라노타 전사장를 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">48AB8C5A-FB6A-467d-B914-01514408440A</CLIENT> <!--시작NPC 카즈라 마을 - 오추쿠 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D66550AB-63CC-4ea1-881C-0EBB953E2D94</PAYER> <!--완료NPC 카즈라 마을 - 라노타 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">48AB8C5A-FB6A-467d-B914-01514408440A</AGENT> <!--진행NPC 11 카즈라 마을 - 오추쿠 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">D66550AB-63CC-4ea1-881C-0EBB953E2D94</AGENT> <!--진행NPC 12 카즈라 마을 - 라노타 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10414311"/> <!--라노타와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10414321" FACE="Ocuku_normal"/> <!--카즈라에 오신 것을 진심으로 환영하오!%%
+신보를 찾기 위해 떠났던 드라칸의 용사들과 
+이곳을 처음으로 찾게된 드래곤 원정대 분들로 인해 
+온 마을이 떠들썩하오.%%
+어쨌거나 험한 길을 지나 이곳까지 오느라 수고가 많으셨소이다.
+카즈라 지역은 이제 예전과 같은 고요함은 찾을 길이 없고...%%
+협곡과 골짜기 마다 평화롭게 뛰놀던 동물들도 
+이젠 신보의 영향으로 날로 흉악해져 가고 있으니…%%
+이곳을 무릉도원이라 부르던 일도 모두 지나간 과거의 일이라오.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10414326" FACE="Lanota_smile"/> <!--아... 어디서 많이 보던 얼굴 같은데…%%
+어쨌거나 반갑네. 
+귀관은 신관 전사들의 지휘를 맡고있는 라노타라고 하네. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10414323" FACE="Ocuku_normal"/> <!--라노타 전사장이 카즈라에 대해 여러가지 안내하고 있으니 
+그를 찾아가 보도록 하시오.%%
+그럼 반가웠소이다. 허허허허!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10414324" FACE="Ocuku_angry"/> <!--으엥? 벌써 자리를 뜨려 하는 것이오?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10414325" FACE="Ocuku_angry"/> <!--라노타 전사장에게 이곳을 찾아온 전사들을 안내하라 일러두었소이다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10414302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

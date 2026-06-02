@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4196</ID> <!--T.T.10419601 그리퐁, 펫의 전직이라고? -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	전투펫 전직 키트 습득-->
+<!--[완료NPC]	바람항구 - 에이미-->
+<!--[내용]	바람항구 펫상점의 에이미는 그리퐁이 전투펫으로 전직할 시기가 되었다며 전투펫으로의 전직을 권유한다. 전투펫이 된 그리퐁은 아이템 주워오기, 몬스터 자동공격, 파이어볼 등 사냥에 유용한 기능을 사용할 수 있다고 한다. 그리퐁의 전직을 위해서는 에이미의 펫상점에서 판매하고 있는 전투펫 전직 키트가 필요하다. -->
+
+
+	<LIMITS>
+		<PET_CLASS TYPE="2" LEVEL="0"/>
+		<PET_LEVEL MIN="20" MAX="39"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</CLIENT> <!--시작NPC 바람항구 - 에이미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</PAYER> <!--완료NPC 바람항구 - 에이미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2e7ce5bc-758a-4e5a-acd3-4a7f5a3171d5</AGENT> <!--진행NPC 11 바람항구 - 에이미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160419600</ITEM> 
+ <!--Item_NO=160419600/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419611"/> <!--전투펫 전직 키트-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">265002270</ITEM><!--전체지급/전체/1)/65001160(봉인아님) 1개-변화의 수정-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419621" FACE="Amy_normal"/> <!--안녕하세요! %name%님~
+어머~ 그리퐁도 벌써 이렇게 자랐구나~%%
+초음파 투시기로 봤을 땐 엄청 조그만 아이였는데
+이젠 건강해져서 쑥쑥 자라나고 있군요. 호호호!%%
+그리퐁도 이제 적당히 어느 정도 자랐으니 
+이 아이를 빨리 전직시키는 게 좋을텐데…
+%name%님 생각은 어떠세요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419626" FACE="Amy_smile"/> <!--보상으로 받게 된 변화의 수정을 사용하면 라이딩펫을 전직 시킬 수 있습니다.%%
+전직을 시도해 보세요. 앞으로 페이롱과 더욱 즐거운 모험이 되시길 바랍니다!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419623" FACE="Amy_normal"/> <!--전직을 하게 되면 아이템을 주워온다거나, 몬스터들을
+공격하는 등의 전투를 보조하는 기능이 추가된답니다.%%
+그리퐁이 가진 잠재능력을 끌어올리기 위한 필수적인 과정이죠.%%
+전직을 위해선 저희 가게에서 판매하고 있는 
+전투펫 전직 키트란 아이템이 필요하니까 꼭 구입해서 
+제게 가져다 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419624" FACE="Amy_angly"/> <!--사냥 속도도 빨라지고, 아이템 줍기 같은 유용한 기능도 있어서
+전직을 하는 것이 여러모로 좋을텐데… -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419625" FACE="Amy_angly"/> <!--아아, 죄송해서 어쩌죠? 전투펫 전직 키트가 없으면 안되는데…
+저희 펫상점에서 저렴하게 팔고 있으니 구입해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Dongdong_King" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Dongdong_King"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_Dongdong_king/N_Dongdong_king.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="40,15" ROTATE="1,0,0,90" LOCATE="0,0,0"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000201" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000202" RANDOM="100"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000000"/>
+			<ITEM NAME="shot_01" ANIMATION="1000071" FIRE_START_NODE="p_ef_mouse" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_FIRE_BALL" RANDOM="100"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

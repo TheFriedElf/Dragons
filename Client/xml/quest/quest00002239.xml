@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2239</ID> <!--T.T.10223901 친하게 지냅시다. (3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 제스한테 배달-->
+<!--[완료NPC]	달빛해안 마을 - 제스-->
+<!--[내용]	묘지기 라르엘은 친구 없이 혼자 지내는 게 익숙하지만 가끔은 외롭다고 한다. 그런 라르엘에게 제스는 라르엘과 친구가 되어 주겠다고 한다. 라르엘은 고마운 제스에게 줄 선물을 만들었다고 한다. 쥐꼬리로 만든 선물을 제스에게 전해주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">89F4650C-E372-4716-B958-5C321BB62C51</PAYER> <!--완료NPC 달빛해안 마을 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012"  MARK="END">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 12 달빛해안 마을 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160223810/1">10011</NPC> 
+ <!--Item_NO=160223810/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160223810/1/511">10011</NPC> 
+ <!--Item_NO=160223810/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160223810/1">10011</NPC> 
+ <!--Item_NO=160223810/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160223810/1/512">10012</NPC> 
+ <!--Item_NO=160223810/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160223810/1">10012</NPC> 
+ <!--Item_NO=160223810/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10223911"/> <!--제스에게 배달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10223921" FACE="Larel_normal"/> <!--네가 저번에 구해다 준 쥐꼬리로 선물을 만들었어.
+쥐꼬리로 무슨 선물을 만들었느냐고? %%
+그건 비밀이야. 네게 알려 주고 싶지 않아.
+그러니까 넌 그냥 전해주기만 해.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10223926" FACE="Jess_smile"/> <!--라르엘이 나에게 주는 선물? 이게 뭐지?
+한번 열어볼까?
+(상자를 열었다.)%%
+윽... 이게 뭐야? 쥐꼬리에 리본을 묶어놓다니...
+기분나빠. 대체 나에게 무슨 의미로 이런 걸 준거지?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10223923" FACE="Larel_smile"/> <!--이걸 가지고 가면 돼.
+그럼 수고해 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10223924" FACE="Larel_angly"/> <!--너는 왜 끝까지 책임지지 않는 거지?
+난 너의 그 태도가 마음에 들지 않아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10223925" FACE="Larel_normal"/> <!--조심히 들고 가.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10223902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10223951" FACE="Larel_angly"/> <!--그걸 잃어버리면 어떻게 해! 바보야.
+금방 만들어줄게.%%
+자! 여기.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10223952" FACE="Jess_normal"/> <!--왜 그래? 나한테 무슨 용건 있어?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

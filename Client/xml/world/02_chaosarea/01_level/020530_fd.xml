@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_020530_FD" DESCRIPTION="90205300">
+	<GSAPATH>../Data/3_World/02_ChaosArea/01_Level/020530_FD.gsa</GSAPATH>
+	<MINIMAP Y="130" H="290">../Data/3_World/02_ChaosArea/01_Level/020530_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/DewWood.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+	<!-- 신들의 안식처 포털 -->
+	<TRIGGER ID="gate_020500_base" TYPE="PORTAL" TITLE_TEXT_ID="800050" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9020500" PARAM2="4">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+	<!-- 엔터 던전 -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_05" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_06" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_07" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_08" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_09" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_10" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10"/>
+	</TRIGGER>
+	<!-- 텔레포트 데미지 이동 -->
+	<TRIGGER ID="teleport_target_11" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_11"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_12" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="teleport_zone_11"/>
+	</TRIGGER>
+	<!--<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="64F3E880-4ACF-4edc-B83A-F5A8DAE062D1" TYPE="FIXED" LOCATION="2009.501, 2000.72, 316.1896"/>
+	<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="F65317FF-1818-4adc-941F-A748AD9B8EFD" TYPE="FIXED" LOCATION="-1874.252, 4027.222, 321.4522"/>
+	<NPC NAME="1028272" ACTOR="c_Trans_tower" SCRIPT="NPC_TRANSTOWER" KID="1028272" GUID="7760A860-0379-4298-947A-871CE005CEAC" TYPE="FIXED" LOCATION="-3580.652, 133.8796, 266.7631"/>-->
+	<!-- 삭제-->
+	<!-- <NPC NAME="1028219" ACTOR="c_HunterG" SCRIPT="NPC_RANDOMQUEST" GUID="4A7BAF7A-1593-42e8-902E-A95CB08AEA63" KID="1028219" TYPE="FIXED" LOCATION="7260.5225,4221.9102,326.7305"/> -->
+	<!-- 포그 -->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="8211" COLOR="0,0.1607843,0.2509804"/>
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1000" MID_END="1500" LOW_END="3000" USE="1"/>
+	<WAVE_EFFECT ENTITY_ID="BaseWater1003_01 01" STOP_EFFECT_ID="ef_walkwave_01" MOVE_EFFECT_ID="ef_walkwave_02"/>
+</WORLD>

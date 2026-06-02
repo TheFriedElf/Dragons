@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_summonbone">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSkill/BoneDragon_skill/BoneDragon_skill.kfm</KFMPATH>
+		<SCRIPT SRC="SkillActor/SummonThorn.lua">
+			<ITEM NAME="SummonBone_Initialize" TYPE="INIT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="idle_01" ANIMATION="1000000"/><!-- FIRE_EFFECT_NODE="char_root" FIRE_EFFECT="ef_BoneDragon_skill_01_02_char_root"/-->
+      <ITEM NAME="attk_01" ANIMATION="1000000" />
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

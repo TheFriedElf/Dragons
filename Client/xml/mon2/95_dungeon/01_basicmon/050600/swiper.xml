@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Swiper">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Griffon_rock"/>
+		<KFMPATH SCALE="1.2">../Data/2_Mon2/95_Dungeon/01_BasicMon/050601/Swiper/Swiper.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="22"/>
+		</ABV>
+		<SLOT>
+
+
+			<!--영혼 감시자 원거리 1-->
+			<ITEM NAME="btlidle_03_shot_start" ANIMATION="1000250"/>
+			<ITEM NAME="btlidle_03_shot" ANIMATION="1000251"/>
+			<ITEM NAME="shot_03" ANIMATION="1000252" FIRE_START_NODE="p_ef_weapon" PROJECTILE_ID="Projectile_Swiper_shot"/>
+
+			<!--에너지 익스 플로젼-->
+			<ITEM NAME="energy_explosion_btlidle_start" ANIMATION="1001191" RANGE_EFFECT="NONE"/>
+			<ITEM NAME="energy_explosion_btlidle" ANIMATION="1001192"/>
+			<ITEM NAME="energy_explosion_fire" ANIMATION="1001193" FIRE_EFFECT="NONE"
+				FIRE_START_NODE="p_ef_r_hand" FIRE_START_EFFECT="Projectile_kahuna_oakshire_ball" PROJECTILE_ID="Projectile_kahunaOakshire_magic_01"/>
+
+		    <!--전격-->
+		    <ITEM NAME="attk_fin_01_start" ANIMATION="1001121"/>
+		    <ITEM NAME="attk_fin_01" ANIMATION="1001122"/>
+		    <ITEM NAME="attk_fin_01_fire" ANIMATION="1001123" LIGHTNING_PATH="../Data/5_Effect/9_Tex/Fx_Lightningblue_1x4.dds" LIGHTNING_START_NODE="p_ef_weapon" DO_DAMAGE="TRUE" IS_SHOW_TARGET_LIGHTNING="FALSE"/>
+		    <ITEM NAME="attk_fin_01_fin_01" ANIMATION="1001124" IS_LIGHTING_END="TRUE"/>
+
+			<!-- 순간이동 
+			<ITEM NAME="attk_04_01_start" ANIMATION="1001141"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1001142"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1001143"/>-->
+
+
+			<!--피격패턴 및 사망-->
+            <ITEM NAME="dmg_01" ANIMATION="1000011"/>
+            <ITEM NAME="dmg_02" ANIMATION="1000012"/>
+            <ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+            <ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+            <ITEM NAME="StandUp" ANIMATION="1000024"/>
+            <ITEM NAME="stun" ANIMATION="1000025"/>
+	        <ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="idle_02" ANIMATION="1000002"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

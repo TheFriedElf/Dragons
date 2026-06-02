@@ -1,0 +1,6 @@
+<ACTION ID="a_Use Repair" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_03"/>  
+  <FSM SCRIPT="Act_Use_UICall"
+       CALL_UI_NAME="SFRM_REPAIR"/>
+</ACTION>

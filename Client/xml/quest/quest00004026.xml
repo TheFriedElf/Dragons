@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4026</ID> <!--T.T.10402601 인재가 필요해 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 바티와 대화-->
+<!--[완료NPC]	바람항구 - 바티-->
+<!--[내용]	이제 신보 탈환대장 무카파의 신뢰를 얻은것 같다. 그럼 바람항구의 바티와 이야기 하여 신보탈환대가 되도록 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">42530F97-3737-47d0-9A00-C0AC94AB5A43</PAYER> <!--완료NPC 바람항구 - 바티 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">42530F97-3737-47d0-9A00-C0AC94AB5A43</AGENT> <!--진행NPC 12 바람항구 - 바티 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10402611"/> <!--바티와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10402621" FACE="Mukapa_normal"/> <!--우리 용족의 전사들이 각지에서 뛰어난 활약을 보이고 있으니
+이 신관사제장의 마음이 이루 말할 수 없이 기쁘다네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10402626" FACE="Valti_smile"/> <!--또, 자네인가…
+어쩌다 운이 좋아 원정대의 일을 해결했나보군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10402623" FACE="Mukapa_normal"/> <!--그런데 자네 자세히 보니 얼굴이 생소하구만…
+크허허허허! 어쨌거나 우리에겐 자네 같은 인재가 더욱 필요하다네.%%
+앞으로도 더욱 분발해주게.%%
+바티 사제, 이 친구를 신보 탈환대에 채용해주게나.%%
+자, 그럼 바티 사제에게 가보시게.
+신보를 찾기 위한 여러가지 임무를 설명해 줄테니.  -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10402624" FACE="Mukapa_smile"/> <!--크허허허… 자네 보기보다 부끄러움이 많구만.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10402625" FACE="Mukapa_angry"/> <!--준비되는 대로 서둘러 바티에게 가보게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--none-->
+			<BODY TEXT="10402611" FACE="Valti_normal"/> <!---->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10402602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

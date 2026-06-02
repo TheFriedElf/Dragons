@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5094</ID> <!--T.T.10509401 슬픈 진실(1) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단의 별가사리 루루루, 로로로, 라라라를 10마리씩 처리하자-->
+<!--[완료NPC]	바람항구 - 제레미-->
+<!--[내용]	제레미는 레오가 자꾸 위험한 칼리곤 선단 쪽으로 나간다면서 그게 자꾸 걱정이 된다고 한다. 현재 그곳에 많이 돌아다니는 별가사리 루루루, 로로로, 라라라가 아이들을 공격하고 다니기 때문에 위험하다고 한다. 아이들을 공격하지 못하도록 막기 위해 칼리곤 선단의 별가사리 루루루, 로로로, 라라라를 10마리씩 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</CLIENT> <!--시작NPC 바람항구 - 제레미 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</PAYER> <!--완료NPC 바람항구 - 제레미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 11 바람항구 - 제레미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010150/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010150/칼리곤 선단,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9010150/1">6011200</MONSTER> 
+ <!--MON_NO=6011200/별가사리 로로로,MAP_NO=9010150/칼리곤 선단,-->
+		<MONSTER OBJECTNO="3" TYPE="INCPARAM100_IN" VALUE="9010150/1">6011300</MONSTER> 
+ <!--MON_NO=6011300/별가사리 라라라,MAP_NO=9010150/칼리곤 선단,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10509411"/> <!--별가사리 루루루-->
+		<OBJECT2 COUNT="10" TEXT="10509412"/> <!--별가사리 로로로-->
+		<OBJECT3 COUNT="10" TEXT="10509413"/> <!--별가사리 라라라-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509421" FACE="Jeremy_normal"/> <!--요즘 큰 걱정이 생겼습니다. 제가 돌보고 있는 아이인 레오가 자꾸 위험 곳으로 나가기 때문입니다.
+제가 몇 번이나 이야기 했지만, 들을 생각을 하지 않는군요.%%
+칼리곤 선단은 언제부터인가 별가사리 루루루, 로로로, 라라라가 작은 아이들을 공격하기 때문에 대단히 위험한 곳이 되어 버렸습니다.
+%class%님이 그 위험한 무리들을 제거해 주실 수 있습니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509426" FACE="Jeremy_smile"/> <!--감사합니다. 전 이제 늙은이라 힘 쓰는 일은 더 이상 하기가 힘들더군요.
+그래서 %name%님과 같은 젊은피의 힘이 절실히 필요합니다.
+뭐 앞으로도 자주 부려먹겠다는 의미는 아닙니다. 허허.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509423" FACE="Jeremy_normal"/> <!--아이들은 항상 어른들의 말을 듣지 않으려고 합니다. 
+그런다고 어른들이 그냥 손 놓고 위험을 지켜 보고만 있을 수야 없지 않겠습니까?%%
+특히나 칼리곤 선단의 별가사리 루루루, 로로로, 라라라는 다른 지역으로 까지 움직여서 아이들을 공격하고 있습니다.
+녀석들의 위험으로부터 아이들을 구해주시기 바랍니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509424" FACE="Jeremy_normal"/> <!--그렇다면 이 늙은이가 직접 나갈 수박에 없겠군요.
+늙은이가 직접 움직여야 하는 이 세상이 안타까울 뿐입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509425" FACE="Jeremy_normal"/> <!--요즘 레오에게 뭔가 큰 고민이 있는 모양입니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4044</ID> <!--T.T.10404401 좋은놈, 나쁜놈, 돌+아이 같은 놈 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	해적단 죠니와 대화-->
+<!--[완료NPC]	칼리곤 선단 - 죠니-->
+<!--[내용]	해적 상어 죠니는 무심결에 자신의 진심을 내보이고 만다. 그와 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">98B00461-1DCF-4215-B7DB-FD8344F891BE</CLIENT> <!--시작NPC 칼리곤 선단 - 죠니 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">98B00461-1DCF-4215-B7DB-FD8344F891BE</PAYER> <!--완료NPC 칼리곤 선단 - 죠니 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">98B00461-1DCF-4215-B7DB-FD8344F891BE</AGENT> <!--진행NPC 11 칼리곤 선단 - 죠니 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10404411"/> <!--죠니와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10404421" FACE="Johny_normal"/> <!--고…%% 
+고, 고…%%
+고마워!%%
+넌 좋은 놈이구나…
+이 때까지 살면서 이렇게 나한테 잘해준 건 네가 두번째다.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10404426" FACE="Johny_normal"/> <!--그 때 나는 물의 신전에 도착해서 상자를 숨길 적당한 장소를 찾고 있었어.
+칼리곤은 상자를 지키고 있었고…%%
+잠시 뒤에 내가 돌아왔을 때, 칼리곤은 갑자기 흉폭해져서 나를 공격했다.
+맞아서 아픈 것보다... %%
+만만한 놈한테 맞았다는 것이 더 슬픈 법이지.
+아니, 아니! 그냥 슬프고 서러웠다.%% 
+보물을 눈 앞에 둔 사람이 그렇게 돌+아이가 될 수도 있구나…
+그런 것 때문에 슬픈 거였다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10404423" FACE="Johny_normal"/> <!--내가 나쁜 놈이었지. 솔직히 괜한 욕심을 부렸던 것 같아.
+난 그냥 캡틴 알비다의 당황하는 모습을 보고 싶었을 뿐인데 말이지.%%
+하지만 그 녀석은 달랐어.
+나한테 생전 처음으로 잘해주었던 녀석…%%
+그 녀석… 그 녀석이… 훌쩍...
+흑흑…%%
+우린 그날 보물상자를 들고 물의 신전으로 향했지.
+그런데 칼리곤은 자꾸만 상자 속에 든 물건을 궁금해했더랬지.%%
+그래.. 이번 부탁은 아주 심플해.
+그냥 계속 얘기나 들어줘. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10404424" FACE="Johny_normal"/> <!--듣기 싫어도 결국은 나를 찾아오게 될 거야. 이 바닥이 원래 그래.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10404425" FACE="Johny_normal"/> <!--없음(테스트, 해석 불필요)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10404402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

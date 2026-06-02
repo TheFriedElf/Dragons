@@ -1,0 +1,16 @@
+<ACTION ID="a_Job_Pick_Process" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+	<SLOT NAME="Common_Com_Job_Mining_Pick_02" LOOP="TRUE"/>
+	<SLOT NAME="Common_Com_Job_Mining_Pick_03"/>
+	<FSM SCRIPT="JobSkill_Process" 
+		JOB_SKILL_TOOL_EFFECT_ID2="ef_Job_Pick"
+		JOB_SKILL_TOOL_TARGET_NODE2="p_wp_r_hand"
+		JOB_SKILL_TOOL_SOUND2=""
+		
+		JOB_SKILL_TOOL_EFFECT_ID3="ef_Job_Pick"
+		JOB_SKILL_TOOL_TARGET_NODE3="p_wp_r_hand"
+		JOB_SKILL_TOOL_SOUND3=""
+		
+		HIDE_WEAPON="TRUE"
+		NO_WEAPON_TRAIL="TRUE"
+	/>
+</ACTION>

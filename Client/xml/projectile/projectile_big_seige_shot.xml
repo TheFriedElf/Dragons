@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="PROJECTILE_Big_Siege_Shot">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="0.01">../Data/5_Effect/7_Projectile/ef_Siegedragon_Big_skill_05_shot_01.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_BIG_SIEGE_SHOT</SCRIPT>
+	<PARAM SPEED="300" ACCEL="2" MASS="0.5" SCALE="0.2"/>
+	<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="ef_linker" RANGE="40"/>
+	</COLLISION_SPHERE>
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+	</SCRIPT_CALL_EVENT>
+</PROJECTILE>

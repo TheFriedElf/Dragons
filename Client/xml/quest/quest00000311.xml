@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+    <ID>311</ID>
+    <GROUPNO>0</GROUPNO>
+    <TITLE TEXT="502338">지도 작성 (1)</TITLE>
+    <GROUPNAME TEXT="500009">바람의 항구</GROUPNAME>
+    <LIMITS>
+        <LEVEL MIN="999" MAX="999" />
+        <CLASSES>
+            <CLASS MEMO="Thief">4</CLASS>
+            <CLASS MEMO="Clown">11</CLASS>
+            <CLASS MEMO="Assassin">12</CLASS>
+        </CLASSES>
+        <!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+        <QUESTS>
+            <QUEST>0</QUEST>
+            <QUEST>0</QUEST>
+        </QUESTS>
+        <LOCATIONS>
+            <!-- <LOCATION>2</LOCATION>-->
+        </LOCATIONS>
+        <PARTY MIN="1" MAX="1" />
+    </LIMITS>
+    <CLIENTS>
+        <CLIENT TYPE="NPC" EVENTNO="10000">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT>
+    </CLIENTS>
+    <AGENTS>
+        <AGENT TYPE="NPC" EVENTNO="10002">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT>
+    </AGENTS>
+    <PAYERS>
+        <PAYER TYPE="NPC" EVENTNO="10003">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER>
+    </PAYERS>
+    <EVENTS>
+        <!--NPC와 대화-->
+        <!--퀘스트를 시작 할 수 있으면 101 다이얼로그를 띄운다-->
+        <NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+        <NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10002</NPC>
+        <NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+        <!--위치 발견 체크-->
+        <LOCATION OBJECTNO="1" TYPE="LOCATION_ENTER" VALUE="9010400">1</LOCATION>
+        <LOCATION OBJECTNO="2" TYPE="LOCATION_ENTER" VALUE="9010430">1</LOCATION>
+        <MONSTER OBJECTNO="3" TYPE="INCPARAM" VALUE="1">6006916</MONSTER>
+        <MONSTER OBJECTNO="3" TYPE="INCPARAM" VALUE="1">6006919</MONSTER>
+        <MONSTER OBJECTNO="3" TYPE="INCPARAM" VALUE="1">6006922</MONSTER>
+        <MONSTER OBJECTNO="3" TYPE="INCPARAM" VALUE="1">6006924</MONSTER>
+    </EVENTS>
+    <OBJECTS TYPE="NOSTEP">
+        <OBJECT1 COUNT="1" TEXT="502345" />
+        <OBJECT2 COUNT="1" TEXT="502539" />
+        <OBJECT3 COUNT="1" TEXT="502346" />
+        <OBJECT5 COUNT="0" TEXT="0" />
+    </OBJECTS>
+    <DIALOGS>
+        <!--101번은 퀘스트 의뢰 정보창-->
+        <!--MEMO=201번은 퀘스트 수락/거부 여부창-->
+        <DIALOG ID="101" TYPE="PROLOG">
+            <BODY TEXT="502339" FACE="Jessie_normal" />
+            <SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+            <SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+        </DIALOG>
+        <!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+        <DIALOG ID="301">
+            <BODY TEXT="502340" FACE="Jessie_smile" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+        <DIALOG ID="401">
+            <BODY TEXT="502341" FACE="Jessie_angly" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="501">
+            <BODY TEXT="502342" FACE="Jessie_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="551">
+            <BODY TEXT="500738" FACE="Jessie_normal" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--601번은 퀘스트 조건이 완료 되고 NPC를 클릭했을 때 뜰창-->
+        <DIALOG ID="601" TYPE="COMPLETE">
+            <BODY TEXT="502343" FACE="Jessie_smile" />
+            <SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+        </DIALOG>
+        <!--701번은 완료를 허락 하였을 때 뜰창-->
+        <DIALOG ID="701">
+            <BODY TEXT="500017" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--801번은 완료를 거부 하였을 때 뜰창-->
+        <DIALOG ID="801">
+            <BODY TEXT="500018" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+        <DIALOG ID="901" TYPE="INFO">
+            <BODY TEXT="502344" />
+            <SELECT ID="0" TEXT="19933">포기</SELECT>
+        </DIALOG>
+        <!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+        <DIALOG ID="902">
+            <BODY TEXT="502048" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <DIALOG ID="903">
+            <BODY TEXT="501835" />
+            <SELECT ID="0" TEXT="500003">닫기</SELECT>
+        </DIALOG>
+        <!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+    </DIALOGS>
+</QUEST>

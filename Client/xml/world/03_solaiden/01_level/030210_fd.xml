@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030210_FD" DESCRIPTION="90302100">
+  <GSAPATH>../Data/3_World/03_Solaiden/01_Level/030210_FD.gsa</GSAPATH>
+  <MINIMAP Y="165" H="220">../Data/3_World/03_Solaiden/01_Level/030210_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/DewWood.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  <!-- 버섯마을 게이트 -->
+  <TRIGGER ID="gate_028100_base" TYPE="PORTAL" TITLE_TEXT_ID="801003" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9028100" PARAM2="6" />
+  </TRIGGER>
+  
+  <!-- 유혹의설원 게이트 -->
+  <TRIGGER ID="gate_030200_base" TYPE="PORTAL" TITLE_TEXT_ID="800060" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030200" PARAM2="1">
+      <ACCESS>
+        <LEVEL MIN="0" />
+      </ACCESS>
+    </ACTION>
+  </TRIGGER>
+
+  <!-- 얼음협곡 게이트 -->
+  <TRIGGER ID="gate_030230_base" TYPE="PORTAL" TITLE_TEXT_ID="800063" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9030230" PARAM2="1">
+      <ACCESS>
+        <LEVEL MIN="0" />
+      </ACCESS>
+    </ACTION>
+  </TRIGGER>
+
+  
+  <!-- 텔레점프 -->
+  <TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_04" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="400" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_05" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_05" PARAM="500" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_06" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_06" PARAM="500" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_07" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_07" PARAM="500" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_08" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_08" PARAM="500" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_09" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_09" PARAM="500" />
+  </TRIGGER>
+  <TRIGGER ID="telejump_target_10" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_10" PARAM="500" />
+  </TRIGGER>
+  
+    <!-- 데미지 텔레포트 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+
+  <!-- 이동 오브젝트 -->
+  <OBJECT GUID="04ad7494-0022-4881-a3f8-df9e6e5a2e54" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000510">
+    <WayPoint POINT="1087.867, -1960.036, 619.9458" TIME="1" />
+    <WayPoint POINT="1408.413, -1960.791, 619.9458" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="b5474c44-deec-4f03-a0c1-6f762d1fb358" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000510">
+    <WayPoint POINT="2394.77, -3897.489, 619.9454" TIME="1" />
+    <WayPoint POINT="2845.378, -3898.29, 619.9454" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="4b4e46b7-0f54-4ad5-85f8-066ec1195c66" RIDABLE="TRUE" SPEED="200" CLASS_NO="5000510">
+    <WayPoint POINT="5044.143, 243.5565, 659.1183" TIME="1" />
+    <WayPoint POINT="5428.098, 245.6766, 659.1183" TIME="1" />
+  </OBJECT>
+
+  <WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="4000" USE="1" />
+  <FOG DENSITY="0" FUNC="Z_LINEAR" START="0" END="6276" COLOR="0.4156863,0.7098039,1"/>
+  <STONES />
+</WORLD>

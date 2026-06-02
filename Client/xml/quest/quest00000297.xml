@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>297</ID> <!--T.T.10029701 일촉즉발! 루돌플 변신? -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구의 루돌프에게 산타의 선물 상자를 가져가자!-->
+<!--[완료NPC]	바람항구 - 산타의 조수 루돌프-->
+<!--[내용]	산타가 나눠준 산타의 선물 상자를 얼음의 성 몬스터에게서 되찾아서 루돌프에게 가져가자!-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4B90A0ED-46FD-4379-8266-F9C4C9A825C3</CLIENT> <!--시작NPC 바람항구 - 산타의 조수 루돌프 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4B90A0ED-46FD-4379-8266-F9C4C9A825C3</PAYER> <!--완료NPC 바람항구 - 산타의 조수 루돌프 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4B90A0ED-46FD-4379-8266-F9C4C9A825C3</AGENT> <!--진행NPC 11 바람항구 - 산타의 조수 루돌프 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160029700</ITEM> 
+ <!--Item_NO=160029700/ 산타의 선물 상자,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10029711"/> <!--산타의 선물 주머니-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<REALM_QUEST_ID>297</REALM_QUEST_ID>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10029721" FACE="Event_Rudolph_angly"/> <!--크앗! 더는 못 참겠다.
+산타클로스 이 인간 때문에 육식할 때의 나로 돌아가 버릴 거 같아~
+앗! %name%님 정말 잘 만났어요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10029726" FACE="Event_Rudolph_smile"/> <!--와! 정말 감사드립니다. 평생 형님으로 모실게요. %%
+필요한 일 있으면 언제든 말씀만 해 주세요. 
+제 밑에 힘 좀 쓰는 아는 동생들이 많아요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10029723" FACE="Event_Rudolph_normal"/> <!--산타가 얼음의 성에 나눠준 선물이 글쎄 그거 한 자루만 있던 게 아니었어요.%% 
+아이들에게 나눠주기 위한 모든 선물을 다 나눠줘 버린 거였어요.%%
+제발 얼음의 성의 몬스터에게서 산타의 선물 상자를 찾아 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10029724" FACE="Event_Rudolph_angly"/> <!--(루돌프가 내 어깨에 손을 얹는다)
+이봐! 순록이 말이 말 같지 않아?%%
+(루돌프가 내 쪽으로 고개를 들이민다)
+좋게좋게 가자고, 아앙?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10029725" FACE="Event_Rudolph_angly"/> <!--세상에 선물에다가 산타의 선물 상자라는 이름을 지어놨어요.
+자기 이름을 붙였으니까 자기거래나 뭐라나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10029702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

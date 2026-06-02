@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_DeathMaster_G" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_DeathMaster"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon/N_DeathMaster/N_DeathMaster.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="1.0">../Data/2_Mon/N_DeathMaster/N_DeathMaster_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ATTACH TYPE="effect" SLOT="53911" EFFECT="ef_deathmaster_idle_01_deathmaster_pantsD" TO="deathmaster_pantsD"/>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="70,30" ROTATE="1,0,0,90" LOCATE="0,0,-20"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<!-- 크게 베기-->
+			<ITEM NAME="btlidle_01" ANIMATION="1000065"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000066"/>
+			<!-- 방패 던지기 -->
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000205"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000206" FIRE_START_NODE="p_wp_l_hand" PROJECTILE_ID="PROJECTILE_deathmaster_shot_01" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_01_skill_shot_middle" ANIMATION="1000216"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1000207"/>
+
+			<!-- 블럭킹 -->
+			<ITEM NAME="blocking_btlidle_01_start" ANIMATION="1000065"/>
+			<ITEM NAME="blocking_01_idle" ANIMATION="1000215"/>
+			<ITEM NAME="blocking_01" ANIMATION="1000211"/>						
+			<!-- 대지의 분노 -->
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000213" CAST_EFFECT="ef_deathmaster_skill_04_01_Bip01 Prop1"/>
+			<ITEM NAME="earthquake_fire" ANIMATION="1000214" CAST_EFFECT="ef_deathmaster_skill_04_01_Bip01 Prop1" FIRE_EFFECT="ef_deathmaster_skill_04_03_char_root" FIRE_EFFECT2="ef_deathmaster_skill_04_02_char_root"/>
+			<!-- 애들 부르기 -->
+			<ITEM NAME="attk_08_01" ANIMATION="1000065"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000066"/>
+
+						<!-- 가디언 소위 나이트 번개 기모았다 발산 -->
+			<ITEM NAME="energy_explosion_btlidle_start" ANIMATION="1000208"/>
+			<ITEM NAME="energy_explosion_btlidle" ANIMATION="1000209"/>
+			<ITEM NAME="energy_explosion_fire" ANIMATION="1000210" FIRE_START_NODE="p_ef_Weapon" FIRE_START_EFFECT="Projectile_kahuna_oakshire_ball" PROJECTILE_ID="Projectile_kahunaOakshire_magic_01" QUAKE_TIME="3" QUAKE_FACTOR="1.2" FIRE_TERM="0.2"/>
+			
+			<!--ITEM NAME="die_01" ANIMATION="1000020"/-->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_blending_01" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000082"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000041" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000042" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000041"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000042"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000043"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000044"/>
+												<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

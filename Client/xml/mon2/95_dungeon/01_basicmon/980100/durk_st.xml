@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Durk_st" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Durk"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Durk_ST/Durk_ST.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="56"/>
+		</ABV>
+		<SLOT>
+		<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+			<!-- 흙 던지기 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000005" PROJECTILE_ID="PROJECTILE_nothing"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000071" PROJECTILE_ID="PROJECTILE_nothing"/>
+			<!-- 연다라 흙 던지기 -->
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000005" PROJECTILE_ID="PROJECTILE_nothing"/>
+			<ITEM NAME="shot_02" ANIMATION="1000071" PROJECTILE_ID="PROJECTILE_nothing"/>
+			<ITEM NAME="shot_return_02" ANIMATION="1000073" PROJECTILE_ID="PROJECTILE_nothing"/>
+			<!-- 마법 던지기 -->
+			<ITEM NAME="btlidle_03_shot" ANIMATION="1000074"/>
+			<ITEM NAME="shot_03" ANIMATION="1000075" FIRE_START_NODE="p_ef_shot" PROJECTILE_ID="PROJECTILE_lightball_01" PROJECTILE_SPEED="850" PROJECTILE_SCALE="2.0"/>
+			<!-- 바닥 내려치기 -->
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000201"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000202" PROJECTILE_ID="PROJECTILE_nothing"/>
+			<!-- 땅 속으로 -->
+			<ITEM NAME="btlidle_02_skill_attk" ANIMATION="1000005"/>
+			<ITEM NAME="skill_attk_02" ANIMATION="1000203"/>
+			<!-- 땅 밖으로 -->
+			<ITEM NAME="btlidle_03_skill_attk" ANIMATION="1000204"/>
+			<ITEM NAME="skill_attk_03" ANIMATION="1000205"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

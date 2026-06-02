@@ -1,0 +1,28 @@
+<ACTION ID="a_back_step" NEXT="a_battle_idle"  USE-EVENT="TRUE"  IGNORE_DMG_EFFECT="TRUE" USE_CFUNC="TRUE" USE_CFUNC_ONTARGET="TRUE" CHECK_CAN_ENTER="TRUE" >
+
+
+	<SLOT NAME="back_step_combo_Attk"/>
+	<SLOT NAME="back_step_combo_Finish"/>
+
+	<FSM SCRIPT="CommonSkillAction" 
+		USE_COMBO="TRUE"
+		USE_TLM="TRUE"
+		
+		TRANSIT_CHECK_TYPE="2"
+		TRANSIT_CHECK_PREV_ACTION_NAME1="a_jump"
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ />
+
+	
+
+</ACTION>
+
+
+	

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="PROJECTILE_parel_shot_01">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH>../Data/5_Effect/7_Projectile/ef_parel_shot_01.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_BOOMERANG</SCRIPT>
+	<PARAM SPEED="1000.0" ACCEL="0" MASS="0.5"/>
+	<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="ef_linker" RANGE="40"/>
+	</COLLISION_SPHERE>
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+	</SCRIPT_CALL_EVENT>
+</PROJECTILE>

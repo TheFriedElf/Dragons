@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>247</ID> <!--T.T.10024701 썸머 스페샬 이벤트! 즐거운 곤충 채집! -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	곤충채집 증명서 5개 수집-->
+<!--[완료NPC]	바람항구 - 가토-->
+<!--[내용]	삼복의 여름 더위를 잠재울 흥미진진 여름 이벤트가 드디어 바람항구에 등장! 드래고니카의 이벤트를 책임지고 있는 이벤트계의 거물, 아즈라엘 가토씨(327세 4개월, 이벤트업종 근무)는 최근 바람항구와 인근 마을, 필드를 망라하여 곤충채집 요원들을 전격 배치! 그 이름도 거창한 [썸머 스페샬 이벤트! 즐거운 곤충채집!] 이벤트를 개최하였다. 행사 기간 중 가토씨에게 곤충채집 증명서를 제출하는 분들에 한하여 이벤트 가챠를 대방출! 과연 어떤 아이템이 우릴 즐겁게 해줄 것인가... 기대감은 MAX치를 너머 RED-ZONE 돌파!   
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 바람항구 - 가토 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 바람항구 - 가토 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 바람항구 - 가토 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">299603110</ITEM> 
+ <!--Item_NO=299603110/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10024711"/> <!--곤충채집 증명서-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">76001280</ITEM><!--전체지급/전체/1)/76001280() 1개-이벤트 지급 가챠상자28-->
+		</SELECT1>
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10024721" FACE="gatto_normal"/> <!--이번 여름은 드래고니카 썸머 스페샬 이벤트로
+'즐거운 곤충 채집'을 열기로 하였다옹~ 쿠쿠쿠!
+참가자를 위한 선물도 물론 준비되어 있다옹~%%
+바람항구 주변에 내가 포섭해 둔 1등급 곤충채집
+요원들이 있을 것이다옹. 이들을 도와 곤충들을 
+채집하고 증명서 5장을 받아오면, 이벤트 가챠로
+교환해줄 것이다옹!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10024726" FACE="gatto_normal"/> <!--아, 곤충채집 증명서를 다섯장 모아오다니, 무척이나
+수고가 많았다냥! 노파심에 말하지만, 이건 자연을 
+파괴하는 이벤트가 아니다옹!%% 
+옛날엔 여름방학 때 곤충들을 잡아 핀으로 고정해 
+액자에 걸어두곤 했지만, 지금 곤충을 모으는 목적은
+드래고니카 세계의 자연보호를 위한 연구 때문이다옹!%%
+잡힌 곤충들은 마법으로 약간의 치료를 한 뒤, 다시
+자연으로 풀어주고 있으니 걱정할 것 없다옹! 에코!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10024723" FACE="gatto_normal"/> <!--에르실과 헤나, 레오 요원은 바람항구에서 채집중이고,
+제스 요원은 달빛해안 마을에서 채집중이고, 레일리 
+요원은 망각의 협곡에 있으니, 잘 기억해두시라옹!%%
+아, 잊을 뻔 했는데 나도 번외 행사로 반딧불을 잡고
+있는 중이니 많은 도움을 바란다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10024724" FACE="gatto_normal"/> <!--느긋하게 굴 때가 아니다옹! 이 퀘스트는 하루 한번 가능한 
+퀘스트다냥! 아까운 기회를 놓쳐도 난 책임질 수 없다옹!
+-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10024725" FACE="gatto_normal"/> <!--잘 기억해둘 것은 여러 요원 중에 다양한 벌레를 받고 있는
+레일리 요원이다옹! 찾아가는 것은 어렵지만 자투리로 모인
+여러 벌레를 증명서로 바꿀 수 있어 유리할 것이다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10024702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

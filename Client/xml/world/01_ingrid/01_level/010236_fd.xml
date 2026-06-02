@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010236_FD">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/010236_FD.gsa</GSAPATH>
+	<MINIMAP Y="125" H="165">../Data/3_World/01_Ingrid/01_Level/010236_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--// 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!--데미지 텔레포트-->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+
+
+<FOG DENSITY="0.08" FUNC="Z_LINEAR" START="443" END="1685" COLOR="0.701000,0.493991,0.699999"/>
+<WORLD_QUALITY HIGH_END="1000" MID_END="2000" LOW_END="3000" USE="1"/>
+</WORLD>

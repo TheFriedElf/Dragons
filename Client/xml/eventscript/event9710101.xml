@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 냉기던전 이벤트신 입장-->
+	<CMD TYPE="HideUI" enable="true"/><!-- 전체 UI 숨기기 /워닝도 안뜸-->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="2"/> <!-- 신 카메라를 켠다.-->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--모든 플레이어를 숨기기 -->
+
+	<CMD TYPE="MoveCamToPos" TargetPos="10152.55, 609.8367, 157.3474"  MoveTime="0" CamActorDistance="300" CamMoveUpDistance="0" HorizRotAngle="-50" VertRotAngle="30"/><!--카메라를 특정 좌표로 이동, 이동 시간,액터와의 거리, 카메라위로, 수평값, 수직값-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="1"/>
+    <CMD TYPE="waittime" time="3"/>
+
+
+	<CMD TYPE="MoveCamToPos" TargetPos="10328.37, 830.7289, 158.0083"  MoveTime="2" CamActorDistance="80" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="30"/><!--카메라를 특정 지역으로 이동시킨다. -->
+	<CMD TYPE="waittime" time="5"/>
+
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="350" CamMoveUpDistance="0" HorizRotAngle="0" VertRotAngle="20"/><!--카메라 나따라 옴 -->
+	<CMD TYPE="waittime" time="1"/>
+
+	<!--엔딩 끝나고 돌아가기-->
+
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--모든 플레이어 보이기 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/> <!-- 신 카메라를 끈다.-->
+	<CMD TYPE="HideUI" enable="false"/> <!-- 전체 UI 보여주기 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_WARNING"/>
+
+</EVENT_SCRIPT>
+

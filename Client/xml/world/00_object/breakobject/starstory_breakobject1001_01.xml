@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Starstory_breakobject1001_01" DIE_PARTICLE_ID="ef_BeachBox1001_01_die">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_atrocitysheep"/>
+		<KFMPATH SCALE="1.0">../Data/3_World/95_Dungeon/02_Modeling/00_Object/01_BreakObject/Starstory_breakobject1001_01/Starstory_breakobject1001_01.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<BOX TO="p_hit_point_01" SIZE="20.0,30.0,60.0"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Action -->
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>
+
+

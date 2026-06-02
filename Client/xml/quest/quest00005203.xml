@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5203</ID> <!--T.T.10520301 용사는 담대함이 기본이야! (3) -->
+
+
+<!-- 작성자 : jinsol7980-->
+<!--[완료조건]	메르곤, 지하묘지 좀비, 지하묘지 미이라 각각 20마리씩 처치-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	용자 담력 테스트 마지막 테스트 항목으로 지하묘지의 무시무시한 몬스터를 일정수 
+이상 처치하고 돌아오면 담대한 용자로 최종 인증해 준다고 하니 어서 가서 
+지하묘지의 무시무시한 몬스터를 처치 하자.-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">4600400</MONSTER> 
+ <!--MON_NO=4600400/메르곤,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">4600600</MONSTER> 
+ <!--MON_NO=4600600/지하묘지 좀비,-->
+		<MONSTER OBJECTNO="3" TYPE="INCPARAM100" VALUE="1">4600200</MONSTER> 
+ <!--MON_NO=4600200/지하묘지 미라,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10520311"/> <!--메르곤 20마리 처치-->
+		<OBJECT2 COUNT="20" TEXT="10520312"/> <!--지하묘지 좀비 20마리 처치-->
+		<OBJECT3 COUNT="20" TEXT="10520313"/> <!--지하묘지 미이라 20마리 처치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10520321" FACE="thomas_normal"/> <!--오오 용자다운 풍모가 느껴지는걸? 흐음 이제 진정한 용자로 인정받는거만 남은건가?%%뭐가 또 있냐는듯한 짜증 스러운 표정이로군, 이거봐 용자는 불평하지 않는거야.
+어쨓든 이제 진짜 마지막 테스트가 남았는데 어때? 해 볼텐가? %% 뭐 진정한 용자가 아니라면 하지 않아도 좋아 하지만 아닐껄?
+이제 속에서 부글부글 끓어 오르는 용자의 용기가 느껴지고 있을껄세, 
+그럼 포기하지 않게 되지.%%이번에는 더 간단한 임무일세, 
+지햐묘지로 가서 자기 속에 끓어 오르는 분노를 몬스터에게 쏟아붇고 오면 되는거지 
+어때 할텐가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10520326" FACE="thomas_smile"/> <!--아 조금 지친 기색이로군, 하지만 눈빛에 느껴지는 만족스럼움을 보니 
+이제 무덤 따위는 더 이상 자네에게 두려움의 대상이 아닌게로군 
+수고했어 자네는 진짜 용감한 용자일세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10520323" FACE="thomas_normal"/> <!--그래!! 그거야 망설임 없이 나아가는거지, 캬하하하하
+자이제 지하묘지로 가서, 메르곤, 지하묘지 좀비, 지하묘지 미이라, 를 각각 20마리씩 처치하고 오게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10520324" FACE="thomas_angly"/> <!--훗, 그럼 그렇지 역시 자네는 여기까지인게로군, 기대한 내가 바보일세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10520325" FACE="thomas_angly"/> <!--어서 마지막 테스트를 진행하지 않고 뭘 꾸물거리는건가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10520311" FACE="None_None"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10520302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

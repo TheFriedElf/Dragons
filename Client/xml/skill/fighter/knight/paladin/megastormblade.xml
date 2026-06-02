@@ -1,0 +1,13 @@
+<ACTION ID="a_mega_stormblade" NEXT="a_jump" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Skill_StormBlade_01"/>
+  <FSM SCRIPT="StormBlade"
+	FIRE_CASTER_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+    FIRE_CASTER_EFFECT_ID="eff_megaStorm_blade_char_root"
+	FIRE_CASTER_EFFECT_SCALE="1.4"
+    FIRE_SOUND_ID="megastorm_blade01"
+	
+	RISING_MOVING_DELTA="70"
+	SPIN_DEG_PER_SEC="2760"
+  />
+</ACTION>

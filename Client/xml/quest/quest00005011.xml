@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5011</ID> <!--T.T.10501101 우아한 예술 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	갑판상어 부둣가 - 갑판상어 부둣가의 몬스터로 부터 콤보 250회 달성-->
+<!--[완료NPC]	바람항구 - 챤피오-->
+<!--[내용]	챤피오는 우아한 예술의 하나로 콤보를 들었다. 하지만 요즘 들어 콤보에 집중하는 사람들이 점차 사라지고 있는 것 같다고 말한다. 아직 콤보를 즐기는 사람들이 있다는 것을 보여주자. 갑판상어 부둣가에서 콤보 250회를 달성해 보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</CLIENT> <!--시작NPC 바람항구 - 챤피오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</PAYER> <!--완료NPC 바람항구 - 챤피오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</AGENT> <!--진행NPC 11 바람항구 - 챤피오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="250/1">9010120</GROUND> 
+ <!--MAP_NO=9010120/갑판상어 부둣가,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10501111"/> <!--콤보 250회-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10501121" FACE="Campiu_normal"/> <!--이젠 멋진 예술을 보기가 너무 힘들어 졌어. 
+왜 그러냐고?%%
+우리들 무인에게 있어 가장 멋진 예술은 바로 콤보지. 
+화려한 연타로 인한 콤보는 정말 환상적이지.%% 
+하지만 이런 환상적인 예술을 실행하려는 사람들이 너무나도 적어져 버렸어. 
+어때 너도 무의 예술을 살리는 것에 동참하지 않겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10501126" FACE="Campiu_smile"/> <!--잘했어. 오랜만에 무의 예술을 바라본 것 같아서 기분이 좋군. 자 다음은 10000번에 도전하는 거야. 이봐 왜 뒷걸음질 치는 거야?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10501123" FACE="Campiu_smile"/> <!--그래 물질적인 것 이외의 기술적인 것에 관심을 가지는 것은 중요한 것이야. 
+네가 콤보를 달성해야 할 곳은 갑판상어 부둣가야.%% 
+거기서 간단하게 콤보 250회만 달성하면 되는 거지. 
+그럼 너의 멋진 예술을 기대하고 있지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10501124" FACE="Campiu_angry"/> <!--왜? 왜? 왜? 도대체 왜 거절하는 거야?
+무의 예술을 이해하는 사람은 정녕 없는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10501125" FACE="Campiu_angry"/> <!--여기서 빈둥대지 말고 어서 콤보를 달성하라고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10501102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

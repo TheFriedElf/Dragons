@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5098</ID> <!--T.T.10509801 슬픈 진실(5) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단 [카오스 모드(F2)]의 정신나간 칼리곤과 갑판상어 20마리를 처리하자-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	사건일지에 따르면 배는 칼리곤의 부하인 갑판상어들을 피하기 위해서 위험한 지역을 지나가다가 암초에 걸렸다고 한다. 구명정이 뒤집힌 이유 역시 갑판상어들이 선박을 차지한 이후에도 구명정을 쫓아와서 해류가 강한 지역을 지나다가 뒤집어 졌다는 것이다. 레오는 용자가 되기로 한 자신이 그들을 퇴치하면 그것은 정의가 아니라 복수가 된다며 정의를 실현해 줄 것을 부탁한다. 정의를 실현하기 위해서 칼리곤 선단 [카오스 모드(F2)]의 정신나간 칼리곤과 갑판상어 20마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9012159/1">3000300</MONSTER> 
+ <!--MON_NO=3000300/정신나간 칼리곤,MAP_NO=9012159/정신나간 칼리곤선장,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9012152/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012152/칼리곤 선단 카오스 2,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9012153/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012153/칼리곤 선단 카오스 3,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9012155/1">6013200</MONSTER> 
+ <!--MON_NO=6013200/갑판상어,MAP_NO=9012155/칼리곤 선단 카오스 5,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10509811"/> <!--정신나간 칼리곤-->
+		<OBJECT2 COUNT="20" TEXT="10509812"/> <!--갑판상어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10509821" FACE="Leo_normal"/> <!--배가 암초에 걸린 이유를 알았습니다. 
+사건일지에 따르면 칼리곤의 부하인 갑판상어를 피하기 위해서 위함한 지역을 지나다가 암초에 거리게 되었다고 합니다.%% 
+선장님은 끝까지 배에 남아서 구명정을 지켜봤다고 합니다.
+하지만 안타깝게 구명정은 추격하는 갑판상어를 피해서 해류가 강한 지역으로 가다가 해류에 휩쓸려 뒤집어졌다고 합니다.
+우리를 죽음으로 몰아넣은 갑판상어와 칼리곤을 용서할 수 없습니다.%%
+하지만 저는 아직 힘이 없습니다. 그리고 제가 직접 그들을 응징한다고 해도 그것은 복수에 지나지 않을 것입니다.
+%name%님이라면 그들에게 정의가 뭔지 보여 주실 수 있다고 믿습니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10509826" FACE="Leo_normal"/> <!--저도 %name%님과 같은 용자가 되기 위해 더욱더 노력하겠습니다.
+%name%님이 제게 보여 주신 정의를 잊지 않겠습니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10509823" FACE="Leo_normal"/> <!--선장님은 배에 물이 찰 때까지 남았다고 했습니다. 저희 부모님 역시 같이 있었다고 적혀 있었습니다. 
+배에 물이 찼지만 물살이 너무 강해서 도저히 육지까지 갈 수 없다고 마지막에 적혀 있었습니다.%% 
+부모님과 선장님은 아마……-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10509824" FACE="Leo_angly"/> <!--정의는 이미 죽어 있습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10509825" FACE="Leo_angly"/> <!--지금도 부모님이 당한 일을 생각하면 분노가 치밀어 오릅니다.
+하지만 이미 용자가 되겠다고 부모님과 약속했습니다.
+전 그 약속을 지켜야 합니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10509802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

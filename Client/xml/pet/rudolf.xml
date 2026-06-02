@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="p_rudolf" INIT_ACTION="a_trace_ground">
+	<TEXTURE SRC="N_Maple.dds">../Data/2_Mon/N_Maple/N_Maple.dds</TEXTURE>
+	<TEXTURE SRC="N_Maple01.dds">../Data/2_Mon/N_Maple/N_Maple01.dds</TEXTURE>
+	<TEXTURE SRC="W_Natere_XMasTree1001_01.dds">../Data/3_World/Map_Textures/W_Natere_XMasTree1001_01.dds</TEXTURE>
+	<TEXTURE SRC="W_Natere_XMasTree1002_01.dds">../Data/3_World/Map_Textures/W_Natere_XMasTree1002_01.dds</TEXTURE>
+
+	<RESERVED_ACTION OPENING="a_trace_ground"/>
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/3_PET/P05_rednose_rudolf/P05_C01.kfm</KFMPATH>
+		<!--SCRIPT SRC="Actor/pet_base.lua">
+			<ITEM NAME="Act_Pet_Follow" TYPE="COMMON"/>
+		</SCRIPT-->
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="50"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100" EFFECT_ID="ef_p05_c01_idle_02" ATTACH_NODE ="p_ef_noise" SCALE="1.0"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="10"/> 
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+			<ITEM NAME="run" ANIMATION="1000050" SPEED="2" /> 
+			<ITEM NAME="opening" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

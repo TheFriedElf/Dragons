@@ -1,0 +1,9 @@
+<ACTION ID="a_Energy Ball" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Com_SKill_Energy_01_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_SKill_Energy_01_02"/>
+  <FSM SCRIPT="Skill_InstallDefault"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_EnergyBall_01_char_root"
+       DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+       />
+</ACTION>

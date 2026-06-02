@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+<!-- 케이론 엔딩-->
+
+	<!--케이론 엔딩-->
+	<CMD TYPE="HideUI" enable="true"/>
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->	
+	
+	<CMD TYPE="WaitFade"/>
+    <CMD TYPE="waittime" time="1.5"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD TYPE="AddActorFilter" ClassNo="1029565"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--소환체를 숨기기 -->
+
+	<CMD TYPE="AddNPC" ClassNo="1029565" NameTTID="521238" SpawnPos="11032.7051, 4149.135, -149.89"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1029565" SlotName="ending_movie"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" />
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" Time="1"/>
+	<CMD TYPE="WaitTime" Time="12.0"/><!-- 오프닝 시간을 기다림-->
+	
+	<!--CMD TYPE="WaitTime" Time="6.5"/ --><!-- 오프닝 시간을 기다림-->
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1029565" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1029565"/>
+
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오세 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+
+	<CMD TYPE="setmoviescene" enable="false" Time="0"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기-->
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="HideUI" enable="false"/>
+
+	<CMD TYPE="waittime" time="1"/>
+	<CMD TYPE="CallUI" UIWndName="FRM_WARNING"/>
+</EVENT_SCRIPT>
+

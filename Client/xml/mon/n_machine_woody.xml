@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Machine_Woody">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Machine_choco"/>
+		<KFMPATH>../Data/2_Mon/N_Machine_Woody/N_Machine_Woody.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Machine_Woody/N_Machine_Woody_break.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+    	<CAPSULE TO="p_hit_point_01" SIZE="35,138"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!-- 몬스터 소환 -->
+			<ITEM NAME="btlidle_01_skill_attk_start" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01_skill_attk" ANIMATION="1000005"/>
+			<ITEM NAME="skill_attk_01" ANIMATION="1000201"/>
+			<!-- 죽기 -->
+			<ITEM NAME="dieskill_btlidle_01_start" ANIMATION="1000005"/>
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000021"/>
+      <!--기본동작-->
+			<ITEM NAME="dmg_01" ANIMATION="1000025"/>
+			<ITEM NAME="die_01" ANIMATION="1000005"/>
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,6 @@
+<ACTION ID="a_Auto Shoot System" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_01"/>
+  <FSM SCRIPT="Skill_InstallDefault"
+       BROADCAST_TARGETLIST="TRUE"/>
+</ACTION>

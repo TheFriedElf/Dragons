@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>60</ID> <!--T.T.10006001 쿠피의 마음 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	과자공장 초콜릿 보관소(F7)의 초콜릿단 보스 쿠피를 저지하자.-->
+<!--[완료NPC]	바람항구(발렌타인) - 고든-->
+<!--[내용]	고든은 초콜릿단의 배경에 보스 쿠피가 있다는 것을 알아낸다. 초콜릿 보관소(F7) 40 스테이지에서 보스 쿠피를 저지하고, 초콜릿을 훔쳐가는 이유에 대해서 알아보자. 쿠피는 과자공장 초콜릿 보관소(F7)에 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</CLIENT> <!--시작NPC 바람항구(발렌타인) - 고든 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</PAYER> <!--완료NPC 바람항구(발렌타인) - 고든 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 11 바람항구(발렌타인) - 고든 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MISSION OBJECTNO="1" TYPE="STRATEGY_DEFENCE_STAGE_CLEAR" VALUE="40">116</MISSION> 
+ <!--Mission_Key=116/[이벤트]초코장인의 집(과자공장) (F7),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10006011"/> <!--쿠피 저지-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10006021" FACE="Goden_normal"/> <!--드디어 알아냈다네.
+이런 몹쓸 짓의 주동자는 초콜릿단의 보스 쿠피라는 녀석일세.
+쿠피가 초콜릿 상자를 훔치지 못하게 막아야 하네.  -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10006026" FACE="Goden_normal"/> <!--이런, 쿠피에게 그런 사연이 있었던 겐가?
+정말 필리아도 그렇고, 쿠피도 여러 가지 사연을 가지고 있군.
+응? 이런 중요한 걸 놓치고 있었군. 나도 이제 나이를 먹은 것 같군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10006023" FACE="Goden_normal"/> <!--쿠피가 초콜릿을 훔치는 이유는 나도 아직 알지는 못하네.
+뭔가 불만이 많은 녀석이라는 소문이 돌고 있다고 들었네만…%%
+사회에 불만을 품은 사람이 어디 한둘인가?
+하지만 불만을 품었다고 범죄를 저지르는 것은 말도 안 되는 일일세.
+자네가 쿠피를 막아서 억울하게 피해를 당한 사람들을 도와주길 바라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10006024" FACE="Goden_angly"/> <!--악행을 못 본 척하는 게, 악행을 저지르는 것과 같다는 걸 모르는 겐가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10006025" FACE="Goden_normal"/> <!--도대체 그 많은 초콜릿을 다 어쩔 셈이었을까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10006002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

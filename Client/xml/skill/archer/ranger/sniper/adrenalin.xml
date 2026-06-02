@@ -1,0 +1,9 @@
+<ACTION ID="a_Adrenalin" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_02"/>
+  <FSM SCRIPT="Act_Melee_Default" FIND_TARGET_TYPE="SPHERE"
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+       HIT_TARGET_EFFECT_ID="ef_Adrenalin_01_char_root"
+       HIT_SOUND_ID="Adrenalin"
+       />
+</ACTION>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_box_long_st" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_box_long"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Box_long_ST/Box_long_ST.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="18"/>
+		</ABV>
+		<SLOT>
+			<!-- 물기 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			<!-- 연달아 물기 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000062"/>
+			<!-- 이빨 쏘기 -->
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000201" FIRE_START_NODE="p_wp_l_hand" PROJECTILE_ID="PROJECTILE_Box_shot_01_st"/>
+			<!-- 소환하기 -->
+			<ITEM NAME="attk_03_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000203"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<!--ITEM NAME="walk" ANIMATION="1000055"/-->
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<!--ITEM NAME="run" ANIMATION="1000051"/-->
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

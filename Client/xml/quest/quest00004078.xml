@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4078</ID> <!--T.T.10407801 툼레이더(2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	두두, 주먹 두두, 주술사 두두를 각각 10마리 퇴치-->
+<!--[완료NPC]	위험한 동굴 - 잭-->
+<!--[내용]	잭은 위험한 동굴에서 펑프족의 수상한 움직임을 감지했다. 그러나 무서운 두더지 두두 때문에 잠입하는 데 큰 방해를 받고 있다. 위험한 동굴에서 두두, 주먹 두두, 주술사 두두를 각각 10마리씩 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">A9F524A1-84FD-436f-8168-709A55165360</CLIENT> <!--시작NPC 위험한 동굴 - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">A9F524A1-84FD-436f-8168-709A55165360</PAYER> <!--완료NPC 위험한 동굴 - 잭 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">A9F524A1-84FD-436f-8168-709A55165360</AGENT> <!--진행NPC 11 위험한 동굴 - 잭 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6059100</MONSTER> 
+ <!--MON_NO=6059100/두두,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">6059200</MONSTER> 
+ <!--MON_NO=6059200/주먹 두두,-->
+		<MONSTER OBJECTNO="3" TYPE="INCPARAM100" VALUE="1">6059300</MONSTER> 
+ <!--MON_NO=6059300/주술사 두두,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10407811"/> <!--두두-->
+		<OBJECT2 COUNT="10" TEXT="10407812"/> <!--주먹 두두-->
+		<OBJECT3 COUNT="10" TEXT="10407813"/> <!--주술사 두두-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10407821" FACE="Jack_normal"/> <!--펑프족이 이곳의 괴물 두더지를 이용해 토굴을 파고 있다는 소식을 들었어. 
+분명히 대단한 보물을 캐내고 있을 거라고…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10407826" FACE="Jack_smile"/> <!--몹쓸 펑프 녀석들... 
+두두들을 엄청나게 모아서 땅굴을 파다가 이젠 잠잠해졌어.%%
+혹시... 보물을 벌써 캐낸 건 아니겠지?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10407823" FACE="Jack_smile"/> <!--토굴을 따라가면 무슨 보물을 파고 있는 지 알 수 있을텐데… 
+근데 이 근처의 놈들이 생각보다 무서운 놈들 같아.%%
+혹시 이곳의 두두라는 두더지들 봤어?
+그게 어떻게 두더지냔 말이야. 완전 맹수더만…%%
+도저히 잠입이 불가능하니 나를 좀 도와줬으며 해. 
+두두를 몇마리 잡아 시선을 교란해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10407824" FACE="Jack_angly"/> <!--야! 너 정말 이러기야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10407825" FACE="Jack_normal"/> <!--위험한 동굴 곳곳에 두두가 있으니 이 녀석들을 신나게 혼내주라고~-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10407802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

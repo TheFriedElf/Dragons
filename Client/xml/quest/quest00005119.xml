@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5119</ID> <!--T.T.10511901 패션은 완성 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	스카이피 신전(아케이드 모드2)- 망각의 복서 미라로부터 붉은 천 15개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 소피아-->
+<!--[내용]	소피아는 은행업무가 끝나는 저녁 시간에 옷 제작 아르바이트를 시작했다고 한다. 시작한 지 얼마 되지 않았지만, 첫 손님으로 바람의 항구 신디는 자신과 어울리는 옷을 만들어 달라고 부탁했다고 한다. 스카이피 신전에서 망각의 복서 미라를 처리하고 붉은 천 15개를 구해 신디에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 달빛해안 마을 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">e195c5f3-ec93-431b-bd0e-8fa742f238b0</PAYER> <!--완료NPC 달빛해안 마을 - 소피아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 달빛해안 마을 - 소피아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010212/10000/5000/1/1/160511900">6008200</MONSTER> 
+ <!--MON_NO=6008200/망각의 복서 미라,MAP_NO=9010212/스카이피 신전 아케이드 2,Item_NO=160511900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160511900</ITEM> 
+ <!--Item_NO=160511900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10511911"/> <!--붉은 천 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10511921" FACE="Sopia_smile"/> <!--%name%님. 안녕하세요. 좋은 날씨네요.
+요즘 좀 어떠세요? 은행에도 자주 안 들리시던데, 혹시 경제적으로 힘든 건 아니시죠?%%
+전 며칠 전부터 저녁 시간마다 부업으로 옷 제작 아르바이트를 시작했어요.
+어제는 첫 의뢰까지 받았어요. 헤헤.
+첫 임무 때문에 그런데, 혹시 시간 있으세요?
+-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10511926" FACE="Sopia_smile"/> <!--감사합니다. 오늘 은행업무를 마치면 옷을 만들어야겠어요. 
+처음 하는데 잘할 수 있겠죠?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10511923" FACE="Sopia_smile"/> <!--옷을 만드는 데 사용할 천이 좀 필요해요. 하지만 저는 은행업무 때문에 시간이 없네요. 
+혹시 스카이피 신전에 가실 일 있으시면 부탁 좀 드리고 싶어서요. %%
+대신 제가 미리 받았던 돈 조금을 용사님에게 드리도록 할게요. 
+붉은 천은 스카이피 신전에 망각의 복서 미라로부터 얻을 수 있을 거예요. 
+15개만 구해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10511924" FACE="Sopia_smile"/> <!--저 좀 도와주면 좋잖아요. 
+서로 돕고 사는 거니까요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10511925" FACE="Sopia_smile"/> <!--붉은 천을 구해주세요. 빨갛고 정열적인 옷을 만들고 싶어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10511902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

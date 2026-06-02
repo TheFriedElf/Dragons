@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>84</ID> <!--T.T.10008401 간단세공이란? -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가의 갑판상어에게서 양털 10개를 구하자-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 몬스터를 퇴치하고 얻은 물건들로 간단세공으로 훌륭한 전투 아이템을 만들 수 있다고 한다. 하지만 이런 스킬을 만드는 것은 생각보다 힘든 작업이기 때문에 자신과 같은 장인이 아니면 힘들다고 말한다. 하지만 수염고래 해안가의 갑판상어가 훔쳐간 양털 10개를  구해준다면 간단세공을 가르쳐 준다고 한다. 수염고래 해안가의 갑판상어에게서 양털 10개를 찾아오자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010100/10000/5000/1/1/20301104">6013200</MONSTER> 
+ <!--MON_NO=6013200/해당값 없거나 입력 안함!! 확인요망 ,MAP_NO=9010100/수염고래 해안가,Item_NO=20301104/양털,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">20301104</ITEM> 
+ <!--Item_NO=20301104/양털,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10008411"/> <!--양털-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">89008610</ITEM><!--전체지급/전체/1)/89008610(봉인아님) 1개-[즉석가공] 세공 배우기 -->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10008421" FACE="Darby_normal"/> <!--이런이런, 또 길 잃은 어린양이 나에게 찾아 왔군.
+그래 원하는 거라도 있어?
+응? 간단세공을 배우고 싶다고?%%
+흠, 길 잃은 양을 인도하는 것도 좋긴 하지만 내 비장의 기술을 가르쳐 주기엔…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10008426" FACE="Darby_smile"/> <!--그래 바로 이거야! 자네 덕분에 올 겨울은 따뜻하게 보낼 수 있겠군.%%
+자! 나도 이제 보답을 해야지. 간단 세공을 통해 자네 모험에 도움이 되기를 빌지.%%
+간단세공을 배우기 위해선 내가 준 간단세공 배우기를 클릭하면 된다네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10008423" FACE="Darby_normal"/> <!--간단세공은 나도 스승님에게 기나긴 세월동안 잔소리를 들으면서 배웠었지. 
+그 기술 하나 배우는데, 10년이 걸렸지.%%
+그런데 내가 자네에게 쉽게 가르쳐줄 수는 없는 노릇이지.
+그래도 나의 기술을 전수하기는 해야 하니깐.
+(다비는 잠시 골똘이 생각한다)%%
+아! 이럼 되겠군. 겨울을 준비해서 양털을 준비했는데, 수염고래 해안가의 갑판상어들이 몽땅 가지고 도망가서 말이지.%% 
+수염고래 해안가에 있는 갑판상어에게서 양털 10개만 찾아다 주지 않겠나?
+그럼 나도 간단세공을 가르쳐 주지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10008424" FACE="Darby_angly"/> <!--간단세공이 아니라 연애에 기술에 대해서 묻고 싶은 건가? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10008425" FACE="Darby_normal"/> <!--요즘은 점점 날씨가 추워지는 것 같군. 뭐 내 옷차림에 대해서 시비를 걸 생각은 말게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10008402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

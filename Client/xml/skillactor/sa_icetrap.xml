@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_IceTrap">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/5_Effect/0_Common/EF_KFM/Trap_Ice/ef_Trap_Ice.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+		<ITEM NAME="idle_01" ANIMATION="1000000" />
+		<ITEM NAME="dieskill_btlidle_02" ANIMATION="1000000" />
+		<ITEM NAME="dieskill_attk_02" ANIMATION="1000061" FIRE_EFFECT="ef_Ice_hammer_02" FIRE_EFFECT_NODE="char_root"/>
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

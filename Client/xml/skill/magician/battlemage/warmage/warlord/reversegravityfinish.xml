@@ -1,0 +1,10 @@
+<ACTION ID="a_Reverse_Gravity6" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE"  ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Spear_skill_ReverseGravity_01_06" />
+  <FSM SCRIPT="Skill_Reverse_Gravity2"
+       CHECK_CAN_PREV_ACTION_ID="a_Reverse_Gravity5"
+       END_ACTION ="TRUE"
+       QUAKE_TIME="1"
+       QUAKE_POWER="7"
+       HIT_TARGET_EFFECT_ID="ef_boom_01"
+       HIT_TARGET_EFFECT_TARGET_NODE_TO_GROUND="TRUE"/>
+</ACTION>

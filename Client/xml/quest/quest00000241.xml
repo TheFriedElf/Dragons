@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구에서 용아와 대화-->
+<!--[완료NPC]	바람항구 - 용아-->
+<!--[내용]	용아가 모든 이벤트에 참여한 유져에게 한번 더 추가적인 카즈라 코인을 지급한다고 한다. 바람항구에서 용아와 대화하자.-->
+<QUEST>
+<ID>241</ID> <!-- 넌 감동이었어! 그저 고맙다는 인사 밖에는… -->
+<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="523540">넌 감동이었어! 그저 고맙다는 인사 밖에는…</TITLE>
+	<GROUPNAME TEXT="500009">바람항구 브리즈</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="20" MAX="99"/>
+		<CLASSES>
+			<CLASS MEMO="Fighter">1</CLASS>
+			<CLASS MEMO="Magician">2</CLASS>
+			<CLASS MEMO="Archer">3</CLASS>
+			<CLASS MEMO="Thief">4</CLASS>
+			<CLASS MEMO="Knight">5</CLASS>
+			<CLASS MEMO="Warrior">6</CLASS>
+			<CLASS MEMO="Mage">7</CLASS>
+			<CLASS MEMO="Battle Bame">8</CLASS>
+			<CLASS MEMO="Hunter">9</CLASS>
+			<CLASS MEMO="Ranger">10</CLASS>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+			<CLASS MEMO="Paladin">13</CLASS>
+			<CLASS MEMO="Gladiator">14</CLASS>
+			<CLASS MEMO="Wizard">15</CLASS>
+			<CLASS MEMO="War Mage">16</CLASS>
+			<CLASS MEMO="Trapper">17</CLASS>
+			<CLASS MEMO="Sniper">18</CLASS>
+			<CLASS MEMO="Dancer">19</CLASS>
+			<CLASS MEMO="Ninja">20</CLASS>
+			<CLASS MEMO="Dragoon">21</CLASS>
+			<CLASS MEMO="Destroyer">22</CLASS>
+			<CLASS MEMO="Archmage">23</CLASS>
+			<CLASS MEMO="War Lord">24</CLASS>
+			<CLASS MEMO="Sentinel">25</CLASS>
+			<CLASS MEMO="Launcher">26</CLASS>
+			<CLASS MEMO="Free Jacker">27</CLASS>
+			<CLASS MEMO="Shadow">28</CLASS>
+			<CLASS MEMO="Duelist">29</CLASS>
+			<CLASS MEMO="Doctor">30</CLASS>
+			<CLASS MEMO="Gun Slinger">31</CLASS>
+			<CLASS MEMO="Bard">32</CLASS>
+			<CLASS MEMO="Battle Master">33</CLASS>
+			<CLASS MEMO="Anatomist">34</CLASS>
+			<CLASS MEMO="Desperado">35</CLASS>
+			<CLASS MEMO="Vocal">36</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+			<QUEST>0</QUEST>
+			<QUEST>0</QUEST>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</CLIENT> <!--시작NPC 바람항구 - 용아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</PAYER> <!--완료NPC 바람항구 - 용아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D67E3BA7-1912-4a5f-AA4F-20D1377461F2</AGENT> <!--진행NPC 11 바람항구 - 용아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ 
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="0" TEXT="523542"/> <!--용아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+	<SELECT1 COUNT="0">
+	<ITEM COUNT="5">231001090</ITEM>
+	</SELECT1>		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="523543" FACE="DragonBaby_cry"/> <!--정말 깜짝 놀라고 말았어.
+이런 근성을 가진 용사가 인간들 사이에 있었다니… -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="523547" FACE="DragonBaby_smile"/> <!--폭풍 같은 참여에 감동을 느낀 우리 New Origin 사전 이벤트의 
+진행위원회에서는 긴급회의를 소집!%%
+이벤트 코인을 한번 더 추가 지급하기로 결정해버렸어! 
+이걸로 감사의 마음을 다할 순 없겠지만 말이지.%%
+%name%...
+당신은 진정한 친구야. 진심으로 감사의 마음을 전하고 싶어.%%
+이벤트에 참여해 주셔서 진심으로 감사합니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="523544" FACE="DragonBaby_cry"/> <!--만약 말이지… 지금은 돌아가신 용의 군주님이 내 앞에 나타나서… 
+세상에서 제일 멋진 사람이 누구냐고 물어본다면…%%
+난 주저 없이 %name%이라고 말할 거야.
+이건 진심에서 우러나온 말이라고.%%
+지금까지 드라칸 관련한 모든 이벤트 퀘스트에 참여해 준 사람은
+정말 손에 꼽을 정도야. 그 중에 %name%이 들어있는 거라고!%%-->
+			<SELECT ID="601"  TEXT="500002">계속</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="523545" FACE="DragonBaby_surprise"/> <!--아.. 말리진 않겠지만.. 분명히 이건 운영자를 부를 정도로 후회할 일이지. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="523546" FACE="DragonBaby_normal"/> <!--(없음, test)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> 
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> 
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="523541" /> 
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+	</DIALOGS>
+</QUEST>

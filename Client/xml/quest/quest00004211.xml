@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4211</ID> <!--T.T.10421101 대미궁의 꼭대기 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	검은 마녀 파리스 퇴치-->
+<!--[완료NPC]	엘로라주둔지 - 콜린-->
+<!--[내용]	콜린은 대미궁 최상층으로 가는 길이 뚫렸다는 정보를 듣고는 전군에게 파리스를 처단하라는 명령을 내린다. 대미궁 최상층에서 검은 마녀 파리스를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">EB52F9B4-B69C-4ca2-BD91-5E5FD22D92EF</CLIENT> <!--시작NPC 엘로라주둔지 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">EB52F9B4-B69C-4ca2-BD91-5E5FD22D92EF</PAYER> <!--완료NPC 엘로라주둔지 - 콜린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">EB52F9B4-B69C-4ca2-BD91-5E5FD22D92EF</AGENT> <!--진행NPC 11 엘로라주둔지 - 콜린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM" VALUE="1">6126100</MONSTER> 
+ <!--MON_NO=6126100/파리스,MAP_NO=9030300/진실의 제단,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10421111"/> <!--파리스 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">50504030</ITEM><!--전체지급/전체/1)/320101090(봉인아님) 1개-국극에 달한 자 소비업적-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10421121" FACE="Colin_normal"/> <!--전사들이여! 긴시간이 흐른 후에 우리는 당도했도다!
+이제 목표가 눈 앞에 있다.%%
+저 대미궁의 꼭대기가 보이는가?
+저곳에 엘가와 엘가의 부활을 꾀하는 사악한 마녀가 있다.%%
+결국 우리는 전우들의 희생을 계단 삼아
+파리스에게 가는 길을 열게 된 것이다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10421126" FACE="Colin_smile"/> <!--이제 평화가 눈 앞에 찾아오는 듯 했으나,
+우리의 희망은 주저앉고 말았구나.
+엘가가 끝내 부활하다니…%%
+그러나 엘가가 도주한 것을 보면 분명 아직 완전한
+부활을 이룬 것은 아니란 것이겠지.%%
+마녀 파리스를 퇴치한 것만으로 커다란 수확이다.
+곧바로 도주한 엘가의 은신처를 찾아야 할 것이니
+긴장을 늦추지 말도록 하라.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10421123" FACE="Colin_normal"/> <!--이제 파리스와 엘가를 무찌른다면
+오래된 우리의 이 지루한 여정에 마침표를 찍을 것이다.%%
+전사들이여!
+파리스를 향해 칼을 들어라!
+깃발을 올리고 전군 진격하라!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10421124" FACE="Colin_angly"/> <!--이 대륙의 혼란을 끝내고 평화를 찾을 수 있는 마지막 관문이다.
+그럼에도 포기하는 것인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10421125" FACE="Colin_angly"/> <!--파리스는 대미궁 꼭대기에 있다.
+쉽지 않겠지만 너의 그 단단한 두 어깨는 이 대륙의 평화를 짊어지고 있다는 것을 명심해라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10421102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

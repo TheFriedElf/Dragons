@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_TRADE" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<ATTR X = "264" Y = "91" W = "248" H = "425" CAN_DRAG = "1" STATIC_NUM = "1"/> 
+		<SCRIPT ID = "ON_CALL"> 
+			RegistUIAction(UISelf, "CloseUI") 
+			LockPlayerInputMove(20) LockPlayerInput(20)
+			ActivateUI("Inv")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 264, 91)</SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> 
+			UnLockPlayerInputMove(20) UnLockPlayerInput(20)
+			if false==GetTradeGuid():IsNil() then
+				Net_PT_C_M_NFY_EXCHANGE_ITEM_QUIT()
+			end
+		</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE">
+			<ATTR X="1" Y="0" W="246" H="36" STATIC_NUM="4"/>
+			<STATIC_FORM ID = "SFRM_COLOR">
+				<ATTR X="7" Y="4" W="84" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<IMG ID = "IMG_TAB">
+					<ATTR X="0" Y="0" W="84" H="24" U = "2" V = "2" UV_INDEX = "3"/>
+					<ATTR IMG = "../Data/6_ui/common/cmTabB.tga" IMG_W = "168" IMG_H = "48"/>
+					<ATTR TEXT = "400700" FONT = "FTtitle_14" T_X = "35" T_Y ="5" T_OUTLINE="0" T_CENTER = "1" FONT_COLOR_HEX = "0xFF4D3413"/>
+				</IMG>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_CLOSE_BG">
+				<ATTR X="216" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				<BUTTON ID="Close">
+					<ATTR X="0" Y="0" W="24" H="24"/>
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_UP">
+						UISelf:GetParent():GetParent():CloseParent()
+						return true
+					</SCRIPT>
+					<HOTKEY ID="1">
+						UISelf:GetParent():GetParent():CloseParent()
+						return true
+					</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>	
+		</STATIC_FORM>
+
+		<STATIC_FORM ID = "SFRM_COLOR1">
+			<ATTR X="9" Y="35" W="230" H="170" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" TEXT = "" FONT_COLOR_HEX = "0xFF4D3413" T_X = "14" T_Y = "5"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+
+			<BUILD TARGET_ID="SFRM_ICON_BG" X="6" Y="27" X_COUNT = "5" Y_COUNT = "2" X_GAB = "44" Y_GAB = "44"/>
+			<STATIC_FORM ID = "SFRM_ICON_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<STATIC_FORM ID = "SFRM_CONFIRM">
+				<ATTR X="1" Y="1" Z = "2" W="228" H="168" STATIC_NUM="31" PASS_EVENT = "1" />
+				<SCRIPT ID = "ON_CALL">
+					UISelf:Visible(false)
+				</SCRIPT>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_SDW">
+				<!--SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT-->
+				<ATTR X="0" Y="0" W="230" H="170" STATIC_NUM="3"/>
+				<ATTR TEXT = "400721" T_X = "15" T_Y = "147" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<LOCAL>
+					<NAME ID="JAPAN">
+						<SCRIPT ID="ON_CALL"> UISelf:SetStaticText("{T=FTtabS/}" .. GetTextW(400721):GetStr())</SCRIPT>
+					</NAME>
+				</LOCAL>
+				<IMG ID = "IMG_ARROW">
+					<ATTR X = "7" Y = "11" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+				</IMG>
+				<IMG ID="IMG_LINE_1" X="8" Y="23" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="8" Y="25" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+					
+				<BUILD ID="BLD_EXPCARD" TARGET_ID="FRM_EXPCARD" X="7" Y="28" X_COUNT = "5" Y_COUNT = "2" X_GAB = "45" Y_GAB = "45"/>
+				<FORM ID = "FRM_EXPCARD">
+					<ATTR X="0" Y="1" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+					<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+					<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+					<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+				</FORM>
+					
+				<BUILD TARGET_ID="ICN_MY_ITEM" X="7" Y="28" X_COUNT = "5" Y_COUNT = "2" X_GAB = "45" Y_GAB = "45"/>
+				<ICON ID = "ICN_MY_ITEM">
+					<ATTR X="0" Y="0" W="40" H="40" />
+					<ATTR ICON_GRP ="108" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+					<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+					<SCRIPT ID="ON_R_BTN_UP">
+						UISelf:IconDoAction()
+						CloseToolTip()
+					</SCRIPT>
+					<SCRIPT ID="ON_CALL"> 
+						UISelf:SetIconResNo(0) 
+						UISelf:SetCustomDataAsInt(0)
+					</SCRIPT>
+				</ICON>
+				<IMG ID="IMG_LINE_3" X="8" Y="115" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_4" X="8" Y="116" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<IMG ID="IMG_LINE_5" X="8" Y="141" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_6" X="8" Y="142" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<STATIC_FORM ID = "SFRM_GOLD">
+					<ATTR X="6" Y="118" W="108" H="21"  STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3"/>
+					<EDIT ID = "EDT_COIN">
+						<ATTR EDIT_FONT="Font_Text"/>
+						<ATTR X = "2" Y = "0" W = "98" H= "21" T_X = "5" T_Y = "8" FONT_COLOR_HEX = "0xFF4D3413"/>
+						<ATTR EDIT_T_X="4" EDIT_T_Y="2" EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "12"  EDIT_ONLY_NUM = "1"/>
+						<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+					</EDIT>
+				</STATIC_FORM>
+				<IMG ID = "IMG_GOLD" X = "109" Y = "120" W = "20" H = "16" IMG = "../Data/6_ui/Common/cmCoin01.tga" IMG_W="20" IMG_H="16" />
+				<STATIC_FORM ID = "SFRM_SILVER">
+					<ATTR X="132" Y="118" W="30" H="21"  STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3"/>
+					<EDIT ID = "EDT_COIN">
+						<ATTR EDIT_FONT="Font_Text"/>
+						<ATTR X = "2" Y = "0" W = "22" H= "21" T_X = "5" T_Y = "8" FONT_COLOR_HEX = "0xFF4D3413"/>
+						<ATTR EDIT_T_X="4" EDIT_T_Y="2" EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "2" EDIT_ONLY_NUM = "1"/>
+						<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+					</EDIT>
+				</STATIC_FORM>
+				<IMG ID = "IMG_SILVER" X = "157" Y = "120" W = "20" H = "16" IMG = "../Data/6_ui/Common/cmCoin02.tga" IMG_W="20" IMG_H="16" />
+				<STATIC_FORM ID = "SFRM_COPER">
+					<ATTR X="179" Y="118" W="30" H="21"  STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3"/>
+					<EDIT ID = "EDT_COIN">
+						<ATTR EDIT_FONT="Font_Text"/>
+						<ATTR X = "2" Y = "0" W = "22" H= "21" T_X = "5" T_Y = "8" FONT_COLOR_HEX = "0xFF4D3413"/>
+						<ATTR EDIT_T_X="4" EDIT_T_Y="2" EDIT_PREVIEW="" EDIT_LIMIT_LENGTH = "2"  EDIT_ONLY_NUM = "1"/>
+						<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+					</EDIT>
+				</STATIC_FORM>
+				<IMG ID = "IMG_COPER" X = "204" Y = "120" W = "20" H = "16" IMG = "../Data/6_ui/Common/cmCoin03.tga" IMG_W="20" IMG_H="16" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<CHECK_BUTTON ID = "CBTN_READY">
+			<ATTR X = "39" Y = "207" W = "84" H = "26" TEXT = "400701" FONT = "FTbt_12" T_CENTER = "1" T_X = "50" T_Y = "4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBgCk.tga" BTN_IMG_W="168" BTN_IMG_H="52" USE_INPUTTIME_CHECK="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				if false == UISelf:GetCheckState() then
+					OnTradeConfirmButton(true)
+				else
+					OnTradeConfirmButton(false)
+				end
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				UISelf:CheckState(false)
+				UISelf:LockClick(false)
+				UISelf:SetClose(false)
+				UISelf:SetStaticText(GetTextW(400701):GetStr())
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_OK">
+			<ATTR X = "125" Y = "207" W = "84" H = "26" TEXT = "400534" FONT = "FTbt_12" T_CENTER = "1" T_X = "50" T_Y = "4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBgCK.tga" BTN_IMG_W="168" BTN_IMG_H="52" USE_INPUTTIME_CHECK="1"/>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				Net_PT_C_M_NFY_EXCHANGE_ITEM_READY(UISelf)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				UISelf:CheckState(false)
+				UISelf:LockClick(false)
+				UISelf:SetClose(false)
+				UISelf:SetStaticText(GetTextW(400534):GetStr())
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER">CallToolTipText(0, GetTextW(400731), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</CHECK_BUTTON>
+		<IMG ID="IMG_LINE_1">
+			<ATTR X="11" Y="235" W="226" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="226" IMG_H="1" CAN_COLOR_CHANGE="1"/>
+			<SCRIPT ID = "ON_CALL">	UISelf:SetColor(1052684) </SCRIPT>
+		</IMG>
+		<IMG ID="IMG_LINE_2">
+			<ATTR X="11" Y="236" W="226" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="226" IMG_H="1" CAN_COLOR_CHANGE="1"/>
+			<SCRIPT ID = "ON_CALL">	UISelf:SetColor(6315866) </SCRIPT>
+		</IMG>
+
+		<STATIC_FORM ID = "SFRM_COLOR2">
+			<ATTR X="9" Y="239" W="230" H="145" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" TEXT = "" FONT_COLOR_HEX = "0xFF4D3413" T_X = "14" T_Y = "5"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+			<BUILD TARGET_ID="SFRM_ICON_BG" X="6" Y="27" X_COUNT = "5" Y_COUNT = "2" X_GAB = "44" Y_GAB = "44"/>
+			<STATIC_FORM ID = "SFRM_ICON_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+
+			<STATIC_FORM ID = "SFRM_CONFIRM">
+				<ATTR X="1" Y="1" Z = "2" W="228" H="143" STATIC_NUM="31" PASS_EVENT = "1" />
+				<SCRIPT ID = "ON_CALL">
+					UISelf:Visible(false)
+				</SCRIPT>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_SDW">
+				<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+				<ATTR X="0" Y="0" W="230" H="145" STATIC_NUM="3"/>
+				<ATTR TEXT = "" T_X = "15" T_Y = "7" FONT_COLOR_HEX = "0xFF4D3413"/>
+				<IMG ID = "IMG_ARROW">
+					<ATTR X = "7" Y = "11" W="6" H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+				</IMG>
+				<IMG ID="IMG_LINE_1" X="8" Y="23" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="8" Y="25" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+					
+				<BUILD ID="BLD_EXPCARD" TARGET_ID="FRM_EXPCARD" X="7" Y="28" X_COUNT = "5" Y_COUNT = "2" X_GAB = "45" Y_GAB = "45"/>
+				<FORM ID = "FRM_EXPCARD">
+					<ATTR X="0" Y="1" W="40" H="40" Z="1" IS_VISIBLE = "0" IGNORE_PARENT_RECT="0" PASS_EVENT="1" NO_FOCUS="1"/>
+					<ATTR TEXT="" T_X="25" T_Y="27" FONT="Font_Chat" T_BOLD="1" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFF00"/>
+					<ATTR IMG="../Data/6_ui/etc/etcIconTxt.tga" IMG_W="40" IMG_H="40"/>
+					<SCRIPT ID="ON_AFTER_DISPLAY">CheckExpCardPercentText(UISelf)</SCRIPT>
+				</FORM>
+					
+				<BUILD TARGET_ID="ICN_MY_ITEM" X="7" Y="28" X_COUNT = "5" Y_COUNT = "2" X_GAB = "45" Y_GAB = "45"/>
+				<ICON ID = "ICN_MY_ITEM">
+					<ATTR X="0" Y="0" W="40" H="40" />
+					<ATTR ICON_GRP ="109" ICON_KEY="0"/>
+					<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+					<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+					<SCRIPT ID="ON_CALL"> 
+						UISelf:SetIconResNo(0) 
+						UISelf:SetCustomDataAsInt(0)
+					</SCRIPT>
+				</ICON>
+				<IMG ID="IMG_LINE_3" X="8" Y="115" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_4" X="8" Y="116" W="214" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="214" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+
+				<STATIC_FORM ID = "SFRM_GOLD">
+					<ATTR X="6" Y="118" W="108" H="21" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" T_X = "5" T_Y = "2" FONT_COLOR_HEX = "0xFF4D3413"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+				</STATIC_FORM>
+				<IMG ID = "IMG_GOLD" X = "109" Y = "120" W = "20" H = "16" IMG = "../Data/6_ui/Common/cmCoin01.tga" IMG_W="20" IMG_H="16" />
+				<STATIC_FORM ID = "SFRM_SILVER">
+					<ATTR X="132" Y="118" W="30" H="21"  STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" T_X = "5" T_Y = "2" FONT_COLOR_HEX = "0xFF4D3413"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+				</STATIC_FORM>
+				<IMG ID = "IMG_SILVER" X = "157" Y = "120" W = "20" H = "16" IMG = "../Data/6_ui/Common/cmCoin02.tga" IMG_W="20" IMG_H="16" />
+				<STATIC_FORM ID = "SFRM_COPER">
+					<ATTR X="179" Y="118" W="30" H="21"  STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3" T_X = "5" T_Y = "2" FONT_COLOR_HEX = "0xFF4D3413"/>
+					<SCRIPT ID = "ON_CALL"> UISelf:SetStaticText("") </SCRIPT>
+				</STATIC_FORM>
+				<IMG ID = "IMG_COPER" X = "204" Y = "120" W = "20" H = "16" IMG = "../Data/6_ui/Common/cmCoin03.tga" IMG_W="20" IMG_H="16" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<CHECK_BUTTON ID = "CBTN_OTHER_READY">
+			<ATTR X = "39" Y = "387" W = "84" H = "26" TEXT = "400701" FONT = "FTbt_12" T_CENTER = "1" T_X = "50" T_Y = "4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBgCk.tga" BTN_IMG_W="168" BTN_IMG_H="52" IS_CLOSED = "1" IS_ENABLE="0"/>
+			<SCRIPT ID = "ON_CALL"> 
+				UISelf:SetClose(true) 
+				UISelf:CheckState(false)
+				UISelf:LockClick(false)
+				UISelf:SetStaticText(GetTextW(400701):GetStr())
+			</SCRIPT>
+		</CHECK_BUTTON>
+		<CHECK_BUTTON ID = "CBTN_OTHER_OK">
+			<ATTR X = "125" Y = "387" W = "84" H = "26" TEXT = "400534" FONT = "FTbt_12" T_CENTER = "1" T_X = "50" T_Y = "4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" IS_ENABLE=" 01"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBgCk.tga" BTN_IMG_W="168" BTN_IMG_H="52" IS_CLOSED = "1"/>
+			<SCRIPT ID = "ON_CALL"> 
+				UISelf:SetClose(true) 
+				UISelf:CheckState(false)
+				UISelf:LockClick(false)
+				UISelf:SetStaticText(GetTextW(400534):GetStr()) 
+			</SCRIPT>
+		</CHECK_BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_TRADE">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="177" CAN_DRAG="1" STATIC_NUM="1"/>
+		<SCRIPT ID = "ON_CALL"> RegistUIAction(UISelf, "Close_SFRM_MSG_TRADE") </SCRIPT>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="125" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="125" STATIC_NUM="3" />
+				<ATTR TEXT="400707" FONT="Font_Text" T_X="95" T_Y="13" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID = "ON_DISPLAY">
+					local t = UISelf:GetStaticText()
+					local ts = t:Length()
+					local t_y = 55-ts*0.5
+					UISelf:SetTextPos(Point2(95,t_y))
+				</SCRIPT>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<BUTTON ID = "BTN_OK">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR X="18" Y="138" W="84" H="26" USE_INPUTTIME_CHECK="1"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_UP">
+				local UIParent = UISelf:GetParent()
+				UIParent:SetCustomDataAsShort(1)
+				UIParent:Close()
+				return true
+				--Net_PT_C_M_NFY_EXCHANGE_ITEM_ANS(true)
+			</SCRIPT>
+			<HOTKEY ID="59">
+				local UIParent = UISelf:GetParent()
+				UIParent:SetCustomDataAsShort(1)
+				UIParent:Close()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<ATTR X="104" Y="138" W="84" H="26" USE_INPUTTIME_CHECK="1"/>
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR FONT = "FTtitle_14" T_X = "42" T_Y ="5" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_UP">
+				local UIParent = UISelf:GetParent()
+				UIParent:SetCustomDataAsShort(0)
+				UIParent:Close()
+				return true
+				--Net_PT_C_M_NFY_EXCHANGE_ITEM_ANS(false)
+			</SCRIPT>
+			<HOTKEY ID="60">
+				local UIParent = UISelf:GetParent()
+				UIParent:SetCustomDataAsShort(0)
+				UIParent:Close()
+				return true
+			</HOTKEY>
+			<HOTKEY ID="1">
+				local UIParent = UISelf:GetParent()
+				UIParent:SetCustomDataAsShort(0)
+				UIParent:Close()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CLOSE">
+			local Result = UISelf:GetCustomDataAsShort()
+			if 1 == Result then
+				Net_PT_C_M_NFY_EXCHANGE_ITEM_ANS(true)
+			else
+				Net_PT_C_M_NFY_EXCHANGE_ITEM_ANS(false)
+			end
+		</SCRIPT>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_MSG_TRADE_REQUEST">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<SCRIPT ID = "ON_CALL"> RegistUIAction(UISelf, "Close_SFRM_MSG_TRADE") </SCRIPT>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFRM_SDW">
+				<ATTR X="0" Y="0" W="190" H="75" STATIC_NUM="3" />
+				<ATTR TEXT="" FONT="Font_Text" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_CANCLE">
+			<ATTR X="63" Y="88" W="79" H="28" USE_INPUTTIME_CHECK="1"/>
+			<ATTR TEXT="400003" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+				Net_PT_C_M_NFY_EXCHANGE_ITEM_ANS(false)
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				Net_PT_C_M_NFY_EXCHANGE_ITEM_ANS(false)
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+
+
+	<FORM ID = "FRM_TAKE_COUPON">
+		<ATTR ALIGN_X = "50" Y = "100" W = "270" H = "160" IMG="../Data/6_ui/mission/msRkWriteBg.tga" IMG_W = "245" IMG_H = "141"/>
+		<ATTR TEXT = "400197" T_CENTER = "1" T_X = "125" T_Y = "42" FONT = "QTtext_Title" T_OUTLINE="1" FONT_COLOR_HEX = "0xFFfcf2b2"/>
+		<FORM ID = "FRM_RANK1">
+			<ATTR X = "140" Y = "13" TEXT = "401101" W = "20" H = "20" FONT = "QTtext_25" FONT_COLOR_HEX = "0xFFFFDD00" T_OUTLINE="1"/>
+		</FORM>
+		<EDIT ID = "EDT_MEMO">
+			<ATTR EDIT_FONT="Font_Text"/>
+			<ATTR X = "15" Y = "78" W = "216" H = "22" EDIT_LIMIT_LENGTH = "15" EDIT_PREVIEW="400196" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetEditText("") </SCRIPT>
+		</EDIT>
+		<IMG ID = "IMG_RANK_10">
+			<ATTR X = "70" Y = "0" W = "50" H = "50" IMG = "../Data/6_ui/pvp/pvNumSmall.tga" U = "5" V = "2" UV_INDEX = "2" IMG_W = "250" IMG_H = "100"/>
+		</IMG>
+		<IMG ID = "IMG_RANK_1">
+			<ATTR X = "97" Y = "0" W = "50" H = "50" IMG = "../Data/6_ui/pvp/pvNumSmall.tga" U = "5" V = "2" UV_INDEX = "1" IMG_W = "250" IMG_H = "100"/>
+		</IMG>
+		<BUTTON ID = "BTN_OK">
+			<ATTR X = "80" Y = "125" W = "84" H = "26" TEXT = "400002" FONT = "FTbt_12" T_X="42" T_Y ="6" T_CENTER = "1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52" USE_INPUTTIME_CHECK="1"/>
+			<SCRIPT ID = "ON_L_BTN_UP">
+				UISelf:CloseParent()
+			</SCRIPT>
+		</BUTTON>
+		<FORM ID = "FRM_CHAR_COUNT">
+			<ATTR X = "192" Y = "56" W = "47" H = "20" FONT="Font_Text" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID = "ON_TICK">
+				local wndMemo = UISelf:GetParent():GetControl("EDT_MEMO")
+				if wndMemo:IsNil() == false then
+					local eText = wndMemo:GetEditText()
+					UISelf:SetStaticText("(" .. eText:Length() .. "/15)")
+				end
+			</SCRIPT>
+		</FORM>
+		<ANI_BAR ID = "BAR_TIME_LIMIT">
+			<ATTR X= "14" Y = "104" W ="217" H ="11" />				
+			<ATTR BAR_COUNT = "1"/>
+			<ATTR BAR_IMG = "../Data/6_ui/mission/msRkTime.tga" BAR_IMG_W = "217" BAR_IMG_H = "11"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X = "107" T_Y ="1" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID = "ON_DISPLAY">
+				UISelf:DisplayTimeBar(false)
+			</SCRIPT>
+			<SCRIPT ID = "ON_CALL">
+				UISelf:SetStartTime(30000)
+			</SCRIPT>
+		</ANI_BAR>
+		<SCRIPT ID = "ON_CLOSE">
+			local strMemo = UISelf:GetControl("EDT_MEMO"):GetEditText()
+			SendTakeCoupon(strMemo:GetStr())
+		</SCRIPT>
+		<HOTKEY ID = "28"> UISelf:Close() </HOTKEY>
+	</FORM>
+</XUI>

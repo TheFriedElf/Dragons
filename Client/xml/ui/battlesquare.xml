@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<!--          CallUI("FRM_BATTLE_SQUARE_JOIN")                  -->
+	<STATIC_FORM ID="FRM_BATTLE_SQUARE_JOIN" ALIGN_X="50" ALIGN_Y="50" W="615" H="352" STATIC_NUM="1">
+		<SCRIPT ID="ON_CLOSE">
+			CloseUI("FRM_TOWN_NUMBER_SELECT") 
+			CloseUI("FRM_TOWN_HOME_STATE_SELECT")
+			local kPacket = NewPacket(30752)
+			Net_Send(kPacket)
+			DeletePacket(kPacket)
+		</SCRIPT>
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="613" H="36" Z="-2" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="583" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():GetParent():Close() return true</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():GetParent():Close() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_TAB_BG" X="7" Y="4" W="144" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<CHECK_BUTTON ID="CBTN_TITLE" X="0" Y="0" W="144" H="24" BTN_IMG="../Data/6_ui/common/cmTabLong2.tga" BTN_IMG_W="144" BTN_IMG_H="96" BTN_VERTICAL_IMG="1" BTN_CLICK_LOCK="1">
+					<ATTR TEXT="460013" FONT="FTtitle_14" T_X="13" T_Y="4" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11"/>
+					<SCRIPT ID="ON_CALL"> UISelf:CheckState(true) </SCRIPT>
+				</CHECK_BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<!--BUILD ID="BLD_BS_TYPE" X="15" Y="135" TARGET_ID="BTN_BS_TYPE" X_COUNT="1" Y_COUNT="4" Y_GAB="25"/-->
+		<BUTTON ID="BTN_BS_TYPE" X="15" Y="135" W="89" H="22" BTN_IMG="../Data/6_ui/main/mnEmtcBt01.tga" BTN_IMG_W="89" BTN_IMG_H="88" BTN_VERTICAL_IMG="1">
+			<ATTR TEXT="460014" T_X="44" T_Y="3" FONT="Font_Text" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="3" T_OUTLINE="1" T_CENTER="1" BTN_T_INVERTBOLD="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"></SCRIPT>
+		</BUTTON>
+		<LIST ID="LST_CHANNEL" X="120" Y="168" W="485" H="165"  ELEMENT_ID="FRM_BATTLE_SQUARE_JOIN_ITEM" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="IMG_SCR_BG">
+			<IMG ID="IMG_SCR_BG" X="467" Y="20" Z="-1" W="13" H="165" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="165"/>
+			<BUTTON ID="BTN_SCR_UP" X="463" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="463" Y="150" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="465" Y="15" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+			<!--SCRIPT ID="ON_CALL">
+				UISelf:ClearAllListItem()
+				UISelf:AddNewListItemChar("")
+			</SCRIPT-->
+		</LIST>
+		<FORM ID="FRM_BG" X="5" Y="32" W="613" H="544" Z="-1">
+			<FORM ID="FRM_UNDER_TITLE" X="0" Y="0" W="605" H="33" Z="-1" IMG="../Data/6_ui/auction/auSchBg.tga" IMG_W="605" IMG_H="33"/>
+			<FORM ID="FRM_UNDER_TITLE_TEXT" X="6" Y="6" W="599" H="18" IMG="../Data/6_ui/battle/bsMark.tga" IMG_W="18" IMG_H="18" NO_FOCUS="1" PASS_EVENT="1">
+				<ATTR TEXT="460029" T_X="22" T_Y="0" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/>
+			</FORM>
+			<FORM ID="FRM_CONTENTS" X="6" Y="39" W="599" H="55" TEXT="460021" T_X="6" T_Y="0" FONT="Font_Text" T_OUTLINE="1">
+				<ATTR FONT_COLOR_HEX="0xFFFFFFFF"/>
+				<!--ATTR FONT_COLOR_HEX="0xFFFFF799"/-->
+			</FORM>
+			<FORM ID="FRM_NPC_FACE" X="383" Y="-90" W="219" H="187" IMG="../Data/6_ui/battle/bsImg.tga" IMG_W="219" IMG_H="187" NO_FOCUS="1" PASS_EVENT="1"/>
+			<STATIC_FORM ID="SFRM_BTN_BG" X="6" Y="98" W="99" H="209" Z="1" STATIC_NUM="34"/>
+			<STATIC_FORM ID="SFRM_MAIN_BG" X="109" Y="98" W="491" H="208" Z="1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID="SFRM_MAIN_BG_SD" X="0" Y="0" W="491" H="208" STATIC_NUM="3"/>
+				<STATIC_FORM ID="SFRM_TITLE_BG" X="6" Y="6" W="460" H="29" Z="-1" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<FORM ID="SFRM_CHANNEL_BG" X="6" Y="6" W="217" H="29" TEXT="460025" T_X="108" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<FORM ID="SFRM_JOINLV_BG" X="223" Y="6" W="77" H="29" TEXT="460026" T_X="38" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<FORM ID="SFRM_MEMBER_BG" X="300" Y="6" W="69" H="29" TEXT="460027" T_X="34" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<FORM ID="SFRM_JOIN_BG" X="370" Y="6" W="90" H="29" TEXT="460028" T_X="45" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+				<FORM ID="IMG_LINE11" X="223" Y="12" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<FORM ID="IMG_LINE12" X="224" Y="12" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID="IMG_LINE21" X="300" Y="12" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<FORM ID="IMG_LINE22" X="301" Y="12" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<FORM ID="IMG_LINE31" X="369" Y="12" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<FORM ID="IMG_LINE32" X="370" Y="12" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			</STATIC_FORM>
+		</FORM>
+		<HOTKEY ID="57">return true</HOTKEY>
+	</STATIC_FORM>
+	
+	<FORM ID="FRM_BATTLE_SQUARE_JOIN_ITEM" X="0" Y="0" W="460" H="28">
+		<STATIC_FORM ID="FRM_BATTLE_SQUARE_JOIN_ITEM_BG" X="0" Y="0" W="460" H="25" Z="-1" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<FORM ID="SFRM_CHANNEL_BG" X="0" Y="0" W="217" H="29" TEXT="460025" T_X="108" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+		<FORM ID="SFRM_JOINLV_BG" X="217" Y="0" W="77" H="29" TEXT="460026" T_X="38" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+		<FORM ID="SFRM_MEMBER_BG" X="294" Y="0" W="69" H="29" TEXT="460027" T_X="34" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" T_CENTER="1"/>
+		<FORM ID="IMG_LINE11" X="217" Y="6" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+		<FORM ID="IMG_LINE12" X="218" Y="6" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+		<FORM ID="IMG_LINE21" X="294" Y="6" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+		<FORM ID="IMG_LINE22" X="295" Y="6" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+		<FORM ID="IMG_LINE31" X="363" Y="6" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+		<FORM ID="IMG_LINE32" X="364" Y="6" W="1" H="16" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="1" IMG_H="16" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+		<BUTTON ID="BTN_JOIN" X="366" Y="1" W="93" H="23" Z="1" BTN_IMG="../Data/6_ui/myhome/mhBt.tga" BTN_IMG_W="93" BTN_IMG_H="92" BTN_VERTICAL_IMG="1">
+			<ATTR TEXT="460015" T_X="46" T_Y="3" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF568" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">JoinBattleSquareChannel(UISelf:GetCustomDataAsInt())</SCRIPT>
+			<!--SCRIPT ID="ON_MOUSE_OVER">CallBattleSquareGameTooltip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT-->
+		</BUTTON>
+	</FORM>
+	
+	<FORM ID="FRM_BS_PLAYER_LIST" ALIGN_X="50" ALIGN_Y="50" W="630" H="583" IS_ABSOLUTE_Y="1" PRIORITY="10">
+		<IMG ID="IMG_T_BG1" X="0" Y="0" Z="-2" W="512" H="46">
+			<ATTR IMG="../Data/6_ui/battle/bsEtBxT01.tga" IMG_W="512" IMG_H="46"/>
+		</IMG>
+		<IMG ID="IMG_T_BG2" X="512" Y="0" Z="-2" W="118" H="46">
+			<ATTR IMG="../Data/6_ui/battle/bsEtBxT02.tga" IMG_W="118" IMG_H="46"/>
+		</IMG>
+		<STATIC_FORM ID="SFRM_BG_1" X="0" Y="46" Z="-2" W="630" H="537" STATIC_NUM="29">
+			<STATIC_FORM ID="SFRM_BG_01" X="13" Y="1" Z="-1" W="607" H="34" STATIC_NUM="34">
+				<IMG ID="IMG_MARK" X="8" Y="7" W="18" H="18">
+					<ATTR IMG="../Data/6_ui/battle/bsMark.tga" IMG_W="18" IMG_H="18"/>
+				</IMG>
+			</STATIC_FORM>
+			<IMG ID="IMG_FACE" X="387" Y="-49" W="219" H="187" CAN_CLIP="0">
+				<ATTR IMG="../Data/6_ui/battle/bsImg.tga" IMG_W="219" IMG_H="187"/>
+			</IMG>
+		</STATIC_FORM>
+		<FORM ID="SFRM_BG_2" X="0" Y="46" Z="-1" W="630" H="537">
+			<STATIC_FORM ID="SFRM_BG_L" X="9" Y="136" W="308" H="368" STATIC_NUM="1">
+				<STATIC_FORM ID="SFRM_BG_C" X="8" Y="6" W="292" H="352" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_BG_S" X="0" Y="0" W="292" H="352" STATIC_NUM="3"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_BG_R" X="313" Y="136" W="308" H="368" STATIC_NUM="1">
+				<STATIC_FORM ID="SFRM_BG_C" X="8" Y="6" W="292" H="352" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_BG_S" X="0" Y="0" W="292" H="352" STATIC_NUM="3"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</FORM>
+		
+		<FORM ID="FRM_TITLE" X="0" Y="0" W="630" H="40">
+			<ATTR TEXT="460069" FONT="QTtext_Title" T_X="13" T_Y="12" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_TITLE_DESC" X="13" Y="47" W="607" H="34">
+			<ATTR TEXT="460070" FONT="FTctsBig_14" T_X="30" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFBC7" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		<FORM ID="FRM_CONTENTS_DESC" X="13" Y="85" W="607" H="70">
+			<ATTR TEXT="460071" FONT="FTcts_13" T_X="0" T_Y="0" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</FORM>
+		
+		<IMG ID="IMG_RED_SELECTED" X="7" Y="144" Z="2" W="314" H="406">
+			<ATTR IMG="../Data/6_ui/battle/bsYLine01.tga" IMG_W="314" IMG_H="406"/>
+		</IMG>
+		<IMG ID="IMG_BLUE_SELECTED" X="311" Y="144" Z="2" W="314" H="406">
+			<ATTR IMG="../Data/6_ui/battle/bsYLine02.tga" IMG_W="314" IMG_H="406"/>
+		</IMG>
+		
+		<LIST ID="LST_RED" X="24" Y="194" W="281" H="340">
+			<ATTR ELEMENT_ID="FRM_BS_LIST_ITEM" ITEM_X="0" ITEM_Y="0"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="285" Y="-22" Z="-1" W="13" H="352">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="352"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="262" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>			
+			<BUTTON ID="ScrDown" X="262" Y="325" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="264" Y="20" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP="ScrUp" />
+			<ATTR BTN_DOWN="ScrDown" />
+			<ATTR BTN_MIDDLE="ScrMiddle" />
+			<ATTR WND_BAR="IMG_LIST_SCROLL_BG"/>
+			<!--SCRIPT ID="ON_CALL">
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+			</SCRIPT-->
+		</LIST>
+		
+		<LIST ID="LST_BLUE" X="328" Y="194" W="281" H="340">
+			<ATTR ELEMENT_ID="FRM_BS_LIST_ITEM" ITEM_X="0" ITEM_Y="0"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="285" Y="-22" Z="-1" W="13" H="352">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="352"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="262" Y="0" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>			
+			<BUTTON ID="ScrDown" X="262" Y="325" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="264" Y="20" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP="ScrUp" />
+			<ATTR BTN_DOWN="ScrDown" />
+			<ATTR BTN_MIDDLE="ScrMiddle" />
+			<ATTR WND_BAR="IMG_LIST_SCROLL_BG"/>
+			<!--SCRIPT ID="ON_CALL">
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+			</SCRIPT-->
+		</LIST>
+		
+		<IMG ID="BTN_RED_JOIN_1" X="20" Y="150" W="152" H="36">
+			<ATTR IMG="../Data/6_ui/battle/bsRedBt01.tga" IMG_W="152" IMG_H="156" U="1" V="4" UV_INDEX="1" OUTLINE_COLOR_HEX="0xFFB8020B"/>
+			<ATTR TEXT="460073" FONT="FTctsBig_14" T_X="56" T_Y="10" T_OUTLINE="1" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</IMG>
+		<IMG ID="BTN_BLUE_JOIN_1" X="459" Y="150" W="152" H="36">
+			<ATTR IMG="../Data/6_ui/battle/bsBlueBt01.tga" IMG_W="152" IMG_H="156" U="1" V="4" UV_INDEX="1" OUTLINE_COLOR_HEX="0xFFB8020B"/>
+			<ATTR TEXT="460074" FONT="FTctsBig_14" T_X="96" T_Y="10" T_OUTLINE="1" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</IMG>
+		
+		<BUTTON ID="BTN_RED_JOIN_2" X="72" Y="549" Z="1" W="182" H="25">
+			<ATTR BTN_IMG="../Data/6_ui/battle/bsRedBt02.tga" BTN_IMG_W="182" BTN_IMG_H="100" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFFB8020B" BTN_VERTICAL_IMG="1"/>
+			<ATTR TEXT="460075" FONT="FTctsBig_14" T_X="91" T_Y="2" T_OUTLINE="1" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(460075, 2200) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendJoinBSTeam(1) </SCRIPT>
+			<HOTKEY ID="59"> SendJoinBSTeam(1) return true </HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_BLUE_JOIN_2" X="376" Y="549" Z="1" W="182" H="25">
+			<ATTR BTN_IMG="../Data/6_ui/battle/bsBlueBt02.tga" BTN_IMG_W="182" BTN_IMG_H="100" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFFB8020B" BTN_VERTICAL_IMG="1"/>
+			<ATTR TEXT="460076" FONT="FTctsBig_14" T_X="91" T_Y="2" T_OUTLINE="1" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID="ON_CREATE">	SetTextOnThisUI(460076, 2201) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SendJoinBSTeam(2) </SCRIPT>
+			<HOTKEY ID="60"> SendJoinBSTeam(2) return true </HOTKEY>
+		</BUTTON>
+	</FORM>
+	<FORM ID="FRM_BS_LIST_ITEM" X="0" Y="0" W="260" H="34">
+		<STATIC_FORM ID="SFRM_RANK" X="0" Y="0" Z="-1" W="260" H="34" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+			<ATTR TEXT="401062" FONT="Font_Text" T_X="25" T_Y="9" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<!--STATIC_FORM ID="SFRM_LV" X="46" Y="4" W="50" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="401056" FONT="Font_Text" T_X="25" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM-->
+		<!--IMG ID="IMG_CLASS" X="46" Y="4" W="26" H="26" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1"/-->
+		<STATIC_FORM ID="SFRM_NAME" X="46" Y="4" W="214" H="26" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT="401212" FONT="Font_Text" T_X="107" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0xFF4D3413"/>
+		</STATIC_FORM>
+		<IMG ID="IMG_MY_ITEM" X="-1" Y="-1" W="260" H="34" IGNORE_PARENT_RECT="1" CAN_CLIP="0">
+			<ATTR IMG="../Data/6_ui/battle/bsMyListOv.tga" IMG_W="262" IMG_H="36"/>
+		</IMG>
+	</FORM>
+	
+	<FORM ID="FRM_BS_PRESENT_LIST" ALIGN_X="50" ALIGN_Y="55" W="759" H="394" PRIORITY="10">
+		<STATIC_FORM ID="FRM_IMG1" X="0" Y="0" Z="-1">
+			<ATTR IMG="../Data/6_ui/battle/bsNowBg01.tga" X="0" Y="0" IMG_W="512" IMG_H="394"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_IMG2" X="0" Y="0" Z="-1">
+			<ATTR IMG="../Data/6_ui/battle/bsNowBg02.tga" X="512" Y="0" IMG_W="247" IMG_H="394"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="FRM_TEAM_RED_TITLE" X="170" Y="14" Z="1" W="200" H="20">
+			<ATTR TEXT="799235" FONT="Font_Warn" T_X="30" T_Y="0" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0XFFFF5B5B" OUTLINE_COLOR_HEX="0xFF000000" />
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_TEAM_BLUE_TITLE" X="529" Y="14" Z="1" W="200" H="20">
+			<ATTR TEXT="799236" FONT="Font_Warn" T_X="30" T_Y="0" T_CENTER="1" T_OUTLINE="1" FONT_COLOR_HEX="0XFF00AEEF" OUTLINE_COLOR_HEX="0xFF000000" />
+		</STATIC_FORM>
+				
+		<STATIC_FORM ID="FRM_TEAM_RED_RANK" X="27" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799237" T_X="30" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_TEAM_BLUE_RANK" X="393" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799237" T_X="30" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="FRM_TEAM_RED_CLASS" X="60" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799238"T_X="30" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_TEAM_BLUE_CLASS" X="425" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799238" T_X="30" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="FRM_TEAM_RED_NAME" X="136" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799239" T_X="30" T_Y="0"T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_TEAM_BLUE_NAME" X="501" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799239" T_X="30" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="FRM_TEAM_RED_POINT" X="243" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799240" T_X="30" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="FRM_TEAM_BLUE_POINT" X="608" Y="53" Z="1" W="60" H="20">
+			<ATTR TEXT="799240" T_X="30" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0XFFFFFFFF" T_OUTLINE="1"/>
+		</STATIC_FORM>
+
+		<LIST ID="LST_RED" X="39" Y="73" Z="1" W="420" H="310" >
+			<ATTR ELEMENT_ID="FRM_BS_PRESENT_LIST_ITEM" ITEM_X="0" ITEM_Y="0"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="328" Y="0" Z="-1" W="13" H="309">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="272"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="324" Y="-15" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>			
+			<BUTTON ID="ScrDown" X="324" Y="308" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="326" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP="ScrUp" />
+			<ATTR BTN_DOWN="ScrDown" />
+			<ATTR BTN_MIDDLE="ScrMiddle" />
+			<ATTR WND_BAR="IMG_LIST_SCROLL_BG"/>
+			<!--SCRIPT ID="ON_CALL">
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+			</SCRIPT-->
+		</LIST>
+		
+		<LIST ID="LST_BLUE" X="405" Y="73" Z="1" W="420" H="310" >
+			<ATTR ELEMENT_ID="FRM_BS_PRESENT_LIST_ITEM" ITEM_X="0" ITEM_Y="0"/>
+			<IMG ID="IMG_LIST_SCROLL_BG" X="328" Y="0" Z="-1" W="13" H="309">
+				<ATTR IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="272"/>
+			</IMG>
+			<BUTTON ID="ScrUp" X="324" Y="-15" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>			
+			<BUTTON ID="ScrDown" X="324" Y="308" W="19" H="15">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			</BUTTON>
+			<BUTTON ID="ScrMiddle" X="326" Y="0" W="15" H="21">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42" />
+			</BUTTON>
+			<ATTR BTN_UP="ScrUp" />
+			<ATTR BTN_DOWN="ScrDown" />
+			<ATTR BTN_MIDDLE="ScrMiddle" />
+			<ATTR WND_BAR="IMG_LIST_SCROLL_BG"/>
+			<!--SCRIPT ID="ON_CALL">
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+				UISelf:AddNewListItemChar("")
+			</SCRIPT-->
+		</LIST>
+	</FORM>
+	<FORM ID="FRM_BS_PRESENT_LIST_ITEM" X="0" Y="0" Z="1" W="420" H="31" >
+		<IMG ID="IMG_LIST_BG" X="0" Y="0" W="315" H="28">
+			<ATTR IMG="../Data/6_ui/battle/bsNowList.tga" IMG_W="315" IMG_H="28"/>
+		</IMG>
+		<STATIC_FORM ID="SFRM_RANK" X="0" Y="0" Z="1" W="30" H="20">
+			<ATTR TEXT="799237" T_X="15" T_Y="7" T_CENTER="1" FONT="FTcts_13" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+		
+		<IMG ID="IMG_CLASS" X="37" Y="1" Z="1" W="26" H="26" IMG="../Data/6_ui/icon/iconClass.tga" IMG_W="156" IMG_H="156" U="6" V="6" UV_INDEX="1"/>
+		
+		<STATIC_FORM ID="SFRM_NAME" X="77" Y="0" Z="1" W="130" H="20">
+			<ATTR TEXT="799239" T_X="50" T_Y="7" T_CENTER="1" FONT="FTcts_13" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_POINT" X="193" Y="0" Z="1" W="80" H="20">
+			<ATTR TEXT="799239" T_X="40" T_Y="7" T_CENTER="1" FONT="FTcts_13" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_MEDAL" X="276" Y="0" Z="1" W="30" H="20">
+			<ATTR TEXT="799239" T_X="15" T_Y="7" T_CENTER="1" FONT="FTcts_13" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+		</STATIC_FORM>
+	</FORM>
+	
+	<FORM_MOVE_ANIMATE_WND ID="FORM_BS_RED_MOVE_POINT" X="0" Y="0" W="70" H="10" NO_FOCUS="1" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1">
+		<ATTR TEXT="" FONT="QTtext_Name" T_X="35" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		<ATTR MOVE_TYPE="1" MOVE_TIME="800" MDF_SPEED_VAL="20" START_X="100" START_Y="100" END_X="170" END_Y="18"/>
+		<ATTR MDF_PT1_X="300" MDF_PT1_Y="50"/>
+		<SCRIPT ID="ON_TICK">
+			if UISelf:IsMoveComplate() then
+				UISelf:InitMoveState()
+				local UIRedPoint = GetUIWnd("FRM_BS_TEAM_RED_POINT")
+				if not UIRedPoint:IsNil() then
+					local UIText = UIRedPoint:GetControl("FRM_POINT")
+					if not UIText:IsNil() then
+						local iPoint = UISelf:GetCustomDataAsInt()
+						UIText:SetStaticText( tostring(iPoint) )
+					end
+				end
+				UISelf:Visible(false)
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM_MOVE_ANIMATE_WND>
+	<FORM_MOVE_ANIMATE_WND ID="FORM_BS_BLUE_MOVE_POINT" X="0" Y="0" W="70" H="10" NO_FOCUS="1" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1">
+		<ATTR TEXT="" FONT="QTtext_Name" T_X="35" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		<ATTR MOVE_TYPE="1" MOVE_TIME="800" MDF_SPEED_VAL="20" START_X="100" START_Y="100" END_X="170" END_Y="18"/>
+		<ATTR MDF_PT1_X="300" MDF_PT1_Y="50"/>
+		<SCRIPT ID="ON_TICK">
+			if UISelf:IsMoveComplate() then
+				UISelf:InitMoveState()
+				local UIBluePoint = GetUIWnd("FRM_BS_TEAM_BLUE_POINT")
+				if not UIBluePoint:IsNil() then
+					local UIText = UIBluePoint:GetControl("FRM_POINT")
+					if not UIText:IsNil() then
+						local iPoint = UISelf:GetCustomDataAsInt()
+						UIText:SetStaticText( tostring(iPoint) )
+					end
+				end
+				UISelf:Visible(false)
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM_MOVE_ANIMATE_WND>
+	<FORM_MOVE_ANIMATE_WND ID="FORM_BS_MY_MOVE_POINT" X="0" Y="0" W="70" H="10" NO_FOCUS="1" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1">
+		<ATTR TEXT="" FONT="QTtext_Name" T_X="35" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		<ATTR MOVE_TYPE="1" MOVE_TIME="800" MDF_SPEED_VAL="20" START_X="100" START_Y="100" END_X="170" END_Y="18"/>
+		<ATTR MDF_PT1_X="300" MDF_PT1_Y="50"/>
+		<SCRIPT ID="ON_TICK">
+			if UISelf:IsMoveComplate() then
+				UISelf:InitMoveState()
+				local UIMyPoint = GetUIWnd("FRM_BS_MY_POINT")
+				if not UIMyPoint:IsNil() then
+					local UIText = UIMyPoint:GetControl("FRM_POINT")
+					if not UIText:IsNil() then
+						local iPoint = UISelf:GetCustomDataAsInt()
+						UIText:SetStaticText( tostring(iPoint) )
+					end
+				end
+				UISelf:Visible(false)
+				UISelf:Close()
+				PlaySoundByID("Com_pointup-01")
+			end
+		</SCRIPT>
+	</FORM_MOVE_ANIMATE_WND>
+		
+	<FORM ID="FRM_BS_TEAM_RED_POINT" ALIGN_X="0" ALIGN_Y="0" W="224" H="45" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1"> 
+		<ATTR TEXT="460088" FONT="Font_Chat" T_X="60" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFFfffbdc" T_OUTLINE="1"/>
+		<ATTR IMG="../Data/6_ui/battle/bsRedBg.tga" IMG_W="224" IMG_H="45"/>
+		<FORM ID="FRM_POINT" X="0" Y="0" W="224" H="45">
+			<ATTR TEXT="4108" FONT="QTtext_Name" T_X="150" T_Y="7" T_CENTER="1" FONT_COLOR_HEX="0xFFff2828" T_OUTLINE="1"/>
+		</FORM>
+		<SCRIPT ID="ON_CALL">
+			local WinUI = UISelf:GetControl("FRM_WIN")
+			if not WinUI:IsNil() then
+				WinUI:Visible(true)
+			end
+		</SCRIPT>
+		<FORM ID="FRM_WIN" X="10" Y="0" W="24" H="36">
+			<ATTR IMG="../Data\6_UI\battle\bsArw.tga" IMG_W="48" IMG_H="72" U="2" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:SetUVIndex(math.mod(math.floor(GetAccumTime()*10),4) + 1)  </SCRIPT>
+		</FORM>
+	</FORM>
+	<FORM ID="FRM_BS_TEAM_RED_POINT_ANI" X="0" Y="0" W="224" H="45" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1" > 
+		<ATTR IMG="../Data/6_ui/battle/bsTopRedAni.tga" IMG_W="224" IMG_H="270" U="1" V="6" UV_INDEX="1" />
+		<SCRIPT ID="ON_DISPLAY"> 
+			UISelf:SetUVIndex(math.mod(math.floor(GetAccumTime()*10),6) + 1)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK"> 
+			local iUVIndex = UISelf:GetUVIndex()
+			if iUVIndex >= 6 then
+				local RedPointUI = CallUI("FRM_BS_TEAM_RED_POINT")
+				local WinUI = RedPointUI:GetControl("FRM_WIN")
+				if not WinUI:IsNil() then
+					WinUI:Visible(true)
+				end
+				UISelf:SetUVIndex(1)
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_BS_TEAM_BLUE_POINT" ALIGN_X="100" ALIGN_Y="0" W="224" H="45" IS_ABSOLUTE_Y="1"> 
+		<ATTR TEXT="460089" FONT="Font_Chat" T_X="164" T_Y="4" T_CENTER="1" FONT_COLOR_HEX="0xFFfffbdc" T_OUTLINE="1"/>
+		<ATTR IMG="../Data/6_ui/battle/bsBlueBg.tga" IMG_W="224" IMG_H="45"/>
+		<FORM ID="FRM_POINT" X="0" Y="0" W="224" H="45">
+			<ATTR TEXT="4108" FONT="QTtext_Name" T_X="74" T_Y="7" T_CENTER="1" FONT_COLOR_HEX="0xFF00bff3" T_OUTLINE="1"/>
+		</FORM>
+		<SCRIPT ID="ON_CALL">
+			local WinUI = UISelf:GetControl("FRM_WIN")
+			if not WinUI:IsNil() then
+				WinUI:Visible(true)
+			end
+		</SCRIPT>
+		<FORM ID="FRM_WIN" X="190" Y="0" W="24" H="36">
+			<ATTR IMG="../Data\6_UI\battle\bsArw.tga" IMG_W="48" IMG_H="72" U="2" V="2" UV_INDEX="1"/>
+			<SCRIPT ID="ON_DISPLAY"> UISelf:SetUVIndex(math.mod(math.floor(GetAccumTime()*10),4) + 1)  </SCRIPT>
+		</FORM>
+	</FORM>
+	<FORM ID="FRM_BS_TEAM_BLUE_POINT_ANI" ALIGN_X="100" Y="0" W="224" H="45" IS_ABSOLUTE_Y="1" > 
+		<ATTR IMG="../Data/6_ui/battle/bsTopBlueAni.tga" IMG_W="224" IMG_H="270" U="1" V="6" UV_INDEX="1" />
+		<SCRIPT ID="ON_TICK"> 
+			UISelf:SetUVIndex(math.mod(math.floor(GetAccumTime()*10),6) + 1)
+			local iUVIndex = UISelf:GetUVIndex()
+			if iUVIndex >= 6 then
+				local BluePointUI = CallUI("FRM_BS_TEAM_BLUE_POINT")
+				local WinUI = BluePointUI:GetControl("FRM_WIN")
+				if not WinUI:IsNil() then
+					WinUI:Visible(true)
+				end
+				UISelf:SetUVIndex(1)
+				UISelf:Close()
+			end
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID= "FRM_BS_INFO" ALIGN_X="50" IS_ABSOLUTE_Y="1" Y="0" W="520" H="32">
+		<ATTR IMG="../Data/6_ui/battle/bsTxtBg.tga" IMG_W="520" IMG_H="32"/>
+		<ATTR TEXT="799233" T_X="253" T_Y="8" T_CENTER="1" FONT="Font_Chat" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+	</FORM>
+	<FORM ID="FRM_BS_MY_POINT" ALIGN_X="50" Y="0" W="283" H="33" IS_ABSOLUTE_Y="1">
+		<ATTR TEXT="460090" FONT="FTctsBig_14" T_X="55" T_Y="5" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		<ATTR IMG="../Data/6_ui/battle/bsMyPntBg.tga" IMG_W="283" IMG_H="33"/>
+		<FORM ID="FRM_POINT" X="0" Y="0" W="202" H="8">
+			<ATTR TEXT="3321" FONT="QTtext_Name" T_X="163" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFFfef690" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		</FORM>
+		<FORM ID="FRM_MEDAL" X="202" Y="0" W="81" H="8">
+			<ATTR TEXT="" FONT="QTtext_Name" T_X="50" T_Y="3" T_CENTER="1" FONT_COLOR_HEX="0xFFfef690" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000">
+				<SCRIPT ID="ON_CREATE">
+					UISelf:SetStaticText("0")
+				</SCRIPT>
+			</ATTR>
+		</FORM>
+	</FORM>
+	<FORM ID="FRM_BS_CENTER_NOTICE" ALIGN_X="50" Y="0" W="1024" H="40" PASS_EVENT="1" IS_ABSOLUTE_Y="1">
+		<!--ATTR TEXT="460085" FONT="FTctsBig_14" T_X="512" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/-->
+	</FORM>
+	
+	<FORM ID="FRM_BS_TEAM_RED_MEDAL" IS_ABSOLUTE_Y="1" ALIGN_X="0" Y="38" W="217" H="40" >
+		<ATTR IMG="../Data/6_ui/battle/bsYongNumLeft.tga" IMG_W="217" IMG_H="40"/>
+		<IMG ID="IMG_MEDAL" PASS_EVENT="1">
+			<ATTR X="40" Y="3" W="36" H="33" IMG="../Data/6_ui/battle/bsYongjaBig.tga" IMG_W="36" IMG_H="33" />
+		</IMG>
+		<FORM ID="FRM_COUNT10" X="76" Y="6" W="30" H="30" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1" />
+		</FORM>
+		<FORM ID="FRM_COUNT1" X="96" Y="6" W="30" H="30" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1" />
+		</FORM>
+		<SCRIPT ID="ON_CREATE">
+			UISelf:SetCustomDataAsInt(0)
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			local kBuffWnd = GetUIWnd("FRM_BUFF")
+			if not kBuffWnd:IsNil() then
+				local kPos = kBuffWnd:GetLocation()
+				kPos:SetY(UISelf:GetSize():GetY()+UISelf:GetLocation():GetY())
+				kBuffWnd:SetLocation(kPos)
+			end
+			QuestMan():SetMiniQuestState(false)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			local kBuffWnd = GetUIWnd("FRM_BUFF")
+			local kRedPointWnd = GetUIWnd("FRM_BS_TEAM_RED_POINT")
+			if not kBuffWnd:IsNil() then
+				if not kRedPointWnd:IsNil() then
+					local kPos = kRedPointWnd:GetLocation()
+					kBuffWnd:SetLocation(kPos)
+				end
+			end
+			QuestMan():SetMiniQuestState(false)
+		</SCRIPT>
+		<SCRIPT ID="ON_DISPLAY">
+			local iMedal = UISelf:GetCustomDataAsInt()
+			UpdateBattleSquareTeamPoint(UISelf, iMedal)
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_BS_TEAM_BLUE_MEDAL" IS_ABSOLUTE_Y="1" ALIGN_X="100" Y="38" W="217" H="40" >
+		<ATTR IMG="../Data/6_ui/battle/bsYongNumLeft.tga" IMG_W="271" IMG_H="40"/>
+		<IMG ID="IMG_MEDAL" PASS_EVENT="1">
+			<ATTR X="99" Y="3" W="36" H="33" IMG="../Data/6_ui/battle/bsYongjaBig.tga" IMG_W="36" IMG_H="33" />
+		</IMG>
+		<FORM ID="FRM_COUNT10" X="135" Y="6" W="30" H="30" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1" />
+		</FORM>
+		<FORM ID="FRM_COUNT1" X="155" Y="6" W="30" H="30" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1" />
+		</FORM>
+		<SCRIPT ID="ON_CREATE">
+			UISelf:SetCustomDataAsInt(0)
+		</SCRIPT>
+		<SCRIPT ID="ON_DISPLAY">
+			local iMedal = UISelf:GetCustomDataAsInt()
+			UpdateBattleSquareTeamPoint(UISelf, iMedal)
+		</SCRIPT>
+	</FORM>	
+	
+	<FORM ID="FRM_BS_TIMER" ALIGN_X="100" Y="76" Z="1" W ="218" H ="115" PASS_EVENT="1" IS_ABSOLUTE_Y="1">
+		<IMG ID="IMG_BG1" PASS_EVENT="1">
+			<ATTR X="0" Y="0" Z ="-1" W="217" H= "56" IMG="../Data/6_ui/battle/bsTimeBg.tga" IMG_W="218" IMG_H="115" />
+		</IMG>
+		<FORM ID="FRM_TITLE" ALIGN_X="403" Y="8" Z="0" W="200" H="22">
+			<ATTR TEXT="799231" FONT="FT15" T_X="105" T_CENTER="1" FONT_COLOR_HEX="0xFFfff55a" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+		</FORM>
+		<FORM ID="FRM_MIN10" X="33" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_MIN1" X="56" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<IMG ID="IMG_TIMER_SEP" X="88" Y="43" Z="0" W="11" H="25" IMG="../Data/6_ui/mission/msTimeYdot.tga" IMG_W="11" IMG_H="25" />
+		<FORM ID="FRM_SEC10" X="93" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_UI/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC1" X="116" Y="33" Z="0" W="40" H="40" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmY.tga" IMG_W="200" IMG_H="80" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<!--<IMG ID="IMG_TIMER_SEP1" X="144" Y="11" Z="0" W="16" H="250" IMG="../Data/6_ui/mission/msTmPt.tga" IMG_W="16" IMG_H="29" />-->
+		<!--FORM ID="FRM_SEC1000" X="145" Y="43" Z="0" W="30" H="30" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1"/>
+		</FORM>
+		<FORM ID="FRM_SEC100" X="163" Y="43" Z="0" W="30" H="30" PASS_EVENT="1">
+			<ATTR IMG="../Data/6_ui/mission/msNumTmYs.tga" IMG_W="150" IMG_H="60" U="5" V="2" UV_INDEX="1"/>
+		</FORM-->
+		<BUTTON ID="BTN_LEAVE" X="66" Y="82" Z="3" W="84" H="26">
+			<ATTR BTN_IMG="../Data/6_ui/Common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52"/>
+			<ATTR TEXT="400305" T_X="42" T_Y="4" FONT="FTbt_12" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER="1" NO_WORD_WRAP = "1"/>
+			<SCRIPT ID="ON_L_BTN_UP"> SendLeaveBSGround() </SCRIPT>
+		</BUTTON>
+		<SCRIPT ID="ON_DISPLAY"> UpdateBattleSquareTimer(UISelf) </SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_BS_DEATH_PENALTY" ALIGN_X="50" ALIGN_Y="50" W="382" H="86">
+		<ATTR IMG="../Data/6_ui/battle/bsBuffBg.tga" IMG_W="382" IMG_H="86" />
+		<ATTR TEXT="799234" T_X="10" T_Y="8" FONT="Font_Chat" FONT_COLOR_HEX="0xffffffff" NO_WORD_WRAP="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xff000000" />
+ 		<BUILD ID = "BLD_BS_BUF" TARGET_ID = "BS_BuffIcon" X = "16" Y = "36" X_COUNT = "8" Y_COUNT = "1" X_GAB = "45" Y_GAB = "50"/>
+		<ICON ID = "BS_BuffIcon">
+			<ATTR X = "0" Y = "0" W ="32" H ="32" ICON_GRP ="104" ICON_KEY = "0" ICON_STATIC="1"/>
+			<SCRIPT ID = "ON_DISPLAY"> UISelf:DrawIcon() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</ICON>
+		<SCRIPT ID = "ON_TICK"> UpdateBuffWnd() </SCRIPT>
+		<SCRIPT ID = "ON_ACTIVATE"> SetBuffWnd(UISelf) </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE">CloseToolTip()</SCRIPT>
+	</FORM>
+	
+	<LIST ID="LST_BS_KILL_MSG" ALIGN_X="100" Y="190" W="280" H="114" IS_ABSOLUTE_Y="1">
+		<ATTR ELEMENT_ID="FRM_BS_KILLMSG_ITEM" ITEM_X="0" ITEM_Y="0" PASS_EVENT="1"/>
+		<SCRIPT ID="ON_TICK">BSKillMsgTick(UISelf) </SCRIPT>
+	</LIST>
+	<FORM ID="FRM_BS_KILLMSG_ITEM" W="280" H="19" PASS_EVENT="1">
+		<FORM ID="FRM_KILLER" X="0" Y="0" W="130" H="19" TEXT="71036" FONT="Font_Chat" T_OUTLINE="1" T_CENTER="1" T_X="65" T_Y="2" FONT_COLOR_HEX="0xFFBAFF00"/>
+		<FORM ID="FRM_ICON" X="132" Y="2" W="16" H="16" U="2" V="2" UV_INDEX="1" IMG="../Data/6_ui/war/wrIcon.tga" IMG_W="32" IMG_H="32"/>
+		<FORM ID="FRM_VICTIM" X="150" Y="0" W="130" H="19" TEXT="71036" FONT="Font_Chat" T_OUTLINE="1" T_CENTER="1" T_X="65" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF"/>
+	</FORM>
+	<FORM ID="FRM_BS_WIN_TEAM_ITEM" ALIGN_X="99" Y="81" W="172" H="99">
+		<ATTR IMG="../Data/6_ui/battle/bsItemPre.tga" IMG_W="172" IMG_H="99"/>
+		<ATTR TEXT="460086" FONT="Font_Text" T_X="86" T_Y="6" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<IMG ID="ICON_CUR" X="26" Y="35" W="42" H="42" Z="2">
+			<ATTR T_X="2" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<ATTR FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE = "1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<IMG ID="ICON_NEXT" X="106" Y="35" W="42" H="42" Z="2">
+			<ATTR T_X="2" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<FORM ID="FRM_CUR_POINT" X="0" Y="0" W="172" H="99">
+			<ATTR TEXT="4108" FONT="FTslot" T_X="44" T_Y="78" T_CENTER="1" FONT_COLOR_HEX="0xFFffd648" T_OUTLINE="1"/>
+		</FORM>
+		<FORM ID="FRM_NEXT_POINT" X="0" Y="0" W="172" H="99">
+			<ATTR TEXT="4108" FONT="FTtab" T_X="126" T_Y="76" T_CENTER="1" FONT_COLOR_HEX="0xFFb7b7b7" T_OUTLINE="1"/>
+		</FORM>
+		<FORM ID="FRM_EFFECT_MODEL" X="0" Y="0" W="172" H="99" PASS_EVENT="1" NO_FOCUS="1" Z="3">
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("EFFECT_VIEW_TEAM", false, false)
+				kSelf:AddRenderModelNIFByPath("EFFECT_VIEW_TEAM", "CraftSpin", "../Data/5_Effect/4_UI/ef_UImix_01_spin.nif", false, true)
+				kSelf:AddRenderModelNIFByPath("EFFECT_VIEW_TEAM", "CraftFlash", "../Data/5_Effect/4_UI/ef_UImix_02_succ.nif", false, true)				
+				kSelf:SetRenderModelCameraZoomMinMax("EFFECT_VIEW_TEAM", -300, 300);
+				kSelf:RenderModelCameraZoom("EFFECT_VIEW_TEAM", 210.0);
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("EFFECT_VIEW_TEAM") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("EFFECT_VIEW_TEAM") </SCRIPT>
+		</FORM>
+		<SCRIPT ID="ON_TICK">
+			OnEffectView(UISelf, "EFFECT_VIEW_TEAM")
+		</SCRIPT>
+		<SCRIPT ID="ON_CALL">
+			local kWnd = UISelf
+			local kPos = kWnd:GetLocation()
+			local kMyItem = ActivateUI("FRM_BS_MY_ITEM")
+			if true == kMyItem:IsNil() then
+				return true
+			end
+			kPos:SetY( kMyItem:GetLocation():GetY() - kMyItem:GetSize():GetY() )
+			kWnd:SetLocation( kPos )
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_BS_MY_ITEM" ALIGN_X="99" Y="92" W="172" H="99">
+		<SCRIPT ID="ON_CALL">
+			local kWnd = UISelf
+			local kScreenSize = GetScreenSize()
+			local kPos = kWnd:GetLocation()
+			local kQuickWnd = GetUIWnd("QUICKMENU")
+			if true == kQuickWnd:IsNil() then
+				return
+			end
+			local kQuickMenu = kQuickWnd:GetControl("BTN_MAIN1")
+			if true == kQuickMenu:IsNil() then
+				return
+			end
+			local kMenu = GetUIWnd("SFRM_SYSTEMMENU")
+			if true == kMenu:IsNil() then
+				return
+			end
+			local kPosY = kScreenSize:GetY() - 175
+			kPos:SetY( kPosY )
+			kWnd:SetLocation( kPos )
+		</SCRIPT>
+		<ATTR IMG="../Data/6_ui/battle/bsItemPre.tga" IMG_W="172" IMG_H="99"/>
+		<ATTR TEXT="460087" FONT="Font_Text" T_X="86" T_Y="6" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		<IMG ID="ICON_CUR" X="26" Y="35" W="42" H="42" Z="2">
+			<ATTR T_X="2" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<IMG ID="ICON_NEXT" X="106" Y="35" W="42" H="42" Z="2">
+			<ATTR T_X="2" T_Y="2" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<FORM ID="FRM_CUR_POINT" X="0" Y="0" W="172" H="99">
+			<ATTR TEXT="4108" FONT="FTslot" T_X="44" T_Y="78" T_CENTER="1" FONT_COLOR_HEX="0xFFffd648" T_OUTLINE="1"/>
+		</FORM>
+		<FORM ID="FRM_NEXT_POINT" X="0" Y="0" W="172" H="99">
+			<ATTR TEXT="4108" FONT="FTtab" T_X="126" T_Y="76" T_CENTER="1" FONT_COLOR_HEX="0xFFb7b7b7" T_OUTLINE="1"/>
+		</FORM>
+		<FORM ID="FRM_EFFECT_MODEL" X="0" Y="0" W="172" H="99" PASS_EVENT="1" NO_FOCUS="1" Z="3">
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("EFFECT_VIEW_MY", false, false)
+				kSelf:AddRenderModelNIFByPath("EFFECT_VIEW_MY", "CraftSpin", "../Data/5_Effect/4_UI/ef_UImix_01_spin.nif", false, true)
+				kSelf:AddRenderModelNIFByPath("EFFECT_VIEW_MY", "CraftFlash", "../Data/5_Effect/4_UI/ef_UImix_02_succ.nif", false, true)				
+				kSelf:SetRenderModelCameraZoomMinMax("EFFECT_VIEW_MY", -300, 300);
+				kSelf:RenderModelCameraZoom("EFFECT_VIEW_MY", 210.0);
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK"> UISelf:DrawRenderModel("EFFECT_VIEW_MY") </SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("EFFECT_VIEW_MY") </SCRIPT>
+		</FORM>
+		<SCRIPT ID="ON_TICK">
+			OnEffectView(UISelf, "EFFECT_VIEW_MY")
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_BS_BATTLE_REBIRTHTIME" ALIGN_X="50" ALIGN_Y="40" W="78" H="78" IMG="../Data/6_ui/war/wrRebthBg.tga" IMG_W="78" IMG_H="78" NO_FOCUS="1">
+		<FORM ID="FRM_TEXT" X="0" Y="-20" W="78" H="17" Z="1" T_CENTER="1" TEXT="71028" FONT="FTctsBig_14" T_X="39" T_Y="6" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFF2D2" NO_FOCUS="1"/>
+		<FORM ID="IMG_REBIRTH_CNT" X="6" Y="6" W="66" H="66" T_CENTER="1" TEXT="" FONT="Font_Warn" T_X="33" T_Y="22" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFF568" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/war/wrRebthBar.tga" IMG_W="330" IMG_H="132" NO_FOCUS="1">
+			<!--ATTR TICK_TIME="1000"/-->
+			<SCRIPT ID="ON_CALL"> CallBSReviveTimer(UISelf:GetParent()) </SCRIPT>
+			<SCRIPT ID="ON_TICK"> BSReviveTimerTick(UISelf) </SCRIPT>
+		</FORM>
+		<FORM ID="FRM_REBIRTHTIME_DUMMY" X="0" Y="0" W="78" H="78" PRIORITY="1" TICK_TIME="50" PASS_EVENT="1" NO_FOCUS="1">
+			<IMG ID="IMG_REBIRTH_EFT" X="19" Y="22" W="41" H="39" Z="2" IS_VISIBLE="0" IMG="../Data/6_ui/war/wrRebthFns.tga" IMG_W="41" IMG_H="39" USE_ALPHA_ANI="0" PASS_EVENT="1" NO_FOCUS="1">
+				<SCRIPT ID="ON_TICK"> BSRebirthTickHeart(UISelf) </SCRIPT>
+			</IMG>
+		</FORM>
+	</FORM>
+	
+	<FORM ID="FRM_BATTLE_SQUARE_GAME_DRAW" ALIGN_X="50" ALIGN_Y="20" W="331" H="102" ALIVE_TIME="6000">
+		<FORM ID="FRM_GAME" X="0" Y="0" W="331" H="102" IMG="../Data/6_ui/pvp/WarRTdraw.tga" IMG_W="331" IMG_H="102"/>
+	</FORM>
+	<FORM ID="FRM_BATTLE_SQUARE_GAME_WIN" ALIGN_X="50" ALIGN_Y="20" W="251" H="102" ALIVE_TIME="6000">
+		<FORM ID="FRM_GAME" X="0" Y="0" W="251" H="102" IMG="../Data/6_ui/pvp/WarRTwin.tga" IMG_W="251" IMG_H="102"/>
+	</FORM>
+	<FORM ID="FRM_BATTLE_SQUARE_GAME_LOSE" ALIGN_X="50" ALIGN_Y="20" W="331" H="102" ALIVE_TIME="6000">
+		<FORM ID="FRM_GAME" X="0" Y="0" W="286" H="102" IMG="../Data/6_ui/pvp/WarRTlose.tga" IMG_W="286" IMG_H="102"/>
+	</FORM>
+	
+	<FORM ID="FRM_BS_RESULT_ITEM" ALIGN_X="50" ALIGN_Y="64" Z="3" W="454" H="298" ALIVE_TIME="67000" ALIVE_TIME_IGNORE_MOUSE_OVER="1">
+		<IMG ID="FRM_BG_4" X="0" Y="0" Z="-2" W="454" H="168">
+			<ATTR IMG="../Data/6_ui/battle/bsItemBg4.tga" IMG_W="454" IMG_H="168"/>
+		</IMG>
+		<IMG ID="FRM_BG_2" X="0" Y="0" Z="-2" W="454" H="148">
+			<ATTR IMG="../Data/6_ui/battle/bsItemBg2.tga" IMG_W="454" IMG_H="148"/>
+		</IMG>
+		<FORM ID="FRM_MSG" X="0" Y="0" Z="-1" W="454" H="148">
+			<ATTR TEXT="" FONT="FTcts_16" T_X="227" T_Y="72" T_CENTER="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		</FORM>
+		<!--SCRIPT ID="ON_CALL">PlaySoundByID("Item_Mix_Success")</SCRIPT-->
+		<IMG ID="ICN_ITEM_1" X="91" Y="3" W="60" H="60">
+			<ATTR TEXT="" FONT="FTcts_16" T_X="58" T_Y="40" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<IMG ID="ICN_ITEM_2" X="161" Y="3" W="60" H="60">
+			<ATTR TEXT="" FONT="FTcts_16" T_X="58" T_Y="40" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<IMG ID="ICN_ITEM_3" X="231" Y="3" W="60" H="60">
+			<ATTR TEXT="" FONT="FTcts_16" T_X="58" T_Y="40" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<IMG ID="ICN_ITEM_4" X="301" Y="3" W="60" H="60">
+			<ATTR TEXT="" FONT="FTcts_16" T_X="58" T_Y="40" T_RIGHT="1" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<SCRIPT ID="ON_MOUSE_OVER">OnCallQuestRewardItemToolTip(UISelf)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		<FORM ID="FRM_UIMODEL" X="-160" Y="-355" W="768" H="768" IGNORE_PARENT_RECT="1" NO_FOCUS="1" PASS_EVENT="1">
+			<SCRIPT ID="ON_CREATE">
+				local kSelf = UISelf
+				kSelf:InitRenderModel("MazeItemEffect", true, true)
+				kSelf:SetRenderModelCameraZoomMinMax("MazeItemEffect", 0.1, 1.0)
+			</SCRIPT>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:RenderModelOrthoCameraZoomSubstitutionOldVer("MazeItemEffect", 0.5)
+				kSelf:AddRenderModelNIFByPath("MazeItemEffect", "MazeMixEffect", "../Data/5_Effect/4_UI/ef_combination_01.nif", false, true)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">UISelf:DrawRenderModel("MazeItemEffect")</SCRIPT>
+			<SCRIPT ID="ON_DISPLAY">UISelf:AddToDrawListRenderModel("MazeItemEffect")</SCRIPT>
+			<SCRIPT ID="ON_CLOSE">UISelf:ClearRenderModel("MazeItemEffect")</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_BS_EXIT_RESULT" X="45" Y="168" W="363" H="28" IS_VISIBLE="0">
+			<SCRIPT ID="ON_CALL"> UISelf:Visible(false) </SCRIPT>
+			<ATTR IMG="../Data/6_ui/battle/bsRstTxtBg.tga" IMG_W="363" IMG_H="28"/>
+			<FORM ID="FRM_KILL_TITLE" X="30" Y="0" W="60" H="28" TEXT="460055" FONT="FTctsBig_14" T_OUTLINE="1" T_X="0" T_Y="4" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_DEATH_TITLE" X="130" Y="0" W="60" H="28" TEXT="460056" FONT="FTctsBig_14" T_OUTLINE="1" T_X="0" T_Y="4" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_POINT_TITLE" X="240" Y="0" W="60" H="28" TEXT="460057" FONT="FTctsBig_14" T_OUTLINE="1" T_X="0" T_Y="4" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<FORM ID="FRM_KILL" X="20" Y="0" W="100" H="28" TEXT="3157" FONT="FTcts_16" T_OUTLINE="1" T_RIGHT="1" T_X="100" T_Y="3" FONT_COLOR_HEX="0xFFFFF200"/>
+			<FORM ID="FRM_DEATH" X="130" Y="0" W="100" H="28" TEXT="3157" FONT="FTcts_16" T_OUTLINE="1" T_RIGHT="1" T_X="100" T_Y="3" FONT_COLOR_HEX="0xFFFFF200"/>
+			<FORM ID="FRM_POINT" X="240" Y="0" W="100" H="28" TEXT="3157" FONT="FTcts_16" T_OUTLINE="1" T_RIGHT="1" T_X="100" T_Y="3" FONT_COLOR_HEX="0xFFFFF200"/>
+		</FORM>
+		<FORM ID="SFRM_BS_EXIT" X="101" Y="196" W="262" H="100" IS_VISIBLE="0">
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+			<FORM ID="FRM_TIME_LIMIT" X="0" Y="0" W="262" H="44">
+				<ATTR IMG="../Data/6_ui/mission/msRwTmbg.tga" IMG_W="262" IMG_H="44"/>
+				<SCRIPT ID="ON_CALL">
+					g_fAutoExitLimitTime = GetAccumTime()
+					g_fAutoExitTime = 60
+				</SCRIPT>
+				<SCRIPT ID="ON_TICK">
+					if g_fAutoExitLimitTime ~= nil then
+						if GetAccumTime() - g_fAutoExitLimitTime >= 1 then
+							g_fAutoExitLimitTime = GetAccumTime()
+							g_fAutoExitTime = g_fAutoExitTime - 1
+							if g_fAutoExitTime > 0 then
+								local sdw = UISelf:GetControl("FRM_MESSAGE")
+								if false == sdw:IsNil() then
+									sdw:SetStaticText( string.format(GetTextW(401057):GetStr(), g_fAutoExitTime) )
+								end
+							else
+								Net_RecentMapMove()
+								return
+							end
+						end
+					end
+				</SCRIPT>
+				<FORM ID="FRM_MESSAGE" X="0" Y="8" Z="1" W="262" H="22">
+					<ATTR TEXT="" FONT="Font_Text" T_X="131" T_Y ="0" T_CENTER="1" T_OUTLINE="0" FONT_COLOR_HEX="0xFF482e26"/>
+					<SCRIPT ID="ON_CALL"> UISelf:SetStaticText( string.format(GetTextW(401057):GetStr(), 60) ) </SCRIPT>
+				</FORM>	
+			</FORM>
+			<STATIC_FORM ID="SFRM_EXIT_BG" X="82" Y="60" W="96" H="40" STATIC_NUM="25" CAN_CLIP="1">
+				<BUTTON ID="BTN_EXIT" X="7" Y="3" W="82" H="41">
+					<ATTR BTN_IMG="../Data/6_ui/Auction/auGbtB.tga" BTN_IMG_W="164" BTN_IMG_H="58" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="9" OUTLINE_COLOR_HEX="0xFF5E2F00"/>
+					<ATTR TEXT="400208" T_X="40" T_Y ="6" T_OUTLINE="1" T_CENTER="1"/>
+					<SCRIPT ID="ON_L_BTN_DOWN"> Net_RecentMapMove() </SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>
+		</FORM>
+	</FORM>
+	
+</XUI>

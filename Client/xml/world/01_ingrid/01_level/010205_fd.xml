@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010205_FD">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/010205_FD.gsa</GSAPATH>
+	<MINIMAP Y="95" H="265">../Data/3_World/01_Ingrid/01_Level/010205_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<SCRIPT>World/01_Ingrid/010205_FD.lua</SCRIPT>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 --> 
+	<MAPVALUE PLAYERKILL="0" TYPE="129"/>
+	<!--// 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+		<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="550" />
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="600" />
+	</TRIGGER>
+	
+<FOG DENSITY="0" FUNC="RANGE_SQ" START="558" END="6774" COLOR="0.4901961,0.4823529,0.4"/>
+</WORLD>

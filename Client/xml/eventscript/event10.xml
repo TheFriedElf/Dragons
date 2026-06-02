@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 베가스 오프닝 1 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="setmoviescene" enable="TRUE" Time="0"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다. -->
+    <CMD TYPE="AddNPC" ClassNo ="1028167" NameTTID ="505650" SpawnPos = "361.786224,1632.127808,29.646542"/>
+	<CMD TYPE="MoveCamToActor" NameTTID="505650" MoveTime="0"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="PlayAnimation" NameTTID="505650" SlotName="Vegas_OPENING_01"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="505650" CameraID="Camera01"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="WaitTime" Time="6"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="ShowActor" NameTTID="505650" Show="false"/>
+    <CMD TYPE="RemoveActor" NameTTID ="505650"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="0.5"/>
+	<CMD TYPE="WaitCamera"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->
+    <CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505392" TextTTID="506173" FaceID="Helper_surprise"/>
+	<CMD TYPE="WaitDialogue"/>
+    <CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+    
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+    
+     <CMD type="CallUI" UIWndName = "FRM_MISSION_START"/>
+     <CMD type="CallUI" UIWndName = "FRM_MISSION_SCENARIO_TIMER"/>
+     <CMD type="CloseUI" UIWndName = "FRM_REST_MON_NUM"/>
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

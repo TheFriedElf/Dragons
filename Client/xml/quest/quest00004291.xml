@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4291</ID> <!--T.T.10429100 침식당한 피오스를 찾아 -->
+
+
+<!-- 작성자 : 김효중-->
+<!--[완료조건]	피오스 회복-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	뱀주인자리로 갈 수 있는 5개의 열쇠가 모두 모였다. 토요일 일요일에만 열리는 뱀주인자리로 들어가서 크레테의 연인이자 별자리의 주인인 피오스의 행방을 찾아보자.-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">7282500</MONSTER> 
+ <!--MON_NO=7282500/사악한 뱀 서펜즈,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10429111"/> <!--피오스 회복-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10429121" FACE="Crete_normal"/> <!--여러분들의 노력으로 5개의 열쇠가 모였습니다. 이제 뱀주인 자리로 들어 갈 수 있습니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10429126" FACE="Crete_smile"/> <!--%name%님 덕분에 피오스님이 회복되었습니다. 별자리도 이제 제 자리를 찾아 가고 있구요. 정말 감사합니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10429123" FACE="Crete_normal"/> <!--성좌의 고리를 이용하여 뱀주인자리로 가주세요. 그곳에 피오스님이 계실거에요. 피오스님을 꼭 구해주세요. 이 혼돈을 막을 수 있는건 %name%님 뿐입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10429124" FACE="Crete_cry"/> <!--정녕 이 혼돈을 막아 주실분은 안계신건 가요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10429125" FACE="Crete_normal"/> <!--피오스님을 구하고, 별자리의 혼돈을 막을 분은 당신 뿐이에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10429102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

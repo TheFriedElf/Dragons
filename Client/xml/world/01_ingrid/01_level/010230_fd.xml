@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010230_FD" DESCRIPTION="90102300">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/010230_FD.gsa</GSAPATH>
+	<MINIMAP Y="155" H="260">../Data/3_World/01_Ingrid/01_Level/010230_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Vally.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--스카이피 게이트-->
+	<TRIGGER ID="gate_010210_base" TYPE="PORTAL" TITLE_TEXT_ID="800019" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9010210" PARAM2="3"/>
+	</TRIGGER>
+
+	<!--망자의 탑-->
+	<TRIGGER ID="gate_010801_base" TYPE="PARTY_MEMBER_PORTAL" TITLE_TEXT_ID="802037" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,85" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Dungeon_Portal" PARAM="9010801" PARAM2="1" SHOW_PARTY_UI="TRUE" IMPORTANT_MONSTER_0="6126140">
+			<ACCESS ERROR_MSG="521312">
+				<LEVEL MIN="36"  MAX="100" PARTY="1"/>
+				<QUEST NO="3980" CHECK="5" PARTY="0" GROUP=""/>
+				<QUEST NO="3912" CHECK="5" PARTY="0" GROUP=""/>
+				<QUEST NO="4090" CHECK="5" PARTY="0" GROUP=""/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+	
+	<!-- 상인의마을 포털 -->
+    <TRIGGER ID="gate_018320_base" TYPE="PORTAL" TITLE_TEXT_ID="801002" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9018320" PARAM2="1"/>
+	</TRIGGER>
+
+	<!-- 엔 터 던 전 -->
+	<TRIGGER ID="EnterDungeon_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_02"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_03" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_03"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_04"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_05" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_05"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_06" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_06"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_07" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_07"/>
+	</TRIGGER>
+	<TRIGGER ID="EnterDungeon_target_08" TYPE="TELEPORT" HIDE_MINIMAP="1">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_08"/>
+	</TRIGGER>
+	<!--텔레점프-->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEJUMP" SOUND_ID="Tele_Jump" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="600"/>
+	</TRIGGER>
+	<!--트리거점프-->
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="500"/>
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoHighJump" PARAM="600"/>
+	</TRIGGER>
+	<!-- 퀘스트 트리거 -->
+	<TRIGGER ID="Quest_Trigger1522_4" TYPE="LOCATION">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="1522"/>
+	</TRIGGER>
+	
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="3730" END="7459" COLOR="0,0,0"/>
+	<!--L.O.D-->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="4000" USE="1"/>
+</WORLD>

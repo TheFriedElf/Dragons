@@ -1,0 +1,11 @@
+<ACTION ID="a_Slow Heal" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_01"/>
+  <FSM SCRIPT="Act_Melee_Default" FIND_TARGET_TYPE="SPHERE"
+       CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_slowheal_01_02_char_root"
+       HIT_CASTER_EFFECT_TARGET_NODE_TO_WORLD_POS_WITH_ROTATE="char_root"
+       HIT_CASTER_EFFECT_ID ="ef_slowheal_01_char_root"       
+	   FIRE_SOUND_ID="SlowHeal"
+       />
+</ACTION>

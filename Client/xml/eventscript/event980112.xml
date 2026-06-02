@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	
+	<!-- 별자리 보스맵 시작연출 공통 -->	
+	<CMD TYPE="setmoviescene" enable="false" Time="0.5"/>
+	<CMD TYPE="HideUI" enable="false"/><!--UI보이기 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+
+
+	<!-- 카메라로 연출 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="0.5"/>
+
+	<!-- 별자리 던전 시작 UI 출력 -->
+	<CMD type="CallUI" UIWndName="FRM_CONSTELLATION_START"/>
+
+</EVENT_SCRIPT>
+
+
+

@@ -1,0 +1,10 @@
+<ACTION ID="a_groundzero_finish" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE"  ALWAYS_IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Arc_Csb_Skill_GroundZero_01_02" />
+  <FSM SCRIPT="Skill_Master_Summon_Finish"
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+       HIT_TARGET_EFFECT_ID="ef_boom_01"
+		
+	   NO_DAMAGE_HOLD ="TRUE"
+		
+       CHECK_CAN_PREV_ACTION_ID="a_groundzero"/>
+</ACTION>

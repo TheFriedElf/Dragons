@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5029</ID> <!--T.T.10502901 끝내주는 요리법 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 조리장 카카투 처리-->
+<!--[완료NPC]	바람항구 - 루돌프-->
+<!--[내용]	루돌프는 과거에 음식수행을 다녔을 때 조리장 카카투라는 녀석을 만났다고 한다. 카카투는 음식은 팔 수 있으면 그만이라고 생각하는 녀석으로 그가 만든 음식을 먹고 많은 사람들이 탈이 났었다고 했다. 카카투가 이상한 음식을 만들어서 팔기 전에 처리해야 한다. 조리장 카카투는 시청 지하수로에 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</CLIENT> <!--시작NPC 바람항구 - 루돌프 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</PAYER> <!--완료NPC 바람항구 - 루돌프 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">74E11B6B-BCE2-4343-BA4C-580B26FD60BA</AGENT> <!--진행NPC 11 바람항구 - 루돌프 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010502/1">6056200</MONSTER> 
+ <!--MON_NO=6056200/조리장 카카투,MAP_NO=9010502/파렐 대저택,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10502911"/> <!--조리장 카카투-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502921" FACE="Rudolph_normal"/> <!--음식의 맛을 결정하는 게 뭔 줄 알고 있어?
+고급 식재료, 요리사의 실력 등도 중요하지만 그보다 더 중요한 게 있어.
+바로 정성이지.%%
+요리는 그냥 손끝으로 만들어지는 게 아니야.
+내 음식을 먹는 사람들을 생각하며 만드는 거지.%%
+하지만 예전에 내가 요리수행을 갔을 때, 만난 조리장 카카투는 정 반대였지.
+그 녀석은 요리를 그냥 팔 수 있으면 다라고 생각했어.%%
+그런데 그 녀석이 다시 이곳에 나타난 것 같아. 
+부탁이야 그 녀석을 막아 주지 않겠어?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502926" FACE="Rudolph_smile"/> <!--고마워. 한 사람의 요리인으로서 녀석을 두고볼 수는 없었어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502923" FACE="Rudolph_normal"/> <!--과거에 여러 곳으로 요리수행을 하러 갔지.
+그때 조리장 카카투 녀석도 있었어.%%
+녀석은 요리를 어떻게 만드는지 별로 중요하지 않았어.
+그저 만들어서 사람들에게 팔 수 있으면 그만이었지.
+하지만 녀석의 음식을 먹은 사람들이 탈이 나면서 녀석의 정체가 드러났지.%%
+조리장 카카투가 도망갔다는 소문만 들었지 지금 어디 있는지는 몰랐어.
+하지만 최근 시청 지하수로에 어슬렁거린다는 소문을 들었어.%%
+녀석을 막지 않으면 또 다시 사람들에게 안 좋은 일이 생길지도 몰라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502924" FACE="Rudolph_normal"/> <!--어쩔 수 없지. 나라도 카카투 녀석을 막을 수밖에.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502925" FACE="Rudolph_normal"/> <!--카카투는 생각보다 포악한 녀석이야. 조심해야 해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

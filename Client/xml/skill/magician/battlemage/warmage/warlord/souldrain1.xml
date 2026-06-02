@@ -1,0 +1,11 @@
+<ACTION ID="a_SoulDrain1" NEXT="a_SoulDrain2" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="skill_summon_01_01"/>
+  <FSM SCRIPT="Skill_WarLord_SoulDrain_Ready"
+       CASTING_EFFECT_EFFECT_ID="ef_skill_souldrain_02_char_root"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_flash_02"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_SOUND_ID="SoulDrain_emp"
+       />
+</ACTION>
+

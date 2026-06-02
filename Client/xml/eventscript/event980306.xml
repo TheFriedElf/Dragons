@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+	<!--피오스 엔딩-->
+
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="WaitTime" Time="0.5"/><!-- 오프닝 시간을 기다림-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade"/>
+
+	<CMD TYPE="HideUI" enable="true"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->	
+	
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD TYPE="AddActorFilter" ClassNo="1029585"/>
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/> <!--소환체를 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/><!---->
+	<CMD TYPE="ShowActor" UnitType="UT_BOSSMONSTER" Show="false"/><!--보스몬스터 감추기-->
+	<CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="false"/> <!--드랍아이템를 숨기기 -->
+	
+
+	<CMD TYPE="AddNPC" ClassNo="1029585" NameTTID="521238" SpawnPos="10040.3,1900.864,-204.536"/>
+	<CMD TYPE="PlayAnimation" ClassNo="1029585" SlotName="final_01"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="521238" CameraID="Camera01" UseActorPositionAsSoundListener="true" />
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" Time="1"/>
+	<CMD TYPE="WaitTime" Time="12"/><!-- 오프닝 시간을 기다림-->
+	
+
+
+	<!--CMD TYPE="WaitTime" Time="6.5"/ --><!-- 오프닝 시간을 기다림-->
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.1" FadeIn="false"/><!-- 화면 어둡게-->
+    <CMD TYPE="WaitFade"/>
+	<CMD TYPE="ShowActor" ClassNo="1029585" Show="false"/>
+	<CMD TYPE="RemoveActor" ClassNo="1029585"/>
+
+    <CMD TYPE="IngQuestDoEvent" SpecialActor="ME" QUEST="4291" Event ="980307"/>
+
+	
+
+
+	
+
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기-->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/><!---->
+	<CMD TYPE="ShowActor" UnitType="UT_BOSSMONSTER" Show="true"/><!--보스몬스터 감추기-->
+	<CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="true"/> <!--드랍아이템를 숨기기 -->
+	
+
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="HideUI" enable="false"/>
+
+	
+
+    <!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980117"/>
+
+	
+</EVENT_SCRIPT>
+

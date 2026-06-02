@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+<!-- 플레이어 이동을 막는다. -->
+     <!--CMD TYPE="PlayAnimation" ClassNo ="5006901" SlotName="opening_idle"/-->
+     <CMD TYPE="WaitCamera"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <!--CMD TYPE="ShowActor" ClassNo ="5006901" Show="false"/-->
+<!-- 화면을 와이드 화면으로 출력하고 2초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+<!-- 몬스터 형태의 수호석을 안보이게 하고-->
+    <!--CMD TYPE="AddNPC" ClassNo ="1028294" NameTTID ="519972" SpawnPos = "8.0,-24.6999,29.8115"/-->
+    <CMD type="waittime" time="1"/>
+    <CMD TYPE="MoveCamToActor" ClassNo ="5006901" MoveTime="1" CamActorDistance="250" CamMoveUpDistance="5"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD type="waittime" time="3"/>
+    <CMD TYPE="WaitCamera"/>
+<!-- 몬스터줌업 오른쪽 -->
+	<CMD TYPE="MoveCamToTrigger" Target="mon_Right_3" MoveTime="2" CamActorDistance="300" CamMoveUpDistance="-30"/>
+
+    <CMD type="waittime" time="1"/>
+<!-- 카메라가 옆으로 가는 사이, 몬스터 형 수호석을 켜주고 오프닝형 몬스터를 꺼준다-->
+    <!--CMD TYPE="ShowActor" ClassNo ="5006901" Show="true"/-->
+    <!---CMD TYPE="ShowActor" ClassNo ="1028294" Show="false"/-->
+    <CMD TYPE="WaitCamera"/>
+	<CMD type="waittime" time="3"/>
+<!-- PC로 돌아오기 -->
+	<CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="2" />
+	<CMD type="waittime" time="2"/>    
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+<!-- PC이동가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_START"/>
+</EVENT_SCRIPT>

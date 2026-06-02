@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2245</ID> <!--T.T.10224501 성공하는 사람들의 3가지 습관 (3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지(Lv35) - 본 플레그 처리-->
+<!--[완료NPC]	달빛해안 마을 - 제시-->
+<!--[내용]	달빛해안 마을 제시는 성공하는 사람들이 가지고 있는 습관을 알려 주겠다고 한다. 제시가 알려 준 첫 번째와 두 번째 습관은 계획과 끈기였다. 마지막으로 배울 용기에 대해서 배워보도록 하자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 달빛해안 마을 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 달빛해안 마을 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 달빛해안 마을 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4601100</MONSTER> 
+ <!--MON_NO=4601100/본 플레그,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10224511"/> <!--지하묘지(Lv35) - 본 플레그 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10224521" FACE="Jessie_normal"/> <!--아쉽지만 내 마지막 강의를 시작하겠네.
+그동안 배운 계획과 끈기에 대해 다시 한번 생각해보게. %%
+사실 계획과 끈기라는 건 성공에 다가가기 위한 준비과정에 지나지 않네.
+무슨 소린지 계속 들어볼 텐가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10224526" FACE="Jessie_smile"/> <!--이번에도 잘 처리한 모양이군.
+그래. 임무를 수행하면서 내가 한 말을 잘 생각해봤겠지?
+그 말뜻을 이제 알려주겠네.%%
+계획과 끈기를 가지고 살아가다 보면 누구에게나
+기회란 선물이 찾아오게 되네.
+그때 기회란 선물을 잡는 데 필요한 게 바로 용기란 무기일세.%%
+계획과 끈기로 기회를 유인하고 기회가 왔을 때 용기로 잡는거란 말이지.
+내 말뜻을 잘 이해했으면 좋겠네.
+이해했다면 자네는 반드시 성공할 수 있을걸세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10224523" FACE="Jessie_smile"/> <!--이번에도 마찬가지로 임무부터 내려야겠지?
+지하묘지(Lv35)에 가서 본 플레그를 처리하고 오게나.
+그리고 일을 처리하면서 이 말에 대해 곰곰이 생각해보시게나.%%
+[신은 용기있는 자를 돕는다.]-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10224524" FACE="Jessie_angly"/> <!--그렇다면 할 수 없군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10224525" FACE="Jessie_normal"/> <!--겁을 먹고 있는 건 아니지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10224502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

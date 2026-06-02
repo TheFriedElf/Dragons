@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 동력 생성 장치 제조 퀘스트 완료 이벤트 씬-->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+    <CMD type="WaitTime" time="3"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다. -->
+	<CMD type="AddActorFilter" ClassNo="1028370"/>
+	<CMD TYPE="AddNPC" ClassNo="1028370" NameTTID="522114" SpawnPos="54.398628,177.395798,322.672852"/>
+    <CMD type="WaitTime" time="3"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "false"/>
+    <CMD type="WaitFade" time="2"/>     
+	<CMD TYPE="SetFollowCamera" NameTTID="522114" CameraID="Camera01" UseActorPositionAsSoundListener="true"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+    <CMD type="WaitFade" time="2"/>
+    <CMD type="waittime" time="0"/>  
+	<CMD TYPE="WaitCamera"/>    
+	<CMD TYPE="SetActorDirection" NameTTID="522114" Direction="1"/>    
+	<CMD TYPE="PlayAnimation" NameTTID="522114" SlotName="opening_movie"/>
+	<CMD TYPE="SetFollowCamera" NameTTID="522114" CameraID="Camera01" UseActorPositionAsSoundListener="true"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="Dialogue" NameTTID="522114" TitleTTID="522074" TextTTID="522079" FaceID="noel_think"/>
+	<CMD TYPE="WaitTime" Time="5"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+    <CMD type="WaitTime" time="3"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "false"/>
+    <CMD type="WaitFade" time="2"/>     
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+    <CMD type="WaitFade" time="2"/>
+    <CMD type="waittime" time="0"/>
+	<CMD TYPE="WaitCamera"/>
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	<CMD type="ClearActorFilter"/>    
+	<CMD TYPE="RemoveActor" NameTTID="522114"/>    
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+</EVENT_SCRIPT>

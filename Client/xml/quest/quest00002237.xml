@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2237</ID> <!--T.T.10223701 친하게 지냅시다. (1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 제스, 헌터G와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	묘지기 라르엘은 음산한 분위기와 조용한 성격 탓에 친구도 없이 외롭게 지낸다고 한다. 라르엘은 혼자 지내는 게 익숙해졌다고 하지만 가끔은 친구가 있으면 좋겠다고 한다. 라르엘과 친하게 지낼 수 있는 친구를 찾아보도록 하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10021"  MARK="END">89F4650C-E372-4716-B958-5C321BB62C51</AGENT> <!--진행NPC 1 달빛해안 마을 - 제스 -->
+		<AGENT TYPE="NPC" EVENTNO="10022"  MARK="END">4A7BAF7A-1593-42e8-902E-A95CB08AEA63</AGENT> <!--진행NPC 2 달빛해안 마을 - 헌터G -->
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="511/1">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="2" TYPE="INCPARAM" VALUE="512/1">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="511">10021</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="512">10022</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10223711"/> <!--제스와 대화-->
+		<OBJECT2 COUNT="1" TEXT="10223712"/> <!--헌터 G와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10223721" FACE="Larel_normal"/> <!--오늘 하루는 어때? 잠은 잘 잤어?
+난 요즘도 잠을 못 자서 많이 힘들어.
+그래도 네가 많이 도와줘서 조금씩 좋아지고 있어.%%
+안자는 시간에는 뭘 하냐고? 
+보통 공상에 빠져 혼자 생각하곤 해.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10223726" FACE="Larel_smile"/> <!--정말? 나랑 친해지고 싶은 사람이 있다고? 누굴까?
+아무튼, 네가 그런 것까지 신경 써주다니... 정말 고마워.
+너 정말 따뜻한 아이구나.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10223723" FACE="Larel_smile"/> <!--심심하거나 외롭지 않느냐고? 음.
+외롭지 않아. 보통 사람이었다면 외로워했겠지만
+나는 혼자 지내는 생활에 익숙해졌어.%%
+그래서 지금은 차라리 혼자여서 편하다고 생각할 때가 있어.
+하긴 그래도 너처럼 날 좋아해주는 사람이 있으면 좋겠지.
+심심하기도 하고 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10223724" FACE="Larel_angly"/> <!--혼자 생각하는 시간도 나쁘지 않아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10223725" FACE="Larel_normal"/> <!--친구가 있으면 좋은점도 있을려나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10223702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10223751" FACE="Jess_smile"/> <!--친구를 소개시켜준다고? 음… 나야 친구가 많으면 많을수록 좋은거지.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10223752" FACE="HunterG_smile"/> <!--친구와 포도주는 오래 된 것일수록 빛이 나는 법일세.
+친구를 소개시켜준다니. 마다할게 없네.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

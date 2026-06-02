@@ -1,0 +1,12 @@
+<ACTION ID="a_Homing Missile" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_HomingMissile_01"/>
+  <FSM SCRIPT="Skill_HommingMissile" 
+       PROJECTILE_ID="Projectile_HommingMissile"
+       WEAPON_HIDE="TRUE"
+       FIRE_CASTER_EFFECT_ID="Homing_Missile"
+       FIRE_CASTER_EFFECT_TARGET_NODE="p_wp_r_hand"
+       FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+       HIT_SOUND_ID="Bazooka"
+       />
+</ACTION>

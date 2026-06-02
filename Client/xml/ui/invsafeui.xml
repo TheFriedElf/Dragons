@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID="SFRM_INV_SAFE" X="240" Y="91" W="292" H="349" STATIC_NUM="1" CAN_DRAG="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">
+		<SCRIPT ID="ON_CALL">
+			ChangeCashBoxViewGroup(UISelf, 0)
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")			
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 240, 91)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> CloseToolTip() UISelf:SetCursorState(0) SendCloseSafe() CloseUI("Inv") </SCRIPT>		
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="290" H="36" Z="-1" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BTN_BG" X="259" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_EXIT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> CloseInvSafeUI() </SCRIPT>
+					<HOTKEY ID="1"> CloseInvSafeUI() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_SORTINV_BG" X="232" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_SORT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmInvenBt.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> SortInv(2,UISelf) </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(790043), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUILD ID="BLD_TITLE_BTN_BG" X="7" Y="4" X_COUNT="4" Y_COUNT="1" X_GAB="56" TARGET_ID="SFRM_BTN_BG"/>
+		<STATIC_FORM ID="SFRM_BTN_BG" X="0" Y="0" Z="1" W="54" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<BUILD ID="BLD_TITLE_BTN" X="7" Y="4" X_COUNT="4" Y_COUNT="1" X_GAB="56" TARGET_ID="CBTN_BAG"/>
+		<CHECK_BUTTON ID="CBTN_BAG" X="0" Y="0" Z="2" W="54" H="24" TEXT="" FONT="FTtitle_14" T_X="20" T_Y="3" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabBs.tga" BTN_IMG_W="108" BTN_IMG_H="48">
+			<SCRIPT ID="ON_BUILD">UISelf:SetStaticText(GetTT(2900):GetStr()..(UISelf:GetBuildIndex()+1))</SCRIPT>
+			<SCRIPT ID="ON_GET_FOCUS">ChangeCashBoxViewGroup(UISelf:GetParent(), UISelf:GetBuildIndex())</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"></SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"></SCRIPT>
+		</CHECK_BUTTON>
+		<FORM ID="SFRM_ITEM_BG" X="0" Y="0" W="292" H="375" Z="-2">
+			<FORM ID="FRM_BG" X="0" Y="0" W="292" H="375" Z="-2">
+				<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="274" H="273" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="274" H="273" Z="-1" STATIC_NUM="3"/>
+					<BUILD ID="BLD_INV_BG_ICON" X="6" Y="6" X_COUNT="6" Y_COUNT="6" X_GAB=" 44" Y_GAB="44" TARGET_ID="SFRM_ICON_BG"/>
+					<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<STATIC_FORM ID="SFRM_EXTENDINV_GUIDE" X="6" Y="6" W="262" H="276" STATIC_NUM="16" IS_VISIBLE="1">
+						<BUTTON ID="BTN_EXTEND" X="125" Y="126" W="174" H="28" BTN_IMG="../Data/6_ui/etc/etcInvenBt.tga" BTN_IMG_W="174" BTN_IMG_H="112" BTN_VERTICAL_IMG="1">
+							<ATTR TEXT="21" FONT="FTbt_12" T_X="87" T_Y="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+							<SCRIPT ID="ON_L_BTN_UP">CallExtendInvMessageBox(UISelf)</SCRIPT>
+						</BUTTON>
+					</STATIC_FORM>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_TIME" X="9" Y="311" W="223" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_TIME_BG" X="0" Y="0" W="274" H="26" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				</STATIC_FORM>
+			</FORM>
+			<IMG ID = "IMG_CURSOR" X = "-1" Y = "-1" Z = "-1" W = "42" H = "42" IMG="../Data/6_ui/common/cmIconOver02.tga" IMG_W = "84" IMG_H = "84" U = "2" V = "2" UV_INDEX = "2" IGNORE_PARENT_RECT = "1" IS_VISIBLE = "0" PASS_EVENT = "1" NO_FOCUS = "1">
+				<SCRIPT ID = "ON_TICK">	UISelf:Visible(UISelf:PtInUI(GetCursorPos())) </SCRIPT>
+			</IMG>
+			<BUILD ID="BLD_INV_ICON" X="16" Y="42" X_COUNT="6" Y_COUNT="6" X_GAB="44" Y_GAB="44" TARGET_ID="ICON_ITEM"/>
+			<ICON ID="ICON_ITEM" X="0" Y="0" W="40" H="40" ICON_GRP ="5" ICON_KEY="0">
+				<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local self = UISelf
+					self:CallIconToolTip()
+					local b = true
+					local cur = self:GetParent():GetControl("IMG_CURSOR")
+					if false == cur:IsNil() then
+						cur:Visible(b)
+						if b then
+							local pos = self:GetLocation()
+							pos:SetX(pos:GetX()-1)
+							pos:SetY(pos:GetY()-1)
+							cur:SetLocation(pos)
+						end
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor()</SCRIPT>
+				<SCRIPT ID="ON_R_BTN_DOWN">UISelf:IconToCursor() UISelf:CursorToIcon(true)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+					UISelf:CursorToIconFast(1)
+					CloseToolTip()
+				</SCRIPT>
+			</ICON>
+		</FORM>
+		<FORM ID="SFRM_ITEM_BIG" X="0" Y="0" W="380" H="375" Z="-2" IS_VISIBLE="0">
+			<FORM ID="FRM_BG" X="0" Y="0" W="380" H="375" Z="-2">
+				<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="362" H="273" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="362" H="273" Z="-1" STATIC_NUM="3"/>
+					<BUILD ID="BLD_INV_BG_ICON" X="6" Y="6" X_COUNT="8" Y_COUNT="18" X_GAB=" 44" Y_GAB="44" TARGET_ID="SFRM_ICON_BG"/>
+					<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<STATIC_FORM ID="SFRM_EXTENDINV_GUIDE" X="6" Y="6" W="350" H="276" STATIC_NUM="16" Z="1" IS_VISIBLE="1">
+						<BUTTON ID="BTN_EXTEND" X="125" Y="126" W="174" H="28" BTN_IMG="../Data/6_ui/etc/etcInvenBt.tga" BTN_IMG_W="174" BTN_IMG_H="112" BTN_VERTICAL_IMG="1">
+							<ATTR TEXT="21" FONT="FTbt_12" T_X="87" T_Y="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+							<SCRIPT ID="ON_L_BTN_UP">CallExtendInvMessageBox(UISelf)</SCRIPT>
+						</BUTTON>
+					</STATIC_FORM>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_TIME" X="9" Y="311" W="311" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_TIME_BG" X="0" Y="0" W="362" H="26" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				</STATIC_FORM>
+			</FORM>
+			<IMG ID = "IMG_CURSOR" X = "-1" Y = "-1" Z = "-1" W = "42" H = "42" IMG="../Data/6_ui/common/cmIconOver02.tga" IMG_W = "84" IMG_H = "84" U = "2" V = "2" UV_INDEX = "2" IGNORE_PARENT_RECT = "1" IS_VISIBLE = "0" PASS_EVENT = "1" NO_FOCUS = "1">
+				<SCRIPT ID = "ON_TICK">	UISelf:Visible(UISelf:PtInUI(GetCursorPos())) </SCRIPT>
+			</IMG>
+			<BUILD ID="BLD_INV_ICON" X="16" Y="42" X_COUNT="8" Y_COUNT="18" X_GAB="44" Y_GAB="44" TARGET_ID="ICON_ITEM"/>
+			<ICON ID="ICON_ITEM" X="0" Y="0" W="40" H="40" ICON_GRP ="5" ICON_KEY="0">
+				<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local self = UISelf
+					self:CallIconToolTip()
+					local b = true
+					local cur = self:GetParent():GetControl("IMG_CURSOR")
+					if false == cur:IsNil() then
+						cur:Visible(b)
+						if b then
+							local pos = self:GetLocation()
+							pos:SetX(pos:GetX()-1)
+							pos:SetY(pos:GetY()-1)
+							cur:SetLocation(pos)
+						end
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor()</SCRIPT>
+				<SCRIPT ID="ON_R_BTN_DOWN">UISelf:IconToCursor() UISelf:CursorToIcon(true)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+					UISelf:CursorToIconFast(1)
+					CloseToolTip()
+				</SCRIPT>
+			</ICON>
+		</FORM>
+		<FORM ID="FRM_TIME" X="9" Y="311" W="223" H="26" TEXT="2904" FONT="Font_Text" T_X="218" T_Y="5" FONT_COLOR_HEX="0xFF4D3413" T_RIGHT="1" TICK_TIME="1000">
+			<FORM ID="FRM_TIME_TEXT" X="0" Y="0" W="223" H="26" TEXT="2903" FONT="Font_Text" T_X="5" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_TICK">DrawInvRemainTime(UISelf, true)</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_INTERCEPT_TEXT" X="9" Y="311" W="223" H="26" TEXT="2902" FONT="Font_Text" T_X="111" T_Y="5" FONT_COLOR_HEX="0xFF7A0000" T_CENTER="1"/>
+		<STATIC_FORM ID="SFRM_INTERCEPTER" IS_VISIBLE="0"X="9" Y="35" W="274" H="273" Z="10" STATIC_NUM="16" TEXT="2901" FONT="Font_Text" T_X="137" T_Y="135" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" PASS_EVENT="1" NO_FOCUS="1"/>
+		<BUTTON ID="BTN_EXPAND" X="235" Y="313" W="47" H="21" TEXT="2905" T_X="23" T_Y="2" FONT="Font_Text" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" BTN_IMG="../Data/6_ui/common/cmBsm.tga" BTN_IMG_W="94" BTN_IMG_H="42">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if not UISelf:IsDisable() then
+					ExpandCashBox(UISelf)
+				end
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_SHARE_SAFE" X="243" Y="91" W="292" H="349" STATIC_NUM="1" CAN_DRAG="1" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close" UNIQUE_EXIST_TYPE="NO_DUPLICATE">		
+		<SCRIPT ID="ON_CALL">
+			ChangeCashBoxViewGroup(UISelf, 4)
+			RegistUIAction(UISelf, "CloseUI")
+			ActivateUI("Inv")
+		</SCRIPT>
+		<SCRIPT ID="ON_CORRECT">AlignUICenterL(UISelf, 243, 91)</SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> CloseToolTip() UISelf:SetCursorState(0) SendCloseShareSafe() CloseUI("Inv")</SCRIPT>		
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="290" H="36" Z="-1" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BTN_BG" X="259" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_EXIT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> CloseInvShareSafeUI() </SCRIPT>
+					<HOTKEY ID="1"> CloseInvShareSafeUI() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_SORTINV_BG" X="232" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_SORT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmInvenBt.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP"> SortInv(3,UISelf) </SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(790043), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUILD ID="BLD_TITLE_BTN_BG" X="7" Y="4" X_COUNT="4" Y_COUNT="1" X_GAB="56" TARGET_ID="SFRM_BTN_BG"/>
+		<STATIC_FORM ID="SFRM_BTN_BG" X="0" Y="0" Z="1" W="54" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<BUILD ID="BLD_TITLE_BTN" X="7" Y="4" X_COUNT="4" Y_COUNT="1" X_GAB="56" TARGET_ID="CBTN_BAG"/>
+		<CHECK_BUTTON ID="CBTN_BAG" X="0" Y="0" Z="2" W="54" H="24" TEXT="" FONT="FTtitle_14" T_X="20" T_Y="3" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" BTN_IMG="../Data/6_ui/common/cmTabBs.tga" BTN_IMG_W="108" BTN_IMG_H="48">
+			<SCRIPT ID="ON_BUILD">UISelf:SetStaticText(GetTT(2927):GetStr()..(UISelf:GetBuildIndex()+1))</SCRIPT>
+			<SCRIPT ID="ON_GET_FOCUS">ChangeCashBoxViewGroup(UISelf:GetParent(), UISelf:GetBuildIndex() + 4)</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OVER"></SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT"></SCRIPT>
+		</CHECK_BUTTON>
+		<FORM ID="SFRM_ITEM_BG" X="0" Y="0" W="292" H="375" Z="-2">
+			<FORM ID="FRM_BG" X="0" Y="0" W="292" H="375" Z="-2">
+				<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="274" H="273" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="274" H="273" Z="-1" STATIC_NUM="3"/>
+					<BUILD ID="BLD_INV_BG_ICON" X="6" Y="6" X_COUNT="6" Y_COUNT="6" X_GAB=" 44" Y_GAB="44" TARGET_ID="SFRM_ICON_BG"/>
+					<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<STATIC_FORM ID="SFRM_EXTENDINV_GUIDE" X="6" Y="6" W="262" H="276" STATIC_NUM="16" Z="1" IS_VISIBLE="1">
+						<BUTTON ID="BTN_EXTEND" X="125" Y="126" W="174" H="28" BTN_IMG="../Data/6_ui/etc/etcInvenBt.tga" BTN_IMG_W="174" BTN_IMG_H="112" BTN_VERTICAL_IMG="1">
+							<ATTR TEXT="21" FONT="FTbt_12" T_X="87" T_Y="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+							<SCRIPT ID="ON_L_BTN_UP">CallExtendInvMessageBox(UISelf)</SCRIPT>
+						</BUTTON>
+					</STATIC_FORM>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_TIME" X="9" Y="311" W="223" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_TIME_BG" X="0" Y="0" W="274" H="26" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				</STATIC_FORM>
+			</FORM>
+			<IMG ID = "IMG_CURSOR" X = "-1" Y = "-1" Z = "-1" W = "42" H = "42" IMG="../Data/6_ui/common/cmIconOver02.tga" IMG_W = "84" IMG_H = "84" U = "2" V = "2" UV_INDEX = "2" IGNORE_PARENT_RECT = "1" IS_VISIBLE = "0" PASS_EVENT = "1" NO_FOCUS = "1">
+				<SCRIPT ID = "ON_TICK">	UISelf:Visible(UISelf:PtInUI(GetCursorPos())) </SCRIPT>
+			</IMG>
+			<BUILD ID="BLD_INV_ICON" X="16" Y="42" X_COUNT="6" Y_COUNT="6" X_GAB="44" Y_GAB="44" TARGET_ID="ICON_ITEM"/>
+			<ICON ID="ICON_ITEM" X="0" Y="0" W="40" H="40" ICON_GRP ="16" ICON_KEY="0">
+				<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local self = UISelf
+					self:CallIconToolTip()
+					local b = true
+					local cur = self:GetParent():GetControl("IMG_CURSOR")
+					if false == cur:IsNil() then
+						cur:Visible(b)
+						if b then
+							local pos = self:GetLocation()
+							pos:SetX(pos:GetX()-1)
+							pos:SetY(pos:GetY()-1)
+							cur:SetLocation(pos)
+						end
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor()</SCRIPT>
+				<SCRIPT ID="ON_R_BTN_DOWN">
+					UISelf:IconToCursor()
+					UISelf:CursorToIcon(true)
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+					UISelf:CursorToIconFast(1)
+					CloseToolTip()
+				</SCRIPT>
+			</ICON>
+		</FORM>
+		<FORM ID="SFRM_ITEM_BIG" X="0" Y="0" W="380" H="375" Z="-2" IS_VISIBLE="0">
+			<FORM ID="FRM_BG" X="0" Y="0" W="380" H="375" Z="-2">
+				<STATIC_FORM ID="SFRM_BG" X="9" Y="35" W="362" H="273" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_BG_SD" X="0" Y="0" W="362" H="273" Z="-1" STATIC_NUM="3"/>
+					<BUILD ID="BLD_INV_BG_ICON" X="6" Y="6" X_COUNT="8" Y_COUNT="18" X_GAB=" 44" Y_GAB="44" TARGET_ID="SFRM_ICON_BG"/>
+					<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="42" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+					<STATIC_FORM ID="SFRM_EXTENDINV_GUIDE" X="6" Y="6" W="350" H="276" STATIC_NUM="16" Z="1" IS_VISIBLE="1">
+						<BUTTON ID="BTN_EXTEND" X="125" Y="126" W="174" H="28" BTN_IMG="../Data/6_ui/etc/etcInvenBt.tga" BTN_IMG_W="174" BTN_IMG_H="112" BTN_VERTICAL_IMG="1">
+							<ATTR TEXT="21" FONT="FTbt_12" T_X="87" T_Y="6" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+							<SCRIPT ID="ON_L_BTN_UP">CallExtendInvMessageBox(UISelf)</SCRIPT>
+						</BUTTON>
+					</STATIC_FORM>
+				</STATIC_FORM>
+				<STATIC_FORM ID="SFRM_TIME" X="9" Y="311" W="311" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+					<STATIC_FORM ID="SFRM_TIME_BG" X="0" Y="0" W="362" H="26" STATIC_NUM="3" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+				</STATIC_FORM>
+			</FORM>
+			<IMG ID = "IMG_CURSOR" X = "-1" Y = "-1" Z = "-1" W = "42" H = "42" IMG="../Data/6_ui/common/cmIconOver02.tga" IMG_W = "84" IMG_H = "84" U = "2" V = "2" UV_INDEX = "2" IGNORE_PARENT_RECT = "1" IS_VISIBLE = "0" PASS_EVENT = "1" NO_FOCUS = "1">
+				<SCRIPT ID = "ON_TICK">	UISelf:Visible(UISelf:PtInUI(GetCursorPos())) </SCRIPT>
+			</IMG>
+			<BUILD ID="BLD_INV_ICON" X="16" Y="42" X_COUNT="8" Y_COUNT="18" X_GAB="44" Y_GAB="44" TARGET_ID="ICON_ITEM"/>
+			<ICON ID="ICON_ITEM" X="0" Y="0" W="40" H="40" ICON_GRP ="5" ICON_KEY="0">
+				<SCRIPT ID="ON_BUILD">UISelf:SetBuildIconKey()</SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">
+					local self = UISelf
+					self:CallIconToolTip()
+					local b = true
+					local cur = self:GetParent():GetControl("IMG_CURSOR")
+					if false == cur:IsNil() then
+						cur:Visible(b)
+						if b then
+							local pos = self:GetLocation()
+							pos:SetX(pos:GetX()-1)
+							pos:SetY(pos:GetY()-1)
+							cur:SetLocation(pos)
+						end
+					end
+				</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor()</SCRIPT>
+				<SCRIPT ID="ON_R_BTN_DOWN">UISelf:IconToCursor() UISelf:CursorToIcon(true)</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_UP">UISelf:CursorToIcon()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DBL_DOWN">
+					UISelf:CursorToIconFast(1)
+					CloseToolTip()
+				</SCRIPT>
+			</ICON>
+		</FORM>
+		<FORM ID="FRM_TIME" X="9" Y="311" W="223" H="26" TEXT="2904" FONT="Font_Text" T_X="218" T_Y="5" FONT_COLOR_HEX="0xFF4D3413" T_RIGHT="1" TICK_TIME="1000">
+			<FORM ID="FRM_TIME_TEXT" X="0" Y="0" W="223" H="26" TEXT="2903" FONT="Font_Text" T_X="5" T_Y="5" FONT_COLOR_HEX="0xFF4D3413"/>
+			<SCRIPT ID="ON_TICK">DrawInvRemainTime(UISelf, true)</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_INTERCEPT_TEXT" X="9" Y="311" W="223" H="26" TEXT="2925" FONT="Font_Text" T_X="111" T_Y="5" FONT_COLOR_HEX="0xFF7A0000" T_CENTER="1"/>
+		<STATIC_FORM ID="SFRM_INTERCEPTER" IS_VISIBLE="0"X="9" Y="35" W="274" H="273" Z="10" STATIC_NUM="16" TEXT="2926" FONT="Font_Text" T_X="137" T_Y="135" FONT_COLOR_HEX="0xFFFFFFFF" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" PASS_EVENT="1" NO_FOCUS="1"/>
+		<BUTTON ID="BTN_EXPAND" X="235" Y="313" W="47" H="21" TEXT="2905" T_X="23" T_Y="2" FONT="Font_Text" T_CENTER="1" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" BTN_IMG="../Data/6_ui/common/cmBsm.tga" BTN_IMG_W="94" BTN_IMG_H="42">
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				if not UISelf:IsDisable() then
+					ExpandCashBox(UISelf)
+				end
+			</SCRIPT>
+		</BUTTON>
+	</STATIC_FORM>	
+
+	<FORM ID="FRM_INVEN_ELE">
+		<ATTR X="0" Y="0" W="247" H="44"/>
+		<STATIC_FORM ID="SFRM_ICON_BG">
+			<ATTR X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+			<ICON ID="InvIcon">
+				<ATTR X="1" Y="1" W="40" H="40"/>
+				<ATTR ICON_GRP ="5"/>
+				<SCRIPT ID="ON_R_BTN_DOWN">UISelf:IconDoAction() </SCRIPT>
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:IconToCursor() </SCRIPT>
+			</ICON>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_ITEM_NAME">
+			<ATTR X="46" Y="0" W="197" H="21" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="13" T_Y ="3"/>
+			<FORM ID="FRM_ARROW">
+				<ATTR X="5" Y="7" W="6" H="6" COLOR_TYPE="4" CAN_COLOR_CHANGE="1"/>
+				<ATTR IMG="../Data/6_ui/common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+			</FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_COIN1">
+			<ATTR X="95" Y="25" W="50" H="16"/>
+			<ATTR IMG="../Data/6_ui/common/cmCoin01.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+		</FORM>
+		<FORM ID="FRM_COIN2">
+			<ATTR X="143" Y="25" W="50" H="16"/>
+			<ATTR IMG="../Data/6_ui/common/cmCoin02.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+		</FORM>
+		<FORM ID="FRM_COIN3">
+			<ATTR X="190" Y="25" W="50" H="16"/>
+			<ATTR IMG="../Data/6_ui/common/cmCoin03.tga" IMG_W="20" IMG_H="16" IMG_X="30" IMG_Y="0"/>
+			<ATTR TEXT = "" FONT = "Font_Text" T_X="29" T_Y ="0" T_RIGHT = "1"/>
+		</FORM>
+	</FORM>
+
+	<STATIC_FORM ID="SFRM_DELETE_ITEM_SAFEINV">	
+		<ATTR ALIGN_X="50" Y="180" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1"/>
+		<STATIC_FORM ID="SFRM_COLOR">
+			<ATTR X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" />
+			<STATIC_FORM ID="SFR_SDW">
+				<ATTR X="0" Y="0" W="190" H="75" STATIC_NUM="3" />
+				<ATTR TEXT="60074" FONT="FTbt_12" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUTTON ID="BTN_OK">
+			<ATTR X="20" Y="88" W="79" H="28" />
+			<ATTR TEXT="400002" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				Net_DeleteItem(UISelf:GetParent():GetCustomDataAsShort(),0)
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59">
+				Net_DeleteItem(UISelf:GetParent():GetCustomDataAsShort(),0)
+				UISelf:CloseParent()
+			</HOTKEY>
+		</BUTTON>
+
+		<BUTTON ID="BTN_CANCEL">
+			<ATTR X="106" Y="88" W="79" H="28" />
+			<ATTR TEXT="400333" FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="1">
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID = "SFRM_EXTEND_INVSAFE_SLOT" ALIGN_X="50" ALIGN_Y="40" W="261" H="303" CAN_DRAG="1" STATIC_NUM="1">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="259" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="228" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="217" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<STATIC_FORM ID = "SFRM_TITLE_SDW" T_X="10" T_Y="4" W="217" H="24" STATIC_NUM="3" TEXT="406101" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_SCRIPT" X="9" Y="35" STATIC_NUM="34" W="244" H="93" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE = "1" TEXT="406102" T_X="20" T_Y="8">
+			<IMG ID="IMG_ARROW" X="9" Y="15" W="20" H="30" CAN_COLOR_CHANGE="1" COLOR_TYPE="4" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="131" Z="-1" W="243" H="132" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<STATIC_FORM ID = "SFRM_SHADOW" W="243" H="136" STATIC_NUM="3">
+				<BUILD TARGET_ID="SFRM_BTN_BG" X="8" Y="8" X_COUNT = "1" Y_COUNT = "4" X_GAB = "0" Y_GAB = "30" START_INDEX = "1"/>
+				<STATIC_FORM ID = "SFRM_BTN_BG" X="0" Y="0" W="227" H="27" STATIC_NUM = "6" CAN_COLOR_CHANGE = "1" COLOR_TYPE = "3">
+					<ATTR FONT_COLOR_HEX="0xFF4D3413" FONT = "FTtitle_14" T_X="10" T_Y="5"/>
+					<SCRIPT ID = "ON_BUILD">UISelf:SetStaticText(GetTT(2900):GetStr().." "..UISelf:GetBuildIndex().." "..GetTT(2905):GetStr())</SCRIPT>
+				</STATIC_FORM>
+			</STATIC_FORM>
+		</STATIC_FORM>
+
+		<BUILD TARGET_ID="BTN_SELECT" X="175" Y="142" X_COUNT = "1" Y_COUNT = "4" X_GAB = "0" Y_GAB = "30"/>
+		<BUTTON ID = "BTN_SELECT" X = "0" Y = "0" Z="1" W = "67" H = "21">
+			<SCRIPT ID ="ON_BUILD">
+				local kTemp = 2200
+				local kHotkeyString = kTemp + UISelf:GetBuildIndex()
+				SetTextOnThisUI(400084, kHotkeyString )
+			</SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBsm2.tga" BTN_IMG_W = "134" BTN_IMG_H = "42"/>
+			<ATTR TEXT = "400084" FONT = "FTtitle_14" T_X = "33" T_Y ="2" T_CENTER="1" T_OUTLINE="1"/>
+			<SCRIPT ID = "ON_L_BTN_DOWN">ExtendInvSafeSlot(UISelf:GetParent(), UISelf:GetBuildIndex())</SCRIPT>
+			<HOTKEY ID="59"> ExtendInvSafeSlot(UISelf:GetParent(), 0 ) return true </HOTKEY>
+			<HOTKEY ID="60"> ExtendInvSafeSlot(UISelf:GetParent(), 1 ) return true </HOTKEY>
+			<HOTKEY ID="61"> ExtendInvSafeSlot(UISelf:GetParent(), 2 ) return true </HOTKEY>
+			<HOTKEY ID="62"> ExtendInvSafeSlot(UISelf:GetParent(), 3 ) return true </HOTKEY>
+			<SCRIPT ID = "ON_MOUSE_OVER"></SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</BUTTON>
+
+		<BUTTON ID = "BTN_CANCLE" X="88" Y="266" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(406115, 2204) </SCRIPT>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "406115" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1">UISelf:CloseParent() return true</HOTKEY>
+			<HOTKEY ID="63">UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		<SCRIPT ID = "ON_CLOSE"> CloseToolTip() </SCRIPT>
+	</STATIC_FORM>
+
+</XUI>

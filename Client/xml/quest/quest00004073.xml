@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4073</ID> <!--T.T.10407301 프린세스 메이킹(5) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	달빛해안 마을의 토마스와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	프린세시아는 왕국으로 직접 돌아가겠다고 한다. 달빛해안 마을의 토마스를 찾아가 이 사실을 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3E51631-D7F2-4129-AB3F-ED04BC38E60F</CLIENT> <!--시작NPC 스카이피 신전 - 프린세시아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3E51631-D7F2-4129-AB3F-ED04BC38E60F</AGENT> <!--진행NPC 11 스카이피 신전 - 프린세시아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 12 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10407311"/> <!--토마스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10407321" FACE="Princessia_normal"/> <!--어렸을 적에 아빠는 늘 바빴어.
+밤 늦게 돌아오면 피곤한 얼굴인데도 억지로 웃으면서 말했지.%%
+사랑하는 우리 공주님…
+매일 같이 잠들 때면 귓가에 속삭였지.%%
+그러니 아빠를 위해서 내가 할 수 있는 일은
+단지 공주가 되는 일 뿐이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10407326" FACE="Thomas_normal"/> <!--허, 그거 참 말썽 많은 아가씨로군 그래.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10407323" FACE="Princessia_normal"/> <!--그럼… 그동안 고마웠어.
+이제 나도 왕국으로 돌아갈테니 용병 토마스에게 그렇게 전해줘.%%
+아, 참…%%
+%name%... 너도 여행을 무사히 마칠 수 있기를 바랄게.%%
+그럼 그동안 고마웠어~ 안녕!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10407324" FACE="Princessia_angry"/> <!--뭐야? 장난치지 말고 토마스에게 내 안부를 전해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10407325" FACE="Princessia_normal"/> <!--달빛해안 마을에 가면 토마스를 만날 수 있을 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10407302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

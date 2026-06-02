@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_SiegeDragon_Atk">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Algon_Kimat"/>
+		<KFMPATH>../Data/2_Mon/N_SiegeDragon_Atk/N_SiegeDragon_Atk.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="33"/>
+			<SPHERE TO="p_hit_point_02" SIZE="33"/>
+		</ABV>
+		<SLOT>
+			<!-- 기본 스킬 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<!-- 입으로 브레스 스킬 -->
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000201"/>
+			<ITEM NAME="breath_01" ANIMATION="1000202"/>
+			<!-- 공중에서 돌진 스킬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000005"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000206"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000207" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000208"/>
+			<!-- 광역공격 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000209"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000211"/>
+			<!-- 순간이동 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000203"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000204"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000205"/>
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000005"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000012"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000013"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000021" DIE_ALPHA="1"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000015" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000023"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>7</ID> <!--T.T.10000701 쓰디쓴 초콜릿 케이크 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람의 항구의 소피아에게 초콜릿 케이크를 전해 주자.-->
+<!--[완료NPC]	바람항구 - 소피아-->
+<!--[내용]	로니는 소피아에게 초콜릿 케이크를 선물로 받았다고 한다. 하지만 초콜릿 케이크는 너무 써서 먹을 수 없을 정도다. 로니는 소피아에게 직접적으로 초콜릿 케이크의 맛이 없다고 말할 수 없다고 한다. 소피아에게 초콜릿 케이크를 직접 맛보게 해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</CLIENT> <!--시작NPC 바람항구 - 로니 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">e195c5f3-ec93-431b-bd0e-8fa742f238b0</PAYER> <!--완료NPC 바람항구 - 소피아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">E7DEB282-9FFF-4A46-8EC4-E42542A97B6B</AGENT> <!--진행NPC 11 바람항구 - 로니 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 12 바람항구 - 소피아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160000700/1">10011</NPC> 
+ <!--Item_NO=160000700/[Q.ID:00007] 초코릿 케이크,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160000700/1/511">10011</NPC> 
+ <!--Item_NO=160000700/[Q.ID:00007] 초코릿 케이크,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160000700/1">10011</NPC> 
+ <!--Item_NO=160000700/[Q.ID:00007] 초코릿 케이크,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160000700/1/512">10012</NPC> 
+ <!--Item_NO=160000700/[Q.ID:00007] 초코릿 케이크,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160000700/1">10012</NPC> 
+ <!--Item_NO=160000700/[Q.ID:00007] 초코릿 케이크,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10000711"/> <!--소피아에게 초콜릿 케이크 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10000721" FACE="Lonnie_normal"/> <!--으이구, 이거 큰일 났군.
+응? %name% 이거 정말 잘 만났어.
+지금 한 여성에게 상처를 줄지도 모르는 일이 발생하고 말았어.%%
+네가 도와 주지 않으면 그 여인이 슬픔에 빠질지도 몰라.
+날 좀 도와 줄 수 있어? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10000726" FACE="Sopia_normal"/> <!--네? 로니씨가 이 초콜릿 케이크를 저에게 전해줬다고요?
+이건 제가 만들어 준 초콜릿 케이크네요.
+응? 같이 나눠 먹자는 이야긴가?%%
+(소피아는 초콜릿 케이크를 한 입 먹어본다)%%
+우엑! 무슨 맛이 이렇지?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10000723" FACE="Lonnie_normal"/> <!--이맘때면, 날 사모하는 여인들이 나에게 작은 사랑의 선물을 주곤 하지.
+난 그 선물들을 기쁜 마음으로 받았어.%%
+하지만 소피아가 준 초콜릿 케이크는 정말! 정말! 정말…
+이거 뭐라고 콕 집어서 이야기하기가 그렇군.
+우선 이걸 한 입 먹어봐%%
+(로니가 건네준 초콜릿 케이크의 강렬한 쓴맛이 전해진다)%%
+그래! 네 표정을 보니 딱 알 수 있겠군.
+하지만 직접적으로 소피아에게 이게 맛이 없다고 전해 줄 수는 없지.%%
+미안하지만 소피아에게 이 초콜릿 케이크를 먹어보라고 좀 전해 주겠어?
+아마, 소피아도 자신이 만든 초콜릿 케이크가 어떤 맛인지 알 수 있겠지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10000724" FACE="Lonnie_angly"/> <!--넌 지금 한 여인을 슬픔을 그대로 보고 있겠다는 거야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10000725" FACE="Lonnie_normal"/> <!--초콜릿 케이크를 설탕에 찍어 먹어야 한다는 것은 상당한 비극이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10000702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10000751" /> <!--초콜릿 케이크를 잃어 버렸다고? 어쩔 수 없지. 여기 소피아가 잔뜩 만들어 놓은 것들 중에 하나를 주지.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10000752" /> <!--초콜릿 케이크는 어디에 있는 거죠? 초콜릿 케이크를 주셔야 맛을 보죠. 초콜릿 케이크를 준다고 하셨던 분에게 다시 가보세요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4277</ID> <!--T.T.10427700 우애깊은 형제 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	쌍둥이자리던전 쌍둥이형제에게 도움받기-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	불꽃성좌의 열쇠는 게자리의 괴물게에게 얻을 수 있다. 하지만 그곳은 지금 어둠의 성운이 깔려 있어서 쉽게 갈 수가 없다. 별자리에서 정찰대의 임무를 맞고 있는 쌍둥이 형제라면 아마도  도움을 줄 수 있을 것이다. 화요일에 열리는 쌍동이자리로 가서 그들을 찾아 도움을 받도록 하자. 하지만 그들 또한 혼돈의 기운에 침식당한 상태라 하니 조심해야만 한다.-->
+
+
+<LIMITS>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="NOT_CHANGE_COUNT" VALUE="1">82000130</ITEM> 
+ <!--Item_NO=82000130/[13_01 별자리] 인도하는 나침반,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">7281600</MONSTER> 
+ <!--MON_NO=7281600/쌍둥이형제 폴락스와 캐스터,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">7281700</MONSTER> 
+ <!--MON_NO=7281700/쌍둥이형제 폴락스와 캐스터,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427711"/> <!--인도하는 나침반-->
+		<OBJECT2 COUNT="1" TEXT="10427713"/> <!--쌍둥이자리던전 클리어-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427721" FACE="Crete_normal"/> <!--두번째 열쇠는 화요일에 열리는 게자리에서 얻을 수 있는 불꽃성좌의 열쇠랍니다.  그러나…..-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427726" FACE="Crete_smile"/> <!--이제 불꽃성좌의 열쇠를 얻으러 갈 수 있겠네요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427723" FACE="Crete_normal"/> <!--지금 게자리는 암흑의 성운이 깔려 있어서 그냥을 찾아갈 수 없을 겁니다. 더군다나 초행이신 %name%님은 더 어렵겠죠. 하지만 별자리의 정찰대 쌍둥이 형제 폴락스와 캐스터는 그 길을 훤히 알고 있거든요. 그들에게 도움을 요청해 보세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427724" FACE="Crete_cry"/> <!--.. 할말이 없네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427725" FACE="Crete_normal"/> <!--아 피오스님 제발 무사하시길-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

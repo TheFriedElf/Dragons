@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5205</ID> <!--T.T.10520501 공격적인 경영이 성공의 열쇠 -->
+
+
+<!-- 작성자 : jinsol7980-->
+<!--[완료조건]	지하묘지 몬스터 50마리 처치-->
+<!--[완료NPC]	부동산 - 제시-->
+<!--[내용]	제시가 새로운 투자처로 지하묘지 지역을 선점하려고 하는데 너무 위험하니 지하묘지 지역의 몬스터 50마리를 처치해서, 제시가 위험하지 않고 편안하게 지역을 돌아볼수 있게 해주자.-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C274D63D-625A-4D11-8610-09F2E398C6CB</CLIENT> <!--시작NPC 부동산 - 제시 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">C274D63D-625A-4D11-8610-09F2E398C6CB</PAYER> <!--완료NPC 부동산 - 제시 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C274D63D-625A-4D11-8610-09F2E398C6CB</AGENT> <!--진행NPC 11 부동산 - 제시 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="KILLMONSTER" VALUE="1">9010910</GROUND> 
+ <!--MAP_NO=9010910/지하묘지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="50" TEXT="10520511"/> <!--지하묘지 몬스터 50마리 처치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10520521" FACE="Jessie_normal"/> <!--이보게 지나가는 용자여 부동산은 정말 뛰어난 재테크 수단 이라네, 
+특이한 지역을 개발해서 사람들만 모이면 일확 천금을 얻을수 있지, %%그래서 말인데 지하묘지 지역을 좀 보고 와주게, 
+지하라 시원하고 소음도 없고 또한 요즘 많은 사람들이 발걸음을 하는듯 해서
+투자 가치가 있는지 보고 평가해 보고 싶거든. %%그런데 아직은 내가 가보기는 너무 위험해서 말이지, 
+용자들 수도 많아진 요즘 좀있으면 거기도 정리되겠지만 
+투자는 선점이 중요하다고 빨리  그곳의 몬스터를 청소 해주게.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10520526" FACE="Jessie_smile"/> <!--고맙네 몬스터의 수가 적어진 지금 빨리 지역을 둘러보고 오겠네, 
+약소하지만 보상을 받아주게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10520523" FACE="Jessie_normal"/> <!--바쁠텐데 수고해 준다니 고맙네, 지하묘지의 몬스터 50마리쯤 처리해주면 될것 같네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10520524" FACE="Jessie_angly"/> <!--흥! 용자가 자네 한사람은 아니니 다른 용자에게 부탁해서 해결하겠네 잘가게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10520525" FACE="Jessie_angly"/> <!--정리는 아직 않됬나? 난 답사갈 준비가 끝났단 말일세 서둘러 주게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10520502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

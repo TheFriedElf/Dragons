@@ -1,0 +1,7 @@
+<ACTION ID="a_Moon Walk" NEXT="a_idle" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="Com_skill_Fire_01" LOOP="TRUE"/>
+  <SLOT NAME="walk"/>
+  <SLOT NAME="com_skill_moonwalk_01" LOOP="TRUE"/>
+  <FSM SCRIPT="Skill_Moon_Dance"
+       HIT_SOUND_ID="moonwalk"/>
+</ACTION>

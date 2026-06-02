@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5186</ID> <!--T.T.10518601 겁먹은 잭 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	잭과 대화-->
+<!--[완료NPC]	위험한 동굴 - 잭-->
+<!--[내용]	위험한 동굴에 잭은 보물이 있다는 소문을 듣고 이곳에 왔다고 한다. 보물을 찾으러 왔지만 잭은 몬스터들 때문에 찾고 있지 못하고 있다고 한다. 잭에게 위험한 동굴은 많이 위험하지 않다고 얘기해주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">A9F524A1-84FD-436f-8168-709A55165360</CLIENT> <!--시작NPC 위험한 동굴 - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">A9F524A1-84FD-436f-8168-709A55165360</PAYER> <!--완료NPC 위험한 동굴 - 잭 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">A9F524A1-84FD-436f-8168-709A55165360</AGENT> <!--진행NPC 11 위험한 동굴 - 잭 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10518611"/> <!--잭과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10518621" FACE="Jack_normal"/> <!--이봐! 친구!
+정말 반가워.
+이런 깊은 동굴에서 널 만나게 될 줄은…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10518626" FACE="Jack_normal"/> <!--(설명해 준다.)
+그래? 별로 무서워할 필요는 없겠네.
+지금 당장 보물을 찾으러 갈 준비를 해야겠군.%%
+바쁘니까 나중에 다시 얘기하자. 
+난 짐을 꾸려야겠어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10518623" FACE="Jack_smile"/> <!--여기 보물이 있다는 소리를 듣고 오긴 했는데...
+어두침침하고 쌀쌀하고 으스스하고...
+별로 좋은 분위기는 아닌듯해.%%
+주위에 사람이 있어서 괜찮지만 혼자서는 다닐 자신이 없어.
+근처 상황 좀 알려줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10518624" FACE="Jack_normal"/> <!--너도 잘 몰라? 어쩔 수 없지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10518625" FACE="Jack_normal"/> <!--상황이 어때?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10518602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

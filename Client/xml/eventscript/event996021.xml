@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+<!-- 플레이어 이동을 막는다. -->
+     <!--CMD TYPE="PlayAnimation" ClassNo ="5006901" SlotName="opening_idle"/-->
+
+<CMD TYPE="IngQuestDoEvent" SpecialActor="ME" QUEST="4280" Event ="980160"/>
+
+
+<!-- 3D 이벤트 -->
+ 
+ <CMD TYPE="HideUI" enable="true"/> <!--UI가리기 -->
+	
+	<CMD TYPE="waittime" time="0.1"/>
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/> <!--플레이어를 숨기기 -->
+	
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/> <!--모든 몬스터 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="false"/>
+	
+	
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD type="waittime" time="0.1"/>    
+	
+	<CMD TYPE="EscScript" EventID="980165"/>
+
+	<CMD TYPE="AddActorFilter" ClassNo="1029530"/><!-- 오프닝 1번-->
+	<CMD TYPE="AddNPC" ClassNo="1029530" NameTTID="522959" SpawnPos="200.5887,5.4745,10.3277"/> <!-- NPC불러오기-->
+	<CMD TYPE="PlayAnimation" ClassNo="1029530" SlotName="opening_movie"/><!-- 오프닝 1번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="522959" CameraID="Camera01" UseActorPositionAsSoundListener="true"/><!-- 오프닝 카메라로 변경 -->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1.0" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="14"/> <!-- 오프닝 시간을 기다림-->
+
+  
+
+	 <!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980165"/>
+
+
+
+
+	
+</EVENT_SCRIPT>
+
+

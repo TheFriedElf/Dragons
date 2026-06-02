@@ -1,0 +1,11 @@
+<ACTION ID="a_Spiral Cannon" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_04"/>
+  <SLOT NAME="Com_Shot_08"/>
+  <FSM SCRIPT="Skill_SpiralCannon" 
+       FIND_TARGET_TYPE="BAR" 
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_mag_Spiralcannon_01_char_root"
+       FIRE_SOUND_ID="SprialCannon"
+       />
+</ACTION>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Worm_Frost" INIT_ACTION="a_opening">
+<TEXTURE SRC="n_bumblow_reflection.dds">../Data/2_Mon/N_Bumblow/n_bumblow_reflection.dds</TEXTURE>
+<TEXTURE SRC="mon_eye02.dds">../Data/2_Mon/N_Alvida/mon_eye02.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Worm_Frost"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/03_Solaiden/01_BasicMon/030800/Worm_Frost/Worm_Frost.kfm</KFMPATH>
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+		
+
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			
+			<!-- 기본공격 -->
+
+			<ITEM NAME="attk_02_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+		
+		<!-- 찍기 -->
+
+			<ITEM NAME="breath_btlidle_02_start" ANIMATION="1000207"/>
+			<ITEM NAME="breath_btlidle_02" ANIMATION="1000208"/>
+			<ITEM NAME="breath_02" ANIMATION="1000209"/>
+			<ITEM NAME="breath_02_finish" ANIMATION="1000210"/>
+		
+			<!-- 샷스킬-->
+
+			
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000252" FIRE_START_NODE="p_ef_mouth" PROJECTILE_ID="PROJECTILE_m_IceGrenade" Z_FACTOR="1.0"/>
+
+			<!--대쉬 -->
+
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326" FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="NONE"/>
+	        <ITEM NAME="dashattk_finish" ANIMATION="1000328" FIRE_EFFECT="NONE"/>
+			<!--브레스-->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347"/>
+			<ITEM NAME="breath_01_finish" ANIMATION="1000348"/>
+		
+			
+					
+			<!--소환-->
+			<ITEM NAME="summon_thorns_btlidle_start" ANIMATION="1000353" RANGE_EFFECT="ef_Blizzard_mon_01"/>
+			<ITEM NAME="summon_thorns_btlidle" ANIMATION="1000354" RANGE_EFFECT="ef_Blizzard_mon_01"/>
+			<ITEM NAME="summon_thorns_fire" ANIMATION="1000355" RANGE_EFFECT="ef_Blizzard_mon_01" />
+			<ITEM NAME="summon_thorns_finish" ANIMATION="1000356" RANGE_EFFECT="ef_Blizzard_mon_01"/>
+		
+		
+		
+		
+			
+			
+			<!-- Basic Movement -->
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

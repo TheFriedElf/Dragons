@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="030132_FD">
+  <GSAPATH>../Data/3_World/03_Solaiden/01_Level/030132_FD.gsa</GSAPATH>
+  <MINIMAP Y="155" H="205">../Data/3_World/03_Solaiden/01_Level/030132_MM.dds</MINIMAP>
+ <BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act" />
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+	</TRIGGER>
+
+  <OBJECT GUID="ac6253c3-ff71-4854-a634-9cf51454334e" RIDABLE="TRUE" SPEED="150" CLASS_NO="5000514">
+    <WayPoint POINT="3287.976, -558.7776, 976.258" TIME="1" />
+    <WayPoint POINT="3291.202, -556.5765, 532.6351" TIME="1" />
+  </OBJECT>
+
+	<!--L.O.D-->
+	<WORLD_QUALITY HIGH_END="1000" MID_END="1500" LOW_END="3000" USE="1" />
+	<!--포그-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="2331" END="5722" COLOR="0.07450981,0.07843138,0.2588235"/>
+
+</WORLD>

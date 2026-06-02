@@ -1,0 +1,12 @@
+<ACTION ID="a_Disease" NEXT="a_battle_idle" USE-EVENT="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_07"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       FIRE_CASTER_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Disease_attk_02_char_root"
+       CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_Disease_attk_03_char_root"
+       HIT_SOUND_ID="Disease"
+       FIND_TARGET_TYPE="SPHERE"
+       />
+</ACTION>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+	<!-- 전체 UI 숨기기 -->
+	<CMD TYPE="HideUI" enable="true"/><!--UI가리기 -->
+
+    <!-- 연출 준비-->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.01" FadeIn="false"/> <!--페이드 어둡게-->
+	<CMD TYPE="WaitFade"/>
+
+
+	<!-- 유닛 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/>
+    <CMD TYPE="ShowActor" UnitType="UT_BOSSMONSTER" Show="false"/><!--보스몬스터 감추기-->
+	<CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="false"/> <!--드랍아이템를 숨기기 -->
+	
+  
+
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0"/> <!-- 무비 신 으로 변경한다 -->  
+
+
+	
+	
+
+	<CMD TYPE="AddActorFilter" ClassNo="1029530"/><!-- 오프닝 1번-->
+	<CMD TYPE="AddNPC" ClassNo="1029530" NameTTID="522959" SpawnPos="200.5887,5.4745,10.3277"/> <!-- NPC불러오기-->
+	<CMD TYPE="PlayAnimation" ClassNo="1029530" SlotName="opening_movie"/><!-- 오프닝 1번-->
+	<CMD TYPE="SetFollowCamera" NameTTID="522959" CameraID="Camera01" UseActorPositionAsSoundListener="true"/><!-- 오프닝 카메라로 변경 -->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1.0" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="14"/> <!-- 오프닝 시간을 기다림-->
+
+    <CMD TYPE="Dialogue" NameTTID="99801062" TextTTID="99801621" FaceID="Persephone_cry" /><!-- 페르세포네 슬픔-->
+	<CMD TYPE="WaitTime" Time="3.5"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<CMD TYPE="ShowActor" ClassNo="1029530" Show="false"/><!-- 오프닝 삭제-->
+	<CMD TYPE="RemoveActor" ClassNo="1029530"/><!-- 오프닝 삭제-->
+
+
+
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/> <!--플레이어를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/> <!--소환체를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_GROUNDBOX" Show="true"/> <!--드랍아이템를 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/> <!--모든 몬스터 보이기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_BOSSMONSTER" Show="true"/><!--보스몬스터 감추기-->
+	<CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="true"/>
+
+
+	
+	<CMD TYPE="HideUI" enable="false"/><!--UI보이기 -->
+	<CMD TYPE="setmoviescene" enable="false" Time="0.2"/>
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/> <!-- 무비 신 으로 변경한다 -->
+	<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_START"/>
+
+
+
+
+</EVENT_SCRIPT>

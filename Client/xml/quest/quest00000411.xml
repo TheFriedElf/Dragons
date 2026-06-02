@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>411</ID> <!--T.T.10041101 NewOrigin오픈(3) - 드래고니카 이벤트 보상! -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	카즈라 마을의 나뭇잎, 드래곤 발자국 도장-->
+<!--[완료NPC]	바람항구 - 가토-->
+<!--[내용]	가토의 이벤트퀘스트를 통해 얻은 카즈라 마을의 나뭇잎과 드래곤 발자국 도장이 있으면 가토가 New Origin 용아풍선을 준다고 한다. 나뭇잎과 드래곤발자국 도장은 달리 사용할 곳이 없으니 풍선아이템을 만들어 보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 바람항구 - 가토 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 바람항구 - 가토 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 바람항구 - 가토 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">231021310</ITEM> 
+ <!--Item_NO=231021310/카즈라 마을의 나뭇잎,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">231021320</ITEM> 
+ <!--Item_NO=231021320/드래곤 발자국 도장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10041111"/> <!-- 카즈라 마을의 나뭇잎 -->
+		<OBJECT2 COUNT="1" TEXT="10041112"/> <!-- 드래곤 발자국 도장 -->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">298006700</ITEM><!--전체지급/전체/1)/298006700봉인아님) 1개-NEWORIGIN 기념 용아풍선1-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10041121" FACE="gatto_normal"/> <!--이제 내가 준비한 이벤트의 마무리 단계 다옹.
+%name%님이 가지고 있는 카즈라 마을의 나뭇잎과 드래곤 발자국 도장을 내게 다오.
+그럼 풍선을 하나 주겠다옹.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10041126" FACE="gatto_normal"/> <!--자 여기 있다옹. 고맙다고 큰 소리로 말하지 않으면 주지 않을 테다옹!!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10041123" FACE="gatto_normal"/> <!--카즈라 마을의 나뭇잎과 드래곤 발자국 도장이 있다면 조건만족이다옹.
+특별히 이번 이벤트를 끝낸 사람들을 증명해주기 위해 카즈라 마을의 특별한 나뭇잎을 잔뜩 가져왔다옹. 거기다 드래곤 발자국 도장을 쾅! 찍으면 되는 거다옹. 참 쉽다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10041124" FACE="gatto_normal"/> <!--안하는 사람이 손해다옹. 난 손해볼게 없다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10041125" FACE="gatto_normal"/> <!--뭔가 부족한거 같다옹. 내가 줬던 선물은 어쨌냐옹??-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10041102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

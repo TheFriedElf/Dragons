@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4119</ID> <!--T.T.10411901 천년 전의 저주 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	광부 터너와 대화-->
+<!--[완료NPC]	악마의 숨결 - 터너-->
+<!--[내용]	용암 지역에서 일하고 있는 광부 터너를 악마의 숨결에서 만나보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</CLIENT> <!--시작NPC 악마의 숨결 - 제이드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2c58cea2-c807-4491-ad32-d6e26d65fca4</PAYER> <!--완료NPC 악마의 숨결 - 터너 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 11 악마의 숨결 - 제이드 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">2c58cea2-c807-4491-ad32-d6e26d65fca4</AGENT> <!--진행NPC 12 악마의 숨결 - 터너 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10411911"/> <!--터너와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10411921" FACE="Walter_normal"/> <!--이곳 악마의 숨결은 예전부터 화마석이라는 보석이 나오고 있어.
+오늘 나의 마지막 공식 임무는… 이 걸 캐는 사람과 관계가 깊지.%%
+위험하니까 나오지 말라고~ 말라고 부탁해도 
+꼬박 꼬박 출근을 일삼는 저기 있는 광부 터너씨를 
+무사 귀가시키는 일이 오늘의 마지막 임무다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10411926" FACE="tourneur_smile"/> <!--아, 맞습니다. 제가 터너에요.. 처음 보는 얼굴인데 누구세요?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10411923" FACE="Walter_normal"/> <!--내가 어지간해서는 남들 이야기를 입에 올리는 걸 싫어하지만… 
+터너씨의 그 고집스러움에 대해선 입을 다물 수가 없구나. %%
+터너씨에게 일찍 들어갈 생각 없냐고 물어봐. 
+밤이 되면 더 위험한 몬스터가 튀어나올 지 모르니까. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10411924" FACE="Walter_angly"/> <!--야! 너 이 녀석… 내 말을 듣지 않으면 어떻게 되는 지 잘 모르는구나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10411925" FACE="Walter_angly"/> <!--설마 옆에 있는 터너씨가 내가 말한 터너씨인가를 고민하고 있는 건 아니겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10411902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

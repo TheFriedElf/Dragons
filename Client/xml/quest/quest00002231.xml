@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2231</ID> <!--T.T.10223101 챤피오 달래기(1) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지 - 지하묘지(Lv35) 몬스터 100마리 처리-->
+<!--[완료NPC]	달빛해안 마을 - 챤피오-->
+<!--[내용]	상급 격투가 챤피오는 마을에 퍼져있는 이상한 소문 때문에 짜증 난다고 한다.
+그 소문인즉슨 챤피오가 사실 약하고 지하묘지 몬스터들에게 절대 이길 수 없다는 내용이라고 한다.
+이에 화가 난 챤피오를 대신하여 지하묘지(Lv35)로 가서 몬스터 100마리를 처리하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</CLIENT> <!--시작NPC 달빛해안 마을 - 챤피오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</PAYER> <!--완료NPC 달빛해안 마을 - 챤피오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D596A6B3-07E0-4f4b-BCD2-8A4A67B21C92</AGENT> <!--진행NPC 11 달빛해안 마을 - 챤피오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4600100</MONSTER> 
+ <!--MON_NO=4600100/외눈박이 미라,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4600300</MONSTER> 
+ <!--MON_NO=4600300/듀라만,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4600300</MONSTER> 
+ <!--MON_NO=4600300/듀라만,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4600400</MONSTER> 
+ <!--MON_NO=4600400/메르곤,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4600500</MONSTER> 
+ <!--MON_NO=4600500/쥐라드,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4600600</MONSTER> 
+ <!--MON_NO=4600600/지하묘지 좀비,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="100" TEXT="10223111"/> <!--지하묘지(Lv35) - 몬스터 100마리 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10223121" FACE="Campiu_normal"/> <!--대체 누구야!!
+누가 나에 대한 헛소문을 퍼트리고 다니는 거야?!
+더는 못 참겠어.
+너 잠깐 내 얘기 좀 듣고 가.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10223126" FACE="Campiu_smile"/> <!--좋아! 이제 누구도 날 무시하지 못 하겠지? 내가 한 것처럼 손을 써놨으니 누가 물어보거든. 너는 모른척 하도록 해 ! 알았지? 이건 사례금이야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10223123" FACE="Campiu_smile"/> <!--넌 내가 얼마나 강한지 알고 있지?
+그런데 요즘 들려오는 헛소리 때문에 내 자존심이 무척 상했어.
+자꾸 누가 챤피오는 약골이라는 소문을 내고 있어.%%
+내가 지하묘지에서 매일 얻어터지고 다닌다는 소문과 함께 말이지.
+네가 지하묘지(Lv35)로 가서 거기 있는 몬스터 100마리만 처리해줘.%%
+내가 직접 가고 싶지만 나 요즘 바쁜 거 알지?
+내가 했다고 말할 거니까 갔다 와서 입 다물고 있어. 알겠어?!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10223124" FACE="Campiu_angry"/> <!--안된다는거야? 대체 왜! 내가 가고 싶지만 지금 정말 바쁘단 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10223125" FACE="Campiu_normal"/> <!--어서 가서 내 몫까지 두들겨 패주고 오라고! 너무 화가 나 !!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10223102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

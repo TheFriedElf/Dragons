@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2230</ID> <!--T.T.10223001 네가 그냥 용사면, 난 TOP용사야! -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지(Lv35) - 쥐라고나 처치-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	토마스는 자신이 굉장히 강하다는 착각에 빠졌다고 한다. 그런 토마스에 잘난 척을 더는 참을 수가 없다. 토마스가 하는 일을 누구나 할 수 있다는 걸 보여주고 토마스의 기세를 한 풀 꺾어놓도록 하자. 토마스의 기세를 꺾으려면 지하묘지(Lv35)에 가서 쥐라고나를 처리하면 될 것 같다고 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010920/1">4601300</MONSTER> 
+ <!--MON_NO=4601300/쥐라고나,MAP_NO=9010920/Lv.35 지하묘지,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10223011"/> <!--지하묘지(Lv35)  - 쥐라고나 처리-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10223021" FACE="Thomas_normal"/> <!--우하하! 이봐! 자네!
+내가 얼마나 강한지 알고 있나?
+예전에는 내가 지나가기만 해도 몬스터들이 모두 숨어버렸지.
+그때는 내가 숨만 한 번 쉬어도 모두 벌벌 떨었다네.%%
+뭐라고? 자네도 강하다고? 나도 어느 정도 인정하지.
+하지만 그게 어디 나만큼 강할까? 우하하.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10223026" FACE="Thomas_smile"/> <!--뭐?!
+그걸 정말 묵사발을 낼 줄이야.
+에헴. 다음에 다시 얘기하세. 
+내가 바빠서 말일세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10223023" FACE="Thomas_smile"/> <!--나보다 강하다면 증명이 필요하겠군.
+지하묘지(Lv35)로 가면 쥐라고나가 있을걸세.%%
+자네가 말한 대로라면 묵사발을 내 줄 자신이 있겠지?
+기대하고 있겠네. 우하하.
+겁나서 꽁무니 빼고 나에게 찾아오진 말게. 
+우하하.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10223024" FACE="Thomas_angly"/> <!--이것보게! 역시 꽁무니부터 빼는구먼! 우하하.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10223025" FACE="Thomas_normal"/> <!--막상 하려니 겁나서 못 가겠나? 우하하 지금이라도 인정하게!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10223002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

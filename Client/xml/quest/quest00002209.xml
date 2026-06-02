@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2209</ID> <!--T.T.10220901 평행우주 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 니콜라와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 니콜라-->
+<!--[내용]	달빛해안 마을 니콜라는 '고양이가 든 검은상자'를 통해 무엇인가를 깨달았다고 한다.
+무엇을 깨달았는지 들어보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</CLIENT> <!--시작NPC 달빛해안 마을 - 니콜라 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</PAYER> <!--완료NPC 달빛해안 마을 - 니콜라 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</AGENT> <!--진행NPC 11 달빛해안 마을 - 니콜라 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10220911"/> <!--니콜라와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10220921" FACE="Nikola_normal"/> <!--상자를 열었더니, 다행히 고양이는 살아있었네.
+내가 무엇을 깨달았는지 알고 있나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10220926" FACE="Nikola_normal"/> <!--실은 내가 이런 평행우주를 확신하는 이유는 따로 있지.
+자네가 처음 나에게 물어봤던, 그 다른 차원의 아이템 때문일세.%%
+내가 얼마전에 장치를 하나 만들었는데, 과연 이것이 어떻게 작동하는지 상당히
+궁금했거든. 근데 자네 덕분에 그 해답을 깨달았어.
+고맙네. 그리고 고양이도 고맙네. 친구가 생겼어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10220923" FACE="Nikola_smile"/> <!--아주 심오한 얘기니까 잘 들어보도록.%%
+내가 상자를 여는 순간 결과는 두 가지가 될 수 있지.
+고양이가 죽어 있거나, 살아 있거나.
+지금은 고양이가 살아 있지만, 만약 고양이가 죽어 있었다면 어떻게 되었을까?%%
+물론 가정이지만 그런 세계가 또 존재할 수 있지 않을까?
+하지만 우린 그런 세계가 있으리라 상상은 할 수 있지만, 그 세계의 존재여부를 확인
+할 수는 없어.%%
+그게 우리의 한계지. 그러나 나는 믿기로 했네. 어딘간에는 그런 세계가 반드시
+존재한다는 것을 말이야.%%
+그 세계와 우리는 평행선처럼 영원히 만날 수 없지. 그래서 나는 명명했네.
+평행우주이론! 
+우리 우주와는 뭔가 다르고, 만날 수는 없지만 반드시 존재하는 우주.%%
+흔히 공상과학에 등장하는 4차원이 아마도 이것과 다르지 않을 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10220924" FACE="Nikola_normal"/> <!--알고 싶지 않은 모양이군.
+자네에 선택 또한 다른 한쪽에 결과물이겠지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10220925" FACE="Nikola_normal"/> <!--그 해답이 궁금한가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10220902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

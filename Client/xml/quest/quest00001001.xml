@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by kimo (kimo) -->
+<QUEST>
+	<ID>1001</ID>
+	<GROUPNO>0</GROUPNO>
+	<TITLE TEXT="506931">미완의 임무</TITLE>
+	<GROUPNAME TEXT="500009">바람의 항구</GROUPNAME>
+	<LIMITS>
+		<LEVEL MIN="35" MAX="42"/>
+		<CLASSES>
+			<CLASS MEMO="Clown">11</CLASS>
+			<CLASS MEMO="Assassin">12</CLASS>
+		</CLASSES>
+		<!--<ITEMS>
+			<ITEM COUNT="0">9100000</ITEM>
+		</ITEMS> -->
+		<QUESTS>
+		</QUESTS>
+		<LOCATIONS>
+			<!-- <LOCATION>2</LOCATION>-->
+		</LOCATIONS>
+		<PARTY MIN="1" MAX="1"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10000">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</CLIENT>
+	</CLIENTS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10002">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</AGENT>
+	</AGENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10003">FB5DB6DB-DD39-4F64-9EA0-BFAB8FA73C56</PAYER>
+	</PAYERS>
+	<EVENTS>
+        <NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10000</NPC>
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10002</NPC>
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10003</NPC>
+        <MISSION OBJECTNO="1" TYPE="CLEAR" VALUE="3">4</MISSION>
+		
+	</EVENTS>
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="506938"/>
+		<OBJECT2 COUNT="0" TEXT="0"/>
+		<OBJECT3 COUNT="0" TEXT="0"/>
+		<OBJECT4 COUNT="0" TEXT="0"/>
+		<OBJECT5 COUNT="0" TEXT="0"/>
+	</OBJECTS>
+	<REWARD>
+		 <!--SELECT1 COUNT="0">
+            <ITEM COUNT="1" RARITY="101" SEAL="0">17100100</ITEM>
+            <CLASS>11</CLASS>
+        </SELECT1>
+        
+        <SELECT1 COUNT="0">
+            <ITEM COUNT="1" RARITY="101" SEAL="0">18100010</ITEM>
+            <CLASS>12</CLASS>
+        </SELECT1-->
+	</REWARD>
+	<DIALOGS>
+		<!--101번은 퀘스트 의뢰 정보창-->
+		<!--MEMO=201번은 퀘스트 수락/거부 여부창-->
+		<DIALOG ID="101" TYPE="PROLOG">
+			<BODY TEXT="506932" FACE="Cindy_normal"/>
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<!--301번은 퀘스트 수락 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="301">
+			<BODY TEXT="506933" FACE="Cindy_normal"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--401번은 퀘스트 거부 하면 뜰창 있어도 되고 없어도 된다.-->
+		<DIALOG ID="401">
+			<BODY TEXT="506934" FACE="Cindy_smile"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501">
+			<BODY TEXT="506935" FACE="Cindy_angly"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE">
+			<BODY TEXT="507305" FACE="Cindy_smile"/>
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<!--901번은 !!절대로!! 퀘스트 정보창, 퀘스트 목록에서 퀘스트를 클릭하면 뜨게 된다.-->
+		<DIALOG ID="901" TYPE="INFO">
+			<BODY TEXT="506937"/>
+			<SELECT ID="0" TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<!--902는 인벤이 꽉 찾을 때 오류 메시지-->
+		<DIALOG ID="902">
+			<BODY TEXT="502048"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903">
+			<BODY TEXT="501835"/>
+			<SELECT ID="0" TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<!--Dialog ID 903~999번 까지는 어떤용도로든 사용가능하다.-->
+	</DIALOGS>
+</QUEST>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>251</ID> <!--T.T.10025101 여름축제 - 달콤한 천조각  -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	하루카에게 천조각 1개를 가져가자!-->
+<!--[완료NPC]	바람항구 - 하루카-->
+<!--[내용]	여름축제를 맞아 솜사탕을 팔던 사토씨의 설탕을 누군가 침입해서 몽땅 먹어버렸다고 한다. 하루카가 이야기 듣기로는 범인이 초록색에 검은색 줄무늬를 가진 동그란 녀석이었다고 한다. 하루카는 아무래도 자신이 재배하던 수박이 범인 같다면서 걱정하고 있다. 설탕은 설탕나무에서 열리는 열매로 천조각 같이 생겨 사람들이 천조각이라고 부른다고 한다. 수박이 가져간 천조각 1개를 회수하자. 수박을 부수면 여러 가지 아이템과 같이 천조각이 떨어진다. 하지만 가끔 안 나오는 경우도 있으니 너무 상심하지 말자. 수박은 톱날꽃게 해변, 스티븐 무역항, 칼리곤 선단, 작은 파도 해안, 바람항구 채집농장에 가끔 등장하니 꾸준히 기다려보자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</CLIENT> <!--시작NPC 바람항구 - 하루카 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</PAYER> <!--완료NPC 바람항구 - 하루카 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</AGENT> <!--진행NPC 11 바람항구 - 하루카 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">299602950</ITEM> 
+ <!--Item_NO=299602950/천조각[2011 여름이벤트],-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10025111"/> <!--천조각-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">299603010</ITEM><!--전체지급/전체/1)/299603010(봉인아님) 1개-솜사탕[2011 여름이벤트]-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10025121" FACE="Haruka_normal"/> <!--여름축제에서 가장 즐거운 먹거리 중에 하나인 솜사탕을 이제 맛보기 힘들 것 같습니다.
+어제 저녁에 사토씨가 보관하던 창고에 누군가 침입해, 그 안에 있던 설탕이 모두 다 사라졌기 때문입니다.%% 
+사토씨는 밤이라서 정확히 보지는 못했지만, 범인의 대략적인 윤곽은 봤다고 합니다.
+동그란 얼굴에 초록색 피부에 검은색 줄무늬가 강하게 있었다고 합니다. %%
+아무래도, 아무래도 전 범인을 알고 있는 것 같습니다. 바로 제가 키우던 수박이 범인 같습니다. 
+용사님 제발 도와 주시기 바랍니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10025126" FACE="Haruka_angly"/> <!--감사합니다. 이제 축제의 달콤함도 돌아왔겠군요. 
+감사의 뜻으로 사토씨가 만든 솜사탕을 드리겠습니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10025123" FACE="Haruka_normal"/> <!--역시 제가 수박을 키울 때, 당도가 높아져야 해라고 계속 말한 게 실수였던 것 같습니다.
+수박들도 역시 그것에 신경을 쓰고 사토씨의 설탕을 모두 가져가버린 것이 분명합니다.%% 
+설탕나무에서 열린 설탕은 천조각과 같은 모습을 하고 있습니다. 그래서 사람들이 그 이름을 천조각이라고 부릅니다.
+혹시라도 그냥 단순한 천조각이라고 생각하고 지나가지 말아주시기 바랍니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10025124" FACE="Haruka_angly"/> <!--아, 이제 여름축제에서 솜사탕은 찾아볼 수 없게 되겠군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10025125" FACE="Haruka_normal"/> <!--수박들이 설탕을 모두 먹어버리기 전에 찾아 주셨으면 감사하겠습니다. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10025102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

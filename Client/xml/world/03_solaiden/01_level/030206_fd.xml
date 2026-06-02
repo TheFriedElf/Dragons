@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="030206_FD">
+  <GSAPATH>../Data/3_World/03_Solaiden/01_Level/030206_FD.gsa</GSAPATH>
+  <MINIMAP Y="205" H="130">../Data/3_World/03_Solaiden/01_Level/030206_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+
+  <TRIGGER ID="gate_next_base" TYPE="MISSION">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="2" />
+  </TRIGGER>
+
+   <!-- 텔레 점프 -->
+
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM_STRING="trigger_jump_1" PARAM="250" />
+  </TRIGGER>
+ <!-- 포 그 -->
+	<WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="3000" USE="1" />
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="3" END="7290" COLOR="0.7921569,0.8901961,1"/>
+
+</WORLD>

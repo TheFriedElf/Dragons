@@ -1,0 +1,11 @@
+<ACTION ID="a_Armor Break" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_armor_break_01"/>
+  <FSM SCRIPT="Act_Melee_Default" HIT_SOUND_ID="ArmorBreak" WEAPON_XML="../XML/Item/Common/12_Weapon/09_special/ArmorBreakAxe.xml"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_Armor_Break_01_char_root"
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	   FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+	/>
+  
+</ACTION>

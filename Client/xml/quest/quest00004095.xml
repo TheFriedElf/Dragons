@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4095</ID> <!--T.T.10409501 의미심장한 우연(8) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	망자의 탑(6층)에서 원령 벨라 퇴치-->
+<!--[완료NPC]	망자의 탑 (6층) - 잭-->
+<!--[내용]	잭이 망자의 탑의 닫힌 문들을 여는 이중장치를 발견한 듯 하다. 망자의 탑(6층)의 원령 벨라를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D024E29B-155C-4aa9-B02E-12F91D783016</CLIENT> <!--시작NPC 망자의 탑 (6층) - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D024E29B-155C-4aa9-B02E-12F91D783016</PAYER> <!--완료NPC 망자의 탑 (6층) - 잭 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D024E29B-155C-4aa9-B02E-12F91D783016</AGENT> <!--진행NPC 11 망자의 탑 (6층) - 잭 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6125600</MONSTER> 
+ <!--MON_NO=6125600/여왕 벨라,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10409511"/> <!--원령 벨라 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10409521" FACE="Jack_normal"/> <!--뭐야? 형이 나를 찾으려고 먼저 올라가버렸다고?
+이거 난처하게 됐는 걸…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10409526" FACE="Jack_normal"/> <!--고마워~
+덕분에 이제 마음 편하게 정상으로 올라갈 수 있을 것 같아.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10409523" FACE="Jack_normal"/> <!--이.. 이런.. 여기 6층에도 문을 여는 장치가 있는데...%%
+서둘러야겠다. 6층의 원령 벨라를 퇴치해줘.
+그럼 탑의 정상으로 가는 동안 막혀있던 문을 모두 열수 있을테니.  -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10409524" FACE="Jack_angly"/> <!--솔직히 유령이 무서우면 무섭다고 말을 해. 흥.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10409525" FACE="Jack_normal"/> <!--원령 벨라는 이곳 6층의 방에 있어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10409502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

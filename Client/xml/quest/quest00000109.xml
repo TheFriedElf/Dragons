@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>109</ID> <!--T.T.10010901 벚꽃 비전서를 찾아서(2/4) -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	[하루카초밥집] 난이도 1～4 - 벚꽃 비전서를 4개 수집-->
+<!--[완료NPC]	바람항구 - 하루카-->
+<!--[내용]	하루카 말에 따르면, [하루카초밥집] 어딘가에 벚꽃 비전서가 숨겨져있다고 한다. [하루카초밥집] 난이도1～4 의 어딘가에 숨겨져있는 벚꽃 비전서 4개를 모아서 하루카에게 전달하면, 새로운 '벚꽃 액세서리'를 만들어 준다고 한다 -->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</CLIENT> <!--시작NPC 바람항구 - 하루카 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</PAYER> <!--완료NPC 바람항구 - 하루카 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">D2500B44-DBD2-4c23-8D7E-F618F88FCF59</AGENT> <!--진행NPC 11 바람항구 - 하루카 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9015409/10000/0/1/1/291301130">6132200</MONSTER> 
+ <!--MON_NO=6132200/주방장 LV14,Item_NO=291301130/벚꽃 비전서100%,-->
+		
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">291301130</ITEM> 
+ <!--Item_NO=291301130/벚꽃 비전서,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="4" TEXT="10010911"/> <!--벚꽃 비전서 수집-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">291301100</ITEM><!--전체지급/전체/1)/291301100(봉인아님) 1개-신 벚꽃 반지-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10010921" FACE="Haruka_normal"/> <!--다른 액세서리도 필요하시군요. 
+그럼, 난이도 1～4로 가셔서, 벚꽃 비전서를 4개 모아서 주세요.
+액세서리를 만들 준비를 해두겠습니다. -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10010926" FACE="Haruka_smile"/> <!--와~ 역시 굉장하신 분이시네요! 벚꽃 비전서를 이렇게 금방 모아오시다니! 
+그럼, 액세서리를 만들게요!!
+다 됐다! 이게 새로운 [벚꽃 반지] 입니다. 
+벚꽃 비전서는 아직 더 많이 있을 거 같아요. 또 비전서를 가져오시면, 다른 액세서리를 만들 수 있을 거 같네요 -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10010923" FACE="Haruka_normal"/> <!--그럼 기다리면서 액세서리를 만들 준비를 하고 있을께요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10010924" FACE="Haruka_angly"/> <!--그러시군요……. 벚꽃 비전에 흥미가 없으십니까…… 아쉽네요 -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10010925" FACE="Haruka_angly"/> <!--저기…. 아직 못가져 오셨나요? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="502048" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10010902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

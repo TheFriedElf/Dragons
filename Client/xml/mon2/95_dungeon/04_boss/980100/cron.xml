@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Cron" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="980195">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+		<KFMPATH SCALE="1.65">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Chiron/Chiron.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="1.65">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Chiron/Chiron_ending.kfm</SUB_KFMPATH>
+
+
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+             <SPHERE TO="p_hit_point_01" SIZE="30"/>
+             <SPHERE TO="p_hit_point_02" SIZE="18"/>
+
+		</ABV>
+		<SLOT>
+	
+			<!--원거리 1 -->
+			<ITEM NAME="btlidle_01_antares_shot_start" ANIMATION="1000250"/>
+			<ITEM NAME="btlidle_01_antares_skill_shot" ANIMATION="1000251"/>
+			<ITEM NAME="skill_antares_shot_01" ANIMATION="1000252" FIRE_START_NODE="p_ef_shot_01" PROJECTILE_SCALE="2.0" GROUND_EFFECT="" PROJECTILE_ID="PROJECTILE_Caster_shot_01"/>
+
+		
+			
+			<!--원거리 2 폭발 -->
+			<ITEM NAME="btlidle_02_antares_shot_start" ANIMATION="1000250"/>
+			<ITEM NAME="btlidle_02_antares_skill_shot" ANIMATION="1000251"/>
+			<ITEM NAME="skill_antares_shot_02" ANIMATION="1000252" FIRE_START_NODE="p_ef_shot_01" PROJECTILE_SCALE="1.8" GROUND_EFFECT="" PROJECTILE_ID="PROJECTILE_chironshot_01"/>
+
+	
+
+	
+			<!--유성낙하-->
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000256" CAST_EFFECT="efk_kirab_projectiledown_01"/>
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000257"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000258" DETACH_RANGE_EFFECT="TRUE" PROJECTILE_ID="PROJECTILE_cron_massive"
+				PROJECTILE_SPEED="400" FIRE_TERM="0.02" PROJECTILE_COUNT="20" QUAKE_TIME="2" QUAKE_FACTOR="3"
+				FIRE_SOUND_ID="elga_meteor"  ARRIVED_EFFECT="efk_chiron_meteor_02"/>
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!--공중 ㅍ폭격(안타레스레이져)-->
+			<ITEM NAME="btlidle_01_skill_shot_start" ANIMATION="1001151"/>
+<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1001152"/>
+<ITEM NAME="skill_shot_01" ANIMATION="1001153" FIRE_START_NODE="p_ef_laser" PROJECTILE_END_NODE="p_ef_laser_end" PROJECTILE_ID="Projectile_cronlaser_shot_01" ARRIVED_EFFECT="efk_chiron_canonbeshot_01" GROUND_EFFECT="efk_chiron_canonbeshot_01"/>
+<ITEM NAME="shot_return_01" ANIMATION="1001154"/>
+
+
+
+
+			<!-- 얼음지역 소환 -->
+			<ITEM NAME="touch_up_start" ANIMATION="1000259" RANGE_EFFECT="EF_Pattern_BlizzardRing"/>
+<ITEM NAME="touch_up_idle" ANIMATION="1000260"/>
+<ITEM NAME="touch_up_fire" ANIMATION="1000261" RANDOM="100" FIRE_START_NODE="p_ef_mouth" 
+           PROJECTILE_ID="Projectile_Touch_up_03" FIRE_TERM="0.03" PROJECTILE_COUNT="1"
+           PROJECTILE_SPEED="800"
+           Z_FACTOR="3"
+           UP_ACTION_NO="7282045"
+           UP_FIRE_EFFECT="EF_Common_Mon_Torus_IcePick_tiger"
+           UP_FIRE_EFFECT_SCALE="1"
+           UP_PROJECTILE_SPEED="180"
+           UP_PROJECTILE_SCALE="1"
+           UP_PROJECTILE_ALPHA="0"
+/>
+
+									
+			
+			<!--무적 버프 -->
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000213"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000214"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000215"/>
+
+
+			<!--소환 스킬 -->
+			<ITEM NAME="attk_05_01_start" ANIMATION="1000262"/>
+			<ITEM NAME="attk_05_01" ANIMATION="1000263"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000264"/>
+
+
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020" DYING_TIME = "3600"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000018" />
+			<ITEM NAME="die_blending_01" ANIMATION="1000018" DYING_TIME = "3600"/>
+
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000044" QUAKE_TIME="1.5" QUAKE_FACTOR="2" CAMERA_ZOOM_OUT="600" CAMERA_ZOOM_IN_SPEED="0"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		
+			<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000001" HIT_SOUND_ID="pattern-brake"/>
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

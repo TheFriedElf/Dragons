@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4100</ID> <!--T.T.10410001 그리퐁의 원래 주인 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	정체불명의 사냥꾼에게 에텔라이트 1개 전달-->
+<!--[완료NPC]	마른나무 늪지대 - 정체불명의 사냥꾼-->
+<!--[내용]	마른나무 늪지대에서 만난 정체불명의 사냥꾼은 
+라이딩펫 그리퐁을 알고 있는 듯 하다. 정체불명의 사냥꾼에게 
+상인의 마을의 상점에서 에텔라이트를 구입해 전달하자.-->
+
+
+	<LIMITS>
+		<PET_CLASS TYPE="2" LEVEL="1"/>
+		
+<PET_LEVEL MIN="40" MAX="60"/>
+	</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">FEADD3EA-7FF8-4625-836B-AD63B494532C</CLIENT> <!--시작NPC 마른나무 늪지대 - 정체불명의 사냥꾼 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">FEADD3EA-7FF8-4625-836B-AD63B494532C</PAYER> <!--완료NPC 마른나무 늪지대 - 정체불명의 사냥꾼 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">FEADD3EA-7FF8-4625-836B-AD63B494532C</AGENT> <!--진행NPC 11 마른나무 늪지대 - 정체불명의 사냥꾼 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160410000</ITEM> 
+ <!--Item_NO=160410000/[Q.ID:04100] 에텔라이트,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160410000/1/501">10011</NPC> 
+ <!--Item_NO=160410000/[Q.ID:04100] 에텔라이트,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160410000/1">10011</NPC> 
+ <!--Item_NO=160410000/[Q.ID:04100] 에텔라이트,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10410011"/> <!--에텔라이트 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">265002280</ITEM><!--전체지급/전체/1)/265002280(봉인아님) 1개-[전투펫] 진화의 수정-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10410021" FACE="Palmir_normal"/> <!--이봐, 꼬마…. 이리와보렴. 
+너… 그 아이는 어디서 난 거야?
+그, 그리퐁 말이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10410026" FACE="Palmir_smile"/> <!--와아, 다행이다!
+이거 상당히 희귀한 물건인데 아직까지 남아있었다니, 
+너 운이 좋은 편이구나.%%
+만약 그리퐁이 성체가 되면 그 때부턴 그리퐁에 탑승이 가능해지니까, 
+이후로도 잘 키워주렴. 알았지?%%
+자, 이 에텔라이트를 그리퐁한테 마시게 하면 되는 거야. 
+그럼 시작한다!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10410023" FACE="Palmir_smile"/> <!--흐음… 내가 펫상점에 맡겼던 알… 거기서 나온거야?%%
+(그러고보니, 펫상점의 이오나가 펫알을 맡았다고 했었지.)
+이리 좀 데리고 와봐… %%
+후후후! 귀엽고 토실토실하게 잘 자랐구나.
+요녀석… 타이밍이 좀 아쉬운 걸… 
+잘하면 엄마랑 만날 수 있었을텐데…%%
+너! 
+어째서 아직까지 이 아이를 성체로 키우지 못한 거야?
+지금 쯤은 이 녀석도 자기 엄마 만큼 커있어야 할텐데…%%
+(정체불명의 사냥꾼은 이후 차분히 자초지종을 들어주었다.)%%
+흠.. 그렇다면 결국 부화시기를 놓쳤던 거로구나. 
+이대로 영영 성체가 될 수 없는 불구 상태가 된 걸까?%%
+흠... 
+그래도 방법이 한가지 있긴 한데 말이지.%% 
+혹시 너... 세상에서 가장 깊은 동굴에서 만들어지는
+에텔라이트라는 영약에 대해 알고 있니?%% 
+그 포션을 구할 수만 있다면 이 녀석을 어른으로 만들 수도 
+있을 것 같거든...%%
+혹시 모르니 상인의 마을 포션 상점으로 가보렴.%%
+그곳에서 에텔라이트를 구해다줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10410024" FACE="Palmir_angry"/> <!--흠… 너, 펫을 키울 자격이 없는 녀석 같아.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10410025" FACE="Palmir_normal"/> <!--에텔라이트를 팔고 있는 곳은 기껏해야 상인의 마을 정도겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10410002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

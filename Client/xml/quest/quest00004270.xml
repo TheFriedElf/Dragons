@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4270</ID> <!--T.T.10427001 정령석이 기다리는 던젼으로… -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	대마도사 그웬과 대화-->
+<!--[완료NPC]	카즈라 마을 - 그웬-->
+<!--[내용]	실험을 끝 마친 노엘박사는 카즈라 마을에 출현한 사상 최강의 마도사, 그웬 루빈이 정령석을 구할 수 있는 던젼으로 모험자들을 안내한다고 일러준다. 카즈라 마을로 대마도사 그웬을 찾아가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</CLIENT> <!--시작NPC 상인의 마을 - 노엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F6892AEE-C23C-4e4c-848E-93F72A255B05</PAYER> <!--완료NPC 카즈라 마을 - 그웬 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 11 상인의 마을 - 노엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">F6892AEE-C23C-4e4c-848E-93F72A255B05</AGENT> <!--진행NPC 12 카즈라 마을 - 그웬 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10427011"/> <!--그웬과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10427021" FACE="noel_normal"/> <!--마지막으로 중요한 정보를 알려주도록 하겠네.%%
+이 근방에 브리즈국 최고의 마법사 가문 출신의 
+그웬 루빈님이 출현했다고 하네.%%
+오랜 시간 동안 수행하며 은둔하고 있던 그녀가 갑작스레
+세상에 나타나서, 모험자들을 정령던젼으로 안내하고 있다는 
+소식이 들리고 있네.%% 
+그녀에게 찾아가면, 정령석을 구할 수 있다는 뜻이겠지.
+그녀를 만난다면 자네를 충분히 성장시킬 수 있는 좋은 기회가 
+될 것이네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10427026" FACE="Gwen_smile"/> <!--아주 머나 먼 오래 전에, 정령의 선택을 받은 다섯 명의 수호자가 
+깊고 깊은 어둠의 차원 속으로 사라졌습니다. 그 이후 세상의
+균형을 유지시켜왔던 정령의 수호석은 주인을 잃은 채 쓸쓸히
+방치됐죠.%% 
+그대는 정령의 선택을 받았군요. 나는 미약하나마 당신에 대해
+알 수 있습니다. 흑룡과 마녀의 사악한 위협으로부터 지상의 
+가녀린 정령들을 지켜줄 사람… %%
+당신이 원하신다면 언제건 정령들의 힘을 얻을 수 있는 곳으로
+인도해 드리도록 하겠습니다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10427023" FACE="noel_normal"/> <!--원래 그녀는 역사상 가장 위대한 마도사이자, 정령석의
+존재를 규명했던 아르프 루빈의 직계 후손이네. %%
+대다수의 상위 마도사가 수행하는 '묵상', '정념', '환몽', '연성'... 
+4단계의 마법 수행을 거쳐 궁극의 수행단계인 '초연'의 단계를 
+극복한 사상 최강의 천재 마도사라고 할 수 있네.%%
+그녀가 카즈라에 출현해 정령던젼으로 모험자를 안내하는 
+이유는 아마도 검은 마녀와 관계가 있을 것이라 생각하네.
+위기를 직감한 것이겠지.%%
+대마도사 그웬이 카즈라 마을에 나와 있다고 들었네.
+그녀를 서둘러 찾아가 보게. 정령던젼으로의 모험을 훌륭히
+완수하여 보다 더 강한 정령석 장비를 만들어내길 빌겠네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10427024" FACE="noel_normal"/> <!--지금 당장이 아니더라도 좋아. 그러나 오직 카즈라에 있는 
+그녀를 통해서만 정령던젼으로 들어갈 수 있다는 사실만은 
+반드시 기억해두길 바라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10427025" FACE="noel_normal"/> <!--그런데 사상 최강의 마도사로 알려진 그녀가 오랜 은둔 끝에
+카즈라 마을에 등장한 이유가 궁금하군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10427002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

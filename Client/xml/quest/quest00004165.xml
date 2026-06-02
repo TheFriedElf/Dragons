@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4165</ID> <!--T.T.10416501 그림자의 시험 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	아키아 동굴(페리에리얼 근처)의 루와 대화-->
+<!--[완료NPC]	아키아 동굴(페리 에리얼 근처) - 루-->
+<!--[내용]	그림자의 사제 루는 퀘차 사제에게 그림자를 피리를 찾으면서 %name%이 신관 전사 시험을 하게 된다는 이야기를 들었다며, 자신에게 그림자의 시험을 받으라고 말한다. 아키아 동굴의 다음 층에서 루 사제를 찾아 대화하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">70925968-3056-4c39-A4C1-8109F1DFADA5</CLIENT> <!--시작NPC 아키아 동굴 - 루 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">FDECB3FF-F4AF-4b26-9780-7B8D5A42D0A5</PAYER> <!--완료NPC 아키아 동굴(페리 에리얼 근처) - 루 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">70925968-3056-4c39-A4C1-8109F1DFADA5</AGENT> <!--진행NPC 11 아키아 동굴 - 루 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">FDECB3FF-F4AF-4b26-9780-7B8D5A42D0A5</AGENT> <!--진행NPC 12 아키아 동굴(페리 에리얼 근처) - 루 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10416511"/> <!--루와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10416521" FACE="Lwu_angry"/> <!--야! 너! 
+내 피리, 제대로 고쳐놨어?%%
+뭐? 퀘차님이 고쳐서 보관하고 있다고?
+이게 어디서 꾀를 부려… 네가 간 빼고 다니는 토끼야?%%
+네가 고장낸 거니까, 당연히 네가 가지고 있다가
+나한테 되돌려줘야 할 것 아냐! 앙!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10416526" FACE="Lwu_normal"/> <!--왔구나.
+미리 말해두지만…
+난 실력은 부족한데 의욕이 충만한 사람을 가장 혐오해!%%
+그러니 시험에 통과하고 싶다면 전력을 다 쏟아부어야 할 거야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10416523" FACE="Lwu_smile"/> <!--큭…%%
+푸하하하! 놀랐지?
+피리는 벌써 퀘차님한테 이렇게 받았지롱~%%
+뭘 그렇게 화난 표정을 짓고 그래.
+장난 좀 친 것 가지고...%%
+내 이름은 루야. 그림자의 사제 루.
+퀘차님한테 들었더니 너, 지금 신관 전사 시험중이라고 하더라.%%
+그리고… 또... 
+야나이가 가루다의 술법을 쓸 때 같이 있었다면서…?%%
+그날 나도 언니가 죽었다는 걸 어렴풋이 느낄 수 있었어.%%
+어릴 때부터, 사제가 되면서부터 지겹도록 들은 이야기인데…%%
+사제는 신보를 위해 목숨을 바쳐야 한다...
+왠지 섬짓하더라. 진짜 죽음을 각오한다는 것 말이야.%%
+아... 그래 너, 시험중이라고 했지. 그렇담 준비해서
+동굴의 다음 층으로 날 찾아와. 시험을 어떻게 볼 건지 말해줄게. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10416524" FACE="Lwu_angry"/> <!--어딜 도망가려고…! 너 진짜 지옥행 급행열차를 타고 싶은 모양이구나…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10416525" FACE="Lwu_normal"/> <!--다음 층에서 기다리고 있을게. 빨리 와.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10416502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

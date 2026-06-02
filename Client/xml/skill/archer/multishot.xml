@@ -1,0 +1,9 @@
+<ACTION ID="a_MultiShot" NEXT="a_battle_idle" USE-EVENT="TRUE" IGNORE_DMG_EFFECT="TRUE">
+	<SLOT NAME="multi_shot_01"/>
+  <FSM SCRIPT="Skill_MultiShot" FIRE_ATTACH_EFFECT_ID="e_arrow"
+   FIRE_ATTACH_EFFECT_TARGET_HELPER_ID="char_root" HIT_EFFECT_ID="e_dmg_cri"
+   PROJECTILE_ID="PROJECTILE_THUNDER_ARROW"
+	 MONSTER_UP_EFFECT_ID="e_jump" MONSTER_DOWN_EFFECT_ID=""
+	 MONSTER_FALLEN_EFFECT_ID="e_skill_reverse_gravity_mon_fallen"/>
+</ACTION>
+

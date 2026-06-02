@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>270</ID> <!--T.T.10027001 간단세공이란? -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	용자의 길의 양에게서 양털 5개를 구하자-->
+<!--[완료NPC]	종소리 마을 - 다윈-->
+<!--[내용]	다윈은 몬스터를 퇴치하고 얻은 물건들로 간단세공으로 훌륭한 전투 아이템을 만들 수 있다고 한다. 하지만 이런 스킬을 만드는 것은 생각보다 힘든 작업이기 때문에 자신과 같은 장인이 아니면 힘들다고 말한다. 하지만 용자의 길의 양에게서 양털 5개를 구해 준다면 간단세공을 가르쳐 준다고 한다. 용자의 길의 양에게서 양털 5개를 구하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">968A8869-57B6-4ee2-8649-9DFEC8166548</CLIENT> <!--시작NPC 종소리 마을 - 다윈 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">968A8869-57B6-4ee2-8649-9DFEC8166548</PAYER> <!--완료NPC 종소리 마을 - 다윈 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">968A8869-57B6-4ee2-8649-9DFEC8166548</AGENT> <!--진행NPC 11 종소리 마을 - 다윈 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010305/10000/0/1/1/20301104">6002200</MONSTER> 
+ <!--MON_NO=6002200/양 ,MAP_NO=9010305/용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010305/10000/0/1/1/20301104">6002700</MONSTER>  <!--MON_NO=6002700/순한양양 ,MAP_NO=9010305/용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010306/10000/0/1/1/20301104">6002200</MONSTER>  <!--MON_NO=6002700/순한양양 ,MAP_NO=9010305/용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010306/10000/0/1/1/20301104">6002100</MONSTER>  <!--MON_NO=6002700/순한양양 ,MAP_NO=9010305/용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010330/10000/0/1/1/20301104">6002200</MONSTER>  <!--/숙련된 용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010330/10000/0/1/1/20301104">6002100</MONSTER>   <!--/숙련된 용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010332/10000/0/1/1/20301104">6002200</MONSTER>  <!--/숙련된 용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010332/10000/0/1/1/20301104">6002300</MONSTER>  <!--/숙련된 용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010335/10000/0/1/1/20301104">6002100</MONSTER>  <!--/숙련된 용자의 길,Item_NO=20301104/양털,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010335/10000/0/1/1/20301104">6002300</MONSTER>  <!--/숙련된 용자의 길,Item_NO=20301104/양털,-->
+
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">20301104</ITEM> 
+ <!--Item_NO=20301104/양털,-->
+
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10027011"/> <!--양털-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">89008610</ITEM><!--전체지급/전체/1)/89008610(봉인아님) 1개-[즉석가공] 세공 배우기 -->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10027021" FACE="Darby_normal"/> <!--이런이런, 또 길 잃은 어린양이 나에게 찾아 왔군..
+그래 뭔 원하는 게 있어?
+응? 간단세공을 배우고 싶단 말인가?
+흠, 길 잃은 양을 인도하는 것도 좋긴 하지만 내 비장의 기술을 가르쳐 주기엔…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10027026" FACE="Darby_smile"/> <!--그래 바로 이거야!
+자네 덕분에 올 겨울은 따뜻하게 보낼 수 있겠군.
+자! 나도 이제 보답을 해야지. 간단 세공을 통해 자네 모험에 도움이 되기를 빌지.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10027023" FACE="Darby_normal"/> <!--간단세공은 나도 스승님에게 기나긴 세월동안 잔소리를 들으면서 배웠었지. 
+그 기술 하나 배우는데, 10년이 걸렸지.
+그런데 내가 자네에게 쉽게 가르쳐줄 수는 없는 노릇이지.
+그래도 나의 기술을 전수하기는 해야 하니깐.
+(다윈은 잠시 골똟이 생각한다)
+아! 이럼 되겠군. 겨울을 준비해서 양털이 필요한데, 용자의 길의 양들이 너무 거칠어서 말이지. 
+용자의 길에 있는 양들에게서 양털 5개만 내게 갖다 주겠나?
+그럼 나도 간단세공을 가르쳐 주지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10027024" FACE="Darby_angly"/> <!--간단세공이 아니라 연애에 기술에 대해서 묻고 싶은 건가? -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10027025" FACE="Darby_normal"/> <!--요즘은 점점 날씨가 추워지는 것 같군. 뭐 내 옷차림에 대해서 시비를 걸 생각은 말게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10027002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

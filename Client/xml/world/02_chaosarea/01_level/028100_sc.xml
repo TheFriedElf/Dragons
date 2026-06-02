@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_028100_SC" DESCRIPTION="90281000">
+	<!--이벤트 시간 설정(이벤트의 개수 만큼 시간설정)-->
+	<TIME_EVENT ID="1" FROM="2011,11,16,00,00" TO="2011,12,26,24,00" /> <!--크리스마스 이벤트-->
+    <TIME_EVENT ID="2" FROM="2012,11,29,14,00" TO="2013,02,25,23,59" /> <!--겨울맵 이벤트-->
+	<TIME_EVENT ID="3" FROM="2012,10,15,12,00" TO="2012,11,08,23,59" /> <!--할로윈 이벤트-->
+	<TIME_EVENT ID="4" FROM="2010,12,02,15,00" TO="2010,12,02,15,30" /> <!--추석 이벤트-->
+	<!--이벤트 맵 설정(이벤트시간에 따라 변화될 맵 설정)-->
+	<GSAPATH>
+		<CONDITION TYPE="DEFAULT">../Data/3_World/02_ChaosArea/01_Level/028100_SC.gsa</CONDITION> <!--디폴트-->
+		<CONDITION ID="1">../Data/3_World/02_ChaosArea/01_Level/028100_SC_CH.gsa</CONDITION> <!--크리스마스 이벤트-->
+		<CONDITION ID="2">../Data/3_World/02_ChaosArea/01_Level/028100_SC_w.gsa</CONDITION> <!--겨울맵 이벤트-->
+		<CONDITION ID="3">../Data/3_World/02_ChaosArea/01_Level/028100_SC_HW.gsa</CONDITION> <!--할로윈 이벤트-->
+		<CONDITION ID="4">../Data/3_World/02_ChaosArea/01_Level/028100_SC_CS.gsa</CONDITION> <!--추석 이벤트-->
+	</GSAPATH>
+	<!--이벤트 사운드 설정(이벤트에 맞는 사운드 설정)-->
+	<BGSOUND VOLUME="1.0">../BGM/dawiner_bg.mp3</BGSOUND><!--디폴트-->
+	<BGSOUND_SUB VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND_SUB><!--디폴트 서브-->
+	<BGSOUND ID="1" VOLUME="1.0">../BGM/Chrismas.wav</BGSOUND> <!--크리스마스이벤트-->
+	<BGSOUND ID="2" VOLUME="1.0">../BGM/dawiner_bg.mp3</BGSOUND> <!--겨울맵 이벤트-->
+	<BGSOUND ID="3" VOLUME="1.0">../BGM/Hill_backup.mp3</BGSOUND> <!--할로윈 이벤트-->
+	<BGSOUND ID="4" VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND> <!--추석 이벤트-->
+	<!--이벤트 포그설정(이벤트에 맞는 사운드 설정)-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="1511" END="4318" COLOR="0.7529412,0.7529412,0.7529412"/> <!--디폴트-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="1727" END="6262" COLOR="0.7529412,0.7529412,0.7529412"/> <!--크리스마스 이벤트-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="1727" END="6262" COLOR="0.7529412,0.7529412,0.7529412"/> <!-- 겨울맵 이벤트-->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="756" END="6693" COLOR="0.1686275,0,0.1686275"/> <!-- 할로윈 이벤트-->
+	<FOG ID="4" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="12000" COLOR="0.858000,0.910990,0.903999"/> <!--추석 이벤트-->
+	<!--미니맵-->
+	<MINIMAP Y="140" H="210">../Data/3_World/02_ChaosArea/01_Level/028100_MM.dds</MINIMAP>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.6" GLOW="0.4" HIGHLIGHT="0.02"/>
+	<!--8방향-->
+	<FREE_DIRECTION ALL="TRUE"/>
+
+
+	<!--신들의 안식처 게이트 -->
+	<TRIGGER ID="gate_020500_base" TYPE="PORTAL" TITLE_TEXT_ID="800050" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9020500" PARAM2="3"/>
+	</TRIGGER>
+
+	<!--바티카 구릉 게이트 -->
+	<TRIGGER ID="gate_050610_base" TYPE="PORTAL" TITLE_TEXT_ID="800080" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9050610" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!--투투꽃나무 숲 게이트 -->
+	<TRIGGER ID="gate_030110_base" TYPE="PORTAL" TITLE_TEXT_ID="800056" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030110" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!--부서진 버섯 공장 게이트 -->
+	<TRIGGER ID="gate_030140_base" TYPE="PORTAL" TITLE_TEXT_ID="800058" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030140" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!--눈보라 고개 게이트 -->
+	<TRIGGER ID="gate_030210_base" TYPE="PORTAL" TITLE_TEXT_ID="800061" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,54" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9030210" PARAM2="1">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+	<!--모델하우스 텔레포트 -->
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_08" TYPE="TELEPORT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_Teleport" PARAM_STRING="teleport_zone_08"/>
+	</TRIGGER>
+
+	
+
+
+	
+	<!-- 채집맵  -->
+	<LOCAL>
+	<NAME ID="DEFAULT">
+		<TRIGGER ID="gate_990200_base" TYPE="PORTAL" TITLE_TEXT_ID="810017" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,105" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+			<CONDITION TYPE="action" ACTION="a_act"/>
+			<ACTION SCRIPT="World_Portal" PARAM="9990200" PARAM2="1">
+				<ACCESS>
+					<LEVEL MIN="0"/>
+				</ACCESS>
+			</ACTION>
+		</TRIGGER>
+	</NAME>
+	<NAME ID="CHINA/BRAZIL/SINGAPORE">
+	</NAME>
+	</LOCAL>
+
+
+	<!-- 카메라 -->
+	<CAMERA_ADJUST ZOOM="-5" UP="15" TARGET_Z="10"/>
+	
+	<!-- L.O.D -->
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1"/>
+	<FOG DENSITY="0" FUNC="RANGE_SQ" START="2000" END="5941" COLOR="0.5215687,0.227451,0.4823529"/>
+</WORLD>
+
+

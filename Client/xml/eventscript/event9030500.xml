@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+			<CMD TYPE="waittime" time="1.2"/>
+			<CMD TYPE="CALLUI" UIWndName="FRM_SG_FLOOR_CLEAR"/> <!-- Clear UI 호출 -->
+			<CMD TYPE="waittime" time="5"/> <!--4초 뒤, 죽는 연출 시간에 따라 조절-->
+			<CMD TYPE="CLOSEUI" UIWndName="FRM_MAIN_GAUGEBAR"/> <!--HP바를 닫는다-->
+			<CMD TYPE="CLOSEUI" UIWndName="FRM_SG_FLOOR_CLEAR"/> <!--HP바를 닫는다-->
+			<CMD TYPE="waittime" time="1"/> <!-- 0.5 초 대기 -->
+			<CMD TYPE="CALLMINIMAP" CLOSE="false"/><!-- 미니맵을 호출 한다 -->
+			<CMD TYPE="waittime" time="1"/> <!-- 0.5 초 대기 -->
+			<CMD TYPE="CALLUI" UIWndName="FRM_GOGO_EVENT"/> <!-- 우측 -->
+</EVENT_SCRIPT>

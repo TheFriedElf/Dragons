@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4232</ID> <!--T.T.10423201 흑룡왕의 하의 제조서 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	검은 발톱의 파편 입수-->
+<!--[완료NPC]	검은발톱 전초기지 - 콜린-->
+<!--[내용]	콜린 역시 흑룡왕의 장비 제조서를 가지고 있는 듯 하다. 드래곤 원정대의 상급법사들이 검은 발톱의 파편을 조사해보고 싶다고 전한다. 엘가를 퇴치하고 검은 발톱의 파편을 얻게 되면 콜린 대장에게 가져다 주자. 콜린 대장은 답례로 흑룡왕의 하의 제조서를 준비했다고 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">790D25EB-B83D-4da9-A4CD-66620CF815F9</CLIENT> <!--시작NPC 검은발톱 전초기지 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">790D25EB-B83D-4da9-A4CD-66620CF815F9</PAYER> <!--완료NPC 검은발톱 전초기지 - 콜린 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">790D25EB-B83D-4da9-A4CD-66620CF815F9</AGENT> <!--진행NPC 11 검은발톱 전초기지 - 콜린 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP" VALUE="10000/0/1/1/160422900">3542120</MONSTER> 
+ <!--MON_NO=3542120/흑룡왕 엘가,Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편100%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160422900</ITEM> 
+ <!--Item_NO=160422900/[Q.ID:04229] 검은 발톱의 파편,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10423211"/> <!--검은 발톱의 파편 입수-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300392</ITEM><!--전체지급/기사/1)/119300372(봉인아님) 1개-(일반) 흑룡왕의 하의 (용기사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>5/13/21</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300532</ITEM><!--전체지급/투사/1)/119300512(봉인아님) 1개-(일반) 흑룡왕의 하의 (파괴자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>6/14/22</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300322</ITEM><!--전체지급/메이지/1)/119300302(봉인아님) 1개-(일반) 흑룡왕의 하의 (아크메이지) 제조서(필요)[Elements],[Count]-->
+			<CLASS>7/15/23</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300462</ITEM><!--전체지급/전투법사/1)/119300442(봉인아님) 1개-(일반) 흑룡왕의 하의 (워로드) 제조서(필요)[Elements],[Count]-->
+			<CLASS>8/16/24</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300112</ITEM><!--전체지급/사냥꾼/1)/119300092(봉인아님) 1개-(일반) 흑룡왕의 하의 (수호자) 제조서(필요)[Elements],[Count]-->
+			<CLASS>9/17/25</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300252</ITEM><!--전체지급/레인저/1)/119300232(봉인아님) 1개-(일반) 흑룡왕의 하의 (스트라이커) 제조서(필요)[Elements],[Count]-->
+			<CLASS>10/18/26</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300042</ITEM><!--전체지급/광대/1)/119300022(봉인아님) 1개-(일반) 흑룡왕의 하의 (매니악) 제조서(필요)[Elements],[Count]-->
+			<CLASS>11/19/27</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">119300182</ITEM><!--전체지급/암살자/1)/119300162(봉인아님) 1개-(일반) 흑룡왕의 하의 (쉐도우) 제조서(필요)[Elements],[Count]-->
+			<CLASS>12/20/28</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">340351032</ITEM><!--전체지급/소환사/1)/340351012(봉인아님) 1개-(일반) 흑룡왕의 하의 (소환사) 제조서(필요)[Elements],[Count]-->
+			<CLASS>51/53/55/57</CLASS>
+		</SELECT1>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">330351032</ITEM><!--전체지급/쌍둥이/1)/330351012(봉인아님) 1개-(일반) 흑룡왕의 하의 (격투가) 제조서(필요)[Elements],[Count]-->
+			<CLASS>52/54/56/58</CLASS>
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10423221" FACE="Colin_normal"/> <!--검은 발톱 둥지를 떠돌고 있는 엘가의 망령으로부터 
+특별한 재료 아이템을 얻을 수 있다는 소문이 들리더군.%%
+이 재료들을 제조서에 적힌 대로 모으게 되면…
+흑룡왕의 장비를 마련할 수 있다고 하더군. %%
+나도 흑룡왕의 하의를 만들 수 있는 제조서를 구했지만
+이런 강력한 장비는 자네 같은 전사들에게 필요한 것일게야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10423226" FACE="Colin_smile"/> <!--그래, 역시 자넨 흑룡왕의 장비를 차지할만한 담력을 가진 친구야.
+이 제조서를 줄테니 제조서에 적혀진 재료를 모아 흑룡왕의 상의를
+완성시켜보게나. %%
+부지런히 엘가를 공략하다 보면 분명히 노력의 대가가 보일걸세.
+물론 엘가원정대에 들어가기 위해 원정대 코인을 모으는 일도
+게을리 해선 안될 일이지.%%
+행운을 비네!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10423223" FACE="Colin_normal"/> <!--자네에게 흑룡왕의 하의 제조서를 선물하고 싶네만…
+우선 내 작은 부탁을 들어주었으면 한다네. %%
+원정대의 마법사들은 그랑누아르에 대단한 관심을 표하고 있다네.
+특히 상급 법사 에델린 같은 경우는 매일 같이 검은 발톱 둥지를
+조사하겠다고 성화라네.%%
+이러한 원정대의 상급 법사들의 연구를 위해 검은 발톱의 파편을
+구해주었으면 하네. 물론 제조서는 자네에게 선물하도록 하겠네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10423224" FACE="Colin_normal"/> <!--허허… 에델린이 무척 속상해 할 것 같은데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10423225" FACE="Colin_normal"/> <!--검은 발톱의 파편은 아직 구하지 못한 것인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10423202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

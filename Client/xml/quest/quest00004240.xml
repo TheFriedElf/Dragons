@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4240</ID> <!--T.T.10424001 드라칸 모험가의 부탁 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바티칸 용군단류 몬스터 30마리 퇴치-->
+<!--[완료NPC]	바티카 구릉 - 크로키-->
+<!--[내용]	드라칸의 크로키가 바티카 구릉에 찾아 온 목적은 놀랍게도, 세상에서 사라진 것으로 알려진 드래곤이 낳은 알이었다. 서로 사이가 좋지 않은 바티칸 용군단의 바르곤 일족과 구릉 놀 일족이 힘을 합쳐 무언가를 찾고 있다는 것을 직감한 크로키는 이들 몬스터들로부터 단서를 얻어내기 위해 도움을 청해온다. 모험가 크로키를 위해 바티칸 용군단의 몬스터 30마리를 퇴치하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</CLIENT> <!--시작NPC 바티카 구릉 - 크로키 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</PAYER> <!--완료NPC 바티카 구릉 - 크로키 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">163B1E59-B33D-4ab3-BE46-83F4F6A900B2</AGENT> <!--진행NPC 11 바티카 구릉 - 크로키 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3400600</MONSTER> 
+ <!--MON_NO=3400600/바티칸 용군단 투척병,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3400400</MONSTER> 
+ <!--MON_NO=3400400/바티칸 용군단 정찰병,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3400500</MONSTER> 
+ <!--MON_NO=3400500/바티칸 용군단 길잡이,-->
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3401100</MONSTER> 
+ <!--MON_NO=3401100/바티칸 용군단 대장,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10424011"/> <!--바티칸 용군단류 몬스터 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10424021" FACE="Kroki_normal"/> <!--치치를 도와주었다는 얘기는 들었소.
+나를 대신해서 내 친구를 도와주었으니
+고맙다는 말 밖엔 뭐라 할말이 없소이다.%%
+사실 나는 최근 우리 마을의 장로, 오추쿠님의 부름으로
+카즈라에 다녀왔소. 오추쿠님은 내게 특별하고도 은밀한
+부탁을 하더이다.%%
+그것은 바로 용의 알을 찾아오라는 말이었소.%%
+이 세계에 비록… 용의 유생체, 그러니까 그 아기 용들 말이오.
+이 용의 유생체들이 몇마리 남아있다는 것은 확실하지만
+거대한 용을 봤다는 이야기는 점차 사라지고 있소.%%
+그런데 오추쿠님이 기르고 있는 용의 유생체, 쿠프가
+동쪽에 있는 구릉에 드래곤의 알이 나타났다고 하더군요.
+이 이야기를 계속 이어서 해도 괜찮겠소?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10424026" FACE="Kroki_smile"/> <!--안타깝게도 단서를 가지고 있다고 생각했던 구릉 놀들에게
+별다른 단서를 얻어내지 못하였소. 그들 대부분에게서 코코투스의
+모습이 그려진 종이 쪼가리를 발견하긴 했지만…%%
+드래곤의 알과 커다란 관계는 없는 것 같소이다.
+어쨌거나 도와준 일에 대해선 잊지않겠소이다. 고맙소.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10424023" FACE="Kroki_normal"/> <!--쿠프의 말을 들은 오추쿠님은 첩보활동 중인 몇몇 모험자를 
+불러들여 특별한 지시를 내리셨소이다. 그것은 바로…
+그 누구 보다 먼저 우리 드라칸이 용의 알을 가져와야 한다는
+것이었소.%%
+난 장로님의 명령이 떨어지자 마자, 이 곳 바티카 구릉을 
+이 잡듯이 뒤지고 있소이다만, 아직 눈에 띄는 단서를 찾진
+못했소. %%
+그러나 이 조용한 구릉지를 떠도는 기이한 분위기를 느꼈소.
+서로를 죽일 듯이 미워하는 용군단의 바르곤들과, 흉폭한 
+구릉 놀 일족들이 이곳에 동시에 나타났다는 점이오.%%
+그들은 각각 무리 지어, 때로는 두종족이 한데 뒤섞여 
+무언가 중요한 것을 찾는 눈치였소. 이들을 캐내다 보면 
+중요한 단서를 얻을 수 있을 것이오만, 나 혼자로선 역부족이오.
+그러니 부디 도와주셨으면 하오. 이들을 교란시켜 내가 정보를
+얻을 수 있도록 해주셨으면 한다오.%%
+내가 구릉족 일족을 맡을테니 %name%님은 용군단의 발곤 녀석
+몇을 맡아주시지요. 부탁하오!   -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10424024" FACE="Kroki_normal"/> <!--아아.. 지금까지 했던 이야기는 아니 들은 것으로 해주시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10424025" FACE="Kroki_normal"/> <!--용군단의 발곤 녀석들을 몇 놈 퇴치하여 녀석들을 교란시켜 주시오.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10424002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

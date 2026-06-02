@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Demon_Achries" DIE_PARTICLE_ID="ef_monster_die">
+<TEXTURE SRC="N_demon_Erlik_body.dds">../Data/2_Mon/M_demon_achries/M_demon_achries_body.dds</TEXTURE>
+<TEXTURE SRC="N_demon_Erlik_head.dds">../Data/2_Mon/M_demon_achries/M_demon_achries_head.dds</TEXTURE>
+<TEXTURE SRC="N_demon_Erlik_weapon.dds">../Data/2_Mon/M_demon_achries/M_demon_achries_weapon.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Demon_Achries"/>
+		<KFMPATH>../Data/2_Mon/N_demon_Erlik/N_demon_Erlik.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="72,12" ROTATE="1,0,0,90" LOCATE="0,-10,0"/>
+		</ABV>
+		<SLOT>
+			<!-- 공격 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000062" RANDOM="100"/>
+		
+			<!-- 원거리 공격 -->		
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000005"/>
+			<ITEM NAME="shot_01" ANIMATION="1000066" FIRE_START_NODE="p_ef_Weapon" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_demon_shot_02"/>
+			<!--발사체 떨구기 공격 -->
+			<ITEM NAME="massive_projectile_btlidle" ANIMATION="1000201"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000202" FIRE_START_NODE="p_ef_skill" FIRE_START_EFFECT="" PROJECTILE_ID="PROJECTILE_demon_shot_03"/>
+			<!-- 대쉬 스킬 -->
+
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000005" LOOP="TRUE"/><!-- 공격의 배틀 아이들 모션 아이들번호를 입력해준다 반드시 필요하다-->
+			<ITEM NAME="dashattk_rush" ANIMATION="1000203" LOOP="TRUE"/> <!-- 해당동작의 공격 모션 아이들번호를 입력해준다 반드시 필요하다-->
+
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="dmg_blending_01" ANIMATION="1000042" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_blending_01" ANIMATION="1000021"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000041"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000042"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000041" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000042" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000041"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000042"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000043"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000044"/>
+									<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

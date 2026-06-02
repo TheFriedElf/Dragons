@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="p_Aram_pet" INIT_ACTION="a_trace_ground">
+	<RESERVED_ACTION OPENING="a_trace_ground"/>
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/3_PET/Aram_pet/Aram_pet.kfm</KFMPATH>
+		<!--SCRIPT SRC="Actor/pet_base.lua">
+			<ITEM NAME="Act_Pet_Follow" TYPE="COMMON"/>
+		</SCRIPT-->
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<EFFECT SCALE="1.0"/>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="5"/> 
+			<ITEM NAME="idle_01" ANIMATION="1000002" RANDOM="5"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="run" ANIMATION="1000055" SPEED="2" /> 
+			<ITEM NAME="opening" ANIMATION="1000000"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

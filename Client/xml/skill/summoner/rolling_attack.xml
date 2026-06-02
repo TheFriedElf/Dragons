@@ -1,0 +1,8 @@
+<ACTION ID="a_Rolling_Attack" NEXT="a_battle_idle" IGNORE_DMG_EFFECT="TRUE" CAN_CHANGE_ACTOR_POS="TRUE" DONT_LOOK_TARGET="TRUE" NO_SET_WALKING_TARGET_LOC="TRUE">
+  <SLOT NAME="Rolling_Attack_start"/>
+  <SLOT NAME="Rolling_Attack_btlidle" LOOP="TRUE"/>
+  <SLOT NAME="Rolling_Attack_rush" LOOP="TRUE"/>
+  <SLOT NAME="idle_01"/>
+  <SLOT NAME="Rolling_Attack_finish"/>
+  <FSM SCRIPT="Skill_Sum_Rolling_Attack"/>
+</ACTION>

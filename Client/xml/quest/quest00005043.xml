@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5043</ID> <!--T.T.10504301 레오의 작은 선물(3) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 [아케이드 모드(F1)] - 별가사리 루루루에게서 맛내기 20개 얻기-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	레오는 꼬깨껍질과 상어꼬리를 사용한 요리를 만들었다고 한다. 그 요리를 맛봐줄 사람으로 미각에 있어서 일가견이 있는 루돌프에게 간다. 하지만 생각보다 맛이 없던 탓에 루돌프는 별가사리 루루루에게서 얻을 수 있다는 맛내기라는 것에 대해 알려 준다. 국물의 진한 맛을 더 높이기 위해서 수염고래 해안가 [아케이드 모드(F1)]의 별가사리 루루루에게서 맛내기 20개가 필요하다. 별가사리 루루루는 여러 지역에 있으니 2장 이상의 맵을 선택해 여러 번 플레이 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010102/10000/0/1/1/160504300">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010102/수염고래 해안가 아케이드 2,Item_NO=160504300/[Q.ID:05043] 맛내기,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160504300</ITEM> 
+ <!--Item_NO=160504300/[Q.ID:05043] 맛내기,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010104/10000/0/1/1/160504300">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010104/수염고래 해안가 아케이드 4,Item_NO=160504300/[Q.ID:05043] 맛내기,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160504300</ITEM> 
+ <!--Item_NO=160504300/[Q.ID:05043] 맛내기,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10504311"/> <!--맛내기-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10504321" FACE="Leo_normal"/> <!--드디어 꼬깨껍질과 상어꼬리를 모두 사용한 요리가 만들어졌어요.
+하지만 역시 제가 사랑하는 사람한테는 가장 맛있는 것을 주고 싶어요.%%
+그래서 우리 바람항구 젤 가는 요리사이자 미식가인 루돌프에게 맛을 보여줬어요.
+루돌프는 뭔가 아쉽다는 표정을 지었어요.
+제가 왜 그러냐고 묻자, 맛이 제대로 우러 나오지 않았다는 거에요.%%
+맛이 제대로 나오기 위해서는 맛내기라는 것이 필요하다네요.
+정말 제대로 된 요리를 만들고 싶어요.
+%name%님 꼭 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10504326" FACE="Leo_smile"/> <!--이제 모든 재료가 다 들어 갔어요. 
+제가 사랑하는 사람도 기뻐할 거에요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10504323" FACE="Leo_normal"/> <!--루돌프는 맛내기라는 것이  별가사리 루루루의 몸에서 나온다고 했어요.
+물론 모든 루루루가 맛내기를 가지고 있는 게 아니기 때문에 찾기가 상당히 어렵데요.%%
+그래서 요리사들은 맛내기를 대신할 다른 재료를 넣거나 아니면 비싼 가격을 들여서 맛내기를 구한데요.%% 
+맛내기는 해산물 요리에서 빠져서는 안 될 중요한 재료이기 때문에 제 요리에 필요할 거래요. 
+%name%님 잘 부탁드릴게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10504324" FACE="Leo_angly"/> <!--%name%님은 사랑하는 사람도 없으신 거에요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10504325" FACE="Leo_normal"/> <!--다른 재료들이 상하지 않도록 빨리 좀 부탁드릴게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10504302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

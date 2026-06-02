@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4028</ID> <!--T.T.10402801 신보 탈환대의 지원요청 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	수염고래 해안가의 마이트리와 대화-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	콜린의 말대로 수염고래 해안가의 드라칸족 사제 마이트리를 만나 그들의 예기를 들어 보자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2FF6590B-6648-4D73-9A61-7B4FA9065498</CLIENT> <!--시작NPC 바람항구 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2FF6590B-6648-4D73-9A61-7B4FA9065498</AGENT> <!--진행NPC 11 바람항구 - 콜린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" Mark="END">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 12 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10402811"/> <!--마이트리와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10402821" FACE="colin_normal"/> <!--최근 자연계에 일어난 이상현상으로 브리즈 대륙은 일대 혼란을 겪고 있네.
+그런 원인을 조사하기 위해 우리 원정대를 발족시킨 것을 잘 알 것이네만…%% 
+우리 브리즈국에 혼란이 찾아온 것과 마찬가지로 용족이라고도 불리우는 
+드라칸족… 그들의 영지인 카즈라 세계에도 커다란 재앙이 찾아왔다네.%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10402826" FACE="Maitri_smile"/> <!--저는 카즈라에서 온 신관사제 마이트리입니다.
+들으셨으리라 예상하지만…%%
+인간과 우리 용족 드라칸이 최근 일어난 세계의 불길한 징조들에 대해
+공동조사하기로 조약을 맺었습니다.%%
+앞으로 많은 협조를 부탁드리는 바입니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10402823" FACE="colin_normal"/> <!--그들은 카즈라의 둥지라고 불리우는 폐쇄적인 지역에서 살았기 때문에 
+우리와의 교류가 전무했지.%%
+그러나 그들이 떠받들던 신보라는 보물을 도둑맞게 되면서
+우리 드래곤원정대에게 도움을 요청해 왔다네.%%
+우리로선 보이지 않는 위협 앞에... 
+든든한 지원군을 얻은 셈이라 볼 수 있네.%%
+그리하여 우리는 서로의 목적이 상당 부분 일치한다는 판단 하에 
+서로의 종족에게 상호 협조하기로 하는 협약을 맺었네.%%
+이번에 자네에게 부탁할 임무는 다름 아닌 드라칸족에 대한 지원일세.
+바람항구로 파견 나온 마이트리라는 드라칸 사제를 만나보게나%%
+그녀가 자네를 기다리고 있을 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10402824" FACE="colin_smile"/> <!--그럼 준비가 되는대로 다시 찾아오도록 하게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10402825" FACE="colin_angly"/> <!--마이트리라는 드라칸의 사제가 수염고래 해안가에서 기다리고 있다네-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--none-->
+			<BODY TEXT="10402811" FACE="Maitri_normal"/> <!---->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10402802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

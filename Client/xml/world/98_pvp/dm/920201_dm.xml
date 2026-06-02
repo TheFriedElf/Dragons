@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_920201_DM">
+	<GSAPATH>../Data/3_World/98_PVP/01_Level/DM/920201_DM.GSA</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/warzone_bg.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35"/>
+	<SCRIPT>World/98_PVP/DM/920201_DM.lua</SCRIPT>
+
+	<TRIGGER ID="telejump_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="110"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="110"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_03" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_03" PARAM="110"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_04" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_04" PARAM="110"/>
+	</TRIGGER>
+	<FOG DENSITY="0.360000" FUNC="RANGE_SQ" START="285.000000" END="3075.000000" COLOR="0.211000,0.101000,0.008000"/>
+</WORLD>

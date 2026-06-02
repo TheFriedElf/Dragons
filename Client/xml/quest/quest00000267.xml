@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>267</ID> <!--T.T.10026701 촌장님의 조언 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	종소리 마을의 던모건과 이야기해 보자-->
+<!--[완료NPC]	종소리 마을 - 던모건-->
+<!--[내용]	던모건은 그동안 모험하느라고 힘들었을 거라고 한다. 모험을 조금 더 즐겁게 하기 위해서 필요한 3가지가 있는데, 즉석요리와 간단세공, 마력추출이라고 한다. 즉석요리는 종소리마을의 요리사 부루투스에게 배울 수 있고, 간단세공은 장비상인 다윈이 가르쳐 준다. 마지막으로 마력추출을 배우기 위해서는 소울크래프트 상인 쥴리가 가르쳐 준다. 해당 스킬을 배우기 위해서 부루투스, 다윈, 쥴리에게 가보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">D943E0C6-BA58-46f8-8C69-857DC250BDFF</CLIENT> <!--시작NPC 종소리 마을 - 던모건 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">D943E0C6-BA58-46f8-8C69-857DC250BDFF</PAYER> <!--완료NPC 종소리 마을 - 던모건 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">D943E0C6-BA58-46f8-8C69-857DC250BDFF</AGENT> <!--진행NPC 11 종소리 마을 - 던모건 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10026711"/> <!--던모건과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10026721" FACE="DawnMorgan_normal"/> <!--오! 모험가님 그동안 모험하느라 수고가 많으셨습니다. 
+요즘들어 부쩍 많아진 몬스터 때문에 힘드시죠?
+제가 모험가님에게 도움이 될만한 이야기를 해드릴까 합니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10026726" FACE="DawnMorgan_smile"/> <!--먼저 요리사 부루투스에게서 몬스터들에게서 얻은 재료로 요리를 할 수 있는 즉석요리를 배울 수 있습니다.%%
+장비상인인 다윈은 몬스터에게서 얻은 재료로 전투아이템을 만들 수 있는 간단세공을 가르쳐 줄 것입니다.%%
+마지막으로 소울크래프트 상인인 쥴리는 몬스터들에게서 가끔 얻을 수 있는 마력이 담긴 아이템에서 마력을 추출할 수 있는 마력추출 스킬을 배울 수 있을 겁니다.%%
+하지만 자신들의 기술을 쉽게 가르쳐 주지는 않겠지요. 각 기술들을 얻기 위해 그 세 사람의 마음을 두드려 보시기 바랍니다.
+ -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10026723" FACE="DawnMorgan_smile"/> <!--모험가란 생각보다 이것 저것 필요한 것이 많은 법입니다. 하지만 모험으로 얻기에는 부족한 것이 많은 형편이죠. 
+그래서 필요한 것이 모험 중에 재료를 이용할 수 있는 기술들이죠. %%
+이러한 기술들을 가르쳐주는 사람들이 바로 저희 종소리 마을에 있다는 것은 정말 자랑이 아닐 수 없습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10026724" FACE="DawnMorgan_angly"/> <!--흠, 모험가님 생각보다 풍족하게 모험을 즐기시고 있나 보군요. 가난한 마을의 촌장으로서는 이해하기 힘들군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10026725" FACE="DawnMorgan_normal"/> <!--그럼, 그 사람들이 누구인지 알려드리도록 하겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10026702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4191</ID> <!--T.T.10419101 신이 잠든 곳으로 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	켄타 30마리 퇴치-->
+<!--[완료NPC]	신들의 안식처 - 피레이-->
+<!--[내용]	피레이는 무티샤가 등장한 이후, 켄타우르스 간에 내전이 일어나 신들의 안식처의 분위기가 좋지 않다고 말한다. 또한 오염된 켄타우르스들이 나타나 피레이까지 잡아가려고 한다는데… 켄타우르스 피레이를 위해 신들의 안식처를 배회하는 켄타 30마리를 퇴치하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</CLIENT> <!--시작NPC 신들의 안식처 - 피레이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</PAYER> <!--완료NPC 신들의 안식처 - 피레이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</AGENT> <!--진행NPC 11 신들의 안식처 - 피레이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">6104100</MONSTER> 
+ <!--MON_NO=6104100/켄타,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10419111"/> <!--켄타 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419121" FACE="Pirey_normal"/> <!--푸헐헐!
+이런…%%
+내가 단단히 오해했구나. 
+미카 일족의 무녀들이 보낸 거라고 빨리 말하지 그랬어.%%
+말도 말아라. 
+최근 이곳 신들의 안식처는 옛날과 분위기가 완전 달라.
+켄타우르스들의 내전 때문에 살벌해졌어.%%
+세상이 어떻게 되는 지 별로 관심이 없을 정도로
+우리 켄타우르스들 이곳에 틀어박혀 아늑한 생활을 
+만끽하고 있었지.%%
+바로 그 무티샤란 놈이 찾아오기 전까지 말이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419126" FACE="Pirey_smile"/> <!--휴우, 살았다.
+그나저나 넌 어디서 그렇게 싸우는 법을 배운 거야?
+제법이구나.%%
+이제 이곳을 신들의 안식처라고 말하기도 부끄러워.
+이런 꼴을 보이다니 켄타우르스 꼴이 말이 아니군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419123" FACE="Pirey_normal"/> <!--아아, 이러고 있을 시간이 없다.
+이제 곧 녀석들이 들이닥칠 거야. 오염된 켄타들 말이야.%%
+그 미치광이 켄타우르스들을 막아주지 않겠니?
+녀석들은 몰려다니면서 나처럼 멀쩡한 정신을 가진
+켄타우르스를 잡아가고 있단다.%%
+부디 신들의 안식처에 있는 켄타들을 잡아다오.
+켄타 20명 정도가 이 근방을 배회하는 것 같더구나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419124" FACE="Pirey_angly"/> <!--아, 그러지 말고 내 이야기를 더 들어보라고.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419125" FACE="Pirey_angly"/> <!--신들의 안식처 곳곳이 나를 잡으려는 켄타들로 가득하구나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<PUPPET NAME="Starstory_SnakeBossroom1001_01" USE_PHYSX="1">
+  <WORLDOBJECT>
+    <KFMPATH SCALE="1">../Data/3_World/95_Dungeon/02_Modeling/00_Object/03_Event/Starstory_SnakeBossroom1001_01/Starstory_SnakeBossroom1001_01.kfm</KFMPATH>
+    <SLOT>
+      <!-- Basic Movement -->
+      <ITEM NAME="close_01" ANIMATION="1000011"/>
+      <ITEM NAME="closeidle_01" ANIMATION="1000000"/>
+
+	  <ITEM NAME="open_01" ANIMATION="1000030"/>
+	  <ITEM NAME="openidle_01" ANIMATION="1000020"/>
+	 </SLOT>
+  </WORLDOBJECT>
+
+  <WORLD_EVENT_STATE_INFO>
+
+    <STATE ID="0" SLOT="closeidle_01" />
+    <STATE ID="2" SLOT="openidle_01"/>
+
+    <TRANSIT FROM="0" TO="2" SLOT="open_01"/>
+    <TRANSIT FROM="2" TO="0" SLOT="close_01"/>
+
+
+  </WORLD_EVENT_STATE_INFO>
+
+</PUPPET>

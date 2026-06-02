@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_015508_EM">
+  <GSAPATH>../Data/3_World/93_EventMap/01_Level/015508_EM.gsa</GSAPATH>
+  <MINIMAP Y="140" H="195">../Data/3_World/93_EventMap/01_Level/015508_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/Event_CookieFactory.mp3</BGSOUND>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  
+ <!-- 포탈이동 -->
+  <TRIGGER ID="gate_next_base" TYPE="MISSION" ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1" />
+  </TRIGGER>
+
+	<!-- 월드 이벤트 오브젝트 정의 -->
+	<WORLDEVENT_OBJECT_LIST>
+		<!--정예방 문 /닫힌 -->
+		<WORLDEVENT_OBJECT ID="1" INIT_STATE="0" TYPE="PUPPET" NAME="libraryDoor1001_03 01"/>	<!--정예방 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="2" INIT_STATE="0" TYPE="PUPPET" NAME="libraryDoor1001_03 02"/>	<!--정예방 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="3" INIT_STATE="0" TYPE="PUPPET" NAME="libraryDoor1001_03 03"/>	<!--정예방 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="4" INIT_STATE="0" TYPE="PUPPET" NAME="libraryDoor1001_03 04"/>	<!--정예방 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="5" INIT_STATE="0" TYPE="PUPPET" NAME="libraryDoor1001_03 05"/>	<!--정예방 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="6" INIT_STATE="0" TYPE="PUPPET" NAME="libraryDoor1001_03 06"/>	<!--정예방 문/ 닫힌 -->
+
+		<!--정예방 작은문  제어-->
+		<WORLDEVENT_OBJECT ID="7" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 01"/>	<!--첫번째 정예방 안 철창문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="8" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 02"/>	<!--첫번째 정예방 안 철창문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="9" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 03"/>	<!--첫번째 정예방 안 철창문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="11" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 04"/>	<!--첫번째 정예방 안 철창문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="12" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 05"/>	<!--세번째 정예방 안 철창문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="13" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 06"/>	<!--세번째 정예방 안 철창문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="14" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 07"/>	<!--세번째 정예방 안 철창문/ 열린 -->
+		<WORLDEVENT_OBJECT ID="15" INIT_STATE="1" TYPE="PUPPET" NAME="Wall1001_01 08"/>	<!--세번째 정예방 안 철창문/ 열린 -->
+		<!--복도문  제어-->
+		<WORLDEVENT_OBJECT ID="16" INIT_STATE="0" TYPE="PUPPET" NAME="LibraryWall1001_01 01"/>	<!--첫번째 복도 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="17" INIT_STATE="0" TYPE="PUPPET" NAME="LibraryWall1001_01 02"/>	<!--숨겨진 방 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="18" INIT_STATE="0" TYPE="PUPPET" NAME="LibraryWall1001_01 03"/>	<!--두번쨰 복도 문/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="19" INIT_STATE="0" TYPE="PUPPET" NAME="LibraryWall1001_01 04"/>	<!--세번째 복도 문/ 닫힌 -->
+		<!--정예방 레베 제어-->
+		<WORLDEVENT_OBJECT ID="20" INIT_STATE="0" TYPE="PUPPET" NAME="Veta_Lever1001_01 01"/>	<!--첫번쩌 정예방 레버/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="21" INIT_STATE="0" TYPE="PUPPET" NAME="Veta_Lever1001_01 02"/>	<!--두번째 정예방 레버/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="22" INIT_STATE="0" TYPE="PUPPET" NAME="Veta_Lever1001_01 03"/>	<!--숨겨진 방 레버/ 닫힌 -->
+		<WORLDEVENT_OBJECT ID="23" INIT_STATE="0" TYPE="PUPPET" NAME="Veta_Lever1001_01 04"/>	<!--세번째 정예방 레버 / 닫힌 -->
+ 
+        <!--첫 번째 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+		<WORLDEVENT_OBJECT ID="24" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 01"/>	<!--첫번째 정예방 숨겨진 복도 방향 이펙트 -->
+		<WORLDEVENT_OBJECT ID="25" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 02"/>	<!--첫번째 정예방 방향 이펙트 -->
+		<!--첫 번째 정예방 다 잡은 후 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="26" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 03"/>
+        <WORLDEVENT_OBJECT ID="27" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 04"/>
+        <!--첫 번째 숨겨진 복도 일반 몬스터(두번째 구역) 다 잡은 후 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="28" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 05"/>
+        <!--세번 째 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="29" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 06"/>
+        <!--네  번째 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+		<WORLDEVENT_OBJECT ID="30" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 07"/>	<!--두번째 정예방 숨겨진 복도 방향 이펙트 -->
+		<WORLDEVENT_OBJECT ID="31" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 08"/>	<!--두번째 숨겨진방 방향 이펙트 -->
+		
+		<!--숨겨진 방(다섯번째 구역) 바닥 이펙트 제어-->
+        <WORLDEVENT_OBJECT ID="32" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 09"/>	<!--파괴 오브젝트 방향 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="33" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 10"/>	<!--레버 방향 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="34" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 11"/>	<!--레버 방향 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="35" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 12"/>	<!--레버 방향 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="36" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 13"/>	<!--나가는 방향 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="37" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 14"/>	<!--나가는 방향 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="38" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 15"/>	<!--나가는 방향 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="39" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 16"/>	<!--나가는 방향 바닥 이펙트 -->
+		
+		<!--두 번째 숨겨진 복도(여섯번쨰 구역)  일반 몬스터 다 잡은 후 바닥 이펙트 -->
+		<WORLDEVENT_OBJECT ID="40" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 17"/>		
+		<!--두 번째 정예방 다 잡은 후 바닥 이펙트 -->	
+        <WORLDEVENT_OBJECT ID="41" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 18"/>
+        <WORLDEVENT_OBJECT ID="42" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 19"/>
+        <!--일곱번째 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="43" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 20"/>
+        <!--여덞번째 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+		<WORLDEVENT_OBJECT ID="44" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 21"/>	<!--세번째 정예방 숨겨진 복도 방향 이펙트 -->
+		<WORLDEVENT_OBJECT ID="45" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 22"/>	<!--세번째 정예방 방향 이펙트 -->
+	    <!--세 번째 숨겨진(아홉번째 구역) 복도 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="46" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 23"/>
+        <!--세 번째 정예방 다 잡은 후 바닥 이펙트 -->
+        <WORLDEVENT_OBJECT ID="47" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 24"/>
+        <WORLDEVENT_OBJECT ID="48" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 25"/>
+        <!--열번째 구역 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+		<WORLDEVENT_OBJECT ID="49" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 26"/>
+        <!--열한번째 구역 일반 몬스터 다 잡은 후 바닥 이펙트 -->
+		<WORLDEVENT_OBJECT ID="50" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ArrowSign1001_01 27"/>
+		
+		
+		<!--거울문 이펙트 제어-->
+
+		<WORLDEVENT_OBJECT ID="51" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 01"/>	<!--게이트 이펙트/첫번째 구역 몹 잡으면 발동 -->
+		<WORLDEVENT_OBJECT ID="52" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 02"/>	<!--게이트 이펙트 첫번째 숨겨진 복도 몬스터 다잡으면 발동 -->
+		<WORLDEVENT_OBJECT ID="53" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 03"/>	<!--게이트 이펙트/첫번째 숨겨진 복도에서 원래 복도로 복귀 발동은 02와 같이 발동 -->
+		<WORLDEVENT_OBJECT ID="54" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 05"/>	<!--게이트 이펙트 / 네번째 구역 몹 다잡고 숨겨진 방 레버를 당겼을시 발동-->
+		<WORLDEVENT_OBJECT ID="55" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 06"/>	<!--게이트 이펙트 /숨겨진 방안 레버를 당겼을 시에 발동 -->
+		<WORLDEVENT_OBJECT ID="56" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 07"/>	<!--게이트 이펙트 /두번쨰 숨겨진 복도 몬스터 다잡으면 발동 -->
+		<WORLDEVENT_OBJECT ID="57" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 08"/>	<!--게이트 이펙트/두번째 숨겨진 복도에서 원래 복도로 복귀 발동은 07와 같이 발동 -->
+		<WORLDEVENT_OBJECT ID="58" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 09"/>	<!--게이트 이펙트/여덟째 구역 몹 다잡으면 발동 -->
+		<WORLDEVENT_OBJECT ID="59" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 10"/>	<!--게이트 이펙트 /세번쨰 숨겨진 복도 몬스터 다잡으면 발동 -->
+		<WORLDEVENT_OBJECT ID="60" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="mirrorGate_1001_05 11"/>	<!--게이트 이펙트/세번째 숨겨진 복도에서 원래 복도로 복귀 발동은 10와 같이 발동 -->
+       
+		<!--이펙트 제어 / 포탈 -->
+		<WORLDEVENT_OBJECT ID="61" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_Gate_1001_05 01"/><!--세번째 구역 몹 다잡으면 발동 -->
+		<WORLDEVENT_OBJECT ID="62" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_Gate_1001_05 02"/> <!--네번째방 잡몹 물리친 후 -->
+
+		<!--이펙트 제어 레버 링 및 알림 -->
+		<WORLDEVENT_OBJECT ID="63" INIT_STATE="1" INIT_SHOW="1" TYPE="MAPOBJECT" NAME="MissonGo 01"/>	<!--첫번째 정예방 입구 헬프/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="64" INIT_STATE="1" INIT_SHOW="1" TYPE="MAPOBJECT" NAME="MissonGo 02"/>	<!--두번쨰 정예방 입구 헬프/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="65" INIT_STATE="1" INIT_SHOW="1" TYPE="MAPOBJECT" NAME="MissonGo 03"/>	<!--숨겨진 방 1헬프/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="66" INIT_STATE="1" INIT_SHOW="1" TYPE="MAPOBJECT" NAME="MissonGo 04"/>	<!--숨겨진 방 1헬프/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="67" INIT_STATE="1" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="MissonGo 05"/>	<!--세번째 정예방 입구 헬프/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="68" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="KeyGide_Z_Ring 01"/> <!--첫번째레버용z/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="69" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="KeyGide_Z_Ring 02"/> <!--둘번째레버용z/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="70" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="KeyGide_Z_Ring 03"/> <!--셋번째레버용z/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="71" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="KeyGide_Z_Ring 04"/> <!--네번째레버용z/ 게이트 -->
+		<WORLDEVENT_OBJECT ID="72" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="KeyGide_Z_Ring 05"/> <!--보스방 트리거용 -->
+        <WORLDEVENT_OBJECT ID="73" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="EF_Acc_hilight_001 01"/> <!--보스방 트리거용 -->
+        <WORLDEVENT_OBJECT ID="74" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_sunshine_01 01"/> <!--보스방 트리거용 -->
+        <WORLDEVENT_OBJECT ID="75" INIT_STATE="0" INIT_SHOW="0" TYPE="MAPOBJECT" NAME="ef_Ice_SlidingRoomObj1001_01 01"/> <!--보스방 트리거용 -->
+
+	</WORLDEVENT_OBJECT_LIST>
+
+	<!--첫번째 구역 몬스터 죽은 후 문열기 -->
+	<WORLD_EVENT ID="1" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="0" EVENT="EQUAL" VALUE="0"/><!--1구간 모든 몬스터가 죽으면 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+            <ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_01" EVENT="ENABLE" VALUE="1"/> <!--첫번째 숨겨진 복도 트리거 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="24" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 문앞 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="25" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 문앞 바닥 화살표 활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="51" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 숨겨진 복도 포털 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_01" EVENT="ENABLE" VALUE="1"/> <!--레버 트리거 활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="68" EVENT="SHOW" VALUE="1"/> <!-- 레버 Z UI 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--첫번째 정예방 문열기 -->
+	<WORLD_EVENT ID="2" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_01" EVENT="ACTION" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="1"/> <!-- 첫번째  정예방 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="20" EVENT="STATUS" VALUE="1"/> <!-- 스위치 내리기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="51" EVENT="SHOW" VALUE="0"/> <!-- 첫번째 숨겨진 복도 포털 비활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_01" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_01" EVENT="ENABLE" VALUE="1"/> <!--첫번째방 정예 몬스터 소환 트리거 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--첫번째 정예방 몬스터 소환 -->
+	<WORLD_EVENT ID="3" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_01" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(10000000)" EVENT="SCRIPT"/> <!--플레이어 입력/이동 제한 ON -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="1" EVENT="STATUS" VALUE="0"/> <!-- 첫번째 방 문닫기 -->
+	        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="7" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기 -->
+	        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="8" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="9" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="10" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기-->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="CALL_SG_BOSS_NAMED_UI(88)" EVENT="SCRIPT"/> <!--정예이름 UI호출 -->
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="51" EVENT="ACTIVE" VALUE="1"/>	<!--첫번째 정예방 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	
+    <!--5초후 첫번째 방 정예 몬스터 소환 -->
+	<WORLD_EVENT ID="4" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="3" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(10000001)" EVENT="SCRIPT"/> <!--플레이어 입력/이동 제한 OFF -->
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-21" EVENT="ACTIVE" VALUE="1"/><!--첫번째 방 정예 몬스터 소환 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_01" EVENT="ENABLE" VALUE="0"/> <!--보스 트리거 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--첫번째 정예방 몹 잡은 후 문열기 -->
+	<WORLD_EVENT ID="5" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-21" EVENT="EQUAL" VALUE="0"/><!--첫번째 정예방몬스터가 모두 죽었을 시 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="51" EVENT="REMOVE"/><!--첫번째 방 몬스터 제거 -->
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="7" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+	        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="8" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="9" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="10" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="2" EVENT="STATUS" VALUE="1"/> <!-- 첫번째 정예방 나가는 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="26" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 정예방 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="27" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 정예방 바닥 화살표 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후 복도방 몬스터 소환 -->
+	<WORLD_EVENT ID="6" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="5" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-13" EVENT="ACTIVE" VALUE="1"/>	<!--세번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--첫번째 숨겨진 복도(두번째 구역) 몬스터 소환 -->
+	<WORLD_EVENT ID="7" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_01" EVENT="ACTION" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_02" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후 첫번째 방 정예 몬스터 소환 -->
+	<WORLD_EVENT ID="8" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="7" EVENT="ACT_AFTER_TIME" VALUE="2000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-12" EVENT="ACTIVE" VALUE="1"/><!--첫번째 숨겨진 복도 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+
+   	<!--첫번째 숨겨진 복도 몬스터 잡은 후 문 열기 -->
+	<WORLD_EVENT ID="9" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-12" EVENT="EQUAL" VALUE="0"/><!--첫번째 정예방몬스터가 모두 죽었을 시 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="52" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 숨겨진 복도 포털 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="28" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 숨겨진 복도 화살표 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_03" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후 첫번째 방 정예 몬스터 소환 -->
+	<WORLD_EVENT ID="10" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="9" EVENT="ACT_AFTER_TIME" VALUE="1000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-13" EVENT="ACTIVE" VALUE="1"/><!--첫번째 숨겨진 복도 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--세번째 구역 몬스터 잡고 문열기 -->
+	<WORLD_EVENT ID="11" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-13" EVENT="EQUAL" VALUE="0"/><!--세번째 구역 몬스터가 죽으면 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_05" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="61" EVENT="SHOW" VALUE="1"/> <!-- 세번째 구역 계단 포탈 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--첫번째 숨겨진 복도(두번째 구역) 몬스터 소환 -->
+	<WORLD_EVENT ID="12" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_05" EVENT="ENTER" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_05" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--1초후 첫번째 방 정예 몬스터 소환 -->
+	<WORLD_EVENT ID="13" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="12" EVENT="ACT_AFTER_TIME" VALUE="1000" /> <!--1초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="14" EVENT="ACTIVE" VALUE="1"/>	<!--네번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+
+    <!--네번째 구역 몬스터 죽은 후 문열기 -->
+	<WORLD_EVENT ID="14" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="14" EVENT="EQUAL" VALUE="0"/><!--네번째 구역 모든 몬스터가 죽으면 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+            <ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_09" EVENT="ENABLE" VALUE="1"/> <!--두번째 숨겨진 복도 트리거 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="62" EVENT="SHOW" VALUE="1"/> <!-- 두번째 숨겨진 복도 포탈 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="30" EVENT="SHOW" VALUE="1"/> <!-- 두번째 문앞 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="16" EVENT="STATUS" VALUE="1"/> <!-- 두번째 숨겨진 복도 쇠창살문 열림 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="54" EVENT="SHOW" VALUE="1"/> <!-- 두번째 숨겨진 방 이동 포탈 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_07" EVENT="ENABLE" VALUE="1"/> <!--숨겨진 방 트리거 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="31" EVENT="SHOW" VALUE="1"/> <!-- 숨겨진방 방향 바닥 화살표 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--두번쨰 숨겨진 방 -->
+	<WORLD_EVENT ID="15" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_07" EVENT="ENTER" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="32" EVENT="SHOW" VALUE="1"/> <!-- 파괴오브젝트 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="17" EVENT="STATUS" VALUE="0"/> <!-- 숨겨진방 안 문 닫기 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후 첫번째 방 정예 몬스터 소환 -->
+	<WORLD_EVENT ID="16" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="15" EVENT="ACT_AFTER_TIME" VALUE="1000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+		<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="15" EVENT="ACTIVE" VALUE="1"/>	<!--숨겨진 방 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+<!--두번째 숨겨진 방 몬스터 다 잡은 후 -->
+    <WORLD_EVENT ID="17" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="15" EVENT="EQUAL" VALUE="0"/><!--네번째 구역 모든 몬스터가 죽으면 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="32" EVENT="SHOW" VALUE="0"/> <!-- 파괴오브젝트 방향 바닥 화살표 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="33" EVENT="SHOW" VALUE="1"/> <!-- 레버 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="34" EVENT="SHOW" VALUE="1"/> <!-- 레버 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="35" EVENT="SHOW" VALUE="1"/> <!-- 레버 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_03" EVENT="ENABLE" VALUE="1"/> <!--레버 트리거 활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="70" EVENT="SHOW" VALUE="1"/> <!-- 레버 Z UI 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--두번째 숨겨진 방 레버 사용 후 -->
+    <WORLD_EVENT ID="18" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_03" EVENT="ACTION" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_07" EVENT="ENABLE" VALUE="0"/> <!--숨겨진 방 들어오는 트리거 비활성화 -->
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+		 	<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="33" EVENT="SHOW" VALUE="0"/> <!-- 레버 방향 바닥 화살표 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="34" EVENT="SHOW" VALUE="0"/> <!-- 레버 방향 바닥 화살표 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="35" EVENT="SHOW" VALUE="0"/> <!-- 레버 방향 바닥 화살표 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="70" EVENT="SHOW" VALUE="0"/> <!-- 레버 Z UI 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="36" EVENT="SHOW" VALUE="1"/> <!-- 레버 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="37" EVENT="SHOW" VALUE="1"/> <!-- 레버 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="38" EVENT="SHOW" VALUE="1"/> <!-- 레버 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="39" EVENT="SHOW" VALUE="1"/> <!-- 레버 방향 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="55" EVENT="SHOW" VALUE="1"/> <!-- 숨겨진 방안 포탈 이펙트 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_08" EVENT="ENABLE" VALUE="1"/> <!--숨겨진 방 나가는 트리거 활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="17" EVENT="STATUS" VALUE="1"/> <!-- 숨겨진방 안 문열기 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_02" EVENT="ENABLE" VALUE="1"/> <!--레버 트리거 활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="69" EVENT="SHOW" VALUE="1"/> <!-- 레버 Z UI 활성화 -->
+     		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--두번째 정예방 문열기 -->
+	<WORLD_EVENT ID="19" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_02" EVENT="ACTION" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_09" EVENT="ENABLE" VALUE="0"/> <!--두번째 숨겨진 복도 트리거 비활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="62" EVENT="STATUS" VALUE="0"/> <!-- 두번째 숨겨진 복도 포탈 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="21" EVENT="STATUS" VALUE="1"/> <!-- 스위치 내리기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="16" EVENT="STATUS" VALUE="0"/> <!-- 두 번째 숨겨진 복도 쇠창살문 닫힘 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="1"/> <!-- 두번째 정예방 들어가는 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="54" EVENT="STATUS" VALUE="0"/> <!-- 숨겨진 방 이동 거울문 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--두번째 정예방 몬스터 소환 -->
+	<WORLD_EVENT ID="20" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_02" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(10000000)" EVENT="SCRIPT"/> <!--플레이어 입력/이동 제한 ON -->
+			
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="3" EVENT="STATUS" VALUE="0"/> <!-- 두번째 방 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="CALL_SG_BOSS_NAMED_UI(88)" EVENT="SCRIPT"/> <!--정예이름 UI호출 -->
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="52" EVENT="ACTIVE" VALUE="1"/>	<!--두번째 방 몬스터 소환 -->
+			
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	
+    <!--5초후 두번째 방 정예 몬스터 소환 -->
+	<WORLD_EVENT ID="21" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="20" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(10000001)" EVENT="SCRIPT"/> <!--플레이어 입력/이동 제한 OFF -->
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-22" EVENT="ACTIVE" VALUE="1"/><!--두번째 방 정예 몬스터 소환 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_02" EVENT="ENABLE" VALUE="0"/> <!--보스 트리거 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--두번째 정예방 몹 잡은 후 문열기 -->
+	<WORLD_EVENT ID="22" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-22" EVENT="EQUAL" VALUE="0"/><!--첫번째 정예방몬스터가 모두 죽었을 시 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="52" EVENT="REMOVE"/><!--첫번째 방 몬스터 제거 -->
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="4" EVENT="STATUS" VALUE="1"/> <!-- 두번째 정예방 나가는 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="41" EVENT="SHOW" VALUE="1"/> <!-- 두번째 정예방 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="42" EVENT="SHOW" VALUE="1"/> <!-- 두번째 정예방 바닥 화살표 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후  몬스터 소환 -->
+	<WORLD_EVENT ID="23" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="22" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="17" EVENT="ACTIVE" VALUE="1"/>	<!--일곱번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	
+    <!--두번째 숨겨진 복도(여섯번째 구역) 몬스터 소환 -->
+	<WORLD_EVENT ID="24" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_09" EVENT="ACTION" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="16" EVENT="ACTIVE" VALUE="1"/><!--두번째 복도 구역 정예 몬스터 소환 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_10" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	
+   	<!--두번째 숨겨진 복도 몬스터 잡은 후 문 열기 -->
+	<WORLD_EVENT ID="25" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="16" EVENT="EQUAL" VALUE="0"/><!--두번째 숨겨진 복도 몬스터가 모두 죽었을 시 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+		<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="56" EVENT="SHOW" VALUE="1"/> <!-- 두번째 숨겨진 복도 거울 포털 활성화 -->
+		<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="57" EVENT="SHOW" VALUE="1"/> <!-- 여덟번째 구역 복도 거울 포털 활성화 -->
+		<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="40" EVENT="SHOW" VALUE="1"/> <!-- 두번째 숨겨진 복도 화살표 활성화 -->
+	    <ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_11" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후  몬스터 소환 -->
+	<WORLD_EVENT ID="26" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="25" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="18" EVENT="ACTIVE" VALUE="1"/>	<!--여덟번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	
+
+	<!--일곱 번째구역 몹 잡은 후 문열기 -->
+	<WORLD_EVENT ID="27" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="17" EVENT="EQUAL" VALUE="0"/><!--두번째 정예방몬스터가 모두 죽었을 시 아래 내용 실행 -->
+          <ACTIVATE_ACTION>
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="18" EVENT="STATUS" VALUE="1"/> <!--일곱번째 구역 나가는 문 열기 -->
+		</ACTIVATE_ACTION>
+    </WORLD_EVENT>
+
+	<!--5초후  몬스터 소환 -->
+	<WORLD_EVENT ID="28" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="27" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="18" EVENT="ACTIVE" VALUE="1"/>	<!--여덟번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+    <!--여덟 번째구역 몹 잡은 후 문열기 -->
+	<WORLD_EVENT ID="29" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="18" EVENT="EQUAL" VALUE="0"/><!--여덞번째구역 몬스터가 모두 죽었을 시 아래 내용 실행 -->
+        <ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="44" EVENT="SHOW" VALUE="1"/> <!-- 세번째 숨겨진 복도 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="45" EVENT="SHOW" VALUE="1"/> <!-- 세번째 정예방 바닥 화살표 활성화 -->
+	        <ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_13" EVENT="ENABLE" VALUE="1"/> <!--세번째 숨겨진 복도 트리거 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="58" EVENT="STATUS" VALUE="1"/> <!-- 세번째 숨겨진 복도 거울 포탈 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_04" EVENT="ENABLE" VALUE="1"/> <!--레버 트리거 활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="71" EVENT="SHOW" VALUE="1"/> <!-- 레버 Z UI 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--레버당겨 세번째 정예방 문열기 -->
+	<WORLD_EVENT ID="30" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Trigger_swich_04" EVENT="ACTION" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="5" EVENT="STATUS" VALUE="1"/> <!-- 세번째  정예방 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="23" EVENT="STATUS" VALUE="1"/> <!-- 스위치 내리기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="58" EVENT="SHOW" VALUE="0"/> <!-- 세번째 숨겨진 복도 거울 포털 비활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_13" EVENT="ENABLE" VALUE="0"/> <!--세번째 숨겨진 복도 트리거 비활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_03" EVENT="ENABLE" VALUE="1"/> <!--세번째방 정예 몬스터 소환 트리거 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--세번째 정예방 몬스터 소환 -->
+	<WORLD_EVENT ID="31" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_03" EVENT="ENTER"/> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(10000000)" EVENT="SCRIPT"/> <!--플레이어 입력/이동 off -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="5" EVENT="STATUS" VALUE="0"/> <!-- 세번째 방 문닫기 -->
+	        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기 -->
+	        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="13" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="14" EVENT="STATUS" VALUE="0"/> <!-- 정예방 안 철창문 문닫기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="71" EVENT="SHOW" VALUE="0"/> <!-- 레버 Z UI 비활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="44" EVENT="SHOW" VALUE="0"/> <!-- 세번째 숨겨진 복도 바닥 화살표 비 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="45" EVENT="SHOW" VALUE="0"/> <!-- 세번째 정예방 바닥 화살표 비 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="CALL_SG_BOSS_NAMED_UI(88)" EVENT="SCRIPT"/> <!--정예이름 UI호출 -->
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="53" EVENT="ACTIVE" VALUE="1"/>	<!--세번째 정예방 일반 몬스터 소환 -->
+			</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후 세번째 방 정예 몬스터 소환 -->
+	<WORLD_EVENT ID="32" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="31" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+		<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-23" EVENT="ACTIVE" VALUE="1"/><!--세번째 방 정예 몬스터 소환 -->
+		<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="Elite_teleport_target_03" EVENT="ENABLE" VALUE="0"/> <!--보스 트리거 비활성화 -->
+		<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="GetEventScriptSystem():ActivateEvent(10000001)" EVENT="SCRIPT"/> <!--플레이어 입력/이동 on -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--세번째 정예방 몹 잡은 후 문열기 -->
+	<WORLD_EVENT ID="33" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="-23" EVENT="EQUAL" VALUE="0"/><!--세번째 정예방 몬스터가 모두 죽었을 시 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="53" EVENT="REMOVE"/><!--세번째 방 몬스터제거 -->
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+	        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="11" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+	        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="12" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="13" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="14" EVENT="STATUS" VALUE="1"/> <!-- 정예방 안 철창문 열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="6" EVENT="STATUS" VALUE="1"/> <!-- 첫번째 정예방 나가는 문열기 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="47" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 정예방 바닥 화살표 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="48" EVENT="SHOW" VALUE="1"/> <!-- 첫번째 정예방 바닥 화살표 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--5초후  몬스터 소환 -->
+	<WORLD_EVENT ID="34" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="33" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="20" EVENT="ACTIVE" VALUE="1"/>	<!--열번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--열번째구역 몹 잡은 후 문열기 -->
+	<WORLD_EVENT ID="35" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="20" EVENT="EQUAL" VALUE="0"/><!--열번째 구역 몬스터가 모두 죽었을 시 아래 내용 실행 -->
+        <ACTIVATE_ACTION>
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="19" EVENT="STATUS" VALUE="1"/> <!-- 열번째 구역 나가는 문열기 -->
+		</ACTIVATE_ACTION>
+   </WORLD_EVENT>
+
+   <!--5초후  몬스터 소환 -->
+	<WORLD_EVENT ID="36" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="35" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			 <ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="21" EVENT="ACTIVE" VALUE="1"/><!--열한번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+    <!--세번째 숨겨진 복도(아홉번째 구역) 몬스터 소환 -->
+	<WORLD_EVENT ID="37" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_13" EVENT="ACTION" /> <!--트리거 정의 -->
+		<ACTIVATE_ACTION>
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_14" EVENT="ENABLE" VALUE="0"/> <!--트리거 비활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--1초후  몬스터 소환 -->
+	<WORLD_EVENT ID="38" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="37" EVENT="ACT_AFTER_TIME" VALUE="1000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			 <ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="19" EVENT="ACTIVE" VALUE="1"/><!--세번째 복도 구역 일반 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+	
+
+   	<!--세번째 숨겨진 복도 몬스터 잡은 후 문 열기 -->
+	<WORLD_EVENT ID="39" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="19" EVENT="EQUAL" VALUE="0"/><!--세번째 숨겨진 복도 몬스터가 모두 죽었을 시 아래 내용 실행 -->
+		<ACTIVATE_ACTION>
+		<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+        <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="59" EVENT="SHOW" VALUE="1"/> <!-- 세번째 숨겨진 복도 거울 포털 활성화 -->
+		<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="45" EVENT="SHOW" VALUE="1"/> <!-- 세번째 숨겨진 복도 화살표 활성화 -->
+	    <ACTION TARGET_TYPE="TRIGGER" TARGET_ID="teleport_target_15" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--1초후  몬스터 소환 -->
+	<WORLD_EVENT ID="40" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="WORLD_EVENT" TARGET_ID="39" EVENT="ACT_AFTER_TIME" VALUE="3000" /> <!--5초 후 아래 이벤트 실행 -->
+		<ACTIVATE_ACTION>
+			 <ACTION TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="21" EVENT="ACTIVE" VALUE="1"/>	<!--열한번째 구역 몬스터 소환 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+	<!--열번 한째구역 몹 잡은 후 포탈 보이기 -->
+	<WORLD_EVENT ID="41" ENABLE="1">
+		<CONDITION BINDING="AND" TARGET_TYPE="MON_REGEN_GROUP" TARGET_ID="21" EVENT="EQUAL" VALUE="0"/><!--첫번째 정예방몬스터가 모두 죽었을 시 아래 내용 실행 -->
+        <ACTIVATE_ACTION>
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="FRM_GOGO_RIGHT" EVENT="SCRIPT"/> <!--오른쪽 GOGO -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="50" EVENT="SHOW" VALUE="1"/> <!-- 보스 포탈 방향 바닥 화살표 활성화 -->
+		    <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="72" EVENT="SHOW" VALUE="1"/> <!-- Z UI 활성화 -->
+            <ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="73" EVENT="SHOW" VALUE="1"/> <!-- 보스방 포탈 포탈 이펙트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="74" EVENT="SHOW" VALUE="1"/> <!-- 보스방 포탈 빛기둥 이펙트 활성화 -->
+			<ACTION TARGET_TYPE="CLIENT_OBJECT" TARGET_ID="75" EVENT="SHOW" VALUE="1"/> <!-- 보스방 포탈 바닥 이펙트 활성화 -->
+			<ACTION TARGET_TYPE="TRIGGER" TARGET_ID="gate_next_base" EVENT="ENABLE" VALUE="1"/> <!--트리거 활성화 -->
+		</ACTIVATE_ACTION>
+	</WORLD_EVENT>
+
+    <!--정예방 스위치-->
+	<TRIGGER ID="Trigger_swich_01" ENABLE="0"> <!--정예1 방 -->
+		<CONDITION TYPE="action" ACTION="a_act" />
+		<ACTION SCRIPT="Map_WorldEventTrigger" />
+	</TRIGGER>
+	<TRIGGER ID="Trigger_swich_02" ENABLE="0"> <!--정예2 방 -->
+		<CONDITION TYPE="action" ACTION="a_act" />
+		<ACTION SCRIPT="Map_WorldEventTrigger" />
+	</TRIGGER>
+	<TRIGGER ID="Trigger_swich_03" ENABLE="0"> <!--숨겨진 방 -->
+		<CONDITION TYPE="action" ACTION="a_act" />
+		<ACTION SCRIPT="Map_WorldEventTrigger" />
+	</TRIGGER>
+	<TRIGGER ID="Trigger_swich_04" ENABLE="0"> <!--정예 3방 -->
+		<CONDITION TYPE="action" ACTION="a_act" />
+		<ACTION SCRIPT="Map_WorldEventTrigger" />
+	</TRIGGER>
+
+	<!-- 엔터던전 -->
+  <TRIGGER ID="teleport_target_01" TYPE="TELEPORT" ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_01" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_02" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_02" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_03" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_03" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_04" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_04" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_05" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_05" PARAM="2" PARAM2="2"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_06" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_06" PARAM="1" PARAM2="1"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_07" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_07" PARAM="4" PARAM2="4"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_08" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_08" PARAM="8" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_09" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_09" PARAM="2" PARAM2="8"/>
+  </TRIGGER>
+   <TRIGGER ID="teleport_target_10" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_10" PARAM="4" PARAM2="1"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_11" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_11" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_12" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_12" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_13" TYPE="TELEPORT" ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_13" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_14" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_14" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_15" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_15" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+  <TRIGGER ID="teleport_target_16" TYPE="TELEPORT"  ENABLE="0" ><!--이벤트 제어-->
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="teleport_zone_16" PARAM="4" PARAM2="8"/>
+  </TRIGGER>
+
+  <!-- 정예방 용 -->
+	<TRIGGER ID="Elite_teleport_target_01" TYPE="TELEPORT" ENABLE="0" IS_WORLD_EVENT_SCRIPT_USE="1" ><!--이벤트 제어-->
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="Elite_teleport_zone_01" PARAM="2" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="Elite_teleport_target_02" TYPE="TELEPORT" ENABLE="0" IS_WORLD_EVENT_SCRIPT_USE="1" ><!--이벤트 제어-->
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="Elite_teleport_zone_02" PARAM="2" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="Elite_teleport_target_03" TYPE="TELEPORT" ENABLE="0" IS_WORLD_EVENT_SCRIPT_USE="1" ><!--이벤트 제어-->
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Party_Map_EnterDugeon" PARAM_STRING="Elite_teleport_zone_03" PARAM="2" PARAM2="2"/>
+	</TRIGGER>
+
+  	<!--텔레포트 데미지 이동-->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+
+  <WORLD_QUALITY HIGH_END="1000" MID_END="1500" LOW_END="2000" USE="1" />
+  </WORLD>

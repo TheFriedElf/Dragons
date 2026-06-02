@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4082</ID> <!--T.T.10408201 툼레이더(6) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	달빛해안 마을 라르엘에게 정령신화 5페이지 전달-->
+<!--[완료NPC]	달빛해안 마을 - 라르엘-->
+<!--[내용]	잭에게 받은 것은 정령신화 5페이지. 달빛해안 마을의 묘지기 라르엘에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">A9F524A1-84FD-436f-8168-709A55165360</CLIENT> <!--시작NPC 위험한 동굴 - 잭 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</PAYER> <!--완료NPC 달빛해안 마을 - 라르엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">A9F524A1-84FD-436f-8168-709A55165360</AGENT> <!--진행NPC 11 위험한 동굴 - 잭 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 12 달빛해안 마을 - 라르엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160408200/1">10011</NPC> 
+ <!--Item_NO=160408200/[Q.ID:04082] 정령신화 5페이지,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160408200/1/511">10011</NPC> 
+ <!--Item_NO=160408200/[Q.ID:04082] 정령신화 5페이지,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160408200/1">10011</NPC> 
+ <!--Item_NO=160408200/[Q.ID:04082] 정령신화 5페이지,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160408200/1/502">10012</NPC> 
+ <!--Item_NO=160408200/[Q.ID:04082] 정령신화 5페이지,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160408200/1">10012</NPC> 
+ <!--Item_NO=160408200/[Q.ID:04082] 정령신화 5페이지,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10408211"/> <!--정령신화 5페이지 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10408221" FACE="Jack_normal"/> <!--자, 약속대로 이걸 받아.
+이 양피지 두루마리는 지하묘지에서 구한 거야.%%
+지하묘지에 유령이 나오니까 경비를 서는 녀석이 하나도 없더라고… 
+덕분에 쉽게 이걸 가지고 나올 수 있었지. 헤헤%%
+뭐? 이걸 라르엘에게 다시 되돌려줄 거라고?
+뭐하러 그래? 이건 생각보다 비싸게 받을 수 있는 물건일텐데…%%-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10408226" FACE="Larel_smile"/> <!--와! 마지막 두루마리야! 드디어 해냈구나!
+최근에 너만큼 반가운 사람이 어디에 또 있었나 싶다.%%-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10408223" FACE="Jack_smile"/> <!--흐음...  네 생각이 정 그렇다면 어쩔 수 없지. 뭐...
+알았어. 묘지기 수도사에게 이걸 돌려주도록 해.%%-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10408224" FACE="Jack_angly"/> <!--그래, 잘 생각했어. 이런 걸 굳이 마다하지 말라고.  -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10408225" FACE="Jack_normal"/> <!--수도사 녀석은 항상 지하묘지 입구 앞에 죽치고 있더라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10408227" FACE="Larel_normal"/> <!--그래 어떻게 된 일이지? 뭔가 빠트린거 아니야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10408202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10408251" FACE="Jack_normal"/> <!--수도사 녀석은 항상 지하묘지 입구 앞에 죽치고 있더라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <CMD TYPE="stopBGM" SoundNo = "0"/> 
+    <!-- 위험한 동굴 오프닝 1 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="setmoviescene" enable="TRUE" Time="0"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다. -->
+    <CMD TYPE="AddNPC" ClassNo ="1028179" NameTTID ="505662" SpawnPos = "2907.460205,-4.221089,923.413086"/>
+    <CMD TYPE="MoveCamToActor" NameTTID ="505662" MoveTime="0"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="SetActorDirection" NameTTID="505662"  Direction="0" />
+    <CMD TYPE="PlayAnimation" NameTTID="505662" SlotName="action_01"/>
+    <CMD TYPE="SetFollowCamera" NameTTID="505662" CameraID="Camera01" UseActorPositionAsSoundListener="true"/>
+    <CMD TYPE="WaitCamera"/>
+    <CMD TYPE="WaitTime" Time="11"/>
+    
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "false"/>
+    <CMD type="WaitFade" time="1"/>
+    
+    <CMD TYPE="ShowActor" NameTTID="505662" Show="false"/>
+    <CMD TYPE="RemoveActor" NameTTID ="505662"/>	
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="1"/>	
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+    <CMD type="WaitFade" time="1"/>
+    
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다.-->    
+	<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	
+    <CMD type="CallUI" UIWndName = "FRM_MISSION_START"/>
+    <CMD type="CloseUI" UIWndName = "FRM_REST_MON_NUM"/>
+    <CMD TYPE="PlayBGM" SoundNo = "0"/>
+	<!-- 플레이어 이동 가능 -->
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

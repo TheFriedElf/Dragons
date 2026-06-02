@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 켄타 엔딩 -->
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD type="WaitTime" time="4"/>
+    <CMD type="CallUI" UIWndName="FRM_MISSION_END"/>
+    <CMD TYPE="PlaySound" SpecialActor="ME"  SlotNumber="1" SoundID="Guild_LV_UP"/>
+    <CMD type="WaitTime" time="4"/>
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="stopBGM" SoundNo = "0"/>
+    <CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="false"/>
+	<CMD type="WaitFade" time="1"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+    <CMD TYPE="PlayBGM" SoundNo = "1"/>
+    <CMD TYPE="ShowActor" ClassNo="6104400" Show="false"/>
+    <!--CMD TYPE="RemoveActor" NameTTID="6104400"/-->
+    <CMD TYPE="RemoveActor" ClassNo="6104400"/>    
+	<CMD TYPE="ShowActor" ActorGUID="AF9E70F4-C6E5-4013-AD27-1B546C4F2600" Show="true"/>
+    <CMD TYPE="SetActorPosition" SpecialActor="ME" TargetPos ="828.765747, 676.046936, 335.633240"/>
+    <CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2"/>
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="0"/>
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+    
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+<CMD TYPE="LockPlayerInputMove" Lock="false"/>    
+</EVENT_SCRIPT>

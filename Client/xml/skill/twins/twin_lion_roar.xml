@@ -1,0 +1,8 @@
+<ACTION ID="a_twin_lion_roar" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="casting01" LOOP="TRUE"/>
+  <SLOT NAME="lion_roar"/>
+  <FSM SCRIPT="CommonSkillAction" 
+	USE_TLM="TRUE"
+	NO_DAMAGE_HOLD="TRUE"
+  />
+</ACTION>

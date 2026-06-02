@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="720701_DG" DESCRIPTION="90207010">
+	<GSAPATH>../Data/3_World/95_Dungeon/700_Elemental_Dungeon/720701_DG.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/breakhoperoad_bg.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.6" GLOW="0.4" HIGHLIGHT="0.02"/>
+	<!--몬스터 카운터 호출-->
+	<EVENT_SCRIPT_ON_ENTER ID="9020701"/>
+
+
+	<!-- 안개내린 오솔길 포탈 -->
+	<TRIGGER ID="gate_020420_base" TYPE="PORTAL" TITLE_TEXT_ID="800049" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,75" TITLE_TEXT_SCALE="1.3" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Portal" PARAM="9020420" PARAM2="4">
+			<ACCESS>
+				<LEVEL MIN="0"/>
+			</ACCESS>
+		</ACTION>
+	</TRIGGER>
+
+
+	<!-- 엔터 던전 -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_03" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_03" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_04" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_04" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_05" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_05" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_06" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_06" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_07" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_07" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_08" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_08" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_09" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_09" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_10" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_10" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_11" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_11" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_12" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_12" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_13" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_13" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_14" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_14" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_15" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_15" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_16" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_16" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_17" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_17" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_18" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_18" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_19" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_19" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_20" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_20" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_21" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_21" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_22" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_22" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_23" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_23" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_24" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_24" PARAM="1" PARAM2="2"/>
+	</TRIGGER>
+
+	<!-- 텔레 점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="450"/>
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="450"/>
+	</TRIGGER>
+	<!-- 텔 레 포 트 데미지 이동 -->
+	<TRIGGER ID="Touch_target_01" TYPE="TELEPORT">
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01"/>
+	</TRIGGER>
+
+	<!--포그-->
+	<FOG DENSITY="0.1" FUNC="RANGE_SQ" START="380" END="2800" COLOR="0.05098039,0,0.1019608"/>
+	<WORLD_QUALITY HIGH_END="1000" MID_END="2000" LOW_END="3000" USE="1"/>
+</WORLD>
+
+

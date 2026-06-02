@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_sapphire_dragon" INIT_ACTION="a_idle">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_sapphire_dragon"/>	
+		<KFMPATH>../Data\2_Mon/B_DragonSapphire/b_dragonsapphire.kfm</KFMPATH>
+		<SCRIPT SRC="WorldAction/WA_SAPHIREBOSS_APPEAR.lua">
+			<ITEM NAME="Actor_Sapphire_Dragon_Hit" TYPE="EVENT"/>
+		</SCRIPT>
+		<!--EFFECT SCALE = "3.0"	/-->
+		<ABV>
+			<SPHERE TO="Bip01 Head" LOCATE="115,0,0" SIZE="50"/>
+			<CAPSULE TO="Bip01 R Finger2" ROTATE="0,0,1,90" SIZE="37.5, 45" LOCATE="-20,0,0"/>
+			<CAPSULE TO="Bip01 L Finger2" ROTATE="0,0,1,90" SIZE="50, 45" LOCATE="-50,0,-10"/>
+		</ABV>
+		<SLOT>
+			<ITEM NAME="idle_01" ANIMATION="1000015" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_idle_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_01_01" ANIMATION="1000000" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000001"/>
+			<ITEM NAME="attk_01_03" ANIMATION="1000017"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000002" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_02_03" ANIMATION="1000018"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000003"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000004" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_03-1.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000005" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_03-2.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000006" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_05.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000007"/>
+			<ITEM NAME="attk_04_03" ANIMATION="1000008"/>
+			<ITEM NAME="attk_05_01" ANIMATION="1000009" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_05.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000010"/>
+			<ITEM NAME="attk_05_03" ANIMATION="1000011"/>
+			<ITEM NAME="attk_06" ANIMATION="1000012" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_06.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="die" ANIMATION="1000013" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_die_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000014" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_dmg_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="openning" ANIMATION="1000016" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_opening_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="turn_l" ANIMATION="1000019"/>
+			<ITEM NAME="turn_r" ANIMATION="1000020"/>
+			<ITEM NAME="attk_03_03" ANIMATION="1000021"/>
+			<ITEM NAME="attk_07_01" ANIMATION="1000000" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_07_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_07_02" ANIMATION="1000001"/>
+			<ITEM NAME="attk_08_01" ANIMATION="1000002" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_07_01.wav" VOLUME="1.0, 1000, 1500"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000003"/>
+			<ITEM NAME="attk_07" ANIMATION="1000022" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_07.wav" VOLUME="1.0, 1000, 1500"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

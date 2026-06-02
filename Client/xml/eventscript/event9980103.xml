@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+	<!-- 전체 UI 숨기기 -->
+	<CMD TYPE="HideUI" enable="true"/><!--UI가리기 -->
+
+	<!-- 연출 준비-->
+
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="0.1"/> <!-- 무비 신 으로 변경한다 -->
+
+	<CMD TYPE="IngQuestDoEvent" SpecialActor="ME" QUEST="4281" Event ="980176"/>
+
+	<CMD TYPE="EscScript" EventID="980177"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801064" TextTTID="99801751" FaceID="Perseus_smile" /><!-- 페르세우스 웃음-->
+	<CMD TYPE="WaitTime" Time="4"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801064" TextTTID="99801752" FaceID="Perseus_sad" /><!-- 페르세우스 난처-->
+	<CMD TYPE="WaitTime" Time="3.5"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801064" TextTTID="99801753" FaceID="Perseus_normal" /><!-- 페르세우스 기본-->
+	<CMD TYPE="WaitTime" Time="3"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801064" TextTTID="99801754" FaceID="Perseus_sad" /><!-- 페르세우스 난처-->
+	<CMD TYPE="WaitTime" Time="2.7"/>
+
+
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980177"/>
+
+	
+</EVENT_SCRIPT>
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Tomb_Procel_F5" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="4216">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Tomb_Procel"/>
+		<KFMPATH SCALE="1.2">../Data/2_Mon2/01_Felloruss/03_EliteMon/050200/Tomb_Procel/Tomb_Procel.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="24"/>
+		
+		</ABV>
+		<SLOT>
+			<!--근거리 1-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000207"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000209"/>
+
+			<!--원거리 1-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000214"/>
+			<ITEM NAME="shot_01" ANIMATION="1000215" FIRE_START_NODE="p_ef_shot_01" PROJECTILE_ID="Peojectile_Tomb_Procel_Shot_01"/>
+
+			<!--던지기-->
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000311"/>
+
+			<ITEM NAME="skill_shot_02" ANIMATION="1000312" FIRE_START_NODE="p_ef_shot_01" PROJECTILE_ID="Peojectile_Tomb_Procel_Shot_02" PROJECTILE_TYPE="BOOMERANG" PROJECTILE_SCALE="0.8" />
+
+			<ITEM NAME="btlidle_02_skill_shot_middle" ANIMATION="1000313"/>
+			<ITEM NAME="shot_return_02" ANIMATION="1000314"/>
+
+			<!--브래스-->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000345"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000346"/>
+			<ITEM NAME="breath_01" ANIMATION="1000347"/>
+			<ITEM NAME="breath_01_finish" ANIMATION="1000348"/>
+
+		<!--피격패턴 및 사망-->
+            <ITEM NAME="dmg_01" ANIMATION="1000011"/>
+            <ITEM NAME="dmg_02" ANIMATION="1000012"/>
+	     
+            <ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+            <ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+            <ITEM NAME="StandUp" ANIMATION="1000024"/>
+ 
+            <ITEM NAME="stun" ANIMATION="1000025"/>
+
+	        <ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="1.5" QUAKE_FACTOR="2" CAMERA_ZOOM_OUT="600" CAMERA_ZOOM_IN_SPEED="0"/>
+			<ITEM NAME="run" ANIMATION="1000050"/>
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+
+					<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

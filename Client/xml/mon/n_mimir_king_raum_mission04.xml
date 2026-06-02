@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Mimir_king_Raum_Mission04">
+	<TEXTURE SRC="tear_02.dds">../Data/2_Mon/N_Mimir_King_Raum/tear_02.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_Kahuna_glow.dds">../Data/2_Mon/N_Mimir_Kahuna/N_Mimir_Kahuna_glow.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_01.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_01.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_01_glow.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_01_glow.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_glow.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_glow.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_Kahuna.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_Kahuna.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_Kahuna_01.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_Kahuna_01.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_Kahuna_02.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_Kahuna_02.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_Kahuna_02_glow.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_Kahuna_02_glow.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_stingsoldier.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_stingsoldier.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_stingsoldier_01.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_stingsoldier_01.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_stingsoldier_01_glow.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_stingsoldier_01_glow.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_stingsoldier_glow.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_stingsoldier_glow.dds</TEXTURE>
+	<TEXTURE SRC="N_Mimir_Kahuna_01_glow.dds">../Data/2_Mon/N_Mimir_King_Raum/N_Mimir_Kahuna_01_glow.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Mimir_king_Raum_Mission04"/>
+		<KFMPATH>../Data/2_Mon/N_Mimir_king_Raum_Mission04/N_Mimir_King_Raum_Mission04.kfm</KFMPATH>
+		<SUB_KFMPATH>../Data/2_Mon/N_Mimir_king_Raum_Mission04/N_Mimir_King_Raum_Mission04_die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="88,25" ROTATE="1,0,0,90"/>
+		</ABV>
+		<SLOT>
+			<!-- 소리 지르기 (모든 PC 스턴상태) -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000206"/>
+			<!-- PC 날리기 (모든 PC 뒤로 날려 버린다) -->
+			<ITEM NAME="Bat_Missile_start_01" ANIMATION="1000207"/>
+			<ITEM NAME="Bat_Missile_btlidle_01" ANIMATION="1000208"/>
+			<ITEM NAME="Bat_Missile_01" ANIMATION="1000209" FIRE_START_NODE="char_root" PROJECTILE_ID="PROJECTILE_Raum_Storm" PROJECTILE_COUNT="4" NO_VERICAL_RANDOM="1" FIRE_DELAY="0.05" DAMAGE_ON_EVENT="1"/>
+			<!-- 날아서 알 투하하기 (바닥에 알 폭탄을 떨어트려 터트린다) -->
+			<ITEM NAME="patrol_btlidle" ANIMATION="1000211" ADD_Z="140"/>
+			<!--준비 -->
+			<ITEM NAME="patrol_attack" ANIMATION="1000212" FIRE_START_NODE="p_ef_heart" PROJECTILE_ID="PROJECTILE_Raum_Egg"/>
+			<!--공격 -->
+			<ITEM NAME="patrol_finish_01" ANIMATION="1000213"/>
+			<!--제자리 -->
+			<ITEM NAME="patrol_finish_02" ANIMATION="1000214"/>
+			<!--완료 -->
+			<!-- 독방구 방출 (자신 주변에 독을 퍼트려 독에 맞게하고 이속을 느리게 한다) -->
+			<ITEM NAME="attk_04_01" ANIMATION="1000215"/>
+			<!--시작 -->
+			<ITEM NAME="attk_04_02" ANIMATION="1000216"/>
+			<!--공격 -->
+			<!--아이들 부르기-->
+			<ITEM NAME="attk_08_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000206"/>
+			<!-- 기본 정보 -->
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<ITEM NAME="Opening" ANIMATION="1000082"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="die_idle_01" ANIMATION="1000021"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="move_01" ANIMATION="1000051"/>
+			<!-- 정예패턴-->
+		<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+			<ITEM NAME="Stun" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

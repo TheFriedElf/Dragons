@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID="FRM_CUSTOMUI_SUMMONER" W="200" H="200" CAN_DRAG="0" PASS_EVENT="1" NO_FOCUS="1" TICK_TIME="10" >
+		<FORM_MOVE_ANIMATE_WND ID="FMA_RECALL" W="64" H="64" CAN_CLIP="1" PASS_EVENT="1" NO_FOCUS="1">
+		<!-- UP -->
+			<ATTR MOVE_TYPE="0" MOVE_TIME="0" START_X="0" START_Y="0" END_X="0" END_Y="0"/>
+			<ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="0" PAUSE_TIME="100"/>
+			<IMG ID="IMG_SLOT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg01.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SELECT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg02.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SKILL" X="12" Y="12" Z="0" W="40" H="40">
+				<ATTR IMG="../Data/6_ui/icon/IconSkill3.tga" IMG_W="480" IMG_H="480" U="12" V="12" UV_INDEX="119"/>
+			</IMG>
+			<IMG ID="IMG_SELECT" X="0" Y="0" Z="5" W="64" H="64" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_UI/skill/skIconBg03.tga" IMG_W="256" IMG_H="192" U="4" V="3"/>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.03) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetupMove(Point2(68,68), Point2(68,0), 0.1)
+			</SCRIPT>
+		</FORM_MOVE_ANIMATE_WND>
+		<FORM_MOVE_ANIMATE_WND ID="FMA_REGAIN" W="64" H="64" CAN_CLIP="1" PASS_EVENT="1" NO_FOCUS="1">
+		<!-- LEFT -->
+			<ATTR MOVE_TYPE="0" MOVE_TIME="0" START_X="0" START_Y="0" END_X="0" END_Y="0"/>
+			<ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="0" PAUSE_TIME="100"/>
+			<IMG ID="IMG_SLOT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg01.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SELECT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg02.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SKILL" X="12" Y="12" Z="0" W="40" H="40">
+				<ATTR IMG="../Data/6_ui/icon/IconSkill3.tga" IMG_W="480" IMG_H="480" U="12" V="12" UV_INDEX="115"/>
+			</IMG>
+			<IMG ID="IMG_SELECT" X="0" Y="0" Z="5" W="64" H="64" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_UI/skill/skIconBg03.tga" IMG_W="256" IMG_H="192" U="4" V="3"/>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.03) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetupMove(Point2(68,68), Point2(0,68), 0.1)
+			</SCRIPT>
+		</FORM_MOVE_ANIMATE_WND>
+		<FORM_MOVE_ANIMATE_WND ID="FMA_PROTECT" W="64" H="64" CAN_CLIP="1" PASS_EVENT="1" NO_FOCUS="1">
+		<!-- RIGHT -->
+			<ATTR MOVE_TYPE="0" MOVE_TIME="0" START_X="0" START_Y="0" END_X="0" END_Y="0"/>
+			<ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="0" PAUSE_TIME="100"/>
+			<IMG ID="IMG_SLOT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg01.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SELECT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg02.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SKILL" X="12" Y="12" Z="0" W="40" H="40">
+				<ATTR IMG="../Data/6_ui/icon/IconSkill3.tga" IMG_W="480" IMG_H="480" U="12" V="12" UV_INDEX="139"/>
+			</IMG>
+			<IMG ID="IMG_SELECT" X="0" Y="0" Z="5" W="64" H="64" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_UI/skill/skIconBg03.tga" IMG_W="256" IMG_H="192" U="4" V="3"/>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.03) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetupMove(Point2(68,68), Point2(136,68), 0.1)
+			</SCRIPT>
+		</FORM_MOVE_ANIMATE_WND>
+		<FORM_MOVE_ANIMATE_WND ID="FMA_IMPECT" W="64" H="64" CAN_CLIP="1" PASS_EVENT="1" NO_FOCUS="1">
+		<!-- DOWN -->
+			<ATTR MOVE_TYPE="0" MOVE_TIME="0" START_X="0" START_Y="0" END_X="0" END_Y="0"/>
+			<ATTR USE_PAUSE="1" PAUSE_MOVE_PERCENT="0" PAUSE_TIME="100"/>
+			<IMG ID="IMG_SLOT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg01.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SELECT_BG" X="0" Y="0" W="64" H="64" IMG="../Data/6_UI/skill/skIconBg02.tga" IMG_W="64" IMG_H="64"/>
+			<IMG ID="IMG_SKILL" X="12" Y="12" Z="0" W="40" H="40">
+				<ATTR IMG="../Data/6_ui/icon/IconSkill4.tga" IMG_W="480" IMG_H="480" U="12" V="12" UV_INDEX="1"/>
+			</IMG>
+			<IMG ID="IMG_SELECT" X="0" Y="0" Z="5" W="64" H="64" PASS_EVENT="1" NO_FOCUS="1">
+				<ATTR IMG="../Data/6_UI/skill/skIconBg03.tga" IMG_W="256" IMG_H="192" U="4" V="3"/>
+				<SCRIPT ID="ON_TICK"> UVAnimation(UISelf, 0.03) </SCRIPT>
+			</IMG>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetupMove(Point2(68,68), Point2(68,136), 0.1)
+			</SCRIPT>
+		</FORM_MOVE_ANIMATE_WND>
+		<SCRIPT ID="ON_CALL">
+			CheckCustomUISkill(UISelf)
+			CustomUISelect(UISelf, 0)
+			RegistESCScript('empty_fun')
+			PlaySoundByID( "sum_menu_open" )
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			PlaySoundByID( "sum_menu_close" )
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			CustomUISummoner_MenuUpdatePos()
+		</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_SUMMON_LIST" ALIGN_X="0" Y="200" W="143" H="24" CAN_DRAG="1" >
+		<ATTR IMG="../Data/6_UI/skill/skNewUITab.tga" IMG_W="143" IMG_H="24"/>
+		<ATTR TEXT="792100" T_X="4" T_Y="3" T_LEFT="1" FONT="Font_Chat" T_BOLD="1" FONT_COLOR_HEX="0xffFFF568" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		<BUTTON ID="BTN_MINIMIZE" X="122" Y="3" W="20" H="21">
+			<ATTR BTN_IMG="../Data/6_ui/skill/skArwDw.tga" BTN_IMG_W="40" BTN_IMG_H="42"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> SummonList_Minimize(UISelf) </SCRIPT>
+		</BUTTON>
+		<LIST ID="LST_SUMMON_INFO" Y="23">
+			<ATTR ELEMENT_ID="FRM_SUMMON_INFO" ITEM_X="0" ITEM_Y="1"/>
+		</LIST>
+		<SCRIPT ID="ON_TICK">SummonList_Tick()</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">	CloseToolTip()	</SCRIPT>
+		<!-- Save UIPos and Load UIPos-->
+		<SCRIPT ID="ON_CALL"> 
+			local PosX = Config_GetValue(HEADKEY_USER_UI, SUBKEY_SUMMON_UI_POS_X)
+			local PosY = Config_GetValue(HEADKEY_USER_UI, SUBKEY_SUMMON_UI_POS_Y)
+			if(0 ~= PosX and 0 ~= PosY) then
+				UISelf:SetLocation( Point2(PosX, PosY) )
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_L_BTN_UP">
+			local kPos = UISelf:GetLocation()
+			Config_SetValue(HEADKEY_USER_UI, SUBKEY_SUMMON_UI_POS_X, kPos:GetX())
+			Config_SetValue(HEADKEY_USER_UI, SUBKEY_SUMMON_UI_POS_Y, kPos:GetY())
+			Config_ApplyConfig()
+			Config_Save(false)
+		</SCRIPT>
+	</FORM>
+	<FORM ID="FRM_SUMMON_INFO" W="143" H="47">
+		<ATTR IMG="../Data/6_UI/skill/skNewUIBox.tga" IMG_W="143" IMG_H="47"/>
+		<!--ATTR TEXT="792101" T_X="50" T_Y="25" T_LEFT="1" FONT="Font_Chat" FONT_COLOR_HEX="0xffFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/-->
+		<ICON ID="ICN_SUMMON" X="4" Y="3" W="40" H="40">
+			<ATTR IMG="../Data/6_ui/icon/IconSkill3.tga" IMG_W="480" IMG_H="480" U="12" V="12" UV_INDEX=""/>
+			<SCRIPT ID="ON_MOUSE_OVER">
+				local kGuid = UISelf:GetParent():GetCustomDataAsGuid()
+				if nil~=kGuid and false==kGuid:IsNil() then
+					CallSummonToolTip(kGuid, GetUIWnd("Cursor"):GetLocation())
+				end
+			</SCRIPT>
+			<SCRIPT ID="ON_MOUSE_OUT">	CloseToolTip()	</SCRIPT>
+		</ICON>
+		<ANI_BAR ID="BAR_HP">
+			<ATTR X="52" Y="7" W="83" H="10" BAR_COUNT="1"/>
+			<ATTR BAR_IMG="../Data/6_ui/skill/skNewUIBar2.tga" BAR_IMG_W="83" BAR_IMG_H="10" U="1" V="1"/>
+			<ATTR TEXT="" FONT="Font_Text_Small" T_X="42" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</ANI_BAR>
+		<!--ANI_BAR ID="BAR_HP_WARNING">
+			<ATTR X="52" Y="7" W="83" H="10" NO_FOCUS="1" PASS_EVENT="1" BAR_COUNT="1"/>
+			<ATTR BAR_IMG="../Data/6_ui/skill/skNewUIBar2_H.tga" BAR_IMG_W="83" BAR_IMG_H="10" U="1" V="1"/>
+			<ATTR TEXT="" FONT="Font_Text_Small" T_X="42" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</ANI_BAR-->
+		<ANI_BAR ID="BAR_TIME">
+			<ATTR X="52" Y="28" W="83" H="10" BAR_COUNT="1"/>
+			<ATTR BAR_IMG="../Data/6_ui/skill/skNewUIBar.tga" BAR_IMG_W="83" BAR_IMG_H="10" U="1" V="1"/>
+			<ATTR TEXT="" FONT="Font_Text_Small" T_X="42" T_Y="0" T_CENTER="1" FONT_COLOR_HEX="0xFFffffff" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</ANI_BAR>
+		<!--ANI_BAR ID="BAR_TIME_WARNING">
+			<ATTR X="52" Y="0" W="83" H="10" BAR_COUNT="1"/>
+			<ATTR BAR_IMG="../Data/6_ui/skill/skNewUIBar_H.tga" BAR_IMG_W="83" BAR_IMG_H="10"/>
+		</ANI_BAR-->
+		<FORM ID="FRM_SELECT" W="143" H="47" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/skill/skNewUISlt.tga" IMG_W="143" IMG_H="47"/>
+		</FORM>
+		<SCRIPT ID="ON_CLOSE">	CloseToolTip()	</SCRIPT>
+	</FORM>
+	
+	<FORM ID="FRM_SHOW_EVADE" ALIGN_X="50" ALIGN_Y="60" W="256" H="256">
+		<FORM ID="FRM_EVADE_1" W="256" H="256" IS_VISIBLE="1">
+			<ATTR IMG="../Data/6_UI/main/keyGide_evade01_1.tga" IMG_W="256" IMG_H="256"/>
+		</FORM>
+		<FORM ID="FRM_EVADE_2" W="256" H="256" IS_VISIBLE="0">
+			<ATTR IMG="../Data/6_UI/main/keyGide_evade01_2.tga" IMG_W="256" IMG_H="256"/>
+		</FORM>
+		<SCRIPT ID="ON_CALL">
+			UISelf:SetCustomDataAsFloat( GetCurrentTimeInSec() )
+			local UIPos = UISelf:GetLocation()
+			UISelf:SetLocation(Point2(UIPos:GetX(), GetScreenSize():GetY()-300 ));
+			UISelf:Visible(false);
+		</SCRIPT>
+		<SCRIPT ID="ON_TICK">
+			ShowEvadeUI_Tick(UISelf)
+		</SCRIPT>
+	</FORM>
+</XUI>

@@ -1,0 +1,15 @@
+<ACTION ID="a_Job_Fishing_End" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" OVERRIDE_PACKET="TRUE" TYPE="JOB_SKILL">
+	<SLOT NAME="Common_Com_Job_Fishing_Fishing_03"/>
+	<SLOT NAME="Common_Com_Job_Gain"/>
+	<FSM SCRIPT="JobSkill_End" 
+		
+		JOB_SKILL_TOOL_EFFECT_ID3="ef_Job_Fishing_03"
+		JOB_SKILL_TOOL_TARGET_NODE3="p_pt_r_hand"
+		JOB_SKILL_TOOL_SOUND3="job_fishing_fishing_03"
+		JOB_SKILL_EFFECT_ID3="eff_com_job_fishing_fishing_finish"
+		JOB_SKILL_EFFECT_TARGET_NODE3="char_root"
+		
+		HIDE_WEAPON="TRUE"
+		NO_WEAPON_TRAIL="TRUE"
+	/>
+</ACTION>

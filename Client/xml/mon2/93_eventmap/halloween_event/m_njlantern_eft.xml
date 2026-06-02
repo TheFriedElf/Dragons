@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_NJlantern_eft" INIT_ACTION="a_opening" EVENT_SCRIPT_ON_DIE="9600405">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Aram_Ara"/>
+		<KFMPATH SCALE="1.5">../Data/2_Mon2/93_EventMap/Halloween_event/Jlantern/Jlantern.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="18.648"/>
+			<SPHERE TO="p_hit_point_02" SIZE="13.941"/>
+			<SPHERE TO="p_hit_point_03" SIZE="18.645"/>
+		</ABV>
+		<SLOT>
+			<!-- 스킬 -->
+
+			<!--근거리 낫 휘두르기-->
+			<ITEM NAME="attk_01_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_01_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000203"/>
+
+			<!--원거리 1 -->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000251"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000252"/>
+			<ITEM NAME="shot_01" ANIMATION="1000253" FIRE_START_NODE="Bip01 R Hand" PROJECTILE_ID="Projectile_Jlantem_shot_02"/>
+		
+			<!-- 휠윈드, 휠윈드 이동 공용 사용-->
+			<ITEM NAME="whirlwind_btlidle_01_start" ANIMATION="1000801"/>
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000802" FIRE_EFFECT="ef_Golem_skill_01_char_root"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000803"/>
+			<ITEM NAME="whirlwind_01_finish" ANIMATION="1000804"/>
+	
+			<!-- 까마귀 파도 -->
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1000254"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000255"/>
+			<ITEM NAME="shot_02" ANIMATION="1000256" FIRE_START_NODE="char_root" PROJECTILE_ID="Projectile_Jlantem_shot"/>
+			
+			<!-- 땅에서 가시 -->
+			<ITEM NAME="attk_start_L" ANIMATION="1000611"/>
+			<ITEM NAME="attk_loop_L" ANIMATION="1000612"/>
+			<ITEM NAME="attk_shot_L" ANIMATION="1000613" FIRE_EFFECT="efk_Jlantem_massive_01"/>
+
+			<!-- 대쉬 공격 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000411"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000412"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000413"  FIRE_EFFECT="NONE"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000414"/>
+
+			<!-- Basic Movement -->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="idle_02" ANIMATION="1000002"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="walk" ANIMATION="1000050"/>
+			<ITEM NAME="run" ANIMATION="1000050"/>
+			<ITEM NAME="fury_01" ANIMATION="1000044"/>
+
+									<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

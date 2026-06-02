@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4309</ID> <!--T.T.10430900 처녀자리의 혼돈 -->
+
+
+<!-- 작성자 : 김효중-->
+<!--[완료조건]	페르세포네 구출-->
+<!--[완료NPC]	피오스의 연인 - 크레테-->
+<!--[내용]	처녀자리에 큰일이 생겼다고 한다. 페르세포네가 누군가에게 쫏기듯 크레테에게 연락을 했는데 그 후로 소식을 듣지 못했다고 한다. 처녀자리로 가서 페르세포네의 안부를 확인하자.-->
+
+
+<LIMITS>
+<DAYOFWEEK>4</DAYOFWEEK>
+</LIMITS>
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</CLIENT> <!--시작NPC 피오스의 연인 - 크레테 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</PAYER> <!--완료NPC 피오스의 연인 - 크레테 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B92FB6D3-CEB6-4e7f-9254-B51ABFE9DE38</AGENT> <!--진행NPC 11 피오스의 연인 - 크레테 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">9</MISSION> <!--Mission_Key=118/[별자리]페가수스/ 처녀자리,-->
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">10</MISSION>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">11</MISSION>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">12</MISSION>
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10430911"/> <!--페르세포네 구출-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+	    <SELECT1 COUNT="0">
+			<ITEM COUNT="1">82000880</ITEM>
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10430921" FACE="Crete_normal"/> <!--페르세포네와 연락이 되질 않는 답니다.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10430926" FACE="Crete_smile"/> <!--페르세포네를 구해주셔서 정말 감사합니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10430923" FACE="Crete_normal"/> <!--얼마전 페르세포네에게서 급한 연락이 온 뒤로는 소식을 들을 수 없답니다. 아무래도 무슨일이 생긴것 같습니다. 처녀자리로 가서 무슨일 인지 알아봐주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10430924" FACE="Crete_cry"/> <!--페르세포네는 미인인데. 후회하실거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10430925" FACE="Crete_normal"/> <!--페르세포네가 걱정이 된답니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10430902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

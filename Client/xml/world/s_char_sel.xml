@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="char_sel">
+	<!--이벤트 시간 설정(이벤트의 개수 만큼 시간설정)-->
+	<TIME_EVENT ID="1" FROM="2011,11,16,12,30" TO="2011,12,26,23,59"/>	<!--크리스마스 이벤트-->
+	<TIME_EVENT ID="2" FROM="2012,11,29,14,00" TO="2013,02,25,23,59"/>	<!--겨울맵 이벤트-->
+	<TIME_EVENT ID="3" FROM="2012,10,15,12,00" TO="2012,11,08,23,59"/> <!--할로윈 이벤트-->
+	<TIME_EVENT ID="4" FROM="2010,12,02,15,00" TO="2010,12,02,15,30"/>	<!--추석 이벤트-->
+	<TIME_EVENT ID="5" FROM="2011,08,17,12,00" TO="2011,08,29,00,00"/>	<!--일본 여름 이벤트-->
+
+	<!--이벤트 맵 설정(이벤트시간에 따라 변화될 맵 설정)-->
+	<GSAPATH>
+		<CONDITION TYPE="DEFAULT">../Data/3_World/00_Ui/01_Level/990001_CS.gsa</CONDITION>		<!--디폴트-->
+		<CONDITION ID="1">../Data/3_World/00_Ui/01_Level/990001_CS_CH.gsa</CONDITION>		<!--크리스마스 이벤트-->
+		<CONDITION ID="2">../Data/3_World/00_Ui/01_Level/990001_CS_W.gsa</CONDITION>		<!--겨울맵 이벤트-->
+		<CONDITION ID="3">../Data/3_World/00_Ui/01_Level/990001_CS_HW.gsa</CONDITION>		<!--할로윈 이벤트-->
+		<CONDITION ID="4">../Data/3_World/00_Ui/01_Level/990001_CS.gsa</CONDITION>		<!--추석 이벤트-->
+		<CONDITION ID="5">../Data/3_World/00_Ui/01_Level/990001_CS.gsa</CONDITION>		<!--일본 여름 이벤트-->
+	</GSAPATH>
+
+	<!--이벤트 사운드 설정(이벤트에 맞는 사운드 설정)-->
+	<BGSOUND VOLUME="1.0">../BGM/char_Select.BGM.mp3</BGSOUND>	<!--디폴트-->
+	<BGSOUND_SUB VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND_SUB>	<!--디폴트 서브-->
+	<BGSOUND ID="1" VOLUME="1.0">../BGM/Chrismas.wav</BGSOUND>	<!--크리스마스이벤트-->
+	<BGSOUND ID="2" VOLUME="1.0">../BGM/HappyPreMix.mp3</BGSOUND>	<!--겨울맵 이벤트-->
+	<BGSOUND ID="3" VOLUME="1.0">../BGM/Hill_backup.mp3</BGSOUND>	<!--할로윈 이벤트-->
+	<BGSOUND ID="4" VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND>	<!--추석 이벤트-->
+	<BGSOUND ID="5" VOLUME="1.0">../BGM/HappyPreMix.mp3</BGSOUND>	<!--일본 여름 이벤트-->
+
+	<!--이벤트 포그설정(이벤트에 맞는 사운드 설정)-->
+	<FOG DENSITY="0.050000" START="20000" END="50000" COLOR="0.858000,0.910990,0.903999"/>	<!--디폴트-->
+	<FOG ID="1" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="20250" COLOR="0,0,0"/>	<!--크리스마스 이벤트-->
+	<FOG ID="2" DENSITY="0" FUNC="Z_LINEAR" START="7933" END="20250" COLOR="0.858000,0.910990,0.903999"/>	<!-- 겨울맵 이벤트-->
+	<FOG ID="3" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="12000" COLOR="1,1,0.8156863"/>	<!-- 할로윈 이벤트-->
+	<FOG ID="4" DENSITY="0" FUNC="Z_LINEAR" START="2000" END="12000" COLOR="0.858000,0.910990,0.903999"/>	<!-- 추석 이벤트-->
+	<FOG ID="5" DENSITY="0" FUNC="Z_LINEAR" START="20000" END="50000" COLOR="0.858000,0.910990,0.903999"/>	<!--일본 여름 이벤트-->
+
+	<SCRIPT INIT="InitializeCharacterSelect" REMOVE_SCENE="CleanUpCharSelectScene">World/char_sel.lua</SCRIPT>
+	<!--8방향 설정-->
+	<FREE_DIRECTION ALL="TRUE"/>
+	<BLOOM BLUR="0.85" BRIGHT="10.0" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<CAMERA_KFMPATH>../Data/3_World/00_Ui/01_Level/Scene/CharacterSelect_Camera.kfm</CAMERA_KFMPATH>
+	<INPUT>
+		<SLOT KEY="2001" SCRIPT="Net_PickCharacter"/>
+		<SLOT KEY="104098" SCRIPT="Net_RecvPrepareCreateCharacter"/>
+		<SLOT KEY="104112" SCRIPT="Net_RecvCreateCharacter"/>
+		<SLOT KEY="1124" SCRIPT="SelectbyKeyboard_Right"/>
+		<SLOT KEY="1123" SCRIPT="SelectbyKeyboard_Left"/>
+		<SLOT KEY="1121" SCRIPT="SelectbyKeyboard_Up"/>
+		<SLOT KEY="1126" SCRIPT="SelectbyKeyboard_Down"/>
+	</INPUT>
+</WORLD>

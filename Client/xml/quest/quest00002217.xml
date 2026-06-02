@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2217</ID> <!--T.T.10221701 다른 차원과 연결 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 니콜라와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 니콜라-->
+<!--[내용]	달빛해안 마을 니콜라는 수 년째 차원이동장치를 개발하고 있다고 한다.
+연구를 거듭한 끝에 장치를 완성시킨 니콜라는 10개의 차원을 발견했고,
+드디어 실험에 들어간다고 한다.
+니콜라를 도와 실험을 해보자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</CLIENT> <!--시작NPC 달빛해안 마을 - 니콜라 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</PAYER> <!--완료NPC 달빛해안 마을 - 니콜라 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011" MARK="END">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</AGENT> <!--진행NPC 11 달빛해안 마을 - 니콜라 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10221711"/> <!--니콜라와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">79653200</ITEM><!--전체지급/전체/1)/79653200(봉인아님) 1개-아이템없음-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10221721" FACE="Nikola_normal"/> <!--지난 번 자네가 가져다 준 ' 순도 높은 시공간의 조각'을 이용해 '공간 에너지 큐브' 
+2개를 만들었네. 순도가 높은 것이 좋긴 좋군.
+자네 그거 아나?%%
+우리가 살면서 선택에 직면하게 되면, 그때마다 지금과 다른 수평우주가 1개씩
+생긴다는 사실 말일세. 뭐 그 말이 사실이라면 엄청나게 수많은 수평우주가 존재했겠지만, 내가 발견한 우주는 아직까지 몇 개 되지 않아.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10221726" FACE="Nikola_cry"/> <!--(하지만 아무 물건도 나오지 않는다.)
+이번에는 뭐가 문제인거지? 음, 또 원인을 파악해 봐야겠군.
+나중에 다시 오게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10221723" FACE="Nikola_smile"/> <!--현재까지 실험으로 10개의 수평우주를 찾았네. 그 이상을 찾으려면 시간이 좀 더 필요해. 
+혹은 그 이상을 찾을 수도 있어. 
+내가 수평우주 즉 다른차원으로 가는 장치이름을 차원교환기로 정했다네.%%
+그리고 10개의 다른차원마다 그리스어를 이용해서 이름을 붙였지.
+붙였는지 α (알파), β (베타) ,γ (감마), δ (델타), ε (입실론), ζ (제타), η (에타), θ (세타), ι (이오타), κ (카파) 
+현재까지 원하는 차원과 바로 연결해 교환을 할 수 없다네. 그게 한계지.%%
+즉 10개의 차원과 아이템을 교환할 수 있지만, 원하는 차원을 선택할 수 없다네.
+자, 그리고 남은 '공간 에너지 큐브'는 자네에게 선물로 주겠네. 그냥 선물이야.
+자 그럼 차원교환을 시작하겠네. 준비는 됐겠지?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10221724" FACE="Nikola_normal"/> <!--이해가 되질 않나? 나중에 다시 오게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10221725" FACE="Nikola_normal"/> <!--들을 준비가 되면 다시 오게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10221702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

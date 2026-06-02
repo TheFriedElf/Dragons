@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4054</ID> <!--T.T.10405401 파리스, 검은 로브를 입은 마녀 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	바람항구의 대현자 제레미와의 대화-->
+<!--[완료NPC]	바람항구 - 제레미-->
+<!--[내용]	콜린은 파리스에 대한 조사를 위해 바람항구의 제레미를 만나보라고 권했다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2FF6590B-6648-4D73-9A61-7B4FA9065498</CLIENT> <!--시작NPC 바람항구 - 콜린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</PAYER> <!--완료NPC 바람항구 - 제레미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2FF6590B-6648-4D73-9A61-7B4FA9065498</AGENT> <!--진행NPC 11 바람항구 - 콜린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 12 바람항구 - 제레미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10405411"/> <!--제레미와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10405421" FACE="Colin_normal"/> <!--반갑군!
+물의 신전에 일어난 사건을 잘 마무리 지었다고 들었네.
+최근에 일어난 불길한 사건들이 모두 검은 로브를 입은 마녀에 의해 
+일어났다고 들었네. 이름이 아마 파리스라고 했지?%% -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10405426" FACE="Jeremy_smile"/> <!--그래요. 그대의 명성은 내 익히 들어 알고 있습니다.
+어서 오시오 허허.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10405423" FACE="Colin_smile"/> <!--우리 브리즈국의 학자들은 파리스라는 인물에 대해 조사하고 있네.
+현자 제레미님도 그런 분들 중 한분이시지.%%
+하지만 이제는 나이 들어 거동이 불편하시니
+자네가 그분의 조사를 돕는 것이 어떠하겠나?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10405424" FACE="Colin_angly"/> <!--그렇다면 별 수 없이 다른 지원자를 찾아야겠네. 커험!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10405425" FACE="Colin_normal"/> <!--제레미님이 기다리고 계신다네. 어서 가보게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10405402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

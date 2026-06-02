@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_050300_DG" DESCRIPTION="90503000">
+	<GSAPATH>../Data/3_World/99_Boss/01_Level/050300/050300_DG.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Akia.BGM.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0"/>
+	<FREE_DIRECTION ALL="TRUE"/>
+
+    <EVENT_SCRIPT_ON_ENTER ID="126" />
+	<EVENT_SCRIPT_STOP_AI NO="126"/>
+
+	<!--결산창 이미지-->
+	<COMPLETE_PATH>
+		<ITEM ID = "0" PATH = "../Data/6_UI/mission/msRtAchonai000.tga"/>
+		<ITEM ID = "1" PATH = "../Data/6_UI/mission/msRtAchonai001.tga"/>
+		<ITEM ID = "2" PATH = "../Data/6_UI/mission/msRtAchonai002.tga"/>
+		<ITEM ID = "3" PATH = "../Data/6_UI/mission/msRtAchonai003.tga"/>
+	</COMPLETE_PATH>
+
+
+	<!-- L.O.D -->
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="530" END="1700" COLOR="0.1686275,0.1372549,0.09019608"/>
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1"/>
+</WORLD>

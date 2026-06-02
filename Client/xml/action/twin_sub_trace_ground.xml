@@ -1,0 +1,13 @@
+<ACTION ID="a_twin_sub_trace_ground" NEXT="a_twin_sub_trace_ground" LOOP="TRUE" CAN_FOLLOW="TRUE" NO_RANDOM_ANIMATION="TRUE" MONITOR="TRUE" CAN_CHANGE_ACTOR_POS="TRUE" TYPE="MOVE">
+	<SLOT NAME="idle_01"/>
+	<SLOT NAME="idle_02"/>
+	<SLOT NAME="idle_03"/>
+	<SLOT NAME="battle_idle"/>  	<!--3/-->
+	<SLOT NAME="repos_warp_start"/>	<!--4/-->
+	<SLOT NAME="repos_warp_end"/>  	<!--5/-->
+
+	<SLOT NAME="run"/>	<!-- 보통 걸을때 -->
+	<SLOT NAME="dash"/>  <!-- 메인 캐릭터와 거리가 많이 벌어졌을때 -->
+	<SLOT NAME="opening"/>
+	<FSM SCRIPT="Act_Twin_Sub_Trace_Ground"/>
+</ACTION>

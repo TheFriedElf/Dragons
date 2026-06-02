@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2205</ID> <!--T.T.10220501 다른 차원의 존재 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 니콜라와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 니콜라-->
+<!--[내용]	칼리곤 선단 보석상인 에드워드는 '차원이동'에 관해 알고 있다고 한다.
+공간에서 공간으로 이동하는 '차원이동'의 비밀에 대해 달빛해안 마을에 있는
+니콜라에게 자세히 물어보도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7E48A8F6-A845-467b-A965-D406DDAE34AE</CLIENT> <!--시작NPC 칼리곤 선단 - 에드워드 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</PAYER> <!--완료NPC 달빛해안 마을 - 니콜라 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7E48A8F6-A845-467b-A965-D406DDAE34AE</AGENT> <!--진행NPC 11 칼리곤 선단 - 에드워드 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">00845D41-48CC-419c-8DC9-FC7BAFCA9E1E</AGENT> <!--진행NPC 12 달빛해안 마을 - 니콜라 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10220511"/> <!--니콜라와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10220521" FACE="Edward_normal"/> <!--자네를 보니 자네와 닮은 또 다른 용사가 생각나는군. 
+도플갱어라고 알고 있나? 또 다른 내가 또 있다는 소리를 하는거지.
+믿지 않는다고? 그것도 당연하겠지.%%
+하지만 난 다른 생각을 갖고 있지. 이 세계에는 수만가지 차원이 존재한다네. 
+하지만 우리는 차원을 이동 할 수 없지.
+그래서 사람들은 다른 차원의 존재를 믿지 않는다네.%%
+그러나 나는 다른 차원의 존재를 믿고 있다네. 
+왜냐고? 사실 난 그 증거를 본적이 있단 말일세. 
+무슨 뜻인지 궁금한가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10220526" FACE="Nikola_normal"/> <!--다른 차원? 그걸 어떻게 너가 알고 있는 거지? 그 얘기는 몇 명밖에 모르는 사실인데, 아직 확신할 수 없으니 아무한테 얘기하지 말라고 그렇게 당부했건만.%%
+그런 얘기가 퍼져나가면 난 분명 웃음거리가 될 뿐이야. 
+대체 누가 그런 소리를 하고 다니는 거야? 정말.
+(상당히 불쾌해보인다. 다음에 다시 얘기를 들어보자.)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10220523" FACE="Edward_normal"/> <!--뭐 물론 직접 다른 차원을 보거나 가본적은 없지만, 다른 차원에서 온 아이템을 본적이 있다면, 그 말을 믿을 수 있겠나?%%
+물론 그 아이템은 우리의 것과 전혀 다르지 않았네. 
+어떻게 보게 됐냐고? 음… 달빛해안마을에 물리학자 니콜라가 있네.
+성격은 별로지만, 실력만큼은 틀림 없다네.
+나는 니콜라를 통해 그 아이템을 보게 됐지. %%
+관심이 있다면, 내가 해줬다는 얘기 비밀로하고, 
+니콜라에게 물어보도록 하게. 내가 얘기했다는건 비밀이네.꼭!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10220524" FACE="Edward_normal"/> <!--그런쪽에는 관심이 없는 모양이군.
+마음이 바뀌거든, 아무때나 찾아와서 묻게.
+다른 차원에 대해 알게 된다면, 
+분명 얻어지는게 있을테니 말이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10220525" FACE="Edward_normal"/> <!--달빛해안 마을 '차원물리학자 니콜라'야.
+이름을 꼭 외워두게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10220502" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,9 @@
+<ACTION ID="a_Revenge" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_Bup_01"/>
+  <FSM SCRIPT="Act_Melee_Default" 
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="ef_revenge_02_char_root"
+       HIT_SOUND_ID="Revenge"
+       />
+</ACTION>

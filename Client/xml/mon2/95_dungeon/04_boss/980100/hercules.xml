@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Hercules" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+		<KFMPATH SCALE="1.5">../Data/1_Cha/3_PET/Hercules/Hercules.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+           
+		   <CAPSULE TO="p_hit_point_01" SIZE="17,55" />
+		   <CAPSULE TO="p_hit_point_02" SIZE="11,32" />
+
+		</ABV>
+		<SLOT>
+			<!--바위를 가르는 검-->
+			<ITEM NAME="attk_fin_01_start" ANIMATION="1002001"/>
+			<ITEM NAME="attk_fin_01" ANIMATION="1002002"/>
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1002003"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1002004"/>
+
+			<!--휘몰아 치기-->
+			<ITEM NAME="whirlwind_btlidle_01_start" ANIMATION="1000801"/>
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000802"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000803"/>
+			<ITEM NAME="whirlwind_01_finish" ANIMATION="1000804"/>
+
+
+			<!--대지의 분노-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1001171"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1001172"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1001173"/>
+
+
+
+
+
+            <!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000001"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000002"/>
+			<ITEM NAME="StandUp" ANIMATION="1000001"/>
+		
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

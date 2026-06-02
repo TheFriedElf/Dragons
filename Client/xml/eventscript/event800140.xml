@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <!-- 라그나로크 엔딩 -->
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="2"/>
+  <CMD TYPE="stopBGM" SoundNo = "0"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  <CMD TYPE="setmoviescene" enable="true"/>
+  <CMD TYPE="playBGM" SoundNo = "1"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "false"/>  
+  <CMD type="WaitFade" time="2"/>
+  
+ 
+  
+  <CMD TYPE="Dialogue" NameTTID="524050" TitleTTID="10014001" TextTTID="524036" StitchImageID="rag_ending01"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524050" TitleTTID="10014001" TextTTID="524037" StitchImageID="rag_ending02"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524050" TitleTTID="10014001" TextTTID="524038" StitchImageID="rag_ending03"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524050" TitleTTID="10014001" TextTTID="524039" StitchImageID="rag_ending04"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="Dialogue" NameTTID="524050" TitleTTID="10014001" TextTTID="524040" StitchImageID="rag_ending05"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524050" TitleTTID="10014001" TextTTID="524041" StitchImageID="rag_ending06"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+  <CMD TYPE="Dialogue" NameTTID="524050" TitleTTID="10014001" TextTTID="524042" StitchImageID="rag_ending07"/>
+  <CMD TYPE="WaitDialogue"/>
+  <CMD type="waittime" time="1"/>
+
+
+
+  <CMD TYPE="CLOSE_DAILOGUE"/>
+    
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "true"/>  
+  <CMD type="WaitFade" time="2"/>
+  
+  <CMD type="waittime" time="1"/>
+  <CMD TYPE="stopBGM" SoundNo = "1"/>
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2"/>
+  <CMD TYPE="setmoviescene" enable="false"/>
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+  <CMD TYPE="playBGM" SoundNo = "0"/>
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

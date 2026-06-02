@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="EscScript" EventID="980112"/>
+
+	<!-- 포트레이트 연출 시작-->
+
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.2" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="0.5"/><!--  시간을 기다림-->
+
+	<CMD TYPE="Dialogue" NameTTID="99801053" TextTTID="99801121" FaceID="Flix_shock" /><!-- 플릭스 놀람-->
+	  <CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801054" TextTTID="99801122" FaceID="Typhoon_angry" /><!-- 타이푼 - 화남 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	
+	<CMD TYPE="Dialogue" NameTTID="99801053" TextTTID="99801123" FaceID="Flix_shock" /><!-- 플릭스 놀람-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="Dialogue" NameTTID="99801053" TextTTID="99801124" FaceID="Flix_cry" /><!-- 플릭스 울음-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+
+
+	
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980112"/>
+
+	
+</EVENT_SCRIPT>
+

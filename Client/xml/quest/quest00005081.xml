@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5081</ID> <!--T.T.10508101 아직은 멀었어 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	칼리곤 선단의 별가사리 루루루 30마리를 처리하자-->
+<!--[완료NPC]	바람항구 - 레오-->
+<!--[내용]	레오는 자신의 검술실력을 실험하기 위해서 칼리곤 선단의 별가사리 루루루를 찾아갔다고 한다. 별가사리 루루루 1마리와 검술 대결을 벌이던 중 갑자기 별가사리가 자신의 친구들을 불렀다고 한다. 수많은 별가사리에 둘러쌓인 레오는 겨우 도망나왔지만, 비겁한 별가사리 루루루를 용서할 수 없다고 한다. 레오는 자신이 별가사리 루루루 1마리와 싸우는 동안 다른 별가사리 루루루 30마리를 막아달라고 한다. 레오가 별가사리 루루루와 싸울 수 있도록 칼리곤 선단의 별가사리 루루루 30마리를 처리하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</PAYER> <!--완료NPC 바람항구 - 레오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010150/1">6011100</MONSTER> 
+ <!--MON_NO=6011100/별가사리 루루루,MAP_NO=9010150/칼리곤 선단,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10508111"/> <!--별가사리 루루루-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10508121" FACE="Leo_normal"/> <!--%name%님 얼마 전에 제 검술 실력을 알아보기 위해 칼리곤 선단에 갔습니다.
+거기서 별가사리 루루루와 1마리와 검술을 겨루게 되었습니다. 
+검술을 많이 연마했지만 별가사리 루루루는 상당히 강했습니다.%% 
+서로 계속 겨루고 있었는데, 별가사리가 갑자기 동료들을 불렀습니다. 전 30마리의 별가사리의 루루루의 동료들에게 둘러쌓였습니다.
+얼른 도망가서 겨우 위기를 모면할 수 있었지만, 저의 실력은 아직 멀었다는 것을 깨달았습니다.%% 
+하지만 싸우다가 동료를 부르는 것은 비겁한 행동이라고 생각합니다. 
+그렇게 생각하지 않으십니까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10508126" FACE="Leo_smile"/> <!--%name%님 덕분에 무사히 대결을 마쳤습니다. 
+아직 저의 실력은 멀었지만, 앞으로 더 성장할 수 있다는 희망을 가지게 되었습니다. 감사드립니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10508123" FACE="Leo_normal"/> <!--전 오늘 다시 별가사리 루루루와 대결을 펼칠 생각입니다. 
+하지만 별가사리 루루루가 다시 동료들을 부른다면 전 아마 또 도망가야 될 것입니다.%% 
+별가사리 루루루가 동료들을 부를 수 없도록 %name%님이 별가사리 루루루의 동료들을 좀 상대해 주시지 않겠습니까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10508124" FACE="Leo_normal"/> <!--거절하셔도 어쩔 수 없습니다. 오늘은 별가사리 루루루 30마리와 싸워봐야 되겠습니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10508125" FACE="Leo_normal"/> <!--별가사리 루루루가 별 것 아니라고 생각하시겠지만, 저에게 있어서는 강적입니다.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10508102" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

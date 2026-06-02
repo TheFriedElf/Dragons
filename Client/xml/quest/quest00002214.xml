@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>2214</ID> <!--T.T.10221401 물건도 전송할 수 있을까? -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 하임에게 물품 접수증 배달-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	달빛해안 마을 은행원 소피아는 물건이 보내지는 동안 니콜라에 얘기를 듣고 싶어한다고 한다. 니콜라 얘기를 전달해주고 물건을 배달했다는 물품 접수증을 받아 하임에게 전해주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">e195c5f3-ec93-431b-bd0e-8fa742f238b0</CLIENT> <!--시작NPC 달빛해안 마을 - 소피아 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">e195c5f3-ec93-431b-bd0e-8fa742f238b0</AGENT> <!--진행NPC 11 달빛해안 마을 - 소피아 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 12 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160221400/1">10011</NPC> 
+ <!--Item_NO=160221400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160221400/1/511">10011</NPC> 
+ <!--Item_NO=160221400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160221400/1">10011</NPC> 
+ <!--Item_NO=160221400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160221400/1/512">10012</NPC> 
+ <!--Item_NO=160221400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160221400/1">10012</NPC> 
+ <!--Item_NO=160221400/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10221411"/> <!--물품 접수증 배달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10221421" FACE="Sopia_normal"/> <!--난 니콜라같이 신경질적인 사람은 질색이예요. 
+전 친절하고 따뜻하고 상냥한 사람이 좋거든요.%%
+그리고 키도 크고, 돈도 많고, 집도 있고, 
+그리고 생긴건 레오나르도 디까푸리오정도?
+제가 욕심이 너무 없는 편인가요? 헤헤.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10221426" FACE="Coneil_smile"/> <!--접수증을 받았으니, 물건은 잘 보내셨나 보네. 
+이제 서로 주고 받았으니, Give and Take가 확실히 되었지?
+헤헤. 다음에 또 부탁할게.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10221423" FACE="Sopia_smile"/> <!--(에너지 전송장치를 설명해 준다.)
+어머, 그 과학자가 그런 장치를 만들었단 말인가요?
+그 동안 그 사람이 연구 한단 소리는 들었지만, 그 연구로 돈을 벌었단 소리는
+한 번도 못 들어봤어요.%%
+그 장치가 물건까지 배달해준다면, 이거 정말 대박이네요. 
+이제 돈 좀 벌겠네요. 음.. 왠지 관심이 좀 생기네요.
+실은 남자가 성격이 좀 있어야 매력이 있긴 하죠 호호호. %%
+그건 그렇고 여기 접수증이예요. 하임씨에게 전해주세요. 
+물건은 잘 보냈으니, 금방 도착할거예요.
+그리고 그 전송장치인가 ? 그게 다 수리되면 저한테 귀띔 좀 해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10221424" FACE="Sopia_normal"/> <!--물건을 보내면 확인증을 가지고 가셔야죠.
+왜 그러세요. 
+정말 이상한 분이네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10221425" FACE="Sopia_normal"/> <!--혹시 수리가 된 건가요? 네? 네?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10221402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10221451" FACE="Sopia_smile"/> <!--접수증을 잃어버리셨다구요?
+걱정 마세요.
+바로 재발급 해드릴게요.
+여기요.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10221452" FACE="Coneil_smile"/> <!--물건을 보내긴 한거야?
+확인할 수 있는 접수증을 받아 와야지.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

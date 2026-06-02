@@ -1,0 +1,15 @@
+<ACTION ID="a_Marionette" NEXT="a_Marionette_Finish" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+	<SLOT NAME="Claw_skill_Marionette_01"/>
+	<SLOT NAME="Claw_skill_Marionette_02"/>
+	<SLOT NAME="Claw_skill_Marionette_03"/>
+	<SLOT NAME="Claw_skill_Marionette_03"/>
+	<FSM SCRIPT="Skill_Maniac_Marionette"
+		CASTING_EFFECT_EFFECT_ID="ef_skill_hell_shouting_01_char_root"
+		CASTING_EFFECT_TARGET_NODE="char_root"
+		FIRE_CASTER_EFFECT_ID="ef_skill_marionette_01_char_root"
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		NO_DAMAGE_HOLD="TRUE"
+		MULTI_HIT_NUM="14"
+		/>
+</ACTION>
+

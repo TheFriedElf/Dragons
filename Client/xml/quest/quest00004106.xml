@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4106</ID> <!--T.T.10410601 파멸의 서장 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	블랙 페더 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 타루부-->
+<!--[내용]	파리스는 소환술과 비슷한 마법을 사용하여 블랙 페더라는 악마를 불러냈다고 한다. 통곡의 고개에서 블랙 페더를 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</CLIENT> <!--시작NPC 카즈라 마을 - 타루부 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</PAYER> <!--완료NPC 카즈라 마을 - 타루부 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2F89863A-9D75-4fa8-BCAA-C22F73CBE63F</AGENT> <!--진행NPC 11 카즈라 마을 - 타루부 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010420/1">3550200</MONSTER> 
+ <!--MON_NO=3550200/블랙 페더,MAP_NO=9010420/통곡의 고개,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10410611"/> <!--블랙 페더-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10410621" FACE="Tarubu_normal"/> <!--우리는 오염된 신보 때문에 엄청난 고통을 겪고 있는 중이구나. 
+그런데 이제서야 그 신보를 누가 오염시켰는지 알아냈다.%%
+파리스라는 처자는 마치 우리가 마물들을 소환해내는 것과 같은 원리로
+이 세계로 다른 차원의 악귀들을 불러들이고 있느니라.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10410626" FACE="Tarubu_smile"/> <!--오호라… 수고했구나.
+아직까진 견딜만 할게야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10410623" FACE="Tarubu_smile"/> <!--우리가 정령석을 사용하는 것처럼 파리스는 파멸의 삼위일체라는 
+사악한 기운이 깃든 물건으로부터 악귀를 불러내고 있다.%%
+아마도 신보로부터 용의 아이들을 해방시킨 것도 그녀일게야.
+귀환 중인 용족의 전사들도 이 악귀 덕에 돌아오지 못하고 있으니…%%
+이 악귀들을 찾아내 제거하거라. 종소리 마을 근방의 통곡의 고개로 가면 
+블랙 페더라는 마물의 은신처를 찾을 수 있을 것이야.%%
+그 놈을 반드시 퇴치하거라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10410624" FACE="Tarubu_angry"/> <!--에이.. 고얀 눔… 이 늙은이 말을 허투루 듣는 게냐!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10410625" FACE="Tarubu_normal"/> <!--종소리 마을로 내려가다보면 통곡의 고개가 나올 것이니라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10410602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

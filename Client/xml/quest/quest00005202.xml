@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5202</ID> <!--T.T.10520201 용사는 담대함이 기본이야! (2) -->
+
+
+<!-- 작성자 : 최영진-->
+<!--[완료조건]	좀비가죽 30개 습득 (지하묘지)-->
+<!--[완료NPC]	달빛해안 마을 - 토마스-->
+<!--[내용]	용사의 담대함을 시험하는 두번째 과제로 토마스는 지하무덤에서 좀비를 처치하고 축축하고 냄새나는 좀비가죽을 모아오라고 한다. 좀비가죽을 모아서 진짜 담대한 용사라는것을 증명하자.-->"
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</CLIENT> <!--시작NPC 달빛해안 마을 - 토마스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</PAYER> <!--완료NPC 달빛해안 마을 - 토마스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">81119B66-F2EC-4cb3-B7AD-ED84BE934E05</AGENT> <!--진행NPC 11 달빛해안 마을 - 토마스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/0/1/1/160520210">4600600</MONSTER> 
+ <!--MON_NO=4600600/지하묘지 좀비,Item_NO=160520210/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160520210</ITEM> 
+ <!--Item_NO=160520210/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10520211"/> <!--좀비가죽 30개 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10520221" FACE="thomas_normal"/> <!--음 담대한 용자여, 지난번의 임무는 잘 수행해 주었다, 
+뭐 기본적인 담력시험정도지뭐, 어찌 되었든 기본은 갖추게 된것이군.
+자 그럼 다음 테스트를 진행해 볼까?%%뭐? 한번이 끝이 아니냐구? 이런이런 너무 나의 시험을 쉽게 봤군.
+이번에야 말로 제대로 테스트를 해 봐야 한다구.
+어때 해볼텐가? 아니면 겁쟁이가 될텐가? 하하하-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10520226" FACE="thomas_smile"/> <!--하하하!!
+진짜 담대한 용자인걸? 벌써 구해 오다니 말이야 하하하.
+아주 맘에 들어, 수고했어, 점점 용자 다워 지는군.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10520223" FACE="thomas_normal"/> <!--그래그래 잘 생각했어 뭐 내용은 비슷해 지하묘지에 가서 지하묘지 좀비를 잡아서 
+그 가죽을 좀 모아다 주면 되네 가볍게 30개만 모아오면 된다네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10520224" FACE="thomas_angly"/> <!--헹, 이제와서 못한다는건 자네의 담력이 여기까지 인거로군, 실망이야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10520225" FACE="thomas_angly"/> <!--아직 다 모으지 못했나? 아니면 오금이저려서 못가는거 아닌가? 후훗-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--진행중-->
+			<BODY TEXT="10520211" FACE="None_None"/> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10520202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

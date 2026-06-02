@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010503_DG" DESCRIPTION="90105030">
+  <DISABLE_RANDOM_ANI>
+    <ITEM OBJECT_NAME ="M_Parel_opening 01"/>
+  </DISABLE_RANDOM_ANI>
+	<GSAPATH>../Data/3_World/99_Boss/01_Level/010503/010503_DG.gsa</GSAPATH>
+	<BGSOUND VOLUME="1.0">../BGM/Hulk_part_3_BNC.mp3</BGSOUND>
+	<SCRIPT INIT="Init_01503" READY="Ready_01503" UPDATE="Update_01503" START="Start_01503" BOSS_DIE="BossDie_01503" REMOVE_SCENE="RemoveParel_01503">World/99_Boss/010503_DG.lua</SCRIPT>
+	<OPENING_MOVIE NAME="M_Parel_opening 01"/>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35"/>
+	<!-- FOG DEPTH="1.0" FAR="1000" COLOR="0.87,0.34,0.3"/ -->	
+	
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 --> 
+	<MAPVALUE PLAYERKILL="0" TYPE="17"/><!--임시-->
+	<!--트랩-->
+	<TRIGGER ID="laser_trap_01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+	<TRIGGER ID="laser_trap_02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  
+  
+  
+  
+  <!--// 퀘스트 트리거 -->
+  <TRIGGER ID="Trigger_Quest1370" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="1370" />
+  </TRIGGER>
+  
+	<!--WorldAction-->
+	<WORLD_ACTION_SETTING>
+		<WORLD_ACTION ID="30" SCRIPT="WA_PAREL_APPEAR"/> 		<!--등장 이벤트 -->
+		<WORLD_ACTION ID="31" SCRIPT="WA_PAREL_DIE"/> 			<!-- 유저 승리 이벤트 -->
+		<WORLD_ACTION ID="32" SCRIPT="WA_PAREL_ATTACK01"/> 		<!-- 일반 2연타 -->
+		<WORLD_ACTION ID="33" SCRIPT="WA_PAREL_ATTACK02"/> 		<!-- 보석을 채찍처럼 공격 -->
+		<WORLD_ACTION ID="34" SCRIPT="WA_PAREL_ATTACK03"/> 		<!-- 바닥찍기 -->
+		<WORLD_ACTION ID="35" SCRIPT="WA_PAREL_ATTACK04"/> 		<!-- 공중 낙하 공격 -->
+		<WORLD_ACTION ID="36" SCRIPT="WA_PAREL_ATTACK05"/> 		<!-- 몸통 박치기 공격 -->
+		<WORLD_ACTION ID="37" SCRIPT="WA_PAREL_STUN"/> 			<!-- Stun -->
+		<WORLD_ACTION ID="38" SCRIPT="WA_PAREL_DOWN"/>			<!-- 다운 -->
+	</WORLD_ACTION_SETTING>
+	<COMPLETE_PATH>
+		<ITEM ID = "0" PATH = "../Data/6_UI/mission/msRtParel000.tga"/>
+		<ITEM ID = "1" PATH = "../Data/6_UI/mission/msRtParel001.tga"/>
+		<ITEM ID = "2" PATH = "../Data/6_UI/mission/msRtParel002.tga"/>
+		<ITEM ID = "3" PATH = "../Data/6_UI/mission/msRtParel003.tga"/>
+	</COMPLETE_PATH>
+</WORLD>

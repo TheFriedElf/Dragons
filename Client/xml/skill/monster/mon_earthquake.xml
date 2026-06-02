@@ -1,0 +1,8 @@
+<ACTION ID="a_mon_earthquake" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" DONT_LOOK_TARGET="FALSE">
+  <SLOT NAME="earthquake_battleidle_start"/>
+  <SLOT NAME="earthquake_battleidle" LOOP="TRUE"/>
+  <SLOT NAME="earthquake_fire"/>
+  <SLOT NAME="idle_01"/>
+  <SLOT NAME="earthquake_finish"/>
+	<FSM SCRIPT="Act_Mon_Earthquake"/>
+</ACTION>

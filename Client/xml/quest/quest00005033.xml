@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5033</ID> <!--T.T.10503301 원숭이와 바나나 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 포키들에게서 바나나 9개 회수-->
+<!--[완료NPC]	바람항구 - 데이지-->
+<!--[내용]	데이지는 이번에 가게에 새롭게 들어온 특상바나나를 포키들이 들이닥쳐서 훔쳐갔다고 한다. 분노한 데이지가 가게문을 닫고 다른 곳으로 떠나겠다고 으름장을 놓고 있다. 데이지의 마음을 돌리기 위해서 포키들로부터 특상바나나 9개를 회수하자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">928106B8-8596-4E9C-B89A-87772C71A749</CLIENT> <!--시작NPC 바람항구 - 데이지 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">928106B8-8596-4E9C-B89A-87772C71A749</PAYER> <!--완료NPC 바람항구 - 데이지 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">928106B8-8596-4E9C-B89A-87772C71A749</AGENT> <!--진행NPC 11 바람항구 - 데이지 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/0/1/1/160503300">6025100</MONSTER> 
+ <!--MON_NO=6025100/엉클 포키,MAP_NO=9010502/파렐 대저택,Item_NO=160503300/[Q.ID:05033] 특상바나나,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503300</ITEM> 
+ <!--Item_NO=160503300/[Q.ID:05033] 특상바나나,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/0/1/1/160503300">6025200</MONSTER> 
+ <!--MON_NO=6025200/큰 엉클 포키,MAP_NO=9010502/파렐 대저택,Item_NO=160503300/[Q.ID:05033] 특상바나나,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503300</ITEM> 
+ <!--Item_NO=160503300/[Q.ID:05033] 특상바나나,-->
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/0/1/1/160503300">6025700</MONSTER> 
+ <!--MON_NO=6025700/대머리 포키,MAP_NO=9010502/파렐 대저택,Item_NO=160503300/[Q.ID:05033] 특상바나나,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160503300</ITEM> 
+ <!--Item_NO=160503300/[Q.ID:05033] 특상바나나,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="9" TEXT="10503311"/> <!--특상바나나-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10503321" FACE="Huerin_normal"/> <!--이런, 정말 이 동네에서 못 살겠네.
+왜 그러냐고? 그걸 몰라서 물어?
+요즘 행패를 부리고 다니는 포키들 때문이지.%%
+이 녀석들 이번에 상점에 들어온 특상바나나를 몽땅 가져가 버렸어.
+이제 여기서 더 이상 장사를 못하겠어.
+바람항구를 떠날 거야?%%
+응? 안 잡아? 
+(뒤늦게 데이지를 붙잡는다)
+이미 늦었어. %%
+뭐 하지만 내 요구를 들어준다면 나도 맘을 돌릴 가능성이 있긴 하지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10503326" FACE="Huerin_normal"/> <!--헤헤. 드디어 다시 내품에 돌아왔구나. 
+근데 이거 뭔가 이상한 냄새를 풍기는 걸.
+켁 지하수로의 이상한 냄새가 다 배었잖아.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10503323" FACE="Huerin_normal"/> <!--좋아. 그렇다면 말하지. 
+내 상점에서 훔쳐간 바나나 9개를 다시 되찾아 줬으면 좋겠어.%%
+포키 녀석들은 나뿐만 아니라 이지역 모든 사람들을 괴롭히고 있어.
+특히 상점을 돌아다니면서 반짝이는 물건과 먹을 것을 훔쳐가곤 있지.%%
+포키 녀석들은 시청 지하수로 쪽에서 자주 목격했다니까, 그쪽으로 가보면 될 거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10503324" FACE="Huerin_normal"/> <!--좋아. 그러면 나두 떠나고 말 거야. 
+정말 간다. 간다. 간다. 간다~
+쳇. 안 붙잡는군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10503325" FACE="Huerin_angly"/> <!--이봐. 포키가 내 특상바나나를 다 먹고나면 껍질을 찾아올 셈이야?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10503302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

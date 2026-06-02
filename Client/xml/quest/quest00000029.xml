@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>29</ID> <!--T.T.10002901 그녀의 이름은 필리아 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	과자공장 초코장인 진저맨의 집(F6)의 애정파괴단 보스 필리아를 저지하자-->
+<!--[완료NPC]	바람항구(발렌타인) - 고든-->
+<!--[내용]	고든은 애정파괴단의 보스 필리아의 지시로 애정파괴단이 행동한다는 것을 알아낸다. 필리아가 초코장인 진저맨을 괴롭히지 못하도록 저지하자. 필리아는 과자공장 초코장인 진저맨의 집(F6)에 있다. 10스테이지에서 필리아를 저지하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</CLIENT> <!--시작NPC 바람항구(발렌타인) - 고든 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</PAYER> <!--완료NPC 바람항구(발렌타인) - 고든 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 11 바람항구(발렌타인) - 고든 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MISSION OBJECTNO="1" TYPE="DEFENCE_STAGE_CLEAR" VALUE="10">115</MISSION> 
+ <!--Mission_Key=115/[이벤트]초콜릿 보관소(과자공장) (F6),-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10002911"/> <!--필리아 저지-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">291303480</ITEM><!--전체지급/전체/1)/291303480(봉인아님) 1개-러블리 실버 벨트-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10002921" FACE="Goden_normal"/> <!--이런, 아무래도 내가 크게 오해하고 있었던 것 같군.
+초코장인 진저맨의 라이벌 다크맨이 진저맨을 괴롭히고 있는 것은 틀림없는 사실이었어.
+하지만 중요한 것은 라이벌 다크맨이 이 일의 주동자가 아니라네.%%
+애정파괴단을 실질적으로 조종하고 있던 것은 애정파괴단의 보스 필리아일세.
+현재 자네밖에는 필리아를 막을 수 있을 자가 없네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10002926" FACE="Goden_normal"/> <!--흠. 그런 일이 있었던 건가?
+남자에게 받았던 상처를, 발렌타인 데이의 상징이라 할 수 있는 초코장인 진저맨에게 풀고 있었던 거군,-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10002923" FACE="Goden_normal"/> <!--필리아가 왜 초코장인 진저맨을 괴롭히고 있었는지는 정확히 알 수가 없다네.
+하지만 한 가지 확실한 것은 필리아가 초콜릿을 만드는 것을 방해하고 있다는 사실이지.%%
+발렌타인 데이를 기다리는 여인들을 위해서라도 자네가 꼭 필리아를 저지해 줬으면 하네.
+필리아는 초코장인 진저맨의 집(F6)의 10스테이지에 있다고 들었네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10002924" FACE="Goden_angly"/> <!--모든 여인의 원망을 자네는 견딜 수 있다는 것인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10002925" FACE="Goden_normal"/> <!--나도 초코장인의 초콜릿을 좋아한다네. 특히 발렌타인 데이에 주는 초콜릿은 그 맛이 환상적이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10002902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

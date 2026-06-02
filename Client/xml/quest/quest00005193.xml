@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5193</ID> <!--T.T.10519301 칼리곤의 수련 방법 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴[아케이드 모드(F1)] - 100콤보 달성-->
+<!--[완료NPC]	위험한 동굴 - 칼리곤-->
+<!--[내용]	칼리곤은 위험한 동굴에서 수련하고 있다고 한다. 칼리곤의 수련 방법을 보고 배우도록 하자. 칼리곤은 위험한 동굴[아케이드 모드(F1)]에서 100콤보를 하면서 수련한다고 한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</CLIENT> <!--시작NPC 위험한 동굴 - 칼리곤 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER> <!--완료NPC 위험한 동굴 - 칼리곤 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT> <!--진행NPC 11 위험한 동굴 - 칼리곤 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="100/1">9010601</GROUND> 
+ <!--MAP_NO=9010602/위험한 동굴 아케이드 2,-->
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="100/1">9010602</GROUND> 
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="100/1">9010603</GROUND> 
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="100/1">9010604</GROUND> 
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="100/1">9010605</GROUND> 
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="100/1">9010606</GROUND>
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="100/1">9010609</GROUND> 
+
+
+
+
+
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10519311"/> <!--위험한 동굴 - 100콤보 달성-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10519321" FACE="Kalligon_normal"/> <!--왔군.
+오늘 특별히 내가 하루에 두 번씩 하는 내 수련방법을 알려주지.
+어때? 궁금하지 않아?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10519326" FACE="Kalligon_normal"/> <!--실력이 훨씬 늘어난 것 같지?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10519323" FACE="Kalligon_smile"/> <!--나는 하루에 100콤보씩 하는 수행을 거의 매일 하고 있지.
+너도 한번 해보는 게 큰 도움이 될 거야.%%
+위험한 동굴[아케이드 모드(F1)]에 가서 100콤보를 하고 와.
+너의 늘어난 실력을 보고 감탄할걸-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10519324" FACE="Kalligon_normal"/> <!--네 자신 스스로 실력에 만족하고 있어?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10519325" FACE="Kalligon_normal"/> <!--100콤보가 쉽지는 않을걸?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10519302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

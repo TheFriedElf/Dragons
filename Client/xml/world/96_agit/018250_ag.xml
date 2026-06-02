@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_018250_AG">
+  <GSAPATH>../Data/3_World/96_Agit/01_Level/018250_AG.gsa</GSAPATH>
+  <MINIMAP Y="70" H="405">../Data/3_World/96_Agit/01_Level/018250_MM.dds</MINIMAP>
+  <BGSOUND VOLUME="1.0">../BGM/JourneyStep.mp3</BGSOUND>
+  <SCRIPT>World/96_Agit/018250_AG.lua</SCRIPT>
+  <BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02" />
+  
+  <FREE_DIRECTION ALL="TRUE"/><!--중국버전용 8방향 -->
+  <!--// 바람항구마을(아지트) 게이트 포탈-->
+  <TRIGGER ID="gate_018100_base" TYPE="PORTAL" TITLE_TEXT_ID="830000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,53" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9018100" PARAM2="6"/>
+	<!--<ACTION SCRIPT="Net_RecentMapMove"/>-->
+  </TRIGGER>
+  
+  <!-- 기부함 -->
+  <BUILDING ID="1" OBJECT="Art_Em_contribution1001_01 01">
+   <!--	<TOGGLE OBJECT="Art_MainHouse1001_02 01"/> -->
+	<TRIGGER ID="T_Em_contribution1001_01" TYPE="KEYEVENT">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="ActEmporiaFunc" PARAM="1"/>
+	</TRIGGER>
+  </BUILDING>
+  
+  <!-- 길드창고 -->
+  <BUILDING ID="2" OBJECT="Art_Em_warehouse1001_01 01">
+	<TOGGLE OBJECT="Art_MainHouse1001_02 02"/>
+	<TRIGGER ID="T_Em_warehouse1001_01" TYPE="KEYEVENT" >
+		<CONDITION TYPE="action" ACTION="a_act" />
+		<ACTION SCRIPT="" PARAM="" />
+	</TRIGGER>
+  </BUILDING>
+  
+  <!-- 동상 -->
+   <!-- <BUILDING ID="5" OBJECT="PVP_Dragon1002_01 01"/> -->
+  
+ 
+
+  <WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="6000" USE="1" />
+  <FOG DENSITY="0.050000" FUNC="RANGE_SQ" START="55.000000" END="6845.000000" COLOR="0.799000,0.936000,0.875000" />
+  
+  <NPC NAME="1028208" ACTOR="c_William" SCRIPT="NPC_EmporiaAdminStrator" GUID="A2820C53-7043-41e3-9E30-A2893642F1C6" KID="1028208" TYPE="FIXED" LOCATION="0.3437667, 91.4677, 234.223"/>
+</WORLD>

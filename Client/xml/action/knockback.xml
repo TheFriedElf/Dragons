@@ -1,0 +1,7 @@
+<ACTION ID="a_knock_back" TYPE="EFFECT" NEXT="a_idle" CAN_CHANGE_ACTOR_POS="TRUE" DONT_LOOK_TARGET = "TRUE">
+  <SLOT NAME="BlowUp_Start" />
+  <SLOT NAME="BlowUp_Loop" LOOP="TRUE"/>
+  <SLOT NAME="BlowUp_Down"/>
+  <SLOT NAME="StandUp"/>
+  <FSM SCRIPT="Act_KnockBack" VELOCITY="80"/>
+</ACTION>

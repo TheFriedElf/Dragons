@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4034</ID> <!--T.T.10403401 신보의 행방을 찾아서(1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	수염고래 해안가[시나리오 모드(F5)] 캡틴 후커 처치-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	신보를 가지고 있을 지도 모르는 수염고래 해안가[시나리오 모드(F5)] 캡틴 후커를 퇴치하고, 신보를 찾아 오자-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">13D42615-B039-43f4-B6EB-28918778D237</CLIENT> <!--시작NPC 수염고래 해안가 - 마이트리 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 11 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_M" VALUE="4/5/1">6013900</MONSTER> 
+ <!--MON_NO=6013900/캡틴 후커,Mission_Key=4/수염고래 해안가 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10403411"/> <!--캡틴 후커[시나리오 모드(F5)]-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10403421" FACE="Maitri_normal"/> <!--이럴 수가… 프리모씨의 말이 사실이라면, 
+그는 신보를 바다에서 건져낸 것이 틀림 없습니다.%%
+그렇다면 지금 신보를 가지고 있는 자는…!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10403426" FACE="Maitri_smile"/> <!--어쩔 수 없군요. 
+캡틴 후커가 말한 대로 이미 신보는 알비다에게 넘어가 있을테니 말이죠.
+당장은 전력을 가다듬고 기다려 보는 수밖에 없네요. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10403423" FACE="Maitri_normal"/> <!--이제 이렇게 된 바에야 정면돌파 밖에 답이 없겠죠?
+원정대도 캡틴 후커 때문에 골치를 썩이고 있다고 들었어요.%%
+서둘러 해적들의 본거지를 찾아 후커 선장을 퇴치해 주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10403424" FACE="Maitri_angly"/> <!--지원이 필요합니다. 다시 한번 생각해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10403425" FACE="Maitri_angly"/> <!--이 정도로는 내 인정을 받을 수 없어요. 서둘러서 시나리오 모드(F5)의 캡틴 후커로 부터 신보를 찾아와 주세요-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10403402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4122</ID> <!--T.T.10412201 천년 전의 저주 (4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	제이드에게 횃불자루 전달-->
+<!--[완료NPC]	악마의 숨결 - 제이드-->
+<!--[내용]	스켈레톤에게 찾아낸 횃불자루에 구조신호가 새겨진 것을 발견한 터너는 제이드에게 이 사건을 알리려 한다. 횃불자루를 악마의 숨결에 있는 병사 제이드에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">2c58cea2-c807-4491-ad32-d6e26d65fca4</CLIENT> <!--시작NPC 악마의 숨결 - 터너 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</PAYER> <!--완료NPC 악마의 숨결 - 제이드 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">2c58cea2-c807-4491-ad32-d6e26d65fca4</AGENT> <!--진행NPC 11 악마의 숨결 - 터너 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">8B0A39CD-FB19-4b6c-8242-3F866F9A7166</AGENT> <!--진행NPC 12 악마의 숨결 - 제이드 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160412200/1">10011</NPC> 
+ <!--Item_NO=160412200/[Q.ID:04122] 횃불자루,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160412200/1/511">10011</NPC> 
+ <!--Item_NO=160412200/[Q.ID:04122] 횃불자루,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="501/160412200/1">10011</NPC> 
+ <!--Item_NO=160412200/[Q.ID:04122] 횃불자루,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160412200/1/512">10012</NPC> 
+ <!--Item_NO=160412200/[Q.ID:04122] 횃불자루,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="601/160412200/1">10012</NPC> 
+ <!--Item_NO=160412200/[Q.ID:04122] 횃불자루,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10412211"/> <!--횃불자루 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10412221" FACE="tourneur_normal"/> <!--아니 근데.. 이건 뭐죠?%% 
+제 물건에.. %%
+이런 흠집이... %%
+흠 자세히 보니 글씨 같기도 한데... 엥?%%
+S....O....S....!!!!! 살려주세요! 라니…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10412226" FACE="Walter_smile"/> <!--아니, 이게 무슨 대단한 거라고… 
+보나마나 훔쳐간 해골들이 장난 쳐놓은 것 아니겠어? 
+특별히 고민할 일 없을 것 같은데…%%
+...라고 말하면서 대충 추리소설 속의 조연들처럼 속아 
+넘어가주고 싶지만… 도저히 자존심이 허락칠 않는구나. 으으!%% 
+그래, 알아.. 스켈레톤이 브리즈국의 언어를 쓸 일이 없지. 
+그렇다면.... 두번 생각할 필요도 없어.%% 
+지금 네가 생각한 것과 내 짐작도 같다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10412223" FACE="tourneur_normal"/> <!--이게 무슨 조화일까요? 
+어떻게 분실한 제 횃불 자루에…
+이런 다급한 글씨가 써있는 지 모르겠습니다. %%
+스켈레톤이 우리들이 쓰는 글씨를 알리도 없고 말이죠.
+이건 아무래도 제이드 병사에게 알리는 것이 좋겠습니다.%% 
+이 물건을 제이드 병사에게 보여주시겠어요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10412224" FACE="tourneur_angly"/> <!--하기사, 제이드 병사는 한결 같은 반응이겠죠. 집에 빨리 가자고…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10412225" FACE="tourneur_angly"/> <!--제이드씨에게 이걸 보여주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10412202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10412251" FACE="tourneur_angly"/> <!--아이템 재지급-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10412252" FACE="walter_angly"/> <!--뭐야… 싱겁게 사람한테 말 걸어 놓고 용건이 없어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

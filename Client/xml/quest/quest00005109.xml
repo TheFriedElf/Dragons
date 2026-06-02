@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5109</ID> <!--T.T.10510901 너덜너덜한 붕대 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	지하묘지 - 지하묘지 미라로부터 너덜너덜한 붕대 15개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 스웰-->
+<!--[내용]	스웰은 사람들을 치료하기 위해 붕대를 구하는 중이라고 한다. 전에 미리내 신전에서 힘들게 구한 붕대는 아무런 효과가 없었다고 한다. 지하묘지로 가서 지하묘지 미라를 잡고, 효과가 좋다고 소문난 너덜너덜한 붕대 15개를 구해 경비병 스웰에게 가져다주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">DB9DFA7F-7F14-4530-A367-DCA447537B2F</CLIENT> <!--시작NPC 달빛해안 마을 - 스웰 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">DB9DFA7F-7F14-4530-A367-DCA447537B2F</PAYER> <!--완료NPC 달빛해안 마을 - 스웰 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">DB9DFA7F-7F14-4530-A367-DCA447537B2F</AGENT> <!--진행NPC 11 달빛해안 마을 - 스웰 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010910/10000/4000/1/1/160510900">4600200</MONSTER> 
+ <!--MON_NO=4600200/지하묘지 미라,MAP_NO=9010910/Lv.30 지하묘지,Item_NO=160510900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160510900</ITEM> 
+ <!--Item_NO=160510900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="15" TEXT="10510911"/> <!--너덜너덜한 붕대 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10510921" FACE="Walter_normal"/> <!--안녕하십니까? %name%님! 정말 큰일이에요.
+다친 마을 사람들을 미리내 신전에서 구한 붕대로 치료했는데 효과가 없네요.%%
+게다가 마을 사람들은 그 붕대 때문에 상처가 더 악화되고 있는 것 같아요.
+아무래도 확실한 효과가 있는 붕대가 필요할 것 같아요. 
+%name%님이 도와주셨으면 합니다. 부탁해요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10510926" FACE="Walter_smile"/> <!--이 붕대로 사람들을 빨리 치료해야겠어요.
+신경 써주셔서 정말 감사해요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10510923" FACE="Walter_normal"/> <!--지하묘지 미라들이 사용하는 붕대가 좋다는 소리를 들었어요. 
+미라들이 사용하는 만큼 효과는 확실한 것 같아요. %%
+지하묘지로 가서 지하묘지 미라를 처리하고 너덜너덜한 붕대 15개만 구해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10510924" FACE="Walter_angly"/> <!--너무 하시네요. 
+마을 사람들이 아파하고 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10510925" FACE="Walter_normal"/> <!--서둘러 주세요. 
+사람들이 아파하고 있어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10510902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

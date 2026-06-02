@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_950601_HD" DESCRIPTION="90206010">
+  <GSAPATH>../Data/3_World/95_Dungeon/200_Hard_Dungeon/950601_HD.gsa</GSAPATH>
+  <BGSOUND VOLUME="1.0">../BGM/Kundara_Dungeon.mp3</BGSOUND>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+
+  <!-- 하드아람 포탈 -->
+  <TRIGGER ID="gate_950600_base" TYPE="PORTAL" TITLE_TEXT_ID="802005" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,130" TITLE_TEXT_SCALE="1.5" TITLE_TEXT_COLOR="1,1,1,1">
+    <CONDITION TYPE="action" ACTION="a_act" />
+    <ACTION SCRIPT="World_Portal" PARAM="9950600" PARAM2="1" />
+  </TRIGGER>
+
+  <!-- 트리거 점프업 -->
+  <TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoHighJump" PARAM="300" />
+  </TRIGGER>
+
+  <!--// 엔터 던전 -->
+  <TRIGGER ID="EnterDungeon_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_05" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_06" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_07" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_07" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_08" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_08" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_09" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_09" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_10" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_10" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_11" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_11" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_12" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_12" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_13" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_13" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_14" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_14" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_15" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_15" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_16" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_16" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_17" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_17" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_18" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_18" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_19" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_19" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_20" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_20" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_22" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_22" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_23" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_23" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_24" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_24" />
+  </TRIGGER>
+  <TRIGGER ID="EnterDungeon_target_25" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="EnterDungeon_zone_25" />
+  </TRIGGER>
+  <!--// 데미지 텔레포트 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_02" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_03" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_03" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_04" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_04" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_05" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_05" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_06" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_06" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_07" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_06" />
+  </TRIGGER>
+  <!--//뒤집히는 가시 트렙//-->
+  <TRIGGER ID="Art_BlockTrap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_BlockTrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_BlockTrap1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  
+  <TRIGGER ID="Art_BlockTrap1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_BlockTrap1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_BlockTrap1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--//창 트렙//-->
+  <TRIGGER ID="Art_Speartrap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+ 
+  <TRIGGER ID="Art_Speartrap1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_02 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_03 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_02 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_02 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_02 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_Speartrap1001_02 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--//떨어지는 가시 트렙//-->
+  <TRIGGER ID="Art_MovingTrap_2001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_MovingTrap_2001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_MovingTrap_2001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_MovingTrap_2001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_MovingTrap_2001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--//떨어지는 조각상 트렙//-->
+  <TRIGGER ID="Art_FishStone1001_02 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_FishStone1001_02 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_FishStone1001_02 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_FishStone1001_02 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_FishStone1001_02 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_FishStone1001_02 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_FishStone1001_02 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--//톱날 트렙//-->
+  <TRIGGER ID="Art_SawTarp1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_04 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_06 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_01 14">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--//좌우 톱날 트렙//-->
+  <TRIGGER ID="Art_SawTarp1001_05 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_05 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 13">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 15">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 16">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 17">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 20">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SawTarp1001_02 21">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+
+  <!--//코브라 트렙//-->
+  <TRIGGER ID="Art_CobraTrap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_CobraTrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_CobraTrap1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_CobraTrap1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_CobraTrap1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_CobraTrap1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_CobraTrap1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--//가시2 트렙//-->
+  <TRIGGER ID="Art_SpineTrap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SpineTrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <TRIGGER ID="Art_SpineTrap1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+  </TRIGGER>
+  <!--//머리4개 코브라 독 트렙//-->
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 08">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 09">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 10">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 11">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 12">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 13">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 14">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 15">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 16">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 17">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 18">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 19">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 20">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 21">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 22">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 23">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 24">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 25">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 26">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 27">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 28">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 29">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 30">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 31">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 32">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 33">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 34">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 35">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 36">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 37">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 38">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 39">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 40">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 41">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 42">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 43">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1001_01 44">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <!--//머리1개 코브라 독 트렙//-->
+  <TRIGGER ID="Art_PoisoncobraTrap1002_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1002_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1002_01 03">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1002_01 04">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1002_01 05">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1002_01 06">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  <TRIGGER ID="Art_PoisoncobraTrap1002_01 07">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    <PHYSX ACTIVE_TOTAL="4.000" />
+    <PHYSX ACTIVE_START="0.000" ACTIVE_END="2.000" />
+  </TRIGGER>
+  
+  <!--// 퀘스트 트리거 -->
+    <TRIGGER ID="Quest_Trigger1066" TYPE="LOCATION">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoSimpleLocation" PARAM="1" PARAM2="1066" />
+  </TRIGGER>
+  
+  <!--포그-->
+  <FOG DENSITY="0.050000" START="1500.000000" END="4000.000000" COLOR="0.000000,0.265000,0.192000" />
+  <!-- L.O.D -->
+  <WORLD_QUALITY HIGH_END="600" MID_END="1500" LOW_END="4000" USE="1" />
+  <OBJECT GUID="94593ca5-b24d-46ba-a91f-e65d44cc7ebe" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000523">
+    <WayPoint POINT="22841.93, 6315.388, 2107.572" TIME="1" />
+    <WayPoint POINT="22841.93, 6081.704, 2107.572" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="d52cb38f-557d-43ae-8408-5ebd455a27b4" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000524">
+    <WayPoint POINT="22915.27, 6316.02, 2107.718" TIME="1" />
+    <WayPoint POINT="22915.27, 6084.121, 2107.718" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="4af5fab4-0d43-40ea-9ac3-81b588a3a52f" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000525">
+    <WayPoint POINT="22989.29, 6316.87, 2107.772" TIME="1" />
+    <WayPoint POINT="22989.29, 6083.97, 2107.772" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="e595c2a7-5a53-493c-9edd-b029e79ee038" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000526">
+    <WayPoint POINT="23138.86, 6316.368, 2110.804" TIME="1" />
+    <WayPoint POINT="23138.86, 6078.286, 2110.804" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="621ba0a4-416a-4998-b052-9c50bad13454" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23214.41, 6315.535, 2163.836" TIME="1" />
+    <WayPoint POINT="23214.41, 6076.685, 2163.836" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="a50451ee-f5d8-4da9-961a-6775ea905b14" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23321.95, 8578.058, 4632.619" TIME="1" />
+    <WayPoint POINT="23321.95, 8379.619, 4632.619" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="e946c7dc-d67c-479b-9d8f-8fe8f69f1016" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23247.07, 8580.051, 4632.366" TIME="1" />
+    <WayPoint POINT="23247.07, 8391.004, 4632.366" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="eb63d393-f556-4a0e-a60f-f480b5abfd4e" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23324.24, 8579.953, 4844.708" TIME="1" />
+    <WayPoint POINT="23324.24, 8392.328, 4844.708" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="57431ee2-b69c-4d31-b41c-e742d6517aae" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23021.05, 8580.231, 4792.388" TIME="1" />
+    <WayPoint POINT="23021.05, 8360.021, 4792.388" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="97ed8b59-37a9-4d3f-aa01-f71144fd840f" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="22944.96, 8582.494, 4844.55" TIME="1" />
+    <WayPoint POINT="22944.96, 8456.438, 4844.55" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="66899ad4-d208-4e7a-a46d-5b1991409500" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23019.8, 8578.735, 5060.699" TIME="1" />
+    <WayPoint POINT="23019.8, 8401.685, 5060.699" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="0cce7a8d-6423-4230-993c-bcb8ce218dd6" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="22948.01, 8568.553, 6434.306" TIME="1" />
+    <WayPoint POINT="22948.01, 8395.014, 6434.306" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="edbcaf1e-7e09-4438-8dc4-0c329027f0e9" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23022.57, 8576.22, 6858.36" TIME="1" />
+    <WayPoint POINT="23022.57, 8360.915, 6858.36" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="e356bff9-b049-485c-b786-76d8cf23dd6d" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="22949.89, 8576.629, 6913.396" TIME="1" />
+    <WayPoint POINT="22949.89, 8448.363, 6913.396" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="13c1ee63-27c7-4c26-9e81-9df5010c372d" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23022.56, 8382.896, 5429.174" TIME="1" />
+    <WayPoint POINT="23022.56, 8573.074, 5429.174" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="f8eb3edc-da83-4779-8be9-ab36b55c8ca6" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23320.17, 8577.35, 5587.843" TIME="1" />
+    <WayPoint POINT="23320.17, 8407.916, 5587.843" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="925cf038-38fc-4b70-ad15-8568022c1c45" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23097.47, 8560.224, 5533.253" TIME="1" />
+    <WayPoint POINT="23097.47, 8393.087, 5533.253" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="46728481-b588-441c-8320-1fb70faa6194" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23024.7, 8566.891, 6385.059" TIME="1" />
+    <WayPoint POINT="23024.7, 8394.764, 6385.059" TIME="1" />
+  </OBJECT>
+  <OBJECT GUID="877e75cf-10ab-4125-ad40-792eec6c6fad" RIDABLE="TRUE" SPEED="300" CLASS_NO="5000527">
+    <WayPoint POINT="23250.34, 8582.303, 5695.51" TIME="1" />
+    <WayPoint POINT="23250.34, 8397.563, 5695.51" TIME="1" />
+  </OBJECT>
+  <STONES />
+</WORLD>

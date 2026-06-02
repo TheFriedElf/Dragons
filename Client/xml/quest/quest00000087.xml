@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>87</ID> <!--T.T.10008701 훌륭한 방어구 키트 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	간단세공 재료를 사용해 휴대용 방어구키트를 만들자-->
+<!--[완료NPC]	바람항구 - 다비-->
+<!--[내용]	다비는 간단세공 재료를 주면서 방어구 키트를 만들어 보라고 한다. 방어구 키트를 만들기 위해서는 보상으로 받은 간단세공 배우기를 먼저 배워야 한다. 간단세공 재료를 마우스 더블클릭으로 소비하면 UI가 뜨고 클릭을 하면 휴대용 방어구키트가 생성된다. 간단세공 재료를 사용하여 휴대용 방어구키트를 1개 만들어서 다비에게 가져가자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5FBBB2E6-6228-462B-8ECF-68D7006970E0</CLIENT> <!--시작NPC 바람항구 - 다비 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5FBBB2E6-6228-462B-8ECF-68D7006970E0</PAYER> <!--완료NPC 바람항구 - 다비 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5FBBB2E6-6228-462B-8ECF-68D7006970E0</AGENT> <!--진행NPC 11 바람항구 - 다비 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/89008660/1">10011</NPC> 
+ <!--Item_NO=89008660/[간단세공 재료] _퀘스트용,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/89008660/1/511">10011</NPC> 
+ <!--Item_NO=89008660/[간단세공 재료] _퀘스트용,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/89008660/1">10011</NPC> 
+ <!--Item_NO=89008660/[간단세공 재료] _퀘스트용,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">89008690</ITEM> 
+ <!--Item_NO=89008690/휴대용 방어구키트_퀘스트용,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10008711"/> <!--휴대용 방어구키트-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10008721" FACE="Darby_normal"/> <!--원래, 기술이란 써먹기 위해서 배우는 거지.
+어때? 자네가 배운 간단세공을 써먹을 기회를 주고 싶은데.
+물론 내가 지금 엄청나게 바빠서 그런 것은 절대로 아니지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10008726" FACE="Darby_smile"/> <!--하하! 잘했어. 제대로 휴대용 방어구키트를 만들어냈군.
+어떻게 자네 여기서 아르바이트라도 해볼 생각 없나?%%
+뭐? 없다고? 아쉽군. 자네라면 내 뒤를 이을 훌륭한 대장장이가 될 수도 있을 거라고 생각했는데.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10008723" FACE="Darby_smile"/> <!--그렇게 어려운 일은 아니고, 자네가 배운 간단세공을 이용해서 간단한 뭔가를 만들어 주면 되는 거지.%%
+내가 주는 간단세공 재료를 사용해서 휴대용 방어구키트를 만들면 되는 거야.
+휴대용 방어구키트를 만들기 위해서는 간단세공 재료에 마우스 더블클릭을 하고 UI가 뜨면 다시 클릭하면 되네.
+만들어진 휴대용 방어구키트를 나에게 주면 자네가 얼마나 기술을 잘 숙련했는지 검증할 수 있는 거지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10008724" FACE="Darby_angly"/> <!--이제와서 기술만 쏙 빼 먹고 나 몰라라 하는 건가? 심보 참 고약한 친구군,-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10008725" FACE="Darby_normal"/> <!--자! 어서 빨리 만들게. 생각보다 시간이란 금방 사라지는 법이지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10008702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10008751" /> <!--간단세공 재료가 없다고? 설마 나 몰래 다른 곳에 팔아 먹고 있는 건 아니겠지. 공짜로 주는 건 이번이 마지막이야.-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

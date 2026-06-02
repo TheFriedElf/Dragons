@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5190</ID> <!--T.T.10519001 총알을 채워라. -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴[아케이드 모드(F1)] - 난폭한 불찌로부터 쇠 총알 20개 획득-->
+<!--[완료NPC]	위험한 동굴 - 칼리곤-->
+<!--[내용]	위험한 동굴에 보물을 찾으러 온 칼리곤은 서둘러 오는 바람에 총알을 충분히 챙기지 못했다고 한다. 위험한 동굴[아케이드(F1)]으로 가서 난폭한 불찌를 처리하고 쇠 총알 20개를 구해다 주자.
+-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</CLIENT> <!--시작NPC 위험한 동굴 - 칼리곤 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</PAYER> <!--완료NPC 위험한 동굴 - 칼리곤 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">7FC5413D-C32C-4e4f-B3F1-677B4D813A2A</AGENT> <!--진행NPC 11 위험한 동굴 - 칼리곤 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010606/10000/4000/1/1/160519000">6039100</MONSTER> 
+ <!--MON_NO=6039100/난폭한 불찌,MAP_NO=9010606/위험한 동굴 아케이드 6,Item_NO=160519000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160519000</ITEM> 
+ <!--Item_NO=160519000/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10519011"/> <!--쇠 총알 획득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10519021" FACE="Kalligon_normal"/> <!--이봐. 친구 지금 혹시 바빠?
+내 부탁 좀 들어줬으면 좋겠는데…-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10519026" FACE="Kalligon_normal"/> <!--이 정도면 충분하겠군.
+나는 한발에 한명씩 잡는 명사수니까 말이야.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10519023" FACE="Kalligon_smile"/> <!--이거 큰일이군. 큰일이야.
+급하게 나오느라 총알을 못 챙겨왔는데
+그게 드디어 문제가 되는군.%%
+총알 좀 구해다 줘. 지금 아주 급해.
+위험한 동굴[아케이드 모드(F1)]으로 가면
+난폭한 불찌가 있을 거야.%%
+쇠 총알 20개만 구해다 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10519024" FACE="Kalligon_normal"/> <!--급한 내 마음을 몰라주는건가?
+이봐! 이봐!!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10519025" FACE="Kalligon_normal"/> <!--쇠 총알 20개면 충분할거야.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10519002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

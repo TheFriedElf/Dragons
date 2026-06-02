@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!--엔다이론 시나리오 모드 클리어 후 문올라올 떄 -->
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="2"/> <!-- 신 카메라를 켠다.-->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/><!-- 플레이어 키를 막는다. -->
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/><!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/><!-- 이벤트 카메라로 변경한다. -->
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="false"/> <!--나를 지운다 -->
+
+	<CMD TYPE="MoveCamToPos" TargetPos="79.70551, -2706.08, -66.1276"  MoveTime="0" CamActorDistance="100" CamMoveUpDistance="0" HorizRotAngle="-40" VertRotAngle="40"/><!--카메라를 특정 지역으로 이동시킨다. -->
+    <CMD TYPE="waittime" time="6"/>
+
+
+	<!--엔딩 끝나고 돌아가기-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade" time="1"/>
+	<CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/><!--나를 활성화 한다 -->
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade" time="2"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/> <!-- 신 카메라를 끈다.-->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+
+</EVENT_SCRIPT>
+

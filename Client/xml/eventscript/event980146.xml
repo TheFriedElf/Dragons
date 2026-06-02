@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<CMD TYPE="EscScript" EventID="980117"/>
+
+	<!-- 포트레이트 연출 시작-->
+
+	<CMD TYPE="Dialogue" NameTTID="99801059" TextTTID="99801441" FaceID="Hercules_normal" /><!-- 헤라클래스 일반-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801442" FaceID="User_normal" /><!-- 주인공 -->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801059" TextTTID="99801443" FaceID="Hercules_over" /><!-- 헤라클래스 우쭐-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="99801059" TextTTID="99801444" FaceID="Hercules_normal" /><!-- 헤라클래스 놀람-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+
+	<CMD TYPE="Dialogue" NameTTID="524105" TextTTID="99801445" FaceID="User_normal" /><!-- 주인공-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	
+	<CMD TYPE="Dialogue" NameTTID="99801059" TextTTID="99801446" FaceID="Hercules_smile" /><!-- 헤라클래스 웃음-->
+	<CMD TYPE="WaitDialogue"/>
+	<CMD TYPE="WaitTime" Time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+
+	
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="980117"/>
+
+	
+</EVENT_SCRIPT>
+

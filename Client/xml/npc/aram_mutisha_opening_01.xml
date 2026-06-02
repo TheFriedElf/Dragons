@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="b_Aram_Mutisha_opening_01" INIT_ACTION="a_opening_movie">
+<NPCMARK NAME="e_ef_colorshadow_npc" ATTATCH_TO="char_root"/>
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/1_Cha/2_NPC/[Scenario_Quest]/B_aram_Mutisha_opening/B_aram_Mutisha_opening.kfm</KFMPATH>
+    <SCRIPT SRC="Actor/mob_base.lua">
+      <ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+    </SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="opening_movie" ANIMATION="1000081" RANDOM="100"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

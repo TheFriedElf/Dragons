@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4153</ID> <!--T.T.10415301 재앙의 전조 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	라미와 뿔 라미 각각 20마리 퇴치-->
+<!--[완료NPC]	카즈라 마을 - 퀘차-->
+<!--[내용]	검은마녀에 의해 중독된 포치의 열매를 먹은 라미들도 중독이 되었다. 퀘차 사제는 샬바론에 있는 라미 녀석들을 퇴치해달라고 부탁한다. 샬바론에 있는 라미와 뿔 라미를 각각 20마리씩 퇴치하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">205ECC48-B136-4455-9641-7C8BE3B0F880</CLIENT> <!--시작NPC 카즈라 마을 - 퀘차 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">205ECC48-B136-4455-9641-7C8BE3B0F880</PAYER> <!--완료NPC 카즈라 마을 - 퀘차 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">205ECC48-B136-4455-9641-7C8BE3B0F880</AGENT> <!--진행NPC 11 카즈라 마을 - 퀘차 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3525000</MONSTER> 
+ <!--MON_NO=3525000/라미 ,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100" VALUE="1">3525200</MONSTER> 
+ <!--MON_NO=3525200/뿔 라미 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="20" TEXT="10415311"/> <!--라미-->
+		<OBJECT2 COUNT="20" TEXT="10415312"/> <!--뿔 라미-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10415321" FACE="Quecua_normal"/> <!--중독된 포치의 열매를 먹은 많은 동물들이 점점 늘어나,
+이제 마시람 산의 거의 모든 동물들이 흉폭해졌구나.%%
+하지만 아직 독의 정체 조차 밝혀내질 못하고 있으니
+이 일을 어찌하면 좋을지 모르겠단다.%%
+%name%, 어서 샬바론으로 갈 차비를 하거라.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10415326" FACE="Quecua_smile"/> <!--수고했다. 큰 일을 해냈어.
+앞으로 이런 일이 더 일어나지 말아야 할텐데 말이다. -->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10415323" FACE="Quecua_normal"/> <!--샬바론에는 중독이 심해서 흉폭해진 동물이 나타났단다. 라미라고 불리는 가여운 녀석들이지.%% 
+접촉하는 주변 동물들을 중독시킬 뿐만 아니라 
+이젠 샬바론을 지나가는 모험자들까지 공격하고 있단다.%% 
+더 큰 피해를 일으키기 전에 샬바론에서 중독된 라미 녀석들을 찾아 퇴치해주렴.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10415324" FACE="Quecua_angry"/> <!--시간이 되는 대로 꼭 이 부탁을 들어주렴.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10415325" FACE="Quecua_angry"/> <!--라미들을 처치할 때 까진 샬바론에 머물러 있거라.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10415302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,9 @@
+<ACTION ID="a_mon_shot_skill_12" NEXT="a_idle" IGNORE_DMG_EFFECT="TRUE" USE-EVENT="TRUE" BIDIRECTION="FALSE">
+	<SLOT NAME="btlidle_12_skill_shot_start"/>
+	<SLOT NAME="btlidle_12_skill_shot" LOOP="TRUE"/>
+	<SLOT NAME="skill_shot_12"/>
+	<SLOT NAME="idle_01"/> <!--보험, 동작하지 않음.-->
+	<SLOT NAME="shot_return_12"/>
+	<SLOT NAME="btlidle_12_skill_shot_middle" LOOP="TRUE"/>	
+	<FSM SCRIPT="Act_Mon_RangeAttack"/>
+</ACTION>

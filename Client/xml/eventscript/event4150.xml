@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD type="waittime" time="1"/>
+  
+  <CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+  <CMD TYPE="SetCameraModeEvent"/>
+  
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="2" CamActorDistance="200" CamMoveUpDistance="-35"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "3" FadeIn = "false"/>  
+  <CMD type="WaitFade" time="1"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+  <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+
+<!-- NPC 루 등장-->
+    <CMD TYPE="ShowActor" ActorGUID="70925968-3056-4c39-A4C1-8109F1DFADA5" Show="true"/>
+    <CMD TYPE="MoveCamToActor" ActorGUID="70925968-3056-4c39-A4C1-8109F1DFADA5"  MoveTime="0"/>
+    
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+    <CMD type="WaitFade" time="1"/>
+    
+    <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+    <CMD TYPE="WaitCamera"/>
+    
+    <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+    <CMD TYPE="setmoviescene" enable="false" Time="1"/>
+    <CMD type="waittime" time="0"/>
+
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

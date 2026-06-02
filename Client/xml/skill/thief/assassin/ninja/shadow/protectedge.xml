@@ -1,0 +1,11 @@
+<ACTION ID="a_ProtectEdge" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="Kattar_skill_ProtectEdge_01_01" LOOP="TRUE"/>
+  <SLOT NAME="Kattar_skill_ProtectEdge_01_02"/>
+  <FSM SCRIPT="Act_Melee_Default"
+		CASTING_EFFECT_EFFECT_ID="ef_skill_protect_edge_03_char_root"
+		CASTING_EFFECT_TARGET_NODE="char_root"
+		DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+		FIRE_CASTER_EFFECT_ID="ef_skill_protect_edge_02_char_root"
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		/>
+</ACTION>

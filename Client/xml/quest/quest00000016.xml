@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>16</ID> <!--T.T.10001601 초코장인의 괴로움 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	과자공장 초코장인의 집(F6)에 침입한 애정파괴단을 조사하자.-->
+<!--[완료NPC]	바람항구(발렌타인) - 고든-->
+<!--[내용]	과자공장 왼쪽으로 가보면 초코장인의 집(F6)이 있다. 그 초코장인의 집(F6)에 애정파괴단이 어슬렁거린다고 한다. 애정파괴단이 무엇을 하고 있는지 알아봐야 한다. 제과점 보초, 사탕가게 보초, 아이스크림 보초를 각각 20마리씩 조사해 보자. 과자공장에 들어가기 위해, 고든 옆에 있는 야마키와 이야기를 해보자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</CLIENT> <!--시작NPC 바람항구(발렌타인) - 고든 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</PAYER> <!--완료NPC 바람항구(발렌타인) - 고든 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">8FD1F9ED-DE6B-42d1-B877-6B6249934B80</AGENT> <!--진행NPC 11 바람항구(발렌타인) - 고든 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9014600/1">8104900</MONSTER> 
+ <!--MON_NO=8104900/해당값 없거나 입력 안함!! 확인요망 ,MAP_NO=9014600/초코장인의집,-->
+		<MONSTER OBJECTNO="2" TYPE="INCPARAM100_IN" VALUE="9014600/1">8105000</MONSTER> 
+ <!--MON_NO=8105000/해당값 없거나 입력 안함!! 확인요망 ,MAP_NO=9014600/초코장인의집,-->
+		<MONSTER OBJECTNO="3" TYPE="INCPARAM100_IN" VALUE="9014600/1">8105100</MONSTER> 
+ <!--MON_NO=8105101/해당값 없거나 입력 안함!! 확인요망 ,MAP_NO=9014600/초코장인의집,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10001611"/> <!--제과점 보초-->
+		<OBJECT2 COUNT="10" TEXT="10001612"/> <!--사탕가게 보초-->
+		<OBJECT3 COUNT="10" TEXT="10001613"/> <!--아이스크림 보초-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10001621" FACE="Goden_normal"/> <!--역시나! 내 생각이 맞았군.
+초코장인 진저맨의 초콜릿 만드는 기술은 그의 스승 초코초코로부터 전수받은 거지.%%
+그 기술은 만드는 이의 마음에 따라서 초콜릿의 맛이 변하는 거네.%%
+그래서 초코초코는 두 제자 중 항상 즐거운 마음으로 있던 초코장인 진저맨에게 기술을 가르친 거지.%%
+아마 초코장인 진저맨의 마음에 무슨 문제가 생긴 건 아닌가 하네.
+자네가 나를 좀 도와줄 수 있겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10001626" FACE="Goden_normal"/> <!--흠, 역시나 애정파괴단이 초코장인 진저맨을 괴롭히고 있었군.
+그런데 도대체 왜 초코장인 진저맨을 괴롭히는 거지?-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10001623" FACE="Goden_normal"/> <!--지금 초코장인 진저맨의 집에 애정파괴단이라는 수수께끼의 인물들이 들어와 있다는 것을 들었네.%%
+그들이 초코장인 진저맨에게 무슨 일을 하는 건 아닌지 걱정이 되네.%%
+자네가 애정파괴단에 보초를 서고 있는 제과점 보초, 사탕가게 보초, 아이스크림 보초들을 우선 조사해 주기 바라네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10001624" FACE="Goden_angly"/> <!--자네가 거부한다면 할 수 없지. 나이 든 나라도 조사를 하는 수밖에. 쿨럭쿨럭. 
+나이가 드니 온몸이 다 쑤시는군.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10001625" FACE="Goden_normal"/> <!--애정파괴단과 초코장인 진저맨이 무슨 관계가 있는 건가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10001602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

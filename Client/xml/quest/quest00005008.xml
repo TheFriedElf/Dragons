@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5008</ID> <!--T.T.10500801 마음을 안정시키는 약(2) -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구 - 챤피오와 대화-->
+<!--[완료NPC]	바람항구 - 챤피오-->
+<!--[내용]	에델린은 꼬깨의 등껍질이 어떤 특수한 성분 때문에 변형되었다고 했다. 그래서 지금 긴장완화을 복용하게 된다면 오히려 정신이 산란스럽게 된다는고 한다. 이 이야기를 걱정하고 있는 챤피오에게 전하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</CLIENT> <!--시작NPC 바람항구 - 에델린 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</PAYER> <!--완료NPC 바람항구 - 챤피오 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">C314BA26-6FAC-4CAE-9B6D-AB19C14D2517</AGENT> <!--진행NPC 11 바람항구 - 에델린 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">F7E114D9-0D5B-44f2-9881-F0ABF8CA6BF0</AGENT> <!--진행NPC 12 바람항구 - 챤피오 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10500811"/> <!--챤피오와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10500821" FACE="Edeline_normal"/> <!--흠. 이거 좀 이상하군요. 
+원래 긴장완화의 약은 푸른 빛깔을 띠는데 이것은 약간 검푸른 빛을 띠는군요.
+아무래도. 등껍질이 어떤 성분에 의해서 변화된 모양이군요.%%
+냄새를 좀 맡아 보겠습니다. 
+흐음. 역시 약이 변형되었군요.
+약의 냄새를 맡은 저의 심장이 안정되지 않고 약간 더 빨리 뛰고 있습니다.%%
+아무래도 약의 오염원인을 더 찾아 봐야 겠습니다. 
+챤피오씨에게 오염원을 찾아서 알려드린다고 전해 주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10500826" FACE="Campiu_angry"/> <!--뭐라고? 약이 오염됐다고? 이런, 계속 기다려왔는데 이대로 포기할 순 없어!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10500823" FACE="Edeline_normal"/> <!--오염원의 원인은 꼬깨의 등껍질이 틀림 없는 것 같습니다. 그런데 도대체 등껍질을 변형시킨 원인을 모르겠군요. 
+챤피오씨에게 미안하지만 조금 더 기다리셔야 할 것 같군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10500824" FACE="Edeline_angly"/> <!--응? 저에게 부탁을 할 때는 언제고 이제와서 거절을 하는 것이에요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10500825" FACE="Edeline_normal"/> <!--챤피오씨가 더 기다리시기 전에 알려 드리는 게 좋겠습니다. 
+제가 보기에 챤피오씨가 그렇게 참을성이 많은 것 같지는 않군요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10500802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="euc-kr"?>
+	<ACTOR NAME="m_Dire_Mist" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<!--ICON ID="icon_m_Rock_Gorgon"/-->
+		<KFMPATH SCALE="0.7">../Data/1_Cha/9_SSkill/Summon/SumDiremist/Mist_Dire.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="15"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000000" RANDOM="100"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>			
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>			
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000021"/>
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022" VELOCITY="50" VELOCITY_INIT="50"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>			
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="walk" ANIMATION="1000051"/>
+			<ITEM NAME="run" ANIMATION="1000055" USE_AUTO_ANI_SPEED="FALSE"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+
+			<!-- 물어뜯기 -->
+			<ITEM NAME="btlidle_01_start" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061"/>
+			
+			<!-- 대쉬 a_mon_dashattk -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT_NODE="p_dash" FIRE_EFFECT="efx_mist_dire_dashattk_01"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000328"/>
+			
+			<!-- 자의에 의한 사망 -->
+			<ITEM NAME="voluntarily_die_01" ANIMATION="1000110"/>
+			
+			<!-- 순간이동 -->
+			<ITEM NAME="Warp" ANIMATION="1000081"/>
+			
+			<!-- 자폭 -->
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000000"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000110"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

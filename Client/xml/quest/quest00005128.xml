@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5128</ID> <!--T.T.10512801 출생의 비밀 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	달빛해안 마을 - 클레아와 대화-->
+<!--[완료NPC]	달빛해안 마을 - 클레아-->
+<!--[내용]	라르엘은 자신의 출생에 대해 알고 싶다고 한다. 그러던 어느 날 라르엘에게 의문의 편지가 한통 오게 되었다고 한다. 그 편지에는 어린 라르엘 사진이 들어 있었고, 라르엘은 그 사진에 나와 있는 집 분위기가 달빛해안 마을 여관과 비슷하다고 한다. 클레아에게 라르엘에 관한 비밀을 알고 있는지 물어보도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</CLIENT> <!--시작NPC 달빛해안 마을 - 라르엘 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6582AB80-AF1C-4798-865E-E113A1241350</PAYER> <!--완료NPC 달빛해안 마을 - 클레아 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">3AA07B20-C66E-43ef-AB29-8AFA21D8396F</AGENT> <!--진행NPC 11 달빛해안 마을 - 라르엘 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">6582AB80-AF1C-4798-865E-E113A1241350</AGENT> <!--진행NPC 12 달빛해안 마을 - 클레아 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10512811"/> <!--클레아와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10512821" FACE="Larel_normal"/> <!--%name%아. 안녕~
+오늘은 피곤한 하루야. 너는 잘 잤어?
+혹시 악몽을 꾸진 않았지?%%
+나는 꿈을 언제 꿨는지 기억이 나질 않아.
+사람은 어른이 될수록 꿈을 덜 꾸게 되는 것 같아.
+어렸을 땐 나도 많은 꿈을 꿨을 텐데, 어릴 때 기억이 생각이 안 나.%%
+어디서 태어났고, 어디서 살았는지 전혀 기억이 나질 않아.
+나는 내 과거가 궁금해. 며칠 전에 내 과거에 대한 단서를 찾았어.
+단서에 대해 들어볼래?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10512826" FACE="Floran_smile"/> <!--라르엘의 어린 시절? 
+음... 글쎄요. 저는 잘 모르겠어요.%%
+이 여관은 체인점이라 실내장식이 모두 비슷해요.
+사진만 가지고 판단하긴 힘들 것 같아요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10512823" FACE="Larel_normal"/> <!--집에 돌아가니 편지가 있었어.
+내용은 없고 사진만 들어 있었는데, 내 어릴 적 모습 같았어.%%
+그런데 신기한 건 사진 속 배경이 클레아 여관과 비슷했어.
+그래서 말인데 클레아가 내 과거에 대해 알고 있지 않을까?%
+네가 가서 물어보고 혹시 나에 대해 알고 있다고 하면 나에게 전해줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10512824" FACE="Larel_angly"/> <!--그래? 많이 바쁜 모양이네. 어쩔 수 없지. 지금처럼 궁금한 채 살아갈게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10512825" FACE="Larel_normal"/> <!--나는 누굴까? 어디서 왔고, 어디에서 자랐을까?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10512802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

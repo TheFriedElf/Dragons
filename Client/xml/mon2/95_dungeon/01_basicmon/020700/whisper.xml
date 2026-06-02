@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Whisper" DIE_PARTICLE_ID="eff_whisper_die_00">
+<TEXTURE SRC="Animal_Deer1001_01_spec.dds">../Data/3_World/Map_Textures/Animal_Deer1001_01_spec.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Whisper"/>
+		<KFMPATH SCALE="1.7">../Data/2_Mon2/95_Dungeon/01_BasicMon/020700/Whisper/Whisper.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		
+		<ABV>
+			<CAPSULE TO="p_hit_point_01" SIZE="20,8"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000061" RANDOM="100"/>
+			<!-- 가미가제 -->
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000011"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000011"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000019"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000011"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001" RANDOM="100"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,7 @@
+<ACTION ID="a_lightning_armor" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" CAN_CHANGE_ACTOR_POS="TRUE">
+  <SLOT NAME="Com_Skill_LightnigArmor_01"/>
+  <SLOT NAME="Com_Skill_LightnigArmor_02"/>
+  <FSM SCRIPT="ShoulderTackle" FIRE_SOUND_ID="LightningArmor"
+       HIT_TARGET_EFFECT_ID="ef_Lightningamor_02_char_root"
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"/>
+</ACTION>

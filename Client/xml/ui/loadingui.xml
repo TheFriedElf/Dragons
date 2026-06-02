@@ -1,0 +1,3017 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+
+	<FORM ID="FRM_BACKGROUND" PRIORITY="1" W="1600" H="1200" X="0" Y="0" IS_ABSOLUTE_X="1" IS_ABSOLUTE_Y="1" USE_ALPHA_ANI="0">
+		<ATTR IMG="../Data/6_ui/Blackbg.tga" IMG_W="1601" IMG_H="1201"/>
+		<SCRIPT ID="ON_CALL">
+			local slf = UISelf
+			ODS("GetCurrentResolutionWidth : "..GetCurrentResolutionWidth().."\n", false, 1509)
+			slf:SetSize(Point2(GetCurrentResolutionWidth(), GetCurrentResolutionHeight()))
+			slf:SetImgSize(Point2(GetCurrentResolutionWidth()+1, GetCurrentResolutionHeight()+1))
+			slf:SetLocation(Point2(0,0))
+		</SCRIPT>
+	</FORM>
+
+
+	<FORM ID="FRM_LOADING_IMG" PRIORITY="3">	
+		<SCRIPT ID="ON_CALL">			
+			ActivateUI("FRM_BACKGROUND")
+
+			if LOCALE.NC_KOREA == GetLocale() then
+				CallUI("FRM_NOTICE_MARK")
+			end
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">
+			CloseUI("FRM_BACKGROUND")
+			CloseUI("LOADING_IMG_EMBATTLE")
+			CloseUI("FRM_NOTICE_MARK")
+		</SCRIPT>
+
+		<ATTR ALIGN_X="50" ALIGN_Y="50" W="1024" H="768"/>
+		<LOCAL>
+			<NAME ID="KOREA">
+				<!--
+				<IMG ID="IMG_MARK">
+					<ATTR X="949" Y="5" Z="3" W="70" H="83" IMG="../Data/6_ui/Mark.tga" IMG_W="70" IMG_H="83"/>
+				</IMG>
+				-->
+			</NAME>
+		</LOCAL>
+
+		<FORM ID="LOADING_IMG_BASIC" IS_VISIBLE="1">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBasic000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBasic001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBasic002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBasic003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_PAREL" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingParel000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingParel001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingParel002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingParel003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		<FORM ID="LOADING_IMG_PAREL2" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParel2000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingParel2001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingParel2002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingParel2003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		<FORM ID="LOADING_IMG_DRAGON" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDragon000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDragon001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDragon002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDragon003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		<FORM ID="LOADING_IMG_MISSION_EVENT" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingEventA000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingEventA001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingEventA002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingEventA003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		<FORM ID="LOADING_IMG_ARAM" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingAram000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingAram001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingAram002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingAram003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+        <FORM ID="LOADING_IMG_BATTLE" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBattle000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBattle001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBattle002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingBattle003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		<FORM ID="LOADING_IMG_BONEDRAGON" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBoneDragon000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBoneDragon001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBoneDragon002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBoneDragon003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<SCRIPT ID="ON_CALL">UISelf:Visible(false)</SCRIPT>
+		</FORM>
+		<FORM ID="LOADING_IMG_FIELD" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingField000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingField001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingField002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingField003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_RESULT" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingResult000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingResult001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingResult002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingResult003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_MISSION" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingMission000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingMission001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingMission002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingMission003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_PVP" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingPvp000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingPvp001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingPvp002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingPvp003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<FORM ID="LOADING_IMG_EMBATTLE" USE_ALPHA_ANI="0" PRIORITY="2">
+			<ATTR X="0" Y="0" W="1600" H="1200" CAN_DRAG="0" CAN_CLIP="1"/>
+			<SCRIPT ID="ON_CALL">
+				local kWnd = UISelf
+				local kScreenSize = GetScreenSize()
+				local kPos = kWnd:GetLocation()
+				kPos:SetX( (kScreenSize:GetX() - kWnd:GetSize():GetX() ) / 2 )
+				kPos:SetY( (kScreenSize:GetY() - kWnd:GetSize():GetY() ) / 2 )
+				kWnd:SetLocation( kPos )
+			</SCRIPT>
+			<FORM ID="FRM_000">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar000.dds" IMG_W = "512" IMG_H = "512"/>
+			</FORM>
+			<FORM ID="FRM_001">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar001.dds" IMG_W = "512" IMG_H = "512"/>
+			</FORM>
+			<FORM ID="FRM_002">
+				<ATTR X="1024" Y="0" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar002.dds" IMG_W = "512" IMG_H = "512"/>
+			</FORM>
+			<FORM ID="FRM_003">
+				<ATTR X="1536" Y="0" W="64" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar003.dds" IMG_W = "64" IMG_H = "512"/>
+			</FORM>
+			
+			<FORM ID="FRM_004">
+				<ATTR X="0" Y="512" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar004.dds" IMG_W = "512" IMG_H = "512"/>
+			</FORM>
+			<FORM ID="FRM_005">
+				<ATTR X="512" Y="512" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar005.dds" IMG_W = "512" IMG_H = "512"/>
+			</FORM>
+			<FORM ID="FRM_006">
+				<ATTR X="1024" Y="512" W="512" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar006.dds" IMG_W = "512" IMG_H = "512"/>
+			</FORM>
+			<FORM ID="FRM_007">
+				<ATTR X="1536" Y="512" W="64" H="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar007.dds" IMG_W = "64" IMG_H = "512"/>
+			</FORM>
+			
+			<FORM ID="FRM_008">
+				<ATTR X="0" Y="1024" W="512" H="176" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar008.dds" IMG_W = "512" IMG_H = "176"/>
+			</FORM>
+			<FORM ID="FRM_009">
+				<ATTR X="512" Y="1024" W="512" H="176" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar009.dds" IMG_W = "512" IMG_H = "176"/>
+			</FORM>
+			<FORM ID="FRM_010">
+				<ATTR X="1024" Y="1024" W="512" H="176" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar010.dds" IMG_W = "512" IMG_H = "176"/>
+			</FORM>
+			<FORM ID="FRM_011">
+				<ATTR X="1536" Y="1024" W="64" H="176" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingWar011.dds" IMG_W = "64" IMG_H = "176"/>
+			</FORM>
+		</FORM>
+
+		<FORM ID="LOADING_EM_CORE_DESTROY" X="0" Y="0" W="1024" H="768" IS_VISIBLE="0">
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdBg001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdBg002.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdBg003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdBg004.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_TEXT_CONTENTS01" X="793" Y="211" W="160" H="10" TEXT="76008" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<!--FORM ID="FRM_TEXT_CONTENTS02" X="353" Y="335" W="160" H="10" TEXT="76009" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/-->
+			<FORM ID="FRM_TEXT_CONTENTS03" X="32" Y="496" W="160" H="10" TEXT="76010" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<FORM ID="FRM_TEXT_CONTENTS04" X="473" Y="296" W="160" H="10" TEXT="76014" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<FORM ID="FRM_TEXT_CONTENTS05" X="562" Y="76" W="160" H="10" TEXT="76011" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<FORM ID="FRM_TEXT_CONTENTS06" X="275" Y="76" W="160" H="10" TEXT="76013" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<FORM ID="FRM_TEXT_CONTENTS07" X="66" Y="66" W="160" H="10" TEXT="76012" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<FORM ID="FRM_TEXT01" X="791" Y="184" W="90" H="10" TEXT="76006" T_X="45" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<!--FORM ID="FRM_TEXT02" X="453" Y="133" W="90" H="10" TEXT="76007" T_X="45" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/-->
+			<FORM ID="FRM_TEXT03" X="30" Y="469" W="62" H="10" TEXT="76001" T_X="31" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<FORM ID="FRM_TEXT04" X="471" Y="269" W="135" H="10" TEXT="76005" T_X="67" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<FORM ID="FRM_TEXT05" X="560" Y="49" W="83" H="10" TEXT="76002" T_X="41" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<FORM ID="FRM_TEXT06" X="273" Y="49" W="75" H="10" TEXT="76003" T_X="37" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<FORM ID="FRM_TEXT07" X="64" Y="39" W="75" H="10" TEXT="76004" T_X="37" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		</FORM>
+		<FORM ID="LOADING_EM_DRAGON_DEFFENCE" X="0" Y="0" W="1024" H="768" IS_VISIBLE="0">
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdDrg001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdDrg002.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdDrg003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0" Z="-1"/>
+				<ATTR IMG="../Data/6_ui/war/wrLdDrg004.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_TEXT_CONTENTS01" X="737" Y="138" W="160" H="10" TEXT="76018" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<FORM ID="FRM_TEXT_CONTENTS02" X="216" Y="227" W="160" H="10" TEXT="76019" FONT="Font_Text" FONT_COLOR_HEX="0xFF091421"/>
+			<FORM ID="FRM_TEXT01" X="759" Y="35" W="135" H="10" TEXT="76016" T_X="67" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+			<FORM ID="FRM_TEXT02" X="236" Y="40" W="130" H="10" TEXT="76017" T_X="65" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1"/>
+		</FORM>
+		<FORM ID="LOADING_IMG_HIDDEN" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingHidden000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingHidden001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingHidden002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingHidden003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_CHAOS" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingChaos000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingChaos001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingChaos002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingChaos003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV1_LV10" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading01_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading01_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading01_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading01_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV10_LV16" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading10_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading10_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading10_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading10_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV15_WOLF" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading15wolf000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading15wolf001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading15wolf002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading15wolf003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV20_WOLF" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading20wolf000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading20wolf001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading20wolf002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading20wolf003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV17_LV25" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading17_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading17_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading17_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading17_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV26_LV35" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading26_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading26_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading26_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading26_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_WATER_DUNGEON" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDungeonofWater000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDungeonofWater001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDungeonofWater002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingDungeonofWater003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_GLOG_EVENT_MAP01" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingGlogMap000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingGlogMap001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingGlogMap002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingGlogMap003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_CATACOMB30" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb30000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb30001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb30002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb30003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_CATACOMB35" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb35000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb35001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb35002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingcatacomb35003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV36_LV40" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading36_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading36_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading36_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading36_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV41_LV45" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading41_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading41_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading41_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading41_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<FORM ID="LOADING_IMG_45DGBS" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgBs_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgBs_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgBs_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgBs_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_45DGFD" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgFd_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgFd_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgFd_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading45DgFd_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<FORM ID="LOADING_IMG_LV46_LV55" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading46_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading46_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading46_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading46_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_LV56_LV59" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading56_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading56_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading56_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading56_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_MAIN" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_WEDDING" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWedding000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWedding001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWedding002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWedding003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<FORM ID="LOADING_IMG_TOWER_OF_TRUTH" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingTrueTw000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingTrueTw001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingTrueTw002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingTrueTw003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_VANCLEEF_BOSS" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef3_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef3_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef3_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef3_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_VANCLEEF_WEAPON" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef2_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef2_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef2_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef2_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_VANCLEEF_ARMOR" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingVancleef_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_BIGMAZE_PARIS" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze3_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze3_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze3_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze3_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_BIGMAZE_SUBBOSS1" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze4_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze4_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze4_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze4_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+        
+        <FORM ID="LOADING_IMG_BIGMAZE_WEAPON" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze2_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze2_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze2_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze2_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_BIGMAZE_SETITEM" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingBigmaze_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<FORM ID="LOADING_IMG_PARIS" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_PARIS_35" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis2000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis2001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis2002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingParis2003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <FORM ID="LOADING_IMG_GREAT_LABYRINTH" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDaemi000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDaemi001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDaemi002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDaemi003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<!-- 디펜스 맵용 로딩화면-->
+		<FORM ID="LOADING_IMG_DEFENCE" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDefence_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDefence_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDefence_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDefence_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <!-- 전략디펜스 맵용 로딩화면-->
+		<FORM ID="LOADING_IMG_DEFENCE7" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingF7defense000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingF7defense001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingF7defense002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingF7defense003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+        <!-- 사쿠라 일반용 로딩화면-->
+		<FORM ID="LOADING_SAKURA" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE1_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE1_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE1_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE1_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<!-- 사쿠라 보스용 로딩화면-->
+		<FORM ID="LOADING_SAKURA_BOSS" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE2_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE2_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE2_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE2_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<!-- 사쿠라 디펜스 로딩화면-->
+		<FORM ID="LOADING_SAKURA_DEFENCE" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE3_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE3_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE3_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingSakuraE3_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!--발렌타인 이벤트 미션 입구 맵 -->
+		<FORM ID="LOADING_vt_9015130" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vt_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vt_002.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vt_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vt_004.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	  <!--발렌타인 이벤트 미션 F6 -->
+
+		<FORM ID="LOADING_vt_DEFENCE" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF6_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF6_002.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF6_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF6_004.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+
+	  <!--발렌타인 이벤트 미션 F7 -->
+
+		<FORM ID="LOADING_vt_DEFENCE7" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF7_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF7_002.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF7_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_vtF7_004.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+
+
+        <!-- 직업맵 로딩화면-->
+		<FORM ID="LOADING_FARM" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingJobskill_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingJobskill_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingJobskill_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingJobskill_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 고요의 섬 1-->
+		<FORM ID="LOADING_Chaser_Ridge" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>			
+        
+        <!-- 고요의 섬 2-->
+		<FORM ID="LOADING_Haven_Peace" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice1000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice1001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice1002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice1003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>	
+        
+         <!-- 고요의 섬 3-->
+		<FORM ID="LOADING_Bear_Claw" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice2000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice2001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice2002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice2003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>	
+        
+         <!-- 고요의 섬 4-->
+		<FORM ID="LOADING_Verglas" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice3000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice3001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice3002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingice3003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!--FORM ID="LOADING_IMG_MYHOME" IS_VISIBLE="0">
+			<ATTR X = "0" Y = "0" W ="1023" H ="767" />
+			<ATTR USE_ALPHA_ANI = "0"/>
+			<FORM ID = "FRM_00">
+				<ATTR X = "0" Y = "0" W ="512" H ="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingMyhome000.dds" IMG_W = "512" IMG_H = "512"/>
+				<ATTR USE_ALPHA_ANI = "0"/>
+			</FORM>
+			<FORM ID = "FRM_10">
+				<ATTR X = "512" Y = "0" W ="512" H ="512" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingMyhome001.dds" IMG_W = "512" IMG_H = "512"/>
+				<ATTR USE_ALPHA_ANI = "0"/>
+			</FORM>
+			<FORM ID = "FRM_01">
+				<ATTR X = "0" Y = "512" W ="512" H ="256" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingMyhome002.dds" IMG_W = "512" IMG_H = "256"/>
+				<ATTR USE_ALPHA_ANI = "0"/>
+			</FORM>
+			<FORM ID = "FRM_11">
+				<ATTR X = "512" Y = "512" W ="512" H ="256" CAN_DRAG = "0" />
+				<ATTR IMG = "../Data/6_ui/loading/loadingMyhome003.dds" IMG_W = "512" IMG_H = "256"/>
+				<ATTR USE_ALPHA_ANI = "0"/>
+			</FORM>
+		</FORM-->
+
+		<!-- 부보부보 미션/ 정예전 진입-->
+		<FORM ID="LOADING_IMG_9030100" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93010_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93010_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93010_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93010_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 벌룬 미션/ 정예전 진입-->
+		<FORM ID="LOADING_IMG_9030130" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93013_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93013_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93013_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading93013_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 에르다 협곡 / 필드진입-->
+		<FORM ID="LOADING_IMG_9050120" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 카즈라 마을 / 마을진입-->
+		<FORM ID="LOADING_IMG_9058100" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9058100_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 샬바론 / 필드/미션진입-->
+		<FORM ID="LOADING_IMG_9050100" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050100_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050100_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050100_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050100_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 라미에타 / 필드/미션진입-->
+		<FORM ID="LOADING_IMG_9050110" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050110_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050110_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050110_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050110_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 드래곤계곡/날개협곡 / 필드/미션진입-->
+		<FORM ID="LOADING_IMG_9050200" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050200_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050200_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050200_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050200_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 세상의 끝/손톱날 고개 / 필드/미션진입-->
+		<FORM ID="LOADING_IMG_9050230" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050230_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050230_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050230_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050230_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!--아키아 동굴 / 던전진입-->
+		<FORM ID="LOADING_IMG_9050301" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050301_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050301_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050301_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050301_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!--검은발톱 둥지/ 던전진입-->
+		<FORM ID="LOADING_IMG_9050401" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9850400_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9850400_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9850400_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9850400_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		
+		
+		<!--하이드론 코어 / 던전진입-->
+		<FORM ID="LOADING_IMG_9050600" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050600_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050600_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050600_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050600_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		
+		
+		<!--붉은여우 삼각지/ 던전진입-->
+		<FORM ID="LOADING_IMG_9050601" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050601_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050601_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050601_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading9050601_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		
+		<!--신규 PVP 점령전 입장 -->
+		<FORM ID="LOADING_IMG_9950101" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading950101_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading950101_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading950101_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading950101_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		
+		
+			<!--신규 PVP 러브 대작전 입장 -->
+		<FORM ID="LOADING_IMG_9950301" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_950301_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_950301_002.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_950301_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_950301_004.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+			
+			<!-- 커뮤니티 이벤트 맵 입장 -->
+		<FORM ID="LOADING_IMG_9960100" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_9960100_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_9960100_002.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_9960100_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading_9960100_004.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+		<!--엘가보스방/ 던전진입-->
+		<FORM ID="LOADING_IMG_9050400" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050401_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050401_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050401_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9050401_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+		<!-- 바람 에서 게펜 -->
+		<FORM ID="LOADING_IMG_9015600R" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600R_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600R_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600R_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600R_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 게펜 에서 바람 -->
+		<FORM ID="LOADING_IMG_9018100R" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingMain003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	 <!-- 던전 에서 게펜 -->
+		<FORM ID="LOADING_IMG_9015600" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015600_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+<!-- 게펜 에서 오크 필드 -->
+		<FORM ID="LOADING_IMG_9015610" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015601_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015601_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015601_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015601_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+	 <!-- 게펜 에서 글레스트 헤임(일반) -->
+
+		<FORM ID="LOADING_IMG_9015620" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+	 <!-- 게펜 에서 글레스트 헤임(레어) -->
+
+		<FORM ID="LOADING_IMG_9015630" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 게펜 에서 글레스트 헤임(영웅) -->
+
+		<FORM ID="LOADING_IMG_9015640" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9015602_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+		<!-- 정령던전 개선 - 냉기 -->
+
+		<FORM ID="LOADING_IMG_9710100" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_cold000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_cold001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_cold002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_cold003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+		<!-- 정령던전 개선 - 화염 -->
+
+		<FORM ID="LOADING_IMG_9710200" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_fire000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_fire001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_fire002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_fire003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 정령던전 개선 - 저주 -->
+
+		<FORM ID="LOADING_IMG_9710300" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_chaos000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_chaos001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_chaos002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_chaos003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+		 <!-- 정령던전 개선 - 자연 -->
+
+		<FORM ID="LOADING_IMG_9710400" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_nature000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_nature001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_nature002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loading_nature003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+  
+		<!-- 달리기 이벤트 1 -->
+
+		<FORM ID="LOADING_IMG_9970100" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingrunning_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingrunning_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingrunning_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loadingrunning_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	<!-- 달리기 이벤트 2 -->
+
+		<FORM ID="LOADING_IMG_9970300" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadinghalloween_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadinghalloween_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadinghalloween_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadinghalloween_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	<!-- 크리스마스 이벤트(아케이드 F1) -->
+
+		<FORM ID="LOADING_IMG_winter_F1" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBasic000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBasic001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBasic002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBasic003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	<!-- 크리스마스 이벤트(카오스 F2) -->
+
+		<FORM ID="LOADING_IMG_winter_F2" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterChaos000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterChaos001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterChaos002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterChaos003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+
+	<!-- 크리스마스 이벤트(시나리오 모드 F5) -->
+
+				<FORM ID="LOADING_IMG_winter_F5" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBoss000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBoss001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBoss002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterBoss003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	<!-- 크리스마스 이벤트(디펜스 모드 F6) -->
+
+		<FORM ID="LOADING_IMG_winter_DEFENCE" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterDefence000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterDefence001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterDefence002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/loadingWinterDefence003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	<!-- 별자리 던전 일반 필드 -->
+
+		<FORM ID="Loading9980100N" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100N_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100N_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100N_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100N_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 별자리 던전 뱀주인 자리 일반 필드 -->
+
+		<FORM ID="Loading9980200N" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200N_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200N_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200N_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200N_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+	<!-- 별자리 던전 보스 필드 -->
+				<FORM ID="Loading9980100B" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100B_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100B_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100B_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100B_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 별자리 던전 뱀주인자리 보스 필드 -->
+				<FORM ID="Loading9980200B" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200B_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200B_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200B_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_UI/loading/Loading9980200B_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+		<!-- 별자리에서 바람항구로 돌아갈 때 -->
+				<FORM ID="Loading9980100V" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100V_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100V_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100V_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/Loading9980100V_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+		<!-- 팻타고 맵이동시 -->
+		<FORM ID="LOADING_IMG_PetLD" IS_VISIBLE="0"> 
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingPetLD_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingPetLD_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingPetLD_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingPetLD_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+		<!-- 신종족 최초 입장 로딩 화면 -->
+		<FORM ID="LOADING_IMG_NEW_RACE" IS_VISIBLE="0">
+			<ATTR X="0" Y="0" W="1023" H="767"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<FORM ID="FRM_00">
+				<ATTR X="0" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDragonrace_000.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_10">
+				<ATTR X="512" Y="0" W="512" H="512" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDragonrace_001.dds" IMG_W="512" IMG_H="512"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_01">
+				<ATTR X="0" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDragonrace_002.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+			<FORM ID="FRM_11">
+				<ATTR X="512" Y="512" W="512" H="256" CAN_DRAG="0"/>
+				<ATTR IMG="../Data/6_ui/loading/LoadingDragonrace_003.dds" IMG_W="512" IMG_H="256"/>
+				<ATTR USE_ALPHA_ANI="0"/>
+			</FORM>
+		</FORM>
+
+
+
+
+
+		<FORM ID="BAR_LOADING_PROGRESS">
+			<ATTR X="88" Y="695" W="847" H="21"/>
+			<ATTR IMG="../Data/6_ui/07_Loading/loading_progress.dds" IMG_W="847" IMG_H="21"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetImgSize(Point2(0, 21))
+			</SCRIPT>
+		</FORM>
+
+		<FORM ID="FRM_TEXT">
+			<ATTR X="85" Y="735" Z="1" W="833" H="20" T_OUTLINE="1" FONT="FTtitleBig_16" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<SCRIPT ID="ON_CALL">
+				UISelf:SetStaticText(GetTextW(math.random(79000,79029)):GetStr())
+			</SCRIPT>
+		</FORM>
+		<!--FORM ID = "FRM_GEAR_CONTAINER">
+			<ATTR X = "0" Y = "0" W ="1023" H ="767" NO_OFFSCREEN="1" USE_ALPHA_ANI = "0"/>
+			<SCRIPT ID = "ON_CALL">		
+				iGearNum = 1
+				fGearTime = GetAccumTime()
+			</SCRIPT>	
+			
+			<SCRIPT ID = "ON_DISPLAY">
+				if iGearNum ~= nil then
+					iGearNum = iGearNum + 1
+					if iGearNum > 4 then
+						iGearNum  = 1
+					end
+					local wndGearLeft = UISelf:GetControl("FRM_GEAR_LEFT")
+					if wndGearLeft:IsNil() == false then					
+						wndGearLeft:SetUVIndex(iGearNum)
+					end
+						
+					local wndGearRight = UISelf:GetControl("FRM_GEAR_RIGHT")
+					if wndGearRight:IsNil() == false then
+						wndGearRight:SetUVIndex(iGearNum)
+					end
+				end					
+			</SCRIPT>
+		
+			<FORM ID = "FRM_GEAR_LEFT" >
+				<ATTR X = "0" Y = "629" W ="102" H ="139" NO_OFFSCREEN="1" USE_ALPHA_ANI = "0"/>
+				<ATTR IMG = "../Data/6_ui/loading/loadingWheel.tga" IMG_W = "204" IMG_H = "278" U = "2" V = "2"/>
+			</FORM>
+			<FORM ID = "FRM_GEAR_RIGHT" >
+				<ATTR X = "922" Y = "629" W ="102" H ="139" NO_OFFSCREEN="1" USE_ALPHA_ANI = "0"/>
+				<ATTR IMG = "../Data/6_ui/loading/loadingWheel_r.tga" IMG_W = "204" IMG_H = "278" U = "2" V = "2"/>
+			</FORM>
+		</FORM-->
+
+
+		<FORM ID="LOADING_PROGRESS_1_BG" IS_VISIBLE="0">
+			<ATTR X="308" Y="560" Z="1" W="100" H="10" CAN_DRAG="0"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<ATTR IMG="../Data/6_ui/loading/loadingUserBar.tga" IMG_W="100" IMG_H="20" U="1" V="2"/>
+		</FORM>
+		<FORM ID="LOADING_PROGRESS_1" IS_VISIBLE="0">
+			<ATTR X="308" Y="560" Z="1" W="100" H="10" CAN_DRAG="0"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<ATTR IMG="../Data/6_ui/loading/loadingUserBar.tga" IMG_W="100" IMG_H="20" U="1" V="2" UV_INDEX="2"/>
+		</FORM>
+		<FORM ID="LOADING_PROGRESS_2_BG" IS_VISIBLE="0">
+			<ATTR X="308" Y="560" Z="1" W="100" H="10" CAN_DRAG="0"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<ATTR IMG="../Data/6_ui/loading/loadingUserBar.tga" IMG_W="100" IMG_H="20" U="1" V="2"/>
+		</FORM>
+		<FORM ID="LOADING_PROGRESS_2" IS_VISIBLE="0">
+			<ATTR X="308" Y="560" Z="1" W="100" H="10" CAN_DRAG="0"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<ATTR IMG="../Data/6_ui/loading/loadingUserBar.tga" IMG_W="100" IMG_H="20" U="1" V="2" UV_INDEX="2"/>
+		</FORM>
+		<FORM ID="LOADING_PROGRESS_3_BG" IS_VISIBLE="0">
+			<ATTR X="308" Y="560" Z="1" W="100" H="10" CAN_DRAG="0"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<ATTR IMG="../Data/6_ui/loading/loadingUserBar.tga" IMG_W="100" IMG_H="20" U="1" V="2"/>
+		</FORM>
+		<FORM ID="LOADING_PROGRESS_3" IS_VISIBLE="0">
+			<ATTR X="308" Y="560" Z="1" W="100" H="10" CAN_DRAG="0"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<ATTR IMG="../Data/6_ui/loading/loadingUserBar.tga" IMG_W="100" IMG_H="20" U="1" V="2" UV_INDEX="2"/>
+		</FORM>
+
+		<!--로컬-->
+		<LOCAL>
+			<NAME ID="DEFAULT">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="KOREA">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_kr.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="CHINA">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_cn.tga" IMG_W="443" IMG_H="85"/>
+				</FORM>
+			</NAME>
+			<NAME ID="JAPAN">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_jp.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_tw.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="EUROPE">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_eu.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_ru.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_sg.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_in.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_ph.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="THAILAND">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_thai.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="85" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_vt.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="AMERICA">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="86" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_na.tga" IMG_W="443" IMG_H="86"/>
+				</FORM>
+			</NAME>
+			<NAME ID="BRAZIL">
+				<FORM ID="GAME_LOGO">
+					<ATTR X="319" Y="597" Z="1" W="443" H="85" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/logoLoading_br.tga" IMG_W="443" IMG_H="85"/>
+				</FORM>
+			</NAME>
+		</LOCAL>
+		<LOCAL>
+			<NAME ID="JAPAN">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="850" Y="724" Z="1" W="116" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_NX.tga" IMG_W="116" IMG_H="40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="ENGLISH">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="928" Y="724" Z="1" W="45" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_iah.tga" IMG_W="45" IMG_H="40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="THAILAND">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="928" Y="724" Z="1" W="45" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_iah.tga" IMG_W = "45" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="928" Y="724" Z="1" W="45" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_FPT_small.tga" IMG_W = "45" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="KOREA">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="928" Y="724" Z="1" W="42" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_kr.tga" IMG_W="42" IMG_H="40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="CHINA">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="842" Y="724" Z="1" W="123" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_playcool.tga" IMG_W="123" IMG_H="40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="SINGAPORE">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="928" Y="724" Z="1" W="45" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_gsquare.tga" IMG_W="45" IMG_H="40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="AMERICA">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="870" Y="724" Z="1" W="90" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_Gravity.tga" IMG_W="90" IMG_H="40"/>
+				</FORM>
+			</NAME>
+
+			<NAME ID="EUROPE">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="830" Y="724" Z="1" W="144" H="36" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_gala.tga" IMG_W="144" IMG_H="36"/>
+				</FORM>
+			</NAME>
+			<NAME ID="FRANCE">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="830" Y="724" Z="1" W="144" H="36" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_gala.tga" IMG_W="144" IMG_H="36"/>
+				</FORM>
+			</NAME>
+			<NAME ID="GERMANY">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="830" Y="724" Z="1" W="144" H="36" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_gala.tga" IMG_W="144" IMG_H="36"/>
+				</FORM>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="880" Y="724" Z="1" W="93" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<!--ATTR IMG="../Data/6_ui/loading/LDlogo_TW_2.tga" IMG_W="93" IMG_H="40"/-->
+				</FORM>
+			</NAME>
+			<NAME ID="RUSSIA">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="903" Y="724" Z="1" W="63" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_Nival.tga" IMG_W="63" IMG_H="40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="INDONESIA">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="928" Y="724" Z="1" W="45" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_iah.tga" IMG_W = "45" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="928" Y="724" Z="1" W="45" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_iah.tga" IMG_W = "45" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="BRAZIL">
+				<FORM ID="PUBLISHER_LOGO">
+					<ATTR X="796" Y="724" Z="1" W="178" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_br.tga" IMG_W = "178" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+		</LOCAL>
+		<LOCAL>
+			<NAME ID="KOREA">
+				<FORM ID="PORTAL_LOGO">
+					<ATTR X="877" Y="724" Z="1" W="42" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<!--ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_plaync.tga" IMG_W="42" IMG_H="40"/-->
+				</FORM>
+			</NAME>
+			<NAME ID="TAIWAN">
+				<FORM ID="PORTAL_LOGO">
+					<ATTR X="880" Y="724" Z="1" W="90" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+					<ATTR USE_ALPHA_ANI="0"/>
+					<ATTR IMG="../Data/6_ui/loading/LDlogo_TW_1.tga" IMG_W="90" IMG_H="40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="THAILAND">
+				<FORM ID="PORTAL_LOGO">
+					<ATTR X="831" Y="724" Z="1" W="90" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_onenet.tga" IMG_W = "90" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="VIETNAM">
+				<FORM ID="PORTAL_LOGO">
+					<ATTR X="831" Y="724" Z="1" W="90" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_Fpt.tga" IMG_W = "90" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+			<NAME ID="PHILIPPINES">
+				<FORM ID="PORTAL_LOGO">
+					<ATTR X="877" Y="724" Z="1" W="45" H="40" CAN_DRAG = "0" USE_ALPHA_ANI = "0"/>
+					<ATTR USE_ALPHA_ANI = "0"/>
+					<ATTR IMG = "../Data/6_ui/loading/LDlogo_eg.tga" IMG_W = "45" IMG_H = "40"/>
+				</FORM>
+			</NAME>
+		</LOCAL>
+		<FORM ID="DEVELOPER_LOGO">
+			<ATTR X="980" Y="724" Z="1" W="40" H="40" CAN_DRAG="0" USE_ALPHA_ANI="0"/>
+			<ATTR USE_ALPHA_ANI="0"/>
+			<ATTR IMG="../Data/6_ui/loading/LDlogo_brsinter.tga" IMG_W="40" IMG_H="40"/>
+		</FORM>
+	</FORM>
+
+
+	<FORM ID="FRM_USER_STOPPER" X="0" Y="0" W="1" H="1" ALIVE_TIME="500" ALIVE_TIME_IGNORE_MOUSE_OVER="1">
+		<SCRIPT ID="ON_CLOSE">
+			local Menu = false
+			if( CheckNil(g_world == nil) ) then return false end
+			if( CheckNil(g_world:IsNil()) ) then return false end
+
+			if Menu == false then
+				UnLockPlayerInputMove(3)
+			if	g_world:GetMapNo() ~= 9910100 then
+				UnLockPlayerInput(1)
+			end
+				UnLockPlayerInput(3)
+				UnLockPlayerInput(6)
+				UnLockPlayerInput(7)
+				UnLockPlayerInput(8)
+				g_bEnableShortCutKey = true
+			end
+		</SCRIPT>
+	</FORM>
+</XUI>

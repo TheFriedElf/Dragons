@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_lavalon" INIT_ACTION="a_idle">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_lavalon"/>
+		<KFMPATH>../Data\2_Mon/B_FossilEarth/B_FossilEarth.kfm</KFMPATH>
+		<!--<SCRIPT SRC="WorldAction/WA_SAPHIREBOSS_APPEAR.lua">
+			<ITEM NAME="Actor_FossilEarth_Hit" TYPE="EVENT" />
+		</SCRIPT>-->
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<!--EFFECT SCALE = "3.0"	/-->
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="90"/>
+			<SPHERE TO="p_hit_point_02" SIZE="132"/>
+			<SPHERE TO="p_hit_point_03" SIZE="80"/>
+			<!--SPHERE TO="p_hit_point_04" SIZE="70"/-->
+			<SPHERE TO="p_hit_point_05" SIZE="80"/>
+			<!--SPHERE TO="p_hit_point_06" SIZE="70"/-->
+			<!--<SPHERE TO="p_hit_point_07" SIZE="30" LOCATE="0,0,-15"/>-->
+		</ABV>
+		<SLOT>
+			<!-- 소환하기 -->
+			<ITEM NAME="btlidle_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000202"/>
+			<!-- 소리 지르기 -->
+			<ITEM NAME="attk_02_01" ANIMATION="1000000"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000201"/>
+			<!-- 마력포 맞고 쓰러지기 : 액션네임 임의 지정 -->
+			<ITEM NAME="only_ani_start_01" ANIMATION="1000021"/>
+			<ITEM NAME="only_ani_idle_01" ANIMATION="1000022"/>
+			<ITEM NAME="only_ani_01_01" ANIMATION="1000012"/>
+			<ITEM NAME="only_ani_01_02" ANIMATION="1000025"/>
+			
+			<!-- 마력포 맞고 쓰러져 있는 상태 : 액션네임 임의 지정 -->
+			<ITEM NAME="Stun" ANIMATION="1000022"/>
+			<!-- 마력포 일어나기 : 액션네임 임의 지정 -->
+			<ITEM NAME="only_ani_idle_02" ANIMATION="1000022"/>
+			<ITEM NAME="only_ani_02_01" ANIMATION="1000025"/>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="battle_idle" ANIMATION="1000000"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000012"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="attk_start_L" ANIMATION="1000061"/>
+			<ITEM NAME="attk_loop_L" ANIMATION="1000062"/>
+			<ITEM NAME="attk_shot_L" ANIMATION="1000063"/>
+			<ITEM NAME="attk_start_R" ANIMATION="1000071"/>
+			<ITEM NAME="attk_loop_R" ANIMATION="1000072"/>
+			<ITEM NAME="attk_shot_R" ANIMATION="1000073"/>
+			<ITEM NAME="firebreath_01" ANIMATION="1000074"/>
+			<ITEM NAME="powerbreak_start" ANIMATION="1000075"/>
+			<ITEM NAME="powerbreak_loop" ANIMATION="1000078"/>
+			<ITEM NAME="powerbreak_shot" ANIMATION="1000079"/>
+			<ITEM NAME="fireturn_Left" ANIMATION="1000076"/>
+			<ITEM NAME="fireturn_Right" ANIMATION="1000077"/>
+			<ITEM NAME="opening_01" ANIMATION="1000081"/>
+			<!--
+			<ITEM NAME="idle_01" ANIMATION="1000000" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_idle_01.wav" VOLUME="1.0, 1000, 1500" />
+			<ITEM NAME="attk_01_01" ANIMATION="1000062" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_01.wav" VOLUME="1.0, 1000, 1500" />
+			<ITEM NAME="attk_01_02" ANIMATION="1000072" />
+
+			<ITEM NAME="attk_02_01" ANIMATION="1000063" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_01.wav" VOLUME="1.0, 1000, 1500" />
+			<ITEM NAME="attk_02_02" ANIMATION="1000073" />
+
+			<ITEM NAME="attk_03_01" ANIMATION="1000061" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_03-1.wav" VOLUME="1.0, 1000, 1500" />
+			<ITEM NAME="attk_03_02" ANIMATION="1000071" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_attk_03-2.wav" VOLUME="1.0, 1000, 1500" />
+
+
+			<ITEM NAME="die" ANIMATION="1000020" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_die_01.wav" VOLUME="1.0, 1000, 1500" />
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000011" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_dmg_01.wav" VOLUME="1.0, 1000, 1500" />
+			
+			<ITEM NAME="openning" ANIMATION="1000081" SOUND="../Data/2_Mon/M_Sound/b_dragonsapphire_opening_01.wav" VOLUME="1.0, 1000, 1500" />
+
+			<ITEM NAME="turn_breace" ANIMATION="1000074" />			
+			<ITEM NAME="turn_l" ANIMATION="1000076" />
+			<ITEM NAME="turn_r" ANIMATION="1000077" />
+			
+			<ITEM NAME="break_01" ANIMATION="1000075" />
+			-->
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

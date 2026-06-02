@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>410</ID> <!--T.T.10041001 NewOrigin오픈(2) - 'ORIGIN' 모으기 -->
+
+
+<!-- 작성자 : 박인걸-->
+<!--[완료조건]	알파벳 'O','R','I','G','I','N' 1개씩 모으기-->
+<!--[완료NPC]	바람항구 - 가토-->
+<!--[내용]	NewOrigin 버전이 오픈되었다. 이럴때면 빠질 수 없는 가토가 이벤트를 준비했다. 플레이중 얻을 수 있는 알파벳 'O','R','I','G','I','N' 를 1개씩 모아오면 선물을 지급해 준다고 한다.
+'O','N'은  몬스터사냥을 통해 얻을 수 있고, 'R','G'는 킬카운트 박스, 'I'는 생산채집시 얻을 수 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">4068400B-E467-4f1a-8DD1-045B407F1F4C</CLIENT> <!--시작NPC 바람항구 - 가토 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4068400B-E467-4f1a-8DD1-045B407F1F4C</PAYER> <!--완료NPC 바람항구 - 가토 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">4068400B-E467-4f1a-8DD1-045B407F1F4C</AGENT> <!--진행NPC 11 바람항구 - 가토 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">398003260</ITEM> 
+ <!--Item_NO=398003260/뉴 오리진 O,-->
+		<ITEM OBJECTNO="2" TYPE="CHANGE_COUNT" VALUE="1">398003270</ITEM> 
+ <!--Item_NO=398003270/뉴 오리진 R,-->
+		<ITEM OBJECTNO="3" TYPE="CHANGE_COUNT" VALUE="2">398003280</ITEM> 
+ <!--Item_NO=398003280/뉴 오리진 I,-->
+		<ITEM OBJECTNO="4" TYPE="CHANGE_COUNT" VALUE="1">398003290</ITEM> 
+ <!--Item_NO=398003290/뉴 오리진 G,-->
+		<ITEM OBJECTNO="5" TYPE="CHANGE_COUNT" VALUE="1">398003230</ITEM> 
+ <!--Item_NO=398003230/뉴 오리진 N,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10041011"/> <!--New Origin 'O'-->
+		<OBJECT2 COUNT="1" TEXT="10041012"/> <!--New Origin 'R'-->
+		<OBJECT3 COUNT="2" TEXT="10041013"/> <!--New Origin 'I'-->
+		<OBJECT4 COUNT="1" TEXT="10041014"/> <!--New Origin 'G'-->
+		<OBJECT5 COUNT="1" TEXT="10041015"/> <!--New Origin 'N'-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">231021320</ITEM><!--전체지급/전체/1)/231021320 드래곤 발자국 도장-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10041021" FACE="gatto_normal"/> <!--야호!!
+드디어 NewOrigin 이 오픈되었다옹.%%
+이럴때 내가 빠질 수 없지. New Origin 오픈을 기념하기 위해 몇 가지 이벤트를 준비했다옹. 자 한번 해볼테냐옹?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10041026" FACE="gatto_normal"/> <!--오호!!
+대단하다옹. 선물은 여기있다. 잘 받아다옹. 이게 어디다 쓰는건지 궁금 할거다옹.%%카즈라 마을의 나뭇잎과 드래곤 발바닥 도장이 있으면 '드래곤이카 NewOrigin'을 얻을 수 있다옹.%%
+그리고 남은 알파벳 아이템을 다시 내게 가져 오면 다른 선물을 줄것이다옹.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10041023" FACE="gatto_normal"/> <!--게임 플레이를 하다보면 내가 숨겨놓은 알파벳 아이템이 등장 할 것이다옹!
+'O','R','I','G','I','N' 6개가 필요하다옹.!%%
+'O','N'는 몬스터사냥할때 얻을 수 있다옹. 어떤 몬스터라도 상관없다옹.%%
+'R','G'는 필드에서 킬카운트박스를 얻었을때 들어 있다옹.%%
+'I'는 채집농장에서 생산채집을 하면 얻을 수 있다옹. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10041024" FACE="gatto_normal"/> <!--안하는 사람이 손해다옹. 난 손해볼게 없다옹!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10041025" FACE="gatto_normal"/> <!--내가 주는 선물을 받는게 쉽지 않을 것이다옹!!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10041002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,15 @@
+<ACTION ID="a_Wild Rage" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_skill_Bup_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       HIT_SOUND_ID="WildRage"
+       FIND_TARGET_TYPE="SPHERE"
+       FIRE_CASTER_EFFECT_ID="ef_skill_wildrage_01_char_root"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_area_circle_B_001"
+       CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+       DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+       CASTING_EFFECT_SIZE_TO_SKILLRANGE="TRUE"
+       NO_DEFAULT_HIT_EFFECT ="TRUE"
+       />
+</ACTION>

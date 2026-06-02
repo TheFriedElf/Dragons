@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4269</ID> <!--T.T.10426901 정령카드 소켓 뚫기 (2) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	소켓이 장착된 헬멧 전달-->
+<!--[완료NPC]	상인의 마을 - 노엘-->
+<!--[내용]	대장장이 앤더스는 노엘 박사의 부탁으로, 정령속성 카드를 장착할 수 있게 실험용 헬멧에 소켓을 뚫는 일을 맡았다고 한다. 앤더스는 상인의 마을에 있는 노엘 박사에게 소켓이 장착된 헬멧을 전해달라고 부탁한다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">BC479D13-63EB-4306-A15C-2BF234C81218</CLIENT> <!--시작NPC 상인의 마을 - 앤더스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</PAYER> <!--완료NPC 상인의 마을 - 노엘 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">BC479D13-63EB-4306-A15C-2BF234C81218</AGENT> <!--진행NPC 11 상인의 마을 - 앤더스 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">8F9A8B91-2297-41fb-969A-2FFCB22A56ED</AGENT> <!--진행NPC 12 상인의 마을 - 노엘 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="301/160426900/1">10011</NPC> 
+ <!--Item_NO=160426900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="501/160426900/1/511">10011</NPC> 
+ <!--Item_NO=160426900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="GIVEITEM" VALUE="511/160426900/1">10012</NPC> 
+ <!--Item_NO=160426900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CHECKITEM" VALUE="601/160426900/1/512">10012</NPC> 
+ <!--Item_NO=160426900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="REMOVEITEM" VALUE="512/160426900/1">10012</NPC> 
+ <!--Item_NO=160426900/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10426911"/> <!--소켓이 장착된 헬멧 전달-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10426921" FACE="Darby_normal"/> <!--박사님이 일전에 맡기신 실험용 헬멧에 소켓 부품이 들어갈
+공간을 확보하는 작업을 해두었어. 이곳에 자네가 준 부품을
+넣어보도록 하겠네. 잠시 기다려 줄 수 있겠나?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10426926" FACE="noel_smile"/> <!--드디어… 내 연구가 결실을 맺게 되었군.
+이로써 가디언 연구를 위한 커다란 한발을 내딛게 되었네.%%
+자네 덕분이야. 자네도 이제 정령석 소켓카드 시스템을
+경험했으니, 자네가 아끼는 장비를 개조해보길 바라겠네.
+연구에 협조해주었으니 충분한 보수를 지급하도록 하겠네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10426923" FACE="Darby_normal"/> <!--… …%%
+자, 조심스럽게… 부품을 넣어보겠네.%%
+흠...유격도 정확하게 맞아 떨어지는군.%%
+자, 이제 됐어!
+이제 카드를 넣을 수 있는 장비가 완성되었네.%%
+노파심에 이야기 하지만, 자네도 언젠가 소켓을 뚫으러
+내게 오게 되겠지? 정령속성 카드를 소켓에 장착할 때에는
+전략적 확신을 가지고 소켓카드를 장착해야 한다네.%%
+소켓카드는 한 번 장착한 뒤에 제거를 하게 되면
+모든 능력을 잃게 되네. 쓰레기가 되는 거지.
+물론 장비는 다른 카드를 꼽을 수 있지만, 쓸 데 없이
+카드를 낭비하지 않도록 주의하길 바라네.%%
+자, 그럼 이 소켓이 장착된 헬멧을 박사님께 전달해주길
+바라네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10426924" FACE="Darby_normal"/> <!--난 지금 눈코 뜰 새 없이 바빠서 박사님께 가기 곤란하다고…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10426925" FACE="Darby_normal"/> <!--노엘 박사님께 소켓이 장착된 헬멧을 전달해주게.  -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10426902" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		<DIALOG ID="511" > <!--진행중-->
+			<BODY TEXT="10426951" /> <!--어서 노엘 박사님께 헬멧을 전달해 주게-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="512" > <!--진행중-->
+			<BODY TEXT="10426952" /> <!--아직 준비 되지 않은 겐가?-->
+			<SELECT ID="0"  TEXT=""></SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

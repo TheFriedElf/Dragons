@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Golem_Argus" DIE_PARTICLE_ID="ef_Golem_die_01_char_root" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Golem_Argus"/>
+		<KFMPATH SCALE="1.2">../Data/2_Mon/M_Golem_Argus/M_Golem_Argus.kfm</KFMPATH>
+		<SUB_KFMPATH SCALE="1.2">../Data/2_Mon/M_Golem_Argus/M_Golem_Argus_Die.kfm</SUB_KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ATTACH TYPE="effect" SLOT="512522" EFFECT="ef_Golem_idle_02_char_root" TO="char_root"/>
+		<ATTACH TYPE="effect" SLOT="512523" EFFECT="ef_Golem_idle_03_p_hit_point_01" TO="p_hit_point_01"/>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="40"/>
+			<SPHERE TO="p_hit_point_02" SIZE="30"/>
+		</ABV>
+		<SLOT>
+			<!-- Basic Movement -->
+			<!--기본 공격1-->
+			<!--mon_melee_01-->
+			<ITEM NAME="btlidle_01" ANIMATION="1000065"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000066"/>
+			<!--mon_melee_02-->
+			<ITEM NAME="attk_02_01" ANIMATION="1000068"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000067"/>
+			<!-- 휠윈드, 휠윈드 이동 공용 사용-->
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000205"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000206" FIRE_EFFECT="ef_Golem_skill_01_char_root"/>
+			<ITEM NAME="whirlwind_01_finish" ANIMATION="1000207"/>
+			<!-- 점프 하며 보석 떨구기-->
+			<ITEM NAME="massive_projectile_02_btlidle" ANIMATION="1000208"/>
+			<ITEM NAME="massive_projectile_02_fire" ANIMATION="1000209" PROJECTILE_ID="PROJECTILE_Golem_shot_03" RANDOM_SCALE="0.4" PROJECTILE_COUNT="30" QUAKE_TIME="1.5" QUAKE_FACTOR="2.2" FIRE_TERM="0.2"/>
+			<!-- 자코 소환 -->
+			<ITEM NAME="attk_03_01" ANIMATION="1000210"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000211"/>
+			<!--아이들 부르기-->
+			<ITEM NAME="attk_08_01" ANIMATION="1000210"/>
+			<ITEM NAME="attk_08_02" ANIMATION="1000211"/>
+			<!-- 죽는 모션 -->
+			<ITEM NAME="BlowUp_Start" ANIMATION="1000011"/>
+			<ITEM NAME="BlowUp_Start_To_Loop" ANIMATION="1000015"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="1.5" QUAKE_FACTOR="0.6"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020" REMAIN_BODY="true" QUAKE_TIME="3" QUAKE_FACTOR="0.6"/>
+			<ITEM NAME="idle_01" ANIMATION="1000000"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="StandUp" ANIMATION="1000026"/>
+			<!-- 다이-->
+			<ITEM NAME="Die_dmg_01" ANIMATION="1000041" RANDOM="100"/>
+			<ITEM NAME="Die_dmg_blending_01" ANIMATION="1000042" RANDOM="100"/>
+			<ITEM NAME="Die_BlowUp_Start" ANIMATION="1000041"/>
+			<ITEM NAME="Die_BlowUp_Start_To_Loop" ANIMATION="1000042"/>
+			<ITEM NAME="Die_BlowUp_Loop" ANIMATION="1000043"/>
+			<ITEM NAME="Die_BlowUp_Down" ANIMATION="1000044"/>
+							<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000000"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000000"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000000" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000000"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

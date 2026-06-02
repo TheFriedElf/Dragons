@@ -1,0 +1,16 @@
+<ACTION ID="a_Spear Jab" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE">
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Onehand_skill_Spear_Jab_01"/>
+  <FSM SCRIPT="Act_Melee_Default" 
+       MULTI_HIT_NUM="5"
+       FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+       FIRE_CASTER_EFFECT_ID="Onehand_skill_Spear_Jab_01_char_root"   
+	   DETACH_FIRE_EFFECT_AT_FINISH="TRUE"
+	   FIRE_CASTER_EFFECT_ID_DEFAULT_DETACH="TRUE"
+       WEAPON_XML="Item/Common/12_Weapon/09_special/SpearJab.xml"
+       NO_WEAPON_TRAIL="TRUE"
+       NO_DAMAGE_HOLD="TRUE"
+       MULTI_HIT_RANDOM_OFFSET="15"
+       HIT_TARGET_EFFECT_RANDOM_OFFSET="7"
+       />
+</ACTION>

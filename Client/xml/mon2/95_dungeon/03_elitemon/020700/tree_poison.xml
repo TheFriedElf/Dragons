@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Tree_Poison" INIT_ACTION="a_opening" DIE_PARTICLE_ID="ef_monster_die_02_G" DIE_PARTICLE_NODE="p_ef_heart">
+	<WORLDOBJECT>
+		<ICON ID="icon_m_Tree_Poison"/>
+		<KFMPATH SCALE="1.5">../Data/2_Mon2/95_Dungeon/03_EliteMon/020700/Tree_Poison/Tree_Poison.kfm</KFMPATH>
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="40"/>
+			<SPHERE TO="p_hit_point_02" SIZE="40"/>
+		</ABV>
+		<SLOT>
+			
+			
+			<!-- 기본치기 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206" QUAKE_TIME="0.5" QUAKE_FACTOR="0.7"/>
+
+			
+			<!-- 독버프자신에게 -->
+		
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000301"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000302"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000303" QUAKE_TIME="0.5" QUAKE_FACTOR="0.7"/>
+
+
+			<!-- 버섯소환 -->
+			<ITEM NAME="attk_03_01_start" ANIMATION="1000304"/>
+			<ITEM NAME="attk_03_01" ANIMATION="1000305"/>
+			<ITEM NAME="attk_03_02" ANIMATION="1000306"/>
+	
+
+			<!-- 자폭 -->
+			<ITEM NAME="dieskill_btlidle_01_start" ANIMATION="1000405" />
+			<ITEM NAME="dieskill_btlidle_01" ANIMATION="1000406" DIEBLINK="se_damage_blink_green"/>
+			<ITEM NAME="dieskill_attk_01" ANIMATION="1000407"/>
+	
+
+
+			<!-- 거대소환체 드롭프로젝트 -->
+			<ITEM NAME="drop_projectile_btlidle_start" ANIMATION="1000370"/>
+			<ITEM NAME="drop_projectile_btlidle" ANIMATION="1000371" RANGE_EFFECT="efx_tree_poison_ground"/>
+			<ITEM NAME="drop_projectile_fire" ANIMATION="1000372" PROJECTILE_ID="Projectile_tree_poison_drop" EFFECT_TO_GROUND="efx_landdmg_poison_destruction_01" QUAKE_TIME="0.6" QUAKE_FACTOR="6.2" PROJECTILE_SPEED="100" SOUND_ID="nekota-shot01"/>
+		
+
+	       	<!--가로 크로스 -->
+
+			
+			<ITEM NAME="crossattack_01_start" ANIMATION="1000395" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_01_idle" ANIMATION="1000396"/>
+			<ITEM NAME="crossattack_01_fire" ANIMATION="1000397" FIRE_EFFECT="efx_tree_poison_crossattack_01_fire" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+			
+			
+	        	<!--가로 크로스 -->
+
+			
+			<ITEM NAME="crossattack_02_start" ANIMATION="1000395" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_02_idle" ANIMATION="1000396"/>
+			<ITEM NAME="crossattack_02_fire" ANIMATION="1000397" FIRE_EFFECT="efx_tree_poison_crossattack_01_fire" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+			
+
+		
+
+
+			<!-- 기본 정보 -->
+			<ITEM NAME="Opening" ANIMATION="1000081" QUAKE_TIME="1.5" QUAKE_FACTOR="0.8"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+	
+		
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<!-- 다이-->
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+		
+	
+				<!-- 정예패턴-->
+			<ITEM NAME="normal_01" ANIMATION="1000005"/>
+			<ITEM NAME="normal_01_02" ANIMATION="1000900" HIT_SOUND_ID="pattern-recovery"/>
+
+			<ITEM NAME="break_01" ANIMATION="1000005"/>
+			<ITEM NAME="break_01_02" ANIMATION="1000005" HIT_SOUND_ID="pattern-brake"/>
+			
+			<ITEM NAME="fury_01" ANIMATION="1000005"/>
+			<ITEM NAME="fury_01_02" ANIMATION="1000900" QUAKE_TIME="1" QUAKE_FACTOR="0.5" HIT_SOUND_ID="pattern-anger"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

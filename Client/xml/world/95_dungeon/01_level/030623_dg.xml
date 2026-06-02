@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_030623_DG">
+  <GSAPATH>../Data/3_World/95_Dungeon/01_Level/030600/030623_DG.gsa</GSAPATH>
+  <BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.4" HIGHLIGHT="0" />
+	
+	
+	
+	<!-- 눈발사트랩 -->
+    <TRIGGER ID="Ice_Trap_1004_01 01">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+    <TRIGGER ID="Ice_Trap_1004_01 02">
+    <CONDITION TYPE="touch" />
+    <ACTION SCRIPT="DoTrap" />
+    </TRIGGER>
+
+	<!--// 포털 -->	
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+	<CONDITION TYPE="action" ACTION="a_act"/>
+	<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+ <!--카메라-->
+	<CAMERA_ADJUST ZOOM="-30" UP="200" TARGET_Z="-45" />
+
+</WORLD>

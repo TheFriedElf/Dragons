@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+<!-- 퀘스트가 있을 시에 연출 발생  -->
+<CMD TYPE="IngQuestDoEvent" SpecialActor="ME" QUEST="29" Event ="800290"/>
+
+<!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+
+<!-- 화면을 와이드 화면으로 출력하고 1초간 멈춘다 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="setmoviescene" enable="TRUE" Time="1"/>
+	<CMD type="waittime" time="1"/>
+	
+<!-- 미션 클리어 UI출력  -->
+	<CMD type="CallUI" UIWndName = "FRM_MISSION_END"/>
+	<CMD type="waittime" time="2"/>
+
+
+<!-- 페이드아웃 -->
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/>
+	<CMD type="waittime" time="1"/>
+    
+
+<!-- 카메라를 일반 모드로 변경 (게임 플레이 모드) -->
+	<CMD TYPE="setmoviescene" enable="false" Time="1" />
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="WaitCamera"/>
+
+<!-- 플레이어 이동 가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+
+<!-- 밖으로 나가기 -->
+	<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_END"/>
+	
+</EVENT_SCRIPT>

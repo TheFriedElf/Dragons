@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_050104_FD">
+	<GSAPATH>../Data/3_World/01_Felloruss/01_Level/050104_FD.gsa</GSAPATH>
+	<MINIMAP Y="100" H="300">../Data/3_World/01_Felloruss/01_Level/050104_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+
+	<!-- 포털 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal_Next_Stage" PARAM="1"/>
+	</TRIGGER>
+
+	<!-- 텔레점프 -->
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="400" />
+	</TRIGGER>
+	<TRIGGER ID="telejump_target_02" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_02" PARAM="400" />
+	</TRIGGER>  
+
+	<!-- 텔 레 포 트 데미지 이동 -->
+	<TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act" />
+		<ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+	</TRIGGER>
+
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="12712" END="12712" COLOR="0.7490196,0.8705882,1"/>
+</WORLD>

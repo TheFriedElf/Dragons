@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4173</ID> <!--T.T.10417301 빛의 시험 (1) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	페리 에리얼 퇴치-->
+<!--[완료NPC]	아키아 동굴(페리 에리얼 근처) - 야나이-->
+<!--[내용]	죽은 줄 알았던 야나이가 아키아 동굴에 나타났다. 신보의 오염과 관계가 있을 지도 모른다. 야나이는 과거 아카나이를 잡으러 갈 때 우연히 만났던 것과 같이 아카나이를 잡으러 간다며 %name%에게 자신을 따라 오라고 말한다. 페리 에리얼 근방에 있는 야나이 사제를 찾아가자. 야나이를 만나기 위해선 페리 에리얼을 퇴치해야 할 것이다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">E6EF9F6D-E5F0-4bbc-B053-081A91B8B9CE</CLIENT> <!--시작NPC 아키아 동굴 - 야나이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">4C2D9561-3763-4cf6-BA9D-73F5EC0743F7</PAYER> <!--완료NPC 아키아 동굴(페리 에리얼 근처) - 야나이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">E6EF9F6D-E5F0-4bbc-B053-081A91B8B9CE</AGENT> <!--진행NPC 11 아키아 동굴 - 야나이 -->
+		<AGENT TYPE="NPC" EVENTNO="10012">4C2D9561-3763-4cf6-BA9D-73F5EC0743F7</AGENT> <!--진행NPC 12 아키아 동굴(페리 에리얼 근처) - 야나이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100" VALUE="1">3530600</MONSTER> 
+ <!--MON_NO=3530600/페리 에리얼,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10417311"/> <!--페리 에리얼 퇴치-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10417321" FACE="Yanai_normal"/> <!--이봐, 너도 신보가 오염되었다는 말을 듣고 
+이곳으로 온거니?
+(이게 도대체 어떻게 된 일이지? 야나이가 어떻게!?)
+난 지금 아카나이를 찾고 있단다.
+날 도와주지 않겠어?
+(이, 이건 처음 만난 날과 똑같은 상황인데...)
+다른 신관 전사들도 모두 아카나이를 막으러 갔어.
+우리도 서둘러 가자꾸나.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10417326" FACE="Yanai_smile"/> <!--좋아… 실력이 제법 쓸만하구나. 
+하지만 네가 페리 에리얼과 싸울 때 보니
+아직 공격에 미흡한 점이 보이더구나.%%
+모든 일에는 허와 실이라는 요소가 존재해.
+공격에도 실초와 허초를 적절히 배합해야 유용한 공격을 해낼 수 있어
+(역시 야나이님은 루님과 달리 상냥하구나...)-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10417323" FACE="Yanai_normal"/> <!--아카나이가 있는 곳을 가려면 아키아 동굴의
+가장 깊숙한 곳으로 가야해.%%
+이곳에 적이 많으니, 잠시 흩어졌다가
+페리에리얼이 있는 곳에서 만나자꾸나.%%
+그럼 건투를 빈다.
+(이… 이게 퀘차님이 말한 헛것인가? 어떻게 해야할 지 모르겠어.)-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10417324" FACE="Yanai_angry"/> <!--너 이외에는 근방에 지원해 줄 전사가 없구나. 어서 따라오렴.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10417325" FACE="Yanai_angry"/> <!--페리 에리얼을 처리 하고 만나자고 말했잖니. 서두르렴-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10417302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

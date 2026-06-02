@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+
+	
+	
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="true"/>
+	
+    <CMD TYPE="setmoviescene" enable="false" Time="0.5"/>
+	<CMD TYPE="HideUI" enable="false"/><!--UI보이기 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/> <!--키입력 막는거 푼다-->
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/><!--이동 막는거 푼다-->
+
+   
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="WaitTime" Time="0.5"/><!--  시간을 기다림-->
+
+
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	
+    </EVENT_SCRIPT>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5164</ID> <!--T.T.10516401 자식의 마음 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	바람항구 - 제레미와 대화-->
+<!--[완료NPC]	바람항구 - 제레미-->
+<!--[내용]	씩씩한 꼬마 레오는 자신을 돌봐주시는 제레미 할아버지를 너무나 사랑하고 고마워 한다고 한다. 하지만 어린 레오는 쑥쓰러워 마음을 표현해보지 못했다고 한다. 레오가 쑥쓰러워 차마 전하지 못한 말을 제레미 할아버지에게 전해주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</PAYER> <!--완료NPC 바람항구 - 제레미 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">5E44DE31-28A5-4fbf-A60F-FB2077C41B28</AGENT> <!--진행NPC 12 바람항구 - 제레미 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10516411"/> <!--제레미와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10516421" FACE="Leo_normal"/> <!--%class%님. 저는 겁쟁이에요.
+왜냐하면 저는 할아버지에게 제 마음을 한번도 얘기해 본적이 없어요.
+할아버지 건강이 점점 안 좋아지고 있어요.%%
+하루 빨리 제 마음을 표현하고 싶어요.
+부끄러워서 표현도 못하고, 정말 바보 같죠? -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10516426" FACE="Jeremy_smile"/> <!--레오가 말인가? 나를 사랑한다고 했다고?허허
+눈물이 자꾸 나는군. 눈에 먼지가 들어간 모양일세.
+허허 고맙네 젊은이. 이제 난 죽어도 여한이 없네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10516423" FACE="Leo_normal"/> <!--부탁 이예요. 할아버지에게 제가 사랑한다고 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10516424" FACE="Leo_normal"/> <!--역시 안되겠죠? 그런 말은 남이 대신 해주는 게 아닌가요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10516425" FACE="Leo_normal"/> <!--부탁 이예요. 할아버지에게 전해주세요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10516402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

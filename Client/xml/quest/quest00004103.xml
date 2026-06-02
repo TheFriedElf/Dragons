@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4103</ID> <!--T.T.10410301 파멸의 중장 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	나이트스케일로 부터 악의의 비늘 습득-->
+<!--[완료NPC]	상인의 마을 - 파블로-->
+<!--[내용]	파리스는 흑마술로 나이트스케일이라는 악마를 만들었다고 한다. 앵무조개 선착장에서 나이트스케일을 퇴치한 후, 악의의 비늘을 습득하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">30B65084-661B-41bc-AB4B-D5CC8A113ADE</CLIENT> <!--시작NPC 상인의 마을 - 파블로 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">30B65084-661B-41bc-AB4B-D5CC8A113ADE</PAYER> <!--완료NPC 상인의 마을 - 파블로 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">30B65084-661B-41bc-AB4B-D5CC8A113ADE</AGENT> <!--진행NPC 11 상인의 마을 - 파블로 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010140/10000/0/1/1/160410300">3550300</MONSTER> 
+ <!--MON_NO=3550300/나이트 스케일,MAP_NO=9010140/앵무조개 선착장,Item_NO=160410300/[Q.ID:04103] 악의의 비늘,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160410300</ITEM> 
+ <!--Item_NO=160410300/[Q.ID:04103] 악의의 비늘,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10410311"/> <!--악령의 비늘(나이트스케일)-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10410321" FACE="pablo_normal"/> <!--바람항구는 우리 보급지역 중 가장 커다란 규모를 가진 본진 아닌가...
+바로 스티븐 2세가 계신 왕국의 수도란 말이네.%%
+그러나 얼마 전부터 바람항구 인근에는 강력한 마성을 가진 몬스터가 
+출몰한다는 소문이 들리고 있네.%%
+부디 나이트스케일이 아니길 바라지만 바람항구에서 띄운 보급선들이 
+난파되는 것을 보니, 그 사악한 몬스터가 제일 먼저 떠오른다네.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10410326" FACE="pablo_smile"/> <!--많은 용사들이 도전했지만, 결국 
+이 저주 받은 물건을 가져온 것은 자네 뿐이라네.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10410323" FACE="pablo_smile"/> <!--앵무조개 선착장에서 악마의 비늘로 만들어진 나이트스케일을 처단해주게나.%% 
+악의의 비늘을 찾아오면, 자네가 이곳 상인의 마을에서 활약할 수 있는 
+제대로 된 실력을 가진 전사인 것이 증명될 것이네.%% 
+부디 몸조심하게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10410324" FACE="pablo_angly"/> <!--겁 먹는 것도 무리는 아니지…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10410325" FACE="pablo_normal"/> <!--앵무조개 선착장을 조사하면, 나이트스케일의 은신처를 찾을 수 있을 것이네.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10410302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

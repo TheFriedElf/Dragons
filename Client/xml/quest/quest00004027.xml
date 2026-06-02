@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4027</ID> <!--T.T.10402701 바티의 불신 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	수염고래 해안가의 마이트리와 대화-->
+<!--[완료NPC]	수염고래 해안가 - 마이트리-->
+<!--[내용]	아직도 신뢰를 못하는 바티가 임무를 주었다. 그 임무는 수염고래 해안가에 나가 있는 마이트리를 만나 대화해 보면 알수 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">42530F97-3737-47d0-9A00-C0AC94AB5A43</CLIENT> <!--시작NPC 바람항구 - 바티 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">13D42615-B039-43f4-B6EB-28918778D237</PAYER> <!--완료NPC 수염고래 해안가 - 마이트리 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">42530F97-3737-47d0-9A00-C0AC94AB5A43</AGENT> <!--진행NPC 11 바람항구 - 바티 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">13D42615-B039-43f4-B6EB-28918778D237</AGENT> <!--진행NPC 12 수염고래 해안가 - 마이트리 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10402711"/> <!--마이트리와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10402721" FACE="Valti_normal"/> <!--아직 나는 그대를 믿지 못하겠어.
+신보 탈환의 임무를 맡은 우리들에게 필요한 인재인지 의문이 든다.%%
+어쨌거나 무카파님의 이야기도 있고하니.
+몇가지 임무를 내리도록 하겠어. 충실히 수행하도록! -->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10402726" FACE="Maitri_smile"/> <!--반가워요!
+지원 요청으로 당신이 올 거라곤 생각 못했어요.%%
+요즘 바티 때문에 고생이 많죠?%%
+%name%님은 우연히 야나이의 일에 휘말리게 되었을 뿐이지만...
+바티는 크게 오해하고 있는 것 같아요.%%
+알에서 태어난 이후로 유일하게 좋아했던 사람이 야나이였으니, 
+바티도 가여운 사람이죠. 이해하길 바래요.%%
+신보를 지키기 위해 일생을 바치는 것이 우리 사제들의 운명이니까
+바티도 언젠가는 당신의 진심을 알아주리라 생각합니다.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10402723" FACE="Valti_normal"/> <!--지금까지도 수염고래 해안가에는 
+우리 용족의 전사들이 속속들이 도착하고 있지.%%
+하지만 그 근처의 해적들에게 습격을 당해 
+부상 당한 전사들이 속출하고 있는 상황이야.%%
+그러니 그대가 빨리 수염고래 해안가로 가서 일을 처리해줘.
+이후의 상황은 마이트리 사제에게 전달받도록! -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10402724" FACE="Valti_smile"/> <!--후후… 역시 생각했던 대로군-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10402725" FACE="Valti_angry"/> <!--이 정도로는 내 인정을 받을 수 없어.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="502" > <!--none-->
+			<BODY TEXT="10402711" FACE="Maitri_normal"/> <!---->
+			<SELECT ID=""  TEXT=""></SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10402702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

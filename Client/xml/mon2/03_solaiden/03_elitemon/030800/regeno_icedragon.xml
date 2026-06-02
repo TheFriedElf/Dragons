@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Regeno_IceDragon" INIT_ACTION="a_opening">
+	<TEXTURE SRC="reflection_metal.dds">../Data/2_Mon/N_Bumblow/reflection_metal.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="icon_Regeno_IceDragon"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/03_Solaiden/03_EliteMon/030800/Regeno_IceDragon/Regeno_IceDragon.kfm
+</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="80"/>
+			<SPHERE TO="p_hit_point_02" SIZE="65"/>
+			<SPHERE TO="p_hit_point_03" SIZE="62,15"/>
+			<BOX TO="p_hit_point_04" SIZE="20,110,30"/>
+			<BOX TO="p_hit_point_05" SIZE="20,80,30"/>
+			<!--SPHERE TO="p_hit_point_01" SIZE="10"/-->
+		</ABV>
+		<SLOT>
+			<!-- 터치버프 -->
+			<ITEM NAME="attk_07_01_start" ANIMATION="1000005"/>
+			<ITEM NAME="attk_07_01" ANIMATION="1000005"/>
+			<ITEM NAME="attk_07_02" ANIMATION="1000359"/>
+			<!-- 근접 꼬리좌우 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+			<!-- 물기 -->
+			<ITEM NAME="attk_04_01_start" ANIMATION="1000210"/>
+			<ITEM NAME="attk_04_01" ANIMATION="1000211"/>
+			<ITEM NAME="attk_04_02" ANIMATION="1000212"/>
+			<!-- 어스퀘이크-->
+			<ITEM NAME="earthquake_battleidle_start" ANIMATION="1000213"/>
+			<ITEM NAME="earthquake_battleidle" ANIMATION="1000214"/>
+			<ITEM NAME="earthquake_fire" ANIMATION="1000215" FIRE_EFFECT_FRONT="220" FIRE_EFFECT="EF_Common_Mon_Torus_IcePick_00_char_root_02" RANDOM_SCALE="1.0"/>
+			<!-- 아이스스피어 -->
+			<ITEM NAME="attk_05_01_start" ANIMATION="1000301"/>
+			<ITEM NAME="attk_05_01" ANIMATION="1000302"/>
+			<ITEM NAME="attk_05_02" ANIMATION="1000303" FIRE_EFFECT_FRONT="0" FIRE_EFFECT="EF_Common_Mon_Torus_IcePick_05_char_root_big" EFFECT_SCALE="5.5" QUAKE_TIME="1" QUAKE_FACTOR="3" HIT_SOUND_ID="Aram_Skill02"/>
+			<!-- 소환 -->
+			<ITEM NAME="attk_06_01_start" ANIMATION="1000304"/>
+			<ITEM NAME="attk_06_01" ANIMATION="1000305"/>
+			<ITEM NAME="attk_06_02" ANIMATION="1000306"/>
+			<!--4방발사-->
+			<ITEM NAME="btlidle_02_skill_shot_start" ANIMATION="1000310"/>
+			<ITEM NAME="btlidle_02_skill_shot" ANIMATION="1000311"/>
+			<ITEM NAME="skill_shot_02" ANIMATION="1000312" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_Icewall" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="btlidle_02_skill_shot_middle" ANIMATION="1000313" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_Icewall" PROJECTILE_TYPE="BOOMERANG"/>
+			<ITEM NAME="shot_return_02" ANIMATION="1000314"/>
+			<!-- 브레스 -->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000345"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1000346"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1000347" FIRE_START_NODE="p_ef_mouth" SHOT_INTER_TIME="0.3" GROUND_EFFECT=""/>
+			<!-- 마법진 생기고 소환한발-->
+			<ITEM NAME="btlidle_03_skill_shot_start" ANIMATION="1000353" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="btlidle_03_skill_shot" ANIMATION="1000354" RANGE_EFFECT="ef_Aram_skill_01_05_char_root"/>
+			<ITEM NAME="skill_shot_03" ANIMATION="1000355" FIRE_START_NODE="p_ef_mouth" PROJECTILE_ID="Projectile_IceBall_shot_02" PROJECTILE_SCALE="1.0"/>
+			<ITEM NAME="shot_return_03" ANIMATION="1000356"/>
+			<!--점프어택(뼈소환) -->
+			<ITEM NAME="summonbone_battleidle_start" ANIMATION="1000357"/>
+			<ITEM NAME="summonbone_battleidle" ANIMATION="1000358" USE_EVENT_KEY="0"/>
+			<ITEM NAME="summonbone_fire" ANIMATION="1000359" FIRE_EFFECT="EF_Common_Mon_IcePick_regno" USE_EVENT_KEY="1" QUAKE_TIME="0.5" QUAKE_FACTOR="2"/>
+			<!-- dBasic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020" DIE_ALPHA="1"/>
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="Opening" ANIMATION="1000082" QUAKE_TIME="1.5" QUAKE_FACTOR="2" CAMERA_ZOOM_OUT="1000" CAMERA_ZOOM_IN="500" CAMERA_ZOOM_IN_SPEED="0"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

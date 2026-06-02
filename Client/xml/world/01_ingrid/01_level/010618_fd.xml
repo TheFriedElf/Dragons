@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_010618_FD" DESCRIPTION="90106000">
+	<GSAPATH>../Data/3_World/01_Ingrid/01_Level/010618_FD.gsa</GSAPATH>
+	<MINIMAP Y="160" H="260">../Data/3_World/01_Ingrid/01_Level/010618_MM.dds</MINIMAP>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_01.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_02.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_03.mp3</BGSOUND>
+	<BGSOUND VOLUME="1.0">../BGM/Mission_04.mp3</BGSOUND>
+	<BLOOM BLUR="0.85" BRIGHT="20.4" SRC="0.7" GLOW="0.35" HIGHLIGHT="0.02"/>
+	<!--MAP TYPE설정-->
+	<!-- TYPE - 일반맵: 1, 인던맵: 2, 마을맵: 8, 마이룸: 16, PVP_KTH: 32, PVP_DM: 64, 미션맵: 128 -->
+	<MAPVALUE PLAYERKILL="0" TYPE="1"/>
+	
+	
+	<!--// 미션포탈 게이트 -->
+	<TRIGGER ID="gate_next_base" TYPE="MISSION" TITLE_TEXT_ID="800000" TITLE_TEXT_FONTNAME="Font_Name" TITLE_TEXT_ADJUST="0,0,65" TITLE_TEXT_SCALE="1" TITLE_TEXT_COLOR="1,1,1,1">
+		<CONDITION TYPE="action" ACTION="a_act"/>
+		<ACTION SCRIPT="World_Mission_Portal" PARAM="90106" MISSION_BG_FILE_NAME="../Data/6_ui/mission/ms010600_0" MISSION_DISCRIPTION_TEXT_NUM="9010600"/>
+	</TRIGGER>
+	
+	
+	  <!-- 데미지 텔레포트 이동 -->
+  <TRIGGER ID="Touch_target_01" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+  <TRIGGER ID="Touch_target_02" TYPE="TELEPORT" >
+    <CONDITION TYPE="touch" ACTION="a_act" />
+    <ACTION SCRIPT="Touch_Teleport" PARAM_STRING="Touch_zone_01" />
+  </TRIGGER>
+
+   
+	<!-- 텔 레 포 트 -->
+	<TRIGGER ID="teleport_target_01" TYPE="TELEPORT" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_01"/>
+	</TRIGGER>
+	<TRIGGER ID="teleport_target_02" TYPE="TELEPORT" HIDE_MINIMAP="1" >
+		<CONDITION TYPE="touch" ACTION="a_act"/>
+		<ACTION SCRIPT="Map_EnterDungeon" PARAM_STRING="teleport_zone_02"/>
+	</TRIGGER>
+
+<WAVE_EFFECT ENTITY_ID="BaseWater1003_01 01" STOP_EFFECT_ID="ef_walkwave_01" MOVE_EFFECT_ID="ef_walkwave_02"/>
+	
+	<FOG DENSITY="0" FUNC="Z_LINEAR" START="926" END="2086" COLOR="0,0.5019608,1"/>
+	<WORLD_QUALITY HIGH_END="1500" MID_END="3000" LOW_END="5000" USE="1"/>
+</WORLD>

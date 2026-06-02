@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+    <CMD type="WaitTime" time="6"/>
+
+	<CMD TYPE="stopBGM" SoundNo="0"/>
+	<CMD type="WaitTime" time="3"/>
+	<CMD type="CallUI" UIWndName="FRM_MISSION_END"/>
+	<CMD TYPE="PlaySound" SpecialActor="ME" SlotNumber="1" SoundID="Guild_LV_UP"/>
+	<CMD type="waittime" time="5"/>
+	<CMD TYPE="StopSound" SpecialActor="ME" SlotNumber="1"/>
+	<CMD type="waittime" time="1"/>
+
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD type="WaitTime" time="2"/>
+    <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "false"/>
+    <CMD type="WaitFade" time="1"/>
+    
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+  <CMD TYPE="MapMove" MapID ="9050200" SpawnIndex="2" />
+  <CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+  <CMD TYPE="WaitCamera"/>
+  
+  <CMD type="waittime" time="3"/>
+  
+  <CMD TYPE="Fade" FadeColor = "0,0,0" FadeTime = "2" FadeIn = "true"/>
+  <CMD type="WaitFade" time="1"/>
+  
+  <CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+
+  <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

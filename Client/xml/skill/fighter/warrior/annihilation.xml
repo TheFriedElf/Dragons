@@ -1,0 +1,8 @@
+<ACTION ID="a_Annihilation" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_shot_04"/>
+  <FSM SCRIPT="Act_Melee_Default"       
+       HIT_TARGET_EFFECT_TARGET_NODE="char_root"
+       HIT_TARGET_EFFECT_ID="ef_skill_Annihilation_02"
+       HIT_SOUND_ID="Annihilation" />    
+</ACTION>

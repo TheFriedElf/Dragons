@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<BUTTON ID = "BTN_TIMER">
+		<ATTR X = "769" Y = "61" W ="30" H ="29" IS_ABSOLUTE_Y="1"/>
+		<ATTR BTN_IMG="../Data/6_ui/main/mnTimeOver.tga" BTN_IMG_W="60" BTN_IMG_H="58"/>
+		<FORM ID = "FRM_HOURGLASS">
+			<ATTR X = "4" Y = "4" W ="23" H ="22" />
+			<ATTR IMG = "../Data/6_ui/main/mnTimeG.tga" IMG_W = "69" IMG_H = "44" U = "3" V = "2"/>
+		</FORM>
+		<!--
+		<FORM ID = "FRM_TIMER_050" IS_VISIBLE="0">
+			<ATTR X = "4" Y = "4" W ="23" H ="22" NO_OFFSCREEN="1"/>
+			<ATTR IMG = "../Data/6_ui/main/mnTimeY.tga" IMG_W = "69" IMG_H = "44" U = "3" V = "2"/>
+		</FORM>
+		<FORM ID = "FRM_TIMER_000" IS_VISIBLE="0">
+			<ATTR X = "4" Y = "4" W ="23" H ="22" NO_OFFSCREEN="1"/>
+			<ATTR IMG = "../Data/6_ui/main/mnTimeR.tga" IMG_W = "69" IMG_H = "44" U = "3" V = "2"/>
+		</FORM>
+		-->
+		<SCRIPT ID="ON_MOUSE_OVER">CallTimerToolTip(UISelf)</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+	</BUTTON>
+	<STATIC_FORM ID="SFRM_FATIGUE" ALIGN_X="50" ALIGN_Y="50" W="221" H="336" STATIC_NUM="1" PRIORITY="0">
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="221" H="36" Z="1" STATIC_NUM="4">
+			<STATIC_FORM ID = "SFRM_TAB_BG" X="8" Y="5" W="142" H="22" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1"/>
+			<IMG ID="IMG_TITLE_TAB" X="7" Y="4" Z="1" W="350" H="24" NO_FOCUS="1" T_CENTER = "1" T_X = "67" T_Y = "4">
+				<ATTR FONT="FTbt_12" FONT_COLOR_HEX="0xFF4D3413" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11" TEXT="799003" IMG="../Data/6_ui/common/cmTabLong2.tga" IMG_W="144" IMG_H="96" U="1" V="4" UV_INDEX="3"/>
+			</IMG>
+		</STATIC_FORM>
+		<FORM ID="FRM_SHADOW_BG" X="0" Y="0" W="203" H="227" Z="-1" STATIC_NUM = "3"/>
+		<STATIC_FORM ID="SFRM_BG" X="9" Y="36" W="203" H="250" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID="SFRM_SHADOW_BG" X="9" Y="36" W="203" H="250" Z="1" STATIC_NUM="3" />
+		<IMG ID="IMG_LINE1" X="10" Y="289" W="201" H="2" IMG="../Data/6_ui/pvp/pvLine.tga" IMG_W="201" IMG_H="2"/>				
+		
+		<BUTTON ID="BTN_EDIT_INFO" X="19" Y="295" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="799005" T_X="41" T_Y="5"  FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0xFF2A0F0B" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:SetEditFocus(false) CallYesNoMsgBox( GetTT(799006), GUID(), 42 )</SCRIPT>
+		</BUTTON>
+		
+		<BUTTON ID="BTN_OK" X="119" Y="295" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="50601" T_X="41" T_Y="5"  FONT="FTbt_12" T_CENTER="1" FONT_COLOR_HEX="0xFF2A0F0B" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">CloseUI("SFRM_FATIGUE")</SCRIPT>
+		</BUTTON>
+		
+		<LIST ID="LST_FATIGUE_CONTENT" X="5" Y="39" Z="1"W="230" H="227" ITEM_X="0" ITEM_Y="0">
+			<ATTR ELEMENT_ID="FRM_FATIGUE_TEXT" />
+			<IMG ID="ScrollBg" X="195" Y="20" Z="-1" W="13" H="287" IMG = "../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="287"/>
+			<BUTTON ID="ScrUp" X="191" Y="5" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>			
+			<BUTTON ID="ScrDown" X="191" Y="230" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>			
+			<BUTTON ID="ScrMiddle" X="193" Y="21" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>			
+			<ATTR WND_BAR="ScrollBg" BTN_UP="ScrUp" BTN_DOWN="ScrDown" BTN_MIDDLE="ScrMiddle"/>
+			<SCRIPT ID="ON_CALL">
+				local kSelf = UISelf
+				kSelf:ClearAllListItem()				
+				local Item = kSelf:AddNewListItemChar("")
+				if false == Item:IsNil() then
+					local ItemWnd = Item:GetWnd()
+					local TextWnd = ItemWnd:GetControl("FRM_TEXT")
+					if false == TextWnd:IsNil() then						
+						TextWnd:SetStaticText(GetTT(799004):GetStr())
+						SetUISizeForTextY(TextWnd)
+						local kSize = TextWnd:GetSize()
+						kSize:SetY(kSize:GetY()+50)
+						ItemWnd:SetSize(kSize)
+						ItemWnd:SetInvalidate()
+					end
+				end
+			</SCRIPT>
+		</LIST>
+	</STATIC_FORM>
+	<FORM ID="FRM_FATIGUE_TEXT" X="0" Y="0" W="221" H="1000" PRIORITY="0">
+		<FORM ID="FRM_TEXT" TEXT="799004" FONT = "Font_Text" T_X="15" T_Y ="15" W="221" H="5500" FONT_COLOR_HEX="0xFF4D3413"/>
+	</FORM>
+</XUI>

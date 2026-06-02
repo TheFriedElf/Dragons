@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<STATIC_FORM ID = "SFRM_EVENT_COUPON" ALIGN_X = "50" ALIGN_Y = "50" W="304" H="121" STATIC_NUM = "1">
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="7" W="286" H="69" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1">
+			<STATIC_FORM ID="SFR_SDW" X="0" Y="0" W="286" H="69" STATIC_NUM="3">
+				<ATTR TEXT="" FONT="Font_Text" T_X="143" T_Y="10" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<FORM ID="IMG_ARROW" X="9" Y="15" W="195" H="18">
+					<ATTR IMG="../Data/6_ui/common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+					<ATTR TEXT="1821" T_X="7" T_Y="-5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				</FORM>
+				<IMG ID="IMG_LINE_1" X="7" Y="32" W="272" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="272" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE_2" X="7" Y="33" W="272" H="1" IMG="../Data/6_ui/Common/cmBody.tga" IMG_W="272" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<STATIC_FORM ID = "SFRM_TEXT_BG" X="7" Y="38" W="272" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<EDIT ID = "EDT_COUPON" X="20" Y="49" W="264" H="20" EDIT_PREVIEW="" EDIT_LIMIT_LENGTH="32">
+			<ATTR EDIT_FONT="Font_Text"/>
+			<SCRIPT ID = "ON_CALL"> 
+				UISelf:SetEditText("") 
+				UISelf:SetCustomDataAsInt(0)
+				UISelf:SetEditFocus(true)
+			</SCRIPT>
+			<SCRIPT ID="ON_TICK">					
+				local cust = UISelf:GetCustomDataAsInt()					
+				if cust == 0 then
+					UISelf:SetCustomDataAsInt(1)
+					UISelf:SetEditFocus(true)						
+				end
+			</SCRIPT>
+			<HOTKEY ID="59"> SendScriptEvent("SFRM_EVENT_COUPON", "BTN_OK", "ON_L_BTN_DOWN") </HOTKEY> 
+			<HOTKEY ID="60"> SendScriptEvent("SFRM_EVENT_COUPON", "BTN_CANCEL", "ON_L_BTN_DOWN") </HOTKEY> 
+			<HOTKEY ID = "28">
+				if true == UISelf:IsEditFocus() then
+					ClearEditFocus()
+					return true
+				end
+			</HOTKEY>
+		</EDIT>
+		<BUTTON ID="BTN_OK" X="67" Y="82" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				local wndCoup = UISelf:GetParent()
+				if false==wndCoup:IsNil() then
+					local edt = wndCoup:GetControl("EDT_COUPON")
+					if false==edt:IsNil() then
+						RecvCouponWord(edt:GetEditText())
+					end
+				end
+			</SCRIPT>
+			<HOTKEY ID="59"> 
+				local wndCoup = UISelf:GetParent()
+				if false==wndCoup:IsNil() then
+					local edt = wndCoup:GetControl("EDT_COUPON")
+					if false==edt:IsNil() then
+						RecvCouponWord(edt:GetEditText())
+					end
+				end
+				return true
+			</HOTKEY>
+			
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="153" Y="82" W="84" H="26">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1"/>
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1"> UISelf:Close() return true</HOTKEY>
+	</STATIC_FORM>
+
+	<STATIC_FORM ID="SFRM_TRY_EVENT_COUPON" PRIORITY="90" ALIGN_X="50" Y="180" W="208" H="127" CAN_DRAG="1" STATIC_NUM="1">
+		<STATIC_FORM ID="SFRM_COLOR" X="9" Y="7" W="190" H="75" CAN_COLOR_CHANGE="1" STATIC_NUM="2" COLOR_TYPE="1" >
+			<STATIC_FORM ID="SFR_SDW" X="0" Y="0" W="190" H="75" STATIC_NUM="3" >
+				<ATTR TEXT="110" FONT="FTbt_12" T_X="95" T_Y="30" T_CENTER="1" FONT_COLOR_HEX = "0xFF4D3413" />
+				<SCRIPT ID = "ON_CREATE"> UI_T_Y_ToCenter(UISelf) </SCRIPT>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_OK" X="20" Y= "88" W="79" H="28">
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400002, 2200) </SCRIPT>
+			<ATTR FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">
+				SendEventCoupon()
+				UISelf:CloseParent()
+			</SCRIPT>
+			<HOTKEY ID="59"> 
+				SendEventCoupon()
+				UISelf:CloseParent()
+				return true
+			</HOTKEY>
+		</BUTTON>
+		<BUTTON ID="BTN_CANCEL" X="106" Y="88" W="79" H="28" >
+			<SCRIPT ID="ON_CREATE"> SetTextOnThisUI(400003, 2201) </SCRIPT>
+			<ATTR FONT="FTbt_12" T_X="42" T_Y="3" T_CENTER="1" />
+			<ATTR BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN">	UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true</HOTKEY>
+		</BUTTON>
+		<HOTKEY ID="1"> UISelf:Close() return true</HOTKEY>
+	</STATIC_FORM>
+
+	<!--
+	CallUI("SFRM_EVENT")
+	-->
+	<STATIC_FORM ID="SFRM_EVENT" ALIGN_X="50" ALIGN_Y="50" W="642" H="584" STATIC_NUM="1">
+		<STATIC_FORM ID="FRM_TITLE" X="1" Y="0" W="640" H="36" Z="1" TEXT="1980" T_X="15" T_Y="6" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_BTN_BG" X="610" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="BTN_EXIT" X="0" Y="0" W="24" H="24" BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48">
+					<SCRIPT ID="ON_L_BTN_UP">CloseUI("SFRM_EVENT")</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():GetParent():Close() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<FORM ID="FRM_BACKGROUND" X="0" Y="0" W="622" H="584" Z="-1">
+			<IMG ID="IMG_LINE0" X="173" Y="32" W="2" H="545" IMG="../Data/6_ui/myHome/mhLine.tga" IMG_W="2" IMG_H="545"/>			
+			<FORM ID="FRM_COUPON_EVENT" X="11" Y="42" W="170" H="42" TEXT="1981" T_X="43" T_Y="3" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" U="2" V="1" UV_INDEX="1" IMG="../Data/6_ui/event/evtImg.tga" IMG_W="84" IMG_H="42"/>
+			<FORM ID="FRM_FREE_EVENT" X="11" Y="311" W="170" H="42" TEXT="1982" T_X="43" T_Y="3" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" U="2" V="1" UV_INDEX="2" IMG="../Data/6_ui/event/evtImg.tga" IMG_W="84" IMG_H="42"/>
+			<STATIC_FORM ID="SFRM_COUPON_EVENT" X="11" Y="84" W="160" H="217" STATIC_NUM="34"/>
+			<STATIC_FORM ID="SFRM_FREE_EVENT" X="11" Y="353" W="160" H="217" STATIC_NUM="34"/>
+			<STATIC_FORM ID="SFRM_CONTENTS_BG" X="179" Y="68" W="452" H="186" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<STATIC_FORM ID="SFRM_EVENT_ITEM_BG0" X="179" Y="256" W="452" H="267" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IS_VISIBLE="0">
+				<STATIC_FORM ID="SFRM_EVENT_ITEM_BG_SD" X="0" Y="0" W="452" H="267" STATIC_NUM="3"/>
+				<BUILD ID="BLD_ICON_BG" X="7" Y="41" TARGET_ID="SFRM_ICON_BG" X_COUNT="10" Y_COUNT="3" X_GAB="44" Y_GAB="88"/>
+				<STATIC_FORM ID="SFRM_ICON_BG" X="0" Y="0" W="42" H="43" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2"/>
+				<IMG ID="IMG_LINE1" X="7" Y="89" W="437" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="437" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE2" X="7" Y="90" W="437" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="437" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+				<IMG ID="IMG_LINE3" X="7" Y="177" W="437" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="437" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+				<IMG ID="IMG_LINE4" X="7" Y="178" W="437" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="437" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_EVENT_ITEM_BG1" X="179" Y="256" W="452" H="267" Z="-1" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" IS_VISIBLE="1">
+				<STATIC_FORM ID="SFRM_EVENT_ITEM_BG_SD" X="0" Y="0" W="452" H="267" STATIC_NUM="3"/>
+			</STATIC_FORM>
+		</FORM>
+		<STATIC_FORM ID="SFRM_EVENT_TITLE" X="179" Y="37" W="454" H="29" TEXT="" T_X="10" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" STATIC_NUM="34"/>
+		<STATIC_FORM ID="SFRM_PERIOD" X="179" Y="68" W="452" H="186" TEXT="" T_X="12" T_Y="8" FONT="FTcts_13" FONT_COLOR_HEX="0xFF790000" STATIC_NUM="3"/>
+		<STATIC_FORM ID="SFRM_CONTENT" X="189" Y="99" W="432" H="145" TEXT="" T_X="8" T_Y="7" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3"/>
+		<LIST ID="LST_EVENT0" X="13" Y="87" W="156" H="210" ELEMENT_ID="BTN_EVENT_LIST_ITEM" ITEM_X="0" ITEM_Y="0" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="QUEST_LIST_SCROLL_BG">
+			<IMG ID="QUEST_LIST_SCROLL_BG" X="138" Y="20" Z="-1" W="13" H="210" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="210"/>
+			<BUTTON ID="BTN_SCR_UP" X="135" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="135" Y="194" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="137" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+		</LIST>
+		<LIST ID="LST_EVENT1" X="13" Y="357" W="156" H="210" ELEMENT_ID="BTN_EVENT_LIST_ITEM" ITEM_X="0" ITEM_Y="0" BTN_UP="BTN_SCR_UP" BTN_DOWN="BTN_SCR_DOWN" BTN_MIDDLE="BTN_SCR_MIDDLE" WND_BAR="QUEST_LIST_SCROLL_BG">
+			<IMG ID="QUEST_LIST_SCROLL_BG" X="138" Y="20" Z="-1" W="13" H="210" IMG="../Data/6_ui/Common/cmScrollBg.tga" IMG_W="13" IMG_H="210"/>
+			<BUTTON ID="BTN_SCR_UP" X="135" Y="0" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollUp.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_DOWN" X="135" Y="194" W="20" H="15" BTN_IMG="../Data/6_ui/Common/cmScrollDn.tga" BTN_IMG_W="38" BTN_IMG_H="30"/>
+			<BUTTON ID="BTN_SCR_MIDDLE" X="137" Y="25" W="18" H="21" BTN_IMG="../Data/6_ui/Common/cmScrollBar.tga" BTN_IMG_W="30" BTN_IMG_H="42"/>
+		</LIST>
+		<FORM ID="SFRM_EVENT_TYPE0" X="179" Y="256" W="452" H="267" IS_VISIBLE="0">
+			<BUILD ID="BLD_REWARD" X="11" Y="14" TARGET_ID="FRM_REWARD" X_COUNT="1" Y_COUNT="3" X_GAB="0" Y_GAB="88"/>
+			<FORM ID="FRM_REWARD" X="11" Y="14" W="430" H="25" TEXT="" T_X="0" T_Y="2" FONT="FTcts_16" FONT_COLOR_HEX="0xFF4D3413"/>
+			<BUILD ID="BLD_REWARD_ICON" X="8" Y="42" TARGET_ID="ICON_REWARD" X_COUNT="10" Y_COUNT="3" X_GAB="44" Y_GAB="88"/>
+			<ICON ID="ICON_REWARD" X="0" Y="0" W="40" H="40" ICON_GRP="254">
+				<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+			</ICON>
+			<BUILD ID="BLD_REWARD_ICON_DISABLE" X="15" Y="49" TARGET_ID="FRM_DISABLE" X_COUNT="10" Y_COUNT="3" X_GAB="44" Y_GAB="88"/>
+			<FORM ID="FRM_DISABLE" X="0" Y="0" W="26" H="26" IS_VISIBLE="0" IMG="../Data/6_ui/event/evtX.tga" IMG_W="26" IMG_H="26"/>
+		</FORM>		
+		<FORM ID="SFRM_EVENT_TYPE1" X="179" Y="256" W="452" H="267" IS_VISIBLE="1">
+			<ATTR TEXT="" FONT="FTcts_16" T_X="10" T_Y="10" FONT_COLOR_HEX="0xFF4D3413"/>
+			<BUILD ID="BLD_ITEM" X="10" Y="40" TARGET_ID="SFRM_ITEM" X_COUNT="1" Y_COUNT="3" X_GAB="0" Y_GAB="54"/>
+			<STATIC_FORM ID="SFRM_ITEM" X="0" Y="0" W="432" H="44" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<ATTR TEXT="" FONT="Font_Text" T_X="42" T_Y="15" FONT_COLOR_HEX="0xFF4D3413"/>
+				<!--STATIC_FORM ID="ICN_ICON" X="48" Y="5" W="40" H="40" STATIC_NUM="2"/-->
+				<ICON ID="ICN_ICON" X="5" Y="5" W="40" H="40" ICON_GRP="104" ICON_KEY="0">
+					<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OVER">UISelf:CallIconToolTip()</SCRIPT>
+					<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+				</ICON>
+			</STATIC_FORM>
+		</FORM>
+		<BUTTON ID="BTN_TAKE_ITEM" X="179" Y="529" W="102" H="29">		
+			<LOCAL>
+			<NAME ID = "JAPAN">
+				<ATTR TEXT="1987" T_X="51" T_Y="5" FONT="FTtab" T_CENTER="1" T_OUTLINE="1"/>
+			</NAME>
+			<NAME ID = "DEFAULT">
+				<ATTR TEXT="1987" T_X="51" T_Y="5" FONT="FT15" T_CENTER="1" T_OUTLINE="1"/>
+			</NAME>
+			</LOCAL>
+			<ATTR BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="12" OUTLINE_COLOR_HEX="0xFFE2FC80"/>
+			<ATTR  BTN_IMG="../Data/6_ui/auction/auGbtB3.tga" BTN_IMG_W="204" BTN_IMG_H="58"/>			
+			<SCRIPT ID="ON_L_BTN_DOWN">GetEventItem(UISelf)</SCRIPT>
+			<HOTKEY ID="59">GetEventItem(UISelf) return true </HOTKEY>			
+		</BUTTON>
+		<BUTTON ID="BTN_CLOSE" X="549" Y="529" W="82" H="29" TEXT="1988" T_X="41" T_Y="5" FONT="FTbt_12" T_CENTER="1" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(1988, 2201) </SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():Close()</SCRIPT>
+			<HOTKEY ID="60">UISelf:GetParent():Close() return true </HOTKEY>
+		</BUTTON>
+		<SCRIPT ID="ON_CALL"> LockPlayerInputMove(13) LockPlayerInput(13) </SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> UnLockPlayerInputMove(13) UnLockPlayerInput(13) </SCRIPT>
+		<HOTKEY ID="57"> return true </HOTKEY>
+	</STATIC_FORM>
+	<CHECK_BUTTON ID="BTN_EVENT_LIST_ITEM" X="0" Y="0" W="132" H="28" U="1" V="4" TEXT="21" T_X="10" T_Y="5" FONT="Font_Text" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" BTN_IMG="../Data/6_ui/event/evtBt.tga" BTN_IMG_W="132" BTN_IMG_H="112" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="8">
+		<SCRIPT ID="ON_L_BTN_DOWN">ViewSelectEventInfo(UISelf)</SCRIPT>
+	</CHECK_BUTTON>
+	<FORM ID="FRM_OX_QUIZ" ALIGN_X="50" ALIGN_Y="20" W="405" H="103">
+		<FORM ID="FRM_O_BG" X="40" Y="-95" W="115" H="115" Z="-2" IMG="../Data/6_ui/event/evtOxObg.tga" IMG_W="115" IMG_H="115" IS_VISIBLE="0"/>
+		<FORM ID="FRM_X_BG" X="255" Y="-95" W="115" H="115" Z="-2" IMG="../Data/6_ui/event/evtOxXbg.tga" IMG_W="115" IMG_H="115" IS_VISIBLE="0"/>
+		<FORM ID="FRM_O" X="40" Y="-95" W="115" H="115" Z="-1" U="2" V="1" UV_INDEX="1" IMG="../Data/6_ui/event/evtOxOimg.tga" IMG_W="230" IMG_H="115" IS_VISIBLE="0">
+			<SCRIPT ID="ON_TICK">UpdateOXLight(UISelf)</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_X" X="255" Y="-95" W="115" H="115" Z="-1" U="2" V="1" UV_INDEX="1" IMG="../Data/6_ui/event/evtOxXimg.tga" IMG_W="230" IMG_H="115" IS_VISIBLE="0">
+			<SCRIPT ID="ON_TICK">UpdateOXLight(UISelf)</SCRIPT>
+		</FORM>
+		<FORM ID="FRM_TOP" X="0" Y="0" W="405" H="28" IMG="../Data/6_ui/event/evtOXbxT.tga" IMG_W="405" IMG_H="28"/>
+		<FORM ID="FRM_MDL" X="0" Y="28" W="405" H="1" Z="1" IMG="../Data/6_ui/event/evtOXbxM.tga" IMG_W="405" IMG_H="1" TEXT="" T_X="202" T_Y="0" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFF4D3" T_OUTLINE="1"/>
+		<FORM ID="FRM_BTM" X="0" Y="29" W="405" H="74" IMG="../Data/6_ui/event/evtOXbxB.tga" IMG_W="405" IMG_H="74">
+			<BUTTON ID="FRM_O_OK" X="20" Y="26" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" TEXT="" T_X="41" T_Y="5" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFF4D3" T_OUTLINE="1">
+				<SCRIPT ID="ON_L_BTN_DOWN">SelectOXAnswer(UISelf:GetParent():GetParent(), true) return true</SCRIPT>
+				<HOTKEY ID="59">SelectOXAnswer(UISelf:GetParent():GetParent(), true) return true</HOTKEY>
+			</BUTTON>
+			<BUTTON ID="FRM_O_NO" X="303" Y="26" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" TEXT="" T_X="41" T_Y="5" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFF4D3" T_OUTLINE="1">
+				<SCRIPT ID="ON_L_BTN_DOWN">SelectOXAnswer(UISelf:GetParent():GetParent(), false) return true</SCRIPT>
+				<HOTKEY ID="60">SelectOXAnswer(UISelf:GetParent():GetParent(), false) return true</HOTKEY>
+			</BUTTON>
+			<FORM ID="FRM_TEXT" X="102" Y="17" W="201" H="48" TEXT="90002" T_X="131" T_Y="22" FONT="Font_Warn" FONT_COLOR_HEX="0xFFFFF973" T_OUTLINE="1"/>
+			<FORM ID="FRM_ONE" X="191" Y="15" W="50" H="50" U="5" V="2" UV_INDEX="1" IMG="../Data/6_ui/Pvp/pvNumSmallY.tga" IMG_W="250" IMG_H="100" IS_VISIBLE="1"/>
+			<FORM ID="FRM_TEN" X="160" Y="15" W="50" H="50" U="5" V="2" UV_INDEX="2" IMG="../Data/6_ui/Pvp/pvNumSmallY.tga" IMG_W="250" IMG_H="100" IS_VISIBLE="1"/>
+			<BUTTON ID="FRM_OK" X="161" Y="26" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtMenu2.tga" BTN_IMG_W="164" BTN_IMG_H="58" TEXT="" T_X="41" T_Y="5" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFFFFF4D3" T_OUTLINE="1" IS_VISIBLE="0">
+				<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():Close() return true</SCRIPT>
+				<HOTKEY ID="59">UISelf:GetParent():GetParent():Close() return true</HOTKEY>
+			</BUTTON>
+			<SCRIPT ID="ON_DISPLAY">
+				if TickUpdateTimer(UISelf) then
+					RequestOXAnswer(UISelf:GetParent())
+				end
+			</SCRIPT>
+		</FORM>
+	</FORM>
+	
+	<!--LuckyStar Event UI Start-->
+	<BUTTON ID="BTN_LUCKYSTAR_ICON" X="550" Y="658" IS_ABSOLUTE_X="1">
+		<ATTR W="45" H="45" BTN_IMG="../Data/6_UI/event/evtLsMnBtBg.tga" BTN_IMG_W="90" BTN_IMG_H="90"/>
+		<IMG ID="IMG_TWINKLE" X="0" Y="0" IMG="../Data/6_UI/event/evtLsMnBt.tga" IMG_W="90" IMG_H="45" U="2" V="1" UV_INDEX="1">
+			<SCRIPT ID="ON_TICK"> OnTick_LuckyStar(UISelf) </SCRIPT>
+		</IMG>		
+		<SCRIPT ID="ON_L_BTN_DOWN"> 
+			UISelf:Visible(false)
+			LuckyStarUI_PopupOpen() 
+		</SCRIPT>
+		<SCRIPT ID="ON_CALL"> 
+			LuckyStarIconAni(true)
+			--CenterAlarmIconAdd(UISelf,100) 0은 디폴트, 숫자가 클수록 앞쪽으로 우선순위
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE"> --CenterAlarmIconDel(UISelf) </SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OVER"> 
+			LuckyStarIconAni(false)  
+			LuckyStarUI_NextEventTimeToolTip()
+			return true
+		</SCRIPT>
+		<SCRIPT ID="ON_MOUSE_OUT">  
+			LuckyStarIconAni(true) 
+			CloseToolTip()
+			return true
+		</SCRIPT>
+	</BUTTON>
+	
+	<!--IN GAME ICON Click / Information POP-UI Start-->
+	<STATIC_FORM ID="SFRM_LS_INFOPOP" ALIGN_X="50" ALIGN_Y="50" X="0" Y="0" W="284" H="149" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_COLORBOX" X="9" Y="7" W="266" H="79" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_INFO_TEXT" X="0" Y="0" W="266" H="79">
+				<ATTR TEXT="2352" T_X="133" T_Y="15" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_SHADOWBOX" X="0" Y="0" W="266" H="79" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_OK" X="58" Y="90" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400533" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarPopupClose(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_CHANGE" X="144" Y="90" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="256" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_ChangeStar(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<CHECK_BUTTON ID="CHK_AUTOPOP" X="0" Y="117" W="224" H="20" >
+			<ATTR BTN_IMG="../Data/6_UI/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<ATTR TEXT="2373" T_X="25" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="17"/>
+			<SCRIPT ID="ON_CALL"> 
+				LuckyStarUI_CheckAutoPopup(UISelf) 
+				MoveVCenterUI_TextBase(UISelf:GetParent(), UISelf, -25)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_UpdateAutopopState() </SCRIPT>
+		</CHECK_BUTTON>
+		<SCRIPT ID="ON_CALL"> 
+			LuckyStarInfoDisplay(UISelf) 
+			LuckyStarUI_IconVisible(false) 
+		</SCRIPT>
+		<HOTKEY ID="1"> LuckyStarPopupClose(UISelf) return true </HOTKEY>
+	</STATIC_FORM>
+	<!--IN GAME ICON Click / Information POP-UI End-->
+	<!--Star Select POP-UI Start-->
+	<STATIC_FORM ID="SFRM_LS_SELECTPOP" ALIGN_X="50" ALIGN_Y="50" X="0" Y="0" W="383" H="366" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_LS_TOP" X="10" Y="8" W="365" H="29" STATIC_NUM="34">
+			<ATTR TEXT="2343" T_X="182" T_Y="6" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</STATIC_FORM>		
+		<STATIC_FORM ID="SFRM_LS_STAR" X="10" Y="39" W="364" H="230" STATIC_NUM="24">
+			<BUILD ID="BLD_STAR_ICON" X="4" Y="4" TARGET_ID="CHK_STAR" X_COUNT="4" Y_COUNT="3" X_GAB="90" Y_GAB="75"/>
+			<CHECK_BUTTON ID="CHK_STAR" X="0" Y="0" W="86" H="71" BTN_IMG_W="172" BTN_IMG_H="142">
+				<SCRIPT ID="ON_BUILD"> OnBuildStarIcon(UISelf, UISelf:GetBuildIndex()+1) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_CheckSelectStar(UISelf) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(2359+UISelf:GetBuildIndex()), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</CHECK_BUTTON>
+		</STATIC_FORM>		
+		<STATIC_FORM ID="SFRM_LS_COSTMONEY" X="10" Y="271" W="363" H="26" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_COSTMONEY_TEXT" X="0" Y="0" W="100" H="30" TEXT="2345" T_X="10" T_Y="5" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413" />
+			<FORM ID="SFRM_GOLD" X="240" Y="0" T_Y="3" W="50" H="16" T_RIGHT="1" FONT="FTctsBig_14" FONT_COLOR_HEX = "0xFF9E0B0F">
+				<SCRIPT ID = "ON_TICK">
+					local gold = math.floor( UISelf:GetParent():GetCustomDataAsInt()/10000 )
+					if gold > 0 then
+						UISelf:SetStaticText(gold) 
+						UISelf:GetParent():GetControl("IMG_GOLD"):Visible(true)
+					else
+						UISelf:SetStaticText("") 
+						UISelf:GetParent():GetControl("IMG_GOLD"):Visible(false)
+					end
+					return true
+				</SCRIPT>
+			</FORM>
+			<IMG ID="IMG_GOLD" X="240" Y="5" W="20" H="16" IMG="../Data/6_ui/Common/cmCoin01.tga" IMG_W="20" IMG_H="16" />
+			<FORM ID="SFRM_SILVER" X="288" Y="0" T_Y="3" W="44" H="16" T_RIGHT="1" FONT="FTctsBig_14" FONT_COLOR_HEX = "0xFF9E0B0F">
+				<SCRIPT ID = "ON_TICK">
+					local silver = math.floor( (UISelf:GetParent():GetCustomDataAsInt()%10000)/100 )
+					if silver > 0 then
+						UISelf:SetStaticText(silver) 
+						UISelf:GetParent():GetControl("IMG_SILVER"):Visible(true);
+					else
+						if UISelf:GetParent():GetCustomDataAsInt() > 9999 then
+							UISelf:SetStaticText("0") 
+							UISelf:GetParent():GetControl("IMG_SILVER"):Visible(true);
+						else
+							UISelf:SetStaticText("")
+							UISelf:GetParent():GetControl("IMG_SILVER"):Visible(false);
+						end
+					end
+					return true
+				</SCRIPT>
+			</FORM>
+			<IMG ID="IMG_SILVER" X="288" Y="5" W="20" H="16" IMG="../Data/6_ui/Common/cmCoin02.tga" IMG_W="20" IMG_H="16" />
+			<FORM ID="SFRM_COPER" X="335" Y="0" T_Y="3" W="47" H="16" T_RIGHT="1" FONT="FTctsBig_14" FONT_COLOR_HEX = "0xFF9E0B0F">
+				<SCRIPT ID = "ON_TICK"> 
+					local coper = (UISelf:GetParent():GetCustomDataAsInt()%100)
+					if coper > 0 then
+						UISelf:SetStaticText(coper) 
+					else
+						UISelf:SetStaticText("0") 
+					end
+				</SCRIPT>
+			</FORM>
+			<IMG ID="IMG_COPER" X="335" Y="5" W="20" H="16" IMG="../Data/6_ui/Common/cmCoin03.tga" IMG_W="20" IMG_H="16" />
+			<STATIC_FORM ID="SFRM_LS_SHADOWBOX" X="0" Y="0" W="363" H="26" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<BUTTON ID="FRM_BTN_ENTER" X="66" Y="302" W="124" H="29" BTN_IMG="../Data/6_ui/event/evtLsBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="124" BTN_IMG_H="116">
+			<ATTR TEXT="1961" T_X="62" T_Y="5" T_CENTER="1"  FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_ReAckOK(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="FRM_BTN_CANCLE" X="193" Y="302" W="124" H="29" BTN_IMG="../Data/6_ui/event/evtLsBt.tga" BTN_VERTICAL_IMG="1" BTN_IMG_W="124" BTN_IMG_H="116">
+			<ATTR TEXT="1966" T_X="62" T_Y="5" T_CENTER="1"  FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarPopupClose(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>		
+		<CHECK_BUTTON ID="CHK_AUTOPOP" X="0" Y="334" W="224" H="20" >
+			<ATTR BTN_IMG="../Data/6_UI/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<ATTR TEXT="2373" T_X="25" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="17"/>
+			<SCRIPT ID="ON_CALL"> 
+				LuckyStarUI_CheckAutoPopup(UISelf) 
+				MoveVCenterUI_TextBase(UISelf:GetParent(), UISelf, -25)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_UpdateAutopopState() </SCRIPT>
+		</CHECK_BUTTON>
+		<SCRIPT ID="ON_CALL"> 
+			LuckyStarUI_IconVisible(false) 
+			LuckyStarUI_SelectStarClear()
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+		<HOTKEY ID="1"> LuckyStarPopupClose(UISelf) return true </HOTKEY>		
+	</STATIC_FORM>
+	<!--Star Select POP-UI End-->
+	<!--Star Change POP-UI Start-->
+	<STATIC_FORM ID="SFRM_LS_CHANGEPOP" ALIGN_X="50" ALIGN_Y="50" X="0" Y="0" W="383" H="310" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_LS_TOP" X="10" Y="8" W="365" H="29" STATIC_NUM="34">
+			<ATTR TEXT="2344" T_X="182" T_Y="6" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</STATIC_FORM>
+		
+		<STATIC_FORM ID="SFRM_LS_STAR" X="10" Y="39" W="364" H="230" STATIC_NUM="24">
+			<BUILD ID="BLD_STAR_ICON" X="4" Y="4" TARGET_ID="CHK_STAR" X_COUNT="4" Y_COUNT="3" X_GAB="90" Y_GAB="75"/>
+			<CHECK_BUTTON ID="CHK_STAR" X="0" Y="0" W="86" H="71" BTN_IMG_W="172" BTN_IMG_H="142">
+				<SCRIPT ID="ON_BUILD"> OnBuildStarIcon(UISelf, UISelf:GetBuildIndex()+1) </SCRIPT>
+				<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_CheckSelectStar(UISelf) </SCRIPT>
+				<SCRIPT ID="ON_CALL"> UISelf:CheckState(false) </SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(2359+UISelf:GetBuildIndex()), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</CHECK_BUTTON>
+		</STATIC_FORM>	
+		
+		<BUTTON ID="FRM_BTN_CHANGE" X="107" Y="271" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="256" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_ReAckOK(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<BUTTON ID="FRM_BTN_NO" X="193" Y="271" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400534" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarPopupClose(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		
+		<SCRIPT ID="ON_CALL"> 
+			LuckyStarUI_IconVisible(false) 
+			LuckyStarUI_SelectStarClear()
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+		<HOTKEY ID="1"> LuckyStarPopupClose(UISelf) return true </HOTKEY>		
+	</STATIC_FORM>
+	<!--Star Change POP-UI End-->
+	<!--Reask POP-UI Start-->
+	<STATIC_FORM ID="SFRM_LS_ASK_SEND" ALIGN_X="50" ALIGN_Y="50" X="0" Y="0" W="274" H="129" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_COLORBOX" X="9" Y="7" W="256" H="79" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_INFO_TEXT" X="0" Y="0" W="256" H="79">
+				<ATTR TEXT="2346" T_X="128" T_Y="25" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_TICK"> LuckyStarUI_ReAskInfoText(UISelf) </SCRIPT>
+			</FORM>
+			<STATIC_FORM ID="SFRM_SHADOWBOX" X="0" Y="0" W="256" H="79" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<BUTTON ID="BTN_LS_BACK" X="9" Y="90" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="790648" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				local kUISelf = UISelf
+				LuckyStarUI_Back() 
+				kUISelf:CloseParent() 
+				return true
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_LS_OK" X="95" Y="90" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400533" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				local kUISelf = UISelf
+				LuckyStarUI_Send()
+				kUISelf:CloseParent()
+				return true
+			</SCRIPT>
+		</BUTTON>
+		<BUTTON ID="BTN_LS_NO" X="181" Y="90" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400534" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> 
+				local kUISelf = UISelf
+				local UIBack = GetUIWnd(g_LuckyStar["BackPopup"])
+				LuckyStarPopupClose(UIBack)
+				kUISelf:CloseParent()
+				return true
+			</SCRIPT>
+		</BUTTON>
+		<HOTKEY ID="1"> 
+			local kUISelf = UISelf
+			local UIBack = GetUIWnd(g_LuckyStar["BackPopup"])
+			LuckyStarPopupClose(UIBack)
+			kUISelf:Close()
+			return true
+		</HOTKEY>
+	</STATIC_FORM>
+	<!--Reask POP-UI End-->
+	<!--All User Result POP-UI Start-->
+	<STATIC_FORM ID="SFRM_LS_RESULT_1" ALIGN_X="50" ALIGN_Y="50" X="0" Y="0" W="383" H="234" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_LS_TOP" X="10" Y="8" W="365" H="29" STATIC_NUM="34">
+			<ATTR TEXT="2342" T_X="182" T_Y="6" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</STATIC_FORM>		
+		<!--Middle Start-->
+		<STATIC_FORM ID="SFRM_COLORBOX" X="13" Y="39" W="233" H="124" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_INFO_TEXT" X="0" Y="0" W="233" H="70">
+				<ATTR TEXT="2347" T_X="116" T_Y="20" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<IMG ID="IMG_LINE1" X="8" Y="70" W="215" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="215" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE2" X="8" Y="71" W="215" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="215" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<FORM ID="FRM_LS_LUCKYUSER_TEXT" X="8" Y="72" W="102" H="24">
+				<ATTR TEXT="2371" T_X="51" T_Y="2" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_LS_LUCKYUSER_NUM" X="8" Y="92" W="102" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="51" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<FORM ID="FRM_LS_SLASH" X="110" Y="92" W="11" H="24">
+				<ATTR T_X="5" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetStaticText("/") </SCRIPT>
+			</FORM>
+			<FORM ID="FRM_LS_TOTALUSER_TEXT" X="121" Y="72" W="102" H="24">
+				<ATTR TEXT="2372" T_X="51" T_Y="2" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_LS_TOTALUSER_NUM" X="121" Y="92" W="102" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR T_X="51" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>			
+			<STATIC_FORM ID="SFRM_SHADOWBOX" X="0" Y="0" W="233" H="124" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_LINEBOX" X="250" Y="39" W="124" H="125" STATIC_NUM="24">			
+			<FORM ID="FRM_T1" X="19" Y="10" W="86" H="20">
+				<ATTR TEXT="2353" T_X="43" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+			</FORM>
+			<IMG ID="FRM_I1" X="19" Y="30" W="86" H="71" IMG="../Data/6_ui/event/evtLsB01.tga" IMG_W="172" IMG_H="142" U="2" V="2" UV_INDEX="1">
+				<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(2358+UISelf:GetCustomDataAsInt()), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</IMG>
+		</STATIC_FORM>
+		<!--Middle End-->
+		<BUTTON ID="FRM_BTN_OK" X="149" Y="172" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400533" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarPopupClose(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<CHECK_BUTTON ID="CHK_AUTOPOP" X="0" Y="201" W="224" H="20" >
+			<ATTR BTN_IMG="../Data/6_UI/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<ATTR TEXT="2373" T_X="25" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="17"/>
+			<SCRIPT ID="ON_CALL"> 
+				LuckyStarUI_CheckAutoPopup(UISelf) 
+				MoveVCenterUI_TextBase(UISelf:GetParent(), UISelf, -25)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_UpdateAutopopState() </SCRIPT>
+		</CHECK_BUTTON>
+		<SCRIPT ID="ON_CALL"> 
+			LuckyStarResultDisplay(UISelf)
+			LuckyStarUI_IconVisible(false)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+		<HOTKEY ID="1"> LuckyStarPopupClose(UISelf) return true </HOTKEY>
+	</STATIC_FORM>
+	
+	<STATIC_FORM ID="SFRM_LS_RESULT_2" ALIGN_X="50" ALIGN_Y="50" X="0" Y="0" W="383" H="297" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_LS_TOP" X="10" Y="8" W="365" H="29" STATIC_NUM="34">
+			<ATTR TEXT="2342" T_X="182" T_Y="6" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</STATIC_FORM>		
+		<!--Middle Start-->
+		<STATIC_FORM ID="SFRM_COLORBOX" X="13" Y="39" W="233" H="186" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_INFO_TEXT" X="0" Y="0" W="233" H="132">
+				<ATTR TEXT="2347" T_X="116" T_Y="50" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<IMG ID="IMG_LINE1" X="8" Y="132" W="215" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="215" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="5"/>
+			<IMG ID="IMG_LINE2" X="8" Y="133" W="215" H="1" IMG="../Data/6_ui/common/cmBody.tga" IMG_W="215" IMG_H="1" CAN_COLOR_CHANGE="1" COLOR_TYPE="6"/>
+			<FORM ID="FRM_LS_LUCKYUSER_TEXT" X="8" Y="134" W="102" H="24">
+				<ATTR TEXT="2371" T_X="51" T_Y="2" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_LS_LUCKYUSER_NUM" X="8" Y="154" W="102" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR TEXT="" T_X="51" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>
+			<FORM ID="FRM_LS_SLASH" X="110" Y="154" W="11" H="24">
+				<ATTR T_X="5" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				<SCRIPT ID="ON_CALL"> UISelf:SetStaticText("/") </SCRIPT>
+			</FORM>
+			<FORM ID="FRM_LS_TOTALUSER_TEXT" X="121" Y="134" W="102" H="24">
+				<ATTR TEXT="2372" T_X="51" T_Y="2" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_LS_TOTALUSER_NUM" X="121" Y="154" W="102" H="24" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+				<ATTR T_X="51" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+			</STATIC_FORM>			
+			<STATIC_FORM ID="SFRM_SHADOWBOX" X="0" Y="0" W="233" H="186" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<STATIC_FORM ID="SFRM_LINEBOX" X="250" Y="39" W="124" H="187" STATIC_NUM="24">			
+			<FORM ID="FRM_T1" X="19" Y="0" W="86" H="20">
+				<ATTR TEXT="2353" T_X="43" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+			</FORM>
+			<IMG ID="FRM_I1" X="19" Y="20" W="86" H="71" IMG="../Data/6_ui/event/evtLsB01.tga" IMG_W="172" IMG_H="142" U="2" V="2" UV_INDEX="1">
+				<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(2358+UISelf:GetCustomDataAsInt()), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</IMG>
+			<FORM ID="FRM_T2" X="19" Y="91" W="86" H="20">
+				<ATTR TEXT="2354" T_X="43" T_Y="4" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFFFFF799" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000" />
+			</FORM>
+			<IMG ID="FRM_I2" X="19" Y="112" W="86" H="71" IMG="../Data/6_ui/event/evtLsB02.tga" IMG_W="172" IMG_H="142" U="2" V="2" UV_INDEX="1">
+				<SCRIPT ID="ON_MOUSE_OVER">CallMutableToolTipText(GetTextW(2358+UISelf:GetCustomDataAsInt()), GetUIWnd("Cursor"):GetLocation())</SCRIPT>
+				<SCRIPT ID="ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+			</IMG>
+		</STATIC_FORM>
+		<!--Middle End-->
+		<BUTTON ID="FRM_BTN_OK" X="149" Y="234" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400533" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarPopupClose(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<CHECK_BUTTON ID="CHK_AUTOPOP" X="0" Y="265" W="224" H="20" >
+			<ATTR BTN_IMG="../Data/6_UI/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<ATTR TEXT="2373" T_X="25" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="17"/>
+			<SCRIPT ID="ON_CALL"> 
+				LuckyStarUI_CheckAutoPopup(UISelf) 
+				MoveVCenterUI_TextBase(UISelf:GetParent(), UISelf, -25)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_UpdateAutopopState() </SCRIPT>
+		</CHECK_BUTTON>
+		<SCRIPT ID="ON_CALL"> 
+			LuckyStarResultDisplay(UISelf)
+			LuckyStarUI_IconVisible(false)
+		</SCRIPT>
+		<SCRIPT ID="ON_CLOSE">CloseToolTip()</SCRIPT>
+		<HOTKEY ID="1"> LuckyStarPopupClose(UISelf) return true </HOTKEY>
+	</STATIC_FORM>
+	<!--All User Result POP-UI End-->
+	<!--Result Custom POP-UI Start-->
+	<STATIC_FORM ID="SFRM_LS_RESULT_CUSTOM" ALIGN_X="50" ALIGN_Y="50" X="0" Y="0" W="278" H="270" STATIC_NUM="1" CAN_DRAG="1">
+		<STATIC_FORM ID="SFRM_LS_TOP" X="10" Y="8" W="260" H="29" STATIC_NUM="34">
+			<ATTR TEXT="2341" T_X="130" T_Y="5" T_CENTER="1" FONT="FTtitle_14" FONT_COLOR_HEX="0xFFFFFFFF" T_OUTLINE="1" OUTLINE_COLOR_HEX="0xFF000000"/>
+		</STATIC_FORM>		
+		<!--Middle Start-->
+		<STATIC_FORM ID="SFRM_COLORBOX" X="9" Y="37" W="260" H="166" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			<FORM ID="FRM_INFO_TEXT" X="0" Y="0" W="260" H="96">
+				<ATTR TEXT="2348" T_X="130" T_Y="15" T_CENTER="1" FONT="FTcts_13" FONT_COLOR_HEX="0xFF4D3413"/>
+			</FORM>
+			<STATIC_FORM ID="SFRM_COLORBOX2_1" X="9" Y="96" W="242" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<IMG ID="IMG_ARROW" X="5" Y="11" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+				<FORM ID="FRM_INFO_TEXT2" TEXT="2350" X="11" Y="0" W="171" H="11" T_X="5" T_Y="6" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_COLORBOX3" X="176" Y="4" W="62" H="20" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<ATTR TEXT="" T_X="31" T_Y="2" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_COLORBOX2_2" X="9" Y="128" W="242" H="29" STATIC_NUM="5" CAN_COLOR_CHANGE="1" COLOR_TYPE="2">
+				<IMG ID="IMG_ARROW" X="5" Y="11" W="6" H="6" IMG="../Data/6_ui/Common/cmIconAllow.tga" IMG_W="6" IMG_H="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="4"/>
+				<FORM ID="FRM_INFO_TEXT2" TEXT="2351" X="11" Y="0" W="171" H="11" T_X="5" T_Y="6" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				<STATIC_FORM ID="SFRM_COLORBOX3" X="176" Y="4" W="62" H="20" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+					<ATTR TEXT="" T_X="31" T_Y="2" T_CENTER="1" FONT="Font_Text" FONT_COLOR_HEX="0xFF4D3413"/>
+				</STATIC_FORM>
+			</STATIC_FORM>
+			<STATIC_FORM ID="SFRM_SHADOWBOX" X="0" Y="0" W="260" H="166" STATIC_NUM="3"/>
+		</STATIC_FORM>
+		<!--Middle End-->
+		<BUTTON ID="FRM_BTN_OK" X="104" Y="207" W="82" H="29" BTN_IMG="../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W="168" BTN_IMG_H="52">
+			<ATTR TEXT="400533" T_X="41" T_Y="5" T_CENTER="1" FONT="FTbt_12" FONT_COLOR_HEX="0xFF2A0F0B" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarPopupClose(UISelf:GetParent()) </SCRIPT>
+		</BUTTON>
+		<CHECK_BUTTON ID="CHK_AUTOPOP" X="0" Y="236" W="224" H="20" >
+			<ATTR BTN_IMG="../Data/6_UI/common/cmBtCheck.tga" BTN_IMG_W="40" BTN_IMG_H="40"/>
+			<ATTR TEXT="2373" T_X="25" T_Y="1" FONT_COLOR_HEX="0xFFFFFFFF" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="17"/>
+			<SCRIPT ID="ON_CALL"> 
+				LuckyStarUI_CheckAutoPopup(UISelf) 
+				MoveVCenterUI_TextBase(UISelf:GetParent(), UISelf, -25)
+			</SCRIPT>
+			<SCRIPT ID="ON_L_BTN_DOWN"> LuckyStarUI_UpdateAutopopState() </SCRIPT>
+		</CHECK_BUTTON>
+		<SCRIPT ID="ON_CALL"> 
+			LuckyStarResultCustomDisplay(UISelf) 
+			LuckyStarUI_IconVisible(false)
+		</SCRIPT> 
+		<HOTKEY ID="1"> LuckyStarPopupClose(UISelf) return true </HOTKEY>
+	</STATIC_FORM>
+	<!--Result Custom POP-UI End-->
+	<!--LuckyStar Event UI End-->
+	
+	<STATIC_FORM ID="SFRM_EVENT_TW_QUESTEFFECT" CALL_SOUND="button_UI_Open" CLOSE_SOUND="button_UI_Close">
+		<ATTR ALIGN_X="50" Y="180" W ="255" H ="210" CAN_DRAG = "1" STATIC_NUM = "1" UNIQUE_EXIST_TYPE="NO_DUPLICATE" />
+		<!--<FORM ID = "SFRM_TITLE_VIEW" TEXT="790108" X="54" Y="40" W="196" H="70" STATIC_NUM="3" FONT_COLOR_HEX="0xFF4D3413"/>-->
+		<STATIC_FORM ID="SFRM_TITLE" X="1" Y="0" W="253" H="36" STATIC_NUM="4">
+			<STATIC_FORM ID="SFRM_CLOSE_BG" X="222" Y="4" W="24" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+				<BUTTON ID="Close" X="0" Y="0" W="24" H="24">
+					<ATTR BTN_IMG="../Data/6_ui/common/cmCloseBg.tga" BTN_IMG_W="48" BTN_IMG_H="48"/>
+					<SCRIPT ID="ON_L_BTN_DOWN">UISelf:GetParent():GetParent():CloseParent()</SCRIPT>
+					<HOTKEY ID="1">UISelf:GetParent():GetParent():CloseParent() return true</HOTKEY>
+				</BUTTON>
+			</STATIC_FORM>
+			<STATIC_FORM ID = "SFRM_COLOR" X="7" Y="4" W="104" H="24" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1">
+			</STATIC_FORM>
+			<CHECK_BUTTON ID="CBTN_COLOR" X="7" Y="4" Z="1" W="104" H="24" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="11">
+				<ATTR BTN_IMG="../Data/6_ui/Common/cmTabLong.tga" BTN_IMG_W="208" BTN_IMG_H="48"/>
+				<ATTR TEXT="700505" FONT="FTtitle_14" T_X="46" T_Y="4" T_CENTER="1" BTN_CLICK_LOCK="1"/>
+				<SCRIPT ID="ON_CALL">
+					UISelf:CheckState(true)
+				</SCRIPT>
+			</CHECK_BUTTON>	
+		</STATIC_FORM>
+		<IMG ID="ICN_BUFF" X="106" Y="49" W="32" H="32" IMG="../Data/6_UI/icon/skillbuff02.tga" IMG_W="256" IMG_H="256" U="8" V="8" UV_INDEX="56">
+			<SCRIPT ID = "ON_MOUSE_OVER">ToolTip_EventTaiwanQuestEffect(UISelf)</SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT">CloseToolTip()</SCRIPT>
+		</IMG>
+		
+		<!--STATIC_FORM ID="SFRM_RESULT_ITEM_BG" X="106" Y="49" W="42" H="42" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<IMG ID = "IMG_BG_1" X="0" Y="0" W="42" H="42" IMG = "../Data/6_UI/common/cmSlotBg.tga" IMG_W = "42" IMG_H = "42" UV_INDEX = "1" FONT_COLOR_HEX="0xffffffff" T_OUTLINE = "1"/>
+		</STATIC_FORM-->
+		<!--ICON ID = "ICN_RESULT" X="107" Y="50" W="40" H="40" ICON_GRP ="254" ICON_KEY = "0" FONT_COLOR_HEX="0xffffffff" T_OUTLINE = "1">
+			<SCRIPT ID="ON_DISPLAY">UISelf:DrawIcon()</SCRIPT>
+			<SCRIPT ID = "ON_CALL"> UISelf:SetCustomDataAsInt(0) </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OVER"> UISelf:CallIconToolTip() </SCRIPT>
+			<SCRIPT ID = "ON_MOUSE_OUT"> CloseToolTip() </SCRIPT>
+		</ICON-->
+		
+		<STATIC_FORM ID = "SFRM_COLOR" X="9" Y="35" Z="-2" W="234" H="132" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+		<STATIC_FORM ID = "SFRM_SHADOW" X = "9" Y = "35" Z="-1" W="234" H="132" STATIC_NUM = "3" />
+		
+		<STATIC_FORM ID = "FRM_COUNT" X="18" Y="99" W="216" H="61" STATIC_NUM="6" CAN_COLOR_CHANGE="1" COLOR_TYPE="3">
+			<ATTR TEXT = "790521" FONT = "Font_Text" T_X="108" T_Y ="20" T_CENTER = "1"/>
+		</STATIC_FORM>		
+		
+		<BUTTON ID = "BTN_TRY_REFINE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(700507, 2200) </SCRIPT>
+			<ATTR X="41" Y="172" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1" />
+			<SCRIPT ID = "ON_L_BTN_DOWN">
+				Send_EventTaiwanQuestEffect(UISelf:GetParent())
+			</SCRIPT>
+			<HOTKEY ID="59">
+				Send_EventTaiwanQuestEffect(UISelf:GetParent())
+				return true
+			</HOTKEY>		
+		</BUTTON>
+		<BUTTON ID = "BTN_CANCLE">
+			<SCRIPT ID = "ON_CREATE"> SetTextOnThisUI(915, 2201) </SCRIPT>
+			<ATTR X="127" Y="172" W="84" H="26"/>
+			<ATTR BTN_IMG = "../Data/6_ui/common/cmBtBg.tga" BTN_IMG_W = "168" BTN_IMG_H = "52"/>
+			<ATTR TEXT = "" FONT = "FTtitle_14" T_X = "42" T_Y ="5" BTN_ENABLE_CHANGE_COLOR="1" BTN_T_COLOR_TYPE="10" T_CENTER = "1"/>
+			<SCRIPT ID="ON_L_BTN_DOWN"> UISelf:CloseParent() </SCRIPT>
+			<HOTKEY ID="1">  UISelf:CloseParent() return true </HOTKEY>
+			<HOTKEY ID="60"> UISelf:CloseParent() return true </HOTKEY>
+		</BUTTON>
+	</STATIC_FORM>
+</XUI>

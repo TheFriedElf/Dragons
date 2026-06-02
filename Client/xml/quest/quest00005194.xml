@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5194</ID> <!--T.T.10519401 센의 탈출 방법 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	위험한 동굴 - 센과 대화-->
+<!--[완료NPC]	위험한 동굴 - 센-->
+<!--[내용]	위험한 동굴에 갇힌 센은 굉장히 불안해하고 있다고 한다. 센에게 위험한 동굴에서 탈출할 수 있는 방법을 알려주고 안심시키도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">FECDF81D-A1BF-4728-A6BA-60FADC603FD7</CLIENT> <!--시작NPC 위험한 동굴 - 센 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">FECDF81D-A1BF-4728-A6BA-60FADC603FD7</PAYER> <!--완료NPC 위험한 동굴 - 센 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011"  MARK="END">FECDF81D-A1BF-4728-A6BA-60FADC603FD7</AGENT> <!--진행NPC 11 위험한 동굴 - 센 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10519411"/> <!--센과 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10519421" FACE="Coneil_sorrow"/> <!--%class%님.
+너무 무섭네요. 여긴 어디인가요?
+전 어떻게 해야 나갈 수 있을까요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10519426" FACE="Coneil_smile"/> <!--네? 위험한 동굴을 %class%님이 바꿀 수 있다고요?
+조금만 참으란 말인가요?
+%class%님이라면… 정말 해낼 수 있을거에요.
+저 믿고 기다릴게요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10519423" FACE="Coneil_sorrow"/> <!--방법이 없을까요?
+이곳에서 장사가 될 리도 없고...
+전 이제 방법이 없나요?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10519424" FACE="Coneil_sorrow"/> <!--역시 방법은 없겠죠?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10519425" FACE="Coneil_sorrow"/> <!--나가고 싶어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10519402" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

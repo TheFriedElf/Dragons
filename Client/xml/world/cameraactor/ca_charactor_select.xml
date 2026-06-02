@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="ca_Charactor_Select">
+	<WORLDOBJECT>
+		<KFMPATH SCALE="1.0">../Data/3_World/00_Ui/01_Level/Scene/CharacterSelect_Camera.kfm</KFMPATH>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="Select_Character" ANIMATION="1000000" />			<!--CharacterSelect_Camera_Select_Character.kf ; 1000000 (LOOP)-->
+			<ITEM NAME="CreateDragon_IN" ANIMATION="1000201" />				<!--CharacterSelect_Camera_CreateDragon_IN.kf ; 1000201 -->
+			<ITEM NAME="Camera_CreateDragon" ANIMATION="1000202" />			<!--CharacterSelect_Camera_CreateDragon.kf ; 1000202 (LOOP) -->
+			<ITEM NAME="CreateDragon_OUT" ANIMATION="1000203" />			<!--CharacterSelect_Camera_CreateDragon_OUT.kf ; 1000203 -->
+			<ITEM NAME="Camera_CreateHuman_IN" ANIMATION="1000101" />		<!--CharacterSelect_Camera_CreateHuman_IN.kf ; 1000101 -->
+			<ITEM NAME="Camera_CreateHuman" ANIMATION="1000102" />			<!--CharacterSelect_Camera_CreateHuman.kf ; 1000102 (LOOP) -->
+			<ITEM NAME="CreateHuman_OUT" ANIMATION="1000103" />				<!--CharacterSelect_Camera_CreateHuman_OUT.kf ; 1000103 -->
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

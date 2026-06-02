@@ -1,0 +1,16 @@
+<ACTION ID="a_Fast Cast" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_01"/>
+  <FSM SCRIPT="Act_Melee_Default" FIND_TARGET_TYPE="SPHERE"
+       HIT_CASTER_EFFECT_TARGET_NODE="p_ef_star"
+       HIT_CASTER_EFFECT_ID="ef_Casting_accelation_p_ef_star"
+       HIT_TARGET_EFFECT_TARGET_NODE="p_ef_star"
+       HIT_TARGET_EFFECT_ID="ef_Casting_accelation_p_ef_star"
+       CASTING_EFFECT_EFFECT_ID="ef_area_circle_B_001"
+       CASTING_EFFECT_TARGET_NODE_TO_WORLD_POS="char_root"
+       DETACH_CASTING_EFFECT_AT_FINISH="TRUE"
+       CASTING_EFFECT_SIZE_TO_SKILLRANGE="TRUE"
+       NO_DEFAULT_HIT_EFFECT ="TRUE"
+       HIT_SOUND_ID="Fastcast"
+       />
+</ACTION>

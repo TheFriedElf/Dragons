@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="Animal_Flores_ST" INIT_ACTION="a_opening">
+<TEXTURE SRC="Frostwolf_01.dds">../Data/2_Mon2/03_Solaiden/01_BasicMon/030700/Frostwolf/Frostwolf_01.dds</TEXTURE>
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Frostwolf"/>
+		<KFMPATH SCALE="0.85">../Data/2_Mon2/95_Dungeon/01_BasicMon/980100/Animal_Flores_ST/Animal_Flores_ST.kfm</KFMPATH>
+	
+			<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+	<SPHERE TO="p_hit_point_01" SIZE="25"/>
+		</ABV>
+		<SLOT>
+		
+	<!-- 근거리 공격 1 -->
+			<ITEM NAME="attk_01_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="attk_01_01" ANIMATION="1000205"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1000206"/>
+
+	<!-- 근거리 공격 2 -->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000207"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000208"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000209"/>
+
+			<!-- Basic Movement -->
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<!-- ITEM NAME="run" ANIMATION="1000055"/ -->
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

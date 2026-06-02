@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4133</ID> <!--T.T.10413301 기상천외 (4) -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	늪지괴물 퇴치 후 늪지괴물의 머리장식 5개 습득-->
+<!--[완료NPC]	이글거리는 늪지대 - 모나드론-->
+<!--[내용]	바톡신 부작용으로 복통을 호소하는 모나드론 공작을 위해 만병통치약으로 알려진 늪지괴물의 머리장식 5개를 가져다 주자. 늪지괴물의 머리장식은 마른나무 늪지대의 늪지 괴물로부터 얻어낼 수 있다.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">02C6F249-3507-4598-A325-E42F4B1F84C4</CLIENT> <!--시작NPC 이글거리는 늪지대 - 모나드론 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">02C6F249-3507-4598-A325-E42F4B1F84C4</PAYER> <!--완료NPC 이글거리는 늪지대 - 모나드론 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">02C6F249-3507-4598-A325-E42F4B1F84C4</AGENT> <!--진행NPC 11 이글거리는 늪지대 - 모나드론 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100" VALUE="10000/7500/1/1/160413300">6016300</MONSTER> 
+ <!--MON_NO=6016300/늪지괴물,Item_NO=160413300/[Q.ID:04133] 늪지괴물의 머리장식25%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160413300</ITEM> 
+ <!--Item_NO=160413300/[Q.ID:04133] 늪지괴물의 머리장식,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="5" TEXT="10413311"/> <!--늪지괴물의 머리장식-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10413321" FACE="Monaderon_normal"/> <!--아… 허윽…
+뭔가 잘못된 것 같군. 
+분명히 아주 조금 밖에 안 마신 것 같은데.. 크으으…%%
+왜 이러지? 이거 복통이 멈추지 않아.
+아, 오해할까봐 미리 얘기하는데...
+바톡신을 마신 게 아니라네.%%
+절대로 말이야.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10413326" FACE="Monaderon_smile"/> <!--오, 가져왔군… 
+아니 그런데 이… 이런 걸 먹어야 되는 건가…%%
+그래 이제서야... 이해가 되는군.
+이 머리장식을 보기만 했을 뿐인데
+단숨에 복통이 가라앉는 느낌이 드는걸.%%
+하지만 이 느낌... 좋아. 
+이건 내 컬렉션에 포함시켜둬야 하겠어.
+음.. 훌륭해…-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10413323" FACE="Monaderon_normal"/> <!--이 부근에 있는 병사들이 그러던데…%% 
+늪지 괴물들의 머리장식에는... 
+한번 먹게 되면 가벼운 통증 따위는
+멈추게 하는 특별한 약효가 있다고 들었네.%%
+그.. 그러니까… 크헉.... 
+이곳... 갈대 늪지에... 서식하는… 뜨흡…%%
+늪지괴물들의 머리장식을.. 흐헙…
+가져와주게…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10413324" FACE="Monaderon_angry"/> <!--으으.. 이 내 복통을 멈추게 도와주게나. 
+그래 고백하자면, 호기심에 바톡신 한모금을 마시긴 했다네. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10413325" FACE="Monaderon_angry"/> <!--으으.. 배가 터질 것만 같네. 늪지 괴물의 머리장식은 아직인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10413302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

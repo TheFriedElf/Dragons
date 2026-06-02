@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_bosssapphire">
+	<NIFPATH>../Data/3_World/99_Boss/01_Level/D_Sapphire/d_sapphire.nif</NIFPATH>
+	<BGSOUND VOLUME="1.0">../BGM/bosssapphire_bg.mp3</BGSOUND>
+	<SCRIPT INIT="Net_InsertPuppets" UPDATE="World_Update">World/bosssapphire.lua</SCRIPT>
+	<!-- TYPE - 일반맵 : 1, 인던맵 : 2, PVP_KTH : 32, 마을맵 : 8, 마이룸 : 16 --> 
+	<MAPVALUE PLAYERKILL="0" TYPE="2"/>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.75" GLOW="0.25" HIGHLIGHT="0" />
+	<CAMERA_KFMPATH>../Data/3_World/99_Boss/01_Level/D_Sapphire/camera.kfm</CAMERA_KFMPATH>
+	<WATER_SETTING>
+		<WATER NAME="sea01" WATER_SPEED="0.7" WATER_WAVE_SIZE="0.05" WATER_REFLECT="0.3" WATER_WAVE_HEIGHT="0.35" WATER_DETAIL_DENSITY="0.01" />
+	</WATER_SETTING>
+	<WORLD_ACTION_SETTING>
+		<WORLD_ACTION ID="0" SCRIPT="WA_SAPHIREBOSS_APPEAR" />
+		<WORLD_ACTION ID="1" SCRIPT="WA_SAPHIREBOSS_DIE" />
+		<WORLD_ACTION ID="2" SCRIPT="WA_SB_CRYSTAL_APPEAR" />
+		<WORLD_ACTION ID="3" SCRIPT="WA_SB_ATTACK4" />    <!-- 치기 -->
+		<WORLD_ACTION ID="4" SCRIPT="WA_SB_ATTACK1" />    <!-- 돌기 -->
+		<WORLD_ACTION ID="5" SCRIPT="WA_SB_ATTACK3" />    <!-- 물기 -->
+		<WORLD_ACTION ID="6" SCRIPT="WA_SB_ATTACK6" />    <!-- 광역 -->
+		<WORLD_ACTION ID="7" SCRIPT="WA_SB_ATTACK7" />    <!-- FAKE 광역 -->
+		<WORLD_ACTION ID="8" SCRIPT="WA_SB_ATTACK8" />    <!-- 치기 광분모드 -->
+		<WORLD_ACTION ID="9" SCRIPT="WA_SB_ROTATION" />    <!-- 쳐다보기 -->
+		<WORLD_ACTION ID="10" SCRIPT="WA_SB_DAMAGE" />    <!-- 데미지 입기 -->
+		<WORLD_ACTION ID="11" SCRIPT="WA_SB_ATTACK2" />    <!-- 치기 추가공격 -->
+		<WORLD_ACTION ID="12" SCRIPT="WA_SB_ATTACK9" />    <!-- 양손 긁기 -->
+		<WORLD_ACTION ID="13" SCRIPT="WA_SB_ATTACK5" />    <!-- 긁다가 내려치기 -->
+		<WORLD_ACTION ID="14" SCRIPT="WA_SB_ATTACK10" />    <!-- 크리스탈 낙하 -->
+	</WORLD_ACTION_SETTING>
+
+	<PUPPET_SETTING>
+		<PUPPET NAME="p_4">Puppet/Bosssapphire/p_ground_4.xml</PUPPET>
+		<PUPPET NAME="p_5">Puppet/Bosssapphire/p_ground_5.xml</PUPPET>
+	</PUPPET_SETTING>
+</WORLD>
+

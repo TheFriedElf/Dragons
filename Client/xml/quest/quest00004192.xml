@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>4192</ID> <!--T.T.10419201 배반자의 음모 -->
+
+
+<!-- 작성자 : 이종일-->
+<!--[완료조건]	케이론의 석궁 습득-->
+<!--[완료NPC]	신들의 안식처 - 피레이-->
+<!--[내용]	피레이가 말하길, 켄타우르스의 리더 카르카로스는 용맹하고 리더쉽이 있는 훌륭한 리더였다고 한다. 그러나 무티샤의 저주마법에 걸린 이후 이성을 잃은 것 같다. 피레이는 자신이 신들의 안식처에서 분실한 자신의 무기를 되찾아오면 더 자세한 사정을 알려주겠다고 말한다. 신들의 안식처에 있는 몬스터를 종류에 상관 없이 퇴치하여, 케이론의 석궁을 습득해 켄타우르스 피레이에게 전달하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</CLIENT> <!--시작NPC 신들의 안식처 - 피레이 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</PAYER> <!--완료NPC 신들의 안식처 - 피레이 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">558FEEC5-1EA7-468a-B707-73ECDD02F7EE</AGENT> <!--진행NPC 11 신들의 안식처 - 피레이 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="MONSTERDROP" VALUE="10000/9850/1/1/160419200">9020500</GROUND> 
+ <!--MAP_NO=9020500/신들의 안식처,Item_NO=160419200/[Q.ID:04192] 케이론의 석궁1.5%,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160419200</ITEM> 
+ <!--Item_NO=160419200/[Q.ID:04192] 케이론의 석궁,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10419211"/> <!--케이론의 석궁 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10419221" FACE="Pirey_normal"/> <!--원래 우리 일족의 리더였던 카르카로스는 대단한 녀석이었지.
+용맹하고 지도력을 갖춘 켄타우르스 최강의 사내였다.%%
+그러던 어느 날 미스트엘프인 헬 크라우저가 인간 마법사를
+데려왔어. 그 녀석이 말하길... 검은 마녀가 쿤다라 사원에 
+숨겨둔 정령의 수호석을 노리고 있다고 하더군.%%
+미스트엘프와 우리 켄타우르스는 
+원래 인간들을 그닥 좋아하지 않았지만…%%
+중요한 정보를 가져온 데다가 인간 치고는 매사에 
+예의가 넘치는 그 젊은 마법사에게 마음을 열고 말았지.%%
+그 뒤로 이곳은 지금처럼 난장판이 되고 말았어.
+카르카로스도 지금은 무티샤의 저주마법에 휘말려
+그의 충견이 되어버렸어!-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10419226" FACE="Pirey_smile"/> <!--내가 괜한 부탁을 한 게 아닐까 걱정했는데…
+이렇게 빨리 케이론의 석궁을 찾아다 주리라곤
+상상치도 못했네. 허허허!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10419223" FACE="Pirey_normal"/> <!--흠, 그러고보니 처음 보는 너에게 이런 얘길 함부로
+해도 될런 지 모르겠다. 너도 결국 외부인이니까.%%
+만약 네가 잃어버린 내 무기를 가져온다면
+안심하고 널 신뢰할 수 있을 것 같구나.%%
+신들의 안식처에 있는 몬스터들을 해치우고, 
+케이론의 석궁을 되찾아 와줄 수 있겠니?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10419224" FACE="Pirey_angly"/> <!--아.. 역시 외부인이었어. 쉽게 믿는 것이 아니었는데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10419225" FACE="Pirey_angly"/> <!--케이론의 석궁을 신들의 안식처에 있는 몬스터가 줏어가는 걸 봤는데…-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10419202" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

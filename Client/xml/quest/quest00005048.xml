@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5048</ID> <!--T.T.10504801 동네 노는 형아 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	수염고래 해안가 - 제스와 대화-->
+<!--[완료NPC]	수염고래 해안가 - 제스-->
+<!--[내용]	레오는 제스가 가지고 있던 물건을 자신의 실수로 잃어버렸다고 한다. 레오는 제스가 소중히 하던 것이라 잃어버렸다는 것을 알면 제스가 자신을 다시 보지 않을까 걱정한다. 걱정을 하는 레오를 위해 수염고래 해안가에 있는 제스와 이야기를 해보자. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</CLIENT> <!--시작NPC 바람항구 - 레오 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">6A425910-8CB2-4711-900E-254F95866BDD</PAYER> <!--완료NPC 수염고래 해안가 - 제스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">36960991-8A9F-45a2-8F1C-FA6DA3CADBA3</AGENT> <!--진행NPC 11 바람항구 - 레오 -->
+		<AGENT TYPE="NPC" EVENTNO="10012" MARK="END">6A425910-8CB2-4711-900E-254F95866BDD</AGENT> <!--진행NPC 12 수염고래 해안가 - 제스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<NPC OBJECTNO="1" TYPE="INCPARAM" VALUE="601/1">10012</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="601">10012</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10504811"/> <!--제스와 대화-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10504821" FACE="Leo_normal"/> <!--이런, 제스 형에게 혼나겠네.
+%name%님 어떡하면 좋죠?
+제스 형이 소중히하고 있던 물건을 잃어 버리고 말았어요.%%
+생각보다 제스 형은 무서운 곳이 있어서 자신의 물건을 잃어버리는 것은 절대 용서를 안 해요.
+아마 다시는 제 얼굴을 보려고 하지 않을지도 몰라요.
+죄송하지만 %name%님이 제스 형에게 잘 이야기 해주지 않겠어요?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10504826" FACE="Jess_smile"/> <!--응? 레오가 내 물건을 잃어버렸다고?
+이 녀석 내가 얼마나 소중히 하던 건데 그걸 잃어버려?%%
+근데 녀석이 잃어버렸다는 게 뭐였지? 아! 그거군.
+이거 쉽게 용서해 줄 수는 없겠는걸.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10504823" FACE="Leo_normal"/> <!--다른 사람들은 동네 노는 형이라며 상대하지 말라고 해도, 저에게 제스 형은 소중한 사람 중에 한 명이에요.%%
+남들이 부모 없는 아이라고 손가락질 할 때도 제스 형은 그런 사람들을 비웃으며 저를 막아줬어요.
+아마 제스형이 저와 만나지 않겠다고 하면 정말 전 제 자신을 용서하지 못할 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10504824" FACE="Leo_angly"/> <!--할 수 없군요. 제스형이 저를 때리더라도 그냥 맞아야 겠어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10504825" FACE="Leo_normal"/> <!--제스 형이 성격이 있기는 해도 설마 %name%님을 때리지는 않을 거에요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10504802" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

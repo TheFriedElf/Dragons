@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5156</ID> <!--T.T.10515601 도전장(3) -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	벨칸신전 - 망각의 복서 미라 30마리 처리-->
+<!--[완료NPC]	달빛해안 마을 - 하임-->
+<!--[내용]	하임과 프랑크의 매출 대결은 몇 일째 계속되고 있다고 한다. 하임은 프랑크를 이기기 위해 특제 포션을 준비했지만, 배달 오는 길에 망각의 복서미라가 계속 방해하고 있다고 한다. 벨칸신전으로 가서 망각의 복서미라 30마리를 처리해 길을 만들어주도록 하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">F3CD863C-444D-40ee-B976-083D98067B1B</CLIENT> <!--시작NPC 달빛해안 마을 - 하임 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">F3CD863C-444D-40ee-B976-083D98067B1B</PAYER> <!--완료NPC 달빛해안 마을 - 하임 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">F3CD863C-444D-40ee-B976-083D98067B1B</AGENT> <!--진행NPC 11 달빛해안 마을 - 하임 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INCPARAM100_IN" VALUE="9010220/1">6008200</MONSTER> 
+ <!--MON_NO=6008200/망각의 복서 미라,MAP_NO=9010220/벨칸 신전,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="30" TEXT="10515611"/> <!--망각의 복서 미라-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10515621" FACE="Coneil_angly"/> <!--친구!친구!
+아우! 내가 이번에 프랑크아저씨를 이기려고 특제 물약을 배달시켰는데,
+오는 길에 망각의 복서미라가 계속 방해를 하고 있어.
+네가 가서 처리해주면 안 될까?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10515626" FACE="Coneil_normal"/> <!--고마워. 정말!
+그 물약을 팔고 꼭 승리하겠어.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10515623" FACE="Coneil_normal"/> <!--고마워. 벨칸신전으로 가봐. 그곳에서 망각의 복서 미라 30마리만 처리해줘.
+난 프랑크 아저씨를 꼭 이기고 싶어. 부탁 좀 할게.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10515624" FACE="Coneil_angly"/> <!--내가 먼저 팔기 시작해야 한단 말이야. -->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10515625" FACE="Coneil_normal"/> <!--보급품 부대가 출발했다고 하네. 어서 너도 서둘러!
+길을 좀 만들어 줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10515602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_summonIceBoom">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSkill/Claymore/Claymore.kfm</KFMPATH>
+		<SCRIPT SRC="SkillActor/SummonThorn.lua">
+			<ITEM NAME="SummonIceBoom_Initialize" TYPE="INIT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+      <ITEM NAME="idle_01" ANIMATION="1000000" FIRE_START_EFFECT="EF_Common_Mon_Torus_IcePick_00_char_root" Effect_Sacle="6.0" INTER_TIME="1.0"/>
+      <ITEM NAME="attk_01" ANIMATION="1000000" FIRE_START_EFFECT="e_dmg_ice01" Effect_Sacle="6.0" INTER_TIME="1.0"/>
+    </SLOT>
+	</WORLDOBJECT>
+</ACTOR>

@@ -1,0 +1,8 @@
+<ACTION ID="a_mon_bat_missile_03" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+	<SLOT NAME="Bat_Missile_start_03"/>
+	<SLOT NAME="Bat_Missile_btlidle_03" LOOP="TRUE"/>
+	<SLOT NAME="Bat_Missile_fire_03"/>
+	<SLOT NAME="idle_01"/>
+	<SLOT NAME="Bat_Missile_finish_03"/>
+	<FSM SCRIPT="Skill_Mon_BatMissle" HIT_SOUND_ID="MagicMissile"/>
+</ACTION>

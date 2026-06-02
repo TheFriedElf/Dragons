@@ -1,0 +1,10 @@
+<ACTION ID="a_Thunder Break" NEXT="a_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" >
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_01"/>
+  <FSM SCRIPT="Act_Melee_Default"
+       CASTING_EFFECT_TARGET_NODE="char_root"
+       CASTING_EFFECT_EFFECT_ID="ef_Thunderbreak_00_char_root"
+       NO_WEAPON_TRAIL ="TRUE"
+       HIT_SOUND_ID="ThunderBreak_Start"
+       />
+</ACTION>

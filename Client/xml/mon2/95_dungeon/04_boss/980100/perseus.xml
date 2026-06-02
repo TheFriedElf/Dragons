@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Perseus" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+		<KFMPATH SCALE="1.5">../Data/1_Cha/3_PET/S_Perseus/S_Perseus.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+           
+		   <CAPSULE TO="p_hit_point_01" SIZE="17,55" />
+		   <CAPSULE TO="p_hit_point_02" SIZE="11,32" />
+
+		</ABV>
+		<SLOT>
+			
+			<!--초승달 가르기-->
+			<ITEM NAME="attk_fin_01_start" ANIMATION="1002001"/>
+			<!--ITEM NAME="attk_fin_01" ANIMATION="1002002"/-->
+			<ITEM NAME="attk_fin_01_fire" ANIMATION="1002003"/>
+			<ITEM NAME="attk_fin_01_fin_01" ANIMATION="1002006"/>
+
+			
+			<!--흑룡포-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000204"/>
+			<!--ITEM NAME="attk_02_01" ANIMATION="1000205"/-->
+			<ITEM NAME="attk_02_02" ANIMATION="1000206"/>
+
+			<!--구룡포-->
+
+			<ITEM NAME="massive_projectile_btlidle_start" ANIMATION="1000256"/>
+			<!--ITEM NAME="massive_projectile_btlidle" ANIMATION="1000001"/-->
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000259"PROJECTILE_ID="Projectile_ninedragon" PROJECTILE_SCALE="0.7" PROJECTILE_COUNT="9" FIRE_TERM="0.5" PROJECTILE_QUAKE_FACTOR="0.5"
+			 ARRIVED_EFFECT="efk_perseus_ninedragon_frag"/>
+
+			<ITEM NAME="massive_projectile_finish" ANIMATION="1000258"/>
+
+
+
+
+            <!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000001"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+
+			<ITEM NAME="Opening" ANIMATION="1000002"/>
+			<ITEM NAME="StandUp" ANIMATION="1000001"/>
+		
+
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

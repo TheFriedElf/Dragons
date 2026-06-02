@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<WORLD ID="w_920301_KTH">
+	<GSAPATH>../Data/3_World/98_PVP/01_Level/KTH/920301_KTH.GSA</GSAPATH>
+    <MINIMAP Y="190" H="165">../Data/3_World/98_PVP/01_Level/KTH/920301_MM.dds</MINIMAP>	
+	<BGSOUND VOLUME="1.0">../BGM/warzone_bg.mp3</BGSOUND>
+	<BLOOM BLUR="1.5" BRIGHT="10.0" SRC="0.7" GLOW="0.35"/>
+	<SCRIPT>World/98_PVP/KTH/920301_KTH.lua</SCRIPT>
+
+	<TRIGGER ID="telejump_target_01" TYPE="TELEJUMP" SOUND_ID="Tele_Jump">
+		<CONDITION TYPE="touch"/>
+		<ACTION SCRIPT="DoTeleJumpEx" PARAM_STRING="telejump_zone_01" PARAM="80"/>
+	</TRIGGER>
+
+	<TRIGGER ID="trigger_jump_1" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="550" />
+	</TRIGGER>
+	<TRIGGER ID="trigger_jump_2" TYPE="JUMP" SOUND_ID="Trigger_Jump">
+		<CONDITION TYPE="touch" />
+		<ACTION SCRIPT="DoHighJump" PARAM="550" />
+	</TRIGGER>
+
+</WORLD>

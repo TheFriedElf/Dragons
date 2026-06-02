@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5070</ID> <!--T.T.10507001 날렵함! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	스티븐 무역항에서 콤보 300회를 달성하자-->
+<!--[완료NPC]	바람항구 - 무카파-->
+<!--[내용]	무카파는 위험에 대처하는 자세의 하나로서 날렵함을 꼽았다. 하지만 날렵함은 그냥 거저 얻을 수 있는 것은 아니라고 한다. 여러 가지 수련을 통해서 얻을 수가 있는데, 용족들은 주로 그것을 콤보를 통해서 얻는다고 한다. 위험에 대처하는 자세 중 날렵함을 익히기 위해서 스티븐 무역항에서 콤보 300회를 달성하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">19FC9179-88AB-4831-A242-AFC621482E2C</CLIENT> <!--시작NPC 바람항구 - 무카파 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">19FC9179-88AB-4831-A242-AFC621482E2C</PAYER> <!--완료NPC 바람항구 - 무카파 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">19FC9179-88AB-4831-A242-AFC621482E2C</AGENT> <!--진행NPC 11 바람항구 - 무카파 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<GROUND OBJECTNO="1" TYPE="COMBOCHECK" VALUE="300/1">9010130</GROUND> 
+ <!--MAP_NO=9010130/스티븐 무역항,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10507011"/> <!--콤보 300회-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10507021" FACE="Mukapa_normal"/> <!--지난번에 위험에 대처하는 자세에 대해서 내가 알려줬을 걸세. 
+이제는 위험이 막상 닥쳤을 때 필요한 것을 알려주겠네.
+위험이란 정말 순식간에 찾아오기 마련이지.%% 
+자네가 아무리 많은 위험요소를 제거했다고 하더라도 우리가 모르는 위험이 또 있을지도 있다네.
+빠르게 다가오는 위험에 대처하는 방법에 대해서 알고 싶은가?-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10507026" FACE="Mukapa_normal"/> <!--역시 날렵함이 있군. 그런식으로 훈련하다가 보면 자연스럽게 몸에 밸 걸세.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10507023" FACE="Mukapa_normal"/> <!--빠르게 다가오는 위험에 대처하는 방법은 바로 날렵함이네. 위험이 한 곳에서 생기란 법이 없지. 
+그런 상황에서 당황하지 않고 능동적으로 대처할 수 있는 날렵함이 필요한 걸세.%%
+이런 날렵함을 훈련하기에 가장 좋은 장소는 스티븐 무역항이라고 하네.
+스티븐 무역항에서 콤보 300회를 달성해보게.
+그럼 자네도 어느 정도의 날렵함을 몸에 익히게 될 걸세.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10507024" FACE="Mukapa_angry"/> <!--자네는 빠르게 다가오는 위험에 대처할 수 있다고 자부하는 것인가?-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10507025" FACE="Mukapa_normal"/> <!--자! 날렵함을 배우는 것은 지금부터라네. 어서 움직이게나.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10507002" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

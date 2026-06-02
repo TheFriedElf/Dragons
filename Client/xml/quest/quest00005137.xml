@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5137</ID> <!--T.T.10513701 주민을 위한 봉사 -->
+
+
+<!-- 작성자 : 배동한-->
+<!--[완료조건]	미리내 신전 [아케이드 모드(F1)] - 찢어진 영수증 조각 10개 획득-->
+<!--[완료NPC]	달빛해안 마을 - 스미스-->
+<!--[내용]	대장장이 스미스는 토마스가 세금을 덜 내기 위해 영수증을 찢어버리는 것을 목격했다고 한다. 그 사실을 모른 척 할까 생각도 했지만, 스미스는 그럴 수 없다고 한다. 미리내 신전[아케이드 모드(F1)]로 가서 스켈레톤 정찰병을 처리하고 영수증 10조각을 모아 스미스에게 가져다 주자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">B62D7CB2-0B35-402f-9117-43AA95707E9E</CLIENT> <!--시작NPC 달빛해안 마을 - 스미스 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">B62D7CB2-0B35-402f-9117-43AA95707E9E</PAYER> <!--완료NPC 달빛해안 마을 - 스미스 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">B62D7CB2-0B35-402f-9117-43AA95707E9E</AGENT> <!--진행NPC 11 달빛해안 마을 - 스미스 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010201/10000/5500/1/1/160513800">6014500</MONSTER> 
+ <!--MON_NO=6014500/스켈레톤 정찰병,MAP_NO=9010201/미리내 신전 아케이드 1,Item_NO=160513800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160513800</ITEM> 
+ <!--Item_NO=160513800/해당값 없거나 입력 안함!! 확인요망 ,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10513711"/> <!--찢어진 영수증 조각-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10513721" FACE="Darby_angly"/> <!--음. 마음이 무겁군.
+괜히 본 것 같아. 사실 아까 프랑크가 영수증을 버리는 것을 봤어.
+우리 상인들은 판매 실적에 따라 세금을 내게 되는데,
+영수증으로 실적을 판단하거든. 만약 영수증이 없다면 세금을 덜 내는 거지.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10513726" FACE="Darby_smile"/> <!--일단 고마워. 난 생각할 시간에 필요해서 이만.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10513723" FACE="Darby_normal"/> <!--그냥 무시하자니 그건 아닌 것 같고, 
+따지자니 프랑크가 서운해할 것 같고 말이지.%%
+일단은 영수증부터 모아야겠어. 미리내 신전[아케이드 모드(F1)]에 버리는 걸 봤어.
+영수증 조각은 스켈레톤 정찰병이 가져가더군. 영수증 조각을 좀 모아줘.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10513724" FACE="Darby_angly"/> <!--나도 모른 척 해야 맞는 건가? 바쁜데 수고해.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10513725" FACE="Darby_normal"/> <!--고민이야. 어떻게 해야 하는지.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10513702" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

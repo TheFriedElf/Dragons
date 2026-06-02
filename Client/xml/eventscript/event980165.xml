@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+
+    
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1.0" FadeIn="false"/><!-- 화면 어둡게-->
+	<CMD TYPE="WaitFade"/>
+
+	<CMD TYPE="ShowActor" ClassNo="1029530" Show="false"/><!-- 오프닝 삭제-->
+	<CMD TYPE="RemoveActor" ClassNo="1029530"/><!-- 오프닝 삭제-->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="true"/>
+	<CMD TYPE="ShowActor" UnitType="UT_BOSSMONSTER" Show="true"/><!--보스몬스터 감추기-->
+	<CMD TYPE="ShowActor" UnitType="UT_OBJECT" Show="true"/>
+
+   
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/> <!-- 카메라가 나를 다시 따라오게 한다.-->
+	<CMD TYPE="ClearActorFilter"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0.01" FadeIn="TRUE"/><!-- 화면 밝게-->
+	<CMD TYPE="WaitFade"/>
+	<CMD TYPE="WaitTime" Time="0.5"/><!--  시간을 기다림-->
+
+
+<!-- PC로 돌아오기 -->
+	<CMD TYPE="MoveCamToActor" SpecialActor ="ME" MoveTime="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="2" />
+	<CMD type="waittime" time="1"/>    
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="HideUI" enable="false"/> <!--UI가리기 -->
+<!-- PC이동가능 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+	<CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD type="CallUI" UIWndName = "FRM_DEFENCE_MISSION_START"/>
+</EVENT_SCRIPT>

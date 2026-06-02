@@ -1,0 +1,9 @@
+<ACTION ID="a_rolling_ground" NEXT="a_battle_idle" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+	<SLOT NAME="Com_spell_01" LOOP="TRUE"/>
+	<SLOT NAME="Onehand_skill_RollingGround_01"/>
+	<SLOT NAME="Onehand_skill_RollingGround_02"/>
+	<SLOT NAME="Onehand_skill_RollingGround_03"/>
+	<FSM SCRIPT="Skill_RollingGround"
+       FIRE_SOUND_ID="RollingGround"/>
+
+</ACTION>

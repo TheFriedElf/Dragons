@@ -1,0 +1,19 @@
+<ACTION ID="a_sniping" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="com_skill_spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Arc_Csb_skill_Sniping_01_01"/>
+  <SLOT NAME="Arc_Csb_skill_Sniping_01_02"/>
+  <SLOT NAME="Arc_Csb_skill_Sniping_01_03"/>
+  <FSM SCRIPT="Sniping"
+  
+	HIT_SOUND_ID="sniping_01_03-02"
+    FIRE_SOUND_ID="sniping_01_03-01"
+    CASTING_EFFECT_TARGET_NODE=""
+    CASTING_EFFECT_EFFECT_ID=""
+	   
+	FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+	FIRE_CASTER_EFFECT_ID="eff_skill_Sniping_02"
+		
+	START_EFFECT_ID="eff_skill_Sniping_01"
+	START_EFFECT_TARGET_NODEI="char_root"
+    />
+</ACTION>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 튜토리얼 헬퍼 등장 씬 -->
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="true"/>
+	<CMD type="waittime" time="0"/>
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="false"/>
+    <CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2"/>
+	<!--CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="0" FadeIn="false"/>
+	<CMD type="WaitFade" time="0"/-->
+    <CMD TYPE="MoveCamToPos" TargetPos="1400.677551,10.319343,86.298523" MoveTime="0" CamActorDistance="-900" CamMoveUpDistance="600"/>
+    <CMD TYPE="WaitCamera"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="2" FadeIn="true"/>
+	<CMD type="WaitFade" time="2"/>
+    <CMD type="waittime" time="3"/>
+    <!--<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>-->
+    <CMD TYPE="setmoviescene" enable="true" Time="1"/>
+    <CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2"/>
+    <CMD TYPE="ShowActor" SpecialActor="ME" Show="true"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="5" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+    <CMD TYPE="SetActorDirection" SpecialActor="ME" Direction="2"/>
+	<CMD TYPE="Dialogue" NameTTID="505553" TitleTTID="505469" TextTTID="505486"/>
+	<CMD TYPE="WaitDialogue"/>
+    <CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+	<CMD TYPE="Walk" SpecialActor="ME" TargetPos="800.677551,-4.705377,86.298523"/>
+	<CMD TYPE="WaitWalk" SpecialActor="ME"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="true"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+    <CMD TYPE="Dialogue" NameTTID="505553" TitleTTID="505469" TextTTID="506197" />
+	<CMD TYPE="WaitDialogue"/>
+    <CMD type="waittime" time="1"/>
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505469" TextTTID="505800" FaceID="Helper_surprise"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="MoveCamToActor" NameTTID="505485" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="AddNPC" ClassNo="1028159" NameTTID="505485" SpawnPos="831.073669,10.319343,86.298523"/>
+	<CMD TYPE="RegistHelper" NameTTID="505485"/>
+	<CMD TYPE="SetActorDirection" NameTTID="505485" Direction="1"/>
+	<CMD TYPE="PlayAnimation" NameTTID="505485" SlotName="opening_01"/>
+	<CMD type="waittime" time="3"/>
+	<CMD TYPE="PlayAnimation" NameTTID="505485" SlotName="talk_01"/>
+	<CMD TYPE="Dialogue" NameTTID="505485" TitleTTID="505469" TextTTID="505801" FaceID="Helper_smile"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+	<CMD TYPE="CLOSE_DAILOGUE"/>
+	<CMD TYPE="PlayAction" NameTTID="505485" ActionName="a_trace_idle"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="false"/>
+	<CMD type="WaitFade" time="1"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="2"/>
+	<CMD TYPE="Fade" FadeColor="0,0,0" FadeTime="1" FadeIn="true"/>
+	<CMD type="WaitFade" time="1"/>
+	<CMD type="CallUI" UIWndName="FRM_GOGO_EVENT"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD type="waittime" time="0"/>
+	<!--CMD TYPE="EnableTrigger" TriggerID="trigger_quest01" Enable="FALSE"/-->
+    <CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

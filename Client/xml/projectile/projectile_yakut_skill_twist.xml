@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<PROJECTILE ID="Projectile_Yakut_skill_twist">
+	<TEX_PATH>../Data/5_Effect/9_Tex</TEX_PATH>
+	<NIF_PATH SCALE="1.5">../Data/5_Effect/7_Projectile/ef_twist_02.nif</NIF_PATH>
+	<SCRIPT>PROJECTILE_ARROW</SCRIPT>
+	<PARAM SPEED="100.0" ACCEL="0" MASS="0.5"/>
+	<SCRIPT_CALL_EVENT>
+		<EVENT TYPE="ARIVED_AT_TARGET"/>
+	</SCRIPT_CALL_EVENT>
+	<COLLISION_SPHERE>
+		<COLL_ITEM TARGET_NODE="col_01" RANGE="30"/>
+    	<COLL_ITEM TARGET_NODE="col_02" RANGE="30"/>
+	</COLLISION_SPHERE>
+</PROJECTILE>

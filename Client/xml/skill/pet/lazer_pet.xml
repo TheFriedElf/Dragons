@@ -1,0 +1,11 @@
+
+<ACTION ID="a_lazer_pet" NEXT="a_trace_ground2" USE-EVENT="TRUE" USE_CFUNC_ONTARGET="TRUE" CHECK_CAN_ENTER="TRUE" USE_CFUNC="TRUE">
+  	<SLOT NAME="idle_01" LOOP="TRUE"/>
+	<!--SLOT NAME="btlidle_01_shot_start"/-->
+	<SLOT NAME="shot_01"/>
+
+  <FSM SCRIPT="CommonSkillAction"
+       ATTACH_NODE_ID="p_ef_fire"
+       HIT_SOUND_ID="pingmao-skill-fire_ball_pet"
+	/>
+</ACTION>

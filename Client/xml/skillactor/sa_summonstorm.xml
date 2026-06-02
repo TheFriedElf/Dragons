@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<ACTOR NAME="sa_summonstorm">
+	<WORLDOBJECT>
+		<KFMPATH>../Data/1_Cha/9_SSkill/Earthquake_storm_dummy/Earthquake_storm_dummy.kfm</KFMPATH>
+		<SCRIPT SRC="SkillActor/SummonThorn.lua">
+			<ITEM NAME="SummonStorm_Initialize" TYPE="INIT"/>
+		</SCRIPT>
+		<SLOT>
+			<!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000000" FIRE_EFFECT="ef_Earthquake_skill_02_char_root" FIRE_EFFECT_NODE="p_ef_shot_01" PROJECTILE_ID="PROJECTILE_Blizzard02" ARRIVE_EFFECT="ef_Blizzard_00002"/>
+			<ITEM NAME="massive_projectile_fire" ANIMATION="1000000" FIRE_EFFECT="ef_Earthquake_skill_02_char_root" FIRE_EFFECT_NODE="p_ef_shot_01" PROJECTILE_ID="PROJECTILE_Blizzard02" ARRIVE_EFFECT="ef_Blizzard_00002"/>
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

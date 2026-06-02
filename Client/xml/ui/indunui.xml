@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<XUI>
+	<FORM ID = "FRM_INDUN_JOIN_REQUEST">
+		<ATTR ALIGN_X = "50" ALIGN_Y = "50" W ="298" H ="87" PRIORITY="100" ALIVE_TIME="20000" ALIVE_TIME_IGNORE_MOUSE_OVER="1"/>
+		<STATIC_FORM ID = "SFRM_BG">
+			<ATTR X = "0" Y = "4" Z="0" W = "298" H = "82" STATIC_NUM = "1" />
+			<IMG ID="IMG_ROW1_LINE1">
+				<ATTR X="72" Y="36" W="210" H="1" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="210" IMG_H="1" CAN_COLOR_CHANGE = "1"/>
+				<SCRIPT ID = "ON_CALL">	UISelf:SetColor(1907997) </SCRIPT>
+			</IMG>
+			<IMG ID="IMG_ROW1_LINE2">
+				<ATTR X="72" Y="37" W="210" H="1" CAN_COLOR_CHANGE="1" IMG = "../Data/6_ui/Common/cmBody.tga" IMG_W="210" IMG_H="1"/>
+				<SCRIPT ID = "ON_CALL">	UISelf:SetColor(9080718) </SCRIPT>
+			</IMG>
+
+			<STATIC_FORM ID = "SFRM_BAR_BG">
+				<ATTR X = "70" Y = "15" W = "214" H = "20" STATIC_NUM = "11" />
+				<ANI_BAR ID = "BAR_TIME_LIMIT">
+					<ATTR X= "1" Y = "1" W ="214" H ="16" />				
+					<ATTR BAR_COUNT = "1"/>
+					<ATTR BAR_IMG = "../Data/6_ui/indun/idBoxBar.tga" BAR_IMG_W = "214" BAR_IMG_H = "16"/>
+					<ATTR TEXT = "" FONT = "Font_Text" T_X = "107" T_Y ="1" T_CENTER = "1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+					<SCRIPT ID = "ON_DISPLAY">
+						UISelf:DisplayTimeBar(true)
+					</SCRIPT>
+					<SCRIPT ID = "ON_CALL">
+						UISelf:SetStartTime(1)
+					</SCRIPT>
+				</ANI_BAR>
+			</STATIC_FORM>
+		</STATIC_FORM>
+		<STATIC_FORM ID = "SFRM_TEXT">
+			<ATTR X = "70" Y = "44" Z="1" W="214" H = "24" STATIC_NUM = "2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1"/>
+			<ATTR TEXT = "18999" FONT = "Font_Text" T_X = "107" T_Y = "4" T_CENTER = "1" T_OUTLINE="1" FONT_COLOR_HEX="0xFFFFFFFF"/>
+			<STATIC_FORM ID = "SFRM_SHADOW">
+				<ATTR X = "0" Y = "0" W = "214" H = "24" STATIC_NUM = "3" />
+			</STATIC_FORM>
+		</STATIC_FORM>
+		
+		<FORM ID = "FRM_GEAR" >
+			<ATTR X = "9" Y ="0" Z="2" W ="73" H ="86" />
+			<ATTR IMG = "../Data/6_ui/indun/idWheel.tga" IMG_W = "146" IMG_H = "172" U = "2" V = "2"/>
+		</FORM>
+
+		<SCRIPT ID = "ON_CALL">
+			iGearNum = 1
+			fGearTime = GetAccumTime()
+		</SCRIPT>
+		<SCRIPT ID = "ON_ALIVE_TIME_END">
+		</SCRIPT>
+		<SCRIPT ID = "ON_DISPLAY">
+			local wndGear = UISelf:GetControl("FRM_GEAR")
+			if wndGear:IsNil() == false then
+				if fGearTime ~= nil and GetAccumTime() - fGearTime > 0.5 then
+					if iGearNum ~= nil then
+						iGearNum = iGearNum + 1
+						if iGearNum > 4 then
+							iGearNum  = 1
+						end
+						wndGear:SetUVIndex(iGearNum)
+					end
+				end
+			end
+		</SCRIPT>
+	</FORM>
+</XUI>

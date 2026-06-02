@@ -1,0 +1,8 @@
+<ACTION ID="a_Octopus Ink" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE">
+  <SLOT NAME="spell_01" LOOP="TRUE"/>
+  <SLOT NAME="Com_Shot_04"/>
+  <FSM SCRIPT="Skill_OctopusInk"
+       HIT_CASTER_EFFECT_TARGET_NODE="char_root"
+       HIT_CASTER_EFFECT_ID="ef_Octopusink_01_char_root"
+       HIT_SOUND_ID="OctopusInk"/>
+</ACTION>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Hydra_02" INIT_ACTION="a_opening">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Diablic"/>
+		<KFMPATH SCALE="1.0">../Data/2_Mon2/95_Dungeon/04_Boss/980100/Hydra/Hydra_02.kfm</KFMPATH>
+
+		
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+             <SPHERE TO="p_hit_point_01" SIZE="41.0"/>
+             <SPHERE TO="p_hit_point_02" SIZE="77.0"/>
+             <SPHERE TO="p_hit_point_03" SIZE="44.0"/>
+			 <SPHERE TO="p_hit_point_04" SIZE="60.0"/>
+		</ABV>
+		<SLOT>
+			
+
+			<!-- 원거리 공격 -->
+			<ITEM NAME="btlidle_11_skill_shot_start" ANIMATION="1000204"/>
+			<ITEM NAME="btlidle_11_skill_shot" ANIMATION="1000205"/>
+			<ITEM NAME="skill_shot_11" ANIMATION="1000206" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_hydra_engball_01"/>
+
+			<!-- 원거리 공격 2 -->
+			<ITEM NAME="btlidle_12_skill_shot_start" ANIMATION="1000207"/>
+			<ITEM NAME="btlidle_12_skill_shot" ANIMATION="1000208"/>
+			<ITEM NAME="skill_shot_12" ANIMATION="1000209" FIRE_START_NODE="p_ef_skill_shot_01" PROJECTILE_ID="Projectile_hydra_dawnball_01"/>  
+
+
+			<!--부활스킬-->
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000020"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000021"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000024"/>
+
+
+             <!--레이저 공격-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1001151"/>
+			<ITEM NAME="btlidle_01_skill_shot" ANIMATION="1001152"/>
+			<ITEM NAME="skill_shot_01" ANIMATION="1001153" FIRE_START_NODE="p_ef_mouth" SHOT_INTER_TIME="0.03" PROJECTILE_SCALE="3" GROUND_EFFECT="NONE" PROJECTILE_ID="PROJECTILE_elga03_breath"/>
+			<ITEM NAME="shot_return_01" ANIMATION="1001154"/>
+
+			<!-- 대쉬 공격 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000501"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000502"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000503"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000504"/>
+
+			<!-- 브래스_음파 공격-->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1001121"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1001122"/>
+			<ITEM NAME="breath_01" ANIMATION="1001123"/>
+			<ITEM NAME="breath_01_finish" ANIMATION="1001124"/>			
+
+
+			<!-- 트렙설치 -->
+			<ITEM NAME="attk_01_01_start" ANIMATION="1001111"/>
+			<ITEM NAME="attk_01_01" ANIMATION="1001112" CAST_EFFECT="ef_SiegeDragon_skill_02_01_char_root" CAST_EFFECT_NODE="char_root" CAST_EFFECT_SCALE="0.5"/>
+			<ITEM NAME="attk_01_02" ANIMATION="1001113" />
+
+            <!-- Basic Movement -->
+			<ITEM NAME="idle_01" ANIMATION="1000005"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="fury_01" ANIMATION="1000044"/>
+			<ITEM NAME="stun" ANIMATION="1000025"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000005" />
+			<ITEM NAME="StandUp_01" ANIMATION="1000024" />
+
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>
+

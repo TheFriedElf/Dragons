@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+    <!-- 스카이피 신전  오프닝 1 -->
+    <!-- 플레이어 이동을 막는다. -->
+	<CMD TYPE="SetCameraModeEvent"/>
+    <CMD TYPE="setmoviescene" enable="TRUE" Time="0"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="TRUE"/>
+	<!-- 카메라를 나를 바라보게 하고 카메라 이동이 멈출 동안 PC는 기다린다. -->
+    <CMD TYPE="WaitCamera"/>
+    
+	<CMD TYPE="LockPlayerInput" Lock="TRUE"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1" CamActorDistance="200" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+
+	<CMD TYPE="Dialogue" NameTTID="510052" TitleTTID="506259" TextTTID="510051" FaceID="Thomas_normal"/>
+	<CMD TYPE="WaitDialogue"/>
+	<CMD type="waittime" time="1"/>
+    <CMD TYPE="CLOSE_DAILOGUE"/>
+	
+    <CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="1"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="SetCameraModeFollow" SpecialActor="ME"/>
+	<CMD TYPE="setmoviescene" enable="false" Time="1"/>
+	<CMD type="waittime" time="0"/>
+    
+    <CMD type="CallUI" UIWndName = "FRM_MISSION_START"/>
+    <CMD type="waittime" time="3"/>
+    <CMD type="CallUI" UIWndName = "FRM_GOGO_EVENT"/>
+    <CMD type="CloseUI" UIWndName = "FRM_REST_MON_NUM"/>
+    
+	<!-- 화면을 다시 정상적으로 보여줌 -->
+	<CMD TYPE="LockPlayerInput" Lock="FALSE"/>
+    <CMD TYPE="LockPlayerInputMove" Lock="false"/>
+</EVENT_SCRIPT>

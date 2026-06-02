@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<ACTOR NAME="m_Devil_Guard" DIE_PARTICLE_ID="ef_monster_die">
+	<WORLDOBJECT>
+		<ICON ID="Icon_m_Devil_Guard"/>
+		<KFMPATH SCALE="2.0">../Data/2_Mon2/95_Dungeon/01_BasicMon/050400/Devil_Guard/Devil_Guard.kfm</KFMPATH>
+		<SCRIPT SRC="Actor/mob_base.lua">
+			<ITEM NAME="Actor_Mob_Base" TYPE="EVENT"/>
+		</SCRIPT>
+		<ABV>
+			<SPHERE TO="p_hit_point_01" SIZE="20"/>
+			<SPHERE TO="p_hit_point_02" SIZE="20"/>
+		</ABV>
+		<SLOT>
+			<!--근거리 1-->
+
+			<ITEM NAME="attk_02_01_start" ANIMATION="1000201"/>
+			<ITEM NAME="attk_02_01" ANIMATION="1000202"/>
+			<ITEM NAME="attk_02_02" ANIMATION="1000203"/>
+
+				<!--근거리2-->
+			<ITEM NAME="breath_btlidle_01_start" ANIMATION="1000204"/>
+			<ITEM NAME="breath_btlidle_01" ANIMATION="1000205"/>
+			<ITEM NAME="breath_01" ANIMATION="1000206"/>
+
+
+
+			<!--원거리 1-->
+			<ITEM NAME="btlidle_01_shot_start" ANIMATION="1000213"/>
+			<ITEM NAME="btlidle_01_shot" ANIMATION="1000214"/>
+			<ITEM NAME="shot_01" ANIMATION="1000215"  FIRE_START_NODE="p_ef_shot_01_01" PROJECTILE_ID="Peojectile_Devilmini_Shot_01" PROJECTILE_SCALE="2"/>
+
+			<ITEM NAME="btlidle_02_shot_start" ANIMATION="1000216"/>
+			<ITEM NAME="btlidle_02_shot" ANIMATION="1000217"/>
+			<ITEM NAME="shot_02" ANIMATION="1000218"  FIRE_START_NODE="p_ef_shot_02" PROJECTILE_ID="Peojectile_Devilmini_Shot_02" PROJECTILE_SCALE="2"/>
+
+			<!--대쉬 -->
+			<ITEM NAME="dashattk_btlidle_01_start" ANIMATION="1000325"/>
+			<ITEM NAME="dashattk_btlidle_01" ANIMATION="1000326"/>
+			<ITEM NAME="dashattk_rush" ANIMATION="1000327" FIRE_EFFECT="efx_devil_guard_dashattk" FIRE_EFFECT_NODE="char_root" FIRE_EFFECT_SCALE="1.0"/>
+			<ITEM NAME="dashattk_finish" ANIMATION="1000328"/>
+	
+            <!--점프해서 내려찍기 -->
+			<ITEM NAME="jumpdowncrash_diag_up" ANIMATION="1000361" GROUND_EFFECT="NONE"/>
+			<ITEM NAME="jumpdowncrash_diag_down" ANIMATION="1000362"/>
+			<ITEM NAME="jumpdowncrash_diag_getup" ANIMATION="1000363"/>
+
+
+			<!-- 휠윈드 -->
+			<ITEM NAME="whirlwind_btlidle_01_start" ANIMATION="1000378"/>
+			<ITEM NAME="whirlwind_btlidle_01" ANIMATION="1000379"/>
+			<ITEM NAME="whirlwind_01" ANIMATION="1000380" FIRE_EFFECT="efx_devil_guard_whirlwind_01"/>
+			<ITEM NAME="whirlwind_01_finish" ANIMATION="1000381"/>
+
+			<!-- 크로스 어텍 -->
+			<ITEM NAME="crossattack_01_start" ANIMATION="1000395" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_01_idle" ANIMATION="1000396" CAST_EFFECT="e_ef_fossilearth_target_01"/>
+			<ITEM NAME="crossattack_01_fire" ANIMATION="1000397" FIRE_EFFECT="ef_devil_guard_Cross" QUAKE_TIME="1" QUAKE_FACTOR="3"/>
+			<ITEM NAME="crossattack_01_finish" ANIMATION="1000398"/>
+
+		
+	<!-- Basic Movement -->
+			<ITEM NAME="die_01" ANIMATION="1000020"/>
+			<ITEM NAME="dmg_01" ANIMATION="1000011" RANDOM="100"/>
+			<ITEM NAME="dmg_02" ANIMATION="1000012" RANDOM="100"/>
+			<ITEM NAME="Stun" ANIMATION="1000025"/>
+			<ITEM NAME="idle_01" ANIMATION="1000001"/>
+			<ITEM NAME="btlidle_01" ANIMATION="1000005"/>
+			<ITEM NAME="run" ANIMATION="1000055"/>
+			<ITEM NAME="walk" ANIMATION="1000055"/>
+			<ITEM NAME="BlowUp_Loop" ANIMATION="1000022"/>
+			<ITEM NAME="BlowUp_Down" ANIMATION="1000023"/>
+			<ITEM NAME="Opening" ANIMATION="1000081"/>
+			<ITEM NAME="StandUp" ANIMATION="1000024"/>
+		
+		</SLOT>
+	</WORLDOBJECT>
+</ACTOR>

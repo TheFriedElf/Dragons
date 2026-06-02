@@ -1,0 +1,11 @@
+<ACTION ID="a_ShadowBlade" NEXT="a_battle_idle" USE-EVENT="TRUE" CHECK_CAN_ENTER="TRUE" IGNORE_DMG_EFFECT="TRUE" USE_CFUNC_ONTARGET="TRUE">
+  <SLOT NAME="Kattar_skill_PhantomWarrior_01" LOOP="TRUE"/>
+  <FSM SCRIPT="Skill_Shadow_ShadowBlade"
+		CASTING_EFFECT_EFFECT_ID="ef_skill_shadow_blade_02_char_root"
+		CASTING_EFFECT_TARGET_NODE="char_root"
+		FIRE_CASTER_EFFECT_ID="ef_skill_shadow_blade_01_char_root"
+		FIRE_CASTER_EFFECT_TARGET_NODE="char_root"
+		CASTING_SOUND_ID="ShadowBlade_Cast"
+		FIRE_SOUND_ID="ShadowBlade"
+		/>
+</ACTION>

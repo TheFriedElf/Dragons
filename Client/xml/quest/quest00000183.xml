@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>183</ID> <!--T.T.10018301 불타는 할로윈의 질주! -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	바람항구의 랜디와 이야기 해보자!-->
+<!--[완료NPC]	바람항구 - 렌디-->
+<!--[내용]	바람항구 랜디가 할로윈 달리기 이벤트에서 보상으로 받는 고스트 러너를 가져오면 좋은 비밀을 알려 준다고 한다. -->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">5299E4D0-C1F4-46c6-8BB6-C9EF8AA3F6BE</CLIENT> <!--시작NPC 바람항구 - 렌디 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">5299E4D0-C1F4-46c6-8BB6-C9EF8AA3F6BE</PAYER> <!--완료NPC 바람항구 - 렌디 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">5299E4D0-C1F4-46c6-8BB6-C9EF8AA3F6BE</AGENT> <!--진행NPC 11 바람항구 - 렌디 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">99804190</ITEM> 
+ <!--Item_NO=99804190/고스트 러너,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="1" TEXT="10018311"/> <!--고스트 러너-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		<SELECT1 COUNT="0">
+			<ITEM COUNT="1">99804190</ITEM><!--전체지급/전체/1)/99804190(봉인아님) 1개-고스트 러너-->
+		</SELECT1>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10018321" FACE="Randy_normal"/> <!--오홋! 오홋! 오홋!
+기가 막힌 소식이에요.
+할로윈을 맞아 달리기 이벤트를 한다고 하네요.%%
+우승상품이 뭔지 궁금하신가욧? 케르케르케르.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10018326" FACE="Randy_smile"/> <!--오옷, 고스트 러너를 가지고 오셨군요.
+그럼 할로윈 이벤트의 비밀을 알려드릴게욧!%%
+고스트 러너와 버닝 고스트 러너를 가져오시면 제가 교환해드린다는 거에욧!%%
+앗! 별로 놀랍지 않으신가 보네요. 어쩔 수 없군욧!
+고스트 러너는 다시 돌려드릴게욧!-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10018323" FACE="Randy_angly"/> <!--바로 저를 본따 디자인한 유령 아바타에요.
+어때요? 정말 가지고 싶죠? 케르케르케르.%%
+상품은 이것뿐만이 아니에요. 
+여러분의 스킬을 더 올려주는 액세서리도 있다구욧!%%
+가지고 싶으시다면 할로윈 달리기에 참가해 보세욧!
+할로윈 달리기에 참여하셔서 고스트 러너를 가지고 오시면 제가 좋은 정보를 알려드릴 게욧!%%
+설마! 달리기를 하는 방법을 모르는 건 아니겠죠?
+바람항구의 데이지에게서 입장권을 사면 되죠오오오옷!
+바람항구의 스티븐 2세가 달리기 맵으로 들여보내 줄거에욧!%%
+자! 할로윈 달리기는 시간이 정해져 있어요.
+스티븐 2세에게서 입장 시간을 잘 확인하고 들어가세욧!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10018324" FACE="Randy_angly"/> <!--크르르르르. 후회할 거에요. 정말 엄청난 보물을 줄지도 몰라욧!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10018325" FACE="Randy_angly"/> <!--빨리 정보를 얻고 싶으면, 달리기 이벤트에 참여해 보세욧!-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10018302" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

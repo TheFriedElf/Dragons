@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<QUEST>
+	<ID>5026</ID> <!--T.T.10502601 하얗고 검은 물체 -->
+
+
+<!-- 작성자 : 김준용-->
+<!--[완료조건]	시청 지하수로 - 쇠망치 미라에게서 천 뭉치 10개 습득-->
+<!--[완료NPC]	바람항구 - 플로란-->
+<!--[내용]	플로란은 마을의 의상경연대회에 내보낼 작품을 만들고 있다고 한다. 하지만 천이 모자라서 걱정을 하고 있다. 플로란에 따르면 시청 지하수로 쇠망치 미라에게서 천 뭉치를 구할 수 있다고 한다. 시청 지하수로 쇠망치 미라에게서 천 뭉치 10개를 구하자.-->
+
+
+	<CLIENTS>
+		<CLIENT TYPE="NPC" EVENTNO="10001">AA4E8514-18C5-4A7D-B532-69898B75EA04</CLIENT> <!--시작NPC 바람항구 - 플로란 -->
+		
+	</CLIENTS>
+	<PAYERS>
+		<PAYER TYPE="NPC" EVENTNO="10031">AA4E8514-18C5-4A7D-B532-69898B75EA04</PAYER> <!--완료NPC 바람항구 - 플로란 -->
+		
+	</PAYERS>
+	<AGENTS>
+		<AGENT TYPE="NPC" EVENTNO="10011">AA4E8514-18C5-4A7D-B532-69898B75EA04</AGENT> <!--진행NPC 11 바람항구 - 플로란 -->
+		
+	</AGENTS>
+
+
+	<EVENTS>
+		<MONSTER OBJECTNO="1" TYPE="INSTDROP100_IN" VALUE="9010502/10000/4000/1/1/160502600">6008600</MONSTER> 
+ <!--MON_NO=6008600/쇠 망치 미라,MAP_NO=9010502/파렐 대저택,Item_NO=160502600/[Q.ID:05026] 천 뭉치,-->
+		<ITEM OBJECTNO="1" TYPE="CHANGE_COUNT" VALUE="1">160502600</ITEM> 
+ <!--Item_NO=160502600/[Q.ID:05026] 천 뭉치,-->
+		<NPC OBJECTNO="0" TYPE="CLIENT" VALUE="101">10001</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="PAYER" VALUE="601">10031</NPC> 
+ <!---->
+		<NPC OBJECTNO="0" TYPE="ING_DLG" VALUE="501">10011</NPC> 
+ <!---->
+		
+	</EVENTS>
+
+
+	<OBJECTS TYPE="NOSTEP">
+		<OBJECT1 COUNT="10" TEXT="10502611"/> <!--천 뭉치 습득-->
+		
+	</OBJECTS>
+
+
+	<REWARD>
+		
+	</REWARD>
+
+
+	<DIALOGS>
+		<DIALOG ID="101" TYPE="PROLOG"> <!--시작-->
+			<BODY TEXT="10502621" FACE="Floran_normal"/> <!--아! 정말 날짜는 다가오는데 이거 어쩌지.
+하여간 이 녀석은 엄마를 도울 생각을 안 하고 또 어딜 나간 거야?%%
+응? %class%님 혹시 이 근방에서 천 조작 보지 못하셨어요?
+사실 얼마 안 있으면 마을의 의상경연대회가 열려요.%%
+저도 대회에 참가하는데, 마침 천 조각이 부족한 거에요. 
+저 좀 제발 도와주세요.-->
+			<SELECT ID="10000" TYPE="ACCEPT" TEXT="500004">수락</SELECT>
+			<SELECT ID="20000" TYPE="REJECT" TEXT="500005">거절</SELECT>
+		</DIALOG>
+		<DIALOG ID="601" TYPE="COMPLETE"> <!--완료-->
+			<BODY TEXT="10502626" FACE="Floran_smile"/> <!--감사합니다. 만약 천이 남는다면 %class%님의 옷도 한 벌 만들어 드릴게요.-->
+			<SELECT ID="30999" TYPE="COMPLETE" TEXT="500007">완료</SELECT>
+		</DIALOG>
+		<DIALOG ID="301" > <!--수락-->
+			<BODY TEXT="10502623" FACE="Floran_normal"/> <!--과거에도 몇 번 도전했지만 생각보다 좋은 성적을 얻지 못했어요.
+하지만 이번에는 정말 잘하고 싶어요.%%
+항상 엄마를 무시하는 아들 녀석에게 무언가 저도 잘 할 수 있다는 것을 보여주고 싶어요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="401" > <!--거절-->
+			<BODY TEXT="10502624" FACE="Floran_normal"/> <!--바쁘시다면 어쩔 수 없죠. 바보 아들 녀석에게 부탁해 봐야겠네요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="501" > <!--진행중-->
+			<BODY TEXT="10502625" FACE="Floran_normal"/> <!--저기, 남은 날짜가 그렇게 길지가 않아요. 빨리 좀 부탁 드릴게요.-->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="902" > <!--인벤오류-->
+			<BODY TEXT="500168" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="903" > <!--1일오류-->
+			<BODY TEXT="501835" /> <!---->
+			<SELECT ID="0"  TEXT="500003">닫기</SELECT>
+		</DIALOG>
+		<DIALOG ID="901" TYPE="INFO"> <!--정보-->
+			<BODY TEXT="10502602" /> <!---->
+			<SELECT ID="0"  TEXT="19933">포기</SELECT>
+		</DIALOG>
+		
+	</DIALOGS>
+	
+	
+	
+		
+</QUEST>

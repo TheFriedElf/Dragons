@@ -1,0 +1,15 @@
+<!--
+-- SKILL_RANGE : 어느 범위 안에 있는 몬스터들이 맞을 것인가?
+-- SKILL_TIME : Skill 총 시간(필요 없을 수도)
+-- SKILL_MAX_MONSTER : 총 몇마리의 몬스터가 맞을 것인가?
+-- SKILL_MAX_HIT : 총 몇대를 때릴 수 있는가?
+-- HIT_EFFECT_ID : 몬스터를 때릴때의 HitEffectID
+-- SKILL_ADJUST : 잔상  이펙트를 보여주는 범위를 조정한다. 값이 크면 클 수록 좀 더 과장 되어져 보인다.
+-->
+
+<ACTION ID="a_SwiftShot" NEXT="a_idle" USE-EVENT="TRUE">  
+	<SLOT NAME="a_idle"/>
+	<SLOT NAME="a_skill_dash_ready"/>  
+	<FSM SCRIPT="Skill_SwiftShot" SKILL_RANGE="60" SKILL_TIME="2" SKILL_MAX_MONSTER="7" 
+	SKILL_MAX_HIT="15" SKILL_ADJUST="2.0" HIT_EFFECT_ID="e_dmg" />
+</ACTION>

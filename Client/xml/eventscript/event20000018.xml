@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<EVENT_SCRIPT>
+	<!-- 전갈자리 -->
+	<CMD TYPE="EscScript" EventID="20000010"/>
+	<!-- 전체 UI 숨기기 -->
+	<CMD TYPE="DOSTRING" COMMAND="UIOff(false)"/>
+	<!-- 유닛 숨기기 -->
+	<CMD TYPE="ShowActor" UnitType="UT_PLAYER" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_SUMMONED" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_ENTITY" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_NPC" Show="false"/>
+	<CMD TYPE="ShowActor" UnitType="UT_MONSTER" Show="false"/>
+	<!-- 카메라로 연출 -->
+	<CMD TYPE="SetCameraModeEvent"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="0" CamActorDistance="600" CamMoveUpDistance="-35"/>
+	<CMD TYPE="WaitCamera"/>
+	<CMD TYPE="MoveCamToActor" SpecialActor="ME" MoveTime="5" CamActorDistance="300" CamMoveUpDistance="-35"/>
+    <CMD TYPE="WaitCamera"/>
+	<!-- 여기까지만 ESC키 먹힘 -->
+	<CMD TYPE="ClearEscScript"/>
+	<!-- 꼭 해야 되는 연출 -->
+	<CMD TYPE="ActivateEvent" EventId="20000010"/>
+</EVENT_SCRIPT>
