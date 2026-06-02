@@ -449,12 +449,6 @@
     <Filter Include="NewWare\Game">
       <UniqueIdentifier>{8d0a75dd-5c7c-426f-a972-b882c74a7b82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\CustomContent">
-      <UniqueIdentifier>{03dea305-4f70-491e-aa6e-3d014aec53fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\CustomContent\Chat">
-      <UniqueIdentifier>{34c6cf13-a045-4596-a12b-0dddf1d7d43e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgIWorldObject.cpp">
@@ -2023,24 +2017,6 @@
     <ClCompile Include="PgRscContainer.cpp" />
     <ClCompile Include="PgRscLoader.cpp" />
     <ClCompile Include="PgWebLogin.cpp" />
-    <ClCompile Include="CustomContent\CustomMinimap.cpp">
-      <Filter>Contents\CustomContent</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomContent\CustomCharacterJumping.cpp">
-      <Filter>Contents\CustomContent</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomContent\Chat\CustomChat.cpp">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomContent\Chat\CustomChatbar.cpp">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomContent\Chat\CustomChatColors.cpp">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomContent\Chat\CustomEmoticons.cpp">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgIWorldObject.h">
@@ -3749,24 +3725,6 @@
     <ClInclude Include="PgRscContainer.h" />
     <ClInclude Include="PgRscLoader.h" />
     <ClInclude Include="PgWebLogin.h" />
-    <ClInclude Include="CustomContent\CustomMinimap.h">
-      <Filter>Contents\CustomContent</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomContent\CustomCharacterJumping.h">
-      <Filter>Contents\CustomContent</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomContent\Chat\CustomChatbar.h">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomContent\Chat\CustomChat.h">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomContent\Chat\CustomChatColors.h">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomContent\Chat\CustomEmoticons.h">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ShadowGeometry.inl">
@@ -3798,13 +3756,5 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="Dragonica.exe.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="CustomContent\Chat\emoticonfont.xml">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </Xml>
-    <Xml Include="CustomContent\Chat\interface.xml">
-      <Filter>Contents\CustomContent\Chat</Filter>
-    </Xml>
   </ItemGroup>
 </Project>
