@@ -1,9 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Variant/PgStringUtil.h"
 #include "Variant/ClientOption.h"
 #include "lwUI.h"
 
 #include "PgOption.h"
+#include "CustomContent/Chat/CustomChatColors.h"
 #include "PgLocalManager.h"
 #include "PgInputSystem.h"
 #include "PgNetwork.h"
@@ -25,7 +26,7 @@ namespace PgOptionUtil
 
 	SClientDWORDOption::SClientDWORDOption(SClientDWORDOption const& rhs)
 	{
-		ReadFromDWORD( rhs.WriteToDWORD() );
+		ReadFromDWORD(rhs.WriteToDWORD());
 	}
 
 	void SClientDWORDOption::ReadFromDWORD(DWORD const dwOption)
@@ -39,106 +40,106 @@ namespace PgOptionUtil
 
 	bool SClientDWORDOption::IsHideEquipInvenPos(EEquipPos const ePos) const
 	{
-		switch( ePos )
+		switch (ePos)
 		{
-		//case EQUIP_POS_GLASS:		{ return HideGlass(); }break;
-		//case EQUIP_POS_NECKLACE:	{ return HideNecklace(); }break;
-		case EQUIP_POS_HELMET:		{ return HideHelmet(); }break;
-		case EQUIP_POS_SHOULDER:	{ return HideShoulder(); }break;
-		case EQUIP_POS_CLOAK:		{ return HideClock(); }break;
-		case EQUIP_POS_SHIRTS:		{ return HideShirts(); }break;
-		case EQUIP_POS_GLOVE:		{ return HideGlove(); }break;
+			//case EQUIP_POS_GLASS:		{ return HideGlass(); }break;
+			//case EQUIP_POS_NECKLACE:	{ return HideNecklace(); }break;
+		case EQUIP_POS_HELMET: { return HideHelmet(); }break;
+		case EQUIP_POS_SHOULDER: { return HideShoulder(); }break;
+		case EQUIP_POS_CLOAK: { return HideClock(); }break;
+		case EQUIP_POS_SHIRTS: { return HideShirts(); }break;
+		case EQUIP_POS_GLOVE: { return HideGlove(); }break;
 
-		//case EQUIP_POS_BELT:			{ return HideBelt(); }break;
-		case EQUIP_POS_PANTS:		{ return HidePants(); }break;
-		case EQUIP_POS_BOOTS:		{ return HideBoots(); }break;
-		//case EQUIP_POS_RING_L:		{ return HideRingL(); }break;
-		//case EQUIP_POS_RING_R:		{ return HideRingR(); }break;
-		//case EQUIP_POS_EARRING:	{ return HideEarring(); }break;
-		//case EQUIP_POS_ATTSTONE:	{ return HideAttstone(); }break;
+			//case EQUIP_POS_BELT:			{ return HideBelt(); }break;
+		case EQUIP_POS_PANTS: { return HidePants(); }break;
+		case EQUIP_POS_BOOTS: { return HideBoots(); }break;
+			//case EQUIP_POS_RING_L:		{ return HideRingL(); }break;
+			//case EQUIP_POS_RING_R:		{ return HideRingR(); }break;
+			//case EQUIP_POS_EARRING:	{ return HideEarring(); }break;
+			//case EQUIP_POS_ATTSTONE:	{ return HideAttstone(); }break;
 
 		default:
-			{
-				// do nothing
-			}break;
+		{
+			// do nothing
+		}break;
 		}
 		return false;
 	}
 	void SClientDWORDOption::SetHideEquipInvenPos(EEquipPos const ePos, bool const bHide)
 	{
-		switch( ePos )
+		switch (ePos)
 		{
-		//case EQUIP_POS_GLASS:		{ HideGlass(bHide); }break;
-		//case EQUIP_POS_NECKLACE:	{ HideNecklace(bHide); }break;
-		case EQUIP_POS_HELMET:		{ HideHelmet(bHide); }break;
-		case EQUIP_POS_SHOULDER:	{ HideShoulder(bHide); }break;
-		case EQUIP_POS_CLOAK:		{ HideClock(bHide); }break;
-		case EQUIP_POS_SHIRTS:		{ HideShirts(bHide); }break;
-		case EQUIP_POS_GLOVE:		{ HideGlove(bHide); }break;
+			//case EQUIP_POS_GLASS:		{ HideGlass(bHide); }break;
+			//case EQUIP_POS_NECKLACE:	{ HideNecklace(bHide); }break;
+		case EQUIP_POS_HELMET: { HideHelmet(bHide); }break;
+		case EQUIP_POS_SHOULDER: { HideShoulder(bHide); }break;
+		case EQUIP_POS_CLOAK: { HideClock(bHide); }break;
+		case EQUIP_POS_SHIRTS: { HideShirts(bHide); }break;
+		case EQUIP_POS_GLOVE: { HideGlove(bHide); }break;
 
-		//case EQUIP_POS_BELT:			{ HideBelt(bHide); }break;
-		case EQUIP_POS_PANTS:		{ HidePants(bHide); }break;
-		case EQUIP_POS_BOOTS:		{ HideBoots(bHide); }break;
-		//case EQUIP_POS_RING_L:		{ HideRingL(bHide); }break;
-		//case EQUIP_POS_RING_R:		{ HideRingR(bHide); }break;
-		//case EQUIP_POS_EARRING:	{ HideEarring(bHide); }break;
-		//case EQUIP_POS_ATTSTONE:	{ HideAttstone(bHide); }break;
+			//case EQUIP_POS_BELT:			{ HideBelt(bHide); }break;
+		case EQUIP_POS_PANTS: { HidePants(bHide); }break;
+		case EQUIP_POS_BOOTS: { HideBoots(bHide); }break;
+			//case EQUIP_POS_RING_L:		{ HideRingL(bHide); }break;
+			//case EQUIP_POS_RING_R:		{ HideRingR(bHide); }break;
+			//case EQUIP_POS_EARRING:	{ HideEarring(bHide); }break;
+			//case EQUIP_POS_ATTSTONE:	{ HideAttstone(bHide); }break;
 
 		default:
-			{
-				// do nothing
-			}break;
+		{
+			// do nothing
+		}break;
 		}
 	}
 	bool SClientDWORDOption::IsHideCashInvenPos(EEquipPos const ePos) const
 	{
-		switch( ePos )
+		switch (ePos)
 		{
-		case EQUIP_POS_GLASS:		{ return HideCashGlass(); }break;
-		case EQUIP_POS_HELMET:		{ return HideCashHelmet(); }break;
-		case EQUIP_POS_SHOULDER:	{ return HideCashShoulder(); }break;
-		case EQUIP_POS_CLOAK:		{ return HideCashClock(); }break;
-		case EQUIP_POS_SHIRTS:		{ return HideCashShirts(); }break;
-		case EQUIP_POS_GLOVE:		{ return HideCashGlove(); }break;
-		case EQUIP_POS_WEAPON:	{ return HideCashWeapon(); }break;
-		case EQUIP_POS_ARM:			{ return HideCashArm(); }break;
-		case EQUIP_POS_BOOTS:		{ return HideCashBoots(); }break;
-		case EQUIP_POS_PANTS:		{ return HideCashPants(); }break;
-		case EQUIP_POS_MEDAL:		{ return HideCashBalloon(); }break;
+		case EQUIP_POS_GLASS: { return HideCashGlass(); }break;
+		case EQUIP_POS_HELMET: { return HideCashHelmet(); }break;
+		case EQUIP_POS_SHOULDER: { return HideCashShoulder(); }break;
+		case EQUIP_POS_CLOAK: { return HideCashClock(); }break;
+		case EQUIP_POS_SHIRTS: { return HideCashShirts(); }break;
+		case EQUIP_POS_GLOVE: { return HideCashGlove(); }break;
+		case EQUIP_POS_WEAPON: { return HideCashWeapon(); }break;
+		case EQUIP_POS_ARM: { return HideCashArm(); }break;
+		case EQUIP_POS_BOOTS: { return HideCashBoots(); }break;
+		case EQUIP_POS_PANTS: { return HideCashPants(); }break;
+		case EQUIP_POS_MEDAL: { return HideCashBalloon(); }break;
 		default:
-			{
-				// do nothing
-			}break;
+		{
+			// do nothing
+		}break;
 		}
 		return false;
 	}
 
 	void SClientDWORDOption::SetHideCashInvenPos(EEquipPos const ePos, bool const bHide)
 	{
-		switch( ePos )
+		switch (ePos)
 		{
-		case EQUIP_POS_GLASS:		{ HideCashGlass(bHide); }break;
-		case EQUIP_POS_HELMET:		{ HideCashHelmet(bHide); }break;
-		case EQUIP_POS_SHOULDER:	{ HideCashShoulder(bHide); }break;
-		case EQUIP_POS_CLOAK:		{ HideCashClock(bHide); }break;
-		case EQUIP_POS_SHIRTS:		{ HideCashShirts(bHide); }break;
-		case EQUIP_POS_GLOVE:		{ HideCashGlove(bHide); }break;
-		case EQUIP_POS_WEAPON:	{ HideCashWeapon(bHide); }break;
-		case EQUIP_POS_ARM:			{ HideCashArm(bHide); }break;
-		case EQUIP_POS_BOOTS:		{ HideCashBoots(bHide); }break;
-		case EQUIP_POS_PANTS:		{ HideCashPants(bHide); }break;
-		case EQUIP_POS_MEDAL:		{ HideCashBalloon(bHide); }break;
+		case EQUIP_POS_GLASS: { HideCashGlass(bHide); }break;
+		case EQUIP_POS_HELMET: { HideCashHelmet(bHide); }break;
+		case EQUIP_POS_SHOULDER: { HideCashShoulder(bHide); }break;
+		case EQUIP_POS_CLOAK: { HideCashClock(bHide); }break;
+		case EQUIP_POS_SHIRTS: { HideCashShirts(bHide); }break;
+		case EQUIP_POS_GLOVE: { HideCashGlove(bHide); }break;
+		case EQUIP_POS_WEAPON: { HideCashWeapon(bHide); }break;
+		case EQUIP_POS_ARM: { HideCashArm(bHide); }break;
+		case EQUIP_POS_BOOTS: { HideCashBoots(bHide); }break;
+		case EQUIP_POS_PANTS: { HideCashPants(bHide); }break;
+		case EQUIP_POS_MEDAL: { HideCashBalloon(bHide); }break;
 		default:
-			{
-				// do nothing
-			}break;
+		{
+			// do nothing
+		}break;
 		}
 	}
 
 	//
 	inline int BoolToInt(bool const bVal)
 	{
-		return (bVal)? 1: 0;
+		return (bVal) ? 1 : 0;
 	}
 	inline bool IntToBool(int const iVal)
 	{
@@ -175,7 +176,7 @@ namespace PgOptionUtil
 
 	void UpdateHideInvenOption(PgActor* pkActor, EEquipPos const kItemPos, SClientDWORDOption const& rkClientOption)
 	{
-		if( !pkActor )
+		if (!pkActor)
 		{
 			return;
 		}
@@ -184,12 +185,12 @@ namespace PgOptionUtil
 
 		PgPlayer* pkPlayer = NULL;
 		PgPilot* pkPilot = pkActor->GetPilot();
-		if( pkPilot )
+		if (pkPilot)
 		{
-			pkPlayer = dynamic_cast< PgPlayer* >(pkPilot->GetUnit());
+			pkPlayer = dynamic_cast<PgPlayer*>(pkPilot->GetUnit());
 		}
 
-		if( !pkPlayer )
+		if (!pkPlayer)
 		{
 			return;
 		}
@@ -200,43 +201,43 @@ namespace PgOptionUtil
 		bool const bHaveFitNormal = S_OK == pkInven->GetItem(IT_FIT, kItemPos, kFitItem);
 		bool const bHaveCashFitCash = S_OK == pkInven->GetItem(IT_FIT_CASH, kItemPos, kCashFitItem);
 
-		if(bHaveFitNormal)
+		if (bHaveFitNormal)
 		{
-			if( rkClientOption.IsHideEquipInvenPos(kItemPos) )
-			{//! Àåºñ ¾ÆÀÌÅÛ ¼û±è
+			if (rkClientOption.IsHideEquipInvenPos(kItemPos))
+			{//! ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				pkActor->UnequipItem(IT_FIT, kItemPos, 0, PgItemEx::LOAD_TYPE_INSTANT, false, false);
 			}
 			else
-			{//! Àåºñ ¾ÆÀÌÅÛ º¸ÀÓ
+			{//! ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				pkActor->EquipItemByPos(IT_FIT, kItemPos, false);
 			}
 		}
 
-		if(bHaveCashFitCash)
+		if (bHaveCashFitCash)
 		{
-			if( rkClientOption.IsHideCashInvenPos(kItemPos) )
-			{//! Ä³½¬ ¾ÆÀÌÅÛ ¼û±è
+			if (rkClientOption.IsHideCashInvenPos(kItemPos))
+			{//! Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				pkActor->UnequipItem(IT_FIT_CASH, kItemPos, 0, PgItemEx::LOAD_TYPE_INSTANT, false, false);
 			}
 			else
-			{//! Ä³½¬ ¾ÆÀÌÅÛ º¸ÀÓ
+			{//! Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				pkActor->EquipItemByPos(IT_FIT_CASH, kItemPos, false);
 			}
 		}
 
-		if( g_kPilotMan.IsMyPlayer(pkPlayer->GetID()) )
+		if (g_kPilotMan.IsMyPlayer(pkPlayer->GetID()))
 		{
 			char const* szActorViewerAddName = "CHARINFO";
 			g_kMyActorViewMgr.ChangeEquip(szActorViewerAddName, pkPlayer->GetID());
 		}
 
-		if(EEquipPos::EQUIP_POS_HELMET == kItemPos)
-		{// Åõ±¸¸¦ °¨Ãè°í
+		if (EEquipPos::EQUIP_POS_HELMET == kItemPos)
+		{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			bool bDisplayHelmet = 0;
-			int const iOption = pkPlayer->GetAbil(AT_CLIENT_OPTION_SAVE) ;
+			int const iOption = pkPlayer->GetAbil(AT_CLIENT_OPTION_SAVE);
 			READ_DWORD_TO_BOOL(iOption, OPTION_TYPE_SHOW_HELMET, bDisplayHelmet);
-			if(true == bDisplayHelmet)
-			{// Åõ±¸ °­Á¦ º¸ÀÌ±â ¿É¼ÇÀÌ ÄÑÁ®ÀÖ´Ù¸é
+			if (true == bDisplayHelmet)
+			{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½
 				g_kStatusEffectMan.DisplayHeadTransformEffect(pkActor, false);
 			}
 		}
@@ -244,16 +245,16 @@ namespace PgOptionUtil
 
 	void UpdateOldAndNew(PgActor* pkActor, SClientDWORDOption const& rkOldOption, SClientDWORDOption const& rkNewOption)
 	{
-		if( rkOldOption.DisplayHelmet() != rkNewOption.DisplayHelmet() )
+		if (rkOldOption.DisplayHelmet() != rkNewOption.DisplayHelmet())
 		{
 			g_kStatusEffectMan.DisplayHeadTransformEffect(pkActor, !rkNewOption.DisplayHelmet());
 		}
 		size_t iCur = EQUIP_POS_NONE;
-		for( ; EQUIP_POS_MAX > iCur; ++iCur )
+		for (; EQUIP_POS_MAX > iCur; ++iCur)
 		{
-			EEquipPos const ePos = static_cast< EEquipPos >(iCur);
-			if( (rkOldOption.IsHideCashInvenPos(ePos) != rkNewOption.IsHideCashInvenPos(ePos)) ||
-				(rkOldOption.IsHideEquipInvenPos(ePos) != rkNewOption.IsHideEquipInvenPos(ePos)) )
+			EEquipPos const ePos = static_cast<EEquipPos>(iCur);
+			if ((rkOldOption.IsHideCashInvenPos(ePos) != rkNewOption.IsHideCashInvenPos(ePos)) ||
+				(rkOldOption.IsHideEquipInvenPos(ePos) != rkNewOption.IsHideEquipInvenPos(ePos)))
 			{
 				UpdateHideInvenOption(pkActor, ePos, rkNewOption);
 			}
@@ -263,30 +264,30 @@ namespace PgOptionUtil
 	SClientDWORDOption OptionToClientOption(PgOption const& rkOption)
 	{
 		SClientDWORDOption kClientOption(0);
-		kClientOption.DisplayHelmet( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_DISPLAY_HELMET)) );
-		kClientOption.HideCashGlass( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_GLASS)) );
-		kClientOption.HideCashHelmet( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_HELMET)) );
-		kClientOption.HideCashShoulder( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_SHOULDER)) );
-		kClientOption.HideCashClock( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_CLOAK)) );
-		kClientOption.HideCashShirts( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_SHIRTS)) );
-		kClientOption.HideCashGlove( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_GLOVE)) );
-		kClientOption.HideCashWeapon( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_WEAPON)) );
-		kClientOption.HideCashArm( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_ARM)) );
-		kClientOption.HideCashBoots( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_BOOTS)) );
-		kClientOption.HideCashPants( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_PANTS)) );
-		kClientOption.HideCashBalloon( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_BALLOON)) );
+		kClientOption.DisplayHelmet(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_DISPLAY_HELMET)));
+		kClientOption.HideCashGlass(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_GLASS)));
+		kClientOption.HideCashHelmet(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_HELMET)));
+		kClientOption.HideCashShoulder(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_SHOULDER)));
+		kClientOption.HideCashClock(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_CLOAK)));
+		kClientOption.HideCashShirts(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_SHIRTS)));
+		kClientOption.HideCashGlove(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_GLOVE)));
+		kClientOption.HideCashWeapon(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_WEAPON)));
+		kClientOption.HideCashArm(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_ARM)));
+		kClientOption.HideCashBoots(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_BOOTS)));
+		kClientOption.HideCashPants(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_PANTS)));
+		kClientOption.HideCashBalloon(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_CASH_EQUIP_HIDE_BALLOON)));
 
 		//kClientOption.HideGlass( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_GLASS)) );
 		//kClientOption.HideNecklace( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_NECKLACE)) );
-		kClientOption.HideHelmet( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_HELMET)) );
-		kClientOption.HideShoulder( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_SHOULDER)) );
-		kClientOption.HideClock( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_CLOAK)) );
-		kClientOption.HideShirts( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_SHIRTS)) );
-		kClientOption.HideGlove( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_GLOVE)) );
+		kClientOption.HideHelmet(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_HELMET)));
+		kClientOption.HideShoulder(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_SHOULDER)));
+		kClientOption.HideClock(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_CLOAK)));
+		kClientOption.HideShirts(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_SHIRTS)));
+		kClientOption.HideGlove(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_GLOVE)));
 
 		//kClientOption.HideBelt( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_BELT)) );
-		kClientOption.HidePants( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_PANTS)) );
-		kClientOption.HideBoots( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_BOOTS)) );
+		kClientOption.HidePants(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_PANTS)));
+		kClientOption.HideBoots(IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_BOOTS)));
 		//kClientOption.HideRingL( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_RINGL)) );
 		//kClientOption.HideRingR( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_RINGR)) );
 		//kClientOption.HideEarring( IntToBool(rkOption.GetValue(XML_ELEMENT_ETC, STR_OPTION_EQUIP_HIDE_EARRING)) );
@@ -327,25 +328,25 @@ namespace PgOptionUtil
 
 		////
 		PgPilot* const pkPlayer = g_kPilotMan.GetPlayerPilot();
-		if( pkPlayer )
+		if (pkPlayer)
 		{
-			// ¿É¼ÇÀÌ º¯°æ µÆÀ¸¹Ç·Î, ÇØ´ç ¾îºôÀ» ¼³Á¤
-			pkPlayer->SetAbil(AT_CLIENT_OPTION_SAVE, rkClientOption.WriteToDWORD()); // ÀÌ°÷¿¡¼­ Åõ±¸ º¸ÀÌ±â °¨Ãß±â¸¦ È£Ãâ
+			// ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½, ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			pkPlayer->SetAbil(AT_CLIENT_OPTION_SAVE, rkClientOption.WriteToDWORD()); // ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ß±â¸¦ È£ï¿½ï¿½
 		}
 	}
 
 	inline void InsertOrSet(PgOption::ContConfigMap& rkConfigMap, std::string const& rkKey, int iValue)
 	{
 		typedef PgOption::ContConfigMap ContConfigMap;
-		ContConfigMap::iterator itor = rkConfigMap.find( rkKey );
-		if( rkConfigMap.end() != itor )
+		ContConfigMap::iterator itor = rkConfigMap.find(rkKey);
+		if (rkConfigMap.end() != itor)
 		{
 			itor->second.first = iValue;
 			itor->second.second = std::string();
 		}
 		else
 		{
-			rkConfigMap.insert( std::make_pair(rkKey, std::make_pair(iValue, std::string())) );
+			rkConfigMap.insert(std::make_pair(rkKey, std::make_pair(iValue, std::string())));
 		}
 	}
 
@@ -358,59 +359,59 @@ namespace PgOptionUtil
 
 
 
-		char chKey[MAX_PATH] = {0, };
+		char chKey[MAX_PATH] = { 0, };
 		short sCur = 0;
-		for( ; OPTION_MAX_KEYSET_SIZE > sCur; ++sCur )
+		for (; OPTION_MAX_KEYSET_SIZE > sCur; ++sCur)
 		{
-			sprintf_s(chKey, "%s%s%u", XML_ELEMENT_KEYSET, STR_OPTION_SEPARATER, static_cast< unsigned long >( sCur )); // KEYSET/XXX
-			std::string const rkConfigKey( chKey );
+			sprintf_s(chKey, "%s%s%u", XML_ELEMENT_KEYSET, STR_OPTION_SEPARATER, static_cast<unsigned long>(sCur)); // KEYSET/XXX
+			std::string const rkConfigKey(chKey);
 
 			BYTE& byKeySet = kOption.byKeySet[sCur];
 
-			ContConfigMap::const_iterator find_iter = rkCurConfig.find( rkConfigKey );
-			if( rkCurConfig.end() != find_iter )
+			ContConfigMap::const_iterator find_iter = rkCurConfig.find(rkConfigKey);
+			if (rkCurConfig.end() != find_iter)
 			{
 				int const iUKey = (*find_iter).second.first;
 
-				if( ENIKEY_TO_UKEY <= iUKey )
+				if (ENIKEY_TO_UKEY <= iUKey)
 				{
-					byKeySet = static_cast< BYTE >( (*find_iter).second.first - ENIKEY_TO_UKEY );
+					byKeySet = static_cast<BYTE>((*find_iter).second.first - ENIKEY_TO_UKEY);
 				}
-				else if(iUKey == 0)
+				else if (iUKey == 0)
 				{
 					byKeySet = 0;
 				}
 				else
 				{
-					byKeySet = ENIKEY_IGNORE_VALUE; // 150~165 ±îÁö
+					byKeySet = ENIKEY_IGNORE_VALUE; // 150~165 ï¿½ï¿½ï¿½ï¿½
 				}
 			}
 			else
 			{
-				byKeySet = ENIKEY_IGNORE_VALUE; // ¾øÀ» ¼öµµ ÀÖ´Ù (145~149)
+				byKeySet = ENIKEY_IGNORE_VALUE; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ (145~149)
 			}
 		}
 
 		{
-			// Á¶ÀÌ½ºÆ½ ÀúÀåÇÑ´Ù
+			// ï¿½ï¿½ï¿½Ì½ï¿½Æ½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 			// kOption.byJoystick[]
 			PgInputSystem* pkInput = NiDynamicCast(PgInputSystem, g_pkLocalManager->GetInputSystem());
-			if(pkInput)
+			if (pkInput)
 			{
 				SPadButtonInformation* kPadTable = pkInput->GetPadSettingTable();
-				if(kPadTable)
+				if (kPadTable)
 				{
-					for(int i=0;NiInputGamePad::NIGP_NUMBUTTONS>i;++i)
+					for (int i = 0; NiInputGamePad::NIGP_NUMBUTTONS > i; ++i)
 					{
-						kOption.byJoystick[i*2] = (kPadTable+i)->m_iUkey - ENIKEY_TO_UKEY;
-						kOption.byJoystick[i*2+1] = (kPadTable+i)->m_iUIButtonIndex;
+						kOption.byJoystick[i * 2] = (kPadTable + i)->m_iUkey - ENIKEY_TO_UKEY;
+						kOption.byJoystick[i * 2 + 1] = (kPadTable + i)->m_iUIButtonIndex;
 					}
 				}
 			}
 		}
 
-		// 32°¡ÁöÀÇ boolÇü ¿É¼ÇÀ» ÀúÀå °¡´É
-		PgOptionUtil::SClientDWORDOption const kClientOption( PgOptionUtil::OptionToClientOption(rkOption) );
+		// 32ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ boolï¿½ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		PgOptionUtil::SClientDWORDOption const kClientOption(PgOptionUtil::OptionToClientOption(rkOption));
 		kOption.dwShowOption = kClientOption.WriteToDWORD();
 
 		rkPacket.Push(kOption);
@@ -423,7 +424,7 @@ namespace PgOptionUtil
 		typedef struct tagOldClientOption {
 			short sVersion;								// 2
 			unsigned short usKeySetSize;				// 4
-			BYTE byKeySet[OPTION_MAX_KEYSET_SIZE*3];	// 502(BYTE byKey + SHORT usKeyValue)
+			BYTE byKeySet[OPTION_MAX_KEYSET_SIZE * 3];	// 502(BYTE byKey + SHORT usKeyValue)
 			DWORD dwShowOption;							// 506
 			BYTE byReserved[OPTION_RESERVED];			// 520
 		} OldClientOption;
@@ -432,98 +433,98 @@ namespace PgOptionUtil
 		//
 		short sVersion = 0;
 		size_t const iRdPos = rkPacket.RdPos();
-		rkPacket.Pop( sVersion );
-		rkPacket.RdPos(iRdPos); // ¿ø·¡·Î µ¹¸°´Ù
+		rkPacket.Pop(sVersion);
+		rkPacket.RdPos(iRdPos); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		DWORD dwShowOption = 0;
 
-		switch( sVersion )
+		switch (sVersion)
 		{
 		case EOLD_OPTOIN_DB_VER:
+		{
+			OldClientOption kOption;
+			rkPacket.Pop(kOption);
+
+			unsigned short usBufferPos = 0;
+			char chKey[MAX_PATH] = { 0, };
+			BYTE byKey = 0;
+			unsigned short usKeyValue = 0;
+
+			if (OPTION_MAX_KEYSET_SIZE >= kOption.usKeySetSize)
 			{
-				OldClientOption kOption;
-				rkPacket.Pop( kOption );
-
-				unsigned short usBufferPos = 0;
-				char chKey[MAX_PATH] = {0, };
-				BYTE byKey = 0;
-				unsigned short usKeyValue = 0;
-
-				if( OPTION_MAX_KEYSET_SIZE >= kOption.usKeySetSize )
+				unsigned short usKeySetSize = kOption.usKeySetSize;
+				while (usKeySetSize-- > 0)
 				{
-					unsigned short usKeySetSize = kOption.usKeySetSize;
-					while( usKeySetSize-- > 0 )
-					{
-						byKey = *(reinterpret_cast<BYTE*>(&kOption.byKeySet[usBufferPos]));
-						usKeyValue = *(reinterpret_cast<unsigned short*>(&kOption.byKeySet[usBufferPos+1]));
-						usBufferPos += (sizeof(BYTE) + sizeof(unsigned short));
-						sprintf_s(chKey, "%s%s%u", XML_ELEMENT_KEYSET, STR_OPTION_SEPARATER, static_cast<unsigned long>(byKey));
+					byKey = *(reinterpret_cast<BYTE*>(&kOption.byKeySet[usBufferPos]));
+					usKeyValue = *(reinterpret_cast<unsigned short*>(&kOption.byKeySet[usBufferPos + 1]));
+					usBufferPos += (sizeof(BYTE) + sizeof(unsigned short));
+					sprintf_s(chKey, "%s%s%u", XML_ELEMENT_KEYSET, STR_OPTION_SEPARATER, static_cast<unsigned long>(byKey));
 
-						InsertOrSet( rkCurConfig, std::string(chKey), usKeyValue );
-					}
+					InsertOrSet(rkCurConfig, std::string(chKey), usKeyValue);
 				}
-				else
-				{
-					rkOption.DefaultKeySet();
-				}
+			}
+			else
+			{
+				rkOption.DefaultKeySet();
+			}
 
-				// DefaultJoystick(); // Á¶ÀÌ½ºÆ½ Á¤º¸°¡ ¾ø´Â ¹öÁ¯ÀÌ´Ù(ÃÊ±âÈ­ ÇØÁÖÀÚ)
-				rkOption.ApplyKeySet();
-				// ApplyJoystick();
+			// DefaultJoystick(); // ï¿½ï¿½ï¿½Ì½ï¿½Æ½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½(ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+			rkOption.ApplyKeySet();
+			// ApplyJoystick();
 
-				dwShowOption = kOption.dwShowOption;
-			}break;
+			dwShowOption = kOption.dwShowOption;
+		}break;
 		case ENEW_OPTION_DB_VER:
+		{
+			ClientOption kOption;
+			rkPacket.Pop(kOption);
+
+			char chKey[MAX_PATH] = { 0, };
+
+			short sCur = 0;
+			for (; OPTION_MAX_KEYSET_SIZE > sCur; ++sCur)
 			{
-				ClientOption kOption;
-				rkPacket.Pop( kOption );
+				sprintf_s(chKey, "%s%s%u", XML_ELEMENT_KEYSET, STR_OPTION_SEPARATER, static_cast<unsigned long>(sCur)); // KEYSET/XXX
 
-				char chKey[MAX_PATH] = {0, };
-
-				short sCur = 0;
-				for( ; OPTION_MAX_KEYSET_SIZE > sCur; ++sCur )
+				BYTE const& byKeySet = kOption.byKeySet[sCur];
+				if (ENIKEY_IGNORE_VALUE != byKeySet)
 				{
-					sprintf_s(chKey, "%s%s%u", XML_ELEMENT_KEYSET, STR_OPTION_SEPARATER, static_cast< unsigned long >( sCur )); // KEYSET/XXX
-
-					BYTE const& byKeySet = kOption.byKeySet[sCur];
-					if( ENIKEY_IGNORE_VALUE != byKeySet )
-					{
-						InsertOrSet( rkCurConfig, std::string(chKey), ENIKEY_TO_UKEY + byKeySet );
-					}
+					InsertOrSet(rkCurConfig, std::string(chKey), ENIKEY_TO_UKEY + byKeySet);
 				}
+			}
 
+			{
+				// kOption.byJoystick[]
+				// JoyStick ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç®ï¿½î³½ï¿½ï¿½
+				PgInputSystem* pkInput = NiDynamicCast(PgInputSystem, g_pkLocalManager->GetInputSystem());
+				if (pkInput)
 				{
-					// kOption.byJoystick[]
-					// JoyStick Á¤º¸¸¦ Ç®¾î³½´Ù
-					PgInputSystem* pkInput = NiDynamicCast(PgInputSystem, g_pkLocalManager->GetInputSystem());
-					if(pkInput)
+					SPadButtonInformation* kPadTable = pkInput->GetPadSettingTable();
+					if (kPadTable)
 					{
-						SPadButtonInformation* kPadTable = pkInput->GetPadSettingTable();
-						if(kPadTable)
+						for (int i = 0; NiInputGamePad::NIGP_NUMBUTTONS > i; ++i)
 						{
-							for(int i=0;NiInputGamePad::NIGP_NUMBUTTONS>i;++i)
-							{
-								(kPadTable+i)->m_iUkey = kOption.byJoystick[i*2] + ENIKEY_TO_UKEY;
-								(kPadTable+i)->m_iUIButtonIndex = kOption.byJoystick[i*2+1];
-							}
+							(kPadTable + i)->m_iUkey = kOption.byJoystick[i * 2] + ENIKEY_TO_UKEY;
+							(kPadTable + i)->m_iUIButtonIndex = kOption.byJoystick[i * 2 + 1];
 						}
 					}
 				}
+			}
 
-				rkOption.ApplyKeySet();
-				// ApplyJoystick();
+			rkOption.ApplyKeySet();
+			// ApplyJoystick();
 
-				dwShowOption = kOption.dwShowOption;
-			}break;
+			dwShowOption = kOption.dwShowOption;
+		}break;
 		default:
-			{
-				rkOption.DefaultKeySet();
-				rkOption.ApplyKeySet();
-				return;
-			}break;
+		{
+			rkOption.DefaultKeySet();
+			rkOption.ApplyKeySet();
+			return;
+		}break;
 		}
 
-		// 32°¡ÁöÀÇ boolÇü ¿É¼ÇÀ» ÀúÀå °¡´É
+		// 32ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ boolï¿½ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		PgOptionUtil::SClientDWORDOption const kClientShowOption(dwShowOption);
 		PgOptionUtil::ClientOptionToOption(kClientShowOption, rkOption);
 	}
@@ -544,17 +545,17 @@ namespace lwOption
 	void SetCashItemEquipHide(int const iItemPos, bool const bHide)
 	{
 		PgOptionUtil::SClientDWORDOption kClientOption(PgOptionUtil::OptionToClientOption(g_kGlobalOption));
-		kClientOption.SetHideCashInvenPos(static_cast< EEquipPos >(iItemPos), bHide);
+		kClientOption.SetHideCashInvenPos(static_cast<EEquipPos>(iItemPos), bHide);
 		PgOptionUtil::ClientOptionToOption(kClientOption, g_kGlobalOption);
 
 		//PgOptionUtil::UpdateHideCashInvenOption(g_kPilotMan.GetPlayerActor(), static_cast< EEquipPos >(iItemPos), kClientOption);
-		SaveCashItemEquipHide(); // UI ¹Ù²ð ½Ã¸¶´Ù ÀúÀå
+		SaveCashItemEquipHide(); // UI ï¿½Ù²ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
 	bool GetCashItemEquipHide(int const iItemPos)
 	{
 		PgOptionUtil::SClientDWORDOption const kClientOption(PgOptionUtil::OptionToClientOption(g_kGlobalOption));
-		return kClientOption.IsHideCashInvenPos( static_cast< EEquipPos >(iItemPos) );
+		return kClientOption.IsHideCashInvenPos(static_cast<EEquipPos>(iItemPos));
 	}
 
 	//-------------------------------------------------------------------------
@@ -569,18 +570,18 @@ namespace lwOption
 	bool SetItemEquipHide(int const iItemPos, bool const bHide)
 	{
 		PgPlayer* pPlayer = g_kPilotMan.GetPlayerUnit();
-		if(pPlayer)
+		if (pPlayer)
 		{
 			int iClass = pPlayer->GetAbil(AT_CLASS);
-			if( IS_CLASS_LIMIT(UCLIMIT_COMMON_DOUBLE_FIGHTER, iClass) 
-				|| pPlayer->UnitType() == UT_SUB_PLAYER )
+			if (IS_CLASS_LIMIT(UCLIMIT_COMMON_DOUBLE_FIGHTER, iClass)
+				|| pPlayer->UnitType() == UT_SUB_PLAYER)
 			{
-				if( EQUIP_POS_BOOTS == static_cast< EEquipPos >(iItemPos))
+				if (EQUIP_POS_BOOTS == static_cast<EEquipPos>(iItemPos))
 				{
 					PgActor* pkActor = g_kPilotMan.GetPlayerActor();
-					if(pkActor)
+					if (pkActor)
 					{
-						if( pkActor->IsExistParts(EQUIP_LIMIT_KICKBALL) )
+						if (pkActor->IsExistParts(EQUIP_LIMIT_KICKBALL))
 						{
 							lwAddWarnDataStr(lwWString(TTW(791253)), 1, true);
 							return false;
@@ -590,21 +591,21 @@ namespace lwOption
 			}
 		}
 		PgOptionUtil::SClientDWORDOption kClientOption(PgOptionUtil::OptionToClientOption(g_kGlobalOption));
-		kClientOption.SetHideEquipInvenPos(static_cast< EEquipPos >(iItemPos), bHide);
+		kClientOption.SetHideEquipInvenPos(static_cast<EEquipPos>(iItemPos), bHide);
 		PgOptionUtil::ClientOptionToOption(kClientOption, g_kGlobalOption);
 
 		//PgOptionUtil::UpdateHideCashInvenOption(g_kPilotMan.GetPlayerActor(), static_cast< EEquipPos >(iItemPos), kClientOption);
-		SaveItemEquipHide(); // UI ¹Ù²ð ½Ã¸¶´Ù ÀúÀå
+		SaveItemEquipHide(); // UI ï¿½Ù²ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return true;
 	}
 
 	bool GetItemEquipHide(int const iItemPos)
 	{
 		PgOptionUtil::SClientDWORDOption const kClientOption(PgOptionUtil::OptionToClientOption(g_kGlobalOption));
-		return kClientOption.IsHideEquipInvenPos( static_cast< EEquipPos >(iItemPos) );
+		return kClientOption.IsHideEquipInvenPos(static_cast<EEquipPos>(iItemPos));
 		return false;
 	}
-	
+
 
 	void RegisterWrapper(lua_State* pkState)
 	{
@@ -620,15 +621,15 @@ namespace lwOption
 };
 
 
-PgOption::PgOption() : 
-m_pkCurConfigMap(NULL),
-m_bConfigCreated(false),
-m_bPrevDisplayHP(false)
+PgOption::PgOption() :
+	m_pkCurConfigMap(NULL),
+	m_bConfigCreated(false),
+	m_bPrevDisplayHP(false)
 {}
 
 PgOption::~PgOption()
 {
-//	_PgOutputDebugString("PgOption :: Destructor at %d\n -- UsingNiNew", timeGetTime());
+	//	_PgOutputDebugString("PgOption :: Destructor at %d\n -- UsingNiNew", timeGetTime());
 }
 
 bool PgOption::Save(bool const bSendToServer)
@@ -636,38 +637,38 @@ bool PgOption::Save(bool const bSendToServer)
 	TiXmlDocument kDocu(STR_OPTION_USER_FILE);
 
 	TiXmlNode* pkNewNode = kDocu.InsertEndChild(TiXmlElement(XML_ELEMENT_CONFIG));
-	if(NULL != pkNewNode)
-	{		
-		for(ContConfigMap::iterator kIter = m_kSavedMap.begin(); m_kSavedMap.end() != kIter; ++kIter)
+	if (NULL != pkNewNode)
+	{
+		for (ContConfigMap::iterator kIter = m_kSavedMap.begin(); m_kSavedMap.end() != kIter; ++kIter)
 		{
 			int iValue = kIter->second.first;//VALUE
 			char const* szText = (0 == kIter->second.second.size()) ? (NULL) : (kIter->second.second.c_str());//TEXT
 			std::string kKeyName = kIter->first.c_str();//KeyName
 			std::vector< std::string > kVec;
 			PgStringUtil::BreakSep(kKeyName, kVec, STR_OPTION_SEPARATER);
-			if(2 == kVec.size())
+			if (2 == kVec.size())
 			{
-				//ºÎ¸ð ÀÌ¸§À» Ã£´Â´Ù.
+				//ï¿½Î¸ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ Ã£ï¿½Â´ï¿½.
 				TiXmlElement* pkParent = pkNewNode->FirstChildElement(kVec[0].c_str());
-				if(!pkParent)
-				{//ºÎ¸ð Å°°¡ ¾ø´Ù.
+				if (!pkParent)
+				{//ï¿½Î¸ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 					TiXmlNode* pkParentNode = pkNewNode->InsertEndChild(TiXmlElement(kVec[0].c_str()));
 					pkParent = dynamic_cast<TiXmlElement*>(pkParentNode);
-					if(NULL == pkParent)
+					if (NULL == pkParent)
 					{
 						NILOG(PGLOG_ERROR, "don't insert element in document config.xml");
 						assert(0);
 						return false;
 					}
 				}
-				//ºÎ¸ð Å° °¡ ÀÖ´Ù.
+				//ï¿½Î¸ï¿½ Å° ï¿½ï¿½ ï¿½Ö´ï¿½.
 				TiXmlNode* pkChildNode = pkParent->InsertEndChild(TiXmlElement(XML_ELEMENT_ITEM));
 				TiXmlElement* pkChild = dynamic_cast<TiXmlElement*>(pkChildNode);
-				if(NULL != pkChild)
+				if (NULL != pkChild)
 				{
 					pkChild->SetAttribute(XML_ATTR_NAME, kVec[1].c_str());
 					pkChild->SetAttribute(XML_ATTR_VALUE, iValue);
-					if(NULL != szText)
+					if (NULL != szText)
 					{
 						pkChild->InsertEndChild(TiXmlText(szText));
 					}
@@ -691,12 +692,12 @@ bool PgOption::Save(bool const bSendToServer)
 		NILOG(PGLOG_ERROR, "Insert Root element failed");
 		assert(0);
 	}
-	if(!kDocu.SaveFile())
+	if (!kDocu.SaveFile())
 	{
 		NILOG(PGLOG_ERROR, "Save faild config.xml");
 		return false;
 	}
-	
+
 	if (bSendToServer)
 	{
 		BM::Stream kOPacket(PT_C_T_REQ_SAVE_OPTION);
@@ -709,30 +710,31 @@ bool PgOption::Save(bool const bSendToServer)
 bool PgOption::Load()
 {
 	bool bRet = true;
+	CustomChatColors::EnsureOptionDefaults(m_kDefaultMap);
 
 	TiXmlDocument kDocu;
 	bRet = kDocu.LoadFile(STR_OPTION_USER_FILE);
-	if(bRet)
+	if (bRet)
 	{
 		pCurConfigMap(&m_kSavedMap);
 		bRet = ParseXml(kDocu.FirstChild());
 	}
 
-	if(false == bRet)
+	if (false == bRet)
 	{//Default Set
 		m_bConfigCreated = true;
 		m_kSavedMap = m_kDefaultMap;//Cur = Saved = Default
 
-		//ÃÖÃÊ ½ÇÇà½Ã ÀüÃ¼È­¸é ÇØ»óµµ·Î ½ÇÇàµÇ±â ¶§¹®¿¡
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼È­ï¿½ï¿½ ï¿½Ø»óµµ·ï¿½ ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int const x = XUIMgr.GetResolutionSize().x;
 		int const y = XUIMgr.GetResolutionSize().y;
-		
+
 		//int const fullScreen = (true==NiApplication::ms_pkApplication->GetFullscreen()) ? 1 : 2;
 
 		SetConfig(XML_ELEMENT_GAME, STR_GAME_RESOLUTION_WIDTH, &x, NULL, &m_kSavedMap);
 		SetConfig(XML_ELEMENT_GAME, STR_GAME_RESOLUTION_HEIGHT, &y, NULL, &m_kSavedMap);
 		//SetConfig(XML_ELEMENT_GAME, STR_GAME_FULL_SCREEN, &fullScreen, NULL, &m_kSavedMap);
-				
+
 		//int iGraphicSet = 1;
 		//if (PgComputerInfo::GetGpuGrade() >= DEVICE_GRADE_HIGH)
 		//{
@@ -741,7 +743,7 @@ bool PgOption::Load()
 		//}
 		//else if (PgComputerInfo::GetGpuGrade() >= DEVICE_GRADE_MEDIUM)
 		//{
-		//	iGraphicSet = 3; // custom settingÀ» ÀÌ¿ë
+		//	iGraphicSet = 3; // custom settingï¿½ï¿½ ï¿½Ì¿ï¿½
 		//	SetConfig(XML_ELEMENT_OPTION, STR_OPTION_GRAPHIC_SET, &iGraphicSet, NULL, &m_kSavedMap);
 		//}
 		//else
@@ -758,9 +760,11 @@ bool PgOption::Load()
 		m_kConfigMap = m_kSavedMap;//Cur Set = Saved Set
 
 		bRet = Diff();//Config Version Check
+		CustomChatColors::EnsureOptionDefaults(m_kSavedMap);
+		CustomChatColors::EnsureOptionDefaults(m_kConfigMap);
 	}
-	if(0 == GetValue(XML_ELEMENT_GAME,"FLY_TO_CAMERA"))
-	{// ÃÖÃÊ ·Îµù½Ã È­¸é±úÁü °ªÀÌ ¾ø´Ù¸é ÄÑÁü °ªÀ¸·Î ¼¼ÆÃÇÑ´Ù
+	if (0 == GetValue(XML_ELEMENT_GAME, "FLY_TO_CAMERA"))
+	{// ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 		SetConfig(XML_ELEMENT_GAME, "FLY_TO_CAMERA", 1, NULL);
 	}
 
@@ -781,13 +785,13 @@ bool PgOption::Diff()
 	kKey.append(STR_OPTION_SEPARATER);
 	kKey.append(XML_ELEMENT_CONF_VER);
 	int const iCurrentVersion = GetValue(XML_ELEMENT_VERSION, XML_ELEMENT_CONF_VER);//
-	int const iDefaultVersion = m_kDefaultMap[kKey].first;//DefaultConfig.xml ¿¡´Â Ç×»ó ÀÖÀ»°ÍÀÌ¶ó´Â °¡Á¤
+	int const iDefaultVersion = m_kDefaultMap[kKey].first;//DefaultConfig.xml ï¿½ï¿½ï¿½ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	if(iCurrentVersion != iDefaultVersion)
+	if (iCurrentVersion != iDefaultVersion)
 	{//Sync ConfigMap from DefaultMap
 		m_kConfigMap[kKey] = m_kDefaultMap[kKey];//Set Version
-		
-		for(ContConfigMap::iterator kIter = m_kDefaultMap.begin(); m_kDefaultMap.end() != kIter; ++kIter)
+
+		for (ContConfigMap::iterator kIter = m_kDefaultMap.begin(); m_kDefaultMap.end() != kIter; ++kIter)
 		{
 			std::vector<std::string> kVec;
 			PgStringUtil::BreakSep(kIter->first, kVec, STR_OPTION_SEPARATER);
@@ -796,10 +800,10 @@ bool PgOption::Diff()
 			std::string kValue = GetText(kVec[0], kVec[1]);
 
 			ContConfigMap::iterator kSubIter = m_kConfigMap.find(kIter->first);
-			if(m_kConfigMap.end()==kSubIter)//Ã£¾Æ¼­ ¾øÀ¸¸é Ãß°¡
+			if (m_kConfigMap.end() == kSubIter)//Ã£ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 			{
 				std::pair<ContConfigMap::iterator, bool> eRet = m_kConfigMap.insert(*kIter);
-				if(!eRet.second)
+				if (!eRet.second)
 				{
 					NILOG(PGLOG_ERROR, "Map insert failed..."); assert(0);
 					return false;
@@ -807,19 +811,19 @@ bool PgOption::Diff()
 			}
 			//else
 			//{
-			//	¾î¶² ±âÁØÀ¸·Î? ÀÌÀüÀÇ °ªÀ» ¹Ù²Ü°ÍÀÌ³Ä? »ç¿ëÀÚ ¼³Á¤Àº?
-			//	¾ø´ø °ªÀ» Ãß°¡ ÇÏ´Â°ÍÀ» ±âº»À¸·Î °¡°í, ÀÌÈÄ ¹öÁ¯ÀÌ ¹Ù²î¸é¼­ ¿ÏÀüÈ÷ º¯°æµÇ´Â °ª¿¡ ´ëÇØ¼­´Â
-			//	»õ·Î¿î Config¸¦ Ãß°¡ ÇÏ´Â°ÍÀ¸·Î ÇÑ´Ù. Á¤ÇØÁø °¹¼ö Á¦ÇÑ(300°³?)¸¦ ³ÑÃÄ¼­ ³ª´Â ¹Ì·¡ ¿¡·¯¿¡ ´ëÇØ¼­´Â
-			//	ÀÌÀüÀÇ Config.xmlÀ» »èÁ¦ ÇÏ´Â Á¶Ä¡¸¦ ÃëÇÏ°Å³ª
-			//	Config.xmlÀ» ¿©·¯°¡Áö·Î ³ª´©¾î ¿µÇâ·ÂÀÌ ´Ù¸¥ ConfigµéÀ» °¢°¢ »ç¿ëÇÏ°Ô Á¦ÀÛ ÇÑ´Ù.
+			//	ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ü°ï¿½ï¿½Ì³ï¿½? ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
+			//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Ï´Â°ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½é¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½
+			//	ï¿½ï¿½ï¿½Î¿ï¿½ Configï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Ï´Â°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(300ï¿½ï¿½?)ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½
+			//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Config.xmlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°Å³ï¿½
+			//	Config.xmlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ Configï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			//}
 		}
-		
-		//¾ø¾î¾ß ÇÏ´Âµ¥ ÀÖ´Â °ªµéÀ» »èÁ¦ ÇÑ´Ù.
-		for(ContConfigMap::iterator kIter = m_kConfigMap.begin(); m_kConfigMap.end() != kIter; ++kIter)
+
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´Âµï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
+		for (ContConfigMap::iterator kIter = m_kConfigMap.begin(); m_kConfigMap.end() != kIter; ++kIter)
 		{
 			ContConfigMap::iterator kSubIter = m_kDefaultMap.find(kIter->first);
-			if(m_kDefaultMap.end() == kSubIter)
+			if (m_kDefaultMap.end() == kSubIter)
 			{
 				kIter = m_kConfigMap.erase(kIter);
 			}
@@ -834,36 +838,36 @@ bool PgOption::Diff()
 void PgOption::ApplyKeySet_ToSystem()
 {
 	int const iPassedKey = GetValue(STR_OPTION_KEYSET, STR_OPTION_PASSED_KEY);
-	
-	for(ContConfigMap::iterator kIter = m_kSavedMap.begin(); m_kSavedMap.end() != kIter; ++kIter)
+
+	for (ContConfigMap::iterator kIter = m_kSavedMap.begin(); m_kSavedMap.end() != kIter; ++kIter)
 	{
-		if(iPassedKey == kIter->second.first)//Passed setting key (is NULL KEY)
+		if (iPassedKey == kIter->second.first)//Passed setting key (is NULL KEY)
 		{
 			continue;
 		}
 
 		std::vector< std::string > kVec;
 		PgStringUtil::BreakSep(kIter->first, kVec, STR_OPTION_SEPARATER);
-		if(0 == strcmp(kVec[0].c_str(), XML_ELEMENT_KEYSET))//KEYSET Element ¿Í °°À¸¸é
+		if (0 == strcmp(kVec[0].c_str(), XML_ELEMENT_KEYSET))//KEYSET Element ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			int iUKey = kIter->second.first;
 			int const iKey = atoi(kVec[1].c_str());
-			if(NiInputKeyboard::KEY_TOTAL_COUNT <= iKey)//¿£Áø¿¡¼­ Áö¿øÇÏ´Â ÀÔ·Â±âÁØÀº ¹«½ÃÇÑ´Ù.
-			{// »ç¿ë ÇÏÁö ¾Ê´Â Å°·Î ÀÌµ¿ ÀÌ¹Ç·Î, ÇØ´ç ScanÅ° ÀÔ·Â¿¡ ´ëÀÀµÇ´Â UKey°ªÀº 0À¸·Î ¼¼ÆÃÇØÁÖ¾î µ¿ÀÛÀÌ ÀÏ¾î³ªÁö ¾Ê°Ô ÇØÁØ´Ù
+			if (NiInputKeyboard::KEY_TOTAL_COUNT <= iKey)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô·Â±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+			{// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ Å°ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Ì¹Ç·ï¿½, ï¿½Ø´ï¿½ ScanÅ° ï¿½Ô·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ UKeyï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¾î³ªï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½
 				iUKey = 0;
 			}
 			bool bRet = g_pkLocalManager->ActionKeyboard_Set(kVec[1].c_str(), iUKey);
-			if(!bRet)
+			if (!bRet)
 			{
 				NILOG(PGLOG_ERROR, "KeyBoard setting failed");
 				assert(0);
 			}
 
-			//»õ·Î¿î UKey -> Key ¹øÈ£ ±â¾ï
-			if(bRet)
+			//ï¿½ï¿½ï¿½Î¿ï¿½ UKey -> Key ï¿½ï¿½È£ ï¿½ï¿½ï¿½
+			if (bRet)
 			{
 				std::pair<ContUKeyToKey::iterator, bool> eRet = m_kUkeyToKey.insert(std::make_pair(iUKey, iKey));
-				if(!eRet.second)
+				if (!eRet.second)
 				{
 					NILOG(PGLOG_ERROR, "Insert Failed, maybe duplicated key");
 					assert(0);
@@ -880,17 +884,17 @@ void PgOption::RollBackAll(ContConfigMap* pkFrom, ContConfigMap* pkTo)
 void PgOption::RollBackConfig(ContConfigMap* pkFrom, ContConfigMap* pkTo)
 {
 	ContConfigMap::iterator kIter = pkFrom->begin();
-	for(; pkFrom->end() != kIter; ++kIter)
+	for (; pkFrom->end() != kIter; ++kIter)
 	{
 		std::vector<std::string> kVec;
 		PgStringUtil::BreakSep(kIter->first, kVec, STR_OPTION_SEPARATER);
 		bool bConfig = false;
-		if(0 != strcmp(kVec[0].c_str(), XML_ELEMENT_GRAPHIC3))	{ bConfig = true; } //Custome Graphic set
-		if(0 != strcmp(kVec[0].c_str(), XML_ELEMENT_SOUND))		{ bConfig = true; } //Sound
-		if(0 != strcmp(kVec[0].c_str(), XML_ELEMENT_ETC))		{ bConfig = true; } //ETC
-		if(0 != strcmp(kVec[0].c_str(), XML_ELEMENT_OPTION))	{ bConfig = true; } //User Option
-		
-		if(bConfig)
+		if (0 != strcmp(kVec[0].c_str(), XML_ELEMENT_GRAPHIC3)) { bConfig = true; } //Custome Graphic set
+		if (0 != strcmp(kVec[0].c_str(), XML_ELEMENT_SOUND)) { bConfig = true; } //Sound
+		if (0 != strcmp(kVec[0].c_str(), XML_ELEMENT_ETC)) { bConfig = true; } //ETC
+		if (0 != strcmp(kVec[0].c_str(), XML_ELEMENT_OPTION)) { bConfig = true; } //User Option
+
+		if (bConfig)
 		{
 			SetConfig(kVec[0], kVec[1], &kIter->second.first, kIter->second.second.c_str(), pkTo);
 		}
@@ -898,12 +902,12 @@ void PgOption::RollBackConfig(ContConfigMap* pkFrom, ContConfigMap* pkTo)
 }
 void PgOption::RollBackKeySet(ContConfigMap* pkFrom, ContConfigMap* pkTo)
 {
-	for(ContConfigMap::iterator kIter = pkFrom->begin(); pkFrom->end() != kIter; ++kIter)
+	for (ContConfigMap::iterator kIter = pkFrom->begin(); pkFrom->end() != kIter; ++kIter)
 	{
 		std::vector<std::string> kVec;
 		PgStringUtil::BreakSep(kIter->first, kVec, STR_OPTION_SEPARATER);
 
-		if(0 == strcmp(kVec[0].c_str(), XML_ELEMENT_KEYSET))//KEYSET Element ¿Í °°À¸¸é
+		if (0 == strcmp(kVec[0].c_str(), XML_ELEMENT_KEYSET))//KEYSET Element ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			SetConfig(kVec[0], kVec[1], &kIter->second.first, kIter->second.second.c_str(), pkTo);
 		}
@@ -927,7 +931,7 @@ bool PgOption::ParseItem_KeySet(TiXmlElement const* pkNode)
 		_TextOrTTW(szTTW, szText, kFunctionName);
 
 		unsigned int iUKey = atoi(szUKey);
-		if(0 == iUKey)
+		if (0 == iUKey)
 		{
 			NILOG(PGLOG_ERROR, "Unique Key is NULL or invalid");
 			assert(0);
@@ -935,16 +939,16 @@ bool PgOption::ParseItem_KeySet(TiXmlElement const* pkNode)
 		}
 
 		unsigned int iIconNo = atoi(szIconNo);
-		if(0 == iUKey)
+		if (0 == iUKey)
 		{
 			NILOG(PGLOG_ERROR, "Icon Resource is null or invalid");
 			assert(0);
 			return false;
 		}
 
-		//Áßº¹Ã¼Å©
+		//ï¿½ßºï¿½Ã¼Å©
 		ContKeySetMap::iterator kIter = m_kKeyFunctionTable.find(iUKey);
-		if(m_kKeyFunctionTable.end() != kIter)
+		if (m_kKeyFunctionTable.end() != kIter)
 		{
 			NILOG(PGLOG_ERROR, "Duplicate keyset table Unique Key");
 			assert(0);
@@ -952,7 +956,7 @@ bool PgOption::ParseItem_KeySet(TiXmlElement const* pkNode)
 		}
 
 		std::pair<ContKeySetMap::iterator, bool> eRet = m_kKeyFunctionTable.insert(std::make_pair(iUKey, std::make_pair(kFunctionName, iIconNo)));
-		if(!eRet.second)
+		if (!eRet.second)
 		{
 			NILOG(PGLOG_ERROR, "Critical Error failed insert item to map");
 			assert(0);
@@ -973,31 +977,31 @@ bool PgOption::ParseItem(TiXmlElement const* pkNode)
 
 		char const* szValue = pkChild->Attribute(XML_ATTR_VALUE);
 
-		if(NULL == szName)
+		if (NULL == szName)
 		{
 			PgXmlError(pkChild, "null option name");
 			return false;
 		}
 
-		if(NULL == szValue && NULL == szText)
+		if (NULL == szValue && NULL == szText)
 		{
 			PgXmlError1(pkChild, "Can't found VALUE='' attribute and TEXT in Element %s", szName);
 			return false;
 		}
 
 		int iValue = 0;
-		if(NULL != szValue)
+		if (NULL != szValue)
 		{
 			iValue = atoi(szValue);
 		}
 
 		//HIGH,LOW,CUSTOME, SOUND, ETC
-		if(false == SetConfig(szParentName, szName, &iValue, szText, pCurConfigMap()))
+		if (false == SetConfig(szParentName, szName, &iValue, szText, pCurConfigMap()))
 		{
 			NILOG(PGLOG_ERROR, "Map insert failed in Config Map");
 			return false;
 		}
-		
+
 		pkChild = pkChild->NextSiblingElement();
 	}
 	return true;
@@ -1005,70 +1009,70 @@ bool PgOption::ParseItem(TiXmlElement const* pkNode)
 
 bool PgOption::ParseXml(TiXmlNode const* pkNode, void* pArg, bool bUTF8)
 {
-	if(0 == m_kKeyNoToKeyStr.size())
+	if (0 == m_kKeyNoToKeyStr.size())
 	{
 		MakeKeynoToKeystr();
 	}
 
 	int const iType = pkNode->Type();
-	if(NULL == pkNode || TiXmlNode::ELEMENT != iType)
+	if (NULL == pkNode || TiXmlNode::ELEMENT != iType)
 	{
 		return false;
 	}
 
-	if(NULL == pCurConfigMap())
+	if (NULL == pCurConfigMap())
 	{
 		pCurConfigMap(&m_kDefaultMap);
 	}
 
 	TiXmlElement const* pkChild = pkNode->FirstChildElement();
-	while(pkChild)
+	while (pkChild)
 	{
 		char const* szParentName = pkChild->Parent()->Value();
 		char const* szName = pkChild->Value();
 		char const* szText = pkChild->GetText();
-		
-		if(0 == strcmp(szName, XML_ELEMENT_CONFIG))
+
+		if (0 == strcmp(szName, XML_ELEMENT_CONFIG))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_GRAPHIC1))
+		else if (0 == strcmp(szName, XML_ELEMENT_GRAPHIC1))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_GRAPHIC2))
+		else if (0 == strcmp(szName, XML_ELEMENT_GRAPHIC2))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_GRAPHIC3))
+		else if (0 == strcmp(szName, XML_ELEMENT_GRAPHIC3))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_SOUND))
+		else if (0 == strcmp(szName, XML_ELEMENT_SOUND))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_ETC))
+		else if (0 == strcmp(szName, XML_ELEMENT_ETC))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_OPTION))
+		else if (0 == strcmp(szName, XML_ELEMENT_OPTION))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_ITEM))
+		else if (0 == strcmp(szName, XML_ELEMENT_ITEM))
 		{
 			ParseItem(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_KEYSET))
+		else if (0 == strcmp(szName, XML_ELEMENT_KEYSET))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_KEYSET_TABLE))
+		else if (0 == strcmp(szName, XML_ELEMENT_KEYSET_TABLE))
 		{
 			ParseXml(pkChild);
 		}
-		else if(0 == strcmp(szName, XML_ELEMENT_KEYMAP))
+		else if (0 == strcmp(szName, XML_ELEMENT_KEYMAP))
 		{
 			ParseItem_KeySet(pkChild);
 		}
@@ -1076,14 +1080,14 @@ bool PgOption::ParseXml(TiXmlNode const* pkNode, void* pArg, bool bUTF8)
 		{
 			//PgXmlError1(pkChild, "Invaid Element: %s", szName);
 			NILOG(PGLOG_LOG, "[PgOption] is it Invalid Config name ?: %s[Row:%d, Col:%d]\n", szName, pkChild->Row(), pkChild->Column());
-			if(!ParseXml(pkChild))
+			if (!ParseXml(pkChild))
 			{
 				return false;
 			}
 		}
 		pkChild = pkChild->NextSiblingElement();
 	}
-	
+
 	return true;
 }
 
@@ -1092,26 +1096,26 @@ bool PgOption::SetConfig(std::string const& szHeadKey, std::string const& szKey,
 	std::string kValue = ((NULL == szText) ? "" : szText);
 	int iValue = ((NULL == piValue) ? 0 : *piValue);
 
-	if(NULL == pkConfigMap)
+	if (NULL == pkConfigMap)
 	{
 		pkConfigMap = &m_kConfigMap;
 	}
-	
+
 	std::string szKeyName = szHeadKey;
 	szKeyName.append(STR_OPTION_SEPARATER);
 	szKeyName.append(szKey);
 
 	ContConfigMap::iterator kIter = pkConfigMap->find(szKeyName);
-	if(pkConfigMap->end() != kIter)
+	if (pkConfigMap->end() != kIter)
 	{
-		if(piValue)	{ kIter->second.first = iValue; }
-		if(szText)	{ kIter->second.second = kValue; }
+		if (piValue) { kIter->second.first = iValue; }
+		if (szText) { kIter->second.second = kValue; }
 
 		return true;
 	}
 
-	//ÃÖ´ë »çÀÌÁî Á¦ÇÑ
-	if(O_MaxConfigCount <= pkConfigMap->size())
+	//ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (O_MaxConfigCount <= pkConfigMap->size())
 	{
 		NILOG(PGLOG_LOG, "over %d config count", O_MaxConfigCount);
 		assert(0);
@@ -1120,7 +1124,7 @@ bool PgOption::SetConfig(std::string const& szHeadKey, std::string const& szKey,
 
 	//
 	std::pair<ContConfigMap::iterator, bool> eRet = pkConfigMap->insert(std::make_pair(szKeyName, std::make_pair(iValue, kValue)));
-	if(!eRet.second)
+	if (!eRet.second)
 	{
 		NILOG(PGLOG_ERROR, "failed Insert item to map");
 		assert(0);
@@ -1148,7 +1152,7 @@ int const PgOption::GetValue(std::string const& szHeadKey, std::string const& sz
 	kKeyName.append(STR_OPTION_SEPARATER);
 	kKeyName.append(szKey);
 	ContConfigMap::const_iterator kIter = m_kConfigMap.find(kKeyName);
-	if(m_kConfigMap.end() != kIter)
+	if (m_kConfigMap.end() != kIter)
 	{
 		return (kIter->second).first;
 	}
@@ -1160,7 +1164,7 @@ int const PgOption::GetDefaultValue(std::string const& szHeadKey, std::string co
 	kKeyName.append(STR_OPTION_SEPARATER);
 	kKeyName.append(szKey);
 	ContConfigMap::const_iterator kIter = m_kDefaultMap.find(kKeyName);
-	if(m_kDefaultMap.end() != kIter)
+	if (m_kDefaultMap.end() != kIter)
 	{
 		return (kIter->second).first;
 	}
@@ -1171,7 +1175,7 @@ int const PgOption::GetCurrentGraphicOption(std::string const& szKey) const
 {
 	int retValue = 0;
 	int const graphicSet = GetValue(XML_ELEMENT_OPTION, STR_OPTION_GRAPHIC_SET);
-	switch(graphicSet)
+	switch (graphicSet)
 	{
 	case 1:
 		retValue = GetValue(XML_ELEMENT_GRAPHIC1, szKey);
@@ -1192,7 +1196,7 @@ int const PgOption::GetCurrentGraphicOption(std::string const& szKey) const
 void PgOption::SetCurrentGraphicOption(std::string const& szKey, int iValue)
 {
 	int const graphicSet = GetValue(XML_ELEMENT_OPTION, STR_OPTION_GRAPHIC_SET);
-	switch(graphicSet)
+	switch (graphicSet)
 	{
 	case 1:
 		SetConfig(XML_ELEMENT_GRAPHIC1, szKey, iValue, NULL);
@@ -1215,7 +1219,7 @@ char const* PgOption::GetText(std::string const& szHeadKey, std::string const& s
 	kKeyName.append(STR_OPTION_SEPARATER);
 	kKeyName.append(szKey);
 	ContConfigMap::const_iterator kIter = m_kConfigMap.find(kKeyName);
-	if(m_kConfigMap.end() != kIter)
+	if (m_kConfigMap.end() != kIter)
 	{
 		return (kIter->second).second.c_str();
 	}
@@ -1229,7 +1233,7 @@ char const* PgOption::GetDefaultText(std::string const& szHeadKey, std::string c
 	kKeyName.append(STR_OPTION_SEPARATER);
 	kKeyName.append(szKey);
 	ContConfigMap::const_iterator kIter = m_kDefaultMap.find(kKeyName);
-	if(m_kDefaultMap.end() != kIter)
+	if (m_kDefaultMap.end() != kIter)
 	{
 		return (kIter->second).second.c_str();
 	}
@@ -1237,10 +1241,10 @@ char const* PgOption::GetDefaultText(std::string const& szHeadKey, std::string c
 	return "";
 }
 
-bool PgOption::GetKeyFuncResource(const unsigned int iUKey, std::wstring &rkName, unsigned int &rkResNo) const
+bool PgOption::GetKeyFuncResource(const unsigned int iUKey, std::wstring& rkName, unsigned int& rkResNo) const
 {
 	ContKeySetMap::const_iterator kIter = m_kKeyFunctionTable.find(iUKey);
-	if(m_kKeyFunctionTable.end() != kIter)
+	if (m_kKeyFunctionTable.end() != kIter)
 	{
 		rkName = kIter->second.first;
 		rkResNo = kIter->second.second;
@@ -1253,21 +1257,21 @@ bool PgOption::GetKeyFuncResource(const unsigned int iUKey, std::wstring &rkName
 
 void PgOption::MakeKeynoToKeystr()
 {
-	for(int i = 0; i < NiInputKeyboard::KEY_TOTAL_COUNT + 200; ++i)//pkIconÀÇ KeyNo¸¦ ÀúÀåÇÑ´Ù. (¿©À¯ºÐ +200);
+	for (int i = 0; i < NiInputKeyboard::KEY_TOTAL_COUNT + 200; ++i)//pkIconï¿½ï¿½ KeyNoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ +200);
 	{
-		char szTemp[255] = {0, };
+		char szTemp[255] = { 0, };
 		std::string kTemp;
 		errno_t eRet = _itoa_s(i, szTemp, 255, 10);
-		if(eRet == 0)
+		if (eRet == 0)
 		{
 			kTemp = szTemp;
 			std::pair<ContKeynoKeystr::iterator, bool> ret = m_kKeyNoToKeyStr.insert(std::make_pair(i, kTemp));
-			if(!ret.second)
+			if (!ret.second)
 			{
 				NILOG(PGLOG_ERROR, "insert failed at map");
 				assert(0);
 				return;
-				
+
 			}
 		}
 		else
@@ -1276,12 +1280,12 @@ void PgOption::MakeKeynoToKeystr()
 			assert(0);
 		}
 	}
-	
+
 }
-bool PgOption::GetKeynoToKeystr(int const iKeyNo, std::string &rkKeyStr) const
+bool PgOption::GetKeynoToKeystr(int const iKeyNo, std::string& rkKeyStr) const
 {
 	ContKeynoKeystr::const_iterator kIter = m_kKeyNoToKeyStr.find(iKeyNo);
-	if(m_kKeyNoToKeyStr.end() != kIter)
+	if (m_kKeyNoToKeyStr.end() != kIter)
 	{
 		rkKeyStr = kIter->second;
 
@@ -1293,7 +1297,7 @@ bool PgOption::GetKeynoToKeystr(int const iKeyNo, std::string &rkKeyStr) const
 int const PgOption::GetUKeyToKey(int iUKey) const
 {
 	ContUKeyToKey::const_iterator kIter = m_kUkeyToKey.find(iUKey);
-	if(m_kUkeyToKey.end() != kIter)
+	if (m_kUkeyToKey.end() != kIter)
 	{
 		return kIter->second;
 	}
@@ -1302,24 +1306,24 @@ int const PgOption::GetUKeyToKey(int iUKey) const
 }
 
 void PgOption::ReadFromPacket(BM::Stream& rkPacket)
-{	
+{
 	g_kGlobalOption.DefaultKeySet();
-	
-	// ¼­¹ö·Î ºÎÅÍ Option°ª ¹Þ¾Æ¿Í ½Ã½ºÅÛ¿¡ Àû¿ë½ÃÅ°±â
-	PgOptionUtil::DBOption_ReadFromPacket( *this, m_kConfigMap, rkPacket );
 
-	m_bPrevDisplayHP = GetValue(XML_ELEMENT_ETC, "BATTLEOP_DISPLAY_HPBAR" );
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Optionï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ ï¿½Ã½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½
+	PgOptionUtil::DBOption_ReadFromPacket(*this, m_kConfigMap, rkPacket);
+
+	m_bPrevDisplayHP = GetValue(XML_ELEMENT_ETC, "BATTLEOP_DISPLAY_HPBAR");
 }
 
 void PgOption::WriteToPacket(BM::Stream& rkPacket)
-{// ¼­¹ö¿¡ Option°ª ÀúÀåÇÏ±â
-	PgOptionUtil::DBOption_WriteToPacket( *this, m_kConfigMap, rkPacket );
+{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Optionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+	PgOptionUtil::DBOption_WriteToPacket(*this, m_kConfigMap, rkPacket);
 }
 
 void PgOption::ApplyConfig()
 {
 	RollBackConfig(&m_kConfigMap, &m_kSavedMap);
-	
+
 	lwUpdateEtcConfig();
 }
 
@@ -1351,15 +1355,15 @@ void PgOption::CancelKeySet()
 }
 
 bool const PgOption::IsDisplayHelmet() const
-{// °­Á¦ Åõ±¸ º¸ÀÌ±â ¿É¼ÇÀÌ ÄÑÁ®ÀÖ´Â°¡
+{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°ï¿½
 	return PgOptionUtil::OptionToClientOption(*this).DisplayHelmet();
 }
 
 void PgOption::SetDisplayHelmet(bool const bDisplay)
-{// °­Á¦ Åõ±¸ º¸ÀÌ±â ¿É¼Ç ¼³Á¤
- // ÆÄÀÏ ¹×, ¼­¹ö¿¡ ÀúÀå ÇÏ·Á¸é Save() ¸â¹ö¸¦ È£Ãâ ÇØ¾ß ÇÑ´Ù
-	PgOptionUtil::SClientDWORDOption kClientOption( PgOptionUtil::OptionToClientOption(*this) );
-	kClientOption.DisplayHelmet( bDisplay );
+{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+ // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ï¿½ Save() ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½
+	PgOptionUtil::SClientDWORDOption kClientOption(PgOptionUtil::OptionToClientOption(*this));
+	kClientOption.DisplayHelmet(bDisplay);
 	PgOptionUtil::ClientOptionToOption(kClientOption, *this);
 }
 
@@ -1367,7 +1371,7 @@ bool PgOption::GetUKeyToKeyStr(int const iUKey, std::wstring& kCurrentKeyName_ou
 {
 	int const iKey = GetUKeyToKey(iUKey);
 	std::string kKetStr;
-	if(true == GetKeynoToKeystr(iKey, kKetStr))
+	if (true == GetKeynoToKeystr(iKey, kKetStr))
 	{
 		kCurrentKeyName_out = UNI(kKetStr);
 		return true;
@@ -1378,23 +1382,23 @@ bool PgOption::GetUKeyToKeyStr(int const iUKey, std::wstring& kCurrentKeyName_ou
 
 void PgOption::OffDisplayHP()
 {
-	//! ¿É¼ÇÀ» ¹Ì¸® ÀúÀåÇÏ°í..
-	m_bPrevDisplayHP = GetValue(XML_ELEMENT_ETC, "BATTLEOP_DISPLAY_HPBAR" );
-	
-	//! ¹«Á¶°Ç ²ö´Ù.
+	//! ï¿½É¼ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½..
+	m_bPrevDisplayHP = GetValue(XML_ELEMENT_ETC, "BATTLEOP_DISPLAY_HPBAR");
+
+	//! ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	SetConfig(XML_ELEMENT_ETC, "BATTLEOP_DISPLAY_HPBAR", PgOptionUtil::BoolToInt(false), NULL);
 	PgEnergyGauge::ms_bDrawEnergyGaugeBar = false;
 }
 void PgOption::RestoreDisplayHP()
 {
-	//! ¹Ì¸® ÀúÀåµÈ ¿É¼ÇÀ¸·Î º¹±¸
+	//! ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	SetConfig(XML_ELEMENT_ETC, "BATTLEOP_DISPLAY_HPBAR", PgOptionUtil::BoolToInt(m_bPrevDisplayHP), NULL);
 	PgEnergyGauge::ms_bDrawEnergyGaugeBar = m_bPrevDisplayHP;
 }
 
 void PgOption::SetSendOptionFlag(int const iValue)
 {
-	SetUseLevelRank(iValue&SOF_LEVELRANK);
+	SetUseLevelRank(iValue & SOF_LEVELRANK);
 }
 
 void PgOption::SetUseLevelRank(bool const IsUse)
@@ -1409,7 +1413,7 @@ bool PgOption::GetUseLevelRank()const
 
 void PgOption::ShowNavigation(bool const bShow)
 {
-	if(bShow)
+	if (bShow)
 	{
 		lua_tinker::call<bool>("CallNaviMap_WorldMap");
 	}

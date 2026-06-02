@@ -61,6 +61,7 @@ namespace PgChatMgrUtil
 	void ChatFilterDel(int const iFilterSet, BYTE const cChatMode, std::wstring const &rkXuiListID);
 	void NoticeLevelColor_Add(int const iLevel, DWORD const dwFontColor, DWORD const dwOutlineColor, bool const bShowBG);
 	void NoticeLevelColor_Clear();
+	DWORD ChatInputColor(EChatType const Type);
 
 	std::wstring const ColorHexToString(DWORD const dwColor);
 };

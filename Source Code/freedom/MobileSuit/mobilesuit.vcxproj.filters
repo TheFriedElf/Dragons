@@ -449,6 +449,12 @@
     <Filter Include="NewWare\Game">
       <UniqueIdentifier>{8d0a75dd-5c7c-426f-a972-b882c74a7b82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\CustomContent">
+      <UniqueIdentifier>{7ce905d6-6d3d-45c6-a716-77fbf205a210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\CustomContent\Chat">
+      <UniqueIdentifier>{010b98c8-2e93-42f9-9e27-3d87e9d63624}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PgIWorldObject.cpp">
@@ -2017,6 +2023,9 @@
     <ClCompile Include="PgRscContainer.cpp" />
     <ClCompile Include="PgRscLoader.cpp" />
     <ClCompile Include="PgWebLogin.cpp" />
+    <ClCompile Include="CustomContent\Chat\CustomChatColors.cpp">
+      <Filter>Contents\CustomContent\Chat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PgIWorldObject.h">
@@ -3725,6 +3734,9 @@
     <ClInclude Include="PgRscContainer.h" />
     <ClInclude Include="PgRscLoader.h" />
     <ClInclude Include="PgWebLogin.h" />
+    <ClInclude Include="CustomContent\Chat\CustomChatColors.h">
+      <Filter>Contents\CustomContent\Chat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ShadowGeometry.inl">
