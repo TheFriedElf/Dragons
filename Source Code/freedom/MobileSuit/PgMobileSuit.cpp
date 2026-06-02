@@ -114,6 +114,7 @@
 #include "PgActionXmlData.h"
 #include "PgConstellation.h"
 #include "Variant/Global.h"
+#include "CustomContent/Chat/CustomChatColors.h"
 
 #include "NewWare/Renderer/DrawWorkflow.h"
 
@@ -785,6 +786,7 @@ bool PgMobileSuit::Initialize()
 	{
 		PgTimeCheck kTimeCheck( dynamic_cast<PgLogWorker_Base*>(&g_kLogWorker), LT_CAUTION, __FUNCTIONW__, __LINE__);
 		g_kGlobalOption.Load();
+		CustomChatColors::GetInstance().Load();
 		adjustGameOption();
 	}
 

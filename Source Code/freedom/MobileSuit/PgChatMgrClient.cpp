@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 #include "Variant/PgStringUtil.h"
 
 #include "PgChatMgrClient.h"
@@ -38,13 +38,15 @@
 
 #include "XUI/XUI_Font.h"
 
-extern char const * EVENT_EM_AD_MERCENARY;
-extern char const * EVENT_EM_START_JOIN;
+#include "CustomContent/Chat/CustomChatColors.h" 
 
-extern void SetEmporiaBattleAlram(bool bClear=false);
-extern void OnClickPvP_ReqDuel( lwGUID kCharGuid );
+extern char const* EVENT_EM_AD_MERCENARY;
+extern char const* EVENT_EM_START_JOIN;
 
-// CT_TRADE ¶§¹®¿¡ ¼öÁ¤
+extern void SetEmporiaBattleAlram(bool bClear = false);
+extern void OnClickPvP_ReqDuel(lwGUID kCharGuid);
+
+// CT_TRADE ë•Œë¬¸ì— ìˆ˜ì •
 int const iMaxChatFilterBit = sizeof(__int64) * 8;
 
 void tagChatLog::Clear()
@@ -63,9 +65,9 @@ void tagChatLog::Clear()
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Global Function 
-void Announce_Msg(std::wstring const &rkStr, EChatType const eChatType, ENoticeLevel const eNoticeLevel, bool const bNotice, bool const bUpper)
+void Announce_Msg(std::wstring const& rkStr, EChatType const eChatType, ENoticeLevel const eNoticeLevel, bool const bNotice, bool const bUpper)
 {
-	if(!g_kChatMgrClient.Active())
+	if (!g_kChatMgrClient.Active())
 	{
 		return;
 	}
@@ -74,9 +76,9 @@ void Announce_Msg(std::wstring const &rkStr, EChatType const eChatType, ENoticeL
 	g_kChatMgrClient.AddLogMessage(kChatLog, rkStr, bNotice, eNoticeLevel, bUpper);
 }
 
-void Notice_Show(std::wstring const &rkString, int const iLevel, bool const bCheckEqualMessage)
+void Notice_Show(std::wstring const& rkString, int const iLevel, bool const bCheckEqualMessage)
 {
-	if(!g_kChatMgrClient.Active())
+	if (!g_kChatMgrClient.Active())
 	{
 		return;
 	}
@@ -89,8 +91,8 @@ void Notice_Show_ByDefStringNo(int const iDefStringNo, int const iLevel)
 {
 	std::wstring kString;
 	{
-		const wchar_t *pText = 0;
-		if(!GetDefString(iDefStringNo, pText))
+		const wchar_t* pText = 0;
+		if (!GetDefString(iDefStringNo, pText))
 		{
 			return;
 		}
@@ -105,58 +107,58 @@ void Notice_Show_ByTextTableNo(int const iTextTableNo, int const iLevel, bool co
 	Notice_Show(TTW(iTextTableNo), iLevel, bCheckEqualMessage);
 }
 
-void MakeStringForDate( std::wstring &wstr, SYSTEMTIME const &kTime )
+void MakeStringForDate(std::wstring& wstr, SYSTEMTIME const& kTime)
 {
-	wchar_t wszTemp[MAX_PATH] = {0,};
-	::swprintf_s( wszTemp, MAX_PATH, L"%04u-%02u-%02u", kTime.wYear, kTime.wMonth, kTime.wDay );
+	wchar_t wszTemp[MAX_PATH] = { 0, };
+	::swprintf_s(wszTemp, MAX_PATH, L"%04u-%02u-%02u", kTime.wYear, kTime.wMonth, kTime.wDay);
 	wstr += wszTemp;
 }
 
-void MakeStringForTime( std::wstring &wstr, SYSTEMTIME const &kTime, bool const bMSEC )
+void MakeStringForTime(std::wstring& wstr, SYSTEMTIME const& kTime, bool const bMSEC)
 {
-	wchar_t wszTemp[MAX_PATH] = {0,};
-	if ( bMSEC )
+	wchar_t wszTemp[MAX_PATH] = { 0, };
+	if (bMSEC)
 	{
-		::swprintf_s( wszTemp, MAX_PATH, L"%02u:%02u:%02u %u\"", kTime.wHour, kTime.wMinute, kTime.wSecond, kTime.wMilliseconds );
+		::swprintf_s(wszTemp, MAX_PATH, L"%02u:%02u:%02u %u\"", kTime.wHour, kTime.wMinute, kTime.wSecond, kTime.wMilliseconds);
 	}
 	else
 	{
-		::swprintf_s( wszTemp, MAX_PATH, L"%02u:%02u:%02u", kTime.wHour, kTime.wMinute, kTime.wSecond );
+		::swprintf_s(wszTemp, MAX_PATH, L"%02u:%02u:%02u", kTime.wHour, kTime.wMinute, kTime.wSecond);
 	}
 	wstr += wszTemp;
 }
 
-void MakeStringForDateTT( std::wstring &wstr, SYSTEMTIME const &kTime, int const iTT )
+void MakeStringForDateTT(std::wstring& wstr, SYSTEMTIME const& kTime, int const iTT)
 {
-	wchar_t wszTemp[MAX_PATH] = {0,};
+	wchar_t wszTemp[MAX_PATH] = { 0, };
 	std::wstring ttw = TTW(iTT);
 	BM::vstring vstr(ttw.c_str());
-	swprintf_s( wszTemp, MAX_PATH, L"%04u", kTime.wYear );
+	swprintf_s(wszTemp, MAX_PATH, L"%04u", kTime.wYear);
 	vstr.Replace(L"#YEAR#", wszTemp);
-	swprintf_s( wszTemp, MAX_PATH, L"%02u", kTime.wMonth );
+	swprintf_s(wszTemp, MAX_PATH, L"%02u", kTime.wMonth);
 	vstr.Replace(L"#MONTH#", wszTemp);
-	swprintf_s( wszTemp, MAX_PATH, L"%02u", kTime.wDay );
+	swprintf_s(wszTemp, MAX_PATH, L"%02u", kTime.wDay);
 	vstr.Replace(L"#DAY#", wszTemp);
 	wstr += (std::wstring const&)vstr;
 }
 
-void MakeStringForTimeTT( std::wstring &wstr, SYSTEMTIME const &kTime, int const iTT )
+void MakeStringForTimeTT(std::wstring& wstr, SYSTEMTIME const& kTime, int const iTT)
 {
-	wchar_t wszTemp[MAX_PATH] = {0,};
+	wchar_t wszTemp[MAX_PATH] = { 0, };
 	std::wstring ttw = TTW(iTT);
 	BM::vstring vstr(ttw.c_str());
-	swprintf_s( wszTemp, MAX_PATH, L"%02u", kTime.wHour );
+	swprintf_s(wszTemp, MAX_PATH, L"%02u", kTime.wHour);
 	vstr.Replace(L"#HOUR#", wszTemp);
-	swprintf_s( wszTemp, MAX_PATH, L"%02u", kTime.wMinute );
+	swprintf_s(wszTemp, MAX_PATH, L"%02u", kTime.wMinute);
 	vstr.Replace(L"#MIN#", wszTemp);
-	swprintf_s( wszTemp, MAX_PATH, L"%02u", kTime.wSecond );
+	swprintf_s(wszTemp, MAX_PATH, L"%02u", kTime.wSecond);
 	vstr.Replace(L"#SEC#", wszTemp);
-	swprintf_s( wszTemp, MAX_PATH, L"%u", kTime.wMilliseconds );
+	swprintf_s(wszTemp, MAX_PATH, L"%u", kTime.wMilliseconds);
 	vstr.Replace(L"#MS#", wszTemp);
 	wstr += (std::wstring const&)vstr;
 }
 
-void WstringFormat( std::wstring& rkOutMsg, size_t const iSize, wchar_t const *szMsg, ... )
+void WstringFormat(std::wstring& rkOutMsg, size_t const iSize, wchar_t const* szMsg, ...)
 {
 	rkOutMsg = TEXT("");
 	if (iSize <= 0)
@@ -164,22 +166,22 @@ void WstringFormat( std::wstring& rkOutMsg, size_t const iSize, wchar_t const *s
 		return;
 	}
 
-	wchar_t* wszTemp = (wchar_t*)NiMalloc(sizeof(wchar_t)*(iSize+1));
+	wchar_t* wszTemp = (wchar_t*)NiMalloc(sizeof(wchar_t) * (iSize + 1));
 	PG_ASSERT_LOG(wszTemp);
-	if ( wszTemp )
+	if (wszTemp)
 	{
-		::memset( wszTemp, 0, (iSize + 1) * sizeof(wchar_t) );
+		::memset(wszTemp, 0, (iSize + 1) * sizeof(wchar_t));
 
 		va_list vargs;
-		va_start( vargs, szMsg );
-		::vswprintf_s( wszTemp, iSize, szMsg, vargs );
+		va_start(vargs, szMsg);
+		::vswprintf_s(wszTemp, iSize, szMsg, vargs);
 		va_end(vargs);
 		rkOutMsg = wszTemp;
 		NiFree(wszTemp);
 	}
 }
 
-void RecvNoticePacket( BM::Stream& kPacket )
+void RecvNoticePacket(BM::Stream& kPacket)
 {
 	std::wstring wstrNotice;
 	int iLevel = EL_Normal;
@@ -187,206 +189,206 @@ void RecvNoticePacket( BM::Stream& kPacket )
 	ENoticeType kType = NOTICE_ERROR;
 	kPacket.Pop(kType);
 
-	switch( kType )
+	switch (kType)
 	{
 	case NOTICE_EM_CHALLENGE_RESULT:
-		{
-			bool bChallenge = false;
-			kPacket.Pop(bChallenge);
+	{
+		bool bChallenge = false;
+		kPacket.Pop(bChallenge);
 
-			wstrNotice = bChallenge ? TTW(70091) : TTW(70092);
-		}break;
+		wstrNotice = bChallenge ? TTW(70091) : TTW(70092);
+	}break;
 	case NOTICE_EMPORIABATTLE_READY:
+	{
+		__int64 i64BattleTime = 0i64;
+		int iIndex = -1;
+		std::wstring kAttackGuildName;
+		std::wstring kDefenceGuildName;
+		kPacket.Pop(i64BattleTime);
+		kPacket.Pop(iIndex);
+		kPacket.Pop(kAttackGuildName);
+		kPacket.Pop(kDefenceGuildName);
+
+		if (g_kGuildMgr.GuildName() == kAttackGuildName || g_kGuildMgr.GuildName() == kDefenceGuildName)
 		{
-			__int64 i64BattleTime = 0i64;
-			int iIndex = -1;
-			std::wstring kAttackGuildName;
-			std::wstring kDefenceGuildName;
-			kPacket.Pop(i64BattleTime);
-			kPacket.Pop(iIndex);
-			kPacket.Pop(kAttackGuildName);
-			kPacket.Pop(kDefenceGuildName);
+			SGuildEmporiaInfo kInfo = g_kGuildMgr.GetEmporiaInfo();
+			kInfo.i64BattleTime = i64BattleTime;
+			g_kGuildMgr.SetEmporiaInfo(kInfo);
+		}
 
-			if( g_kGuildMgr.GuildName()==kAttackGuildName || g_kGuildMgr.GuildName()==kDefenceGuildName )
-			{
-				SGuildEmporiaInfo kInfo = g_kGuildMgr.GetEmporiaInfo();
-				kInfo.i64BattleTime = i64BattleTime;
-				g_kGuildMgr.SetEmporiaInfo(kInfo);
-			}
-
-			if ( g_pkWorld && !g_pkWorld->IsHaveAttr(GATTR_FLAG_EMPORIABATTLE) )
-			{
-				//±æµåÀü #GRADE#ÀÌ ½ÃÀÛµÇ¾ú½À´Ï´Ù.(8°­, 4°­, ÁØ°á½Â, °á½Â, 1¼º ¹æ¾îÀü, 2¼º ¹æ¾îÀü)
-				int iGradeNo = 0;
-				switch(iIndex)
-				{
-				case 101:
-				case 100:
-					{
-						iGradeNo = 71046;
-						iGradeNo += iIndex-PgEmporiaTournament::EMPORIA_BATTLE_TOURNAMENT_OWNERSHIP_STARTINDEX;
-					}break;
-				case 0:
-					{
-						iGradeNo = 71072;
-					}break;
-				case 1:case 2:
-					{
-						iGradeNo = 71073;
-					}break;	
-				case 3:case 4:case 5:case 6:
-					{
-						iGradeNo = 71074;
-					}break;
-				}
-
-				if(iGradeNo)
-				{
-					BM::vstring vStr(TTW(71081));
-					vStr.Replace(L"#GRADE#", TTW(iGradeNo));
-
-					SChatLog kChatLog(CT_EVENT);
-					g_kChatMgrClient.AddLogMessage( kChatLog, vStr, true, iLevel, true, true );
-				}
-			}
-
-			//
-			if( g_kEventTimer.IsHaveLocal(EVENT_EM_AD_MERCENARY) )
-			{
-				g_kEventTimer.RightNowLocal(EVENT_EM_AD_MERCENARY);
-			}
-			if( g_kEventTimer.IsHaveLocal(EVENT_EM_START_JOIN) )
-			{
-				g_kEventTimer.RightNowLocal(EVENT_EM_START_JOIN);
-			}
-			SetEmporiaBattleAlram(true);
-		}break;
-	case NOTICE_EMPORIABATTLE_START:
+		if (g_pkWorld && !g_pkWorld->IsHaveAttr(GATTR_FLAG_EMPORIABATTLE))
 		{
-		}break;
-	case NOTICE_EMPORIABATTLE_RESULT:
-		{
-			std::wstring wstrResult;
-
-			EEmporiaResultNoticeType eType = ERNT_NONE;
-			kPacket.Pop(eType);
-			switch(eType)
+			//ê¸¸ë“œì „ #GRADE#ì´ ì‹œì‘ë˜ì—ˆìŠµë‹ˆë‹¤.(8ê°•, 4ê°•, ì¤€ê²°ìŠ¹, ê²°ìŠ¹, 1ì„± ë°©ì–´ì „, 2ì„± ë°©ì–´ì „)
+			int iGradeNo = 0;
+			switch (iIndex)
 			{
-			case ERNT_USEROUT:
-			case ERNT_TIMEOVER:
-				{
-					//#GUILDNAME# ±æµå°¡ ±æµåÀü¿¡¼­ ½Â¸®Çß½À´Ï´Ù.
-					std::wstring kWinGuild;
-					kPacket.Pop(kWinGuild);
-
-					BM::vstring vStr(TTW(70102));
-					vStr.Replace(L"#GUILDNAME#", kWinGuild);
-					wstrResult = static_cast<std::wstring>(vStr);
-				}break;
-			case ERNT_HAVEPOINT:
-				{
-					//#GUILDNAME# ±æµå°¡ Æ÷ÀÎÆ® '#POINT#'Á¡À» È¹µæÇÏ¿© ±æµåÀü¿¡¼­ ½Â¸®Çß½À´Ï´Ù.
-					std::wstring kWinGuild;
-					int iPoint = 0;
-					kPacket.Pop(kWinGuild);
-					kPacket.Pop(iPoint);
-
-					BM::vstring vStr(TTW(70103));
-					vStr.Replace(L"#GUILDNAME#", kWinGuild);
-					vStr.Replace(L"#POINT#", iPoint);
-					wstrResult = static_cast<std::wstring>(vStr);
-				}break;
-			case ERNT_DESTORYCORE:
-			case ERNT_KILLDRAGON:
-				{
-					std::wstring kKillerName;
-					std::wstring kWinGuild;
-					kPacket.Pop(kKillerName);
-					kPacket.Pop(kWinGuild);
-
-					//#GUILDNAME# ±æµå°¡ ±æµåÀü¿¡¼­ ½Â¸®Çß½À´Ï´Ù.
-					int iNo = 70102;
-
-					if( !kKillerName.empty() )
-					{
-						//'#USER#'´ÔÀÌ ÄÚ¾î¸¦ ÆÄ±«ÇÏ¿© #GUILDNAME# ±æµå°¡ ±æµåÀü¿¡¼­ ½Â¸®Çß½À´Ï´Ù.
-						//'#USER#'´ÔÀÌ °Å´ë¼öÈ£¿ëÀ» ¼¶¸êÇÏ¿© #GUILDNAME# ±æµå°¡ ±æµåÀü¿¡¼­ ½Â¸®Çß½À´Ï´Ù.
-						iNo = (ERNT_DESTORYCORE==eType) ? 70104 : 70105;
-					}
-
-					BM::vstring vStr(TTW(iNo));
-					vStr.Replace(L"#USER#", kKillerName);
-					vStr.Replace(L"#GUILDNAME#", kWinGuild);
-					wstrResult = static_cast<std::wstring>(vStr);
-				}break;
+			case 101:
+			case 100:
+			{
+				iGradeNo = 71046;
+				iGradeNo += iIndex - PgEmporiaTournament::EMPORIA_BATTLE_TOURNAMENT_OWNERSHIP_STARTINDEX;
+			}break;
+			case 0:
+			{
+				iGradeNo = 71072;
+			}break;
+			case 1:case 2:
+			{
+				iGradeNo = 71073;
+			}break;
+			case 3:case 4:case 5:case 6:
+			{
+				iGradeNo = 71074;
+			}break;
 			}
 
-			if( !wstrResult.empty() )
+			if (iGradeNo)
 			{
-				bool bShowNoti = true;
-				if( g_pkWorld && g_pkWorld->IsHaveAttr(GATTR_FLAG_EMPORIABATTLE) )
-				{
-					bShowNoti = false;
-				}
+				BM::vstring vStr(TTW(71081));
+				vStr.Replace(L"#GRADE#", TTW(iGradeNo));
 
 				SChatLog kChatLog(CT_EVENT);
-				g_kChatMgrClient.AddLogMessage( kChatLog, wstrResult, bShowNoti, EL_PvPMsg );
+				g_kChatMgrClient.AddLogMessage(kChatLog, vStr, true, iLevel, true, true);
 			}
-		}break;
-	case NOTICE_PLUSE_UPGRADE_ITEM:
-		{
-			std::wstring kName;
-			wchar_t const* pItemName = NULL;
-			DWORD iItemNo = 0;
-			int iNextLv = 0;
-			bool bResult = false;
+		}
 
-			kPacket.Pop(kName);
-			kPacket.Pop(iItemNo);
-			kPacket.Pop(iNextLv);
-			kPacket.Pop(bResult);
-			GET_DEF(CItemDefMgr, kItemDefMgr);
-			CItemDef const* pDef = kItemDefMgr.GetDef(iItemNo);
-			if( pDef )
+		//
+		if (g_kEventTimer.IsHaveLocal(EVENT_EM_AD_MERCENARY))
+		{
+			g_kEventTimer.RightNowLocal(EVENT_EM_AD_MERCENARY);
+		}
+		if (g_kEventTimer.IsHaveLocal(EVENT_EM_START_JOIN))
+		{
+			g_kEventTimer.RightNowLocal(EVENT_EM_START_JOIN);
+		}
+		SetEmporiaBattleAlram(true);
+	}break;
+	case NOTICE_EMPORIABATTLE_START:
+	{
+	}break;
+	case NOTICE_EMPORIABATTLE_RESULT:
+	{
+		std::wstring wstrResult;
+
+		EEmporiaResultNoticeType eType = ERNT_NONE;
+		kPacket.Pop(eType);
+		switch (eType)
+		{
+		case ERNT_USEROUT:
+		case ERNT_TIMEOVER:
+		{
+			//#GUILDNAME# ê¸¸ë“œê°€ ê¸¸ë“œì „ì—ì„œ ìŠ¹ë¦¬í–ˆìŠµë‹ˆë‹¤.
+			std::wstring kWinGuild;
+			kPacket.Pop(kWinGuild);
+
+			BM::vstring vStr(TTW(70102));
+			vStr.Replace(L"#GUILDNAME#", kWinGuild);
+			wstrResult = static_cast<std::wstring>(vStr);
+		}break;
+		case ERNT_HAVEPOINT:
+		{
+			//#GUILDNAME# ê¸¸ë“œê°€ í¬ì¸íŠ¸ '#POINT#'ì ì„ íšë“í•˜ì—¬ ê¸¸ë“œì „ì—ì„œ ìŠ¹ë¦¬í–ˆìŠµë‹ˆë‹¤.
+			std::wstring kWinGuild;
+			int iPoint = 0;
+			kPacket.Pop(kWinGuild);
+			kPacket.Pop(iPoint);
+
+			BM::vstring vStr(TTW(70103));
+			vStr.Replace(L"#GUILDNAME#", kWinGuild);
+			vStr.Replace(L"#POINT#", iPoint);
+			wstrResult = static_cast<std::wstring>(vStr);
+		}break;
+		case ERNT_DESTORYCORE:
+		case ERNT_KILLDRAGON:
+		{
+			std::wstring kKillerName;
+			std::wstring kWinGuild;
+			kPacket.Pop(kKillerName);
+			kPacket.Pop(kWinGuild);
+
+			//#GUILDNAME# ê¸¸ë“œê°€ ê¸¸ë“œì „ì—ì„œ ìŠ¹ë¦¬í–ˆìŠµë‹ˆë‹¤.
+			int iNo = 70102;
+
+			if (!kKillerName.empty())
 			{
-				if( GetDefString(pDef->NameNo(), pItemName) )
-				{
-					if(bResult)
-					{// ÀÎÃ¦Æ® ¸Ş¼¼Áö´Â ¼º°ø ÇßÀ»¶§¸¸ º¸¿©ÁØ´Ù
-						WstringFormat( wstrNotice, MAX_PATH, TTW(404008).c_str(), kName.c_str(), pItemName, iNextLv, TTW(404010).c_str() );
-					}
+				//'#USER#'ë‹˜ì´ ì½”ì–´ë¥¼ íŒŒê´´í•˜ì—¬ #GUILDNAME# ê¸¸ë“œê°€ ê¸¸ë“œì „ì—ì„œ ìŠ¹ë¦¬í–ˆìŠµë‹ˆë‹¤.
+				//'#USER#'ë‹˜ì´ ê±°ëŒ€ìˆ˜í˜¸ìš©ì„ ì„¬ë©¸í•˜ì—¬ #GUILDNAME# ê¸¸ë“œê°€ ê¸¸ë“œì „ì—ì„œ ìŠ¹ë¦¬í–ˆìŠµë‹ˆë‹¤.
+				iNo = (ERNT_DESTORYCORE == eType) ? 70104 : 70105;
+			}
+
+			BM::vstring vStr(TTW(iNo));
+			vStr.Replace(L"#USER#", kKillerName);
+			vStr.Replace(L"#GUILDNAME#", kWinGuild);
+			wstrResult = static_cast<std::wstring>(vStr);
+		}break;
+		}
+
+		if (!wstrResult.empty())
+		{
+			bool bShowNoti = true;
+			if (g_pkWorld && g_pkWorld->IsHaveAttr(GATTR_FLAG_EMPORIABATTLE))
+			{
+				bShowNoti = false;
+			}
+
+			SChatLog kChatLog(CT_EVENT);
+			g_kChatMgrClient.AddLogMessage(kChatLog, wstrResult, bShowNoti, EL_PvPMsg);
+		}
+	}break;
+	case NOTICE_PLUSE_UPGRADE_ITEM:
+	{
+		std::wstring kName;
+		wchar_t const* pItemName = NULL;
+		DWORD iItemNo = 0;
+		int iNextLv = 0;
+		bool bResult = false;
+
+		kPacket.Pop(kName);
+		kPacket.Pop(iItemNo);
+		kPacket.Pop(iNextLv);
+		kPacket.Pop(bResult);
+		GET_DEF(CItemDefMgr, kItemDefMgr);
+		CItemDef const* pDef = kItemDefMgr.GetDef(iItemNo);
+		if (pDef)
+		{
+			if (GetDefString(pDef->NameNo(), pItemName))
+			{
+				if (bResult)
+				{// ì¸ì±ˆíŠ¸ ë©”ì„¸ì§€ëŠ” ì„±ê³µ í–ˆì„ë•Œë§Œ ë³´ì—¬ì¤€ë‹¤
+					WstringFormat(wstrNotice, MAX_PATH, TTW(404008).c_str(), kName.c_str(), pItemName, iNextLv, TTW(404010).c_str());
 				}
 			}
-		}break;
+		}
+	}break;
 	case NOTICE_EM_AD_MERCENARY:
-		{
-			g_kEmporiaMgr.ADMercenary( kPacket );
-		}break;
+	{
+		g_kEmporiaMgr.ADMercenary(kPacket);
+	}break;
 	case NOTICE_REGEN_EVENT_MONSTER:
+	{
+		int MapNo = 0;
+		kPacket.Pop(MapNo);
+		kPacket.Pop(wstrNotice);
+
+		if (0 != MapNo)
 		{
-			int MapNo = 0;
-			kPacket.Pop(MapNo);
-			kPacket.Pop(wstrNotice);
+			std::wstring MapName = GetMapName(MapNo);
 
-			if( 0 != MapNo )
-			{
-				std::wstring MapName = GetMapName( MapNo );
+			wstrNotice = MapName + wstrNotice;
+		}
 
-				wstrNotice = MapName + wstrNotice;
-			}
-
-			iLevel = EL_GMMsg;
-		}break;
+		iLevel = EL_GMMsg;
+	}break;
 	default:
-		{
+	{
 
-		}break;
+	}break;
 	}
 
-	if ( !wstrNotice.empty() )
+	if (!wstrNotice.empty())
 	{
 		SChatLog kChatLog(CT_EVENT);
-		g_kChatMgrClient.AddLogMessage( kChatLog, wstrNotice, true, iLevel );
+		g_kChatMgrClient.AddLogMessage(kChatLog, wstrNotice, true, iLevel);
 	}
 }
 
@@ -400,8 +402,8 @@ namespace PgChatMgrUtil
 	std::wstring const kExpeditionLogWndName(_T("FRM_EXPEDITION_REGISTER"));
 	enum E_CHAT_PALAM
 	{
-		CP_MAX_All			=	30,//255,//ÀüÃ¼ ·Î±×´Â 512°³¸¸ º¸¿©ÁØ´Ù.
-		CP_MAX_InputLog		=	32,//ÃÖ´ë ÀÔ·Â ·Î±×´Â 32°³´Ù
+		CP_MAX_All = 30,//255,//ì „ì²´ ë¡œê·¸ëŠ” 512ê°œë§Œ ë³´ì—¬ì¤€ë‹¤.
+		CP_MAX_InputLog = 32,//ìµœëŒ€ ì…ë ¥ ë¡œê·¸ëŠ” 32ê°œë‹¤
 	};
 
 	typedef struct tagChatColor
@@ -415,7 +417,7 @@ namespace PgChatMgrUtil
 		{
 			Set(dwInHead, dwInBody);
 		}
-		
+
 		void Set(DWORD const dwInHead, DWORD const dwInBody)
 		{
 			m_kHead = dwInHead;
@@ -427,37 +429,37 @@ namespace PgChatMgrUtil
 	typedef std::map< int, CChatLogList > ContAllChatLog;
 	typedef std::map< int, SNoticeLevelColor > ContNoticeLevelColor;
 
-	ContAllChatLog kLogChat; //Ã¤ÆÃ ÇÊÅÍ
-	ContNoticeLevelColor kContNoticeLevelColor;//°øÁö»çÇ× ·¹º§ ÄÃ·¯
+	ContAllChatLog kLogChat; //ì±„íŒ… í•„í„°
+	ContNoticeLevelColor kContNoticeLevelColor;//ê³µì§€ì‚¬í•­ ë ˆë²¨ ì»¬ëŸ¬
 
 
 	void HeaderName(const EChatType eType, std::wstring& rkOut, bool bChatOut = false)
 	{
-		switch(eType)
+		switch (eType)
 		{
 		case CT_FRIEND:
-			{
-				rkOut = TTW(400104);
-			}break;
+		{
+			rkOut = TTW(400104);
+		}break;
 		case CT_GUILD:
-			{
-				rkOut = TTW(400106);
-			}break;
+		{
+			rkOut = TTW(400106);
+		}break;
 		case CT_NORMAL:
-			{
-				rkOut = TTW(400108);
-			}break;
+		{
+			rkOut = TTW(400108);
+		}break;
 		case CT_TEAM:
-			{
-				rkOut = TTW(400273);
-			}break;
+		{
+			rkOut = TTW(400273);
+		}break;
 		case CT_PARTY:
-			{
-				rkOut = TTW(400105);
-			}break;
+		{
+			rkOut = TTW(400105);
+		}break;
 		case CT_WHISPER_BYNAME:
-			{
-			if( bChatOut )
+		{
+			if (bChatOut)
 			{
 				rkOut = TTW(400107);//400107
 			}
@@ -465,30 +467,30 @@ namespace PgChatMgrUtil
 			{
 				rkOut = TTW(400904);//400107
 			}
-			}break;
+		}break;
 		case CT_WHISPER_BYGUID:
-			{
-				rkOut = TTW(400107);//400107
-			}break;
+		{
+			rkOut = TTW(400107);//400107
+		}break;
 		case CT_MEGAPHONE_CH:
 		case CT_MEGAPHONE_SV:
-			{
-				rkOut = TTW(401219);
-			}break;
+		{
+			rkOut = TTW(401219);
+		}break;
 		case CT_TRADE:
-			{
-				rkOut = TTW(404003);
-			}break;
+		{
+			rkOut = TTW(404003);
+		}break;
 		default:
-			{
-				rkOut = TTW(400161);
-			}break;
+		{
+			rkOut = TTW(400161);
+		}break;
 		}
 	}
 
-	HRESULT GetChatModeColor(const EChatType eChatType, bool const bIsMine, SChatColor &rOutColor)
+	HRESULT GetChatModeColor(const EChatType eChatType, bool const bIsMine, SChatColor& rOutColor)
 	{
-		const static tagChatColor aColorSet[] = 
+		const static tagChatColor aColorSet[] =
 		{
 			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_ERROR
 			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_NONE
@@ -510,37 +512,37 @@ namespace PgChatMgrUtil
 			tagChatColor(0xFF99ACFF, 0xFF99ACFF),	// CT_COMMAND
 			tagChatColor(0xFFFFFF00, 0xFFFFFF00),	// CT_MEGAPHONE_CH
 			tagChatColor(0xFF7CEFFF, 0xFF7CEFFF),	// CT_MEGAPHONE_SV
-			
+
 			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_RAREMONSTERGEN
 			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_RAREMONSTERDEAD
 			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_OXQUIZEVENT
 
-			tagChatColor(0xFFFF0000, 0xFFFF0000),	// CT_ERROR_NOTICE	»¡
-			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_NORMAL_NOTICE Èò
-			tagChatColor(0xFF00FF00, 0xFF00FF00),	// CT_NOTICE1		³ì
-			tagChatColor(0xFF46F8FF, 0xFF46F8FF),	// CT_NOTICE2		ÇÏ
-			tagChatColor(0xFFFFF440, 0xFFFFF440),	// CT_NOTICE3		³ë
-			tagChatColor(0xFFFFF440, 0xFFFFF440),	// CT_LOVE_SMS		³ë
+			tagChatColor(0xFFFF0000, 0xFFFF0000),	// CT_ERROR_NOTICE	ë¹¨
+			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_NORMAL_NOTICE í°
+			tagChatColor(0xFF00FF00, 0xFF00FF00),	// CT_NOTICE1		ë…¹
+			tagChatColor(0xFF46F8FF, 0xFF46F8FF),	// CT_NOTICE2		í•˜
+			tagChatColor(0xFFFFF440, 0xFFFFF440),	// CT_NOTICE3		ë…¸
+			tagChatColor(0xFFFFF440, 0xFFFFF440),	// CT_LOVE_SMS		ë…¸
 
-			tagChatColor(0xFF000000, 0xFF000000),	// ¾²Áö¾Ê´Â Ç×¸ñ : CT_CASHITEM_GIFT °ø¹é ¸ÂÃß±â À§ÇÔ 0xFF000000
+			tagChatColor(0xFF000000, 0xFF000000),	// ì“°ì§€ì•ŠëŠ” í•­ëª© : CT_CASHITEM_GIFT ê³µë°± ë§ì¶”ê¸° ìœ„í•¨ 0xFF000000
 			tagChatColor(0xFF00FF00, 0xFF00FF00),	// CT_GOLD
 			tagChatColor(0xFF00FF00, 0xFF00FF00),	// CT_EXP
 			tagChatColor(0xFFFFFFFF, 0xFFFFFFFF),	// CT_EMOTION
-			tagChatColor(0xFF000000, 0xFF000000),	// °ø¹é
-			tagChatColor(0xFF000000, 0xFF000000),	// °ø¹é
-			tagChatColor(0xFF000000, 0xFF000000),	// °ø¹é
-			tagChatColor(0xFF000000, 0xFF000000),	// °ø¹é
-			tagChatColor(0xFF000000, 0xFF000000),	// °ø¹é
-			tagChatColor(0xFF000000, 0xFF000000),	// °ø¹é
+			tagChatColor(0xFF000000, 0xFF000000),	// ê³µë°±
+			tagChatColor(0xFF000000, 0xFF000000),	// ê³µë°±
+			tagChatColor(0xFF000000, 0xFF000000),	// ê³µë°±
+			tagChatColor(0xFF000000, 0xFF000000),	// ê³µë°±
+			tagChatColor(0xFF000000, 0xFF000000),	// ê³µë°±
+			tagChatColor(0xFF000000, 0xFF000000),	// ê³µë°±
 			tagChatColor(0xFFFFF440, 0xFFFFF440)	// CT_TRADE
 		};
-		
+
 		{
-			size_t const size = PgArrayUtil::GetArrayCount(aColorSet);			
-			if(size < static_cast<size_t>(eChatType))
+			size_t const size = PgArrayUtil::GetArrayCount(aColorSet);
+			if (size < static_cast<size_t>(eChatType))
 			{
 				rOutColor = tagChatColor(0xFFFFFFFF, 0xFFFFFFFF);
-				_PgMessageBox("PgChatMgrClient::GetChatModeColor","color array range over");
+				_PgMessageBox("PgChatMgrClient::GetChatModeColor", "color array range over");
 				return E_FAIL;
 			}
 		}
@@ -549,30 +551,33 @@ namespace PgChatMgrUtil
 		const static tagChatColor kMyBattle(0xFFFFFF00, 0xFFFFFF00);
 		const static tagChatColor kBlueTeam(0x0000FFFF, 0x0000FFFF);
 
-		if(	eChatType >= CT_ERROR
-			&&	eChatType <  CT_MAX)
+		if (eChatType >= CT_ERROR
+			&& eChatType < CT_MAX)
 		{
-			const SChatColor *pElement = &aColorSet[eChatType];
-			if( bIsMine )
-			{	
-				switch(eChatType)
+			const SChatColor* pElement = &aColorSet[eChatType];
+			if (bIsMine)
+			{
+				switch (eChatType)
 				{
 				case CT_NORMAL:
-					{
-						pElement = &kMyNormal;
-					}break;
+				{
+					pElement = &kMyNormal;
+				}break;
 				case CT_BATTLE:
-					{
-						pElement = &kMyBattle;
-					}break;
+				{
+					pElement = &kMyBattle;
+				}break;
 				default:
 					break;
 				}
 			}
 
-			if( pElement )
+			if (pElement)
 			{
 				rOutColor = *pElement;
+				DWORD const dwCustomColor = CustomChatColors::GetInstance().ResolveCustomChatColor(eChatType, rOutColor.m_kHead);
+				rOutColor.m_kHead = dwCustomColor;
+				rOutColor.m_kBody = dwCustomColor;
 				return S_OK;
 			}
 		}
@@ -581,9 +586,9 @@ namespace PgChatMgrUtil
 	}
 
 
-	DWORD ChatInputColor(EChatType const Type)
+	DWORD DefaultChatInputColor(EChatType const Type)
 	{
-		const static DWORD aColorSet[] = 
+		const static DWORD aColorSet[] =
 		{
 			0xFFFFFFFF,	// CT_ERROR				0xFFFFFFFF
 			0xFFFFFFFF,	// CT_NONE				0xFFFFFFFF
@@ -609,93 +614,107 @@ namespace PgChatMgrUtil
 			0xFFFFFFFF, // CT_RAREMONSTERDEAD
 			0xFFFFFFFF, // CT_OXQUIZEVENT
 
-			0xFFFF0000, // CT_ERROR_NOTICE	»¡
-			0xFFFFFFFF, // CT_NORMAL_NOTICE Èò
-			0xFF00FF00, // CT_NOTICE1		³ì
-			0xFF46F8FF, // CT_NOTICE2		ÇÏ
-			0xFFFFF440, // CT_NOTICE3		³ë
-			0xFFFFF440, // CT_LOVE_SMS		³ë
-			0xFF000000,	// ¾²Áö¾Ê´Â Ç×¸ñ : CT_CASHITEM_GIFT °ø¹é ¸ÂÃß±â À§ÇÔ 0xFF000000
+			0xFFFF0000, // CT_ERROR_NOTICE	ë¹¨
+			0xFFFFFFFF, // CT_NORMAL_NOTICE í°
+			0xFF00FF00, // CT_NOTICE1		ë…¹
+			0xFF46F8FF, // CT_NOTICE2		í•˜
+			0xFFFFF440, // CT_NOTICE3		ë…¸
+			0xFFFFF440, // CT_LOVE_SMS		ë…¸
+			0xFF000000,	// ì“°ì§€ì•ŠëŠ” í•­ëª© : CT_CASHITEM_GIFT ê³µë°± ë§ì¶”ê¸° ìœ„í•¨ 0xFF000000
 			0xFF00FF00,	// CT_GOLD	0xFF00FF00
 			0xFF00FF00,	// CT_EXP	0xFF00FF00
 			0xFFFFFFFF,	// CT_EMOTION			0xFFFFFFFF
-			0xFF000000,	// °ø¹é
-			0xFF000000,	// °ø¹é
-			0xFF000000,	// °ø¹é
-			0xFF000000,	// °ø¹é
-			0xFF000000,	// °ø¹é
-			0xFF000000,	// °ø¹é
+			0xFF000000,	// ê³µë°±
+			0xFF000000,	// ê³µë°±
+			0xFF000000,	// ê³µë°±
+			0xFF000000,	// ê³µë°±
+			0xFF000000,	// ê³µë°±
+			0xFF000000,	// ê³µë°±
 			0xFFFFF440, // CT_TRADE
 		};
 		size_t const size = PgArrayUtil::GetArrayCount(aColorSet);
-		if(size < static_cast<size_t>(Type))
+		if (size < static_cast<size_t>(Type))
 		{
-			_PgMessageBox("PgChatMgrClient::ChatInputColor","color array range over");
+			_PgMessageBox("PgChatMgrClient::DefaultChatInputColor", "color array range over");
 			return (0xFFFFFFFF);
 		}
 		return aColorSet[Type];
 	}
 
+	DWORD ChatInputColor(EChatType const Type)
+	{
+		DWORD const dwDefaultColor = DefaultChatInputColor(Type);
+		if (0xFFFFFFFF == dwDefaultColor && Type != CT_ERROR && Type != CT_NONE && Type != CT_NORMAL)
+		{
+			return dwDefaultColor;
+		}
+		return CustomChatColors::GetInstance().ResolveCustomChatColor(Type, dwDefaultColor);
+	}
+
+	DWORD ResolveDisplayedChatColor(SChatLog const& rkChatLog)
+	{
+		return CustomChatColors::GetInstance().ResolveDisplayedChatColor(rkChatLog.ChatType(), rkChatLog.dwColor, ChatInputColor(rkChatLog.ChatType()));
+	}
 
 	//
 	std::wstring const ColorHexToString(DWORD const dwColor)
 	{
 		int const iMaxArraySize = 128;
-		wchar_t	szTemp[iMaxArraySize] = {0, };
+		wchar_t	szTemp[iMaxArraySize] = { 0, };
 		swprintf(szTemp, iMaxArraySize, L"{C=%#x/}", dwColor);
 		return std::wstring(szTemp);
 	}
 
 
 	//
-	void ChatFilterClear() // Ã¤ÆÃ¸ğµå·Î ÇÊÅÍ¸µ ÃÊ±âÈ­
+	void ChatFilterClear() // ì±„íŒ…ëª¨ë“œë¡œ í•„í„°ë§ ì´ˆê¸°í™”
 	{
-		kLogChat.clear(); // ¸ğµç ·Î±×¸¦ Áö¿î´Ù.
+		kLogChat.clear(); // ëª¨ë“  ë¡œê·¸ë¥¼ ì§€ìš´ë‹¤.
 	}
 
-	void ChatFilterAdd(int const iFilterSet, BYTE const cChatMode, std::wstring const &rkXuiListID) //Ã¤ÆÃ¸ğµå·Î ÇÊ´õ¸µ Ãß°¡
+	void ChatFilterAdd(int const iFilterSet, BYTE const cChatMode, std::wstring const& rkXuiListID) //ì±„íŒ…ëª¨ë“œë¡œ í•„ë”ë§ ì¶”ê°€
 	{
-		//Ã¤ÆÃ ÇÊÅÍSetÀ» Ãß°¡
-		if(	cChatMode > iMaxChatFilterBit
-		||	cChatMode < 0 )
+		//ì±„íŒ… í•„í„°Setì„ ì¶”ê°€
+		if (cChatMode > iMaxChatFilterBit
+			|| cChatMode < 0)
 		{
-			NILOG(PGLOG_ERROR, "Out of range chat filter mode"); 
-			PG_ASSERT_LOG(0 && _T(__FUNCTION__) );
+			NILOG(PGLOG_ERROR, "Out of range chat filter mode");
+			PG_ASSERT_LOG(0 && _T(__FUNCTION__));
 			return;
 		}
 
-		DWORD const dwChatFilter = (1<<cChatMode);
-		
+		DWORD const dwChatFilter = (1 << cChatMode);
+
 		std::pair<ContAllChatLog::iterator, bool> kRet = kLogChat.insert(std::make_pair(iFilterSet, ContAllChatLog::mapped_type()));
 
-		ContAllChatLog::mapped_type &rkElement = (*kRet.first).second;
+		ContAllChatLog::mapped_type& rkElement = (*kRet.first).second;
 		rkElement.ApplyFlag(dwChatFilter);
-		
-		if( !rkXuiListID.empty() ) //XUI ID ¸®½ºÆ® ÀÓ½Ã ÀúÀå
+
+		if (!rkXuiListID.empty()) //XUI ID ë¦¬ìŠ¤íŠ¸ ì„ì‹œ ì €ì¥
 		{
 			rkElement.WndName(rkXuiListID);
 		}
 	}
 
-	void ChatFilterDel(int const iFilterSet, BYTE const cChatMode, std::wstring const &rkXuiListID) //Ã¤ÆÃ¸ğµå·Î ÇÊ´õ¸µ »èÁ¦
+	void ChatFilterDel(int const iFilterSet, BYTE const cChatMode, std::wstring const& rkXuiListID) //ì±„íŒ…ëª¨ë“œë¡œ í•„ë”ë§ ì‚­ì œ
 	{
-		//Ã¤ÆÃ ÇÊÅÍSetÀ» Ãß°¡
-		if(	cChatMode > iMaxChatFilterBit
-		||	cChatMode < 0 )
+		//ì±„íŒ… í•„í„°Setì„ ì¶”ê°€
+		if (cChatMode > iMaxChatFilterBit
+			|| cChatMode < 0)
 		{
-			NILOG(PGLOG_ERROR, "Out of range chat filter mode"); 
-			PG_ASSERT_LOG(0 && _T(__FUNCTION__) );
+			NILOG(PGLOG_ERROR, "Out of range chat filter mode");
+			PG_ASSERT_LOG(0 && _T(__FUNCTION__));
 			return;
 		}
 
-		DWORD const dwChatFilter = (1<<cChatMode);
+		DWORD const dwChatFilter = (1 << cChatMode);
 
 		std::pair<ContAllChatLog::iterator, bool> kRet = kLogChat.insert(std::make_pair(iFilterSet, ContAllChatLog::mapped_type()));
 
-		ContAllChatLog::mapped_type &rkElement = (*kRet.first).second;
+		ContAllChatLog::mapped_type& rkElement = (*kRet.first).second;
 		rkElement.DisApplyFlag(dwChatFilter);
-		
-		if( !rkXuiListID.empty() ) //XUI ID ¸®½ºÆ® ÀÓ½Ã ÀúÀå
+
+		if (!rkXuiListID.empty()) //XUI ID ë¦¬ìŠ¤íŠ¸ ì„ì‹œ ì €ì¥
 		{
 			rkElement.WndName(rkXuiListID);
 		}
@@ -706,8 +725,8 @@ namespace PgChatMgrUtil
 	void NoticeLevelColor_Add(int const iLevel, DWORD const dwFontColor, DWORD const dwOutlineColor, bool const bShowBG)
 	{
 		SNoticeLevelColor kNewLevelColor(dwFontColor, dwOutlineColor, bShowBG);
-		std::pair<ContNoticeLevelColor::iterator, bool> kRet = kContNoticeLevelColor.insert( std::make_pair(iLevel, kNewLevelColor) );
-		if( !kRet.second )
+		std::pair<ContNoticeLevelColor::iterator, bool> kRet = kContNoticeLevelColor.insert(std::make_pair(iLevel, kNewLevelColor));
+		if (!kRet.second)
 		{
 			PG_ASSERT_LOG(0 && "Duplicated Level Color");
 		}
@@ -720,26 +739,26 @@ namespace PgChatMgrUtil
 
 
 	//
-	// ³»ºÎ Ã¤ÆÃÃ¢
+	// ë‚´ë¶€ ì±„íŒ…ì°½
 	void UpdateLogWndInternal(XUI::CXUI_Wnd* pkLogWnd, std::wstring const& rkWndName, SChatLog const& rkChatLog, std::wstring const& rkText, bool const bCheckEqualMessage, bool const bIsMonster)
 	{
-		if( !pkLogWnd )
+		if (!pkLogWnd)
 		{
 			return;
 		}
-	
-		XUI::CXUI_List *pkListWnd = dynamic_cast<XUI::CXUI_List*>(pkLogWnd->GetControl(rkWndName));
-		if( pkListWnd )
+
+		XUI::CXUI_List* pkListWnd = dynamic_cast<XUI::CXUI_List*>(pkLogWnd->GetControl(rkWndName));
+		if (pkListWnd)
 		{
-			if(bCheckEqualMessage)
+			if (bCheckEqualMessage)
 			{
 				int const iTotalSize = pkListWnd->GetTotalItemCount();
-				if(0 < iTotalSize)
+				if (0 < iTotalSize)
 				{
-					XUI::SListItem *pItem = pkListWnd->GetItemAt(iTotalSize - 1); // ListÀÇ °¡Àå ÃÖ±Ù ¾ÆÀÌÅÛÀ» ¾ò¾î ¿Â´Ù.
-					if(pItem && pItem->m_pWnd)
+					XUI::SListItem* pItem = pkListWnd->GetItemAt(iTotalSize - 1); // Listì˜ ê°€ì¥ ìµœê·¼ ì•„ì´í…œì„ ì–»ì–´ ì˜¨ë‹¤.
+					if (pItem && pItem->m_pWnd)
 					{
-						if(pItem->m_pWnd->Text() == rkText)
+						if (pItem->m_pWnd->Text() == rkText)
 						{
 							return;
 						}
@@ -747,40 +766,40 @@ namespace PgChatMgrUtil
 				}
 			}
 
-			XUI::SListItem *pItem = pkListWnd->AddItem( std::wstring() ); //¹«Á¶°Ç Ãß°¡
-			if( !pItem )
+			XUI::SListItem* pItem = pkListWnd->AddItem(std::wstring()); //ë¬´ì¡°ê±´ ì¶”ê°€
+			if (!pItem)
 			{
-				NILOG(PGLOG_ERROR, "XUI List Add item failed"); 
+				NILOG(PGLOG_ERROR, "XUI List Add item failed");
 				PG_ASSERT_LOG(0);
 				return;
 			}
 
-			XUI::CXUI_Wnd *pkWnd = pItem->m_pWnd;
-			if( pkWnd )
+			XUI::CXUI_Wnd* pkWnd = pItem->m_pWnd;
+			if (pkWnd)
 			{
-				XUI::CXUI_Wnd*	pChild = pkWnd->GetControl(_T("FRM_ID_RECT"));
-				if( pChild )
+				XUI::CXUI_Wnd* pChild = pkWnd->GetControl(_T("FRM_ID_RECT"));
+				if (pChild)
 				{
-					if(((rkChatLog.ChatType() > CT_NONE)
-						&&  (rkChatLog.ChatType() < CT_USERSELECT_MAX))
-						||  (rkChatLog.ChatType() == CT_WHISPER_BYGUID)
-						||	(rkChatLog.ChatType() == CT_MEGAPHONE_SV)
-						||  (rkChatLog.ChatType() == CT_MEGAPHONE_CH)
-						||  (rkChatLog.ChatType() == CT_MYHOME_PUBLIC)
-						||  (rkChatLog.ChatType() == CT_MYHOME_PRIVATE)
-						||  (rkChatLog.ChatType() == CT_LOVE_SMS)
-						||	(rkChatLog.ChatType() == CT_TRADE ))
+					if (((rkChatLog.ChatType() > CT_NONE)
+						&& (rkChatLog.ChatType() < CT_USERSELECT_MAX))
+						|| (rkChatLog.ChatType() == CT_WHISPER_BYGUID)
+						|| (rkChatLog.ChatType() == CT_MEGAPHONE_SV)
+						|| (rkChatLog.ChatType() == CT_MEGAPHONE_CH)
+						|| (rkChatLog.ChatType() == CT_MYHOME_PUBLIC)
+						|| (rkChatLog.ChatType() == CT_MYHOME_PRIVATE)
+						|| (rkChatLog.ChatType() == CT_LOVE_SMS)
+						|| (rkChatLog.ChatType() == CT_TRADE))
 					{
 						std::wstring kHeaderText;
 						XUI::CXUI_Style_String HeaderStyle;
 						HeaderName(rkChatLog.ChatType(), kHeaderText);
 						kHeaderText = _T("[") + kHeaderText + _T("]");
-						if( false == bIsMonster )
+						if (false == bIsMonster)
 						{
 							pChild->AdjustText(pChild->Font(), kHeaderText, HeaderStyle);
 							POINT2 const kHeaderSize(Pg2DString::CalculateOnlySize(HeaderStyle));
 
-							pChild->SetCustomData(rkChatLog.kCharName.c_str(), sizeof(std::wstring::value_type)*rkChatLog.kCharName.size());
+							pChild->SetCustomData(rkChatLog.kCharName.c_str(), sizeof(std::wstring::value_type) * rkChatLog.kCharName.size());
 							pChild->Text(rkChatLog.kCharName.c_str());
 							XUI::CXUI_Style_String kStyleString = pChild->StyleText();
 							POINT2 kTextSize(Pg2DString::CalculateOnlySize(kStyleString));
@@ -804,41 +823,41 @@ namespace PgChatMgrUtil
 				pkWnd->SetCustomData(&Type, sizeof(Type));
 				pkWnd->Text(rkText);
 				XUI::CXUI_Style_String kStyleString = pkWnd->StyleText();
-				XUI::PgExtraDataPackInfo const &kExtraDataPackInfo = rkChatLog.kExtraDataPackInfo;
+				XUI::PgExtraDataPackInfo const& kExtraDataPackInfo = rkChatLog.kExtraDataPackInfo;
 				kStyleString.SetExtraDataPackInfo(kExtraDataPackInfo);
 
 				pkWnd->StyleText(kStyleString);
 
-				pkWnd->Size(pkWnd->Size().x, pkWnd->TextRect().y+1);
+				pkWnd->Size(pkWnd->Size().x, pkWnd->TextRect().y + 1);
 
 			}
 
-			while( CP_MAX_All < pkListWnd->GetTotalItemCount() )//°¹¼ö ÃÊ°ú »èÁ¦
+			while (CP_MAX_All < pkListWnd->GetTotalItemCount())//ê°¯ìˆ˜ ì´ˆê³¼ ì‚­ì œ
 			{
-				XUI::SListItem *pkFirstItem = pkListWnd->FirstItem();//»õ·Î¿î °³Ã¼°¡ ¾Æ·¡¿¡¼­ ºÙ´Â ¹æ½ÄÀÌ±â ¶§¹®.
-				if( pkFirstItem )
+				XUI::SListItem* pkFirstItem = pkListWnd->FirstItem();//ìƒˆë¡œìš´ ê°œì²´ê°€ ì•„ë˜ì—ì„œ ë¶™ëŠ” ë°©ì‹ì´ê¸° ë•Œë¬¸.
+				if (pkFirstItem)
 				{
 					pkListWnd->DeleteItem(pkFirstItem);
 				}
 				else
 				{
-					//pkFirstItem ¾øÀ» ¼ö´Â ¾øÁö¸¸.
+					//pkFirstItem ì—†ì„ ìˆ˜ëŠ” ì—†ì§€ë§Œ.
 					assert(NULL);
 					break;
 				}
 			}
-		
+
 			//Adjust List Scroll Position
 			pkListWnd->DisplayStartPos(pkListWnd->GetTotalItemLen() - pkListWnd->Height());
 			pkListWnd->AdjustMiddleBtnPos();
 		}
 	}
 
-	// ¿ÜºÎ Ã¤ÆÃÃ¢
+	// ì™¸ë¶€ ì±„íŒ…ì°½
 	void UpdateLogWndExternal(int const iIdx, SChatLog const& rkChatLog, std::wstring const& rkText, bool const bCheckEqualMessage)
 	{
-		XUI::CXUI_Font *pFont = g_kFontMgr.GetFont(FONT_CHAT);
-		if( !pFont )
+		XUI::CXUI_Font* pFont = g_kFontMgr.GetFont(FONT_CHAT);
+		if (!pFont)
 		{
 			return;
 		}
@@ -846,74 +865,73 @@ namespace PgChatMgrUtil
 		g_kChatWindow.AddNewString(iIdx, kNewSytleText, bCheckEqualMessage);
 	}
 
-	void UpdateLogWnd(XUI::CXUI_Wnd *pkLogWnd, SChatLog const& rkChatLog, bool const bCheckEqualMessage, bool const IsMonster)
+	void UpdateLogWnd(XUI::CXUI_Wnd* pkLogWnd, SChatLog const& rkChatLog, bool const bCheckEqualMessage, bool const IsMonster)
 	{
-		ContAllChatLog::iterator total_iter = kLogChat.begin();//ÀüÃ¼ÀÓ.
-		while( kLogChat.end() != total_iter )
+		ContAllChatLog::iterator total_iter = kLogChat.begin();//ì „ì²´ì„.
+		while (kLogChat.end() != total_iter)
 		{
 			ContAllChatLog::key_type const& iKey = (*total_iter).first;
-			ContAllChatLog::mapped_type const &rkElement = (*total_iter).second;
-			if( g_kChatMgrClient.CheckChattingOption(rkChatLog, rkElement) )
-			{//Ãß°¡ ÇÏÀÚ
+			ContAllChatLog::mapped_type const& rkElement = (*total_iter).second;
+			if (g_kChatMgrClient.CheckChattingOption(rkChatLog, rkElement))
+			{//ì¶”ê°€ í•˜ì
 
-				{	// ±æµå, ÆÄÆ¼ ´ëÈ­ÀÇ °æ¿ì ´ëÈ­ ÅÇÀÌ Á¡¸êÇÏµµ·Ï ÇØ¾ßµÈ´Ù.
+				{	// ê¸¸ë“œ, íŒŒí‹° ëŒ€í™”ì˜ ê²½ìš° ëŒ€í™” íƒ­ì´ ì ë©¸í•˜ë„ë¡ í•´ì•¼ëœë‹¤.
 					XUI::CXUI_Wnd* pNewLog = XUIMgr.Get(_T("ChatOut"));
-					if( !pNewLog )
+					if (!pNewLog)
 					{
 						return;
 					}
 
 					pNewLog = pNewLog->GetControl(_T("CHAT_BG"));
-					if( !pNewLog )
+					if (!pNewLog)
 					{
 						return;
 					}
 
-					switch(rkChatLog.ChatType())
+					switch (rkChatLog.ChatType())
 					{
 					case CT_PARTY:
+					{
+						pNewLog = pNewLog->GetControl(_T("BTN_CHATFILTER_PARTY"));
+						if (!pNewLog)
 						{
-							pNewLog = pNewLog->GetControl(_T("BTN_CHATFILTER_PARTY"));
-							if( !pNewLog )
-							{
-								return;
-							}
-						}break;
+							return;
+						}
+					}break;
 					case CT_GUILD:
+					{
+						pNewLog = pNewLog->GetControl(_T("BTN_CHATFILTER_GUILD"));
+						if (!pNewLog)
 						{
-							pNewLog = pNewLog->GetControl(_T("BTN_CHATFILTER_GUILD"));
-							if( !pNewLog )
-							{
-								return;
-							}
-						}break;
+							return;
+						}
+					}break;
 					default:
-						{
-							pNewLog = NULL;
-						}break;
+					{
+						pNewLog = NULL;
+					}break;
 					}
 
-					if( pNewLog )
+					if (pNewLog)
 					{
 						pNewLog = pNewLog->GetControl(_T("FRM_NEW_CHATLOG"));
 						pNewLog->Visible(true);
 					}
 				}
 
-				std::wstring kText = ColorHexToString(ChatInputColor(rkChatLog.ChatType()));
-
+				std::wstring kText = ColorHexToString(DefaultChatInputColor(rkChatLog.ChatType()));
 				std::wstring kHeader;
 				HeaderName(rkChatLog.ChatType(), kHeader);
 
 				kText += _T("[") + kHeader + _T("]");
-				kText += ColorHexToString(rkChatLog.dwColor);
+				kText += ColorHexToString(ResolveDisplayedChatColor(rkChatLog));
 
-				if( rkChatLog.kCharName.size() )
+				if (rkChatLog.kCharName.size())
 				{
 					TCHAR	str[1000];
-					swprintf_s(str,1000,_T("{EP=%d/}"),rkChatLog.kExtraDataPackInfo.GetExtraDataPackCount()-1);
+					swprintf_s(str, 1000, _T("{EP=%d/}"), rkChatLog.kExtraDataPackInfo.GetExtraDataPackCount() - 1);
 
-					if( false == IsMonster )
+					if (false == IsMonster)
 					{
 						kText += _T("{O=U/}") + std::wstring(str);
 						kText += rkChatLog.kCharName;
@@ -935,18 +953,18 @@ namespace PgChatMgrUtil
 				const HRESULT hResult = GetChatModeColor(rkChatLog.ChatType(), rkChatLog.bMine, kChatColor);
 				assert(S_OK == hResult);
 
-				if( pkLogWnd )
+				if (pkLogWnd)
 				{
 					UpdateLogWndInternal(pkLogWnd, rkElement.WndName(), rkChatLog, kText, bCheckEqualMessage, IsMonster);
 				}
 				else
 				{
-					UpdateLogWndExternal(iKey-1, rkChatLog, kText, bCheckEqualMessage);
-					XUI::CXUI_Wnd *pkWnd = XUIMgr.Activate( PgChatMgrUtil::kLogWndName );
-					if( pkWnd )
+					UpdateLogWndExternal(iKey - 1, rkChatLog, kText, bCheckEqualMessage);
+					XUI::CXUI_Wnd* pkWnd = XUIMgr.Activate(PgChatMgrUtil::kLogWndName);
+					if (pkWnd)
 					{
 						UpdateLogWndInternal(pkWnd, rkElement.WndName(), rkChatLog, kText, bCheckEqualMessage, IsMonster);
-						XUIMgr.Close( PgChatMgrUtil::kLogWndName );
+						XUIMgr.Close(PgChatMgrUtil::kLogWndName);
 					}
 				}
 			}
@@ -954,63 +972,63 @@ namespace PgChatMgrUtil
 		}
 	}
 
-	void UpdateExpeditionLogWnd(XUI::CXUI_Wnd *pkLogWnd, SChatLog const& rkChatLog, bool const bCheckEqualMessage, bool const IsMonster)
+	void UpdateExpeditionLogWnd(XUI::CXUI_Wnd* pkLogWnd, SChatLog const& rkChatLog, bool const bCheckEqualMessage, bool const IsMonster)
 	{
-		if( g_kExpedition.IsMember(rkChatLog.kCharGUID) )
+		if (g_kExpedition.IsMember(rkChatLog.kCharGUID))
 		{
-			ContAllChatLog::iterator total_iter = kLogChat.begin();//ÀüÃ¼ÀÓ.
-			while( kLogChat.end() != total_iter )
+			ContAllChatLog::iterator total_iter = kLogChat.begin();//ì „ì²´ì„.
+			while (kLogChat.end() != total_iter)
 			{
 				ContAllChatLog::key_type const& iKey = (*total_iter).first;
-				ContAllChatLog::mapped_type const &rkElement = (*total_iter).second;
-				if( rkElement.CmpFilterFlag(rkChatLog.ChatFlag()) )
-				{//Ãß°¡ ÇÏÀÚ
-					std::wstring kText = ColorHexToString(ChatInputColor(rkChatLog.ChatType()));
+				ContAllChatLog::mapped_type const& rkElement = (*total_iter).second;
+				if (rkElement.CmpFilterFlag(rkChatLog.ChatFlag()))
+				{//ì¶”ê°€ í•˜ì
+					std::wstring kText = ColorHexToString(DefaultChatInputColor(rkChatLog.ChatType()));
 
 					SExpeditionMember const* pMember = PgClientExpeditionUtil::GetMember(rkChatLog.kCharGUID);
-					if( pMember == NULL )
+					if (pMember == NULL)
 					{
 						return;
 					}
 
-					if( g_kExpedition.IsExpeditionMaster(pMember->kCharGuid) )
+					if (g_kExpedition.IsExpeditionMaster(pMember->kCharGuid))
 					{
 						kText += ColorHexToString(0xFFF76300);
 					}
 					else
 					{
 						int TeamNum = pMember->sTeam;
-						switch( TeamNum )
+						switch (TeamNum)
 						{
 						case EET_TEAM_1:
-							{
-								kText += ColorHexToString(0xFFA0F70B);
-							}break;
+						{
+							kText += ColorHexToString(0xFFA0F70B);
+						}break;
 						case EET_TEAM_2:
-							{
-								kText += ColorHexToString(0xFFFEF967);
-							}break;
+						{
+							kText += ColorHexToString(0xFFFEF967);
+						}break;
 						case EET_TEAM_3:
-							{
-								kText += ColorHexToString(0xFF90D8FF);
-							}break;
+						{
+							kText += ColorHexToString(0xFF90D8FF);
+						}break;
 						case EET_TEAM_4:
-							{
-								kText += ColorHexToString(0xFFBBA4FC);
-							}break;
+						{
+							kText += ColorHexToString(0xFFBBA4FC);
+						}break;
 						default:
-							{
-								kText += ColorHexToString(rkChatLog.dwColor);
-							}break;
+						{
+							kText += ColorHexToString(ResolveDisplayedChatColor(rkChatLog));
+						}break;
 						}
 					}
 
-					if( rkChatLog.kCharName.size() )
+					if (rkChatLog.kCharName.size())
 					{
 						TCHAR	str[1000];
-						swprintf_s(str,1000,_T("{EP=%d/}"),rkChatLog.kExtraDataPackInfo.GetExtraDataPackCount()-1);
+						swprintf_s(str, 1000, _T("{EP=%d/}"), rkChatLog.kExtraDataPackInfo.GetExtraDataPackCount() - 1);
 
-						if( false == IsMonster )
+						if (false == IsMonster)
 						{
 							kText += _T("{O=U/}") + std::wstring(str);
 							kText += rkChatLog.kCharName;
@@ -1032,18 +1050,18 @@ namespace PgChatMgrUtil
 					const HRESULT hResult = GetChatModeColor(rkChatLog.ChatType(), rkChatLog.bMine, kChatColor);
 					assert(S_OK == hResult);
 
-					if( pkLogWnd )
+					if (pkLogWnd)
 					{
 						UpdateLogWndInternal(pkLogWnd, rkElement.WndName(), rkChatLog, kText, bCheckEqualMessage, IsMonster);
 					}
 					else
 					{
-						UpdateLogWndExternal(iKey-1, rkChatLog, kText, bCheckEqualMessage);
-						XUI::CXUI_Wnd *pkWnd = XUIMgr.Activate( PgChatMgrUtil::kLogWndName );
-						if( pkWnd )
+						UpdateLogWndExternal(iKey - 1, rkChatLog, kText, bCheckEqualMessage);
+						XUI::CXUI_Wnd* pkWnd = XUIMgr.Activate(PgChatMgrUtil::kLogWndName);
+						if (pkWnd)
 						{
 							UpdateLogWndInternal(pkWnd, rkElement.WndName(), rkChatLog, kText, bCheckEqualMessage, IsMonster);
-							XUIMgr.Close( PgChatMgrUtil::kLogWndName );
+							XUIMgr.Close(PgChatMgrUtil::kLogWndName);
 						}
 					}
 				}
@@ -1054,18 +1072,18 @@ namespace PgChatMgrUtil
 
 	void ClearLogWnd()
 	{
-		XUI::CXUI_Wnd *pkWnd = XUIMgr.Get( kLogWndName );
-		if( !pkWnd )
+		XUI::CXUI_Wnd* pkWnd = XUIMgr.Get(kLogWndName);
+		if (!pkWnd)
 		{
 			return;
 		}
 
-		ContAllChatLog::iterator total_iter = kLogChat.begin();//UI±â·Ï »èÁ¦
-		while( kLogChat.end() != total_iter )
+		ContAllChatLog::iterator total_iter = kLogChat.begin();//UIê¸°ë¡ ì‚­ì œ
+		while (kLogChat.end() != total_iter)
 		{
 			ContAllChatLog::mapped_type const& rkElement = (*total_iter).second;
-			XUI::CXUI_List *pkListWnd = dynamic_cast<XUI::CXUI_List*>(pkWnd->GetControl(rkElement.WndName()));
-			if( pkListWnd )
+			XUI::CXUI_List* pkListWnd = dynamic_cast<XUI::CXUI_List*>(pkWnd->GetControl(rkElement.WndName()));
+			if (pkListWnd)
 			{
 				pkListWnd->ClearList();
 			}
@@ -1081,16 +1099,16 @@ ChatInitUtil::SCHAT_LOC	kChatLoc[ECS_END] = { { 0, 669, 384, 120 }, { 53, 695, 6
 
 void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth, int const iHeight, bool bChangeLoc)
 {
-	XUI::CXUI_Wnd*	pChatBar = XUIMgr.Activate(L"ChatBar");
-	XUI::CXUI_Wnd*	pChatOut = XUIMgr.Activate(L"ChatOut");
-	XUI::CXUI_Wnd*	pSysChatOut = XUIMgr.Activate(L"SysChatOut");
-	
-	if( !pChatBar || !pChatOut || !pSysChatOut )
+	XUI::CXUI_Wnd* pChatBar = XUIMgr.Activate(L"ChatBar");
+	XUI::CXUI_Wnd* pChatOut = XUIMgr.Activate(L"ChatOut");
+	XUI::CXUI_Wnd* pSysChatOut = XUIMgr.Activate(L"SysChatOut");
+
+	if (!pChatBar || !pChatOut || !pSysChatOut)
 	{
 		return;
 	}
-	
-	if( (ECS_CASHSHOP == g_kChatMgrClient.ChatStation()) || (ECS_PVPLOBBY == g_kChatMgrClient.ChatStation()) )
+
+	if ((ECS_CASHSHOP == g_kChatMgrClient.ChatStation()) || (ECS_PVPLOBBY == g_kChatMgrClient.ChatStation()))
 	{
 		pSysChatOut->Visible(false);
 		g_kChatMgrClient.SysOutHide(true);
@@ -1098,23 +1116,23 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 	else
 	{
 		int SysOutConfigValue = lwConfig_GetValue("SYSTEMOUT_OPTION", "SYSTEMOUT_WINDOW");
-		if( 2 == SysOutConfigValue  )
-		{	// ½Ã½ºÅÛ ¸Ş¼¼Áö Ã¢¿É¼ÇÀÌ ÄÑÁø °æ¿ì¿¡¸¸.
+		if (2 == SysOutConfigValue)
+		{	// ì‹œìŠ¤í…œ ë©”ì„¸ì§€ ì°½ì˜µì…˜ì´ ì¼œì§„ ê²½ìš°ì—ë§Œ.
 			pSysChatOut->Visible(true);
 			g_kChatMgrClient.SysOutHide(false);
 		}
 	}
 
-	//	Ãª ¹Ù
+	//	ì±— ë°”
 	POINT2 ptSize = pChatBar->Size();
 	ptSize.x = iWidth;
 	pChatBar->Size(ptSize);
-	if(bChangeLoc)
+	if (bChangeLoc)
 	{
 		pChatBar->Location(iX, iY, pChatBar->Location().z);
 	}
 	XUI::CXUI_Wnd* pkChatBarBg = pChatBar->GetControl(L"SFRM_BAR_BG");
-	if(pkChatBarBg)
+	if (pkChatBarBg)
 	{
 		pkChatBarBg->Size(pChatBar->Size());
 	}
@@ -1122,73 +1140,73 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 	XUI::CXUI_Wnd* pHead = pChatBar->GetControl(L"FRM_HEAD");
 	XUI::CXUI_Wnd* pEdit = pChatBar->GetControl(L"EDT_CHAT");
 	XUI::CXUI_Button* pDrop = dynamic_cast<XUI::CXUI_Button*>(pChatBar->GetControl(L"BTN_TELL_TYPE"));
-	if( !pHead || !pEdit || !pDrop)
-	{ 
-		return; 
+	if (!pHead || !pEdit || !pDrop)
+	{
+		return;
 	}
 
 	pHead->Size(iWidth - 158, pHead->Size().y);
 	pEdit->Size(iWidth - 158, pEdit->Size().y);
 
 	XUI::CXUI_Wnd* pInputBg = pChatBar->GetControl(L"SFRM_EDT_BG");
-	if( pInputBg )
+	if (pInputBg)
 	{
 		pInputBg->Size(iWidth - 156, pInputBg->Size().y);
 		pInputBg = pInputBg->GetControl(L"SFRM_EDT_BG_SHADOW");
-		if( pInputBg )
+		if (pInputBg)
 		{
 			pInputBg->Size(iWidth - 156, pInputBg->Size().y);
 		}
 	}
 
 	XUI::CXUI_Button* pBtnToggle = dynamic_cast<XUI::CXUI_Button*>(pChatBar->GetControl(L"BTN_TOGGLECHAT"));
-	if( pBtnToggle )
+	if (pBtnToggle)
 	{
 		pBtnToggle->Location(iWidth - 30, pBtnToggle->Location().y, pBtnToggle->Location().z);
 	}
 	XUI::CXUI_Form* pFormToggle = dynamic_cast<XUI::CXUI_Form*>(pChatBar->GetControl(L"FRM_TOGGLECHAT"));
-	if( pFormToggle )
+	if (pFormToggle)
 	{
 		pFormToggle->Location(iWidth - 29, pBtnToggle->Location().y + 1, pBtnToggle->Location().z);
 	}
 
-	//	Ãª ¾Æ¿ô
+	//	ì±— ì•„ì›ƒ
 	ptSize = pChatOut->Size();
 	ptSize.x = iWidth;
-	if(ECS_CASHSHOP == g_kChatMgrClient.ChatStation())
-	{// Ä³½Ã¼¥½Ã Ã¤ÆÃÃ¢ Å©±â ÁÙ¾îµé¶§, Ã¤ÆÃ ¹è°æºÎºĞµµ Á¶Á¤ÇÔ
-		if(0 < ptSize.y)
+	if (ECS_CASHSHOP == g_kChatMgrClient.ChatStation())
+	{// ìºì‹œìƒµì‹œ ì±„íŒ…ì°½ í¬ê¸° ì¤„ì–´ë“¤ë•Œ, ì±„íŒ… ë°°ê²½ë¶€ë¶„ë„ ì¡°ì •í•¨
+		if (0 < ptSize.y)
 		{
 			ptSize.y = iHeight;
 		}
 	}
 	pChatOut->Size(ptSize);
-	if(bChangeLoc)
+	if (bChangeLoc)
 	{
-		pChatOut->Location(iX-1, iY - ptSize.y, pChatOut->Location().z);	
+		pChatOut->Location(iX - 1, iY - ptSize.y, pChatOut->Location().z);
 	}
 
 	bool bIsSnap = g_kChatMgrClient.SysChatOutSnap();
-	if( pSysChatOut && bIsSnap )
+	if (pSysChatOut && bIsSnap)
 	{
 		pSysChatOut->Location(POINT2(pChatOut->Location().x, pChatOut->Location().y - pSysChatOut->Size().y - 5));
 	}
 
 	XUI::CXUI_Wnd* pBtnParent = pChatOut->GetControl(L"CHAT_BG");
-	if( pBtnParent )
+	if (pBtnParent)
 	{
 		XUI::CXUI_Button* pBtnOption = dynamic_cast<XUI::CXUI_Button*>(pBtnParent->GetControl(L"BTN_FILTER_OPTION"));
 		XUI::CXUI_Button* pBtnTColor = dynamic_cast<XUI::CXUI_Button*>(pBtnParent->GetControl(L"BTN_TEXT_COLOR"));
 		XUI::CXUI_Button* pBtnEmoticon = dynamic_cast<XUI::CXUI_Button*>(pBtnParent->GetControl(L"BTN_EMOTICON"));
 		XUI::CXUI_Button* pBtnEmotion = dynamic_cast<XUI::CXUI_Button*>(pBtnParent->GetControl(L"BTN_EMOTION"));
-		
+
 		XUI::CXUI_Wnd* pMainBg = pBtnParent->GetControl(L"SFRM_CHATOUT_BG");
-		if( !pBtnTColor|| !pBtnEmoticon || !pBtnEmotion || !pMainBg || !pBtnOption)
-		{ 
-			return; 
+		if (!pBtnTColor || !pBtnEmoticon || !pBtnEmotion || !pMainBg || !pBtnOption)
+		{
+			return;
 		}
-		
-		if(ECS_CASHSHOP == g_kChatMgrClient.ChatStation())
+
+		if (ECS_CASHSHOP == g_kChatMgrClient.ChatStation())
 		{
 			pBtnParent->Size(iWidth, 63);
 			pMainBg->Size(iWidth, 63);
@@ -1203,9 +1221,9 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 		pBtnEmoticon->Location(iWidth - 71, pBtnEmoticon->Location().y, pBtnEmoticon->Location().z);
 		pBtnEmotion->Location(iWidth - 48, pBtnEmotion->Location().y, pBtnEmotion->Location().z);
 		XUI::CXUI_Wnd* pBtn = pBtnParent->GetControl(L"BTN_CALL_CHAT_DLG");
-		if(NULL!=pBtn)
+		if (NULL != pBtn)
 		{
-			pBtn->Location(iWidth - 25, pBtn->Location().y, pBtn->Location().z);		
+			pBtn->Location(iWidth - 25, pBtn->Location().y, pBtn->Location().z);
 		}
 	}
 
@@ -1215,37 +1233,37 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 	XUI::CXUI_Wnd* pListTrade = pChatOut->GetControl(L"LIST_CHAT_TRADE");
 	XUI::CXUI_Wnd* pListWhisp = pChatOut->GetControl(L"LIST_CHAT_WHISPER");
 	XUI::CXUI_Wnd* pDMY = pChatOut->GetControl(L"DMY_CHAT");
-	if( !pListNormal || !pListGuild || !pListParty || !pListTrade || !pListWhisp || !pDMY )
-	{ 
-		return; 
+	if (!pListNormal || !pListGuild || !pListParty || !pListTrade || !pListWhisp || !pDMY)
+	{
+		return;
 	}
-	if(ECS_CASHSHOP == g_kChatMgrClient.ChatStation())
-	{// Ä³½Ã¼¥½Ã Ã¤ÆÃÃ¢ Å©±â ÁÙ¾îµé¶§, ½ºÅ©·Ñ¹Ù¸¦ ÁÙÀÓ
+	if (ECS_CASHSHOP == g_kChatMgrClient.ChatStation())
+	{// ìºì‹œìƒµì‹œ ì±„íŒ…ì°½ í¬ê¸° ì¤„ì–´ë“¤ë•Œ, ìŠ¤í¬ë¡¤ë°”ë¥¼ ì¤„ì„
 		int const iChatSize = 52;
-		if(pListNormal)
+		if (pListNormal)
 		{
-			pListNormal->Size(iWidth, iChatSize);	
+			pListNormal->Size(iWidth, iChatSize);
 			XUI::CXUI_Wnd* pScrUpBtn = pListNormal->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListNormal->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListNormal->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListNormal);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1254,30 +1272,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListGuild)
+		if (pListGuild)
 		{
-			pListGuild->Size(iWidth, iChatSize);	
+			pListGuild->Size(iWidth, iChatSize);
 			XUI::CXUI_Wnd* pScrUpBtn = pListGuild->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListGuild->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListGuild->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListGuild);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1286,30 +1304,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListParty)
+		if (pListParty)
 		{
-			pListParty->Size(iWidth, iChatSize);	
+			pListParty->Size(iWidth, iChatSize);
 			XUI::CXUI_Wnd* pScrUpBtn = pListParty->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListParty->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListParty->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListParty);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1318,30 +1336,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListTrade)
+		if (pListTrade)
 		{
-			pListTrade->Size(iWidth, iChatSize);	
+			pListTrade->Size(iWidth, iChatSize);
 			XUI::CXUI_Wnd* pScrUpBtn = pListTrade->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListTrade->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListTrade->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListTrade);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1350,30 +1368,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListWhisp)
+		if (pListWhisp)
 		{
-			pListWhisp->Size(iWidth, iChatSize);	
+			pListWhisp->Size(iWidth, iChatSize);
 			XUI::CXUI_Wnd* pScrUpBtn = pListWhisp->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListWhisp->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListWhisp->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListWhisp);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1381,39 +1399,39 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 				pList->AdjustMiddleBtnPos();
 			}
 		}
-		
+
 		pListGuild->Size(iWidth, iChatSize);
 		pListParty->Size(iWidth, iChatSize);
 		pListTrade->Size(iWidth, iChatSize);
 		pListWhisp->Size(iWidth, iChatSize);
-		pDMY->Size(iWidth,iChatSize);
+		pDMY->Size(iWidth, iChatSize);
 	}
 	else
 	{
-		if(pListNormal)
+		if (pListNormal)
 		{
 			pListNormal->Size(iWidth, pListNormal->Size().y);
 			XUI::CXUI_Wnd* pScrUpBtn = pListNormal->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListNormal->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListNormal->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListNormal);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1422,30 +1440,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListGuild)
+		if (pListGuild)
 		{
 			pListGuild->Size(iWidth, pListGuild->Size().y);
 			XUI::CXUI_Wnd* pScrUpBtn = pListGuild->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListGuild->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListGuild->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListGuild);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1454,30 +1472,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListParty)
+		if (pListParty)
 		{
 			pListParty->Size(iWidth, pListParty->Size().y);
 			XUI::CXUI_Wnd* pScrUpBtn = pListParty->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListParty->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListParty->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListParty);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1486,30 +1504,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListTrade)
+		if (pListTrade)
 		{
 			pListTrade->Size(iWidth, pListTrade->Size().y);
 			XUI::CXUI_Wnd* pScrUpBtn = pListTrade->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListTrade->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListTrade->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListTrade);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1518,30 +1536,30 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 			}
 		}
 
-		if(pListWhisp)
+		if (pListWhisp)
 		{
 			pListWhisp->Size(iWidth, pListWhisp->Size().y);
 			XUI::CXUI_Wnd* pScrUpBtn = pListWhisp->GetControl(L"ScrUp");
-			if(pScrUpBtn)
+			if (pScrUpBtn)
 			{
-				POINT3I const kCurrentPos = pScrUpBtn->Location();			
+				POINT3I const kCurrentPos = pScrUpBtn->Location();
 				pScrUpBtn->Location(iWidth - 21, -5);
 			}
 			XUI::CXUI_Wnd* pScrDnBtn = pListWhisp->GetControl(L"ScrDown");
-			if(pScrDnBtn)
+			if (pScrDnBtn)
 			{
-				POINT3I const kCurrentPos = pScrDnBtn->Location();			
+				POINT3I const kCurrentPos = pScrDnBtn->Location();
 				pScrDnBtn->Location(iWidth - 21, 40);
-			}			
+			}
 			XUI::CXUI_Wnd* pScrMid = pListWhisp->GetControl(L"ScrMiddle");
-			if(pScrMid)
+			if (pScrMid)
 			{
-				POINT3I const kCurrentPos = pScrMid->Location();			
+				POINT3I const kCurrentPos = pScrMid->Location();
 				pScrMid->Location(iWidth - 19, -5);
 			}
 
 			XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pListWhisp);
-			if(pList)
+			if (pList)
 			{
 				lwUIWnd(pList).MoveMiddleBtnEndPos();
 				pList->AdjustDownBtnPos();
@@ -1560,7 +1578,7 @@ void ChatInitUtil::ResizeChatWindow(int const iX, int const iY, int const iWidth
 
 //
 //////////////////////////////////////////////////////////////////////////////////////////
-PgChatMgrClient::tagInputChatLog::tagInputChatLog(std::wstring const &rkChat)
+PgChatMgrClient::tagInputChatLog::tagInputChatLog(std::wstring const& rkChat)
 {
 	fInputTime = g_pkApp->GetAccumTime();
 	kChat = rkChat;
@@ -1568,34 +1586,35 @@ PgChatMgrClient::tagInputChatLog::tagInputChatLog(std::wstring const &rkChat)
 }
 
 PgChatMgrClient::PgChatMgrClient()
-	:	m_bShowNoticeAble(true)
-	,	m_bIsUseColor(false)
-	,	m_iFontColor(0xFFFFFFFF)
-	,	m_kBallonState(BS_Not_Open)
-	,	m_kChatStation(ECS_COMMON)
-	,	m_bToggleConsecutiveChat(false)
-	,	m_bExistWhisperList(false)
-	,	m_bSysChatOutSnap(false)
-	,	m_bSysOutHide(false)
+	: m_bShowNoticeAble(true)
+	, m_bIsUseColor(false)
+	, m_iFontColor(0xFFFFFFFF)
+	, m_kBallonState(BS_Not_Open)
+	, m_kChatStation(ECS_COMMON)
+	, m_bToggleConsecutiveChat(false)
+	, m_bExistWhisperList(false)
+	, m_bSysChatOutSnap(false)
+	, m_bSysOutHide(false)
 {
-	m_iChatMode		= CT_NORMAL;
+	m_iChatMode = CT_NORMAL;
+	CustomChatColors::GetInstance();
 	InputChatLog_Reset();
 	Active(true);
 
-	{// µµ¹è ±İÁö °ü·Ã º¯¼ö ÃÊ±âÈ­(¾Æ·¡ °ªÀº lua¿¡¼­ ÀçÃÊ±âÈ­ µÊ) init.lua
+	{// ë„ë°° ê¸ˆì§€ ê´€ë ¨ ë³€ìˆ˜ ì´ˆê¸°í™”(ì•„ë˜ ê°’ì€ luaì—ì„œ ì¬ì´ˆê¸°í™” ë¨) init.lua
 		m_stMaxInputLog = PgChatMgrUtil::CP_MAX_InputLog;
 		BlockTime(0.0f);
 		MaxBlockTime(5.0f);
 		StartBlockTime(0.0f);
-		
-		// ½ºÆÔ Ã¼Å© ½ºÅ×ÀÌÆ®
+
+		// ìŠ¤íŒ¸ ì²´í¬ ìŠ¤í…Œì´íŠ¸
 		m_iSpamChkFlag = 0;
-						//ESCS_ChainInput
-						// |ESCS_LooseChainInput
-						// |ESCS_MacroInput
-						// |ESCS_SameInput;
-	
-		//SetBlockSpamChat_ChainInput
+		//ESCS_ChainInput
+		// |ESCS_LooseChainInput
+		// |ESCS_MacroInput
+		// |ESCS_SameInput;
+
+//SetBlockSpamChat_ChainInput
 		ChainWatchT(0.77f);
 		ChainBlockTime(0.0f);
 
@@ -1614,31 +1633,31 @@ PgChatMgrClient::PgChatMgrClient()
 		MacroRangeTime(0.2);
 		MacroBlockTime(0.0f);
 	}
-	//ÀÌÀü Ã¤ÆÃÃ¢¹øÈ£ ÀúÀå
+	//ì´ì „ ì±„íŒ…ì°½ë²ˆí˜¸ ì €ì¥
 	{
 		OldChatMode(1);
 	}
-	
-	////¾Æ·¡ ºÎºĞÀº init.lua¿¡¼­ ÃÊ±âÈ­ ÇÑÈÄ ´Ù½Ã ³Ö°í ÀÖÀ¸´Ï init.lua¿¡¼­ Ãß°¡ÇÏ¿© »ç¿ëÇÒ°Í
+
+	////ì•„ë˜ ë¶€ë¶„ì€ init.luaì—ì„œ ì´ˆê¸°í™” í•œí›„ ë‹¤ì‹œ ë„£ê³  ìˆìœ¼ë‹ˆ init.luaì—ì„œ ì¶”ê°€í•˜ì—¬ ì‚¬ìš©í• ê²ƒ
 	//PgChatMgrUtil::NoticeLevelColor_Clear();
 	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Normal, 0xFFFFF954, 0xFF000000, false);		//Level 0
 	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Warning, 0xFFFF2A2F, 0xFF000000, true);		//Level 1
 	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Level2, 0xFF01FFAE, 0xFF000000, false);		//Level 2
 	//PgChatMgrUtil::NoticeLevelColor_Add(EL_PvPMsg, 0xFFF6D576, 0xFF000000, true);		//Level PvP
 	//PgChatMgrUtil::NoticeLevelColor_Add(EL_GMMsg, 0xFFFFA934, 0xFF000000, true);		//GMMsg
-	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Notice1, 0xFF00FF00, 0xFF000000, true);		// Áß¿äÁ¤º¸ °»½Å
-	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Notice2, 0xFF46F8FF, 0xFF000000, true);		// À¯Àú °ü°èµÈ °øÁö
-	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Notice3, 0xFFFFFF00, 0xFF000000, true);		// Á¤º¸°»½Å, À¯Àú¿¡°Ô ¾Ë¸²	
+	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Notice1, 0xFF00FF00, 0xFF000000, true);		// ì¤‘ìš”ì •ë³´ ê°±ì‹ 
+	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Notice2, 0xFF46F8FF, 0xFF000000, true);		// ìœ ì € ê´€ê³„ëœ ê³µì§€
+	//PgChatMgrUtil::NoticeLevelColor_Add(EL_Notice3, 0xFFFFFF00, 0xFF000000, true);		// ì •ë³´ê°±ì‹ , ìœ ì €ì—ê²Œ ì•Œë¦¼	
 	PgChatMgrUtil::ChatFilterClear();
-	//Ã¤ÆÃ¸ğµå ÀÎ½Ä±â´É
+	//ì±„íŒ…ëª¨ë“œ ì¸ì‹ê¸°ëŠ¥
 	{
 		OldChatTime(0);
 	}
 
-	m_kSavedPos.Set(-1,-1);
+	m_kSavedPos.Set(-1, -1);
 	m_kSystemSavedPos.Set(-1, -1);
 
-	// °Å·¡ Ã¤ÆÃ ´ë±â ½Ã°£.
+	// ê±°ë˜ ì±„íŒ… ëŒ€ê¸° ì‹œê°„.
 	TradeModeChatTime(0.0f);
 }
 
@@ -1650,8 +1669,8 @@ PgChatMgrClient::~PgChatMgrClient()
 void PgChatMgrClient::Clear()
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	//Á» Æ¯¼öÇÑ Clear();
-	//·Î±×¾Æ¿ô. ¼­¹ö Á¢¼Ó ¿¬°áÀÌ ²÷°åÀ» ¶§ ÀÌÀü »ç¿ëÀÚ Á¤º¸¸¸ ½Ï Áö¿öÁØ´Ù.
+	//ì¢€ íŠ¹ìˆ˜í•œ Clear();
+	//ë¡œê·¸ì•„ì›ƒ. ì„œë²„ ì ‘ì† ì—°ê²°ì´ ëŠê²¼ì„ ë•Œ ì´ì „ ì‚¬ìš©ì ì •ë³´ë§Œ ì‹¹ ì§€ì›Œì¤€ë‹¤.
 
 	PgChatMgrUtil::ClearLogWnd();
 
@@ -1670,41 +1689,41 @@ void PgChatMgrClient::Clear()
 void PgChatMgrClient::ShowNoticeUI(std::wstring const kContents, int iLevel, bool bUpper, bool const bCheckEqualMessage)
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	if( PgChatMgrUtil::kContNoticeLevelColor.empty() )
+	if (PgChatMgrUtil::kContNoticeLevelColor.empty())
 	{
 		return;
 	}
 
 	PgChatMgrUtil::ContNoticeLevelColor::iterator iter = PgChatMgrUtil::kContNoticeLevelColor.find(iLevel);
-	if( PgChatMgrUtil::kContNoticeLevelColor.end() == iter )
+	if (PgChatMgrUtil::kContNoticeLevelColor.end() == iter)
 	{
 		iter = PgChatMgrUtil::kContNoticeLevelColor.find(0);//Default
 	}
 
 	PgChatMgrUtil::ContNoticeLevelColor::mapped_type& rkNoticeColor = (*iter).second;
 
-	m_kNoticeWaitList.push( SNoticeWaitItem(kContents, rkNoticeColor) );
+	m_kNoticeWaitList.push(SNoticeWaitItem(kContents, rkNoticeColor));
 	ShowNotice(bUpper, bCheckEqualMessage);
 }
 
 void PgChatMgrClient::ShowNotice(bool bUpper, bool const bCheckEqualMessage)
-{ 
+{
 	BM::CAutoMutex kLock(m_kMutex);
-	if ( !IsShowNoticeAble() )
+	if (!IsShowNoticeAble())
 	{
 		return;
 	}
 
 	DWORD const dwCurTime = BM::GetTime32();
-	while( !m_kNoticeWaitList.empty() )
+	while (!m_kNoticeWaitList.empty())
 	{
 		QueueNoticeWait::value_type& rkItem = m_kNoticeWaitList.front();
-		if(bUpper)
+		if (bUpper)
 		{
 			ShowNotice(0, rkItem.kContents, rkItem, dwCurTime, 0, bCheckEqualMessage);
 		}
 		else
-		{// ÇÏ´Ü Ãâ·Â
+		{// í•˜ë‹¨ ì¶œë ¥
 			ShowNotice(100, rkItem.kContents, rkItem, dwCurTime, 0, bCheckEqualMessage);
 		}
 		m_kNoticeWaitList.pop();
@@ -1718,11 +1737,11 @@ void PgChatMgrClient::LogMsgBox(int const iTTW)
 	LogMsgBox(TTW(iTTW));
 }
 
-void PgChatMgrClient::LogMsgBox(std::wstring const &rkMsg)
+void PgChatMgrClient::LogMsgBox(std::wstring const& rkMsg)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( rkMsg.empty() )
+	if (rkMsg.empty())
 	{
 		return;
 	}
@@ -1735,18 +1754,18 @@ void PgChatMgrClient::LogMsgBox(std::wstring const &rkMsg)
 void PgChatMgrClient::ClearNotice()
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	while( !m_kNoticeWaitList.empty() )
+	while (!m_kNoticeWaitList.empty())
 	{
 		m_kNoticeWaitList.pop();
 	}
 
 	int iIndex = 0;
-	while(true)
+	while (true)
 	{
-		TCHAR wszTemp[MAX_PATH] = {0,};
+		TCHAR wszTemp[MAX_PATH] = { 0, };
 		_stprintf_s(wszTemp, MAX_PATH, _T("WarnOut_%d"), iIndex);
-		XUI::CXUI_Wnd*	pkWnd = XUIMgr.Get(wszTemp);
-		if( pkWnd )
+		XUI::CXUI_Wnd* pkWnd = XUIMgr.Get(wszTemp);
+		if (pkWnd)
 		{
 			pkWnd->Close();
 			++iIndex;
@@ -1761,26 +1780,26 @@ void PgChatMgrClient::ClearNotice()
 void PgChatMgrClient::DisableNotice()
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	TCHAR wszTemp[MAX_PATH] = {0,};
+	TCHAR wszTemp[MAX_PATH] = { 0, };
 
 	int iIndex = 0;
-	XUI::CXUI_Wnd *pkWnd = NULL;
+	XUI::CXUI_Wnd* pkWnd = NULL;
 	DWORD const dwTime = BM::GetTime32();
-	while ( 1 )
+	while (1)
 	{
-		_stprintf_s(wszTemp, MAX_PATH, _T("WarnOut_%d"), iIndex++ );
+		_stprintf_s(wszTemp, MAX_PATH, _T("WarnOut_%d"), iIndex++);
 
-		if ( !XUIMgr.IsActivate( std::wstring(wszTemp), pkWnd ) )
+		if (!XUIMgr.IsActivate(std::wstring(wszTemp), pkWnd))
 		{
 			break;
 		}
 
-		if(dwTime - pkWnd->CalledTime() < 1000)
+		if (dwTime - pkWnd->CalledTime() < 1000)
 		{
 			SNoticeLevelColor kCurColor;
 			pkWnd->GetCustomData(&kCurColor, sizeof(kCurColor));
 
-			m_kNoticeWaitList.push( SNoticeWaitItem( pkWnd->Text(), kCurColor) );
+			m_kNoticeWaitList.push(SNoticeWaitItem(pkWnd->Text(), kCurColor));
 		}
 		else
 		{
@@ -1789,21 +1808,21 @@ void PgChatMgrClient::DisableNotice()
 	}
 }
 
-void PgChatMgrClient::ShowNotice(int const iIndex, std::wstring const &rkContents, const SNoticeLevelColor& rkColor, DWORD const dwCallTime, int const iY, bool const bCheckEqualMessage)
+void PgChatMgrClient::ShowNotice(int const iIndex, std::wstring const& rkContents, const SNoticeLevelColor& rkColor, DWORD const dwCallTime, int const iY, bool const bCheckEqualMessage)
 {
-	TCHAR wszTemp[MAX_PATH] = {0,};
+	TCHAR wszTemp[MAX_PATH] = { 0, };
 	_stprintf_s(wszTemp, MAX_PATH, _T("WarnOut_%d"), iIndex);
 
 	int iEleapsedY = iY;
 	SNoticeWaitItem kOldItem;
 	DWORD dwOldCalledTime = 0;
 
-	XUI::CXUI_Wnd *pkWnd = XUIMgr.Get(wszTemp);
-	if( pkWnd )//Old
+	XUI::CXUI_Wnd* pkWnd = XUIMgr.Get(wszTemp);
+	if (pkWnd)//Old
 	{
 		SNoticeLevelColor kCurColor;
 		pkWnd->GetCustomData(&kCurColor, sizeof(kCurColor));
-		//ShowNotice(iIndex+1, pkWnd->Text(), kCurColor, pkWnd->CalledTime(), iY+pkWnd->Size().y);// Àç±ÍÈ£Ãâ
+		//ShowNotice(iIndex+1, pkWnd->Text(), kCurColor, pkWnd->CalledTime(), iY+pkWnd->Size().y);// ì¬ê·€í˜¸ì¶œ
 
 		kOldItem = SNoticeWaitItem(pkWnd->Text(), kCurColor);
 		dwOldCalledTime = pkWnd->CalledTime();
@@ -1812,17 +1831,17 @@ void PgChatMgrClient::ShowNotice(int const iIndex, std::wstring const &rkContent
 	{
 		pkWnd = XUIMgr.Call(wszTemp);
 	}
-	
-	if(bCheckEqualMessage)
+
+	if (bCheckEqualMessage)
 	{
-		if(kOldItem.kContents == rkContents)
+		if (kOldItem.kContents == rkContents)
 		{
-			// ÀÌÀü ¸Ş½ÃÁö¿Í ³»¿ëÀÌ °°À» °æ¿ì Ãß°¡ÇÏÁö ¾ÊÀ½
+			// ì´ì „ ë©”ì‹œì§€ì™€ ë‚´ìš©ì´ ê°™ì„ ê²½ìš° ì¶”ê°€í•˜ì§€ ì•ŠìŒ
 			return;
 		}
 	}
 
-	if( pkWnd )
+	if (pkWnd)
 	{
 		int const iUpSideBaseLocationY = 214;
 		int const iDownSideBaseLocationY = 565;
@@ -1830,15 +1849,15 @@ void PgChatMgrClient::ShowNotice(int const iIndex, std::wstring const &rkContent
 		pkWnd->CalledTime(dwCallTime);
 
 		pkWnd->Size(pkWnd->Size().x, Pg2DString::CalculateOnlySize((XUI::CXUI_Style_String)pkWnd->StyleText()).y + 2);
-		if(100 > iIndex)
-		{// »ó´Ü Ç¥½Ã 
+		if (100 > iIndex)
+		{// ìƒë‹¨ í‘œì‹œ 
 			pkWnd->Location(pkWnd->Location().x, iUpSideBaseLocationY - iY - pkWnd->Size().y);
 		}
 		else
-		{// ÇÏ´Ü Ç¥½Ã
-			int const iDownSideLimit = iDownSideBaseLocationY * pkWnd->Size().y*3;
+		{// í•˜ë‹¨ í‘œì‹œ
+			int const iDownSideLimit = iDownSideBaseLocationY * pkWnd->Size().y * 3;
 			pkWnd->Location(pkWnd->Location().x, iDownSideBaseLocationY + iY + pkWnd->Size().y);
-			if(iDownSideLimit < pkWnd->Location().y) 
+			if (iDownSideLimit < pkWnd->Location().y)
 			{
 				pkWnd->Close();
 				return;
@@ -1848,43 +1867,43 @@ void PgChatMgrClient::ShowNotice(int const iIndex, std::wstring const &rkContent
 		pkWnd->FontColor(rkColor.dwFontColor);//decorate
 		pkWnd->OutLineColor(rkColor.dwOutlineColor);
 		XUI::CXUI_Wnd* pkBgWnd = pkWnd->GetControl(_T("IMG_BG"));
-		if( pkBgWnd )
+		if (pkBgWnd)
 		{
 			pkBgWnd->Visible(rkColor.bShowBG);
 			pkBgWnd->Size(pkBgWnd->Size().x, pkWnd->Size().y);
 			pkBgWnd->ImgSize(pkBgWnd->Size());
 		}
 		pkWnd->SetCustomData(&rkColor, sizeof(rkColor));
-		
-		iEleapsedY += pkWnd->Size().y;		
+
+		iEleapsedY += pkWnd->Size().y;
 	}
 
-	if( pkWnd
-	&&	!kOldItem.kContents.empty() )//ÀÌÀü ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é Àç±Í È£Ãâ·Î
+	if (pkWnd
+		&& !kOldItem.kContents.empty())//ì´ì „ ì•„ì´í…œì´ ìˆìœ¼ë©´ ì¬ê·€ í˜¸ì¶œë¡œ
 	{
-		ShowNotice(iIndex+1, kOldItem.kContents, kOldItem, dwOldCalledTime, iEleapsedY);
+		ShowNotice(iIndex + 1, kOldItem.kContents, kOldItem, dwOldCalledTime, iEleapsedY);
 	}
 }
 
-void ReplaceEnterChar(std::wstring::value_type &rkChar)
+void ReplaceEnterChar(std::wstring::value_type& rkChar)
 {
-	if( L'\r' == rkChar )
+	if (L'\r' == rkChar)
 	{
 		rkChar = L' ';
 	}
 }
 
-void PgChatMgrClient::AddMessage(int const iTextTable, SChatLog &rkChatLog, bool bNotice, int iLevel, bool bUpper, bool const bCheckEqualMessage)
-{//ÁöÁ¤µÈ ¸Ş½ÃÁö ¹øÈ£·Î ÀÌº¥Æ® ¸Ş½ÃÁö ¹ß»ı
+void PgChatMgrClient::AddMessage(int const iTextTable, SChatLog& rkChatLog, bool bNotice, int iLevel, bool bUpper, bool const bCheckEqualMessage)
+{//ì§€ì •ëœ ë©”ì‹œì§€ ë²ˆí˜¸ë¡œ ì´ë²¤íŠ¸ ë©”ì‹œì§€ ë°œìƒ
 	BM::CAutoMutex kLock(m_kMutex);
 	PgStringUtil::EraseStr<std::wstring>(TTW(iTextTable), _T("\n"), rkChatLog.kContents);
 	std::for_each(rkChatLog.kContents.begin(), rkChatLog.kContents.end(), ReplaceEnterChar);
 
-	rkChatLog.dwColor = PgChatMgrUtil::ChatInputColor(rkChatLog.ChatType());
+	rkChatLog.dwColor = PgChatMgrUtil::DefaultChatInputColor(rkChatLog.ChatType());
 	//rkChatLog.kContents = TTW(iTextTable);
 	//rkChatLog.iLineCount = BreakLine(rkChatLog.kContents);;
 
-	if( rkChatLog.IsDelayLog() )
+	if (rkChatLog.IsDelayLog())
 	{
 		AddDelayLog(rkChatLog);
 		return;
@@ -1892,24 +1911,24 @@ void PgChatMgrClient::AddMessage(int const iTextTable, SChatLog &rkChatLog, bool
 
 	RecvChatLog_Add(rkChatLog, bCheckEqualMessage);
 
-	if(bNotice)
+	if (bNotice)
 	{
 		ShowNoticeUI(rkChatLog.kContents, iLevel, bUpper, bCheckEqualMessage);
 	}
 };
 
-void PgChatMgrClient::AddLogMessage(SChatLog &rkChatLog, std::wstring const &rkLogMessage, bool bNotice, int iLevel, bool bUpper, bool const bCheckEqualMessage, bool const IsMonster)
+void PgChatMgrClient::AddLogMessage(SChatLog& rkChatLog, std::wstring const& rkLogMessage, bool bNotice, int iLevel, bool bUpper, bool const bCheckEqualMessage, bool const IsMonster)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
 	PgStringUtil::EraseStr<std::wstring>(rkLogMessage, _T("\n"), rkChatLog.kContents);
 	std::for_each(rkChatLog.kContents.begin(), rkChatLog.kContents.end(), ReplaceEnterChar);
 
-	rkChatLog.dwColor = PgChatMgrUtil::ChatInputColor(rkChatLog.ChatType());
+	rkChatLog.dwColor = PgChatMgrUtil::DefaultChatInputColor(rkChatLog.ChatType());
 	//rkChatLog.kContents = rkLogMessage;
 	//rkChatLog.iLineCount = BreakLine(rkChatLog.kContents);
 
-	if( rkChatLog.IsDelayLog() )
+	if (rkChatLog.IsDelayLog())
 	{
 		AddDelayLog(rkChatLog);
 		return;
@@ -1917,75 +1936,75 @@ void PgChatMgrClient::AddLogMessage(SChatLog &rkChatLog, std::wstring const &rkL
 
 	RecvChatLog_Add(rkChatLog, bCheckEqualMessage, IsMonster);
 
-	if(bNotice)
+	if (bNotice)
 	{
 		ShowNoticeUI(rkLogMessage, iLevel, bUpper, bCheckEqualMessage);
 	}
 }
 
-//Ã¤ÆÃ Ä¿¸Çµå XML·Î ºÎÅÍ ·Îµù
-bool PgChatMgrClient::ParseXml(const TiXmlNode *pkNode, void *pArg, bool bUTF8)
+//ì±„íŒ… ì»¤ë§¨ë“œ XMLë¡œ ë¶€í„° ë¡œë”©
+bool PgChatMgrClient::ParseXml(const TiXmlNode* pkNode, void* pArg, bool bUTF8)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
 	int const iType = pkNode->Type();
 
-	while(pkNode)
+	while (pkNode)
 	{
-		switch(iType)
+		switch (iType)
 		{
 		case TiXmlNode::ELEMENT:
+		{
+			TiXmlElement* pkElement = (TiXmlElement*)pkNode;
+			PG_ASSERT_LOG(pkElement);
+
+			char const* pcTagName = pkElement->Value();
+
+			if (strcmp(pcTagName, "CHAT_COMMAND") == 0)
 			{
-				TiXmlElement *pkElement = (TiXmlElement *)pkNode;
-				PG_ASSERT_LOG(pkElement);
-				
-				char const *pcTagName = pkElement->Value();
+				const TiXmlNode* pkChildNode = pkNode->FirstChild();
 
-				if(strcmp(pcTagName, "CHAT_COMMAND")==0)
+				pkNode = pkChildNode;
+				continue;
+			}
+			else if (strcmp(pcTagName, "TEXT") == 0)
+			{
+				const TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+				int	iModeNo = 0;
+				unsigned int iMinCount = 0;
+				char const* szText = 0;
+				while (pkAttr)
 				{
-					const TiXmlNode * pkChildNode = pkNode->FirstChild();
-					
-					pkNode = pkChildNode;
-					continue;
+					char const* pcAttrName = pkAttr->Name();
+					char const* pcAttrValue = pkAttr->Value();
+
+					if (0 == strcmp(pcAttrName, "TEXT"))
+					{
+						szText = pcAttrValue;
+					}
+					else if (0 == strcmp(pcAttrName, "MODE"))
+					{
+						iModeNo = atoi(pcAttrValue);
+					}
+					else if (0 == strcmp(pcAttrName, "MINCOUNT"))
+					{
+						iMinCount = (unsigned int)atoi(pcAttrValue);
+					}
+					else
+					{
+						PG_ASSERT_LOG(!"invalid attribute");
+					}
+					pkAttr = pkAttr->Next();
 				}
-				else if(strcmp(pcTagName, "TEXT") == 0)
+
+				if (szText)
 				{
-					const TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-					int	iModeNo	= 0;
-					unsigned int iMinCount = 0;
-					char const *szText = 0;
-					while(pkAttr)
-					{
-						char const *pcAttrName = pkAttr->Name();
-						char const *pcAttrValue = pkAttr->Value();
-
-						if(0 == strcmp(pcAttrName, "TEXT"))
-						{
-							szText = pcAttrValue;
-						}
-						else if(0 == strcmp(pcAttrName, "MODE"))
-						{
-							iModeNo = atoi(pcAttrValue);
-						}
-						else if(0 == strcmp(pcAttrName, "MINCOUNT"))
-						{
-							iMinCount = (unsigned int)atoi(pcAttrValue);
-						}
-						else
-						{
-							PG_ASSERT_LOG(!"invalid attribute");
-						}
-						pkAttr = pkAttr->Next();
-					}
-
-					if( szText )
-					{
-						std::wstring kTemp = UNI(szText);
-						UPR(kTemp);
-						RegChatCommand(kTemp, (EChatType)iModeNo, iMinCount, std::string(""));
-					}
+					std::wstring kTemp = UNI(szText);
+					UPR(kTemp);
+					RegChatCommand(kTemp, (EChatType)iModeNo, iMinCount, std::string(""));
 				}
 			}
+		}
 		}
 
 		const TiXmlNode* pkNextNode = pkNode->NextSibling();
@@ -1995,7 +2014,7 @@ bool PgChatMgrClient::ParseXml(const TiXmlNode *pkNode, void *pArg, bool bUTF8)
 	return true;
 }
 
-bool PgChatMgrClient::RegChatCommand(std::wstring const &rkCommand, const EChatType eChatType, const unsigned int iMinCount, const std::string& rkLuaScript)
+bool PgChatMgrClient::RegChatCommand(std::wstring const& rkCommand, const EChatType eChatType, const unsigned int iMinCount, const std::string& rkLuaScript)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
@@ -2011,26 +2030,26 @@ bool PgChatMgrClient::RegChatCommand(std::wstring const &rkCommand, const EChatT
 
 
 //
-void BreakSpace(std::wstring const &rkText, std::vector< std::wstring > &rkVec)
+void BreakSpace(std::wstring const& rkText, std::vector< std::wstring >& rkVec)
 {
 	std::wstring kTemp = rkText;
 	std::wstring kSep = L" ";
-	TCHAR *pToken = NULL;
-	TCHAR *pNextToken = NULL;
+	TCHAR* pToken = NULL;
+	TCHAR* pNextToken = NULL;
 	pToken = _tcstok_s(&kTemp[1], kSep.c_str(), &pNextToken);
-	if(NULL == pToken)
+	if (NULL == pToken)
 	{
 		rkVec.push_back(rkText);
 		return;
 	}
 	rkVec.push_back(pToken);
 
-	while(1)
+	while (1)
 	{
 		pToken = _tcstok_s(NULL, kSep.c_str(), &pNextToken);
-		if( pToken != NULL )
+		if (pToken != NULL)
 		{
-			rkVec.push_back( pToken );
+			rkVec.push_back(pToken);
 		}
 		else
 		{
@@ -2039,78 +2058,78 @@ void BreakSpace(std::wstring const &rkText, std::vector< std::wstring > &rkVec)
 	}
 }
 
-//Ã¤ÆÃ Ä¿¸Çµå ¹× ÀÌ¸ğ¼Ç
-bool PgChatMgrClient::Command_Chat(std::wstring const &rkChat, int &iChatMode, std::wstring &rkName, std::wstring &rkContents)
+//ì±„íŒ… ì»¤ë§¨ë“œ ë° ì´ëª¨ì…˜
+bool PgChatMgrClient::Command_Chat(std::wstring const& rkChat, int& iChatMode, std::wstring& rkName, std::wstring& rkContents)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if(rkChat[0] == _T('/'))
+	if (rkChat[0] == _T('/'))
 	{
-		if(rkChat.size() < 1)
-		{//Ã¤ÆÃ³»¿ëÀÌ ÇÑ±ÛÀÚ¸é ¿¡·¯!
+		if (rkChat.size() < 1)
+		{//ì±„íŒ…ë‚´ìš©ì´ í•œê¸€ìë©´ ì—ëŸ¬!
 			return false;
 		}
 
 		std::vector< std::wstring > kVec;
-		BreakSpace(rkChat, kVec);//°ø¹é ¹®ÀÚ·Î Ã¤ÆÃ ¹®À» ºĞÇØ
+		BreakSpace(rkChat, kVec);//ê³µë°± ë¬¸ìë¡œ ì±„íŒ… ë¬¸ì„ ë¶„í•´
 
 		SChatCommand const* kTargetCmd = GetCommandType(kVec[0]);
-		if( !kTargetCmd )
+		if (!kTargetCmd)
 		{
 			return false;
 		}
 
 		iChatMode = kTargetCmd->eChatType;
 
-		switch( iChatMode )
+		switch (iChatMode)
 		{
-		case CT_WHISPER_BYNAME://»ç¿ëÀÚ ÀÔ·ÂÀº ÀÌ°É·Î µé¾î¿Â´Ù.
+		case CT_WHISPER_BYNAME://ì‚¬ìš©ì ì…ë ¥ì€ ì´ê±¸ë¡œ ë“¤ì–´ì˜¨ë‹¤.
+		{
+
+			if (kTargetCmd->iMinCount != 3)// /r
 			{
-
-				if(kTargetCmd->iMinCount != 3)// /r
+				if (!m_kWhisperList.size())
 				{
-					if( !m_kWhisperList.size() )
-					{
-						return false;
-					}
-
-					ContWhisper::reverse_iterator	rit = m_kWhisperList.rbegin();
-					if( rit != m_kWhisperList.rend() )
-					{
-						rkName = (*rit);
-					}
-
-					if( kVec.size() > 1 )
-					{
-						size_t nPos = rkChat.find(kVec[1], 0);
-						rkContents = rkChat.substr(nPos, rkChat.size() - nPos);
-					}
+					return false;
 				}
-				else// /w
+
+				ContWhisper::reverse_iterator	rit = m_kWhisperList.rbegin();
+				if (rit != m_kWhisperList.rend())
 				{
-					if( kVec.size() < 2 )
-					{
-						return false;
-					}
-					rkName = kVec[1];
-					InsertWhisper(rkName, false);
-
-					if( kVec.size() > 2 )
-					{
-						size_t nPos = rkChat.find(kVec[2], 0);
-						rkContents = rkChat.substr(nPos, rkChat.size() - nPos);
-					}
+					rkName = (*rit);
 				}
-			}break;
-		default: // /p /f /g /s
-			{
-				rkName = L"";
-				if( kVec.size() > 1 )
+
+				if (kVec.size() > 1)
 				{
 					size_t nPos = rkChat.find(kVec[1], 0);
 					rkContents = rkChat.substr(nPos, rkChat.size() - nPos);
 				}
-			}break;
+			}
+			else// /w
+			{
+				if (kVec.size() < 2)
+				{
+					return false;
+				}
+				rkName = kVec[1];
+				InsertWhisper(rkName, false);
+
+				if (kVec.size() > 2)
+				{
+					size_t nPos = rkChat.find(kVec[2], 0);
+					rkContents = rkChat.substr(nPos, rkChat.size() - nPos);
+				}
+			}
+		}break;
+		default: // /p /f /g /s
+		{
+			rkName = L"";
+			if (kVec.size() > 1)
+			{
+				size_t nPos = rkChat.find(kVec[1], 0);
+				rkContents = rkChat.substr(nPos, rkChat.size() - nPos);
+			}
+		}break;
 		}
 		return true;
 	}
@@ -2118,36 +2137,36 @@ bool PgChatMgrClient::Command_Chat(std::wstring const &rkChat, int &iChatMode, s
 	return false;
 }
 
-bool PgChatMgrClient::Command_Emotion(std::wstring const &rkChat)
+bool PgChatMgrClient::Command_Emotion(std::wstring const& rkChat)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	//Æ¯Á¤ ´Ü¾î¿¡ ´ëÇÑ Ä³¸¯ÅÍ ¹İÀÀ Ã³¸®¿ë(¤»¤» -> ¿ôÀ½)
+	//íŠ¹ì • ë‹¨ì–´ì— ëŒ€í•œ ìºë¦­í„° ë°˜ì‘ ì²˜ë¦¬ìš©(ã…‹ã…‹ -> ì›ƒìŒ)
 	int iID = 0;
-	if( g_kPgEmotiMgr.FindEmotionByKeyward(rkChat, iID))
+	if (g_kPgEmotiMgr.FindEmotionByKeyward(rkChat, iID))
 	{
 		PgPlayer* pPlayer = g_kPilotMan.GetPlayerUnit();
-		if( pPlayer )
+		if (pPlayer)
 		{
-			::CONT_EMOTION const * pContEmotion = NULL;
-			g_kTblDataMgr.GetContDef(pContEmotion);	//¸Ê µ¥ÇÁ
-			if( !pContEmotion )
+			::CONT_EMOTION const* pContEmotion = NULL;
+			g_kTblDataMgr.GetContDef(pContEmotion);	//ë§µ ë°í”„
+			if (!pContEmotion)
 			{
 				return false;
 			}
 
 			::CONT_EMOTION::const_iterator c_iter = pContEmotion->find(SEMOTIONKEY(ET_EMOTION, iID));
-			if( c_iter == pContEmotion->end() )
+			if (c_iter == pContEmotion->end())
 			{
 				return false;
 			}
 
 			PgBitArray<MAX_DB_EMOTICON_SIZE> kCont;
-			if( pPlayer->GetContEmotion(ET_EMOTION, kCont) )
+			if (pPlayer->GetContEmotion(ET_EMOTION, kCont))
 			{
-				if( c_iter->second == 0 || kCont.Get(iID) )
+				if (c_iter->second == 0 || kCont.Get(iID))
 				{
-					if(CheckCanEmotion(iID))
+					if (CheckCanEmotion(iID))
 					{
 						SendEmotionPacket(g_kPilotMan.PlayerActor(), ET_EMOTION, iID);
 					}
@@ -2160,12 +2179,12 @@ bool PgChatMgrClient::Command_Emotion(std::wstring const &rkChat)
 	return false;
 }
 
-bool PgChatMgrClient::Command_Filter(std::wstring &rkChat)
+bool PgChatMgrClient::Command_Filter(std::wstring& rkChat)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
 	std::wstring kTemp = rkChat;
-	if(!g_kClientFS.Filter(kTemp, true))
+	if (!g_kClientFS.Filter(kTemp, true))
 	{
 		return false;
 	}
@@ -2173,16 +2192,16 @@ bool PgChatMgrClient::Command_Filter(std::wstring &rkChat)
 	return true;
 }
 
-bool PgChatMgrClient::SeperateUserCommand(std::wstring const& rkCmdText, std::wstring::size_type kNextPos, std::wstring &rkNormalText, std::map<size_t, std::wstring> &kContCommand)
+bool PgChatMgrClient::SeperateUserCommand(std::wstring const& rkCmdText, std::wstring::size_type kNextPos, std::wstring& rkNormalText, std::map<size_t, std::wstring>& kContCommand)
 {
 	rkNormalText.clear();
 	const	int	iLength = rkCmdText.length();
-	if(iLength == 0)
+	if (iLength == 0)
 	{
 		return	false;
 	}
 	const int iMaxColorCommand = 9;
-	const WCHAR	*strColorCommandConverting[iMaxColorCommand]=
+	const WCHAR* strColorCommandConverting[iMaxColorCommand] =
 	{
 		{ _T("R") },
 		{ _T("G") },
@@ -2196,22 +2215,22 @@ bool PgChatMgrClient::SeperateUserCommand(std::wstring const& rkCmdText, std::ws
 	};
 
 	const	WCHAR wFirstChar = rkCmdText[0];
-	//	wFirstChar °¡ ¹®ÀÚÀÌ¸é Color Ä¿¸àµå
-	if(iswalpha(wFirstChar) != 0 )
+	//	wFirstChar ê°€ ë¬¸ìì´ë©´ Color ì»¤ë©˜ë“œ
+	if (iswalpha(wFirstChar) != 0)
 	{
-		for(int iCommandPos=0; iCommandPos<iMaxColorCommand;iCommandPos++)
+		for (int iCommandPos = 0; iCommandPos < iMaxColorCommand; iCommandPos++)
 		{
 			std::wstring kCommandText = _T("#");
 			const WCHAR* strCommand = strColorCommandConverting[iCommandPos];
 			int	iCmdLen = wcslen(strCommand);
 			bool bCorrect = true;
 			int kSrcPos = 0;
-			for(kSrcPos=0; kSrcPos<iCmdLen; kSrcPos++)
+			for (kSrcPos = 0; kSrcPos < iCmdLen; kSrcPos++)
 			{
 				WCHAR	wSrcChar = rkCmdText[kSrcPos];
-				WCHAR	wCmdChar = *(strCommand+kSrcPos);
+				WCHAR	wCmdChar = *(strCommand + kSrcPos);
 
-				if(wSrcChar != wCmdChar)
+				if (wSrcChar != wCmdChar)
 				{
 					bCorrect = false;
 					break;
@@ -2222,25 +2241,25 @@ bool PgChatMgrClient::SeperateUserCommand(std::wstring const& rkCmdText, std::ws
 				}
 			}
 
-			if(bCorrect)
+			if (bCorrect)
 			{
 				rkNormalText = rkCmdText.substr(kSrcPos);
-				kContCommand.insert( std::make_pair(kNextPos, kCommandText) );
+				kContCommand.insert(std::make_pair(kNextPos, kCommandText));
 				return	true;
 			}
 		}
 		return	false;
 	}
 
-	//	wFirstChar °¡ ¼ıÀÚÀÌ¸é ÀÌ¸ğÆ¼ÄÜ Ä¿¸àµå
-	if(iswdigit(wFirstChar) != 0 )
+	//	wFirstChar ê°€ ìˆ«ìì´ë©´ ì´ëª¨í‹°ì½˜ ì»¤ë©˜ë“œ
+	if (iswdigit(wFirstChar) != 0)
 	{
 		std::wstring kNumberString = _T("#");
 		int kSrcPos = 0;
-		for(kSrcPos=0; kSrcPos<iLength; kSrcPos++)
+		for (kSrcPos = 0; kSrcPos < iLength; kSrcPos++)
 		{
 			WCHAR	wChar = rkCmdText[kSrcPos];
-			if( iswdigit(wChar) == 0)
+			if (iswdigit(wChar) == 0)
 			{
 				break;
 			}
@@ -2248,60 +2267,60 @@ bool PgChatMgrClient::SeperateUserCommand(std::wstring const& rkCmdText, std::ws
 			kNumberString += wChar;
 		}
 
-		if(kNumberString.length() == 0)
+		if (kNumberString.length() == 0)
 		{
 			return	false;
 		}
 
 		rkNormalText = rkCmdText.substr(kSrcPos);
-		kContCommand.insert( std::make_pair(kNextPos, kNumberString) );
+		kContCommand.insert(std::make_pair(kNextPos, kNumberString));
 
 		return	true;
 	}
 
 	return	false;
 }
-bool PgChatMgrClient::SeperateCommandString(std::wstring const& rkOrgText, std::wstring &rkNormalText, std::map<size_t, std::wstring> &kContCommand)
+bool PgChatMgrClient::SeperateCommandString(std::wstring const& rkOrgText, std::wstring& rkNormalText, std::map<size_t, std::wstring>& kContCommand)
 {
 	const	int	iLength = rkOrgText.length();
-	if(iLength == 0)
+	if (iLength == 0)
 	{
 		return	false;
 	}
 	rkNormalText.clear();
-	//#ÀÖ´ÂÁö È®ÀÎ
+	//#ìˆëŠ”ì§€ í™•ì¸
 	wchar_t const kCommandWord = L'#';
 	std::wstring::size_type kBeforePos = 0;
 	std::wstring::size_type kNextPos = rkOrgText.find(kCommandWord);
-	if( kNextPos == std::wstring::npos )
+	if (kNextPos == std::wstring::npos)
 	{
 		return false;
 	}
-	//ÀÖÀ¸¸é ºĞ¸® µ¿ÀÛ
+	//ìˆìœ¼ë©´ ë¶„ë¦¬ ë™ì‘
 	std::wstring kNewString;
-	while(kNextPos != std::wstring::npos)
+	while (kNextPos != std::wstring::npos)
 	{
-		kNewString += rkOrgText.substr(kBeforePos,kNextPos-kBeforePos);
-		//	# ´ÙÀ½ºÎÅÍ Space or '#' ±îÁö ÀĞ´Â´Ù.
-		
-		std::wstring::size_type	kNextSpacePos = rkOrgText.find(_T(' '),kNextPos+1);
-		std::wstring::size_type	kNextCommandPos = rkOrgText.find(kCommandWord,kNextPos+1);
+		kNewString += rkOrgText.substr(kBeforePos, kNextPos - kBeforePos);
+		//	# ë‹¤ìŒë¶€í„° Space or '#' ê¹Œì§€ ì½ëŠ”ë‹¤.
 
-		if( kNextSpacePos == std::wstring::npos) 
-		{//°ø¹é À§Ä¡ ÀúÀå
+		std::wstring::size_type	kNextSpacePos = rkOrgText.find(_T(' '), kNextPos + 1);
+		std::wstring::size_type	kNextCommandPos = rkOrgText.find(kCommandWord, kNextPos + 1);
+
+		if (kNextSpacePos == std::wstring::npos)
+		{//ê³µë°± ìœ„ì¹˜ ì €ì¥
 			kNextSpacePos = iLength;
 		}
-		if( kNextCommandPos == std::wstring::npos) 
-		{//´ÙÀ½ #ÀÇ À§Ä¡ ÀúÀå
+		if (kNextCommandPos == std::wstring::npos)
+		{//ë‹¤ìŒ #ì˜ ìœ„ì¹˜ ì €ì¥
 			kNextCommandPos = iLength;
 		}
-		//Ä¿¸ÇµåÀÇ ±æÀÌ °ª = °ø¹éÀÌ¶û ´ÙÀ½# Áß ºü¸¥ ÂÊ À§Ä¡°ª - ÇöÀç #À§Ä¡°ª+1
-		const int iCmdTextLength = ((kNextCommandPos<kNextSpacePos) ? kNextCommandPos : kNextSpacePos) - (kNextPos+1);
-		std::wstring kCmdText = rkOrgText.substr(kNextPos+1,iCmdTextLength);
+		//ì»¤ë§¨ë“œì˜ ê¸¸ì´ ê°’ = ê³µë°±ì´ë‘ ë‹¤ìŒ# ì¤‘ ë¹ ë¥¸ ìª½ ìœ„ì¹˜ê°’ - í˜„ì¬ #ìœ„ì¹˜ê°’+1
+		const int iCmdTextLength = ((kNextCommandPos < kNextSpacePos) ? kNextCommandPos : kNextSpacePos) - (kNextPos + 1);
+		std::wstring kCmdText = rkOrgText.substr(kNextPos + 1, iCmdTextLength);
 
 		std::wstring kConvertedText;
-		//ÃßÃâÇÑ Ä¿¸Çµå¿¡ µş·Áµé¾î°£ ÀÏ¹İ ¹®ÀÚ ºĞ¸® ¹× ºĞ¸®ÇÑ Ä¿¸Çµå ÀúÀå
-		if(SeperateUserCommand(kCmdText, kNextPos, kConvertedText, kContCommand))
+		//ì¶”ì¶œí•œ ì»¤ë§¨ë“œì— ë”¸ë ¤ë“¤ì–´ê°„ ì¼ë°˜ ë¬¸ì ë¶„ë¦¬ ë° ë¶„ë¦¬í•œ ì»¤ë§¨ë“œ ì €ì¥
+		if (SeperateUserCommand(kCmdText, kNextPos, kConvertedText, kContCommand))
 		{
 			kNewString += kConvertedText;
 			kNextPos += kCmdText.length();
@@ -2311,9 +2330,9 @@ bool PgChatMgrClient::SeperateCommandString(std::wstring const& rkOrgText, std::
 			kNewString += kCommandWord;
 		}
 
-		kBeforePos = kNextPos+1;
-		kNextPos = rkOrgText.find(kCommandWord,kBeforePos);
-	
+		kBeforePos = kNextPos + 1;
+		kNextPos = rkOrgText.find(kCommandWord, kBeforePos);
+
 	}
 
 	rkNormalText = kNewString;
@@ -2321,39 +2340,39 @@ bool PgChatMgrClient::SeperateCommandString(std::wstring const& rkOrgText, std::
 	return true;
 }
 
-//ÀÌ¸ğÆ¼ÄÜÀ» ¼¯Àº ±İÁö¾î °Ë»ç ¹× º¯È¯(2010. 07. 14 Á¶Çö°Ç)
-bool PgChatMgrClient::TransEmoticonFilter(std::wstring &rkChat)
+//ì´ëª¨í‹°ì½˜ì„ ì„ì€ ê¸ˆì§€ì–´ ê²€ì‚¬ ë° ë³€í™˜(2010. 07. 14 ì¡°í˜„ê±´)
+bool PgChatMgrClient::TransEmoticonFilter(std::wstring& rkChat)
 {
 	std::wstring kNormal;
 	std::map<size_t, std::wstring> kContCommand;
 
-	if( false == SeperateCommandString(rkChat, kNormal, kContCommand) )
+	if (false == SeperateCommandString(rkChat, kNormal, kContCommand))
 	{
 		return false;
 	}
-	//»õ·Î Àû¿ëµÈ ÇÊÅÍ¸µ Àû¿ë
+	//ìƒˆë¡œ ì ìš©ëœ í•„í„°ë§ ì ìš©
 	bool bFilter = false;
-	if( false == g_kClientFS.Filter(rkChat, false) )
-	{ //±âÁ¸ ÇÊÅÍ¿¡ °É¸®Áö ¾Ê¾ÒÀ» °æ¿ì, ·¹Á÷½º ÇÊÅÍ°á°ú ÀúÀå
+	if (false == g_kClientFS.Filter(rkChat, false))
+	{ //ê¸°ì¡´ í•„í„°ì— ê±¸ë¦¬ì§€ ì•Šì•˜ì„ ê²½ìš°, ë ˆì§ìŠ¤ í•„í„°ê²°ê³¼ ì €ì¥
 		bFilter = g_kClientFS.Filter(kNormal, true);
 	}
-	
-	if(true == bFilter)
-	{//·¹Á÷½º ÇÊÅÍ¿¡ °É·ÈÀ» °æ¿ì, ÀÓ½Ã ÀÌ¸ğÆ¼ÄÜ ÄÁÅ×ÀÌ³Ê¿¡ÀúÀåµÈ ÀÌ¸ğÆ¼ÄÜ ¿ø·¡ ¹®Àå À§Ä¡¿¡ ³¢¿ö³Ö±â(µÇ³ª?¹®Á¦¾ø³ª?)
+
+	if (true == bFilter)
+	{//ë ˆì§ìŠ¤ í•„í„°ì— ê±¸ë ¸ì„ ê²½ìš°, ì„ì‹œ ì´ëª¨í‹°ì½˜ ì»¨í…Œì´ë„ˆì—ì €ì¥ëœ ì´ëª¨í‹°ì½˜ ì›ë˜ ë¬¸ì¥ ìœ„ì¹˜ì— ë¼ì›Œë„£ê¸°(ë˜ë‚˜?ë¬¸ì œì—†ë‚˜?)
 		std::wstring kFilterString;
 		size_t kNormalPos = 0;
-		for( size_t kCurrentPos = 0; kCurrentPos < rkChat.length(); ++kCurrentPos)
+		for (size_t kCurrentPos = 0; kCurrentPos < rkChat.length(); ++kCurrentPos)
 		{
 			std::map<size_t, std::wstring>::const_iterator const_iter = kContCommand.find(kCurrentPos);
-			if( const_iter != kContCommand.end() )
+			if (const_iter != kContCommand.end())
 			{
 				std::wstring kCmdText = (*const_iter).second;
 				kFilterString += kCmdText;
 				kCurrentPos += kCmdText.length() - 1;
 			}
-			else 
+			else
 			{
-				if(kNormalPos < kNormal.length() )
+				if (kNormalPos < kNormal.length())
 				{
 					wchar_t const kNormChar = kNormal.at(kNormalPos);
 					kFilterString += kNormChar;
@@ -2367,7 +2386,7 @@ bool PgChatMgrClient::TransEmoticonFilter(std::wstring &rkChat)
 	return bFilter;
 }
 
-//Ã¤ÆÃ ±â´É Á¦ÇÑ
+//ì±„íŒ… ê¸°ëŠ¥ ì œí•œ
 void PgChatMgrClient::SetBlockSpamChat_ChainInput(float const fWatchT, float const fBlockTime)
 {
 	ChainWatchT(fWatchT);
@@ -2399,14 +2418,14 @@ bool PgChatMgrClient::Command_UserFunction(std::wstring const& rkChat)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if ( true == Command_EmotiAction( rkChat ) )
+	if (true == Command_EmotiAction(rkChat))
 	{
 		return true;
 	}
 
-	if( rkChat[0] == L'/' )
-	{// ´Ù¸¥°÷¿¡¼­ Command_UserUse ÇÔ¼ö È£Ãâ ±İÁö
-		if( !Command_UserUse(rkChat) )
+	if (rkChat[0] == L'/')
+	{// ë‹¤ë¥¸ê³³ì—ì„œ Command_UserUse í•¨ìˆ˜ í˜¸ì¶œ ê¸ˆì§€
+		if (!Command_UserUse(rkChat))
 		{
 			std::wstring const kCommand = rkChat.substr(1);
 			return Command_God(kCommand);
@@ -2417,30 +2436,30 @@ bool PgChatMgrClient::Command_UserFunction(std::wstring const& rkChat)
 }
 
 bool PgChatMgrClient::Command_EmotiAction(std::wstring const& rkChat)
-{//¿©±â¼­ Ä¿¸Çµå Çü½ÄÀÇ Ç³¼± ÀÌ¸ğÆ¼ÄÜ°ú ÀÌ¸ğ¼ÇÀ» ÆĞÅ¶È­ÇÏ¿© ¼­¹ö·Î Àü¼ÛÇÑ´Ù.
+{//ì—¬ê¸°ì„œ ì»¤ë§¨ë“œ í˜•ì‹ì˜ í’ì„  ì´ëª¨í‹°ì½˜ê³¼ ì´ëª¨ì…˜ì„ íŒ¨í‚·í™”í•˜ì—¬ ì„œë²„ë¡œ ì „ì†¡í•œë‹¤.
 	BM::CAutoMutex kLock(m_kMutex);
 
 	bool bExistEmoti = false;
 	BYTE bEmotiType = ET_EMOTICON;
 	int iEmotiID = 0;
-	if( rkChat[0] == L'/' )
-	{//ÀÌ¸ğ¼Ç Ã¼Å©
+	if (rkChat[0] == L'/')
+	{//ì´ëª¨ì…˜ ì²´í¬
 		//g_kPgEmotiMgr
 		bEmotiType = ET_EMOTION;
-		bExistEmoti = g_kPgEmotiMgr.FindEmotionByKeyward( rkChat, iEmotiID, 1 );
+		bExistEmoti = g_kPgEmotiMgr.FindEmotionByKeyward(rkChat, iEmotiID, 1);
 	}
-	else if( rkChat[0] == L'@' )
-	{//Ç³¼±ÀÌ¸ğÆ¼ÄÜ Ã¼Å©
+	else if (rkChat[0] == L'@')
+	{//í’ì„ ì´ëª¨í‹°ì½˜ ì²´í¬
 		//g_kPgEmotiMgr
 		bEmotiType = ET_BALLOON;
-		bExistEmoti = g_kPgEmotiMgr.FindBalloonByKeyward( rkChat, iEmotiID, 1 );
+		bExistEmoti = g_kPgEmotiMgr.FindBalloonByKeyward(rkChat, iEmotiID, 1);
 	}
 
-	if( bExistEmoti )
+	if (bExistEmoti)
 	{
-		if(ET_EMOTION == bEmotiType)
+		if (ET_EMOTION == bEmotiType)
 		{
-			if(CheckCanEmotion(iEmotiID))
+			if (CheckCanEmotion(iEmotiID))
 			{
 				SendEmotionPacket(g_kPilotMan.PlayerActor(), bEmotiType, iEmotiID);
 			}
@@ -2453,62 +2472,62 @@ bool PgChatMgrClient::Command_EmotiAction(std::wstring const& rkChat)
 	return bExistEmoti;
 }
 
-bool PgChatMgrClient::Command_God(std::wstring const &rkChat)
+bool PgChatMgrClient::Command_God(std::wstring const& rkChat)
 {
 #ifndef USE_INB
 	lua_tinker::dostring(*lua_wrapper_user(g_kLuaTinker), MB(rkChat));
 #else
-	SChatLog kChatLog(CT_EVENT);//Àß¸øµÈ ¸í·É¾î ÀÔ´Ï´Ù.
+	SChatLog kChatLog(CT_EVENT);//ì˜ëª»ëœ ëª…ë ¹ì–´ ì…ë‹ˆë‹¤.
 	AddMessage(EM_Invalid_Command, kChatLog, true);
 #endif
 	return true;
 }
 
-bool PgChatMgrClient::Command_UserUse(std::wstring const &rkChat)
-{// À¯Àú°¡ »ç¿ëÇÒ¼ö ÀÖ´Â ¸í·É¾î	
+bool PgChatMgrClient::Command_UserUse(std::wstring const& rkChat)
+{// ìœ ì €ê°€ ì‚¬ìš©í• ìˆ˜ ìˆëŠ” ëª…ë ¹ì–´	
 	static std::wstring const SAVE_USER_PORTAL_CMD(L"/MEMORIZE");
 
-	std::wstring kTempStr=rkChat;
+	std::wstring kTempStr = rkChat;
 	UPR(kTempStr);
-	
-	switch(g_kLocal.ServiceRegion())
-	{// ±¹°¡ Áß¿¡
+
+	switch (g_kLocal.ServiceRegion())
+	{// êµ­ê°€ ì¤‘ì—
 	case LOCAL_MGR::NC_TAIWAN:
-		{// ´ë¸¸Àº
-			if(SAVE_USER_PORTAL_CMD == kTempStr)
-			{// À§Ä¡ ±â¾ï ¸í·ÉÀ» »ç¿ë ÇÒ¼ö ÀÖ´Ù
-				g_kMemTransCard.SendRegMemPortalReq();
-				return true;
-			}
-		}break;
+	{// ëŒ€ë§Œì€
+		if (SAVE_USER_PORTAL_CMD == kTempStr)
+		{// ìœ„ì¹˜ ê¸°ì–µ ëª…ë ¹ì„ ì‚¬ìš© í• ìˆ˜ ìˆë‹¤
+			g_kMemTransCard.SendRegMemPortalReq();
+			return true;
+		}
+	}break;
 	default:
-		{
+	{
 #ifndef USE_INB
-			if(SAVE_USER_PORTAL_CMD == kTempStr)
-			{// ¹èÆ÷ ¹öÀüÀÌ ¾Æ´Ï¸é, À§Ä¡ ±â¾ï ¸í·ÉÀ» »ç¿ë °¡´É
-				g_kMemTransCard.SendRegMemPortalReq();
-				return true;
-			}
+		if (SAVE_USER_PORTAL_CMD == kTempStr)
+		{// ë°°í¬ ë²„ì „ì´ ì•„ë‹ˆë©´, ìœ„ì¹˜ ê¸°ì–µ ëª…ë ¹ì„ ì‚¬ìš© ê°€ëŠ¥
+			g_kMemTransCard.SendRegMemPortalReq();
+			return true;
+		}
 #endif
-		}break;
+	}break;
 	}
 	return false;
 }
 
-bool	PgChatMgrClient::GetUserCommandConvertedString(std::wstring const &kStringSrc,std::wstring &kConvertedString, std::wstring const & kFont)	
+bool	PgChatMgrClient::GetUserCommandConvertedString(std::wstring const& kStringSrc, std::wstring& kConvertedString, std::wstring const& kFont)
 {
 	kConvertedString.clear();
 
 	const	int	iLength = kStringSrc.length();
 
-	if(iLength == 0)
+	if (iLength == 0)
 	{
 		return	false;
 	}
 
 	const	int	iMaxColorCommand = 9;
-	
-	const	WCHAR	*strColorCommandConverting[iMaxColorCommand][2]=
+
+	const	WCHAR* strColorCommandConverting[iMaxColorCommand][2] =
 	{
 		{ _T("R"),_T("{C=0xffff0000/}") },
 		{ _T("G"),_T("{C=0xff00ff00/}") },
@@ -2523,28 +2542,28 @@ bool	PgChatMgrClient::GetUserCommandConvertedString(std::wstring const &kStringS
 
 	const	WCHAR wFirstChar = kStringSrc[0];
 
-	//	wFirstChar °¡ ¹®ÀÚÀÌ¸é Color Ä¿¸àµå
-	if(iswalpha(wFirstChar) != 0 )
+	//	wFirstChar ê°€ ë¬¸ìì´ë©´ Color ì»¤ë©˜ë“œ
+	if (iswalpha(wFirstChar) != 0)
 	{
-		for(int j=0;j<iMaxColorCommand;j++)
+		for (int j = 0; j < iMaxColorCommand; j++)
 		{
-			const	WCHAR*	strCommand = strColorCommandConverting[j][0];
+			const	WCHAR* strCommand = strColorCommandConverting[j][0];
 
 			int	iCmdLen = wcslen(strCommand);
 			bool	bCorrect = true;
-			for(int k=0;k<iCmdLen;k++)
+			for (int k = 0; k < iCmdLen; k++)
 			{
 				WCHAR	wSrcChar = kStringSrc[k];
-				WCHAR	wCmdChar = *(strCommand+k);
+				WCHAR	wCmdChar = *(strCommand + k);
 
-				if(wSrcChar != wCmdChar)
+				if (wSrcChar != wCmdChar)
 				{
 					bCorrect = false;
 					break;
 				}
 			}
 
-			if(bCorrect)
+			if (bCorrect)
 			{
 				kConvertedString += std::wstring(strColorCommandConverting[j][1]);
 				kConvertedString += kStringSrc.substr(1);
@@ -2554,14 +2573,14 @@ bool	PgChatMgrClient::GetUserCommandConvertedString(std::wstring const &kStringS
 		return	false;
 	}
 
-	//	wFirstChar °¡ ¼ıÀÚÀÌ¸é ÀÌ¸ğÆ¼ÄÜ Ä¿¸àµå
-	if(iswdigit(wFirstChar) != 0 )
+	//	wFirstChar ê°€ ìˆ«ìì´ë©´ ì´ëª¨í‹°ì½˜ ì»¤ë©˜ë“œ
+	if (iswdigit(wFirstChar) != 0)
 	{
 		std::wstring kNumberString;
-		for(int i=0; i<iLength; i++)
+		for (int i = 0; i < iLength; i++)
 		{
 			WCHAR	wChar = kStringSrc[i];
-			if( iswdigit(wChar) == 0)
+			if (iswdigit(wChar) == 0)
 			{
 				break;
 			}
@@ -2569,18 +2588,18 @@ bool	PgChatMgrClient::GetUserCommandConvertedString(std::wstring const &kStringS
 			kNumberString += wChar;
 		}
 
-		if(kNumberString.length() == 0)
+		if (kNumberString.length() == 0)
 		{
 			return	false;
 		}
 
 		int	iEmoticonID = 0;
-		if( !g_kEmoFontMgr.Trans_key_value(atoi(MB(kNumberString)), iEmoticonID) )
+		if (!g_kEmoFontMgr.Trans_key_value(atoi(MB(kNumberString)), iEmoticonID))
 		{
 			return false;
 		}
 		const	WCHAR	wEmoticonIDChar = iEmoticonID;
-		
+
 		kConvertedString += _T("{T=");
 		kConvertedString += XUI::XUI_SAVE_FONT;
 		kConvertedString += _T("/C=");
@@ -2606,12 +2625,12 @@ bool	PgChatMgrClient::GetUserCommandConvertedString(std::wstring const &kStringS
 	return	false;
 }
 
-std::wstring PgChatMgrClient::ConvertUserCommand(std::wstring const &kString,std::wstring const & kFont)
+std::wstring PgChatMgrClient::ConvertUserCommand(std::wstring const& kString, std::wstring const& kFont)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
 	const	int	iLength = kString.length();
-	if(iLength == 0)
+	if (iLength == 0)
 	{
 		return	kString;
 	}
@@ -2622,32 +2641,32 @@ std::wstring PgChatMgrClient::ConvertUserCommand(std::wstring const &kString,std
 
 	std::wstring::size_type kBeforePos = 0;
 	std::wstring::size_type kNextPos = kString.find(kCommandChar);
-	if( kNextPos == std::wstring::npos )
+	if (kNextPos == std::wstring::npos)
 	{
-		//	Ä¿¸àµå°¡ ÇÏ³ªµµ ¾øÀ½
+		//	ì»¤ë©˜ë“œê°€ í•˜ë‚˜ë„ ì—†ìŒ
 		return kString;
 	}
 
-	
 
-	while(kNextPos != std::wstring::npos)
+
+	while (kNextPos != std::wstring::npos)
 	{
-		
-		kNewString += kString.substr(kBeforePos,kNextPos-kBeforePos);
 
-		//	# ´ÙÀ½ºÎÅÍ Space or '#' ±îÁö ÀĞ´Â´Ù.
-		
-		std::wstring::size_type	kNextSpacePos = kString.find(_T(' '),kNextPos+1);
-		std::wstring::size_type	kNextCommandPos = kString.find(kCommandChar,kNextPos+1);
+		kNewString += kString.substr(kBeforePos, kNextPos - kBeforePos);
 
-		if( kNextSpacePos == std::wstring::npos) kNextSpacePos = iLength;
-		if( kNextCommandPos == std::wstring::npos) kNextCommandPos = iLength;
+		//	# ë‹¤ìŒë¶€í„° Space or '#' ê¹Œì§€ ì½ëŠ”ë‹¤.
 
-		const	int	iCmdTextLength = ((kNextCommandPos<kNextSpacePos) ? kNextCommandPos : kNextSpacePos) - (kNextPos+1);
-		std::wstring kCmdText = kString.substr(kNextPos+1,iCmdTextLength);
+		std::wstring::size_type	kNextSpacePos = kString.find(_T(' '), kNextPos + 1);
+		std::wstring::size_type	kNextCommandPos = kString.find(kCommandChar, kNextPos + 1);
+
+		if (kNextSpacePos == std::wstring::npos) kNextSpacePos = iLength;
+		if (kNextCommandPos == std::wstring::npos) kNextCommandPos = iLength;
+
+		const	int	iCmdTextLength = ((kNextCommandPos < kNextSpacePos) ? kNextCommandPos : kNextSpacePos) - (kNextPos + 1);
+		std::wstring kCmdText = kString.substr(kNextPos + 1, iCmdTextLength);
 
 		std::wstring kConvertedText;
-		if(GetUserCommandConvertedString(kCmdText,kConvertedText,kFont))
+		if (GetUserCommandConvertedString(kCmdText, kConvertedText, kFont))
 		{
 			kNewString += kConvertedText;
 			kNextPos += kCmdText.length();
@@ -2657,37 +2676,37 @@ std::wstring PgChatMgrClient::ConvertUserCommand(std::wstring const &kString,std
 			kNewString += kCommandChar;
 		}
 
-		kBeforePos = kNextPos+1;
-		kNextPos = kString.find(kCommandChar,kBeforePos);
-	
+		kBeforePos = kNextPos + 1;
+		kNextPos = kString.find(kCommandChar, kBeforePos);
+
 	}
 
-	kNewString += kString.substr(kBeforePos,iLength-kBeforePos);
+	kNewString += kString.substr(kBeforePos, iLength - kBeforePos);
 
 	return	kNewString;
 }
 
-bool PgChatMgrClient::SendMToMChat(std::wstring& rkChat, DWORD& Color,std::wstring const& wstrName)
+bool PgChatMgrClient::SendMToMChat(std::wstring& rkChat, DWORD& Color, std::wstring const& wstrName)
 {
 	BM::CAutoMutex	kLock(m_kMutex);
 
-	if( rkChat.empty() )
+	if (rkChat.empty())
 	{
 		return true;
 	}
 
-	if( !wstrName.size() )
+	if (!wstrName.size())
 	{
 		return false;
 	}
 
-	if( !SendChat_MuteCheck() )
+	if (!SendChat_MuteCheck())
 	{
 		return false;
 	}
-	
-	if(!g_kUnicodeFilter.IsCorrect(UFFC_CHAT, rkChat))
-	{// »ç¿ë °¡´ÉÇÑ À¯´ÏÄÚµå ¹üÁÖ Ã¼Å©
+
+	if (!g_kUnicodeFilter.IsCorrect(UFFC_CHAT, rkChat))
+	{// ì‚¬ìš© ê°€ëŠ¥í•œ ìœ ë‹ˆì½”ë“œ ë²”ì£¼ ì²´í¬
 		SChatLog kChatLog(CT_EVENT);
 		g_kChatMgrClient.AddMessage(700407, kChatLog, true);
 		return false;
@@ -2698,7 +2717,7 @@ bool PgChatMgrClient::SendMToMChat(std::wstring& rkChat, DWORD& Color,std::wstri
 	BM::Stream kPacket(PT_C_M_REQ_CHAT);
 	kPacket.Push((BYTE)CT_MANTOMAN);
 
-	Color = (true == UseColor())?(m_iFontColor):(PgChatMgrUtil::ChatInputColor(CT_MANTOMAN));
+	Color = (true == UseColor()) ? (m_iFontColor) : (PgChatMgrUtil::DefaultChatInputColor(CT_MANTOMAN));
 	kPacket.Push(rkChat);//2
 	kPacket.Push(Color);//3
 
@@ -2706,87 +2725,87 @@ bool PgChatMgrClient::SendMToMChat(std::wstring& rkChat, DWORD& Color,std::wstri
 	kExtraDataPackInfo.PushToPacket(kPacket);//4
 
 	BM::GUID kRecvGuid;
-	if(Name2Guid_Find_ByName(wstrName, kRecvGuid))
-	{//Guid·Î
+	if (Name2Guid_Find_ByName(wstrName, kRecvGuid))
+	{//Guidë¡œ
 		kPacket.Push((BYTE)0);
 		kPacket.Push(kRecvGuid);
 	}
 	else
-	{//ÀÌ¸§À¸·Î
+	{//ì´ë¦„ìœ¼ë¡œ
 		kPacket.Push((BYTE)1);
 		kPacket.Push(wstrName);
 	}
 
 	kPacket.Push(static_cast<BYTE>(MTM_MSG_DEFAULT));
 
-	NETWORK_SEND(kPacket)//ÆĞÅ¶Àü¼Û
+	NETWORK_SEND(kPacket)//íŒ¨í‚·ì „ì†¡
 
-	return bSendRet;
+		return bSendRet;
 }
 
-//Ã¤ÆÃ ¸Ş½ÃÁö ¿ÜºÎ Ã¢ »ç¿ë
-bool PgChatMgrClient::SendChat(std::wstring const &rkChat, std::wstring const &rkName)
+//ì±„íŒ… ë©”ì‹œì§€ ì™¸ë¶€ ì°½ ì‚¬ìš©
+bool PgChatMgrClient::SendChat(std::wstring const& rkChat, std::wstring const& rkName)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( rkChat.empty() )
+	if (rkChat.empty())
 	{
 		return true;
 	}
-	
-	InputChatLog_Add(rkChat);//¹«Á¶°Ç Ã¤ÆÃ ÀÔ·Â ·Î±× Ãß°¡
-	
-	//Ã¤ÆÃ ±İÁö
-	if( !SendChat_MuteCheck() )
+
+	InputChatLog_Add(rkChat);//ë¬´ì¡°ê±´ ì±„íŒ… ì…ë ¥ ë¡œê·¸ ì¶”ê°€
+
+	//ì±„íŒ… ê¸ˆì§€
+	if (!SendChat_MuteCheck())
 	{
 		return false;
 	}
 
-	//	Ä¿¸Çµå
+	//	ì»¤ë§¨ë“œ
 	std::wstring kContents = rkChat;
 	std::wstring kName = m_kWhisperTarget;
 	int iChatMode = CT_NORMAL;
- 	bool const bCommand = Command_Chat(rkChat, iChatMode, kName, kContents);//Ã¤ÆÃÄ¿¸àµå ÀÎÁö °Ë»ç.(Àü¼Û¸ğµå°¡ ¹Ù²ğ ¼ö ÀÖ´Ù.)
-	//	Ä¿¸Çµå
-	if( !bCommand 
-	&&	Command_UserFunction(rkChat) )
+	bool const bCommand = Command_Chat(rkChat, iChatMode, kName, kContents);//ì±„íŒ…ì»¤ë©˜ë“œ ì¸ì§€ ê²€ì‚¬.(ì „ì†¡ëª¨ë“œê°€ ë°”ë€” ìˆ˜ ìˆë‹¤.)
+	//	ì»¤ë§¨ë“œ
+	if (!bCommand
+		&& Command_UserFunction(rkChat))
 	{
 		return true;
 	}
 	else
 	{
-		if( bCommand && kContents.empty() )
-		{//Å¸ÀÔº¯°æ ¸í·É¾î¸¸ ÀÖ°í ³»¿ëÀÌ ¾ø´Ù¸é Àü¼ÛÇÏÁö ¾Ê´Â´Ù.
+		if (bCommand && kContents.empty())
+		{//íƒ€ì…ë³€ê²½ ëª…ë ¹ì–´ë§Œ ìˆê³  ë‚´ìš©ì´ ì—†ë‹¤ë©´ ì „ì†¡í•˜ì§€ ì•ŠëŠ”ë‹¤.
 			SChatLog kChatLog(CT_EVENT);
 			AddMessage(EM_Invalid_Command, kChatLog);
 			return false;
 		}
 	}
 
-	if(CheckSpamChat(rkChat))
-	{// µµ¹èÀÌ¸é
+	if (CheckSpamChat(rkChat))
+	{// ë„ë°°ì´ë©´
 		return false;
 	}
 
 	XUI::CXUI_Font* pFont = g_kFontMgr.GetFont(FONT_CHAT);
-	if( pFont )
+	if (pFont)
 	{
-		if( m_kTextColorList.empty() )
+		if (m_kTextColorList.empty())
 		{
 			m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(iChatMode));
 		}
 		else
 		{
 			ContTextColorList::iterator it = m_kTextColorList.begin();
-			while( it != m_kTextColorList.end() )
+			while (it != m_kTextColorList.end())
 			{
-				if( (*it).eChatType == m_iChatMode )
+				if ((*it).eChatType == m_iChatMode)
 				{
 					break;
 				}
 				++it;
 			}
-			if( it == m_kTextColorList.end() )
+			if (it == m_kTextColorList.end())
 			{
 				m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(iChatMode));
 			}
@@ -2795,15 +2814,15 @@ bool PgChatMgrClient::SendChat(std::wstring const &rkChat, std::wstring const &r
 				m_iFontColor = (*it).TextColor;
 			}
 		}
-		
+
 		XUI::CXUI_Style_String	kText(XUI::PgFontDef(pFont, m_iFontColor), kContents);
 		return SendChat_Message(iChatMode, kText, kName);
 	}
 	return false;
 }
 
-// ±Ó¼Ó¸», ¸Ş½ÃÁö Áö¿¬ÀÏ °æ¿ì´Â bCheckEqualMessage Ã¼Å© ÇÏÁö ¾ÊÀ½
-void PgChatMgrClient::RecvChatLog_Add(const SChatLog &rkChatLog, bool const bCheckEqualMessage, bool const IsMonster)
+// ê·“ì†ë§, ë©”ì‹œì§€ ì§€ì—°ì¼ ê²½ìš°ëŠ” bCheckEqualMessage ì²´í¬ í•˜ì§€ ì•ŠìŒ
+void PgChatMgrClient::RecvChatLog_Add(const SChatLog& rkChatLog, bool const bCheckEqualMessage, bool const IsMonster)
 {
 #if !defined(USE_INB) && defined(PG_LOG_ENABLED)
 	if (NiLogger::GetOutputToLogFile(PGLOG_MESSAGE))
@@ -2814,7 +2833,7 @@ void PgChatMgrClient::RecvChatLog_Add(const SChatLog &rkChatLog, bool const bChe
 		PgChatMgrUtil::HeaderName(rkChatLog.ChatType(), kHeader);
 		kText += _T("[") + kHeader + _T("]");
 
-		if( rkChatLog.kCharName.size() )
+		if (rkChatLog.kCharName.size())
 		{
 			kText += rkChatLog.kCharName;
 			kText += _T(" : ");
@@ -2825,9 +2844,9 @@ void PgChatMgrClient::RecvChatLog_Add(const SChatLog &rkChatLog, bool const bChe
 		kText += _T("\n");
 
 		std::wstring::iterator itor = kText.begin();
-		while(itor != kText.end())
+		while (itor != kText.end())
 		{
-			if((*itor) == _T('%'))
+			if ((*itor) == _T('%'))
 			{
 				kTextFinal.append(_T("%%"));
 			}
@@ -2843,28 +2862,28 @@ void PgChatMgrClient::RecvChatLog_Add(const SChatLog &rkChatLog, bool const bChe
 #endif	
 
 	XUI::CXUI_Wnd* pNewLog = XUIMgr.Get(_T("ChatOut"));
-	if( !pNewLog )
+	if (!pNewLog)
 	{
-		std::back_inserter(m_kChatLog) = rkChatLog; // Áö¿¬
+		std::back_inserter(m_kChatLog) = rkChatLog; // ì§€ì—°
 		return;
 	}
 
-	if( CT_WHISPER_BYGUID == rkChatLog.ChatType()
-	&&	!rkChatLog.kCharName.empty()
-	&&	!rkChatLog.bMine )
+	if (CT_WHISPER_BYGUID == rkChatLog.ChatType()
+		&& !rkChatLog.kCharName.empty()
+		&& !rkChatLog.bMine)
 	{
 		InsertWhisper(rkChatLog.kCharName);
 	}
 
-	if( CT_NORMAL == rkChatLog.ChatType() )
+	if (CT_NORMAL == rkChatLog.ChatType())
 	{
-		XUI::CXUI_Wnd *pkExpeditionWnd = XUIMgr.Get( PgChatMgrUtil::kExpeditionLogWndName );
-		if( pkExpeditionWnd )
+		XUI::CXUI_Wnd* pkExpeditionWnd = XUIMgr.Get(PgChatMgrUtil::kExpeditionLogWndName);
+		if (pkExpeditionWnd)
 		{
-			XUI::CXUI_Wnd *pkExpeditionLogWnd = pkExpeditionWnd->GetControl(L"FRM_TAIL");
-			if( PgClientExpeditionUtil::IsInExpedition() )
+			XUI::CXUI_Wnd* pkExpeditionLogWnd = pkExpeditionWnd->GetControl(L"FRM_TAIL");
+			if (PgClientExpeditionUtil::IsInExpedition())
 			{
-				if( pkExpeditionLogWnd || g_kChatWindow.GethWnd() )
+				if (pkExpeditionLogWnd || g_kChatWindow.GethWnd())
 				{
 					PgChatMgrUtil::UpdateExpeditionLogWnd(pkExpeditionLogWnd, rkChatLog, bCheckEqualMessage, IsMonster);
 				}
@@ -2872,56 +2891,56 @@ void PgChatMgrClient::RecvChatLog_Add(const SChatLog &rkChatLog, bool const bChe
 		}
 	}
 
-	XUI::CXUI_Wnd *pkLogWnd = XUIMgr.Get( PgChatMgrUtil::kLogWndName );
-	XUI::CXUI_Wnd *pkSysLogWnd = XUIMgr.Get( PgChatMgrUtil::kSysLogWndName );
-	if( (pkLogWnd && pkSysLogWnd) || g_kChatWindow.GethWnd() )
+	XUI::CXUI_Wnd* pkLogWnd = XUIMgr.Get(PgChatMgrUtil::kLogWndName);
+	XUI::CXUI_Wnd* pkSysLogWnd = XUIMgr.Get(PgChatMgrUtil::kSysLogWndName);
+	if ((pkLogWnd && pkSysLogWnd) || g_kChatWindow.GethWnd())
 	{
 		PgChatMgrUtil::UpdateLogWnd(pkLogWnd, rkChatLog, bCheckEqualMessage, IsMonster);
-		
-		if( (rkChatLog.ChatType() > CT_USERSELECT_MAX)
+
+		if ((rkChatLog.ChatType() > CT_USERSELECT_MAX)
 			&& (rkChatLog.ChatType() != CT_WHISPER_BYGUID)
-			&& (rkChatLog.ChatType() != CT_TRADE) )
+			&& (rkChatLog.ChatType() != CT_TRADE))
 		{
-			if( !m_bSysOutHide )
-			{	// ½Ã½ºÅÛ ¸Ş¼¼Áö Ã¢ÀÌ º¸ÀÏ¶§¸¸ ¾÷µ¥ÀÌÆ®.
-				PgChatMgrUtil::UpdateLogWnd(pkSysLogWnd, rkChatLog, bCheckEqualMessage, IsMonster);				
+			if (!m_bSysOutHide)
+			{	// ì‹œìŠ¤í…œ ë©”ì„¸ì§€ ì°½ì´ ë³´ì¼ë•Œë§Œ ì—…ë°ì´íŠ¸.
+				PgChatMgrUtil::UpdateLogWnd(pkSysLogWnd, rkChatLog, bCheckEqualMessage, IsMonster);
 			}
 		}
 	}
 	else
 	{
-		if( PgChatMgrUtil::CP_MAX_All <= m_kChatLog.size() )
+		if (PgChatMgrUtil::CP_MAX_All <= m_kChatLog.size())
 		{
 			m_kChatLog.pop_front();
 		}
-		std::back_inserter(m_kChatLog) = rkChatLog; // Áö¿¬
+		std::back_inserter(m_kChatLog) = rkChatLog; // ì§€ì—°
 	}
 }
 
 void PgChatMgrClient::Update()
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	if( m_kChatLog.empty() )
+	if (m_kChatLog.empty())
 	{
 		return;
 	}
 
-	XUI::CXUI_Wnd *pkLogWnd = XUIMgr.Get( PgChatMgrUtil::kLogWndName );
-	XUI::CXUI_Wnd *pkSysLogWnd = XUIMgr.Get( PgChatMgrUtil::kSysLogWndName );
-	if( !pkLogWnd && !pkSysLogWnd && !g_kChatWindow.GethWnd() )
+	XUI::CXUI_Wnd* pkLogWnd = XUIMgr.Get(PgChatMgrUtil::kLogWndName);
+	XUI::CXUI_Wnd* pkSysLogWnd = XUIMgr.Get(PgChatMgrUtil::kSysLogWndName);
+	if (!pkLogWnd && !pkSysLogWnd && !g_kChatWindow.GethWnd())
 	{
 		return;
 	}
 
 	ContDelayList::iterator iter = m_kChatLog.begin();
-	while( m_kChatLog.end() != iter )
+	while (m_kChatLog.end() != iter)
 	{
 		PgChatMgrUtil::UpdateLogWnd(pkLogWnd, (*iter), false, false);
-		
-		if( !m_bSysOutHide 
+
+		if (!m_bSysOutHide
 			&& ((*iter).ChatType() > CT_USERSELECT_MAX)
 			&& ((*iter).ChatType() != CT_WHISPER_BYGUID)
-			&& ((*iter).ChatType() != CT_TRADE) )
+			&& ((*iter).ChatType() != CT_TRADE))
 		{
 			PgChatMgrUtil::UpdateLogWnd(pkSysLogWnd, (*iter), false, false);
 		}
@@ -2936,11 +2955,11 @@ void PgChatMgrClient::InsertWhisper(std::wstring const& kName, bool const bIsSor
 
 	ContWhisper::iterator	it = m_kWhisperList.begin();
 
-	while( it != m_kWhisperList.end() )
+	while (it != m_kWhisperList.end())
 	{
-		if( bIsSort )
+		if (bIsSort)
 		{
-			if( it->compare(kName) == 0 )
+			if (it->compare(kName) == 0)
 			{
 				m_kWhisperList.erase(it);
 				break;
@@ -2948,7 +2967,7 @@ void PgChatMgrClient::InsertWhisper(std::wstring const& kName, bool const bIsSor
 		}
 		else
 		{
-			if( it->compare(kName) == 0 )
+			if (it->compare(kName) == 0)
 			{
 				return;
 			}
@@ -2956,13 +2975,13 @@ void PgChatMgrClient::InsertWhisper(std::wstring const& kName, bool const bIsSor
 		++it;
 	}
 	m_kWhisperList.push_back(kName);
-	if( m_kWhisperList.size() > MAX_WHISPER )
+	if (m_kWhisperList.size() > MAX_WHISPER)
 	{
 		m_kWhisperList.pop_front();
 	}
 }
 
-//Ã¤ÆÃ °ü·Ã Recv
+//ì±„íŒ… ê´€ë ¨ Recv
 bool PgChatMgrClient::RecvChat(BM::Stream* pkPacket)
 {
 	BM::CAutoMutex kLock(m_kMutex);
@@ -2980,41 +2999,41 @@ bool PgChatMgrClient::RecvChat(BM::Stream* pkPacket)
 
 	bool bShowBallon = true;
 	bool bCanGo = true;
-	switch(cChatMode)
+	switch (cChatMode)
 	{
 	case CT_WHISPER_BYGUID:
 	case CT_WHISPER_BYNAME:
-		{
-			bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyWhisper);
-		}break;
+	{
+		bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyWhisper);
+	}break;
 	case CT_PARTY:
-		{
-			bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyParty);
-		}break;
+	{
+		bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyParty);
+	}break;
 	case CT_FRIEND:
-		{
-			bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyFriend);
-		}break;
+	{
+		bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyFriend);
+	}break;
 	case CT_GUILD_LOINGUSER:
-		{
-			bShowBallon = false;
-			cChatMode = CT_GUILD;
-		}//No break
+	{
+		bShowBallon = false;
+		cChatMode = CT_GUILD;
+	}//No break
 	case CT_GUILD:
-		{
-			bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyGuild);
-		}break;
+	{
+		bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyGuild);
+	}break;
 	case CT_TRADE:
-		{
-			bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyTrade);
-		}break;
+	{
+		bCanGo = 0 == g_kGlobalOption.GetValue(kEtcHeadKey, kSubKey_DenyTrade);
+	}break;
 	default:
-		{
-			bCanGo = true;
-		}break;
+	{
+		bCanGo = true;
+	}break;
 	}
 
-	switch(cChatMode)
+	switch (cChatMode)
 	{
 	case CT_NORMAL:
 	case CT_FRIEND:
@@ -3025,199 +3044,27 @@ bool PgChatMgrClient::RecvChat(BM::Stream* pkPacket)
 	case CT_WHISPER_BYNAME:
 	case CT_EMOTION:
 	case CT_TRADE:
-		{
-			if( bCanGo )
-			{
-				SChatLog kChatLog((EChatType)cChatMode);
-				pkPacket->Pop(kChatLog.kCharGUID);//CharGuid
-				pkPacket->Pop(kChatLog.kCharName);
-				pkPacket->Pop(kChatLog.kContents);
-				pkPacket->Pop(kChatLog.dwColor);
-
-				{	// 3°¡Áö Ã¤ÆÃ Å¸ÀÔ¸¸ Ã¤ÆÃ Â÷´ÜÇÔ.
-					if( (cChatMode == CT_NORMAL) 
-						|| (cChatMode == CT_WHISPER_BYGUID) 
-						|| (cChatMode == CT_WHISPER_BYNAME) )
-					{
-						bool bBlocked = CheckChatBlockCharacter(kChatLog.kCharName, ECBT_NORMAL);
-						if( bBlocked )
-						{
-							return false;
-						}
-					}
-				}
-
-				kChatLog.kContents = ConvertUserCommand(kChatLog.kContents);
-
-				kChatLog.kExtraDataPackInfo.PopFromPacket(*pkPacket);
-
-				XUI::PgExtraDataPack	kCharNameData;
-				kCharNameData.AddExtraData(LINK_EDT_CHAR, kChatLog.kCharGUID.str());
-
-				kChatLog.kExtraDataPackInfo.AddExtraDataPack(kCharNameData);
-
-				kChatLog.bMine = g_kPilotMan.IsMyPlayer(kChatLog.kCharGUID);
-				if( !kChatLog.bMine )
-				{
-					Name2Guid_Add(CT_NORMAL, kChatLog.kCharName, kChatLog.kCharGUID); // Ä³½³
-				}
-				if(cChatMode != CT_EMOTION)
-				{
-					RecvChatLog_Add(kChatLog);	
-				}
-
-				if(bShowBallon)
-				{
-					std::wstring strContent(PgChatMgrUtil::ColorHexToString(kChatLog.dwColor));
-					strContent += kChatLog.kContents;
-					Character_ChatBallon_Set(kChatLog.kCharGUID, strContent, cChatMode);//Ä³¸¯ÅÍ°¡ ÀÖÀ¸¸é Ç³¼±À» ¶ç¿î´Ù.
-				}
-			}
-		}break;
-	case CT_MANTOMAN:
-		{
-			BYTE	IsResult;
-			std::wstring wstrName;
-			SMtoMChatData	Data;
-
-			pkPacket->Pop(kCharGuid);
-			pkPacket->Pop(IsResult);
-
-			if( IsResult == 2 )
-			{
-//				Data.kType = MTM_MSG_DEFAULT;
-				Data.kName = TTW(400161);
-				Data.kContants = TTW(551003);
-				Data.dwColor = 0xFFFFFF99;
-//				Data.kLinkItem.clear();
-				g_kMToMMgr.Add(kCharGuid, L"",  MTM_MSG_DEFAULT, Data, false );
-			}
-			else
-			{
-				BYTE kType = MTM_MSG_DEFAULT;
-
-				pkPacket->Pop(wstrName);
-				Name2Guid_Add(CT_NORMAL, wstrName, kCharGuid); // Ä³½³
-
-				// µû·Î ³îÀÚ
-				pkPacket->Pop(kType);
-				pkPacket->Pop(Data.kContants);
-				pkPacket->Pop(Data.dwColor);
-
-				if ( MTM_MSG_EMPORIABATTLE == kType )
-				{
-					kType = MTM_MSG_DEFAULT;
-				}
-
-//				PU::TLoadArray_M(*pkPacket, Data.kLinkItem);
-
-				Data.kContants = ConvertUserCommand(Data.kContants);
-
-				if( !IsResult )
-				{
-					Data.kName = wstrName;
-					g_kMToMMgr.Add(kCharGuid, wstrName, kType, Data, false);
-				}
-				else
-				{
-					PgPlayer* Player = g_kPilotMan.GetPlayerUnit();
-					Data.kName = Player->Name();
-					g_kMToMMgr.Add(kCharGuid, Data);
-				}
-			}
-		}break;
-	case CT_NOTICE:
-		{
-			std::wstring kContents;
-			pkPacket->Pop(kContents);
-			Notice_Show(kContents, EL_Warning);
-		}break;
-	case CT_ERROR:
-		{//¿¡·¯Ã³¸®!
-			{
-				BYTE cErrorCode;
-				pkPacket->Pop(cErrorCode);
-				if(WCR_NotFoundName==cErrorCode || WCR_NotFoundGuid==cErrorCode)
-				{
-					//SChatLog kChatLog((EChatType)cChatMode);
-					SChatLog kChatLog(CT_EVENT);
-					AddMessage(EM_FreindFailed, kChatLog, true);
-				}
-			}
-		}break;
-	case CT_RAREMONSTERGEN:
-		{
-			int iMonsterNo = 0;
-			BM::GUID kGuid;
-			pkPacket->Pop(kGuid);
-			pkPacket->Pop(iMonsterNo);
-
-			GET_DEF(CMonsterDefMgr, kMonsterDefMgr);
-			CMonsterDef const * pDef = kMonsterDefMgr.GetDef(iMonsterNo);
-			if(pDef)
-			{
-				wchar_t const * pkMonName = NULL;
-				if(g_pkWorld
-					&& true == GetDefString(pDef->NameNo(),pkMonName)
-					)
-				{
-					std::wstring kMsg;
-					WstringFormat( kMsg, MAX_PATH, TTW(4001000).c_str(),GetMapName(g_pkWorld->MapNo()).c_str(), pkMonName);
-					Notice_Show(kMsg, EL_Normal);
-				}
-			}
-		}break;
-	case CT_RAREMONSTERDEAD:
-		{
-			int iMonsterNo = 0;
-			std::wstring kOwnerName;
-
-			BM::GUID kGuid;
-			pkPacket->Pop(kGuid);
-			pkPacket->Pop(iMonsterNo);
-			pkPacket->Pop(kOwnerName);
-
-			GET_DEF(CMonsterDefMgr, kMonsterDefMgr);
-			CMonsterDef const * pDef = kMonsterDefMgr.GetDef(iMonsterNo);
-			if(pDef)
-			{
-				wchar_t const * pkMonName = NULL;
-				if(g_pkWorld
-					&& true == GetDefString(pDef->NameNo(),pkMonName)
-					)
-				{
-					std::wstring kMsg;
-					WstringFormat( kMsg, MAX_PATH, TTW(4001001).c_str(), kOwnerName.c_str(),GetMapName(g_pkWorld->MapNo()).c_str(),pkMonName);
-					Notice_Show(kMsg, EL_Normal);
-				}
-			}
-		}break;
-	case CT_OXQUIZEVENT:
-		{
-			BM::GUID kEventGuid;
-			std::wstring kContents;
-			pkPacket->Pop(kEventGuid);
-			pkPacket->Pop(kContents);
-			Notice_Show(kContents,EL_Normal);
-		}break;
-	case CT_CASHITEM_GIFT:
-		{
-			int iMsgNo = 0;
-			int iEventNo = 0;
-			pkPacket->Pop(iMsgNo);
-			pkPacket->Pop(iEventNo);
-
-			std::wstring kMsg;
-			WstringFormat( kMsg, MAX_PATH, TTW(iMsgNo).c_str(), iEventNo);
-			Notice_Show(kMsg, EL_Normal);
-		}break;
-	case CT_MYHOME_PUBLIC:
+	{
+		if (bCanGo)
 		{
 			SChatLog kChatLog((EChatType)cChatMode);
 			pkPacket->Pop(kChatLog.kCharGUID);//CharGuid
 			pkPacket->Pop(kChatLog.kCharName);
 			pkPacket->Pop(kChatLog.kContents);
 			pkPacket->Pop(kChatLog.dwColor);
+
+			{	// 3ê°€ì§€ ì±„íŒ… íƒ€ì…ë§Œ ì±„íŒ… ì°¨ë‹¨í•¨.
+				if ((cChatMode == CT_NORMAL)
+					|| (cChatMode == CT_WHISPER_BYGUID)
+					|| (cChatMode == CT_WHISPER_BYNAME))
+				{
+					bool bBlocked = CheckChatBlockCharacter(kChatLog.kCharName, ECBT_NORMAL);
+					if (bBlocked)
+					{
+						return false;
+					}
+				}
+			}
 
 			kChatLog.kContents = ConvertUserCommand(kChatLog.kContents);
 
@@ -3229,48 +3076,220 @@ bool PgChatMgrClient::RecvChat(BM::Stream* pkPacket)
 			kChatLog.kExtraDataPackInfo.AddExtraDataPack(kCharNameData);
 
 			kChatLog.bMine = g_kPilotMan.IsMyPlayer(kChatLog.kCharGUID);
+			if (!kChatLog.bMine)
+			{
+				Name2Guid_Add(CT_NORMAL, kChatLog.kCharName, kChatLog.kCharGUID); // ìºìŠ
+			}
+			if (cChatMode != CT_EMOTION)
+			{
+				RecvChatLog_Add(kChatLog);
+			}
 
-			lwHomeRenew::AddMyhomeChatAllChatContent(kChatLog);
-		}break;
-	case CT_MYHOME_PRIVATE:
+			if (bShowBallon)
+			{
+				std::wstring strContent(PgChatMgrUtil::ColorHexToString(kChatLog.dwColor));
+				strContent += kChatLog.kContents;
+				Character_ChatBallon_Set(kChatLog.kCharGUID, strContent, cChatMode);//ìºë¦­í„°ê°€ ìˆìœ¼ë©´ í’ì„ ì„ ë„ìš´ë‹¤.
+			}
+		}
+	}break;
+	case CT_MANTOMAN:
+	{
+		BYTE	IsResult;
+		std::wstring wstrName;
+		SMtoMChatData	Data;
+
+		pkPacket->Pop(kCharGuid);
+		pkPacket->Pop(IsResult);
+
+		if (IsResult == 2)
 		{
-		}break;
+			//				Data.kType = MTM_MSG_DEFAULT;
+			Data.kName = TTW(400161);
+			Data.kContants = TTW(551003);
+			Data.dwColor = 0xFFFFFF99;
+			//				Data.kLinkItem.clear();
+			g_kMToMMgr.Add(kCharGuid, L"", MTM_MSG_DEFAULT, Data, false);
+		}
+		else
+		{
+			BYTE kType = MTM_MSG_DEFAULT;
+
+			pkPacket->Pop(wstrName);
+			Name2Guid_Add(CT_NORMAL, wstrName, kCharGuid); // ìºìŠ
+
+			// ë”°ë¡œ ë†€ì
+			pkPacket->Pop(kType);
+			pkPacket->Pop(Data.kContants);
+			pkPacket->Pop(Data.dwColor);
+
+			if (MTM_MSG_EMPORIABATTLE == kType)
+			{
+				kType = MTM_MSG_DEFAULT;
+			}
+
+			//				PU::TLoadArray_M(*pkPacket, Data.kLinkItem);
+
+			Data.kContants = ConvertUserCommand(Data.kContants);
+
+			if (!IsResult)
+			{
+				Data.kName = wstrName;
+				g_kMToMMgr.Add(kCharGuid, wstrName, kType, Data, false);
+			}
+			else
+			{
+				PgPlayer* Player = g_kPilotMan.GetPlayerUnit();
+				Data.kName = Player->Name();
+				g_kMToMMgr.Add(kCharGuid, Data);
+			}
+		}
+	}break;
+	case CT_NOTICE:
+	{
+		std::wstring kContents;
+		pkPacket->Pop(kContents);
+		Notice_Show(kContents, EL_Warning);
+	}break;
+	case CT_ERROR:
+	{//ì—ëŸ¬ì²˜ë¦¬!
+		{
+			BYTE cErrorCode;
+			pkPacket->Pop(cErrorCode);
+			if (WCR_NotFoundName == cErrorCode || WCR_NotFoundGuid == cErrorCode)
+			{
+				//SChatLog kChatLog((EChatType)cChatMode);
+				SChatLog kChatLog(CT_EVENT);
+				AddMessage(EM_FreindFailed, kChatLog, true);
+			}
+		}
+	}break;
+	case CT_RAREMONSTERGEN:
+	{
+		int iMonsterNo = 0;
+		BM::GUID kGuid;
+		pkPacket->Pop(kGuid);
+		pkPacket->Pop(iMonsterNo);
+
+		GET_DEF(CMonsterDefMgr, kMonsterDefMgr);
+		CMonsterDef const* pDef = kMonsterDefMgr.GetDef(iMonsterNo);
+		if (pDef)
+		{
+			wchar_t const* pkMonName = NULL;
+			if (g_pkWorld
+				&& true == GetDefString(pDef->NameNo(), pkMonName)
+				)
+			{
+				std::wstring kMsg;
+				WstringFormat(kMsg, MAX_PATH, TTW(4001000).c_str(), GetMapName(g_pkWorld->MapNo()).c_str(), pkMonName);
+				Notice_Show(kMsg, EL_Normal);
+			}
+		}
+	}break;
+	case CT_RAREMONSTERDEAD:
+	{
+		int iMonsterNo = 0;
+		std::wstring kOwnerName;
+
+		BM::GUID kGuid;
+		pkPacket->Pop(kGuid);
+		pkPacket->Pop(iMonsterNo);
+		pkPacket->Pop(kOwnerName);
+
+		GET_DEF(CMonsterDefMgr, kMonsterDefMgr);
+		CMonsterDef const* pDef = kMonsterDefMgr.GetDef(iMonsterNo);
+		if (pDef)
+		{
+			wchar_t const* pkMonName = NULL;
+			if (g_pkWorld
+				&& true == GetDefString(pDef->NameNo(), pkMonName)
+				)
+			{
+				std::wstring kMsg;
+				WstringFormat(kMsg, MAX_PATH, TTW(4001001).c_str(), kOwnerName.c_str(), GetMapName(g_pkWorld->MapNo()).c_str(), pkMonName);
+				Notice_Show(kMsg, EL_Normal);
+			}
+		}
+	}break;
+	case CT_OXQUIZEVENT:
+	{
+		BM::GUID kEventGuid;
+		std::wstring kContents;
+		pkPacket->Pop(kEventGuid);
+		pkPacket->Pop(kContents);
+		Notice_Show(kContents, EL_Normal);
+	}break;
+	case CT_CASHITEM_GIFT:
+	{
+		int iMsgNo = 0;
+		int iEventNo = 0;
+		pkPacket->Pop(iMsgNo);
+		pkPacket->Pop(iEventNo);
+
+		std::wstring kMsg;
+		WstringFormat(kMsg, MAX_PATH, TTW(iMsgNo).c_str(), iEventNo);
+		Notice_Show(kMsg, EL_Normal);
+	}break;
+	case CT_MYHOME_PUBLIC:
+	{
+		SChatLog kChatLog((EChatType)cChatMode);
+		pkPacket->Pop(kChatLog.kCharGUID);//CharGuid
+		pkPacket->Pop(kChatLog.kCharName);
+		pkPacket->Pop(kChatLog.kContents);
+		pkPacket->Pop(kChatLog.dwColor);
+
+		kChatLog.kContents = ConvertUserCommand(kChatLog.kContents);
+
+		kChatLog.kExtraDataPackInfo.PopFromPacket(*pkPacket);
+
+		XUI::PgExtraDataPack	kCharNameData;
+		kCharNameData.AddExtraData(LINK_EDT_CHAR, kChatLog.kCharGUID.str());
+
+		kChatLog.kExtraDataPackInfo.AddExtraDataPack(kCharNameData);
+
+		kChatLog.bMine = g_kPilotMan.IsMyPlayer(kChatLog.kCharGUID);
+
+		lwHomeRenew::AddMyhomeChatAllChatContent(kChatLog);
+	}break;
+	case CT_MYHOME_PRIVATE:
+	{
+	}break;
 	//case CT_Max:
 	//case CT_NONE:
 	//case CT_EVENT:
 	//case CT_EVENT_SYSTEM:
 	//case CT_EVENT_GAME:
 	default:
-		{
-		}break;
+	{
+	}break;
 	}
 
 	return true;
 }
 
-//Ã¤ÆÃ ÀÔ·Â ·Î±× °ü·Ã
-void PgChatMgrClient::InputChatLog_Add(std::wstring const &rkChat)//ÀÔ·Â·Î±× Ãß°¡
+//ì±„íŒ… ì…ë ¥ ë¡œê·¸ ê´€ë ¨
+void PgChatMgrClient::InputChatLog_Add(std::wstring const& rkChat)//ì…ë ¥ë¡œê·¸ ì¶”ê°€
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
 	ContInputList::iterator kIter = m_kLog_InputChat.begin();
-	for(; m_kLog_InputChat.end() != kIter; ++kIter)
+	for (; m_kLog_InputChat.end() != kIter; ++kIter)
 	{
-		if((*kIter) == rkChat)//Áßº¹ ÇÏ¸é ÀÌÀü°É Áö¿î´Ù.
+		if ((*kIter) == rkChat)//ì¤‘ë³µ í•˜ë©´ ì´ì „ê±¸ ì§€ìš´ë‹¤.
 		{
 			kIter = m_kLog_InputChat.erase(kIter);
 			break;
 		}
 	}
 
-	// Ã¤ÆÃ ±â·ÏÀÌ Max ÀÌ»óÀÌ¸é Á¦°Å
-	if( MaxInputLog() < m_kLog_Input.size()+1 )
+	// ì±„íŒ… ê¸°ë¡ì´ Max ì´ìƒì´ë©´ ì œê±°
+	if (MaxInputLog() < m_kLog_Input.size() + 1)
 	{
 		m_kLog_Input.erase(m_kLog_Input.begin());
 	}
 	m_kLog_Input.push_back(SInputChatLog(rkChat));
 
-	if( MaxInputLog() < m_kLog_InputChat.size()+1 )
+	if (MaxInputLog() < m_kLog_InputChat.size() + 1)
 	{
 		m_kLog_InputChat.erase(m_kLog_InputChat.begin());
 	}
@@ -3279,124 +3298,124 @@ void PgChatMgrClient::InputChatLog_Add(std::wstring const &rkChat)//ÀÔ·Â·Î±× Ãß°
 	InputChatLog_Reset();
 }
 
-//Ã¤ÆÃ ÀÔ·Â ·Î±× °ü·Ã
-bool PgChatMgrClient::CheckSpamChat(std::wstring const &rkChat)//ÀÔ·Â·Î±× Ãß°¡
+//ì±„íŒ… ì…ë ¥ ë¡œê·¸ ê´€ë ¨
+bool PgChatMgrClient::CheckSpamChat(std::wstring const& rkChat)//ì…ë ¥ë¡œê·¸ ì¶”ê°€
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	
-	if(1 >= m_kLog_Input.size()) 
+
+	if (1 >= m_kLog_Input.size())
 	{
 		return false;
 	}
-	
-	//ÃÖ±Ù¿¡ µé¾î¿Â°ÍÀº ÀÚ½ÅÀÇ °ÍÀÌ¹Ç·Î Àá½Ã »©µĞ´Ù
+
+	//ìµœê·¼ì— ë“¤ì–´ì˜¨ê²ƒì€ ìì‹ ì˜ ê²ƒì´ë¯€ë¡œ ì ì‹œ ë¹¼ë‘”ë‹¤
 	SInputChatLog const kBackEle = m_kLog_Input.back();
 	m_kLog_Input.pop_back();
 
 	bool bBadInput = false;
 	float fCurTime = g_pkApp->GetAccumTime();
 	float fDistTimeToPrevInput = 0;
-	
-	if(SpamChkFlag() & ESCS_ChainInput
+
+	if (SpamChkFlag() & ESCS_ChainInput
 		&& !m_kLog_Input.empty())
 	{// Block ChainInput
-		fDistTimeToPrevInput = fCurTime-m_kLog_Input.rbegin()->fInputTime;
-		if(m_fChainWatchT >= fDistTimeToPrevInput)
-		{//1. ¹Ù·Î ÀÌÀü°ú ºñ±³ÇØ¼­ m_fChainWatchT º¸´Ù ÀÛÀ¸¸é ±İÁö
+		fDistTimeToPrevInput = fCurTime - m_kLog_Input.rbegin()->fInputTime;
+		if (m_fChainWatchT >= fDistTimeToPrevInput)
+		{//1. ë°”ë¡œ ì´ì „ê³¼ ë¹„êµí•´ì„œ m_fChainWatchT ë³´ë‹¤ ì‘ìœ¼ë©´ ê¸ˆì§€
 			bBadInput = true;
 			IncBlockChatTime(m_fChainBlockTime);
-			//WriteToConsole("1Å¸ÀÔ : %f Áõ°¡\n", m_fChainBlockTime);
+			//WriteToConsole("1íƒ€ì… : %f ì¦ê°€\n", m_fChainBlockTime);
 		}
 	}
 
-	if(!bBadInput
+	if (!bBadInput
 		&& SpamChkFlag() & ESCS_LooseChainInput
-		&&m_kLog_Input.size() >= m_iLChainCnt)
+		&& m_kLog_Input.size() >= m_iLChainCnt)
 	{// Block LooseChainInput
 		float fOldTime = 0.f;
 		ContInputLog::reverse_iterator kReverse_Iter = m_kLog_Input.rbegin();
-		
-		for(unsigned int i=0; i < m_iLChainCnt; ++i)
-		{// ¸¶Áö¸· ÀÔ·ÂÀ¸·ÎºÎÅÍ N°³ ¸¸Å­ ÀÌÀü¿¡ ÀÔ·ÂµÈ ¹®ÀåÀÇ
-			if(kReverse_Iter != m_kLog_Input.rend())
-			{// ½Ã°£ °ªÀ» °¡Á®¿Í
+
+		for (unsigned int i = 0; i < m_iLChainCnt; ++i)
+		{// ë§ˆì§€ë§‰ ì…ë ¥ìœ¼ë¡œë¶€í„° Nê°œ ë§Œí¼ ì´ì „ì— ì…ë ¥ëœ ë¬¸ì¥ì˜
+			if (kReverse_Iter != m_kLog_Input.rend())
+			{// ì‹œê°„ ê°’ì„ ê°€ì ¸ì™€
 				fOldTime = kReverse_Iter->fInputTime;
 			}
 			++kReverse_Iter;
 		}
-		if(m_fLChainWatchT >= fCurTime-fOldTime)
-		{// N°³°¡ Æ¯Á¤ ½Ã°£ ÀÌ³»¿¡ ÀÔ·Â µÇ¾ú´Ù¸é µµ¹è·Î ÆÇ¸í ÇÑ´Ù
+		if (m_fLChainWatchT >= fCurTime - fOldTime)
+		{// Nê°œê°€ íŠ¹ì • ì‹œê°„ ì´ë‚´ì— ì…ë ¥ ë˜ì—ˆë‹¤ë©´ ë„ë°°ë¡œ íŒëª… í•œë‹¤
 			bBadInput = true;
 			IncBlockChatTime(m_fLChainBlockTime);
-			//WriteToConsole("2Å¸ÀÔ : %f Áõ°¡\n", m_fLChainBlockTime);
+			//WriteToConsole("2íƒ€ì… : %f ì¦ê°€\n", m_fLChainBlockTime);
 		}
 	}
 
-	if(!bBadInput
+	if (!bBadInput
 		&& SpamChkFlag() & ESCS_MacroInput)
 	{// Block MacroInput
-		////1. ÇöÀç ÀÔ·Â ¹®Àå°ú °°Àº ¹®ÀåÀ» Ã£À½
-		/////if(Ã£¾ÒÀ»¶§)
+		////1. í˜„ì¬ ì…ë ¥ ë¬¸ì¥ê³¼ ê°™ì€ ë¬¸ì¥ì„ ì°¾ìŒ
+		/////if(ì°¾ì•˜ì„ë•Œ)
 		//{
-		//	//1-1. »çÀÌ½Ã°£ = ÇöÀç ÀÔ·Â ¹®ÀåÀÇ ÀÔ·Â½Ã°£ - Ã£Àº ¹®ÀåÀÇ ÀÔ·Â½Ã°£
-		//	///if(»çÀÌ½Ã°£ÀÌ ¿ÀÂ÷¹üÁÖ ÀÌ³»ÀÌ¸é)
+		//	//1-1. ì‚¬ì´ì‹œê°„ = í˜„ì¬ ì…ë ¥ ë¬¸ì¥ì˜ ì…ë ¥ì‹œê°„ - ì°¾ì€ ë¬¸ì¥ì˜ ì…ë ¥ì‹œê°„
+		//	///if(ì‚¬ì´ì‹œê°„ì´ ì˜¤ì°¨ë²”ì£¼ ì´ë‚´ì´ë©´)
 		//	{
-		//		//1-1-1. ÇöÀç ÀÔ·Â ¹®ÀåÀÇ ÀÔ·Â ½Ã°£ = Ã£Àº ¹®ÀåÀÇ ÀÔ·Â ½Ã°£
-		//		//1-1-2. ++Ä«¿îÆ®
-		//		///if(Ä«¿îÆ®°¡ ºí·ÏÇØ¾ßÇÒ¸¸Å­ ÀÌ¸é)
+		//		//1-1-1. í˜„ì¬ ì…ë ¥ ë¬¸ì¥ì˜ ì…ë ¥ ì‹œê°„ = ì°¾ì€ ë¬¸ì¥ì˜ ì…ë ¥ ì‹œê°„
+		//		//1-1-2. ++ì¹´ìš´íŠ¸
+		//		///if(ì¹´ìš´íŠ¸ê°€ ë¸”ë¡í•´ì•¼í• ë§Œí¼ ì´ë©´)
 		//		{
-		//			//µµ¹è ÆÇÁ¤!
+		//			//ë„ë°° íŒì •!
 		//		}
 		//	}
 		//}
-		unsigned int uiCnt=0;
+		unsigned int uiCnt = 0;
 		float fCurStrInputTime = fCurTime;
 		float fTermTime = 0.0f;
 		ContInputLog::reverse_iterator kReverse_Iter = m_kLog_Input.rbegin();
-		for(;m_kLog_Input.rend() != kReverse_Iter; ++kReverse_Iter)
+		for (; m_kLog_Input.rend() != kReverse_Iter; ++kReverse_Iter)
 		{
-			if(rkChat == kReverse_Iter->kChat)
-			{//1. ÇöÀç ÀÔ·Â ¹®Àå°ú °°Àº ¹®ÀåÀ» Ã£À½
-				//1-1. »çÀÌ½Ã°£ = ÇöÀç ÀÔ·Â ¹®ÀåÀÇ ÀÔ·Â½Ã°£ - Ã£Àº ¹®ÀåÀÇ ÀÔ·Â½Ã°£
+			if (rkChat == kReverse_Iter->kChat)
+			{//1. í˜„ì¬ ì…ë ¥ ë¬¸ì¥ê³¼ ê°™ì€ ë¬¸ì¥ì„ ì°¾ìŒ
+				//1-1. ì‚¬ì´ì‹œê°„ = í˜„ì¬ ì…ë ¥ ë¬¸ì¥ì˜ ì…ë ¥ì‹œê°„ - ì°¾ì€ ë¬¸ì¥ì˜ ì…ë ¥ì‹œê°„
 				float const fDiffTime = fCurStrInputTime - kReverse_Iter->fInputTime;
-				if(0.0f == fTermTime)
-				{// °°Àº ¹®Àå 2°³ÀÇ Â÷ÀÌ ½Ã°£ 1°³·Î´Â ºĞº°À» ÇÒ¼ö ¾øÀ¸¹Ç·Î Â÷ÀÌ°ª¸¸ ÀúÀåÇÏ°í ´ÙÀ½À» Ã£À½
+				if (0.0f == fTermTime)
+				{// ê°™ì€ ë¬¸ì¥ 2ê°œì˜ ì°¨ì´ ì‹œê°„ 1ê°œë¡œëŠ” ë¶„ë³„ì„ í• ìˆ˜ ì—†ìœ¼ë¯€ë¡œ ì°¨ì´ê°’ë§Œ ì €ì¥í•˜ê³  ë‹¤ìŒì„ ì°¾ìŒ
 					fTermTime = fDiffTime;
 				}
 				else
 				{
-					float const fMinTime = fTermTime-m_fMacroRangeTime;
-					float const fMaxTime = fTermTime+m_fMacroRangeTime;
+					float const fMinTime = fTermTime - m_fMacroRangeTime;
+					float const fMaxTime = fTermTime + m_fMacroRangeTime;
 					//WriteToConsole("Min %2.3f, MaxL %2.3f\n", fMinTime, fMaxTime);
 					//WriteToConsole("Tem %2.3f\n", fTermTime);
 					//WriteToConsole("Dif %2.3f\n", fDiffTime);
-					if(fMinTime <= fDiffTime
+					if (fMinTime <= fDiffTime
 						&& fDiffTime <= fMaxTime)
-					{///»çÀÌ½Ã°£ÀÌ ¿ÀÂ÷¹üÁÖ ÀÌ³»ÀÌ¸é
-						//1-1-2. ++Ä«¿îÆ®
+					{///ì‚¬ì´ì‹œê°„ì´ ì˜¤ì°¨ë²”ì£¼ ì´ë‚´ì´ë©´
+						//1-1-2. ++ì¹´ìš´íŠ¸
 						++uiCnt;
-						if(uiCnt >= m_iMaroCnt)
-						{/// Ä«¿îÆ®°¡ ºí·ÏÇØ¾ßÇÒ¸¸Å­ ÀÌ¸é µµ¹è ÆÇÁ¤!
+						if (uiCnt >= m_iMaroCnt)
+						{/// ì¹´ìš´íŠ¸ê°€ ë¸”ë¡í•´ì•¼í• ë§Œí¼ ì´ë©´ ë„ë°° íŒì •!
 							bBadInput = true;
 							IncBlockChatTime(m_fMacroBlockTime);
-							//WriteToConsole("3Å¸ÀÔ : %f Áõ°¡\n", m_fMacroBlockTime);
+							//WriteToConsole("3íƒ€ì… : %f ì¦ê°€\n", m_fMacroBlockTime);
 							break;
 						}
 					}
 					else
-					{// »çÀÌ½Ã°£ÀÌ °°Áö ¾ÊÀ¸¸é ±×¸¸µÒ
+					{// ì‚¬ì´ì‹œê°„ì´ ê°™ì§€ ì•Šìœ¼ë©´ ê·¸ë§Œë‘ 
 						break;
 					}
 				}
-				//1-1-1. ÇöÀç ÀÔ·Â ¹®ÀåÀÇ ÀÔ·Â ½Ã°£ = Ã£Àº ¹®ÀåÀÇ ÀÔ·Â ½Ã°£
+				//1-1-1. í˜„ì¬ ì…ë ¥ ë¬¸ì¥ì˜ ì…ë ¥ ì‹œê°„ = ì°¾ì€ ë¬¸ì¥ì˜ ì…ë ¥ ì‹œê°„
 				fCurStrInputTime = kReverse_Iter->fInputTime;
 			}
 		}
 		//if(bBadInput)
-		//{// Ã¼Å©ÇÑÈÄ ´Ù½Ã È½¼ö¸¦ Ã¤¿ì°Ô ÇÒÇÊ¿ä´Â ¾øÀ¸¹Ç·Î ÀÏ´Ü Á¦°ÅÇÔ(ÈÄ¿¡ ÇÊ¿äÇÒ¼öµµ?)
+		//{// ì²´í¬í•œí›„ ë‹¤ì‹œ íšŸìˆ˜ë¥¼ ì±„ìš°ê²Œ í• í•„ìš”ëŠ” ì—†ìœ¼ë¯€ë¡œ ì¼ë‹¨ ì œê±°í•¨(í›„ì— í•„ìš”í• ìˆ˜ë„?)
 		//	ContInputLog::iterator itor = m_kLog_Input.begin();
 		//	while(m_kLog_Input.end() != itor)
-		//	{// ¸ğµÎ »èÁ¦
+		//	{// ëª¨ë‘ ì‚­ì œ
 		//		if((*itor) == rkChat)
 		//		{
 		//			itor = m_kLog_Input.erase(itor);
@@ -3409,53 +3428,53 @@ bool PgChatMgrClient::CheckSpamChat(std::wstring const &rkChat)//ÀÔ·Â·Î±× Ãß°¡
 		//}
 		//WriteToConsole("\n\n");
 	}
-	
 
-	if(!bBadInput
+
+	if (!bBadInput
 		&& SpamChkFlag() & ESCS_SameInput)
 	{// Block SameInput
 		unsigned int uiCount = 0;
 		ContInputLog::reverse_iterator kReverse_Iter = m_kLog_Input.rbegin();
-		for(;m_kLog_Input.rend() != kReverse_Iter; ++kReverse_Iter)
+		for (; m_kLog_Input.rend() != kReverse_Iter; ++kReverse_Iter)
 		{
 			float const fDiffTime = fCurTime - kReverse_Iter->fInputTime;
-			if(m_fSameWatchT < fDiffTime)
-			{// m_fSameInputÃÊ ÀÌ³»¿¡
+			if (m_fSameWatchT < fDiffTime)
+			{// m_fSameInputì´ˆ ì´ë‚´ì—
 				break;
 			}
-			if(rkChat == kReverse_Iter->kChat)
+			if (rkChat == kReverse_Iter->kChat)
 			{
 				++uiCount;
-				if(m_iSameCnt <= uiCount && m_fSameWatchT >= fDiffTime)
-				{// 4. °°Àº ÀÔ·ÂÀÌ m_iSameCnt°³ ÀÌ»óÀÌ¸é ±İÁö
+				if (m_iSameCnt <= uiCount && m_fSameWatchT >= fDiffTime)
+				{// 4. ê°™ì€ ì…ë ¥ì´ m_iSameCntê°œ ì´ìƒì´ë©´ ê¸ˆì§€
 					bBadInput = true;
 					IncBlockChatTime(m_fSameBlockTime);
-					//WriteToConsole("4Å¸ÀÔ : %f Áõ°¡\n", m_fSameBlockTime);
+					//WriteToConsole("4íƒ€ì… : %f ì¦ê°€\n", m_fSameBlockTime);
 					break;
 				}
 			}
 		}
 	}
 
-	//¸ğµÎ »ç¿ëÇßÀ¸¹Ç·Î ´Ù½Ã Ãß°¡
+	//ëª¨ë‘ ì‚¬ìš©í–ˆìœ¼ë¯€ë¡œ ë‹¤ì‹œ ì¶”ê°€
 	m_kLog_Input.push_back(kBackEle);
-	
-	float const fElapsedBlockTime = g_pkApp->GetAccumTime() - StartBlockTime();
-	//WriteToConsole("Áö¿¬½Ã°£ : %f\n Block½Ã°£:%f\n\n", fElapsedBlockTime, BlockTime());
 
-	if(bBadInput)
+	float const fElapsedBlockTime = g_pkApp->GetAccumTime() - StartBlockTime();
+	//WriteToConsole("ì§€ì—°ì‹œê°„ : %f\n Blockì‹œê°„:%f\n\n", fElapsedBlockTime, BlockTime());
+
+	if (bBadInput)
 	{
 		SChatLog kChatLog(CT_EVENT);
 		AddMessage(EM_DoNot_Keyboard_Warior, kChatLog, true);
-		StartBlockTime(g_pkApp->GetAccumTime());				//Ã¤ÆÃ ±İÁö ½ÃÀÛ
-		//return ECB_BLOCK;//µµ¹èÀÌ¸é
+		StartBlockTime(g_pkApp->GetAccumTime());				//ì±„íŒ… ê¸ˆì§€ ì‹œì‘
+		//return ECB_BLOCK;//ë„ë°°ì´ë©´
 		return true;
 	}
-	else if(fElapsedBlockTime <= BlockTime())
-	{// µµ¹è·Î ÀÎÇÑ Ã¤ÆÃ ±İÁöÀÌ¸é Ã¤ÆÃÀ» ÇÒ ¼ö ¾øÀ½
+	else if (fElapsedBlockTime <= BlockTime())
+	{// ë„ë°°ë¡œ ì¸í•œ ì±„íŒ… ê¸ˆì§€ì´ë©´ ì±„íŒ…ì„ í•  ìˆ˜ ì—†ìŒ
 		SChatLog kChatLog(CT_EVENT);
 		std::wstring const kFormStr(TTW(790630));
-		wchar_t szBuf[MAX_PATH] ={0,};
+		wchar_t szBuf[MAX_PATH] = { 0, };
 		int const iRemainBlockTime = static_cast<int>(BlockTime() - fElapsedBlockTime);
 		wsprintfW(szBuf, kFormStr.c_str(), iRemainBlockTime);
 		AddLogMessage(kChatLog, szBuf, true);
@@ -3469,33 +3488,33 @@ bool PgChatMgrClient::CheckSpamChat(std::wstring const &rkChat)//ÀÔ·Â·Î±× Ãß°¡
 	return false;
 }
 
-bool PgChatMgrClient::InputChatLog_Get(std::wstring &rkChat, bool bPrev)//ÀÔ·Â·Î±× ¼øÂ÷¾ò±â
+bool PgChatMgrClient::InputChatLog_Get(std::wstring& rkChat, bool bPrev)//ì…ë ¥ë¡œê·¸ ìˆœì°¨ì–»ê¸°
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( m_kLog_InputChat.empty() )
+	if (m_kLog_InputChat.empty())
 	{
 		return false;
 	}
 
-	if(-1 == m_nLog_InputChat_Old)
-	{//Ã³À½ÀÏ ¶§
+	if (-1 == m_nLog_InputChat_Old)
+	{//ì²˜ìŒì¼ ë•Œ
 		rkChat = *m_kLog_InputChatIter;
 		m_nLog_InputChat_Old = bPrev;
 		return true;
 	}
 
-	if(bPrev)
+	if (bPrev)
 	{//Prev(UP)
 		++m_kLog_InputChatIter;
-		if(m_kLog_InputChat.rend() == m_kLog_InputChatIter)
+		if (m_kLog_InputChat.rend() == m_kLog_InputChatIter)
 		{
 			--m_kLog_InputChatIter;
 		}
 	}
 	else
 	{//Next(DOWN)
-		if(m_kLog_InputChat.rbegin() != m_kLog_InputChatIter)
+		if (m_kLog_InputChat.rbegin() != m_kLog_InputChatIter)
 		{
 			--m_kLog_InputChatIter;
 		}
@@ -3513,61 +3532,61 @@ void PgChatMgrClient::InputChatLog_Reset()
 	m_nLog_InputChat_Old = -1;
 }
 
-//ÀÌ¸ğ¼Ç °ü·Ã (Send)
+//ì´ëª¨ì…˜ ê´€ë ¨ (Send)
 bool PgChatMgrClient::SendChat_InputNow(bool bPopup)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
 	BYTE	ChatMode = (BYTE)m_iChatMode;
 
-	if( bPopup )
+	if (bPopup)
 	{
-		switch(m_iChatMode)
+		switch (m_iChatMode)
 		{
-		case CT_NORMAL://ÀÏ¹İÃ¤ÆÃ, ÆÄÆ¼¸¸ º¸³½´Ù.
-			{
-				m_kBallonState = BS_Normal_Open;
-				break;
-			}
+		case CT_NORMAL://ì¼ë°˜ì±„íŒ…, íŒŒí‹°ë§Œ ë³´ë‚¸ë‹¤.
+		{
+			m_kBallonState = BS_Normal_Open;
+			break;
+		}
 		case CT_PARTY:
+		{
+			if (PgClientPartyUtil::IsInParty())
 			{
-				if( PgClientPartyUtil::IsInParty() )
-				{
-					m_kBallonState = BS_Party_Open;
-				}
-				else
-				{
-					return false;
-				}
-			}break;
-		case CT_GUILD:
-			{
-				if( g_kGuildMgr.IamHaveGuild() )
-				{
-					m_kBallonState = BS_Guild_Open;
-				}
-				else
-				{
-					return false;
-				}
-			}break;
-		default:
+				m_kBallonState = BS_Party_Open;
+			}
+			else
 			{
 				return false;
-			};
+			}
+		}break;
+		case CT_GUILD:
+		{
+			if (g_kGuildMgr.IamHaveGuild())
+			{
+				m_kBallonState = BS_Guild_Open;
+			}
+			else
+			{
+				return false;
+			}
+		}break;
+		default:
+		{
+			return false;
+		};
 		}
 	}
 	else
 	{
-		switch( m_kBallonState )
+		switch (m_kBallonState)
 		{
-		case BS_Normal_Open:{ ChatMode = (BYTE)CT_NORMAL;	} break;
-		case BS_Party_Open:	{ ChatMode = (BYTE)CT_PARTY;	} break;
-		case BS_Guild_Open: { ChatMode = (BYTE)CT_GUILD;	} break;
+		case BS_Normal_Open: { ChatMode = (BYTE)CT_NORMAL; } break;
+		case BS_Party_Open: { ChatMode = (BYTE)CT_PARTY; } break;
+		case BS_Guild_Open: { ChatMode = (BYTE)CT_GUILD; } break;
 		default:
-			{
-				return false;
-			} break;
+		{
+			return false;
+		} break;
 		}
 		m_kBallonState = BS_Not_Open;
 	}
@@ -3575,10 +3594,10 @@ bool PgChatMgrClient::SendChat_InputNow(bool bPopup)
 	BM::Stream kPacket(PT_C_M_REQ_CHAT_INPUTNOW);
 	kPacket.Push(ChatMode);
 	kPacket.Push(bPopup);
-	
+
 	NETWORK_SEND(kPacket)
-	
-	return bSendRet;
+
+		return bSendRet;
 }
 
 bool PgChatMgrClient::RecvChat_InputNow(BM::Stream* pkPacket)
@@ -3592,21 +3611,21 @@ bool PgChatMgrClient::RecvChat_InputNow(BM::Stream* pkPacket)
 	pkPacket->Pop(kCharGuid);
 	pkPacket->Pop(cChatMode);
 	pkPacket->Pop(bPopup);
-	
-	PgPilot	*pkPilot = g_kPilotMan.FindPilot(kCharGuid);
-	if(pkPilot)
+
+	PgPilot* pkPilot = g_kPilotMan.FindPilot(kCharGuid);
+	if (pkPilot)
 	{
-		PgActor *pkActor = dynamic_cast<PgActor *>(pkPilot->GetWorldObject());
-		if(pkActor)
+		PgActor* pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
+		if (pkActor)
 		{
-			if(bPopup)
+			if (bPopup)
 			{
 				pkActor->ShowChatBalloon((EChatType)cChatMode, TTW(799251), 0, true);
 				//ShowChatBalloon_InputNow();
 			}
 			else
 			{
-				pkActor->ShowChatBalloon_Clear();//(...)À» °¨Ãá´Ù
+				pkActor->ShowChatBalloon_Clear();//(...)ì„ ê°ì¶˜ë‹¤
 			}
 			return true;
 		}
@@ -3616,16 +3635,16 @@ bool PgChatMgrClient::RecvChat_InputNow(BM::Stream* pkPacket)
 
 bool PgChatMgrClient::Self_InputNow(bool const bPopup, int const iChatMode)
 {
-	PgActor *pkActor = g_kPilotMan.GetPlayerActor();
-	if(pkActor)
+	PgActor* pkActor = g_kPilotMan.GetPlayerActor();
+	if (pkActor)
 	{
-		if(bPopup)
+		if (bPopup)
 		{
 			pkActor->ShowChatBalloon((EChatType)iChatMode, TTW(799251), 0, true);
 		}
 		else
 		{
-			pkActor->ShowChatBalloon_Clear();//(...)À» °¨Ãá´Ù
+			pkActor->ShowChatBalloon_Clear();//(...)ì„ ê°ì¶˜ë‹¤
 		}
 		return true;
 	}
@@ -3634,140 +3653,140 @@ bool PgChatMgrClient::Self_InputNow(bool const bPopup, int const iChatMode)
 
 void PgChatMgrClient::ClearChatBalloon()
 {
-	PgActor *pkActor = g_kPilotMan.GetPlayerActor();
-	if(pkActor)
+	PgActor* pkActor = g_kPilotMan.GetPlayerActor();
+	if (pkActor)
 	{
-		pkActor->ShowChatBalloon_Clear();//(...)À» °¨Ãá´Ù
+		pkActor->ShowChatBalloon_Clear();//(...)ì„ ê°ì¶˜ë‹¤
 	}
 }
 
 //
-void PgChatMgrClient::Character_ChatBallon_Set(BM::GUID &rkCharGuid, std::wstring const &rkWString, int const iChatType)
-{//ÁöÁ¤µÈ GuidÄ³¸¯ÅÍ ¸»Ç³¼± »ğÀÔ
+void PgChatMgrClient::Character_ChatBallon_Set(BM::GUID& rkCharGuid, std::wstring const& rkWString, int const iChatType)
+{//ì§€ì •ëœ Guidìºë¦­í„° ë§í’ì„  ì‚½ì…
 	BM::CAutoMutex kLock(m_kMutex);
 
-	PgPilot	*pkPilot = g_kPilotMan.FindPilot(rkCharGuid);
-	if(pkPilot)
+	PgPilot* pkPilot = g_kPilotMan.FindPilot(rkCharGuid);
+	if (pkPilot)
 	{
-		PgActor *pkActor = dynamic_cast<PgActor *>(pkPilot->GetWorldObject());
-		if(pkActor)
+		PgActor* pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
+		if (pkActor)
 		{
-			switch(iChatType)
+			switch (iChatType)
 			{
-			case CT_NORMAL://ÀÏ¹İ Ã¤ÆÃ¸¸
-			case CT_PARTY://ÆÄÆ¼ Ã¤ÆÃ¸¸
-			case CT_EMOTION://ÀÌ¸ğ¼Ç(´ÜÃàÅ° »ç¿ë)
-			case CT_GUILD:// ±æµå Ã¤ÆÃ¸¸
-				{
-					pkActor->ShowChatBalloon((EChatType)iChatType, rkWString);//¸»Ç³¼± Ç¥½Ã
-				}break;
+			case CT_NORMAL://ì¼ë°˜ ì±„íŒ…ë§Œ
+			case CT_PARTY://íŒŒí‹° ì±„íŒ…ë§Œ
+			case CT_EMOTION://ì´ëª¨ì…˜(ë‹¨ì¶•í‚¤ ì‚¬ìš©)
+			case CT_GUILD:// ê¸¸ë“œ ì±„íŒ…ë§Œ
+			{
+				pkActor->ShowChatBalloon((EChatType)iChatType, rkWString);//ë§í’ì„  í‘œì‹œ
+			}break;
 			default:
-				{//±×¿Ü Ã¤ÆÃÀº Ç¥½Ã ÇÏÁö ¾Ê´Â´Ù.
-				}break;
+			{//ê·¸ì™¸ ì±„íŒ…ì€ í‘œì‹œ í•˜ì§€ ì•ŠëŠ”ë‹¤.
+			}break;
 			}
 		}
 	}
 	return;
 }
 
-//Name 2 Guid °ü·Ã ÇÔ¼ö
-void PgChatMgrClient::Name2Guid_Add(EChatType const eType, std::wstring const &rkCharName, BM::GUID const &rkCharGuid)
+//Name 2 Guid ê´€ë ¨ í•¨ìˆ˜
+void PgChatMgrClient::Name2Guid_Add(EChatType const eType, std::wstring const& rkCharName, BM::GUID const& rkCharGuid)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
 	//ContName2GuidList::value_type *pkNewName2Guid = NULL;
 	ContName2GuidList::iterator result_iter = m_kCache_Name2Guid.end();
 
-	ContName2Guid::const_iterator find_iter1 = m_kLog_Name2Guid.find( rkCharName );
-	ContGuid2Name::const_iterator find_iter2 = m_kLog_Guid2Name.find( rkCharGuid );
-	if( m_kLog_Name2Guid.end() == find_iter1
-	&&	m_kLog_Guid2Name.end() == find_iter2 )
+	ContName2Guid::const_iterator find_iter1 = m_kLog_Name2Guid.find(rkCharName);
+	ContGuid2Name::const_iterator find_iter2 = m_kLog_Guid2Name.find(rkCharGuid);
+	if (m_kLog_Name2Guid.end() == find_iter1
+		&& m_kLog_Guid2Name.end() == find_iter2)
 	{
-		result_iter = m_kCache_Name2Guid.insert( m_kCache_Name2Guid.end(), ContName2GuidList::value_type(eType, rkCharName, rkCharGuid) );
+		result_iter = m_kCache_Name2Guid.insert(m_kCache_Name2Guid.end(), ContName2GuidList::value_type(eType, rkCharName, rkCharGuid));
 	}
 
-	if( m_kCache_Name2Guid.end() != result_iter )
+	if (m_kCache_Name2Guid.end() != result_iter)
 	{
-		std::pair<ContName2Guid::iterator, bool> kRet1 = m_kLog_Name2Guid.insert( std::make_pair(rkCharName, result_iter) );
-		std::pair<ContGuid2Name::iterator, bool> kRet2 = m_kLog_Guid2Name.insert( std::make_pair(rkCharGuid, result_iter) );
+		std::pair<ContName2Guid::iterator, bool> kRet1 = m_kLog_Name2Guid.insert(std::make_pair(rkCharName, result_iter));
+		std::pair<ContGuid2Name::iterator, bool> kRet2 = m_kLog_Guid2Name.insert(std::make_pair(rkCharGuid, result_iter));
 	}
 }
 
-bool PgChatMgrClient::Name2Guid_Find_ByName(std::wstring const &rkCharName, BM::GUID &rkCharGuid) const
+bool PgChatMgrClient::Name2Guid_Find_ByName(std::wstring const& rkCharName, BM::GUID& rkCharGuid) const
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	ContName2Guid::const_iterator find_iter =  m_kLog_Name2Guid.find( rkCharName );
-	if( m_kLog_Name2Guid.end() == find_iter )
+	ContName2Guid::const_iterator find_iter = m_kLog_Name2Guid.find(rkCharName);
+	if (m_kLog_Name2Guid.end() == find_iter)
 	{
 		return false;
 	}
-	ContName2GuidList::value_type const &rkElement = *(*find_iter).second;
+	ContName2GuidList::value_type const& rkElement = *(*find_iter).second;
 	rkCharGuid = rkElement.kCharGuid;
 	return true;
 }
 
-bool PgChatMgrClient::Name2Guid_Find_ByGuid(BM::GUID const &rkCharGuid, std::wstring &rkCharName) const
+bool PgChatMgrClient::Name2Guid_Find_ByGuid(BM::GUID const& rkCharGuid, std::wstring& rkCharName) const
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	ContGuid2Name::const_iterator find_iter = m_kLog_Guid2Name.find( rkCharGuid );
-	if( m_kLog_Guid2Name.end() == find_iter )
+	ContGuid2Name::const_iterator find_iter = m_kLog_Guid2Name.find(rkCharGuid);
+	if (m_kLog_Guid2Name.end() == find_iter)
 	{
 		return false;
 	}
-	ContName2GuidList::value_type const &rkElement = *(*find_iter).second;
+	ContName2GuidList::value_type const& rkElement = *(*find_iter).second;
 	rkCharName = rkElement.kCharName;
 	return true;
 }
 
 PgChatMgrClient::ContName2GuidList::iterator PgChatMgrClient::Name2Guid_Remove(ContName2GuidList::iterator iter)
 {
-	if( m_kCache_Name2Guid.end() == iter )
+	if (m_kCache_Name2Guid.end() == iter)
 	{
 		return iter;
 	}
 
-	ContName2GuidList::value_type const &rkElement = (*iter);
-	m_kLog_Name2Guid.erase( rkElement.kCharName );
-	m_kLog_Guid2Name.erase( rkElement.kCharGuid );
-	return m_kCache_Name2Guid.erase( iter );
+	ContName2GuidList::value_type const& rkElement = (*iter);
+	m_kLog_Name2Guid.erase(rkElement.kCharName);
+	m_kLog_Guid2Name.erase(rkElement.kCharGuid);
+	return m_kCache_Name2Guid.erase(iter);
 }
 
 void PgChatMgrClient::Name2Guid_Remove(EChatType const eType)
 {
 	ContName2GuidList::iterator iter = m_kCache_Name2Guid.begin();
-	while( m_kCache_Name2Guid.end() != iter )
+	while (m_kCache_Name2Guid.end() != iter)
 	{
-		if( eType == (*iter).eType )
+		if (eType == (*iter).eType)
 		{
-			(*iter).eType = CT_NORMAL;//»èÁ¦ ´ë½Å¿¡ ¸ÊÀÌµ¿½Ã »èÁ¦ °¡´ÉÇÑ °ÍÀ¸·Î ¸¸µç´Ù.
+			(*iter).eType = CT_NORMAL;//ì‚­ì œ ëŒ€ì‹ ì— ë§µì´ë™ì‹œ ì‚­ì œ ê°€ëŠ¥í•œ ê²ƒìœ¼ë¡œ ë§Œë“ ë‹¤.
 		}
 		++iter;
 	}
 }
 
-bool PgChatMgrClient::Name2Guid_Remove(BM::GUID const &rkCharGuid)
+bool PgChatMgrClient::Name2Guid_Remove(BM::GUID const& rkCharGuid)
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	ContGuid2Name::const_iterator find_iter = m_kLog_Guid2Name.find( rkCharGuid );
-	if( m_kLog_Guid2Name.end() == find_iter )
+	ContGuid2Name::const_iterator find_iter = m_kLog_Guid2Name.find(rkCharGuid);
+	if (m_kLog_Guid2Name.end() == find_iter)
 	{
 		return false;
 	}
-	Name2Guid_Remove( (*find_iter).second );
+	Name2Guid_Remove((*find_iter).second);
 	return true;
 }
 
-bool PgChatMgrClient::Name2Guid_Remove(std::wstring const &rkCharName)
+bool PgChatMgrClient::Name2Guid_Remove(std::wstring const& rkCharName)
 {
 	BM::CAutoMutex kLock(m_kMutex);
-	ContName2Guid::const_iterator find_iter = m_kLog_Name2Guid.find( rkCharName );
-	if( m_kLog_Name2Guid.end() == find_iter )
+	ContName2Guid::const_iterator find_iter = m_kLog_Name2Guid.find(rkCharName);
+	if (m_kLog_Name2Guid.end() == find_iter)
 	{
 		return false;
 	}
-	Name2Guid_Remove( (*find_iter).second );
+	Name2Guid_Remove((*find_iter).second);
 	return true;
 }
 
@@ -3776,26 +3795,26 @@ void PgChatMgrClient::Name2Guid_Clear()
 	BM::CAutoMutex kLock(m_kMutex);
 
 	ContName2GuidList::iterator iter = m_kCache_Name2Guid.begin();
-	while( m_kCache_Name2Guid.end() != iter )
+	while (m_kCache_Name2Guid.end() != iter)
 	{
-		ContName2GuidList::value_type &rkElement = (*iter);
+		ContName2GuidList::value_type& rkElement = (*iter);
 
-		switch( rkElement.eType )
+		switch (rkElement.eType)
 		{
 		case CT_PARTY:
 		case CT_FRIEND:
 		case CT_GUILD:
-			{
-				// Don't Clear
-			}break;
+		{
+			// Don't Clear
+		}break;
 		default:
-			{
-				m_kLog_Name2Guid.erase( rkElement.kCharName );
-				m_kLog_Guid2Name.erase( rkElement.kCharGuid );
-				iter = m_kCache_Name2Guid.erase( iter );
+		{
+			m_kLog_Name2Guid.erase(rkElement.kCharName);
+			m_kLog_Guid2Name.erase(rkElement.kCharGuid);
+			iter = m_kCache_Name2Guid.erase(iter);
 
-				continue;
-			}break;
+			continue;
+		}break;
 		}
 
 		++iter;
@@ -3804,9 +3823,9 @@ void PgChatMgrClient::Name2Guid_Clear()
 
 
 bool PgChatMgrClient::CheckChatOut()
-{ 
+{
 	BM::CAutoMutex kLock(m_kMutex);
-	return (g_kChatWindow.GethWnd() == NULL)?(false):(true);
+	return (g_kChatWindow.GethWnd() == NULL) ? (false) : (true);
 }
 
 bool PgChatMgrClient::SetChatOutFocus()
@@ -3815,31 +3834,31 @@ bool PgChatMgrClient::SetChatOutFocus()
 	return g_kChatWindow.SetChatOutFocus();
 }
 
-// TabÀ¸·Î ±Ó¼Ó¸» ´ë»ó º¯°æ.
+// Tabìœ¼ë¡œ ê·“ì†ë§ ëŒ€ìƒ ë³€ê²½.
 std::wstring PgChatMgrClient::SetWhisperByTab(void)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	// ±Ó¼Ó¸» ¸®½ºÆ®°¡ ÀÖÀ» ¶§¸¸.
-	if( m_kWhisperList.size() )
+	// ê·“ì†ë§ ë¦¬ìŠ¤íŠ¸ê°€ ìˆì„ ë•Œë§Œ.
+	if (m_kWhisperList.size())
 	{
 		ContWhisper::reverse_iterator rit = m_kWhisperList.rbegin();
-		
-		// ±Ó¼Ó¸» ´ë»óÀÌ ¾øÀ¸¸é ±Ó¼Ó¸» ¸®½ºÆ® ¸ÇÃ³À½ ÀÌ¸§À¸·Î.
-		if( 0 == m_kWhisperTarget.size() )
+
+		// ê·“ì†ë§ ëŒ€ìƒì´ ì—†ìœ¼ë©´ ê·“ì†ë§ ë¦¬ìŠ¤íŠ¸ ë§¨ì²˜ìŒ ì´ë¦„ìœ¼ë¡œ.
+		if (0 == m_kWhisperTarget.size())
 		{
 			return *rit;
 		}
 
-		while( rit != m_kWhisperList.rend() )
+		while (rit != m_kWhisperList.rend())
 		{
-			if( 0 == rit->compare(m_kWhisperTarget) )
+			if (0 == rit->compare(m_kWhisperTarget))
 			{
-				// ÇöÀç ±Ó¼Ó¸» ´ëÈ­ÁßÀÎ ÀÌ¸§ÀÇ ´ÙÀ½À» ¼±ÅÃÇÑ´Ù.
+				// í˜„ì¬ ê·“ì†ë§ ëŒ€í™”ì¤‘ì¸ ì´ë¦„ì˜ ë‹¤ìŒì„ ì„ íƒí•œë‹¤.
 				++rit;
-				
-				// ±Ó¼Ó¸» ¸®½ºÆ®ÀÇ ¸Ç ¸¶Áö¸· ÀÌ¸§ÀÌ¾úÀ¸¸é, ´Ù½Ã Ã³À½À¸·Î.
-				if( rit == m_kWhisperList.rend() )
+
+				// ê·“ì†ë§ ë¦¬ìŠ¤íŠ¸ì˜ ë§¨ ë§ˆì§€ë§‰ ì´ë¦„ì´ì—ˆìœ¼ë©´, ë‹¤ì‹œ ì²˜ìŒìœ¼ë¡œ.
+				if (rit == m_kWhisperList.rend())
 				{
 					rit = m_kWhisperList.rbegin();
 				}
@@ -3857,19 +3876,19 @@ bool PgChatMgrClient::SetWhisperDlg(XUI::CXUI_Wnd* pkWnd)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( m_kWhisperList.size() )
+	if (m_kWhisperList.size())
 	{
 		XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pkWnd->GetControl(_T("LST_SELECT_TYPE")));
-		if( pList )
+		if (pList)
 		{
 			pList->DeleteAllItem();
 			ContWhisper::const_iterator	iter = m_kWhisperList.begin();
 			LONG ItemSizeY = 0;
 
-			while( iter != m_kWhisperList.end() )
+			while (iter != m_kWhisperList.end())
 			{
 				XUI::SListItem* pItem = pList->AddItem(_T("FRM_WHISPER_NAME"));
-				if( pItem )
+				if (pItem)
 				{
 					XUI::CXUI_Wnd* pkItemWnd = pItem->m_pWnd;
 					pkItemWnd->Text((*iter));
@@ -3885,10 +3904,10 @@ bool PgChatMgrClient::SetWhisperDlg(XUI::CXUI_Wnd* pkWnd)
 		}
 
 		XUI::CXUI_Wnd* pChatBar = XUIMgr.Get(_T("ChatBar"));
-		if( pChatBar )
+		if (pChatBar)
 		{
 			XUI::CXUI_Wnd* pTemp = pChatBar->GetControl(_T("BTN_WHISPER"));
-			if( pTemp )
+			if (pTemp)
 			{
 				pkWnd->Location(pChatBar->Location().x + pTemp->Location().x, pChatBar->Location().y + pTemp->Location().y - pkWnd->Size().y);
 			}
@@ -3896,7 +3915,7 @@ bool PgChatMgrClient::SetWhisperDlg(XUI::CXUI_Wnd* pkWnd)
 	}
 	else
 	{
-		//SChatLog kChatLog(CT_EVENT);//Àß¸øµÈ ¸í·É¾î ÀÔ´Ï´Ù.
+		//SChatLog kChatLog(CT_EVENT);//ì˜ëª»ëœ ëª…ë ¹ì–´ ì…ë‹ˆë‹¤.
 		//AddMessage(404006, kChatLog);
 		pkWnd->Close();
 		return true;
@@ -3910,7 +3929,7 @@ PgChatMgrClient::SChatCommand const* PgChatMgrClient::GetCommandType(std::wstrin
 	std::wstring kTemp = Cmd;
 	UPR(kTemp);
 	ContChatCommand::iterator	iter = m_kChatCommand.find(kTemp);
-	if(m_kChatCommand.end() != iter)
+	if (m_kChatCommand.end() != iter)
 	{
 		return &iter->second;
 	}
@@ -3921,11 +3940,11 @@ PgChatMgrClient::SChatCommand const* PgChatMgrClient::GetCommandType(std::wstrin
 PgChatMgrClient::SChatCommand const* PgChatMgrClient::GetCommandTypeToMode(EChatType const Mode)
 {
 	ContChatCommand::iterator	iter = m_kChatCommand.begin();
-	while( iter != m_kChatCommand.end() )
+	while (iter != m_kChatCommand.end())
 	{
-		if( iter->second.eChatType == Mode )
+		if (iter->second.eChatType == Mode)
 		{
-			if( Mode != CT_WHISPER_BYNAME || iter->second.iMinCount != 2)
+			if (Mode != CT_WHISPER_BYNAME || iter->second.iMinCount != 2)
 			{
 				return &iter->second;
 			}
@@ -3939,7 +3958,7 @@ bool PgChatMgrClient::SendChatDlg(std::wstring const& Text)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 	return SendChat(Text, L"");
-//CreateChatDlg()
+	//CreateChatDlg()
 }
 
 
@@ -3947,9 +3966,9 @@ bool PgChatMgrClient::CheckSysCommand(std::wstring const& kText)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( kText[0] == _T('/'))
+	if (kText[0] == _T('/'))
 	{
-		if( kText.size() < 2 )
+		if (kText.size() < 2)
 		{
 			return false;
 		}
@@ -3958,17 +3977,17 @@ bool PgChatMgrClient::CheckSysCommand(std::wstring const& kText)
 		BreakSpace(kText, kVec);
 		std::wstring	kContants;
 
-		SChatCommand const*	kTargetCmd = NULL;
+		SChatCommand const* kTargetCmd = NULL;
 
 		std::vector< std::wstring >::iterator	iter = kVec.begin();
-		if( iter == kVec.end() )
+		if (iter == kVec.end())
 		{
 			return false;
 		}
 
-		if( iter->compare(L"MODE") == 0 )
+		if (iter->compare(L"MODE") == 0)
 		{
-			if( ++iter != kVec.end() )
+			if (++iter != kVec.end())
 			{
 				kTargetCmd = GetCommandTypeToMode((EChatType)_wtoi(iter->c_str()));
 				kVec.erase(iter);
@@ -3980,44 +3999,44 @@ bool PgChatMgrClient::CheckSysCommand(std::wstring const& kText)
 		}
 
 
-		if( !kTargetCmd )
-		{	
+		if (!kTargetCmd)
+		{
 			return false;
 		}
-		switch( kTargetCmd->eChatType )
+		switch (kTargetCmd->eChatType)
 		{
 		case CT_DUEL:
+		{
+			if (kVec.size() < 2)
 			{
-				if( kVec.size() < 2 )
-				{
-					return false;
-				}
+				return false;
+			}
 
-				PgPilot* pkPilot = g_kPilotMan.FindPilot(kVec.at(1));
-				if(pkPilot)
-				{
-					BM::GUID kID = pkPilot->GetGuid();
-					OnClickPvP_ReqDuel( lwGUID(kID) );
-				}
-				else
-				{
-					::Notice_Show_ByTextTableNo(201212, EL_Warning);
-				}
-			}return true;
+			PgPilot* pkPilot = g_kPilotMan.FindPilot(kVec.at(1));
+			if (pkPilot)
+			{
+				BM::GUID kID = pkPilot->GetGuid();
+				OnClickPvP_ReqDuel(lwGUID(kID));
+			}
+			else
+			{
+				::Notice_Show_ByTextTableNo(201212, EL_Warning);
+			}
+		}return true;
 		}
 	}
 	return false;
 
 }
 
-// ½ºÆäÀÌ½º¿¡ ÀÇÇÑ Ã¤ÆÃ ¸ğµå º¯°æ
+// ìŠ¤í˜ì´ìŠ¤ì— ì˜í•œ ì±„íŒ… ëª¨ë“œ ë³€ê²½
 bool PgChatMgrClient::CheckChatCommand(std::wstring const& kText)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( kText[0] == _T('/'))
+	if (kText[0] == _T('/'))
 	{
-		if( kText.size() < 2 )
+		if (kText.size() < 2)
 		{
 			return false;
 		}
@@ -4026,17 +4045,17 @@ bool PgChatMgrClient::CheckChatCommand(std::wstring const& kText)
 		BreakSpace(kText, kVec);
 		std::wstring	kContants;
 
-		SChatCommand const*	kTargetCmd = NULL;
+		SChatCommand const* kTargetCmd = NULL;
 
 		std::vector< std::wstring >::iterator	iter = kVec.begin();
-		if( iter == kVec.end() )
+		if (iter == kVec.end())
 		{
 			return false;
 		}
 
-		if( iter->compare(L"MODE") == 0 )
+		if (iter->compare(L"MODE") == 0)
 		{
-			if( ++iter != kVec.end() )
+			if (++iter != kVec.end())
 			{
 				kTargetCmd = GetCommandTypeToMode((EChatType)_wtoi(iter->c_str()));
 				kVec.erase(iter);
@@ -4048,108 +4067,61 @@ bool PgChatMgrClient::CheckChatCommand(std::wstring const& kText)
 		}
 
 
-		if( !kTargetCmd )
-		{	
+		if (!kTargetCmd)
+		{
 			return false;
 		}
 
 		XUI::CXUI_Wnd* pChatOut = XUIMgr.Get(_T("ChatOut"));
-		if( !pChatOut )
+		if (!pChatOut)
 		{
 			return false;
 		}
 		XUI::CXUI_Wnd* pBtnParent = pChatOut->GetControl(L"CHAT_BG");
-	//	if( !pBtnParent )
-	//	{
-	//		return false;
-	//	}
-		switch( kTargetCmd->eChatType )
+		//	if( !pBtnParent )
+		//	{
+		//		return false;
+		//	}
+		switch (kTargetCmd->eChatType)
 		{
 		case CT_DUEL:
+		{
+			if (kVec.size() < 2)
 			{
-				if( kVec.size() < 2 )
+				return false;
+			}
+		}return true;
+
+		case CT_WHISPER_BYNAME://ì‚¬ìš©ì ì…ë ¥ì€ ì´ê±¸ë¡œ ë“¤ì–´ì˜¨ë‹¤.
+		{
+			if (kTargetCmd->iMinCount != 3)// /r
+			{
+				if (!m_kWhisperList.size())
 				{
 					return false;
 				}
-			}return true;
 
-		case CT_WHISPER_BYNAME://»ç¿ëÀÚ ÀÔ·ÂÀº ÀÌ°É·Î µé¾î¿Â´Ù.
-			{
-				if(kTargetCmd->iMinCount != 3)// /r
+				ContWhisper::reverse_iterator	rit = m_kWhisperList.rbegin();
+				if (rit != m_kWhisperList.rend())
 				{
-					if( !m_kWhisperList.size() )
-					{
-						return false;
-					}
-
-					ContWhisper::reverse_iterator	rit = m_kWhisperList.rbegin();
-					if( rit != m_kWhisperList.rend() )
-					{
-						m_kWhisperTarget = (*rit);
-						m_iChatMode = kTargetCmd->eChatType;
-						if( m_kTextColorList.empty() )
-						{
-							m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
-						}
-						else
-						{
-							ContTextColorList::iterator it = m_kTextColorList.begin();
-							while( it != m_kTextColorList.end() )
-							{
-								if( (*it).eChatType == m_iChatMode )
-								{
-									break;
-								}
-								++it;
-							}
-							if( it == m_kTextColorList.end() )
-							{
-								m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
-							}
-							else
-							{
-								m_iFontColor = (*it).TextColor;
-							}
-						}
-					}
-
-					if( kVec.size() > 1 )
-					{
-						size_t nPos = kText.find(kVec[1], 0);
-						kContants = kText.substr(nPos, kText.size() - nPos);
-					}
-				}
-				else// /w
-				{
-					if( kVec.size() < 2 )
-					{
-						return false;
-					}
-					
-					if( MAX_CHARACTERNAME_LEN < (kVec[1].size() * sizeof(std::wstring::value_type)) )
-					{
-						lwAddWarnDataTT(404024);
-						return true;
-					}
-
-					m_kWhisperTarget = kVec[1];
+					m_kWhisperTarget = (*rit);
 					m_iChatMode = kTargetCmd->eChatType;
-					if( m_kTextColorList.empty() )
+					if (m_kTextColorList.empty())
 					{
 						m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
 					}
 					else
 					{
 						ContTextColorList::iterator it = m_kTextColorList.begin();
-						while( it != m_kTextColorList.end() )
+						while (it != m_kTextColorList.end())
 						{
-							if( (*it).eChatType == m_iChatMode )
+							if ((*it).eChatType == m_iChatMode)
 							{
 								break;
 							}
 							++it;
 						}
-						if( it == m_kTextColorList.end() )
+						if (it == m_kTextColorList.end())
 						{
 							m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
 						}
@@ -4158,39 +4130,45 @@ bool PgChatMgrClient::CheckChatCommand(std::wstring const& kText)
 							m_iFontColor = (*it).TextColor;
 						}
 					}
-
-					PgPlayer *pkPC = g_kPilotMan.GetPlayerUnit();
-					if( pkPC )
-					{
-						InsertWhisper(m_kWhisperTarget, false);
-					}
-					if( kVec.size() > 2 )
-					{
-						size_t nPos = kText.find(kVec[2], 0);
-						kContants = kText.substr(nPos, kText.size() - nPos);
-					}
 				}
-			}break;
-		default: // /p /f /g /s
+
+				if (kVec.size() > 1)
+				{
+					size_t nPos = kText.find(kVec[1], 0);
+					kContants = kText.substr(nPos, kText.size() - nPos);
+				}
+			}
+			else// /w
 			{
-				m_kWhisperTarget = L"";
+				if (kVec.size() < 2)
+				{
+					return false;
+				}
+
+				if (MAX_CHARACTERNAME_LEN < (kVec[1].size() * sizeof(std::wstring::value_type)))
+				{
+					lwAddWarnDataTT(404024);
+					return true;
+				}
+
+				m_kWhisperTarget = kVec[1];
 				m_iChatMode = kTargetCmd->eChatType;
-				if( m_kTextColorList.empty() )
+				if (m_kTextColorList.empty())
 				{
 					m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
 				}
 				else
 				{
 					ContTextColorList::iterator it = m_kTextColorList.begin();
-					while( it != m_kTextColorList.end() )
+					while (it != m_kTextColorList.end())
 					{
-						if( (*it).eChatType == m_iChatMode )
+						if ((*it).eChatType == m_iChatMode)
 						{
 							break;
 						}
 						++it;
 					}
-					if( it == m_kTextColorList.end() )
+					if (it == m_kTextColorList.end())
 					{
 						m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
 					}
@@ -4200,60 +4178,101 @@ bool PgChatMgrClient::CheckChatCommand(std::wstring const& kText)
 					}
 				}
 
-				if( kVec.size() > 1 )
+				PgPlayer* pkPC = g_kPilotMan.GetPlayerUnit();
+				if (pkPC)
 				{
-					size_t nPos = kText.find(kVec[1], 0);
+					InsertWhisper(m_kWhisperTarget, false);
+				}
+				if (kVec.size() > 2)
+				{
+					size_t nPos = kText.find(kVec[2], 0);
 					kContants = kText.substr(nPos, kText.size() - nPos);
 				}
+			}
+		}break;
+		default: // /p /f /g /s
+		{
+			m_kWhisperTarget = L"";
+			m_iChatMode = kTargetCmd->eChatType;
+			if (m_kTextColorList.empty())
+			{
+				m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
+			}
+			else
+			{
+				ContTextColorList::iterator it = m_kTextColorList.begin();
+				while (it != m_kTextColorList.end())
+				{
+					if ((*it).eChatType == m_iChatMode)
+					{
+						break;
+					}
+					++it;
+				}
+				if (it == m_kTextColorList.end())
+				{
+					m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
+				}
+				else
+				{
+					m_iFontColor = (*it).TextColor;
+				}
+			}
 
-				int nChatTab = 1;
-				switch( kTargetCmd->eChatType )
-				{
-				case CT_NORMAL:
-				case CT_TEAM:
-					{
-						nChatTab = 1;
-					}break;
-				case CT_GUILD:
-					{
-						nChatTab = 2;
-					}break;
-				case CT_PARTY:
-					{
-						nChatTab = 3;
-					}break;
-				case CT_TRADE:
-					{
-						nChatTab = 4;
-					}break;
-				default:
-					{
-						nChatTab = 1;
-					}break;
-				}
-				if( pBtnParent )
-				{
-					lua_tinker::call<void, lwUIWnd, int>("ChatMode_FilterSet", lwUIWnd(pBtnParent), nChatTab);
-				}
+			if (kVec.size() > 1)
+			{
+				size_t nPos = kText.find(kVec[1], 0);
+				kContants = kText.substr(nPos, kText.size() - nPos);
+			}
+
+			int nChatTab = 1;
+			switch (kTargetCmd->eChatType)
+			{
+			case CT_NORMAL:
+			case CT_TEAM:
+			{
+				nChatTab = 1;
 			}break;
+			case CT_GUILD:
+			{
+				nChatTab = 2;
+			}break;
+			case CT_PARTY:
+			{
+				nChatTab = 3;
+			}break;
+			case CT_TRADE:
+			{
+				nChatTab = 4;
+			}break;
+			default:
+			{
+				nChatTab = 1;
+			}break;
+			}
+			if (pBtnParent)
+			{
+				lua_tinker::call<void, lwUIWnd, int>("ChatMode_FilterSet", lwUIWnd(pBtnParent), nChatTab);
+			}
+		}break;
 		}
 
-		if( m_kTextColorList.empty() )
+		if (m_kTextColorList.empty())
 		{
 			m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
 		}
 		else
 		{
 			ContTextColorList::iterator it = m_kTextColorList.begin();
-			while( it != m_kTextColorList.end() )
+			while (it != m_kTextColorList.end())
 			{
-				if( (*it).eChatType == m_iChatMode )
+				if ((*it).eChatType == m_iChatMode)
 				{
 					break;
 				}
 				++it;
 			}
-			if( it == m_kTextColorList.end() )
+			if (it == m_kTextColorList.end())
 			{
 				m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
 			}
@@ -4273,145 +4292,145 @@ bool PgChatMgrClient::CheckChatCommand(std::wstring const& kText)
 	return true;
 }
 
-//	Àü¼Û Àü °«Ä¿¸Çµå Ã¼Å©
+//	ì „ì†¡ ì „ ê°“ì»¤ë§¨ë“œ ì²´í¬
 bool PgChatMgrClient::SendChat_Check(std::wstring const& kText, bool const bCheckSpamChat)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( !kText.size() )
+	if (!kText.size())
 	{
 		return true;
 	}
-	
-	if(bCheckSpamChat)
-	{// µµ¹è ÇÊÅÍ¸µ ÇÏÁö ¾Ê´Â °æ¿ì´Â ·Î±×¿¡ ±â¾ïÇÏÁö ¾Ê´Â´Ù
+
+	if (bCheckSpamChat)
+	{// ë„ë°° í•„í„°ë§ í•˜ì§€ ì•ŠëŠ” ê²½ìš°ëŠ” ë¡œê·¸ì— ê¸°ì–µí•˜ì§€ ì•ŠëŠ”ë‹¤
 		InputChatLog_Add(kText);
 	}
-	
-	if( CheckChatCommand( kText ) )
+
+	if (CheckChatCommand(kText))
 	{
 		return false;
 	}
-	if( Command_UserFunction(kText) )
-	{//	Ä¿¸Çµå
+	if (Command_UserFunction(kText))
+	{//	ì»¤ë§¨ë“œ
 		return true;
 	}
-	if( !SendChat_MuteCheck() )
-	{//	Ã¤±İ
+	if (!SendChat_MuteCheck())
+	{//	ì±„ê¸ˆ
 		return true;
 	}
 
-	if(bCheckSpamChat
+	if (bCheckSpamChat
 		&& CheckSpamChat(kText))
-	{// µµ¹èÃ¼Å©¸¦ »ç¿ëÇÏ°í, µµ¹è ÀÌ¸é
+	{// ë„ë°°ì²´í¬ë¥¼ ì‚¬ìš©í•˜ê³ , ë„ë°° ì´ë©´
 		return true;
 	}
 
-	return SendChat_Message(m_iChatMode, XUI::CXUI_Style_String(XUI::PgFontDef(g_kFontMgr.GetCurrentFont()),kText), m_kWhisperTarget);
+	return SendChat_Message(m_iChatMode, XUI::CXUI_Style_String(XUI::PgFontDef(g_kFontMgr.GetCurrentFont()), kText), m_kWhisperTarget);
 }
 bool PgChatMgrClient::SendChat_CheckSS(XUI::CXUI_Style_String const& kText, bool const bCheckSpamChat)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( !kText.Length() )
+	if (!kText.Length())
 	{
-		switch( m_iChatMode )
+		switch (m_iChatMode)
 		{
-			// ±Ó¼Ó¸» »óÅÂ¿¡¼­ ºóÄ­ÀÌ¸é ÀÏ¹İ ´ëÈ­·Î º¯°æ
+			// ê·“ì†ë§ ìƒíƒœì—ì„œ ë¹ˆì¹¸ì´ë©´ ì¼ë°˜ ëŒ€í™”ë¡œ ë³€ê²½
 		case CT_WHISPER_BYGUID:
 		case CT_WHISPER_BYNAME:
+		{
+			std::wstring	kContants(L"");
+			m_kWhisperTarget = L"";
+
+			m_iChatMode = CT_NORMAL;
+			if (m_kTextColorList.empty())
 			{
-				std::wstring	kContants(L"");
-				m_kWhisperTarget = L"";
-				
-				m_iChatMode = CT_NORMAL;
-				if( m_kTextColorList.empty() )
+				m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
+			}
+			else
+			{
+				ContTextColorList::iterator it = m_kTextColorList.begin();
+				while (it != m_kTextColorList.end())
+				{
+					if ((*it).eChatType == m_iChatMode)
+					{
+						break;
+					}
+					++it;
+				}
+				if (it == m_kTextColorList.end())
 				{
 					m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
 				}
 				else
 				{
-					ContTextColorList::iterator it = m_kTextColorList.begin();
-					while( it != m_kTextColorList.end() )
-					{
-						if( (*it).eChatType == m_iChatMode )
-						{
-							break;
-						}
-						++it;
-					}
-					if( it == m_kTextColorList.end() )
-					{
-						m_iFontColor = PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_iChatMode));
-					}
-					else
-					{
-						m_iFontColor = (*it).TextColor;
-					}
+					m_iFontColor = (*it).TextColor;
 				}
+			}
 
-				SetChatControl(CT_NORMAL, m_kWhisperTarget, kContants);
-			} break;
+			SetChatControl(CT_NORMAL, m_kWhisperTarget, kContants);
+		} break;
 		default:
-			{	
-				std::wstring	kContants(L"");
-				
-				SetChatControl((EChatType)m_iChatMode, m_kWhisperTarget, kContants);
-				
-				m_bToggleConsecutiveChat = false;
-			} break;
+		{
+			std::wstring	kContants(L"");
+
+			SetChatControl((EChatType)m_iChatMode, m_kWhisperTarget, kContants);
+
+			m_bToggleConsecutiveChat = false;
+		} break;
 		}
 		return true;
 	}
 
-	switch( m_iChatMode )
+	switch (m_iChatMode)
 	{
 	case CT_TRADE:
+	{
+		// ê±°ë˜ ì±„íŒ…ì€ 30ì´ˆì— í•œë²ˆë§Œ ê°€ëŠ¥.
+		float CurTime = g_pkApp->GetAccumTime();
+		if (CurTime > m_TradeModeChatTime)
 		{
-			// °Å·¡ Ã¤ÆÃÀº 30ÃÊ¿¡ ÇÑ¹ø¸¸ °¡´É.
-			float CurTime = g_pkApp->GetAccumTime();
-			if( CurTime > m_TradeModeChatTime )
-			{
-				m_TradeModeChatTime = g_pkApp->GetAccumTime() + 30;
-			}
-			else
-			{
-				// ¿¡·¯ ¸Ş¼¼Áö(30ÃÊ¿¡ ÇÑ¹ø¸¸ °¡´ÉÇÕ´Ï´Ù).
-				lwAddWarnDataTT(799393);
-				return true;
-			}				
-		}break;
+			m_TradeModeChatTime = g_pkApp->GetAccumTime() + 30;
+		}
+		else
+		{
+			// ì—ëŸ¬ ë©”ì„¸ì§€(30ì´ˆì— í•œë²ˆë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤).
+			lwAddWarnDataTT(799393);
+			return true;
+		}
+	}break;
 	}
-	
-	if(bCheckSpamChat)
-	{// µµ¹è ÇÊÅÍ¸µ ÇÏÁö ¾Ê´Â °æ¿ì´Â ·Î±×¿¡ ±â¾ïÇÏÁö ¾Ê´Â´Ù
+
+	if (bCheckSpamChat)
+	{// ë„ë°° í•„í„°ë§ í•˜ì§€ ì•ŠëŠ” ê²½ìš°ëŠ” ë¡œê·¸ì— ê¸°ì–µí•˜ì§€ ì•ŠëŠ”ë‹¤
 		InputChatLog_Add(kText.GetNormalString());
 	}
-	if( CheckSysCommand( kText.GetOriginalString() ))
+	if (CheckSysCommand(kText.GetOriginalString()))
 	{
 		return true;
 	}
 
-	if( CheckChatCommand( kText.GetOriginalString() ) )
+	if (CheckChatCommand(kText.GetOriginalString()))
 	{
 		return false;
 	}
 
-	//	Ä¿¸Çµå
-	if( Command_UserFunction(kText.GetOriginalString()) )
+	//	ì»¤ë§¨ë“œ
+	if (Command_UserFunction(kText.GetOriginalString()))
 	{
 		return true;
 	}
 
-	//	Ã¤±İ
-	if( !SendChat_MuteCheck() )
+	//	ì±„ê¸ˆ
+	if (!SendChat_MuteCheck())
 	{
 		return true;
 	}
 
-	if(bCheckSpamChat
+	if (bCheckSpamChat
 		&& CheckSpamChat(kText.GetNormalString()))
-	{// µµ¹èÃ¼Å©¸¦ »ç¿ëÇÏ°í µµ¹èÀÌ¸é
+	{// ë„ë°°ì²´í¬ë¥¼ ì‚¬ìš©í•˜ê³  ë„ë°°ì´ë©´
 		return true;
 	}
 
@@ -4420,23 +4439,23 @@ bool PgChatMgrClient::SendChat_CheckSS(XUI::CXUI_Style_String const& kText, bool
 
 bool PgChatMgrClient::SendChat_Message(int const iChatType, XUI::CXUI_Style_String const& kText, std::wstring const& kName)
 {
-	if( g_pkApp->IsSingleMode() )
+	if (g_pkApp->IsSingleMode())
 	{
-		AddLogMessage( SChatLog(CT_NORMAL),kText.GetOriginalString());
+		AddLogMessage(SChatLog(CT_NORMAL), kText.GetOriginalString());
 		return true;
 	}
 
 	BM::CAutoMutex kLock(m_kMutex);
 
 	std::wstring OrginalString = kText.GetOriginalString();
-	XUI::PgExtraDataPackInfo const &kExtraDataPackInfo = kText.GetExtraDataPackInfo();
+	XUI::PgExtraDataPackInfo const& kExtraDataPackInfo = kText.GetExtraDataPackInfo();
 
-	// Ã¤ÆÃ ÅØ½ºÆ®¿¡ '{', 'T', '='°¡ »ç¿ëµÈ ºÎºĞÀÌ ÀÖÀ¸¸é Ã¤ÆÃ ÅÂ±× »ç¿ëÀ¸·Î °£ÁÖÇÔ.
+	// ì±„íŒ… í…ìŠ¤íŠ¸ì— '{', 'T', '='ê°€ ì‚¬ìš©ëœ ë¶€ë¶„ì´ ìˆìœ¼ë©´ ì±„íŒ… íƒœê·¸ ì‚¬ìš©ìœ¼ë¡œ ê°„ì£¼í•¨.
 	bool const UseChatTag = CheckChatTag(OrginalString);
-	if( UseChatTag )
+	if (UseChatTag)
 	{
 		bool IsItemExtraData = IsItemLinkContainData(kExtraDataPackInfo);
-		if (false==IsItemExtraData)
+		if (false == IsItemExtraData)
 		{
 			SChatLog kChatLog((EChatType)CT_EVENT);
 			g_kChatMgrClient.AddMessage(799394, kChatLog, true, 11);
@@ -4446,62 +4465,78 @@ bool PgChatMgrClient::SendChat_Message(int const iChatType, XUI::CXUI_Style_Stri
 
 	BYTE byChatType = static_cast<BYTE>(iChatType);
 
-	BM::Stream	kPacket( PT_C_M_REQ_CHAT );
+	BM::Stream	kPacket(PT_C_M_REQ_CHAT);
 
 	size_t const iWrPos = kPacket.WrPos();
-	kPacket.Push( byChatType );//1
+	kPacket.Push(byChatType);//1
 
-	//	# °è¿­ Ä¿¸àµå(#1,#2,#R...) ¸¦ ÆÄ½ÌÇÏ¿© XUIÀÇ StyleString ¿¡ ¸Â°Ô Ä¡È¯ÇÑ´Ù.
+	//	# ê³„ì—´ ì»¤ë©˜ë“œ(#1,#2,#R...) ë¥¼ íŒŒì‹±í•˜ì—¬ XUIì˜ StyleString ì— ë§ê²Œ ì¹˜í™˜í•œë‹¤.
 	std::wstring kContents = kText.GetOriginalString();
-	//Ä¿¸Çµå°¡ Æ÷ÇÔµÈ ¹®Àå¿¡ ´ëÇÑ ÇÊÅÍ¸µ Ãß°¡
+	//ì»¤ë§¨ë“œê°€ í¬í•¨ëœ ë¬¸ì¥ì— ëŒ€í•œ í•„í„°ë§ ì¶”ê°€
 	TransEmoticonFilter(kContents);
-	if( !g_kUnicodeFilter.IsCorrect(UFFC_CHAT, kContents) )
-	{// »ç¿ë °¡´ÉÇÑ À¯´ÏÄÚµå ¹üÁÖ Ã¼Å©
+	if (!g_kUnicodeFilter.IsCorrect(UFFC_CHAT, kContents))
+	{// ì‚¬ìš© ê°€ëŠ¥í•œ ìœ ë‹ˆì½”ë“œ ë²”ì£¼ ì²´í¬
 		SChatLog kChatLog(CT_EVENT);
 		g_kChatMgrClient.AddMessage(700407, kChatLog, true);
 		return true;
 	}
 
-	Command_Emotion(kContents);//xxx ÀÓ½Ã ÀÌ¸ğ¼Ç °Ë»ç
+	Command_Emotion(kContents);//xxx ì„ì‹œ ì´ëª¨ì…˜ ê²€ì‚¬
 	Command_Filter(kContents);
 
 	kPacket.Push(kContents);//2
-	if( CT_MYHOME_PUBLIC == byChatType || CT_MYHOME_PRIVATE == byChatType )
+	if (CT_MYHOME_PUBLIC == byChatType || CT_MYHOME_PRIVATE == byChatType)
 	{
 		kPacket.Push(lwHomeRenew::GetMyhomeChatFontColor());//3
 	}
 	else
 	{
-		kPacket.Push(m_iFontColor);//3
+		kPacket.Push(PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(byChatType)));//3
 	}
 
 	kExtraDataPackInfo.PushToPacket(kPacket);//4
 
-	//	Ã¤ÆÃ ¸ğµå¿¡ µû¸¥ °Ë»ç.
-	switch( byChatType )
+	//	ì±„íŒ… ëª¨ë“œì— ë”°ë¥¸ ê²€ì‚¬.
+	switch (byChatType)
 	{
 	case CT_WHISPER_BYGUID:
 	case CT_WHISPER_BYNAME:
+	{
+		if (kName.empty())	// ë³´ë‚¼ ì‚¬ëŒ ì´ë¦„ì„ Â›ã¢ì§¸?
 		{
-			if( kName.empty() )	// º¸³¾ »ç¶÷ ÀÌ¸§À» ›§´Â°¡
+			SChatLog kChatLog(CT_EVENT_SYSTEM);
+			AddMessage(EM_Whisper_InputError, kChatLog, true);
+			return true;
+		}
+		else
+		{
+			BM::GUID kRecvGuid;
+			if (Name2Guid_Find_ByName(kName, kRecvGuid))
 			{
-				SChatLog kChatLog(CT_EVENT_SYSTEM);
-				AddMessage(EM_Whisper_InputError, kChatLog, true);
-				return true;
+				if (kRecvGuid != g_kPilotMan.GetPlayerUnit()->GetID())
+				{
+					if (CT_WHISPER_BYGUID != byChatType)
+					{
+						byChatType = CT_WHISPER_BYGUID;
+						kPacket.ModifyData(iWrPos, &byChatType, sizeof(byChatType));
+					}
+					kPacket.Push(kRecvGuid);
+				}
+				else
+				{
+					SChatLog kChatLog(CT_EVENT_SYSTEM);
+					AddMessage(799340, kChatLog, true);
+					return true;
+				}
 			}
 			else
 			{
-				BM::GUID kRecvGuid;
-				if( Name2Guid_Find_ByName(kName, kRecvGuid) )
+				if (CT_WHISPER_BYNAME != byChatType)
 				{
-					if( kRecvGuid != g_kPilotMan.GetPlayerUnit()->GetID() )
+					if (0 != kName.compare(g_kPilotMan.GetPlayerUnit()->Name()))
 					{
-						if ( CT_WHISPER_BYGUID != byChatType )
-						{
-							byChatType = CT_WHISPER_BYGUID;
-							kPacket.ModifyData( iWrPos, &byChatType, sizeof(byChatType) );
-						}
-						kPacket.Push(kRecvGuid);
+						byChatType = CT_WHISPER_BYNAME;
+						kPacket.ModifyData(iWrPos, &byChatType, sizeof(byChatType));
 					}
 					else
 					{
@@ -4510,79 +4545,63 @@ bool PgChatMgrClient::SendChat_Message(int const iChatType, XUI::CXUI_Style_Stri
 						return true;
 					}
 				}
-				else
-				{
-					if ( CT_WHISPER_BYNAME != byChatType )
-					{
-						if( 0 != kName.compare(g_kPilotMan.GetPlayerUnit()->Name()) )
-						{
-							byChatType = CT_WHISPER_BYNAME;
-							kPacket.ModifyData( iWrPos, &byChatType, sizeof(byChatType) );
-						}
-						else
-						{
-							SChatLog kChatLog(CT_EVENT_SYSTEM);
-							AddMessage(799340, kChatLog, true);
-							return true;
-						}
-					}
-					kPacket.Push(kName);
-				}
+				kPacket.Push(kName);
 			}
+		}
 
-			SendChat_InputNow(false);
-		}break;
+		SendChat_InputNow(false);
+	}break;
 	case CT_PARTY:
+	{
+		if (!PgClientPartyUtil::IsInParty())	// íŒŒí‹°ì— ì†í•´ ìˆëŠ”ê°€
 		{
-			if( !PgClientPartyUtil::IsInParty() )	// ÆÄÆ¼¿¡ ¼ÓÇØ ÀÖ´Â°¡
-			{
-				SChatLog kChatLog(CT_EVENT_SYSTEM);
-				AddMessage(22002, kChatLog, true);
-				return true;
-			}
-		}break;
+			SChatLog kChatLog(CT_EVENT_SYSTEM);
+			AddMessage(22002, kChatLog, true);
+			return true;
+		}
+	}break;
 	case CT_GUILD:
+	{
+		if (!g_kGuildMgr.IamHaveGuild())	// ê¸¸ë“œì— ì†í•´ ìˆëŠ”ê°€
 		{
-			if( !g_kGuildMgr.IamHaveGuild() )	// ±æµå¿¡ ¼ÓÇØ ÀÖ´Â°¡
-			{
-				SChatLog kChatLog(CT_EVENT_SYSTEM);
-				AddMessage(700092, kChatLog, true);
-				return true;
-			}
+			SChatLog kChatLog(CT_EVENT_SYSTEM);
+			AddMessage(700092, kChatLog, true);
+			return true;
+		}
 
-			SendChat_InputNow(false);
-		}break;
+		SendChat_InputNow(false);
+	}break;
 	case CT_TEAM:
 	case CT_NORMAL:
 	case CT_EMOTION:
 	case CT_TRADE:
-		{
-		}break;
+	{
+	}break;
 	case CT_FRIEND:
-		{
-			SendChat_InputNow(false);
-		}break;
+	{
+		SendChat_InputNow(false);
+	}break;
 	case CT_MYHOME_PUBLIC:
 	case CT_MYHOME_PRIVATE:
-		{
-		}break;
+	{
+	}break;
 	default:
-		{
-			//	¿©±â´Â À¯Àú°¡ ¾µ ¼ö ¾ø´Ù.
-			PG_ASSERT_LOG( 0 && _T(__FUNCTION__) && _T("Not Support Chat Mode") );
-			return false;
-		}break;
+	{
+		//	ì—¬ê¸°ëŠ” ìœ ì €ê°€ ì“¸ ìˆ˜ ì—†ë‹¤.
+		PG_ASSERT_LOG(0 && _T(__FUNCTION__) && _T("Not Support Chat Mode"));
+		return false;
+	}break;
 	}
 
 	NETWORK_SEND(kPacket)
-	return bSendRet;//ÆĞÅ¶Àü¼Û
+		return bSendRet;//íŒ¨í‚·ì „ì†¡
 }
 
 void PgChatMgrClient::SetChatControl(EChatType const Type, std::wstring const& kName, std::wstring  const& Contants)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	int const MAX_EDIT_SIZE = kChatLoc[ChatStation()].iWidth  - 208;
+	int const MAX_EDIT_SIZE = kChatLoc[ChatStation()].iWidth - 208;
 	int const EDIT_BASE_LOC = 123;
 
 	std::wstring	kHead;
@@ -4590,10 +4609,10 @@ void PgChatMgrClient::SetChatControl(EChatType const Type, std::wstring const& k
 
 	PgChatMgrUtil::HeaderName(Type, kHead, CheckChatOut());
 
-	if(Type == CT_WHISPER_BYNAME)
+	if (Type == CT_WHISPER_BYNAME)
 	{
-		wchar_t	szName[30] = {0,};
-		if( !CheckChatOut() )
+		wchar_t	szName[30] = { 0, };
+		if (!CheckChatOut())
 		{
 			swprintf(szName, 29, kHead.c_str(), kName.c_str());
 			kHead = szName;
@@ -4605,7 +4624,7 @@ void PgChatMgrClient::SetChatControl(EChatType const Type, std::wstring const& k
 	}
 	//kHead += _T(":");
 
-	if( CheckChatOut() )
+	if (CheckChatOut())
 	{
 		kHead = std::wstring(_T("/")) + kHead + _T(" ");
 		g_kChatWindow.SetChatControl(Type, kHead, Color);
@@ -4613,28 +4632,28 @@ void PgChatMgrClient::SetChatControl(EChatType const Type, std::wstring const& k
 	}
 
 	XUI::CXUI_Wnd* pParent = XUIMgr.Get(_T("ChatBar"));
-	if( !pParent )
+	if (!pParent)
 	{
-		return; 
+		return;
 	}
 
 	XUI::CXUI_Wnd* pHead = pParent->GetControl(_T("FRM_HEAD"));
-	if( !pHead )
+	if (!pHead)
 	{
-		return; 
+		return;
 	}
 
 	XUI::CXUI_Edit* pEdit = dynamic_cast<XUI::CXUI_Edit*>(pParent->GetControl(_T("EDT_CHAT")));
-	if( !pEdit )
+	if (!pEdit)
 	{
-		return; 
+		return;
 	}
 
 	XUI::CXUI_Wnd* pTypeBtn = pParent->GetControl(_T("BTN_TELL_TYPE"));
-	if( pTypeBtn )
+	if (pTypeBtn)
 	{
 		std::wstring	kTemp;
-		if(Type == CT_WHISPER_BYNAME)
+		if (Type == CT_WHISPER_BYNAME)
 		{
 			PgChatMgrUtil::HeaderName(CT_WHISPER_BYGUID, kTemp);
 		}
@@ -4645,30 +4664,30 @@ void PgChatMgrClient::SetChatControl(EChatType const Type, std::wstring const& k
 		pTypeBtn->Text(kTemp);
 	}
 
-	switch(Type)
+	switch (Type)
 	{
 	case CT_WHISPER_BYNAME:
-		{
-			kHead += _T(":");
+	{
+		kHead += _T(":");
 
-			pHead->Size(POINT2(MAX_EDIT_SIZE, pHead->Size().y));
-			pHead->Visible(true);
-			pHead->Text(kHead);
-			pHead->FontColor(Color);
+		pHead->Size(POINT2(MAX_EDIT_SIZE, pHead->Size().y));
+		pHead->Visible(true);
+		pHead->Text(kHead);
+		pHead->FontColor(Color);
 
-			XUI::CXUI_Style_String kStyleString = pHead->StyleText();
-			POINT2 const kTextSize(Pg2DString::CalculateOnlySize(kStyleString));
-			pHead->Size(POINT2(kTextSize.x, pHead->Size().y));
+		XUI::CXUI_Style_String kStyleString = pHead->StyleText();
+		POINT2 const kTextSize(Pg2DString::CalculateOnlySize(kStyleString));
+		pHead->Size(POINT2(kTextSize.x, pHead->Size().y));
 
-			pEdit->Location(POINT2(EDIT_BASE_LOC + kTextSize.x, pEdit->Location().y));
-			pEdit->Size(POINT2(MAX_EDIT_SIZE - kTextSize.x, pEdit->Size().y));
-		}break;
+		pEdit->Location(POINT2(EDIT_BASE_LOC + kTextSize.x, pEdit->Location().y));
+		pEdit->Size(POINT2(MAX_EDIT_SIZE - kTextSize.x, pEdit->Size().y));
+	}break;
 	default:
-		{
-			pHead->Visible(false);
-			pEdit->Location(POINT2(EDIT_BASE_LOC, pEdit->Location().y));
-			pEdit->Size(POINT2(MAX_EDIT_SIZE, pEdit->Size().y));
-		}break;
+	{
+		pHead->Visible(false);
+		pEdit->Location(POINT2(EDIT_BASE_LOC, pEdit->Location().y));
+		pEdit->Size(POINT2(MAX_EDIT_SIZE, pEdit->Size().y));
+	}break;
 	}
 	pEdit->EditText(Contants);
 	pEdit->SetEditFocus(true);
@@ -4679,30 +4698,30 @@ bool PgChatMgrClient::SendChat_MuteCheck()
 	BM::CAutoMutex kLock(m_kMutex);
 
 	PgPlayer* pkPlayer = g_kPilotMan.GetPlayerUnit();
-	if( pkPlayer )
+	if (pkPlayer)
 	{
-		CEffect *pkEffect = pkPlayer->GetEffect(EFFECTNO_MUTECHAT);
-		if( pkEffect )	//Ã¤±İµÇ¾úÀ¸¸é
+		CEffect* pkEffect = pkPlayer->GetEffect(EFFECTNO_MUTECHAT);
+		if (pkEffect)	//ì±„ê¸ˆë˜ì—ˆìœ¼ë©´
 		{
 			__int64 const i64NowTime = g_kEventView.GetLocalSecTime(CGameTime::SECOND);
 			__int64 i64EndTime = 0i64;
-			CGameTime::DBTimeEx2SecTime( pkEffect->ExpireTime(), i64EndTime, CGameTime::SECOND );
+			CGameTime::DBTimeEx2SecTime(pkEffect->ExpireTime(), i64EndTime, CGameTime::SECOND);
 
-			__int64 const i64GapTime = std::max( i64EndTime - i64NowTime, 1i64 );
-		
+			__int64 const i64GapTime = std::max(i64EndTime - i64NowTime, 1i64);
+
 			wchar_t wstrTime[50] = L"***";
-			if ( (CGameTime::OneYear / CGameTime::SECOND) >= i64GapTime )
+			if ((CGameTime::OneYear / CGameTime::SECOND) >= i64GapTime)
 			{
 				int iSec = static_cast<int>(i64GapTime % 60i64);
 				int iMin = static_cast<int>(i64GapTime / 60i64);
 				int iHour = iMin / 60;
 				iMin %= 60;
 
-				swprintf(wstrTime, 50, L"%d:%02d:%02d",iHour, iMin, iSec);
+				swprintf(wstrTime, 50, L"%d:%02d:%02d", iHour, iMin, iSec);
 			}
 
 			std::wstring kMessage;
-				
+
 			SChatLog kChatLog(CT_EVENT_SYSTEM);
 			FormatTTW(kMessage, 700122, wstrTime);
 			g_kChatMgrClient.AddLogMessage(kChatLog, kMessage, true, 1);
@@ -4718,19 +4737,19 @@ void PgChatMgrClient::AddDelayLog(SChatLog const& rkLog)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( !rkLog.IsDelayLog() )
+	if (!rkLog.IsDelayLog())
 	{
-		return ;
+		return;
 	}
 
 	ContDelayLogMap::iterator find_iter = m_kDelayLog.find(rkLog.DelayCause());
-	if( m_kDelayLog.end() == find_iter )
+	if (m_kDelayLog.end() == find_iter)
 	{
-		std::pair<ContDelayLogMap::iterator, bool> kRet = m_kDelayLog.insert( std::make_pair(rkLog.DelayCause(), ContDelayLogMap::mapped_type()) );
+		std::pair<ContDelayLogMap::iterator, bool> kRet = m_kDelayLog.insert(std::make_pair(rkLog.DelayCause(), ContDelayLogMap::mapped_type()));
 		find_iter = kRet.first;
 	}
 
-	if( m_kDelayLog.end() != find_iter )
+	if (m_kDelayLog.end() != find_iter)
 	{
 		ContDelayLogMap::mapped_type& rkDelayLog = (*find_iter).second;
 		std::back_inserter(rkDelayLog) = rkLog;
@@ -4741,14 +4760,14 @@ void PgChatMgrClient::FlushDelayLog(EItemModifyParentEventType const eCause)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 	ContDelayLogMap::iterator find_iter = m_kDelayLog.find(eCause);
-	if( m_kDelayLog.end() == find_iter )
+	if (m_kDelayLog.end() == find_iter)
 	{
-		return ;
+		return;
 	}
 
 	ContDelayLogMap::mapped_type const& rkVec = (*find_iter).second;
 	ContDelayLogMap::mapped_type::const_iterator log_iter = rkVec.begin();
-	while( rkVec.end() != log_iter )
+	while (rkVec.end() != log_iter)
 	{
 		ContDelayLog::value_type const& rkDelayLog = (*log_iter);
 		RecvChatLog_Add(rkDelayLog);
@@ -4763,52 +4782,52 @@ void PgChatMgrClient::SetMaxBlockTime(float const fMaxBlockTime)
 }
 
 void PgChatMgrClient::ClearBlockTime()
-{// Ã¤ÆÃ ±İÁö ½Ã°£ ÃÊ±âÈ­
+{// ì±„íŒ… ê¸ˆì§€ ì‹œê°„ ì´ˆê¸°í™”
 	m_fBlockTime = m_fStartBlockTime = 0;
 }
 void PgChatMgrClient::IncBlockChatTime(float const fIncTime)
 {
-	m_fBlockTime+=fIncTime;
-	if(m_fBlockTime > m_fMaxBlockTime)
+	m_fBlockTime += fIncTime;
+	if (m_fBlockTime > m_fMaxBlockTime)
 	{
 		m_fBlockTime = m_fMaxBlockTime;
 	}
 }
 
-void PgChatMgrClient::ChatAram(const std::wstring & strAramSound, const bool bShowNow)
+void PgChatMgrClient::ChatAram(const std::wstring& strAramSound, const bool bShowNow)
 {
 	const UINT64 iNewTime = BM::GetTime64();
-	//10ÃÊ º¸´Ù ¸¹ÀÌ Áö³µ°í, °ÔÀÓ ½ÃÀÛÀÌ ¾Æ´Ï¶ó¸é
-	if( 10000 <= (iNewTime - m_iOldChatTime) || bShowNow)
+	//10ì´ˆ ë³´ë‹¤ ë§ì´ ì§€ë‚¬ê³ , ê²Œì„ ì‹œì‘ì´ ì•„ë‹ˆë¼ë©´
+	if (10000 <= (iNewTime - m_iOldChatTime) || bShowNow)
 	{
-		PgPlayer *pkPlayer = g_kPilotMan.GetPlayerUnit();
-		if(!pkPlayer)
+		PgPlayer* pkPlayer = g_kPilotMan.GetPlayerUnit();
+		if (!pkPlayer)
 		{
 			return;
 		}
 
-		PgPilot	*pkPilot = g_kPilotMan.FindPilot(pkPlayer->GetID());
-		if(pkPilot)
+		PgPilot* pkPilot = g_kPilotMan.FindPilot(pkPlayer->GetID());
+		if (pkPilot)
 		{
-			PgActor *pkActor = dynamic_cast<PgActor *>(pkPilot->GetWorldObject());
-			if(!pkActor)
+			PgActor* pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
+			if (!pkActor)
 			{
-				return;	
+				return;
 			}
-			//Ã¤ÆÃÃ¢ È°¼ºÈ­ ¸»Ç³¼± ¸Ş¼¼Áö Ãâ·Â
+			//ì±„íŒ…ì°½ í™œì„±í™” ë§í’ì„  ë©”ì„¸ì§€ ì¶œë ¥
 			pkActor->ShowChatBalloon(CT_NORMAL, TTW(799250), 10000, true);
 
-			//»ç¿îµå Ãß°¡
-			g_kUISound.PlaySoundByID( strAramSound );
+			//ì‚¬ìš´ë“œ ì¶”ê°€
+			g_kUISound.PlaySoundByID(strAramSound);
 
-			//'¾È³ç' ÀÌ¸ğ¼Ç Ãß°¡
-			PgEmotiMgr::tagEmotion const &kEmotion = g_kPgEmotiMgr.GetEmotion(1);
-			if( CheckCanEmotion(1) && !kEmotion.IsEmpty() )
+			//'ì•ˆë…•' ì´ëª¨ì…˜ ì¶”ê°€
+			PgEmotiMgr::tagEmotion const& kEmotion = g_kPgEmotiMgr.GetEmotion(1);
+			if (CheckCanEmotion(1) && !kEmotion.IsEmpty())
 			{
-				if( !kEmotion.ParamCont().empty() )
+				if (!kEmotion.ParamCont().empty())
 				{
 					PgEmotiMgr::tagEmotion::CONT_PARAM::const_iterator iter = kEmotion.ParamCont().begin();
-					while( iter != kEmotion.ParamCont().end() )
+					while (iter != kEmotion.ParamCont().end())
 					{
 						pkActor->SetParam(MB(iter->second.KEY), MB(iter->second.VAL));
 						++iter;
@@ -4823,7 +4842,7 @@ void PgChatMgrClient::ChatAram(const std::wstring & strAramSound, const bool bSh
 
 void PgChatMgrClient::SetChatOutDefaultPos(POINT2 const& rkPos)
 {
-	if(ECS_COMMON == ChatStation())
+	if (ECS_COMMON == ChatStation())
 	{
 		SetSavedPos(rkPos);
 	}
@@ -4831,7 +4850,7 @@ void PgChatMgrClient::SetChatOutDefaultPos(POINT2 const& rkPos)
 
 void PgChatMgrClient::SetSysChatOutDefaultPos(POINT2 const& rkPos)
 {
-	if( ECS_COMMON == ChatStation() )
+	if (ECS_COMMON == ChatStation())
 	{
 		SetSystemSavedPos(rkPos);
 	}
@@ -4859,14 +4878,14 @@ POINT2 const& PgChatMgrClient::GetSysChatOutDefaultPos() const
 
 void PgChatMgrClient::ApplyChatOutSavedPos(XUI::CXUI_Wnd* pkWnd)
 {
-	if(NULL==pkWnd)
+	if (NULL == pkWnd)
 	{
 		return;
 	}
-	if(ECS_COMMON == ChatStation())
+	if (ECS_COMMON == ChatStation())
 	{
 		POINT2 const& rkSavedPos = GetChatOutDefaultPos();
-		if(-1<rkSavedPos.x && -1<rkSavedPos.y)
+		if (-1 < rkSavedPos.x && -1 < rkSavedPos.y)
 		{
 			pkWnd->Location(rkSavedPos);
 		}
@@ -4876,15 +4895,15 @@ void PgChatMgrClient::ApplyChatOutSavedPos(XUI::CXUI_Wnd* pkWnd)
 
 void PgChatMgrClient::ApplySystemChatOutSavedPos(XUI::CXUI_Wnd* pkWnd)
 {
-	if( NULL == pkWnd )
+	if (NULL == pkWnd)
 	{
 		return;
 	}
 
-	if( ECS_COMMON == ChatStation() )
+	if (ECS_COMMON == ChatStation())
 	{
 		POINT2 const& rkSavedPos = GetSysChatOutDefaultPos();
-		if( -1 < rkSavedPos.x && -1 < rkSavedPos.y )
+		if (-1 < rkSavedPos.x && -1 < rkSavedPos.y)
 		{
 			pkWnd->Location(rkSavedPos);
 			CheckSnapPos(rkSavedPos);
@@ -4896,7 +4915,7 @@ void PgChatMgrClient::ApplySystemChatOutSavedPos(XUI::CXUI_Wnd* pkWnd)
 
 void PgChatMgrClient::ChatStation(EChatStation eStation)
 {
-	if(m_kChatStation!=m_kPastChatStation)
+	if (m_kChatStation != m_kPastChatStation)
 	{
 		m_kPastChatStation = m_kChatStation;
 	}
@@ -4922,13 +4941,13 @@ bool PgChatMgrClient::TogglingConsecutiveChat(void)
 void PgChatMgrClient::ToggleConsecutiveChatUI(void)
 {
 	CXUI_Wnd* pkWnd = XUIMgr.Get(L"ChatBar");
-	if( pkWnd )
+	if (pkWnd)
 	{
-		CXUI_Wnd* pkStroke =  pkWnd->GetControl(L"FRM_TOGGLECHAT");
-		if(pkStroke)
+		CXUI_Wnd* pkStroke = pkWnd->GetControl(L"FRM_TOGGLECHAT");
+		if (pkStroke)
 		{
 			pkStroke->Visible(m_bToggleConsecutiveChat);
-		}	
+		}
 	}
 }
 
@@ -4937,9 +4956,9 @@ void PgChatMgrClient::ShowNotifyConnectInfo(ENotifyConnectInfo const NfyInfo, st
 	BM::CAutoMutex kLock(m_kMutex);
 
 	ContNotifyConnectInfoList::iterator it = m_kNotifyList.begin();
-	while( it != m_kNotifyList.end() )
+	while (it != m_kNotifyList.end())
 	{
-		if( 0 == kName.compare((*it).kName) )
+		if (0 == kName.compare((*it).kName))
 		{
 			return;
 		}
@@ -4950,23 +4969,23 @@ void PgChatMgrClient::ShowNotifyConnectInfo(ENotifyConnectInfo const NfyInfo, st
 	std::wstring kHeader(_T(""));
 	std::wstring kText(_T(""));
 
-	switch(NfyInfo)
+	switch (NfyInfo)
 	{
 	case NCI_FRIEND:
-		{
-			kHeader = _T("{C=0xFF88FF47/}") + TTW(400104);
-		}break;
+	{
+		kHeader = _T("{C=0xFF88FF47/}") + TTW(400104);
+	}break;
 	case NCI_GUILD:
-		{
-			kHeader = _T("{C=0xFFFD90FE/}") + TTW(400106);
-		}break;
+	{
+		kHeader = _T("{C=0xFFFD90FE/}") + TTW(400106);
+	}break;
 	case NCI_COUPLE:
-		{
-			kHeader = _T("{C=0xFFFF8E49/}") + TTW(700519);
-		}break;
+	{
+		kHeader = _T("{C=0xFFFF8E49/}") + TTW(700519);
+	}break;
 	default:
-		{
-		}break;
+	{
+	}break;
 	}
 
 	kText += kHeader + _T(" : ");
@@ -4986,7 +5005,7 @@ BM::GUID& PgChatMgrClient::GetNotifyGuid(void)
 
 void PgChatMgrClient::PopNotifyList(void)
 {
-	if( m_kNotifyList.empty() )
+	if (m_kNotifyList.empty())
 	{
 		return;
 	}
@@ -4998,13 +5017,13 @@ void PgChatMgrClient::ShowNotifyConnectInfoUI(void)
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if( m_kNotifyList.empty() )
+	if (m_kNotifyList.empty())
 	{
 		return;
 	}
 
 	XUI::CXUI_Wnd* pkNfyWnd = XUIMgr.Get(_T("FRM_NFY_CONN"));
-	if( pkNfyWnd )
+	if (pkNfyWnd)
 	{
 		return;
 	}
@@ -5012,7 +5031,7 @@ void PgChatMgrClient::ShowNotifyConnectInfoUI(void)
 	ContNotifyConnectInfoList::iterator it = m_kNotifyList.begin();
 
 	pkNfyWnd = XUIMgr.Call(_T("FRM_NFY_CONN"));
-	if( !pkNfyWnd )
+	if (!pkNfyWnd)
 	{
 		return;
 	}
@@ -5020,47 +5039,47 @@ void PgChatMgrClient::ShowNotifyConnectInfoUI(void)
 	XUI::CXUI_Wnd* pkGuildMarkWnd = pkNfyWnd->GetControl(_T("IMG_GUILD_MARK"));
 	XUI::CXUI_Wnd* pkClassMarkWnd = pkNfyWnd->GetControl(_T("IMG_CLASS"));
 	XUI::CXUI_Wnd* pkCoupleWnd = pkNfyWnd->GetControl(_T("IMG_COUPLE"));
-	if( !pkGuildMarkWnd || !pkClassMarkWnd || !pkCoupleWnd )
+	if (!pkGuildMarkWnd || !pkClassMarkWnd || !pkCoupleWnd)
 	{
 		return;
 	}
 
-	switch( (*it).eNotifyInfo )
+	switch ((*it).eNotifyInfo)
 	{
 	case NCI_FRIEND:
-		{
-			pkGuildMarkWnd->Visible(false);
-			pkClassMarkWnd->Visible(true);
-			pkCoupleWnd->Visible(false);
-		}break;
+	{
+		pkGuildMarkWnd->Visible(false);
+		pkClassMarkWnd->Visible(true);
+		pkCoupleWnd->Visible(false);
+	}break;
 	case NCI_COUPLE:
-		{
-			pkGuildMarkWnd->Visible(false);
-			pkClassMarkWnd->Visible(false);
-			pkCoupleWnd->Visible(true);
-		}break;
+	{
+		pkGuildMarkWnd->Visible(false);
+		pkClassMarkWnd->Visible(false);
+		pkCoupleWnd->Visible(true);
+	}break;
 	case NCI_GUILD:
-		{
-			pkGuildMarkWnd->Visible(true);
-			pkClassMarkWnd->Visible(false);
-			pkCoupleWnd->Visible(false);
-		}break;
+	{
+		pkGuildMarkWnd->Visible(true);
+		pkClassMarkWnd->Visible(false);
+		pkCoupleWnd->Visible(false);
+	}break;
 	default:
-		{
-			pkGuildMarkWnd->Visible(false);
-			pkClassMarkWnd->Visible(false);
-			pkCoupleWnd->Visible(false);
-		}break;
+	{
+		pkGuildMarkWnd->Visible(false);
+		pkClassMarkWnd->Visible(false);
+		pkCoupleWnd->Visible(false);
+	}break;
 	}
 
-	lwSetMiniClassIconIndex( pkClassMarkWnd, (*it).nClassNo );
+	lwSetMiniClassIconIndex(pkClassMarkWnd, (*it).nClassNo);
 
 	(*it).kUVInfo.U = pkGuildMarkWnd->UVInfo().U;
 	(*it).kUVInfo.V = pkGuildMarkWnd->UVInfo().V;
-	pkGuildMarkWnd->UVInfo( (*it).kUVInfo );
+	pkGuildMarkWnd->UVInfo((*it).kUVInfo);
 
 	XUI::CXUI_Wnd* pChild = pkNfyWnd->GetControl(_T("FRM_ID_RECT"));
-	if( pChild)
+	if (pChild)
 	{
 		pChild->SetCustomData((*it).kName.c_str(), sizeof(std::wstring::value_type) * (*it).kName.size());
 		pChild->Text((*it).kName.c_str());
@@ -5071,14 +5090,14 @@ void PgChatMgrClient::ShowNotifyConnectInfoUI(void)
 		pChild->SetInvalidate();
 	}
 
-	pkNfyWnd->Text( (*it).kOutString );
+	pkNfyWnd->Text((*it).kOutString);
 }
 
 void PgChatMgrClient::CheckSnapPos(POINT2 const& rkPos)
 {
 	XUI::CXUI_Wnd* pSysChatOut = XUIMgr.Activate(_T("SysChatOut"));
 	XUI::CXUI_Wnd* pChatOut = XUIMgr.Activate(_T("ChatOut"));
-	if( !pSysChatOut || ! pChatOut )
+	if (!pSysChatOut || !pChatOut)
 	{
 		return;
 	}
@@ -5087,10 +5106,10 @@ void PgChatMgrClient::CheckSnapPos(POINT2 const& rkPos)
 	POINT3I const& rkChatOutLoc = pChatOut->Location();
 	int nHeight = pSysChatOut->Height();
 
-	if( (rkSysChatOutLoc.x < rkChatOutLoc.x + 50) 
+	if ((rkSysChatOutLoc.x < rkChatOutLoc.x + 50)
 		&& (rkSysChatOutLoc.x > rkChatOutLoc.x - 50)
 		&& (rkSysChatOutLoc.y < rkChatOutLoc.y - nHeight + 50)
-		&& (rkSysChatOutLoc.y) > rkChatOutLoc.y - nHeight - 50 )
+		&& (rkSysChatOutLoc.y) > rkChatOutLoc.y - nHeight - 50)
 	{
 		pSysChatOut->Location(POINT2(pChatOut->Location().x, pChatOut->Location().y - pSysChatOut->Size().y - 5));
 		SysChatOutSnap(true);
@@ -5100,12 +5119,13 @@ void PgChatMgrClient::CheckSnapPos(POINT2 const& rkPos)
 void PgChatMgrClient::UseFontColor(unsigned int iColor)
 {
 	ContTextColorList::iterator it = m_kTextColorList.begin();
-	while ( it != m_kTextColorList.end() )
+	while (it != m_kTextColorList.end())
 	{
-		if( (*it).eChatType == m_iChatMode )
+		if ((*it).eChatType == m_iChatMode)
 		{
 			(*it).TextColor = iColor;
 			m_iFontColor = iColor;
+			CustomChatColors::GetInstance().SaveCustomChatColor(static_cast<EChatType>(m_iChatMode), iColor);
 			return;
 		}
 		++it;
@@ -5114,53 +5134,54 @@ void PgChatMgrClient::UseFontColor(unsigned int iColor)
 	STextColorMap kTextColor(m_iChatMode, iColor);
 	m_kTextColorList.push_back(kTextColor);
 	m_iFontColor = iColor;
+	CustomChatColors::GetInstance().SaveCustomChatColor(static_cast<EChatType>(m_iChatMode), iColor);
 }
 
-// À¯Àú°¡ Ã¤ÆÃ Tag¸¦ »ç¿ëÇß´ÂÁö °Ë»ç.
-// Ã¤ÆÃ Tag¸¦ »ç¿ëÇß´Ù¸é º¸³»Áö¸»°í ±×³É ¹«½ÃÇØ¾ß µÊ.
-bool PgChatMgrClient::CheckChatTag(std::wstring const & Text)
+// ìœ ì €ê°€ ì±„íŒ… Tagë¥¼ ì‚¬ìš©í–ˆëŠ”ì§€ ê²€ì‚¬.
+// ì±„íŒ… Tagë¥¼ ì‚¬ìš©í–ˆë‹¤ë©´ ë³´ë‚´ì§€ë§ê³  ê·¸ëƒ¥ ë¬´ì‹œí•´ì•¼ ë¨.
+bool PgChatMgrClient::CheckChatTag(std::wstring const& Text)
 {
-	// '{'·Î ½ÃÀÛÇÏ´Â ºÎºĞÀÌ ÀÖ´ÂÁö °Ë»ç.
+	// '{'ë¡œ ì‹œì‘í•˜ëŠ” ë¶€ë¶„ì´ ìˆëŠ”ì§€ ê²€ì‚¬.
 	std::wstring::size_type TagStartPos = Text.find(_T("{"));
-	if( TagStartPos == std::wstring::npos )
-	{	// '{' ·Î ½ÃÀÛÇÏ´Â ºÎºĞÀÌ ¾øÀ½(Ã¤ÆÃÅÂ±× »ç¿ëÇÏÁö ¾ÊÀ½).
+	if (TagStartPos == std::wstring::npos)
+	{	// '{' ë¡œ ì‹œì‘í•˜ëŠ” ë¶€ë¶„ì´ ì—†ìŒ(ì±„íŒ…íƒœê·¸ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ).
 		return false;
 	}
 
-	// Font³ª Font-Size º¯°æÇÏ·Á´Â °æ¿ì¸¸ ¸·´Â´Ù. { T =
+	// Fontë‚˜ Font-Size ë³€ê²½í•˜ë ¤ëŠ” ê²½ìš°ë§Œ ë§‰ëŠ”ë‹¤. { T =
 	std::wstring::size_type TagTextChangePos = Text.find(_T("T"));
-	if( TagTextChangePos == std::wstring::npos )
-	{	// 'T'¸¦ Æ÷ÇÔÇÏÁö ¾Ê´Â´Ù. (Å©±âº¯È¯)
+	if (TagTextChangePos == std::wstring::npos)
+	{	// 'T'ë¥¼ í¬í•¨í•˜ì§€ ì•ŠëŠ”ë‹¤. (í¬ê¸°ë³€í™˜)
 		TagTextChangePos = Text.find(_T("C"));
-		if( TagTextChangePos == std::wstring::npos )
-		{	// 'C'¸¦ Æ÷ÇÔÇÏÁö ¾Ê´Â´Ù. (ÄÃ·¯º¯È¯)
+		if (TagTextChangePos == std::wstring::npos)
+		{	// 'C'ë¥¼ í¬í•¨í•˜ì§€ ì•ŠëŠ”ë‹¤. (ì»¬ëŸ¬ë³€í™˜)
 			return false;
 		}
 	}
 
-	// '{'°¡ Æ÷ÇÔµÇ¾î ÀÖ´Ù¸é '='°¡ ÀÖ´ÂÁö ´Ù½Ã °Ë»ç.
+	// '{'ê°€ í¬í•¨ë˜ì–´ ìˆë‹¤ë©´ '='ê°€ ìˆëŠ”ì§€ ë‹¤ì‹œ ê²€ì‚¬.
 	std::wstring::size_type TagEndPos = Text.find(_T("="));
-	if( TagEndPos == std::wstring::npos )
-	{	// '{'´Â ÀÖ´Âµ¥ '='°¡ ¾øÀ¸¸é Ã¤ÆÃ ÅÂ±×¸¦ »ç¿ëÇÏÁö ¾Ê´Â °ÍÀ¸·Î °£ÁÖ.
+	if (TagEndPos == std::wstring::npos)
+	{	// '{'ëŠ” ìˆëŠ”ë° '='ê°€ ì—†ìœ¼ë©´ ì±„íŒ… íƒœê·¸ë¥¼ ì‚¬ìš©í•˜ì§€ ì•ŠëŠ” ê²ƒìœ¼ë¡œ ê°„ì£¼.
 		return false;
 	}
 
-	if( (TagStartPos < TagTextChangePos) && (TagTextChangePos < TagEndPos) )
-	{	// Ã¤ÆÃ ÅØ½ºÆ®¿¡ '{', 'T', '='°¡ »ç¿ëµÈ ºÎºĞÀÌ ÀÖÀ¸¸é Ã¤ÆÃ ÅÂ±× »ç¿ëÀ¸·Î °£ÁÖÇÔ.
+	if ((TagStartPos < TagTextChangePos) && (TagTextChangePos < TagEndPos))
+	{	// ì±„íŒ… í…ìŠ¤íŠ¸ì— '{', 'T', '='ê°€ ì‚¬ìš©ëœ ë¶€ë¶„ì´ ìˆìœ¼ë©´ ì±„íŒ… íƒœê·¸ ì‚¬ìš©ìœ¼ë¡œ ê°„ì£¼í•¨.
 		return true;
 	}
-	
-	//T ¹Ù·Î ´ÙÀ½¿¡ '=' ºÙ¾úÀ» °æ¿ì¿£ ÆùÆ® Å©±â º¯°æÀÌ´Ù. 'T' ¿Í '=' »çÀÌÀÇ °ø¹éÀº ¹«½ÃÇØ¾ß ÇÑ´Ù.
-	std::wstring::size_type Tag_T_Pos = (TagTextChangePos+1);
-	while( Tag_T_Pos != std::wstring::npos )
+
+	//T ë°”ë¡œ ë‹¤ìŒì— '=' ë¶™ì—ˆì„ ê²½ìš°ì—” í°íŠ¸ í¬ê¸° ë³€ê²½ì´ë‹¤. 'T' ì™€ '=' ì‚¬ì´ì˜ ê³µë°±ì€ ë¬´ì‹œí•´ì•¼ í•œë‹¤.
+	std::wstring::size_type Tag_T_Pos = (TagTextChangePos + 1);
+	while (Tag_T_Pos != std::wstring::npos)
 	{
 		wchar_t const szWord = Text.at(Tag_T_Pos);
-		if( szWord == L' ' )
+		if (szWord == L' ')
 		{
 			++Tag_T_Pos;
 			continue;
 		}
-		if( szWord == L'=' )
+		if (szWord == L'=')
 		{
 			return true;
 		}
@@ -5173,34 +5194,34 @@ bool PgChatMgrClient::CheckChatTag(std::wstring const & Text)
 	return false;
 }
 
-void PgChatMgrClient::Regist_ChatBlockUser(std::wstring & Name)
+void PgChatMgrClient::Regist_ChatBlockUser(std::wstring& Name)
 {
 	BM::CAutoMutex Lock(m_kMutex);
 
-	PgPlayer * pPlayer = g_kPilotMan.GetPlayerUnit();
-	if( !pPlayer )
+	PgPlayer* pPlayer = g_kPilotMan.GetPlayerUnit();
+	if (!pPlayer)
 	{
 		return;
 	}
 
-	if( Name.empty() )
+	if (Name.empty())
 	{
 		return;
 	}
 
-	if( Name == pPlayer->Name() )
-	{	// ÀÚ±â ÀÚ½ÅÀº Ãß°¡ÇÒ ¼ö ¾ø´Ù.
+	if (Name == pPlayer->Name())
+	{	// ìê¸° ìì‹ ì€ ì¶”ê°€í•  ìˆ˜ ì—†ë‹¤.
 		BM::vstring vText(TTW(404027));
 		SChatLog ChatLog(CT_EVENT_SYSTEM);
 		AddLogMessage(ChatLog, vText, true, 1);
 		return;
 	}
 
-	if( PgClientPartyUtil::IsInParty() )
-	{	// ÆÄÆ¼ ¸â¹ö´Â Â÷´Ü ÇÒ ¼ö ¾ø´Ù.
-		SPartyMember const * pMember = NULL;
-		if( g_kParty.GetMember(Name, pMember) )
-		{	// ÆÄÆ¼ ¸â¹ö¿¡ Æ÷ÇÔµÈ Ä³¸¯ÅÍ´Ù.
+	if (PgClientPartyUtil::IsInParty())
+	{	// íŒŒí‹° ë©¤ë²„ëŠ” ì°¨ë‹¨ í•  ìˆ˜ ì—†ë‹¤.
+		SPartyMember const* pMember = NULL;
+		if (g_kParty.GetMember(Name, pMember))
+		{	// íŒŒí‹° ë©¤ë²„ì— í¬í•¨ëœ ìºë¦­í„°ë‹¤.
 			BM::vstring vText(TTW(404028));
 			SChatLog ChatLog(CT_EVENT_SYSTEM);
 			AddLogMessage(ChatLog, vText, true, 1);
@@ -5208,21 +5229,21 @@ void PgChatMgrClient::Regist_ChatBlockUser(std::wstring & Name)
 		}
 	}
 
-	if( m_MyChatBlockList.size() >= MAX_BLOCKCHAT_LIST )
-	{	// ´õÀÌ»ó Ãß°¡ÇÒ ¼ö ¾ø´Ù.
+	if (m_MyChatBlockList.size() >= MAX_BLOCKCHAT_LIST)
+	{	// ë”ì´ìƒ ì¶”ê°€í•  ìˆ˜ ì—†ë‹¤.
 		BM::vstring vText(TTW(404026));
 		SChatLog ChatLog(CT_EVENT_SYSTEM);
 		AddLogMessage(ChatLog, vText, true, 1);
 		return;
 	}
-	
-	// Ã³À½ Ãß°¡ ÇÒ ¶§´Â ±âº»À¸·Î ¸ğµç Ã¤ÆÃÀ» Â÷´Ü.
+
+	// ì²˜ìŒ ì¶”ê°€ í•  ë•ŒëŠ” ê¸°ë³¸ìœ¼ë¡œ ëª¨ë“  ì±„íŒ…ì„ ì°¨ë‹¨.
 	BYTE BlockType = ECBT_BOTH;
 
-	// Â÷´Ü ¸®½ºÆ®¿¡ Ãß°¡.
+	// ì°¨ë‹¨ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€.
 	bool bDuplicate = CheckChatBlockList(Name);
-	if( bDuplicate )
-	{	// ÀÌ¹Ì Â÷´Ü µÈ Ä³¸¯ÅÍ.
+	if (bDuplicate)
+	{	// ì´ë¯¸ ì°¨ë‹¨ ëœ ìºë¦­í„°.
 		BM::vstring vText(TTW(404025));
 		vText.Replace(L"#Name#", Name);
 		SChatLog ChatLog(CT_EVENT_SYSTEM);
@@ -5230,7 +5251,7 @@ void PgChatMgrClient::Regist_ChatBlockUser(std::wstring & Name)
 		return;
 	}
 
-	// ¼­¹ö·Î Â÷´Ü Á¤º¸ ÆĞÅ¶ º¸³¿.
+	// ì„œë²„ë¡œ ì°¨ë‹¨ ì •ë³´ íŒ¨í‚· ë³´ëƒ„.
 	BM::Stream Packet(PT_C_M_REQ_REGIST_CHAT_BLOCK);
 	Packet.Push(Name);
 	Packet.Push(BlockType);
@@ -5238,14 +5259,14 @@ void PgChatMgrClient::Regist_ChatBlockUser(std::wstring & Name)
 	NETWORK_SEND(Packet);
 }
 
-void PgChatMgrClient::UnRegist_ChatBlockUser(std::wstring & Name)
+void PgChatMgrClient::UnRegist_ChatBlockUser(std::wstring& Name)
 {
 	BM::CAutoMutex Lock(m_kMutex);
-	
-	// Â÷´Ü ¸®½ºÆ®¿¡ ÀÖ´ÂÁö È®ÀÎ.
+
+	// ì°¨ë‹¨ ë¦¬ìŠ¤íŠ¸ì— ìˆëŠ”ì§€ í™•ì¸.
 	bool bExist = CheckChatBlockList(Name);
-	if( !bExist )
-	{	// ¸ñ·Ï¿¡ ¾ø´Âµ¥ »èÁ¦ ½Ãµµ.
+	if (!bExist)
+	{	// ëª©ë¡ì— ì—†ëŠ”ë° ì‚­ì œ ì‹œë„.
 		BM::vstring vText(TTW(404038));
 		SChatLog ChatLog(CT_EVENT_SYSTEM);
 		AddLogMessage(ChatLog, vText, true, 1);
@@ -5254,30 +5275,30 @@ void PgChatMgrClient::UnRegist_ChatBlockUser(std::wstring & Name)
 
 	RemoveChatBlockList(Name);
 
-	// ¼­¹ö·Î Â÷´Ü Á¤º¸ ÆĞÅ¶ º¸³¿.
+	// ì„œë²„ë¡œ ì°¨ë‹¨ ì •ë³´ íŒ¨í‚· ë³´ëƒ„.
 	BM::Stream Packet(PT_C_M_REQ_UNREGIST_CHAT_BLOCK);
 	Packet.Push(Name);
 
 	NETWORK_SEND(Packet);
 }
 
-void PgChatMgrClient::Modify_ChatBlockMode(std::wstring & Name, BYTE BlockMode)
+void PgChatMgrClient::Modify_ChatBlockMode(std::wstring& Name, BYTE BlockMode)
 {
 	BM::CAutoMutex Lock(m_kMutex);
-	
+
 	BYTE SendBlockType = 0;
-	// Â÷´Ü ¸®½ºÆ®¿¡ ÀÖ´ÂÁö È®ÀÎ.
+	// ì°¨ë‹¨ ë¦¬ìŠ¤íŠ¸ì— ìˆëŠ”ì§€ í™•ì¸.
 	bool bExist = ModifyChatBlockList(Name, BlockMode, SendBlockType);
-	if( !bExist )
-	{	// ¸ñ·Ï¿¡ ¾ø´Âµ¥ º¯°æ ½Ãµµ.
-		// ¸ñ·Ï¿¡ ¾ø´Âµ¥ »èÁ¦ ½Ãµµ.
+	if (!bExist)
+	{	// ëª©ë¡ì— ì—†ëŠ”ë° ë³€ê²½ ì‹œë„.
+		// ëª©ë¡ì— ì—†ëŠ”ë° ì‚­ì œ ì‹œë„.
 		BM::vstring vText(TTW(404038));
 		SChatLog ChatLog(CT_EVENT_SYSTEM);
 		AddLogMessage(ChatLog, vText, true, 1);
 		return;
 	}
 
-	// ¼­¹ö·Î Â÷´Ü ¿É¼Ç º¯°æ ÆĞÅ¶ º¸³¿.
+	// ì„œë²„ë¡œ ì°¨ë‹¨ ì˜µì…˜ ë³€ê²½ íŒ¨í‚· ë³´ëƒ„.
 	BM::Stream Packet(PT_C_M_REQ_CHANGE_CHAT_BLOCK_OPTION);
 	Packet.Push(Name);
 	Packet.Push(SendBlockType);
@@ -5285,58 +5306,58 @@ void PgChatMgrClient::Modify_ChatBlockMode(std::wstring & Name, BYTE BlockMode)
 	NETWORK_SEND(Packet);
 }
 
-void PgChatMgrClient::UpdateChatBlockList(XUI::CXUI_Wnd * pWnd)
+void PgChatMgrClient::UpdateChatBlockList(XUI::CXUI_Wnd* pWnd)
 {
 	BM::CAutoMutex Lock(m_kMutex);
 
-	if( NULL == pWnd )
+	if (NULL == pWnd)
 	{
 		return;
 	}
 
-	XUI::CXUI_List * pList = dynamic_cast<XUI::CXUI_List*>(pWnd->GetControl(L"LST_BLOCK_LIST"));
-	if( NULL == pList )
+	XUI::CXUI_List* pList = dynamic_cast<XUI::CXUI_List*>(pWnd->GetControl(L"LST_BLOCK_LIST"));
+	if (NULL == pList)
 	{
 		return;
 	}
 
 	pList->ClearList();
-	
+
 	int ListNum = 0;
 	CONT_BLOCKCHAT_LIST::const_iterator list_iter = m_MyChatBlockList.begin();
-	for( ; list_iter != m_MyChatBlockList.end() ; ++list_iter)
+	for (; list_iter != m_MyChatBlockList.end(); ++list_iter)
 	{
-		XUI::SListItem * pItem = pList->AddItem(L"");	// »õ·Î¿î Ç×¸ñ Ãß°¡.
-		if( pItem )
+		XUI::SListItem* pItem = pList->AddItem(L"");	// ìƒˆë¡œìš´ í•­ëª© ì¶”ê°€.
+		if (pItem)
 		{
-			XUI::CXUI_Wnd * pItemWnd = pItem->m_pWnd;
-			if( pItemWnd )
+			XUI::CXUI_Wnd* pItemWnd = pItem->m_pWnd;
+			if (pItemWnd)
 			{
 				pItemWnd->SetCustomData((list_iter->first).c_str(), sizeof(std::wstring::value_type) * (list_iter->first.size()));
 				++ListNum;
 
-				XUI::CXUI_Form * pName = dynamic_cast<XUI::CXUI_Form *>(pItemWnd->GetControl(L"FRM_BLOCK_NAME"));
-				if( pName )
+				XUI::CXUI_Form* pName = dynamic_cast<XUI::CXUI_Form*>(pItemWnd->GetControl(L"FRM_BLOCK_NAME"));
+				if (pName)
 				{
 					std::wstring CharName = list_iter->first;
 					pName->Text(CharName);
 				}
 
-				XUI::CXUI_CheckButton * pNormalBtn = dynamic_cast<XUI::CXUI_CheckButton *>(pItemWnd->GetControl(L"CHK_BLOCK_NORMAL"));
-				if( pNormalBtn )
+				XUI::CXUI_CheckButton* pNormalBtn = dynamic_cast<XUI::CXUI_CheckButton*>(pItemWnd->GetControl(L"CHK_BLOCK_NORMAL"));
+				if (pNormalBtn)
 				{
 					pNormalBtn->Check(false);
-					if( (list_iter->second & ECBT_NORMAL) )
+					if ((list_iter->second & ECBT_NORMAL))
 					{
 						pNormalBtn->Check(true);
 					}
 				}
 
-				XUI::CXUI_CheckButton * pWorldBtn = dynamic_cast<XUI::CXUI_CheckButton *>(pItemWnd->GetControl(L"CHK_BLOCK_WORLD"));
-				if( pWorldBtn )
+				XUI::CXUI_CheckButton* pWorldBtn = dynamic_cast<XUI::CXUI_CheckButton*>(pItemWnd->GetControl(L"CHK_BLOCK_WORLD"));
+				if (pWorldBtn)
 				{
 					pWorldBtn->Check(false);
-					if( (list_iter->second & ECBT_CASHCHAT) )
+					if ((list_iter->second & ECBT_CASHCHAT))
 					{
 						pWorldBtn->Check(true);
 					}
@@ -5346,26 +5367,26 @@ void PgChatMgrClient::UpdateChatBlockList(XUI::CXUI_Wnd * pWnd)
 	}
 }
 
-void PgChatMgrClient::SetChatBlockList(CONT_BLOCKCHAT_LIST & BlockList)
+void PgChatMgrClient::SetChatBlockList(CONT_BLOCKCHAT_LIST& BlockList)
 {
 	BM::CAutoMutex Lock(m_kMutex);
 
 	m_MyChatBlockList.swap(BlockList);
 }
 
-void PgChatMgrClient::GetChatBlockList(CONT_BLOCKCHAT_LIST & BlockList)
+void PgChatMgrClient::GetChatBlockList(CONT_BLOCKCHAT_LIST& BlockList)
 {
 	BM::CAutoMutex Lock(m_kMutex);
 
 	BlockList.insert(m_MyChatBlockList.begin(), m_MyChatBlockList.end());
 }
 
-bool PgChatMgrClient::CheckChatBlockCharacter(std::wstring & CharName, EChatBlockType BlockType)
+bool PgChatMgrClient::CheckChatBlockCharacter(std::wstring& CharName, EChatBlockType BlockType)
 {
 	CONT_BLOCKCHAT_LIST::iterator find_iter = m_MyChatBlockList.find(CharName);
-	if( find_iter != m_MyChatBlockList.end() )
+	if (find_iter != m_MyChatBlockList.end())
 	{
-		if( find_iter->second & BlockType )
+		if (find_iter->second & BlockType)
 		{
 			return true;
 		}
@@ -5374,34 +5395,34 @@ bool PgChatMgrClient::CheckChatBlockCharacter(std::wstring & CharName, EChatBloc
 	return false;
 }
 
-bool PgChatMgrClient::CheckChatBlockList(std::wstring & CharName)
-{	// Â÷´Ü ¸®½ºÆ®¿¡ µî·Ï µÇ¾î ÀÖ´ÂÁö È®ÀÎ.
-	CONT_BLOCKCHAT_LIST::iterator find_iter = m_MyChatBlockList.find( CharName );
-	if( find_iter != m_MyChatBlockList.end() )
-	{	// Ã£¾ÒÀ¸¸é true.
+bool PgChatMgrClient::CheckChatBlockList(std::wstring& CharName)
+{	// ì°¨ë‹¨ ë¦¬ìŠ¤íŠ¸ì— ë“±ë¡ ë˜ì–´ ìˆëŠ”ì§€ í™•ì¸.
+	CONT_BLOCKCHAT_LIST::iterator find_iter = m_MyChatBlockList.find(CharName);
+	if (find_iter != m_MyChatBlockList.end())
+	{	// ì°¾ì•˜ìœ¼ë©´ true.
 		return true;
 	}
-	// ¾øÀ¸¸é false.
+	// ì—†ìœ¼ë©´ false.
 	return false;
 }
 
-bool PgChatMgrClient::AddChatBlockList(std::wstring & CharName, BYTE BlockType)
+bool PgChatMgrClient::AddChatBlockList(std::wstring& CharName, BYTE BlockType)
 {
-	std::pair<CONT_BLOCKCHAT_LIST::iterator, bool> ret = m_MyChatBlockList.insert( std::make_pair(CharName, BlockType) );
-	
+	std::pair<CONT_BLOCKCHAT_LIST::iterator, bool> ret = m_MyChatBlockList.insert(std::make_pair(CharName, BlockType));
+
 	return ret.second;
 }
 
-void PgChatMgrClient::RemoveChatBlockList(std::wstring & CharName)
+void PgChatMgrClient::RemoveChatBlockList(std::wstring& CharName)
 {
 	m_MyChatBlockList.erase(CharName);
 }
 
-bool PgChatMgrClient::ModifyChatBlockList(std::wstring & CharName, BYTE BlockType, BYTE & ModifyBlockType)
-{	// Ã¤ÆÃ Â÷´Ü ¹æ¹ı º¯°æ.
-	CONT_BLOCKCHAT_LIST::iterator find_iter = m_MyChatBlockList.find( CharName );
-	if( find_iter != m_MyChatBlockList.end() )
-	{	// Ã£¾Æ¼­ º¯°æ.
+bool PgChatMgrClient::ModifyChatBlockList(std::wstring& CharName, BYTE BlockType, BYTE& ModifyBlockType)
+{	// ì±„íŒ… ì°¨ë‹¨ ë°©ë²• ë³€ê²½.
+	CONT_BLOCKCHAT_LIST::iterator find_iter = m_MyChatBlockList.find(CharName);
+	if (find_iter != m_MyChatBlockList.end())
+	{	// ì°¾ì•„ì„œ ë³€ê²½.
 		find_iter->second = find_iter->second ^ BlockType;
 		ModifyBlockType = find_iter->second;
 		return true;
@@ -5410,90 +5431,90 @@ bool PgChatMgrClient::ModifyChatBlockList(std::wstring & CharName, BYTE BlockTyp
 	return false;
 }
 
-bool PgChatMgrClient::CheckChattingOption(SChatLog const & ChatLog, PgChatMgrUtil::CChatLogList const & ChatLogList)
+bool PgChatMgrClient::CheckChattingOption(SChatLog const& ChatLog, PgChatMgrUtil::CChatLogList const& ChatLogList)
 {
-	if( (ChatStation() == ECS_PVPLOBBY) || (ChatStation() == ECS_CASHSHOP) )
-	{	// PvP·ÎºñÀÌ°Å³ª Ä³½Ã¼¥ »óÅÂ¿¡¼­´Â ½Ã½ºÅÛ Ã¢ Ç¥½Ã À¯¹« ¿É¼Ç°ú, ´Ù¸¥ ÅÇÀÇ ¿É¼Ç¿¡ µû¶ó Ãâ·ÂÇØÁÙ ³»¿ëÀÌ ´Ù¸£´Ù.
-		if( (ChatLog.ChatType() > CT_USERSELECT_MAX)
+	if ((ChatStation() == ECS_PVPLOBBY) || (ChatStation() == ECS_CASHSHOP))
+	{	// PvPë¡œë¹„ì´ê±°ë‚˜ ìºì‹œìƒµ ìƒíƒœì—ì„œëŠ” ì‹œìŠ¤í…œ ì°½ í‘œì‹œ ìœ ë¬´ ì˜µì…˜ê³¼, ë‹¤ë¥¸ íƒ­ì˜ ì˜µì…˜ì— ë”°ë¼ ì¶œë ¥í•´ì¤„ ë‚´ìš©ì´ ë‹¤ë¥´ë‹¤.
+		if ((ChatLog.ChatType() > CT_USERSELECT_MAX)
 			&& (ChatLog.ChatType() != CT_WHISPER_BYGUID)
-			&& (ChatLog.ChatType() != CT_TRADE) )
-		{	// ½Ã½ºÅÛ ¸Ş¼¼ÁöÀÇ °æ¿ì..
+			&& (ChatLog.ChatType() != CT_TRADE))
+		{	// ì‹œìŠ¤í…œ ë©”ì„¸ì§€ì˜ ê²½ìš°..
 			int SysOutConfigValue = lwConfig_GetValue("SYSTEMOUT_OPTION", "SYSTEMOUT_WINDOW");
 			int ChatOutConfigValue = lwConfig_GetValue("CHATMODE_NORMAL", "FILTER_SYSTEM");
-			if( 2 == SysOutConfigValue || 2 == ChatOutConfigValue )
-			{	// ½Ã½ºÅÛ ¸Ş¼¼Áö Ã¢ÀÌ ÄÑÁ® ÀÖ°Å³ª, ÀÏ¹İÃ¤ÆÃÃ¢¿¡ ½Ã½ºÅÛ¸Ş¼¼Áö ¿É¼ÇÀÌ ÄÑÁ®ÀÖ´Â °æ¿ì¿¡¸¸ Ãâ·Â.
+			if (2 == SysOutConfigValue || 2 == ChatOutConfigValue)
+			{	// ì‹œìŠ¤í…œ ë©”ì„¸ì§€ ì°½ì´ ì¼œì ¸ ìˆê±°ë‚˜, ì¼ë°˜ì±„íŒ…ì°½ì— ì‹œìŠ¤í…œë©”ì„¸ì§€ ì˜µì…˜ì´ ì¼œì ¸ìˆëŠ” ê²½ìš°ì—ë§Œ ì¶œë ¥.
 				return true;
 			}
 		}
 		else
-		{	// ´Ù¸¥ Å¸ÀÔÀÇ ¸Ş¼¼Áö´Â ÀÚ½ÅÀÇ Ã¤ÆÃÅÇ¿¡¼­ ¿É¼ÇÀ» È®ÀÎÇÑ ÈÄ¿¡ ÀÏ¹İ Ã¤ÆÃ·Î±×·Î Ãâ·Â½ÃÅ²´Ù.
-			// ÇØ´ç ÅÇÀÇ ¿É¼Ç Áß ÀÚ½ÅÀÇ ¿É¼Ç¸¸ È®ÀÎ(±æµåÅÇÀÌ¸é ±æµå¸Ş¼¼Áö ¿É¼ÇÀÌ ÄÑÁ®ÀÖ´ÂÁö¸¸ º»´Ù).
+		{	// ë‹¤ë¥¸ íƒ€ì…ì˜ ë©”ì„¸ì§€ëŠ” ìì‹ ì˜ ì±„íŒ…íƒ­ì—ì„œ ì˜µì…˜ì„ í™•ì¸í•œ í›„ì— ì¼ë°˜ ì±„íŒ…ë¡œê·¸ë¡œ ì¶œë ¥ì‹œí‚¨ë‹¤.
+			// í•´ë‹¹ íƒ­ì˜ ì˜µì…˜ ì¤‘ ìì‹ ì˜ ì˜µì…˜ë§Œ í™•ì¸(ê¸¸ë“œíƒ­ì´ë©´ ê¸¸ë“œë©”ì„¸ì§€ ì˜µì…˜ì´ ì¼œì ¸ìˆëŠ”ì§€ë§Œ ë³¸ë‹¤).
 			int ConfigValue = 0;
-			switch( ChatLog.ChatType() )
+			switch (ChatLog.ChatType())
 			{
 			case CT_NORMAL:
 			case CT_FRIEND:
 			case CT_TEAM:
 			case CT_WHISPER_BYGUID:
 			case CT_WHISPER_BYNAME:
-				{
-					ConfigValue = lwConfig_GetValue("CHATMODE_NORMAL", "FILTER_NORMAL");
-				}break;
+			{
+				ConfigValue = lwConfig_GetValue("CHATMODE_NORMAL", "FILTER_NORMAL");
+			}break;
 			case CT_PARTY:
-				{
-					ConfigValue = lwConfig_GetValue("CHATMODE_PARTY", "FILTER_PARTY");
-				}break;
+			{
+				ConfigValue = lwConfig_GetValue("CHATMODE_PARTY", "FILTER_PARTY");
+			}break;
 			case CT_GUILD:
-				{
-					ConfigValue = lwConfig_GetValue("CHATMODE_GUILD", "FILTER_GUILD");
-				}break;
+			{
+				ConfigValue = lwConfig_GetValue("CHATMODE_GUILD", "FILTER_GUILD");
+			}break;
 			case CT_TRADE:
-				{
-					ConfigValue = lwConfig_GetValue("CHATMODE_TRADE", "FILTER_TRADE");
-				}break;
+			{
+				ConfigValue = lwConfig_GetValue("CHATMODE_TRADE", "FILTER_TRADE");
+			}break;
 			default:
-				{
-					ConfigValue = 2;
-				}break;
+			{
+				ConfigValue = 2;
+			}break;
 			}
 
-			if( 2 == ConfigValue )
+			if (2 == ConfigValue)
 			{
 				return true;
 			}
 		}
 	}
 	else
-	{	// ÀÏ¹İ »óÅÂ³ª ¸¶ÀÌÈ¨¿¡¼­ÀÇ Ã¤ÆÃÀº ±âÁ¸°ú µ¿ÀÏÇÔ.
+	{	// ì¼ë°˜ ìƒíƒœë‚˜ ë§ˆì´í™ˆì—ì„œì˜ ì±„íŒ…ì€ ê¸°ì¡´ê³¼ ë™ì¼í•¨.
 		return ChatLogList.CmpFilterFlag(ChatLog.ChatFlag());
 	}
 
 	return false;
 }
 
-void PgChatMgrClient::LoveModeMessageDelay(std::wstring & Message, int nLevel)
+void PgChatMgrClient::LoveModeMessageDelay(std::wstring& Message, int nLevel)
 {
 	PgChatMgrUtil::ContNoticeLevelColor::iterator iter = PgChatMgrUtil::kContNoticeLevelColor.find(nLevel);
-	if( PgChatMgrUtil::kContNoticeLevelColor.end() == iter )
+	if (PgChatMgrUtil::kContNoticeLevelColor.end() == iter)
 	{
 		iter = PgChatMgrUtil::kContNoticeLevelColor.find(0);//Default
 	}
 
-	PgChatMgrUtil::ContNoticeLevelColor::mapped_type & NoticeColor = (*iter).second;
+	PgChatMgrUtil::ContNoticeLevelColor::mapped_type& NoticeColor = (*iter).second;
 
-	m_kNoticeWaitList.push( SNoticeWaitItem(Message, NoticeColor) );
+	m_kNoticeWaitList.push(SNoticeWaitItem(Message, NoticeColor));
 }
 
-bool PgChatMgrClient::IsItemLinkContainData(XUI::PgExtraDataPackInfo const &rkExtraDataPackInfo) const
+bool PgChatMgrClient::IsItemLinkContainData(XUI::PgExtraDataPackInfo const& rkExtraDataPackInfo) const
 {
 	size_t const extraDataCount = rkExtraDataPackInfo.GetExtraDataPackCount();
 	for (size_t i = 0; i < extraDataCount; ++i)
 	{
 		PgExtraDataPack const* pInfo = rkExtraDataPackInfo.GetExtraDataPack(i);
 		CONT_EXTRA_DATA::const_iterator it = pInfo->m_kExtraDataCont.begin();
-		while(pInfo->m_kExtraDataCont.end() != it)
+		while (pInfo->m_kExtraDataCont.end() != it)
 		{
-			if((*it).m_kType==LINK_EDT_ITEM)
+			if ((*it).m_kType == LINK_EDT_ITEM)
 			{
 				return true;
 			}

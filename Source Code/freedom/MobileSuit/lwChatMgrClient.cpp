@@ -257,7 +257,7 @@ void lwChatMgrClient::AddLogMessage(lwWString kContents, bool bNotice, int iLeve
 }
 unsigned int lwChatMgrClient::GetFontColor()
 {
-	return m_pkChatMgrClient->FontColor();
+	return PgChatMgrUtil::ChatInputColor(static_cast<EChatType>(m_pkChatMgrClient->ChatMode()));
 }
 void lwChatMgrClient::SetFontColor(unsigned int iColor)
 {
