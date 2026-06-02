@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 #define DIRECTINPUT_VERSION (0x0800)
 
@@ -6,6 +6,7 @@
 #include "XUI_Manager.h"
 
 extern CS::CCSIME g_kMultiIME;
+bool TryGetCustomChatBarCaretPos(XUI::CXUI_Edit* pChatEditControl, std::wstring const& wstrInputText, CS::CARETDATA const& rkData, POINT2 const& kBaseCaretPos, int iWrapWidth, int iDefaultLineHeight, POINT2& kOutCaretPos);
 
 using namespace XUI;
 
@@ -17,8 +18,7 @@ CXUI_Edit_MultiLine::CXUI_Edit_MultiLine(void)
 	NoWordWrap(false);
 }
 CXUI_Edit_MultiLine::~CXUI_Edit_MultiLine(void)
-{
-}
+{}
 
 void CXUI_Edit_MultiLine::VRegistAttr(std::wstring const& wstrName, std::wstring const& wstrValue)
 {
@@ -29,7 +29,7 @@ void CXUI_Edit_MultiLine::VRegistAttr(std::wstring const& wstrName, std::wstring
 	if (ATTR_EDIT_MULTI_LINE_COUNT == wstrName)
 	{
 		int iVal = (int)vValue;
-		if(iVal)
+		if (iVal)
 		{
 			MultiLineCount(iVal);
 		}
@@ -37,10 +37,10 @@ void CXUI_Edit_MultiLine::VRegistAttr(std::wstring const& wstrName, std::wstring
 }
 
 void CXUI_Edit_MultiLine::VOnClose()
-{	
+{
 	CXUI_Edit::DelGroupEdit(this);
 	CXUI_Wnd::VOnClose();
-	if( CXUI_Edit::GetFocusedEdit() == this )
+	if (CXUI_Edit::GetFocusedEdit() == this)
 	{
 		CXUI_Edit::SetFocusedEdit(NULL);
 	}
@@ -52,9 +52,9 @@ void CXUI_Edit_MultiLine::VOnClose()
 	g_kMultiIME.SetString();
 }
 
-bool CXUI_Edit_MultiLine::VOnTick( DWORD const dwCurTime )
+bool CXUI_Edit_MultiLine::VOnTick(DWORD const dwCurTime)
 {
-	if ( !CXUI_Wnd::VOnTick(dwCurTime) )
+	if (!CXUI_Wnd::VOnTick(dwCurTime))
 	{
 		return false;
 	}
@@ -66,6 +66,14 @@ bool CXUI_Edit_MultiLine::VOnTick( DWORD const dwCurTime )
 	XUI::CXUI_Font* pFont = g_kFontMgr.GetFont(EditFont());
 
 	m_wstrInputText = g_kMultiIME.GetResultStr();
+	if (m_iLimitLength > 0 && static_cast<int>(m_wstrInputText.length()) > m_iLimitLength)
+	{
+		m_wstrInputText.erase(m_iLimitLength);
+		g_kMultiIME.SetLimitLength(m_iLimitLength, false);
+		g_kMultiIME.SetString(m_wstrInputText);
+		g_kMultiIME.SetCaretPos(__min(Data.iSelectStart, m_iLimitLength), __min(Data.iSelectEnd, m_iLimitLength));
+		Data = g_kMultiIME.GetCaretPos();
+	}
 
 	std::wstring szRealText;
 	m_bIsSame = false;
@@ -76,9 +84,9 @@ bool CXUI_Edit_MultiLine::VOnTick( DWORD const dwCurTime )
 		Text(m_wstrRealString);
 	}
 
-	if( GetFocusedEdit() == this && m_spWndMouseFocus == this )
+	if (GetFocusedEdit() == this && m_spWndMouseFocus == this)
 	{
-		if( dwCurTime - CarotBlinkTime() > 400 )	//±ôºýÀÓ ¼ÓµµÁ¶Àý
+		if (dwCurTime - CarotBlinkTime() > 400)	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
 		{
 			CarotBlink(!CarotBlink());
 			CarotBlinkTime(dwCurTime);
@@ -94,7 +102,7 @@ bool CXUI_Edit_MultiLine::VDisplay()
 
 	TextPos(EditTextPos());
 
-	if(!CXUI_Wnd::VDisplay() ){return false;}
+	if (!CXUI_Wnd::VDisplay()) { return false; }
 
 	CS::CARETDATA Data = g_kMultiIME.GetCaretPos();
 
@@ -141,11 +149,11 @@ bool CXUI_Edit_MultiLine::VDisplay()
 	//m_spRenderer->RenderText(kRenderTextInfo);
 
 
-	if( GetFocusedEdit() == this && m_spWndMouseFocus == this )	//±Û¸¸ Àû¾î³õ°í ´Ù¸¥ À©µµ¿ì¸¦ Å¬¸¯ÇÒ ¼ö ÀÖÀ¸¹Ç·Î m_spWndMouseFocusµµ Ã¼Å©ÇØ¾ß ÇÔ
+	if (GetFocusedEdit() == this && m_spWndMouseFocus == this)	//ï¿½Û¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ì¸¦ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ m_spWndMouseFocusï¿½ï¿½ Ã¼Å©ï¿½Ø¾ï¿½ ï¿½ï¿½
 	{
-		RenderBlock(szRealText);//±ÛÀÚ ºí·° Ãâ·Â
+		RenderBlock(szRealText);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
-		if(CarotBlink())
+		if (CarotBlink())
 		{
 			POINT2 kCaretPos = CalcCaretPos(m_wstrInputText, Data, pFont, iLine);
 			RenderCarot(kCaretPos);
@@ -155,21 +163,21 @@ bool CXUI_Edit_MultiLine::VDisplay()
 	return true;
 }
 
-int const CXUI_Edit_MultiLine::MakeEditString(std::wstring & Val, int const iCarot)
+int const CXUI_Edit_MultiLine::MakeEditString(std::wstring& Val, int const iCarot)
 {
 	int iLineCount = 1;
-	if( m_wstrInputText.empty() )
+	if (m_wstrInputText.empty())
 	{
 		m_kVecLine.clear();
 		m_wstrRealString.clear();
 		return iLineCount;
 	}
 
-	if( m_wstrInputText == m_wstrPastInputText && m_wstrInputText.size() == m_wstrPastInputText.size() && m_iPastCarotPos == iCarot && !m_wstrRealString.empty())
-	{	//ÅØ½ºÆ®¿Í ÄÉ·µ À§Ä¡°¡ º¯°æµÇÁö ¾Ê¾ÒÀ» ¶§ ¶Ç °è»êÀ» ÇØ ÁÖÁö ¾Ê°Ô ÇÏ±â À§ÇØ.
+	if (m_wstrInputText == m_wstrPastInputText && m_wstrInputText.size() == m_wstrPastInputText.size() && m_iPastCarotPos == iCarot && !m_wstrRealString.empty())
+	{	//ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½É·ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		Val = m_wstrRealString;
 		iLineCount = GetLineCount(Val, iCarot);
-		if(iLineCount>MultiLineCount())
+		if (iLineCount > MultiLineCount())
 		{
 			iLineCount = MultiLineCount();
 		}
@@ -179,17 +187,17 @@ int const CXUI_Edit_MultiLine::MakeEditString(std::wstring & Val, int const iCar
 		return iLineCount;
 	}
 
-	CarotBlink(true); 
+	CarotBlink(true);
 	CarotBlinkTime(BM::GetTime32());
 
 	XUI::CXUI_Font* pFont = g_kFontMgr.GetFont(EditFont());
 
 	m_kVecLine.clear();
 
-	pFont->CalcWidthAddReturn(m_wstrInputText, Val, m_kVecLine, m_Size.x - EditTextPos().x); 
+	pFont->CalcWidthAddReturn(m_wstrInputText, Val, m_kVecLine, m_Size.x - EditTextPos().x);
 	int iNewLineCount = GetLineCount(Val, iCarot);
 	size_t kVecCount = m_kVecLine.size();
-	if(MultiLineCount()<kVecCount)
+	if (MultiLineCount() < kVecCount)
 	{
 		Val.clear();
 		Val = m_kOldVal;
@@ -209,29 +217,29 @@ int const CXUI_Edit_MultiLine::MakeEditString(std::wstring & Val, int const iCar
 
 	//m_wstrInputText = Val;
 	m_wstrRealString = Val;
-	
+
 	return iNewLineCount;
 }
 
-void CXUI_Edit_MultiLine::RenderBlock(std::wstring & Val)
+void CXUI_Edit_MultiLine::RenderBlock(std::wstring& Val)
 {
 	XUI::CXUI_Font* pFont = g_kFontMgr.GetFont(EditFont());
 
-	if( ! CXUI_Edit::m_spTextBlockBgImg ){return;}
-	if( m_wstrInputText.empty() ){return;}
+	if (!CXUI_Edit::m_spTextBlockBgImg) { return; }
+	if (m_wstrInputText.empty()) { return; }
 
 	CS::CARETDATA const Data = g_kMultiIME.GetCaretPos();
 
-	if( Data.iSelectStart == Data.iSelectEnd ){return;}//¼±ÅÃ ¿µ¿ª ¾øÀ½.
+	if (Data.iSelectStart == Data.iSelectEnd) { return; }//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
-	POINT3I pt = TotalLocation()+EditTextPos();
+	POINT3I pt = TotalLocation() + EditTextPos();
 
 	SRenderInfo kRenderInfo;
 
 	kRenderInfo.bGrayScale = GrayScale();
 
-	SSizedScale &rSS = kRenderInfo.kSizedScale;
-	rSS.ptSrcSize = POINT2(128,12);//xxx todo ÇÏµåÄÚµù
+	SSizedScale& rSS = kRenderInfo.kSizedScale;
+	rSS.ptSrcSize = POINT2(128, 12);//xxx todo ï¿½Ïµï¿½ï¿½Úµï¿½
 	kRenderInfo.fAlpha = Alpha();
 	m_siBlockImgIdx = -2;
 
@@ -245,29 +253,29 @@ void CXUI_Edit_MultiLine::RenderBlock(std::wstring & Val)
 	POINT2 ptPos = pt;
 
 	int const add = 2;
-	int iMax = __min(iLineCount -1, (int)m_kVecLine.size());
+	int iMax = __min(iLineCount - 1, (int)m_kVecLine.size());
 	for (int i = 0; i < iMax; ++i)
 	{
-		iStartPos-=(int)(m_kVecLine[i].m_kWstr.length());
+		iStartPos -= (int)(m_kVecLine[i].m_kWstr.length());
 		if (m_kVecLine[i].m_bReturn)
 		{
-			iStartPos-=add;
+			iStartPos -= add;
 		}
 	}
 
-	while (iBlockLen>0 && iLineCount - 1 < (int)m_kVecLine.size())
+	while (iBlockLen > 0 && iLineCount - 1 < (int)m_kVecLine.size())
 	{
-		int iEndPos = __min((int)(m_kVecLine[iLineCount-1].m_kWstr.length()), iStartPos + iBlockLen);
-		std::wstring wstrSub = m_kVecLine[iLineCount-1].m_kWstr.substr(iStartPos, iEndPos - iStartPos);
+		int iEndPos = __min((int)(m_kVecLine[iLineCount - 1].m_kWstr.length()), iStartPos + iBlockLen);
+		std::wstring wstrSub = m_kVecLine[iLineCount - 1].m_kWstr.substr(iStartPos, iEndPos - iStartPos);
 		int iSubLen = pFont->CalcWidth(wstrSub);
 		int iFrontLen = 0;
 		if (iStartPos > 0)
 		{
-			iFrontLen = pFont->CalcWidth(m_kVecLine[iLineCount-1].m_kWstr.substr(0, iStartPos));
+			iFrontLen = pFont->CalcWidth(m_kVecLine[iLineCount - 1].m_kWstr.substr(0, iStartPos));
 		}
 		ptPos = pt;
-		ptPos.x+=iFrontLen;
-		ptPos.y+=(iLineCount-1)*pFont->GetHeight();
+		ptPos.x += iFrontLen;
+		ptPos.y += (iLineCount - 1) * pFont->GetHeight();
 
 		ptSize.x = iSubLen;
 
@@ -276,14 +284,14 @@ void CXUI_Edit_MultiLine::RenderBlock(std::wstring & Val)
 			rSS.ptDrawSize = ptSize;
 			kRenderInfo.kLoc = ptPos;
 			GetParentDrawRect(kRenderInfo.rcDrawable);
-			m_spRenderer->RenderSprite( CXUI_Edit::m_spTextBlockBgImg, m_siBlockImgIdx, kRenderInfo);
+			m_spRenderer->RenderSprite(CXUI_Edit::m_spTextBlockBgImg, m_siBlockImgIdx, kRenderInfo);
 			m_siBlockImgIdx = -1;
 		}
 
 		iBlockLen -= (int)wstrSub.length();
-		if (m_kVecLine[iLineCount-1].m_bReturn)
+		if (m_kVecLine[iLineCount - 1].m_bReturn)
 		{
-			iBlockLen-=add;
+			iBlockLen -= add;
 		}
 		iStartPos = 0;
 		++iLineCount;
@@ -292,66 +300,71 @@ void CXUI_Edit_MultiLine::RenderBlock(std::wstring & Val)
 
 POINT2 CXUI_Edit_MultiLine::CalcCaretPos(std::wstring const& wstrReal, CS::CARETDATA const& rkData, XUI::CXUI_Font* pFont, int const iLine)
 {
-	POINT2 ptLastPos = TotalLocation()+EditTextPos();
+	POINT2 ptLastPos = TotalLocation() + EditTextPos();
+	POINT2 kCustomCaretPos = ptLastPos;
+	if (TryGetCustomChatBarCaretPos(this, m_wstrInputText, rkData, ptLastPos, m_Size.x - EditTextPos().x, pFont ? pFont->GetHeight() : 0, kCustomCaretPos))
+	{
+		return kCustomCaretPos;
+	}
 
 	if (!wstrReal.empty())
 	{
 		std::wstring szFront;
-		ptLastPos.y+=(pFont->GetHeight()*(iLine-1));
-		
-		if( !m_wstrInputText.empty() )
+		ptLastPos.y += (pFont->GetHeight() * (iLine - 1));
+
+		if (!m_wstrInputText.empty())
 		{
 			if (!m_kVecLine.empty())
 			{
-				int iLen = __min((int)wstrReal.length(), rkData.iCaretPos-m_iStartTextPos);
-				int iMinLine = __min(iLine - 1 , (int)m_kVecLine.size() - 1);
+				int iLen = __min((int)wstrReal.length(), rkData.iCaretPos - m_iStartTextPos);
+				int iMinLine = __min(iLine - 1, (int)m_kVecLine.size() - 1);
 				int iMinLen = 0;
 
-				for(int i = 0; i < iMinLine; ++i)
+				for (int i = 0; i < iMinLine; ++i)
 				{
 					iLen = iLen - (int)(m_kVecLine[i].m_kWstr.length());
 					if (m_kVecLine[i].m_bReturn)
 					{
-						iLen-=2;
+						iLen -= 2;
 					}
 				}
 
 				iLen = __max(0, iLen);
 
-				iMinLen = __min(iLen , (int)(m_kVecLine[iMinLine].m_kWstr.size()));
-				for(int i = 0; i < iMinLen; ++i)
+				iMinLen = __min(iLen, (int)(m_kVecLine[iMinLine].m_kWstr.size()));
+				for (int i = 0; i < iMinLen; ++i)
 				{
 					wchar_t wC = m_kVecLine[iMinLine].m_kWstr[i];
-					szFront+=wC;
+					szFront += wC;
 				}
 			}
 
-			ptLastPos.x+= pFont->CalcWidth(szFront);//¾à°£ ¾ÕÀ¸·Î ´ç°ÜÁà¾ß ÇÔ
+			ptLastPos.x += pFont->CalcWidth(szFront);//ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		}
 	}
 
 	return ptLastPos;
-} 
+}
 
-void CXUI_Edit_MultiLine::MoveCarotToClickPos(int &iStart, int &iEnd)
+void CXUI_Edit_MultiLine::MoveCarotToClickPos(int& iStart, int& iEnd)
 {
-	if( m_wstrInputText.empty() )
+	if (m_wstrInputText.empty())
 	{
-		g_kMultiIME.SetCaretPos(0,0);
-		return; 
+		g_kMultiIME.SetCaretPos(0, 0);
+		return;
 	}
 
-	if( iStart < m_iStartTextPos )
+	if (iStart < m_iStartTextPos)
 	{
 		iStart = m_iStartTextPos;
 	}
 
-	if( iStart > m_iEndTextPos )
+	if (iStart > m_iEndTextPos)
 	{
 		iEnd = m_iEndTextPos;
 	}
 
-	g_kMultiIME.SetCaretPos(iStart,iEnd);
+	g_kMultiIME.SetCaretPos(iStart, iEnd);
 }
 
 void CXUI_Edit_MultiLine::VLoseFocus(bool const bUpToParent)
@@ -367,14 +380,14 @@ void CXUI_Edit_MultiLine::VLoseFocus(bool const bUpToParent)
 			g_kMultiIME.SetEnableIME(false);
 		}
 		g_kMultiIME.SetOnlyNumeric(false, false);
-		m_bIsSame = false;	
+		m_bIsSame = false;
 	}
-} 
+}
 
 int CXUI_Edit_MultiLine::GetClickTextPos()
 {
 	int iSize = 0;
-	if( m_wstrInputText.empty() )
+	if (m_wstrInputText.empty())
 	{
 		return iSize;
 	}
@@ -386,10 +399,10 @@ int CXUI_Edit_MultiLine::GetClickTextPos()
 
 bool CXUI_Edit_MultiLine::VPeekEvent(E_INPUT_EVENT_INDEX const& rET, POINT3I const& rPT, DWORD const& dwValue)
 {
-	if( !CXUI_Wnd::Visible() || IsClosed() ){return false;}//ÀÚ½Äµµ ¾ÈÇÔ.
-	if( !Enable() ){return false;}
+	if (!CXUI_Wnd::Visible() || IsClosed()) { return false; }//ï¿½Ú½Äµï¿½ ï¿½ï¿½ï¿½ï¿½.
+	if (!Enable()) { return false; }
 
-	//XUI_Edit¸¸ Æ¯º° ¸Þ½ÃÁö Ã³¸®¸¦ ÇÑ´Ù.
+	//XUI_Editï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 	bool bRet = false;
 	m_bDBLClick = false;
 
@@ -399,170 +412,170 @@ bool CXUI_Edit_MultiLine::VPeekEvent(E_INPUT_EVENT_INDEX const& rET, POINT3I con
 	std::wstring wstrScriptKey;
 #endif
 
-	switch(rET)
+	switch (rET)
 	{
 	case IEI_KEY_DOWN:
 		//case IEI_KEY_UP:
-		{//ÄÁÆ®·Ñ¿¡ Àü´Þ µÇ¾î¾ßÇÔ. dxxx todo 
-			if(IsFocus())
+	{//ï¿½ï¿½Æ®ï¿½Ñ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½. dxxx todo 
+		if (IsFocus())
+		{
+			if (g_kMultiIME.IsNowComp() == false)
 			{
-				if (g_kMultiIME.IsNowComp() == false)
-				{
-					BM::vstring vstr(dwValue);
-					bRet = DoHotKey(vstr);
-				}
-				return true;//¹¹°¡ ¾î¶»°Ô µÇ´ø Æ÷Ä¿½º¸¦ °¡Áø³ðÀÌ ÀÎÇ²À» ¸Ô¾îÄ¡¿ö¾ß ÇÔ
+				BM::vstring vstr(dwValue);
+				bRet = DoHotKey(vstr);
 			}
-			/*BM::vstring vstr = (int)dwValue;
-			bRet = DoHotKey(vstr);
-			if(!bRet)
-			{
-				return false;
-			}*/
+			return true;//ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç²ï¿½ï¿½ ï¿½Ô¾ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		}
+		/*BM::vstring vstr = (int)dwValue;
+		bRet = DoHotKey(vstr);
+		if(!bRet)
+		{
 			return false;
-		}break;
+		}*/
+		return false;
+	}break;
 	case IEI_MS_DOWN:
+	{
+		if (ContainsPoint(m_sMousePos))//ï¿½ï¿½ï¿½ì½º ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ê¼ï¿½.
 		{
-			if( ContainsPoint( m_sMousePos ) )//¸¶¿ì½º ÀÌº¥Æ®´Â ¿µ¿ª Ã¼Å© ÇÊ¼ö.
+			m_spWndMouseOver = this;//Edit ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+
+			if (MEI_BTN_0 == dwValue)
 			{
-				m_spWndMouseOver = this;//Edit Àü¿ë Ãß°¡
+				IsMouseDown(true);
+				VAcquireFocus(this);
 
-				if(MEI_BTN_0 == dwValue)
-				{
-					IsMouseDown(true);
-					VAcquireFocus(this);
+				static DWORD dwLastDownTime = 0;
+				DWORD const dwNow = BM::GetTime32();
 
-					static DWORD dwLastDownTime = 0;
-					DWORD const dwNow = BM::GetTime32();
-
-					if( LastMouseDownPos()-XUIMgr.DblClickBound()<=m_sMousePos && LastMouseDownPos()+XUIMgr.DblClickBound()>=m_sMousePos )
-					{//°°Àº ÁÂÇ¥¿¡¼­.
-						if(dwLastDownTime)
+				if (LastMouseDownPos() - XUIMgr.DblClickBound() <= m_sMousePos && LastMouseDownPos() + XUIMgr.DblClickBound() >= m_sMousePos)
+				{//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½.
+					if (dwLastDownTime)
+					{
+						//ï¿½Ö¾ï¿½ï¿½ï¿½ //ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+						if ((dwNow - dwLastDownTime) < XUIMgr.DblClickTick())//200 ï¿½Ð¸ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½Ô´ï¿½..
 						{
-							//ÀÖ¾ú°í //ÀÏÁ¤ ½Ã°£ ³»¿¡ µé¾î¿À¸é.
-							if((dwNow - dwLastDownTime) < XUIMgr.DblClickTick())//200 ¹Ð¸® ÀÌÇÏ·Î µé¾î¿Ô´Ù..
-							{
-								wstrScriptKey = SCRIPT_ON_L_BTN_DBL_DOWN;
-								dwLastDownTime = 0;//ÀÌº¥Æ®ÈÄ ½Ã°£Àº 0À¸·Î ¸¸µé¾î¾ßÇÏ°í.
-								m_bDBLClick = true;
+							wstrScriptKey = SCRIPT_ON_L_BTN_DBL_DOWN;
+							dwLastDownTime = 0;//ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½.
+							m_bDBLClick = true;
 
-								bRet = true;
-							}
+							bRet = true;
 						}
 					}
+				}
 
-					dwLastDownTime = dwNow;//¹¹°¡ µÆµç ¸¶Áö¸· ´Ù¿î½Ã°£Àº ±â·Ï
+				dwLastDownTime = dwNow;//ï¿½ï¿½ï¿½ï¿½ ï¿½Æµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
-					wstrScriptKey = SCRIPT_ON_L_BTN_DOWN;
-					LastMouseDownPos(m_sMousePos);
+				wstrScriptKey = SCRIPT_ON_L_BTN_DOWN;
+				LastMouseDownPos(m_sMousePos);
 
-					if(m_spWndMouseOver==this && GetFocusedEdit()!=this)//>>Edit Àü¿ë Ãß°¡
+				if (m_spWndMouseOver == this && GetFocusedEdit() != this)//>>Edit ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+				{
+					if (!m_wstrInputText.empty())//ï¿½Ô·Âµï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Èµï¿½
 					{
-						if(!m_wstrInputText.empty())//ÀÔ·ÂµÈ ¹®ÀÚ¿­ÀÌ ÀÖÀ» °æ¿ì ÃÊ±âÈ­ ½ÃÅ°¸é ¾ÈµÊ
-						{
-							g_kMultiIME.SetString(m_wstrInputText);
-							g_kMultiIME.SetCaretPos(false);//Ä³·µÀ» ¸Ç µÚ·Î
-							SetEditFocus(true);
-						}
-						else
-						{
-							SetEditFocus(false);//¹«Á¶°Ç ÀÔ·ÂµÈ ¹®ÀÚ°¡ Å¬¸®¾î µÇ¹Ç·Î ºÐ¸®ÇÔ
-						}
+						g_kMultiIME.SetString(m_wstrInputText);
+						g_kMultiIME.SetCaretPos(false);//Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú·ï¿½
+						SetEditFocus(true);
 					}
-					else if(m_spWndMouseOver==this && GetFocusedEdit()==this)//Æ÷Ä¿½º ¸ÔÀº »óÅÂ¿¡¼­ ´Ù½Ã ¿ÞÂÊ Å¬¸¯
+					else
 					{
-						int pos = GetClickTextPos();
-						//MoveCarotToClickPos(pos, pos);
-						if(m_bDBLClick)//Æ÷Ä¿½º ¸ÔÀº »óÅÂ¿¡¼­ ´õºíÅ¬¸¯µÇ¸é ¸ðµÎ ºí·°ÁöÁ¤
-						{
-							g_kMultiIME.SetCaretPos(0, (int)m_wstrInputText.length());
-						}
-						else
-						{
-							g_kMultiIME.SetCaretPos(pos, pos);
-						}
-
-					}//<<Edit Àü¿ë Ãß°¡
-				}
-				else if( MEI_BTN_1 == dwValue )
-				{ 
-					wstrScriptKey = SCRIPT_ON_R_BTN_DOWN;
-				}
-				bRet = true;
-			}
-		}break;
-	case IEI_MS_UP:
-		{
-			if( ContainsPoint( m_sMousePos ) )//¸¶¿ì½º ÀÌº¥Æ®´Â ¿µ¿ª Ã¼Å© ÇÊ¼ö.
-			{
-				if(MEI_BTN_0 == dwValue)
-				{
-					IsMouseDown(false);	
-					wstrScriptKey = SCRIPT_ON_L_BTN_UP; 
-				}
-				else if( MEI_BTN_1 == dwValue )
-				{ 
-					wstrScriptKey = SCRIPT_ON_R_BTN_UP;
-				}
-				bRet = true;
-			}
-		}break;
-	case IEI_MS_MOVE:
-		{
-			bool const bIsBeforeMouseOver = IsMouseOver();
-			if( ContainsPoint( m_sMousePos ) )//¸¶¿ì½º ÀÌº¥Æ®´Â ¿µ¿ª Ã¼Å© ÇÊ¼ö.
-			{
-				bRet = true;
-				if(m_spWndMouseOver != this)
-				{
-					if(m_spWndMouseOver)
-					{
-						m_spWndMouseOver->DoScript(SCRIPT_ON_MOUSE_OUT);//ÀÌÀü ¸¶¿ì½º ¿À¹ö¿¡¼­ ¾Æ¿ô Ã³¸®.
-						m_spWndMouseOver->IsMouseDown(false);
+						SetEditFocus(false);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Âµï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹Ç·ï¿½ ï¿½Ð¸ï¿½ï¿½ï¿½
 					}
-
-					m_spWndMouseOver = this;// ¸¶¿ì½º ¿Ã¶ó¿Ô¾î.
-
-					wstrScriptKey = SCRIPT_ON_MOUSE_OVER;
 				}
-
-				if(IsMouseDown() && CanDrag())
-				{
-					POINT3I ptOrg = Location();
-					Location( ptOrg+rPT );
-				}
-
-				if(IsMouseDown())//>>Edit Àü¿ë Ãß°¡
+				else if (m_spWndMouseOver == this && GetFocusedEdit() == this)//ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½
 				{
 					int pos = GetClickTextPos();
-					if(g_kMultiIME.GetCaretPos().iSelectStart > pos)
+					//MoveCarotToClickPos(pos, pos);
+					if (m_bDBLClick)//ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					{
-						int start = g_kMultiIME.GetCaretPos().iSelectEnd;
-						MoveCarotToClickPos(pos, start);
+						g_kMultiIME.SetCaretPos(0, (int)m_wstrInputText.length());
 					}
-					else if(g_kMultiIME.GetCaretPos().iSelectStart < pos)
+					else
 					{
-						int start = g_kMultiIME.GetCaretPos().iSelectStart;
-						MoveCarotToClickPos(start, pos);
+						g_kMultiIME.SetCaretPos(pos, pos);
 					}
-				}//<<Edit Àü¿ë Ãß°¡
 
-				if(rPT.z != 0 && ContainsPoint(m_sMousePos)) // ¸¶¿ì½º ÈÙÀÌ´Ù.
-				{
-					if (rPT.z > 0){wstrScriptKey = SCRIPT_ON_WHEEL_UP;}
-					else{wstrScriptKey = SCRIPT_ON_WHEEL_DOWN;}
-					SetCustomData(&rPT.z, sizeof(rPT.z));
-					bRet = true;
-				}
+				}//<<Edit ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 			}
-		}break;
-	default:
+			else if (MEI_BTN_1 == dwValue)
+			{
+				wstrScriptKey = SCRIPT_ON_R_BTN_DOWN;
+			}
+			bRet = true;
+		}
+	}break;
+	case IEI_MS_UP:
+	{
+		if (ContainsPoint(m_sMousePos))//ï¿½ï¿½ï¿½ì½º ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ê¼ï¿½.
 		{
-			return true;
-		}break;
+			if (MEI_BTN_0 == dwValue)
+			{
+				IsMouseDown(false);
+				wstrScriptKey = SCRIPT_ON_L_BTN_UP;
+			}
+			else if (MEI_BTN_1 == dwValue)
+			{
+				wstrScriptKey = SCRIPT_ON_R_BTN_UP;
+			}
+			bRet = true;
+		}
+	}break;
+	case IEI_MS_MOVE:
+	{
+		bool const bIsBeforeMouseOver = IsMouseOver();
+		if (ContainsPoint(m_sMousePos))//ï¿½ï¿½ï¿½ì½º ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ê¼ï¿½.
+		{
+			bRet = true;
+			if (m_spWndMouseOver != this)
+			{
+				if (m_spWndMouseOver)
+				{
+					m_spWndMouseOver->DoScript(SCRIPT_ON_MOUSE_OUT);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¿ï¿½ Ã³ï¿½ï¿½.
+					m_spWndMouseOver->IsMouseDown(false);
+				}
+
+				m_spWndMouseOver = this;// ï¿½ï¿½ï¿½ì½º ï¿½Ã¶ï¿½Ô¾ï¿½.
+
+				wstrScriptKey = SCRIPT_ON_MOUSE_OVER;
+			}
+
+			if (IsMouseDown() && CanDrag())
+			{
+				POINT3I ptOrg = Location();
+				Location(ptOrg + rPT);
+			}
+
+			if (IsMouseDown())//>>Edit ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+			{
+				int pos = GetClickTextPos();
+				if (g_kMultiIME.GetCaretPos().iSelectStart > pos)
+				{
+					int start = g_kMultiIME.GetCaretPos().iSelectEnd;
+					MoveCarotToClickPos(pos, start);
+				}
+				else if (g_kMultiIME.GetCaretPos().iSelectStart < pos)
+				{
+					int start = g_kMultiIME.GetCaretPos().iSelectStart;
+					MoveCarotToClickPos(start, pos);
+				}
+			}//<<Edit ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+
+			if (rPT.z != 0 && ContainsPoint(m_sMousePos)) // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½Ì´ï¿½.
+			{
+				if (rPT.z > 0) { wstrScriptKey = SCRIPT_ON_WHEEL_UP; }
+				else { wstrScriptKey = SCRIPT_ON_WHEEL_DOWN; }
+				SetCustomData(&rPT.z, sizeof(rPT.z));
+				bRet = true;
+			}
+		}
+	}break;
+	default:
+	{
+		return true;
+	}break;
 	}
 
-	bool const bScriptRet = DoScript( wstrScriptKey );//½ÇÇà ¾ÈµÇ´Â Çö»óÀ» ¹æÁöÇÏ±â À§ÇÔ.
+	bool const bScriptRet = DoScript(wstrScriptKey);//ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
 	return (bRet || bScriptRet);
 }
@@ -572,49 +585,49 @@ void CXUI_Edit_MultiLine::OnHookEvent()
 	m_wstrInputText = g_kMultiIME.GetResultStr();
 }
 
-void CXUI_Edit_MultiLine::EditText(std::wstring const& wstrValue,bool bKeepTextBlock)
+void CXUI_Edit_MultiLine::EditText(std::wstring const& wstrValue, bool bKeepTextBlock)
 {
 	m_wstrInputText = wstrValue;
-	g_kMultiIME.SetLimitLength(m_iLimitLength, false);//¹®Á¦ Á¦ÇÑÀ» º¯°æÇÑ´Ù.
+	g_kMultiIME.SetLimitLength(m_iLimitLength, false);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	g_kMultiIME.SetOnlyNumeric(IsOnlyNum(), false);
 	g_kMultiIME.SetMultiLine(IsMultiLine(), m_iLimitLength, MultiLineCount(), false);
-	g_kMultiIME.SetString( m_wstrInputText );
-	g_kMultiIME.SetCaretPos(false);//Ä³·µÀ» ¸Ç µÚ·Î
+	g_kMultiIME.SetString(m_wstrInputText);
+	g_kMultiIME.SetCaretPos(false);//Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ú·ï¿½
 }
 
 bool CXUI_Edit_MultiLine::SetEditFocus(bool const bIsJustFocus)
 {
-	if(IsEditDisable())
-	{//¼öÁ¤ºÒ°¡´É!!
+	if (IsEditDisable())
+	{//ï¿½ï¿½ï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½!!
 		return false;
 	}
 
-	if( !m_wstrBlockPath.empty() )
+	if (!m_wstrBlockPath.empty())
 	{
 		m_spRscMgr->ReleaseRsc(CXUI_Edit::m_spTextBlockBgImg);
-		CXUI_Edit::m_spTextBlockBgImg = m_spRscMgr->GetRsc( m_wstrBlockPath );
+		CXUI_Edit::m_spTextBlockBgImg = m_spRscMgr->GetRsc(m_wstrBlockPath);
 		m_siBlockImgIdx = -2;
 	}
 
-	if( !m_wstrCarotPath.empty() )
+	if (!m_wstrCarotPath.empty())
 	{
 		m_spRscMgr->ReleaseRsc(CXUI_Edit::m_spCarotImg);
-		CXUI_Edit::m_spCarotImg = m_spRscMgr->GetRsc( m_wstrCarotPath );
+		CXUI_Edit::m_spCarotImg = m_spRscMgr->GetRsc(m_wstrCarotPath);
 		m_siCarotImgIdx = -1;
 	}
 
 	VAcquireFocus(this);
 	CXUI_Edit::SetFocusedEdit(this);
 
-	if(!bIsJustFocus)
+	if (!bIsJustFocus)
 	{
 		m_wstrInputText = _T("");
 	}
-	
-	g_kMultiIME.SetLimitLength(m_iLimitLength, false);//¹®Á¦ Á¦ÇÑÀ» º¯°æÇÑ´Ù.
+
+	g_kMultiIME.SetLimitLength(m_iLimitLength, false);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	g_kMultiIME.SetOnlyNumeric(IsOnlyNum(), false);
 	g_kMultiIME.SetMultiLine(IsMultiLine(), m_iLimitLength, MultiLineCount(), false);
-	g_kMultiIME.SetString( m_wstrInputText );
+	g_kMultiIME.SetString(m_wstrInputText);
 	g_kMultiIME.SetPasswordMode(IsSecret());
 	g_kMultiIME.SetEnglishIME(false);
 	g_kMultiIME.SetEnableIME(true);
@@ -623,58 +636,58 @@ bool CXUI_Edit_MultiLine::SetEditFocus(bool const bIsJustFocus)
 		g_kMultiIME.SetNativeIME();
 	}
 
-	DoScript(SCRIPT_ON_FOCUS);	//Æ÷Ä¿½º¸¦ °¡Á³À»¶§ (ON_FOCUS)
+	DoScript(SCRIPT_ON_FOCUS);	//ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ON_FOCUS)
 	return true;
 }
 
 
-void CXUI_Edit_MultiLine::RenderCarot(POINT2& pt)	//Ä³·µÃâ·Â
+void CXUI_Edit_MultiLine::RenderCarot(POINT2& pt)	//Ä³ï¿½ï¿½ï¿½ï¿½ï¿½
 {
 	XUI::CXUI_Font* pFont = g_kFontMgr.GetFont(EditFont());
 
-	if(CXUI_Edit::m_spTextBlockBgImg == NULL
-		||	CXUI_Edit::m_spCarotImg == NULL 
-		||	!pFont)
+	if (CXUI_Edit::m_spTextBlockBgImg == NULL
+		|| CXUI_Edit::m_spCarotImg == NULL
+		|| !pFont)
 	{
 		assert(NULL);
 		return;
 	}
 
-	void *pImg = NULL;
-	int *pImgIdx = NULL;
+	void* pImg = NULL;
+	int* pImgIdx = NULL;
 	SRenderInfo kRenderInfo;
 	int iAdd = 0;
 
-	if( g_kMultiIME.IsNowComp() )	//ÇÑ±ÛÀÌ¸é
+	if (g_kMultiIME.IsNowComp())	//ï¿½Ñ±ï¿½ï¿½Ì¸ï¿½
 	{
 		pt.x -= pFont->GetHeight();
-		
+
 		pImg = CXUI_Edit::m_spTextBlockBgImg;
 		pImgIdx = &m_siBlockImgIdx;
 
-		SSizedScale &rSS = kRenderInfo.kSizedScale;
-		rSS.ptSrcSize = POINT2(16,16);//xxx todo ÇÏµåÄÚµù
-		rSS.ptDrawSize = POINT2(pFont->GetHeight()-4, pFont->GetHeight());
-		iAdd = 4;//xxx todo ÇÏµåÄÚµù
+		SSizedScale& rSS = kRenderInfo.kSizedScale;
+		rSS.ptSrcSize = POINT2(16, 16);//xxx todo ï¿½Ïµï¿½ï¿½Úµï¿½
+		rSS.ptDrawSize = POINT2(pFont->GetHeight() - 4, pFont->GetHeight());
+		iAdd = 4;//xxx todo ï¿½Ïµï¿½ï¿½Úµï¿½
 	}
 	else
 	{
 		pImg = CXUI_Edit::m_spCarotImg;
 		pImgIdx = &m_siCarotImgIdx;
 
-		SSizedScale &rSS = kRenderInfo.kSizedScale;
-		rSS.ptSrcSize = POINT2(16,16);//xxx todo ÇÏµåÄÚµù
+		SSizedScale& rSS = kRenderInfo.kSizedScale;
+		rSS.ptSrcSize = POINT2(16, 16);//xxx todo ï¿½Ïµï¿½ï¿½Úµï¿½
 		rSS.ptDrawSize = POINT2(1, pFont->GetHeight());
 	}
 
 	kRenderInfo.kUVInfo = UVInfo();
 	kRenderInfo.kLoc = pt;
-	kRenderInfo.kLoc.x+=iAdd;
+	kRenderInfo.kLoc.x += iAdd;
 	GetParentDrawRect(kRenderInfo.rcDrawable);
 	kRenderInfo.fAlpha = Alpha();
 
-	if( pImg )
+	if (pImg)
 	{
-		m_spRenderer->RenderSprite( pImg, *pImgIdx, kRenderInfo);
+		m_spRenderer->RenderSprite(pImg, *pImgIdx, kRenderInfo);
 	}
 }
