@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Variant/PgStringUtil.h"
 #include "PgMobileSuit.h"
 #include "PgActionFSMFuncs.h"
@@ -20,6 +20,7 @@
 #include "lwFindTargetParam.h"
 #include "PgMath.h"
 #include "PgOption.h"
+#include "CustomContent/Movement/CustomCharacterJumping.h"
 
 int const SLOTNO_IDLE_EFFECT = 20110620;
 float const g_fEvasionStartTime = 0.3f;
@@ -32,70 +33,70 @@ extern	bool lwKeyIsDown(int iKeyNum, bool bIsNotUKey);
 extern	float	lwGetAccumTime();
 extern	lwComboAdvisor	lwGetComboAdvisor();
 
-bool Act_Melee_IsToUpAttack(lwActor actor,lwAction action)
+bool Act_Melee_IsToUpAttack(lwActor actor, lwAction action)
 {
 	if (action.IsNil())
 	{
 		return	false;
 	}
-	
-	if	(lwKeyIsDown(ACTIONKEY_UP,false))
+
+	if (lwKeyIsDown(ACTIONKEY_UP, false))
 	{
 		return	true;
 	}
-	
+
 	lwInputSlotInfo	kInputSlotInfo = action.GetInputSlotInfo();
 	if (kInputSlotInfo.IsNil() == false)
 	{
-		if	(kInputSlotInfo.GetUKey() == ACTIONKEY_UP_ATTACK)
+		if (kInputSlotInfo.GetUKey() == ACTIONKEY_UP_ATTACK)
 		{
 			return	true;
 		}
 	}
-	
+
 	return	false;
-	
+
 }
 
-bool Act_Melee_IsToDownAttack(lwActor actor,lwAction action)
+bool Act_Melee_IsToDownAttack(lwActor actor, lwAction action)
 {
 	if (action.IsNil())
 	{
 		return	false;
 	}
-	
-	if	(lwKeyIsDown(ACTIONKEY_DOWN,false))
+
+	if (lwKeyIsDown(ACTIONKEY_DOWN, false))
 	{
 		return	true;
 	}
-	
+
 	lwInputSlotInfo	kInputSlotInfo = action.GetInputSlotInfo();
 	if (kInputSlotInfo.IsNil() == false)
 	{
-	
-		if	(kInputSlotInfo.GetUKey() == ACTIONKEY_DOWN_ATTACK)
+
+		if (kInputSlotInfo.GetUKey() == ACTIONKEY_DOWN_ATTACK)
 		{
 			return	true;
 		}
-	
+
 	}
-	
+
 	return	false;
-	
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //	class	PgActionFSM_Act_Idle
 ////////////////////////////////////////////////////////////////////////////////////////////////
-bool	PgActionFSM_Act_Idle::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Idle::OnEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
 	std::string actorID = actor.GetID();
 
-	//Æê Å¾½Â ÁßÀÌ¶ó¸é Å¾½Â µ¿ÀÛÀ¸·Î º¯°æ
-	if(actor.IsRidingPet())
+	//ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (actor.IsRidingPet())
 	{
 		action.SetSlot(3);
 		actor.PlayCurrentSlot(true);
@@ -103,40 +104,40 @@ bool	PgActionFSM_Act_Idle::OnEnter(lwActor actor,lwAction action)	const
 		return true;
 	}
 
-	//	¸¸¾à stun »óÅÂ¶ó¸é, stun ¾×¼ÇÀ¸·Î ÀüÀÌ½ÃÅ²´Ù.
-	if(actor.IsStun())
+	//	ï¿½ï¿½ï¿½ï¿½ stun ï¿½ï¿½ï¿½Â¶ï¿½ï¿½, stun ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½Å²ï¿½ï¿½.
+	if (actor.IsStun())
 	{
-		actor.ReserveTransitAction("a_stun",DIR_NONE);
+		actor.ReserveTransitAction("a_stun", DIR_NONE);
 		return	false;
 	}
-	
+
 	int const iSpecificIdleActionNo = actor.GetSpecificIdle();
-	if(iSpecificIdleActionNo)
+	if (iSpecificIdleActionNo)
 	{
 		action.SetParamInt(100, 1);		// SpecificIdle
-		switch(iSpecificIdleActionNo)
+		switch (iSpecificIdleActionNo)
 		{
 		case ESIT_BOSS_MONSTER_IDLE:
-			{
-				actor.ResetAnimation();
-				actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
-				return false;
-			}break;
+		{
+			actor.ResetAnimation();
+			actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
+			return false;
+		}break;
 		case ESIT_NONE:
-			{
-			}break;
+		{
+		}break;
 		default:
+		{
+			if (iSpecificIdleActionNo != action.GetActionNo())
 			{
-				if(iSpecificIdleActionNo != action.GetActionNo())
-				{
-					actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
-					return false;
-				}
-			}break;
+				actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
+				return false;
+			}
+		}break;
 		}
 	}
-	if( actor.IsUnitType(UT_SUB_PLAYER) )
-	{// º¸Á¶ Ä³¸¯ÅÍ¿¡ ¸Â´Â ¾×¼ÇÀ¸·Î ¹Ù²ãÁÖ°í(¸ÞÀÎ Ä³¸¯ÅÍ¸¦ µû¶ó°¡´Â)
+	if (actor.IsUnitType(UT_SUB_PLAYER))
+	{// ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Â´ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½Ö°ï¿½(ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ó°¡´ï¿½)
 		actor.ReserveTransitAction("a_twin_sub_trace_ground", DIR_NONE);
 		return false;
 	}
@@ -150,7 +151,7 @@ bool	PgActionFSM_Act_Idle::OnEnter(lwActor actor,lwAction action)	const
 				BYTE	byDir = actor.GetDirection();
 				if (byDir != DIR_NONE)
 				{
-					actor.ReserveTransitAction(ACTIONNAME_RUN,byDir);
+					actor.ReserveTransitAction(ACTIONNAME_RUN, byDir);
 					return false;
 				}
 			}
@@ -158,40 +159,40 @@ bool	PgActionFSM_Act_Idle::OnEnter(lwActor actor,lwAction action)	const
 	}
 
 
-	if(std::string(action.GetID()) == ACTIONNAME_BIDLE && actor.IsUnitType(UT_PLAYER))
+	if (std::string(action.GetID()) == ACTIONNAME_BIDLE && actor.IsUnitType(UT_PLAYER))
 	{
 		action.SetSlot(1);
 	}
 
 	actor.Stop();
 
-	if(EMGRADE_UPGRADED >= actor.GetAbil(AT_GRADE) || actor()->IsUseBattleIdle())
+	if (EMGRADE_UPGRADED >= actor.GetAbil(AT_GRADE) || actor()->IsUseBattleIdle())
 	{
-		if(actor.IsUnitType(UT_MONSTER) && actor.HasTarget())
+		if (actor.IsUnitType(UT_MONSTER) && actor.HasTarget())
 		{
 			action.SetSlot(2);
 		}
 	}
 
-	if(actor.IsUnitType(UT_PLAYER))
+	if (actor.IsUnitType(UT_PLAYER))
 	{
-		action.SetParamFloat(2,15);
-	}                                           
-	else if(actor.IsUnitType(UT_MONSTER))
-	{
-		action.SetParamFloat(2,4);
+		action.SetParamFloat(2, 15);
 	}
-	else if(actor.IsUnitType(UT_PET))
+	else if (actor.IsUnitType(UT_MONSTER))
 	{
-		action.SetParamFloat(2,8);
+		action.SetParamFloat(2, 4);
+	}
+	else if (actor.IsUnitType(UT_PET))
+	{
+		action.SetParamFloat(2, 8);
 	}
 
 	action.SetParamInt(4, 4 + BM::Rand_Index(4));
 	action.SetParamInt(5, 0);
 	action.SetParamInt(6, 0);
-	action.SetParamFloat(13,-1);
+	action.SetParamFloat(13, -1);
 
-	if(false==actor()->IdleEffectName().empty())
+	if (false == actor()->IdleEffectName().empty())
 	{
 		actor.AttachParticle(SLOTNO_IDLE_EFFECT, actor()->IdleEffectNode().c_str(), actor()->IdleEffectName().c_str());
 	}
@@ -206,28 +207,28 @@ void DoAutoFire(lwActor actor)
 
 	if (actor.IsMyActor())
 	{
-		if (lwKeyIsDown(ACTIONKEY_ATTACK,false))
+		if (lwKeyIsDown(ACTIONKEY_ATTACK, false))
 		{
 			int	const	iBaseActorType = actor.GetPilot().GetBaseClassID();
-			float	fAutoFireDelayTime = lua_tinker::call<float,int>("GetAutoFireDelayTime",iBaseActorType);
+			float	fAutoFireDelayTime = lua_tinker::call<float, int>("GetAutoFireDelayTime", iBaseActorType);
 			float	fNowTime = lwGetAccumTime();
 			float	fElapsedTime = fNowTime - g_fLastAutoFireTime;
-			if (fElapsedTime>fAutoFireDelayTime)
+			if (fElapsedTime > fAutoFireDelayTime)
 			{
-				char const*	pkAutoFireActionID = actor.GetNormalAttackActionID();
+				char const* pkAutoFireActionID = actor.GetNormalAttackActionID();
 
-				if(PgAction::CheckCanEnter(actor(),pkAutoFireActionID,false) == false)
+				if (PgAction::CheckCanEnter(actor(), pkAutoFireActionID, false) == false)
 				{
 					return;
 				}
 
 				g_fLastAutoFireTime = fNowTime;
-				actor.ReserveTransitAction(pkAutoFireActionID,DIR_NONE);
+				actor.ReserveTransitAction(pkAutoFireActionID, DIR_NONE);
 			}
 		}
 	}
 }
-bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 
 	lwCheckNil(actor.IsNil());
@@ -236,12 +237,12 @@ bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTim
 	int	currentSlot = action.GetCurrentSlot();
 	//std::string param = action.GetParam(0);
 	int	iIdleType = action.GetParamInt(6);
-	
+
 	if (actor.IsCheckMeetFloor())
 	{
-		if(actor.IsMeetFloor() == false && actor.IsMyActor())
+		if (actor.IsMeetFloor() == false && actor.IsMyActor())
 		{
-			lwAction kAction = actor.ReserveTransitAction(ACTIONNAME_JUMP,0);
+			lwAction kAction = actor.ReserveTransitAction(ACTIONNAME_JUMP, 0);
 			kAction.SetSlot(2);
 			kAction.SetDoNotBroadCast(true);
 			return false;
@@ -250,7 +251,7 @@ bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTim
 
 	if (action.GetParamFloat(13) == -1)
 	{
-		action.SetParamFloat(13,accumTime);
+		action.SetParamFloat(13, accumTime);
 	}
 
 	if (actor.IsMyActor() == false)
@@ -262,7 +263,7 @@ bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTim
 			return true;
 		}
 	}
-	
+
 	if (actor.IsCheckMeetFloor())
 	{
 		if (actor.IsMeetFloor() && actor.IsMyActor())
@@ -272,7 +273,7 @@ bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTim
 				BYTE	byDir = actor.GetDirection();
 				if (byDir != DIR_NONE)
 				{
-					actor.ReserveTransitAction(ACTIONNAME_RUN,byDir);
+					actor.ReserveTransitAction(ACTIONNAME_RUN, byDir);
 					return true;
 				}
 			}
@@ -283,11 +284,11 @@ bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTim
 
 	if (actor.IsCheckMeetFloor())
 	{
-		if (actor.IsMeetFloor() == false 
-			&& actor.GetAbil(AT_MONSTER_TYPE) != 1 
+		if (actor.IsMeetFloor() == false
+			&& actor.GetAbil(AT_MONSTER_TYPE) != 1
 			&& actor.IsUnitType(UT_OBJECT) == false)
 		{
-			if (strcmp(action.GetParam(119),"jump_trap") == 0 || actor.GetVelocity().GetZ() < 0 )
+			if (strcmp(action.GetParam(119), "jump_trap") == 0 || actor.GetVelocity().GetZ() < 0)
 			{
 				action.SetNextActionName(ACTIONNAME_JUMP);
 				action.SetParam(3, "fall_down");
@@ -299,36 +300,36 @@ bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTim
 	if (actor.IsAnimationDone() == true)
 	{
 		actor.ResetAnimation();
-	
+
 		if (iIdleType == 0)
 		{
-		
+
 			int iBaseIdleLoopNum = action.GetParamInt(4);
 			int iBaseIdleLoopCurNum = action.GetParamInt(5);
-			
-			iBaseIdleLoopCurNum=iBaseIdleLoopCurNum+1;
-			
-			if (iBaseIdleLoopCurNum>= iBaseIdleLoopNum)
+
+			iBaseIdleLoopCurNum = iBaseIdleLoopCurNum + 1;
+
+			if (iBaseIdleLoopCurNum >= iBaseIdleLoopNum)
 			{
-				action.SetParamInt(6,1);
+				action.SetParamInt(6, 1);
 				actor.PlayCurrentSlot(false);
 			}
 			else
 			{
-				action.SetParamInt(5,iBaseIdleLoopCurNum);
-				actor.PlayCurrentSlot(true);	
+				action.SetParamInt(5, iBaseIdleLoopCurNum);
+				actor.PlayCurrentSlot(true);
 			}
 		}
-		else if( iIdleType == 1 )
+		else if (iIdleType == 1)
 		{
-			
+
 			action.SetParamInt(6, 0);
 			action.SetParamInt(4, 4 + BM::Rand_Index(4));
 			action.SetParamInt(5, 0);
-			
-			actor.PlayCurrentSlot(true);			
+
+			actor.PlayCurrentSlot(true);
 		}
-	
+
 
 		return true;
 	}
@@ -341,54 +342,54 @@ bool	PgActionFSM_Act_Idle::OnUpdate(lwActor actor,lwAction action,float accumTim
 			return false;
 		}
 	}
-	else if(actor.GetPilot().GetAbil(AT_IDLEACTION_TYPE) != 101 && accumTime - action.GetParamFloat(13) > 3.0 )
+	else if (actor.GetPilot().GetAbil(AT_IDLEACTION_TYPE) != 101 && accumTime - action.GetParamFloat(13) > 3.0)
 	{
-		action.SetParamFloat(13,accumTime);
+		action.SetParamFloat(13, accumTime);
 	}
-	
+
 	int const iSpecificIdleActionNo = actor.GetSpecificIdle();
-	switch(iSpecificIdleActionNo)
+	switch (iSpecificIdleActionNo)
 	{
 	case ESIT_BOSS_MONSTER_IDLE:
-		{
-			actor.ResetAnimation();
-			actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
-			return false;
-		}break;
+	{
+		actor.ResetAnimation();
+		actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
+		return false;
+	}break;
 	case ESIT_NONE:
+	{
+		if (0 < action.GetParamInt(100))
 		{
-			if(0 < action.GetParamInt(100))
-			{
-				actor.ReserveTransitAction(ACTIONNAME_IDLE, actor.GetDirection());
-				return false;
-			}
-		}break;
+			actor.ReserveTransitAction(ACTIONNAME_IDLE, actor.GetDirection());
+			return false;
+		}
+	}break;
 	default:
+	{
+		if (iSpecificIdleActionNo != action.GetActionNo())
 		{
-			if(iSpecificIdleActionNo != action.GetActionNo())
-			{
-				actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
-				return false;
-			}
-		}break;
+			actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
+			return false;
+		}
+	}break;
 	}
 
 	return true;
 }
-bool	PgActionFSM_Act_Idle::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_Idle::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 	lwCheckNil(actor.GetAction().IsNil());
 
-	if (strcmp(action.GetID(),ACTIONNAME_JUMP)==0 && strcmp(actor.GetAction().GetParam(3),"fall_down") == 0 )
+	if (strcmp(action.GetID(), ACTIONNAME_JUMP) == 0 && strcmp(actor.GetAction().GetParam(3), "fall_down") == 0)
 	{
-		// Àýº®¿¡¼­ ¶³¾îÁú ¶§´Â, ActionPacketÀ» º¸³»Áö ¾Ê´Â´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ActionPacketï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 		action.SetSlot(2);
 		action.SetDoNotBroadCast(true);
 	}
 
-	if(false==actor()->IdleEffectName().empty())
+	if (false == actor()->IdleEffectName().empty())
 	{
 		actor.DetachFrom(SLOTNO_IDLE_EFFECT);
 	}
@@ -398,13 +399,13 @@ bool	PgActionFSM_Act_Idle::OnLeave(lwActor actor,lwAction action,bool bCancel)	c
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //	class	PgActionFSM_Act_Walk
 ////////////////////////////////////////////////////////////////////////////////////////////////
-bool	PgActionFSM_Act_Walk::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Walk::OnEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	//Æê Å¾½Â ÁßÀÌ¶ó¸é Å¾½Â µ¿ÀÛÀ¸·Î º¯°æ
-	if(actor.IsRidingPet())
+	//ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (actor.IsRidingPet())
 	{
 		actor.ReserveTransitAction(ACTIONNAME_RP_WALK, action.GetDirection());
 		return true;
@@ -416,8 +417,8 @@ bool	PgActionFSM_Act_Walk::OnEnter(lwActor actor,lwAction action)	const
 		std::string prevActionID = prevAction.GetID();
 		if (prevActionID == ACTIONNAME_JUMP)
 		{
-			// ÇöÀç ¾×¼ÇÀÌ Á¡ÇÁÀÌ°í ½½·ÔÀÌ 3¹øÀÌ ¾Æ´Ï°Å³ª,
-			// ¹Ù´ÚÀÌ ¾Æ´Ï¸é, ÀüÀÌ ºÒ°¡´É
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï°Å³ï¿½,
+			// ï¿½Ù´ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
 			int prevSlot = prevAction.GetCurrentSlot();
 			if (prevSlot != 3 ||
 				actor.IsMeetFloor() == false)
@@ -426,7 +427,7 @@ bool	PgActionFSM_Act_Walk::OnEnter(lwActor actor,lwAction action)	const
 				return false;
 			}
 		}
-		else if(prevActionID == "a_walk_left" ||
+		else if (prevActionID == "a_walk_left" ||
 			prevActionID == "a_walk_right" ||
 			prevActionID == "a_walk_up" ||
 			prevActionID == "a_walk_down")
@@ -434,66 +435,66 @@ bool	PgActionFSM_Act_Walk::OnEnter(lwActor actor,lwAction action)	const
 			action.SetDoNotBroadCast(true);
 			return false;
 		}
-		// ±× ¿Ü¿¡´Â ÀüÀÌ °¡´É
+		// ï¿½ï¿½ ï¿½Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
 	actor.FindPathNormal();
-	if (strcmp(action.GetID(),"a_walk_left") == 0)
+	if (strcmp(action.GetID(), "a_walk_left") == 0)
 	{
-		actor.ToLeft(true,true);
+		actor.ToLeft(true, true);
 	}
-	else if(strcmp(action.GetID(),"a_walk_right") == 0)
+	else if (strcmp(action.GetID(), "a_walk_right") == 0)
 	{
-		actor.ToLeft(false,true);
+		actor.ToLeft(false, true);
 	}
-	
+
 	//actor.ResetAnimation();
-	
+
 	return true;
 }
-bool	PgActionFSM_Act_Walk::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool	PgActionFSM_Act_Walk::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
 	std::string actorID = actor.GetID();
-	
+
 	float fOriginalMoveSpeed = static_cast<float>(actor.GetAbil(AT_MOVESPEED));
 	float movingSpeed = static_cast<float>(actor.GetAbil(AT_C_MOVESPEED));
 	float fCorrectedSpeed = static_cast<float>(actor.GetAbil(AT_ADD_MOVESPEED_BY_DELAY));
 
-	if(g_pkWorld)
+	if (g_pkWorld)
 	{
-		if(g_pkWorld->GetAttr() & GATTR_VILLAGE)
+		if (g_pkWorld->GetAttr() & GATTR_VILLAGE)
 		{
 			fOriginalMoveSpeed += static_cast<float>(actor.GetAbil(AT_VILLAGE_MOVESPEED));
 			movingSpeed += static_cast<float>(actor.GetAbil(AT_C_VILLAGE_MOVESPEED));
 		}
 	}
-	
-	if(0<fCorrectedSpeed)
+
+	if (0 < fCorrectedSpeed)
 	{
-		movingSpeed = fCorrectedSpeed;	//º¸Á¤µÈ °ª
+		movingSpeed = fCorrectedSpeed;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	}
 
 	if (fOriginalMoveSpeed == 0)
 	{
 		fOriginalMoveSpeed = movingSpeed;
 	}
-		
+
 	float	fAnimSpeed = 0.0f;
-	
+
 	if (0 < fOriginalMoveSpeed)
 	{
-		fAnimSpeed = movingSpeed/fOriginalMoveSpeed;
+		fAnimSpeed = movingSpeed / fOriginalMoveSpeed;
 	}
-	
-	char const* pkAutoSpeed = actor.GetAnimationInfo("USE_AUTO_ANI_SPEED",0);
-	if(NULL==pkAutoSpeed || 0!=strcmp(pkAutoSpeed,"FALSE"))
+
+	char const* pkAutoSpeed = actor.GetAnimationInfo("USE_AUTO_ANI_SPEED", 0);
+	if (NULL == pkAutoSpeed || 0 != strcmp(pkAutoSpeed, "FALSE"))
 	{
 		actor.SetAnimSpeed(fAnimSpeed);
 	}
-	
+
 	if (actor.IsUnitType(UT_PLAYER))
 	{
 		movingSpeed = movingSpeed * 0.6f;
@@ -506,19 +507,19 @@ bool	PgActionFSM_Act_Walk::OnUpdate(lwActor actor,lwAction action,float accumTim
 	}
 #endif
 
-	BYTE dir = actor.GetDirection() ;
+	BYTE dir = actor.GetDirection();
 
-    //ODS("Act_Walk_OnUpdate actor."..actorID.." GUID."..actor.GetPilotGuid().GetString().." movingSpeed."..movingSpeed.."\n");
-	if (actor.Walk(dir, movingSpeed, frameTime,false) == false)
+	//ODS("Act_Walk_OnUpdate actor."..actorID.." GUID."..actor.GetPilotGuid().GetString().." movingSpeed."..movingSpeed.."\n");
+	if (actor.Walk(dir, movingSpeed, frameTime, false) == false)
 	{
-	    return  false;
+		return  false;
 	}
 
 	lwPoint3 vel = actor.GetVelocity();
 	float z = vel.GetZ();
 
-	// ¶Ù¾î°¡´Ù°¡ ¹ßÀÌ ¶¥¿¡¼­ ¶³¾îÁ³À» °æ¿ì
-	// ¿Ã¶ó°¡´Â Á¡ÇÁ¸¦ ÇØ¾ß ÇÒÁö, ³»·Á¿À´Â Á¡ÇÁ¸¦ ÇØ¾ß ÇÒÁö °áÁ¤
+	// ï¿½Ù¾î°¡ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	// ï¿½Ã¶ó°¡´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (actor.IsMeetFloor() == false)
 	{
 		if (z < -2)
@@ -538,14 +539,14 @@ bool	PgActionFSM_Act_Walk::OnUpdate(lwActor actor,lwAction action,float accumTim
 
 	return true;
 }
-bool	PgActionFSM_Act_Walk::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_Walk::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
 	lwAction curAction = actor.GetAction();
 
-	if (curAction.IsNil() == false && (strcmp(action.GetID(),ACTIONNAME_JUMP) ==0) )
+	if (curAction.IsNil() == false && (strcmp(action.GetID(), ACTIONNAME_JUMP) == 0))
 	{
 		std::string const param = curAction.GetParam(2);
 		if (param == "fall_down")
@@ -560,13 +561,13 @@ bool	PgActionFSM_Act_Walk::OnLeave(lwActor actor,lwAction action,bool bCancel)	c
 
 	return true;
 }
-bool	PgActionFSM_Act_Walk::OnEvent(lwActor actor,std::string kTextKey,int iSeqID)	const
+bool	PgActionFSM_Act_Walk::OnEvent(lwActor actor, std::string kTextKey, int iSeqID)	const
 {
 	lwCheckNil(actor.IsNil());
 
 	if (kTextKey == "start")
 	{
-		actor.AttachParticle(BM::Rand_Range(-200, -100),"char_root", "e_run");
+		actor.AttachParticle(BM::Rand_Range(-200, -100), "char_root", "e_run");
 	}
 
 	return	true;
@@ -576,34 +577,34 @@ bool	PgActionFSM_Act_Walk::OnEvent(lwActor actor,std::string kTextKey,int iSeqID
 //	class	PgActionFSM_Act_Run
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool	PgActionFSM_Act_Run::OnCheckCanEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Run::OnCheckCanEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-//	if action.GetEnable() == false then
-		// À½.. ÀÏ´Ü ÁÖ¼®Ã³¸®..
-//		local up = actor.GetActionState("a_run_up")
-//		local down = actor.GetActionState("a_run_down")
-//		local right = actor.GetActionState("a_run_right")
-//		local left = actor.GetActionState("a_run_left")		
-	
-//		if up ~=0 or down ~=0 or right ~=0 or left ~=0 then
-//			return false
-//		end
-//	end
-	
+	//	if action.GetEnable() == false then
+			// ï¿½ï¿½.. ï¿½Ï´ï¿½ ï¿½Ö¼ï¿½Ã³ï¿½ï¿½..
+	//		local up = actor.GetActionState("a_run_up")
+	//		local down = actor.GetActionState("a_run_down")
+	//		local right = actor.GetActionState("a_run_right")
+	//		local left = actor.GetActionState("a_run_left")		
+
+	//		if up ~=0 or down ~=0 or right ~=0 or left ~=0 then
+	//			return false
+	//		end
+	//	end
+
 	lwAction curAction = actor.GetAction();
-	if(false==curAction.IsNil())
+	if (false == curAction.IsNil())
 	{
 		std::string curActionID = curAction.GetID();
 		if (curActionID == ACTIONNAME_RUN && actor.IsNowFollowing() == false)
 		{
 			_PgOutputDebugString("Current Action is \"a_run\" . transit failed!\n");
-			return false ;
+			return false;
 		}
 		int const iSpecificActionNo = actor.GetAbil(AT_SKILL_SPECIFIC_RUN);
-		if(0 < iSpecificActionNo
+		if (0 < iSpecificActionNo
 			//&& iSpecificActionNo != curAction.GetActionNo()
 			)
 		{
@@ -611,33 +612,33 @@ bool	PgActionFSM_Act_Run::OnCheckCanEnter(lwActor actor,lwAction action)	const
 			return false;
 		}
 	}
-	
+
 	return true;
 }
-bool	PgActionFSM_Act_Run::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Run::OnEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	if( actor.IsUnitType(UT_MONSTER) && actor.GetAnimationLength(action.GetSlotAnimName(0)) == 0 )
+	if (actor.IsUnitType(UT_MONSTER) && actor.GetAnimationLength(action.GetSlotAnimName(0)) == 0)
 	{
-		action.SetSlot(1);	//runÀÌ ¾øÀ¸¸é walk¸ð¼ÇÀ¸·Î º¸ÀÓ
+		action.SetSlot(1);	//runï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ walkï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		actor.PlayCurrentSlot(true);
 	}
 
-	if( actor.IsMyActor() )
-	{//µ¿±âÈ­ ¸ÂÁö ¾Ê´Â ¹®Á¦ ÀÏºÎ ¼öÁ¤ : ÀÌµ¿ ÇÏ±â Àü¿¡ Ä³¸¯ÅÍ ¹æÇâÀ» ´Ù½Ã ¹Þµµ·Ï ¼öÁ¤
-		NiInputKeyboard	*pkKeyboard = g_pkLocalManager->GetInputSystem()->GetKeyboard();
-		if( pkKeyboard)
+	if (actor.IsMyActor())
+	{//ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½Ìµï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Þµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		NiInputKeyboard* pkKeyboard = g_pkLocalManager->GetInputSystem()->GetKeyboard();
+		if (pkKeyboard)
 		{
-			int const iDirKeySet[4] = {ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ACTIONKEY_UP, ACTIONKEY_DOWN};
-			BYTE const byDirSet[4] = {DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN};
-			for( int iCount = 0; iCount<4; ++iCount )
+			int const iDirKeySet[4] = { ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ACTIONKEY_UP, ACTIONKEY_DOWN };
+			BYTE const byDirSet[4] = { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN };
+			for (int iCount = 0; iCount < 4; ++iCount)
 			{
 				int const iKeyNum = g_kGlobalOption.GetUKeyToKey(iDirKeySet[iCount]);
 				NiInputKeyboard::KeyCode kKeycode = static_cast<NiInputKeyboard::KeyCode>(iKeyNum);
-				bool const bKeyDown = pkKeyboard->KeyIsDown( kKeycode );
-				if( bKeyDown )
+				bool const bKeyDown = pkKeyboard->KeyIsDown(kKeycode);
+				if (bKeyDown)
 				{
 					g_kPilotMan.UpdateDirectionSlot(iDirKeySet[iCount], true);
 				}
@@ -652,8 +653,8 @@ bool	PgActionFSM_Act_Run::OnEnter(lwActor actor,lwAction action)	const
 	//	_PgOutputDebugString("Run is Entered PrevAction . "..actor.GetAction().GetID().." \n");
 	//}
 
-	//Æê Å¾½Â ÁßÀÌ¶ó¸é Å¾½Â µ¿ÀÛÀ¸·Î º¯°æ
-	if(actor.IsRidingPet())
+	//ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (actor.IsRidingPet())
 	{
 		actor.ReserveTransitAction(ACTIONNAME_RP_WALK, action.GetDirection());
 		return true;
@@ -665,8 +666,8 @@ bool	PgActionFSM_Act_Run::OnEnter(lwActor actor,lwAction action)	const
 		int prevSlot = prevAction.GetCurrentSlot();
 		if (prevActionID == ACTIONNAME_JUMP)
 		{
-			// ÇöÀç ¾×¼ÇÀÌ Á¡ÇÁÀÌ°í ½½·ÔÀÌ 3¹øÀÌ ¾Æ´Ï°Å³ª,
-			// ¹Ù´ÚÀÌ ¾Æ´Ï¸é, ÀüÀÌ ºÒ°¡´É
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï°Å³ï¿½,
+			// ï¿½Ù´ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
 			if (prevSlot != 3 || actor.IsMeetFloor() == false)
 			{
 				action.SetDoNotBroadCast(true);
@@ -678,24 +679,24 @@ bool	PgActionFSM_Act_Run::OnEnter(lwActor actor,lwAction action)	const
 		{
 			return false;
 		}
-		// ±× ¿Ü¿¡´Â ÀüÀÌ °¡´É
+		// ï¿½ï¿½ ï¿½Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
 	actor.UseSkipUpdateWhenNotVisible(false);
-	action.SetParamInt(1,0);
+	action.SetParamInt(1, 0);
 
 	lwPoint3	kTargetPos = action.GetParamAsPoint(0);
-	if (kTargetPos.IsZero() == false )
+	if (kTargetPos.IsZero() == false)
 	{
-		action.SetParamInt(3,1);
-		
+		action.SetParamInt(3, 1);
+
 		lwPoint3	kMoveDirection = kTargetPos.Subtract2(actor.GetPos());
 		kMoveDirection.Unitize();
-		action.SetParamAsPoint(1,kMoveDirection);
-		action.SetParamAsPoint(2,actor.GetPos());
-		
+		action.SetParamAsPoint(1, kMoveDirection);
+		action.SetParamAsPoint(2, actor.GetPos());
+
 		actor.SetMovingDir(kMoveDirection);
-		actor.LookAt(kTargetPos,true,true,false);
+		actor.LookAt(kTargetPos, true, true, false);
 		actor.ConcilDirection(kMoveDirection, true);
 	}
 
@@ -704,15 +705,15 @@ bool	PgActionFSM_Act_Run::OnEnter(lwActor actor,lwAction action)	const
 		actor.BackMoving(true);
 	}
 
-	//½ÃÀÛ À§Ä¡¿Í ½ÃÀÛ ½Ã°£À» ±â·Ï
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	action.SetParamAsPoint(7, actor.GetPos());
 	action.SetParamFloat(8, static_cast<float>(g_kEventView.GetServerElapsedTime()));
-	
+
 	//lwCommonSkillUtilFunc::TryMustChangeSubPlayerAction(actor, "a_twin_sub_trace_ground", prevAction.GetDirection());
 
 	return true;
 }
-bool	PgActionFSM_Act_Run::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool	PgActionFSM_Act_Run::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -725,7 +726,7 @@ bool	PgActionFSM_Act_Run::OnUpdate(lwActor actor,lwAction action,float accumTime
 #ifndef EXTERNAL_RELEASE
 	if (g_pkApp->IsSingleMode() == true)
 	{
-		movingSpeed = 120.0f ;
+		movingSpeed = 120.0f;
 	}
 	else
 #endif
@@ -733,96 +734,96 @@ bool	PgActionFSM_Act_Run::OnUpdate(lwActor actor,lwAction action,float accumTime
 		movingSpeed = static_cast<float>(actor.GetAbil(AT_C_MOVESPEED));
 	}
 
-	if(0.0f != fCustomSpeed)
+	if (0.0f != fCustomSpeed)
 	{
 		movingSpeed = fCustomSpeed;
 	}
-	
+
 	float fOriginalMoveSpeed = static_cast<float>(actor.GetAbil(AT_MOVESPEED));
 	if (0.0f == fOriginalMoveSpeed)
 	{
 		fOriginalMoveSpeed = movingSpeed;
 	}
 
-	if(g_pkWorld)
+	if (g_pkWorld)
 	{
-		if(g_pkWorld->GetAttr() & GATTR_VILLAGE)
+		if (g_pkWorld->GetAttr() & GATTR_VILLAGE)
 		{
 			movingSpeed += static_cast<float>(actor.GetAbil(AT_C_VILLAGE_MOVESPEED));
 		}
 	}
-	
+
 	float fAnimSpeed = 0.0f;
-	
+
 	if (0.0f < fOriginalMoveSpeed)
 	{
-		fAnimSpeed = movingSpeed/fOriginalMoveSpeed;
+		fAnimSpeed = movingSpeed / fOriginalMoveSpeed;
 	}
-	
-	char const* pkAutoSpeed = actor.GetAnimationInfo("USE_AUTO_ANI_SPEED",0);
-	if(NULL==pkAutoSpeed || 0!=strcmp(pkAutoSpeed,"FALSE"))
+
+	char const* pkAutoSpeed = actor.GetAnimationInfo("USE_AUTO_ANI_SPEED", 0);
+	if (NULL == pkAutoSpeed || 0 != strcmp(pkAutoSpeed, "FALSE"))
 	{
 		actor.SetAnimSpeed(fAnimSpeed);
 	}
-	
+
 	DoAutoFire(actor);
-	
-	if (actor.IsMyActor() && action.GetParamInt(1) == 0 )
+
+	if (actor.IsMyActor() && action.GetParamInt(1) == 0)
 	{
 		if (accumTime - action.GetActionEnterTime() > 0.1f)
 		{
 			actor.SetComboCount(0);
-			action.SetParamInt(1,1);
+			action.SetParamInt(1, 1);
 		}
 	}
-	
+
 	if (bMoveToPos)
 	{
 		lwPoint3	kMoveTargetPos = action.GetParamAsPoint(0);
-		lwPoint3	kMoveDirection = action.GetParamAsPoint(1);	
+		lwPoint3	kMoveDirection = action.GetParamAsPoint(1);
 		lwPoint3	kMoveStartPos = action.GetParamAsPoint(2);
-		
+
 		lwPoint3	kDir1 = actor.GetPos().Subtract2(kMoveTargetPos);
 		kDir1.Unitize();
 		lwPoint3	kDir2 = kMoveStartPos.Subtract2(kMoveTargetPos);
 		kDir2.Unitize();
-		
+
 		if (0 > kDir1.Dot(kDir2) || 5 > actor.GetPos().Distance(kMoveTargetPos))
 		{
-			actor.SetTranslate(kMoveTargetPos,false);
+			actor.SetTranslate(kMoveTargetPos, false);
 			return	false;
 		}
-		
+
 		kMoveDirection.Multiply(movingSpeed);
 		actor.SetMovingDelta(kMoveDirection);
-	
+
 		return	true;
 	}
-	
+
 	BYTE dir = actor.GetDirection();
-	
+
 	if (dir == DIR_NONE)
 	{
 		if (actor.GetWalkingToTarget() == false)
 		{
 			//ODS("[Act_Run_OnUpdate] Direction is None . transit Next Action\n")
 			//--actor.FindPathNormal()
-			return false ;
+			return false;
 		}
 	}
-	
+
 	if (movingSpeed == 0)
 	{
-	    return  false;
+		return  false;
 	}
 
 	//NiPoint3 kNewPos = actor.GetPos()();
 	//NiPoint3 kOldPos = action.GetParamAsPoint(7)();
-	//kOldPos.z = kNewPos.z = 0.0f; //Z¸¦ ¹«½ÃÇÏ°í °è»êÇÑ´Ù. ¶³¾îÁö´Â °ÍÀº Áß·Â¿¡ ÀÇÇÑ °Í
+	//kOldPos.z = kNewPos.z = 0.0f; //Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
 	//float const fDistance = (kNewPos - kOldPos).Length();
 
-	////ÀÌµ¿ÇÑ °Å¸®°¡ ÀÖÀ» °æ¿ì
+	////ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	//if(0.0f < fDistance)
 	//{
 	//	NiPoint3 kDirection = kNewPos - kOldPos;
@@ -830,10 +831,10 @@ bool	PgActionFSM_Act_Run::OnUpdate(lwActor actor,lwAction action,float accumTime
 	//	kDirection *= movingSpeed * frameTime;
 	//	kDirection += kNewPos;
 
-	//	//Áö±Ý±îÁö ÀÌµ¿ÇÑ °Å¸®
+	//	//ï¿½ï¿½ï¿½Ý±ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
 	//	float const fDistance2 = (kDirection - kOldPos).Length();
 
-	//	//½Ã¹Ä·¹ÀÌ¼Ç
+	//	//ï¿½Ã¹Ä·ï¿½ï¿½Ì¼ï¿½
 	//	float const fElapsedTime = (static_cast<float>(g_kEventView.GetServerElapsedTime()) - action.GetParamFloat(8)) / 1000.0f;
 	//	float const fMovingSpeed2 = static_cast<float>(actor.GetAbil(AT_MOVESPEED)) * fElapsedTime;
 	//	NiPoint3 kDirection2 = kNewPos - kOldPos;
@@ -850,13 +851,13 @@ bool	PgActionFSM_Act_Run::OnUpdate(lwActor actor,lwAction action,float accumTime
 	//	}
 	//}
 
-	actor.Walk(dir, movingSpeed,0,false);
+	actor.Walk(dir, movingSpeed, 0, false);
 
 	lwPoint3 vel = actor.GetVelocity();
 	float z = vel.GetZ();
 
-	// ¶Ù¾î°¡´Ù°¡ ¹ßÀÌ ¶¥¿¡¼­ ¶³¾îÁ³À» °æ¿ì
-	// ¿Ã¶ó°¡´Â Á¡ÇÁ¸¦ ÇØ¾ß ÇÒÁö, ³»·Á¿À´Â Á¡ÇÁ¸¦ ÇØ¾ß ÇÒÁö °áÁ¤
+	// ï¿½Ù¾î°¡ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	// ï¿½Ã¶ó°¡´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (actor.IsMeetFloor() == false)
 	{
 		if (z < -2)
@@ -875,18 +876,18 @@ bool	PgActionFSM_Act_Run::OnUpdate(lwActor actor,lwAction action,float accumTime
 		}
 	}
 
-	// »ç´Ù¸® Ã¼Å©
-	if (actor.ContainsDirection(DIR_UP) && 
+	// ï¿½ï¿½Ù¸ï¿½ Ã¼Å©
+	if (actor.ContainsDirection(DIR_UP) &&
 		actor.IsMyActor() &&
 		actor.ClimbUpLadder())
 	{
 		action.SetNextActionName("a_ladder_idle");
 		return false;
 	}
-	
+
 	return true;
 }
-bool	PgActionFSM_Act_Run::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_Run::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -911,7 +912,7 @@ bool	PgActionFSM_Act_Run::OnLeave(lwActor actor,lwAction action,bool bCancel)	co
 		}
 		else if (param == "null")
 		{
-			if(actor.IsMeetFloor())
+			if (actor.IsMeetFloor())
 				action.SetSlot(1);
 			else
 				action.SetSlot(2);
@@ -919,10 +920,10 @@ bool	PgActionFSM_Act_Run::OnLeave(lwActor actor,lwAction action,bool bCancel)	co
 	}
 	else if (kActionID == "a_ladder_idle" ||
 		kActionID == "a_ladder_down" ||
-		kActionID == "a_ladder_up" )
+		kActionID == "a_ladder_up")
 	{
 		actor.HideParts(6, true);
-		actor.SetParam("LADDER_WEAPON_HIDE","TRUE");
+		actor.SetParam("LADDER_WEAPON_HIDE", "TRUE");
 	}
 	else if (kActionID == ACTIONNAME_IDLE)
 	{
@@ -934,7 +935,7 @@ bool	PgActionFSM_Act_Run::OnLeave(lwActor actor,lwAction action,bool bCancel)	co
 
 	return true;
 }
-bool	PgActionFSM_Act_Run::OnCleanUp(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Run::OnCleanUp(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 
@@ -942,7 +943,7 @@ bool	PgActionFSM_Act_Run::OnCleanUp(lwActor actor,lwAction action)	const
 	return	true;
 }
 
-bool	PgActionFSM_Act_Run::OnEvent(lwActor actor,std::string textKey,int iSeqID)	const
+bool	PgActionFSM_Act_Run::OnEvent(lwActor actor, std::string textKey, int iSeqID)	const
 {
 	lwCheckNil(actor.IsNil());
 	if (textKey == "start")
@@ -956,20 +957,20 @@ bool	PgActionFSM_Act_Run::OnEvent(lwActor actor,std::string textKey,int iSeqID)	
 //	class	PgActionFSM_Act_Dash
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool	PgActionFSM_Act_Dash::OnCheckCanEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Dash::OnCheckCanEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 
-	//Æê Å¾½Â ÁßÀÌ¶ó¸é ´ë½¬ ºÒ°¡
-	if(actor.IsRidingPet())
+	//ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ë½¬ ï¿½Ò°ï¿½
+	if (actor.IsRidingPet())
 	{
 		return false;
 	}
 	lwAction prevAction = actor.GetAction();
-	if( false == prevAction.IsNil() )
+	if (false == prevAction.IsNil())
 	{
 		int const iSpecificActionNo = actor.GetAbil(AT_SKILL_SPECIFIC_DASH);
-		if(0 < iSpecificActionNo
+		if (0 < iSpecificActionNo
 			//&& iSpecificActionNo != prevAction.GetActionNo()
 			)
 		{
@@ -978,15 +979,15 @@ bool	PgActionFSM_Act_Dash::OnCheckCanEnter(lwActor actor,lwAction action)	const
 		}
 	}
 
-	// ±âÈ¹ÆÀÀå´ÔÀÌ °øÁß¿¡¼­ ´ë½¬ ÇÒ ¼ö ÀÖ°Ô ÇØ´Þ¶ø´Ï´Ù;;(´Ü ÇÑ ¹ø¸¸)
+	// ï¿½ï¿½È¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ë½¬ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½Ø´Þ¶ï¿½ï¿½Ï´ï¿½;;(ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 	if (actor.IsMeetFloor() == false)
 	{
-		if (actor.GetJumpAccumHeight()<50)
+		if (actor.GetJumpAccumHeight() < 50)
 		{
 			return false;
 		}
 	}
-	
+
 	if (actor.IsOnlyMoveAction())
 	{
 		return false;
@@ -995,7 +996,7 @@ bool	PgActionFSM_Act_Dash::OnCheckCanEnter(lwActor actor,lwAction action)	const
 	if (g_pkApp->IsSingleMode() == false)
 #endif
 	{
-		//	ÀÌµ¿ ¼Óµµ°¡  0ÀÌ¸é ¾ÈµÈ´Ù.
+		//	ï¿½Ìµï¿½ ï¿½Óµï¿½ï¿½ï¿½  0ï¿½Ì¸ï¿½ ï¿½ÈµÈ´ï¿½.
 		if (actor.GetAbil(AT_C_MOVESPEED) == 0)
 		{
 			return	false;
@@ -1004,9 +1005,9 @@ bool	PgActionFSM_Act_Dash::OnCheckCanEnter(lwActor actor,lwAction action)	const
 
 	return true;
 }
-bool	PgActionFSM_Act_Dash::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Dash::OnEnter(lwActor actor, lwAction action)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
@@ -1014,7 +1015,7 @@ bool	PgActionFSM_Act_Dash::OnEnter(lwActor actor,lwAction action)	const
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	//ÇöÀç »ç¿ë ÇÏÁö ¾Ê´Â´Ù
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½
 	//if (actor.IsMyActor())
 	//{
 	//	if (actor.GetPilot().IsCorrectClass(UCLASS_ASSASSIN,false))
@@ -1038,7 +1039,7 @@ bool	PgActionFSM_Act_Dash::OnEnter(lwActor actor,lwAction action)	const
 
 	if (actor.IsMyActor() == false)
 	{
-//		ODS("======================== Other actor's dash Begin =====================\n")
+		//		ODS("======================== Other actor's dash Begin =====================\n")
 		actor.ClearReservedAction();
 	}
 
@@ -1046,45 +1047,45 @@ bool	PgActionFSM_Act_Dash::OnEnter(lwActor actor,lwAction action)	const
 
 	action.SetParamFloat(0, g_pkWorld->GetAccumTime());	// Start Time
 	action.SetParamFloat(1, fDashSpeed);	// Start Velocity
-	action.SetParam(2,"");
+	action.SetParam(2, "");
 
 	action.SetParamAsPoint(7, actor.GetPos());
 	action.SetParamInt(8, static_cast<int>(g_kEventView.GetServerElapsedTime()));
-	
-	actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga",500,0);
-	
+
+	actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga", 500, 0);
+
 	actor.FindPathNormal();
 	lwPoint3	pt = actor.GetTranslate();
-	pt.SetZ(pt.GetZ()-30);
+	pt.SetZ(pt.GetZ() - 30);
 	//actor.AttachParticleToPoint(201, pt, "e_special_transform")	
 	actor.SetComboCount(0);
-	
+
 	if (actor.IsMyActor() == false)
 	{
-		actor.SetTranslate(action.GetActionStartPos(),false);
+		actor.SetTranslate(action.GetActionStartPos(), false);
 	}
-	
+
 	actor.UseSkipUpdateWhenNotVisible(false);
-	action.SetParamInt(4,0);
-	
+	action.SetParamInt(4, 0);
+
 	if (actor.IsMyActor())
 	{
-	
-        lwGetComboAdvisor().OnNewActionEnter(action.GetID());	
-        lwGetComboAdvisor().OnNewActionEnter(action.GetID());	
-        
+
+		lwGetComboAdvisor().OnNewActionEnter(action.GetID());
+		lwGetComboAdvisor().OnNewActionEnter(action.GetID());
+
 		std::string kNormalAttackActionID = actor.GetNormalAttackActionID();
-        lwGetComboAdvisor().AddNextAction("a_dash_attack");    
-        lwGetComboAdvisor().AddNextAction("a_dash_jump");    
-        lwGetComboAdvisor().AddNextAction("a_dash_blowup");    
-        lwGetComboAdvisor().AddNextAction("a_clown_sliding_tackle");    
+		lwGetComboAdvisor().AddNextAction("a_dash_attack");
+		lwGetComboAdvisor().AddNextAction("a_dash_jump");
+		lwGetComboAdvisor().AddNextAction("a_dash_blowup");
+		lwGetComboAdvisor().AddNextAction("a_clown_sliding_tackle");
 	}
-	
+
 	// actor.SetDirection(action.GetDirection());
 
 	return true;
 }
-bool	PgActionFSM_Act_Dash::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool	PgActionFSM_Act_Dash::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -1099,88 +1100,88 @@ bool	PgActionFSM_Act_Dash::OnUpdate(lwActor actor,lwAction action,float accumTim
 
 	//ODS("__________Jumping . " .. jumping .. "________\n")
 
-	
-	if (std::string(action.GetParam(2)) == "" && 
-	
-		( std::string(action.GetNextActionName()) == "a_dash_attack"
-		|| std::string(action.GetNextActionName()) == "a_magician_dash_attack"
-		|| std::string(action.GetNextActionName()) == "a_thi_dash_attack"
-		|| std::string(action.GetNextActionName()) == "a_archer_dash_attack"
-		|| std::string(action.GetNextActionName()) == "a_Sum_dash_attack"
-		|| std::string(action.GetNextActionName()) == "a_twin_dash_attack"
+
+	if (std::string(action.GetParam(2)) == "" &&
+
+		(std::string(action.GetNextActionName()) == "a_dash_attack"
+			|| std::string(action.GetNextActionName()) == "a_magician_dash_attack"
+			|| std::string(action.GetNextActionName()) == "a_thi_dash_attack"
+			|| std::string(action.GetNextActionName()) == "a_archer_dash_attack"
+			|| std::string(action.GetNextActionName()) == "a_Sum_dash_attack"
+			|| std::string(action.GetNextActionName()) == "a_twin_dash_attack"
+			)
 		)
-	  )
 	{
-		
-	    action.SetNextActionName(ACTIONNAME_IDLE);
-	    
+
+		action.SetNextActionName(ACTIONNAME_IDLE);
+
 	}
-	
+
 	if (std::string(action.GetParam(2)) == "ToDashAttack!")
 	{
-	    action.SetParam(2,"end");
+		action.SetParam(2, "end");
 		return false;
 	};
-	
+
 	if (iState == 0)
 	{
-		actor.FindPathNormal();		
-		
+		actor.FindPathNormal();
+
 		float fAccel = -1000 * frameTime;
 		float fVelocity = action.GetParamFloat(1);
-		
-//		local kMovingDir = actor.GetLookingDir()
-//		kMovingDir.Multiply(fVelocity)
-		
+
+		//		local kMovingDir = actor.GetLookingDir()
+		//		kMovingDir.Multiply(fVelocity)
+
 		BYTE dir = action.GetDirection();
 
 		//ODS("______________Direction . " .. dir .. "\n")
 
-		
-		//ÇöÀç´Â ÀÏ´Ü ¸·¾Æ µÐ´Ù.
-		//ÃÖ´ë ´ë½¬ °Å¸®º¸´Ù ¸¹ÀÌ °¡´Â °æ¿ì°¡ »ý±æ ¼ö ÀÖÀ¸¹Ç·Î ½Ã¹Ä·¹ÀÌ¼Ç ÈÄ ÃÖ´ë°ª ÀÌ»ó °¡Áö ¸øÇÏµµ·Ï ÇÑ´Ù.
+
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½.
+		//ï¿½Ö´ï¿½ ï¿½ë½¬ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ã¹Ä·ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ ï¿½Ö´ë°ª ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		NiPoint3 kNewPos = actor.GetPos()();
 		NiPoint3 kOldPos = action.GetParamAsPoint(7)();
-		kOldPos.z = kNewPos.z = 0.0f; //Z¸¦ ¹«½ÃÇÏ°í °è»êÇÑ´Ù. ¶³¾îÁö´Â °ÍÀº Áß·Â¿¡ ÀÇÇÑ °Í
+		kOldPos.z = kNewPos.z = 0.0f; //Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
 		float const fDistance = (kNewPos - kOldPos).Length();
 
-		//ÀÌµ¿ÇÑ °Å¸®°¡ ÀÖÀ» °æ¿ì
-		if(0.0f < fDistance)
+		//ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		if (0.0f < fDistance)
 		{
 			float const fMaxDistance = 130.0f;
-			//³²Àº ÀÌµ¿ °Å¸®
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Å¸ï¿½
 			float const fDistance2 = fMaxDistance - fDistance;
 
-			//µÎ º¤ÅÍ¸¦ ÀÌ¿ëÇÏ¿© ¹æÇâ º¤ÅÍ¸¦ ±¸ÇÏ°í
-			//¹æÇâ º¤ÅÍ¸¦ ÀÌ¿ëÇÏ¿© ½ÇÁ¦·Î ÀÌµ¿ÇÏ´Â °÷ÀÇ À§Ä¡¸¦ ±¸ÇÑ´Ù.
+			//ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 			NiPoint3 kDirection = kNewPos - kOldPos;
 			kDirection.Unitize();
 			kDirection *= fVelocity * frameTime;
 			kDirection += kNewPos;
 
-			// ÀÌ¹ø ÇÁ·¹ÀÓ¿¡ ÀÌµ¿ ÇÏ´Â °Å¸®
+			// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½Ìµï¿½ ï¿½Ï´ï¿½ ï¿½Å¸ï¿½
 			float const fDistance3 = (kDirection - kOldPos).Length();
 
-			//ÀÌ¹Ì ÃÖ´ë ´ë½¬ ÀÌµ¿°Å¸® °Å¸®¸¦ ¹þ¾î³­ °æ¿ì
-			if(fMaxDistance - fDistance3 < 0)
+			//ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ ï¿½ë½¬ ï¿½Ìµï¿½ï¿½Å¸ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³­ ï¿½ï¿½ï¿½
+			if (fMaxDistance - fDistance3 < 0)
 			{
-				//fVelocity°ªÀ» ´Ù½Ã ¼¼ÆÃÇØ¾ß ÇÑ´Ù.				
+				//fVelocityï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.				
 				fVelocity = fDistance2 / frameTime;
 			}
 		}
 
-		actor.Walk(dir, fVelocity,0,false);
-		
+		actor.Walk(dir, fVelocity, 0, false);
+
 		fVelocity = fVelocity + fAccel;
 		fVelocity = __max(0, fVelocity);
 		action.SetParamFloat(1, fVelocity);
-		
+
 		float fElapsedTime = accumTime - action.GetParamFloat(0);
 		if (0.3f < fElapsedTime)
 		{
-			// TODO . ElapsedTimeÀÌ 0.3¿¡¼­ ¾ó¸¶³ª ¹þ¾î³µ´ÂÁö È®ÀÎ ÈÄ¿¡, ±×¸¸Å­ µÚ·Î ´ç°Ü ÁÖ¾î¾ß ÇÑ´Ù.
-			action.SetParamInt(4,1);
+			// TODO . ElapsedTimeï¿½ï¿½ 0.3ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸¶³ï¿½ ï¿½ï¿½ï¿½î³µï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ä¿ï¿½, ï¿½×¸ï¿½Å­ ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
+			action.SetParamInt(4, 1);
 			action.SetParamFloat(5, accumTime);
 		}
 	}
@@ -1188,9 +1189,9 @@ bool	PgActionFSM_Act_Dash::OnUpdate(lwActor actor,lwAction action,float accumTim
 	{
 		float fElapsedTime = accumTime - action.GetParamFloat(5);
 		float	fDashFreezeTime = lua_tinker::call<float>("GetDashFreezeTime");
-		if (fElapsedTime>=fDashFreezeTime)
+		if (fElapsedTime >= fDashFreezeTime)
 		{
-			action.SetParam(2,"end");
+			action.SetParam(2, "end");
 			if (actor.IsMeetFloor() == false)
 			{
 				action.SetNextActionName(ACTIONNAME_JUMP);
@@ -1198,15 +1199,15 @@ bool	PgActionFSM_Act_Dash::OnUpdate(lwActor actor,lwAction action,float accumTim
 			return false;
 		}
 	}
-	
+
 	if (std::string(action.GetParam(3)) == "EndNow")
 	{
 		return false;
 	}
-		
+
 	return	true;
 }
-bool	PgActionFSM_Act_Dash::OnCleanUp(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Dash::OnCleanUp(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 
@@ -1221,41 +1222,41 @@ bool	PgActionFSM_Act_Dash::OnCleanUp(lwActor actor,lwAction action)	const
 
 	return true;
 }
-bool	PgActionFSM_Act_Dash::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_Dash::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
 	std::string kNextActionID = action.GetID();
-	if("a_rest" == kNextActionID)
+	if ("a_rest" == kNextActionID)
 	{
 		return true;
 	}
-	
+
 	lwAction kCurAction = actor.GetAction();
 
 	lwCheckNil(kCurAction.IsNil());
 	std::string newActionID = action.GetID();
 
 	lwCheckNil(actor.GetPilot().IsNil());
-    int	iBaseActorType = actor.GetPilot().GetBaseClassID();
+	int	iBaseActorType = actor.GetPilot().GetBaseClassID();
 	int const iEquipWeaponType = actor.GetEquippedWeaponType();
-    
-    if (newActionID == ACTIONNAME_JUMP)
+
+	if (newActionID == ACTIONNAME_JUMP)
 	{
 		//action.SetDoNotBroadCast(true)
-		
+
 		action.SetSlot(2);
 	}
 
-	if (std::string(action.GetActionType())=="EFFECT")
+	if (std::string(action.GetActionType()) == "EFFECT")
 	{
 		return true;
 	};
-	
+
 	int weapontype = actor.GetEquippedWeaponType();
-	
-	if( newActionID == "a_dash_attack" ||
+
+	if (newActionID == "a_dash_attack" ||
 		newActionID == "a_thi_dash_attack" ||
 		newActionID == "a_nj_dash_attack" ||
 		newActionID == "a_archer_dash_attack" ||
@@ -1263,62 +1264,62 @@ bool	PgActionFSM_Act_Dash::OnLeave(lwActor actor,lwAction action,bool bCancel)	c
 		newActionID == "a_clown_sliding_tackle" ||
 		newActionID == "a_kni_dashdownblow" ||
 		newActionID == "a_dash_blowup" ||
-		newActionID == "a_trap"||
+		newActionID == "a_trap" ||
 		newActionID == "a_Sum_dash_attack"
 		|| "a_twin_dash_attack" == newActionID
 		|| "a_twin_screw_drop_kick" == newActionID
 		)
 	{
-		action.SetParamFloat(1,kCurAction.GetParamFloat(1));
-		action.SetParamAsPoint(7, kCurAction.GetParamAsPoint(7)); // ´ë½¬ÀÇ ½ÃÀÛ À§Ä¡¸¦ ¼¼ÆÃ
-		action.SetParamFloat(8,130.0f); //MaxÀÌµ¿ °Å¸®
-	
+		action.SetParamFloat(1, kCurAction.GetParamFloat(1));
+		action.SetParamAsPoint(7, kCurAction.GetParamAsPoint(7)); // ï¿½ë½¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		action.SetParamFloat(8, 130.0f); //Maxï¿½Ìµï¿½ ï¿½Å¸ï¿½
+
 		return true;
 	}
-	
-	if ((newActionID.substr(0,7) == "a_melee" || 
-		newActionID.substr(0,11) == "a_thi_melee" || 
-		newActionID.substr(0,10) == "a_nj_melee" ||
-		newActionID == "a_archer_shot_01" || 
-		newActionID == "a_MagicianShot_01" || 
+
+	if ((newActionID.substr(0, 7) == "a_melee" ||
+		newActionID.substr(0, 11) == "a_thi_melee" ||
+		newActionID.substr(0, 10) == "a_nj_melee" ||
+		newActionID == "a_archer_shot_01" ||
+		newActionID == "a_MagicianShot_01" ||
 		newActionID == "a_Sum_Rifle_Shot"
 		|| "a_twin_melee_01_m" == newActionID
-		) 
-		&& weapontype!=0)
+		)
+		&& weapontype != 0)
 	{
-		
+
 		// Dash Attack!
-		
-		
+
+
 		lwPilot	kPilot = actor.GetPilot();
 		lwCheckNil(kPilot.IsNil());
 
 		std::string	kNextActionName = "";
-		
-		if (kPilot.IsCorrectClass(UCLASS_CLOWN,false) &&
-			Act_Melee_IsToDownAttack(actor,action))
+
+		if (kPilot.IsCorrectClass(UCLASS_CLOWN, false) &&
+			Act_Melee_IsToDownAttack(actor, action))
 		{
-			
+
 			kNextActionName = "a_clown_sliding_tackle";
 		}
-		else if (kPilot.IsCorrectClass(UCLASS_KNIGHT,false) &&
-			 actor.IsMeetFloor() == false)
+		else if (kPilot.IsCorrectClass(UCLASS_KNIGHT, false) &&
+			actor.IsMeetFloor() == false)
 		{
 			kNextActionName = "a_kni_dashdownblow";
 		}
-		else if (kPilot.IsCorrectClass(UCLASS_WARRIOR,false) && 
-			Act_Melee_IsToUpAttack(actor,action))
+		else if (kPilot.IsCorrectClass(UCLASS_WARRIOR, false) &&
+			Act_Melee_IsToUpAttack(actor, action))
 		{
 			kNextActionName = "a_dash_blowup";
 		}
-		else if (kPilot.IsCorrectClass(UCLASS_MIRAGE,false) && 
+		else if (kPilot.IsCorrectClass(UCLASS_MIRAGE, false) &&
 			actor.IsMeetFloor() == false)
 		{
 			kNextActionName = "a_twin_screw_drop_kick";
 		}
 		else
 		{
-			
+
 			if (actor.CheckStatusEffectExist("se_transform_to_metamorphosis"))
 			{
 				kNextActionName = "a_nj_dash_attack";
@@ -1333,11 +1334,11 @@ bool	PgActionFSM_Act_Dash::OnLeave(lwActor actor,lwAction action,bool bCancel)	c
 				//else
 				//{
 				//	if( PgItemEx::IT_SWORD == iEquipWeaponType )
-				//	{//ÇÑ¼Õ°Ë
+				//	{//ï¿½Ñ¼Õ°ï¿½
 				//		kNextActionName = "a_ohs_combo_k_a";
 				//	}
 				//	else if( PgItemEx::IT_BTS == iEquipWeaponType )
-				//	{//¾ç¼Õ°Ë
+				//	{//ï¿½ï¿½Õ°ï¿½
 				//		kNextActionName = "a_ths_combo_k_a";
 				//	}
 				//}
@@ -1359,15 +1360,15 @@ bool	PgActionFSM_Act_Dash::OnLeave(lwActor actor,lwAction action,bool bCancel)	c
 			{
 				kNextActionName = "a_Sum_dash_attack";
 			}
-			else if (UCLASS_DOUBLE_FIGHTER == iBaseActorType )
+			else if (UCLASS_DOUBLE_FIGHTER == iBaseActorType)
 			{
 				kNextActionName = "a_twin_dash_attack";
 			}
 		}
-		
-		if (kNextActionName !="" && action.CheckCanEnter(actor,kNextActionName.c_str(),true))
+
+		if (kNextActionName != "" && action.CheckCanEnter(actor, kNextActionName.c_str(), true))
 		{
-			kCurAction.SetParam(2,"ToDashAttack!");
+			kCurAction.SetParam(2, "ToDashAttack!");
 			kCurAction.SetNextActionName(kNextActionName.c_str());
 		}
 		return false;
@@ -1383,28 +1384,28 @@ bool	PgActionFSM_Act_Dash::OnLeave(lwActor actor,lwAction action,bool bCancel)	c
 	}
 	else if (newActionID == ACTIONNAME_JUMP && actor.IsJumping() == false)
 	{
-		if (std::string(action.GetParam(5)) == "HiJump" ) // hiJump¸é ±×³É jump·Î ³Ñ¾î°¨.
+		if (std::string(action.GetParam(5)) == "HiJump") // hiJumpï¿½ï¿½ ï¿½×³ï¿½ jumpï¿½ï¿½ ï¿½Ñ¾î°¨.
 		{
 			action.SetSlot(1);
 			kCurAction.SetParam(3, "EndNow");
 			return true;
 		}
 
-		if(action.CheckCanEnter(actor,"a_dash_jump",false) == false)
+		if (action.CheckCanEnter(actor, "a_dash_jump", false) == false)
 		{
 			return	false;
 		}
-		
+
 		//ODS("____________To Dash Jump______________\n")
 		kCurAction.SetNextActionName("a_dash_jump");
 		kCurAction.SetParam(3, "EndNow");
-		return false ;
+		return false;
 	}
-	else if(newActionID == "a_dash_jump")
+	else if (newActionID == "a_dash_jump")
 	{
-		return	action.CheckCanEnter(actor,newActionID.c_str(),false);
+		return	action.CheckCanEnter(actor, newActionID.c_str(), false);
 	}
-	else if( newActionID == "a_telejump" ||
+	else if (newActionID == "a_telejump" ||
 		newActionID == "a_lock_move" ||
 		newActionID == "a_trap" ||
 		newActionID == "a_teleport"
@@ -1420,7 +1421,7 @@ bool	PgActionFSM_Act_Dash::OnLeave(lwActor actor,lwAction action,bool bCancel)	c
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //	class	PgActionFSM_Act_Dash_Jump
 ////////////////////////////////////////////////////////////////////////////////////////////////
-bool	PgActionFSM_Act_Dash_Jump::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Dash_Jump::OnEnter(lwActor actor, lwAction action)	const
 {
 
 	lwCheckNil(actor.IsNil());
@@ -1438,22 +1439,22 @@ bool	PgActionFSM_Act_Dash_Jump::OnEnter(lwActor actor,lwAction action)	const
 	float	jumpForce = lua_tinker::call<float>("GetJumpForce");
 
 	actor.StartJump(jumpForce);
-	actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga",500,0);
-	
-//	if actor.IsMyActor() == false then
-//		actor.SetTranslate(action.GetActionStartPos());
-//	end
-	
-	
+	actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga", 500, 0);
+
+	//	if actor.IsMyActor() == false then
+	//		actor.SetTranslate(action.GetActionStartPos());
+	//	end
+
+
 	actor.UseSkipUpdateWhenNotVisible(false);
 
 	if (actor.IsMyActor())
 	{
-        lwGetComboAdvisor().OnNewActionEnter(action.GetID());	
+		lwGetComboAdvisor().OnNewActionEnter(action.GetID());
 	}
-	
+
 	//if( IsClass_OwnSubPlayer(actor.GetAbil(AT_CLASS)) )
-	//{// ½ÖµÕÀÌÀÌ¸é
+	//{// ï¿½Öµï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
 	//	lwActor kSubActor = actor.GetSubPlayer();
 	//	if( !kSubActor.IsNil() )
 	//	{
@@ -1466,19 +1467,19 @@ bool	PgActionFSM_Act_Dash_Jump::OnEnter(lwActor actor,lwAction action)	const
 	//		}
 	//	}
 	//}
-	
+
 	lwAction prevAction = actor.GetAction();
-//	lwCheckNil(prevAction.IsNil());
-	if( false == prevAction.IsNil() )
+	//	lwCheckNil(prevAction.IsNil());
+	if (false == prevAction.IsNil())
 	{
 		int iDir = prevAction.GetDirection();
-		if( actor.IsUnitType(UT_SUB_PLAYER) )
+		if (actor.IsUnitType(UT_SUB_PLAYER))
 		{
 			lwActor kCaller = actor.GetCallerActor();
-			if( !kCaller.IsNil() )
+			if (!kCaller.IsNil())
 			{
 				lwAction kCallerAction = kCaller.GetAction();
-				if( !kCallerAction.IsNil() )
+				if (!kCallerAction.IsNil())
 				{
 					iDir = kCallerAction.GetDirection();
 				}
@@ -1487,16 +1488,16 @@ bool	PgActionFSM_Act_Dash_Jump::OnEnter(lwActor actor,lwAction action)	const
 		action.SetParamInt(911, iDir);
 
 		lwActor kSubActor = actor.GetSubPlayer();
-		if( false == kSubActor.IsNil() )
+		if (false == kSubActor.IsNil())
 		{
 			lwAction kSubAction = kSubActor.GetAction();
-			if( false == kSubAction.IsNil() )
+			if (false == kSubAction.IsNil())
 			{
-				if( 0 != strcmp( "BlowUp_Down", kSubAction.GetActionName() ) 
-					&& 0 != strcmp( "BlowUp_Loop", kSubAction.GetActionName() )
-					&& 0 != strcmp( "BlowUp_Start", kSubAction.GetActionName() ) )
-				{//¼­ºêÄ³¸¯ÅÍ »óÅÂ°¡ ´Ù¿î »óÅÂ¸é °­Á¦ ÀüÀÌ ½ÃÅ°Áö ¾Êµµ·Ï ÇÏÀÚ.
-					lwCommonSkillUtilFunc::TryMustChangeSubPlayerAction( actor, action.GetID(), iDir, 0, true );
+				if (0 != strcmp("BlowUp_Down", kSubAction.GetActionName())
+					&& 0 != strcmp("BlowUp_Loop", kSubAction.GetActionName())
+					&& 0 != strcmp("BlowUp_Start", kSubAction.GetActionName()))
+				{//ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+					lwCommonSkillUtilFunc::TryMustChangeSubPlayerAction(actor, action.GetID(), iDir, 0, true);
 				}
 			}
 		}
@@ -1504,7 +1505,7 @@ bool	PgActionFSM_Act_Dash_Jump::OnEnter(lwActor actor,lwAction action)	const
 
 	return true;
 }
-bool	PgActionFSM_Act_Dash_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTime,float fFrameTime)	const
+bool	PgActionFSM_Act_Dash_Jump::OnUpdate(lwActor actor, lwAction action, float fAccumTime, float fFrameTime)	const
 {
 	lwCheckNil(action.IsNil());
 	lwCheckNil(actor.IsNil());
@@ -1515,15 +1516,15 @@ bool	PgActionFSM_Act_Dash_Jump::OnUpdate(lwActor actor,lwAction action,float fAc
 
 	bool IsAnimDone = actor.IsAnimationDone();
 	BYTE dir = action.GetParamInt(911);
-	
+
 	if (curAnimSlot != 2)
 	{
-		actor.Walk(dir, movingSpeed,0,false);
+		actor.Walk(dir, movingSpeed, 0, false);
 	}
 
 	if (curAnimSlot == 0)
 	{
-		if (IsAnimDone == true )
+		if (IsAnimDone == true)
 		{
 			actor.PlayNext();
 		}
@@ -1558,9 +1559,9 @@ bool	PgActionFSM_Act_Dash_Jump::OnUpdate(lwActor actor,lwAction action,float fAc
 		}
 	}
 
-	if ( std::string(action.GetParam(4808)) == "end" )
+	if (std::string(action.GetParam(4808)) == "end")
 	{
-		if( actor.IsUnitType( UT_SUB_PLAYER ) )
+		if (actor.IsUnitType(UT_SUB_PLAYER))
 		{
 			lwCommonSkillUtilFunc::TryMustChangeActorAction(actor, "a_twin_sub_trace_ground");
 		}
@@ -1569,7 +1570,7 @@ bool	PgActionFSM_Act_Dash_Jump::OnUpdate(lwActor actor,lwAction action,float fAc
 
 	return true;
 }
-bool	PgActionFSM_Act_Dash_Jump::OnCleanUp(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_Dash_Jump::OnCleanUp(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 
@@ -1578,7 +1579,7 @@ bool	PgActionFSM_Act_Dash_Jump::OnCleanUp(lwActor actor,lwAction action)	const
 
 	return	true;
 }
-bool	PgActionFSM_Act_Dash_Jump::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_Dash_Jump::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -1590,16 +1591,16 @@ bool	PgActionFSM_Act_Dash_Jump::OnLeave(lwActor actor,lwAction action,bool bCanc
 	int iCurrnetSlot = kCurAction.GetCurrentSlot();
 
 	//ODS("__________Dash_Jump's NextAction . " .. newActionID .. "\n")
-	
-	if (actor.IsMyActor() == false || 
+
+	if (actor.IsMyActor() == false ||
 		std::string(action.GetActionType()) == "EFFECT")
 	{
 		return true;
 	}
-	
-	if ( std::string(kCurAction.GetParam(4808)) == "end" &&
+
+	if (std::string(kCurAction.GetParam(4808)) == "end" &&
 		(iCurrnetSlot == 1 ||
-		iCurrnetSlot == 2))
+			iCurrnetSlot == 2))
 	{
 		if (newActionID == ACTIONNAME_RUN ||
 			newActionID == ACTIONNAME_IDLE)
@@ -1609,7 +1610,7 @@ bool	PgActionFSM_Act_Dash_Jump::OnLeave(lwActor actor,lwAction action,bool bCanc
 	}
 	else if (newActionID == "a_telejump" ||
 		newActionID == "a_lock_move" ||
-		newActionID == "a_trap" || 
+		newActionID == "a_trap" ||
 		newActionID == "a_teleport"
 		|| newActionID == "a_teleport_rocket"
 		)
@@ -1618,29 +1619,29 @@ bool	PgActionFSM_Act_Dash_Jump::OnLeave(lwActor actor,lwAction action,bool bCanc
 	}
 	else if (newActionID == ACTIONNAME_JUMP)
 	{
-		if (std::string(action.GetParam(5)) == "HiJump") // hiJump¸é ±×³É jump·Î ³Ñ¾î°¨.
+		if (std::string(action.GetParam(5)) == "HiJump") // hiJumpï¿½ï¿½ ï¿½×³ï¿½ jumpï¿½ï¿½ ï¿½Ñ¾î°¨.
 		{
 			kCurAction.SetParam(4808, "EndNow");
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 
-bool PgActionFSM_Act_Jump::OnCheckCanEnter(lwActor actor,lwAction action)	const
+bool PgActionFSM_Act_Jump::OnCheckCanEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
-	
+
 	lwAction prevAction = actor.GetAction();
 	//lwCheckNil(prevAction.IsNil());
-	
-	if( prevAction.IsNil() ) 
+
+	if (prevAction.IsNil())
 	{
 		return	true;
 	}
 	int const iSpecificActionNo = actor.GetAbil(AT_SKILL_SPECIFIC_JUMP);
-	if(0 < iSpecificActionNo
+	if (0 < iSpecificActionNo
 		//&& iSpecificActionNo != prevAction.GetActionNo()
 		)
 	{
@@ -1649,44 +1650,44 @@ bool PgActionFSM_Act_Jump::OnCheckCanEnter(lwActor actor,lwAction action)	const
 	}
 
 	lwPacket kPacket = action.GetParamAsPacket();
-	if( kPacket.IsNil() == false ) 
+	if (kPacket.IsNil() == false)
 	{
-		action.SetParamFloat(4,kPacket.PopFloat());
-		action.SetParamInt(7,kPacket.PopInt());
+		action.SetParamFloat(4, kPacket.PopFloat());
+		action.SetParamInt(7, kPacket.PopInt());
 	}
-		
+
 	std::string actionName = prevAction.GetID();
-	
-	//	³«¹ý Ã¼Å©
+
+	//	ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	CheckBreakFall(actor);
 
-	if( lwIsSingleMode() == false && actor.GetAbil(AT_C_MOVESPEED) == 0 ) 
-	{ // 0 ÀÌ¸é Á¡ÇÁ ÇÒ ¼ö ¾ø´Â »óÅÂ
+	if (lwIsSingleMode() == false && actor.GetAbil(AT_C_MOVESPEED) == 0)
+	{ // 0 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return false;
 	}
-	
-	if( IsFloatEvasion(actor,action) )
+
+	if (IsFloatEvasion(actor, action))
 	{
 		actor.ClearAllActionEffect();
 		return	true;
 	}
-	
-    if( actor.IsMeetFloor() == false ) 
+
+	if (actor.IsMeetFloor() == false)
 	{
-        if( actionName == "a_ladder_down" ||
-		    actionName == "a_ladder_idle" || 
-		    actionName == "a_ladder_up" ||
-		    actionName == "a_ladder_dash" ||
-		    actionName == "a_magician_down_shot" ||
-		    actionName == "a_archer_down_shot" ||
-		    actionName.substr(0,19) == "a_MagicianFloatShot" ||
-		    actionName.substr(0,13) == "a_float_melee" ||
-		    actionName.substr(0,16) == "a_nj_float_melee" ||
-		    actionName == "a_thief_float_melee_01" ||
-		    actionName == "a_down_attack_fly" ||
-		    actionName == "a_mag_down_attack_fly" ||
-		    actionName == "a_thi_down_attack_fly" ||
-		    actionName == "a_arc_down_attack_fly" ||
+		if (actionName == "a_ladder_down" ||
+			actionName == "a_ladder_idle" ||
+			actionName == "a_ladder_up" ||
+			actionName == "a_ladder_dash" ||
+			actionName == "a_magician_down_shot" ||
+			actionName == "a_archer_down_shot" ||
+			actionName.substr(0, 19) == "a_MagicianFloatShot" ||
+			actionName.substr(0, 13) == "a_float_melee" ||
+			actionName.substr(0, 16) == "a_nj_float_melee" ||
+			actionName == "a_thief_float_melee_01" ||
+			actionName == "a_down_attack_fly" ||
+			actionName == "a_mag_down_attack_fly" ||
+			actionName == "a_thi_down_attack_fly" ||
+			actionName == "a_arc_down_attack_fly" ||
 			actionName == ACTIONNAME_RUN ||
 			actionName == "a_storm blade" ||
 			actionName == "a_mega_stormblade" ||
@@ -1701,34 +1702,34 @@ bool PgActionFSM_Act_Jump::OnCheckCanEnter(lwActor actor,lwAction action)	const
 			actionName == "a_fig_floatdownblow1" ||
 			actionName == "a_fig_floatdownblow2" ||
 			actionName == "a_Judge Dread" ||
-			actionName == "a_Sky Pirce01" ||			
+			actionName == "a_Sky Pirce01" ||
 			actionName == "a_Screw Upper" ||
-			actionName == "a_mage_down_shot"||
-			actionName ==  "a_MP-Zero Trap" ||
-			actionName ==  "a_Splash Trap" ||
-			actionName ==  "a_Freezing Trap" ||
-			actionName ==  "a_Silence Trap" ||			
-			actionName ==  "a_tesla_coil" ||
-			actionName.substr(0,15) == "a_magefloatshot" ||
-			actionName.substr(0,18) == "a_twin_float_melee" ||
+			actionName == "a_mage_down_shot" ||
+			actionName == "a_MP-Zero Trap" ||
+			actionName == "a_Splash Trap" ||
+			actionName == "a_Freezing Trap" ||
+			actionName == "a_Silence Trap" ||
+			actionName == "a_tesla_coil" ||
+			actionName.substr(0, 15) == "a_magefloatshot" ||
+			actionName.substr(0, 18) == "a_twin_float_melee" ||
 			actionName == "a_Sum_Rifle_Jump_Shot_01"
 			|| "a_twin_tornado_spin" == actionName
 			|| "a_twin_dragon_upper" == actionName
 			|| "a_Air_Smash" == actionName
-		    ) {
+			) {
 			//ODS("Act_Jump_OnCheckCanEnter - true . "..actionName.."\n", false, 3851)
-		    return  true;
+			return  true;
 		}
-        return  false;
-    }
+		return  false;
+	}
 	return	true;
 }
-bool PgActionFSM_Act_Jump::OnEnter(lwActor actor,lwAction action) const
+bool PgActionFSM_Act_Jump::OnEnter(lwActor actor, lwAction action) const
 {
-		// check prveious action
-	// ¾ÆÁ÷±îÁö´Â actorÀÇ ActionÀÌ ÀÌÀü ¾×¼ÇÀÌ´Ù.
-	// OnEnter¿¡¼­ true¸¦ µÇµ¹·Á ÁÖ¸é, ÀÌÀüÀÇ ¾×¼ÇÀº 
-	// ¿ÏÀüÈ÷ »èÁ¦µÈ´Ù.
+	// check prveious action
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ actorï¿½ï¿½ Actionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½Ì´ï¿½.
+// OnEnterï¿½ï¿½ï¿½ï¿½ trueï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ ï¿½Ö¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ 
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½.
 
 //	if( action.GetParamFloat(123456) == 0 ) {
 //		action.SetParamFloat(123456, timeGetTime())
@@ -1737,19 +1738,19 @@ bool PgActionFSM_Act_Jump::OnEnter(lwActor actor,lwAction action) const
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	if( actor.IsMyActor() )
-	{//µ¿±âÈ­ ¸ÂÁö ¾Ê´Â ¹®Á¦ ÀÏºÎ ¼öÁ¤ : ÀÌµ¿ ÇÏ±â Àü¿¡ Ä³¸¯ÅÍ ¹æÇâÀ» ´Ù½Ã ¹Þµµ·Ï ¼öÁ¤
-		NiInputKeyboard	*pkKeyboard = g_pkLocalManager->GetInputSystem()->GetKeyboard();
-		if( pkKeyboard)
+	if (actor.IsMyActor())
+	{//ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ïºï¿½ ï¿½ï¿½ï¿½ï¿½ : ï¿½Ìµï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Þµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		NiInputKeyboard* pkKeyboard = g_pkLocalManager->GetInputSystem()->GetKeyboard();
+		if (pkKeyboard)
 		{
-			int const iDirKeySet[4] = {ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ACTIONKEY_UP, ACTIONKEY_DOWN};
-			BYTE const byDirSet[4] = {DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN};
-			for( int iCount = 0; iCount<4; ++iCount )
+			int const iDirKeySet[4] = { ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ACTIONKEY_UP, ACTIONKEY_DOWN };
+			BYTE const byDirSet[4] = { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN };
+			for (int iCount = 0; iCount < 4; ++iCount)
 			{
 				int const iKeyNum = g_kGlobalOption.GetUKeyToKey(iDirKeySet[iCount]);
 				NiInputKeyboard::KeyCode kKeycode = static_cast<NiInputKeyboard::KeyCode>(iKeyNum);
-				bool const bKeyDown = pkKeyboard->KeyIsDown( kKeycode );
-				if( bKeyDown )
+				bool const bKeyDown = pkKeyboard->KeyIsDown(kKeycode);
+				if (bKeyDown)
 				{
 					g_kPilotMan.UpdateDirectionSlot(iDirKeySet[iCount], true);
 				}
@@ -1758,104 +1759,104 @@ bool PgActionFSM_Act_Jump::OnEnter(lwActor actor,lwAction action) const
 	}
 
 	lwAction prevAction = actor.GetAction();
-//	lwCheckNil(prevAction.IsNil());
+	//	lwCheckNil(prevAction.IsNil());
 
 	lwPilot kPilot = actor.GetPilot();
-	if( true == kPilot.IsNil() )
+	if (true == kPilot.IsNil())
 	{
 		return false;
 	}
-	
-	if(	prevAction.IsNil() )
+
+	if (prevAction.IsNil())
 	{
 		return	true;
 	}
-	
+
 	std::string actionName = prevAction.GetID();
 
 	//ODS("Act_Jump_OnEnter actionName."..actionName.."\n");
-	
-	float	fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker),"jumpForce");
+
+	float	fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker), "jumpForce");
 	float	bIsFloatEvasion = (action.GetParamInt(7) == 1);
-	
-	if( strcmp(action.GetParam(4), "null") != 0 ) 
+
+	if (strcmp(action.GetParam(4), "null") != 0)
 	{
 		fJumpForce = PgStringUtil::SafeAtof(action.GetParam(4));
-		if( fJumpForce == 0.0f)
+		if (fJumpForce == 0.0f)
 		{
-			fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker),"jumpForce");
+			fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker), "jumpForce");
 		}
 	}
-	
-	if( bIsFloatEvasion ) 
+
+	if (bIsFloatEvasion)
 	{
 		fJumpForce = 30;
 	}
-		
-	action.SetParamFloat(4,fJumpForce);
-	
-	if( STR_HIJUMP == action.GetParam(5) )
+
+	action.SetParamFloat(4, fJumpForce);
+
+	if (STR_HIJUMP == action.GetParam(5))
 	{
 		//UseCameraHeightAdjust(false)
 	}
-	
-	if( bIsFloatEvasion 
-		|| ESS_CASTTIME == prevAction.GetActionParam()	// Ä³½ºÆÃÁß Äµ½½ÀÌ¸é
-		) 
+
+	if (bIsFloatEvasion
+		|| ESS_CASTTIME == prevAction.GetActionParam()	// Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Äµï¿½ï¿½ï¿½Ì¸ï¿½
+		)
 	{
 		actor.StartJump(fJumpForce);
 		return	true;
 	}
 
-	if( actionName == ACTIONNAME_RUN ||
+	if (actionName == ACTIONNAME_RUN ||
 		actionName == "a_walk_left" ||
 		actionName == "a_walk_right" ||
 		actionName == "a_walk_up" ||
 		actionName == "a_walk_down" ||
 		actionName == "a_ladder_down" ||
-		actionName == "a_ladder_idle" || 
+		actionName == "a_ladder_idle" ||
 		actionName == "a_ladder_up" ||
 		actionName == "a_ladder_dash" ||
-		actionName == "a_dash" || 
+		actionName == "a_dash" ||
 		actionName == "a_dash_jump" ||
 		STR_HIJUMP == action.GetParam(5)
-		) 
+		)
 	{
-		if( action.GetCurrentSlot() == 1 ) 
+		if (action.GetCurrentSlot() == 1)
 		{
-			if( strcmp(prevAction.GetParam(2), "fall_up") != 0 ) 
+			if (strcmp(prevAction.GetParam(2), "fall_up") != 0)
 			{
-				SetComboAdvisor(actor,action);
+				SetComboAdvisor(actor, action);
 				actor.StartJump(fJumpForce);
 			}
 			lwPoint3	pt = actor.GetTranslate();
 			pt.SetZ(pt.GetZ() - 30);
 			actor.AttachParticleToPoint(2, pt, "e_jump");
 		}
-		else if( action.GetCurrentSlot() == 2 ) 
+		else if (action.GetCurrentSlot() == 2)
 		{
-			if( actor.IsJumping() == false ) 
+			if (actor.IsJumping() == false)
 			{
 				actor.StartJump(0);
 			}
 		}
 		return true;
 	}
-	else if( actionName == ACTIONNAME_JUMP ) 
+	else if (actionName == ACTIONNAME_JUMP)
 	{
-		if( strcmp(action.GetParam(1), "jump_again") == 0 )
+		if (strcmp(action.GetParam(1), "jump_again") == 0)
 		{
-			actor.StartJump(fJumpForce/2);
+			actor.StartJump(fJumpForce / 2);
 			action.SetSlot(4);
 			return true;
 		}
-		if( actor.IsMeetFloor() == true &&
-			actor.IsSlide() == false 
-			) 
+		if (actor.IsMeetFloor() == true &&
+			actor.IsSlide() == false
+			)
 		{
 			action.SetSlot(1);
 			actor.StartJump(fJumpForce);
-			SetComboAdvisor(actor,action);
+			SetComboAdvisor(actor, action);
 			return true;
 		}
 		else
@@ -1865,15 +1866,15 @@ bool PgActionFSM_Act_Jump::OnEnter(lwActor actor,lwAction action) const
 			return false;
 		}
 	}
-	else if( actionName == ACTIONNAME_IDLE ||
+	else if (actionName == ACTIONNAME_IDLE ||
 		actionName == ACTIONNAME_BIDLE ||
-		actionName == "a_hang" || 
+		actionName == "a_hang" ||
 		actionName == "a_rope" ||
 		actionName == "a_magician_charge_attack" ||
 		actionName == "a_archer_jump_shot" ||
-		actionName.substr(0,19) == "a_MagicianFloatShot" ||
-		actionName.substr(0,13) == "a_float_melee" ||
-		actionName.substr(0,16) == "a_nj_float_melee" ||
+		actionName.substr(0, 19) == "a_MagicianFloatShot" ||
+		actionName.substr(0, 13) == "a_float_melee" ||
+		actionName.substr(0, 16) == "a_nj_float_melee" ||
 		actionName == "a_thief_float_melee_01" ||
 		actionName == "a_down_attack_fly" ||
 		actionName == "a_mag_down_attack_fly" ||
@@ -1890,26 +1891,26 @@ bool PgActionFSM_Act_Jump::OnEnter(lwActor actor,lwAction action) const
 		actionName == "a_mega_stormblade" ||
 		actionName == "a_AscensionDragon" ||
 		actionName == "a_archer_down_shot" ||
-		actionName == "a_Sky Pirce01" ||		
+		actionName == "a_Sky Pirce01" ||
 		actionName == "a_Screw Upper" ||
 		actionName == "a_mage_down_shot" ||
-		actionName ==  "a_MP-Zero Trap" ||
-		actionName ==  "a_Splash Trap" ||
-		actionName ==  "a_Freezing Trap" ||
-		actionName ==  "a_Silence Trap" ||
-		actionName ==  "a_tesla_coil" || 
-		actionName ==  "a_Sum_Rifle_Jump_Shot_01" ||
-		actionName.substr(0,15) == "a_magefloatshot" ||
-		actionName.substr(0,18) == "a_twin_float_melee"
+		actionName == "a_MP-Zero Trap" ||
+		actionName == "a_Splash Trap" ||
+		actionName == "a_Freezing Trap" ||
+		actionName == "a_Silence Trap" ||
+		actionName == "a_tesla_coil" ||
+		actionName == "a_Sum_Rifle_Jump_Shot_01" ||
+		actionName.substr(0, 15) == "a_magefloatshot" ||
+		actionName.substr(0, 18) == "a_twin_float_melee"
 		|| "a_twin_tornado_spin" == actionName
 		|| "a_twin_dragon_upper" == actionName
 		|| "a_Air_Smash" == actionName
 		|| "a_domination" == actionName
 		)
 	{
-		if( actor.IsMeetFloor() == false && 
-			action.GetCurrentSlot() != 2 
-			) 
+		if (actor.IsMeetFloor() == false &&
+			action.GetCurrentSlot() != 2
+			)
 		{
 			//ODS("Act_Jump_OnEnter Failed action.GetCurrentSlot() != 2 / actionName . "..actionName.."\n", false, 3851);
 			return	false;
@@ -1918,7 +1919,7 @@ bool PgActionFSM_Act_Jump::OnEnter(lwActor actor,lwAction action) const
 
 		return true;
 	}
-	else if( kPilot.IsHaveComboAction(prevAction.GetActionNo()) )
+	else if (kPilot.IsHaveComboAction(prevAction.GetActionNo()))
 	{
 		action.SetSlot(1);
 		actor.StartJump(fJumpForce);
@@ -1928,7 +1929,7 @@ bool PgActionFSM_Act_Jump::OnEnter(lwActor actor,lwAction action) const
 	//ODS("Act_Jump_OnEnter Failed actionName . "..actionName.."\n", false, 3851);
 	return false;
 }
-void PgActionFSM_Act_Jump::OnOverridePacket(lwActor actor,lwAction action,lwPacket kPacket)	const
+void PgActionFSM_Act_Jump::OnOverridePacket(lwActor actor, lwAction action, lwPacket kPacket)	const
 {
 	lwCheckNil(action.IsNil());
 	lwCheckNil(kPacket.IsNil());
@@ -1936,7 +1937,7 @@ void PgActionFSM_Act_Jump::OnOverridePacket(lwActor actor,lwAction action,lwPack
 	kPacket.PushFloat(action.GetParamFloat(4));
 	kPacket.PushInt(action.GetParamInt(7));	//	Is this Float Evasion ?
 }
-bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTime,float fFrameTime) const
+bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor, lwAction action, float fAccumTime, float fFrameTime) const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -1944,32 +1945,32 @@ bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTi
 	int curAnimSlot = action.GetCurrentSlot();
 	float movingSpeed = 0.0f;
 	float	fJumpForce = action.GetParamFloat(4);
-		
-	if( lwIsSingleMode() == true ) 
+
+	if (lwIsSingleMode() == true)
 	{
 		movingSpeed = 150;
 	}
 	else
 	{
-		movingSpeed = static_cast<float>( actor.GetAbil(AT_C_MOVESPEED) );
+		movingSpeed = static_cast<float>(actor.GetAbil(AT_C_MOVESPEED));
 	}
 
-	if( NULL != g_pkWorld ) 
+	if (NULL != g_pkWorld)
 	{
-		if( g_pkWorld->GetAttr() == GATTR_VILLAGE ) 
+		if (g_pkWorld->GetAttr() == GATTR_VILLAGE)
 		{
 			movingSpeed = movingSpeed + actor.GetAbil(AT_C_VILLAGE_MOVESPEED);
 		}
 	}
 
 	DoAutoFire(actor);
-	
+
 	lwPoint3 vel = actor.GetVelocity(); 	// Current Velocity
 	float z = vel.GetZ(); 				// Gravity
 
 	//std::string param = action.GetParam(0);
 
-	// Gravity°ªÀÌ ±ò²ûÇÏ°Ô 0ÀÌ ³ª¿ÀÁö ¾Ê´Â °Í¿¡ ÁÖÀÇ.
+	// Gravityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	bool IsAnimDone = actor.IsAnimationDone();
 
 	std::string nextAction = ACTIONNAME_IDLE;
@@ -1977,10 +1978,10 @@ bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTi
 
 	////ODS("Current Slot = " .. curAnimSlot .. "\n")
 
-	// »ç´Ù¸® Ã¼Å©
-	if( actor.ContainsDirection(DIR_UP) && 
+	// ï¿½ï¿½Ù¸ï¿½ Ã¼Å©
+	if (actor.ContainsDirection(DIR_UP) &&
 		actor.IsMyActor() &&
-		actor.ClimbUpLadder() 
+		actor.ClimbUpLadder()
 		)
 	{
 		action.SetNextActionName("a_ladder_idle");
@@ -1992,54 +1993,59 @@ bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTi
 	//	ODS("[Jump] Current Dir = " .. dir .. "\n");
 	//}
 
-	if( dir != DIR_NONE ) 
+	if (dir != DIR_NONE)
 	{
 		actor.Walk(dir, movingSpeed, 0.0f, false);
 		nextAction = ACTIONNAME_RUN;
 	}
-	else if( actor.GetWalkingToTarget() == true ) 
+	else if (actor.GetWalkingToTarget() == true)
 	{
 		actor.Walk(dir, movingSpeed, 0.0f, false);
-//	else
-//		WriteToConsole("________°øÁß¿¡¼­ ¿òÁ÷ÀÎ ½Ã°£ . " .. timeGetTime() - action.GetParamFloat(123456) .. "AccumHeight . " .. actor.GetJumpAccumHeight() .. " JumpTime . " .. actor.GetJumpTime() .. " Moving Speed . " .. movingSpeed .. "\n")
+		//	else
+		//		WriteToConsole("________ï¿½ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ . " .. timeGetTime() - action.GetParamFloat(123456) .. "AccumHeight . " .. actor.GetJumpAccumHeight() .. " JumpTime . " .. actor.GetJumpTime() .. " Moving Speed . " .. movingSpeed .. "\n")
 	}
 
-	if( curAnimSlot == 0 ) 
+	if (curAnimSlot == 0)
 	{
-		if( IsAnimDone == true ) 
+		if (IsAnimDone == true)
 		{
 			actor.StartJump(fJumpForce);
-            SetComboAdvisor(actor,action);
-			
+			SetComboAdvisor(actor, action);
+
 			lwPoint3 pt = actor.GetTranslate();
 			pt.SetZ(pt.GetZ() - 30);
 			actor.AttachParticleToPoint(2, pt, "e_jump");
 			actor.PlayNext();
 			return true;
 		}
-		else if( dir != DIR_NONE ) 
+		else if (dir != DIR_NONE)
 		{
 			actor.PlayNext();
 			actor.StartJump(fJumpForce);
-            SetComboAdvisor(actor,action);
-			
+			SetComboAdvisor(actor, action);
+
 			lwPoint3	pt = actor.GetTranslate();
 			pt.SetZ(pt.GetZ() - 30);
 			actor.AttachParticleToPoint(2, pt, "e_jump");
 		}
-		else if( z > g_fLandingThreshold ) 
+		else if (z > g_fLandingThreshold)
 		{
 			actor.PlayNext();
 		}
-	}	
-	else if( curAnimSlot == 1 )
+	}
+	else if (curAnimSlot == 1)
 	{
-		if( actor.IsMeetFloor() == true &&
+		if (actor.IsMeetFloor() == true &&
 			actor.IsSlide() == false &&
-			actor.IsJumping() == false 
+			actor.IsJumping() == false
 			)
 		{
-			if( dir == DIR_NONE ) 
+			if (CustomCharacterJumping::ShouldPrioritizeJumpOnLanding(actor, action))
+			{
+				action.SetNextActionName(ACTIONNAME_JUMP);
+				return false;
+			}
+			if (dir == DIR_NONE)
 			{
 				actor.Stop();
 				action.SetSlot(3);
@@ -2047,76 +2053,81 @@ bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTi
 			}
 			else
 			{
-				// Jump°¡ 3¹ø ½½·ÔÀÌ¾î¾ß runÀ¸·Î Enter°¡´É
-				// paramÀ¸·Î runÀÌ µé¾î¿À¸é ÂøÁöÈÄ¿¡ ´Þ¸®´Â ¾Ö´Ï¸¦ ÁÖ°Ú´Ù´Â ¶æ
-				if( nextAction != ACTIONNAME_IDLE ) 
+				// Jumpï¿½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ runï¿½ï¿½ï¿½ï¿½ Enterï¿½ï¿½ï¿½ï¿½
+				// paramï¿½ï¿½ï¿½ï¿½ runï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½Ö°Ú´Ù´ï¿½ ï¿½ï¿½
+				if (nextAction != ACTIONNAME_IDLE)
 				{
 					action.SetSlot(3);
 					action.SetNextActionName(nextAction.c_str());
 					return false;
 				}
-				else if( strcmp(action.GetParam(1), "jump_again") != 0 )
+				else if (strcmp(action.GetParam(1), "jump_again") != 0)
 				{
 					action.SetNextActionName(ACTIONNAME_JUMP);
 					return false;
 				}
 			}
 		}
-		else if( IsAnimDone == true ) 
+		else if (IsAnimDone == true)
 		{
 			actor.PlayNext();
 		}
 	}
-	else if( curAnimSlot == 2 ) 
+	else if (curAnimSlot == 2)
 	{
-		if( actor.IsMeetFloor() == true &&
-			actor.IsSlide() == false ) 
+		if (actor.IsMeetFloor() == true &&
+			actor.IsSlide() == false)
 		{
-			if( dir == DIR_NONE ) 
+			if (CustomCharacterJumping::ShouldPrioritizeJumpOnLanding(actor, action))
+			{
+				action.SetNextActionName(ACTIONNAME_JUMP);
+				return false;
+			}
+			if (dir == DIR_NONE)
 			{
 				actor.Stop();
 				actor.PlayNext();
 			}
 			else
 			{
-				// paramÀ¸·Î runÀÌ µé¾î¿À¸é ÂøÁöÈÄ¿¡ ´Þ¸®´Â ¾Ö´Ï¸¦ ÁÖ°Ú´Ù´Â ¶æ
-				if( nextAction != ACTIONNAME_IDLE ) 
+				// paramï¿½ï¿½ï¿½ï¿½ runï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½Ö°Ú´Ù´ï¿½ ï¿½ï¿½
+				if (nextAction != ACTIONNAME_IDLE)
 				{
 					action.SetSlot(3);
 					action.SetNextActionName(nextAction.c_str());
 					return false;
 				}
-				else if( strcmp(action.GetParam(1), "jump_again") != 0 ) 
+				else if (strcmp(action.GetParam(1), "jump_again") != 0)
 				{
-					// paramÀÌ runÀÌ ¾Æ´Ï°í,
-					// ÀÌ´Ü Á¡ÇÁ¸¦ ÇÑ °ÍÀÌ ¾Æ´Ï¸é, ÀÌ´Ü Á¡ÇÁ¸¦ ÇÑ´Ù.
+					// paramï¿½ï¿½ runï¿½ï¿½ ï¿½Æ´Ï°ï¿½,
+					// ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½, ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					action.SetNextActionName(ACTIONNAME_JUMP);
 					return false;
 				}
 			}
 		}
 	}
-	else if( curAnimSlot == 3 ) 
-	{ 
-		if( IsAnimDone == true ) 
+	else if (curAnimSlot == 3)
+	{
+		if (IsAnimDone == true)
 		{
 			return false;
 		}
 		else
 		{
-			if( nextAction == ACTIONNAME_JUMP ) 
+			if (nextAction == ACTIONNAME_JUMP)
 			{
 				action.SetNextActionName(nextAction.c_str());
 				return false;
 			}
 		}
 	}
-	else if( curAnimSlot == 4 ) 
-	{ 
-		if( actor.IsMeetFloor() == true ) 
+	else if (curAnimSlot == 4)
+	{
+		if (actor.IsMeetFloor() == true)
 		{
-			// paramÀ¸·Î runÀÌ µé¾î¿À¸é ÂøÁöÈÄ¿¡ ´Þ¸®´Â ¾Ö´Ï¸¦ ÁÖ°Ú´Ù´Â ¶æ
-			if( nextAction != ACTIONNAME_IDLE ) 
+			// paramï¿½ï¿½ï¿½ï¿½ runï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½Ö°Ú´Ù´ï¿½ ï¿½ï¿½
+			if (nextAction != ACTIONNAME_IDLE)
 			{
 				action.SetSlot(3);
 				action.SetNextActionName(nextAction.c_str());
@@ -2128,14 +2139,14 @@ bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTi
 				actor.PlayCurrentSlot(false);
 			}
 		}
-		else if( IsAnimDone == true ) 
+		else if (IsAnimDone == true)
 		{
 			action.SetSlot(2);
 			actor.PlayCurrentSlot(false);
 		}
 	}
 
-	// ¸Å´Þ¸®±â Ã³¸®
+	// ï¿½Å´Þ¸ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	//if( action.GetParam(10) != "just_hang" &&
 		//(curAnimSlot == 1 || curAnimSlot == 2 || curAnimSlot == 4) &&
 		//actor.IsMeetFloor() == false ) {
@@ -2150,19 +2161,19 @@ bool PgActionFSM_Act_Jump::OnUpdate(lwActor actor,lwAction action,float fAccumTi
 
 	return true;
 }
-bool PgActionFSM_Act_Jump::OnCleanUp(lwActor actor,lwAction action) const
+bool PgActionFSM_Act_Jump::OnCleanUp(lwActor actor, lwAction action) const
 {
 	lwCheckNil(actor.IsNil());
 	lwAction curAction = actor.GetAction();
 	lwCheckNil(curAction.IsNil());
-	
-	if( curAction.IsNil() == false && STR_HIJUMP == curAction.GetParam(5) ) 
+
+	if (curAction.IsNil() == false && STR_HIJUMP == curAction.GetParam(5))
 	{
 		lwUseCameraHeightAdjust(true);
 	}
 	return true;
 }
-bool PgActionFSM_Act_Jump::OnLeave(lwActor actor,lwAction action,bool bCancel) const
+bool PgActionFSM_Act_Jump::OnLeave(lwActor actor, lwAction action, bool bCancel) const
 {
 	lwCheckNil(actor.IsNil());
 
@@ -2171,21 +2182,21 @@ bool PgActionFSM_Act_Jump::OnLeave(lwActor actor,lwAction action,bool bCancel) c
 
 	std::string nextActionName = action.GetID();
 	lwCheckNil(action.IsNil());
-	
+
 	//ODS("Act_Jump_OnLeave nextActionName."..nextActionName.."\n");
 
-	// »õ·Î¿î ¾×¼ÇÀÌ µé¾î¿ÔÀ» ¶§
-	if( action.GetEnable() == true ) 
+	// ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	if (action.GetEnable() == true)
 	{
-		if( nextActionName == ACTIONNAME_JUMP && 
-			strcmp(curAction.GetParam(1), "jump_again") != 0 ) 
+		if (nextActionName == ACTIONNAME_JUMP &&
+			strcmp(curAction.GetParam(1), "jump_again") != 0)
 		{
-			if( actor.GetAbil(AT_DOUBLE_JUMP_USE) == 1 ) 
+			if (actor.GetAbil(AT_DOUBLE_JUMP_USE) == 1)
 			{
-				if( curAction.GetCurrentSlot() == 1 || 
-					curAction.GetCurrentSlot() == 2 ) 
+				if (curAction.GetCurrentSlot() == 1 ||
+					curAction.GetCurrentSlot() == 2)
 				{
-					if( 0 == PgStringUtil::SafeStrcmp("TRUE", actor.GetParam("DOUBLE_JUMP")) ) 
+					if (0 == PgStringUtil::SafeStrcmp("TRUE", actor.GetParam("DOUBLE_JUMP")))
 					{
 						action.SetParam(1, "jump_again");
 					}
@@ -2193,33 +2204,33 @@ bool PgActionFSM_Act_Jump::OnLeave(lwActor actor,lwAction action,bool bCancel) c
 				return true;
 			}
 		}
-		else if( nextActionName == ACTIONNAME_RUN ||
-			actor.IsMeetFloor() && 
-			actor.IsMeetSide() == false 
+		else if (nextActionName == ACTIONNAME_RUN ||
+			actor.IsMeetFloor() &&
+			actor.IsMeetSide() == false
 			)
 		{
 			//action.SetDoNotBroadCast(true)
 			return true;
 		}
-		else if( nextActionName == "a_ladder_down" || 
+		else if (nextActionName == "a_ladder_down" ||
 			nextActionName == "a_ladder_idle" ||
-			nextActionName == "a_ladder_up" 
+			nextActionName == "a_ladder_up"
 			)
 		{
 			actor.HideParts(6, true);
-			actor.SetParam("LADDER_WEAPON_HIDE","TRUE");
+			actor.SetParam("LADDER_WEAPON_HIDE", "TRUE");
 			return true;
 		}
-		else if( nextActionName == ACTIONNAME_IDLE )
+		else if (nextActionName == ACTIONNAME_IDLE)
 		{
 			curAction.SetParam(0, "null");
 			actor.DetachFrom(2);
 		}
-		else if( nextActionName == "a_hang" &&
+		else if (nextActionName == "a_hang" &&
 			strcmp(curAction.GetParam(5), "Done") != 0
 			)
 		{
-			return false ;
+			return false;
 		}
 		return true;
 	}
@@ -2229,33 +2240,33 @@ bool PgActionFSM_Act_Jump::OnLeave(lwActor actor,lwAction action,bool bCancel) c
 void PgActionFSM_Act_Jump::CheckBreakFall(lwActor actor) const
 {
 	lwCheckNil(actor.IsNil());
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return;
 	}
 
-	if(actor.IsMyActor())	//	³«¹ý Ã³¸®
+	if (actor.IsMyActor())	//	ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	{
 		lwAction action = actor.GetAction();
 		lwCheckNil(action.IsNil());
 
-		if(action.IsNil() == false 
+		if (action.IsNil() == false
 			&& action.CanBreakFall()
 			)
 		{
 			float fLastPressTime = action.GetParamFloat(6);
-			if(0 ==  fLastPressTime)
+			if (0 == fLastPressTime)
 			{
 				fLastPressTime = g_pkWorld->GetAccumTime();
-				action.SetParamFloat(6,fLastPressTime);
+				action.SetParamFloat(6, fLastPressTime);
 			}
 		}
-	
-		if( actor.IsDownState())
+
+		if (actor.IsDownState())
 		{
 			float fDownTime = actor.GetTotalDownTime();
 			fDownTime = fDownTime - 0.5f;
-			if( fDownTime < 0)
+			if (fDownTime < 0)
 			{
 				fDownTime = 0;
 			}
@@ -2269,68 +2280,68 @@ bool PgActionFSM_Act_Jump::IsFloatEvasion(lwActor actor, lwAction action) const
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
 
-	if( action.GetParamInt(7) == 1 ) 
+	if (action.GetParamInt(7) == 1)
 	{
 		return	true;
 	}
-	
-	if( actor.IsMyActor() == false ) 
+
+	if (actor.IsMyActor() == false)
 	{
 		return	false;
 	}
-	
-	if( actor.IsMeetFloor() )
+
+	if (actor.IsMeetFloor())
 	{
 		return	false;
 	}
 
 	lwAction	kCurAction = actor.GetAction();
-	if( kCurAction.IsNil() ) 
-	{
-		return	false;
-	}
-	
-	lwInputSlotInfo kInputSlotInfo = action.GetInputSlotInfo();
-	if( kInputSlotInfo.IsNil() ) 
-	{
-		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.IsNil()\n");
-		return	false;
-	}
-	
-	if( kInputSlotInfo.GetUKey() != 3023 ) 
-	{
-		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.GetUKey() ~= 3023\n");
-		return	false;
-	}
-	
-	if( 0 == PgStringUtil::SafeStrcmp(actor.GetParam("FLOAT_EVASION"), "FALSE") ) 
+	if (kCurAction.IsNil())
 	{
 		return	false;
 	}
 
-	if( actor.IsBlowUp() == false ) 
+	lwInputSlotInfo kInputSlotInfo = action.GetInputSlotInfo();
+	if (kInputSlotInfo.IsNil())
+	{
+		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.IsNil()\n");
+		return	false;
+	}
+
+	if (kInputSlotInfo.GetUKey() != 3023)
+	{
+		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.GetUKey() ~= 3023\n");
+		return	false;
+	}
+
+	if (0 == PgStringUtil::SafeStrcmp(actor.GetParam("FLOAT_EVASION"), "FALSE"))
+	{
+		return	false;
+	}
+
+	if (actor.IsBlowUp() == false)
 	{
 		//ODS("Act_Jump_IsFloatEvasion actor.IsBlowUp() == false\n");
 		return	false;
 	}
-	
+
 	float fActionStartTime = kCurAction.GetActionEnterTime();
 	float fCurrentTime = g_pkWorld->GetAccumTime();
-	
-	if( (fCurrentTime - fActionStartTime) < g_fEvasionStartTime ) 
+
+	if ((fCurrentTime - fActionStartTime) < g_fEvasionStartTime)
 	{
 		return	false;
 	}
-	
-	action.SetParamInt(7,1);
-	actor.SetParam("FLOAT_EVASION","FALSE");
+
+	action.SetParamInt(7, 1);
+	actor.SetParam("FLOAT_EVASION", "FALSE");
 	actor.SetCanHit(false);
-	
+
 	return	true;
 }
 
@@ -2338,7 +2349,7 @@ void PgActionFSM_Act_Jump::SetComboAdvisor(lwActor actor, lwAction action) const
 {
 	lwCheckNil(actor.IsNil());
 
-	if( actor.IsMyActor() ) 
+	if (actor.IsMyActor())
 	{
 		lwCheckNil(action.IsNil());
 
@@ -2349,27 +2360,27 @@ void PgActionFSM_Act_Jump::SetComboAdvisor(lwActor actor, lwAction action) const
 
 		int iBaseClassID = kPilot.GetBaseClassID();
 
-		if( iBaseClassID == UCLASS_FIGHTER ) 
+		if (iBaseClassID == UCLASS_FIGHTER)
 		{
 			lwGetComboAdvisor().AddNextAction("a_melee_drop");
 			lwGetComboAdvisor().AddNextAction("a_float_melee_01");
 		}
-		else if( iBaseClassID == UCLASS_THIEF ) 
+		else if (iBaseClassID == UCLASS_THIEF)
 		{
 			lwGetComboAdvisor().AddNextAction("a_thi_melee_drop");
 			lwGetComboAdvisor().AddNextAction("a_thief_float_melee_01");
 		}
-		else if( iBaseClassID == UCLASS_MAGICIAN ) 
+		else if (iBaseClassID == UCLASS_MAGICIAN)
 		{
 			lwGetComboAdvisor().AddNextAction("a_magician_down_shot");
 			lwGetComboAdvisor().AddNextAction("a_MagicianFloatShot_01");
 		}
-		else if( iBaseClassID == UCLASS_ARCHER ) 
+		else if (iBaseClassID == UCLASS_ARCHER)
 		{
 			lwGetComboAdvisor().AddNextAction("a_archer_down_shot");
 			lwGetComboAdvisor().AddNextAction("a_MagicianFloatShot_01");
 		}
-		else if( iBaseClassID == UCLASS_DOUBLE_FIGHTER ) 
+		else if (iBaseClassID == UCLASS_DOUBLE_FIGHTER)
 		{
 			lwGetComboAdvisor().AddNextAction("a_twin_float_melee_01");
 			lwGetComboAdvisor().AddNextAction("a_twin_float_melee_01");
@@ -2378,56 +2389,56 @@ void PgActionFSM_Act_Jump::SetComboAdvisor(lwActor actor, lwAction action) const
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 // Skill
-bool	PgActionFSM_Skill_Blitz_Play::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Skill_Blitz_Play::OnEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
-	
-	//	½ÃÀÛ ½Ã°£ ±â·Ï
-	action.SetParamFloat(0,g_pkWorld->GetAccumTime());
-	
+
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
+	action.SetParamFloat(0, g_pkWorld->GetAccumTime());
+
 	//	State
-	action.SetParamInt(4,0);
-	
+	action.SetParamInt(4, 0);
+
 	//	Hit Count
-	action.SetParamInt(5,0);
-	
+	action.SetParamInt(5, 0);
+
 	//	Last Hit Time
-	action.SetParamFloat(6,0);
+	action.SetParamFloat(6, 0);
 
 	//  boom Time
-	action.SetParamFloat(7,g_pkWorld->GetAccumTime() + 0.3f);
+	action.SetParamFloat(7, g_pkWorld->GetAccumTime() + 0.3f);
 	//  boom Count
-	action.SetParamInt(8,0);
-	
-	actor.SetMovingDelta(lwPoint3(0,0,0));
+	action.SetParamInt(8, 0);
+
+	actor.SetMovingDelta(lwPoint3(0, 0, 0));
 	actor.StopJump();
 	actor.FreeMove(true);
 
 	float	fStartHeight = 150.0f;
-	
+
 	lwPoint3 kPos = actor.GetPos();
-	kPos.SetZ(kPos.GetZ()+fStartHeight);
-	actor.AttachParticleToPoint(1,kPos,"ef_bang");
+	kPos.SetZ(kPos.GetZ() + fStartHeight);
+	actor.AttachParticleToPoint(1, kPos, "ef_bang");
 	actor.SetTranslate(kPos, false);
 
-	action.SetParamFloat(33,kPos.GetX()); // Ã³À½ ½ÃÀÛ À§Ä¡
-	action.SetParamFloat(34,kPos.GetY());
-	action.SetParamFloat(35,kPos.GetZ());		
+	action.SetParamFloat(33, kPos.GetX()); // Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
+	action.SetParamFloat(34, kPos.GetY());
+	action.SetParamFloat(35, kPos.GetZ());
 
 	actor.SetTargetScale(0.9f, 10);
-	
+
 	//lwCommonSkillUtilFunc::InitMaxHitCnt(action);
 	lwCommonSkillUtilFunc::SetMaxHitCnt(action, 3);
 	return true;
 }
-bool	PgActionFSM_Skill_Blitz_Play::OnUpdate(lwActor actor,lwAction action,float fAccumTime,float fFrameTime)	const
+bool	PgActionFSM_Skill_Blitz_Play::OnUpdate(lwActor actor, lwAction action, float fAccumTime, float fFrameTime)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
@@ -2437,38 +2448,38 @@ bool	PgActionFSM_Skill_Blitz_Play::OnUpdate(lwActor actor,lwAction action,float 
 
 	bool animDone = actor.IsAnimationDone();
 	int iSlotNum = action.GetCurrentSlot();
-	float fMoveSpeed  = 600.0f;
+	float fMoveSpeed = 600.0f;
 	float fMaxMoveTime = 0.4f;
 	int	iState = action.GetParamInt(4);
 
-	if (iSlotNum == 0 ) 
+	if (iSlotNum == 0)
 	{
-		actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga",500,0);
-		action.SetParamFloat(0,fAccumTime);	//	ÀÌµ¿ ½ÃÀÛ ½Ã°£ ±â·Ï
+		actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga", 500, 0);
+		action.SetParamFloat(0, fAccumTime);	//	ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
 
 		lwPoint3 kPos = actor.GetPos();
-		// ÇöÀç À§Ä¡ ±â·Ï
-		action.SetParamFloat(1,kPos.GetX());
-		action.SetParamFloat(2,kPos.GetY());
-		action.SetParamFloat(3,kPos.GetZ());
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
+		action.SetParamFloat(1, kPos.GetX());
+		action.SetParamFloat(2, kPos.GetY());
+		action.SetParamFloat(3, kPos.GetZ());
 
 		actor.PlayNext();
 
 	}
-	else if (iSlotNum == 1 ) 
-	{	
+	else if (iSlotNum == 1)
+	{
 		float	fElapsedTime = fAccumTime - action.GetParamFloat(0);
 		float	fMoveDistance = fElapsedTime * fMoveSpeed;
-		float	fRate = fElapsedTime/fMaxMoveTime;
-		if (fRate>1 ) 
+		float	fRate = fElapsedTime / fMaxMoveTime;
+		if (fRate > 1)
 		{
 			fRate = 1;
 		}
 
 		float	fMoveDistance2 = fMoveSpeed * fRate;
 
-		lwPoint3 kStartPos(action.GetParamFloat(33),action.GetParamFloat(34),action.GetParamFloat(35));
-		lwPoint3 kTargetPos(action.GetParamFloat(30),action.GetParamFloat(31),action.GetParamFloat(32));
+		lwPoint3 kStartPos(action.GetParamFloat(33), action.GetParamFloat(34), action.GetParamFloat(35));
+		lwPoint3 kTargetPos(action.GetParamFloat(30), action.GetParamFloat(31), action.GetParamFloat(32));
 		lwPoint3 kLookDir = kTargetPos.Subtract2(kStartPos);
 		kLookDir.Unitize();
 		kLookDir.Multiply(fMoveDistance);
@@ -2476,12 +2487,12 @@ bool	PgActionFSM_Skill_Blitz_Play::OnUpdate(lwActor actor,lwAction action,float 
 		kStartPos.Add(kLookDir);
 		actor.SetTranslate(kStartPos, false);
 
-		if( fRate == 1.0f ) 
+		if (fRate == 1.0f)
 		{
 			actor.EndBodyTrail();
 			actor.PlayNext();
-			action.SetParamInt(4,1);//	Start Hit
-			OldActionLuaFunc::HitOneTime(actor,action);
+			action.SetParamInt(4, 1);//	Start Hit
+			OldActionLuaFunc::HitOneTime(actor, action);
 			return true;
 		}
 	}
@@ -2489,415 +2500,415 @@ bool	PgActionFSM_Skill_Blitz_Play::OnUpdate(lwActor actor,lwAction action,float 
 	if (iState == 1)
 	{
 		float	fElapsedTime = fAccumTime - action.GetParamFloat(6);
-		if (fElapsedTime >= 0.15 ) 
+		if (fElapsedTime >= 0.15)
 		{
-			OldActionLuaFunc::HitOneTime(actor,action);
+			OldActionLuaFunc::HitOneTime(actor, action);
 		}
 	}
 	else if (iState == 2)
 	{
 
-		if ( animDone && fAccumTime - action.GetParamFloat(6)>0.5 )
+		if (animDone && fAccumTime - action.GetParamFloat(6) > 0.5)
 		{
 			action.SetParamFloat(6, g_pkWorld->GetAccumTime());
-			action.SetParamInt(4,3);
+			action.SetParamInt(4, 3);
 			actor.SetTargetAlpha(actor.GetAlpha(), 0.0f, 0.7f, false);
 		}
 	}
-	else if ( iState == 3 ) 
+	else if (iState == 3)
 	{
-		if ( fAccumTime - action.GetParamFloat(6) > 1.2 )
+		if (fAccumTime - action.GetParamFloat(6) > 1.2)
 		{
 			return false;
 		}
 	}
 
 	float fBoomElapsedTime = fAccumTime - action.GetParamFloat(7);
-	if ( fBoomElapsedTime >= 0.05 && action.GetParamInt(8) < 3 ) 
+	if (fBoomElapsedTime >= 0.05 && action.GetParamInt(8) < 3)
 	{
-		lwPoint3 ptcl = g_pkWorld->ThrowRay(actor.GetPos()(), NiPoint3(0,0,-1), 100);
-		if ( ptcl.GetX() == -1 && ptcl.GetY() == -1 && ptcl.GetZ() == -1 ) 
+		lwPoint3 ptcl = g_pkWorld->ThrowRay(actor.GetPos()(), NiPoint3(0, 0, -1), 100);
+		if (ptcl.GetX() == -1 && ptcl.GetY() == -1 && ptcl.GetZ() == -1)
 		{
 			return true;
 		}
-		ptcl.SetZ(ptcl.GetZ()+5);
+		ptcl.SetZ(ptcl.GetZ() + 5);
 		actor.AttachParticleToPoint(100 + action.GetParamInt(8), ptcl, "ef_boom_01");
-		action.SetParamFloat(7,g_pkWorld->GetAccumTime());
-		action.SetParamInt(8,action.GetParamInt(8) + 1);
-		g_pkWorld->AttachSound("Missile", actor.GetPos()(), 0,0,0);
+		action.SetParamFloat(7, g_pkWorld->GetAccumTime());
+		action.SetParamInt(8, action.GetParamInt(8) + 1);
+		g_pkWorld->AttachSound("Missile", actor.GetPos()(), 0, 0, 0);
 	}
 
 	return true;
- }
+}
 
-bool	PgActionFSM_Skill_Blitz_Play::OnCleanUp(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Skill_Blitz_Play::OnCleanUp(lwActor actor, lwAction action)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return true;
 	}
 	lwCheckNil(actor.IsNil());
-		
+
 	actor.EndBodyTrail();
 	g_pkWorld->RemoveObjectOnNextUpdate(actor.GetPilotGuid()());
 	return true;
-	
+
 }
-bool	PgActionFSM_Skill_Blitz_Play::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Skill_Blitz_Play::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	return true;
 }
-bool	PgActionFSM_Skill_Blitz_Play::OnEvent(lwActor actor,std::string kTextKey,int iSeqID)	const
+bool	PgActionFSM_Skill_Blitz_Play::OnEvent(lwActor actor, std::string kTextKey, int iSeqID)	const
 {
 	return	true;
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-bool PgActionFSM_Skill_Wolf_Rush_Play::OnEnter(lwActor actor,lwAction action)	const
+bool PgActionFSM_Skill_Wolf_Rush_Play::OnEnter(lwActor actor, lwAction action)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
 
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	
+
 	std::string actorID = actor.GetID();
 	std::string actionID = action.GetID();
-	
-	//	½ÃÀÛ ½Ã°£ ±â·Ï
-	action.SetParamFloat(0,g_pkWorld->GetAccumTime());
-	
+
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
+	action.SetParamFloat(0, g_pkWorld->GetAccumTime());
+
 	//	State
-	action.SetParamInt(4,0);
-	
+	action.SetParamInt(4, 0);
+
 	//	Hit Count
-	action.SetParamInt(5,0);
-	
+	action.SetParamInt(5, 0);
+
 	//	Last Hit Time
-	action.SetParamFloat(6,0);
-	
+	action.SetParamFloat(6, 0);
+
 	lwPoint3 kPos = actor.GetPos();
-	kPos.SetZ(kPos.GetZ()-30);
-	actor.AttachParticleToPoint(1,kPos,"ef_bang");
-	
-	actor.SetMovingDelta(lwPoint3(0,0,0));
+	kPos.SetZ(kPos.GetZ() - 30);
+	actor.AttachParticleToPoint(1, kPos, "ef_bang");
+
+	actor.SetMovingDelta(lwPoint3(0, 0, 0));
 	actor.StopJump();
 	actor.FreeMove(true);
 	actor.SetTargetScale(1.3f, 180);
-	
+
 	//lwCommonSkillUtilFunc::InitMaxHitCnt(action);
 	lwCommonSkillUtilFunc::SetMaxHitCnt(action, 5);
 	return true;
 }
 
-bool PgActionFSM_Skill_Wolf_Rush_Play::OnUpdate(lwActor actor,lwAction action,float fAccumTime,float fFrameTime)	const
+bool PgActionFSM_Skill_Wolf_Rush_Play::OnUpdate(lwActor actor, lwAction action, float fAccumTime, float fFrameTime)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
 
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	
+
 	bool animDone = actor.IsAnimationDone();
-//	local actionID = action.GetID();
+	//	local actionID = action.GetID();
 	int iSlotNum = action.GetCurrentSlot();
-	float fMoveSpeed  = 700;
-	int fMaxMoveDistance = action.GetParamInt(10)+10;
+	float fMoveSpeed = 700;
+	int fMaxMoveDistance = action.GetParamInt(10) + 10;
 	int	iState = action.GetParamInt(4);
-	
-	if( iSlotNum == 0 ) 
+
+	if (iSlotNum == 0)
 	{
 		float fElapsedTime = fAccumTime - action.GetParamFloat(0);
-		if( fElapsedTime>=0.3f ) 
+		if (fElapsedTime >= 0.3f)
 		{
-			actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga",500,0);
-			action.SetParamFloat(0,fAccumTime);	//	ÀÌµ¿ ½ÃÀÛ ½Ã°£ ±â·Ï
-			
+			actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga", 500, 0);
+			action.SetParamFloat(0, fAccumTime);	//	ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
+
 			lwPoint3	kPos = actor.GetPos();
-			// ÇöÀç À§Ä¡ ±â·Ï
-			action.SetParamFloat(1,kPos.GetX());
-			action.SetParamFloat(2,kPos.GetY());
-			action.SetParamFloat(3,kPos.GetZ());
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
+			action.SetParamFloat(1, kPos.GetX());
+			action.SetParamFloat(2, kPos.GetY());
+			action.SetParamFloat(3, kPos.GetZ());
 			actor.PlayNext();
 		}
 	}
-	else if( iSlotNum == 1 )
+	else if (iSlotNum == 1)
 	{
 		float	fElapsedTime = fAccumTime - action.GetParamFloat(0);
 		float	fMoveDistance = fElapsedTime * fMoveSpeed;
-		
-		if( fMoveDistance>=fMaxMoveDistance ) 
+
+		if (fMoveDistance >= fMaxMoveDistance)
 		{
 			actor.EndBodyTrail();
 			actor.PlayNext();
 		}
 		else
 		{
-			lwPoint3 kMovingDir = lwPoint3(action.GetParamFloat(11),action.GetParamFloat(12),action.GetParamFloat(13));
+			lwPoint3 kMovingDir = lwPoint3(action.GetParamFloat(11), action.GetParamFloat(12), action.GetParamFloat(13));
 			kMovingDir.Multiply(fMoveDistance);
-			lwPoint3 kNextPos = lwPoint3(action.GetParamFloat(1),action.GetParamFloat(2),action.GetParamFloat(3));
+			lwPoint3 kNextPos = lwPoint3(action.GetParamFloat(1), action.GetParamFloat(2), action.GetParamFloat(3));
 			kNextPos.Add(kMovingDir);
 			actor.SetTranslate(kNextPos, false);
 		}
 	}
-	
-	if( iState == 1 )
+
+	if (iState == 1)
 	{
 		float	fElapsedTime = fAccumTime - action.GetParamFloat(6);
-		if( fElapsedTime >= 0.15f ) 
+		if (fElapsedTime >= 0.15f)
 		{
-			OldActionLuaFunc::HitOneTime(actor,action);
+			OldActionLuaFunc::HitOneTime(actor, action);
 		}
 	}
-	else if( iState == 2 ) 
+	else if (iState == 2)
 	{
-		if( animDone && fAccumTime - action.GetParamFloat(6)>0.5f ) 
+		if (animDone && fAccumTime - action.GetParamFloat(6) > 0.5f)
 		{
-			action.SetParamFloat(6,g_pkWorld->GetAccumTime());
-			action.SetParamInt(4,3);
-			actor.SetTargetAlpha(actor.GetAlpha(),0.0f, 0.8f, false);
+			action.SetParamFloat(6, g_pkWorld->GetAccumTime());
+			action.SetParamInt(4, 3);
+			actor.SetTargetAlpha(actor.GetAlpha(), 0.0f, 0.8f, false);
 		}
 	}
-	else if( iState == 3 )
+	else if (iState == 3)
 	{
-		if( fAccumTime - action.GetParamFloat(6) > 1.2f )
+		if (fAccumTime - action.GetParamFloat(6) > 1.2f)
 		{
 			return false;
 		}
-	}	
+	}
 
 	return true;
 }
-bool PgActionFSM_Skill_Wolf_Rush_Play::OnCleanUp(lwActor actor,lwAction action)	const
+bool PgActionFSM_Skill_Wolf_Rush_Play::OnCleanUp(lwActor actor, lwAction action)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
 
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	
+
 	actor.EndBodyTrail();
 	g_pkWorld->RemoveObjectOnNextUpdate(actor.GetPilotGuid()());
 	return true;
 }
-bool PgActionFSM_Skill_Wolf_Rush_Play::OnEvent(lwActor actor,std::string kTextKey,int iSeqID)	const
+bool PgActionFSM_Skill_Wolf_Rush_Play::OnEvent(lwActor actor, std::string kTextKey, int iSeqID)	const
 {
 	lwCheckNil(actor.IsNil());
-		
+
 	lwAction kAction = actor.GetAction();
 	lwCheckNil(kAction.IsNil());
-	
 
-	if( kAction.GetActionParam() == ESS_CASTTIME ) 
+
+	if (kAction.GetActionParam() == ESS_CASTTIME)
 	{
 		return true;
 	}
-	
-	if( kAction.GetParamInt(4) == 0 
+
+	if (kAction.GetParamInt(4) == 0
 		&& (kTextKey == "hit" || kTextKey == "end")
 		)
 	{
-		kAction.SetParamInt(4,1); //	Start Hit
-		OldActionLuaFunc::HitOneTime(actor,kAction);
+		kAction.SetParamInt(4, 1); //	Start Hit
+		OldActionLuaFunc::HitOneTime(actor, kAction);
 	}
 	return true;
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-bool PgActionFSM_Skill_Falcon_Beat_Play::OnEnter(lwActor actor,lwAction action)	const
+bool PgActionFSM_Skill_Falcon_Beat_Play::OnEnter(lwActor actor, lwAction action)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	//	½ÃÀÛ ½Ã°£ ±â·Ï
-	action.SetParamFloat(0,g_pkWorld->GetAccumTime());
-	
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
+	action.SetParamFloat(0, g_pkWorld->GetAccumTime());
+
 	//	State
-	action.SetParamInt(4,0);
-	
+	action.SetParamInt(4, 0);
+
 	//	Hit Count
-	action.SetParamInt(5,0);
+	action.SetParamInt(5, 0);
 	lwCommonSkillUtilFunc::SetMaxHitCnt(action, 3);
 
 	//	Last Hit Time
-	action.SetParamFloat(6,0);
+	action.SetParamFloat(6, 0);
 
 	//  boom Time
 	action.SetParamFloat(7, g_pkWorld->GetAccumTime() + 0.48f);
 	//  boom Count
-	action.SetParamInt(8,0);
-	
+	action.SetParamInt(8, 0);
+
 	float	fStartHeight = 150;
-	
+
 	lwPoint3 kPos = actor.GetPos();
-	kPos.SetZ(kPos.GetZ()+fStartHeight);
-	actor.AttachParticleToPoint(1,kPos,"ef_bang");
-	
-	actor.SetMovingDelta(lwPoint3(0,0,0));
+	kPos.SetZ(kPos.GetZ() + fStartHeight);
+	actor.AttachParticleToPoint(1, kPos, "ef_bang");
+
+	actor.SetMovingDelta(lwPoint3(0, 0, 0));
 	actor.StopJump();
 	actor.FreeMove(true);
 
-	//	º£Áö¾î °î¼±À» ±×¸®±â À§ÇÑ 4°³ÀÇ Æ÷ÀÎÆ®¸¦ Ã£¾Æº¸ÀÚ.
-	lwPoint3 kMovingDir(action.GetParamFloat(11),action.GetParamFloat(12),action.GetParamFloat(13));		
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¼±ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã£ï¿½Æºï¿½ï¿½ï¿½.
+	lwPoint3 kMovingDir(action.GetParamFloat(11), action.GetParamFloat(12), action.GetParamFloat(13));
 	kPos = actor.GetPos();
-	
-	kPos.SetZ(kPos.GetZ()+fStartHeight);	
-	
-	//	Ã¹¹øÂ°ÁÂÇ¥´Â Ä³¸¯ÅÍÀÇ ÇöÀç ÁÂÇ¥
-	action.SetParamFloat(14,kPos.GetX());
-	action.SetParamFloat(15,kPos.GetY());
-	action.SetParamFloat(16,kPos.GetZ());
-	
-	//	¸¶Áö¸· ÁÂÇ¥´Â Ä³¸¯ÅÍ·ÎºÎÅÍ »çÁ¤°Å¸®±îÁöÀÇ ÁÂÇ¥
-	float fMaxMoveDistance = static_cast<float>( action.GetParamInt(10)+180 );
-	
+
+	kPos.SetZ(kPos.GetZ() + fStartHeight);
+
+	//	Ã¹ï¿½ï¿½Â°ï¿½ï¿½Ç¥ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
+	action.SetParamFloat(14, kPos.GetX());
+	action.SetParamFloat(15, kPos.GetY());
+	action.SetParamFloat(16, kPos.GetZ());
+
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í·Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥
+	float fMaxMoveDistance = static_cast<float>(action.GetParamInt(10) + 180);
+
 	lwPoint3	kTargetPos = kMovingDir.Multiply2(fMaxMoveDistance);
 	kTargetPos.Add(actor.GetPos());
 	kTargetPos.SetZ(kTargetPos.GetZ() + 5);
-	action.SetParamFloat(23,kTargetPos.GetX());
-	action.SetParamFloat(24,kTargetPos.GetY());
-	action.SetParamFloat(25,kTargetPos.GetZ());	
-	
-	// µÎ¹øÂ° ÁÂÇ¥
-	lwPoint3	kSecPos(kPos.GetX(),kPos.GetY(),kPos.GetZ() + 20);	
-	kSecPos.SetZ(kSecPos.GetZ()+(kTargetPos.GetZ()-kSecPos.GetZ())*0.9f);
-	action.SetParamFloat(17,kSecPos.GetX());
-	action.SetParamFloat(18,kSecPos.GetY());
-	action.SetParamFloat(19,kSecPos.GetZ());
-		
-	// ¼¼¹øÂ° ÁÂÇ¥
-	lwPoint3	kThirdPos = kMovingDir.Multiply2(fMaxMoveDistance*0.2f);
+	action.SetParamFloat(23, kTargetPos.GetX());
+	action.SetParamFloat(24, kTargetPos.GetY());
+	action.SetParamFloat(25, kTargetPos.GetZ());
+
+	// ï¿½Î¹ï¿½Â° ï¿½ï¿½Ç¥
+	lwPoint3	kSecPos(kPos.GetX(), kPos.GetY(), kPos.GetZ() + 20);
+	kSecPos.SetZ(kSecPos.GetZ() + (kTargetPos.GetZ() - kSecPos.GetZ()) * 0.9f);
+	action.SetParamFloat(17, kSecPos.GetX());
+	action.SetParamFloat(18, kSecPos.GetY());
+	action.SetParamFloat(19, kSecPos.GetZ());
+
+	// ï¿½ï¿½ï¿½ï¿½Â° ï¿½ï¿½Ç¥
+	lwPoint3	kThirdPos = kMovingDir.Multiply2(fMaxMoveDistance * 0.2f);
 	kThirdPos.Add(kSecPos);
-	action.SetParamFloat(20,kThirdPos.GetX());
-	action.SetParamFloat(21,kThirdPos.GetY());
-	action.SetParamFloat(22,kThirdPos.GetZ());
+	action.SetParamFloat(20, kThirdPos.GetX());
+	action.SetParamFloat(21, kThirdPos.GetY());
+	action.SetParamFloat(22, kThirdPos.GetZ());
 
 	actor.SetTargetScale(0.9f, 10);
 	return true;
 }
-bool PgActionFSM_Skill_Falcon_Beat_Play::OnUpdate(lwActor actor,lwAction action,float fAccumTime,float fFrameTime)	const
+bool PgActionFSM_Skill_Falcon_Beat_Play::OnUpdate(lwActor actor, lwAction action, float fAccumTime, float fFrameTime)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	if( NULL == g_pkWorld )
+	if (NULL == g_pkWorld)
 	{
-		return false;	
+		return false;
 	}
-	
+
 	bool animDone = actor.IsAnimationDone();
-//	local actionID = action.GetID();
+	//	local actionID = action.GetID();
 	int iSlotNum = action.GetCurrentSlot();
-	float fMoveSpeed  = 600;
+	float fMoveSpeed = 600;
 	float fMaxMoveTime = 0.8f;
 	int	iState = action.GetParamInt(4);
-	
-	if( iSlotNum == 0 )
+
+	if (iSlotNum == 0)
 	{
-		actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga",500,0);
-		
-		action.SetParamFloat(0,fAccumTime);	//	ÀÌµ¿ ½ÃÀÛ ½Ã°£ ±â·Ï
-		
+		actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga", 500, 0);
+
+		action.SetParamFloat(0, fAccumTime);	//	ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
+
 		lwPoint3	kPos = actor.GetPos();
-		// ÇöÀç À§Ä¡ ±â·Ï
-		action.SetParamFloat(1,kPos.GetX());
-		action.SetParamFloat(2,kPos.GetY());
-		action.SetParamFloat(3,kPos.GetZ());
-	
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
+		action.SetParamFloat(1, kPos.GetX());
+		action.SetParamFloat(2, kPos.GetY());
+		action.SetParamFloat(3, kPos.GetZ());
+
 		actor.PlayNext();
 	}
-	
-	if( iSlotNum == 1 ) 
+
+	if (iSlotNum == 1)
 	{
 		float	fElapsedTime = fAccumTime - action.GetParamFloat(0);
 		float	fMoveDistance = fElapsedTime * fMoveSpeed;
-		float	fRate = fElapsedTime/fMaxMoveTime;
-		if( fRate>1 ) 
+		float	fRate = fElapsedTime / fMaxMoveTime;
+		if (fRate > 1)
 		{
 			fRate = 1;
 		}
-		lwPoint3 kMovingDir(action.GetParamFloat(11),action.GetParamFloat(12),action.GetParamFloat(13));
-		
-		lwPoint3	kP1(action.GetParamFloat(14),action.GetParamFloat(15),action.GetParamFloat(16));
-		lwPoint3	kP2(action.GetParamFloat(17),action.GetParamFloat(18),action.GetParamFloat(19));
-		lwPoint3	kP3(action.GetParamFloat(20),action.GetParamFloat(21),action.GetParamFloat(22));
-		lwPoint3	kP4(action.GetParamFloat(23),action.GetParamFloat(24),action.GetParamFloat(25));
-		
+		lwPoint3 kMovingDir(action.GetParamFloat(11), action.GetParamFloat(12), action.GetParamFloat(13));
+
+		lwPoint3	kP1(action.GetParamFloat(14), action.GetParamFloat(15), action.GetParamFloat(16));
+		lwPoint3	kP2(action.GetParamFloat(17), action.GetParamFloat(18), action.GetParamFloat(19));
+		lwPoint3	kP3(action.GetParamFloat(20), action.GetParamFloat(21), action.GetParamFloat(22));
+		lwPoint3	kP4(action.GetParamFloat(23), action.GetParamFloat(24), action.GetParamFloat(25));
+
 		NiPoint3 kTempPos;
-		Bezier4(kP1(),kP2(),kP3(),kP4(),fRate, kTempPos);
-		lwPoint3 kNextPos(kTempPos); 
+		Bezier4(kP1(), kP2(), kP3(), kP4(), fRate, kTempPos);
+		lwPoint3 kNextPos(kTempPos);
 		actor.SetTranslate(kNextPos, false);
-		
-		actor.LookAt(kNextPos,true,false, false);
-	
-		if( fRate == 1 ) 
+
+		actor.LookAt(kNextPos, true, false, false);
+
+		if (fRate == 1)
 		{
 			actor.EndBodyTrail();
 			actor.PlayNext();
-			
-			action.SetParamInt(4,1);	//	Start Hit
-			OldActionLuaFunc::HitOneTime(actor,action);
+
+			action.SetParamInt(4, 1);	//	Start Hit
+			OldActionLuaFunc::HitOneTime(actor, action);
 			return true;
 		}
 	}
-	
-	if( iState == 1 ) 
+
+	if (iState == 1)
 	{
 		float	fElapsedTime = fAccumTime - action.GetParamFloat(6);
-		if( fElapsedTime >= 0.15 ) 
+		if (fElapsedTime >= 0.15)
 		{
-			OldActionLuaFunc::HitOneTime(actor,action);
+			OldActionLuaFunc::HitOneTime(actor, action);
 		}
 	}
-	else if( iState == 2 ) 
+	else if (iState == 2)
 	{
-		if( animDone && fAccumTime - action.GetParamFloat(6)>0.5 ) {
-			action.SetParamFloat(6,g_pkWorld->GetAccumTime());
-			action.SetParamInt(4,3);
-			actor.SetTargetAlpha(actor.GetAlpha(),0.0f, 0.7f, false);
+		if (animDone && fAccumTime - action.GetParamFloat(6) > 0.5) {
+			action.SetParamFloat(6, g_pkWorld->GetAccumTime());
+			action.SetParamInt(4, 3);
+			actor.SetTargetAlpha(actor.GetAlpha(), 0.0f, 0.7f, false);
 		}
 	}
-	else if( iState == 3 ) 
+	else if (iState == 3)
 	{
-		if( fAccumTime - action.GetParamFloat(6) > 1.2 ) 
+		if (fAccumTime - action.GetParamFloat(6) > 1.2)
 		{
 			return false;
 		}
 	}
 
 	float fBoomElapsedTime = fAccumTime - action.GetParamFloat(7);
-	if( fBoomElapsedTime >= 0.05 && action.GetParamInt(8) < 5 )
+	if (fBoomElapsedTime >= 0.05 && action.GetParamInt(8) < 5)
 	{
-		lwPoint3 ptcl( g_pkWorld->ThrowRay(actor.GetPos()(), NiPoint3(0,0,-1), 100) );
-		if( ptcl.GetX() == -1 && ptcl.GetY() == -1 && ptcl.GetZ() == -1 ) 
+		lwPoint3 ptcl(g_pkWorld->ThrowRay(actor.GetPos()(), NiPoint3(0, 0, -1), 100));
+		if (ptcl.GetX() == -1 && ptcl.GetY() == -1 && ptcl.GetZ() == -1)
 		{
 			return true;
 		}
-		ptcl.SetZ(ptcl.GetZ()+5);
+		ptcl.SetZ(ptcl.GetZ() + 5);
 		actor.AttachParticleToPoint(100 + action.GetParamInt(8), ptcl, "ef_boom_01");
-		action.SetParamFloat(7,g_pkWorld->GetAccumTime());
-		action.SetParamInt(8,action.GetParamInt(8) + 1);
-		g_pkWorld->AttachSound("Missile", actor.GetPos()(), 0.0f,0.0f,0.0f);
+		action.SetParamFloat(7, g_pkWorld->GetAccumTime());
+		action.SetParamInt(8, action.GetParamInt(8) + 1);
+		g_pkWorld->AttachSound("Missile", actor.GetPos()(), 0.0f, 0.0f, 0.0f);
 	}
 
 	return true;
 }
-bool PgActionFSM_Skill_Falcon_Beat_Play::OnCleanUp(lwActor actor,lwAction action)	const
+bool PgActionFSM_Skill_Falcon_Beat_Play::OnCleanUp(lwActor actor, lwAction action)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
-	lwCheckNil(actor.IsNil());		
+	lwCheckNil(actor.IsNil());
 	actor.EndBodyTrail();
 	g_pkWorld->RemoveObjectOnNextUpdate(actor.GetPilotGuid()());
 	return true;
@@ -2905,24 +2916,24 @@ bool PgActionFSM_Skill_Falcon_Beat_Play::OnCleanUp(lwActor actor,lwAction action
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-bool PgActionFSM_Skill_Bro_Spin_Fire::OnEnter(lwActor actor,lwAction action)	const
+bool PgActionFSM_Skill_Bro_Spin_Fire::OnEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	if( NULL == g_pkWorld )
+	if (NULL == g_pkWorld)
 	{
-		return false;	
+		return false;
 	}
 
-	if( actor.IsUnderMyControl() ) 
+	if (actor.IsUnderMyControl())
 	{
-		action.StartTimer(1.5f,0.3f,0);
+		action.StartTimer(1.5f, 0.3f, 0);
 	}
 
-	action.SetParamInt(10,0); // count
+	action.SetParamInt(10, 0); // count
 	int iMaxHit = action.GetAbil(AT_COUNT);
-	if( 0 == iMaxHit ) 
+	if (0 == iMaxHit)
 	{
 		iMaxHit = 4;
 	}
@@ -2930,78 +2941,78 @@ bool PgActionFSM_Skill_Bro_Spin_Fire::OnEnter(lwActor actor,lwAction action)	con
 
 	action.SetDoNotBroadCast(true);
 
-	//	½ÃÀÛ ½Ã°£ ±â·Ï
-	action.SetParamFloat(0,g_pkWorld->GetAccumTime());
-	action.SetParamFloat(1,g_pkWorld->GetAccumTime());
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
+	action.SetParamFloat(0, g_pkWorld->GetAccumTime());
+	action.SetParamFloat(1, g_pkWorld->GetAccumTime());
 
-	action.SetParamFloat(13,actor.GetPos().GetX());
-	action.SetParamFloat(14,actor.GetPos().GetY());
-	action.SetParamFloat(15,actor.GetPos().GetZ());
+	action.SetParamFloat(13, actor.GetPos().GetX());
+	action.SetParamFloat(14, actor.GetPos().GetY());
+	action.SetParamFloat(15, actor.GetPos().GetZ());
 
 	//action.SetSlot(action.GetCurrentSlot()+1);
 	actor.PlayCurrentSlot(false);
-	action.SetParamInt(9,0);
+	action.SetParamInt(9, 0);
 
 	actor.StopJump();
 	actor.FreeMove(true);
 
 	lwPoint3 pt = actor.GetNodeTranslate("char_root");
-	actor.AttachParticleToPoint(581,pt,"ef_Bro_Spin_char_root");
+	actor.AttachParticleToPoint(581, pt, "ef_Bro_Spin_char_root");
 
 	std::string	kSoundID = action.GetScriptParam("FIRE_SOUND_ID");
-	if( kSoundID.empty() )
+	if (kSoundID.empty())
 	{
-		actor.AttachSound(2783,kSoundID.c_str(), 0);
+		actor.AttachSound(2783, kSoundID.c_str(), 0);
 	}
 	return true;
 }
-bool PgActionFSM_Skill_Bro_Spin_Fire::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool PgActionFSM_Skill_Bro_Spin_Fire::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 	//std::string actorID = actor.GetID();
 	int iActionState = action.GetParamInt(9);
-	//°øÁßÀ¸·Î ¿Ã¶ó°¡°Ô 
-	actor.SetMovingDelta(lwPoint3(0.0f,0.0f,12.0f));
-	//È¸Àü
-	float DegToRadUnit = 3.141592f/180.0f;
-	float SpinScalar = 4.0f*360.0f;
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¶ó°¡°ï¿½ 
+	actor.SetMovingDelta(lwPoint3(0.0f, 0.0f, 12.0f));
+	//È¸ï¿½ï¿½
+	float DegToRadUnit = 3.141592f / 180.0f;
+	float SpinScalar = 4.0f * 360.0f;
 
 	float fElapsedTime = accumTime - action.GetParamFloat(0);
 
-	actor.IncRotate(frameTime*SpinScalar*DegToRadUnit);
+	actor.IncRotate(frameTime * SpinScalar * DegToRadUnit);
 
-	if( fElapsedTime> 1.0f ) 
+	if (fElapsedTime > 1.0f)
 	{
-		if( iActionState == 0 ) 
+		if (iActionState == 0)
 		{
-			actor.SetTargetAlpha(actor.GetAlpha(),0.0f, 0.7f, false);
-			action.SetParamInt(9,1);
+			actor.SetTargetAlpha(actor.GetAlpha(), 0.0f, 0.7f, false);
+			action.SetParamInt(9, 1);
 			actor.DetachFrom(581);
 		}
 	}
 	return true;
 }
 
-bool PgActionFSM_Skill_Bro_Spin_Fire::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool PgActionFSM_Skill_Bro_Spin_Fire::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 	actor.DetachFrom(581);
 	return true;
 }
-bool PgActionFSM_Skill_Bro_Spin_Fire::OnCleanUp(lwActor actor,lwAction action)	const
+bool PgActionFSM_Skill_Bro_Spin_Fire::OnCleanUp(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
-	if( NULL == g_pkWorld )
+	if (NULL == g_pkWorld)
 	{
-		return false;	
+		return false;
 	}
-	g_pkWorld->RemoveObjectOnNextUpdate( actor.GetPilotGuid()() );
+	g_pkWorld->RemoveObjectOnNextUpdate(actor.GetPilotGuid()());
 	return true;
 }
 
-bool PgActionFSM_Skill_Bro_Spin_Fire::OnTimer(lwActor actor,lwAction action,float fCallTime,int iTimerID)	const
+bool PgActionFSM_Skill_Bro_Spin_Fire::OnTimer(lwActor actor, lwAction action, float fCallTime, int iTimerID)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -3009,23 +3020,23 @@ bool PgActionFSM_Skill_Bro_Spin_Fire::OnTimer(lwActor actor,lwAction action,floa
 	int iHitCount = action.GetParamInt(10);
 	int iTotalHit = action.GetParamInt(11);
 
-	if( iHitCount == iTotalHit ) 
+	if (iHitCount == iTotalHit)
 	{
 		return false;
 	}
 
 	action.CreateActionTargetList(actor, false);
 
-	if( lwIsSingleMode() ) 
+	if (lwIsSingleMode())
 	{
-		OnTargetListModified(actor,action,false);
+		OnTargetListModified(actor, action, false);
 		return true;
 	}
 	else
 	{
 		lwActionTargetList kTargetList = action.GetTargetList();
 		int iTargetCount = kTargetList.size();
-		if( 0 < iTargetCount ) 
+		if (0 < iTargetCount)
 		{
 			action.BroadCastTargetListModify(actor.GetPilot(), false);
 			action.ClearTargetList();
@@ -3033,54 +3044,54 @@ bool PgActionFSM_Skill_Bro_Spin_Fire::OnTimer(lwActor actor,lwAction action,floa
 	}
 
 	iHitCount = iHitCount + 1;
-	action.SetParamInt(10,iHitCount);
+	action.SetParamInt(10, iHitCount);
 
-	if( iHitCount == iTotalHit ) 
+	if (iHitCount == iTotalHit)
 	{
 		return	true;
 	}
 
 	return	true;
 }
-int PgActionFSM_Skill_Bro_Spin_Fire::OnFindTarget(lwActor actor,lwAction action,lwActionTargetList kTargetList)
+int PgActionFSM_Skill_Bro_Spin_Fire::OnFindTarget(lwActor actor, lwAction action, lwActionTargetList kTargetList)
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	lwPoint3 kPos(action.GetParamFloat(13),action.GetParamFloat(14),action.GetParamFloat(15) - 30);
+	lwPoint3 kPos(action.GetParamFloat(13), action.GetParamFloat(14), action.GetParamFloat(15) - 30);
 	lwPoint3 kDir = actor.GetLookingDir();
 
 	lwFindTargetParam kParam;
-	kParam.SetParam_1(kPos,lwPoint3(0.0f,0.0f,1.0f));
-	kParam.SetParam_2(400.0f, static_cast<float>( action.GetSkillRange(0,actor)*2 ),0,0);
-	kParam.SetParam_3(true,PgAction::FTO_BLOWUP + PgAction::FTO_NORMAL);
+	kParam.SetParam_1(kPos, lwPoint3(0.0f, 0.0f, 1.0f));
+	kParam.SetParam_2(400.0f, static_cast<float>(action.GetSkillRange(0, actor) * 2), 0, 0);
+	kParam.SetParam_3(true, PgAction::FTO_BLOWUP + PgAction::FTO_NORMAL);
 
-	int iFound = action.FindTargetsEx(action.GetActionNo(),PgAction::TAT_BAR,kParam,kTargetList,kTargetList);
+	int iFound = action.FindTargetsEx(action.GetActionNo(), PgAction::TAT_BAR, kParam, kTargetList, kTargetList);
 	return iFound;
 }
 
-void PgActionFSM_Skill_Bro_Spin_Fire::OnTargetListModified(lwActor actor,lwAction action,bool bIsBefore)	const
+void PgActionFSM_Skill_Bro_Spin_Fire::OnTargetListModified(lwActor actor, lwAction action, bool bIsBefore)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	if( bIsBefore == false ) 
+	if (bIsBefore == false)
 	{
-		lwCommonSkillUtilFunc::DefaultHitOneTime(actor,action, false);
+		lwCommonSkillUtilFunc::DefaultHitOneTime(actor, action, false);
 		action.GetTargetList().ApplyActionEffects(false, false, false);
 	}
 }
 
 ///
-bool	PgActionFSM_Act_IdleBear::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_IdleBear::OnEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	
+
 	std::string actorID = actor.GetID();
 
-	//Æê Å¾½Â ÁßÀÌ¶ó¸é Å¾½Â µ¿ÀÛÀ¸·Î º¯°æ
-	if(actor.IsRidingPet())
+	//ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (actor.IsRidingPet())
 	{
 		action.SetSlot(3);
 		actor.PlayCurrentSlot(true);
@@ -3088,40 +3099,40 @@ bool	PgActionFSM_Act_IdleBear::OnEnter(lwActor actor,lwAction action)	const
 		return true;
 	}
 
-	//	¸¸¾à stun »óÅÂ¶ó¸é, stun ¾×¼ÇÀ¸·Î ÀüÀÌ½ÃÅ²´Ù.
-	if(actor.IsStun())
+	//	ï¿½ï¿½ï¿½ï¿½ stun ï¿½ï¿½ï¿½Â¶ï¿½ï¿½, stun ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½Å²ï¿½ï¿½.
+	if (actor.IsStun())
 	{
-		actor.ReserveTransitAction("a_stun",DIR_NONE);
+		actor.ReserveTransitAction("a_stun", DIR_NONE);
 		return	false;
 	}
-	
+
 	int const iSpecificIdleActionNo = actor.GetSpecificIdle();
-	if(iSpecificIdleActionNo)
+	if (iSpecificIdleActionNo)
 	{
 		action.SetParamInt(100, 1);		// SpecificIdle
-		switch(iSpecificIdleActionNo)
+		switch (iSpecificIdleActionNo)
 		{
 		case ESIT_BOSS_MONSTER_IDLE:
-			{
-				actor.ResetAnimation();
-				actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
-				return false;
-			}break;
+		{
+			actor.ResetAnimation();
+			actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
+			return false;
+		}break;
 		case ESIT_NONE:
-			{
-			}break;
+		{
+		}break;
 		default:
+		{
+			if (iSpecificIdleActionNo != action.GetActionNo())
 			{
-				if(iSpecificIdleActionNo != action.GetActionNo())
-				{
-					actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
-					return false;
-				}
-			}break;
+				actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
+				return false;
+			}
+		}break;
 		}
 	}
-	if( actor.IsUnitType(UT_SUB_PLAYER) )
-	{// º¸Á¶ Ä³¸¯ÅÍ¿¡ ¸Â´Â ¾×¼ÇÀ¸·Î ¹Ù²ãÁÖ°í(¸ÞÀÎ Ä³¸¯ÅÍ¸¦ µû¶ó°¡´Â)
+	if (actor.IsUnitType(UT_SUB_PLAYER))
+	{// ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Â´ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½Ö°ï¿½(ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ó°¡´ï¿½)
 		actor.ReserveTransitAction("a_twin_sub_trace_ground", DIR_NONE);
 		return false;
 	}
@@ -3135,7 +3146,7 @@ bool	PgActionFSM_Act_IdleBear::OnEnter(lwActor actor,lwAction action)	const
 				BYTE	byDir = actor.GetDirection();
 				if (byDir != DIR_NONE)
 				{
-					actor.ReserveTransitAction(ACTIONNAME_RUN,byDir);
+					actor.ReserveTransitAction(ACTIONNAME_RUN, byDir);
 					return false;
 				}
 			}
@@ -3143,48 +3154,48 @@ bool	PgActionFSM_Act_IdleBear::OnEnter(lwActor actor,lwAction action)	const
 	}
 
 
-	if(std::string(action.GetID()) == ACTIONNAME_BIDLE && actor.IsUnitType(UT_PLAYER))
+	if (std::string(action.GetID()) == ACTIONNAME_BIDLE && actor.IsUnitType(UT_PLAYER))
 	{
 		action.SetSlot(1);
 	}
 
 	actor.Stop();
 
-	if(EMGRADE_UPGRADED >= actor.GetAbil(AT_GRADE) || actor()->IsUseBattleIdle())
+	if (EMGRADE_UPGRADED >= actor.GetAbil(AT_GRADE) || actor()->IsUseBattleIdle())
 	{
-		if(actor.IsUnitType(UT_MONSTER) && actor.HasTarget())
+		if (actor.IsUnitType(UT_MONSTER) && actor.HasTarget())
 		{
 			action.SetSlot(2);
 		}
 	}
 
-	if(actor.IsUnitType(UT_PLAYER))
+	if (actor.IsUnitType(UT_PLAYER))
 	{
-		action.SetParamFloat(2,15);
-	}                                           
-	else if(actor.IsUnitType(UT_MONSTER))
-	{
-		action.SetParamFloat(2,4);
+		action.SetParamFloat(2, 15);
 	}
-	else if(actor.IsUnitType(UT_PET))
+	else if (actor.IsUnitType(UT_MONSTER))
 	{
-		action.SetParamFloat(2,8);
+		action.SetParamFloat(2, 4);
+	}
+	else if (actor.IsUnitType(UT_PET))
+	{
+		action.SetParamFloat(2, 8);
 	}
 
 	action.SetParamInt(4, 4 + BM::Rand_Index(4));
 	action.SetParamInt(5, 0);
 	action.SetParamInt(6, 0);
-	action.SetParamFloat(13,-1);
-	
-	if(false==actor()->IdleEffectName().empty())
+	action.SetParamFloat(13, -1);
+
+	if (false == actor()->IdleEffectName().empty())
 	{
 		actor.AttachParticle(SLOTNO_IDLE_EFFECT, actor()->IdleEffectNode().c_str(), actor()->IdleEffectName().c_str());
 	}
-	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ½ºÅ³À» ¾²¸é ¾ÈµÇ´Â ½ºÅ³ÀÎ°¡
+	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½Å³ï¿½Î°ï¿½
 	return	true;
 }
 
-bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 
 	lwCheckNil(actor.IsNil());
@@ -3193,12 +3204,12 @@ bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accu
 	int	currentSlot = action.GetCurrentSlot();
 	//std::string param = action.GetParam(0);
 	int	iIdleType = action.GetParamInt(6);
-	
+
 	if (actor.IsCheckMeetFloor())
 	{
-		if(actor.IsMeetFloor() == false && actor.IsMyActor())
+		if (actor.IsMeetFloor() == false && actor.IsMyActor())
 		{
-			lwAction kAction = actor.ReserveTransitAction(ACTIONNAME_JUMP,0);
+			lwAction kAction = actor.ReserveTransitAction(ACTIONNAME_JUMP, 0);
 			kAction.SetSlot(2);
 			kAction.SetDoNotBroadCast(true);
 			return false;
@@ -3207,7 +3218,7 @@ bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accu
 
 	if (action.GetParamFloat(13) == -1)
 	{
-		action.SetParamFloat(13,accumTime);
+		action.SetParamFloat(13, accumTime);
 	}
 
 	//if (actor.IsMyActor() == false)
@@ -3219,7 +3230,7 @@ bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accu
 		//	return true;
 		//}
 	//}
-	
+
 	if (actor.IsCheckMeetFloor())
 	{
 		if (actor.IsMeetFloor() && actor.IsMyActor())
@@ -3229,7 +3240,7 @@ bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accu
 				BYTE	byDir = actor.GetDirection();
 				if (byDir != DIR_NONE)
 				{
-					actor.ReserveTransitAction(ACTIONNAME_RUN,byDir);
+					actor.ReserveTransitAction(ACTIONNAME_RUN, byDir);
 					return true;
 				}
 			}
@@ -3240,11 +3251,11 @@ bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accu
 
 	if (actor.IsCheckMeetFloor())
 	{
-		if (actor.IsMeetFloor() == false 
-			&& actor.GetAbil(AT_MONSTER_TYPE) != 1 
+		if (actor.IsMeetFloor() == false
+			&& actor.GetAbil(AT_MONSTER_TYPE) != 1
 			&& actor.IsUnitType(UT_OBJECT) == false)
 		{
-			if (strcmp(action.GetParam(119),"jump_trap") == 0 || actor.GetVelocity().GetZ() < 0 )
+			if (strcmp(action.GetParam(119), "jump_trap") == 0 || actor.GetVelocity().GetZ() < 0)
 			{
 				action.SetNextActionName(ACTIONNAME_JUMP);
 				action.SetParam(3, "fall_down");
@@ -3256,36 +3267,36 @@ bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accu
 	if (actor.IsAnimationDone() == true)
 	{
 		actor.ResetAnimation();
-	
+
 		if (iIdleType == 0)
 		{
-		
+
 			int iBaseIdleLoopNum = action.GetParamInt(4);
 			int iBaseIdleLoopCurNum = action.GetParamInt(5);
-			
-			iBaseIdleLoopCurNum=iBaseIdleLoopCurNum+1;
-			
-			if (iBaseIdleLoopCurNum>= iBaseIdleLoopNum)
+
+			iBaseIdleLoopCurNum = iBaseIdleLoopCurNum + 1;
+
+			if (iBaseIdleLoopCurNum >= iBaseIdleLoopNum)
 			{
-				action.SetParamInt(6,1);
+				action.SetParamInt(6, 1);
 				actor.PlayCurrentSlot(false);
 			}
 			else
 			{
-				action.SetParamInt(5,iBaseIdleLoopCurNum);
-				actor.PlayCurrentSlot(true);	
+				action.SetParamInt(5, iBaseIdleLoopCurNum);
+				actor.PlayCurrentSlot(true);
 			}
 		}
-		else if( iIdleType == 1 )
+		else if (iIdleType == 1)
 		{
-			
+
 			action.SetParamInt(6, 0);
 			action.SetParamInt(4, 4 + BM::Rand_Index(4));
 			action.SetParamInt(5, 0);
-			
-			actor.PlayCurrentSlot(true);			
+
+			actor.PlayCurrentSlot(true);
 		}
-	
+
 
 		return true;
 	}
@@ -3298,133 +3309,133 @@ bool	PgActionFSM_Act_IdleBear::OnUpdate(lwActor actor,lwAction action,float accu
 			return false;
 		}
 	}
-	else if(actor.GetPilot().GetAbil(AT_IDLEACTION_TYPE) != 101 && accumTime - action.GetParamFloat(13) > 3.0 )
+	else if (actor.GetPilot().GetAbil(AT_IDLEACTION_TYPE) != 101 && accumTime - action.GetParamFloat(13) > 3.0)
 	{
-		action.SetParamFloat(13,accumTime);
+		action.SetParamFloat(13, accumTime);
 	}
-	
+
 	int const iSpecificIdleActionNo = actor.GetSpecificIdle();
-	switch(iSpecificIdleActionNo)
+	switch (iSpecificIdleActionNo)
 	{
 	case ESIT_BOSS_MONSTER_IDLE:
-		{
-			actor.ResetAnimation();
-			actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
-			return false;
-		}break;
+	{
+		actor.ResetAnimation();
+		actor.ReserveTransitAction("a_SpecificIdle", DIR_NONE);
+		return false;
+	}break;
 	case ESIT_NONE:
+	{
+		if (0 < action.GetParamInt(100))
 		{
-			if(0 < action.GetParamInt(100))
-			{
-				actor.ReserveTransitAction(ACTIONNAME_IDLE, actor.GetDirection());
-				return false;
-			}
-		}break;
+			actor.ReserveTransitAction(ACTIONNAME_IDLE, actor.GetDirection());
+			return false;
+		}
+	}break;
 	default:
+	{
+		if (iSpecificIdleActionNo != action.GetActionNo())
 		{
-			if(iSpecificIdleActionNo != action.GetActionNo())
-			{
-				actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
-				return false;
-			}
-		}break;
+			actor.ReserveTransitActionByActionNo(actor.GetSpecificIdle(), actor.GetDirection());
+			return false;
+		}
+	}break;
 	}
 
 	return true;
 }
-bool	PgActionFSM_Act_IdleBear::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_IdleBear::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 	lwCheckNil(actor.GetAction().IsNil());
 
-	if (strcmp(action.GetID(),ACTIONNAME_JUMP)==0 && strcmp(actor.GetAction().GetParam(3),"fall_down") == 0 )
+	if (strcmp(action.GetID(), ACTIONNAME_JUMP) == 0 && strcmp(actor.GetAction().GetParam(3), "fall_down") == 0)
 	{
-		// Àýº®¿¡¼­ ¶³¾îÁú ¶§´Â, ActionPacketÀ» º¸³»Áö ¾Ê´Â´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ActionPacketï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 		action.SetSlot(2);
 		action.SetDoNotBroadCast(true);
 	}
 
-	if(false==actor()->IdleEffectName().empty())
+	if (false == actor()->IdleEffectName().empty())
 	{
 		actor.DetachFrom(SLOTNO_IDLE_EFFECT);
 	}
 	return true;
 }
 ///
-bool	PgActionFSM_Act_RunBear::OnCheckCanEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_RunBear::OnCheckCanEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	
-//	if action.GetEnable() == false then
-		// À½.. ÀÏ´Ü ÁÖ¼®Ã³¸®..
-//		local up = actor.GetActionState("a_run_up")
-//		local down = actor.GetActionState("a_run_down")
-//		local right = actor.GetActionState("a_run_right")
-//		local left = actor.GetActionState("a_run_left")		
-	
-//		if up ~=0 or down ~=0 or right ~=0 or left ~=0 then
-//			return false
-//		end
-//	end
-	
+
+	//	if action.GetEnable() == false then
+			// ï¿½ï¿½.. ï¿½Ï´ï¿½ ï¿½Ö¼ï¿½Ã³ï¿½ï¿½..
+	//		local up = actor.GetActionState("a_run_up")
+	//		local down = actor.GetActionState("a_run_down")
+	//		local right = actor.GetActionState("a_run_right")
+	//		local left = actor.GetActionState("a_run_left")		
+
+	//		if up ~=0 or down ~=0 or right ~=0 or left ~=0 then
+	//			return false
+	//		end
+	//	end
+
 	lwAction curAction = actor.GetAction();
-	if(false==curAction.IsNil())
+	if (false == curAction.IsNil())
 	{
 		std::string curActionID = curAction.GetID();
 		if (curActionID == ACTIONNAME_RUN && actor.IsNowFollowing() == false)
 		{
 			_PgOutputDebugString("Current Action is \"a_run\" . transit failed!\n");
-			return false ;
+			return false;
 		}
 	}
 
 	return true;
 }
-bool	PgActionFSM_Act_RunBear::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_RunBear::OnEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
 	lwAction prevAction = actor.GetAction();
-	
+
 	if (prevAction.IsNil() == false)
 	{
 		std::string prevActionID = prevAction.GetID();
 		int prevSlot = prevAction.GetCurrentSlot();
-		if (prevActionID.substr(0,6) == ACTIONNAME_JUMP)
+		if (prevActionID.substr(0, 6) == ACTIONNAME_JUMP)
 		{
-			// ÇöÀç ¾×¼ÇÀÌ Á¡ÇÁÀÌ°í ½½·ÔÀÌ 3¹øÀÌ ¾Æ´Ï°Å³ª,
-			// ¹Ù´ÚÀÌ ¾Æ´Ï¸é, ÀüÀÌ ºÒ°¡´É
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï°Å³ï¿½,
+			// ï¿½Ù´ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
 			if (prevSlot != 3 || actor.IsMeetFloor() == false)
 			{
 				action.SetDoNotBroadCast(true);
 				return false;
 			}
 		}
-		else if (prevActionID.substr(0,5) == ACTIONNAME_RUN)
+		else if (prevActionID.substr(0, 5) == ACTIONNAME_RUN)
 		{
 			return false;
 		}
-		// ±× ¿Ü¿¡´Â ÀüÀÌ °¡´É
+		// ï¿½ï¿½ ï¿½Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
 	actor.UseSkipUpdateWhenNotVisible(false);
-	action.SetParamInt(1,0);
+	action.SetParamInt(1, 0);
 
 	lwPoint3	kTargetPos = action.GetParamAsPoint(0);
-	if (kTargetPos.IsZero() == false )
+	if (kTargetPos.IsZero() == false)
 	{
-		action.SetParamInt(3,1);
-		
+		action.SetParamInt(3, 1);
+
 		lwPoint3	kMoveDirection = kTargetPos.Subtract2(actor.GetPos());
 		kMoveDirection.Unitize();
-		action.SetParamAsPoint(1,kMoveDirection);
-		action.SetParamAsPoint(2,actor.GetPos());
-		
+		action.SetParamAsPoint(1, kMoveDirection);
+		action.SetParamAsPoint(2, actor.GetPos());
+
 		actor.SetMovingDir(kMoveDirection);
-		actor.LookAt(kTargetPos,true,true,false);
+		actor.LookAt(kTargetPos, true, true, false);
 		actor.ConcilDirection(kMoveDirection, true);
 	}
 
@@ -3433,13 +3444,13 @@ bool	PgActionFSM_Act_RunBear::OnEnter(lwActor actor,lwAction action)	const
 		actor.BackMoving(true);
 	}
 
-	//½ÃÀÛ À§Ä¡¿Í ½ÃÀÛ ½Ã°£À» ±â·Ï
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	action.SetParamAsPoint(7, actor.GetPos());
 	action.SetParamFloat(8, static_cast<float>(g_kEventView.GetServerElapsedTime()));
-	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ½ºÅ³À» ¾²¸é ¾ÈµÇ´Â ½ºÅ³ÀÎ°¡
+	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½Å³ï¿½Î°ï¿½
 	return true;
 }
-bool	PgActionFSM_Act_RunBear::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool	PgActionFSM_Act_RunBear::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -3452,7 +3463,7 @@ bool	PgActionFSM_Act_RunBear::OnUpdate(lwActor actor,lwAction action,float accum
 #ifndef EXTERNAL_RELEASE
 	if (g_pkApp->IsSingleMode() == true)
 	{
-		movingSpeed = 120.0f ;
+		movingSpeed = 120.0f;
 	}
 	else
 #endif
@@ -3460,93 +3471,93 @@ bool	PgActionFSM_Act_RunBear::OnUpdate(lwActor actor,lwAction action,float accum
 		movingSpeed = static_cast<float>(actor.GetAbil(AT_C_MOVESPEED));
 	}
 
-	if(0.0f != fCustomSpeed)
+	if (0.0f != fCustomSpeed)
 	{
 		movingSpeed = fCustomSpeed;
 	}
-	
+
 	float fOriginalMoveSpeed = static_cast<float>(actor.GetAbil(AT_MOVESPEED));
 	if (0.0f == fOriginalMoveSpeed)
 	{
 		fOriginalMoveSpeed = movingSpeed;
 	}
 
-	if(g_pkWorld)
+	if (g_pkWorld)
 	{
-		if(g_pkWorld->GetAttr() & GATTR_VILLAGE)
+		if (g_pkWorld->GetAttr() & GATTR_VILLAGE)
 		{
 			movingSpeed += static_cast<float>(actor.GetAbil(AT_C_VILLAGE_MOVESPEED));
 		}
 	}
-	
+
 	float fAnimSpeed = 0.0f;
-	
+
 	if (0.0f < fOriginalMoveSpeed)
 	{
-		fAnimSpeed = movingSpeed/fOriginalMoveSpeed;
+		fAnimSpeed = movingSpeed / fOriginalMoveSpeed;
 	}
-	
-	char const* pkAutoSpeed = actor.GetAnimationInfo("USE_AUTO_ANI_SPEED",0);
-	if(NULL==pkAutoSpeed || 0!=strcmp(pkAutoSpeed,"FALSE"))
+
+	char const* pkAutoSpeed = actor.GetAnimationInfo("USE_AUTO_ANI_SPEED", 0);
+	if (NULL == pkAutoSpeed || 0 != strcmp(pkAutoSpeed, "FALSE"))
 	{
 		actor.SetAnimSpeed(fAnimSpeed);
 	}
-	
+
 	DoAutoFire(actor);
-	
-	if (actor.IsMyActor() && action.GetParamInt(1) == 0 )
+
+	if (actor.IsMyActor() && action.GetParamInt(1) == 0)
 	{
 		if (accumTime - action.GetActionEnterTime() > 0.1f)
 		{
 			actor.SetComboCount(0);
-			action.SetParamInt(1,1);
+			action.SetParamInt(1, 1);
 		}
 	}
-	
+
 	if (bMoveToPos)
 	{
 		lwPoint3	kMoveTargetPos = action.GetParamAsPoint(0);
-		lwPoint3	kMoveDirection = action.GetParamAsPoint(1);	
+		lwPoint3	kMoveDirection = action.GetParamAsPoint(1);
 		lwPoint3	kMoveStartPos = action.GetParamAsPoint(2);
-		
+
 		lwPoint3	kDir1 = actor.GetPos().Subtract2(kMoveTargetPos);
 		kDir1.Unitize();
 		lwPoint3	kDir2 = kMoveStartPos.Subtract2(kMoveTargetPos);
 		kDir2.Unitize();
-		
+
 		if (0 > kDir1.Dot(kDir2) || 5 > actor.GetPos().Distance(kMoveTargetPos))
 		{
-			actor.SetTranslate(kMoveTargetPos,false);
+			actor.SetTranslate(kMoveTargetPos, false);
 			return	false;
 		}
-		
+
 		kMoveDirection.Multiply(movingSpeed);
 		actor.SetMovingDelta(kMoveDirection);
-	
+
 		return	true;
 	}
-	
+
 	BYTE dir = actor.GetDirection();
-	
+
 	if (dir == DIR_NONE)
 	{
 		if (actor.GetWalkingToTarget() == false)
 		{
-			return false ;
+			return false;
 		}
 	}
-	
+
 	if (movingSpeed == 0)
 	{
-	    return  false;
+		return  false;
 	}
-	actor.Walk(dir, movingSpeed,0,false);
+	actor.Walk(dir, movingSpeed, 0, false);
 
 	lwPoint3 vel = actor.GetVelocity();
 	float z = vel.GetZ();
 
-	// ¶Ù¾î°¡´Ù°¡ ¹ßÀÌ ¶¥¿¡¼­ ¶³¾îÁ³À» °æ¿ì
-	// ¿Ã¶ó°¡´Â Á¡ÇÁ¸¦ ÇØ¾ß ÇÒÁö, ³»·Á¿À´Â Á¡ÇÁ¸¦ ÇØ¾ß ÇÒÁö °áÁ¤
+	// ï¿½Ù¾î°¡ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	// ï¿½Ã¶ó°¡´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (actor.IsMeetFloor() == false)
 	{
 		if (z < -2)
@@ -3563,18 +3574,18 @@ bool	PgActionFSM_Act_RunBear::OnUpdate(lwActor actor,lwAction action,float accum
 		}
 	}
 
-	// »ç´Ù¸® Ã¼Å©
-	if (actor.ContainsDirection(DIR_UP) && 
+	// ï¿½ï¿½Ù¸ï¿½ Ã¼Å©
+	if (actor.ContainsDirection(DIR_UP) &&
 		actor.IsMyActor() &&
 		actor.ClimbUpLadder())
 	{
 		action.SetNextActionName("a_ladder_idle");
 		return false;
 	}
-	
+
 	return true;
 }
-bool	PgActionFSM_Act_RunBear::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_RunBear::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -3583,7 +3594,7 @@ bool	PgActionFSM_Act_RunBear::OnLeave(lwActor actor,lwAction action,bool bCancel
 	lwCheckNil(curAction.IsNil());
 	std::string kActionID = action.GetID();
 
-	if (kActionID.substr(0,6) == ACTIONNAME_JUMP)
+	if (kActionID.substr(0, 6) == ACTIONNAME_JUMP)
 	{
 		std::string param = curAction.GetParam(2);
 		if (param == "fall_down")
@@ -3598,7 +3609,7 @@ bool	PgActionFSM_Act_RunBear::OnLeave(lwActor actor,lwAction action,bool bCancel
 		}
 		else if (param == "null")
 		{
-			if(actor.IsMeetFloor())
+			if (actor.IsMeetFloor())
 			{
 				action.SetSlot(1);
 			}
@@ -3610,12 +3621,12 @@ bool	PgActionFSM_Act_RunBear::OnLeave(lwActor actor,lwAction action,bool bCancel
 	}
 	else if (kActionID == "a_ladder_idle" ||
 		kActionID == "a_ladder_down" ||
-		kActionID == "a_ladder_up" )
+		kActionID == "a_ladder_up")
 	{
 		actor.HideParts(6, true);
-		actor.SetParam("LADDER_WEAPON_HIDE","TRUE");
+		actor.SetParam("LADDER_WEAPON_HIDE", "TRUE");
 	}
-	else if (kActionID.substr(0,6) == ACTIONNAME_IDLE)
+	else if (kActionID.substr(0, 6) == ACTIONNAME_IDLE)
 	{
 		//action.SetDoNotBroadCast(true)
 		return true;
@@ -3625,7 +3636,7 @@ bool	PgActionFSM_Act_RunBear::OnLeave(lwActor actor,lwAction action,bool bCancel
 
 	return true;
 }
-bool	PgActionFSM_Act_RunBear::OnCleanUp(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_RunBear::OnCleanUp(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 
@@ -3633,7 +3644,7 @@ bool	PgActionFSM_Act_RunBear::OnCleanUp(lwActor actor,lwAction action)	const
 	return	true;
 }
 
-bool	PgActionFSM_Act_RunBear::OnEvent(lwActor actor,std::string textKey,int iSeqID)	const
+bool	PgActionFSM_Act_RunBear::OnEvent(lwActor actor, std::string textKey, int iSeqID)	const
 {
 	lwCheckNil(actor.IsNil());
 	if (textKey == "start")
@@ -3643,25 +3654,25 @@ bool	PgActionFSM_Act_RunBear::OnEvent(lwActor actor,std::string textKey,int iSeq
 	return	true;
 }
 ///
-bool	PgActionFSM_Act_DashBear::OnCheckCanEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_DashBear::OnCheckCanEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 
-	//Æê Å¾½Â ÁßÀÌ¶ó¸é ´ë½¬ ºÒ°¡
-	if(actor.IsRidingPet())
+	//ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ë½¬ ï¿½Ò°ï¿½
+	if (actor.IsRidingPet())
 	{
 		return false;
 	}
 
-	// ±âÈ¹ÆÀÀå´ÔÀÌ °øÁß¿¡¼­ ´ë½¬ ÇÒ ¼ö ÀÖ°Ô ÇØ´Þ¶ø´Ï´Ù;;(´Ü ÇÑ ¹ø¸¸)
+	// ï¿½ï¿½È¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ë½¬ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½Ø´Þ¶ï¿½ï¿½Ï´ï¿½;;(ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 	if (actor.IsMeetFloor() == false)
 	{
-		if (actor.GetJumpAccumHeight()<50)
+		if (actor.GetJumpAccumHeight() < 50)
 		{
 			return false;
 		}
 	}
-	
+
 	if (actor.IsOnlyMoveAction())
 	{
 		return false;
@@ -3670,7 +3681,7 @@ bool	PgActionFSM_Act_DashBear::OnCheckCanEnter(lwActor actor,lwAction action)	co
 	if (g_pkApp->IsSingleMode() == false)
 #endif
 	{
-		//	ÀÌµ¿ ¼Óµµ°¡  0ÀÌ¸é ¾ÈµÈ´Ù.
+		//	ï¿½Ìµï¿½ ï¿½Óµï¿½ï¿½ï¿½  0ï¿½Ì¸ï¿½ ï¿½ÈµÈ´ï¿½.
 		if (actor.GetAbil(AT_C_MOVESPEED) == 0)
 		{
 			return	false;
@@ -3679,9 +3690,9 @@ bool	PgActionFSM_Act_DashBear::OnCheckCanEnter(lwActor actor,lwAction action)	co
 
 	return true;
 }
-bool	PgActionFSM_Act_DashBear::OnEnter(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_DashBear::OnEnter(lwActor actor, lwAction action)	const
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
@@ -3691,7 +3702,7 @@ bool	PgActionFSM_Act_DashBear::OnEnter(lwActor actor,lwAction action)	const
 
 	if (actor.IsMyActor() == false)
 	{
-//		ODS("======================== Other actor's dash Begin =====================\n")
+		//		ODS("======================== Other actor's dash Begin =====================\n")
 		actor.ClearReservedAction();
 	}
 
@@ -3699,31 +3710,31 @@ bool	PgActionFSM_Act_DashBear::OnEnter(lwActor actor,lwAction action)	const
 
 	action.SetParamFloat(0, g_pkWorld->GetAccumTime());	// Start Time
 	action.SetParamFloat(1, fDashSpeed);	// Start Velocity
-	action.SetParam(2,"");
+	action.SetParam(2, "");
 
 	action.SetParamAsPoint(7, actor.GetPos());
 	action.SetParamInt(8, static_cast<int>(g_kEventView.GetServerElapsedTime()));
-	
-	actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga",500,0);
-	
+
+	actor.StartBodyTrail("../Data/5_Effect/9_Tex/swift_01.tga", 500, 0);
+
 	actor.FindPathNormal();
 	lwPoint3	pt = actor.GetTranslate();
-	pt.SetZ(pt.GetZ()-30);
+	pt.SetZ(pt.GetZ() - 30);
 	//actor.AttachParticleToPoint(201, pt, "e_special_transform")	
 	actor.SetComboCount(0);
-	
+
 	if (actor.IsMyActor() == false)
 	{
-		actor.SetTranslate(action.GetActionStartPos(),false);
+		actor.SetTranslate(action.GetActionStartPos(), false);
 	}
-	
+
 	actor.UseSkipUpdateWhenNotVisible(false);
-	action.SetParamInt(4,0);	
+	action.SetParamInt(4, 0);
 	// actor.SetDirection(action.GetDirection());
-	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ½ºÅ³À» ¾²¸é ¾ÈµÇ´Â ½ºÅ³ÀÎ°¡
+	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½Å³ï¿½Î°ï¿½
 	return true;
 }
-bool	PgActionFSM_Act_DashBear::OnUpdate(lwActor actor,lwAction action,float accumTime,float frameTime)	const
+bool	PgActionFSM_Act_DashBear::OnUpdate(lwActor actor, lwAction action, float accumTime, float frameTime)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -3739,63 +3750,63 @@ bool	PgActionFSM_Act_DashBear::OnUpdate(lwActor actor,lwAction action,float accu
 	//ODS("__________Jumping . " .. jumping .. "________\n")
 	if (iState == 0)
 	{
-		actor.FindPathNormal();		
-		
+		actor.FindPathNormal();
+
 		float fAccel = -1000 * frameTime;
 		float fVelocity = action.GetParamFloat(1);
-		
-//		local kMovingDir = actor.GetLookingDir()
-//		kMovingDir.Multiply(fVelocity)
-		
+
+		//		local kMovingDir = actor.GetLookingDir()
+		//		kMovingDir.Multiply(fVelocity)
+
 		BYTE dir = action.GetDirection();
 
 		//ODS("______________Direction . " .. dir .. "\n")
 
-		
-		//ÇöÀç´Â ÀÏ´Ü ¸·¾Æ µÐ´Ù.
-		//ÃÖ´ë ´ë½¬ °Å¸®º¸´Ù ¸¹ÀÌ °¡´Â °æ¿ì°¡ »ý±æ ¼ö ÀÖÀ¸¹Ç·Î ½Ã¹Ä·¹ÀÌ¼Ç ÈÄ ÃÖ´ë°ª ÀÌ»ó °¡Áö ¸øÇÏµµ·Ï ÇÑ´Ù.
+
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½.
+		//ï¿½Ö´ï¿½ ï¿½ë½¬ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ã¹Ä·ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ ï¿½Ö´ë°ª ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		NiPoint3 kNewPos = actor.GetPos()();
 		NiPoint3 kOldPos = action.GetParamAsPoint(7)();
-		kOldPos.z = kNewPos.z = 0.0f; //Z¸¦ ¹«½ÃÇÏ°í °è»êÇÑ´Ù. ¶³¾îÁö´Â °ÍÀº Áß·Â¿¡ ÀÇÇÑ °Í
+		kOldPos.z = kNewPos.z = 0.0f; //Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
 		float const fDistance = (kNewPos - kOldPos).Length();
 
-		//ÀÌµ¿ÇÑ °Å¸®°¡ ÀÖÀ» °æ¿ì
-		if(0.0f < fDistance)
+		//ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		if (0.0f < fDistance)
 		{
 			float const fMaxDistance = 130.0f;
-			//³²Àº ÀÌµ¿ °Å¸®
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Å¸ï¿½
 			float const fDistance2 = fMaxDistance - fDistance;
 
-			//µÎ º¤ÅÍ¸¦ ÀÌ¿ëÇÏ¿© ¹æÇâ º¤ÅÍ¸¦ ±¸ÇÏ°í
-			//¹æÇâ º¤ÅÍ¸¦ ÀÌ¿ëÇÏ¿© ½ÇÁ¦·Î ÀÌµ¿ÇÏ´Â °÷ÀÇ À§Ä¡¸¦ ±¸ÇÑ´Ù.
+			//ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 			NiPoint3 kDirection = kNewPos - kOldPos;
 			kDirection.Unitize();
 			kDirection *= fVelocity * frameTime;
 			kDirection += kNewPos;
 
-			// ÀÌ¹ø ÇÁ·¹ÀÓ¿¡ ÀÌµ¿ ÇÏ´Â °Å¸®
+			// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½Ìµï¿½ ï¿½Ï´ï¿½ ï¿½Å¸ï¿½
 			float const fDistance3 = (kDirection - kOldPos).Length();
 
-			//ÀÌ¹Ì ÃÖ´ë ´ë½¬ ÀÌµ¿°Å¸® °Å¸®¸¦ ¹þ¾î³­ °æ¿ì
-			if(fMaxDistance - fDistance3 < 0)
+			//ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ ï¿½ë½¬ ï¿½Ìµï¿½ï¿½Å¸ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³­ ï¿½ï¿½ï¿½
+			if (fMaxDistance - fDistance3 < 0)
 			{
-				//fVelocity°ªÀ» ´Ù½Ã ¼¼ÆÃÇØ¾ß ÇÑ´Ù.				
+				//fVelocityï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.				
 				fVelocity = fDistance2 / frameTime;
 			}
 		}
 
-		actor.Walk(dir, fVelocity,0,false);
-		
+		actor.Walk(dir, fVelocity, 0, false);
+
 		fVelocity = fVelocity + fAccel;
 		fVelocity = __max(0, fVelocity);
 		action.SetParamFloat(1, fVelocity);
-		
+
 		float fElapsedTime = accumTime - action.GetParamFloat(0);
 		if (0.3f < fElapsedTime)
 		{
-			// TODO . ElapsedTimeÀÌ 0.3¿¡¼­ ¾ó¸¶³ª ¹þ¾î³µ´ÂÁö È®ÀÎ ÈÄ¿¡, ±×¸¸Å­ µÚ·Î ´ç°Ü ÁÖ¾î¾ß ÇÑ´Ù.
-			action.SetParamInt(4,1);
+			// TODO . ElapsedTimeï¿½ï¿½ 0.3ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸¶³ï¿½ ï¿½ï¿½ï¿½î³µï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½Ä¿ï¿½, ï¿½×¸ï¿½Å­ ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
+			action.SetParamInt(4, 1);
 			action.SetParamFloat(5, accumTime);
 		}
 	}
@@ -3803,9 +3814,9 @@ bool	PgActionFSM_Act_DashBear::OnUpdate(lwActor actor,lwAction action,float accu
 	{
 		float fElapsedTime = accumTime - action.GetParamFloat(5);
 		float	fDashFreezeTime = lua_tinker::call<float>("GetDashFreezeTime");
-		if (fElapsedTime>=fDashFreezeTime)
+		if (fElapsedTime >= fDashFreezeTime)
 		{
-			action.SetParam(2,"end");
+			action.SetParam(2, "end");
 			if (actor.IsMeetFloor() == false)
 			{
 				action.SetNextActionName(ACTIONNAME_JUMP);
@@ -3813,15 +3824,15 @@ bool	PgActionFSM_Act_DashBear::OnUpdate(lwActor actor,lwAction action,float accu
 			return false;
 		}
 	}
-	
+
 	if (std::string(action.GetParam(3)) == "EndNow")
 	{
 		return false;
 	}
-		
+
 	return	true;
 }
-bool	PgActionFSM_Act_DashBear::OnCleanUp(lwActor actor,lwAction action)	const
+bool	PgActionFSM_Act_DashBear::OnCleanUp(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
 
@@ -3829,52 +3840,52 @@ bool	PgActionFSM_Act_DashBear::OnCleanUp(lwActor actor,lwAction action)	const
 	actor.EndBodyTrail();
 	return true;
 }
-bool	PgActionFSM_Act_DashBear::OnLeave(lwActor actor,lwAction action,bool bCancel)	const
+bool	PgActionFSM_Act_DashBear::OnLeave(lwActor actor, lwAction action, bool bCancel)	const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	std::string kNextActionID = action.GetID();	
+	std::string kNextActionID = action.GetID();
 	lwAction kCurAction = actor.GetAction();
 
 	lwCheckNil(kCurAction.IsNil());
 	std::string newActionID = action.GetID();
 
 	lwCheckNil(actor.GetPilot().IsNil());
-    int	iBaseActorType = actor.GetPilot().GetBaseClassID();
-    
-	if (newActionID.substr(0,6) == ACTIONNAME_JUMP)
+	int	iBaseActorType = actor.GetPilot().GetBaseClassID();
+
+	if (newActionID.substr(0, 6) == ACTIONNAME_JUMP)
 	{
 		//action.SetDoNotBroadCast(true)
-		
+
 		action.SetSlot(2);
 	}
 
-	if (std::string(action.GetActionType())=="EFFECT")
+	if (std::string(action.GetActionType()) == "EFFECT")
 	{
 		return true;
 	};
-	
+
 	if (std::string(kCurAction.GetParam(2)) == "end")
 	{
-		if (newActionID.substr(0,6) == ACTIONNAME_JUMP)
+		if (newActionID.substr(0, 6) == ACTIONNAME_JUMP)
 		{
 			action.SetSlot(2);
 		}
 		return	true;
 	}
-	else if (newActionID.substr(0,6) == ACTIONNAME_JUMP && actor.IsJumping() == false)
+	else if (newActionID.substr(0, 6) == ACTIONNAME_JUMP && actor.IsJumping() == false)
 	{
-		if (std::string(action.GetParam(5)) == "HiJump" ) // hiJump¸é ±×³É jump·Î ³Ñ¾î°¨.
+		if (std::string(action.GetParam(5)) == "HiJump") // hiJumpï¿½ï¿½ ï¿½×³ï¿½ jumpï¿½ï¿½ ï¿½Ñ¾î°¨.
 		{
 			action.SetSlot(1);
 			kCurAction.SetParam(3, "EndNow");
 			return true;
 		}
 	}
-	else if( newActionID == "a_telejump" ||
+	else if (newActionID == "a_telejump" ||
 		newActionID == "a_lock_move" ||
-//		newActionID == "a_trap" ||
+		//		newActionID == "a_trap" ||
 		newActionID == "a_teleport"
 		|| newActionID == "a_teleport_rocket"
 		)
@@ -3886,52 +3897,52 @@ bool	PgActionFSM_Act_DashBear::OnLeave(lwActor actor,lwAction action,bool bCance
 }
 
 ///
-bool PgActionFSM_Act_JumpBear::OnCheckCanEnter(lwActor actor,lwAction action)	const
+bool PgActionFSM_Act_JumpBear::OnCheckCanEnter(lwActor actor, lwAction action)	const
 {
 	lwCheckNil(actor.IsNil());
-	
+
 	lwAction prevAction = actor.GetAction();
 	lwCheckNil(prevAction.IsNil());
-	
-	if( prevAction.IsNil() ) 
+
+	if (prevAction.IsNil())
 	{
 		return	true;
 	}
 
 
 	lwPacket kPacket = action.GetParamAsPacket();
-	if( kPacket.IsNil() == false ) 
+	if (kPacket.IsNil() == false)
 	{
-		action.SetParamFloat(4,kPacket.PopFloat());
-		action.SetParamInt(7,kPacket.PopInt());
+		action.SetParamFloat(4, kPacket.PopFloat());
+		action.SetParamInt(7, kPacket.PopInt());
 	}
-		
+
 	std::string actionName = prevAction.GetID();
-	
-	//	³«¹ý Ã¼Å©
+
+	//	ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	//CheckBreakFall(actor);
 
-	if( lwIsSingleMode() == false && actor.GetAbil(AT_C_MOVESPEED) == 0 ) 
-	{ // 0 ÀÌ¸é Á¡ÇÁ ÇÒ ¼ö ¾ø´Â »óÅÂ
+	if (lwIsSingleMode() == false && actor.GetAbil(AT_C_MOVESPEED) == 0)
+	{ // 0 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return false;
 	}
-	
-	if( IsFloatEvasion(actor,action) )
+
+	if (IsFloatEvasion(actor, action))
 	{
 		actor.ClearAllActionEffect();
 		return	true;
 	}
-	
-    if( actor.IsMeetFloor() == false ) 
+
+	if (actor.IsMeetFloor() == false)
 	{
-        if( actionName == "a_ladder_down" ||
-		    actionName == "a_ladder_idle" || 
-		    actionName == "a_ladder_up" ||
-		    actionName == "a_ladder_dash" ||
-			actionName.substr(0,5) == ACTIONNAME_RUN ||
-			actionName.substr(0,6) == ACTIONNAME_IDLE ||
-			actionName.substr(0,6) == ACTIONNAME_JUMP ||
-			actionName.substr(0,6) == "a_dash"
+		if (actionName == "a_ladder_down" ||
+			actionName == "a_ladder_idle" ||
+			actionName == "a_ladder_up" ||
+			actionName == "a_ladder_dash" ||
+			actionName.substr(0, 5) == ACTIONNAME_RUN ||
+			actionName.substr(0, 6) == ACTIONNAME_IDLE ||
+			actionName.substr(0, 6) == ACTIONNAME_JUMP ||
+			actionName.substr(0, 6) == "a_dash"
 			)
 		{
 			return true;
@@ -3940,100 +3951,100 @@ bool PgActionFSM_Act_JumpBear::OnCheckCanEnter(lwActor actor,lwAction action)	co
 	}
 	return true;
 }
-bool PgActionFSM_Act_JumpBear::OnEnter(lwActor actor,lwAction action) const
+bool PgActionFSM_Act_JumpBear::OnEnter(lwActor actor, lwAction action) const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
-	
+
 	lwAction prevAction = actor.GetAction();
-	
-	if(	prevAction.IsNil() )
+
+	if (prevAction.IsNil())
 	{
 		return	true;
 	}
-	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ½ºÅ³À» ¾²¸é ¾ÈµÇ´Â ½ºÅ³ÀÎ°¡
+	lwCommonSkillUtilFunc::InitIsBanSubPlayerAction(actor, action);	// SC ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½Å³ï¿½Î°ï¿½
 	std::string actionName = prevAction.GetID();
 
-	float	fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker),"jumpForce");
+	float	fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker), "jumpForce");
 	float	bIsFloatEvasion = (action.GetParamInt(7) == 1);
-	
-	if( strcmp(action.GetParam(4), "null") != 0 ) 
+
+	if (strcmp(action.GetParam(4), "null") != 0)
 	{
 		fJumpForce = PgStringUtil::SafeAtof(action.GetParam(4));
-		if( fJumpForce == 0.0f)
+		if (fJumpForce == 0.0f)
 		{
-			fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker),"jumpForce");
+			fJumpForce = lua_tinker::get<float>(*lua_wrapper_user(g_kLuaTinker), "jumpForce");
 		}
 	}
-	
-	if( bIsFloatEvasion ) 
+
+	if (bIsFloatEvasion)
 	{
 		fJumpForce = 30;
 	}
-		
-	action.SetParamFloat(4,fJumpForce);
-	
-	if( STR_HIJUMP == action.GetParam(5) )
+
+	action.SetParamFloat(4, fJumpForce);
+
+	if (STR_HIJUMP == action.GetParam(5))
 	{
 		//UseCameraHeightAdjust(false)
 	}
-	
-	if( bIsFloatEvasion 
-		|| ESS_CASTTIME == prevAction.GetActionParam()	// Ä³½ºÆÃÁß Äµ½½ÀÌ¸é
-		) 
+
+	if (bIsFloatEvasion
+		|| ESS_CASTTIME == prevAction.GetActionParam()	// Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Äµï¿½ï¿½ï¿½Ì¸ï¿½
+		)
 	{
 		actor.StartJump(fJumpForce);
 		return	true;
 	}
 
-	if( actionName.substr(0,5) == ACTIONNAME_RUN ||
+	if (actionName.substr(0, 5) == ACTIONNAME_RUN ||
 		actionName == "a_walk_left" ||
 		actionName == "a_walk_right" ||
 		actionName == "a_walk_up" ||
 		actionName == "a_walk_down" ||
 		actionName == "a_ladder_down" ||
-		actionName == "a_ladder_idle" || 
+		actionName == "a_ladder_idle" ||
 		actionName == "a_ladder_up" ||
 		actionName == "a_ladder_dash" ||
-		actionName.substr(0,6) == "a_dash" || 
+		actionName.substr(0, 6) == "a_dash" ||
 		STR_HIJUMP == action.GetParam(5)
-		) 
+		)
 	{
-		if( action.GetCurrentSlot() == 1 ) 
+		if (action.GetCurrentSlot() == 1)
 		{
-			if( strcmp(prevAction.GetParam(2), "fall_up") != 0 ) 
+			if (strcmp(prevAction.GetParam(2), "fall_up") != 0)
 			{
-				SetComboAdvisor(actor,action);
+				SetComboAdvisor(actor, action);
 				actor.StartJump(fJumpForce);
 			}
 			lwPoint3	pt = actor.GetTranslate();
 			pt.SetZ(pt.GetZ() - 30);
 			actor.AttachParticleToPoint(2, pt, "e_jump");
 		}
-		else if( action.GetCurrentSlot() == 2 ) 
+		else if (action.GetCurrentSlot() == 2)
 		{
-			if( actor.IsJumping() == false ) 
+			if (actor.IsJumping() == false)
 			{
 				actor.StartJump(0);
 			}
 		}
 		return true;
 	}
-	else if( actionName.substr(0,6) == ACTIONNAME_JUMP ) 
+	else if (actionName.substr(0, 6) == ACTIONNAME_JUMP)
 	{
-		if( strcmp(action.GetParam(1), "jump_again") == 0 )
+		if (strcmp(action.GetParam(1), "jump_again") == 0)
 		{
-			actor.StartJump(fJumpForce/2);
+			actor.StartJump(fJumpForce / 2);
 			action.SetSlot(4);
 			return true;
 		}
-		if( actor.IsMeetFloor() == true &&
-			actor.IsSlide() == false 
-			) 
+		if (actor.IsMeetFloor() == true &&
+			actor.IsSlide() == false
+			)
 		{
 			action.SetSlot(1);
 			actor.StartJump(fJumpForce);
-			SetComboAdvisor(actor,action);
+			SetComboAdvisor(actor, action);
 			return true;
 		}
 		else
@@ -4042,14 +4053,14 @@ bool PgActionFSM_Act_JumpBear::OnEnter(lwActor actor,lwAction action) const
 			return false;
 		}
 	}
-	else if( actionName.substr(0,6) == ACTIONNAME_IDLE 
-		|| actionName == "a_hang" 
-		|| actionName == "a_rope" 
+	else if (actionName.substr(0, 6) == ACTIONNAME_IDLE
+		|| actionName == "a_hang"
+		|| actionName == "a_rope"
 		)
 	{
-		if( actor.IsMeetFloor() == false && 
+		if (actor.IsMeetFloor() == false &&
 			action.GetCurrentSlot() != 2
-			) 
+			)
 		{
 			return	false;
 		}
@@ -4058,7 +4069,7 @@ bool PgActionFSM_Act_JumpBear::OnEnter(lwActor actor,lwAction action) const
 
 	return false;
 }
-void PgActionFSM_Act_JumpBear::OnOverridePacket(lwActor actor,lwAction action,lwPacket kPacket)	const
+void PgActionFSM_Act_JumpBear::OnOverridePacket(lwActor actor, lwAction action, lwPacket kPacket)	const
 {
 	lwCheckNil(action.IsNil());
 	lwCheckNil(kPacket.IsNil());
@@ -4066,7 +4077,7 @@ void PgActionFSM_Act_JumpBear::OnOverridePacket(lwActor actor,lwAction action,lw
 	kPacket.PushFloat(action.GetParamFloat(4));
 	kPacket.PushInt(action.GetParamInt(7));	//	Is this Float Evasion ?
 }
-bool PgActionFSM_Act_JumpBear::OnUpdate(lwActor actor,lwAction action,float fAccumTime,float fFrameTime) const
+bool PgActionFSM_Act_JumpBear::OnUpdate(lwActor actor, lwAction action, float fAccumTime, float fFrameTime) const
 {
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
@@ -4075,31 +4086,31 @@ bool PgActionFSM_Act_JumpBear::OnUpdate(lwActor actor,lwAction action,float fAcc
 	float movingSpeed = 0.0f;
 	float	fJumpForce = action.GetParamFloat(4);
 
-	if( lwIsSingleMode() == true ) 
+	if (lwIsSingleMode() == true)
 	{
 		movingSpeed = 150;
 	}
 	else
 	{
-		movingSpeed = static_cast<float>( actor.GetAbil(AT_C_MOVESPEED) );
+		movingSpeed = static_cast<float>(actor.GetAbil(AT_C_MOVESPEED));
 	}
 
-	if( NULL != g_pkWorld ) 
+	if (NULL != g_pkWorld)
 	{
-		if( g_pkWorld->GetAttr() == GATTR_VILLAGE ) 
+		if (g_pkWorld->GetAttr() == GATTR_VILLAGE)
 		{
 			movingSpeed = movingSpeed + actor.GetAbil(AT_C_VILLAGE_MOVESPEED);
 		}
 	}
 
 	DoAutoFire(actor);
-	
+
 	lwPoint3 vel = actor.GetVelocity(); 	// Current Velocity
 	float z = vel.GetZ(); 				// Gravity
 
 	//std::string param = action.GetParam(0);
 
-	// Gravity°ªÀÌ ±ò²ûÇÏ°Ô 0ÀÌ ³ª¿ÀÁö ¾Ê´Â °Í¿¡ ÁÖÀÇ.
+	// Gravityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	bool IsAnimDone = actor.IsAnimationDone();
 
 	std::string nextAction = ACTIONNAME_IDLE;
@@ -4107,62 +4118,62 @@ bool PgActionFSM_Act_JumpBear::OnUpdate(lwActor actor,lwAction action,float fAcc
 
 	////ODS("Current Slot = " .. curAnimSlot .. "\n")
 
-	// »ç´Ù¸® Ã¼Å©
-	if( actor.ContainsDirection(DIR_UP) && 
+	// ï¿½ï¿½Ù¸ï¿½ Ã¼Å©
+	if (actor.ContainsDirection(DIR_UP) &&
 		actor.IsMyActor() &&
-		actor.ClimbUpLadder() 
+		actor.ClimbUpLadder()
 		)
 	{
 		action.SetNextActionName("a_ladder_idle");
 		return false;
 	}
 
-	if( dir != DIR_NONE ) 
+	if (dir != DIR_NONE)
 	{
 		actor.Walk(dir, movingSpeed, 0.0f, false);
 		nextAction = ACTIONNAME_RUN;
 	}
-	else if( actor.GetWalkingToTarget() == true ) 
+	else if (actor.GetWalkingToTarget() == true)
 	{
 		actor.Walk(dir, movingSpeed, 0.0f, false);
 	}
 
-	if( curAnimSlot == 0 ) 
+	if (curAnimSlot == 0)
 	{
-		if( IsAnimDone == true ) 
+		if (IsAnimDone == true)
 		{
 			actor.StartJump(fJumpForce);
-            SetComboAdvisor(actor,action);
-			
+			SetComboAdvisor(actor, action);
+
 			lwPoint3 pt = actor.GetTranslate();
 			pt.SetZ(pt.GetZ() - 30);
 			actor.AttachParticleToPoint(2, pt, "e_jump");
 			actor.PlayNext();
 			return true;
 		}
-		else if( dir != DIR_NONE ) 
+		else if (dir != DIR_NONE)
 		{
 			actor.PlayNext();
 			actor.StartJump(fJumpForce);
-            SetComboAdvisor(actor,action);
-			
+			SetComboAdvisor(actor, action);
+
 			lwPoint3	pt = actor.GetTranslate();
 			pt.SetZ(pt.GetZ() - 30);
 			actor.AttachParticleToPoint(2, pt, "e_jump");
 		}
-		else if( z > g_fLandingThreshold ) 
+		else if (z > g_fLandingThreshold)
 		{
 			actor.PlayNext();
 		}
-	}	
-	else if( curAnimSlot == 1 )
+	}
+	else if (curAnimSlot == 1)
 	{
-		if( actor.IsMeetFloor() == true &&
+		if (actor.IsMeetFloor() == true &&
 			actor.IsSlide() == false &&
-			actor.IsJumping() == false 
+			actor.IsJumping() == false
 			)
 		{
-			if( dir == DIR_NONE ) 
+			if (dir == DIR_NONE)
 			{
 				actor.Stop();
 				action.SetSlot(3);
@@ -4170,76 +4181,76 @@ bool PgActionFSM_Act_JumpBear::OnUpdate(lwActor actor,lwAction action,float fAcc
 			}
 			else
 			{
-				// Jump°¡ 3¹ø ½½·ÔÀÌ¾î¾ß runÀ¸·Î Enter°¡´É
-				// paramÀ¸·Î runÀÌ µé¾î¿À¸é ÂøÁöÈÄ¿¡ ´Þ¸®´Â ¾Ö´Ï¸¦ ÁÖ°Ú´Ù´Â ¶æ
-				if( nextAction != ACTIONNAME_IDLE ) 
+				// Jumpï¿½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ runï¿½ï¿½ï¿½ï¿½ Enterï¿½ï¿½ï¿½ï¿½
+				// paramï¿½ï¿½ï¿½ï¿½ runï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½Ö°Ú´Ù´ï¿½ ï¿½ï¿½
+				if (nextAction != ACTIONNAME_IDLE)
 				{
 					action.SetSlot(3);
 					action.SetNextActionName(nextAction.c_str());
 					return false;
 				}
-				else if( strcmp(action.GetParam(1), "jump_again") != 0 )
+				else if (strcmp(action.GetParam(1), "jump_again") != 0)
 				{
 					action.SetNextActionName(ACTIONNAME_JUMP);
 					return false;
 				}
 			}
 		}
-		else if( IsAnimDone == true ) 
+		else if (IsAnimDone == true)
 		{
 			actor.PlayNext();
 		}
 	}
-	else if( curAnimSlot == 2 ) 
+	else if (curAnimSlot == 2)
 	{
-		if( actor.IsMeetFloor() == true &&
-			actor.IsSlide() == false ) 
+		if (actor.IsMeetFloor() == true &&
+			actor.IsSlide() == false)
 		{
-			if( dir == DIR_NONE ) 
+			if (dir == DIR_NONE)
 			{
 				actor.Stop();
 				actor.PlayNext();
 			}
 			else
 			{
-				// paramÀ¸·Î runÀÌ µé¾î¿À¸é ÂøÁöÈÄ¿¡ ´Þ¸®´Â ¾Ö´Ï¸¦ ÁÖ°Ú´Ù´Â ¶æ
-				if( nextAction != ACTIONNAME_IDLE ) 
+				// paramï¿½ï¿½ï¿½ï¿½ runï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½Ö°Ú´Ù´ï¿½ ï¿½ï¿½
+				if (nextAction != ACTIONNAME_IDLE)
 				{
 					action.SetSlot(3);
 					action.SetNextActionName(nextAction.c_str());
 					return false;
 				}
-				else if( strcmp(action.GetParam(1), "jump_again") != 0 ) 
+				else if (strcmp(action.GetParam(1), "jump_again") != 0)
 				{
-					// paramÀÌ runÀÌ ¾Æ´Ï°í,
-					// ÀÌ´Ü Á¡ÇÁ¸¦ ÇÑ °ÍÀÌ ¾Æ´Ï¸é, ÀÌ´Ü Á¡ÇÁ¸¦ ÇÑ´Ù.
+					// paramï¿½ï¿½ runï¿½ï¿½ ï¿½Æ´Ï°ï¿½,
+					// ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½, ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					action.SetNextActionName(ACTIONNAME_JUMP);
 					return false;
 				}
 			}
 		}
 	}
-	else if( curAnimSlot == 3 ) 
-	{ 
-		if( IsAnimDone == true ) 
+	else if (curAnimSlot == 3)
+	{
+		if (IsAnimDone == true)
 		{
 			return false;
 		}
 		else
 		{
-			if( nextAction == ACTIONNAME_JUMP ) 
+			if (nextAction == ACTIONNAME_JUMP)
 			{
 				action.SetNextActionName(nextAction.c_str());
 				return false;
 			}
 		}
 	}
-	else if( curAnimSlot == 4 ) 
-	{ 
-		if( actor.IsMeetFloor() == true ) 
+	else if (curAnimSlot == 4)
+	{
+		if (actor.IsMeetFloor() == true)
 		{
-			// paramÀ¸·Î runÀÌ µé¾î¿À¸é ÂøÁöÈÄ¿¡ ´Þ¸®´Â ¾Ö´Ï¸¦ ÁÖ°Ú´Ù´Â ¶æ
-			if( nextAction != ACTIONNAME_IDLE ) 
+			// paramï¿½ï¿½ï¿½ï¿½ runï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½Ö°Ú´Ù´ï¿½ ï¿½ï¿½
+			if (nextAction != ACTIONNAME_IDLE)
 			{
 				action.SetSlot(3);
 				action.SetNextActionName(nextAction.c_str());
@@ -4251,7 +4262,7 @@ bool PgActionFSM_Act_JumpBear::OnUpdate(lwActor actor,lwAction action,float fAcc
 				actor.PlayCurrentSlot(false);
 			}
 		}
-		else if( IsAnimDone == true ) 
+		else if (IsAnimDone == true)
 		{
 			action.SetSlot(2);
 			actor.PlayCurrentSlot(false);
@@ -4260,7 +4271,7 @@ bool PgActionFSM_Act_JumpBear::OnUpdate(lwActor actor,lwAction action,float fAcc
 
 	return true;
 }
-bool PgActionFSM_Act_JumpBear::OnLeave(lwActor actor,lwAction action,bool bCancel) const
+bool PgActionFSM_Act_JumpBear::OnLeave(lwActor actor, lwAction action, bool bCancel) const
 {
 	lwCheckNil(actor.IsNil());
 
@@ -4269,20 +4280,20 @@ bool PgActionFSM_Act_JumpBear::OnLeave(lwActor actor,lwAction action,bool bCance
 
 	std::string nextActionName = action.GetID();
 	lwCheckNil(action.IsNil());
-	
-	
-	// »õ·Î¿î ¾×¼ÇÀÌ µé¾î¿ÔÀ» ¶§
-	if( action.GetEnable() == true ) 
+
+
+	// ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	if (action.GetEnable() == true)
 	{
-		if( nextActionName == ACTIONNAME_JUMP && 
-			strcmp(curAction.GetParam(1), "jump_again") != 0 ) 
+		if (nextActionName == ACTIONNAME_JUMP &&
+			strcmp(curAction.GetParam(1), "jump_again") != 0)
 		{
-			if( actor.GetAbil(AT_DOUBLE_JUMP_USE) == 1 ) 
+			if (actor.GetAbil(AT_DOUBLE_JUMP_USE) == 1)
 			{
-				if( curAction.GetCurrentSlot() == 1 || 
-					curAction.GetCurrentSlot() == 2 ) 
+				if (curAction.GetCurrentSlot() == 1 ||
+					curAction.GetCurrentSlot() == 2)
 				{
-					if( 0 == PgStringUtil::SafeStrcmp("TRUE", actor.GetParam("DOUBLE_JUMP")) ) 
+					if (0 == PgStringUtil::SafeStrcmp("TRUE", actor.GetParam("DOUBLE_JUMP")))
 					{
 						action.SetParam(1, "jump_again");
 					}
@@ -4290,45 +4301,45 @@ bool PgActionFSM_Act_JumpBear::OnLeave(lwActor actor,lwAction action,bool bCance
 				return true;
 			}
 		}
-		else if( nextActionName == ACTIONNAME_RUN ||
-			actor.IsMeetFloor() && 
-			actor.IsMeetSide() == false 
+		else if (nextActionName == ACTIONNAME_RUN ||
+			actor.IsMeetFloor() &&
+			actor.IsMeetSide() == false
 			)
 		{
 			//action.SetDoNotBroadCast(true)
 			return true;
 		}
-		else if( nextActionName == "a_ladder_down" || 
+		else if (nextActionName == "a_ladder_down" ||
 			nextActionName == "a_ladder_idle" ||
-			nextActionName == "a_ladder_up" 
+			nextActionName == "a_ladder_up"
 			)
 		{
 			actor.HideParts(6, true);
-			actor.SetParam("LADDER_WEAPON_HIDE","TRUE");
+			actor.SetParam("LADDER_WEAPON_HIDE", "TRUE");
 			return true;
 		}
-		else if( nextActionName == ACTIONNAME_IDLE )
+		else if (nextActionName == ACTIONNAME_IDLE)
 		{
 			curAction.SetParam(0, "null");
 			actor.DetachFrom(2);
 		}
-		else if( nextActionName == "a_hang" &&
+		else if (nextActionName == "a_hang" &&
 			strcmp(curAction.GetParam(5), "Done") != 0
 			)
 		{
-			return false ;
+			return false;
 		}
 		return true;
 	}
 	return false;
 }
-bool PgActionFSM_Act_JumpBear::OnCleanUp(lwActor actor,lwAction action) const
+bool PgActionFSM_Act_JumpBear::OnCleanUp(lwActor actor, lwAction action) const
 {
 	lwCheckNil(actor.IsNil());
 	lwAction curAction = actor.GetAction();
 	lwCheckNil(curAction.IsNil());
-	
-	if( curAction.IsNil() == false && STR_HIJUMP == curAction.GetParam(5) ) 
+
+	if (curAction.IsNil() == false && STR_HIJUMP == curAction.GetParam(5))
 	{
 		lwUseCameraHeightAdjust(true);
 	}
@@ -4344,7 +4355,7 @@ bool PgActionFSM_Act_JumpBear::OnCleanUp(lwActor actor,lwAction action) const
 //		return;
 //	}
 //
-//	if(actor.IsMyActor())	//	³«¹ý Ã³¸®
+//	if(actor.IsMyActor())	//	ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 //	{
 //		lwAction action = actor.GetAction();
 //		lwCheckNil(action.IsNil());
@@ -4379,68 +4390,68 @@ bool PgActionFSM_Act_JumpBear::IsFloatEvasion(lwActor actor, lwAction action) co
 	lwCheckNil(actor.IsNil());
 	lwCheckNil(action.IsNil());
 
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
 
-	if( action.GetParamInt(7) == 1 ) 
+	if (action.GetParamInt(7) == 1)
 	{
 		return	true;
 	}
-	
-	if( actor.IsMyActor() == false ) 
+
+	if (actor.IsMyActor() == false)
 	{
 		return	false;
 	}
-	
-	if( actor.IsMeetFloor() )
+
+	if (actor.IsMeetFloor())
 	{
 		return	false;
 	}
 
 	lwAction	kCurAction = actor.GetAction();
-	if( kCurAction.IsNil() ) 
-	{
-		return	false;
-	}
-	
-	lwInputSlotInfo kInputSlotInfo = action.GetInputSlotInfo();
-	if( kInputSlotInfo.IsNil() ) 
-	{
-		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.IsNil()\n");
-		return	false;
-	}
-	
-	if( kInputSlotInfo.GetUKey() != 3023 ) 
-	{
-		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.GetUKey() ~= 3023\n");
-		return	false;
-	}
-	
-	if( 0 == PgStringUtil::SafeStrcmp(actor.GetParam("FLOAT_EVASION"), "FALSE") ) 
+	if (kCurAction.IsNil())
 	{
 		return	false;
 	}
 
-	if( actor.IsBlowUp() == false ) 
+	lwInputSlotInfo kInputSlotInfo = action.GetInputSlotInfo();
+	if (kInputSlotInfo.IsNil())
+	{
+		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.IsNil()\n");
+		return	false;
+	}
+
+	if (kInputSlotInfo.GetUKey() != 3023)
+	{
+		//ODS("Act_Jump_IsFloatEvasion kInputSlotInfo.GetUKey() ~= 3023\n");
+		return	false;
+	}
+
+	if (0 == PgStringUtil::SafeStrcmp(actor.GetParam("FLOAT_EVASION"), "FALSE"))
+	{
+		return	false;
+	}
+
+	if (actor.IsBlowUp() == false)
 	{
 		//ODS("Act_Jump_IsFloatEvasion actor.IsBlowUp() == false\n");
 		return	false;
 	}
-	
+
 	float fActionStartTime = kCurAction.GetActionEnterTime();
 	float fCurrentTime = g_pkWorld->GetAccumTime();
-	
-	if( (fCurrentTime - fActionStartTime) < g_fEvasionStartTime ) 
+
+	if ((fCurrentTime - fActionStartTime) < g_fEvasionStartTime)
 	{
 		return	false;
 	}
-	
-	action.SetParamInt(7,1);
-	actor.SetParam("FLOAT_EVASION","FALSE");
+
+	action.SetParamInt(7, 1);
+	actor.SetParam("FLOAT_EVASION", "FALSE");
 	actor.SetCanHit(false);
-	
+
 	return	true;
 }
 
@@ -4448,7 +4459,7 @@ void PgActionFSM_Act_JumpBear::SetComboAdvisor(lwActor actor, lwAction action) c
 {
 	lwCheckNil(actor.IsNil());
 
-	if( actor.IsMyActor() ) 
+	if (actor.IsMyActor())
 	{
 		lwCheckNil(action.IsNil());
 
@@ -4459,27 +4470,27 @@ void PgActionFSM_Act_JumpBear::SetComboAdvisor(lwActor actor, lwAction action) c
 
 		int iBaseClassID = kPilot.GetBaseClassID();
 
-		if( iBaseClassID == UCLASS_FIGHTER ) 
+		if (iBaseClassID == UCLASS_FIGHTER)
 		{
 			lwGetComboAdvisor().AddNextAction("a_melee_drop");
 			lwGetComboAdvisor().AddNextAction("a_float_melee_01");
 		}
-		else if( iBaseClassID == UCLASS_THIEF ) 
+		else if (iBaseClassID == UCLASS_THIEF)
 		{
 			lwGetComboAdvisor().AddNextAction("a_thi_melee_drop");
 			lwGetComboAdvisor().AddNextAction("a_thief_float_melee_01");
 		}
-		else if( iBaseClassID == UCLASS_MAGICIAN ) 
+		else if (iBaseClassID == UCLASS_MAGICIAN)
 		{
 			lwGetComboAdvisor().AddNextAction("a_magician_down_shot");
 			lwGetComboAdvisor().AddNextAction("a_MagicianFloatShot_01");
 		}
-		else if( iBaseClassID == UCLASS_ARCHER ) 
+		else if (iBaseClassID == UCLASS_ARCHER)
 		{
 			lwGetComboAdvisor().AddNextAction("a_archer_down_shot");
 			lwGetComboAdvisor().AddNextAction("a_MagicianFloatShot_01");
 		}
-		else if( iBaseClassID == UCLASS_DOUBLE_FIGHTER ) 
+		else if (iBaseClassID == UCLASS_DOUBLE_FIGHTER)
 		{
 			lwGetComboAdvisor().AddNextAction("a_twin_float_melee_01");
 			lwGetComboAdvisor().AddNextAction("a_twin_float_melee_01");
@@ -4489,23 +4500,23 @@ void PgActionFSM_Act_JumpBear::SetComboAdvisor(lwActor actor, lwAction action) c
 ///
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 namespace OldActionLuaFunc
-{// lua¿¡ ÀÖ´ø ÇÔ¼öµéÀ» C·Î ¿Å±â´ÂÁß °ãÄ¡´Â ³»¿ëÀ» ÇÔ¼öÈ­ ÇÑ°Íµé
-	bool HitOneTime(lwActor actor,lwAction action)
+{// luaï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ Cï¿½ï¿½ ï¿½Å±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½È­ ï¿½Ñ°Íµï¿½
+	bool HitOneTime(lwActor actor, lwAction action)
 	{
-		if( lwCheckNil(actor.IsNil()) )
+		if (lwCheckNil(actor.IsNil()))
 		{
 			return false;
 		}
-		if( lwCheckNil(action.IsNil()) )
+		if (lwCheckNil(action.IsNil()))
 		{
 			return false;
 		}
-		if( NULL == g_pkWorld )
+		if (NULL == g_pkWorld)
 		{
-			return false;	
+			return false;
 		}
 
-		action.SetParamFloat(6,g_pkWorld->GetAccumTime());
+		action.SetParamFloat(6, g_pkWorld->GetAccumTime());
 
 		int	iHitCount = action.GetParamInt(5);
 
@@ -4522,33 +4533,33 @@ namespace OldActionLuaFunc
 		//	return true;
 		//}	
 		//lwActor kOriginalActor = kPilot.GetActor();
-		
+
 		int iTotalHit = lwCommonSkillUtilFunc::GetMaxHitCnt(action);
 
-		if ( iHitCount == iTotalHit-1 ) 
+		if (iHitCount == iTotalHit - 1)
 		{
 			int iTargetCount = action.GetTargetCount();
-			int i =0;
-			if ( iTargetCount>0 ) 
+			int i = 0;
+			if (iTargetCount > 0)
 			{
-				while (i<iTargetCount)
+				while (i < iTargetCount)
 				{
 					lwActionResult  actionResult = action.GetTargetActionResult(i);
-					if ( actionResult.IsNil() == false )
+					if (actionResult.IsNil() == false)
 					{
-						action.SetParamInt(15, actionResult.GetValue() /iTotalHit );
+						action.SetParamInt(15, actionResult.GetValue() / iTotalHit);
 						int	iOneDmg = action.GetParamInt(15);
 
-						actionResult.SetValue( actionResult.GetValue() - iOneDmg*(iTotalHit-1) );
+						actionResult.SetValue(actionResult.GetValue() - iOneDmg * (iTotalHit - 1));
 
 						lwGUID kTargetGUID = action.GetTargetGUID(i);
 						lwPilot kTargetPilot = g_kPilotMan.FindPilot(kTargetGUID());
-						if ( kTargetPilot.IsNil() == false ) {
+						if (kTargetPilot.IsNil() == false) {
 
 							lwActor actorTarget = kTargetPilot.GetActor();
 
 							lwActionTargetInfo kInfo = action.GetTargetInfo(i);
-							OldActionLuaFunc::DoDamage(actor,actorTarget,actionResult, kInfo);
+							OldActionLuaFunc::DoDamage(actor, actorTarget, actionResult, kInfo);
 						}
 					}
 					++i;
@@ -4560,20 +4571,20 @@ namespace OldActionLuaFunc
 		{
 			action.GetTargetList().ApplyOnlyDamage(iTotalHit, false, false);
 			int iTargetCount = action.GetTargetCount();
-			int i =0;
-			if ( iTargetCount>0 ) 
+			int i = 0;
+			if (iTargetCount > 0)
 			{
-				while(i<iTargetCount)
+				while (i < iTargetCount)
 				{
 					lwActionResult actionResult = action.GetTargetActionResult(i);
-					if ( actionResult.IsNil() == false ) 
+					if (actionResult.IsNil() == false)
 					{
 						lwGUID kTargetGUID = action.GetTargetGUID(i);
-						lwPilot kTargetPilot( g_kPilotMan.FindPilot(kTargetGUID()) );
-						if ( kTargetPilot.IsNil() == false ) 
+						lwPilot kTargetPilot(g_kPilotMan.FindPilot(kTargetGUID()));
+						if (kTargetPilot.IsNil() == false)
 						{
 							lwActor actorTarget = kTargetPilot.GetActor();
-							OldActionLuaFunc::DoDamage(actor,actorTarget,actionResult,action.GetTargetInfo(i));
+							OldActionLuaFunc::DoDamage(actor, actorTarget, actionResult, action.GetTargetInfo(i));
 						}
 					}
 					++i;
@@ -4584,24 +4595,24 @@ namespace OldActionLuaFunc
 
 		++iHitCount;
 
-		if ( iHitCount == iTotalHit ) 
+		if (iHitCount == iTotalHit)
 		{
-			action.SetParamInt(4,2);	//	
+			action.SetParamInt(4, 2);	//	
 			return	true;
 		}
 
-		action.SetParamInt(5,iHitCount);
+		action.SetParamInt(5, iHitCount);
 
 		return	true;
 	}
 
-	void DoDamage(lwActor actor, lwActor actorTarget,lwActionResult kActionResult, lwActionTargetInfo kActionTargetInfo)
+	void DoDamage(lwActor actor, lwActor actorTarget, lwActionResult kActionResult, lwActionTargetInfo kActionTargetInfo)
 	{
 		//if( lwCheckNil(actor.IsNil()) ) 
 		//{
 		//	return;
 		//}
-		if( lwCheckNil(actorTarget.IsNil()) )
+		if (lwCheckNil(actorTarget.IsNil()))
 		{
 			return;
 		}
@@ -4614,7 +4625,7 @@ namespace OldActionLuaFunc
 		int	iSphereIndex = kActionTargetInfo.GetABVIndex();
 		lwPoint3 pt = actorTarget.GetABVShapeWorldPos(iSphereIndex);
 
-		if (kActionResult.GetCritical() ) 
+		if (kActionResult.GetCritical())
 		{
 			actorTarget.AttachParticleToPoint(12, pt, "e_dmg_cri");
 		}
@@ -4623,7 +4634,7 @@ namespace OldActionLuaFunc
 			actorTarget.AttachParticleToPoint(12, pt, "e_dmg");
 		}
 
-		// Ãæ°Ý È¿°ú Àû¿ë
+		// ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		actorTarget.SetShakeInPeriod(5, 72);
 	}
 }

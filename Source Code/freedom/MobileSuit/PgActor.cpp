@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include <mmsystem.h>
 #include "Lohengrin/PacketStruct2.h"
 #include "Variant/Constant.H"
@@ -37,6 +37,7 @@
 #include "Pg2DString.h"
 #include "PgSkillTargetMan.h"
 #include "PgWorkerThread.h"
+#include "CustomContent/Movement/CustomCharacterJumping.h"
 #include "lwUI.H"
 #include "lwWString.H"
 #include "ShadowGeometry.h"
@@ -97,21 +98,21 @@
 #define PG_ITEM_SEQUENCIAL_LOAD
 
 #ifdef PG_SYNC_ENTIRE_TIME
-	DWORD PgActor::ms_dwSyncTime = 0;
-	DWORD PgActor::ms_dwLocalSyncTime = 0;
-	DWORD PgActor::ms_dwLastSentTime = 0;
-	DWORD PgActor::ms_dwAverageLatency = 0;
+DWORD PgActor::ms_dwSyncTime = 0;
+DWORD PgActor::ms_dwLocalSyncTime = 0;
+DWORD PgActor::ms_dwLastSentTime = 0;
+DWORD PgActor::ms_dwAverageLatency = 0;
 #endif
 
-extern const	char	*ACTIONNAME_RP_IDLE;
-extern const	char	*ACTIONNAME_RP_WALK;
-extern const	char	*ACTIONNAME_RP_JUMP;
-extern const	char	*ACTIONNAME_TRACE;
-extern const	char	*ACTIONNAME_TRACE2;
-extern const	char	*ACTIONNAME_RUN_PET;
-extern const	char	*ACTIONNAME_RIDING;
+extern const	char* ACTIONNAME_RP_IDLE;
+extern const	char* ACTIONNAME_RP_WALK;
+extern const	char* ACTIONNAME_RP_JUMP;
+extern const	char* ACTIONNAME_TRACE;
+extern const	char* ACTIONNAME_TRACE2;
+extern const	char* ACTIONNAME_RUN_PET;
+extern const	char* ACTIONNAME_RIDING;
 
-float PgActor::ms_fGravity = -800.0f;				// Ä³¸¯ÅÍ Á¡ÇÁ½Ã¿¡¸¸ Àû¿ëµÇ´Â Áß·Â
+float PgActor::ms_fGravity = -800.0f;				// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ß·ï¿½
 
 bool PgActor::m_stbNameVisible = true;
 bool PgActor::m_bDrawNamePC = true;
@@ -127,27 +128,27 @@ NiColor PgActor::ms_kDefaultEmissive = NiColor(0.5098f, 0.5098f, 0.5098f);
 NiColor PgActor::ms_kDefaultSpecular = NiColor(0, 0, 0);
 NiColor PgActor::ms_kDefaultDiffuse = NiColor(0, 0, 0);
 extern void NET_C_M_REQ_TRIGGER(int const iObjectType, lwGUID kGuid, int const iActionType);
-extern void Send_PT_C_M_REQ_ITEM_DIVIDE(const SItemPos &kItemPos, int const iItemNo, BM::GUID const &kItemGuid, int const iCount);
+extern void Send_PT_C_M_REQ_ITEM_DIVIDE(const SItemPos& kItemPos, int const iItemNo, BM::GUID const& kItemGuid, int const iCount);
 
-float const PgActor::ms_kUpdateIntervalByInvisibleGrade[PgActor::MAX_NUM_INVISIBLE] = 
+float const PgActor::ms_kUpdateIntervalByInvisibleGrade[PgActor::MAX_NUM_INVISIBLE] =
 {
 	1.0f / 60.0f, 1.0f / 20.0f, 1.0f / 6.0f, 1.0f / 3.0f, 1.0f / 2.0f
 };
 
 enum eATTACHTO_PARTICLE_SLOT
 {
-	EAPS_NONE					= 0,
-	EAPS_STRATEGIC_POINT		= 191918,
-	EAPS_CUSTOMUI_SUMMONED		= 200001,
-	EAPS_GET_START				= 900000,
-	EAPS_GET_END				= 999999,
+	EAPS_NONE = 0,
+	EAPS_STRATEGIC_POINT = 191918,
+	EAPS_CUSTOMUI_SUMMONED = 200001,
+	EAPS_GET_START = 900000,
+	EAPS_GET_END = 999999,
 };
 
 ControllerManager g_kControllerManager;
 
 NiImplementRTTI(PgActor, PgIWorldObject);
 
-extern const	char	*ACTIONNAME_RUN_PET;
+extern const	char* ACTIONNAME_RUN_PET;
 
 int GetTotalSummonedCount(CUnit const* pkCaller);
 
@@ -156,7 +157,7 @@ int GetTotalSummonedCount(CUnit const* pkCaller);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 NxControllerAction  PgControllerHitCallBack::onShapeHit(const NxControllerShapeHit& hit)
 {
-	if(m_pkParentActor 
+	if (m_pkParentActor
 		&& NX_NEGATIVE_UNIT_Z == hit.dir
 		)
 	{
@@ -177,7 +178,7 @@ NxControllerAction  PgControllerHitCallBack::onControllerHit(const NxControllers
 bool PgSweepHitCallBack::onEvent(NxU32 nbEntities, NxSweepQueryHit* entities)
 {
 
-	_PgOutputDebugString("PgSweepHitCallBack::onEvent t:%f n:(%f,%f,%f)\n",entities->t,entities->normal.x,entities->normal.y,entities->normal.z);
+	_PgOutputDebugString("PgSweepHitCallBack::onEvent t:%f n:(%f,%f,%f)\n", entities->t, entities->normal.x, entities->normal.y, entities->normal.z);
 	return	true;
 }
 
@@ -186,212 +187,212 @@ bool PgSweepHitCallBack::onEvent(NxU32 nbEntities, NxSweepQueryHit* entities)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 PgActor::PgActor()
-:m_bLockBidirection(true),
-m_bWalkingToTarget(false),
-m_bWalkingToTargetForce(false),
-m_pkAction(NULL),
-m_kSeqID(-1),
-m_kTargetDir(NiPoint3::ZERO),
-m_kTargetLoc(NiPoint3::ZERO),
-m_kMovingDir(NiPoint3::ZERO),
-m_kLastFloorPos(NiPoint3::ZERO),
-m_kPrevWorldPos(NiPoint3::ZERO),
-m_kSourcePos(NiPoint3::ZERO),
-m_pkCurrentTrigger(0),
-m_bCurrentTriggerAct(false),
-m_pkActorCallback ( 0),
-m_kLookingDir ( NiPoint3::ZERO),
-m_byMovingDirection ( DIR_NONE),
-m_bPositionChanged ( false),
-m_fLastItemPickUpTime ( 0.0f),
-m_fLastAttackTargetedTime ( 0.0f),
-m_pTextBalloon (NULL),
-m_pMarkBalloon(NULL),
-m_pPartyBalloon (NULL),
-m_pExpeditionBalloon(NULL),
-m_pVendorBalloon (NULL),
-m_pHPGaugeBar(NULL),
-m_pkHeadBuffIconList ( NULL),
-m_fLastDownwardPassUpdateTime ( 0),
-m_pkShadow ( NULL),
-m_bSpecularOn(false),
-// PhysX °ü·Ã
-m_pkPhysXActor ( 0),
-m_pkPhysXSrc ( 0),
-m_pkPhysXDest ( 0),
-m_pkController ( 0),
-m_pkMonsterDef ( 0),
-m_bIsUnderMyControl ( false),
-m_pkSyncMoveNextAction ( NULL),
-m_pkMountedRidingObject ( NULL),
-m_pkMountedRidingPet ( NULL ),
-m_fScaleOrig(1.0f),
-m_bShadowHide ( false),
-m_bMiniMapHide ( false),
-m_spSpotLightGeom ( NULL),
-m_bIsOptimizeSleep ( true),
-// ¹°¸® °ü·Ã..
-m_bJump ( false),
-m_bAdjustValidPos ( true),
-m_bForceSync ( true),
-m_fJumpTime ( 0.0f),
-m_fJumpAccumHeight ( 0.0f),
-m_fInitialVelocity ( 0.0f),
-m_bFreeMove ( false),
-m_bFalling ( false),
-m_bFloor ( false),
-m_bCheckMeetFloor( true),
-m_bSlide ( false),
-//m_fLocalUpDownSpeed ( 0.0f),
-//m_bUseLocalUpDownSpeed ( false),
-m_dwLastUpdateFrame (0),
-m_fLastUpdateFrameTime ( 0.0f),
-m_iUpdateCount(0),
-m_bHide ( false),
-m_bHideNameTitle(false),
-m_bCanHit ( true),
-m_bBlink ( false),
-m_bBlinkHide ( false),
-m_bTransformed ( false),
+	:m_bLockBidirection(true),
+	m_bWalkingToTarget(false),
+	m_bWalkingToTargetForce(false),
+	m_pkAction(NULL),
+	m_kSeqID(-1),
+	m_kTargetDir(NiPoint3::ZERO),
+	m_kTargetLoc(NiPoint3::ZERO),
+	m_kMovingDir(NiPoint3::ZERO),
+	m_kLastFloorPos(NiPoint3::ZERO),
+	m_kPrevWorldPos(NiPoint3::ZERO),
+	m_kSourcePos(NiPoint3::ZERO),
+	m_pkCurrentTrigger(0),
+	m_bCurrentTriggerAct(false),
+	m_pkActorCallback(0),
+	m_kLookingDir(NiPoint3::ZERO),
+	m_byMovingDirection(DIR_NONE),
+	m_bPositionChanged(false),
+	m_fLastItemPickUpTime(0.0f),
+	m_fLastAttackTargetedTime(0.0f),
+	m_pTextBalloon(NULL),
+	m_pMarkBalloon(NULL),
+	m_pPartyBalloon(NULL),
+	m_pExpeditionBalloon(NULL),
+	m_pVendorBalloon(NULL),
+	m_pHPGaugeBar(NULL),
+	m_pkHeadBuffIconList(NULL),
+	m_fLastDownwardPassUpdateTime(0),
+	m_pkShadow(NULL),
+	m_bSpecularOn(false),
+	// PhysX ï¿½ï¿½ï¿½ï¿½
+	m_pkPhysXActor(0),
+	m_pkPhysXSrc(0),
+	m_pkPhysXDest(0),
+	m_pkController(0),
+	m_pkMonsterDef(0),
+	m_bIsUnderMyControl(false),
+	m_pkSyncMoveNextAction(NULL),
+	m_pkMountedRidingObject(NULL),
+	m_pkMountedRidingPet(NULL),
+	m_fScaleOrig(1.0f),
+	m_bShadowHide(false),
+	m_bMiniMapHide(false),
+	m_spSpotLightGeom(NULL),
+	m_bIsOptimizeSleep(true),
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½..
+	m_bJump(false),
+	m_bAdjustValidPos(true),
+	m_bForceSync(true),
+	m_fJumpTime(0.0f),
+	m_fJumpAccumHeight(0.0f),
+	m_fInitialVelocity(0.0f),
+	m_bFreeMove(false),
+	m_bFalling(false),
+	m_bFloor(false),
+	m_bCheckMeetFloor(true),
+	m_bSlide(false),
+	//m_fLocalUpDownSpeed ( 0.0f),
+	//m_bUseLocalUpDownSpeed ( false),
+	m_dwLastUpdateFrame(0),
+	m_fLastUpdateFrameTime(0.0f),
+	m_iUpdateCount(0),
+	m_bHide(false),
+	m_bHideNameTitle(false),
+	m_bCanHit(true),
+	m_bBlink(false),
+	m_bBlinkHide(false),
+	m_bTransformed(false),
 
-m_fRotationInterpolTime ( 1.0f),
-m_fSyncInterpolTime ( 0.0f),
-m_fMovingSpeedScale ( 1.0f),
-m_bSide ( false),
-m_bCheckCamColl ( false),
-m_bCheckCliff ( false),
-m_bTransformation ( false),
-m_bDead ( false),
-m_bBackMoving ( false),
-m_bNoConcil ( false),
-m_bNoFindPathNormal ( false),
-m_bBlowUp ( false),
-m_fLastWaveEffectUpdateTime(0),
-m_bLeaveExpedition ( false),
-m_bDieReservedByAction ( false),
-m_ulNormalAttackEndTime ( 0),
-m_uiMyWeaponType ( PgItemEx::IT_FST),
-m_kMyWeaponEquipLimit ( EQUIP_LIMIT_WEAPON),
-m_byMyWeaponAnimFolderNum ( 1),
-m_byWeaponAnimFolderNumAtActionStart(0),
-m_fTargetScale ( 0),
-m_fStartScale ( 0),
-m_ulScaleChangeStartTime ( 0),
-m_ulTotalScaleChangeTime ( 0),
-m_pAlphaNode(NULL),
-m_fStartAlpha(0),
-m_fEndAlpha(0),
-m_ulAlphaStartTime(0),
-m_ulAlphaChangeTime(0),
-m_bNowDrawWeaponTrail ( false),
-m_bNowDrawBodyTrail ( false),
-m_bRiding ( false),
-m_bNeedToUpdateUIModel ( true),
-m_kTargetWalkingNextAction ( ""),
-m_spNameText(0),
-m_spTitleName(0),
-m_spGuildNameText(0),
-m_spGuildMark(0),
-m_spGuardianMark(0),
-m_spMyhomeMark(0),
-m_spAchievementTitle(0),
-m_spGIFTitle(0),
-m_spCustomCountText(0),
-m_spDuelTitle(0),
-m_spEffectCountDown(0),
-m_sComboCount(0),
-m_ulNormalAttackFreezeStartTime ( 0),
-m_bMaterialColorCached ( false),
-m_kAlwaysGlowMap(false),
-m_iGodTimeStatusEffectInstanceID(-1),
-m_iDamageBlinkStatusEffectInstanceID(-1),
-m_bSendBlowStatus ( false),
+	m_fRotationInterpolTime(1.0f),
+	m_fSyncInterpolTime(0.0f),
+	m_fMovingSpeedScale(1.0f),
+	m_bSide(false),
+	m_bCheckCamColl(false),
+	m_bCheckCliff(false),
+	m_bTransformation(false),
+	m_bDead(false),
+	m_bBackMoving(false),
+	m_bNoConcil(false),
+	m_bNoFindPathNormal(false),
+	m_bBlowUp(false),
+	m_fLastWaveEffectUpdateTime(0),
+	m_bLeaveExpedition(false),
+	m_bDieReservedByAction(false),
+	m_ulNormalAttackEndTime(0),
+	m_uiMyWeaponType(PgItemEx::IT_FST),
+	m_kMyWeaponEquipLimit(EQUIP_LIMIT_WEAPON),
+	m_byMyWeaponAnimFolderNum(1),
+	m_byWeaponAnimFolderNumAtActionStart(0),
+	m_fTargetScale(0),
+	m_fStartScale(0),
+	m_ulScaleChangeStartTime(0),
+	m_ulTotalScaleChangeTime(0),
+	m_pAlphaNode(NULL),
+	m_fStartAlpha(0),
+	m_fEndAlpha(0),
+	m_ulAlphaStartTime(0),
+	m_ulAlphaChangeTime(0),
+	m_bNowDrawWeaponTrail(false),
+	m_bNowDrawBodyTrail(false),
+	m_bRiding(false),
+	m_bNeedToUpdateUIModel(true),
+	m_kTargetWalkingNextAction(""),
+	m_spNameText(0),
+	m_spTitleName(0),
+	m_spGuildNameText(0),
+	m_spGuildMark(0),
+	m_spGuardianMark(0),
+	m_spMyhomeMark(0),
+	m_spAchievementTitle(0),
+	m_spGIFTitle(0),
+	m_spCustomCountText(0),
+	m_spDuelTitle(0),
+	m_spEffectCountDown(0),
+	m_sComboCount(0),
+	m_ulNormalAttackFreezeStartTime(0),
+	m_bMaterialColorCached(false),
+	m_kAlwaysGlowMap(false),
+	m_iGodTimeStatusEffectInstanceID(-1),
+	m_iDamageBlinkStatusEffectInstanceID(-1),
+	m_bSendBlowStatus(false),
 
-m_fTotalAnimSpeedControlTime ( 0),
-m_fAnimSpeedControlStartTime ( 0),
-m_fAnimSpeedControlValue ( 0.0f),
-m_fOriginalAnimSpeed ( 1.0f),
-m_fAccumTimeAdjust ( 0.0f),
-m_fBeforeAccumTime ( 0.0f),
+	m_fTotalAnimSpeedControlTime(0),
+	m_fAnimSpeedControlStartTime(0),
+	m_fAnimSpeedControlValue(0.0f),
+	m_fOriginalAnimSpeed(1.0f),
+	m_fAccumTimeAdjust(0.0f),
+	m_fBeforeAccumTime(0.0f),
 
-m_iTotalShakeTime ( 0),
-m_iShakeStartTime ( 0),
-m_fShakeValue ( 0),
+	m_iTotalShakeTime(0),
+	m_iShakeStartTime(0),
+	m_fShakeValue(0),
 
-//m_fLastUpdateTime ( 0),
-//m_fStridenUpdateTime ( 0.0f),
-//m_fLastDownwardPassUpdateTime ( 0),
-m_bVisible ( true),
-m_kNormalizedActorPosByCamera ( NiPoint3::ZERO),
-m_eInvisibleGrade ( PgActor::VISIBLE),
-m_bLoadingComplete(false),
-m_kOriginalPos(0,0,0),
-//ÀÌ»Ú°Ô ²Ù¹Ì±â °ü·Ã
-m_bInputNow	( false),
-m_bNoName ( false),
-m_bTraceUpdate ( false),
-m_iEquipCount ( 0),
-m_uiActiveGrp ( DEFAULT_ACTIVE_GRP),
+	//m_fLastUpdateTime ( 0),
+	//m_fStridenUpdateTime ( 0.0f),
+	//m_fLastDownwardPassUpdateTime ( 0),
+	m_bVisible(true),
+	m_kNormalizedActorPosByCamera(NiPoint3::ZERO),
+	m_eInvisibleGrade(PgActor::VISIBLE),
+	m_bLoadingComplete(false),
+	m_kOriginalPos(0, 0, 0),
+	//ï¿½Ì»Ú°ï¿½ ï¿½Ù¹Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½
+	m_bInputNow(false),
+	m_bNoName(false),
+	m_bTraceUpdate(false),
+	m_iEquipCount(0),
+	m_uiActiveGrp(DEFAULT_ACTIVE_GRP),
 
-m_bUseSkipUpdateWhenNotVisible ( false),
+	m_bUseSkipUpdateWhenNotVisible(false),
 
-m_fCurrentHeadSize ( 1.0f),
-m_fTargetHeadSize ( 1.0f),
-m_fDefaultHeadSize ( 1.0f),
-m_fHeadSizeTransitSpeed ( 1.0f),
-m_fWalkToTargetLocSkillRange ( 0.0f),
+	m_fCurrentHeadSize(1.0f),
+	m_fTargetHeadSize(1.0f),
+	m_fDefaultHeadSize(1.0f),
+	m_fHeadSizeTransitSpeed(1.0f),
+	m_fWalkToTargetLocSkillRange(0.0f),
 
-m_bInvisible ( false),
-m_iFreezeStatus ( EFS_NONE),
-m_bNotActionShift(false),
+	m_bInvisible(false),
+	m_iFreezeStatus(EFS_NONE),
+	m_bNotActionShift(false),
 
-m_dwLastFrameTime ( 0),
-m_dwLastActionTime ( 0),
-m_dwAccumedOverTime ( 0),
-m_fLoadingStartTime ( 0.0f),
+	m_dwLastFrameTime(0),
+	m_dwLastActionTime(0),
+	m_dwAccumedOverTime(0),
+	m_fLoadingStartTime(0.0f),
 
-m_bSyncVelocity ( false),
-m_bSyncCrashed ( false),
-m_bSync ( false),
-m_bOnlyMoveAction ( false),
-m_bOnlyDefaultAttack ( false),
-m_bDownState ( false),
-m_fTotalDownTime(0),
+	m_bSyncVelocity(false),
+	m_bSyncCrashed(false),
+	m_bSync(false),
+	m_bOnlyMoveAction(false),
+	m_bOnlyDefaultAttack(false),
+	m_bDownState(false),
+	m_fTotalDownTime(0),
 
-m_spWeaponTrailNode ( NULL),
-m_spBodyTrailNode ( NULL),
+	m_spWeaponTrailNode(NULL),
+	m_spBodyTrailNode(NULL),
 
-m_byLastDirection ( 0),
-m_fSpecifiedFrameTime ( 0.0f),
-m_bDoSimulateOnServer ( true),
-m_dwLastSimulatedTime ( 0),
+	m_byLastDirection(0),
+	m_fSpecifiedFrameTime(0.0f),
+	m_bDoSimulateOnServer(true),
+	m_dwLastSimulatedTime(0),
 
-m_fAutoDeleteActorTime ( 0.0f),
-m_fAutoDeleteActorStartTime ( 0.0f),
-m_iEventScriptIDOnDie(-1),
-m_fDieParticleScale(1.0f),
-m_dwActionLatency(0),
-m_kSyncStartDir(DIR_NONE),
-m_fElapsedSyncTime(0),
-m_fVelocityRate(0),
-m_bStun(false),
-m_pkActorAppearanceMan(NULL),
-m_uiMyWeaponNo(0),
-m_kControllerHitCallBack(this),
-m_vPrevControllerPos(0,0,0),
-m_fAnimationStartTime(0.0f),
-m_fBlowUpStartTime(0),
-m_fLastCheckItemUseTime(0),
-m_bIgnoreSlide(true),
-//Æ®¸®°Å °ü·Ã
-m_iOtherEquipItemReturnValue(0),
+	m_fAutoDeleteActorTime(0.0f),
+	m_fAutoDeleteActorStartTime(0.0f),
+	m_iEventScriptIDOnDie(-1),
+	m_fDieParticleScale(1.0f),
+	m_dwActionLatency(0),
+	m_kSyncStartDir(DIR_NONE),
+	m_fElapsedSyncTime(0),
+	m_fVelocityRate(0),
+	m_bStun(false),
+	m_pkActorAppearanceMan(NULL),
+	m_uiMyWeaponNo(0),
+	m_kControllerHitCallBack(this),
+	m_vPrevControllerPos(0, 0, 0),
+	m_fAnimationStartTime(0.0f),
+	m_fBlowUpStartTime(0),
+	m_fLastCheckItemUseTime(0),
+	m_bIgnoreSlide(true),
+	//Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	m_iOtherEquipItemReturnValue(0),
 
-m_bCanRide(false),
-m_bShowWarning(true),
-m_iOldStrategicPoint(0),
+	m_bCanRide(false),
+	m_bShowWarning(true),
+	m_iOldStrategicPoint(0),
 
-m_kIdleEffectNode("char_root"),
-m_iAttachSlotNo(EAPS_GET_START)
+	m_kIdleEffectNode("char_root"),
+	m_iAttachSlotNo(EAPS_GET_START)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.PgActor"), g_pkApp->GetFrameCount()));
 
@@ -433,7 +434,7 @@ m_iAttachSlotNo(EAPS_GET_START)
 	m_SpecularTransitInfo.m_kPrev = NiColor::BLACK;
 	m_SpecularTransitInfo.m_kCurrent = NiColor::BLACK;
 
-//	m_iTwistTimes = 0;
+	//	m_iTwistTimes = 0;
 
 
 	m_kMovingAbsolute.zero();
@@ -445,7 +446,7 @@ m_iAttachSlotNo(EAPS_GET_START)
 
 
 	m_OriginalActorGUID.Clear();
-//	m_kMasterGuid.Clear();
+	//	m_kMasterGuid.Clear();
 	m_kReservedAction.clear();
 
 	//m_pkQuestSimpleInfoPool = NiNew PgQuestSimpleInfoPool();
@@ -456,13 +457,13 @@ m_iAttachSlotNo(EAPS_GET_START)
 	{
 		m_kLastUpdateTimeByInvisibleGrade[i] = 0.0f;;
 		m_kCanUpdate[i] = false;
-	}	
-	
+	}
+
 	//InfoUI(0);
 
 	m_pkActionEffectStack = new PgActionEffectStack(this);
 
-	m_kLastFramePos = NxExtendedVec3(0,0,0);
+	m_kLastFramePos = NxExtendedVec3(0, 0, 0);
 
 	m_kSyncInterpolDelta.zero();
 
@@ -488,32 +489,32 @@ m_iAttachSlotNo(EAPS_GET_START)
 
 	m_kDieParticleNode.clear();
 
-	UseSmoothShow(1.0f);	
+	UseSmoothShow(1.0f);
 
 	m_kGenerateSetEffectSlotIndex = 500000;
 
 	SetUseBattleIdle(false);
-		
+
 	{// TrailContiner
 		m_kContTrail.resize(ETAT_MAX);
 		CONT_TRAIL::iterator kItor = m_kContTrail.begin();
-		while( kItor != m_kContTrail.end() )
+		while (kItor != m_kContTrail.end())
 		{
 			(*kItor) = NULL;
 			++kItor;
 		}
 	}
 	_PgOutputDebugString("[PgActor::PgActor] Actor:%#X created\n", this);
-	
+
 }
 
 PgActor::~PgActor()
 {
-	// ¿©±â¿¡¼­ ActorManager°¡ AMPool·Î ¸®ÅÏÀÌ µÇ¹Ç·Î ±× Àü¿¡ ActorManager¿¡ Çß´ø ³»¿ëµéÀ» ´Ù ¾ø¾ÖÀÚ.
+	// ï¿½ï¿½ï¿½â¿¡ï¿½ï¿½ ActorManagerï¿½ï¿½ AMPoolï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹Ç·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ActorManagerï¿½ï¿½ ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	Terminate();
 	PgIWorldObject::Terminate();
 }
-bool PgActor::CreateCopyEx(PgActor *pkNewActor)
+bool PgActor::CreateCopyEx(PgActor* pkNewActor)
 {
 	pkNewActor->SetName(GetName());
 
@@ -529,10 +530,10 @@ bool PgActor::CreateCopyEx(PgActor *pkNewActor)
 	pkNewActor->m_kReservedAction.insert(std::make_pair(RA_OPENING, "a_opening"));
 	pkNewActor->m_kReservedAction.insert(std::make_pair(RA_INTRO_IDLE, "a_intro_idle"));
 
-	if(m_pkPilot)
+	if (m_pkPilot)
 	{
 		pkNewActor->m_pkPilot = m_pkPilot->CreateCopy();
-		if(pkNewActor->m_pkPilot)
+		if (pkNewActor->m_pkPilot)
 		{
 			pkNewActor->m_pkPilot->SetWorldObject(pkNewActor);
 		}
@@ -541,12 +542,12 @@ bool PgActor::CreateCopyEx(PgActor *pkNewActor)
 	pkNewActor->m_kReservedAction[RA_OPENING] = m_kReservedAction[RA_OPENING];
 	pkNewActor->m_kReservedAction[RA_IDLE] = m_kReservedAction[RA_IDLE];
 
-	PgIWorldObjectBase	*pkNewBase = GetWorldObjectBase()->CreateCopy(pkNewActor);
+	PgIWorldObjectBase* pkNewBase = GetWorldObjectBase()->CreateCopy(pkNewActor);
 	std::wstring kEventScript = pkNewBase->GetEventScript();
-	if(kEventScript.length() != 0)
+	if (kEventScript.length() != 0)
 	{
 		pkNewActor->m_pkActorCallback = NiNew ActorCallbackObject;
-		if(!pkNewActor->m_pkActorCallback)
+		if (!pkNewActor->m_pkActorCallback)
 		{
 			PG_ASSERT_LOG(!"failed to creat ActorCallbackObject");
 			return false;
@@ -555,7 +556,7 @@ bool PgActor::CreateCopyEx(PgActor *pkNewActor)
 		pkNewActor->m_pkActorCallback->m_pkWorldObject = pkNewActor;
 		pkNewActor->m_pkActorCallback->m_kScriptName = MB(kEventScript);
 
-		if(!pkNewActor->GetActorManager())
+		if (!pkNewActor->GetActorManager())
 		{
 			PG_ASSERT_LOG(!"ActorCallbackObject : ActorManager must be initialized prior to Callback Object!");
 			return false;
@@ -568,21 +569,21 @@ bool PgActor::CreateCopyEx(PgActor *pkNewActor)
 	pkNewActor->m_bNoName = m_bNoName;
 	pkNewActor->m_VarTextureList = m_VarTextureList;
 
-	if(m_pkActorAppearanceMan)
+	if (m_pkActorAppearanceMan)
 	{
 		pkNewActor->m_pkActorAppearanceMan = m_pkActorAppearanceMan->CreateCopy(pkNewActor);
 	}
 
-	NiActorManager *pkAM = pkNewActor->GetActorManager();
-	if(!pkAM)
+	NiActorManager* pkAM = pkNewActor->GetActorManager();
+	if (!pkAM)
 	{
 		return false;
 	}
 
 	pkAM->Update(0.0f);
-	NiTimeController::StartAnimations(pkNewActor->GetNIFRoot(), 0.0f); //PgWorld¿¡ AttachµÉ ¶§ ¾Ë¾Æ¼­ µÈ´Ù.
+	NiTimeController::StartAnimations(pkNewActor->GetNIFRoot(), 0.0f); //PgWorldï¿½ï¿½ Attachï¿½ï¿½ ï¿½ï¿½ ï¿½Ë¾Æ¼ï¿½ ï¿½È´ï¿½.
 	AMContainer::iterator itr = pkNewActor->m_kSupplementAMContainer.begin();
-	while(itr != pkNewActor->m_kSupplementAMContainer.end())
+	while (itr != pkNewActor->m_kSupplementAMContainer.end())
 	{
 		PG_ASSERT_LOG(itr->m_spAM);
 		if (itr->m_spAM)
@@ -592,11 +593,11 @@ bool PgActor::CreateCopyEx(PgActor *pkNewActor)
 		++itr;
 	}
 
-	// Actor¸¦ ºÙÀÏ ¶§´Â, ¹«Á¶°Ç ¼û±ä ´ÙÀ½ ·ÎµùÀ» ´Ù ÇÏ¸é Alpha·Î »©ÁØ´Ù.
+	// Actorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï¸ï¿½ Alphaï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 	pkAM->GetNIFRoot()->SetAppCulled(true);
 	pkNewActor->NiNode::SetAppCulled(true);
 
-	// ¹Ù¸®¿¡ÀÌ¼Ç ÅØ½ºÃÄ¸¦ ·ÎµùÇÑ´Ù.
+	// ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½Ø½ï¿½ï¿½Ä¸ï¿½ ï¿½Îµï¿½ï¿½Ñ´ï¿½.
 	if (pkNewActor->m_VarTextureList.size() > 0)
 	{
 		pkNewActor->ChangeTexture(pkNewActor);
@@ -608,24 +609,24 @@ bool PgActor::CreateCopyEx(PgActor *pkNewActor)
 }
 PgIWorldObject* PgActor::CreateCopy()
 {
-	PgActor	*pkNewActor = NiNew PgActor();
+	PgActor* pkNewActor = NiNew PgActor();
 	PgActor::CreateCopyEx(pkNewActor);
 	return	pkNewActor;
 }
 
 CUnit* PgActor::GetUnit() const
 {
-	if(GetPilot())
+	if (GetPilot())
 	{
 		return GetPilot()->GetUnit();
 	}
-	
+
 	return NULL;
 }
 
 void PgActor::SetSendBlowStatus(bool bSend, bool bFirstDown, bool bNoUseStandUpTime)
-{	
-	if(m_bSendBlowStatus && bSend == false)
+{
+	if (m_bSendBlowStatus && bSend == false)
 	{
 		BM::Stream kPacket(PT_C_M_REQ_MON_BLOWSTATUS);
 		kPacket.Push(GetPilotGuid());
@@ -635,122 +636,122 @@ void PgActor::SetSendBlowStatus(bool bSend, bool bFirstDown, bool bNoUseStandUpT
 		kPacket.Push(bFirstDown);
 		kPacket.Push(bNoUseStandUpTime);
 		NETWORK_SEND(kPacket);
-		
+
 		//lua_tinker::call<void, lwGUID, lwPoint3, bool>("Net_C_M_REQ_MON_BLOWSTATUS", lwGUID(GetPilotGuid()),lwPoint3(GetPos()),bFirstDown);
 
-		if(!bFirstDown)
+		if (!bFirstDown)
 		{
 			m_bSendBlowStatus = false;
 			return;
 		}
 	}
 
-	if(bSend)
+	if (bSend)
 	{
 		m_bSendBlowStatus = bSend;
 	}
 	else
 	{
 		BM::GUID kPlayerPilotGuid;
-		if(g_kPilotMan.GetPlayerPilotGuid(kPlayerPilotGuid))
+		if (g_kPilotMan.GetPlayerPilotGuid(kPlayerPilotGuid))
 		{
 			m_bSendBlowStatus = (kPlayerPilotGuid == GetPilot()->GetUnit()->GetBlowAttacker()) || IsMyActor() || g_kPilotMan.IsMySummoned(kPlayerPilotGuid);
-			if(!m_bSendBlowStatus)
+			if (!m_bSendBlowStatus)
 			{
 				PgPilot* pkPilot = g_kPilotMan.FindPilot(GetPilot()->GetUnit()->GetBlowAttacker());
-				if(pkPilot)
+				if (pkPilot)
 				{
-					switch(pkPilot->GetUnit()->UnitType())
+					switch (pkPilot->GetUnit()->UnitType())
 					{
 					case UT_ENTITY:
+					{
+						PgEntity* pkEntity = dynamic_cast<PgEntity*>(pkPilot->GetUnit());
+						if (pkEntity)
 						{
-							PgEntity *pkEntity = dynamic_cast<PgEntity*>(pkPilot->GetUnit());
-							if(pkEntity)
-							{
-								m_bSendBlowStatus = (pkEntity->Caller() == kPlayerPilotGuid);
-							}
-						}break;
+							m_bSendBlowStatus = (pkEntity->Caller() == kPlayerPilotGuid);
+						}
+					}break;
 					case UT_SUB_PLAYER:
+					{
+						PgSubPlayer* pkSubPlayer = dynamic_cast<PgSubPlayer*>(pkPilot->GetUnit());
+						if (pkSubPlayer)
 						{
-							PgSubPlayer* pkSubPlayer = dynamic_cast<PgSubPlayer*>(pkPilot->GetUnit());
-							if(pkSubPlayer)
-							{
-								m_bSendBlowStatus = (pkSubPlayer->Caller() == kPlayerPilotGuid);
-							}
-						}break;
+							m_bSendBlowStatus = (pkSubPlayer->Caller() == kPlayerPilotGuid);
+						}
+					}break;
 					case UT_SUMMONED:
-						{
-							m_bSendBlowStatus = g_kPilotMan.IsMySummoned(pkPilot->GetUnit());
-						}break;
+					{
+						m_bSendBlowStatus = g_kPilotMan.IsMySummoned(pkPilot->GetUnit());
+					}break;
 					}
 				}
 			}
 		}
 	}
 }
-void	PgActor::DetachActorAlphaProperty(NiAVObject *pkAVObject)
+void	PgActor::DetachActorAlphaProperty(NiAVObject* pkAVObject)
 {
-	if(!m_bLoadingComplete)
+	if (!m_bLoadingComplete)
 	{
 		return;
 	}
 
-	NiNode	*pkNode = NiDynamicCast(NiNode,pkAVObject);
-	if(pkNode)
+	NiNode* pkNode = NiDynamicCast(NiNode, pkAVObject);
+	if (pkNode)
 	{
 		int	iArray = pkNode->GetArrayCount();
-		for(int i = 0;i < iArray; ++i)
+		for (int i = 0; i < iArray; ++i)
 		{
-			NiAVObject	*pkChild = pkNode->GetAt(i);
-			if(pkChild)
+			NiAVObject* pkChild = pkNode->GetAt(i);
+			if (pkChild)
 			{
 				DetachActorAlphaProperty(pkChild);
-			}	
+			}
 		}
 		return;
 	}
 
-	NiAlphaProperty	*pkAlpha = (NiAlphaProperty*)pkAVObject->GetProperty(NiAlphaProperty::GetType());
-	if(pkAlpha && pkAlpha == m_spAlphaProperty)
+	NiAlphaProperty* pkAlpha = (NiAlphaProperty*)pkAVObject->GetProperty(NiAlphaProperty::GetType());
+	if (pkAlpha && pkAlpha == m_spAlphaProperty)
 	{
 		pkAVObject->DetachProperty(m_spAlphaProperty);
 	}
 }
-void	PgActor::AttachActorAlphaProperty(NiAVObject *pkAVObject)
+void	PgActor::AttachActorAlphaProperty(NiAVObject* pkAVObject)
 {
-	if(!m_bLoadingComplete)
+	if (!m_bLoadingComplete)
 	{
 		return;
 	}
 
-	if(!pkAVObject)
+	if (!pkAVObject)
 	{
 		return;
 	}
 
-	NiNode	*pkNode = NiDynamicCast(NiNode,pkAVObject);
-	if(pkNode)
+	NiNode* pkNode = NiDynamicCast(NiNode, pkAVObject);
+	if (pkNode)
 	{
 		int	iArray = pkNode->GetArrayCount();
-		for(int i=0;i<iArray; ++i)
+		for (int i = 0; i < iArray; ++i)
 		{
-			NiAVObject	*pkChild = pkNode->GetAt(i);
-			if(pkChild)
+			NiAVObject* pkChild = pkNode->GetAt(i);
+			if (pkChild)
 			{
 				AttachActorAlphaProperty(pkChild);
-			}	
+			}
 		}
 		return;
 	}
 
-	NiGeometry	*pkGeom = NiDynamicCast(NiGeometry,pkAVObject);
-	if(!pkGeom)
+	NiGeometry* pkGeom = NiDynamicCast(NiGeometry, pkAVObject);
+	if (!pkGeom)
 	{
 		return;
 	}
 
-	NiAlphaProperty	*pkAlpha = (NiAlphaProperty*)pkGeom->GetProperty(NiAlphaProperty::GetType());
-	if(pkAlpha==NULL)
+	NiAlphaProperty* pkAlpha = (NiAlphaProperty*)pkGeom->GetProperty(NiAlphaProperty::GetType());
+	if (pkAlpha == NULL)
 	{
 		pkAVObject->AttachProperty(m_spAlphaProperty);
 	}
@@ -764,7 +765,7 @@ void	PgActor::AttachActorAlphaProperty(NiAVObject *pkAVObject)
 }
 void PgActor::Terminate()
 {
-	_PgOutputDebugString("[PgActor::Terminate] Actor:(%s)(%s)(%#X) terminating\n",MB(GetPilotGuid().str()), MB(GetGuid().str()), this);
+	_PgOutputDebugString("[PgActor::Terminate] Actor:(%s)(%s)(%#X) terminating\n", MB(GetPilotGuid().str()), MB(GetGuid().str()), this);
 	RestoreTexture();
 
 	SAFE_DELETE_NI(m_pkShadow);
@@ -776,31 +777,31 @@ void PgActor::Terminate()
 	m_pkMountedRidingPet = NULL;
 
 
-	//	ÀÓ½Ã·Î ºÙÀÎ ¾ËÆÄÇÁ·ÎÆÛÆ¼¸¦ ¶¼¾î³½´Ù.
+	//	ï¿½Ó½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½î³½ï¿½ï¿½.
 	DetachActorAlphaProperty(this);
 	UpdateProperties();
 
-	SetColor(NiColor::WHITE);	//	ÄÃ·¯ º¹±Í
+	SetColor(NiColor::WHITE);	//	ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.Terminate"), g_pkApp->GetFrameCount()));
 
 	PG_ASSERT_LOG(m_pHPGaugeBar == NULL);
-	
+
 	m_ActionToggleState.clear();
 	m_StatusEffectInstanceListForUpdate.clear();
 	m_StatusEffectInstanceList.clear();
 
-	// Before CleanUpÀ¸·Î ¿Å±è.
+	// Before CleanUpï¿½ï¿½ï¿½ï¿½ ï¿½Å±ï¿½.
 	//SAFE_DELETE(m_pkActionEffectStack)
-	
+
 	DetachAllParts();
 
 	SAFE_DELETE_NI(m_pkPick);
 	SAFE_DELETE_NI(m_pkActorCallback);
 	//SAFE_DELETE_NI(m_pkQuestSimpleInfoPool);
 
-	// AM Container Á¤¸®
-	for(AMContainer::iterator itr = m_kSupplementAMContainer.begin(); itr != m_kSupplementAMContainer.end(); ++itr)
+	// AM Container ï¿½ï¿½ï¿½ï¿½
+	for (AMContainer::iterator itr = m_kSupplementAMContainer.begin(); itr != m_kSupplementAMContainer.end(); ++itr)
 	{
 		PG_ASSERT_LOG(itr->m_spAM);
 		if (itr->m_spAM)
@@ -808,28 +809,28 @@ void PgActor::Terminate()
 	}
 	m_kSupplementAMContainer.clear();
 
-	// ´ë±âÅ¥¿¡ µî·ÏµÈ ÀåÂøÇÒ ¾ÆÀÌÅÛ Á¦°Å
+	// ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_kAttachItemLock.Lock();
-	for(AttachItemContainer::iterator itr = m_kAttachItemContainer.begin(); itr != m_kAttachItemContainer.end(); ++itr)
+	for (AttachItemContainer::iterator itr = m_kAttachItemContainer.begin(); itr != m_kAttachItemContainer.end(); ++itr)
 	{
 		THREAD_DELETE_ITEM(itr->pItem);
 	}
 	m_kAttachItemContainer.clear();
 
 	RestoreItemModel(EQUIP_LIMIT_WEAPON);
-	for(PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin(); itr != m_kPartsAttachInfo.end(); ++itr)
+	for (PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin(); itr != m_kPartsAttachInfo.end(); ++itr)
 	{
-		PgItemEx *pkEquipItem = itr->second;
+		PgItemEx* pkEquipItem = itr->second;
 		THREAD_DELETE_ITEM(pkEquipItem);
 	}
 
 	m_kPartsAttachInfo.clear();
 	m_kAttachItemLock.Unlock();
 
-	if(GetNIFRoot())
+	if (GetNIFRoot())
 	{
-		NiAVObject	*pkHead = GetCharRoot()->GetObjectByName("Bip01 Head");
-		if(pkHead)
+		NiAVObject* pkHead = GetCharRoot()->GetObjectByName("Bip01 Head");
+		if (pkHead)
 		{
 			pkHead->SetScale(1);
 		}
@@ -844,87 +845,87 @@ void PgActor::Terminate()
 
 	ClearTempAction();
 }
-BM::GUID const &PgActor::GetPilotGuid()
+BM::GUID const& PgActor::GetPilotGuid()
 {
-	if(GetPilot())
+	if (GetPilot())
 		return	GetPilot()->GetGuid();
 
 	PG_ASSERT_LOG("PgActor::GetPilotGuid() Failed. This actor has not pilot.\n");
 	return	BM::GUID::NullData();
 }
-void	PgActor::OnAbilChanged(int iAbilType,int iValue)
+void	PgActor::OnAbilChanged(int iAbilType, int iValue)
 {
-	if(iAbilType == AT_HP)
+	if (iAbilType == AT_HP)
 	{
-		if(m_pkActorAppearanceMan)
+		if (m_pkActorAppearanceMan)
 		{
 			m_pkActorAppearanceMan->UpdateAppearance();
 		}
 	}
 }
-void PgActor::RefreshHPGaugeBar(int iBeforeHP,int iNewHP, PgActor *pkAttacker, bool const bSetAbil)
+void PgActor::RefreshHPGaugeBar(int iBeforeHP, int iNewHP, PgActor* pkAttacker, bool const bSetAbil)
 {
-	if(true==bSetAbil)
+	if (true == bSetAbil)
 	{
-		GetPilot()->SetAbil( AT_HP, iNewHP );
+		GetPilot()->SetAbil(AT_HP, iNewHP);
 	}
-	_PgOutputDebugString("[PgActor::RefreshHPGaugeBar] Actor:%s Current HP : %d\n",MB(GetPilotGuid().str()), iNewHP );
+	_PgOutputDebugString("[PgActor::RefreshHPGaugeBar] Actor:%s Current HP : %d\n", MB(GetPilotGuid().str()), iNewHP);
 
-	//BigAreaÀÏ¶§ AT_HP Àû¿ë ÆÐÅ¶ÀÌ ¸ÕÀú µé¾î¿Í HP¹Ù°¡ º¸ÀÌÁö ¾Ê´Â °æ¿ì°¡ ¹ß»ý
-	//±×·¡¼­ ¾Æ·¡¿Í °°Àº Á¶°ÇÀ» Ãß°¡ÇßÀ½, ÇêÄ¡´Â °æ¿ì´Â ¾î¶»°Ô Ç¥ÇöµÇÁö?
-	//ÇêÄ¡´Â °æ¿ì RefreshHPGaugeBar¸¦ È£ÃâÇÏ±â Àü¿¡ Ã¼Å©ÇÏ¿© ÇÔ¼ö¿¡ ÁøÀÔÇÏÁö ¾Êµµ·Ï ÇÔ
-	//Á» ´õ ÁÁÀº ¹æ¹ýÀÌ ÀÖ´Ù¸é ÀÌ ¹æ¹ýÀº ¼öÁ¤ÇßÀ¸¸é ÁÁ°ÚÀ½
-	bool const bEtcVisible = (m_pHPGaugeBar && false==m_pHPGaugeBar->IsVisibleTime() && iBeforeHP==iNewHP && pkAttacker);
-	if ( SetHPBarValue( iBeforeHP, iNewHP ) || bEtcVisible )
+	//BigAreaï¿½Ï¶ï¿½ AT_HP ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ HPï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ì°¡ ï¿½ß»ï¿½
+	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
+	//ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ RefreshHPGaugeBarï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï¿ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½ï¿½
+	//ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	bool const bEtcVisible = (m_pHPGaugeBar && false == m_pHPGaugeBar->IsVisibleTime() && iBeforeHP == iNewHP && pkAttacker);
+	if (SetHPBarValue(iBeforeHP, iNewHP) || bEtcVisible)
 	{
 		bool	bShowHPGauge = false;
 
-		if ( PgContentsBase::ms_pkContents )
+		if (PgContentsBase::ms_pkContents)
 		{
-			CUnit *pkUnit = GetPilot()->GetUnit();
-			if ( pkUnit )
+			CUnit* pkUnit = GetPilot()->GetUnit();
+			if (pkUnit)
 			{
-				PgContentsBase::ms_pkContents->RecvHP( pkUnit, iBeforeHP, iNewHP );
+				PgContentsBase::ms_pkContents->RecvHP(pkUnit, iBeforeHP, iNewHP);
 			}
 		}
 
-		if( m_pHPGaugeBar )
+		if (m_pHPGaugeBar)
 		{
-			switch ( m_pHPGaugeBar->GetType() )
+			switch (m_pHPGaugeBar->GetType())
 			{
 			case EGAUGE_CORE:
-				{
-					bShowHPGauge = true;
-				}break;
+			{
+				bShowHPGauge = true;
+			}break;
 			default:
-				{
-					if(pkAttacker)
-					{// °ø°ÝÀÚ°¡
-						CUnit* pkAttackerUnit = pkAttacker->GetUnit();
-						if( pkAttackerUnit )
-						{
-							if ( pkAttacker->IsUnderMyControl() 
-								|| g_kPilotMan.IsMySummoned( pkAttackerUnit )
-								)
-							{// ³» ¼ÒÀ¯ÀÌ°Å³ª(¼ÒÈ¯Ã¼´Â µû·Î Ã¼Å©ÇØ¾ßÇÔ)
-								bShowHPGauge = true;
-							}
-						}
-					}
-					else
+			{
+				if (pkAttacker)
+				{// ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½
+					CUnit* pkAttackerUnit = pkAttacker->GetUnit();
+					if (pkAttackerUnit)
 					{
-						CUnit* pkUnit =  GetUnit();
-						if( pkUnit && 
-							pkUnit->IsUnitType(UT_SUMMONED)
-						)
-						{
+						if (pkAttacker->IsUnderMyControl()
+							|| g_kPilotMan.IsMySummoned(pkAttackerUnit)
+							)
+						{// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°Å³ï¿½(ï¿½ï¿½È¯Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ø¾ï¿½ï¿½ï¿½)
 							bShowHPGauge = true;
 						}
 					}
-				}break;
+				}
+				else
+				{
+					CUnit* pkUnit = GetUnit();
+					if (pkUnit &&
+						pkUnit->IsUnitType(UT_SUMMONED)
+						)
+					{
+						bShowHPGauge = true;
+					}
+				}
+			}break;
 			}
 
-			if( bShowHPGauge && !IsUnderMyControl() )
+			if (bShowHPGauge && !IsUnderMyControl())
 			{
 				m_pHPGaugeBar->ResetVisibleStartTime();
 			}
@@ -932,36 +933,36 @@ void PgActor::RefreshHPGaugeBar(int iBeforeHP,int iNewHP, PgActor *pkAttacker, b
 	}
 }
 
-bool PgActor::SetHPBarValue(int const iBefore,int const iNew )
+bool PgActor::SetHPBarValue(int const iBefore, int const iNew)
 {
-	if ( !m_pHPGaugeBar )
+	if (!m_pHPGaugeBar)
 	{
 		return false;
 	}
 
-	switch ( m_pHPGaugeBar->GetType() )
+	switch (m_pHPGaugeBar->GetType())
 	{
 	case EGAUGE_PET:
-		{
-			//PetÀº ÀÌ°÷¿¡¼­ º¯°æµÇÁö ¾Êµµ·Ï ¸·´Â´Ù
-			//PetÀº m_pHPGaugeBar°¡ Ç¥½ÃÇÏ´Â ³»¿ëÀÌ HP°¡ ¾Æ´Ñ MP ÀÌ±â ¶§¹®¿¡ MP°¡ º¯°æµÇ´Â °÷¿¡¼­ Á÷Á¢ º¯°æÇØÁØ´Ù.
-			return false;
-		}break;
+	{
+		//Petï¿½ï¿½ ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½
+		//Petï¿½ï¿½ m_pHPGaugeBarï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HPï¿½ï¿½ ï¿½Æ´ï¿½ MP ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+		return false;
+	}break;
 	default:
+	{
+		int const iMaxHP = GetPilot()->GetAbil(AT_C_MAX_HP);
+
+		if (iBefore == iNew && m_pHPGaugeBar->MaxValue() == iMaxHP)
 		{
-			int const iMaxHP = GetPilot()->GetAbil(AT_C_MAX_HP);
+			return false;
+		}
 
-			if(iBefore == iNew && m_pHPGaugeBar->MaxValue() == iMaxHP)
-			{
-				return false;
-			}
-
-			_PgOutputDebugString("[PgActor::RefreshHPGaugeBar] Actor:%s iMaxHP:%d Before HP : %d New HP: %d\n",MB(GetPilotGuid().str()),iMaxHP,iBefore,iNew);
-			m_pHPGaugeBar->SetBarValue ( iMaxHP, iBefore,iNew );
-		}break;
+		_PgOutputDebugString("[PgActor::RefreshHPGaugeBar] Actor:%s iMaxHP:%d Before HP : %d New HP: %d\n", MB(GetPilotGuid().str()), iMaxHP, iBefore, iNew);
+		m_pHPGaugeBar->SetBarValue(iMaxHP, iBefore, iNew);
+	}break;
 	}
 
-	
+
 	return true;
 }
 
@@ -970,7 +971,7 @@ PgEnergyGauge* PgActor::GetHPGaugeBar()const
 	return m_pHPGaugeBar;
 }
 
-float PgActor::GetDistanceFromPath(NiPoint3 const &kPos)
+float PgActor::GetDistanceFromPath(NiPoint3 const& kPos)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.GetDistanceFromPath"), g_pkApp->GetFrameCount()));
 	static NiPoint3 akDirs[] =
@@ -980,13 +981,13 @@ float PgActor::GetDistanceFromPath(NiPoint3 const &kPos)
 		NiPoint3(0.0f, 1.0f, 0.0f),
 		NiPoint3(0.0f, -1.0f, 0.0f),
 	};
-	
+
 	m_pkPick->SetTarget(m_pkPathRoot);
 	m_pkPick->ClearResultsArray();
 
 	NiPoint3 kPickStart = kPos + NiPoint3(0, 0, 30.0f);
 
-	for(int i = 0; i < 4; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		m_pkPick->PickObjects(kPickStart, akDirs[i], true);
 	}
@@ -994,12 +995,12 @@ float PgActor::GetDistanceFromPath(NiPoint3 const &kPos)
 	m_pkPick->RemoveTarget();
 
 	NiPick::Results& rkResults = m_pkPick->GetResults();
-	if(rkResults.GetSize() == 0)
+	if (rkResults.GetSize() == 0)
 	{
 		return false;
 	}
 
-	NiPick::Record *pkRecord = rkResults.GetAt(0);
+	NiPick::Record* pkRecord = rkResults.GetAt(0);
 	return pkRecord->GetDistance();
 }
 
@@ -1012,16 +1013,16 @@ NiPoint3 PgActor::GetDirectionVector(BYTE byDirection)
 
 	NiPoint3 kMovingDir = NiPoint3::ZERO;
 
-	if(bLeft || bRight)
+	if (bLeft || bRight)
 	{
 		kMovingDir += m_kPathNormal.UnitCross(bLeft ? -NiPoint3::UNIT_Z : NiPoint3::UNIT_Z);
 	}
 
-	if(bUp || bDown)
+	if (bUp || bDown)
 	{
 		kMovingDir += (bUp ? m_kPathNormal : -m_kPathNormal);
 	}
-	
+
 	kMovingDir.Unitize();
 	return kMovingDir;
 }
@@ -1031,15 +1032,15 @@ float PgActor::TraceFly(float fSpeed, float fFrameTime, float fLimitDistance, fl
 	SetFreeMove(true);
 
 	bool bTracing = false;
-	NiPoint3 const &rkCurPos = GetPos();
+	NiPoint3 const& rkCurPos = GetPos();
 	NiPoint3 kDiffPos = m_kTargetLoc - rkCurPos;
 	float const fDistance = kDiffPos.Length();
 	kDiffPos.Unitize();
 	NiPoint3 kNextPos = GetTranslate();
-	if( fLimitDistance < fDistance )
+	if (fLimitDistance < fDistance)
 	{
-		// ¿­½ÉÈ÷ ¦i¾Æ°¡ÀÚ
-		kNextPos = rkCurPos + (kDiffPos * fSpeed * fFrameTime) + (kDiffPos * (fDistance-fLimitDistance) * fAccelateScale * fFrameTime);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½iï¿½Æ°ï¿½ï¿½ï¿½
+		kNextPos = rkCurPos + (kDiffPos * fSpeed * fFrameTime) + (kDiffPos * (fDistance - fLimitDistance) * fAccelateScale * fFrameTime);
 		bTracing = true;
 	}
 	else
@@ -1048,25 +1049,25 @@ float PgActor::TraceFly(float fSpeed, float fFrameTime, float fLimitDistance, fl
 	}
 	{
 		float const fDiffZ = m_kTargetLoc.z + fFloatHeight - rkCurPos.z;
-		if( fLimitZ > NiAbs(fDiffZ) )
+		if (fLimitZ > NiAbs(fDiffZ))
 		{
 			//
 		}
 		else
 		{
-			//if( 0 > fDiffZ ) // ³»°¡ ¹Ø¿¡ ÀÖ´Ù
-			//if( 0 < fDiffZ ) // ³»°¡ À§¿¡ ÀÖ´Ù
+			//if( 0 > fDiffZ ) // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¿ï¿½ ï¿½Ö´ï¿½
+			//if( 0 < fDiffZ ) // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½
 			kNextPos.z += (fDiffZ * fFrameTime);
 		}
 	}
 
-	if(GetTranslate() != kNextPos)
+	if (GetTranslate() != kNextPos)
 	{
-		m_pkController->setPosition( NxExtendedVec3(kNextPos.x, kNextPos.y, kNextPos.z) );
+		m_pkController->setPosition(NxExtendedVec3(kNextPos.x, kNextPos.y, kNextPos.z));
 		SetTranslate(kNextPos);
 		SetWorldTranslate(kNextPos);
 
-		if( bCanRotate )
+		if (bCanRotate)
 		{
 			ConcilDirection(kDiffPos, true);
 		}
@@ -1083,36 +1084,36 @@ float PgActor::TraceGround(float fSpeed, float fFrameTime, float fLimitDistance,
 bool PgActor::Walk(BYTE byDir, float fSpeed, float fFrameTime, bool bCorrectFinalPos)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.Walk"), g_pkApp->GetFrameCount()));
-//	if(!IsMyActor() && m_pkAction && m_pkAction->GetBirthTime() != 0 && m_pkPilot->GetUnit()->UnitType() != UT_MONSTER)
-//	{
-//		// Latency¿Í ½ÇÁ¦ °Å¸® Â÷¿¡ µû¶ó¼­ ¼Óµµ¸¦ Á¶ÀýÇÑ´Ù.
-//		DWORD dwAverageLatency = PgActor::GetAverageLatency();
-//		//DWORD dwBirthDelay = PgActor::GetSynchronizedTime() - m_pkAction->GetBirthTime();
-//		//PG_ASSERT_LOG(dwBirthDelay > 0);
-//		
-//		// BirthDelay°¡ Averange Latencyº¸´Ù Ä¿¾ß ÇÑ´Ù.
-//		//fSpeed *= (1.0f - dwAverageLatency / 4000.0f);
-//	}
+	//	if(!IsMyActor() && m_pkAction && m_pkAction->GetBirthTime() != 0 && m_pkPilot->GetUnit()->UnitType() != UT_MONSTER)
+	//	{
+	//		// Latencyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	//		DWORD dwAverageLatency = PgActor::GetAverageLatency();
+	//		//DWORD dwBirthDelay = PgActor::GetSynchronizedTime() - m_pkAction->GetBirthTime();
+	//		//PG_ASSERT_LOG(dwBirthDelay > 0);
+	//		
+	//		// BirthDelayï¿½ï¿½ Averange Latencyï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ ï¿½Ñ´ï¿½.
+	//		//fSpeed *= (1.0f - dwAverageLatency / 4000.0f);
+	//	}
 
-	if(fSpeed == 0)
+	if (fSpeed == 0)
 	{
 		return	false;
 	}
 
 	NiPoint3 kMovingDir = GetDirectionVector(byDir);
 
-	// °¡¾ßµÉ Æ÷ÀÎÆ®°¡ ÁöÁ¤µÇ¾î ÀÖÀ¸¸é, ±× ¹æÇâÀ¸·Î °£´Ù.
-	if(m_bWalkingToTarget)
+	// ï¿½ï¿½ï¿½ßµï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+	if (m_bWalkingToTarget)
 	{
 		bool bGoingToTarget = false;
-		if(m_bWalkingToTargetForce || kMovingDir == NiPoint3::ZERO)
+		if (m_bWalkingToTargetForce || kMovingDir == NiPoint3::ZERO)
 		{
 			kMovingDir = m_kTargetDir;
 			NiPoint3 kCross = m_kPathNormal.UnitCross(kMovingDir);
 			kCross.Unitize();
 
-			// ÃàÀÌ ²¿ÀÏ ¶§´Â ¿ÞÂÊÀ» º¸°Ô ÇÑ´Ù,
-			if(kCross.SqrLength() < 0.0001f)
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½,
+			if (kCross.SqrLength() < 0.0001f)
 			{
 				kCross = NiPoint3::UNIT_Z;
 			}
@@ -1121,7 +1122,7 @@ bool PgActor::Walk(BYTE byDir, float fSpeed, float fFrameTime, bool bCorrectFina
 			bGoingToTarget = true;
 		}
 
-		//NiPoint3 kDiff = m_kTargetLoc - GetTranslate();	//	¾²ÀÌÁö ¾Ê´Â º¯¼ö? ¿Ö Á¸ÀçÇÏ´Â°¡? leesg213
+		//NiPoint3 kDiff = m_kTargetLoc - GetTranslate();	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½? leesg213
 		//kDiff.z = 0;	
 
 		NiPoint3 kCharPos(GetPosition());
@@ -1134,31 +1135,31 @@ bool PgActor::Walk(BYTE byDir, float fSpeed, float fFrameTime, bool bCorrectFina
 		float fRemainLength = kRemainDist.Length();
 		float kDiffLength = (kNextPos - m_kStartLoc).Length();
 
-	/*	_PgOutputDebugString("[PgActor::Walk] Actor:%s (%s) kMovingDir:(%f,%f,%f) kCharPos:(%f,%f,%f) kNextPos:(%f,%f,%f) TargetLoc:(%f,%f,%f) StartLoc:(%f,%f,%f) m_kTargetDir:(%f,%f,%f) fSpeed:%f fFrameTime:%f fRemainLength : %f\n",
-			MB(GetPilot()->GetName()),
-			MB(GetPilot()->GetGuid().str()),
-			kMovingDir.x,kMovingDir.y,kMovingDir.z,
-			kCharPos.x,kCharPos.y,kCharPos.z,
-			kNextPos.x,kNextPos.y,kNextPos.z,
-			m_kTargetLoc.x,m_kTargetLoc.y,m_kTargetLoc.z,
-			m_kStartLoc.x,m_kStartLoc.y,m_kStartLoc.z,
-			m_kTargetDir.x,m_kTargetDir.y,m_kTargetDir.z,
-			fSpeed,fFrameTime,
-			fRemainLength);*/
+		/*	_PgOutputDebugString("[PgActor::Walk] Actor:%s (%s) kMovingDir:(%f,%f,%f) kCharPos:(%f,%f,%f) kNextPos:(%f,%f,%f) TargetLoc:(%f,%f,%f) StartLoc:(%f,%f,%f) m_kTargetDir:(%f,%f,%f) fSpeed:%f fFrameTime:%f fRemainLength : %f\n",
+				MB(GetPilot()->GetName()),
+				MB(GetPilot()->GetGuid().str()),
+				kMovingDir.x,kMovingDir.y,kMovingDir.z,
+				kCharPos.x,kCharPos.y,kCharPos.z,
+				kNextPos.x,kNextPos.y,kNextPos.z,
+				m_kTargetLoc.x,m_kTargetLoc.y,m_kTargetLoc.z,
+				m_kStartLoc.x,m_kStartLoc.y,m_kStartLoc.z,
+				m_kTargetDir.x,m_kTargetDir.y,m_kTargetDir.z,
+				fSpeed,fFrameTime,
+				fRemainLength);*/
 
-		//_PgOutputDebugString("m_fDiffLength = %.4f, DiffLength = %.4f\n", m_fDiffLength, kDiffLength);
-		if(fRemainLength <= m_fWalkToTargetLocSkillRange)
+				//_PgOutputDebugString("m_fDiffLength = %.4f, DiffLength = %.4f\n", m_fDiffLength, kDiffLength);
+		if (fRemainLength <= m_fWalkToTargetLocSkillRange)
 		{
 			SetMovingDelta(NX_ZERO);
 
-			// Á¤ÇØÁø ¹æÇâÀ¸·Î °¡´Â °ÍÀ» ³¡³»¸é¼­, ÁöÁ¤µÈ ¾×¼ÇÀ» ÇÑ´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½é¼­, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			SetNoWalkingTarget(false);
 			return false;
 		}
-		if(m_fDiffLength <= kDiffLength)
+		if (m_fDiffLength <= kDiffLength)
 		{
 			SetMovingDelta(NX_ZERO);
-			if(bCorrectFinalPos)
+			if (bCorrectFinalPos)
 			{
 				SetPosition(m_kTargetLoc);
 			}
@@ -1168,32 +1169,32 @@ bool PgActor::Walk(BYTE byDir, float fSpeed, float fFrameTime, bool bCorrectFina
 				SetPosition(m_kTargetLoc);
 			}
 
-			// Á¤ÇØÁø ¹æÇâÀ¸·Î °¡´Â °ÍÀ» ³¡³»¸é¼­, ÁöÁ¤µÈ ¾×¼ÇÀ» ÇÑ´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½é¼­, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			SetNoWalkingTarget(false);
 			return false;
 		}
 	}
-	else if(byDir == DIR_NONE)
+	else if (byDir == DIR_NONE)
 	{
-	//	return false;
+		//	return false;
 	}
-	
+
 	kMovingDir.z = 0;
 	kMovingDir.Unitize();
 
 	NxVec3 kMovingDelta;
 	NiPhysXTypes::NiPoint3ToNxVec3(kMovingDir, kMovingDelta);
 
-	SetMovingDelta(m_kMovingDelta+(kMovingDelta * fSpeed * m_fMovingSpeedScale));
+	SetMovingDelta(m_kMovingDelta + (kMovingDelta * fSpeed * m_fMovingSpeedScale));
 
-	// TODO : bDontChangeDirection ±¸Çö.
-	// No ConcilÀ» ÇØÁÖ¸é µÉµí..
+	// TODO : bDontChangeDirection ï¿½ï¿½ï¿½ï¿½.
+	// No Concilï¿½ï¿½ ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½Éµï¿½..
 
 	m_kMovingDir.z = 0;
-	if(m_bLockBidirection)
+	if (m_bLockBidirection)
 	{
-		// 2¹æÇâÀ¸·Î¸¸ º¸´Â °æ¿ì
-		if((byDir & DIR_VERTICAL) != byDir)
+		// 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		if ((byDir & DIR_VERTICAL) != byDir)
 		{
 			m_kMovingDir = m_kPathNormal.UnitCross(NiPoint3::UNIT_Z * (byDir & DIR_LEFT ? -1.0f : 1.0f));
 			//_PgOutputDebugString("[Set m_kMovingDir 1] Actor(%s) m_kMovingDir(%f,%f,%f)\n", MB(GetPilot()->GetGuid().str()),m_kMovingDir.x,m_kMovingDir.y,m_kMovingDir.z);
@@ -1210,33 +1211,33 @@ bool PgActor::Walk(BYTE byDir, float fSpeed, float fFrameTime, bool bCorrectFina
 
 void PgActor::SetTargetHeadSize(float const fTargetHeadSize, float const fTransitSpeed)
 {
-	m_fTargetHeadSize = GetDefaultHeadSize()*fTargetHeadSize;
+	m_fTargetHeadSize = GetDefaultHeadSize() * fTargetHeadSize;
 	m_fHeadSizeTransitSpeed = fTransitSpeed;
 }
 
 void PgActor::SetFreezed(bool const bTrue, bool const bSetAni, bool const bDoDmgAction)
 {
-	if(GetFreezed() != bTrue)
-	{// ¼³Á¤ÀÌ ´Þ¶óÁ®
-		if(bTrue)
-		{//¾ó·Á¾ß ÇÏ°í
+	if (GetFreezed() != bTrue)
+	{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ï¿½
+		if (bTrue)
+		{//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½
 			m_iFreezeStatus |= EFS_FREEZED;
 			lwCommonSkillUtilFunc::TryMustChangeActorAction(this, ACTIONNAME_IDLE);
-			if(bDoDmgAction)
-			{// ¾ó¾îµµ µ¥¹ÌÁö ¾×¼ÇÀ» ÇÑ´Ù¸é
+			if (bDoDmgAction)
+			{// ï¿½ï¿½îµµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ñ´Ù¸ï¿½
 				m_iFreezeStatus |= EFS_ALLOW_DMG_ACTION;
 			}
 		}
 		else
-		{// ¾óÀº°ÍÀÌ Ç®·Á¾ß ÇÑ´Ù¸é
+		{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç®ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´Ù¸ï¿½
 			m_iFreezeStatus = EFS_NONE;
 		}
 
-		if(bSetAni)
+		if (bSetAni)
 		{
-			if( GetFreezed() )
+			if (GetFreezed())
 			{
-				SetAnimSpeedInPeriod(0.0001f, 99999999);	//	¾Ö´Ï¸ÞÀÌ¼Ç Á¤Áö
+				SetAnimSpeedInPeriod(0.0001f, 99999999);	//	ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 			}
 			else
 			{
@@ -1257,7 +1258,7 @@ bool PgActor::CanDmgActionOnFreezed() const
 
 void PgActor::SetNotActionShift(bool const bTrue)
 {
-	if(m_bNotActionShift != bTrue)
+	if (m_bNotActionShift != bTrue)
 	{
 		m_bNotActionShift = bTrue;
 	}
@@ -1265,7 +1266,7 @@ void PgActor::SetNotActionShift(bool const bTrue)
 
 bool PgActor::IsActionShift(PgAction const* pkAction) const
 {
-	if(pkAction && pkAction->GetActionOptionEnable(PgAction::AO_IGNORE_NOTACTIONSHIFT))
+	if (pkAction && pkAction->GetActionOptionEnable(PgAction::AO_IGNORE_NOTACTIONSHIFT))
 	{
 		return true;
 	}
@@ -1274,9 +1275,9 @@ bool PgActor::IsActionShift(PgAction const* pkAction) const
 }
 
 void PgActor::SetBlowUp(bool const bBlowUp)
-{	
-	m_bBlowUp = bBlowUp;	
-	if(g_pkWorld && bBlowUp && m_fBlowUpStartTime == 0)
+{
+	m_bBlowUp = bBlowUp;
+	if (g_pkWorld && bBlowUp && m_fBlowUpStartTime == 0)
 	{
 		m_fBlowUpStartTime = g_pkWorld->GetAccumTime();
 	}
@@ -1287,11 +1288,11 @@ void PgActor::SetInvisible(bool const bTrue)
 {
 	m_bInvisible = bTrue;
 
-	if(m_bInvisible)
+	if (m_bInvisible)
 	{
-		if(IsMyActor())
+		if (IsMyActor())
 		{
-			SetTargetAlpha(GetAlpha(), 0.5f,1.0f);
+			SetTargetAlpha(GetAlpha(), 0.5f, 1.0f);
 		}
 	}
 	else
@@ -1307,9 +1308,9 @@ NiPoint3 PgActor::GetWalkingTargetDir()
 
 void PgActor::SetNoWalkingTarget(bool bDoNextAction)
 {
-	if(IsMeetFloor() == false)
+	if (IsMeetFloor() == false)
 	{
-		NILOG(PGLOG_ERROR,"=================== [Telejump Assert] Actor's Meet Floor != true ===================\n");
+		NILOG(PGLOG_ERROR, "=================== [Telejump Assert] Actor's Meet Floor != true ===================\n");
 	}
 
 	SetMeetFloor(false);
@@ -1318,36 +1319,36 @@ void PgActor::SetNoWalkingTarget(bool bDoNextAction)
 	m_kTargetLoc = NiPoint3::ZERO;
 	m_kTargetDir = NiPoint3::ZERO;
 	m_fDiffLength = 0.0f;
-	m_bCheckCliff = false;	//	leesg213 Ãß°¡ÇÔ
+	m_bCheckCliff = false;	//	leesg213 ï¿½ß°ï¿½ï¿½ï¿½
 	m_fWalkToTargetLocSkillRange = 0.0f;
-	
-	if(bDoNextAction && m_kTargetWalkingNextAction.length() != 0)
+
+	if (bDoNextAction && m_kTargetWalkingNextAction.length() != 0)
 	{
 		ReserveTransitAction(m_kTargetWalkingNextAction.c_str());
 	}
 }
 
-void PgActor::SetWalkingTarget(BM::GUID &rkGuid, bool const bForceToTarget, char const *pcNextAction, bool bCheckCliff,float fSkillRange)
+void PgActor::SetWalkingTarget(BM::GUID& rkGuid, bool const bForceToTarget, char const* pcNextAction, bool bCheckCliff, float fSkillRange)
 {
-	PgPilot *pkPilot = g_kPilotMan.FindPilot(rkGuid);
-	if(!pkPilot)
+	PgPilot* pkPilot = g_kPilotMan.FindPilot(rkGuid);
+	if (!pkPilot)
 	{
 		return;
 	}
 
-	PgActor *pkActor = dynamic_cast<PgActor *> (pkPilot->GetWorldObject());
-	if(!pkActor)
+	PgActor* pkActor = dynamic_cast<PgActor*> (pkPilot->GetWorldObject());
+	if (!pkActor)
 	{
 		return;
 	}
 
-	SetWalkingTargetLoc(pkActor->GetTranslate(), bForceToTarget, pcNextAction, bCheckCliff,fSkillRange);
+	SetWalkingTargetLoc(pkActor->GetTranslate(), bForceToTarget, pcNextAction, bCheckCliff, fSkillRange);
 }
 
-void PgActor::SetWalkingTargetLoc(NiPoint3 const &kTargetLoc, bool const bForceToTarget, char const *pcNextAction, bool bCheckCliff,float fSkillRange)
+void PgActor::SetWalkingTargetLoc(NiPoint3 const& kTargetLoc, bool const bForceToTarget, char const* pcNextAction, bool bCheckCliff, float fSkillRange)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.SetWorkingTarget"), g_pkApp->GetFrameCount()));
-	// bForceToTarget : TargetÀ¸·Î ¿òÁ÷ÀÌ´Â µ¿¾È °­Á¦ Äµ½½ÀÌ ¾ÈµÇ°Ô ÇÒ °ÍÀÎ°¡.
+	// bForceToTarget : Targetï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Äµï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÇ°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½.
 	NxExtendedVec3 kStartLocEx = m_pkController->getPosition();
 	NxVec3 kStartLoc(static_cast<NxReal>(kStartLocEx.x), static_cast<NxReal>(kStartLocEx.y), static_cast<NxReal>(0.0f));
 	NiPhysXTypes::NxVec3ToNiPoint3(kStartLoc, m_kStartLoc);
@@ -1358,41 +1359,41 @@ void PgActor::SetWalkingTargetLoc(NiPoint3 const &kTargetLoc, bool const bForceT
 	m_kTargetDir = (kAdjustedTargetLoc - m_kStartLoc);
 	m_kTargetDir.z = 0;
 	m_fDiffLength = m_kTargetDir.Length();
-	if(fSkillRange!=-1)
+	if (fSkillRange != -1)
 		m_fWalkToTargetLocSkillRange = fSkillRange;
 
-	if(m_fDiffLength == 0.0f)
+	if (m_fDiffLength == 0.0f)
 	{
 		return;
 	}
 
 	m_kTargetDir.Unitize();
 
-	if(GetPilot())
+	if (GetPilot())
 	{
-		_PgOutputDebugString("[PgActor::SetWalkingTargetLoc] Actor:%s(%s) TargetLoc:(%f,%f,%f) m_kTargetDir:(%f,%f,%f) kAdjustedTargetLoc:(%f,%f,%f) bForceToTarget:%d fSkillRange:%f\n", MB(GetPilot()->GetName()), MB(GetPilotGuid().str()), kTargetLoc.x,kTargetLoc.y,kTargetLoc.z, m_kTargetDir.x,m_kTargetDir.y,m_kTargetDir.z, kAdjustedTargetLoc.x,kAdjustedTargetLoc.y,kAdjustedTargetLoc.z,bForceToTarget,fSkillRange);
+		_PgOutputDebugString("[PgActor::SetWalkingTargetLoc] Actor:%s(%s) TargetLoc:(%f,%f,%f) m_kTargetDir:(%f,%f,%f) kAdjustedTargetLoc:(%f,%f,%f) bForceToTarget:%d fSkillRange:%f\n", MB(GetPilot()->GetName()), MB(GetPilotGuid().str()), kTargetLoc.x, kTargetLoc.y, kTargetLoc.z, m_kTargetDir.x, m_kTargetDir.y, m_kTargetDir.z, kAdjustedTargetLoc.x, kAdjustedTargetLoc.y, kAdjustedTargetLoc.z, bForceToTarget, fSkillRange);
 	}
 
 	m_bWalkingToTarget = true;
 	m_bWalkingToTargetForce = bForceToTarget;
 	m_bCheckCliff = bCheckCliff;
 	m_kTargetWalkingNextAction = (pcNextAction == 0 ? std::string("") : pcNextAction);
-//	ConcilDirection(m_kTargetDir, true);
+	//	ConcilDirection(m_kTargetDir, true);
 }
 
-NiPoint3 const &PgActor::GetWalkingTargetLoc()
+NiPoint3 const& PgActor::GetWalkingTargetLoc()
 {
 	return m_kTargetLoc;
 }
 
-//! ¸ñÇ¥ ÁöÁ¡À¸·Î ¿òÁ÷ÀÌµµ·Ï ¼³Á¤ µÇ¾î ÀÖ´ÂÁö ¸®ÅÏ.
+//! ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 bool PgActor::GetWalkingToTarget()
 {
 	return m_bWalkingToTarget;
 }
 
-//! Ä³¸¯ÅÍÀÇ Scale À» º¯È­½ÃÅ²´Ù.
-void PgActor::SetTargetScale(float fScale,unsigned long ulTotalScaleChangeTime)
+//! Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Scale ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½Å²ï¿½ï¿½.
+void PgActor::SetTargetScale(float fScale, unsigned long ulTotalScaleChangeTime)
 {
 	if (GetActorManager())
 		m_fStartScale = GetNIFRoot()->GetScale();
@@ -1425,27 +1426,27 @@ void PgActor::SetTargetColor(const NiColor& kColor, float const fTransitionTime)
 	m_ColorTransitInfo.m_fAccumTime = 0.0f;
 }
 
-void PgActor::SetTargetSpecular(const NiColor &kColor, float fTransitTime)
+void PgActor::SetTargetSpecular(const NiColor& kColor, float fTransitTime)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.SetActorColor"), g_pkApp->GetFrameCount()));
-	// Material ¿ø·¡ »ö»óÀ» ÀÐ¾î¼­ ÀúÀåÇØ µÐ´Ù.
-	if(!m_bMaterialColorCached)
+	// Material ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾î¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½.
+	if (!m_bMaterialColorCached)
 	{
 		m_bMaterialColorCached = StoreDefaultMaterialColor(NiDynamicCast(NiNode, GetNIFRoot()), true);
-		if(!m_bMaterialColorCached)
+		if (!m_bMaterialColorCached)
 		{
 			return;
 		}
 	}
 
-	// »ö»óÀ» º¯È­½ÃÅ°±â Àü¿¡, ÇöÀç »ö±òÀ» ÀúÀåÇØ µÐ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½.
 	m_kMaterialCurrentColorContainer.clear();
-	for(MaterialColorContainer::iterator itr = m_kMaterialColorContainer.begin();
+	for (MaterialColorContainer::iterator itr = m_kMaterialColorContainer.begin();
 		itr != m_kMaterialColorContainer.end();
 		++itr)
 	{
-		NiMaterialProperty *pkMaterialProp = itr->first;
-		m_kMaterialCurrentColorContainer.insert(std::make_pair(pkMaterialProp, ColorSet(pkMaterialProp->GetAmbientColor(), pkMaterialProp->GetEmittance(),pkMaterialProp->GetSpecularColor(),pkMaterialProp->GetDiffuseColor())));
+		NiMaterialProperty* pkMaterialProp = itr->first;
+		m_kMaterialCurrentColorContainer.insert(std::make_pair(pkMaterialProp, ColorSet(pkMaterialProp->GetAmbientColor(), pkMaterialProp->GetEmittance(), pkMaterialProp->GetSpecularColor(), pkMaterialProp->GetDiffuseColor())));
 	}
 
 	m_SpecularTransitInfo.m_kPrev = m_SpecularTransitInfo.m_kCurrent = m_SpecularTransitInfo.m_kTarget;
@@ -1456,33 +1457,33 @@ void PgActor::SetTargetSpecular(const NiColor &kColor, float fTransitTime)
 	TurnOnSpecular();
 }
 
-//!	¾×ÅÍÀÇ ¾ÆÀÌÅÛ ¸ðµ¨À» ÀÓ½Ã·Î ±³Ã¼ÇÑ´Ù.
-void	PgActor::ChangeItemModel(eEquipLimit kItemPos,char const *pkNewItemXMLPath)
+//!	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½Ã·ï¿½ ï¿½ï¿½Ã¼ï¿½Ñ´ï¿½.
+void	PgActor::ChangeItemModel(eEquipLimit kItemPos, char const* pkNewItemXMLPath)
 {
-	_PgOutputDebugString("PgActor::ChangeItemModel Actor : %s iItemPos : %d pkNewItemXMLPath : %s\n", MB(GetPilot()->GetName()),kItemPos,pkNewItemXMLPath);
+	_PgOutputDebugString("PgActor::ChangeItemModel Actor : %s iItemPos : %d pkNewItemXMLPath : %s\n", MB(GetPilot()->GetName()), kItemPos, pkNewItemXMLPath);
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ChangeModel"), g_pkApp->GetFrameCount()));
-	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kItemPos);	
-	if(itr != m_kPartsAttachInfo.end())
+	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kItemPos);
+	if (itr != m_kPartsAttachInfo.end())
 	{
-		PgItemEx *pkEquipItem = itr->second;
-		if(!pkEquipItem) 
+		PgItemEx* pkEquipItem = itr->second;
+		if (!pkEquipItem)
 		{
 			_PgOutputDebugString("PgActor::ChangeItemModel pkEquipItem is NULL\n");
 			return;
 		}
-		_PgOutputDebugString("PgActor::ChangeItemModel pkEquipItem : %s\n",pkEquipItem->GetID().c_str());
+		_PgOutputDebugString("PgActor::ChangeItemModel pkEquipItem : %s\n", pkEquipItem->GetID().c_str());
 
 		NiNode* pkModel = NiDynamicCast(NiNode, GetCharRoot());
 		const	char* pcTargetDummy = pkEquipItem->GetTargetPoint();
-		//	±âÁ¸ÀÇ ¸Þ½¬¸¦ ¶¼¾î³½´Ù.
-		NiNode	*pkTargetNode = NULL;
-		if(pkEquipItem->GetMeshRoot())
+		//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³½ï¿½ï¿½.
+		NiNode* pkTargetNode = NULL;
+		if (pkEquipItem->GetMeshRoot())
 		{
 			pkTargetNode = pkEquipItem->GetMeshRoot()->GetParent();
-			if(pkTargetNode)
+			if (pkTargetNode)
 			{
-				_PgOutputDebugString("PgActor::ChangeItemModel pkTargetNode:%s EquipItemMeshRoot : %s\n", pkTargetNode->GetName(),pkEquipItem->GetMeshRoot()->GetName());
+				_PgOutputDebugString("PgActor::ChangeItemModel pkTargetNode:%s EquipItemMeshRoot : %s\n", pkTargetNode->GetName(), pkEquipItem->GetMeshRoot()->GetName());
 
 				pkTargetNode->DetachChild(pkEquipItem->GetMeshRoot());
 			}
@@ -1502,8 +1503,8 @@ void	PgActor::ChangeItemModel(eEquipLimit kItemPos,char const *pkNewItemXMLPath)
 		pkEquipItem->ChangeModel(pkNewItemXMLPath);
 		_PgOutputDebugString("PgActor::ChangeItemModel ChangeModel Finished\n");
 
-		//	»õ ¸Þ½¬¸¦ ºÙÀÎ´Ù.
-		if(pkTargetNode)
+		//	ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
+		if (pkTargetNode)
 		{
 			_PgOutputDebugString("PgActor::ChangeItemModel Attach New Mesh Root\n");
 			pkTargetNode->AttachChild(pkEquipItem->GetMeshRoot(), true);
@@ -1517,29 +1518,29 @@ void	PgActor::ChangeItemModel(eEquipLimit kItemPos,char const *pkNewItemXMLPath)
 	}
 	_PgOutputDebugString("PgActor::ChangeItemModel Parts Not Found\n");
 }
-//!	¾×ÅÍÀÇ ¹«±â ¸ðµ¨À» ¿ø·¡ °ÍÀ¸·Î µ¹·Á³õ´Â´Ù.
+//!	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 void	PgActor::RestoreItemModel(eEquipLimit kItemPos)
 {
-	if(!GetPilot())
+	if (!GetPilot())
 	{
 		return;
 	}
 
-	_PgOutputDebugString("PgActor::RestoreItemModel Actor : %s iItemPos : %d\n", MB(GetPilot()->GetName()),kItemPos);
+	_PgOutputDebugString("PgActor::RestoreItemModel Actor : %s iItemPos : %d\n", MB(GetPilot()->GetName()), kItemPos);
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.RestorModel"), g_pkApp->GetFrameCount()));
-	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kItemPos);	
-	if(itr != m_kPartsAttachInfo.end())
+	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kItemPos);
+	if (itr != m_kPartsAttachInfo.end())
 	{
-		PgItemEx *pkEquipItem = itr->second;
-		if(!pkEquipItem) 
+		PgItemEx* pkEquipItem = itr->second;
+		if (!pkEquipItem)
 		{
 			_PgOutputDebugString("PgActor::RestoreItemModel pkEquipItem is NULL\n");
 			return;
 		}
-		_PgOutputDebugString("PgActor::RestoreItemModel pkEquipItem : %s\n",pkEquipItem->GetID().c_str());
+		_PgOutputDebugString("PgActor::RestoreItemModel pkEquipItem : %s\n", pkEquipItem->GetID().c_str());
 
-		if(pkEquipItem->GetOriginalMeshRoot() == 0)
+		if (pkEquipItem->GetOriginalMeshRoot() == 0)
 		{
 			_PgOutputDebugString("PgActor::RestoreItemModel pkEquipItem->GetOriginalMeshRoot() is NULL\n");
 			return;
@@ -1547,14 +1548,14 @@ void	PgActor::RestoreItemModel(eEquipLimit kItemPos)
 
 		NiNode* pkModel = NiDynamicCast(NiNode, GetCharRoot());
 		const	char* pcTargetDummy = pkEquipItem->GetTargetPoint();
-		//	±âÁ¸ÀÇ ¸Þ½¬¸¦ ¶¼¾î³½´Ù.
-		NiNode	*pkTargetNode=NULL;
-		if(pkEquipItem->GetMeshRoot())
+		//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³½ï¿½ï¿½.
+		NiNode* pkTargetNode = NULL;
+		if (pkEquipItem->GetMeshRoot())
 		{
 			pkTargetNode = pkEquipItem->GetMeshRoot()->GetParent();
-			if(pkTargetNode)
+			if (pkTargetNode)
 			{
-				_PgOutputDebugString("PgActor::RestoreItemModel pkTargetNode:%s EquipItemMeshRoot : %s\n", pkTargetNode->GetName(),pkEquipItem->GetMeshRoot()->GetName());
+				_PgOutputDebugString("PgActor::RestoreItemModel pkTargetNode:%s EquipItemMeshRoot : %s\n", pkTargetNode->GetName(), pkEquipItem->GetMeshRoot()->GetName());
 
 				pkTargetNode->DetachChild(pkEquipItem->GetMeshRoot());
 			}
@@ -1571,8 +1572,8 @@ void	PgActor::RestoreItemModel(eEquipLimit kItemPos)
 
 		pkEquipItem->RestoreOriginalModel();
 
-		//	»õ ¸Þ½¬¸¦ ºÙÀÎ´Ù.
-		if(pkTargetNode)
+		//	ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
+		if (pkTargetNode)
 		{
 			_PgOutputDebugString("PgActor::RestoreItemModel Attach New Mesh Root\n");
 
@@ -1583,7 +1584,7 @@ void	PgActor::RestoreItemModel(eEquipLimit kItemPos)
 			pkTargetNode->Update(0.0f, true);
 		}
 
-	
+
 		return;
 	}
 
@@ -1615,7 +1616,7 @@ void PgActor::IncEquipCount()
 		return;
 
 	::InterlockedIncrement(&m_iEquipCount);
-//	_PgOutputDebugString("%s actor EquipCount (After Inc) = %d\n", MB(GetGuid().str()), m_iEquipCount);
+	//	_PgOutputDebugString("%s actor EquipCount (After Inc) = %d\n", MB(GetGuid().str()), m_iEquipCount);
 }
 
 void PgActor::DecEquipCount()
@@ -1630,12 +1631,12 @@ void PgActor::DecEquipCount()
 		AttachItemInfo kInfo;
 		m_kAttachItemLock.Lock();
 		int	iAttachItemContainerSize = m_kAttachItemContainer.size();
-		if(iAttachItemContainerSize > 0)
+		if (iAttachItemContainerSize > 0)
 		{
 			kInfo = m_kAttachItemContainer.front();
 			if (kInfo.pItem == NULL)
 			{
-				// Loading Thread¿¡ Áý¾î³ÖÀÚ...
+				// Loading Threadï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...
 				m_kAttachItemContainer.pop_front();
 			}
 		}
@@ -1648,16 +1649,15 @@ void PgActor::DecEquipCount()
 		}
 	}
 #endif
-//	_PgOutputDebugString("%s actor EquipCount (After Dec) = %d\n", MB(GetGuid().str()), m_iEquipCount);
+	//	_PgOutputDebugString("%s actor EquipCount (After Dec) = %d\n", MB(GetGuid().str()), m_iEquipCount);
 }
 
 void PgActor::Stop()
-{
-}
+{}
 
 void PgActor::StartJump(float const fHeight)
 {
-	if(!GetJump())
+	if (!GetJump())
 	{
 		m_fJumpAccumHeight = 0.0f;
 	}
@@ -1670,26 +1670,26 @@ void PgActor::StartJump(float const fHeight)
 	m_kSlideVector.zero();
 }
 
-float PgActor::StartTeleJump(NiPoint3 const &kTargetPoint, float const fHeight)
+float PgActor::StartTeleJump(NiPoint3 const& kTargetPoint, float const fHeight)
 {
 	NxExtendedVec3 kCharPos = m_pkController->getPosition();
 	NiPoint3 kActorPos(static_cast<float>(kCharPos.x), static_cast<float>(kCharPos.y), static_cast<float>(kCharPos.z));
 	float fDiffHeight = kTargetPoint.z - kActorPos.z;
 	float fPeak = fHeight + (fDiffHeight > 0.0f ? fDiffHeight : 0.0f);
 
-	// Á¡ÇÁÇÏÀÚ (´ÜÀ§°¡ InchÀÌ´Ù)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Inchï¿½Ì´ï¿½)
 	StartJump(fPeak);
 
 	NiPoint3 kDiffDistance = kTargetPoint - kActorPos;
 	kDiffDistance.z = 0;
 	float fDistance = kDiffDistance.Length();
-	
-	// Ã¼°ø ½Ã°£
+
+	// Ã¼ï¿½ï¿½ ï¿½Ã°ï¿½
 	float fAchiveToPeak = -GetInitialVelocity() / GetGravity();
 	float fAchiveToGround = NiSqrt(2.0f * (fDiffHeight > 0.0f ? fHeight : -fDiffHeight + fHeight) * -1.0f / GetGravity());
 	float fAchiveTime = fAchiveToPeak + fAchiveToGround;
 
-	return fDistance / fAchiveTime;	
+	return fDistance / fAchiveTime;
 }
 bool PgActor::GetForceSync()
 {
@@ -1713,11 +1713,11 @@ bool PgActor::GetJump()	const
 
 void PgActor::ClearActionState()
 {
-//	m_uiStateCount = 0;
-//	m_kMonitorSlot.clear();
+	//	m_uiStateCount = 0;
+	//	m_kMonitorSlot.clear();
 }
 
-unsigned int PgActor::GetActionState(char const *pcActionID)
+unsigned int PgActor::GetActionState(char const* pcActionID)
 {
 	//MonitorSlot::iterator itr = m_kMonitorSlot.find(std::string(pcActionID));
 	//if(itr != m_kMonitorSlot.end())
@@ -1728,7 +1728,7 @@ unsigned int PgActor::GetActionState(char const *pcActionID)
 	return 0;
 }
 
-//! Chain Attack Count ¸¦ 1 Áõ°¡½ÃÅ²´Ù. ´Ü ÃÖ±Ù Áõ°¡µÈ ½Ã°£¿¡¼­ 3ÃÊ ÀÌ»ó Èê·¶À» °æ¿ì 1 ·Î¸®¼Â.
+//! Chain Attack Count ï¿½ï¿½ 1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½. ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ê·¶ï¿½ï¿½ ï¿½ï¿½ï¿½ 1 ï¿½Î¸ï¿½ï¿½ï¿½.
 void PgActor::IncreaseChainAttackCount(int const iSkillNo)
 {
 	g_kChainAttack.IncreaseChainAttackCount(iSkillNo);
@@ -1739,70 +1739,70 @@ void PgActor::SetFreeMove(bool bFreeMove)
 	m_bFreeMove = bFreeMove;
 }
 
-void PgActor::MoveActorAbsolute(NxVec3 const &kMoveAbs)
+void PgActor::MoveActorAbsolute(NxVec3 const& kMoveAbs)
 {
 	//NxVec3 kResultVec3;
 	//kResultVec3.x = (NxReal)(m_pkController->getDebugPosition().x + kMoveAbs.x);
 	//kResultVec3.y = (NxReal)(m_pkController->getDebugPosition().y + kMoveAbs.y);
 	//kResultVec3.z = (NxReal)(m_pkController->getDebugPosition().z + kMoveAbs.z);
 
-	//// m_kMovingAbsoluteÀº ControllerÀÇ move¶§ ÇÊ¿äÇÑ µ¥ÀÌÅÍ.
-	//// move´Â.. ÀÌ ÇÔ¼ö°¡ ½ÇÇàµÇ°í ³ª¼­ ´ÙÀ½ ÇÁ·¹ÀÓ¶§ °è»ê µÇ±â ¶§¹®¿¡..
-	//// ÇÑ¹ÚÀÚ ´Ê°Ô ¿òÁ÷ÀÎ´Ù. ±×·¸±â ¶§¹®¿¡. actor¸¦ ÀÌ¹øÇÁ·¹ÀÓ ·»´õ Àü¿¡ ¿òÁ÷¿© Áà¼­.
-	//// Áï½Ã ÀÌµ¿ µÈ°Í °°Àº Çö»óÃ³·³ º¸¿©ÁØ´Ù.
+	//// m_kMovingAbsoluteï¿½ï¿½ Controllerï¿½ï¿½ moveï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	//// moveï¿½ï¿½.. ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ ï¿½ï¿½ï¿½ ï¿½Ç±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
+	//// ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½. ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. actorï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½à¼­.
+	//// ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½È°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 	//m_pkPhysXActor->setGlobalPosition(kResultVec3);
 	m_kMovingAbsolute += kMoveAbs;
 }
 void PgActor::MoveActor(NxVec3 kDelta)
 {
 
-	SetMovingDelta(m_kMovingDelta+kDelta);
+	SetMovingDelta(m_kMovingDelta + kDelta);
 
 	//_PgOutputDebugString("Moving Delta MoveActor: %.f, %.f, %.f\n", m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z);
 }
 
-//!	¹«±â ±ËÀû ±×¸®±â ½ÃÀÛ
+//!	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void PgActor::StartWeaponTrail()
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.StartWeaponTrail"), g_pkApp->GetFrameCount()));
 	EndWeaponTrail();
-	
-	if(g_spTrailNodeMan && m_spWeaponTrailNode == 0)
+
+	if (g_spTrailNodeMan && m_spWeaponTrailNode == 0)
 	{
-		PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_WEAPON);	//	5¹øÀÌ ¹«±â
-		if(itr != m_kPartsAttachInfo.end())
+		PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_WEAPON);	//	5ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		if (itr != m_kPartsAttachInfo.end())
 		{
-			PgItemEx *pkEquipItem = itr->second;
+			PgItemEx* pkEquipItem = itr->second;
 			m_spWeaponTrailNode = g_spTrailNodeMan->StartNewTrail(
-				NiDynamicCast(NiAVObject,pkEquipItem->GetMeshRoot()),
-				pkEquipItem->GetTrailInfo().m_kTexturePath,pkEquipItem->GetTrailInfo().m_iTotalTime/1000.0f,
-				pkEquipItem->GetTrailInfo().m_iBrightTime/1000.0f);
+				NiDynamicCast(NiAVObject, pkEquipItem->GetMeshRoot()),
+				pkEquipItem->GetTrailInfo().m_kTexturePath, pkEquipItem->GetTrailInfo().m_iTotalTime / 1000.0f,
+				pkEquipItem->GetTrailInfo().m_iBrightTime / 1000.0f);
 		}
 
 	}
 }
-//!	¹«±â ±ËÀû ±×¸®±â Á¾·á
+//!	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void PgActor::EndWeaponTrail()
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.EndWeaponTrail"), g_pkApp->GetFrameCount()));
-	if(g_spTrailNodeMan && m_spWeaponTrailNode)
+	if (g_spTrailNodeMan && m_spWeaponTrailNode)
 	{
-		g_spTrailNodeMan->StopTrail(m_spWeaponTrailNode,false);
+		g_spTrailNodeMan->StopTrail(m_spWeaponTrailNode, false);
 		m_spWeaponTrailNode = 0;
 	}
 }
-//!	¸ö ±ËÀû ±×¸®±â ½ÃÀÛ
+//!	ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void PgActor::StartBodyTrail(char const* strTexPath, int iTotalTime, int iBrightTime)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.StartBodyTrail"), g_pkApp->GetFrameCount()));
-	if(NULL == strTexPath)
+	if (NULL == strTexPath)
 	{
 		return;
 	}
 	StartTrail(ETAT_BODY, strTexPath, iTotalTime, iBrightTime);
 }
 
-//!	¸ö ±ËÀû ±×¸®±â Á¾·á
+//!	ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 void PgActor::EndBodyTrail()
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.EndBodyTrail"), g_pkApp->GetFrameCount()));
@@ -1810,105 +1810,105 @@ void PgActor::EndBodyTrail()
 }
 
 bool PgActor::StartTrail(eTrailAttachType const eTrailType, std::string const kTexPath, int iTotalTime, int iBrightTime)
-{	
+{
 	EndTrail(eTrailType);
 
-	if( IsHide() 
+	if (IsHide()
 		|| !g_spTrailNodeMan
 		|| ETAT_NONE >= eTrailType
 		|| ETAT_MAX <= eTrailType
 		|| kTexPath.empty()
-		|| eTrailType >= static_cast<int>( m_kContTrail.size() )
+		|| eTrailType >= static_cast<int>(m_kContTrail.size())
 		)
 	{
 		return false;
 	}
 	PgTrailNodePtr spTrailNode = NULL;
-	//PgTrailNodePtr spTrailNode = GetTrailNode( eTrailType ); // NULLÀÌ ¾Æ´Ï¸é »èÁ¦°¡ ¾ÈµÈ°ÍÀÌ¹Ç·Î
+	//PgTrailNodePtr spTrailNode = GetTrailNode( eTrailType ); // NULLï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÈ°ï¿½ï¿½Ì¹Ç·ï¿½
 	//if( NULL != spTrailNode )
-	//{// ½ÇÆÐ ÇÏ°í
+	//{// ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½
 	//	return false;
 	//}
-	NiAVObject* pkNode = GetActorManager()->GetNIFRoot();	// ·çÆ®·Î ºÎÅÍ ½ÃÀÛÇØ¼­
-	if( NULL == pkNode )
+	NiAVObject* pkNode = GetActorManager()->GetNIFRoot();	// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½
+	if (NULL == pkNode)
 	{
 		return false;
 	}
 	std::string kTargetNode;
-	switch( eTrailType )
-	{// Actor ¸ö¿¡ ½ºÅ°´×À¸·Î ºÙ¾îÀÖ´Â ¾ÆÀÌÅÛ ¸Þ½¬µîÀÇ ³ëµåµéÀº Ã£Áö ¸øÇÏ¹Ç·Î À¯ÀÇ
+	switch (eTrailType)
+	{// Actor ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	case ETAT_BODY:
-		{// char_root
-			//pkNode = GetActorManager()->GetNIFRoot();
-		}break;
+	{// char_root
+		//pkNode = GetActorManager()->GetNIFRoot();
+	}break;
 	case ETAT_R_HAND:
-		{
-			kTargetNode = "p_wp_r_hand";
-		}break;
-	case ETAT_L_HAND:
-		{
-			kTargetNode = "p_wp_l_hand";
-		}break;
-	case ETAT_R_FOOT:
-		{
-			kTargetNode = "Boots_R_Bone02";
-		}break;
-	case ETAT_L_FOOT:
-		{
-			kTargetNode = "Boots_L_Bone02";
-		}break;
-	case ETAT_CENTER:
-		{
-			kTargetNode = "Bip01";
-		}break;
-	default:
-		{
-			return false;
-		}break;
-	}
-	if(ETAT_BODY != eTrailType)
 	{
-		pkNode = pkNode->GetObjectByName( kTargetNode.c_str() );
+		kTargetNode = "p_wp_r_hand";
+	}break;
+	case ETAT_L_HAND:
+	{
+		kTargetNode = "p_wp_l_hand";
+	}break;
+	case ETAT_R_FOOT:
+	{
+		kTargetNode = "Boots_R_Bone02";
+	}break;
+	case ETAT_L_FOOT:
+	{
+		kTargetNode = "Boots_L_Bone02";
+	}break;
+	case ETAT_CENTER:
+	{
+		kTargetNode = "Bip01";
+	}break;
+	default:
+	{
+		return false;
+	}break;
+	}
+	if (ETAT_BODY != eTrailType)
+	{
+		pkNode = pkNode->GetObjectByName(kTargetNode.c_str());
 	}
 
-	if( NULL == pkNode )
+	if (NULL == pkNode)
 	{
 		return false;
 	}
 
 	spTrailNode = g_spTrailNodeMan->StartNewTrail(
 		pkNode,
-		kTexPath,iTotalTime/1000.0f,
-		iBrightTime/1000.0f);
+		kTexPath, iTotalTime / 1000.0f,
+		iBrightTime / 1000.0f);
 	SetNodeTrail(eTrailType, spTrailNode);
 	return true;
 }
 
 bool PgActor::EndTrail(eTrailAttachType const eTrailType)
-{	
-	if(!g_spTrailNodeMan
+{
+	if (!g_spTrailNodeMan
 		|| ETAT_NONE >= eTrailType
 		|| ETAT_MAX <= eTrailType
-		|| eTrailType >= static_cast<int>( m_kContTrail.size() )
+		|| eTrailType >= static_cast<int>(m_kContTrail.size())
 		)
 	{
 		return false;
 	}
 	PgTrailNodePtr spTrailNode = GetTrailNode(eTrailType);
-	if(NULL == spTrailNode)
+	if (NULL == spTrailNode)
 	{
 		return false;
 	}
-	g_spTrailNodeMan->StopTrail(spTrailNode,false);
+	g_spTrailNodeMan->StopTrail(spTrailNode, false);
 	spTrailNode = NULL;
 	return true;
 }
 
 PgTrailNodePtr PgActor::GetTrailNode(eTrailAttachType const eTrailType)
 {
-	if( ETAT_NONE >= eTrailType
+	if (ETAT_NONE >= eTrailType
 		|| ETAT_MAX <= eTrailType
-		|| eTrailType >= static_cast<int>( m_kContTrail.size() )
+		|| eTrailType >= static_cast<int>(m_kContTrail.size())
 		)
 	{
 		return NULL;
@@ -1918,9 +1918,9 @@ PgTrailNodePtr PgActor::GetTrailNode(eTrailAttachType const eTrailType)
 }
 bool PgActor::SetNodeTrail(eTrailAttachType const eTrailType, PgTrailNodePtr& rkNodeTrail)
 {
-	if( ETAT_NONE >= eTrailType
+	if (ETAT_NONE >= eTrailType
 		|| ETAT_MAX <= eTrailType
-		|| eTrailType >= static_cast<int>( m_kContTrail.size() )
+		|| eTrailType >= static_cast<int>(m_kContTrail.size())
 		)
 	{
 		return false;
@@ -1931,17 +1931,17 @@ bool PgActor::SetNodeTrail(eTrailAttachType const eTrailType, PgTrailNodePtr& rk
 
 void	PgActor::StartGodTime(float fTotalGodTime)
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return;
 	}
 
-	NILOG(PGLOG_LOG,"StartGodTime() Actor:%s %s fTotalGodTime:%f\n",MB(GetGuid().str()),MB(GetPilot()->GetName()),fTotalGodTime);
+	NILOG(PGLOG_LOG, "StartGodTime() Actor:%s %s fTotalGodTime:%f\n", MB(GetGuid().str()), MB(GetPilot()->GetName()), fTotalGodTime);
 
-	if(fTotalGodTime<=0)
+	if (fTotalGodTime <= 0)
 	{
 		m_kGodTimeInfo.m_bGodTime = false;
-		g_kStatusEffectMan.RemoveStatusEffectFromActor2(GetPilot(),m_iGodTimeStatusEffectInstanceID);
+		g_kStatusEffectMan.RemoveStatusEffectFromActor2(GetPilot(), m_iGodTimeStatusEffectInstanceID);
 		m_iGodTimeStatusEffectInstanceID = -1;
 		return;
 	}
@@ -1951,24 +1951,24 @@ void	PgActor::StartGodTime(float fTotalGodTime)
 	m_kGodTimeInfo.m_fStartTime = g_pkWorld->GetAccumTime();
 	m_kGodTimeInfo.m_fBlinkTime = g_pkWorld->GetAccumTime();
 
-	//RemoveStatusEffectFromActor2·Î Áö¿ì´Â °ÍµéÀº MadeByItemÀ» ÄÑÁØ´Ù.
-	if(m_iGodTimeStatusEffectInstanceID==-1)
+	//RemoveStatusEffectFromActor2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Íµï¿½ï¿½ï¿½ MadeByItemï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
+	if (m_iGodTimeStatusEffectInstanceID == -1)
 	{
-		m_iGodTimeStatusEffectInstanceID = g_kStatusEffectMan.AddStatusEffectToActor(GetPilot(), GetPilot(), "se_semi_transparent",0,0,0,true, true);
+		m_iGodTimeStatusEffectInstanceID = g_kStatusEffectMan.AddStatusEffectToActor(GetPilot(), GetPilot(), "se_semi_transparent", 0, 0, 0, true, true);
 	}
 }
 void	PgActor::StartDamageBlink(bool bStart)
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return;
 	}
 
 	m_kDamageBlinkInfo.bEnable = bStart;
 
-	if(!GetPilot()) return;
+	if (!GetPilot()) return;
 
-	if(bStart)
+	if (bStart)
 	{
 		m_kDamageBlinkInfo.m_fStartTime = g_pkWorld->GetAccumTime();
 		m_kDamageBlinkInfo.m_fLastTime = g_pkWorld->GetAccumTime();
@@ -1976,19 +1976,19 @@ void	PgActor::StartDamageBlink(bool bStart)
 		m_kDamageBlinkInfo.m_fTotalTime = 0.10f;
 		m_kDamageBlinkInfo.m_bToggle = true;
 
-		//	ÀÌ¹Ì ÀÖ´Â°Å´Â Áö¿ì°í
-		g_kStatusEffectMan.RemoveStatusEffectFromActor2(GetPilot(),m_iDamageBlinkStatusEffectInstanceID);
+		//	ï¿½Ì¹ï¿½ ï¿½Ö´Â°Å´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+		g_kStatusEffectMan.RemoveStatusEffectFromActor2(GetPilot(), m_iDamageBlinkStatusEffectInstanceID);
 
-		//	»õ·Î ³ÖÀÚ
-		m_iDamageBlinkStatusEffectInstanceID = g_kStatusEffectMan.AddStatusEffectToActor(GetPilot(), GetPilot(), GetDamageBlinkID(),0,0,1,true, true);
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		m_iDamageBlinkStatusEffectInstanceID = g_kStatusEffectMan.AddStatusEffectToActor(GetPilot(), GetPilot(), GetDamageBlinkID(), 0, 0, 1, true, true);
 	}
 	else
 	{
-		g_kStatusEffectMan.RemoveStatusEffectFromActor2(GetPilot(),m_iDamageBlinkStatusEffectInstanceID);
+		g_kStatusEffectMan.RemoveStatusEffectFromActor2(GetPilot(), m_iDamageBlinkStatusEffectInstanceID);
 	}
 }
 
-NxActor *PgActor::GetPhysXActor() const
+NxActor* PgActor::GetPhysXActor() const
 {
 	return m_pkPhysXActor;
 }
@@ -2003,11 +2003,11 @@ NiPoint3 PgActor::GetFloorLoc()
 	return NiPoint3::ZERO;
 }
 
-PgAction *PgActor::GetAction() const
+PgAction* PgActor::GetAction() const
 {
 	return m_pkAction;
 }
-//!	ÇöÀç ÇÃ·¹ÀÌ ÁßÀÎ ¾×¼ÇÀ» »èÁ¦ÇÑ´Ù.
+//!	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 //void	PgActor::ReleaseAction()
 //{
 //	if(m_pkAction)
@@ -2016,12 +2016,12 @@ PgAction *PgActor::GetAction() const
 //		SAFE_DELETE(m_pkAction);
 //	}
 //}
-PgTrigger *PgActor::GetCurrentTrigger()
+PgTrigger* PgActor::GetCurrentTrigger()
 {
 	return m_pkCurrentTrigger;
 }
 
-void PgActor::SetCurrentTrigger(PgTrigger *pkTrigger)
+void PgActor::SetCurrentTrigger(PgTrigger* pkTrigger)
 {
 	m_pkCurrentTrigger = pkTrigger;
 	m_bCurrentTriggerAct = false;
@@ -2029,7 +2029,7 @@ void PgActor::SetCurrentTrigger(PgTrigger *pkTrigger)
 
 bool PgActor::GetIsInTrigger() const
 {
-	if( m_pkCurrentTrigger )
+	if (m_pkCurrentTrigger)
 	{
 		return m_pkCurrentTrigger->Enable();
 	}
@@ -2060,7 +2060,7 @@ void PgActor::BlinkThis(bool const bBlink, int const iBlinkFreq)
 	SetBlinkHide(false);
 	m_fBlinkAccumTime = 0.0f;
 	m_bBlink = bBlink;
-	//! 0ÀÌ µé¾î¿ÔÀ»¶§ ¾îÂî ÇÏ´Â°Ô ÁÁÀ»±î.
+	//! 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	if (iBlinkFreq > 0)
 	{
 		m_fBlinkFreq = 1.0f / (float)iBlinkFreq;
@@ -2072,20 +2072,20 @@ void PgActor::BlinkThis(bool const bBlink, int const iBlinkFreq)
 	}
 }
 
-//!	ÀÏÁ¤ ½Ã°£µ¿¾È ¾×ÅÍ¸¦ Èçµç´Ù.
+//!	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½.
 void PgActor::SetShakeInPeriod(float const fShakePower, int const iPeriod)
 {
 	m_iTotalShakeTime = iPeriod;
 	m_iShakeStartTime = BM::GetTime32();
 	m_fShakeValue = fShakePower;
-	if(m_kOriginalPos == NiPoint3::ZERO)
+	if (m_kOriginalPos == NiPoint3::ZERO)
 		m_kOriginalPos = GetNIFRoot()->GetTranslate();
 }
 
-//!	ÀÏÁ¤ ½Ã°£µ¿¾È ¾Ö´Ï¸ÞÀÌ¼Ç ½ºÇÇµå¸¦ Á¶Á¤ÇÑ´Ù.
+//!	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½Çµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 void PgActor::SetAnimSpeedInPeriod(float const fAnimSpeed, int const iPeriod)
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return;
 	}
@@ -2095,21 +2095,21 @@ void PgActor::SetAnimSpeedInPeriod(float const fAnimSpeed, int const iPeriod)
 	m_fAnimSpeedControlValue = fAnimSpeed;
 }
 
-//!	¾Ö´Ï¸ÞÀÌ¼Ç ½ºÇÇµå¸¦ ¿ø·¡´ë·Î µ¹¸°´Ù.
+//!	ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½Çµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 void PgActor::SetAnimOriginalSpeed()
 {
 	m_fTotalAnimSpeedControlTime = 0;
 	SetAnimSpeed(m_fOriginalAnimSpeed);
 }
 
-//! ¾Ö´Ï¸ÞÀÌ¼Ç ½ºÇÇµå ¾ò±â
+//! ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½Çµï¿½ ï¿½ï¿½ï¿½
 float PgActor::GetAnimSpeed() const
 {
-	if(!GetActorManager())
+	if (!GetActorManager())
 		return	1.0f;
 
-	NiControllerSequence *pkController = GetActorManager()->GetSequence(m_kSeqID);
-	if(pkController)
+	NiControllerSequence* pkController = GetActorManager()->GetSequence(m_kSeqID);
+	if (pkController)
 	{
 		return pkController->GetFrequency();
 	}
@@ -2119,77 +2119,77 @@ float PgActor::GetAnimSpeed() const
 
 void PgActor::SetAnimSpeed(float fSpeed)
 {
-	if(!GetActorManager())
+	if (!GetActorManager())
 		return;
 
-	if(fSpeed <=0 )
+	if (fSpeed <= 0)
 	{
 		fSpeed = 0.0001f;
 	}
 
-	NiControllerSequence *pkController = GetActorManager()->GetSequence(m_kSeqID);
-	if(!pkController)
+	NiControllerSequence* pkController = GetActorManager()->GetSequence(m_kSeqID);
+	if (!pkController)
 	{
 		//PG_ASSERT_LOG(!"Sequence Controller is Null!");
 		return;
 	}
-	if(fSpeed == pkController->GetFrequency()) return;
-	
+	if (fSpeed == pkController->GetFrequency()) return;
+
 	m_fOriginalAnimSpeed = fSpeed;
 	pkController->SetFrequency(fSpeed);
 	GetActorManager()->RebuildTimeline();
 }
 
-//! Á×¾î¼­ ³¯¾Æ°¡´ø ¾×ÅÍ°¡ Ä«¸Þ¶ó¿Í ºÎµóÇû´ÂÁö Ã¼Å©ÇÏ¿©, ºÎµóÈù È­¸é ÁÂÇ¥¸¦ µ¹·ÁÁØ´Ù.
-bool PgActor::CheckCollWithCamera(float &fCollScreenX,float &fCollScreenY)
+//! ï¿½×¾î¼­ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ Ä«ï¿½Þ¶ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï¿ï¿½, ï¿½Îµï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+bool PgActor::CheckCollWithCamera(float& fCollScreenX, float& fCollScreenY)
 {
-	if(!GetWorld()) return false;
+	if (!GetWorld()) return false;
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.CheckCollWithCamera"), g_pkApp->GetFrameCount()));
 
-	NiCamera *pCamera = GetWorld()->m_kCameraMan.GetCamera();
-	if(!pCamera) return false;
+	NiCamera* pCamera = GetWorld()->m_kCameraMan.GetCamera();
+	if (!pCamera) return false;
 
-	const NiFrustum &kFrustum = pCamera->GetViewFrustum();
+	const NiFrustum& kFrustum = pCamera->GetViewFrustum();
 	NxVec3 vFrontBox[4];
 
-	NxVec3 vCamPos(pCamera->GetWorldLocation().x,pCamera->GetWorldLocation().y,pCamera->GetWorldLocation().z);
-	NxVec3 vCamD(pCamera->GetWorldDirection().x,pCamera->GetWorldDirection().y,pCamera->GetWorldDirection().z);
-	NxVec3 vCamR(pCamera->GetWorldRightVector().x,pCamera->GetWorldRightVector().y,pCamera->GetWorldRightVector().z);
-	NxVec3 vCamU(pCamera->GetWorldUpVector().x,pCamera->GetWorldUpVector().y,pCamera->GetWorldUpVector().z);
+	NxVec3 vCamPos(pCamera->GetWorldLocation().x, pCamera->GetWorldLocation().y, pCamera->GetWorldLocation().z);
+	NxVec3 vCamD(pCamera->GetWorldDirection().x, pCamera->GetWorldDirection().y, pCamera->GetWorldDirection().z);
+	NxVec3 vCamR(pCamera->GetWorldRightVector().x, pCamera->GetWorldRightVector().y, pCamera->GetWorldRightVector().z);
+	NxVec3 vCamU(pCamera->GetWorldUpVector().x, pCamera->GetWorldUpVector().y, pCamera->GetWorldUpVector().z);
 
-	float fNearDistance = pCamera->GetMinNearPlaneDist()+200;
-	NxVec3 vFrontPos = vCamPos+vCamD*fNearDistance;
-	vFrontBox[0] = vFrontPos+vCamR*kFrustum.m_fLeft+vCamU*kFrustum.m_fTop;
-	vFrontBox[1] = vFrontPos+vCamR*kFrustum.m_fRight+vCamU*kFrustum.m_fTop;
-	vFrontBox[2] = vFrontPos+vCamR*kFrustum.m_fRight+vCamU*kFrustum.m_fBottom;
+	float fNearDistance = pCamera->GetMinNearPlaneDist() + 200;
+	NxVec3 vFrontPos = vCamPos + vCamD * fNearDistance;
+	vFrontBox[0] = vFrontPos + vCamR * kFrustum.m_fLeft + vCamU * kFrustum.m_fTop;
+	vFrontBox[1] = vFrontPos + vCamR * kFrustum.m_fRight + vCamU * kFrustum.m_fTop;
+	vFrontBox[2] = vFrontPos + vCamR * kFrustum.m_fRight + vCamU * kFrustum.m_fBottom;
 
 	NxVec3 vGlobalPos = GetPhysXActor()->getGlobalPosition();
 
-	NiPoint3 vCurrentPos(vGlobalPos.x,vGlobalPos.y,vGlobalPos.z);
-	NxPlane plane(vFrontBox[0],vFrontBox[1],vFrontBox[2]);
+	NiPoint3 vCurrentPos(vGlobalPos.x, vGlobalPos.y, vGlobalPos.z);
+	NxPlane plane(vFrontBox[0], vFrontBox[1], vFrontBox[2]);
 
 	//if(m_kPrevWorldPos.x == 0 && m_kPrevWorldPos.y == 0 && m_kPrevWorldPos.z  == 0)
 	if (m_fCheckCam_FirstDValue == 0.0f)
 	{
-		m_fCheckCam_FirstDValue = plane.distance(NxVec3(vCurrentPos.x,vCurrentPos.y,vCurrentPos.z));
+		m_fCheckCam_FirstDValue = plane.distance(NxVec3(vCurrentPos.x, vCurrentPos.y, vCurrentPos.z));
 		//PG_ASSERT_LOG(IsZero(m_fCheckCam_FirstDValue) == false);
 		m_kPrevWorldPos = vCurrentPos;
 		return false;
 	}
 
-	float d_value = plane.distance(NxVec3(vCurrentPos.x,vCurrentPos.y,vCurrentPos.z));
+	float d_value = plane.distance(NxVec3(vCurrentPos.x, vCurrentPos.y, vCurrentPos.z));
 
 	NiPoint3 kPrevPosSaved = m_kPrevWorldPos;
 	m_kPrevWorldPos = vCurrentPos;
 
-	if(m_fCheckCam_FirstDValue*d_value<0)	//	ºä Æò¸é°ú ºÎµóÇû´Â°¡?
+	if (m_fCheckCam_FirstDValue * d_value < 0)	//	ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½Â°ï¿½?
 	{
-		// Ä«¸Þ¶ó ºä ¾È¿¡ ÀÖ´Â°¡?
-		bool bResult = pCamera->WorldPtToScreenPt(vCurrentPos,fCollScreenX,fCollScreenY);
-		if(!bResult) return false;
+		// Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´Â°ï¿½?
+		bool bResult = pCamera->WorldPtToScreenPt(vCurrentPos, fCollScreenX, fCollScreenY);
+		if (!bResult) return false;
 
-		if(fCollScreenX<0 || fCollScreenY<0 || fCollScreenX>1 || fCollScreenY>1) return false;
+		if (fCollScreenX < 0 || fCollScreenY < 0 || fCollScreenX>1 || fCollScreenY>1) return false;
 
 		return true;
 	}
@@ -2199,20 +2199,20 @@ bool PgActor::CheckCollWithCamera(float &fCollScreenX,float &fCollScreenY)
 
 void PgActor::SetHide(bool const bHide)
 {
-	m_bHide = bHide;	
+	m_bHide = bHide;
 
 	SetHideBalloon(IsHide());
 }
 
 void PgActor::SetHideBalloon(bool const bHide)
 {
-	//	¸»Ç³¼±µµ ²¨ÁÖÀÚ
-	if(m_pTextBalloon)
+	//	ï¿½ï¿½Ç³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	if (m_pTextBalloon)
 	{
 		m_pTextBalloon->SetShow(!bHide);
 	}
 
-	if ( m_pMarkBalloon )
+	if (m_pMarkBalloon)
 	{
 		m_pMarkBalloon->SetShow(!bHide);
 	}
@@ -2226,7 +2226,7 @@ void PgActor::SetBlinkHide(bool const bHide)
 void PgActor::SetHideShadow(bool const bHide)
 {
 	m_bShadowHide = bHide;
-	PgCircleShadow::ShowShadowRecursive(this,bHide==false);
+	PgCircleShadow::ShowShadowRecursive(this, bHide == false);
 }
 
 void PgActor::SetHideMiniMap(bool const bHide)
@@ -2240,7 +2240,7 @@ void	PgActor::AbilChangedByEffect(BM::GUID const& kCasterGUID, WORD wAbilID, int
 	int	const iChangedAmount = iDelta;
 	//	int const iServerKnownValue = iCurrentValue - iAbilValue;
 
-	if(AT_HP == wAbilID || AT_MP == wAbilID)
+	if (AT_HP == wAbilID || AT_MP == wAbilID)
 	{
 		int	const iCurrent = iCurrentValue;
 		int	const iNew = iAbilValue;
@@ -2248,47 +2248,47 @@ void	PgActor::AbilChangedByEffect(BM::GUID const& kCasterGUID, WORD wAbilID, int
 		bool const bAbilTypeIsHP = AT_HP == wAbilID;
 
 		PgPilot* pkCaster = g_kPilotMan.FindPilot(kCasterGUID);
-		if(pkCaster)
+		if (pkCaster)
 		{
 			PgActor* pkCasterActor = dynamic_cast<PgActor*>(pkCaster->GetWorldObject());
 			bClampScreen = pkCasterActor->IsMyActor();
 
-			if(bAbilTypeIsHP)
+			if (bAbilTypeIsHP)
 			{
-				RefreshHPGaugeBar(iCurrent, iCurrent+iChangedAmount, pkCasterActor);
+				RefreshHPGaugeBar(iCurrent, iCurrent + iChangedAmount, pkCasterActor);
 			}
 		}
 
-		if(bAbilTypeIsHP)
+		if (bAbilTypeIsHP)
 		{
-			if(0 < iDelta)
+			if (0 < iDelta)
 			{
-				if(iCurrent <= iNew 
+				if (iCurrent <= iNew
 					&& 0 != iCurrentValue
 					)
-				{//hp°¡ È¸º¹µÇ´Â°ÍÀÌ¶ó¸é
+				{//hpï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ç´Â°ï¿½ï¿½Ì¶ï¿½ï¿½
 					ShowHpMpNum(iChangedAmount);
 				}
 				else
 				{
-					ShowDamageNum(GetPos(),GetPos(),iChangedAmount, false, false, (BYTE)PgDamageNumMan::C_GREEN);
+					ShowDamageNum(GetPos(), GetPos(), iChangedAmount, false, false, (BYTE)PgDamageNumMan::C_GREEN);
 				}
 			}
-			else if( 0 > iDelta )
+			else if (0 > iDelta)
 			{
-				ShowDamageNum(GetPos(),GetPos(),iChangedAmount, false, false, (BYTE)PgDamageNumMan::C_RED);
+				ShowDamageNum(GetPos(), GetPos(), iChangedAmount, false, false, (BYTE)PgDamageNumMan::C_RED);
 			}
 
 			RefreshHPGaugeBar(iCurrent, iNew, NULL);
 
-			if(iAbilValue <= 0)	//	Á×¾ú´Ù
+			if (iAbilValue <= 0)	//	ï¿½×¾ï¿½ï¿½ï¿½
 			{
-				AddEffect(ACTIONEFFECT_DIE,0);
+				AddEffect(ACTIONEFFECT_DIE, 0);
 			}
 		}
 		else
 		{
-			if(iCurrent <= iNew && 0 != iCurrentValue) //hp°¡ È¸º¹µÇ´Â°ÍÀÌ¶ó¸é
+			if (iCurrent <= iNew && 0 != iCurrentValue) //hpï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ç´Â°ï¿½ï¿½Ì¶ï¿½ï¿½
 			{
 				ShowHpMpNum(iChangedAmount, bAbilTypeIsHP);
 			}
@@ -2312,8 +2312,8 @@ void PgActor::SetCanHit(bool const bCanHit)
 bool PgActor::GetCanHit() const
 {
 	return	m_bCanHit
-			&&	(!IsGodTime())
-			&&	( 0 == GetPilot()->GetUnit()->GetAbil(AT_CANNOT_DAMAGE) );
+		&& (!IsGodTime())
+		&& (0 == GetPilot()->GetUnit()->GetAbil(AT_CANNOT_DAMAGE));
 }
 
 void PgActor::SetThrowStart()
@@ -2324,67 +2324,67 @@ void PgActor::SetThrowStart()
 	m_kPrevWorldPos.x = m_kPrevWorldPos.y = m_kPrevWorldPos.z = 0;
 }
 
-void	PgActor::ShowChatBalloon(const EChatType eChatType, char const *Text, int const iUpTime, bool const bFake)
+void	PgActor::ShowChatBalloon(const EChatType eChatType, char const* Text, int const iUpTime, bool const bFake)
 {
-	if(!Text) return;
+	if (!Text) return;
 	ShowChatBalloon(eChatType, UNI(Text), iUpTime, bFake);
 }
 
-void	PgActor::ShowChatBalloon( EChatType const eChatType, std::wstring const &Text, int const iUpTime, bool const bFake)
+void	PgActor::ShowChatBalloon(EChatType const eChatType, std::wstring const& Text, int const iUpTime, bool const bFake)
 {
-	if( !m_pTextBalloon )
+	if (!m_pTextBalloon)
 	{
-		if( true == g_kBalloonMan2D.CreateNode( m_pTextBalloon ) )
+		if (true == g_kBalloonMan2D.CreateNode(m_pTextBalloon))
 		{
 			m_pTextBalloon->Init(this);
 		}
 	}
 
-	if ( m_pTextBalloon )
+	if (m_pTextBalloon)
 	{
-		m_pTextBalloon->SetNewBalloon( eChatType, Text, iUpTime, bFake );
+		m_pTextBalloon->SetNewBalloon(eChatType, Text, iUpTime, bFake);
 	}
-	
-	m_bInputNow = bFake;//ÀÔ·ÂÁß »óÅÂ ÇØÁö
+
+	m_bInputNow = bFake;//ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 }
 
-void PgActor::ShowMark( MARK_TYPE const eMarkType )
+void PgActor::ShowMark(MARK_TYPE const eMarkType)
 {
 	// Test
-	if( !m_pMarkBalloon )
+	if (!m_pMarkBalloon)
 	{
 		m_pMarkBalloon = g_kMarkBalloonMan.CreateNode();
-		if ( !m_pMarkBalloon )
+		if (!m_pMarkBalloon)
 		{
 			return;
 		}
 		m_pMarkBalloon->Init(this);
 	}
 
-	m_pMarkBalloon->SetNewMarkBalloon( eMarkType );
+	m_pMarkBalloon->SetNewMarkBalloon(eMarkType);
 }
 
 void	PgActor::ShowChatBalloon_Clear()
 {
-	if(!m_pTextBalloon) return;
-	if(m_bInputNow)
+	if (!m_pTextBalloon) return;
+	if (m_bInputNow)
 	{
 		m_bInputNow = false;
-		m_pTextBalloon->SetExistTime( 100 );	//100/1000ÃÊ ÈÄ¿¡ Á¾·áµÈ´Ù.
+		m_pTextBalloon->SetExistTime(100);	//100/1000ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½È´ï¿½.
 	}
 }
 
 void	PgActor::ShowMark_Clear()
 {
-	if ( m_pMarkBalloon )
+	if (m_pMarkBalloon)
 	{
 		m_pMarkBalloon->Release();
 	}
 }
 
-void	PgActor::SetMovingDelta(NxVec3 const &kDelta)
+void	PgActor::SetMovingDelta(NxVec3 const& kDelta)
 {
-	m_kMovingDelta = kDelta; 
+	m_kMovingDelta = kDelta;
 
 	//_PgOutputDebugString("Moving Delta Set: %.f, %.f, %.f\n", m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z);
 }
@@ -2411,44 +2411,44 @@ bool PgActor::IsSync()
 
 bool PgActor::ProcessActionQueue()
 {
-	if(m_bSync)
+	if (m_bSync)
 	{
 		return true;
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ProcessActionQueue"), g_pkApp->GetFrameCount()));
 
-	// »õ·Î¿Â ÆÐÅ¶ÀÇ ¼Óµµ°¡, ÀÌÀü ÆÐÅ¶ÀÇ ¼Óµµº¸´Ù ºü¸¦ ¶§¸¸ ±×¸¸Å­ ½Ã°£À» ´Ê°Ô µÎ¾î¼­ ÆÐÅ¶À» Ã³¸®ÇÔ.
+	// ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½Å¶ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¶ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½Å­ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½Î¾î¼­ ï¿½ï¿½Å¶ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½.
 	BM::CAutoMutex kLock(m_kActionQueueMutex);
 
 	bool bReturn = true;
 	ActionQueue::iterator itr = m_kActionQueue.begin();
-	while(itr != m_kActionQueue.end())
+	while (itr != m_kActionQueue.end())
 	{
-		PgActionEntity &rkActionEntity = *itr;
-		
+		PgActionEntity& rkActionEntity = *itr;
+
 		DWORD	dwNow = BM::GetTime32();
 
-		if(dwNow <= m_dwLastActionTime)
+		if (dwNow <= m_dwLastActionTime)
 		{
-			// LastActionTimeÀÌ ¼öÁ¤µÇ¸é, ¿©±â¿¡ °É¸± ¼ö ÀÖÀ¸³ª, ÀÌÁ¦ ¼öÁ¤µÉ ÀÏÀÌ ¾øÀ½.
+			// LastActionTimeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½, ï¿½ï¿½ï¿½â¿¡ ï¿½É¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			//WriteToConsole("Now[%u] <= LastAction[%u]\n", dwNow, m_dwLastActionTime);
 			return true;
 		}
-		
-//		PG_ASSERT_LOG(dwNow > m_dwLastActionTime);
+
+		//		PG_ASSERT_LOG(dwNow > m_dwLastActionTime);
 
 		DWORD dwActionTerm = rkActionEntity.GetActionTerm();
 		DWORD dwElapsedTime = (m_dwLastActionTime != 0 ? dwNow - m_dwLastActionTime : dwActionTerm);
-//		WriteToConsole("ElapsedTime[%u] = Now[%u] - LastAction[%u] (Action Term : %u)\n", 
-//						dwElapsedTime, dwNow, m_dwLastActionTime, dwActionTerm);
+		//		WriteToConsole("ElapsedTime[%u] = Now[%u] - LastAction[%u] (Action Term : %u)\n", 
+		//						dwElapsedTime, dwNow, m_dwLastActionTime, dwActionTerm);
 
 		bool bForceToProcessAction = false;
-		if(dwElapsedTime < dwActionTerm)
+		if (dwElapsedTime < dwActionTerm)
 		{
-			if(m_dwAccumedOverTime > 0 && m_pkAction && m_pkAction->AlreadySync())
+			if (m_dwAccumedOverTime > 0 && m_pkAction && m_pkAction->AlreadySync())
 			{
-				if(m_pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS) || 
+				if (m_pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS) ||
 					m_pkAction->GetActionOptionEnable(PgAction::AO_LOOP))
 				{
 					bForceToProcessAction = true;
@@ -2456,7 +2456,7 @@ bool PgActor::ProcessActionQueue()
 			}
 			else
 			{
-				// ¾ÆÁ÷ ¾×¼ÇÀ» ÇÒ ¶§°¡ ¾Æ´Ï´Ù.
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï´ï¿½.
 				//char szBuff[1024];
 				//if(rkActionEntity.GetAction())
 				//{
@@ -2474,23 +2474,23 @@ bool PgActor::ProcessActionQueue()
 		DWORD dwSyncTime = 0;
 		DWORD dwOverTime = dwElapsedTime - dwActionTerm;
 
-		if(dwElapsedTime<dwActionTerm)
+		if (dwElapsedTime < dwActionTerm)
 		{
 			dwOverTime = 0;
 		}
 		//WriteToConsole("[ProcessNextAction] Action's OverTime : %u (%u - %u)\t", dwOverTime, dwElapsedTime, dwActionTerm);
 
-		PgAction *pkAction = rkActionEntity.GetAction();
-		if(pkAction)
+		PgAction* pkAction = rkActionEntity.GetAction();
+		if (pkAction)
 		{
-			if(bForceToProcessAction)
+			if (bForceToProcessAction)
 			{
 				DWORD dwRemainTime = dwActionTerm - dwElapsedTime;
 				DWORD dwNewActionTerm = 0;
 				PG_ASSERT_LOG(dwRemainTime);
-				
+
 				//WriteToConsole("[Reward Synctime 2.1] RemainTime[%u] = ActionTerm[%u] - ElapsedTime[%u]\n", dwRemainTime, dwActionTerm, dwElapsedTime);
-				if(m_dwAccumedOverTime <= dwRemainTime)
+				if (m_dwAccumedOverTime <= dwRemainTime)
 				{
 					pkAction->SetActionTerm(dwRemainTime - m_dwAccumedOverTime);
 					m_dwAccumedOverTime = 0;
@@ -2504,16 +2504,16 @@ bool PgActor::ProcessActionQueue()
 					dwOverTime = 0;
 					//WriteToConsole("[Reward Synctime 2.1.3] Remaind AccummedTime : %u\n", m_dwAccumedOverTime);
 				}
-			}	
+			}
 
-			if(!BeginSync(pkAction, dwOverTime))
+			if (!BeginSync(pkAction, dwOverTime))
 			{
 				//WriteToConsole("[BeginSync] LastAction Time [%u] : return false\n", m_dwLastActionTime);
 				PG_ASSERT_LOG(m_bSync);
 				return true;
 			}
-			
-			ProcessAction(pkAction,IsMyActor());
+
+			ProcessAction(pkAction, IsMyActor());
 			bReturn = false;
 			m_dwLastActionTime = dwNow;
 			//WriteToConsole("[ProcessAction] Action : %s, LastActionTime : %u\n", pkAction->GetID().c_str(), m_dwLastActionTime);
@@ -2525,7 +2525,7 @@ bool PgActor::ProcessActionQueue()
 			//WriteToConsole("[ProcessDirection] Direction : %u\n", rkActionEntity.GetDirection());
 		}
 
-		// ¸Å Æ½´ç OverTimeÀÌ ¹ß»ýÇÏ´Âµ¥, ÀÌ°ÍÀ» ÇÕ»êÇØ¼­ Now¿¡¼­ »©ÁÖ¾î¾ß ÇÑ´Ù.
+		// ï¿½ï¿½ Æ½ï¿½ï¿½ OverTimeï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï´Âµï¿½, ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½Õ»ï¿½ï¿½Ø¼ï¿½ Nowï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		m_dwAccumedOverTime += dwOverTime;
 		itr = m_kActionQueue.erase(itr);
 	}
@@ -2534,89 +2534,89 @@ bool PgActor::ProcessActionQueue()
 }
 
 
-	//if(dwActionTerm == 0 || m_dwLastActionTime == 0)
-	//{
-	//	m_dwLastActionTime = dwNow;
-	//	return;
-	//}
+//if(dwActionTerm == 0 || m_dwLastActionTime == 0)
+//{
+//	m_dwLastActionTime = dwNow;
+//	return;
+//}
 
-	//PG_ASSERT_LOG(dwNow >= m_dwLastActionTime);
-	//if(dwNow < m_dwLastActionTime)
-	//{
-	//	// ¼öÁ¤µÈ LastActionTimeÀÌ ´õ ÃÖ±Ù ½Ã°£ÀÌ¸é ´ÙÀ½ ÇÁ·¹ÀÓ¿¡ Ã³¸®.
-	//	return;
-	//}
+//PG_ASSERT_LOG(dwNow >= m_dwLastActionTime);
+//if(dwNow < m_dwLastActionTime)
+//{
+//	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ LastActionTimeï¿½ï¿½ ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½Ã°ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ Ã³ï¿½ï¿½.
+//	return;
+//}
 
-	//DWORD dwElapsedTime = dwNow - m_dwLastActionTime;
-	//if(dwElapsedTime == 0 || dwElapsedTime < dwActionTerm)
-	//{
-	//	// Action Term¸¸Å­ ½Ã°£ÀÌ °æ°úµÇÁö ¾Ê¾Ò´Ù¸é, ´ÙÀ½¿¡ ¾÷µ¥ÀÌÆ® ÇÑ´Ù.
-	//	NILOG(PGLOG_NETWORK, "Elapsed Time : %u, Action Term : %u\n", dwElapsedTime, dwActionTerm);
-	//	return;
-	//}
+//DWORD dwElapsedTime = dwNow - m_dwLastActionTime;
+//if(dwElapsedTime == 0 || dwElapsedTime < dwActionTerm)
+//{
+//	// Action Termï¿½ï¿½Å­ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ñ´ï¿½.
+//	NILOG(PGLOG_NETWORK, "Elapsed Time : %u, Action Term : %u\n", dwElapsedTime, dwActionTerm);
+//	return;
+//}
 
-	//PG_ASSERT_LOG(dwElapsedTime >= dwActionTerm);
-	//DWORD dwOverTime = dwElapsedTime - dwActionTerm;
+//PG_ASSERT_LOG(dwElapsedTime >= dwActionTerm);
+//DWORD dwOverTime = dwElapsedTime - dwActionTerm;
 
-	//PgAction *pkAction = rkActionEntity.GetAction();
-	//if(pkAction)
-	//{
-	//	WriteToConsole("Action : %s, OverTime : %u\n", pkAction->GetID().c_str(), dwOverTime);
-	//	NILOG(PGLOG_NETWORK, "Action : %s, OverTime : %u\n", pkAction->GetID().c_str(), dwOverTime);
+//PgAction *pkAction = rkActionEntity.GetAction();
+//if(pkAction)
+//{
+//	WriteToConsole("Action : %s, OverTime : %u\n", pkAction->GetID().c_str(), dwOverTime);
+//	NILOG(PGLOG_NETWORK, "Action : %s, OverTime : %u\n", pkAction->GetID().c_str(), dwOverTime);
 
-	//	// ¾×¼ÇÀÇ ½ÃÀÛ À§Ä¡¸¦ º¸°£ÇÑ´Ù.
-	//	if(!BeginSync(pkAction, dwNow))
-	//	{
-	//		PG_ASSERT_LOG(m_bSync);
-	//		
-	//		// SyncÁßÀÌ¹Ç·Î, ´õÀÌ»ó ActionQueue¿¡¼­´Â ¾Æ¹«°Íµµ Ã³¸®ÇÏÁö ¾Ê´Â´Ù.
-	//		// ´õÀÌ»ó ½ÌÅ©¸¦ ÇÏÁö ¾Ê´Â´Ù.
-	//		pkAction->AlreadySync(true);
-	//		return;
-	//	}
+//	// ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+//	if(!BeginSync(pkAction, dwNow))
+//	{
+//		PG_ASSERT_LOG(m_bSync);
+//		
+//		// Syncï¿½ï¿½ï¿½Ì¹Ç·ï¿½, ï¿½ï¿½ï¿½Ì»ï¿½ ActionQueueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+//		// ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+//		pkAction->AlreadySync(true);
+//		return;
+//	}
 
-	//	// ActionÀ» ÇÏ¸é¼­ ÀÌÀü¿¡ ¹Ù²î¾ú´ø ¹æÇâÀÌ º¹±¸ µÈ´Ù.
-	//	if(DoAction(pkAction, false))
-	//	{
-	//		NILOG(PGLOG_LOG,"Actor : %s %s Process Action (%s, %d, %d, %d, %u) In Queue\n", MB(GetPilot()->GetName()),
-	//			MB(GetGuid().str()), pkAction->GetID().c_str(), pkAction->GetActionNo(), pkAction->GetActionInstanceID(),
-	//			pkAction->GetTargetList()->size(), pkAction->GetBirthTime());
-	//	}
-	//	else
-	//	{
-	//		// Action¿¡ ½ÇÆÐÇÏ¸é, ¾î¶»°Ô ÇØ¾ß ÇÏ´Â°¡??
-	//		NILOG(PGLOG_LOG,"Action Failed.\n");
-	//		g_kActionPool.ReleaseAction(pkAction);
-	//	}
+//	// Actionï¿½ï¿½ ï¿½Ï¸é¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½.
+//	if(DoAction(pkAction, false))
+//	{
+//		NILOG(PGLOG_LOG,"Actor : %s %s Process Action (%s, %d, %d, %d, %u) In Queue\n", MB(GetPilot()->GetName()),
+//			MB(GetGuid().str()), pkAction->GetID().c_str(), pkAction->GetActionNo(), pkAction->GetActionInstanceID(),
+//			pkAction->GetTargetList()->size(), pkAction->GetBirthTime());
+//	}
+//	else
+//	{
+//		// Actionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½, ï¿½î¶»ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½Ï´Â°ï¿½??
+//		NILOG(PGLOG_LOG,"Action Failed.\n");
+//		g_kActionPool.ReleaseAction(pkAction);
+//	}
 
-	//	DWORD dwSyncTerm = m_dwEndSyncTime - m_dwBeginSyncTime;
-	//	PG_ASSERT_LOG(dwSyncTerm >= 0);
-	//	m_dwLastActionTime += (dwActionTerm + dwSyncTerm);
-	//	
-	//	PG_ASSERT_LOG(m_dwLastActionTime > dwOverTime);
-	//	m_dwLastActionTime -= dwOverTime;
-	//	m_dwAccumedOverTime += dwSyncTerm;
+//	DWORD dwSyncTerm = m_dwEndSyncTime - m_dwBeginSyncTime;
+//	PG_ASSERT_LOG(dwSyncTerm >= 0);
+//	m_dwLastActionTime += (dwActionTerm + dwSyncTerm);
+//	
+//	PG_ASSERT_LOG(m_dwLastActionTime > dwOverTime);
+//	m_dwLastActionTime -= dwOverTime;
+//	m_dwAccumedOverTime += dwSyncTerm;
 
-	//	WriteToConsole("SyncTerm : %u \tOverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwSyncTerm, dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
-	//	NILOG(PGLOG_NETWORK, "SyncTerm : %u \tOverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwSyncTerm, dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
-	//}
-	//else
-	//{
-	//	// Direction Ã³¸®.
-	//	SetDirection(rkActionEntity.GetDirection());
-	//	m_dwLastActionTime += dwActionTerm;
-	//	m_dwLastActionTime -= dwOverTime;
+//	WriteToConsole("SyncTerm : %u \tOverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwSyncTerm, dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
+//	NILOG(PGLOG_NETWORK, "SyncTerm : %u \tOverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwSyncTerm, dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
+//}
+//else
+//{
+//	// Direction Ã³ï¿½ï¿½.
+//	SetDirection(rkActionEntity.GetDirection());
+//	m_dwLastActionTime += dwActionTerm;
+//	m_dwLastActionTime -= dwOverTime;
 
-	//	PG_ASSERT_LOG(m_dwLastActionTime > dwOverTime);
-	//	if(m_dwLastActionTime <= dwOverTime)
-	//	{
-	//		int i = 1;
-	//	}
-	//	WriteToConsole("[Monitored Dir] OverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
-	//	NILOG(PGLOG_NETWORK, "[Monitored Dir] OverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
-	//}
+//	PG_ASSERT_LOG(m_dwLastActionTime > dwOverTime);
+//	if(m_dwLastActionTime <= dwOverTime)
+//	{
+//		int i = 1;
+//	}
+//	WriteToConsole("[Monitored Dir] OverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
+//	NILOG(PGLOG_NETWORK, "[Monitored Dir] OverTime : %u\tAccumedOverTime : %u\t LastActionTime : %u\n", dwOverTime, m_dwAccumedOverTime, m_dwLastActionTime);
+//}
 
-	//m_kActionQueue.erase(itr);
+//m_kActionQueue.erase(itr);
 //}
 
 //void PgActor::ProcessSyncPosition(float fFrameTime, float fSyncRate)
@@ -2635,7 +2635,7 @@ bool PgActor::ProcessActionQueue()
 //	
 //	NiPoint3 kNextPos = kCurPos + kMovVector;
 //	
-//	//	½ÃÀÛÀ§Ä¡¿¡¼­ ´ÙÀ½ ÁÂÇ¥±îÁöÀÇ °Å¸®°¡, ½ÃÀÛÀ§Ä¡¿¡¼­ ¸ñÇ¥ÁÂÇ¥±îÁöÀÇ °Å¸®º¸´Ù Å©´Ù¸é, Áö³ªÄ£°ÍÀÌ´Ù.
+//	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ì´ï¿½.
 //	float fDistance1 = (kStartPos-kSyncTargetPos).Length();
 //	float fDistance2 = (kStartPos-kNextPos).Length();
 //	
@@ -2670,64 +2670,64 @@ bool PgActor::ProcessActionQueue()
 //			//	ToLeft(false,true);
 //		}
 //
-//		//	¶Ù±â ¸ð¼ÇÀ¸·Î ¹Ù²ÙÀÚ.
+//		//	ï¿½Ù±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½.
 //		if(SetTargetAnimation(std::string("run")) == false)
 //			SetTargetAnimation(std::string("walk"));
 //
 //	}
 //}
 
-//! ÀÌ Ä³¸¯ÅÍ¸¦ Ä«¸Þ¶ó Æ÷°Å½º Ä³¸¯ÅÍ·Î ¸¸µç´Ù.
+//! ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½Å½ï¿½ Ä³ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 void	PgActor::SetCameraFocus()
 {
-	if(!GetWorld()) return;
+	if (!GetWorld()) return;
 
-	if(GetWorld()->m_kCameraMan.GetCameraModeE() == PgCameraMan::CMODE_FOLLOW)
+	if (GetWorld()->m_kCameraMan.GetCameraModeE() == PgCameraMan::CMODE_FOLLOW)
 	{
-		PgCameraModeFollow	*pCM = (PgCameraModeFollow*)GetWorld()->m_kCameraMan.GetCameraMode();
+		PgCameraModeFollow* pCM = (PgCameraModeFollow*)GetWorld()->m_kCameraMan.GetCameraMode();
 		pCM->SetActor(this);
 		//_PgOutputDebugString("Set Cam Actor To :%s\n",GetID().c_str());
 	}
 
 }
-//! ´ë¹ÌÁö ¼ýÀÚ¸¦ Ä³¸¯ÅÍ ¸Ó¸® À§¿¡ ¶ç¿öÁØ´Ù.
-void	PgActor::ShowDamageNum(NiPoint3 vAttackerPos,NiPoint3 kTargetPos,int iDamage,bool const bClampScreen, bool const bCritical, BYTE const btColor, int const iEnchantLevel, int const iExceptAbil)
+//! ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+void	PgActor::ShowDamageNum(NiPoint3 vAttackerPos, NiPoint3 kTargetPos, int iDamage, bool const bClampScreen, bool const bCritical, BYTE const btColor, int const iEnchantLevel, int const iExceptAbil)
 {
-	if(!GetWorld()|| !GetWorld()->m_pkDamageNumMan) { return; }
+	if (!GetWorld() || !GetWorld()->m_pkDamageNumMan) { return; }
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ShowDamageNum"), g_pkApp->GetFrameCount()));
 
 	bool bIsRedColor = true;
-	if(0 > iDamage)
+	if (0 > iDamage)
 	{
 		iDamage = iDamage * -1;
 		bIsRedColor = false;
 	}
 
-	if(GetPilot() && GetPilot()->GetUnit() && GetPilot()->GetUnit()->IsUnitType(UT_PLAYER)) { bIsRedColor = false; }
+	if (GetPilot() && GetPilot()->GetUnit() && GetPilot()->GetUnit()->IsUnitType(UT_PLAYER)) { bIsRedColor = false; }
 
-	
-	if(IsMyActor() || bClampScreen)
+
+	if (IsMyActor() || bClampScreen)
 	{
-		GetWorld()->m_pkDamageNumMan->AddNewNum(iDamage,kTargetPos, bIsRedColor,bClampScreen, bCritical, iEnchantLevel, iExceptAbil);
+		GetWorld()->m_pkDamageNumMan->AddNewNum(iDamage, kTargetPos, bIsRedColor, bClampScreen, bCritical, iEnchantLevel, iExceptAbil);
 	}
 	else
 	{
-		GetWorld()->m_pkDamageNumMan->AddNewSmallNum(iDamage,kTargetPos, bClampScreen, bCritical, btColor, iEnchantLevel, iExceptAbil);
+		GetWorld()->m_pkDamageNumMan->AddNewSmallNum(iDamage, kTargetPos, bClampScreen, bCritical, btColor, iEnchantLevel, iExceptAbil);
 	}
 }
 
-//! °æÇèÄ¡ ¼ýÀÚ¸¦ Ä³¸¯ÅÍ ¸Ó¸® À§¿¡ ¶ç¿öÁØ´Ù.
+//! ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½Ú¸ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 void	PgActor::ShowExpNum(int const iExp)
 {
-	if(!GetWorld() || !GetWorld()->m_pkDamageNumMan)
+	if (!GetWorld() || !GetWorld()->m_pkDamageNumMan)
 	{
-		return; 
+		return;
 	}
 
-	//°æÇèÄ¡°¡ 0º¸´Ù ÀÛÀ» °æ¿ì Ãâ·ÂÇÏÁö ¾Ê´Â´Ù.
-	//°æÇèÄ¡°¡ 0ÀÏ ¶© Exp X¸¦ Ãâ·ÂÇØ¾ßÇÏ¹Ç·Î >= ¸¦ ÇÏ¸é ¾ÈµÈ´Ù.
-	if(0 > iExp)
+	//ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+	//ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ Exp Xï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½Ï¹Ç·ï¿½ >= ï¿½ï¿½ ï¿½Ï¸ï¿½ ï¿½ÈµÈ´ï¿½.
+	if (0 > iExp)
 	{
 		return;
 	}
@@ -2736,30 +2736,30 @@ void	PgActor::ShowExpNum(int const iExp)
 
 	NiPoint3 kExpNumPos = GetPos();
 
-	if(GetActorManager() && GetActorManager()->GetNIFRoot())
+	if (GetActorManager() && GetActorManager()->GetNIFRoot())
 	{
 		//NiAVObject* pkDummy = GetActorManager()->GetNIFRoot()->GetObjectByName(ATTACH_POINT_STAR);
 		NiAVObject* pkDummy = GetNodePointStar();
-		if(pkDummy)
+		if (pkDummy)
 		{
 			kExpNumPos = pkDummy->GetWorldTranslate();
-			kExpNumPos.z+=25;
+			kExpNumPos.z += 25;
 		}
 	}
 
-	GetWorld()->m_pkDamageNumMan->AddNewExpNum(iExp,kExpNumPos);
+	GetWorld()->m_pkDamageNumMan->AddNewExpNum(iExp, kExpNumPos);
 }
 
-//! ÀÚµ¿À¸·Î È¸º¹µÇ´Â HP/MP È¸º¹·®À» ¸Ó¸® À§¿¡ ¶ç¿ö ÁØ´Ù.
+//! ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ç´ï¿½ HP/MP È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½.
 void	PgActor::ShowHpMpNum(int iValue, bool bHp)
 {
-	if(!GetWorld() || !GetWorld()->m_pkDamageNumMan)
+	if (!GetWorld() || !GetWorld()->m_pkDamageNumMan)
 	{
 		return;
 	}
 
-	//È¸º¹·®ÀÌ 0ÀÌ¸é º¸¿©ÁÖÁö ¾Ê´Â´Ù.
-	if(0 == iValue)
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+	if (0 == iValue)
 	{
 		return;
 	}
@@ -2768,43 +2768,43 @@ void	PgActor::ShowHpMpNum(int iValue, bool bHp)
 
 	NiPoint3	kExpNumPos = GetPos();
 
-	if(GetActorManager() && GetActorManager()->GetNIFRoot())
+	if (GetActorManager() && GetActorManager()->GetNIFRoot())
 	{
 		//NiAVObject	*pkDummy = GetActorManager()->GetNIFRoot()->GetObjectByName(ATTACH_POINT_STAR);
-		NiAVObject	*pkDummy = GetNodePointStar();
-		if(pkDummy)
+		NiAVObject* pkDummy = GetNodePointStar();
+		if (pkDummy)
 		{
 			kExpNumPos = pkDummy->GetWorldTranslate();
-			if(bHp)
+			if (bHp)
 			{
-				kExpNumPos.z+=20;
+				kExpNumPos.z += 20;
 			}
 			else
 			{
-				kExpNumPos.z+=10;
+				kExpNumPos.z += 10;
 			}
 		}
 	}
 
-	GetWorld()->m_pkDamageNumMan->AddNewHpMp(iValue,kExpNumPos, bHp);
+	GetWorld()->m_pkDamageNumMan->AddNewHpMp(iValue, kExpNumPos, bHp);
 }
 
-void PgActor::ShowSkillText(NiPoint3 kTargetPos,int iTextType,bool bUp)
+void PgActor::ShowSkillText(NiPoint3 kTargetPos, int iTextType, bool bUp)
 {
-	if(!GetWorld() || !GetWorld()->m_pkDamageNumMan) { return; }
+	if (!GetWorld() || !GetWorld()->m_pkDamageNumMan) { return; }
 
-	GetWorld()->m_pkDamageNumMan->AddNewSkillText(iTextType,bUp,kTargetPos);
+	GetWorld()->m_pkDamageNumMan->AddNewSkillText(iTextType, bUp, kTargetPos);
 }
-//!	°£´Ü ¸Þ¼¼Áö¸¦ ¶ç¿î´Ù.
-void PgActor::ShowSimpleText(NiPoint3 kTargetPos,int iTextType)
+//!	ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+void PgActor::ShowSimpleText(NiPoint3 kTargetPos, int iTextType)
 {
-	if(!GetWorld() || !GetWorld()->m_pkDamageNumMan) { return; }
+	if (!GetWorld() || !GetWorld()->m_pkDamageNumMan) { return; }
 
-	GetWorld()->m_pkDamageNumMan->AddNewSimpleText(iTextType,kTargetPos);
+	GetWorld()->m_pkDamageNumMan->AddNewSimpleText(iTextType, kTargetPos);
 }
 
-//! Ä³¸¯ÅÍ¸¦ ¹Î´Ù.
-void	PgActor::PushActor(bool bLeft,float fDistance,float fVelocity,float fAccel)
+//! Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Î´ï¿½.
+void	PgActor::PushActor(bool bLeft, float fDistance, float fVelocity, float fAccel)
 {
 	m_Push.m_bActivated = true;
 	m_Push.m_bLeft = bLeft;
@@ -2820,35 +2820,35 @@ void	PgActor::PushActor(bool bLeft,float fDistance,float fVelocity,float fAccel)
 	//_PgOutputDebugString("Moving Delta Push: %.f, %.f, %.f\n", m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z);
 }
 
-void	PgActor::PushActor(NiPoint3 const &rkDir,float fDistance,float fVelocity,float fAccel)
+void	PgActor::PushActor(NiPoint3 const& rkDir, float fDistance, float fVelocity, float fAccel)
 {
 	m_Push.m_kDir = rkDir;
 	m_Push.m_kDir.Unitize();
 	PushActor(false, fDistance, fVelocity, fAccel);
 }
 
-//! ÀåºñÇÏ°í ÀÖ´Â ¹«±âÀÇ Å¸ÀÔ¹øÈ£¸¦ ¸®ÅÏÇÑ´Ù.
+//! ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ô¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 int	PgActor::GetEquippedWeaponType()
 {
 	return m_uiMyWeaponType;
 }
 PgItemEx* PgActor::GetEquippedWeapon() const
 {
-	PartsAttachInfo::const_iterator itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_WEAPON);	
-	if(itr != m_kPartsAttachInfo.end())
+	PartsAttachInfo::const_iterator itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_WEAPON);
+	if (itr != m_kPartsAttachInfo.end())
 	{
-		PgItemEx *pkEquipItem = itr->second;
+		PgItemEx* pkEquipItem = itr->second;
 		return pkEquipItem;
 	}
 	return	NULL;
 }
 char* PgActor::GetEquippedWeaponProjectileID()
 {
-	PartsAttachInfo::const_iterator itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_WEAPON);	
-	if(itr != m_kPartsAttachInfo.end())
+	PartsAttachInfo::const_iterator itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_WEAPON);
+	if (itr != m_kPartsAttachInfo.end())
 	{
-		PgItemEx *pkEquipItem = itr->second;
-		if(!pkEquipItem)
+		PgItemEx* pkEquipItem = itr->second;
+		if (!pkEquipItem)
 		{
 			return "";
 		}
@@ -2882,7 +2882,7 @@ char* PgActor::GetEquippedWeaponProjectileID()
 //	}
 //	m_pkController->setCollision(true);
 //
-//	// Ä³¸¯ÅÍÀÇ Á¤È®ÇÑ À§Ä¡¸¦ Á¤ÇØÁØ´Ù.
+//	// Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 //	m_pkController->setPosition(kPos);
 //
 //#ifdef PG_USE_CAPSULE_CONTROLLER
@@ -2895,11 +2895,11 @@ char* PgActor::GetEquippedWeaponProjectileID()
 
 int	PgActor::GetABVShapeIndex(char const* strShapeName)
 {
-	if(strShapeName == NULL || strlen(strShapeName)==0) return 0;
+	if (strShapeName == NULL || strlen(strShapeName) == 0) return 0;
 
-	for(int i=0;i<PG_MAX_NB_ABV_SHAPES; ++i)
+	for (int i = 0; i < PG_MAX_NB_ABV_SHAPES; ++i)
 	{
-		if(strcmp(strShapeName, GetABVShape(i)->m_kTo)==0) return i;
+		if (strcmp(strShapeName, GetABVShape(i)->m_kTo) == 0) return i;
 	}
 
 	return	0;
@@ -2912,7 +2912,7 @@ NiPoint3	PgActor::GetABVShapeWorldPos(int iIndex)
 	{
 		NxVec3	vWorldPos;
 		vWorldPos = m_apkPhysXCollisionActors[iIndex]->getGlobalPosition();
-		return	NiPoint3(vWorldPos.x,vWorldPos.y,vWorldPos.z);
+		return	NiPoint3(vWorldPos.x, vWorldPos.y, vWorldPos.z);
 	}
 	/*
 	ABVShape	*pShape = GetABVShape(iIndex);
@@ -2936,7 +2936,7 @@ NiPoint3	PgActor::GetABVShapeWorldPos(int iIndex)
 
 void PgActor::AddToDefaultItem(eEquipLimit kItemPos, int iItemNo, SEnchantInfo const* pEnchant)
 {
-	if(kItemPos % 2 != 0 && kItemPos != 1)
+	if (kItemPos % 2 != 0 && kItemPos != 1)
 	{
 		return;
 	}
@@ -2946,9 +2946,9 @@ void PgActor::AddToDefaultItem(eEquipLimit kItemPos, int iItemNo, SEnchantInfo c
 
 bool PgActor::DelDefaultItem(eEquipLimit kItemPos)
 {
-	// ±âÁ¸¿¡ ÀÖ´ø °°Àº À§Ä¡ÀÇ default itemÀ» Áö¿î´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ default itemï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	DefaultItemContainer::iterator itr = std::find(m_kDefaultItem.begin(), m_kDefaultItem.end(), ItemDesc(kItemPos));
-	if(itr != m_kDefaultItem.end())
+	if (itr != m_kDefaultItem.end())
 	{
 		m_kDefaultItem.erase(itr);
 		return true;
@@ -2959,20 +2959,20 @@ bool PgActor::DelDefaultItem(eEquipLimit kItemPos)
 void PgActor::SetDefaultItem(eEquipLimit kItemPos, int iItemNo, SEnchantInfo const* pEnchant)
 {
 	DefaultItemContainer::iterator itr = std::find(m_kDefaultItem.begin(), m_kDefaultItem.end(), ItemDesc(kItemPos));
-	if(itr == m_kDefaultItem.end())
+	if (itr == m_kDefaultItem.end())
 	{
-		m_kDefaultItem.push_back(ItemDesc(kItemPos, iItemNo, (pEnchant == NULL)?(SEnchantInfo()):(*pEnchant)));
+		m_kDefaultItem.push_back(ItemDesc(kItemPos, iItemNo, (pEnchant == NULL) ? (SEnchantInfo()) : (*pEnchant)));
 		return;
 	}
 
 	itr->m_iItemNo = iItemNo;
-	itr->m_kEnchantInfo = (pEnchant == NULL)?(SEnchantInfo()):(*pEnchant);
+	itr->m_kEnchantInfo = (pEnchant == NULL) ? (SEnchantInfo()) : (*pEnchant);
 }
 
 int PgActor::GetDefaultItem(eEquipLimit kItemPos)
 {
 	DefaultItemContainer::iterator itr = std::find(m_kDefaultItem.begin(), m_kDefaultItem.end(), ItemDesc(kItemPos));
-	if(itr == m_kDefaultItem.end())
+	if (itr == m_kDefaultItem.end())
 	{
 		return 0;
 	}
@@ -2983,7 +2983,7 @@ int PgActor::GetDefaultItem(eEquipLimit kItemPos)
 bool PgActor::GetDefaultItemEnchantInfo(eEquipLimit kItemPos, SEnchantInfo& kInfo)
 {
 	DefaultItemContainer::iterator itr = std::find(m_kDefaultItem.begin(), m_kDefaultItem.end(), ItemDesc(kItemPos));
-	if(itr == m_kDefaultItem.end())
+	if (itr == m_kDefaultItem.end())
 	{
 		return false;
 	}
@@ -2995,40 +2995,40 @@ bool PgActor::GetDefaultItemEnchantInfo(eEquipLimit kItemPos, SEnchantInfo& kInf
 bool PgActor::SetItemColor(eEquipLimit kItemPos, int iItemNo, bool bDefaultItem)
 {
 	GET_DEF(CItemDefMgr, kItemDefMgr);
-	CItemDef const *pkItemDef = kItemDefMgr.GetDef(iItemNo);
-	if(!pkItemDef)
+	CItemDef const* pkItemDef = kItemDefMgr.GetDef(iItemNo);
+	if (!pkItemDef)
 	{
 		NILOG(PGLOG_ERROR, "[PgActor] SetItemColor, Can't Find %d Item(%d) from defmgr\n", iItemNo, kItemPos);
 		return false;
 	}
 
-	// »ö±òÀ» ¹Ù²Ù·Á´Â ÆÄÃ÷°¡ AttachµÇ¾î ÀÖÁö ¾ÊÀ¸¸é ½ÇÆÐ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Attachï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kItemPos);
-	if(itr == m_kPartsAttachInfo.end())
+	if (itr == m_kPartsAttachInfo.end())
 	{
 		return false;
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.SetItemColor"), g_pkApp->GetFrameCount()));
 
-	// Item Color¿Í Brightness¸¦ °¡Áö°í ¿Â´Ù.
+	// Item Colorï¿½ï¿½ Brightnessï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½.
 	int iItemColor = pkItemDef->GetAbil(AT_HAIR_COLOR);
 	float fRed = ((iItemColor & 0x00ff0000) >> 16) / 255.0f;
 	float fGreen = ((iItemColor & 0x0000ff00) >> 8) / 255.0f;
 	float fBlue = (iItemColor & 0x000000ff) / 255.0f;
 	int iBrightness = pkItemDef->GetAbil(AT_HAIRBRIGHTNESS);
 
-	// ¾ÆÀÌÅÛ »ö±òÀ» º¯°æÇÑ´Ù.
-	PgItemEx *pkItem = itr->second;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	PgItemEx* pkItem = itr->second;
 	NiColor kItemColor(fRed, fGreen, fBlue);
 	pkItem->SetItemColor(kItemColor, iBrightness);
 
-	if(kItemPos == EQUIP_LIMIT_HAIR && bDefaultItem)
+	if (kItemPos == EQUIP_LIMIT_HAIR && bDefaultItem)
 	{
-		// Default ItemÀ¸·Î ¼³Á¤ÇÑ´Ù.
+		// Default Itemï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		SetDefaultItem(EQUIP_LIMIT_HAIR_COLOR, iItemNo);
 		PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(GetPilot()->GetUnit());
-		if( pkPlayer )
+		if (pkPlayer)
 		{
 			pkPlayer->SetDefaultItem(EQUIP_POS_HAIR_COLOR, iItemNo);
 		}
@@ -3043,22 +3043,22 @@ bool PgActor::EquipItemProc(int iItemNo, bool bSetToDefaultItem, PgItemEx* pkEqu
 	return true;
 }
 
-bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefault)
+bool PgActor::EquipItem(PgItemEx* pkEquipItem, int iItemNo, bool bSetToDefault)
 {
 	return true;
 }
 #endif
 
-int PgActor::GetAdjustedItemNo( CUnit* pkUnit, EEquipPos const kEquipPos )
+int PgActor::GetAdjustedItemNo(CUnit* pkUnit, EEquipPos const kEquipPos)
 {
-	if( pkUnit )
+	if (pkUnit)
 	{
-		if( g_pkWorld && (g_pkWorld->IsHaveAttr(GATTR_FLAG_BATTLESQUARE)) )
+		if (g_pkWorld && (g_pkWorld->IsHaveAttr(GATTR_FLAG_BATTLESQUARE)))
 		{
 			int const iTeamNo = g_kBattleSquareMng.GetTeam(pkUnit->GetID());
-			if( TEAM_NONE != iTeamNo )
+			if (TEAM_NONE != iTeamNo)
 			{
-				switch( kEquipPos )
+				switch (kEquipPos)
 				{
 				case EQUIP_POS_HAIR:
 				case EQUIP_POS_FACE:
@@ -3070,23 +3070,23 @@ int PgActor::GetAdjustedItemNo( CUnit* pkUnit, EEquipPos const kEquipPos )
 				case EQUIP_POS_EARRING:
 				case EQUIP_POS_RING_L:
 				case EQUIP_POS_RING_R:
-					{
-					}break;
+				{
+				}break;
 				default:
-					{
-						// ¸®ÅÏ -1ÀÌ¸é ¾ÆÀÌÅÛÀ» ÀåÂøÇÏ¸é ¾ÈµÈ´Ù.
-						return lua_tinker::call<int,int,int>("GetTeamItemNo", iTeamNo, static_cast<int>(kEquipPos) );
-					}break;
+				{
+					// ï¿½ï¿½ï¿½ï¿½ -1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ÈµÈ´ï¿½.
+					return lua_tinker::call<int, int, int>("GetTeamItemNo", iTeamNo, static_cast<int>(kEquipPos));
+				}break;
 				}
 			}
 
-			return 0;// ¸®ÅÏ 0ÀÌ¸é ¿ø·¡ ¾ÆÀÌÅÛÀ» ÀåÂø
+			return 0;// ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}
 
-		if ( !m_kEquipItemCont.empty() )
+		if (!m_kEquipItemCont.empty())
 		{
 			EQUIP_ITEM_CONT::const_iterator itor = m_kEquipItemCont.find(static_cast<int>(kEquipPos));
-			if(itor != m_kEquipItemCont.end())
+			if (itor != m_kEquipItemCont.end())
 			{
 				return (*itor).second;
 			}
@@ -3097,21 +3097,21 @@ int PgActor::GetAdjustedItemNo( CUnit* pkUnit, EEquipPos const kEquipPos )
 		}
 	}
 
-	return 0;// ¸®ÅÏ 0ÀÌ¸é ¿ø·¡ ¾ÆÀÌÅÛÀ» ÀåÂø
+	return 0;// ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 }
 
-void PgActor::SetAdjustedItem(EQUIP_ITEM_CONT const& kEquipItemCont,int const iOtherEquipItemReturnValue)
+void PgActor::SetAdjustedItem(EQUIP_ITEM_CONT const& kEquipItemCont, int const iOtherEquipItemReturnValue)
 {
 	m_kEquipItemCont = kEquipItemCont;
 	m_iOtherEquipItemReturnValue = iOtherEquipItemReturnValue;
 }
 
-int PgActor::GetCashItemChanger( EEquipPos const kEquipPos )
+int PgActor::GetCashItemChanger(EEquipPos const kEquipPos)
 {
-	if ( !m_kCashChangeItem.empty() )
+	if (!m_kCashChangeItem.empty())
 	{
 		CONT_APPEARANCE_CHANGE_INFO::const_iterator itor = m_kCashChangeItem.find(static_cast<int>(kEquipPos));
-		if(itor != m_kCashChangeItem.end())
+		if (itor != m_kCashChangeItem.end())
 		{
 			return (*itor).second.iItemNo;
 		}
@@ -3122,11 +3122,11 @@ int PgActor::GetCashItemChanger( EEquipPos const kEquipPos )
 void PgActor::AddCashItemChanger(CONT_APPEARANCE_CHANGE_INFO const& rkEquipItemCont)
 {
 	CONT_APPEARANCE_CHANGE_INFO::const_iterator kItor = rkEquipItemCont.begin();
-	while(rkEquipItemCont.end() != kItor)
+	while (rkEquipItemCont.end() != kItor)
 	{
-		std::pair<CONT_APPEARANCE_CHANGE_INFO::iterator, bool> kRet = m_kCashChangeItem.insert( std::make_pair(kItor->first,kItor->second) );
-		if(!kRet.second)
-		{// ÀÌ¹Ì Á¸ÀçÇÑ´Ù¸é µ¤¾î¾´´Ù
+		std::pair<CONT_APPEARANCE_CHANGE_INFO::iterator, bool> kRet = m_kCashChangeItem.insert(std::make_pair(kItor->first, kItor->second));
+		if (!kRet.second)
+		{// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ ï¿½ï¿½ï¿½î¾´ï¿½ï¿½
 			kRet.first->second = kItor->second;
 		}
 		++kItor;
@@ -3136,10 +3136,10 @@ void PgActor::AddCashItemChanger(CONT_APPEARANCE_CHANGE_INFO const& rkEquipItemC
 void PgActor::RemoveCashItemChanger(CONT_APPEARANCE_CHANGE_INFO const& rkEquipItemCont)
 {
 	CONT_APPEARANCE_CHANGE_INFO::const_iterator kItor = rkEquipItemCont.begin();
-	while(rkEquipItemCont.end() != kItor)
+	while (rkEquipItemCont.end() != kItor)
 	{
-		CONT_APPEARANCE_CHANGE_INFO::iterator kRemove_Itor = m_kCashChangeItem.find( kItor->first );
-		if( kRemove_Itor != m_kCashChangeItem.end() )
+		CONT_APPEARANCE_CHANGE_INFO::iterator kRemove_Itor = m_kCashChangeItem.find(kItor->first);
+		if (kRemove_Itor != m_kCashChangeItem.end())
 		{
 			m_kCashChangeItem.erase(kRemove_Itor);
 		}
@@ -3147,12 +3147,12 @@ void PgActor::RemoveCashItemChanger(CONT_APPEARANCE_CHANGE_INFO const& rkEquipIt
 	}
 }
 
-int PgActor::GetNormalItemChanger( EEquipPos const kEquipPos )
+int PgActor::GetNormalItemChanger(EEquipPos const kEquipPos)
 {
-	if ( !m_kNormalChangeItem.empty() )
+	if (!m_kNormalChangeItem.empty())
 	{
 		CONT_APPEARANCE_CHANGE_INFO::const_iterator itor = m_kNormalChangeItem.find(static_cast<int>(kEquipPos));
-		if(itor != m_kNormalChangeItem.end())
+		if (itor != m_kNormalChangeItem.end())
 		{
 			return (*itor).second.iItemNo;
 		}
@@ -3163,11 +3163,11 @@ int PgActor::GetNormalItemChanger( EEquipPos const kEquipPos )
 void PgActor::AddNormalItemChanger(CONT_APPEARANCE_CHANGE_INFO const& kEquipItemCont)
 {
 	CONT_APPEARANCE_CHANGE_INFO::const_iterator kItor = kEquipItemCont.begin();
-	while(kEquipItemCont.end() != kItor)
+	while (kEquipItemCont.end() != kItor)
 	{
-		std::pair<CONT_APPEARANCE_CHANGE_INFO::iterator, bool> kRet = m_kNormalChangeItem.insert( std::make_pair(kItor->first,kItor->second) );
-		if(!kRet.second)
-		{// ÀÌ¹Ì Á¸ÀçÇÑ´Ù¸é µ¤¾î¾´´Ù
+		std::pair<CONT_APPEARANCE_CHANGE_INFO::iterator, bool> kRet = m_kNormalChangeItem.insert(std::make_pair(kItor->first, kItor->second));
+		if (!kRet.second)
+		{// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ ï¿½ï¿½ï¿½î¾´ï¿½ï¿½
 			kRet.first->second = kItor->second;
 		}
 		++kItor;
@@ -3176,10 +3176,10 @@ void PgActor::AddNormalItemChanger(CONT_APPEARANCE_CHANGE_INFO const& kEquipItem
 void PgActor::RemoveNormalItemChanger(CONT_APPEARANCE_CHANGE_INFO const& kEquipItemCont)
 {
 	CONT_APPEARANCE_CHANGE_INFO::const_iterator kItor = kEquipItemCont.begin();
-	while(kEquipItemCont.end() != kItor)
+	while (kEquipItemCont.end() != kItor)
 	{
-		CONT_APPEARANCE_CHANGE_INFO::iterator kRemove_Itor = m_kNormalChangeItem.find( kItor->first );
-		if( kRemove_Itor != m_kNormalChangeItem.end() )
+		CONT_APPEARANCE_CHANGE_INFO::iterator kRemove_Itor = m_kNormalChangeItem.find(kItor->first);
+		if (kRemove_Itor != m_kNormalChangeItem.end())
 		{
 			m_kNormalChangeItem.erase(kRemove_Itor);
 		}
@@ -3192,54 +3192,54 @@ bool PgActor::IsEquipItemList()const
 	return !m_kEquipItemCont.empty();
 }
 
-// LoadType 0 : MyActor ÀÌ¸é ¹Ù·Î ·Îµù, ¾Æ´Ï¸é Thread·Î
-// LoadType 1 : ÀÏ´Ü AttachItemConatiner¸¦ »ç¿ëÇÏ¿©, ÇÏ³ª¾¿ ºÙÀÌ´Â ¹æ½ÄÀ¸·Î Ã³¸® °¢°¢ÀÇ ItemÀº Thread¸¦ Å¸°Ô µÊ.
-// LoadType 2 : ¹«Á¶°Ç ¹Ù·Î ·Îµù.
-bool PgActor::AddEquipItem( int iItemNo, bool bSetToDefaultItem, PgItemEx::ItemLoadType eLoadType ,bool bReal)
+// LoadType 0 : MyActor ï¿½Ì¸ï¿½ ï¿½Ù·ï¿½ ï¿½Îµï¿½, ï¿½Æ´Ï¸ï¿½ Threadï¿½ï¿½
+// LoadType 1 : ï¿½Ï´ï¿½ AttachItemConatinerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½, ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Itemï¿½ï¿½ Threadï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½.
+// LoadType 2 : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½Îµï¿½.
+bool PgActor::AddEquipItem(int iItemNo, bool bSetToDefaultItem, PgItemEx::ItemLoadType eLoadType, bool bReal)
 {
-//! ÇÑ°³ÀÇ ÇÔ¼ö¸¦ PG_USE_WORKER_THREAD°¡ ¼±¾ðµÇ¸é 3°³·Î ÂÉ°³°í °¢°¢ÀÇ »óÈ²¿¡ ¸ÂÀ» ¶§ ºÎ¸£°Ô µÈ´Ù.
+	//! ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ PG_USE_WORKER_THREADï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ 3ï¿½ï¿½ï¿½ï¿½ ï¿½É°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ï¿½ ï¿½È´ï¿½.
 #ifdef PG_USE_WORKER_THREAD
 	PgPilot* pkPilot = GetPilot();
-	if( !pkPilot )
+	if (!pkPilot)
 	{
 		return false;
 	}
-		
-	m_kItemEquipInfo.insert( std::make_pair(iItemNo, true) );
 
-	//	µ¿ÀÏÇÑ ¾ÆÀÌÅÛÀÎÁö Ã¼Å©.
+	m_kItemEquipInfo.insert(std::make_pair(iItemNo, true));
+
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©.
 	GET_DEF(CItemDefMgr, kItemDefMgr);
 	CItemDef const* pkItemDef = kItemDefMgr.GetDef(iItemNo);
-	if( pkItemDef )
+	if (pkItemDef)
 	{
-		eEquipLimit const equipLimit = static_cast< eEquipLimit >(pkItemDef->GetAbil(AT_EQUIP_LIMIT));
+		eEquipLimit const equipLimit = static_cast<eEquipLimit>(pkItemDef->GetAbil(AT_EQUIP_LIMIT));
 
 		PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(equipLimit);
-		if( m_kPartsAttachInfo.end() != itr )
+		if (m_kPartsAttachInfo.end() != itr)
 		{
-			PgItemEx *pkEquipItem2 = itr->second;
-			CItemDef *pkItemDef2 = pkEquipItem2->GetItemDef();
-			if( NULL != pkEquipItem2
-			&&	NULL != pkItemDef2 )
+			PgItemEx* pkEquipItem2 = itr->second;
+			CItemDef* pkItemDef2 = pkEquipItem2->GetItemDef();
+			if (NULL != pkEquipItem2
+				&& NULL != pkItemDef2)
 			{
-				if( pkItemDef2->No() == pkItemDef->No() )
+				if (pkItemDef2->No() == pkItemDef->No())
 				{
 					CUnit* pkUnit = GetPilot()->GetUnit();
-					if( pkUnit )
+					if (pkUnit)
 					{
 						PgInventory* pkInven = pkUnit->GetInven();
-						if( pkInven )
+						if (pkInven)
 						{
 							int	kEquipPos = 0;
 							int	iEquipLimit = equipLimit;
-							while( 1 < iEquipLimit )
+							while (1 < iEquipLimit)
 							{
 								iEquipLimit = iEquipLimit >> 1;
 								++kEquipPos;
 							}
 
-							if( kEquipPos >= EQUIP_POS_HAIR_COLOR
-							&&	kEquipPos <= EQUIP_POS_FACE ) // ÀÌ°ÍµéÀº Enchantµµ ¾ø°í Inven¿¡µµ ¾ø´Ù.
+							if (kEquipPos >= EQUIP_POS_HAIR_COLOR
+								&& kEquipPos <= EQUIP_POS_FACE) // ï¿½Ì°Íµï¿½ï¿½ï¿½ Enchantï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Invenï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 							{
 								return true;
 							}
@@ -3248,24 +3248,24 @@ bool PgActor::AddEquipItem( int iItemNo, bool bSetToDefaultItem, PgItemEx::ItemL
 							SItemPos const kCashItemPos(IT_FIT_CASH, kEquipPos);
 
 							PgBase_Item kItem;
-							if( pkInven->GetItem(kNormalItemPos, kItem) != S_OK ) 
+							if (pkInven->GetItem(kNormalItemPos, kItem) != S_OK)
 							{
-								if( pkInven->GetItem(kCashItemPos, kItem) != S_OK
-								&&	kItem.IsUseTimeOut() == false )
+								if (pkInven->GetItem(kCashItemPos, kItem) != S_OK
+									&& kItem.IsUseTimeOut() == false)
 								{
 									SEnchantInfo kEnchant;
-									if( GetDefaultItemEnchantInfo(static_cast<eEquipLimit>(1 << kEquipPos), kEnchant) )
+									if (GetDefaultItemEnchantInfo(static_cast<eEquipLimit>(1 << kEquipPos), kEnchant))
 									{
 										kItem.EnchantInfo(kEnchant);
 									}
 									else
 									{
-										return true;	// ÀÎº¥¿¡ ¾ø´Ù¸é ±âº» ÀåÂø ¾ÆÀÌÅÛÀÌ°ÚÁö?
+										return true;	// ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½?
 									}
 								}
 							}
 
-							if( kItem.EnchantInfo().PlusLv() == pkEquipItem2->GetEnchantLevel() )
+							if (kItem.EnchantInfo().PlusLv() == pkEquipItem2->GetEnchantLevel())
 							{
 								return true;
 							}
@@ -3278,13 +3278,13 @@ bool PgActor::AddEquipItem( int iItemNo, bool bSetToDefaultItem, PgItemEx::ItemL
 
 
 #ifdef PG_ITEM_SEQUENCIAL_LOAD
-	// Ace Thread¿¡ ³Ö¾ú´õ´Ï ÇÑÇÁ·¹ÀÓ¿¡ ´Ù Ã³¸®ÇØ¹ö¸®´Â °æÇâÀÌ ÀÖ¾î¼­ ±¸ºÐÀ» ÇÏ°í ÀÖ´Ù.
+	// Ace Threadï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾î¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½Ö´ï¿½.
 	if (eLoadType == PgItemEx::LOAD_TYPE_USEQUEUE && m_iEquipCount > 0 && IsMyActor() == false)
 	{
 		AttachItemInfo kInfo;
 		kInfo.iItemNo = iItemNo;
 		kInfo.bSetDefaultItem = bSetToDefaultItem;
-		kInfo.pItem = NULL;		// NULL·Î ¸¸µé¸é Item Loading Thread¿¡ ³Ö°Ô µÈ´Ù.
+		kInfo.pItem = NULL;		// NULLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Item Loading Threadï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½È´ï¿½.
 		kInfo.iClass = GetPilot()->GetBaseClassID();
 		kInfo.iGender = GetPilot()->GetAbil(AT_GENDER);
 		m_kAttachItemLock.Lock();
@@ -3309,7 +3309,7 @@ bool PgActor::AddEquipItem( int iItemNo, bool bSetToDefaultItem, PgItemEx::ItemL
 bool PgActor::EquipItemProc(int iItemNo, bool bSetToDefaultItem, PgItemEx* pkEquipItem, PgItemEx::ItemLoadType eLoadType)
 {
 #endif // #ifdef PG_USE_WORKER_THREAD
-	if(!GetPilot() || !GetPilot()->GetUnit())
+	if (!GetPilot() || !GetPilot()->GetUnit())
 	{
 		DecEquipCount();
 		return false;
@@ -3319,52 +3319,52 @@ bool PgActor::EquipItemProc(int iItemNo, bool bSetToDefaultItem, PgItemEx* pkEqu
 
 	if (pkEquipItem == NULL)
 	{
-		// ItemDefNo·Î ºÎÅÍ PgItemEx »ý¼º!
+		// ItemDefNoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ PgItemEx ï¿½ï¿½ï¿½ï¿½!
 		pkEquipItem = PgItemEx::GetItemFromDef(iItemNo, GetPilot()->GetAbil(AT_GENDER), GetPilot()->GetBaseClassID());
 	}
-	
+
 	if (pkEquipItem == NULL)
 	{
-		// ¾ÆÀÌÅÛ »ý¼º¿¡ ½ÇÆÐÇØµµ ÆÐ½º!
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ ï¿½Ð½ï¿½!
 		PG_ASSERT_LOG(m_pkPilot);
 		if (m_pkPilot)
 		{
 			NILOG(PGLOG_ERROR, "%s actor's %d item creation failed!\n", MB(m_pkPilot->GetName()), iItemNo);
 		}
-		// xxxxxx TODO : 0ÀÎ ¾ÆÀÌÅÛÀ» Âø¿ëÇÏÁö ¾Ê°Ô²û ÇÏÀÚ.
+		// xxxxxx TODO : 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°Ô²ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		DecEquipCount();
 		return false;
 	}
 
 	CUnit* pkUnit = GetPilot()->GetUnit();
 
-	PgInventory *pkInven = pkUnit->GetInven();
-	if(pkInven)
+	PgInventory* pkInven = pkUnit->GetInven();
+	if (pkInven)
 	{
 		int	kEquipPos = 0;
 		int	iEquipLimit = pkEquipItem->EquipLimit();
-		while(iEquipLimit>1)
+		while (iEquipLimit > 1)
 		{
-			iEquipLimit=iEquipLimit>>1;
+			iEquipLimit = iEquipLimit >> 1;
 			++kEquipPos;
 		}
 		SItemPos kItemPos(IT_FIT, kEquipPos);
 		PgBase_Item kItem;
-		if(S_OK == pkInven->GetItem(kItemPos, kItem) && iItemNo == kItem.ItemNo())
+		if (S_OK == pkInven->GetItem(kItemPos, kItem) && iItemNo == kItem.ItemNo())
 		{
 			pkEquipItem->SetItemInfo(kItem);
 		}
 		else
 		{
 			kItemPos.x = IT_FIT_CASH;
-			if(S_OK == pkInven->GetItem(kItemPos, kItem) && kItem.IsUseTimeOut() == false)
+			if (S_OK == pkInven->GetItem(kItemPos, kItem) && kItem.IsUseTimeOut() == false)
 			{
 				pkEquipItem->SetItemInfo(kItem);
 			}
 			else
 			{
 				SEnchantInfo kEnchant;
-				if( GetDefaultItemEnchantInfo(pkEquipItem->EquipLimit(), kEnchant) )
+				if (GetDefaultItemEnchantInfo(pkEquipItem->EquipLimit(), kEnchant))
 				{
 					kItem.EnchantInfo(kEnchant);
 					pkEquipItem->SetItemInfo(kItem);
@@ -3379,11 +3379,11 @@ bool PgActor::EquipItemProc(int iItemNo, bool bSetToDefaultItem, PgItemEx* pkEqu
 		return EquipItem(pkEquipItem, iItemNo, bSetToDefaultItem);
 	}
 
-	// ´ë±âÅ¥¿¡ µî·ÏÇØ¼­ ´ÙÀ½ Update¿¡ ÀåÂøµÇµµ·Ï ÇÑ´Ù.
+	// ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ Updateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 	AttachItemInfo kInfo;
 	kInfo.iItemNo = iItemNo;
 	kInfo.bSetDefaultItem = bSetToDefaultItem;
-	kInfo.pItem = pkEquipItem;	
+	kInfo.pItem = pkEquipItem;
 	m_kAttachItemLock.Lock();
 	m_kAttachItemContainer.push_front(kInfo);
 	m_kAttachItemLock.Unlock();
@@ -3393,7 +3393,7 @@ bool PgActor::EquipItemProc(int iItemNo, bool bSetToDefaultItem, PgItemEx* pkEqu
 	return true;
 }
 
-bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefaultItem)
+bool PgActor::EquipItem(PgItemEx* pkEquipItem, int iItemNo, bool bSetToDefaultItem)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.EquipItem"), g_pkApp->GetFrameCount()));
 	//PgOutputPrint5("[PgActor] EquipItem(real) 0x%0X, no(%d), gend(%d), class(%d), path(%s)\n", pkEquipItem,
@@ -3405,12 +3405,12 @@ bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefaultIt
 		return false;
 	}
 
-	//	ÀÌ¹Ì µ¿ÀÏÇÑ ¾ÆÀÌÅÛÀ» ÀåÂøÇÏ°í ÀÖ´Ù¸é ±×³É Return ÇÏÀÚ. leesg213
-	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(pkEquipItem->EquipLimit());	
-	if(itr != m_kPartsAttachInfo.end())
+	//	ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½×³ï¿½ Return ï¿½ï¿½ï¿½ï¿½. leesg213
+	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(pkEquipItem->EquipLimit());
+	if (itr != m_kPartsAttachInfo.end())
 	{
-		PgItemEx *pkEquipItem2 = itr->second;
-		if(pkEquipItem && pkEquipItem2 && pkEquipItem->IsEqual(pkEquipItem2))
+		PgItemEx* pkEquipItem2 = itr->second;
+		if (pkEquipItem && pkEquipItem2 && pkEquipItem->IsEqual(pkEquipItem2))
 		{
 			DecEquipCount();
 			THREAD_DELETE_ITEM(pkEquipItem);
@@ -3420,36 +3420,36 @@ bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefaultIt
 
 	bool bAttachSuccess = false;
 	const eEquipLimit ikEquipLimit = pkEquipItem->EquipLimit();
-	
+
 	PgPilot* pkPilot = GetPilot();
-	if(pkPilot)
+	if (pkPilot)
 	{
-		NILOG(PGLOG_LOG,"PgActor::EquipItem() -> ActorGUID : %s ActorName : %s ItemNo : %d ikEquipLimit: %d bSetToDefaultItem : %d EquipCount : %d\n", MB(GetPilotGuid().str()),MB(pkPilot->GetName()),iItemNo,ikEquipLimit,bSetToDefaultItem,m_iEquipCount);
+		NILOG(PGLOG_LOG, "PgActor::EquipItem() -> ActorGUID : %s ActorName : %s ItemNo : %d ikEquipLimit: %d bSetToDefaultItem : %d EquipCount : %d\n", MB(GetPilotGuid().str()), MB(pkPilot->GetName()), iItemNo, ikEquipLimit, bSetToDefaultItem, m_iEquipCount);
 	}
 
-	if(pkEquipItem->GetMeshRoot())
+	if (pkEquipItem->GetMeshRoot())
 	{
 		AttachActorAlphaProperty(pkEquipItem->GetMeshRoot());
 		pkEquipItem->GetMeshRoot()->UpdateProperties();
 	}
 
 	CONT_NI_COLOR kContColor;
-	if(GetCoupleItemColor(kContColor))
+	if (GetCoupleItemColor(kContColor))
 	{
 		pkEquipItem->ApplyCustomColor(kContColor);
 	}
 
-	if(ikEquipLimit <= EQUIP_LIMIT_HELMET)
+	if (ikEquipLimit <= EQUIP_LIMIT_HELMET)
 	{
 		bAttachSuccess = AttachNoSkinningParts(pkEquipItem);
 	}
 	else
-	{// ¾ÆÀÌÅÛ Æ÷Áö¼ÇÀÌ 20ÀÌ»óÀÌ¸é, SkinningÇÏ¿© AttachÇÏ´Â ¾ÆÀÌÅÛÀÌ´Ù.
+	{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 20ï¿½Ì»ï¿½ï¿½Ì¸ï¿½, Skinningï¿½Ï¿ï¿½ Attachï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
 		bAttachSuccess = (AttachSkinningParts(pkEquipItem) > 0 ? true : false);
-		if(GetNIFRoot())
-		{// AttachSkinningParts()ÇÏ¸é¼­ ÃÊ±âÈ­µÈ HeadSize¸¦ ÀúÀåµÈ °ªÀ¸·Î µ¹¸°´Ù
-			NiAVObject	*pkHead = GetCharRoot()->GetObjectByName("Bip01 Head");
-			if(pkHead)
+		if (GetNIFRoot())
+		{// AttachSkinningParts()ï¿½Ï¸é¼­ ï¿½Ê±ï¿½È­ï¿½ï¿½ HeadSizeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			NiAVObject* pkHead = GetCharRoot()->GetObjectByName("Bip01 Head");
+			if (pkHead)
 			{
 				pkHead->SetScale(m_fCurrentHeadSize);
 			}
@@ -3459,25 +3459,25 @@ bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefaultIt
 	//_PgOutputDebugString("____ItemPos____ : %d\n", ikEquipLimit);
 	DecEquipCount();
 
-	if(!bAttachSuccess)
+	if (!bAttachSuccess)
 	{
-		// ¾ÆÀÌÅÛÀ» ¸ø ºÙ¿´À¸¸é Áï½Ã Á¾·á
-		NILOG(PGLOG_ERROR,"PgActor::EquipItem() -> bAttachSuccess Failed ItemNo : %d ikEquipLimit : %d bSetToDefaultItem : %d \n", iItemNo,ikEquipLimit,bSetToDefaultItem);
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		NILOG(PGLOG_ERROR, "PgActor::EquipItem() -> bAttachSuccess Failed ItemNo : %d ikEquipLimit : %d bSetToDefaultItem : %d \n", iItemNo, ikEquipLimit, bSetToDefaultItem);
 
 		return false;
 	}
 
-	if(bSetToDefaultItem)
+	if (bSetToDefaultItem)
 	{
-		SEnchantInfo kEnchant = (pkEquipItem == NULL)?(SEnchantInfo()):(pkEquipItem->GetItemInfo().EnchantInfo());
+		SEnchantInfo kEnchant = (pkEquipItem == NULL) ? (SEnchantInfo()) : (pkEquipItem->GetItemInfo().EnchantInfo());
 
 		SetDefaultItem(ikEquipLimit, iItemNo, &kEnchant);
 		PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkPilot->GetUnit());
-		if( pkPlayer )
+		if (pkPlayer)
 		{
 			int iEquipPos = 0;
 			int iTempLimit = ikEquipLimit;
-			while( iTempLimit > 1 )
+			while (iTempLimit > 1)
 			{
 				iTempLimit = iTempLimit >> 1;
 				++iEquipPos;
@@ -3486,61 +3486,61 @@ bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefaultIt
 		}
 	}
 
-	// ÆÄÃ÷¸¦ ÀÌ»Ú°Ô ºÙ¿´À¸¸é, ºÙÀÎ ÆÄÃ÷ ¸ñ·Ï¿¡ ³Ö´Â´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»Ú°ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½Ö´Â´ï¿½.
 	m_kPartsAttachInfo.insert(std::make_pair(ikEquipLimit, pkEquipItem));
 
-	// Ã³À½ ·Îµù ÁßÀÌ¸é °¨Ãá´Ù.
-	// ±âº» ½¦ÀÌÇÁ¸¦ º¸¿©Áà¾ßÇÑ´Ù.
+	// Ã³ï¿½ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+	// ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	//if(!m_bLoadingComplete)
 	//{
 	//	_PgOutputDebugString("[PgActor::EquipItem] Actor : %s ItemNo : %d Hide Parts because m_bLoadingComplete == fasle\n",MB(GetPilotGuid().str()),iItemNo);
 	//	HideParts(ikEquipLimit, true);
 	//}
 
-	// ¸Ó¸®¸¦ ºÙÀÌ´Âµ¥ ¼º°øÇßÀ¸¸é, ¿°»öÀ» ÇØ¾ß ÇÏ´ÂÁö Ã¼Å©ÇÏÀÚ.
-	if(ikEquipLimit == EQUIP_LIMIT_HAIR)
+	// ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ï¿½ï¿½.
+	if (ikEquipLimit == EQUIP_LIMIT_HAIR)
 	{
 		DefaultItemContainer::iterator itr = std::find(m_kDefaultItem.begin(), m_kDefaultItem.end(), ItemDesc(EQUIP_LIMIT_HAIR_COLOR));
-		if(itr != m_kDefaultItem.end())
+		if (itr != m_kDefaultItem.end())
 		{
 			SetItemColor(ikEquipLimit, itr->m_iItemNo, bSetToDefaultItem);
 		}
 	}
-	
-	if(pkPilot)
+
+	if (pkPilot)
 	{
 		CUnit* pkUnit = pkPilot->GetUnit();
-		if(pkUnit)
+		if (pkUnit)
 		{
 			int iClass = pkPilot->GetAbil(AT_CLASS);
-			if( IS_CLASS_LIMIT(UCLIMIT_COMMON_DOUBLE_FIGHTER, iClass) 
+			if (IS_CLASS_LIMIT(UCLIMIT_COMMON_DOUBLE_FIGHTER, iClass)
 				|| pkUnit->UnitType() == UT_SUB_PLAYER
 				)
 			{
 				PgActor* pkSubplayerActor = PgActorUtil::GetSubPlayerActor(this);
-				if(pkSubplayerActor)
+				if (pkSubplayerActor)
 				{
-					switch( ikEquipLimit )
+					switch (ikEquipLimit)
 					{
 					case EQUIP_LIMIT_WEAPON:
-						{
-							pkSubplayerActor->AddEquipItem(330100005, false, PgItemEx::LOAD_TYPE_INSTANT, false );
-						}break;
+					{
+						pkSubplayerActor->AddEquipItem(330100005, false, PgItemEx::LOAD_TYPE_INSTANT, false);
+					}break;
 					case EQUIP_LIMIT_FACE:
 					case EQUIP_LIMIT_HAIR:
-						{
-							pkSubplayerActor->AddEquipItem(iItemNo, false, PgItemEx::LOAD_TYPE_INSTANT, false );
-						}break;
-						//case EQUIP_LIMIT_HAIR_COLOR:
-						//	{// Çì¾î »ö»óÀº Recv_PT_M_NFY_ITEM_CHANGE(BM::Stream* pkPacket)¿¡ DISCT_SET_DEFAULT_ITEM¿¡¼­ Á÷Á¢ ¹Ù²î¾îÁü
-						//		pkSubplayerActor->SetItemColor(EQUIP_LIMIT_HAIR, iItemNo);
-						//	}break;
+					{
+						pkSubplayerActor->AddEquipItem(iItemNo, false, PgItemEx::LOAD_TYPE_INSTANT, false);
+					}break;
+					//case EQUIP_LIMIT_HAIR_COLOR:
+					//	{// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Recv_PT_M_NFY_ITEM_CHANGE(BM::Stream* pkPacket)ï¿½ï¿½ DISCT_SET_DEFAULT_ITEMï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ï¿½
+					//		pkSubplayerActor->SetItemColor(EQUIP_LIMIT_HAIR, iItemNo);
+					//	}break;
 					}
 				}
 
-				if( ikEquipLimit == EQUIP_LIMIT_BOOTS)
+				if (ikEquipLimit == EQUIP_LIMIT_BOOTS)
 				{
-					if( m_kPartsAttachInfo.end() != m_kPartsAttachInfo.find(EQUIP_LIMIT_KICKBALL) )
+					if (m_kPartsAttachInfo.end() != m_kPartsAttachInfo.find(EQUIP_LIMIT_KICKBALL))
 					{
 						HideParts_IgnoreHideCnt(EQUIP_LIMIT_BOOTS, true);
 					}
@@ -3549,9 +3549,9 @@ bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefaultIt
 						HideParts_IgnoreHideCnt(EQUIP_LIMIT_BOOTS, false);
 					}
 				}
-				else if( ikEquipLimit == EQUIP_LIMIT_KICKBALL)
+				else if (ikEquipLimit == EQUIP_LIMIT_KICKBALL)
 				{
-					if( m_kPartsAttachInfo.end() != m_kPartsAttachInfo.find(EQUIP_LIMIT_BOOTS) )
+					if (m_kPartsAttachInfo.end() != m_kPartsAttachInfo.find(EQUIP_LIMIT_BOOTS))
 					{
 						HideParts_IgnoreHideCnt(EQUIP_LIMIT_BOOTS, true);
 					}
@@ -3563,85 +3563,85 @@ bool PgActor::EquipItem(PgItemEx *pkEquipItem, int iItemNo, bool bSetToDefaultIt
 			}
 		}
 	}
-	if( EQUIP_LIMIT_FACE == ikEquipLimit )
+	if (EQUIP_LIMIT_FACE == ikEquipLimit)
 	{
 		SetNodeHide("D_ear", false);
 	}
 	pkEquipItem->ApplyEnchantEffect();
 	pkEquipItem->ApplyStatusEffect(GetPilot());
-	pkEquipItem->SetActorNodesHide(this, true); //¾ÆÀÌÅÛ Âø¿ëÀ¸·Î ¼û±æ ³ëµå°¡ ÀÖÀ¸¸é ¼û±âÀÚ
-//////////////////////////////////////////////	
-// Ä¿ÇÃ Ä®¶ó.
+	pkEquipItem->SetActorNodesHide(this, true); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//////////////////////////////////////////////	
+	// Ä¿ï¿½ï¿½ Ä®ï¿½ï¿½.
 
 
-//////////////////////////////////////////////	
-	// Åõ±¸ ¸ð¾ç¿¡ µû¸¥ ¸Ó¸® ¸ð¾çÀ» ¹Ù²Ù¾î¾ß ÇÏ´ÂÁö Ã¼Å©.
+	//////////////////////////////////////////////	
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ç¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ Ã¼Å©.
 	{
-		PgItemEx *pkHelm = 0;
-		PgItemEx *pkHair = 0;
+		PgItemEx* pkHelm = 0;
+		PgItemEx* pkHair = 0;
 
-		if(ikEquipLimit == EQUIP_LIMIT_HELMET)
+		if (ikEquipLimit == EQUIP_LIMIT_HELMET)
 		{
 			PartsAttachInfo::iterator hairItr = m_kPartsAttachInfo.find(EQUIP_LIMIT_HAIR);
-			if(hairItr != m_kPartsAttachInfo.end())
+			if (hairItr != m_kPartsAttachInfo.end())
 			{
 				pkHair = hairItr->second;
 				pkHelm = pkEquipItem;
 			}
 		}
-		else if(ikEquipLimit == EQUIP_LIMIT_HAIR)
+		else if (ikEquipLimit == EQUIP_LIMIT_HAIR)
 		{
 			PartsAttachInfo::iterator helmItr = m_kPartsAttachInfo.find(EQUIP_LIMIT_HELMET);
-			if(helmItr != m_kPartsAttachInfo.end())
+			if (helmItr != m_kPartsAttachInfo.end())
 			{
 				pkHelm = helmItr->second;
 			}
 			pkHair = pkEquipItem;
 		}
 
-		ApplyHairType(pkHair,pkHelm);
+		ApplyHairType(pkHair, pkHelm);
 
 	}
 
-	if(m_bLoadingComplete)
+	if (m_bLoadingComplete)
 	{
 		ApplyHideParts(ikEquipLimit);
 	}
 
-	//! ¾ÆÀÌÅÛÀ» Âø¿ëÇÏ¿´À¸¸é, UIModelÀ» ¾÷µ¥ÀÌÆ® ÇØ¾ß ÇÏ¹Ç·Î ÇÃ·¡±×¸¦ TRUE·Î ¼³Á¤
+	//! ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½, UIModelï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ø¾ï¿½ ï¿½Ï¹Ç·ï¿½ ï¿½Ã·ï¿½ï¿½×¸ï¿½ TRUEï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_bNeedToUpdateUIModel = true;
 
-	// Material Prop°¡ ¹Ù²¼À¸¹Ç·Î °»½ÅÇØ¾ß ÇÑ´Ù.
+	// Material Propï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.
 	NeedToUpdateMaterialProp(true);
-	
+
 	return true;
 }
 
-bool PgActor::GetCoupleItemColor(CONT_NI_COLOR &kContColor)
+bool PgActor::GetCoupleItemColor(CONT_NI_COLOR& kContColor)
 {
 	kContColor.clear();
 
 	CUnit* pkUnit = GetPilot()->GetUnit();
 	PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkUnit);
-	
-	if(pkPlayer)
+
+	if (pkPlayer)
 	{
 		BM::GUID const kCoupleColorGuid = pkPlayer->CoupleColorGuid();
-		if(kCoupleColorGuid.IsNotNull())
-		{//GUID ¸¦  ¼ø¹æÇâ, ¿ª¹æÇâÀ» XOR·Î ¸¸µë(½ÃÄö¼È GUID ¶§¹®¿¡. ¼ø¹æ, ¿ª¹æÀ» ¼¯¾î¾ßÇÔ)
-			BYTE const *pkColorMem = reinterpret_cast<BYTE const*>(&kCoupleColorGuid);
-			
-			size_t const max_color = sizeof(BM::GUID)/3;//rgb ¶ó¼­ 3
+		if (kCoupleColorGuid.IsNotNull())
+		{//GUID ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ XORï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ GUID ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+			BYTE const* pkColorMem = reinterpret_cast<BYTE const*>(&kCoupleColorGuid);
+
+			size_t const max_color = sizeof(BM::GUID) / 3;//rgb ï¿½ï¿½ 3
 			kContColor.resize(max_color);
 
 			size_t i = 0;
-			while(max_color > i)
+			while (max_color > i)
 			{
-				NiColor & kElement = kContColor.at(i);
-				kElement.r = static_cast<float>(*(pkColorMem+0))/255.f; 
-				kElement.g = static_cast<float>(*(pkColorMem+1))/255.f; 
-				kElement.b = static_cast<float>(*(pkColorMem+2))/255.f; 
-				pkColorMem+=3;//3¹ÙÀÌÆ® ÀÌµ¿ ÁøÇà.
+				NiColor& kElement = kContColor.at(i);
+				kElement.r = static_cast<float>(*(pkColorMem + 0)) / 255.f;
+				kElement.g = static_cast<float>(*(pkColorMem + 1)) / 255.f;
+				kElement.b = static_cast<float>(*(pkColorMem + 2)) / 255.f;
+				pkColorMem += 3;//3ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½.
 				++i;
 			}
 			return true;
@@ -3653,12 +3653,12 @@ bool PgActor::GetCoupleItemColor(CONT_NI_COLOR &kContColor)
 void	PgActor::RefreshCustomItemColor()
 {
 	CONT_NI_COLOR kContColor;
-	if(GetCoupleItemColor(kContColor))
+	if (GetCoupleItemColor(kContColor))
 	{
-		for(PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin(); itr != m_kPartsAttachInfo.end(); ++itr)
+		for (PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin(); itr != m_kPartsAttachInfo.end(); ++itr)
 		{
-			PgItemEx *pkParts = itr->second;
-			if(!pkParts)
+			PgItemEx* pkParts = itr->second;
+			if (!pkParts)
 			{
 				continue;
 			}
@@ -3668,16 +3668,16 @@ void	PgActor::RefreshCustomItemColor()
 	}
 }
 
-void	PgActor::ApplyHairType(PgItemEx *pkHair,PgItemEx *pkHelm)
+void	PgActor::ApplyHairType(PgItemEx* pkHair, PgItemEx* pkHelm)
 {
-	if(!pkHair)
+	if (!pkHair)
 	{
 		return;
 	}
 
 	std::string kMeshPath = pkHair->GetMeshPath();
 	int iPos = kMeshPath.rfind(".nif") - 1;
-	if(!pkHelm || pkHelm->GetMeshType() == PgItemEx::HELM_TYPE_NONE)
+	if (!pkHelm || pkHelm->GetMeshType() == PgItemEx::HELM_TYPE_NONE)
 	{
 		kMeshPath[iPos] = '1';
 	}
@@ -3686,7 +3686,7 @@ void	PgActor::ApplyHairType(PgItemEx *pkHair,PgItemEx *pkHelm)
 		kMeshPath[iPos] = pkHelm->GetMeshType() + '0';
 	}
 
-	kMeshPath = kMeshPath.substr(kMeshPath.rfind("/")+1, iPos - kMeshPath.rfind("/"));
+	kMeshPath = kMeshPath.substr(kMeshPath.rfind("/") + 1, iPos - kMeshPath.rfind("/"));
 
 	pkHair->DetachUselessHairNode(pkHair->GetMeshRoot(), kMeshPath.c_str());
 
@@ -3698,79 +3698,79 @@ void	PgActor::ApplyHairType(PgItemEx *pkHair,PgItemEx *pkHelm)
 }
 void	PgActor::CheckItemUseTime()
 {
-	if((NiGetCurrentTimeInSec() - m_fLastCheckItemUseTime) < 5)	//	 5ÃÊ¿¡ ÇÑ¹ø¾¿¸¸ Ã¼Å©ÇÑ´Ù.
+	if ((NiGetCurrentTimeInSec() - m_fLastCheckItemUseTime) < 5)	//	 5ï¿½Ê¿ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½.
 	{
 		return;
 	}
 
 	m_fLastCheckItemUseTime = NiGetCurrentTimeInSec();
 
-	if(!GetPilot())
+	if (!GetPilot())
 	{
 		return;
 	}
 
-	CUnit	*pkUnit = GetPilot()->GetUnit();
-	if(!pkUnit)
+	CUnit* pkUnit = GetPilot()->GetUnit();
+	if (!pkUnit)
 	{
 		return;
 	}
 
-	PgPlayer	*pkPlayer = dynamic_cast<PgPlayer*>(pkUnit);
-	if(!pkPlayer)
-		{
-			return;
-		}
+	PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkUnit);
+	if (!pkPlayer)
+	{
+		return;
+	}
 
-	PgInventory	*pkInven = pkPlayer->GetInven();
-	if(!pkInven)
+	PgInventory* pkInven = pkPlayer->GetInven();
+	if (!pkInven)
 	{
 		return;
 	}
 
 	CONT_HAVE_ITEM_DATA	kCashItems;
-	if(S_OK != pkInven->GetItems(IT_FIT_CASH,kCashItems))
+	if (S_OK != pkInven->GetItems(IT_FIT_CASH, kCashItems))
 	{
 		return;
 	}
 
 	bool	bRefreshAbil = false;
 
-	for(CONT_HAVE_ITEM_DATA::iterator itor = kCashItems.begin(); itor != kCashItems.end(); ++itor)
+	for (CONT_HAVE_ITEM_DATA::iterator itor = kCashItems.begin(); itor != kCashItems.end(); ++itor)
 	{
-		PgBase_Item	&kCashItem = itor->second;
+		PgBase_Item& kCashItem = itor->second;
 
 		int const iItemNo = itor->first;
 
 		SItemPos	kItemPos;
-		if(S_OK != pkInven->GetFirstItem(IT_FIT_CASH,iItemNo,kItemPos))
+		if (S_OK != pkInven->GetFirstItem(IT_FIT_CASH, iItemNo, kItemPos))
 		{
 			continue;
 		}
 
-		if(kCashItem.IsUseTimeOut())
+		if (kCashItem.IsUseTimeOut())
 		{
-			if(m_kItemEquipInfo.find(iItemNo) != m_kItemEquipInfo.end())
+			if (m_kItemEquipInfo.find(iItemNo) != m_kItemEquipInfo.end())
 			{
-				UnequipItem(static_cast<EInvType>(kItemPos.x),static_cast<EEquipPos>(kItemPos.y), iItemNo);
+				UnequipItem(static_cast<EInvType>(kItemPos.x), static_cast<EEquipPos>(kItemPos.y), iItemNo);
 				bRefreshAbil = true;
 			}
 		}
 		else
 		{
-			if(m_kItemEquipInfo.find(iItemNo) == m_kItemEquipInfo.end())
+			if (m_kItemEquipInfo.find(iItemNo) == m_kItemEquipInfo.end())
 			{
 				PgOptionUtil::SClientDWORDOption const kOption(GetPilot()->GetAbil(AT_CLIENT_OPTION_SAVE));
-				if( !kOption.IsHideCashInvenPos(static_cast<EEquipPos>(kItemPos.y)) )
+				if (!kOption.IsHideCashInvenPos(static_cast<EEquipPos>(kItemPos.y)))
 				{
-					EquipItemByPos(static_cast<EInvType>(kItemPos.x),static_cast<EEquipPos>(kItemPos.y));
+					EquipItemByPos(static_cast<EInvType>(kItemPos.x), static_cast<EEquipPos>(kItemPos.y));
 					bRefreshAbil = true;
 				}
 			}
 		}
 	}
 
-	if(bRefreshAbil)
+	if (bRefreshAbil)
 	{
 		pkPlayer->NftChangedAbil(AT_REFRESH_ABIL_INV, E_SENDTYPE_NONE);
 		RefreshCharStateUI();
@@ -3778,66 +3778,66 @@ void	PgActor::CheckItemUseTime()
 
 }
 
-bool PgActor::UnequipItem( EInvType kInvType, EEquipPos eEquipPos, int iItemNo, PgItemEx::ItemLoadType eLoadType, bool const bClear, bool bReal )
+bool PgActor::UnequipItem(EInvType kInvType, EEquipPos eEquipPos, int iItemNo, PgItemEx::ItemLoadType eLoadType, bool const bClear, bool bReal)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.UnequipItem"), g_pkApp->GetFrameCount()));
 
 	PgPilot* pkPilot = GetPilot();
-	if( !pkPilot )
+	if (!pkPilot)
 	{
 		return false;
 	}
 	CUnit* pkUnit = pkPilot->GetUnit();
-	if( !pkUnit )
+	if (!pkUnit)
 	{
 		return false;
 	}
-	PgInventory *pkInv = pkUnit->GetInven();
-	if( !pkInv )
+	PgInventory* pkInv = pkUnit->GetInven();
+	if (!pkInv)
 	{
 		return	false;
 	}
-	
+
 	PgItemEx* pkItemEx = NULL;
 	eEquipLimit	const kEquipLimit = static_cast<eEquipLimit>(1 << eEquipPos);
 	PartsAttachInfo::iterator attachItr = m_kPartsAttachInfo.find(kEquipLimit);
-	if(attachItr != m_kPartsAttachInfo.end())
-	{// eEquipPos À§Ä¡¿¡ ¿Ü°ü ¾ÆÀÌÅÛÀÌ ÀÖ´Ù¸é ¾ò¾î¿À°í
+	if (attachItr != m_kPartsAttachInfo.end())
+	{// eEquipPos ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ü°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		pkItemEx = attachItr->second;
 	}
-	
-	if(0 >= iItemNo)
-	{// ÀåÂø ÇØÁ¦ ¾ÆÀÌÅÛ ¹øÈ£°¡ ¿ÀÁö ¾Ê´Â´Ù¸é
-		if(!pkItemEx)
-		{// ÇØ´ç ÀåÂø À§Ä¡¿¡ ÀÖ´Â
+
+	if (0 >= iItemNo)
+	{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½
+		if (!pkItemEx)
+		{// ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ö´ï¿½
 			return false;
 		}
 		CItemDef* pkItemDef = pkItemEx->GetItemDef();
-		if(!pkItemDef)
-		{// ¾ÆÀÌÅÛ ¹øÈ£¸¦ ¾ò¾î¿Í »ç¿ëÇÏ°í
+		if (!pkItemDef)
+		{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
 			return false;
 		}
 		iItemNo = pkItemDef->No();
 	}
-	else if( bReal)
-	{// ÀåÂø ÇØÁ¦ ¾ÆÀÌÅÛ ¹øÈ£°¡ ÀÖ°í, ÁøÂ¥ ÀåÂø ÇØÁ¦ ÇÏ´Â°ÍÀÌ¶ó¸é
+	else if (bReal)
+	{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ö°ï¿½, ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´Â°ï¿½ï¿½Ì¶ï¿½ï¿½
 		GET_DEF(CItemSetDefMgr, kItemSetDefMgr);
 		int const iSetNo = kItemSetDefMgr.GetItemSetNo(iItemNo);
-		if(0 < iSetNo)
-		{// ¼¼Æ® ¾ÆÀÌÅÛÀÌ ÀåÂø ÇØÁ¦ µÇ¾ú´Â°¡ È®ÀÎÇØ¼­
-			RemoveCompletedItemSet(iSetNo);		// ¼¼Æ® ¾ÆÀÌÅÛ ¿Ï¼ºÈ÷ Àû¿ëµÇ´Â È¿°ú¸¦ Á¦°Å ÇØÁÖ°í
-			RemoveItemEffect(iItemNo);			// ¾ÆÀÌÅÛ¿¡ Æ¯Á¤½ÃÁ¡¿¡¸¸ ºÙ¿©ÁÙ ÆÄÆ¼Å¬ Á¤º¸°¡ ÀÖ¾ú´Ù¸é Á¦°ÅÇØÁÖ°í
+		if (0 < iSetNo)
+		{// ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½Â°ï¿½ È®ï¿½ï¿½ï¿½Ø¼ï¿½
+			RemoveCompletedItemSet(iSetNo);		// ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
+			RemoveItemEffect(iItemNo);			// ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½
 		}
 	}
-	
-	if( !bClear )
+
+	if (!bClear)
 	{
 		int const iClass = pkUnit->GetAbil(AT_CLASS);
-		if( IS_CLASS_LIMIT(UCLIMIT_COMMON_DOUBLE_FIGHTER, iClass) 
-			|| pkUnit->UnitType() == UT_SUB_PLAYER 
+		if (IS_CLASS_LIMIT(UCLIMIT_COMMON_DOUBLE_FIGHTER, iClass)
+			|| pkUnit->UnitType() == UT_SUB_PLAYER
 			)
 		{
-			if( kEquipLimit == EQUIP_LIMIT_KICKBALL
+			if (kEquipLimit == EQUIP_LIMIT_KICKBALL
 				&& m_kPartsAttachInfo.end() != m_kPartsAttachInfo.find(EQUIP_LIMIT_BOOTS)
 				)
 			{
@@ -3846,48 +3846,48 @@ bool PgActor::UnequipItem( EInvType kInvType, EEquipPos eEquipPos, int iItemNo, 
 		}
 	}
 
-	if( bReal 
-		&& 0 == m_kItemEquipInfo.erase(iItemNo)	//(¸ðµç ÀåÂøµÈ ¿Ü°ü ¾ÆÀÌÅÛÀÇ Á¤º¸°¡ µé¾îÀÖÀ½)
+	if (bReal
+		&& 0 == m_kItemEquipInfo.erase(iItemNo)	//(ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 		)
-	{// Á¦´ë·Î ÀåÂø ÇØÁ¦ µÇ´Â°ÍÀÎÁö È®ÀÎÇÏ¿©  Á¦°ÅµÈ°Ô ¾ø´Ù¸é ÀåÂø µÇ¾îÀÖ´Â ¾ÆÀÌÅÛÀÌ ¾Æ´Ï±â¿¡ Á¾·áÇØÁÖ°í
+	{// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´Â°ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï¿ï¿½  ï¿½ï¿½ï¿½ÅµÈ°ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï±â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½
 		return false;
 	}
-	
-	int iType = 0;	// ÀÌ ¾ÆÀÌÅÛÀÌ ¾î¶² ¿ÜÇü ¾ÆÀÌÅÛÀÎÁö Ã¼Å© ÇÏ¿©
+
+	int iType = 0;	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ï¿ï¿½
 	int iApperanceItemNo = GetAppearanceItemNo(eEquipPos, iType);
-	
-	switch(iType)
+
+	switch (iType)
 	{
 	case EESP_CASH_SET_EFFECT_FIT:
-		{// ¼¼Æ®¿Ï¼º ¿Ü°üÀÌ
-			if( IT_FIT_CASH == kInvType ) // Ä³½Ã·Î ºÎÅÍ ¿Ô´Ù¸é
-			{// ¼¼Æ®¿Ï¼º ¿Ü°ü°ú, Áö±Ý ÀåÂø ÇØÁ¦ÇÒ Ä³½Ã ¾ÆÀÌÅÛÀ» Á¦¿ÜÇÑ ´Ù¸¥ ¿Ü°üÀ» ´Ù½Ã ¾ò¾î¿À°í
-				iApperanceItemNo = GetAppearanceItemNo(eEquipPos, iType, true, false, true, false);
-			}
-		}break;
+	{// ï¿½ï¿½Æ®ï¿½Ï¼ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½
+		if (IT_FIT_CASH == kInvType) // Ä³ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ù¸ï¿½
+		{// ï¿½ï¿½Æ®ï¿½Ï¼ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			iApperanceItemNo = GetAppearanceItemNo(eEquipPos, iType, true, false, true, false);
+		}
+	}break;
 	case EESP_NORMAL_SET_EFFECT_FIT:
-		{
-			if( IT_FIT == kInvType ) // ÀÏ¹Ý ¾ÆÀÌÅÛÀ¸·Î ºÎÅÍ ¿Ô´Ù¸é
-			{// ¼¼Æ®¿Ï¼º ¿Ü°ü°ú, Áö±Ý ÀåÂø ÇØÁ¦ÇÑ ÀÏ¹Ý ¾ÆÀÌÅÛÀ» Á¦¿ÜÇÑ ´Ù¸¥ ¿Ü°üÀ» ´Ù½Ã ¾ò¾î¿À°í
-				iApperanceItemNo = GetAppearanceItemNo(eEquipPos, iType, true, false, true, true, false);
-			}
-		}break;
+	{
+		if (IT_FIT == kInvType) // ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ù¸ï¿½
+		{// ï¿½ï¿½Æ®ï¿½Ï¼ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			iApperanceItemNo = GetAppearanceItemNo(eEquipPos, iType, true, false, true, true, false);
+		}
+	}break;
 	default:
-		{
-		}break;
+	{
+	}break;
 	}
-	
-	if( (EESP_NONE == iType || 0 == iApperanceItemNo)
+
+	if ((EESP_NONE == iType || 0 == iApperanceItemNo)
 		&& (NULL != pkItemEx)
 		)
-	{// ±³Ã¼ÇØÁÙ ¿Ü°üÀÌ ¾Æ¹«°Íµµ ¾ø´Ù¸é
-		if(DetachParts(pkItemEx)					// ÇöÀç ÀåÂø À§Ä¡ÀÇ ¿Ü°üÀ» Á¦°ÅÇØÁÖ°í
-			&& EQUIP_LIMIT_HELMET == kEquipLimit	// ±× ºÎºÐÀÌ Çï¸äÀÌ¶ó¸é
+	{// ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½
+		if (DetachParts(pkItemEx)					// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ü°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½
+			&& EQUIP_LIMIT_HELMET == kEquipLimit	// ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
 			)
 		{
 			PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_HAIR);
-			if(itr != m_kPartsAttachInfo.end())
-			{// ¸Ó¸®¸¦ ºÙ¿©Áà¾ß ÇÏ°í
+			if (itr != m_kPartsAttachInfo.end())
+			{// ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½
 				ApplyHairType(itr->second, NULL);
 			}
 		}
@@ -3895,9 +3895,9 @@ bool PgActor::UnequipItem( EInvType kInvType, EEquipPos eEquipPos, int iItemNo, 
 		return true;
 	}
 
-	if ( 0 < iApperanceItemNo )
+	if (0 < iApperanceItemNo)
 	{
-		AddEquipItem( iApperanceItemNo, EESP_DEFAULT == iType, eLoadType );
+		AddEquipItem(iApperanceItemNo, EESP_DEFAULT == iType, eLoadType);
 	}
 	return true;
 }
@@ -3910,85 +3910,85 @@ bool PgActor::IsEquipMedalPos(EEquipPos kItemPos)
 bool PgActor::EquipItemByPos(EInvType eInvType, EEquipPos eEquipPos, bool bReal)
 {
 	PgPilot* pkPilot = GetPilot();
-	if( NULL == pkPilot )
+	if (NULL == pkPilot)
 	{
 		return false;
 	}
 	CUnit* pkUnit = pkPilot->GetUnit();
-	if( NULL == pkUnit)
+	if (NULL == pkUnit)
 	{
 		return false;
 	}
-	PgInventory* pkInv =  pkUnit->GetInven();
-	if( NULL == pkInv)
+	PgInventory* pkInv = pkUnit->GetInven();
+	if (NULL == pkInv)
 	{
 		return false;
 	}
 
-	if( 0.0f == m_fLoadingStartTime )
+	if (0.0f == m_fLoadingStartTime)
 	{
 		m_fLoadingStartTime = NiGetCurrentTimeInSec();
 	}
 
-	if ( EQUIP_POS_HAIR_COLOR == eEquipPos )
-	{// ¸Ó¸®»öÀº PgItemEx¸¦ ¸¸µé ÇÊ¿ä°¡ ¾ø°í, Hair¾ÆÀÌÅÛÀ» ¸¸µé¶§ ÂüÁ¶¸¸ µÊ
+	if (EQUIP_POS_HAIR_COLOR == eEquipPos)
+	{// ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ PgItemExï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½ï¿½, Hairï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¶§ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		return true;
 	}
-	
+
 	bool bCompleteItemSet = false;
 	PgBase_Item kItem;
-	if( bReal
-		&& S_OK == pkInv->GetItem(eInvType, eEquipPos, kItem) 
+	if (bReal
+		&& S_OK == pkInv->GetItem(eInvType, eEquipPos, kItem)
 		)
 	{
-		int const iSetNo = CheckItemSetComplete( eInvType, kItem.ItemNo(), bCompleteItemSet );
-		if( 0 < iSetNo
+		int const iSetNo = CheckItemSetComplete(eInvType, kItem.ItemNo(), bCompleteItemSet);
+		if (0 < iSetNo
 			&& bCompleteItemSet
 			)
-		{// ¼¼Æ®¾ÆÀÌÅÛ ¿Ï¼º½Ã Ãß°¡ Ã³¸® ºÎºÐÀ» ÁøÇàÇÏ°í
-			AddCompletedItemSet( iSetNo );
+		{// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ Ã³ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+			AddCompletedItemSet(iSetNo);
 		}
-		// ´ÜÀÏ ¾ÆÀÌÅÛ¿¡ ÀÇÇÑ Ãß°¡ ÆÄÆ¼Å¬ÀÌ ÀÖ´Ù¸é È®ÀÎÇØ¼­ ÁøÇàÇÏ°í
-		AddItemEffect( kItem.ItemNo() );
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ È®ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+		AddItemEffect(kItem.ItemNo());
 	}
-	
-	// ÇöÀç º¸¿©¾ßÇÒ ¾ÆÀÌÅÛÀ» Ã£¾Æ¿À°í,
-	int iType = 0;	// ÀÌ ¾ÆÀÌÅÛÀÌ ¾î¶² ¿ÜÇü ¾ÆÀÌÅÛÀÎÁö Ã¼Å© ÇÏ¿©
+
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½Æ¿ï¿½ï¿½ï¿½,
+	int iType = 0;	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ï¿ï¿½
 	int const iApperanceItemNo = GetAppearanceItemNo(eEquipPos, iType);
-		
-	if( 0 < iApperanceItemNo )
-	{// ÇØ´ç ¾ÆÀÌÅÛÀ» ÀåÂø ÇÒ ¼ö ÀÖ°Ô ÇÑ´Ù.
-		NILOG(PGLOG_LOG, "[PgActor] EquipItemByPos(%d, %d, %d)\n", eEquipPos, iApperanceItemNo,  EESP_DEFAULT == iType);
-		return AddEquipItem( iApperanceItemNo, EESP_DEFAULT == iType, PgItemEx::LOAD_TYPE_USEQUEUE , bReal);
+
+	if (0 < iApperanceItemNo)
+	{// ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½Ñ´ï¿½.
+		NILOG(PGLOG_LOG, "[PgActor] EquipItemByPos(%d, %d, %d)\n", eEquipPos, iApperanceItemNo, EESP_DEFAULT == iType);
+		return AddEquipItem(iApperanceItemNo, EESP_DEFAULT == iType, PgItemEx::LOAD_TYPE_USEQUEUE, bReal);
 	}
 
 	return false;
 }
 
 int PgActor::CheckItemSetComplete(EInvType eInvType, int const iEquipItemNo, bool& rbOutIsComplete)
-{// eInvType¿¡ iEquipItemNoÀÌ ÀåÂøµÉ¶§ ¼¼Æ®¾ÆÀÌÅÛÀÌ ¿Ï¼ºµÇ´Â°ÍÀÌ ÀÖ´Â°¡
+{// eInvTypeï¿½ï¿½ iEquipItemNoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½Ç´Â°ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½
 	rbOutIsComplete = false;
 
 	PgPilot* pkPilot = GetPilot();
-	if( NULL == pkPilot )
+	if (NULL == pkPilot)
 	{
 		return 0;
 	}
 	CUnit* pkUnit = pkPilot->GetUnit();
-	if( NULL == pkUnit)
+	if (NULL == pkUnit)
 	{
 		return 0;
 	}
-	PgInventory* pkInv =  pkUnit->GetInven();
-	if( NULL == pkInv)
+	PgInventory* pkInv = pkUnit->GetInven();
+	if (NULL == pkInv)
 	{
 		return 0;
 	}
 	GET_DEF(CItemSetDefMgr, kItemSetDefMgr);
 	int const iSetNo = kItemSetDefMgr.GetItemSetNo(iEquipItemNo);
-	CItemSetDef const *pkSetDef = kItemSetDefMgr.GetDef(iSetNo);
-	if(pkSetDef)
-	{// ¼¼Æ®¾ÆÀÌÅÛ ¿Ï¼ºµµ¸¦ È®ÀÎÇØ¼­ ÆÄÆ¼Å¬À» ºÙ¿©ÁÖ°í
+	CItemSetDef const* pkSetDef = kItemSetDefMgr.GetDef(iSetNo);
+	if (pkSetDef)
+	{// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½Ö°ï¿½
 		CONT_HAVE_ITEM_DATA kContHaveItems;
 		pkInv->GetItems(eInvType, kContHaveItems);
 		int const iPieceSet = pkSetDef->CheckNeedItem(kContHaveItems, pkUnit, rbOutIsComplete);
@@ -3997,19 +3997,19 @@ int PgActor::CheckItemSetComplete(EInvType eInvType, int const iEquipItemNo, boo
 }
 
 void PgActor::AddItemEffect(int const iItemNo)
-{// ´ÜÀÏ ¾ÆÀÌÅÛÀÇ Ãß°¡ ÀÌÆåÆ®¸¦ µî·ÏÇÑ´Ù
+{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	SPOTParticleInfo kTemp;
-	if(g_kItemMan.GetItemPOTParticleInfo( iItemNo, kTemp))
-	{// // ´ÜÀÏ ¾ÆÀÌÅÛ¿¡, Æ¯Á¤½ÃÁ¡¿¡¸¸ ºÙ¿©ÁÙ ÆÄÆ¼Å¬ Á¤º¸°¡ Á¸ÀçÇÑ´Ù¸é, ÇØ´ç °ü¸® °´Ã¼¿¡ ³Ö¾î ÁÖ°í
+	if (g_kItemMan.GetItemPOTParticleInfo(iItemNo, kTemp))
+	{// // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½, Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½, ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½Ö°ï¿½
 		m_kPOTParticle.AddInfo(kTemp);
 	}
 }
 
 void PgActor::RemoveItemEffect(int const iItemNo)
-{// ´ÜÀÏ ¾ÆÀÌÅÛÀÇ Ãß°¡ ÀÌÆåÆ®¸¦ Á¦°ÅÇÑ´Ù
+{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	SPOTParticleInfo kTemp;
-	if(g_kItemMan.GetItemPOTParticleInfo(iItemNo, kTemp))
-	{// // ¾ÆÀÌÅÛ¿¡, Æ¯Á¤½ÃÁ¡¿¡¸¸ ºÙ¿©ÁÙ ÆÄÆ¼Å¬ Á¤º¸°¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í ¶¼¾îÁØ´Ù
+	if (g_kItemMan.GetItemPOTParticleInfo(iItemNo, kTemp))
+	{// // ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½, Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½
 		m_kPOTParticle.RemoveInfo(static_cast<PgPOTParticle::eAttachPointOfTime>(kTemp.iAttachPointOfTime));
 	}
 }
@@ -4017,179 +4017,179 @@ void PgActor::RemoveItemEffect(int const iItemNo)
 int PgActor::GetAppearanceItemNo(EEquipPos const eEquipPos, int& riType, bool const bCheckEffect, bool const bCheckCashItemSet, bool const bCheckNormalItemSet, bool const bCheckCash, bool const bCheckNormal)
 {
 	PgPilot* pkPilot = GetPilot();
-	if( NULL == pkPilot )
+	if (NULL == pkPilot)
 	{
 		return 0;
 	}
 	CUnit* pkUnit = pkPilot->GetUnit();
-	if( NULL == pkUnit)
+	if (NULL == pkUnit)
 	{
 		return 0;
 	}
-	PgInventory* pkInv =  pkUnit->GetInven();
-	if( NULL == pkInv)
+	PgInventory* pkInv = pkUnit->GetInven();
+	if (NULL == pkInv)
 	{
 		return 0;
 	}
-	// º¸¿©¾ß ÇÏ´Â ¿ì¼±¼øÀ§ : Effect¿Ü°ü > Cash¼¼Æ® Ãß°¡ ¾ÆÀÌÅÛ ¿Ü°ü > ÀÏ¹Ý¼¼Æ® Ãß°¡ ¾ÆÀÌÅÛ ¿Ü°ü > Ä³½Ã¾ÆÀÌÅÛ ¿Ü°ü > ÀÏ¹Ý¾ÆÀÌÅÛ ¿Ü°ü > µðÆúÆ®¾ÆÀÌÅÛ ¿Ü°ü
-	
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ : Effectï¿½Ü°ï¿½ > Cashï¿½ï¿½Æ® ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ > ï¿½Ï¹Ý¼ï¿½Æ® ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ > Ä³ï¿½Ã¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ > ï¿½Ï¹Ý¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ > ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½
+
 	riType = EESP_NONE;
-	if(bCheckEffect)
-	{// Effect¿Ü°ü
-		int const iItemNo = GetAdjustedItemNo( pkUnit, eEquipPos );
-		if(0 < iItemNo)
-		{//Effect·Î ÀÎÇÑ ¿Ü°ü ¾ÆÀÌÅÛ º¯È­°¡ ÀÖ´Â°¡ È®ÀÎÇØ¼­ ÀÖÀ¸¸é º¸¿©¾ßÇÏ°í
+	if (bCheckEffect)
+	{// Effectï¿½Ü°ï¿½
+		int const iItemNo = GetAdjustedItemNo(pkUnit, eEquipPos);
+		if (0 < iItemNo)
+		{//Effectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ö´Â°ï¿½ È®ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
 			riType = EESP_EFFECT_FIT;
 			return iItemNo;
 		}
 	}
-	
+
 	PgOptionUtil::SClientDWORDOption const kOption(pkPilot->GetAbil(AT_CLIENT_OPTION_SAVE));
 	PgBase_Item kCashInvItem;
 
-	bool const bShowAbleCashItem = 
-		( S_OK == pkInv->GetItem( IT_FIT_CASH, eEquipPos, kCashInvItem )	// Ä³½Ã¾ÆÀÌÅÛÀÌ Á¸ÀçÇÏ°í
-		&&	!kCashInvItem.IsUseTimeOut()								// ¾ÆÀÌÅÛ Á¦ÇÑ½Ã°£ÀÌ Áö³ªÁö ¾Ê¾Ò°í
-		&&	!kOption.IsHideCashInvenPos(eEquipPos)				// º¸ÀÌ±â ¿É¼Ç¿¡ °¨Ãß¾îÁ®ÀÖÁö ¾Ê´Ù¸é
-		);														// Ä³½Ã¾ÆÀÌÅÛÀº º¸ÀÌ´Â ¾ÆÀÌÅÛÀÌ´Ù.
-	
-	if(bCheckCashItemSet
+	bool const bShowAbleCashItem =
+		(S_OK == pkInv->GetItem(IT_FIT_CASH, eEquipPos, kCashInvItem)	// Ä³ï¿½Ã¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+			&& !kCashInvItem.IsUseTimeOut()								// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò°ï¿½
+			&& !kOption.IsHideCashInvenPos(eEquipPos)				// ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½É¼Ç¿ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Ù¸ï¿½
+			);														// Ä³ï¿½Ã¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
+
+	if (bCheckCashItemSet
 		&& bShowAbleCashItem
 		)
-	{// Ä³½Ã ¼¼Æ®¾ÆÀÌÅÛÀ¸·Î ÀÎÇÑ ¾ÆÀÌÅÛ ±³È¯ ºÎºÐ
-		int const iItemNo = GetCashItemChanger( eEquipPos );
-		if( 0 < iItemNo )
+	{// Ä³ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Îºï¿½
+		int const iItemNo = GetCashItemChanger(eEquipPos);
+		if (0 < iItemNo)
 		{
 			riType = EESP_CASH_SET_EFFECT_FIT;
 			return iItemNo;
 		}
-	}	
-	if(bCheckCash
+	}
+	if (bCheckCash
 		&& bShowAbleCashItem
 		)
-	{// Ä³½Ã ¾ÆÀÌÅÛ ¿Ü°ü
+	{// Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½
 		riType = EESP_CASH_FIT;
 		return kCashInvItem.ItemNo();
 	}
 
 	PgBase_Item kNormalInvItem;
 	bool const bShowAbleNormalItem =
-		( S_OK == pkInv->GetItem( IT_FIT, eEquipPos, kNormalInvItem )			// ÀÏ¹Ý¾ÆÀÌÅÛÀÌ Á¸ÀçÇÏ°í
-		&& !kOption.IsHideEquipInvenPos( eEquipPos )				// º¸ÀÌ±â ¿É¼Ç¿¡ °¨Ãß¾îÁ®ÀÖÁö ¾Ê´Ù¸é
-		);															// ÀÏ¹Ý¾ÆÀÌÅÛÀº º¸ÀÌ´Â ¾ÆÀÌÅÛÀÌ´Ù
+		(S_OK == pkInv->GetItem(IT_FIT, eEquipPos, kNormalInvItem)			// ï¿½Ï¹Ý¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+			&& !kOption.IsHideEquipInvenPos(eEquipPos)				// ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½É¼Ç¿ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Ù¸ï¿½
+			);															// ï¿½Ï¹Ý¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½
 
-	if(bCheckNormalItemSet
+	if (bCheckNormalItemSet
 		&& bShowAbleNormalItem
 		)
-	{// ³ë¸Ö ¼¼Æ®¾ÆÀÌÅÛÀ¸·Î ÀÎÇÑ ¾ÆÀÌÅÛ ±³È¯ ºÎºÐ
-		int const iItemNo = GetNormalItemChanger( eEquipPos );
-		if(0 < iItemNo)
+	{// ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Îºï¿½
+		int const iItemNo = GetNormalItemChanger(eEquipPos);
+		if (0 < iItemNo)
 		{
 			riType = EESP_NORMAL_SET_EFFECT_FIT;
 			return iItemNo;
 		}
 	}
-	if(bCheckNormal
-		&& (bShowAbleNormalItem && EQUIP_POS_MEDAL != eEquipPos)	// ³ë¸Ö¾ÆÀÌÅÛ Áß¿¡ ¸Þ´Þ À§Ä¡´Â ¾Æ¹«°Íµµ Ç¥½Ã ÇÏÁö ¾Ê±â¿¡ ¿Ü°ü ¾ÆÀÌÅÛ¹øÈ£·Î ¹ÝÈ¯ÇÏ¸é ¾ÈµÇ°í
+	if (bCheckNormal
+		&& (bShowAbleNormalItem && EQUIP_POS_MEDAL != eEquipPos)	// ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±â¿¡ ï¿½Ü°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï¸ï¿½ ï¿½ÈµÇ°ï¿½
 		)
-	{// ÀÏ¹Ý ¾ÆÀÌÅÛ ¿Ü°ü
+	{// ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½
 		riType = EESP_NORMAL_FIT;
 		return kNormalInvItem.ItemNo();
 	}
-	
-	ItemDesc kItemDec( static_cast<eEquipLimit>(1 << eEquipPos) );
-	DefaultItemContainer::iterator itr = std::find( m_kDefaultItem.begin(), m_kDefaultItem.end(), kItemDec );
-	if(m_kDefaultItem.end() != itr )
-	{// ÀåÂøºÎÀ§¿¡ µðÆúÆ® ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é
+
+	ItemDesc kItemDec(static_cast<eEquipLimit>(1 << eEquipPos));
+	DefaultItemContainer::iterator itr = std::find(m_kDefaultItem.begin(), m_kDefaultItem.end(), kItemDec);
+	if (m_kDefaultItem.end() != itr)
+	{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		riType = EESP_DEFAULT;
 		return itr->m_iItemNo;
 	}
-	
+
 	return 0;
 }
 
 void PgActor::HideEquipItem(int iEquipPos, bool bHide)
 {
 	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find((eEquipLimit)(1 << iEquipPos));
-	if(itr == m_kPartsAttachInfo.end())
+	if (itr == m_kPartsAttachInfo.end())
 	{
 		return;
 	}
 
 	itr->second->Hide(bHide);
-	if(iEquipPos == EQUIP_POS_HELMET)
+	if (iEquipPos == EQUIP_POS_HELMET)
 	{
-		PgItemEx *pkHelm = itr->second;
+		PgItemEx* pkHelm = itr->second;
 		itr = m_kPartsAttachInfo.find(EQUIP_LIMIT_HAIR);
-		if(itr == m_kPartsAttachInfo.end())
+		if (itr == m_kPartsAttachInfo.end())
 		{
 			return;
 		}
 
-		PgItemEx *pkHair = itr->second;
-		if(bHide)
+		PgItemEx* pkHair = itr->second;
+		if (bHide)
 		{
 			pkHelm = 0;
 		}
-		ApplyHairType(pkHair,pkHelm);
+		ApplyHairType(pkHair, pkHelm);
 	}
 }
 
 void PgActor::EquipAllItem()
-{	
-	// xxxxxxxxxxxx ¸ðÇÎ ¶§¹®¿¡ ¾ó±¼À» ¸ÕÀú ºÙ¿©¾ß ÇÏ¹Ç·Î
+{
+	// xxxxxxxxxxxx ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½Ï¹Ç·ï¿½
 
-	//	Ä³½¬ ¾ÆÀÌÅÛ ¸ÕÀú ÀåÂø
+	//	Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_FACE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_HAIR_COLOR);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_HAIR);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_SHOULDER);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_CLOAK);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_GLASS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_WEAPON);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_SHEILD);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_NECKLACE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_EARRING);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_FACE);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_HAIR_COLOR);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_HAIR);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_SHOULDER);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_CLOAK);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_GLASS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_WEAPON);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_SHEILD);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_NECKLACE);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_EARRING);
 	//EquipItemByPos(IT_FIT_CASH,EQUIP_POS_EARRING_R);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_RING);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_RING_R);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_BELT);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_RING);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_RING_R);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_BELT);
 	//EquipItemByPos(IT_FIT_CASH,EQUIP_POS_ATTSTONE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_MEDAL);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_HELMET);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_SHIRTS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_PANTS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_BOOTS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_GLOVE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_KICKBALL);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_ARM);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_MEDAL);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_HELMET);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_SHIRTS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_PANTS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_BOOTS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_GLOVE);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_KICKBALL);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_ARM);
 
-	//	ÀÏ¹Ý ¾ÆÀÌÅÛ ÀåÂø
-	EquipItemByPos(IT_FIT,EQUIP_POS_FACE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_HAIR_COLOR);
-	EquipItemByPos(IT_FIT,EQUIP_POS_HAIR);
-	EquipItemByPos(IT_FIT,EQUIP_POS_SHOULDER);
-	EquipItemByPos(IT_FIT,EQUIP_POS_CLOAK);
-	EquipItemByPos(IT_FIT,EQUIP_POS_GLASS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_WEAPON);
-	EquipItemByPos(IT_FIT,EQUIP_POS_SHEILD);
-	EquipItemByPos(IT_FIT,EQUIP_POS_NECKLACE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_EARRING);
+	//	ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	EquipItemByPos(IT_FIT, EQUIP_POS_FACE);
+	EquipItemByPos(IT_FIT, EQUIP_POS_HAIR_COLOR);
+	EquipItemByPos(IT_FIT, EQUIP_POS_HAIR);
+	EquipItemByPos(IT_FIT, EQUIP_POS_SHOULDER);
+	EquipItemByPos(IT_FIT, EQUIP_POS_CLOAK);
+	EquipItemByPos(IT_FIT, EQUIP_POS_GLASS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_WEAPON);
+	EquipItemByPos(IT_FIT, EQUIP_POS_SHEILD);
+	EquipItemByPos(IT_FIT, EQUIP_POS_NECKLACE);
+	EquipItemByPos(IT_FIT, EQUIP_POS_EARRING);
 	//EquipItemByPos(IT_FIT,EQUIP_POS_EARRING_R);
-	EquipItemByPos(IT_FIT,EQUIP_POS_RING);
-	EquipItemByPos(IT_FIT,EQUIP_POS_RING_R);
-	EquipItemByPos(IT_FIT,EQUIP_POS_BELT);
+	EquipItemByPos(IT_FIT, EQUIP_POS_RING);
+	EquipItemByPos(IT_FIT, EQUIP_POS_RING_R);
+	EquipItemByPos(IT_FIT, EQUIP_POS_BELT);
 	//EquipItemByPos(IT_FIT,EQUIP_POS_ATTSTONE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_MEDAL);
-	EquipItemByPos(IT_FIT,EQUIP_POS_HELMET);
-	EquipItemByPos(IT_FIT,EQUIP_POS_SHIRTS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_PANTS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_BOOTS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_GLOVE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_KICKBALL);
-	EquipItemByPos(IT_FIT,EQUIP_POS_ARM);
-	
+	EquipItemByPos(IT_FIT, EQUIP_POS_MEDAL);
+	EquipItemByPos(IT_FIT, EQUIP_POS_HELMET);
+	EquipItemByPos(IT_FIT, EQUIP_POS_SHIRTS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_PANTS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_BOOTS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_GLOVE);
+	EquipItemByPos(IT_FIT, EQUIP_POS_KICKBALL);
+	EquipItemByPos(IT_FIT, EQUIP_POS_ARM);
+
 	//int iItemPos = 0;
 	//while(++iItemPos < (EQUIP_POS_MAX+1))
 	//{
@@ -4205,52 +4205,52 @@ void PgActor::EquipAllItem()
 int PgActor::GetAttachSlotNo()
 {
 	++m_iAttachSlotNo;
-	if(m_iAttachSlotNo > EAPS_GET_END)
+	if (m_iAttachSlotNo > EAPS_GET_END)
 	{
 		m_iAttachSlotNo = EAPS_GET_START;
 	}
 	return m_iAttachSlotNo;
 }
 
-bool PgActor::AttachTo(int iSlot, char const *pcTargetName, NiAVObject *pkObject)
+bool PgActor::AttachTo(int iSlot, char const* pcTargetName, NiAVObject* pkObject)
 {
-	PgParticle	*pkParticle = NiDynamicCast(PgParticle,pkObject);
-	if(!pkParticle)
+	PgParticle* pkParticle = NiDynamicCast(PgParticle, pkObject);
+	if (!pkParticle)
 	{
 		return false;
 	}
 
-	PgActor* pkActor = this; 
+	PgActor* pkActor = this;
 
 	PgPilot* pkPilot = GetPilot();
-	
-	if( pkPilot )
-	{// PilotÀÌ Á¸ÀçÇÏ°í (NPC°æ¿ì¿¡´Â ¾øÀ½) 
+
+	if (pkPilot)
+	{// Pilotï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ (NPCï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) 
 		CUnit* pkUnit = pkPilot->GetUnit();
-		if( pkUnit )
-		{// UnitÀÌ ÀÖ´Ù¸é
-			PgActorUtil::AdjustParticleScaleByUnitScaleAbil( pkUnit, pkParticle );
+		if (pkUnit)
+		{// Unitï¿½ï¿½ ï¿½Ö´Ù¸ï¿½
+			PgActorUtil::AdjustParticleScaleByUnitScaleAbil(pkUnit, pkParticle);
 			PgAction* pkAction = GetAction();
-			if( pkAction
+			if (pkAction
 				&& 0 < pkAction->GetAbil(AT_APPLY_ATTACK_SPEED)
 				)
-			{// ÇöÀç ¾×¼ÇÀÇ ¾Ö´Ï ¼Ó·Â¿¡ µû¶ó, ÆÄÆ¼Å¬ ¼Ó·Â Á¶Á¤ÇÏ°í
-				float const fAttackSpeed = pkUnit->GetAbil(AT_C_ATTACK_SPEED)/ABILITY_RATE_VALUE_FLOAT;
-				pkParticle->SetPlaySpeed( fAttackSpeed );
+			{// ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ó·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Æ¼Å¬ ï¿½Ó·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+				float const fAttackSpeed = pkUnit->GetAbil(AT_C_ATTACK_SPEED) / ABILITY_RATE_VALUE_FLOAT;
+				pkParticle->SetPlaySpeed(fAttackSpeed);
 			}
 
-			if( IsRidingPet()						// Æê¿¡ Å¸°í ÀÖ´Â
-				&& pkUnit->IsUnitType(UT_PLAYER)	// ÇÃ·¹ÀÌ¾î¶ó¸é
+			if (IsRidingPet()						// ï¿½ê¿¡ Å¸ï¿½ï¿½ ï¿½Ö´ï¿½
+				&& pkUnit->IsUnitType(UT_PLAYER)	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½
 				)
-			{// ÆêÀÌ ÁÖÃ¼°¡ µÊ
+			{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½
 				pkActor = GetMountTargetPet();
 			}
 		}
 	}
-	
-	if(pkActor->PgIWorldObject::AttachTo(iSlot,pcTargetName,pkObject))
+
+	if (pkActor->PgIWorldObject::AttachTo(iSlot, pcTargetName, pkObject))
 	{
-		if( pkParticle->IsLoop() )
+		if (pkParticle->IsLoop())
 		{
 			pkActor->AttachActorAlphaProperty(pkObject);
 			pkObject->UpdateProperties();
@@ -4263,43 +4263,43 @@ bool PgActor::AttachTo(int iSlot, char const *pcTargetName, NiAVObject *pkObject
 
 void PgActor::MoveParticlesToTarget(PgActor* pkTarget)
 {
-	if(NULL == pkTarget || this == pkTarget)
+	if (NULL == pkTarget || this == pkTarget)
 	{
 		return;
 	}
 
 	AttachSlot::iterator itAttachSlotSrc = m_kAttachSlot.begin();
-	while(itAttachSlotSrc != m_kAttachSlot.end())
+	while (itAttachSlotSrc != m_kAttachSlot.end())
 	{
-		CONT_FIXED_SLOT_LIST::const_iterator itFindFixedElem = m_kFixedParticleList.find( (*itAttachSlotSrc).first );
-		if(itFindFixedElem != m_kFixedParticleList.end())
-		{ //ÀÌµ¿ ½ÃÅ°Áö ¸»¾Æ¾ßÇÒ ½½·ÔÀÌ¶ó¸é ½ºÅµ
+		CONT_FIXED_SLOT_LIST::const_iterator itFindFixedElem = m_kFixedParticleList.find((*itAttachSlotSrc).first);
+		if (itFindFixedElem != m_kFixedParticleList.end())
+		{ //ï¿½Ìµï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½Åµ
 			++itAttachSlotSrc;
 			continue;
 		}
-		pkTarget->m_kAttachSlot.insert(*itAttachSlotSrc); //´ë»óÀ¸·Î ÆÄÆ¼Å¬ ÀÌµ¿ÇÏ°í ¿øº» ¸ñ·Ï¿¡¼­ »èÁ¦
+		pkTarget->m_kAttachSlot.insert(*itAttachSlotSrc); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½Ìµï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		m_kAttachSlot.erase(itAttachSlotSrc++);
 	}
 
 	AttachSlot::iterator itAttachSlotNoZTestSrc = m_kAttachSlot_NoZTest.begin();
-	while(itAttachSlotNoZTestSrc != m_kAttachSlot_NoZTest.end())
+	while (itAttachSlotNoZTestSrc != m_kAttachSlot_NoZTest.end())
 	{
-		CONT_FIXED_SLOT_LIST::const_iterator itFindFixedElem = m_kFixedParticleList.find( (*itAttachSlotNoZTestSrc).first );
-		if(itFindFixedElem != m_kFixedParticleList.end())
-		{ //ÀÌµ¿ ½ÃÅ°Áö ¸»¾Æ¾ßÇÒ ½½·ÔÀÌ¶ó¸é ½ºÅµ
+		CONT_FIXED_SLOT_LIST::const_iterator itFindFixedElem = m_kFixedParticleList.find((*itAttachSlotNoZTestSrc).first);
+		if (itFindFixedElem != m_kFixedParticleList.end())
+		{ //ï¿½Ìµï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½Åµ
 			++itAttachSlotNoZTestSrc;
 			continue;
 		}
-		pkTarget->m_kAttachSlot_NoZTest.insert(*itAttachSlotNoZTestSrc); //´ë»óÀ¸·Î ÆÄÆ¼Å¬ ÀÌµ¿ÇÏ°í ¿øº» ¸ñ·Ï¿¡¼­ »èÁ¦
+		pkTarget->m_kAttachSlot_NoZTest.insert(*itAttachSlotNoZTestSrc); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½Ìµï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		m_kAttachSlot_NoZTest.erase(itAttachSlotNoZTestSrc++);
 	}
 }
 
-bool PgActor::AttachToPoint(int iSlot, NiPoint3 kLoc, NiAVObject *pkObject)
+bool PgActor::AttachToPoint(int iSlot, NiPoint3 kLoc, NiAVObject* pkObject)
 {
-	return	PgIWorldObject::AttachToPoint(iSlot,kLoc,pkObject);
+	return	PgIWorldObject::AttachToPoint(iSlot, kLoc, pkObject);
 }
-NiPoint3 PgActor::GetParticleNodeWorldPos(int iSlot, char *strNodeName)
+NiPoint3 PgActor::GetParticleNodeWorldPos(int iSlot, char* strNodeName)
 {
 	return PgIWorldObject::GetParticleNodeWorldPos(iSlot, strNodeName);
 }
@@ -4311,26 +4311,26 @@ NiAVObject* PgActor::GetParticleNode(int iSlot, char const* strNodeName)
 
 bool PgActor::DetachFrom(int iSlot, bool bDefaultThreadDelete)
 {
-	NiAVObject*	pkAVObject = NULL;
+	NiAVObject* pkAVObject = NULL;
 	PgActor* pkActor = this;
-	if(pkActor->IsRidingPet() && pkActor->GetUnit() && pkActor->GetUnit()->IsUnitType(UT_PLAYER))
+	if (pkActor->IsRidingPet() && pkActor->GetUnit() && pkActor->GetUnit()->IsUnitType(UT_PLAYER))
 	{
 		PgActor* pkCallerActor = GetMountTargetPet();
-		if(NULL != pkCallerActor)
+		if (NULL != pkCallerActor)
 		{
 			pkActor = pkCallerActor;
 		}
 	}
 	AttachSlot::iterator itr = pkActor->m_kAttachSlot.find(iSlot);
-	if(itr != pkActor->m_kAttachSlot.end())	//	ÀÏ¹Ý ½½·Ô¿¡ ÀÖÀ¸¸é
+	if (itr != pkActor->m_kAttachSlot.end())	//	ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		pkAVObject = itr->second;
 		pkActor->DetachActorAlphaProperty(pkAVObject);
 		pkAVObject->UpdateProperties();
 	}
 
-	itr = pkActor->m_kAttachSlot_NoZTest.find(iSlot);	//	Z¹«½Ã ½½·Ô¿¡ ÀÖ´ÂÁö Ã£°í
-	if(itr != pkActor->m_kAttachSlot_NoZTest.end())
+	itr = pkActor->m_kAttachSlot_NoZTest.find(iSlot);	//	Zï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
+	if (itr != pkActor->m_kAttachSlot_NoZTest.end())
 	{
 		pkAVObject = itr->second;
 		pkActor->DetachActorAlphaProperty(pkAVObject);
@@ -4339,25 +4339,25 @@ bool PgActor::DetachFrom(int iSlot, bool bDefaultThreadDelete)
 
 	pkActor->SetDefaultMaterialNeedsUpdateFlag(false);
 
-	return	pkActor->PgIWorldObject::DetachFrom(iSlot,bDefaultThreadDelete);
+	return	pkActor->PgIWorldObject::DetachFrom(iSlot, bDefaultThreadDelete);
 }
 
 bool PgActor::IsAttachParticleSlot(int const iSlot)const
 {
-	NiAVObject*	pkAVObject = NULL;
+	NiAVObject* pkAVObject = NULL;
 	PgActor const* pkActor = this;
-	if(pkActor->IsRidingPet() && pkActor->GetUnit() && pkActor->GetUnit()->IsUnitType(UT_PLAYER))
+	if (pkActor->IsRidingPet() && pkActor->GetUnit() && pkActor->GetUnit()->IsUnitType(UT_PLAYER))
 	{
 		pkActor = GetMountTargetPet();
 	}
 	AttachSlot::const_iterator itr = pkActor->m_kAttachSlot.find(iSlot);
-	if(itr != pkActor->m_kAttachSlot.end())	//	ÀÏ¹Ý ½½·Ô¿¡ ¾øÀ¸¸é
+	if (itr != pkActor->m_kAttachSlot.end())	//	ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		return true;
 	}
 
-	itr = pkActor->m_kAttachSlot_NoZTest.find(iSlot);	//	Z¹«½Ã ½½·Ô¿¡ ÀÖ´ÂÁö Ã£°í
-	if(itr != pkActor->m_kAttachSlot_NoZTest.end())
+	itr = pkActor->m_kAttachSlot_NoZTest.find(iSlot);	//	Zï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
+	if (itr != pkActor->m_kAttachSlot_NoZTest.end())
 	{
 		return true;
 	}
@@ -4367,38 +4367,38 @@ bool PgActor::IsAttachParticleSlot(int const iSlot)const
 
 void	PgActor::SetDefaultMaterialNeedsUpdateFlag(bool bFlag)
 {
-	NewWare::Scene::ApplyTraversal::Geometry::SetDefaultMaterialNeedsUpdateFlag( this, bFlag );
-	
-	// Attach ³à¼®µé Á¤¸®
-	for(AttachSlot::iterator itr = m_kAttachSlot.begin(); itr != m_kAttachSlot.end(); ++itr)
+	NewWare::Scene::ApplyTraversal::Geometry::SetDefaultMaterialNeedsUpdateFlag(this, bFlag);
+
+	// Attach ï¿½à¼®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	for (AttachSlot::iterator itr = m_kAttachSlot.begin(); itr != m_kAttachSlot.end(); ++itr)
 	{
-		PgParticle *pkParticle = NiDynamicCast(PgParticle,itr->second);
-		if(pkParticle)
+		PgParticle* pkParticle = NiDynamicCast(PgParticle, itr->second);
+		if (pkParticle)
 		{
-			NewWare::Scene::ApplyTraversal::Geometry::SetDefaultMaterialNeedsUpdateFlag( pkParticle, bFlag );
+			NewWare::Scene::ApplyTraversal::Geometry::SetDefaultMaterialNeedsUpdateFlag(pkParticle, bFlag);
 		}
 	}
 
-	for(AttachSlot::iterator itr = m_kAttachSlot_NoZTest.begin(); itr != m_kAttachSlot_NoZTest.end(); ++itr)
+	for (AttachSlot::iterator itr = m_kAttachSlot_NoZTest.begin(); itr != m_kAttachSlot_NoZTest.end(); ++itr)
 	{
-		PgParticle *pkParticle = NiDynamicCast(PgParticle,itr->second);
-		if(pkParticle)
+		PgParticle* pkParticle = NiDynamicCast(PgParticle, itr->second);
+		if (pkParticle)
 		{
-			NewWare::Scene::ApplyTraversal::Geometry::SetDefaultMaterialNeedsUpdateFlag( pkParticle, bFlag );
+			NewWare::Scene::ApplyTraversal::Geometry::SetDefaultMaterialNeedsUpdateFlag(pkParticle, bFlag);
 		}
 	}
 }
 void	PgActor::SetAlpha(float fAlpha)
 {
-	if(!GetNIFRoot())
+	if (!GetNIFRoot())
 		return;
 
-	if(m_spAlphaProperty)
+	if (m_spAlphaProperty)
 	{
-		bool	bNeedAlphaBlending = fAlpha<1;
-		if(bNeedAlphaBlending != m_spAlphaProperty->GetAlphaBlending())
+		bool	bNeedAlphaBlending = fAlpha < 1;
+		if (bNeedAlphaBlending != m_spAlphaProperty->GetAlphaBlending())
 		{
-			SetDefaultMaterialNeedsUpdateFlag(false);	//	½¦ÀÌ´õ¸¦ ¾÷µ¥ÀÌÆ® ½ÃÄÑ¾ßÇÑ´Ù.
+			SetDefaultMaterialNeedsUpdateFlag(false);	//	ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ñ´ï¿½.
 		}
 		m_spAlphaProperty->SetAlphaBlending(bNeedAlphaBlending);
 	}
@@ -4407,44 +4407,44 @@ void	PgActor::SetAlpha(float fAlpha)
 	kColor.a = fAlpha;
 	GetNIFRoot()->SetColorLocal(kColor);
 
-	if ( m_spTitleName )
+	if (m_spTitleName)
 	{
-		m_spTitleName->SetAlpha( fAlpha );
+		m_spTitleName->SetAlpha(fAlpha);
 	}
 
-	if ( m_spNameText )
+	if (m_spNameText)
 	{
-		m_spNameText->SetAlpha( fAlpha );
+		m_spNameText->SetAlpha(fAlpha);
 	}
 
-	if( m_spGuildNameText )
+	if (m_spGuildNameText)
 	{
-		m_spGuildNameText->SetAlpha( fAlpha );
+		m_spGuildNameText->SetAlpha(fAlpha);
 	}
 
-	if( m_spAchievementTitle )
+	if (m_spAchievementTitle)
 	{
-		m_spAchievementTitle->SetAlpha( fAlpha );
+		m_spAchievementTitle->SetAlpha(fAlpha);
 	}
 
-	if( m_spGIFTitle )
+	if (m_spGIFTitle)
 	{
-		m_spGIFTitle->SetAlpha( fAlpha );
+		m_spGIFTitle->SetAlpha(fAlpha);
 	}
 
-	if(m_spDuelTitle)
+	if (m_spDuelTitle)
 	{
 		//m_spDuelTitle->SetAlpha(fAlpha);
 	}
 
-	if(m_spEffectCountDown)
+	if (m_spEffectCountDown)
 	{
 		m_spEffectCountDown->SetAlpha(fAlpha);
 	}
 }
 float PgActor::GetAlpha()const
 {
-	if(!GetNIFRoot())
+	if (!GetNIFRoot())
 		return 0.0f;
 
 	return GetNIFRoot()->GetColorLocal().a;
@@ -4452,15 +4452,15 @@ float PgActor::GetAlpha()const
 
 void PgActor::TransitAlpha(float fTime)
 {
-	if(!m_bLoadingComplete)
+	if (!m_bLoadingComplete)
 	{
 		return;
 	}
 
-	if( 0.0f == m_AlphaTransitInfo.m_fAlphaTransitionTime ) 
+	if (0.0f == m_AlphaTransitInfo.m_fAlphaTransitionTime)
 		return;
 
-	if(m_AlphaTransitInfo.m_fAlphaTransitionTime <= m_AlphaTransitInfo.m_fAlphaAccumTime)
+	if (m_AlphaTransitInfo.m_fAlphaTransitionTime <= m_AlphaTransitInfo.m_fAlphaAccumTime)
 	{
 		m_AlphaTransitInfo.m_fAlphaTransitionTime = 0.0f;
 		return;
@@ -4470,9 +4470,9 @@ void PgActor::TransitAlpha(float fTime)
 
 	m_AlphaTransitInfo.m_fAlphaAccumTime += fTime;
 	m_AlphaTransitInfo.m_fAlphaAccumTime = NiMin(m_AlphaTransitInfo.m_fAlphaAccumTime, m_AlphaTransitInfo.m_fAlphaTransitionTime);
-	m_AlphaTransitInfo.m_fCurrentAlpha = m_AlphaTransitInfo.m_fPrevAlpha + 
+	m_AlphaTransitInfo.m_fCurrentAlpha = m_AlphaTransitInfo.m_fPrevAlpha +
 		((m_AlphaTransitInfo.m_fTargetAlpha - m_AlphaTransitInfo.m_fPrevAlpha)
-		* m_AlphaTransitInfo.m_fAlphaAccumTime / m_AlphaTransitInfo.m_fAlphaTransitionTime);
+			* m_AlphaTransitInfo.m_fAlphaAccumTime / m_AlphaTransitInfo.m_fAlphaTransitionTime);
 
 	SetAlpha(m_AlphaTransitInfo.m_fCurrentAlpha);
 
@@ -4480,7 +4480,7 @@ void PgActor::TransitAlpha(float fTime)
 
 void	PgActor::SetColor(const NiColor& kColor)
 {
-	if(!GetNIFRoot())
+	if (!GetNIFRoot())
 		return;
 
 	NiColorA	kGeomColor = GetNIFRoot()->GetColorLocal();
@@ -4494,28 +4494,28 @@ void	PgActor::SetColor(const NiColor& kColor)
 
 void PgActor::TransitActorSpecular(float fTime)
 {
-	if(m_SpecularTransitInfo.m_fTransitionTime == 0)
+	if (m_SpecularTransitInfo.m_fTransitionTime == 0)
 	{
 		return;
 	}
-	if(m_SpecularTransitInfo.m_fTransitionTime<m_SpecularTransitInfo.m_fAccumTime)
+	if (m_SpecularTransitInfo.m_fTransitionTime < m_SpecularTransitInfo.m_fAccumTime)
 	{
 		return;
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.TransitActorColor"), g_pkApp->GetFrameCount()));
 	m_SpecularTransitInfo.m_fAccumTime += fTime;
-	if(m_SpecularTransitInfo.m_fAccumTime > m_SpecularTransitInfo.m_fTransitionTime)
+	if (m_SpecularTransitInfo.m_fAccumTime > m_SpecularTransitInfo.m_fTransitionTime)
 	{
 		m_SpecularTransitInfo.m_fAccumTime = m_SpecularTransitInfo.m_fTransitionTime;
 	}
 
-	// º¸°£ÇÒ ºñÀ²À» °è»êÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	float fRate = m_SpecularTransitInfo.m_fAccumTime / m_SpecularTransitInfo.m_fTransitionTime;
-	if((fRate = NiClamp(fRate, 0.0f, 1.0f)) == 1.0f)
+	if ((fRate = NiClamp(fRate, 0.0f, 1.0f)) == 1.0f)
 	{
 		m_SpecularTransitInfo.m_fTransitionTime = 0.0f;
-		if(m_SpecularTransitInfo.m_kTarget == NiColor::BLACK)
+		if (m_SpecularTransitInfo.m_kTarget == NiColor::BLACK)
 		{
 			RestoreSpecular();
 		}
@@ -4524,16 +4524,16 @@ void PgActor::TransitActorSpecular(float fTime)
 	NiColor kTargetSpecular;
 	NiColor kCurrentSpecular;
 
-	// Current Color -> Target Color·Î ¼±Çü º¸°£ÇÑ´Ù.
+	// Current Color -> Target Colorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	MaterialColorContainer::iterator curItr = m_kMaterialCurrentColorContainer.begin();
-	for(MaterialColorContainer::iterator itr = m_kMaterialColorContainer.begin();
+	for (MaterialColorContainer::iterator itr = m_kMaterialColorContainer.begin();
 		itr != m_kMaterialColorContainer.end();
 		++itr)
 	{
-		NiMaterialProperty *pkMaterialProp = itr->first;
-		ColorSet &rkColorSet = itr->second;
+		NiMaterialProperty* pkMaterialProp = itr->first;
+		ColorSet& rkColorSet = itr->second;
 
-		if(curItr != m_kMaterialCurrentColorContainer.end())
+		if (curItr != m_kMaterialCurrentColorContainer.end())
 		{
 			kCurrentSpecular = curItr->second.m_kSpecular;
 			++curItr;
@@ -4547,10 +4547,10 @@ void PgActor::TransitActorSpecular(float fTime)
 
 void PgActor::TransitColor(float fTime)
 {
-	if(m_ColorTransitInfo.m_fTransitionTime == 0) 
+	if (m_ColorTransitInfo.m_fTransitionTime == 0)
 		return;
 
-	if(m_ColorTransitInfo.m_fTransitionTime <= m_ColorTransitInfo.m_fAccumTime)
+	if (m_ColorTransitInfo.m_fTransitionTime <= m_ColorTransitInfo.m_fAccumTime)
 	{
 		m_ColorTransitInfo.m_fTransitionTime = 0.0f;
 		return;
@@ -4560,9 +4560,9 @@ void PgActor::TransitColor(float fTime)
 
 	m_ColorTransitInfo.m_fAccumTime += fTime;
 	m_ColorTransitInfo.m_fAccumTime = NiMin(m_ColorTransitInfo.m_fAccumTime, m_ColorTransitInfo.m_fTransitionTime);
-	m_ColorTransitInfo.m_kCurrent = m_ColorTransitInfo.m_kPrev + 
+	m_ColorTransitInfo.m_kCurrent = m_ColorTransitInfo.m_kPrev +
 		((m_ColorTransitInfo.m_kTarget - m_ColorTransitInfo.m_kPrev)
-		* m_ColorTransitInfo.m_fAccumTime / m_ColorTransitInfo.m_fTransitionTime);
+			* m_ColorTransitInfo.m_fAccumTime / m_ColorTransitInfo.m_fTransitionTime);
 
 	SetColor(m_ColorTransitInfo.m_kCurrent);
 
@@ -4577,11 +4577,11 @@ void PgActor::SetParticleAlpha(NiAVObject* pkRoot, float fAlpha)
 
 	if (NiIsKindOf(NiGeometry, pkRoot))
 	{
-		NiGeometry *pkGeometry = (NiGeometry *)pkRoot;
+		NiGeometry* pkGeometry = (NiGeometry*)pkRoot;
 
-		// MaterialProperty¸¦ °¡Á®¿Â´Ù.
-		NiMaterialProperty *pkMaterialProp = pkGeometry->GetPropertyState()->GetMaterial();
-		if(!pkMaterialProp)
+		// MaterialPropertyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
+		NiMaterialProperty* pkMaterialProp = pkGeometry->GetPropertyState()->GetMaterial();
+		if (!pkMaterialProp)
 		{
 			pkMaterialProp = NiNew NiMaterialProperty();
 			pkRoot->AttachProperty(pkMaterialProp);
@@ -4601,73 +4601,73 @@ void PgActor::SetParticleAlpha(NiAVObject* pkRoot, float fAlpha)
 	}
 }
 
-//!	¾×ÅÍÀÇ ½ºÆäÅ§·¯¸¦ ÄÒ´Ù
+//!	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å§ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
 void	PgActor::TurnOnSpecular()
 {
 
-	if(g_pkWorld)
+	if (g_pkWorld)
 	{
-		g_pkWorld->LightObjectRecurse(g_pkWorld->GetLightRoot(),this);
+		g_pkWorld->LightObjectRecurse(g_pkWorld->GetLightRoot(), this);
 	}
 
 	UpdateEffects();
 
-	for(SpecularEnableContainer::iterator itor = m_kSpecularContainer.begin(); itor != m_kSpecularContainer.end(); ++itor)
+	for (SpecularEnableContainer::iterator itor = m_kSpecularContainer.begin(); itor != m_kSpecularContainer.end(); ++itor)
 	{
 		NiSpecularPropertyPtr spSpecular = itor->first;
-		if(spSpecular)
+		if (spSpecular)
 		{
 			spSpecular->SetSpecular(true);
 		}
-		
+
 	}
 
 	m_bSpecularOn = true;
 
-	SetDefaultMaterialNeedsUpdateFlag(false);	//	½¦ÀÌ´õ¸¦ ¾÷µ¥ÀÌÆ® ½ÃÄÑ¾ßÇÑ´Ù.
+	SetDefaultMaterialNeedsUpdateFlag(false);	//	ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ñ´ï¿½.
 
 }
-//!	¾×ÅÍÀÇ ½ºÆäÅ§·¯¸¦ ¿ø»óº¹±¸½ÃÅ²´Ù.
+//!	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½óº¹±ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
 void	PgActor::RestoreSpecular()
 {
 
-	if(g_pkWorld)
+	if (g_pkWorld)
 	{
-		g_pkWorld->RemoveLightObjectRecurse(g_pkWorld->GetLightRoot(),this);
+		g_pkWorld->RemoveLightObjectRecurse(g_pkWorld->GetLightRoot(), this);
 	}
 	m_bSpecularOn = false;
 
 	UpdateEffects();
-	for(SpecularEnableContainer::iterator itor = m_kSpecularContainer.begin(); itor != m_kSpecularContainer.end(); ++itor)
+	for (SpecularEnableContainer::iterator itor = m_kSpecularContainer.begin(); itor != m_kSpecularContainer.end(); ++itor)
 	{
 		NiSpecularPropertyPtr spSpecular = itor->first;
-		if(spSpecular)
+		if (spSpecular)
 		{
 			bool	const	bTurnOn = itor->second;
 
 			spSpecular->SetSpecular(bTurnOn);
 		}
 	}
-	SetDefaultMaterialNeedsUpdateFlag(false);	//	½¦ÀÌ´õ¸¦ ¾÷µ¥ÀÌÆ® ½ÃÄÑ¾ßÇÑ´Ù.
+	SetDefaultMaterialNeedsUpdateFlag(false);	//	ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ñ´ï¿½.
 }
 
 
 bool PgActor::StoreDefaultMaterialColor(NiNode* pkNode, bool bForce)
 {
-	if(bForce)
+	if (bForce)
 	{
 		m_bMaterialColorCached = false;
 	}
 
-	if(!m_bMaterialColorCached)
+	if (!m_bMaterialColorCached)
 	{
 		m_kMaterialColorContainer.clear();
-		for(MaterialContainer::const_iterator itr = m_kMaterialContainer.begin();
+		for (MaterialContainer::const_iterator itr = m_kMaterialContainer.begin();
 			itr != m_kMaterialContainer.end();
 			++itr)
 		{
-			NiMaterialProperty *pkMat = *itr;
-			m_kMaterialColorContainer.insert(std::make_pair(pkMat, ColorSet(pkMat->GetAmbientColor(), pkMat->GetEmittance(),pkMat->GetSpecularColor(),pkMat->GetDiffuseColor())));
+			NiMaterialProperty* pkMat = *itr;
+			m_kMaterialColorContainer.insert(std::make_pair(pkMat, ColorSet(pkMat->GetAmbientColor(), pkMat->GetEmittance(), pkMat->GetSpecularColor(), pkMat->GetDiffuseColor())));
 		}
 
 		m_bMaterialColorCached = true;
@@ -4684,7 +4684,7 @@ bool PgActor::GetAlphaProperty()
 
 bool PgActor::FindMaterialProp(NiNode* pkRoot, bool bCheckNoChange, bool bTraverseAllNode)
 {
-	if(!pkRoot)
+	if (!pkRoot)
 	{
 		return false;
 	}
@@ -4700,48 +4700,48 @@ bool PgActor::FindMaterialProp(NiNode* pkRoot, bool bCheckNoChange, bool bTraver
 	for (unsigned int i = 0; i < uiArrayCount; ++i)
 	{
 		NiAVObject* pkChild = pkRoot->GetAt(i);
-		if(!pkChild)
+		if (!pkChild)
 		{
 			continue;
 		}
-		
-		const NiFixedString &rkChildName = pkChild->GetName();
-		if(bCheckNoChange)
+
+		const NiFixedString& rkChildName = pkChild->GetName();
+		if (bCheckNoChange)
 		{
-			NiStringExtraData *pkExtra = NiDynamicCast(NiStringExtraData, pkChild->GetExtraData("UserPropBuffer"));
-			if(pkExtra)
+			NiStringExtraData* pkExtra = NiDynamicCast(NiStringExtraData, pkChild->GetExtraData("UserPropBuffer"));
+			if (pkExtra)
 			{
-				// Geometry¿¡ NoColorChange¶ó°í UserProp¿¡ Àû¾îµ×À¸¸é, ±×¿¡ ÇØ´çÇÏ´Â MaterialÀº ¸®½ºÆ®¿¡ Ãß°¡ÇÏÁö ¾Ê´Â´Ù.
+				// Geometryï¿½ï¿½ NoColorChangeï¿½ï¿½ï¿½ UserPropï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½×¿ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ Materialï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 				NiFixedString kUserDefined = pkExtra->GetValue();
-				if(kUserDefined.ContainsNoCase("NoColorChange"))
+				if (kUserDefined.ContainsNoCase("NoColorChange"))
 				{
 					continue;
 				}
 			}
 		}
 
-		if(NiIsKindOf(NiGeometry, pkChild))
+		if (NiIsKindOf(NiGeometry, pkChild))
 		{
-			if(rkChildName.ContainsNoCase("Biped Object") || rkChildName.ContainsNoCase("Bone"))
+			if (rkChildName.ContainsNoCase("Biped Object") || rkChildName.ContainsNoCase("Bone"))
 			{
 				continue;
 			}
 
-			NiGeometry *pkGeometry = (NiGeometry *)pkChild;
+			NiGeometry* pkGeometry = (NiGeometry*)pkChild;
 
-			// MaterialProperty¸¦ °¡Á®¿Â´Ù.
-			NiMaterialProperty *pkMaterialProp = pkGeometry->GetPropertyState()->GetMaterial();
-			if(!pkMaterialProp)
+			// MaterialPropertyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
+			NiMaterialProperty* pkMaterialProp = pkGeometry->GetPropertyState()->GetMaterial();
+			if (!pkMaterialProp)
 			{
 				pkMaterialProp = NiNew NiMaterialProperty();
 				pkChild->AttachProperty(pkMaterialProp);
 				NILOG(PGLOG_WARNING, "[PgActor.FindMaterialProp] The MaterialProperty has newly allocated. It must be deleted. (%p)\n", &pkMaterialProp);
 			}
 
-			NiSpecularProperty *pkSpecularOriginal = pkGeometry->GetPropertyState()->GetSpecular();
+			NiSpecularProperty* pkSpecularOriginal = pkGeometry->GetPropertyState()->GetSpecular();
 
-			NiSpecularProperty *pkSpecular = NiNew NiSpecularProperty();
-			if(pkSpecularOriginal == NULL || pkSpecularOriginal->GetSpecular() == false)
+			NiSpecularProperty* pkSpecular = NiNew NiSpecularProperty();
+			if (pkSpecularOriginal == NULL || pkSpecularOriginal->GetSpecular() == false)
 				pkSpecular->SetSpecular(false);
 			else
 				pkSpecular->SetSpecular(true);
@@ -4749,16 +4749,16 @@ bool PgActor::FindMaterialProp(NiNode* pkRoot, bool bCheckNoChange, bool bTraver
 			pkChild->DetachProperty(pkSpecularOriginal);
 			pkChild->AttachProperty(pkSpecular);
 
-			m_kSpecularContainer.insert(std::make_pair(pkSpecular,pkSpecular->GetSpecular()));
+			m_kSpecularContainer.insert(std::make_pair(pkSpecular, pkSpecular->GetSpecular()));
 
 			pkChild->UpdateProperties();
 			m_kMaterialContainer.push_back(pkMaterialProp);
 		}
-		else if(NiIsKindOf(NiNode, pkChild))
+		else if (NiIsKindOf(NiNode, pkChild))
 		{
-			if(bTraverseAllNode || rkChildName != NiFixedString("char_root") || !pkChild->GetAppCulled())
+			if (bTraverseAllNode || rkChildName != NiFixedString("char_root") || !pkChild->GetAppCulled())
 			{
-				FindMaterialProp((NiNode* )pkChild, bCheckNoChange, bTraverseAllNode);
+				FindMaterialProp((NiNode*)pkChild, bCheckNoChange, bTraverseAllNode);
 			}
 		}
 	}
@@ -4769,22 +4769,22 @@ bool PgActor::FindMaterialProp(NiNode* pkRoot, bool bCheckNoChange, bool bTraver
 void PgActor::UpdateDownwardPass(float fTime, bool bUpdateControllers)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.UpdateDownwardPass"), g_pkApp->GetFrameCount()));
-	fTime+=m_fAccumTimeAdjust;
+	fTime += m_fAccumTimeAdjust;
 
-	if(IsVisible() == false)
+	if (IsVisible() == false)
 	{
-		if(m_fLastDownwardPassUpdateTime == 0.0f || fTime - m_fLastDownwardPassUpdateTime > 10.0f)
+		if (m_fLastDownwardPassUpdateTime == 0.0f || fTime - m_fLastDownwardPassUpdateTime > 10.0f)
 		{
 			m_fLastDownwardPassUpdateTime = fTime;
-			NiNode::UpdateDownwardPass(m_fLastDownwardPassUpdateTime,bUpdateControllers);
+			NiNode::UpdateDownwardPass(m_fLastDownwardPassUpdateTime, bUpdateControllers);
 		}
 		else
 		{
 			{
-				if(GetPositionChanged() || (GetAction() && GetAction()->GetActionOptionEnable(PgAction::AO_ALWAYS_UPDATE)))
+				if (GetPositionChanged() || (GetAction() && GetAction()->GetActionOptionEnable(PgAction::AO_ALWAYS_UPDATE)))
 				{
 					SetPositionChanged(false);
-					NiNode::UpdateDownwardPass(fTime,false);
+					NiNode::UpdateDownwardPass(fTime, false);
 				}
 			}
 		}
@@ -4796,7 +4796,7 @@ void PgActor::UpdateDownwardPass(float fTime, bool bUpdateControllers)
 		m_iUpdateCount++;
 		NILOG(PGLOG_WARNING, "[PgActor] %s Update %d frame more than twice(%f)\n", MB(GetGuid().str()), g_pkApp->GetFrameCount(), NiGetCurrentTimeInSec() - m_fLastUpdateFrameTime);
 	}
-	
+
 	if (fTime != 0.0f)
 	{
 		if (m_dwLastUpdateFrame != g_pkApp->GetFrameCount())
@@ -4805,21 +4805,21 @@ void PgActor::UpdateDownwardPass(float fTime, bool bUpdateControllers)
 		}
 		m_dwLastUpdateFrame = g_pkApp->GetFrameCount();
 	}
-	if(g_pkWorld)
+	if (g_pkWorld)
 	{
 		m_fLastUpdateFrameTime = g_pkWorld->GetAccumTime();
 	}
 
-	NiNode::UpdateDownwardPass(fTime,bUpdateControllers);
+	NiNode::UpdateDownwardPass(fTime, bUpdateControllers);
 }
 
-// Á¤¹ÐÇÑ °¢À» ¸î¹øÀÌ³ª Àâ´Â°¡?
-// (0)ÀÌ¸é 1µµ Â÷ÀÌ·Î ¶³¾îÁú¶§±îÁö ·çÇÁ µ¹¸é¼­ Ã£´Â´Ù.
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½Â°ï¿½?
+// (0)ï¿½Ì¸ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¼­ Ã£ï¿½Â´ï¿½.
 #define PG_GET_DELTALOC_COUNT		(3)
 NxVec3 PgActor::GetAdjustValidDetailDeltaLoc(NxVec3 kTargetDeltaLoc, NxVec3 kFindLoc, float fDegree)
 {
 	NxVec3 kDeltaLoc = kFindLoc;
-	NxScene *pkScene = GetWorld()->GetPhysXScene()->GetPhysXScene();
+	NxScene* pkScene = GetWorld()->GetPhysXScene()->GetPhysXScene();
 	if (!pkScene)
 	{
 		return kDeltaLoc;
@@ -4832,8 +4832,8 @@ NxVec3 PgActor::GetAdjustValidDetailDeltaLoc(NxVec3 kTargetDeltaLoc, NxVec3 kFin
 	float fDeltaDegree = fDegree * 0.5f;
 	float fHalfDegree = fDeltaDegree;
 
-	while( (!PG_GET_DELTALOC_COUNT) ||
-			(iCount < PG_GET_DELTALOC_COUNT) )
+	while ((!PG_GET_DELTALOC_COUNT) ||
+		(iCount < PG_GET_DELTALOC_COUNT))
 	{
 		if (fabs(fHalfDegree) < 1.0f)
 		{
@@ -4847,22 +4847,22 @@ NxVec3 PgActor::GetAdjustValidDetailDeltaLoc(NxVec3 kTargetDeltaLoc, NxVec3 kFin
 		kMat.rotZ(NxMath::degToRad(fDeltaDegree));
 
 		NxVec3 kDelta = kTargetDeltaLoc;
-		kDelta = kMat * kDelta;	//	ÀÌµ¿º¤ÅÍ¸¦ fDeltaDegree ¸¸Å­ ZÃàÀ» Áß½ÉÀ¸·Î È¸Àü½ÃÅ²´Ù.
+		kDelta = kMat * kDelta;	//	ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í¸ï¿½ fDeltaDegree ï¿½ï¿½Å­ Zï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
 
 		NxExtendedVec3 kAfterPos = kCharPos;
-		kAfterPos += kDelta;	//	È¸ÀüµÈ ÀÌµ¿º¤ÅÍ¸¸Å­ ÀüÁøµÈ ÁÂÇ¥¸¦ ±¸ÇÑ´Ù.
+		kAfterPos += kDelta;	//	È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í¸ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 
-		if (	//	kAfterPos ¿¡ Ä³¸¯ÅÍ°¡ ¼³ ¼ö ÀÖ´Â°¡?
+		if (	//	kAfterPos ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â°ï¿½?
 			GetWorld()->raycastClosestShape(
-			NxRay(NxVec3((NxReal)kAfterPos.x, (NxReal)kAfterPos.y, (NxReal)kAfterPos.z), NX_NEGATIVE_UNIT_Z),
-			NX_STATIC_SHAPES, kHit, -1, 100000, NX_RAYCAST_SHAPE))
+				NxRay(NxVec3((NxReal)kAfterPos.x, (NxReal)kAfterPos.y, (NxReal)kAfterPos.z), NX_NEGATIVE_UNIT_Z),
+				NX_STATIC_SHAPES, kHit, -1, 100000, NX_RAYCAST_SHAPE))
 		{
 			kDeltaLoc = kDelta;
-			fDeltaDegree -= fHalfDegree;	//	fDeltaDegree ¸¦ ¹ÝÀ¸·Î ÁÙÀÎ´Ù.
+			fDeltaDegree -= fHalfDegree;	//	fDeltaDegree ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
 		}
 		else
 		{
-			fDeltaDegree += fHalfDegree;	//	fDeltaDegree ¸¦ Áõ°¡½ÃÅ²´Ù.
+			fDeltaDegree += fHalfDegree;	//	fDeltaDegree ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
 		}
 
 		iCount += 1;
@@ -4880,24 +4880,24 @@ NxVec3 PgActor::GetAdjustValidDeltaLoc(NxVec3 kTargetDeltaLoc)
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.GetAdjustValidDeltaLoc"), g_pkApp->GetFrameCount()));
-	// ´ÙÀ½ ÁÂÇ¥°¡ ¶³¾îÁöÁö ¾Ê°Ô º¸Á¤ÇØ¼­ ÁÂÇ¥¸¦ ¸®ÅÏÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	NxExtendedVec3 kCharPos = m_pkController->getPosition();
 	NxExtendedVec3 kBeforePos = kCharPos;
 	kBeforePos += kTargetDeltaLoc;
 
-	NxScene *pkScene = GetWorld()->GetPhysXScene()->GetPhysXScene();
+	NxScene* pkScene = GetWorld()->GetPhysXScene()->GetPhysXScene();
 	NxRaycastHit kHit;
 	bool bFind = false;
-	if(pkScene && GetWorld()->raycastClosestShape(
+	if (pkScene && GetWorld()->raycastClosestShape(
 		NxRay(NxVec3((NxReal)kBeforePos.x, (NxReal)kBeforePos.y, (NxReal)kBeforePos.z - (m_pkController->getHeight() * 0.5f)), NX_NEGATIVE_UNIT_Z),
 		NX_STATIC_SHAPES, kHit, -1, 100000.0f, NX_RAYCAST_SHAPE))
 	{
-		// ´ÙÀ½ ÁÂÇ¥°¡ Ä³¸¯ÅÍ°¡ °¥¼ö ÀÖ´Â ÁÂÇ¥¶ó¸é ¾Æ¹«·± Á¶ÀÛ¾øÀÌ Delta¸¦ ¸®ÅÏ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¾ï¿½ï¿½ï¿½ Deltaï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		bFind = true;
 	}
-	// ´ÙÀ½ ÁÂÇ¥°¡ Ä³¸¯ÅÍ°¡ °¥¼ö ¾ø´Â ÁÂÇ¥¶ó¸é
-	// °¢¸¸Å­ µ¹·Á¼­ Ã£Àº´ÙÀ½ Àß °¥¼ö ÀÖ°Ô ÇØÁØ´Ù.
-	else if(pkScene)
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
+	else if (pkScene)
 	{
 		NxMat33 kMat1, kMat2;
 		kMat1.id();
@@ -4905,38 +4905,38 @@ NxVec3 PgActor::GetAdjustValidDeltaLoc(NxVec3 kTargetDeltaLoc)
 		kMat1.rotZ(NxMath::degToRad(50.0f));
 		kMat2.rotZ(NxMath::degToRad(-50.0f));
 		NxVec3 kDelta1 = kTargetDeltaLoc;
-		kDelta1 = kMat1 * kDelta1;	//	ÀÌµ¿º¤ÅÍ¸¦ ZÃàÀ» Áß½ÉÀ¸·Î 50µµ È¸Àü
+		kDelta1 = kMat1 * kDelta1;	//	ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í¸ï¿½ Zï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ 50ï¿½ï¿½ È¸ï¿½ï¿½
 		NxVec3 kDelta2 = kTargetDeltaLoc;
-		kDelta2 = kMat2 * kDelta2;	//	ÀÌµ¿º¤ÅÍ¸¦ ZÃàÀ» Áß½ÉÀ¸·Î -50µµ È¸Àü
+		kDelta2 = kMat2 * kDelta2;	//	ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í¸ï¿½ Zï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ -50ï¿½ï¿½ È¸ï¿½ï¿½
 
 		NxExtendedVec3 kAfterPos1 = kCharPos;
-		kAfterPos1 += kDelta1;	//	ZÃàÀ» Áß½ÉÀ¸·Î 50µµ È¸Àü½ÃÅ² ÀÌµ¿º¤ÅÍ¸¸Å­ ÀüÁø.
+		kAfterPos1 += kDelta1;	//	Zï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ 50ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å² ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í¸ï¿½Å­ ï¿½ï¿½ï¿½ï¿½.
 		NxExtendedVec3 kAfterPos2 = kCharPos;
-		kAfterPos2 += kDelta2;	//	ZÃàÀ» Áß½ÉÀ¸·Î -50µµ È¸Àü½ÃÅ² ÀÌµ¿º¤ÅÍ¸¸Å­ ÀüÁø.
-		
-		if (	//	kAfterPos1 ÁÂÇ¥·Î Ä³¸¯ÅÍ°¡ ÀÌµ¿ ÇÒ ¼ö ÀÖ´Â°¡?
+		kAfterPos2 += kDelta2;	//	Zï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ -50ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å² ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í¸ï¿½Å­ ï¿½ï¿½ï¿½ï¿½.
+
+		if (	//	kAfterPos1 ï¿½ï¿½Ç¥ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â°ï¿½?
 			GetWorld()->raycastClosestShape(
-			NxRay(NxVec3((NxReal)kAfterPos1.x, (NxReal)kAfterPos1.y, (NxReal)kAfterPos1.z - (m_pkController->getHeight() * 0.5f)), NX_NEGATIVE_UNIT_Z),
-			NX_STATIC_SHAPES, kHit, -1, 100000.0f, NX_RAYCAST_SHAPE))
+				NxRay(NxVec3((NxReal)kAfterPos1.x, (NxReal)kAfterPos1.y, (NxReal)kAfterPos1.z - (m_pkController->getHeight() * 0.5f)), NX_NEGATIVE_UNIT_Z),
+				NX_STATIC_SHAPES, kHit, -1, 100000.0f, NX_RAYCAST_SHAPE))
 		{
 #ifdef PG_USE_DETAIL_DELTALOC
-			kTargetDeltaLoc = GetAdjustValidDetailDeltaLoc(kTargetDeltaLoc, kDelta1, 50.0f);	//	´õ Á¤¹ÐÇÑ ÁÂÇ¥¸¦ Ã£´Â´Ù.
+			kTargetDeltaLoc = GetAdjustValidDetailDeltaLoc(kTargetDeltaLoc, kDelta1, 50.0f);	//	ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ Ã£ï¿½Â´ï¿½.
 #else
 			kTargetDeltaLoc = kDelta1;
 #endif
 		}
-		else if (	//	kAfterPos2 ÁÂÇ¥·Î Ä³¸¯ÅÍ°¡ ÀÌµ¿ ÇÒ ¼ö ÀÖ´Â°¡?
+		else if (	//	kAfterPos2 ï¿½ï¿½Ç¥ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â°ï¿½?
 			GetWorld()->raycastClosestShape(
-			NxRay(NxVec3((NxReal)kAfterPos2.x, (NxReal)kAfterPos2.y, (NxReal)kAfterPos2.z - (m_pkController->getHeight() * 0.5f)), NX_NEGATIVE_UNIT_Z),
-			NX_STATIC_SHAPES, kHit, -1, 100000.0f, NX_RAYCAST_SHAPE))
+				NxRay(NxVec3((NxReal)kAfterPos2.x, (NxReal)kAfterPos2.y, (NxReal)kAfterPos2.z - (m_pkController->getHeight() * 0.5f)), NX_NEGATIVE_UNIT_Z),
+				NX_STATIC_SHAPES, kHit, -1, 100000.0f, NX_RAYCAST_SHAPE))
 		{
 #ifdef PG_USE_DETAIL_DELTALOC
-			kTargetDeltaLoc = GetAdjustValidDetailDeltaLoc(kTargetDeltaLoc, kDelta2, -50.0f);	//	´õ Á¤¹ÐÇÑ ÁÂÇ¥¸¦ Ã£´Â´Ù.
+			kTargetDeltaLoc = GetAdjustValidDetailDeltaLoc(kTargetDeltaLoc, kDelta2, -50.0f);	//	ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ Ã£ï¿½Â´ï¿½.
 #else
 			kTargetDeltaLoc = kDelta2;
 #endif
 		}
-		else	//	ÀÌµ¿ÇÒ ¼ö ÀÖ´Â °÷ÀÌ ¾ø´Ù¸é, ÀÌµ¿º¤ÅÍ¸¦ 0·Î ¸¸µç´Ù.
+		else	//	ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½, ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í¸ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 		{
 			kTargetDeltaLoc.x = 0.0f;
 			kTargetDeltaLoc.y = 0.0f;
@@ -4962,7 +4962,7 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 
 #ifdef PG_USE_ACTOR_TRACE
 	NxExtendedVec3 beforeUpdatePos = m_pkController->getPosition();
-	NxExtendedVec3 afterUpdatePos = m_pkController->getPosition();	
+	NxExtendedVec3 afterUpdatePos = m_pkController->getPosition();
 	NxExtendedVec3 afterMove1Pos = m_pkController->getPosition();
 	NxExtendedVec3 beforeMove2Pos = m_pkController->getPosition();
 	NxExtendedVec3 afterMove2Pos = m_pkController->getPosition();
@@ -4978,8 +4978,8 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 		PG_STAT(timerA.Stop());
 	}
 
-	// È¸ÀüÀ» º¸°£ÇÑ´Ù.
-	if(GetRotationInterpolTime() < 1.0f)
+	// È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	if (GetRotationInterpolTime() < 1.0f)
 	{
 		SetRotationInterpolTime(1.0f);
 		SetRotation(m_kToRotation);
@@ -4996,18 +4996,18 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 		//m_pkPhysXActor->setGlobalOrientationQuat(kNewRot);
 	}
 
-	float	fJumpHeight=0.0f;
-	if(GetJump())
+	float	fJumpHeight = 0.0f;
+	if (GetJump())
 	{
-		// Á¡ÇÁ ÁßÀÌ¶ó¸é Á¡ÇÁ ³ôÀÌ¸¦ °è»êÇÏÀÚ.
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		// h = (v0 * (t+ delta t) + 0.5 * g(t + delta t)^2) - (v0*t + 0.5 * gt^2)
 		//   = (v0 * (JumpTime + FrameTime) + 0.5 * g(JumpTime + FrameTime)^2) - (v0*t + 0.5 * gt^2)
 		//   = ...
 		//   = v0 + (g * (0.5 * JumpTime + FrameTime))
-		fJumpHeight = GetInitialVelocity() + GetGravity() * (0.5f * fFrameTime +  GetJumpTime());
-		SetJumpTime(GetJumpTime()+fFrameTime);
-		
-		SetMovingDelta(NxVec3(m_kMovingDelta.x,m_kMovingDelta.y,m_kMovingDelta.z+fJumpHeight));
+		fJumpHeight = GetInitialVelocity() + GetGravity() * (0.5f * fFrameTime + GetJumpTime());
+		SetJumpTime(GetJumpTime() + fFrameTime);
+
+		SetMovingDelta(NxVec3(m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z + fJumpHeight));
 		//m_fJumpAccumHeight += fJumpHeight * fFrameTime;
 
 		//NILOG(PGLOG_MINOR, "Moving Delta Jump: %.f, %.f, %.f\n", m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z);
@@ -5016,17 +5016,17 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 	else
 	{
 		m_fJumpAccumHeight = 0.0f;
-		if(!GetFreeMove())
+		if (!GetFreeMove())
 		{
-			SetMovingDelta(NxVec3(m_kMovingDelta.x,m_kMovingDelta.y,-98.0f));
+			SetMovingDelta(NxVec3(m_kMovingDelta.x, m_kMovingDelta.y, -98.0f));
 		}
 	}
-	
+
 	bool	bDoNotSlide = false;
-	
-	Update_IsAbleSlide(fAccumTime, fFrameTime, bDoNotSlide);	// °æ»ç¸é¿¡¼­ ¹Ì²ô·¯Áö±â°¡ °¡´ÉÇÑÁö Ã¼Å© ÇÏ°í
-	
-	if(m_fSpecifiedFrameTime != 0.0f)	//	ÀÌ°Å´Â ÇöÀç ¾²ÀÌÁö ¾Ê´Â´Ù.
+
+	Update_IsAbleSlide(fAccumTime, fFrameTime, bDoNotSlide);	// ï¿½ï¿½ï¿½é¿¡ï¿½ï¿½ ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ï°ï¿½
+
+	if (m_fSpecifiedFrameTime != 0.0f)	//	ï¿½Ì°Å´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 	{
 		SetMovingDelta(m_kMovingDelta * m_fSpecifiedFrameTime);
 		m_fSpecifiedFrameTime = 0.0f;
@@ -5046,12 +5046,12 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 	float fControllerHalfHeight = m_pkController->getExtents().y * 0.5f;
 	float fControllerRadius = m_pkController->getExtents().x;
 #endif
-	
-	// NxController·Î Ä³¸¯ÅÍ¸¦ ¿òÁ÷ÀÎ´Ù.
+
+	// NxControllerï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½.
 	NxU32 collisionFlags = 0;
 
-	// TODO : ¾Æ·¡ ÄÚµå¸¦ Walk·Î »©µµ µÇ´Â°¡?
-	// Set Walking LocationÀ» ¾µ ¶§, ´ÙÀ½ ¿òÁ÷ÀÏ °÷ÀÌ ¶³¾îÁö´Â °÷ÀÌ¸é ¸ø°¡°Ô ÇÏ´Â °Í
+	// TODO : ï¿½Æ·ï¿½ ï¿½Úµå¸¦ Walkï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´Â°ï¿½?
+	// Set Walking Locationï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½
 	//if(m_bCheckCliff)
 	//{
 	//	NxExtendedVec3 kCharPos = m_pkController->getPosition();
@@ -5076,27 +5076,27 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 
 	beforeMove1Pos = m_pkController->getPosition();
 
-	// ¾ó¾î ÀÖÀ¸¸é, Z°ª ¿Ü¿¡´Â ¿òÁ÷ÀÌÁö ¾Ê´Â´Ù.
-	if( GetFreezed() )
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Zï¿½ï¿½ ï¿½Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+	if (GetFreezed())
 	{
-		SetMovingDelta(NxVec3(0.0f,0.0f,m_kMovingDelta.z));
+		SetMovingDelta(NxVec3(0.0f, 0.0f, m_kMovingDelta.z));
 	}
 
 #ifdef PG_USE_ACTOR_AUTOMOVE_EDGE
 	if (GetAdjustValidPos() && GetSlide() == false)
 	{
-		// ´ÙÀ½ ÁÂÇ¥°¡ ¶³¾îÁöÁö ¾Ê°Ô º¸Á¤ÇØ¼­ ÁÂÇ¥¸¦ ¸®ÅÏÇÑ´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		float fDeltaZ = m_kMovingDelta.z;
-		if(!GetJump())
+		if (!GetJump())
 		{
-			SetMovingDelta(NxVec3(m_kMovingDelta.x,m_kMovingDelta.y,0.0f));
+			SetMovingDelta(NxVec3(m_kMovingDelta.x, m_kMovingDelta.y, 0.0f));
 		}
 
 		SetMovingDelta(GetAdjustValidDeltaLoc(m_kMovingDelta));
 
-		if(!GetJump())
+		if (!GetJump())
 		{
-			SetMovingDelta(NxVec3(m_kMovingDelta.x,m_kMovingDelta.y,fDeltaZ));
+			SetMovingDelta(NxVec3(m_kMovingDelta.x, m_kMovingDelta.y, fDeltaZ));
 		}
 	}
 #endif
@@ -5107,21 +5107,21 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 #endif
 
 	bool bPreviousFloor = IsMeetFloor();
-	
-//	m_kSlideVector.zero();
-//	m_bSlide = false;
-	
-	//if(IsMyActor())
-	//{
-	//	_PgOutputDebugString("_______Moving Delta : %.3f, %.3f, %.3f\n", m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z);
-	//}
 
-	
+	//	m_kSlideVector.zero();
+	//	m_bSlide = false;
+
+		//if(IsMyActor())
+		//{
+		//	_PgOutputDebugString("_______Moving Delta : %.3f, %.3f, %.3f\n", m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z);
+		//}
+
+
 	NxVec3	kFinalMove = m_kMovingDelta + m_kMovingAbsolute;
 
 	NxExtendedVec3	kBeforeMove = m_pkController->getPosition();
-	
-	if(m_kMovingAbsolute != NX_ZERO)
+
+	if (m_kMovingAbsolute != NX_ZERO)
 	{
 		unsigned	int	uiActiveGroup = m_uiActiveGrp & (~(1 << PG_PHYSX_GROUP_OBJECT));
 
@@ -5139,15 +5139,15 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 	NxVec3 kCharPos(static_cast<NxReal>(kAfterMove.x), static_cast<NxReal>(kAfterMove.y), static_cast<NxReal>(kAfterMove.z));
 	UpdateBottomRayHit(kCharPos);
 
-	if(!GetFreeMove() && IsOnRidingObject() && GetMovingDelta().z<0)
+	if (!GetFreeMove() && IsOnRidingObject() && GetMovingDelta().z < 0)
 	{
 		NxRay kRay(kCharPos, NX_NEGATIVE_UNIT_Z);
 		NxRaycastHit kHit;
-		NxShape *pkHitShape = GetWorld()->raycastClosestShape(kRay, NX_ALL_SHAPES, kHit, 1<<PG_PHYSX_GROUP_OBJECT, 10000.0f, NX_RAYCAST_SHAPE|NX_RAYCAST_IMPACT);
-		if(pkHitShape && (fabs(kCharPos.z - kHit.worldImpact.z)<PG_CHARACTER_Z_ADJUST) )
+		NxShape* pkHitShape = GetWorld()->raycastClosestShape(kRay, NX_ALL_SHAPES, kHit, 1 << PG_PHYSX_GROUP_OBJECT, 10000.0f, NX_RAYCAST_SHAPE | NX_RAYCAST_IMPACT);
+		if (pkHitShape && (fabs(kCharPos.z - kHit.worldImpact.z) < PG_CHARACTER_Z_ADJUST))
 		{
 
-			kAfterMove = NxExtendedVec3(kAfterMove.x,kAfterMove.y,kHit.worldImpact.z + PG_CHARACTER_Z_ADJUST);
+			kAfterMove = NxExtendedVec3(kAfterMove.x, kAfterMove.y, kHit.worldImpact.z + PG_CHARACTER_Z_ADJUST);
 
 			m_pkController->setPosition(kAfterMove);
 			collisionFlags |= NXCC_COLLISION_DOWN;
@@ -5155,12 +5155,12 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 		}
 	}
 
-	SetPositionChanged( (kAfterMove.x != kBeforeMove.x) || (kAfterMove.y != kBeforeMove.y) || (kAfterMove.z != kBeforeMove.z) );
+	SetPositionChanged((kAfterMove.x != kBeforeMove.x) || (kAfterMove.y != kBeforeMove.y) || (kAfterMove.z != kBeforeMove.z));
 
 	SetMeetFloor((collisionFlags & NXCC_COLLISION_DOWN ? true : false));
 	m_bSide = (collisionFlags & NXCC_COLLISION_SIDES ? true : false);
-	
-	if(IsMyActor())
+
+	if (IsMyActor())
 	{
 		NxVec3 kTempVec = m_kMovingDelta;
 		kTempVec.z = 0.0f;
@@ -5172,11 +5172,11 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 		float fRealMagnitude = kTempVec2.magnitudeSquared();
 
 
-		if(m_bSide && fReserveMagnitude - fRealMagnitude > 1.0f)
+		if (m_bSide && fReserveMagnitude - fRealMagnitude > 1.0f)
 		{
 			//WriteToConsole("[%s] Now character is leaning the wall\n", __FUNCTION__);
 
-			if(m_bDoSimulateOnServer)
+			if (m_bDoSimulateOnServer)
 			{
 				m_bDoSimulateOnServer = false;
 				m_dwLastSimulatedTime = BM::GetTime32();
@@ -5185,7 +5185,7 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 
 			}
 		}
-		else if(!m_bDoSimulateOnServer && BM::GetTime32() - m_dwLastSimulatedTime > 500)
+		else if (!m_bDoSimulateOnServer && BM::GetTime32() - m_dwLastSimulatedTime > 500)
 		{
 			//WriteToConsole("[%s] Broadcast Do Simulate on server\n", __FUNCTION__);
 			m_bDoSimulateOnServer = true;
@@ -5195,9 +5195,9 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 
 	CheckRidingObject();
 
-	if(!GetFreeMove())
+	if (!GetFreeMove())
 	{
-		// ¹«Á¶°Ç ¾Æ·¡·Î Ray¸¦ ½÷¾ß ÇÏ´Â °æ¿ìÀÌ´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ Rayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
 #ifdef USE_CAPSULE_CONTROLLER
 		float fCenterHeight = m_pkController->getHeight() * 0.5f + m_pkController->getRadius();
 		float fLegHeight = m_pkController->getRadius();
@@ -5206,13 +5206,13 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 		float fLegHeight = PG_CHARACTER_CAPSULE_RADIUS;
 #endif
 
-		if(IsMeetFloor())
+		if (IsMeetFloor())
 		{
-			NxActor *pkActor = GetPhysXActor();
-			if(bDoNotSlide == false && m_kControllerShapeHit.shape)
+			NxActor* pkActor = GetPhysXActor();
+			if (bDoNotSlide == false && m_kControllerShapeHit.shape)
 			{
 				NxVec3	const	vNormal = m_kControllerShapeHit.worldNormal;
-				//NxCollisionGroup kGroup = m_kControllerShapeHit.shape->getGroup(); // ¿¤°¡´øÀü ÇÇÁ÷½º Å©·¡½Ã ºÎºÐ. ÇöÀç »ç¿ëÇÏÁö ¾Ê¾Æµµ ¹«°üÇÏ±â¿¡ »èÁ¦ÇÔ
+				//NxCollisionGroup kGroup = m_kControllerShapeHit.shape->getGroup(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 				float fAngleToFloor = NiACos(vNormal.dot(NX_UNIT_Z));
 
@@ -5220,11 +5220,11 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 
 				float	fAngleDeg = NxMath::radToDeg(fAngleToFloor);
 
-				if( (91.0f>=fAngleDeg && PG_LIMITED_ANGLE < fAngleDeg) 
-					//&& (kGroup == PG_PHYSX_GROUP_BASE_FLOOR || kGroup == PG_PHYSX_GROUP_BASE_WALL || kGroup == PG_PHYSX_GROUP_OBJECT) // kGroup¸¦ ¾ò¾î¿Ã¼ö ¾øÀ¸¹Ç·Î »èÁ¦
+				if ((91.0f >= fAngleDeg && PG_LIMITED_ANGLE < fAngleDeg)
+					//&& (kGroup == PG_PHYSX_GROUP_BASE_FLOOR || kGroup == PG_PHYSX_GROUP_BASE_WALL || kGroup == PG_PHYSX_GROUP_OBJECT) // kGroupï¿½ï¿½ ï¿½ï¿½ï¿½Ã¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½
 					)
-				{// µÎ ¹øÀÇ Cross Product·Î ºøº¯ ¹æÇâÀÇ º¤ÅÍ¸¦ ±¸ÇÑ´Ù.
-					if(90.0f > fAngleDeg)
+				{// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Cross Productï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
+					if (90.0f > fAngleDeg)
 					{
 						m_kSlideVector = NX_UNIT_Z.cross(vNormal);
 						m_kSlideVector.normalize();
@@ -5236,9 +5236,9 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 						m_kSlideVector = vNormal;
 					}
 
-					if(GetJump())
+					if (GetJump())
 					{
-						if(0.0f >= fJumpHeight)
+						if (0.0f >= fJumpHeight)
 						{
 							bSlide = true;
 						}
@@ -5249,7 +5249,7 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 					}
 				}
 
-				if(bSlide && !GetSlide())
+				if (bSlide && !GetSlide())
 				{
 					SetSlideStartTime(fAccumTime);
 				}
@@ -5258,37 +5258,37 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 			}
 
 
-			if(!GetSlide())
+			if (!GetSlide())
 			{
 				StopJump();
 			}
 		}
-		else if(!GetJump())
+		else if (!GetJump())
 		{
-			// Ä³¸¯ÅÍ ¹ß ³¡¿¡¼­ ¹Ù´ÚÀ¸·Î Ray¸¦ ½÷¼­ ÇÊ¿äÇÑ Á¤º¸¸¦ ¾ò¾î¿Â´Ù
+			// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù´ï¿½ï¿½ï¿½ï¿½ï¿½ Rayï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½
 			NxExtendedVec3 kCharPosEx = m_pkController->getDebugPosition();
 			NxVec3 kCharPos(static_cast<NxReal>(kCharPosEx.x), static_cast<NxReal>(kCharPosEx.y), static_cast<NxReal>(kCharPosEx.z));
 			NxRay kRay(kCharPos - NxVec3(0.0f, 0.0f, fCenterHeight - 0.5f), NX_NEGATIVE_UNIT_Z);
 			NxRaycastHit kHit;
-			NxShape *pkHitShape = GetWorld()->raycastClosestShape(kRay, NX_STATIC_SHAPES, kHit, 0xffffffff, 10000.0f, NX_RAYCAST_SHAPE);
+			NxShape* pkHitShape = GetWorld()->raycastClosestShape(kRay, NX_STATIC_SHAPES, kHit, 0xffffffff, 10000.0f, NX_RAYCAST_SHAPE);
 
-			if(!pkHitShape || (kCharPos - kHit.worldImpact).magnitude() > fCenterHeight + fLegHeight + 0.5f)
+			if (!pkHitShape || (kCharPos - kHit.worldImpact).magnitude() > fCenterHeight + fLegHeight + 0.5f)
 			{
-				// Àýº®ÀÓ.
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 				m_bFalling = true;
 				StartJump(0);
 				SetSlide(false);
 			}
 			else
 			{
-				// °è´ÜÀÌ°Å³ª, ³»¸®¸·ÀÌ´Ù. floor = true·Î ÇØÁÖÀÚ.
+				// ï¿½ï¿½ï¿½ï¿½Ì°Å³ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½. floor = trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 				SetMeetFloor(true);
 				SetSlide(false);
 			}
 		}
-	
-		// Actor°¡ ÃµÀå¿¡ ºÎµúÇûÀ» ¶§
-		if((collisionFlags & NXCC_COLLISION_UP)	&& (GetInitialVelocity() != 0.0f))
+
+		// Actorï¿½ï¿½ Ãµï¿½å¿¡ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		if ((collisionFlags & NXCC_COLLISION_UP) && (GetInitialVelocity() != 0.0f))
 		{
 			SetInitialVelocity(0.0f);
 			SetJumpTime(0.0f);
@@ -5300,9 +5300,9 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 		GetWorld()->LockPhysX(false);
 	}
 
-	if(GetJump())
+	if (GetJump())
 	{
-		// ¹Ýµå½Ã getDebugPositionÀ» ½á¾ß ÇÑ´Ù. move¸¦ ÇÑ ÈÄ Update°¡ µÇ±â Àü¿¡´Â getPositionÀ¸·Î °¡Á®¿À¸é ÁÂÇ¥°¡ ±×´ë·Î´Ù.
+		// ï¿½Ýµï¿½ï¿½ getDebugPositionï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½. moveï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ Updateï¿½ï¿½ ï¿½Ç±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ getPositionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½×´ï¿½Î´ï¿½.
 		NxExtendedVec3 kCurPos = m_pkController->getDebugPosition();
 		float fRealJumpHeight = static_cast<float>(kCurPos.z - beforeMove1Pos.z);
 		m_fJumpAccumHeight += fRealJumpHeight;
@@ -5312,7 +5312,7 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 	m_kPrevMovingDelta = m_kMovingDelta;
 	SetMovingDelta(NX_ZERO);
 
-	if(m_pkAction && m_pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
+	if (m_pkAction && m_pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
 	{
 		FindPathNormal();
 	}
@@ -5325,9 +5325,9 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 		m_kLastFloorPos.z = (float)curPos.z;
 	}
 
-	if(bPreviousFloor != IsMeetFloor() && GetAction())	//	¹Ù´Ú¿¡¼­ ¶³¾îÁ³°Å³ª È¤Àº ¹Ù´Ú¿¡ ´ê¾ÒÀ»¶§ ½ºÅ©¸³Æ® È£ÃâÇÑ´Ù.
+	if (bPreviousFloor != IsMeetFloor() && GetAction())	//	ï¿½Ù´Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½ È¤ï¿½ï¿½ ï¿½Ù´Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® È£ï¿½ï¿½ï¿½Ñ´ï¿½.
 	{
-		lua_tinker::call<void, lwActor, lwAction,bool>("Actor_OnMeetFloor", lwActor(this), lwAction(GetAction()),IsMeetFloor());
+		lua_tinker::call<void, lwActor, lwAction, bool>("Actor_OnMeetFloor", lwActor(this), lwAction(GetAction()), IsMeetFloor());
 	}
 
 #ifdef PG_USE_ACTOR_TRACE
@@ -5335,17 +5335,17 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 
 	if (m_bTraceUpdate)
 	{
-		if(m_kLastFramePos.z != beforeUpdatePos.z)
+		if (m_kLastFramePos.z != beforeUpdatePos.z)
 		{
 			NILOG(PGLOG_MINOR, "[PgActor] UpdatePhysX - %s actor pos changed form last updatePhysx(%f,%f,%f) to (%f,%f,%f)\n", MB(GetGuid().str()), m_kLastFramePos.x, m_kLastFramePos.y, m_kLastFramePos.z, beforeUpdatePos.x, beforeUpdatePos.y, beforeUpdatePos.z);
 		}
 
-		if(beforeMove1Pos.z != afterMove1Pos.z)
+		if (beforeMove1Pos.z != afterMove1Pos.z)
 		{
 			NILOG(PGLOG_MINOR, "[PgActor] UpdatePhysX - %s actor pos changed form before move1(%f,%f,%f) to after move1(%f,%f,%f)\n", MB(GetGuid().str()), beforeMove1Pos.x, beforeMove1Pos.y, beforeMove1Pos.z, afterMove1Pos.x, afterMove1Pos.y, afterMove1Pos.z);
 		}
 
-		if(beforeMove2Pos.z != afterMove2Pos.z)
+		if (beforeMove2Pos.z != afterMove2Pos.z)
 		{
 			NILOG(PGLOG_MINOR, "[PgActor] UpdatePhysX - %s actor pos changed form before Move2(%f,%f,%f) to after Move2(%f,%f,%f)\n", MB(GetGuid().str()), beforeMove2Pos.x, beforeMove2Pos.y, beforeMove2Pos.z, afterMove2Pos.x, afterMove2Pos.y, afterMove2Pos.z);
 		}
@@ -5370,11 +5370,11 @@ void PgActor::UpdatePhysX(float fAccumTime, float fFrameTime)
 #endif
 	m_kLastFramePos = m_pkController->getPosition();
 }
-void	PgActor::UpdateBottomRayHit(NxVec3 const &kNewPosition)
+void	PgActor::UpdateBottomRayHit(NxVec3 const& kNewPosition)
 {
 	NxRay kRay(kNewPosition, NX_NEGATIVE_UNIT_Z);
 	m_kBottomRayHit.shape = 0;
-	GetWorld()->raycastClosestShape(kRay, NX_ALL_SHAPES, m_kBottomRayHit, m_uiActiveGrp, 10000.0f, NX_RAYCAST_SHAPE|NX_RAYCAST_FACE_NORMAL|NX_RAYCAST_DISTANCE|NX_RAYCAST_IMPACT);
+	GetWorld()->raycastClosestShape(kRay, NX_ALL_SHAPES, m_kBottomRayHit, m_uiActiveGrp, 10000.0f, NX_RAYCAST_SHAPE | NX_RAYCAST_FACE_NORMAL | NX_RAYCAST_DISTANCE | NX_RAYCAST_IMPACT);
 }
 /*
 struct	stTimeCheck
@@ -5408,44 +5408,44 @@ void	PgActor::UpdateWaveEffect(float fAccumTime)
 
 	float	fDelay = GetPositionChanged() ? 0.3f : 1.0f;
 
-	if(fAccumTime - m_fLastWaveEffectUpdateTime > fDelay)
+	if (fAccumTime - m_fLastWaveEffectUpdateTime > fDelay)
 	{
 		m_fLastWaveEffectUpdateTime = fAccumTime;
-		if(g_pkWorld)
+		if (g_pkWorld)
 		{
-			g_pkWorld->UpdateWaveEffect(this,GetPositionChanged());
+			g_pkWorld->UpdateWaveEffect(this, GetPositionChanged());
 		}
 	}
 }
 void	PgActor::CheckRidingObject()
 {
-	if(!m_pkPhysXScene)
+	if (!m_pkPhysXScene)
 	{
 		return;
 	}
 
-	NxScene	*pkScene = m_pkPhysXScene->GetPhysXScene();
-	if(!pkScene)
+	NxScene* pkScene = m_pkPhysXScene->GetPhysXScene();
+	if (!pkScene)
 	{
 		return;
 	}
 
-	PgObject	*pkFoundObject = NULL;
+	PgObject* pkFoundObject = NULL;
 
 
-	NiPoint3	const	&kStart = GetPosition(true);
-	if(IsMeetFloor() || (fabs(m_kBottomRayHit.worldImpact.z - kStart.z)<PG_CHARACTER_Z_ADJUST))
+	NiPoint3	const& kStart = GetPosition(true);
+	if (IsMeetFloor() || (fabs(m_kBottomRayHit.worldImpact.z - kStart.z) < PG_CHARACTER_Z_ADJUST))
 	{
-		NiPoint3	const	kDir = NiPoint3::UNIT_Z*-1;
+		NiPoint3	const	kDir = NiPoint3::UNIT_Z * -1;
 		float	const	fRange = 100.0f;
 
 		NxRaycastHit kHit;
 		NxRay kRay(NxVec3(kStart.x, kStart.y, kStart.z), NxVec3(kDir.x, kDir.y, kDir.z));
-		NxShape *pkHitShape = GetWorld()->raycastClosestShape(kRay, NX_DYNAMIC_SHAPES, kHit, 1<<PG_PHYSX_GROUP_OBJECT, fRange);
+		NxShape* pkHitShape = GetWorld()->raycastClosestShape(kRay, NX_DYNAMIC_SHAPES, kHit, 1 << PG_PHYSX_GROUP_OBJECT, fRange);
 
-		if(pkHitShape)
+		if (pkHitShape)
 		{
-			if(pkHitShape->userData)
+			if (pkHitShape->userData)
 			{
 				pkFoundObject = (PgObject*)pkHitShape->userData;
 			}
@@ -5453,15 +5453,15 @@ void	PgActor::CheckRidingObject()
 	}
 
 
-	if(pkFoundObject != m_pkMountedRidingObject && m_pkMountedRidingObject)
+	if (pkFoundObject != m_pkMountedRidingObject && m_pkMountedRidingObject)
 	{
 		m_pkMountedRidingObject->DemountActor(this);
 		m_pkMountedRidingObject = NULL;
 	}
 
-	if(pkFoundObject)
+	if (pkFoundObject)
 	{
-		if(pkFoundObject->MountActor(this))
+		if (pkFoundObject->MountActor(this))
 		{
 			m_pkMountedRidingObject = pkFoundObject;
 		}
@@ -5471,40 +5471,40 @@ void	PgActor::CheckRidingObject()
 
 bool PgActor::UnmountPet(void)
 {
-	if(!GetPilot() || !GetPilot()->GetUnit() || !GetPilot()->GetUnit()->IsUnitType(UT_PLAYER))
+	if (!GetPilot() || !GetPilot()->GetUnit() || !GetPilot()->GetUnit()->IsUnitType(UT_PLAYER))
 	{
 		return false;
 	}
-	if(m_pkMountedRidingPet == NULL)
+	if (m_pkMountedRidingPet == NULL)
 	{
 		return false;
 	}
 	NiNodePtr pkNodePetRidePt = NiDynamicCast(NiNode, m_pkMountedRidingPet->GetObjectByName(ATTACH_POINT_MOUNT_PET));
 	NiAVObjectPtr pkNodeSceneRoot = GetNIFRoot();
-	if(!pkNodeSceneRoot || !pkNodePetRidePt)
+	if (!pkNodeSceneRoot || !pkNodePetRidePt)
 	{
 		return false;
 	}
 
 	pkNodeSceneRoot = pkNodePetRidePt->DetachChild(pkNodeSceneRoot);
-	if(!pkNodeSceneRoot)
+	if (!pkNodeSceneRoot)
 	{
 		return false;
 	}
 	AttachChild(pkNodeSceneRoot, false);
 	pkNodeSceneRoot->SetTranslate(m_kSceneRootPos);
 	NiActorManager* pkActorMng = GetActorManager();
-	if(pkActorMng)
-	{ //pc nifÀÇ ¿ø·¡ scale °ªÀ» º¹¿ø
+	if (pkActorMng)
+	{ //pc nifï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ scale ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		NiAVObject* pkNifRoot = pkActorMng->GetNIFRoot();
-		if(pkNifRoot)
+		if (pkNifRoot)
 		{
 			pkNifRoot->SetScale(m_fScaleOrig);
 		}
 	}
 
-	DetachNameNodes(m_pkMountedRidingPet->GetNIFRoot(), ATTACH_POINT_RIDENAME); //Å¾½Â¿ë ÀÌ¸§³ëµå ºÐ¸®
-	AttachNameNodes(pkNodeSceneRoot); //ÀÌ¸§ ³ëµå ¿ø»ó º¹±¸
+	DetachNameNodes(m_pkMountedRidingPet->GetNIFRoot(), ATTACH_POINT_RIDENAME); //Å¾ï¿½Â¿ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¸ï¿½
+	AttachNameNodes(pkNodeSceneRoot); //ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_pkMountedRidingPet->AttachNameNodes(m_pkMountedRidingPet->GetNIFRoot());
 
 	ReserveTransitAction(ACTIONNAME_IDLE);
@@ -5513,157 +5513,157 @@ bool PgActor::UnmountPet(void)
 	NiNode::Update(0);
 	m_pkMountedRidingPet->NiNode::Update(0);
 
-	m_pkMountedRidingPet->MoveParticlesToTarget(this); //Æê¿¡°Ô ºÙÀº ÆÄÆ¼Å¬À» ³ª¿¡°Ô·Î ÀÌµ¿..
+	m_pkMountedRidingPet->MoveParticlesToTarget(this); //ï¿½ê¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ ï¿½Ìµï¿½..
 
 	m_pkMountedRidingPet->SetPickupScript("Pet_Pickup");
 	m_pkMountedRidingPet->m_pkMountedRidingPet = NULL;
 	m_pkMountedRidingPet = NULL;
 	PgPilot* pkPilot = g_kPilotMan.FindPilot(GetGuid());
-	if(pkPilot == NULL)
+	if (pkPilot == NULL)
 	{
 		return false;
 	}
 	pkPilot->SetRidingPet(false);
 
-	//¼û±ä ºÎÀ§¸¦ ´Ù½Ã Ç¥½Ã
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ Ç¥ï¿½ï¿½
 	PgAction* pkAction = GetAction();
-	if(pkAction)
+	if (pkAction)
 	{
 		HideParts(EQUIP_LIMIT_WEAPON, false);
 	}
 
-	lua_tinker::call<void, lwActor, bool>("SubActorHide", lwActor(this), true); //½ÖµÕÀÌ º¹±¸
+	lua_tinker::call<void, lwActor, bool>("SubActorHide", lwActor(this), true); //ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	return true;
 }
 
 void PgActor::SyncMountPet(void)
-{ //´Ù¸¥ ¾×ÅÍ°¡ ·ÎµùµÉ ¶§, Å¾½Â »óÅÂ¶ó¸é ¿©±â¼­ Å¾½Â½ÃÅ²´Ù.
+{ //ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½, Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ Å¾ï¿½Â½ï¿½Å²ï¿½ï¿½.
 	CUnit* pkUnit = GetUnit();
-	if(!pkUnit)
+	if (!pkUnit)
 	{
 		return;
 	}
-	switch(pkUnit->UnitType())
+	switch (pkUnit->UnitType())
 	{
 	case UT_PLAYER:
+	{
+		PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkUnit);
+		if (!pkPlayer)
 		{
-			PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkUnit);
-			if(!pkPlayer)
-			{
-				return;
-			}
-			PgActor* pkPetActor = g_kPilotMan.FindActor(pkPlayer->SelectedPetID());
-			if(!pkPetActor)
-			{
-				return;
-			}
-			CUnit* pkPetUnit = pkPetActor->GetUnit();
-			if(!pkPetUnit)
-			{
-				return;
-			}
-			if(IsRidingPet() || !pkPetUnit->GetAbil(AT_MOUNTED_PET_SKILL))
-			{
-				return;
-			}
-			MountPet();
-		}break;
+			return;
+		}
+		PgActor* pkPetActor = g_kPilotMan.FindActor(pkPlayer->SelectedPetID());
+		if (!pkPetActor)
+		{
+			return;
+		}
+		CUnit* pkPetUnit = pkPetActor->GetUnit();
+		if (!pkPetUnit)
+		{
+			return;
+		}
+		if (IsRidingPet() || !pkPetUnit->GetAbil(AT_MOUNTED_PET_SKILL))
+		{
+			return;
+		}
+		MountPet();
+	}break;
 	case UT_PET:
+	{
+		PgActor* pkCallerActor = g_kPilotMan.FindActor(pkUnit->Caller());
+		if (!pkCallerActor || IsRidingPet() || !pkUnit->GetAbil(AT_MOUNTED_PET_SKILL))
 		{
-			PgActor* pkCallerActor = g_kPilotMan.FindActor(pkUnit->Caller());
-			if(!pkCallerActor || IsRidingPet() || !pkUnit->GetAbil(AT_MOUNTED_PET_SKILL) )
-			{
-				return;
-			}
-			pkCallerActor->MountPet();
-		}break;
+			return;
+		}
+		pkCallerActor->MountPet();
+	}break;
 	}
 
 }
 
 bool PgActor::MountPet(void)
 {
-	if(!GetPilot() || !GetPilot()->GetUnit() || !GetPilot()->GetUnit()->IsUnitType(UT_PLAYER) || IsRidingPet())
-	{ //PC°¡ ¾Æ´Ï°Å³ª ÀÌ¹Ì Å¾½Â ÁßÀÌ¶ó¸é ±×³É Á¾·á
+	if (!GetPilot() || !GetPilot()->GetUnit() || !GetPilot()->GetUnit()->IsUnitType(UT_PLAYER) || IsRidingPet())
+	{ //PCï¿½ï¿½ ï¿½Æ´Ï°Å³ï¿½ ï¿½Ì¹ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return false;
 	}
-	//-------------Step1. ÆêÀÇ ¾×ÅÍ¸¦ ¾ò´Â´Ù---------------------------------
+	//-------------Step1. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Â´ï¿½---------------------------------
 	PgPilot* pkPilot = g_kPilotMan.FindPilot(GetGuid());
-	if(pkPilot == NULL)
+	if (pkPilot == NULL)
 	{
 		return false;
 	}
 	PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkPilot->GetUnit());
-	if(pkPlayer == NULL)
+	if (pkPlayer == NULL)
 	{
 		return false;
 	}
 	PgActor* pkActorPet = g_kPilotMan.FindActor(pkPlayer->SelectedPetID());
-	if(pkActorPet == NULL || !IsCompleteLoadParts() || !pkActorPet->IsCompleteLoadParts()) //ÁÖÀÎ°ú Æê ¸ðµÎ ·ÎµùÀÌ ¿Ï·áµÇ¾î ÀÖ¾î¾ß¸¸ ÇÑ´Ù
+	if (pkActorPet == NULL || !IsCompleteLoadParts() || !pkActorPet->IsCompleteLoadParts()) //ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ ï¿½Ö¾ï¿½ß¸ï¿½ ï¿½Ñ´ï¿½
 	{
 		return false;
 	}
-	//-------------Step2. Å¾½Â °¡´ÉÇÑ ÆêÀÎÁö Ã¼Å©----------------------------
+	//-------------Step2. Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©----------------------------
 	PgPilot* pkPetPilot = g_kPilotMan.FindPilot(pkPlayer->SelectedPetID());
-	if(pkPetPilot == NULL)
+	if (pkPetPilot == NULL)
 	{
 		return false;
 	}
 	PgPet* pkPet = dynamic_cast<PgPet*>(pkPetPilot->GetUnit());
-	if(pkPet == NULL || pkPet->UnitType() != UT_PET || pkPet->GetPetType() != EPET_TYPE_3)
-	{ //ÆêÀÌ ¾ø°Å³ª ¶óÀÌµù ÆêÀÌ ¾Æ´Ï¸é
-		return false; //MSG: Å¾½ÂÇÒ ¼ö ÀÖ´Â ÆêÀÌ ¾ø½À´Ï´Ù.
+	if (pkPet == NULL || pkPet->UnitType() != UT_PET || pkPet->GetPetType() != EPET_TYPE_3)
+	{ //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½
+		return false; //MSG: Å¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
 	}
 
-	//--Step3. »óÅÂ Ã¼Å© (Å» ¼ö ÀÖ´Â »óÅÂÀÎ°¡?)
+	//--Step3. ï¿½ï¿½ï¿½ï¿½ Ã¼Å© (Å» ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½?)
 //	PgAction* pkAction = GetAction();
-//	if(!pkAction/* || !IsMeetFloor() || pkAction->GetActionType() != "IDLE"*/) //ÇöÀç Áö¸é¿¡ ¼­ÀÖ°Å³ª ¾ÆÀÌµé »óÅÂÀÏ¶§¸¸ °¡´É
+//	if(!pkAction/* || !IsMeetFloor() || pkAction->GetActionType() != "IDLE"*/) //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¿¡ ï¿½ï¿½ï¿½Ö°Å³ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //	{
-//		return false; //MSG: Å¾½ÂÇÒ ¼ö ¾ø´Â »óÅÂÀÔ´Ï´Ù.
+//		return false; //MSG: Å¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 //	}
 
 
 
-	//Å¾½ÂÇÒ ÆêÀÇ »õ À§Ä¡·Î ÀÌ¸§³ëµå ºÙÀÓ
-	if(m_pTextBalloon) //MountPet() ÇÔ¼ö°¡ µÎ¹ø ÀÌ»ó È£ÃâµÉ °æ¿ì¸¦ ´ëºñÇØ¼­ Ã¼Å©ÇØ¾ß ÇÑ´Ù.
+	//Å¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (m_pTextBalloon) //MountPet() ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½ ï¿½Ì»ï¿½ È£ï¿½ï¿½ï¿½ ï¿½ï¿½ì¸¦ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ Ã¼Å©ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.
 	{
 		m_pTextBalloon->SetEnable(false);
 	}
-	DetachNameNodes(GetNIFRoot()); //³ëµå ºÐ¸®Àü¿¡ ÀÌ¸§³ëµå ºÐ¸®
+	DetachNameNodes(GetNIFRoot()); //ï¿½ï¿½ï¿½ ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¸ï¿½
 	pkActorPet->DetachNameNodes(pkActorPet->GetNIFRoot());
 	AttachNameNodes(pkActorPet->GetNIFRoot(), ATTACH_POINT_RIDENAME);
 
-	//--Step4. ÄÁÆ®·Ñ·¯ µ¿±âÈ­(ÆêÀÇ ÄÁÆ®·Ñ·¯¸¦ PCÀÇ ÄÁÆ®·Ñ·¯¿Í °°ÀÌ °­Á¦·Î À§Ä¡ ½ÃÅ²´Ù.)
+	//--Step4. ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ ï¿½ï¿½ï¿½ï¿½È­(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ PCï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½Å²ï¿½ï¿½.)
 	pkActorPet->SetPosition(GetPosition(true));
 	pkActorPet->SetLookingDirection(GetDirection());
 
-	//--Step5. ³ëµå ºÙÀÌ±â(ÆêÀÇ Æ¯Á¤ ³ëµå¿¡ Ä³¸¯ÅÍ ·çÆ® ³ëµå¸¦ ºÙÈù´Ù)---
+	//--Step5. ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½(ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½å¿¡ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)---
 	NiNodePtr pkNodeSceneRoot = NiDynamicCast(NiNode, GetNIFRoot());
-	if(!pkNodeSceneRoot)
+	if (!pkNodeSceneRoot)
 	{
 		return false;
 	}
 	NiAVObjectPtr pkObjCharRoot = pkNodeSceneRoot->GetObjectByName(ATTACH_POINT_PC_TO_PET);
 	NiNodePtr pkNodePetRidePt = NiDynamicCast(NiNode, pkActorPet->GetObjectByName(ATTACH_POINT_MOUNT_PET));
-	if(!pkObjCharRoot || !pkNodePetRidePt)
+	if (!pkObjCharRoot || !pkNodePetRidePt)
 	{
 		return false;
 	}
-	if(pkNodePetRidePt->GetWorldScale() == 0)
+	if (pkNodePetRidePt->GetWorldScale() == 0)
 	{
 		pkNodePetRidePt->SetWorldScale(1.f);
 	}
 
 	m_kSceneRootPos = pkNodeSceneRoot->GetTranslate();
-	pkNodeSceneRoot->SetTranslate( pkObjCharRoot->GetTranslate() );
+	pkNodeSceneRoot->SetTranslate(pkObjCharRoot->GetTranslate());
 
 	float fScale = pkNodePetRidePt->GetWorldScale();
 	NiActorManager* pkActorMng = GetActorManager();
-	if(pkActorMng)
-	{ //Æê xml¿¡¼­ scaleÀ» °­Á¦·Î Å°¿ü´Ù¸é Å¾½Â ÈÄ PCÀÇ scaleµµ Ä¿Áö¹Ç·Î Å¾½Â Àü pcÀÇ scaleÀ» ¹Ì¸® ÁÙ¿©ÁØ´Ù.
+	if (pkActorMng)
+	{ //ï¿½ï¿½ xmlï¿½ï¿½ï¿½ï¿½ scaleï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½Ù¸ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ PCï¿½ï¿½ scaleï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½Ç·ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ pcï¿½ï¿½ scaleï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ù¿ï¿½ï¿½Ø´ï¿½.
 		NiAVObject* pkNifRoot = pkActorMng->GetNIFRoot();
-		if(pkNifRoot)
+		if (pkNifRoot)
 		{
 			m_fScaleOrig = pkNifRoot->GetScale();
 			pkNifRoot->SetScale(1.f / fScale);
@@ -5679,84 +5679,84 @@ bool PgActor::MountPet(void)
 	NiNode::Update(0);
 	m_pkMountedRidingPet->NiNode::Update(0);
 	pkPilot->SetRidingPet(true);
-	
-	ReserveTransitAction(ACTIONNAME_RP_IDLE); //PC¾×¼Ç ¾ÆÀÌµé·Î..
-	m_pkMountedRidingPet->ReserveTransitAction(ACTIONNAME_RIDING); //Æê¾×¼Ç ¾ÆÀÌµé·Î..
+
+	ReserveTransitAction(ACTIONNAME_RP_IDLE); //PCï¿½×¼ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½..
+	m_pkMountedRidingPet->ReserveTransitAction(ACTIONNAME_RIDING); //ï¿½ï¿½×¼ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½..
 
 
-	MoveParticlesToTarget(m_pkMountedRidingPet); //³ª¿¡°Ô ºÙÀº ÆÄÆ¼Å¬À» Æê¿¡°Ô·Î ÀÌµ¿..
+	MoveParticlesToTarget(m_pkMountedRidingPet); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ê¿¡ï¿½Ô·ï¿½ ï¿½Ìµï¿½..
 
-	//¹«±â¸¦ °¨Ãá´Ù.
+	//ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	HideParts(EQUIP_LIMIT_WEAPON, true);
 	m_pkMountedRidingPet->SetPickupScript("Actor_Pickup");
 
-	lua_tinker::call<void, lwActor, bool>("SubActorHide", lwActor(this), true); //½ÖµÕÀÌ ¼û±è
+	lua_tinker::call<void, lwActor, bool>("SubActorHide", lwActor(this), true); //ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	return true;
 }
 
 NiAVObjectPtr PgActor::GetCharRoot(void)
-{ //CharRoot Node¸¦ ¾ò¾î¾ß ÇÑ´Ù¸é ¹Ýµå½Ã ÀÌ ÇÔ¼ö¿¡¼­ ¾ò¾î¾ß ÇÑ´Ù. Æê Å¾½Â ¿©ºÎ¿¡ µû¶ó ÂüÁ¶ ´ë»óÀÌ ´Þ¶óÁú ¼ö ÀÖ±â ¶§¹®ÀÌ´Ù
+{ //CharRoot Nodeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´Ù¸ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½. ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½
 	return GetMainNIFRoot();
 }
 
 void	PgActor::CheckInvalidSpace()	//	Check whether the actor is standing on some impossible location.
 {
-	if(IsMyActor() == false || !m_pkController)
+	if (IsMyActor() == false || !m_pkController)
 	{
 		return;
 	}
 
 	NxVec3 vCurrentPos(static_cast<float>(m_pkController->getPosition().x)
-					,static_cast<float>(m_pkController->getPosition().y)
-					,static_cast<float>(m_pkController->getPosition().z)
-					);
+		, static_cast<float>(m_pkController->getPosition().y)
+		, static_cast<float>(m_pkController->getPosition().z)
+	);
 
-	if(NX_ZERO != m_vPrevControllerPos)
+	if (NX_ZERO != m_vPrevControllerPos)
 	{
 		NxVec3	vDir = vCurrentPos - m_vPrevControllerPos;
 		float	fDistance = vDir.normalize();
 
-		if( 0.0f == fDistance )
+		if (0.0f == fDistance)
 		{
 			return;
 		}
 
-		if(g_pkWorld)
+		if (g_pkWorld)
 		{
 			PgUserRaycastReport	kHitReport;
 			g_pkWorld->DetachAllParticle();
 
-			NxU32 uCount1 = g_pkWorld->raycastAllShapes(NxRay(m_vPrevControllerPos,vDir),kHitReport,NX_STATIC_SHAPES,(1<<PG_PHYSX_GROUP_BASE_FLOOR),fDistance,NX_RAYCAST_SHAPE);
+			NxU32 uCount1 = g_pkWorld->raycastAllShapes(NxRay(m_vPrevControllerPos, vDir), kHitReport, NX_STATIC_SHAPES, (1 << PG_PHYSX_GROUP_BASE_FLOOR), fDistance, NX_RAYCAST_SHAPE);
 
-			for(unsigned int i=0;i<uCount1;++i)
+			for (unsigned int i = 0; i < uCount1; ++i)
 			{
-				NxVec3	const &vPos = kHitReport.GetHitReports().at(i).worldImpact;
-				g_pkWorld->AttachParticle(g_kParticleMan.GetParticle("QuestNotify_Help"),NiPoint3(vPos.x,vPos.y,vPos.z));
+				NxVec3	const& vPos = kHitReport.GetHitReports().at(i).worldImpact;
+				g_pkWorld->AttachParticle(g_kParticleMan.GetParticle("QuestNotify_Help"), NiPoint3(vPos.x, vPos.y, vPos.z));
 			}
-			NxU32 uCount2 = g_pkWorld->raycastAllShapes(NxRay(vCurrentPos,-vDir),kHitReport,NX_STATIC_SHAPES,(1<<PG_PHYSX_GROUP_BASE_FLOOR),fDistance,NX_RAYCAST_SHAPE);
-			for(unsigned int i=0;i<uCount2;++i)
+			NxU32 uCount2 = g_pkWorld->raycastAllShapes(NxRay(vCurrentPos, -vDir), kHitReport, NX_STATIC_SHAPES, (1 << PG_PHYSX_GROUP_BASE_FLOOR), fDistance, NX_RAYCAST_SHAPE);
+			for (unsigned int i = 0; i < uCount2; ++i)
 			{
-				NxVec3	const &vPos = kHitReport.GetHitReports().at(i).worldImpact;
-				g_pkWorld->AttachParticle(g_kParticleMan.GetParticle("QuestNotify_Ing"),NiPoint3(vPos.x,vPos.y,vPos.z));
+				NxVec3	const& vPos = kHitReport.GetHitReports().at(i).worldImpact;
+				g_pkWorld->AttachParticle(g_kParticleMan.GetParticle("QuestNotify_Ing"), NiPoint3(vPos.x, vPos.y, vPos.z));
 			}
 
-			if(uCount1 > uCount2)
+			if (uCount1 > uCount2)
 			{
 
 				BM::Stream	kPacket(PT_C_M_NOTI_DETECTION_HACKING);
 				kPacket.Push(DHT_HIDE_IN_BOX);
 				NETWORK_SEND(kPacket)
 
-					TransitAction(GetReservedAction(RA_IDLE),true,0,DIR_NONE,true);
-				SetPosition(NiPoint3(m_vPrevControllerPos.x,m_vPrevControllerPos.y,m_vPrevControllerPos.z));
+					TransitAction(GetReservedAction(RA_IDLE), true, 0, DIR_NONE, true);
+				SetPosition(NiPoint3(m_vPrevControllerPos.x, m_vPrevControllerPos.y, m_vPrevControllerPos.z));
 				return;
 			}
 		}
 	}
 
 	m_vPrevControllerPos = vCurrentPos;
-	
+
 }
 
 bool PgActor::Update(float fAccumTime, float fFrameTime)
@@ -5778,7 +5778,7 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 
 
 
-	// °¢ InvisibleGroupº° Update¿©ºÎ¸¦ ¼³Á¤ÇÑ´Ù. frameTime°ú´Â ¹«°üÇÏ°Ô ÁøÇàµÈ´Ù.
+	// ï¿½ï¿½ InvisibleGroupï¿½ï¿½ Updateï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. frameTimeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½È´ï¿½.
 	float fCurrentTime = NiGetCurrentTimeInSec();
 	bool bUpdateThisFrame = false;
 	float fModifiedFrameTime = fFrameTime;
@@ -5817,79 +5817,79 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 
 	PG_STAT(timerB.Start());
 	const	bool bIsMyActor = IsMyActor();
-		
-	//	¾Ö´Ï¸ÞÀÌ¼Ç Å¸ÀÓ °è»ê(¼Óµµ Á¶Àýµî¿¡ ÀÇÇØ ¹Ù²ð ¼ö ÀÖÀ½)
-	const	float	fAnimationAccumTime = CalcAnimationAccumTime(fAccumTime,fFrameTime);
-	
-	// ¿ùµå°´Ã¼ °øÅë Update¸¦ ¼öÇàÇÑ´Ù.
+
+	//	ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+	const	float	fAnimationAccumTime = CalcAnimationAccumTime(fAccumTime, fFrameTime);
+
+	// ï¿½ï¿½ï¿½å°´Ã¼ ï¿½ï¿½ï¿½ï¿½ Updateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	if (bUpdateThisFrame)
 	{
 		PgIWorldObject::Update(fAccumTime, fModifiedFrameTime);
 	}
 	//kTC[2].End();
 	//kTC[3].Start();
-	//	Ãæµ¹ ´ë¹ÌÁö Ã¼Å© - °Å¸®°¡ ¸Ö¸é ¾Æ¿¹ ¾ÈÇØµµ µÈ´Ù.
+	//	ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© - ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö¸ï¿½ ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½Øµï¿½ ï¿½È´ï¿½.
 	if (GetInvisibleGrade() <= PgActor::INVISIBLE_NEAR)
 	{
 		CheckTouchDmg();
 	}
 	PG_STAT(timerB.Stop());
-	
-	if(m_dwLastFrameTime == 0)
+
+	if (m_dwLastFrameTime == 0)
 	{
 		m_dwLastFrameTime = BM::GetTime32();
 	}
 
-	if(m_spSpotLightGeom)
+	if (m_spSpotLightGeom)
 	{
-		NiAVObject	*pkLightGeom = m_spSpotLightGeom;
-		PgParticle	*pkParticle = (PgParticle*)(pkLightGeom);
-		if(pkParticle)
+		NiAVObject* pkLightGeom = m_spSpotLightGeom;
+		PgParticle* pkParticle = (PgParticle*)(pkLightGeom);
+		if (pkParticle)
 		{
-			pkParticle->Update(fAccumTime,fFrameTime);
+			pkParticle->Update(fAccumTime, fFrameTime);
 		}
 	}
 
 	UpdateWaveEffect(fAccumTime);
 	//kTC[3].End();
 	//kTC[4].Start();
-	
-	//	¹Ð±â
+
+	//	ï¿½Ð±ï¿½
 	UpdatePush(fFrameTime);
 
 	PG_STAT(timerC.Start());
 	//if (bUpdateThisFrame || m_kCanUpdate[PgActor::INVISIBLE_MIDDLE])
 	{
 		bool bUpdateDefaultProcess = true;
-		if(IsNowFollowing())
+		if (IsNowFollowing())
 		{
 			bUpdateDefaultProcess = ProcessFollowingActor();
 		}
-		else if(!bIsMyActor)
+		else if (!bIsMyActor)
 		{
 			bUpdateDefaultProcess = (IsSync() ? UpdateSync(fModifiedFrameTime) : ProcessActionQueue());
 		}
 
-		if(bUpdateDefaultProcess)
+		if (bUpdateDefaultProcess)
 		{
 			int iNextActionNo = 0;
-			if( SkillSetAction().GetReservedAction(iNextActionNo, this) )
+			if (SkillSetAction().GetReservedAction(iNextActionNo, this))
 			{
 				//ReserveTransitAction(iNextActionNo);
 				TryReserveActionToMyActor(iNextActionNo);
 			}
 
-			//	¿¹¾àµÈ ¾×¼Ç ÀüÈ¯À» Ã³¸®ÇÑ´Ù.
+			//	ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ñ´ï¿½.
 			DoReservedTransitAction();
 			//kTC[4].End();
 			//kTC[5].Start();
 
-			//! ¿¢ÅÍ FSMÀ» °»½ÅÇÑ´Ù.
+			//! ï¿½ï¿½ï¿½ï¿½ FSMï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 #ifndef EXTERNAL_RELEASE
-			if(lua_tinker::call<bool>("UpdateActorFSM"))
+			if (lua_tinker::call<bool>("UpdateActorFSM"))
 #endif
 			{
-				if(m_pkAction)
+				if (m_pkAction)
 				{
 					m_pkAction->UpdateFSM(this, fAccumTime, fModifiedFrameTime);
 				}
@@ -5897,9 +5897,9 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 			//kTC[5].End();
 
 			//kTC[6].Start();
-			// PhysX¸¦ ¾÷µ¥ÀÌÆ® ÇÑ´Ù.
+			// PhysXï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ñ´ï¿½.
 #ifndef EXTERNAL_RELEASE
-			if(lua_tinker::call<bool>("UpdateActorPhysX"))
+			if (lua_tinker::call<bool>("UpdateActorPhysX"))
 #endif
 			{
 				UpdatePhysX(fAccumTime, fModifiedFrameTime);
@@ -5908,11 +5908,11 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 		}
 	}
 	//kTC[7].Start();
-	// µî·ÏµÈ ½ºÅ©¸³Æ®°¡ ÀÖ´Ù¸é, ¾÷µ¥ÀÌÆ® ÇÑ´Ù.
-	if(!GetUpdateScript().empty())
+	// ï¿½ï¿½Ïµï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ñ´ï¿½.
+	if (!GetUpdateScript().empty())
 	{
 		NIMETRICS_EVAL(NiMetricsClockTimer a("PgMobileSuit.lua_call"));
-		NIMETRICS_STARTTIMER(a);		
+		NIMETRICS_STARTTIMER(a);
 		lua_tinker::call<bool, lwActor, float, float>(MB(GetUpdateScript().c_str()), lwActor(this), fAccumTime, fFrameTime);
 		NIMETRICS_ENDTIMER(a);
 	}
@@ -5921,27 +5921,27 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 	PG_STAT(timerD.Start());
 
 	PickUpNearItem();
-	
-	UpdateTrigger();	// ¹°·ÁÀÖ´Â ¾×¼Ç Á¶°Ç Æ®¸®°Å¸¦ ¹ßµ¿ÇÑ´Ù.
+
+	UpdateTrigger();	// ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ßµï¿½ï¿½Ñ´ï¿½.
 	//kTC[7].End();
 	//kTC[8].Start();
 
-	// ¿¡´Ï¸ÞÀÌ¼ÇÀ» °»½ÅÇÑ´Ù, Ä³¸¯ÅÍ°¡ ÄÃ¸µ µÇ¾î ÀÖÀ» ¶§´Â ÀÏÁ¤ ½Ã°£¸¶´Ù ¾÷µ¥ÀÌÆ®¸¦ ÇØÁØ´Ù.
+	// ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½, Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ã¸ï¿½ ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 	if (bUpdateThisFrame)
 	{
 		UpdateActorManager(fAnimationAccumTime);
 	}
 	//kTC[8].End();
 	//kTC[9].Start();
-	
-	DoLoadingFinishWork();	//	·Îµù ³¡³µÀ» ¶§ÀÇ Ã³¸®
-	// ¿¹¾àµÈ ItemµéÀ» Equip ÇÑ´Ù.
+
+	DoLoadingFinishWork();	//	ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ Itemï¿½ï¿½ï¿½ï¿½ Equip ï¿½Ñ´ï¿½.
 	UpdateItemEquip();
 
 	//kTC[9].End();
 	//kTC[10].Start();
 
-	//! ¾×¼Ç ·¹ÀÌ¾î°¡ ÀÖÀ¸¸é ¾÷µ¥ÀÌÆ® ÇÑ´Ù.
+	//! ï¿½×¼ï¿½ ï¿½ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ñ´ï¿½.
 	//if(m_kActionLayerContainer.size())
 	//{
 	//	ActionLayerContainer::const_iterator itr = m_kActionLayerContainer.begin();
@@ -5955,58 +5955,58 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 	PG_STAT(timerD.Stop());
 
 	PG_STAT(timerE.Start());
-	if(m_pkActionEffectStack && !m_pkActionEffectStack->IsEmpty())
+	if (m_pkActionEffectStack && !m_pkActionEffectStack->IsEmpty())
 	{
-		m_pkActionEffectStack->Update(fAccumTime,fFrameTime);
+		m_pkActionEffectStack->Update(fAccumTime, fFrameTime);
 	}
 
 	if (bUpdateThisFrame)
 	{
-		
-		TransitActorSpecular(fModifiedFrameTime);	//	»ö±ò ¹Ù²Ù±â
-		TransitAlpha(fModifiedFrameTime);	//	Åõ¸íµµ ¹Ù²Ù±â
-		TransitColor(fModifiedFrameTime);	//	Åõ¸íµµ ¹Ù²Ù±â
-		UpdateBlink(fModifiedFrameTime);// Ä³¸¯ÅÍ°¡ ±ô¹Ú°Å·Á¾ß ÇÑ´Ù¸é
-		//UpdateTwist();// Ä³¸¯ÅÍ°¡ ºù±Ûºù±Û µ¹¾Æ¾ß ÇÑ´Ù¸é
+
+		TransitActorSpecular(fModifiedFrameTime);	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
+		TransitAlpha(fModifiedFrameTime);	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
+		TransitColor(fModifiedFrameTime);	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
+		UpdateBlink(fModifiedFrameTime);// Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Ú°Å·ï¿½ï¿½ï¿½ ï¿½Ñ´Ù¸ï¿½
+		//UpdateTwist();// Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Ûºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ ï¿½Ñ´Ù¸ï¿½
 	}
-	
+
 	UpdateSkillInfos();
 
-	//	½ºÄÉÀÏ¸µ Ã³¸®
-	if(bUpdateThisFrame)
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ Ã³ï¿½ï¿½
+	if (bUpdateThisFrame)
 	{
 		UpdateScale();
 	}
 
-	// ³ëµå¾ËÆÄ Ã³¸®
-	if(bUpdateThisFrame)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+	if (bUpdateThisFrame)
 	{
 		UpdateNodeAlpha();
 	}
 
-	//	¸Ó¸®Å©±â
-	if(bUpdateThisFrame)
+	//	ï¿½Ó¸ï¿½Å©ï¿½ï¿½
+	if (bUpdateThisFrame)
 	{
-		UpdateHeadSize(fFrameTime,fAccumTime);
+		UpdateHeadSize(fFrameTime, fAccumTime);
 	}
 
-	// ÀÌÆåÆ® Ä«¿îµå ´Ù¿î
+	// ï¿½ï¿½ï¿½ï¿½Æ® Ä«ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½
 	UpdateEffectCountDonw(fFrameTime);
-	
-	UpdateGodTime(fAccumTime);	//	¹«Àû Å¸ÀÓ
-	UpdateDamageBlink(fAccumTime);//	´ë¹ÌÁö ºí¸µÅ©
 
-	CUnit * pkUnit = GetPilot() && GetPilot()->GetUnit() ? GetPilot()->GetUnit() : NULL;
-	if(pkUnit)
+	UpdateGodTime(fAccumTime);	//	ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
+	UpdateDamageBlink(fAccumTime);//	ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å©
+
+	CUnit* pkUnit = GetPilot() && GetPilot()->GetUnit() ? GetPilot()->GetUnit() : NULL;
+	if (pkUnit)
 	{
 		unsigned long const ulElapsedTime = g_pkApp ? g_pkApp->GetEventViewElapsed() : 0;
 
 		pkUnit->AutoGroggy(ulElapsedTime);
 
-	  	if(pkUnit->IsUnitType(UT_SUMMONED))
-	    {
-		    pkUnit->AutoHeal(ulElapsedTime);
-	    }
+		if (pkUnit->IsUnitType(UT_SUMMONED))
+		{
+			pkUnit->AutoHeal(ulElapsedTime);
+		}
 	}
 
 	//kTC[10].End();
@@ -6016,7 +6016,7 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 	//kTC[11].End();
 	//kTC[12].Start();
 
-	// Update½Ã°£ ±â·Ï.
+	// Updateï¿½Ã°ï¿½ ï¿½ï¿½ï¿½.
 	for (int i = 0; i < MAX_NUM_INVISIBLE; ++i)
 	{
 		if (m_kCanUpdate[i])
@@ -6026,25 +6026,25 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 	}
 	//kTC[12].End();
 
-	if(m_fAutoDeleteActorTime != 0.0f)
+	if (m_fAutoDeleteActorTime != 0.0f)
 	{
 		float fElapsedTime = fAccumTime - m_fAutoDeleteActorStartTime;
-		if(m_fAutoDeleteActorTime < fElapsedTime)
+		if (m_fAutoDeleteActorTime < fElapsedTime)
 		{
 			GetWorld()->RemoveObjectOnNextUpdate((BM::GUID)GetPilotGuid());
 			m_fAutoDeleteActorTime = 0.0f;
 		}
 	}
 
-	if(IsMyActor() && g_pkWorld)
+	if (IsMyActor() && g_pkWorld)
 	{
-		if(GetAction() && GetAction()->GetActionOptionEnable(PgAction::AO_DISABLE_SMALLAREACHECK) == false)
+		if (GetAction() && GetAction()->GetActionOptionEnable(PgAction::AO_DISABLE_SMALLAREACHECK) == false)
 		{
 			g_pkWorld->UpdateSmallAreaIndex(GetPosition());
 		}
 	}
 
-	// ¸¶Áö¸· ÇÁ·¹ÀÓ ½Ã°£À» ±¸ÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 	m_dwLastFrameTime = BM::GetTime32();
 	//kTC[0].End();
 
@@ -6067,14 +6067,14 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 	//	strcat(msg,"\n");
 	//	_PgOutputDebugString(msg);
 	//}
-	m_bIsOptimizeSleep = true;	//´ÙÀ½¹ø ÇÁ·¹ÀÓ¿¡´Â ¹«Á¶°Ç ´Ù½Ã ÄÑÀÚ
+	m_bIsOptimizeSleep = true;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	UpdateStatusEffect(fAccumTime, fFrameTime);
 
 
-	//Å¾½Â ÁßÀÌ¸é, ÆêÀÇ ÄÁÆ®·Ñ·¯¸¦ PCÀÇ ÄÁÆ®·Ñ·¯¿Í ÀÏÄ¡½ÃÅ²´Ù (ÀÌµ¿, ¹æÇâ)
-	if(m_pkMountedRidingPet != NULL && GetPilot() && GetPilot()->GetUnit() && GetPilot()->GetUnit()->IsUnitType(UT_PLAYER))
-	{ //ÆêÀÇ °æ¿ì, ÀÌ ·çÆ¾À» Å¸¸é ¾ÈµÈ´Ù.
+	//Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ PCï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½Å²ï¿½ï¿½ (ï¿½Ìµï¿½, ï¿½ï¿½ï¿½ï¿½)
+	if (m_pkMountedRidingPet != NULL && GetPilot() && GetPilot()->GetUnit() && GetPilot()->GetUnit()->IsUnitType(UT_PLAYER))
+	{ //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½Æ¾ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ÈµÈ´ï¿½.
 		m_pkMountedRidingPet->SetPosition(GetPosition(true));
 		NiPoint3 kDir = GetLookingDir();
 		m_pkMountedRidingPet->ConcilDirection(kDir);
@@ -6088,23 +6088,23 @@ bool PgActor::Update(float fAccumTime, float fFrameTime)
 void PgActor::UpdateRidingInfo(float fAccumTime, float fFrameTime)
 {
 	int	iTotalSrc = m_vKinematicSrcCont.size();
-	for(int i=0;i<iTotalSrc;++i)
+	for (int i = 0; i < iTotalSrc; ++i)
 	{
-		NiPhysXKinematicSrc	*pkSrc = m_vKinematicSrcCont[i];
-		NiAVObject	*pkGBSource = pkSrc->GetSource();
+		NiPhysXKinematicSrc* pkSrc = m_vKinematicSrcCont[i];
+		NiAVObject* pkGBSource = pkSrc->GetSource();
 
-		if(!pkGBSource)
+		if (!pkGBSource)
 		{
 			continue;
 		}
 
-		NxActor	*pkTarget = pkSrc->GetTarget();
-		if(!pkTarget)
+		NxActor* pkTarget = pkSrc->GetTarget();
+		if (!pkTarget)
 		{
 			continue;
 		}
 
-		NxMat34	&kGlobalPose = pkTarget->getGlobalPose();
+		NxMat34& kGlobalPose = pkTarget->getGlobalPose();
 
 		kGlobalPose.t.x = pkGBSource->GetWorldTranslate().x;
 		kGlobalPose.t.y = pkGBSource->GetWorldTranslate().y;
@@ -6113,10 +6113,10 @@ void PgActor::UpdateRidingInfo(float fAccumTime, float fFrameTime)
 		pkTarget->setGlobalPose(kGlobalPose);
 	}
 }
-float	PgActor::CalcAnimationAccumTime(float fAccumTime,float fFrameTime)
+float	PgActor::CalcAnimationAccumTime(float fAccumTime, float fFrameTime)
 {
 	float	fRealFrameTime = 0;
-	if(m_fBeforeAccumTime > 0)
+	if (m_fBeforeAccumTime > 0)
 	{
 		fRealFrameTime = fAccumTime - m_fBeforeAccumTime;
 	}
@@ -6125,17 +6125,17 @@ float	PgActor::CalcAnimationAccumTime(float fAccumTime,float fFrameTime)
 	float	fAnimationAccumTime = fAccumTime;
 	float	fAnimationFrameTime = fFrameTime;
 
-	if(m_fTotalAnimSpeedControlTime>0 || m_fTotalAnimSpeedControlTime == -1)
+	if (m_fTotalAnimSpeedControlTime > 0 || m_fTotalAnimSpeedControlTime == -1)
 	{
 		float	fElapsedTime = fAccumTime - m_fAnimSpeedControlStartTime;
-		if(m_fTotalAnimSpeedControlTime != -1 && fElapsedTime>m_fTotalAnimSpeedControlTime)
+		if (m_fTotalAnimSpeedControlTime != -1 && fElapsedTime > m_fTotalAnimSpeedControlTime)
 		{
 			m_fTotalAnimSpeedControlTime = 0;
-		}	
+		}
 		else
 		{
-			m_fAccumTimeAdjust -= (fRealFrameTime - fRealFrameTime*m_fAnimSpeedControlValue);
-			fAnimationFrameTime *=m_fAnimSpeedControlValue;
+			m_fAccumTimeAdjust -= (fRealFrameTime - fRealFrameTime * m_fAnimSpeedControlValue);
+			fAnimationFrameTime *= m_fAnimSpeedControlValue;
 		}
 	}
 
@@ -6145,14 +6145,14 @@ float	PgActor::CalcAnimationAccumTime(float fAccumTime,float fFrameTime)
 }
 void	PgActor::UpdateTrigger()
 {
-	if( m_pkAction 
-		&& m_pkCurrentTrigger 
-		&& !m_bCurrentTriggerAct 
-		&& PgTrigger::TRIGGER_TYPE_JOB_SKILL != m_pkCurrentTrigger->GetTriggerType() 
+	if (m_pkAction
+		&& m_pkCurrentTrigger
+		&& !m_bCurrentTriggerAct
+		&& PgTrigger::TRIGGER_TYPE_JOB_SKILL != m_pkCurrentTrigger->GetTriggerType()
 		)
 	{
-		if( PgTrigger::CT_ACTION == m_pkCurrentTrigger->GetConditionType()
-		&&	(m_pkCurrentTrigger->GetConditionAction() == m_pkAction->GetID() || GetActionState(m_pkCurrentTrigger->GetConditionAction().c_str())) )
+		if (PgTrigger::CT_ACTION == m_pkCurrentTrigger->GetConditionType()
+			&& (m_pkCurrentTrigger->GetConditionAction() == m_pkAction->GetID() || GetActionState(m_pkCurrentTrigger->GetConditionAction().c_str())))
 		{
 			m_pkCurrentTrigger->OnAction(this);
 			m_bCurrentTriggerAct = true;
@@ -6162,24 +6162,24 @@ void	PgActor::UpdateTrigger()
 void	PgActor::UpdateActorManager(float fAnimationAccumTime)
 {
 #ifndef EXTERNAL_RELEASE
-	if(lua_tinker::call<bool>("UpdateActorManager"))
+	if (lua_tinker::call<bool>("UpdateActorManager"))
 #endif
 	{
 		float fTime = fAnimationAccumTime;
-		if(GetAnimationStartTime() > 0.0f)
+		if (GetAnimationStartTime() > 0.0f)
 		{
 			fTime = fAnimationAccumTime - GetAnimationStartTime();
 		}
-		NiActorManager* pkActorMgr =  GetActorManager();
+		NiActorManager* pkActorMgr = GetActorManager();
 		PG_ASSERT_LOG(pkActorMgr);
-		if(pkActorMgr)
+		if (pkActorMgr)
 		{
 			pkActorMgr->Update(fTime);
 		}
 
-		// ÆÄÃ÷º°·Î ¾Ö´Ï°¡ ÀÖ´Ù¸é, ÇÃ·¹ÀÌ ÇÑ´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï°ï¿½ ï¿½Ö´Ù¸ï¿½, ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		AMContainer::iterator itr = m_kSupplementAMContainer.begin();
-		while(itr != m_kSupplementAMContainer.end())
+		while (itr != m_kSupplementAMContainer.end())
 		{
 			PG_ASSERT_LOG(itr->m_spAM);
 			if (itr->m_spAM)
@@ -6191,20 +6191,20 @@ void	PgActor::UpdateActorManager(float fAnimationAccumTime)
 		}
 	}
 }
-void	PgActor::SetSpotLightColor(int Red,int Green,int Blue)
+void	PgActor::SetSpotLightColor(int Red, int Green, int Blue)
 {
-	if(!m_spSpotLightGeom)
+	if (!m_spSpotLightGeom)
 	{
 		return;
 	}
 
-	m_spSpotLightGeom->SetColorLocal(NiColorA(Red/255.0f,Green/255.0f,Blue/255.0f,1.0f));
+	m_spSpotLightGeom->SetColorLocal(NiColorA(Red / 255.0f, Green / 255.0f, Blue / 255.0f, 1.0f));
 }
 
 void	PgActor::DoLoadingFinishWork()
 {
-	// Ä³¸¯ÅÍ ·ÎµùÀÌ ³¡³µÀ½!! [Ä³¸¯ÅÍ ·ÎµùÀÌ ³¡³ª¸é ÆÄÃ÷¸¦ º¸¿©ÁÖ°í, ¾ËÆÄ¸¦ ¸ÔÀÎ´Ù]
-	if(!m_iEquipCount && !m_bLoadingComplete)
+	// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!! [Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½, ï¿½ï¿½ï¿½Ä¸ï¿½ ï¿½ï¿½ï¿½Î´ï¿½]
+	if (!m_iEquipCount && !m_bLoadingComplete)
 	{
 		bool	const	bIsMyActor = IsMyActor();
 
@@ -6212,22 +6212,22 @@ void	PgActor::DoLoadingFinishWork()
 		NILOG(PGLOG_LOG, "[PgActor] %s actor loading all items, %f time elasped\n", MB(GetGuid().str()), NiGetCurrentTimeInSec() - m_fLoadingStartTime);
 		m_fLoadingStartTime = 0.0f;
 
-		NiActorManager *pkAM = GetActorManager();
+		NiActorManager* pkAM = GetActorManager();
 
-		// ·ÎµùÀÌ ³¡³µÀ¸¹Ç·Î, ¸öÃ¼¸¦ ´Ù½Ã º¸¿©ÁØ´Ù.
+		// ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½, ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		pkAM->GetNIFRoot()->SetAppCulled(false);
-		
-		_PgOutputDebugString("[PgActor::Update] Unhide Parts because Loading Completed Actor : %s\n",MB(GetPilotGuid().str()));
 
-		// ¼û°Üµ×´ø ÆÄÃ÷¸¦ º¸ÀÌ°Ô ÇÑ´Ù.
+		_PgOutputDebugString("[PgActor::Update] Unhide Parts because Loading Completed Actor : %s\n", MB(GetPilotGuid().str()));
+
+		// ï¿½ï¿½ï¿½Üµ×´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Ñ´ï¿½.
 		//for(PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin();
 		//	itr != m_kPartsAttachInfo.end();
 		//	++itr)
 		//{
 		//	HideParts(itr->first, false);
 		//}
-		
-		// ¸ðµç MaterialÀ» ÀÐ¾î¼­ ÀúÀåÇØ µÐ´Ù.
+
+		// ï¿½ï¿½ï¿½ Materialï¿½ï¿½ ï¿½Ð¾î¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½.
 		m_kMaterialContainer.clear();
 		m_kSpecularContainer.clear();
 		m_bMaterialCached = FindMaterialProp(this, false, true);
@@ -6235,23 +6235,23 @@ void	PgActor::DoLoadingFinishWork()
 		AttachActorAlphaProperty(this);
 		UpdateProperties();
 
-		if(m_AlphaTransitInfo.bUseLoadingFinishInit)
+		if (m_AlphaTransitInfo.bUseLoadingFinishInit)
 		{
 			m_AlphaTransitInfo.m_fTargetAlpha = 0.0f;
-			if ( UseSmoothShow() > 0.0f )
+			if (UseSmoothShow() > 0.0f)
 			{
-				// º¯¼ö°ªÀÌ ÀÌ»óÇØ...
-				SetTargetAlpha( GetAlpha(), UseSmoothShow(), m_AlphaTransitInfo.m_fAlphaTransitionTime);
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½...
+				SetTargetAlpha(GetAlpha(), UseSmoothShow(), m_AlphaTransitInfo.m_fAlphaTransitionTime);
 			}
 			else
 			{
-				SetTargetAlpha( GetAlpha(), 1.0f, 0.15f);
+				SetTargetAlpha(GetAlpha(), 1.0f, 0.15f);
 			}
 		}
 
-		//	»óÅÂ ÀÌ»ó Àû¿ë
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½
 		PgPilot* pkPilot = GetPilot();
-		if( pkPilot )
+		if (pkPilot)
 		{
 			g_kStatusEffectMan.ReAddEveryEffect(pkPilot);
 			g_kStatusEffectMan.DoReserved(pkPilot);
@@ -6259,8 +6259,8 @@ void	PgActor::DoLoadingFinishWork()
 
 		ApplyHidePartsAll();
 
-		// Recv_PT_M_C_NFY_MAPLOADED(..) ÇÔ¼ö·Î ÀÌÀüÇÏ¿´´Ù..
-		// ÀÌÀ¯ : GameTime Á¤º¸°¡ ±×¶§ ¿À±â ¶§¹®
+		// Recv_PT_M_C_NFY_MAPLOADED(..) ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½..
+		// ï¿½ï¿½ï¿½ï¿½ : GameTime ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		//if(IsMyActor())
 		//{
 		//	ResetSkillCoolTimeFromUnit();
@@ -6268,37 +6268,37 @@ void	PgActor::DoLoadingFinishWork()
 
 		PgPlayer* pkPC = NULL;
 
-		if(pkPilot)
+		if (pkPilot)
 		{
 			pkPC = dynamic_cast<PgPlayer*>(pkPilot->GetUnit());
-			if( pkPilot && g_pkWorld
-			&&	g_kPilotMan.IsMyPlayer(pkPilot->GetGuid())
-			&&	lua_tinker::call<bool, int, lwUnit>("IsCanAutoAddHelper", g_pkWorld->MapNo(), lwUnit(pkPC)) )
+			if (pkPilot && g_pkWorld
+				&& g_kPilotMan.IsMyPlayer(pkPilot->GetGuid())
+				&& lua_tinker::call<bool, int, lwUnit>("IsCanAutoAddHelper", g_pkWorld->MapNo(), lwUnit(pkPC)))
 			{
 				lua_tinker::call<void>("CreateHelper");
 			}
 		}
 
-		if( BM::GUID::NullData() != g_kParty.PartyGuid()
-		&&	pkPilot
-		&&	pkPC
-		&&	g_kParty.PartyGuid() == pkPC->PartyGuid() ) // ³» ÆÄÆ¼¿øÀÌ¸é ÆÄÆ¼ ¼­Å¬ ºÙÀÎ´Ù.
+		if (BM::GUID::NullData() != g_kParty.PartyGuid()
+			&& pkPilot
+			&& pkPC
+			&& g_kParty.PartyGuid() == pkPC->PartyGuid()) // ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½Æ¼ ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½Î´ï¿½.
 		{
-			PgClientPartyUtil::AttachPartyCircle( pkPC->GetID() );
+			PgClientPartyUtil::AttachPartyCircle(pkPC->GetID());
 		}
 
-		if(pkPilot)
+		if (pkPilot)
 		{
-			g_kMapMoveCompleteEventMgr.Pop( pkPilot->GetGuid() );	// ¸Ê ÀÌµ¿ÀÌÈÄ ¿¬Ãâ ¿ä¼Ò
+			g_kMapMoveCompleteEventMgr.Pop(pkPilot->GetGuid());	// ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		}
 
-		if(bIsMyActor)
+		if (bIsMyActor)
 		{
-			PgParticle	*pkParticle = g_kParticleMan.GetParticle("e_spotlight");
-			if(g_pkWorld && pkParticle)
+			PgParticle* pkParticle = g_kParticleMan.GetParticle("e_spotlight");
+			if (g_pkWorld && pkParticle)
 			{
-				NiAVObject	*pkAttachNode = GetObjectByName("char_root");
-				if(pkAttachNode)
+				NiAVObject* pkAttachNode = GetObjectByName("char_root");
+				if (pkAttachNode)
 				{
 					pkParticle->SetParticleProcessor(NiNew PgParticleProcessorAttachToNode(pkAttachNode));
 					g_pkWorld->AddSpotLightCaster(pkParticle);
@@ -6307,34 +6307,34 @@ void	PgActor::DoLoadingFinishWork()
 				}
 			}
 			PgPilot* pkPilot = GetPilot();
-			if(pkPilot)
+			if (pkPilot)
 			{
 				UpdateLowHPWarnning(0, pkPilot->GetAbil(AT_HP));
 			}
 		}
 
-		//	¿ùµå¿¡ SpotLight °¡ Àû¿ëµÇÁö ¾ÊÀº »óÅÂ¶ó¸é, Ä³¸¯ÅÍÀÇ GlowMap À» Á¦°ÅÇÑ´Ù.
-		if(g_pkWorld)
+		//	ï¿½ï¿½ï¿½å¿¡ SpotLight ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½, Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ GlowMap ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		if (g_pkWorld)
 		{
-			PgRenderer::EnableGlowMap(this,g_pkWorld->GetSpotLightOn() || AlwaysGlowMap());
-		}
-		
-		if(!m_kLoadingCompleteInitFunc.empty())
-		{
-			lua_tinker::call<void,lwActor>(m_kLoadingCompleteInitFunc.c_str(),lwActor(this));
+			PgRenderer::EnableGlowMap(this, g_pkWorld->GetSpotLightOn() || AlwaysGlowMap());
 		}
 
-		if( g_pkWorld 
-			&& g_pkWorld->IsHaveAttr(GATTR_FLAG_BATTLESQUARE) )
+		if (!m_kLoadingCompleteInitFunc.empty())
+		{
+			lua_tinker::call<void, lwActor>(m_kLoadingCompleteInitFunc.c_str(), lwActor(this));
+		}
+
+		if (g_pkWorld
+			&& g_pkWorld->IsHaveAttr(GATTR_FLAG_BATTLESQUARE))
 		{
 			CUnit* pkUnit = pkPilot->GetUnit();
-			if( pkUnit->IsInUnitType(UT_MONSTER) )
+			if (pkUnit->IsInUnitType(UT_MONSTER))
 			{
-				NiAVObject *pkParticle = g_kParticleMan.GetParticle("hero_certificate_mon");
-				if( pkParticle )
+				NiAVObject* pkParticle = g_kParticleMan.GetParticle("hero_certificate_mon");
+				if (pkParticle)
 				{
 					int const iAttachToBaseNo = 121212;
-					if( !AttachTo(iAttachToBaseNo, "p_ef_star", pkParticle) )
+					if (!AttachTo(iAttachToBaseNo, "p_ef_star", pkParticle))
 					{
 						THREAD_DELETE_PARTICLE(pkParticle);
 					}
@@ -6343,34 +6343,34 @@ void	PgActor::DoLoadingFinishWork()
 		}
 
 		//PgRenderer::ChangeShader(this,"FXSkinning");
-        NewWare::Scene::ApplyTraversal::Geometry::OptimizeActorSkins( this, PgRenderer::GetBonesPerPartition() );
-				
-		if(m_pkActorAppearanceMan)
+		NewWare::Scene::ApplyTraversal::Geometry::OptimizeActorSkins(this, PgRenderer::GetBonesPerPartition());
+
+		if (m_pkActorAppearanceMan)
 		{
 			m_pkActorAppearanceMan->UpdateAppearance(true);
 		}
 
 		int const iMonEnchantGradeNo = m_pkPilot->GetAbil(AT_MON_ENCHANT_GRADE_NO);
-		if( iMonEnchantGradeNo )
+		if (iMonEnchantGradeNo)
 		{
 			CONT_DEF_MONSTER_ENCHANT_GRADE const* pkDefMonEnchantGrade = NULL;
 			g_kTblDataMgr.GetContDef(pkDefMonEnchantGrade);
 			CONT_DEF_MONSTER_ENCHANT_GRADE::const_iterator find_iter = pkDefMonEnchantGrade->find(iMonEnchantGradeNo);
-			if( pkDefMonEnchantGrade->end() != find_iter )
+			if (pkDefMonEnchantGrade->end() != find_iter)
 			{
 				CONT_DEF_MONSTER_ENCHANT_GRADE::mapped_type const& rkMonEnchantGrade = (*find_iter).second;
-				for( int iCur=0; MAX_MONSTER_ENCHANT_EFFECT_COUNT > iCur; ++iCur )
+				for (int iCur = 0; MAX_MONSTER_ENCHANT_EFFECT_COUNT > iCur; ++iCur)
 				{
 					std::string const& rkEffectID = rkMonEnchantGrade.akEffectName[iCur];
 					std::string const& rkRootName = rkMonEnchantGrade.akEffectRoot[iCur];
-					if( !rkEffectID.empty()
-					&&	!rkRootName.empty() )
+					if (!rkEffectID.empty()
+						&& !rkRootName.empty())
 					{
-						NiAVObject *pkParticle = g_kParticleMan.GetParticle(rkEffectID.c_str(), PgParticle::O_SCALE, GetEffectScale());
-						if( pkParticle )
+						NiAVObject* pkParticle = g_kParticleMan.GetParticle(rkEffectID.c_str(), PgParticle::O_SCALE, GetEffectScale());
+						if (pkParticle)
 						{
 							int const iAttachToBaseNo = 200000;
-							if( !AttachTo(iAttachToBaseNo + iCur, rkRootName.c_str(), pkParticle) )
+							if (!AttachTo(iAttachToBaseNo + iCur, rkRootName.c_str(), pkParticle))
 							{
 								THREAD_DELETE_PARTICLE(pkParticle);
 							}
@@ -6383,23 +6383,23 @@ void	PgActor::DoLoadingFinishWork()
 		UpdateQuestDepend();
 
 
-		SyncMountPet(); //´Ù¸¥ Player°¡ ·ÎµùµÇ¸é Å¾½ÂÀ» µ¿±âÈ­ ½ÃÄÑ¾ß ÇÑ´Ù.
-		SyncActionOnAddUnit(pkPC); //ÀÌµ¿ µ¿±âÈ­ (AddUnit() -> ·Îµù¿Ï·á ÈÄ)
+		SyncMountPet(); //ï¿½Ù¸ï¿½ Playerï¿½ï¿½ ï¿½Îµï¿½ï¿½Ç¸ï¿½ Å¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½Ñ¾ï¿½ ï¿½Ñ´ï¿½.
+		SyncActionOnAddUnit(pkPC); //ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½È­ (AddUnit() -> ï¿½Îµï¿½ï¿½Ï·ï¿½ ï¿½ï¿½)
 
 	}
 }
 void	PgActor::NfyActorManagerChanged(bool bBefore)
 {
-	if(bBefore)
+	if (bBefore)
 	{
 		RestoreTexture();
 
-		//	ÀÓ½Ã·Î ºÙÀÎ ¾ËÆÄÇÁ·ÎÆÛÆ¼¸¦ ¶¼¾î³½´Ù.
+		//	ï¿½Ó½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½î³½ï¿½ï¿½.
 		DetachActorAlphaProperty(this);
 		UpdateProperties();
 
-		RestoreSpecular();	//	½ºÆäÅ§·¯ º¹±Í
-		if(m_pkActorCallback)
+		RestoreSpecular();	//	ï¿½ï¿½ï¿½ï¿½Å§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		if (m_pkActorCallback)
 		{
 			GetActorManager()->SetCallbackObject(NULL);
 		}
@@ -6413,24 +6413,24 @@ void	PgActor::NfyActorManagerChanged(bool bBefore)
 		AttachActorAlphaProperty(this);
 		UpdateProperties();
 
-		if(m_pkActorCallback)
+		if (m_pkActorCallback)
 		{
 			GetActorManager()->SetCallbackObject(m_pkActorCallback);
 		}
 
-		NiTimeController::StartAnimations(GetNIFRoot(), 0.0f); //PgWorld¿¡ AttachµÉ ¶§ ¾Ë¾Æ¼­ µÈ´Ù.
+		NiTimeController::StartAnimations(GetNIFRoot(), 0.0f); //PgWorldï¿½ï¿½ Attachï¿½ï¿½ ï¿½ï¿½ ï¿½Ë¾Æ¼ï¿½ ï¿½È´ï¿½.
 
-		//	»óÅÂ ÀÌ»ó Àû¿ë
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½
 		PgPilot* pkPilot = GetPilot();
-		if( pkPilot )
+		if (pkPilot)
 		{
 			g_kStatusEffectMan.ReAddEveryEffect(GetPilot());
 		}
 
-		//	¿ùµå¿¡ SpotLight °¡ Àû¿ëµÇÁö ¾ÊÀº »óÅÂ¶ó¸é, Ä³¸¯ÅÍÀÇ GlowMap À» Á¦°ÅÇÑ´Ù.
-		if(g_pkWorld)
+		//	ï¿½ï¿½ï¿½å¿¡ SpotLight ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½, Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ GlowMap ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		if (g_pkWorld)
 		{
-			PgRenderer::EnableGlowMap(this,g_pkWorld->GetSpotLightOn() || AlwaysGlowMap());
+			PgRenderer::EnableGlowMap(this, g_pkWorld->GetSpotLightOn() || AlwaysGlowMap());
 		}
 
 		if (m_VarTextureList.size() > 0)
@@ -6438,7 +6438,7 @@ void	PgActor::NfyActorManagerChanged(bool bBefore)
 			ChangeTexture(this);
 		}
 
-        NewWare::Scene::ApplyTraversal::Geometry::OptimizeActorSkins( this, PgRenderer::GetBonesPerPartition() );
+		NewWare::Scene::ApplyTraversal::Geometry::OptimizeActorSkins(this, PgRenderer::GetBonesPerPartition());
 
 		ResetAnimation();
 	}
@@ -6448,13 +6448,13 @@ void	PgActor::NfyActorManagerLoadingComplete()
 {
 	PgIWorldObject::NfyActorManagerLoadingComplete();
 
-	//	±×¸²ÀÚ ºÙÀÌ±â
-	if(PgCircleShadow::AttachCircleShadowRecursive(this,200.0f,0.7f,0,0,&m_kBottomRayHit) == 0)
+	//	ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
+	if (PgCircleShadow::AttachCircleShadowRecursive(this, 200.0f, 0.7f, 0, 0, &m_kBottomRayHit) == 0)
 	{
-		PgCircleShadow::AttachCircleShadowRecursive(this,200.0f,0.7f,0,this,&m_kBottomRayHit);
+		PgCircleShadow::AttachCircleShadowRecursive(this, 200.0f, 0.7f, 0, this, &m_kBottomRayHit);
 	}
 
-	if(m_bShadowHide)
+	if (m_bShadowHide)
 	{
 		SetHideShadow(m_bShadowHide);
 	}
@@ -6462,18 +6462,18 @@ void	PgActor::NfyActorManagerLoadingComplete()
 void PgActor::ResetSkillCoolTimeFromUnit()
 {
 	m_SkillCoolTimeInfo.Reset();
-	if(!m_pkPilot)
+	if (!m_pkPilot)
 	{
 		return;
 	}
 	PgControlUnit* pkUnit = static_cast<PgControlUnit*>(m_pkPilot->GetUnit());
-	if(!pkUnit)
+	if (!pkUnit)
 	{
 		return;
 	}
 
 	CSkill* pkSkill = pkUnit->GetSkill();
-	if(!pkSkill)
+	if (!pkSkill)
 	{
 		return;
 	}
@@ -6484,53 +6484,53 @@ void PgActor::ResetSkillCoolTimeFromUnit()
 	pkSkill->GetFirstCoolTime(kItor);
 
 	CSkill::SCoolTimeInfo kInfo;
-	while(pkSkill->GetNextCoolTime(kItor,kInfo))
+	while (pkSkill->GetNextCoolTime(kItor, kInfo))
 	{
-		if(0 == kInfo.iSkillNo)
+		if (0 == kInfo.iSkillNo)
 		{
 			continue;
 		}
 
 		GET_DEF(CSkillDefMgr, kSkillDefMgr);
 		CSkillDef const* pkSkillDef = kSkillDefMgr.GetDef(kInfo.iSkillNo);
-		if(!pkSkillDef) 
+		if (!pkSkillDef)
 		{
 			continue;
 		}
 
 		int	iCoolTime = pkSkillDef->GetAbil(ATS_COOL_TIME);
-		int	iAddCoolTime =0;
+		int	iAddCoolTime = 0;
 
-		// ÄðÅ¸ÀÓÀÌ ÀÖ´Â ½ºÅ³¸¸ Ãß°¡ ÄðÅ¸ÀÓÀ» Àû¿ë
-		if(0 < iCoolTime)
+		// ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		if (0 < iCoolTime)
 		{
-			if(m_pkPilot)
+			if (m_pkPilot)
 			{
-				if(m_pkPilot->GetUnit())
+				if (m_pkPilot->GetUnit())
 				{
-					if(m_pkPilot->GetUnit()->GetSkill())
+					if (m_pkPilot->GetUnit()->GetSkill())
 					{
 						iAddCoolTime = m_pkPilot->GetUnit()->GetSkill()->GetSkillCoolTime();
 					}
 				}
 			}
 
-			if(iAddCoolTime > iCoolTime)
+			if (iAddCoolTime > iCoolTime)
 			{
 				iAddCoolTime = 0;
 			}
 
 			iCoolTime += iAddCoolTime;
-		}		
+		}
 
 		//_PgOutputDebugString("#### Skill CoolTime ServerTime[%I64d], CoolTime[%I64d]\n", ui64ServerTime, kInfo.u64CoolTime);
 		int	const iRemainCoolTime = ((kInfo.dwCoolTime < dwServerTime) ? 0 : static_cast<int>(kInfo.dwCoolTime - dwServerTime));
 
 		m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(
-			std::make_pair(	
-			g_kSkillTree.GetKeySkillNo(kInfo.iSkillNo),
-			stSkillCoolTimeInfo::stCoolTimeInfoNode(kInfo.iSkillNo,BM::GetTime32()-(iCoolTime-iRemainCoolTime),iCoolTime))
-			);
+			std::make_pair(
+				g_kSkillTree.GetKeySkillNo(kInfo.iSkillNo),
+				stSkillCoolTimeInfo::stCoolTimeInfoNode(kInfo.iSkillNo, BM::GetTime32() - (iCoolTime - iRemainCoolTime), iCoolTime))
+		);
 	}
 
 
@@ -6538,7 +6538,7 @@ void PgActor::ResetSkillCoolTimeFromUnit()
 void	PgActor::UpdateItemEquip()
 {
 	AttachItemInfo kInfo;
-	
+
 	m_kAttachItemLock.Lock();
 	int	iAttachItemContainerSize = m_kAttachItemContainer.size();
 	if (iAttachItemContainerSize > 0) // && m_AlphaTransitInfo.m_fAlphaTransitionTime == 0.0f)
@@ -6548,8 +6548,8 @@ void	PgActor::UpdateItemEquip()
 			m_kAttachItemContainer.pop_front();
 	}
 	m_kAttachItemLock.Unlock();
-	
-	if(iAttachItemContainerSize>0 && kInfo.pItem != NULL)
+
+	if (iAttachItemContainerSize > 0 && kInfo.pItem != NULL)
 	{
 		if (EquipItem(kInfo.pItem, kInfo.iItemNo, kInfo.bSetDefaultItem) == false)
 		{
@@ -6559,11 +6559,11 @@ void	PgActor::UpdateItemEquip()
 }
 void	PgActor::UpdateBlink(float fModifiedFrameTime)
 {
-	if(m_bBlink)
+	if (m_bBlink)
 	{
 		m_fBlinkAccumTime += fModifiedFrameTime;
-		
-		if(m_fBlinkAccumTime > m_fBlinkFreq)
+
+		if (m_fBlinkAccumTime > m_fBlinkFreq)
 		{
 			m_fBlinkAccumTime = 0.0f;
 			SetBlinkHide(!IsBlinkHide());
@@ -6588,26 +6588,26 @@ void	PgActor::UpdateBlink(float fModifiedFrameTime)
 //	}
 //}
 
-void	PgActor::UpdateHeadSize(float fFrameTime,float fAccumTime)	//	¸Ó¸®Å©±â ¾÷µ¥ÀÌÆ®
+void	PgActor::UpdateHeadSize(float fFrameTime, float fAccumTime)	//	ï¿½Ó¸ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 {
-	if(m_fCurrentHeadSize != m_fTargetHeadSize)
+	if (m_fCurrentHeadSize != m_fTargetHeadSize)
 	{
-		if(m_fCurrentHeadSize<m_fTargetHeadSize)
+		if (m_fCurrentHeadSize < m_fTargetHeadSize)
 		{
-			m_fCurrentHeadSize+=m_fHeadSizeTransitSpeed*fFrameTime;
-			if(m_fCurrentHeadSize>=m_fTargetHeadSize)
+			m_fCurrentHeadSize += m_fHeadSizeTransitSpeed * fFrameTime;
+			if (m_fCurrentHeadSize >= m_fTargetHeadSize)
 				m_fCurrentHeadSize = m_fTargetHeadSize;
 		}
 		else
 		{
-			m_fCurrentHeadSize-=m_fHeadSizeTransitSpeed*fFrameTime;
-			if(m_fCurrentHeadSize<=m_fTargetHeadSize)
+			m_fCurrentHeadSize -= m_fHeadSizeTransitSpeed * fFrameTime;
+			if (m_fCurrentHeadSize <= m_fTargetHeadSize)
 				m_fCurrentHeadSize = m_fTargetHeadSize;
 		}
-		if(GetCharRoot())
+		if (GetCharRoot())
 		{
-			NiAVObject	*pkHead = GetCharRoot()->GetObjectByName("Bip01 Head");
-			if(pkHead)
+			NiAVObject* pkHead = GetCharRoot()->GetObjectByName("Bip01 Head");
+			if (pkHead)
 			{
 				pkHead->SetScale(m_fCurrentHeadSize);
 			}
@@ -6617,40 +6617,40 @@ void	PgActor::UpdateHeadSize(float fFrameTime,float fAccumTime)	//	¸Ó¸®Å©±â ¾÷µ¥
 }
 void	PgActor::UpdateGodTime(float fAccumTime)
 {
-	if(m_kGodTimeInfo.m_bGodTime)
+	if (m_kGodTimeInfo.m_bGodTime)
 	{
 		float	fElapsedTime = fAccumTime - m_kGodTimeInfo.m_fStartTime;
-		if(fElapsedTime>=m_kGodTimeInfo.m_fTotalTime)
+		if (fElapsedTime >= m_kGodTimeInfo.m_fTotalTime)
 		{
-			StartGodTime(0);	//	0 Àº °ð ÁßÁöÇÏ¶ó´Â ÀÇ¹ÌÀÌ´Ù.
+			StartGodTime(0);	//	0 ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½Ì´ï¿½.
 		}
 	}
 
 }
 void	PgActor::UpdateDamageBlink(float fAccumTime)
 {
-	if(m_kDamageBlinkInfo.bEnable)
+	if (m_kDamageBlinkInfo.bEnable)
 	{
 		float	fElapsedTime = fAccumTime - m_kDamageBlinkInfo.m_fStartTime;
-		if(fElapsedTime>m_kDamageBlinkInfo.m_fTotalTime)
+		if (fElapsedTime > m_kDamageBlinkInfo.m_fTotalTime)
 		{
 			StartDamageBlink(false);
 		}
 		else
 		{
 			fElapsedTime = fAccumTime - m_kDamageBlinkInfo.m_fLastTime;
-			if(fElapsedTime>m_kDamageBlinkInfo.m_fPeriod)
+			if (fElapsedTime > m_kDamageBlinkInfo.m_fPeriod)
 			{
 				m_kDamageBlinkInfo.m_fLastTime = fAccumTime;
 				m_kDamageBlinkInfo.m_bToggle = !m_kDamageBlinkInfo.m_bToggle;
 
-				if(m_kDamageBlinkInfo.m_bToggle)
+				if (m_kDamageBlinkInfo.m_bToggle)
 				{
-					g_kStatusEffectMan.AddStatusEffectToActor(GetPilot(), GetPilot(), GetDamageBlinkID(),200000002,0,1,true,false);
+					g_kStatusEffectMan.AddStatusEffectToActor(GetPilot(), GetPilot(), GetDamageBlinkID(), 200000002, 0, 1, true, false);
 				}
 				else
 				{
-					g_kStatusEffectMan.RemoveStatusEffectFromActor(GetPilot(),200000002);
+					g_kStatusEffectMan.RemoveStatusEffectFromActor(GetPilot(), 200000002);
 				}
 			}
 		}
@@ -6658,37 +6658,37 @@ void	PgActor::UpdateDamageBlink(float fAccumTime)
 }
 void	PgActor::UpdateScale()
 {
-	if (m_ulScaleChangeStartTime>0)
+	if (m_ulScaleChangeStartTime > 0)
 	{
 		unsigned	long	ulElapsedTime = BM::GetTime32() - m_ulScaleChangeStartTime;
 		float	fRate = (float)ulElapsedTime / (float)m_ulTotalScaleChangeTime;
-		if(fRate>1) fRate =1;
-		if(fRate<0) fRate = 0;
+		if (fRate > 1) fRate = 1;
+		if (fRate < 0) fRate = 0;
 
-		float	fNewScale = m_fStartScale + (m_fTargetScale-m_fStartScale)*fRate;
+		float	fNewScale = m_fStartScale + (m_fTargetScale - m_fStartScale) * fRate;
 		GetNIFRoot()->SetScale(fNewScale);
-		if(fRate == 1) m_ulScaleChangeStartTime = 0;
+		if (fRate == 1) m_ulScaleChangeStartTime = 0;
 	}
 }
 void	PgActor::UpdatePush(float fFrameTime)
 {
-	if(m_Push.m_bActivated)
+	if (m_Push.m_bActivated)
 	{
-		float	fDistance = m_Push.m_fVelocity*fFrameTime;;
+		float	fDistance = m_Push.m_fVelocity * fFrameTime;;
 		m_Push.m_fDistance -= fDistance;
-		m_Push.m_fVelocity += m_Push.m_fAccel*fFrameTime;
-		if(m_Push.m_fDistance<=0)
+		m_Push.m_fVelocity += m_Push.m_fAccel * fFrameTime;
+		if (m_Push.m_fDistance <= 0)
 		{
 			fDistance += m_Push.m_fDistance;
-			std::max(fDistance,0.0f);
+			std::max(fDistance, 0.0f);
 			m_Push.m_bActivated = false;
 			m_Push.m_fVelocity = fDistance;
 		}
 
 		NiPoint3 kMovingDirNew = m_Push.m_kDir;
-		if(NiPoint3::ZERO==m_Push.m_kDir)
+		if (NiPoint3::ZERO == m_Push.m_kDir)
 		{
-			NiPoint3	const	&kPathNormal = GetPathNormal();
+			NiPoint3	const& kPathNormal = GetPathNormal();
 			NiPoint3	kRightDir = kPathNormal.Cross(NiPoint3::UNIT_Z);
 			kRightDir.Unitize();
 
@@ -6707,8 +6707,8 @@ void	PgActor::UpdatePush(float fFrameTime)
 		kMovingDir.z = 0.0f;
 		kMovingDir.normalize();
 		kDelta = kMovingDir * m_Push.m_fVelocity;
-		
-		SetMovingDelta(m_kMovingDelta+kDelta);
+
+		SetMovingDelta(m_kMovingDelta + kDelta);
 
 		//_PgOutputDebugString("Moving Delta PushAct: %.f, %.f, %.f\n", m_kMovingDelta.x, m_kMovingDelta.y, m_kMovingDelta.z);
 	}
@@ -6728,44 +6728,44 @@ void	PgActor::UpdatePush(float fFrameTime)
 //	return true;
 //}
 
-//! ÆÄÃ÷¸¦ ¾×ÅÍ¿¡ ºÙÀÎ´Ù.
-int PgActor::AttachSkinningParts(PgItemEx *pkParts)
+//! ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
+int PgActor::AttachSkinningParts(PgItemEx* pkParts)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.AttackSkinningParts"), g_pkApp->GetFrameCount()));
 	NiNode* pkAttachSrcRoot = (NiNode*)pkParts->GetMeshRoot();
-	if(GetPilot())
+	if (GetPilot())
 	{
-		_PgOutputDebugString("DetachParts Actor:%s From PgActor::AttachSkinningParts\n",MB(GetPilot()->GetName()));
+		_PgOutputDebugString("DetachParts Actor:%s From PgActor::AttachSkinningParts\n", MB(GetPilot()->GetName()));
 	}
 
 	DetachParts(pkParts->EquipLimit());
 
-	// AttachµÈ Node°¡ 1°³ ÀÌ»óÀÌ¸é.. ¼º°ø
+	// Attachï¿½ï¿½ Nodeï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½Ì¸ï¿½.. ï¿½ï¿½ï¿½ï¿½
 	return SkinningParts(pkParts, pkAttachSrcRoot, true);
 }
 
 void	PgActor::CheckTouchDmg()
 {
-	if(!IsMyActor()) {return;}//³» ¾×ÅÍ°¡ ¾Æ´Ò°æ¿î ÇÒ ÇÊ¿ä¾øÀ½
-	if(!m_pkController) {return;}
-	if(!g_pkWorld) {return;}
-	if(!g_pkWorld->GetPhysXScene()) {return;}
-	if(!GetPilot()) {return;}
-	CUnit *pkActorUnit = GetPilot()->GetUnit();
-	if(!pkActorUnit ) {return;}
-	if( pkActorUnit->IsUnitType(UT_PLAYER) == false ) {return;}
-	if(GetGroupNo() != OGT_PLAYER) {return;}
-	if(GetCanHit() == false) {return;}
-	if(IsDownState()) {return;}
+	if (!IsMyActor()) { return; }//ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Æ´Ò°ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½
+	if (!m_pkController) { return; }
+	if (!g_pkWorld) { return; }
+	if (!g_pkWorld->GetPhysXScene()) { return; }
+	if (!GetPilot()) { return; }
+	CUnit* pkActorUnit = GetPilot()->GetUnit();
+	if (!pkActorUnit) { return; }
+	if (pkActorUnit->IsUnitType(UT_PLAYER) == false) { return; }
+	if (GetGroupNo() != OGT_PLAYER) { return; }
+	if (GetCanHit() == false) { return; }
+	if (IsDownState()) { return; }
 	//if(IsIgnoreEffect(ACTIONEFFECT_DMG)) {return;}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.CheckTouchDmg"), g_pkApp->GetFrameCount()));
 
-	NxScene *pkScene = g_pkWorld->GetPhysXScene()->GetPhysXScene();
-	if(!pkScene) {return;}
+	NxScene* pkScene = g_pkWorld->GetPhysXScene()->GetPhysXScene();
+	if (!pkScene) { return; }
 
 	static int const nbMaxShapes = 100;
-	NxShape	*pkCollidedShapes[nbMaxShapes];
+	NxShape* pkCollidedShapes[nbMaxShapes];
 
 	NxCapsule kCapsule;
 	NxExtendedVec3 const kPos = m_pkController->getDebugPosition();
@@ -6777,59 +6777,59 @@ void	PgActor::CheckTouchDmg()
 	kCapsule.p0.z = kCapsule.p1.z = static_cast<NxReal>(kPos.z);
 	kCapsule.p0.y -= fHeight * 0.5f;
 	kCapsule.p1.y += fHeight * 0.5f;
-	kCapsule.radius = fRadius;	
+	kCapsule.radius = fRadius;
 
-	static int const iOGT = (1<<(OGT_MONSTER+1))|(1<<(OGT_ENTITY+1));
+	static int const iOGT = (1 << (OGT_MONSTER + 1)) | (1 << (OGT_ENTITY + 1));
 
 	int const iTotalShapes = GetWorld()->overlapCapsuleShapes(kCapsule,
-		NX_DYNAMIC_SHAPES,nbMaxShapes,pkCollidedShapes,
-		NULL,iOGT,NULL,true);
+		NX_DYNAMIC_SHAPES, nbMaxShapes, pkCollidedShapes,
+		NULL, iOGT, NULL, true);
 
-	NxShape *pkHitShape = NULL;
-	for(int i=0;i<iTotalShapes;++i)
+	NxShape* pkHitShape = NULL;
+	for (int i = 0; i < iTotalShapes; ++i)
 	{
 		pkHitShape = pkCollidedShapes[i];
 		if (pkHitShape && pkHitShape->userData)
 		{
 			PgActor* pkActor = reinterpret_cast<PgActor*>(pkHitShape->userData);//(PgActor*)pkHitShape->userData;
-			PgPilot	*pkPilot = pkActor->GetPilot();
+			PgPilot* pkPilot = pkActor->GetPilot();
 
-			if(pkActor == this) {continue;}
-			if(pkActor->IsDownState()) {continue;}
-			if(pkActor->GetAction() && pkActor->GetAction()->GetID()=="a_die") {continue;}
-			if(!pkPilot)
+			if (pkActor == this) { continue; }
+			if (pkActor->IsDownState()) { continue; }
+			if (pkActor->GetAction() && pkActor->GetAction()->GetID() == "a_die") { continue; }
+			if (!pkPilot)
 			{
 				continue;
 			}
-			if(/*pkPilot->GetAbil(AT_GRADE) != EMGRADE_ELITE &&
+			if (/*pkPilot->GetAbil(AT_GRADE) != EMGRADE_ELITE &&
 				pkPilot->GetAbil(AT_GRADE) != EMGRADE_BOSS &&*/
 				pkPilot->GetAbil(AT_COLLISION_SKILL) == 0)
 			{
 				continue;
 			}
 
-			//Æ¯Á¤ Ãæµ¹±¸¸¸ °Ë»ç
-			if(pkPilot->GetAbil(AT_USE_PART_CHECK_COLLISION))
+			//Æ¯ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+			if (pkPilot->GetAbil(AT_USE_PART_CHECK_COLLISION))
 			{
 				char const* shapename = pkHitShape->getName();
-				if(shapename)
+				if (shapename)
 				{
-					int	const iABVShapeIndex = pkActor->GetABVShapeIndex(shapename) + 1; //ABVShapeIdx´Â 0ÀÌ ³ª¿Ã¼öµµ ÀÖ¾î AbilÀº +1ÇÏ¿© µî·Ï
+					int	const iABVShapeIndex = pkActor->GetABVShapeIndex(shapename) + 1; //ABVShapeIdxï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ Abilï¿½ï¿½ +1ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½
 					bool bPartCollition = false;
-					for(int i=0; i<PG_MAX_NB_ABV_SHAPES; ++i)
+					for (int i = 0; i < PG_MAX_NB_ABV_SHAPES; ++i)
 					{
-						int const iPartCollition = pkPilot->GetAbil(AT_PART_CHECK_COLLISION_01+i);
-						if(0==iPartCollition)
+						int const iPartCollition = pkPilot->GetAbil(AT_PART_CHECK_COLLISION_01 + i);
+						if (0 == iPartCollition)
 						{
 							break;
 						}
-						if(iABVShapeIndex==iPartCollition)
+						if (iABVShapeIndex == iPartCollition)
 						{
 							bPartCollition = true;
 							break;
 						}
 					}
-					if(!bPartCollition)
+					if (!bPartCollition)
 					{
 						continue;
 					}
@@ -6839,33 +6839,33 @@ void	PgActor::CheckTouchDmg()
 			NiPoint3 kCenter;
 			NiPhysXTypes::NxVec3ToNiPoint3(pkHitShape->getGlobalPosition(), kCenter);
 
-			CUnit *pkUnit = pkPilot->GetUnit();	
-			if ( pkUnit && pkUnit->IsTarget( pkActorUnit ) && pkUnit->IsAlive() )
+			CUnit* pkUnit = pkPilot->GetUnit();
+			if (pkUnit && pkUnit->IsTarget(pkActorUnit) && pkUnit->IsAlive())
 			{
 				bool bAction = true;
-				if(IsIgnoreEffect(ACTIONEFFECT_DMG))
+				if (IsIgnoreEffect(ACTIONEFFECT_DMG))
 				{
-					bAction = 0<pkUnit->GetAbil(AT_COLLISION_USE_FORCE);
+					bAction = 0 < pkUnit->GetAbil(AT_COLLISION_USE_FORCE);
 				}
-				if(bAction)
+				if (bAction)
 				{
-				    NET_C_M_REQ_TRIGGER(QOT_Monster, pkActor->GetGuid(), TRIGGER_ACTION_COLLISION);
-				    PgAction * pkReserve = ReserveTransitAction("a_touch_dmg");
-					if(pkReserve)
+					NET_C_M_REQ_TRIGGER(QOT_Monster, pkActor->GetGuid(), TRIGGER_ACTION_COLLISION);
+					PgAction* pkReserve = ReserveTransitAction("a_touch_dmg");
+					if (pkReserve)
 					{
 						pkReserve->SetParamAsPoint(20110630, kCenter);
 					}
-			    }
-		    }
-	    }
-    }
+				}
+			}
+		}
+	}
 }
 
-int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
+int PgActor::SkinningParts(PgItemEx* pkParts, NiNode* pkNode, bool bAttach)
 {
 	PG_ASSERT_LOG(pkParts);
 	PG_ASSERT_LOG(pkNode);
-	if(!pkNode || pkParts == NULL)
+	if (!pkNode || pkParts == NULL)
 	{
 		return 0;
 	}
@@ -6877,31 +6877,31 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 	int iArrayCount = pkNode->GetArrayCount();
 	NiNode* pkAttachingNode = 0;
 
-	for(int iArrayIndex = 0; iArrayIndex<iArrayCount; ++iArrayIndex)
+	for (int iArrayIndex = 0; iArrayIndex < iArrayCount; ++iArrayIndex)
 	{
-		NiAVObject *pkChild = pkNode->GetAt(iArrayIndex);
-		if(!pkChild)
+		NiAVObject* pkChild = pkNode->GetAt(iArrayIndex);
+		if (!pkChild)
 		{
 			continue;
 		}
 
-		if(pkChild->GetExtraData("HAS_NO_VALID_GEOMETRY")) // QUESTION? ¼Ò¹®ÀÚ ºñ±³´Â µÇ³ª.
+		if (pkChild->GetExtraData("HAS_NO_VALID_GEOMETRY")) // QUESTION? ï¿½Ò¹ï¿½ï¿½ï¿½ ï¿½ñ±³´ï¿½ ï¿½Ç³ï¿½.
 		{
 			continue;
 		}
 
-		if(NiIsKindOf(NiGeometry, pkChild) && pkChild->GetAppCulled())
+		if (NiIsKindOf(NiGeometry, pkChild) && pkChild->GetAppCulled())
 		{
 			NILOG(PGLOG_ERROR, "[PgActor] SkinningParts, %s node has appculled\n", pkChild->GetName());
 		}
 
-		// GeometryÁ¤º¸ÀÌ°í, HideµÇ¾î ÀÖÁö ¾ÊÀ¸¸é
-		if(NiIsKindOf(NiGeometry, pkChild) && !pkChild->GetAppCulled())
+		// Geometryï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½, Hideï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if (NiIsKindOf(NiGeometry, pkChild) && !pkChild->GetAppCulled())
 		{
-			NiGeometry *pkGeometry = (NiGeometry *)pkChild;
-			
+			NiGeometry* pkGeometry = (NiGeometry*)pkChild;
+
 			NiSkinInstance* pkSkin = pkGeometry->GetSkinInstance();
-			if(pkSkin)
+			if (pkSkin)
 			{
 				NiSkinData* pkSkinData = pkSkin->GetSkinData();
 				if (pkSkinData == NULL)
@@ -6909,21 +6909,21 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 
 				unsigned int uiBoneCount = pkSkinData->GetBoneCount();
 				NiAVObject* pkRootParent = pkSkin->GetRootParent();
-				NiAVObject*const* pkBones = pkSkin->GetBones();
+				NiAVObject* const* pkBones = pkSkin->GetBones();
 
 				NiAVObject* pkDup = NULL;
 
-				for(unsigned int ui = 0; ui < uiBoneCount; ++ui)
+				for (unsigned int ui = 0; ui < uiBoneCount; ++ui)
 				{
 					NiAVObject* pkCurBone = pkBones[ui];
 					if (pkCurBone)
 					{
 						pkDup = GetCharRoot()->GetObjectByName(pkCurBone->GetName());
-						if(pkDup)
+						if (pkDup)
 						{
 							if (pkDup->GetScale() != 1.0f)
 							{
-								NILOG(PGLOG_WARNING, "[PgActor] SkinningParts, %s node's %d bone(%s), scale is %f.\n", pkChild->GetName(), ui,pkCurBone->GetName(), pkDup->GetScale());
+								NILOG(PGLOG_WARNING, "[PgActor] SkinningParts, %s node's %d bone(%s), scale is %f.\n", pkChild->GetName(), ui, pkCurBone->GetName(), pkDup->GetScale());
 								pkDup->SetScale(1.0f);
 							}
 							pkSkin->SetBone(ui, pkDup);
@@ -6942,9 +6942,9 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 				if (pkRootParent)
 				{
 					pkDup = GetCharRoot()->GetObjectByName(pkRootParent->GetName());
-					if(!pkDup)
+					if (!pkDup)
 					{
-						NILOG(PGLOG_ERROR, "[PgActor] SkinningParts, %s node GetMainNIFRoot()->GetObjectByName pkRootParent:%s Failed\n", pkChild->GetName(),pkRootParent->GetName());
+						NILOG(PGLOG_ERROR, "[PgActor] SkinningParts, %s node GetMainNIFRoot()->GetObjectByName pkRootParent:%s Failed\n", pkChild->GetName(), pkRootParent->GetName());
 
 					}
 				}
@@ -6953,8 +6953,8 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 					pkDup = NULL;
 					NILOG(PGLOG_ERROR, "[PgActor] SkinningParts, %s node's has no skin root\n", pkChild->GetName());
 				}
-			
-				if(!pkDup)
+
+				if (!pkDup)
 				{
 					continue;
 				}
@@ -6962,13 +6962,13 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 				pkSkin->SetRootParent(pkDup);
 			}
 
-			// ºÙÀÌ·Á´Â GeometryÀÇ °¡Àå °¡±î¿î ºÎ¸ðÀÇ ÀÌ¸§°ú °°Àº ³ëµå¸¦
-			// ¸ðµ¨ÀÇ Tree¿¡¼­ Ã£¾Æ¼­, ±× ³ëµå¿¡ ºÙÀÎ´Ù.
+			// ï¿½ï¿½ï¿½Ì·ï¿½ï¿½ï¿½ Geometryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦
+			// ï¿½ï¿½ï¿½ï¿½ Treeï¿½ï¿½ï¿½ï¿½ Ã£ï¿½Æ¼ï¿½, ï¿½ï¿½ ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½Î´ï¿½.
 			bool bFindNewParent = false;
-			NiNode* pkCandidateNode = pkNode;			
-			while(!bFindNewParent && pkCandidateNode && pkCandidateNode->GetParent())
+			NiNode* pkCandidateNode = pkNode;
+			while (!bFindNewParent && pkCandidateNode && pkCandidateNode->GetParent())
 			{
-				if(GetCharRoot()->GetObjectByName(pkCandidateNode->GetParent()->GetName()))
+				if (GetCharRoot()->GetObjectByName(pkCandidateNode->GetParent()->GetName()))
 				{
 					bFindNewParent = true;
 					break;
@@ -6977,11 +6977,11 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 
 			}
 
-			// ºÙÀÌ·Á´Â ³ëµåÀÇ ºÎ¸ð¸¦ ¿ø·¡ÀÇ ¸ðµ¨¿¡¼­ Ã£¾ÒÀ¸¸é, ³ëµå¸¦ ºÙÀÏ ÁØºñ¸¦ ÇÑ´Ù.
-			if(bFindNewParent)
+			// ï¿½ï¿½ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ðµ¨¿ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ ï¿½Ñ´ï¿½.
+			if (bFindNewParent)
 			{
 				++iAttachedThisTime;
-				if(pkParts)
+				if (pkParts)
 				{
 					pkParts->AddAttachedObject(pkCandidateNode);
 				}
@@ -6992,28 +6992,28 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 				NILOG(PGLOG_ERROR, "[PgActor] SkinningParts, %s node can't find new parent [Original Parent : %s]\n", pkChild->GetName(), pkNode->GetName());
 			}
 		}
-		else if(NiIsKindOf(NiNode, pkChild)/* && pkChild->GetName() != "char_root"*/)
+		else if (NiIsKindOf(NiNode, pkChild)/* && pkChild->GetName() != "char_root"*/)
 		{
 			iRetAttachedNode += SkinningParts(pkParts, (NiNode*)pkChild, !(bAttach && iAttachedThisTime != 0));
 		}
 	}
 
-	if(bAttach && iAttachedThisTime > 0 && pkAttachingNode && pkAttachingNode->GetParent())
-	{	
+	if (bAttach && iAttachedThisTime > 0 && pkAttachingNode && pkAttachingNode->GetParent())
+	{
 		NiNode* pkDup = NiDynamicCast(NiNode, GetCharRoot()->GetObjectByName(pkAttachingNode->GetParent()->GetName()));
 
-		if(pkDup)
+		if (pkDup)
 		{
 			NiNode* pkParent = pkNode->GetParent();
 			if (pkParent)
 			{
 				unsigned int uiArrayCount = pkParent->GetArrayCount();
-				for(unsigned int index = 0; index<uiArrayCount; ++index)
+				for (unsigned int index = 0; index < uiArrayCount; ++index)
 				{
-					NiAVObject *pkChild = pkParent->GetAt(index);
-					if(NiIsKindOf(NiTextureEffect, pkChild))
+					NiAVObject* pkChild = pkParent->GetAt(index);
+					if (NiIsKindOf(NiTextureEffect, pkChild))
 					{
-						if(pkParts)
+						if (pkParts)
 						{
 							pkParts->AddAttachedObject(pkChild);
 						}
@@ -7028,7 +7028,7 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 				pkDup->UpdateProperties();
 				//remove_zero_update 
 				//pkDup->Update(0.0f);
-				
+
 				iRetAttachedNode += iAttachedThisTime;
 			}
 			else
@@ -7045,8 +7045,8 @@ int PgActor::SkinningParts(PgItemEx *pkParts, NiNode* pkNode, bool bAttach)
 	return iRetAttachedNode;
 }
 
-//! ÆÄÃ÷¸¦ ¾×ÅÍÀÇ Æ¯Á¤ ´õ¹Ì¿¡ ºÙÀÎ´Ù.(ÀÌ¶§ÀÇ ÆÄÃ÷´Â ½ºÅ°´×À» ÇÏÁö ¾Ê´Â ÆÄÃ÷´Ù)
-bool PgActor::AttachNoSkinningParts(PgItemEx *pkParts, char const *pcTargetDummy)
+//! ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.(ï¿½Ì¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+bool PgActor::AttachNoSkinningParts(PgItemEx* pkParts, char const* pcTargetDummy)
 {
 	if (pkParts == NULL)
 	{
@@ -7055,10 +7055,10 @@ bool PgActor::AttachNoSkinningParts(PgItemEx *pkParts, char const *pcTargetDummy
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.AttachNoSkinningParts"), g_pkApp->GetFrameCount()));
 
-	if(!pcTargetDummy)
+	if (!pcTargetDummy)
 	{
 		pcTargetDummy = pkParts->GetTargetPoint();
-		if(!pcTargetDummy)
+		if (!pcTargetDummy)
 		{
 			return false;
 		}
@@ -7066,8 +7066,8 @@ bool PgActor::AttachNoSkinningParts(PgItemEx *pkParts, char const *pcTargetDummy
 
 	bool const	bSequenceReload = (pkParts->EquipLimit() == EQUIP_LIMIT_FACE);
 
-	//	pcPartsNifPath ÀÇ Scene Root ¸¦ pcTargetDummy ¿¡ Attach ½ÃÅ²´Ù.
-	NiNode* pkItem = (NiNode*) pkParts->GetMeshRoot();
+	//	pcPartsNifPath ï¿½ï¿½ Scene Root ï¿½ï¿½ pcTargetDummy ï¿½ï¿½ Attach ï¿½ï¿½Å²ï¿½ï¿½.
+	NiNode* pkItem = (NiNode*)pkParts->GetMeshRoot();
 	PG_ASSERT_LOG(pkItem);
 
 	NiNode* pkModel = NiDynamicCast(NiNode, GetCharRoot());
@@ -7077,27 +7077,27 @@ bool PgActor::AttachNoSkinningParts(PgItemEx *pkParts, char const *pcTargetDummy
 		return false;
 
 	NiNode* pkDestNode = NiDynamicCast(NiNode, pkModel->GetObjectByName(pcTargetDummy));
-	if(!pkDestNode)
+	if (!pkDestNode)
 	{
 		PG_ASSERT_LOG(!"pcTargetDummy dummy not found from dest");
 		return false;
 	}
 
 	NiNode* pkSrcNode = NiDynamicCast(NiNode, pkItem->GetObjectByName(pcTargetDummy));
-	if(!pkSrcNode)
+	if (!pkSrcNode)
 	{
 		PG_ASSERT_LOG(!"pcTargetDummy dummy not found from src");
 		return false;
 	}
 
-	// ÆÄÃ÷¸¦ ºÙÀÌ±â Àü¿¡, ÀÌÀü ÆÄÃ÷¸¦ Á¦°ÅÇÑ´Ù.
-	_PgOutputDebugString("DetachParts Actor : %s From PgActor::AttachNoSkinningParts\n",GetPilot() ? MB(GetPilot()->GetName()) : GetID().c_str());
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	_PgOutputDebugString("DetachParts Actor : %s From PgActor::AttachNoSkinningParts\n", GetPilot() ? MB(GetPilot()->GetName()) : GetID().c_str());
 
 	DetachParts(pkParts->EquipLimit());
 
-	//	ÆÄÃ÷¸¦ Detach ÇÑ ÈÄ, À§¿¡¼­´Â Ã£¾ÆÁ³´ø Node°¡ ¾ø¾îÁ³°Å³ª, º¯°æ‰çÀ» ¼ö ÀÖÀ¸¹Ç·Î, ´Ù½Ã ÇÑ¹ø Ã£´Â´Ù.
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Detach ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Nodeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½, ï¿½Ù½ï¿½ ï¿½Ñ¹ï¿½ Ã£ï¿½Â´ï¿½.
 	pkDestNode = NiDynamicCast(NiNode, pkModel->GetObjectByName(pcTargetDummy));
-	if(!pkDestNode)
+	if (!pkDestNode)
 	{
 		PG_ASSERT_LOG(!"pcTargetDummy dummy not found from dest again");
 		return false;
@@ -7108,7 +7108,7 @@ bool PgActor::AttachNoSkinningParts(PgItemEx *pkParts, char const *pcTargetDummy
 
 	NiNode* pkAttachingNode = pkSrcNode->GetParent();
 	PG_ASSERT_LOG(pkAttachingNode);
-	if (NULL == pkAttachingNode )
+	if (NULL == pkAttachingNode)
 	{
 		return false;
 	}
@@ -7125,11 +7125,11 @@ bool PgActor::AttachNoSkinningParts(PgItemEx *pkParts, char const *pcTargetDummy
 		NiTimeController::StartAnimations(pkDestNode, g_pkWorld->GetAccumTime());
 	}
 
-	if(bSequenceReload)
+	if (bSequenceReload)
 	{
-		// Morphing TargetÀ» ºÙ¿´À¸¸é, ±×¿¡ ÇØ´çÇÏ´Â ¸ðÇÎ ¾Ö´Ï¸¦ ¸®·Îµù ÇØÁÖ¾î¾ß ¸ðÇÎÀÌ µÈ´Ù.
-		NiActorManager *pkAM = GetActorManager();
-		if(pkAM)
+		// Morphing Targetï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½×¿ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½.
+		NiActorManager* pkAM = GetActorManager();
+		if (pkAM)
 		{
 			pkAM->Reset();
 			pkAM->ChangeNIFRoot(pkModel);
@@ -7138,65 +7138,65 @@ bool PgActor::AttachNoSkinningParts(PgItemEx *pkParts, char const *pcTargetDummy
 		//DoReservedAction(RA_IDLE);
 	}
 
-	// AttachÇÑ ³ëµå¸¦ º¸°üÇÏ°í ÀÖ´Â´Ù.
+	// Attachï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´Â´ï¿½.
 	pkParts->AddAttachedObject(pkAttachingNode);
 
-	// ÆÄÃ÷¿¡ ¾Ö´Ï°¡ Æ÷ÇÔµÇ¾î ÀÖÀ¸¸é AMContainer¿¡ µî·ÏÇÑ´Ù.
-	if(pkParts->IsAvailableAnimation())
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï°ï¿½ ï¿½ï¿½ï¿½ÔµÇ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AMContainerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	if (pkParts->IsAvailableAnimation())
 	{
-		m_kSupplementAMContainer.push_back(AMPair(pkParts->EquipLimit(), pkParts->GetActorManager(),pkParts->GetCustomAniIDChangeSetting()));
+		m_kSupplementAMContainer.push_back(AMPair(pkParts->EquipLimit(), pkParts->GetActorManager(), pkParts->GetCustomAniIDChangeSetting()));
 	}
 
-	PgItemEx *pkAdditionalItem = pkParts->GetAdditionalItem();
-	if(pkAdditionalItem != 0)
+	PgItemEx* pkAdditionalItem = pkParts->GetAdditionalItem();
+	if (pkAdditionalItem != 0)
 	{
 		AttachNoSkinningParts(pkAdditionalItem);
 	}
 
-	// TODO : Weapon No´Â CustomizingÀÌ ÇÊ¿äÇÏ´Ù.
-	if(pkParts->IsWeapon())
+	// TODO : Weapon Noï¿½ï¿½ Customizingï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ï´ï¿½.
+	if (pkParts->IsWeapon())
 	{
 		m_uiMyWeaponType = pkParts->GetWeaponType();
 		m_kMyWeaponEquipLimit = pkParts->EquipLimit();
 		m_byMyWeaponAnimFolderNum = pkParts->GetAnimFolderNum();
-		if(pkParts->GetItemDef())
+		if (pkParts->GetItemDef())
 		{
 			SetMyWeaponNo(pkParts->GetItemDef()->No());
 		}
 
-		//	ÄÞº¸ ÃÊ±âÈ­
+		//	ï¿½Þºï¿½ ï¿½Ê±ï¿½È­
 		SetComboCount(0);
 	}
-	
+
 	return true;
 }
 
 bool PgActor::DetachParts(eEquipLimit kItemPos)
 {
 	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kItemPos);
-	if(itr == m_kPartsAttachInfo.end())
+	if (itr == m_kPartsAttachInfo.end())
 	{
 		return false;
 	}
 
-	if(GetPilot())
+	if (GetPilot())
 	{
-		_PgOutputDebugString("DetachParts Actor : %s From PgActor::DetachParts(%d)\n",MB(GetPilot()->GetName()),kItemPos);
+		_PgOutputDebugString("DetachParts Actor : %s From PgActor::DetachParts(%d)\n", MB(GetPilot()->GetName()), kItemPos);
 	}
 
 	return DetachParts(itr->second);
 }
 
-bool PgActor::DetachParts(PgItemEx *pkParts)
+bool PgActor::DetachParts(PgItemEx* pkParts)
 {
-	if(!pkParts)
+	if (!pkParts)
 	{
 		return false;
 	}
-	//	Item ¸ðµ¨ ±³Ã¼µÇ¾ú´Ù¸é, ¿ø»ó º¹±¸ ½ÃÅ²´Ù.
+	//	Item ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½Ç¾ï¿½ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å²ï¿½ï¿½.
 	RestoreItemModel(pkParts->EquipLimit());
-	
-	if(pkParts->GetMeshRoot())
+
+	if (pkParts->GetMeshRoot())
 	{
 		DetachActorAlphaProperty(pkParts->GetMeshRoot());
 		pkParts->GetMeshRoot()->UpdateProperties();
@@ -7204,28 +7204,28 @@ bool PgActor::DetachParts(PgItemEx *pkParts)
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.DetachParts"), g_pkApp->GetFrameCount()));
 
-	// Actor¿¡°Ô¼­ ºÙ¿´´ø NodeµéÀ» ¸ðµÎ ¶¼¾î³½´Ù.
-	if( GetPilot() )
+	// Actorï¿½ï¿½ï¿½Ô¼ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ Nodeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³½ï¿½ï¿½.
+	if (GetPilot())
 	{
-		_PgOutputDebugString("[PgActor::DetachParts] Actor:%s Item : %d\n",MB(GetPilotGuid().str()),pkParts->GetItemDef()->No());
+		_PgOutputDebugString("[PgActor::DetachParts] Actor:%s Item : %d\n", MB(GetPilotGuid().str()), pkParts->GetItemDef()->No());
 	}
 
 	pkParts->ResetHide();
 	pkParts->RestoreAttachedObject();
 
-	if(pkParts->GetAdditionalItem())
+	if (pkParts->GetAdditionalItem())
 	{
 		pkParts->GetAdditionalItem()->ResetHide();
 		pkParts->GetAdditionalItem()->RestoreAttachedObject();
 	}
 
-	// Attached Info List¿¡¼­ Áö¿î´Ù.
+	// Attached Info Listï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	m_kPartsAttachInfo.erase(pkParts->EquipLimit());
 
-	// ÆÄÃ÷¾Ö´Ï·Î ºÙ¾îÀÖ´ø AMÀ» Áö¿î´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï·ï¿½ ï¿½Ù¾ï¿½ï¿½Ö´ï¿½ AMï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	AMContainer::iterator amItr = std::find(m_kSupplementAMContainer.begin(), m_kSupplementAMContainer.end(), AMPair(pkParts->EquipLimit(), 0, &PgItemEx::stCustomAniIDChangeSetting()));
-	if(amItr != m_kSupplementAMContainer.end())
-	{	
+	if (amItr != m_kSupplementAMContainer.end())
+	{
 		PG_ASSERT_LOG(amItr->m_spAM);
 		if (amItr->m_spAM)
 		{
@@ -7235,10 +7235,10 @@ bool PgActor::DetachParts(PgItemEx *pkParts)
 		m_kSupplementAMContainer.erase(amItr);
 	}
 
-	// ÆÄÃ÷°¡ ¹«±â¿´´Ù¸é WeaponTypeÀº 1000(Hand)À¸·Î ÇÑ´Ù.
-	if(pkParts->IsWeapon())
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿´ï¿½Ù¸ï¿½ WeaponTypeï¿½ï¿½ 1000(Hand)ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
+	if (pkParts->IsWeapon())
 	{
-		//	EndWeaponTrail();	//	Thread Safe ¶§¹®¿¡ ÀÏ´Ü ÁÖ¼®Ã³¸®.
+		//	EndWeaponTrail();	//	Thread Safe ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½Ö¼ï¿½Ã³ï¿½ï¿½.
 
 		m_uiMyWeaponType = PgItemEx::IT_FST;
 		m_kMyWeaponEquipLimit = EQUIP_LIMIT_WEAPON;
@@ -7254,12 +7254,12 @@ bool PgActor::DetachParts(PgItemEx *pkParts)
 	pkParts->ClearStatusEffect(GetPilot());
 	pkParts->SetActorNodesHide(this, false);
 
-	// ¸¶Áö¸·À¸·Î PartsÁ¤º¸ ÀÚÃ¼¸¦ Áö¿î´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Partsï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	THREAD_DELETE_ITEM(pkParts);
 	return true;
 }
 
-//! ¸ðµç ÆÄÃ÷¸¦ Á¦°ÅÇÑ´Ù.
+//! ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 bool PgActor::DetachAllParts()
 {
 	//std::vector<int> akDetachParts(32);
@@ -7271,11 +7271,11 @@ bool PgActor::DetachAllParts()
 	//}
 
 	PartsAttachInfo::iterator detach_iter = m_kPartsAttachInfo.begin();
-	while(detach_iter != m_kPartsAttachInfo.end())
+	while (detach_iter != m_kPartsAttachInfo.end())
 	{
-		if(GetPilot())
+		if (GetPilot())
 		{
-			_PgOutputDebugString("DetachParts Actor:%s From PgActor::DetachAllParts\n",MB(GetPilot()->GetName()));
+			_PgOutputDebugString("DetachParts Actor:%s From PgActor::DetachAllParts\n", MB(GetPilot()->GetName()));
 		}
 		DetachParts((*detach_iter).first);
 		detach_iter = m_kPartsAttachInfo.begin();
@@ -7292,11 +7292,11 @@ bool PgActor::DetachAllParts()
 	return true;
 }
 
-//! ÆÄÃ÷°¡ ÀÌ¹Ì ºÙ¾îÀÖ´ÂÁö Ã¼Å©ÇÑ´Ù.
+//! ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½Ù¾ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½.
 bool	PgActor::IsExistParts(eEquipLimit kItemPos)
 {
 	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kItemPos);
-	if(itr == m_kPartsAttachInfo.end())
+	if (itr == m_kPartsAttachInfo.end())
 	{
 		return false;
 	}
@@ -7305,41 +7305,41 @@ bool	PgActor::IsExistParts(eEquipLimit kItemPos)
 
 void	PgActor::UpdateShakeActor()
 {
-	//!	Ä³¸¯ÅÍ Èçµé±â Ã³¸®
-	if(m_iTotalShakeTime>0)
+	//!	Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+	if (m_iTotalShakeTime > 0)
 	{
-		int iElaspedTime =BM::GetTime32() - m_iShakeStartTime;
-		if(iElaspedTime>m_iTotalShakeTime)
+		int iElaspedTime = BM::GetTime32() - m_iShakeStartTime;
+		if (iElaspedTime > m_iTotalShakeTime)
 		{
 			m_iTotalShakeTime = 0;
 			GetNIFRoot()->SetTranslate(m_kOriginalPos);
-			m_kOriginalPos.x=m_kOriginalPos.y=m_kOriginalPos.z=0;
+			m_kOriginalPos.x = m_kOriginalPos.y = m_kOriginalPos.z = 0;
 		}
 		else
 		{
 
 			NiPoint3	kRandom(
-				(BM::Rand_Index(100)/100.0f)*m_fShakeValue,
-				(BM::Rand_Index(100)/100.0f)*m_fShakeValue,
-				(BM::Rand_Index(100)/100.0f)*m_fShakeValue);
-			
-			if(BM::Rand_Range(1)){kRandom.x*=-1;}
-			if(BM::Rand_Range(1)){kRandom.y*=-1;}
-			if(BM::Rand_Range(1)){kRandom.z*=-1;}
+				(BM::Rand_Index(100) / 100.0f) * m_fShakeValue,
+				(BM::Rand_Index(100) / 100.0f) * m_fShakeValue,
+				(BM::Rand_Index(100) / 100.0f) * m_fShakeValue);
 
-			NiPoint3 kNewPos = m_kOriginalPos+kRandom;
+			if (BM::Rand_Range(1)) { kRandom.x *= -1; }
+			if (BM::Rand_Range(1)) { kRandom.y *= -1; }
+			if (BM::Rand_Range(1)) { kRandom.z *= -1; }
+
+			NiPoint3 kNewPos = m_kOriginalPos + kRandom;
 			GetNIFRoot()->SetTranslate(kNewPos);
-		}		
+		}
 	}
 }
-void	PgActor::DrawParticle(PgRenderer *pkRenderer,bool bOnlyZTestEnable)
+void	PgActor::DrawParticle(PgRenderer* pkRenderer, bool bOnlyZTestEnable)
 {
-	PgParticle	*pkParticle = NULL;
+	PgParticle* pkParticle = NULL;
 
-	for ( AttachSlot::iterator itr = m_kAttachSlot.begin(); itr != m_kAttachSlot.end(); ++itr )
+	for (AttachSlot::iterator itr = m_kAttachSlot.begin(); itr != m_kAttachSlot.end(); ++itr)
 	{
-		pkParticle = NiDynamicCast(PgParticle,itr->second);
-		if(pkParticle && pkParticle->GetZTest() == bOnlyZTestEnable)
+		pkParticle = NiDynamicCast(PgParticle, itr->second);
+		if (pkParticle && pkParticle->GetZTest() == bOnlyZTestEnable)
 		{
 			pkParticle->SetAppCulled(false);
 			pkRenderer->PartialRenderClick_Deprecated(pkParticle);
@@ -7347,12 +7347,12 @@ void	PgActor::DrawParticle(PgRenderer *pkRenderer,bool bOnlyZTestEnable)
 		}
 	}
 
-	if(bOnlyZTestEnable == false)
+	if (bOnlyZTestEnable == false)
 	{
-		for ( AttachSlot::iterator itr = m_kAttachSlot_NoZTest.begin(); itr != m_kAttachSlot_NoZTest.end(); ++itr )
+		for (AttachSlot::iterator itr = m_kAttachSlot_NoZTest.begin(); itr != m_kAttachSlot_NoZTest.end(); ++itr)
 		{
-			pkParticle = NiDynamicCast(PgParticle,itr->second);
-			if(pkParticle)
+			pkParticle = NiDynamicCast(PgParticle, itr->second);
+			if (pkParticle)
 			{
 				pkParticle->SetAppCulled(false);
 				pkRenderer->PartialRenderClick_Deprecated(pkParticle);
@@ -7361,19 +7361,19 @@ void	PgActor::DrawParticle(PgRenderer *pkRenderer,bool bOnlyZTestEnable)
 		}
 	}
 }
-void	PgActor::UpdateHPGaugeBarPosition(NiCamera *pkCamera)
-{ 
-	if(m_pHPGaugeBar)
+void	PgActor::UpdateHPGaugeBarPosition(NiCamera* pkCamera)
+{
+	if (m_pHPGaugeBar)
 	{
 		PG_ASSERT_LOG(GetActorManager());
 		PG_ASSERT_LOG(GetActorManager()->GetNIFRoot());
 
 		//NiAVObjectPtr	spTargetPoint = GetActorManager()->GetNIFRoot()->GetObjectByName(ATTACH_POINT_STAR);
 		NiAVObjectPtr	spTargetPoint = GetNodePointStar();
-		if( spTargetPoint )
+		if (spTargetPoint)
 		{
 			NiPoint3 kPos = spTargetPoint->GetWorldTranslate();
-			if( m_spNameText )
+			if (m_spNameText)
 			{
 				NiPoint3 const& kFromPos = m_spNameText->GetWorldTranslate();
 				kPos -= kFromPos;
@@ -7387,44 +7387,44 @@ void	PgActor::UpdateHPGaugeBarPosition(NiCamera *pkCamera)
 		}
 	}
 }
-void	PgActor::DrawNameText(PgRenderer *pkRenderer,NiCamera *pkCamera)
+void	PgActor::DrawNameText(PgRenderer* pkRenderer, NiCamera* pkCamera)
 {
 	PG_ASSERT_LOG(pkCamera);
 
 #ifndef EXTERNAL_RELEASE
-	if(lua_tinker::call<bool>("DrawNameText"))
+	if (lua_tinker::call<bool>("DrawNameText"))
 #endif
 	{
-		PgActorUtil::SetNameCulled(m_spNameText, m_spGuildNameText, m_spGuildMark, m_spGuardianMark, m_spTitleName, m_spAchievementTitle, m_spGIFTitle, m_spMyhomeMark, m_spCustomCountText, m_spDuelTitle, m_spEffectCountDown, true); // ÀÏ´Ü ¼û±ä´Ù
+		PgActorUtil::SetNameCulled(m_spNameText, m_spGuildNameText, m_spGuildMark, m_spGuardianMark, m_spTitleName, m_spAchievementTitle, m_spGIFTitle, m_spMyhomeMark, m_spCustomCountText, m_spDuelTitle, m_spEffectCountDown, true); // ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 
-		if(!m_pTextBalloon || m_pTextBalloon->IsEnable() == false)
+		if (!m_pTextBalloon || m_pTextBalloon->IsEnable() == false)
 		{
-			if( !m_bNoName && m_stbNameVisible && m_spNameText && !g_kQuestMan.IsQuestDialog() )
+			if (!m_bNoName && m_stbNameVisible && m_spNameText && !g_kQuestMan.IsQuestDialog())
 			{
 				bool bDrawName = true;
 				PgPilot* pkPilot = GetPilot();
-				if( pkPilot )
+				if (pkPilot)
 				{
 					CUnit* pkUnit = pkPilot->GetUnit();
-					if( pkUnit )
+					if (pkUnit)
 					{
-						switch( pkUnit->UnitType() )
+						switch (pkUnit->UnitType())
 						{
 						case UT_NPC:
 						case UT_MONSTER:
-							{
-								bDrawName = m_bDrawNameNPC;
-							}break;
+						{
+							bDrawName = m_bDrawNameNPC;
+						}break;
 						case UT_PLAYER:
 						case UT_PET:
-							{
-								bDrawName = m_bDrawNamePC;
-							}break;
+						{
+							bDrawName = m_bDrawNamePC;
+						}break;
 						}
 					}
 				}
 
-				if( !bDrawName )
+				if (!bDrawName)
 				{
 					return;
 				}
@@ -7434,29 +7434,29 @@ void	PgActor::DrawNameText(PgRenderer *pkRenderer,NiCamera *pkCamera)
 		}
 	}
 }
-void TurnOnFog(NiAVObject *pkAVObject,bool bTurnOn)
+void TurnOnFog(NiAVObject* pkAVObject, bool bTurnOn)
 {
-	NiGeometry	*pkGeom = NiDynamicCast(NiGeometry,pkAVObject);
-	if(pkGeom)
+	NiGeometry* pkGeom = NiDynamicCast(NiGeometry, pkAVObject);
+	if (pkGeom)
 	{
-		NiFogProperty	*pkFog = pkGeom->GetPropertyState()->GetFog();
-		if(pkFog)
+		NiFogProperty* pkFog = pkGeom->GetPropertyState()->GetFog();
+		if (pkFog)
 		{
 			pkFog->SetFog(bTurnOn);
 		}
 		return;
 	}
 
-	NiNode	*pkNode = NiDynamicCast(NiNode,pkAVObject);
-	if(pkNode)
+	NiNode* pkNode = NiDynamicCast(NiNode, pkAVObject);
+	if (pkNode)
 	{
 		int	iCount = pkNode->GetArrayCount();
-		for(int i=0;i<iCount;++i)
+		for (int i = 0; i < iCount; ++i)
 		{
-			NiAVObject	*pkChild = pkNode->GetAt(i);
-			if(pkChild)
+			NiAVObject* pkChild = pkNode->GetAt(i);
+			if (pkChild)
 			{
-				TurnOnFog(pkChild,bTurnOn);
+				TurnOnFog(pkChild, bTurnOn);
 			}
 		}
 	}
@@ -7464,51 +7464,51 @@ void TurnOnFog(NiAVObject *pkAVObject,bool bTurnOn)
 
 void PgActor::RenderShadowObject()
 {
-	if(!g_bUseProjectionShadow)
+	if (!g_bUseProjectionShadow)
 		return;
 
-	if(m_pkShadow && g_pkWorld)
+	if (m_pkShadow && g_pkWorld)
 	{
 		SetAppCulled(false);
-		TurnOnFog(this,false);
+		TurnOnFog(this, false);
 		UpdateProperties();
 		m_pkShadow->ClickAndStuff(g_pkWorld->GetAccumTime());
-		TurnOnFog(this,true);
+		TurnOnFog(this, true);
 		SetAppCulled(true);
 		UpdateProperties();
 	}
 }
 
-bool PgActor::IsDrawable( PgRenderer* pkRenderer, NiCamera* pkCamera )
+bool PgActor::IsDrawable(PgRenderer* pkRenderer, NiCamera* pkCamera)
 {
 	PgPilot* pkPilot = GetPilot();
-	if(pkPilot == NULL || pkPilot->IsHide() == true) { return false; }
+	if (pkPilot == NULL || pkPilot->IsHide() == true) { return false; }
 
-	if(IsCompleteLoadParts() == false) { return false; }
+	if (IsCompleteLoadParts() == false) { return false; }
 	if (GetInvisibleGrade() >= PgActor::INVISIBLE_FAR && GetIgnoreCameraCulling() == false) { return false; }
 
-	const bool bThisIsEnemyActor = IsEnemy( g_kPilotMan.GetPlayerActor() );
-	if ( IsHide() || IsBlinkHide() ) // ¼û°Å³ª ºí¸µÅ© ¼û±â / !(Àû & ¼û¾úÀ» °æ¿ì)
+	const bool bThisIsEnemyActor = IsEnemy(g_kPilotMan.GetPlayerActor());
+	if (IsHide() || IsBlinkHide()) // ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ / !(ï¿½ï¿½ & ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
 	{
-		if( !bThisIsEnemyActor )
+		if (!bThisIsEnemyActor)
 		{
-			PgCircleShadow::AddOnlyShadowToVisibleArrayRecursive(this,pkRenderer,pkCamera);	//	±×¸²ÀÚ¸¸ ±×¸®±â
+			PgCircleShadow::AddOnlyShadowToVisibleArrayRecursive(this, pkRenderer, pkCamera);	//	ï¿½×¸ï¿½ï¿½Ú¸ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		}
 		return false;
 	}
-	if( IsInvisible() && bThisIsEnemyActor ) { return false; }
+	if (IsInvisible() && bThisIsEnemyActor) { return false; }
 
-    return true;
+	return true;
 }
 
-void PgActor::Draw( PgRenderer* pkRenderer, NiCamera* pkCamera, float fFrameTime )
+void PgActor::Draw(PgRenderer* pkRenderer, NiCamera* pkCamera, float fFrameTime)
 {
-    if ( IsDrawable(pkRenderer, pkCamera) == false )
-			return;
+	if (IsDrawable(pkRenderer, pkCamera) == false)
+		return;
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.Draw"), g_pkApp->GetFrameCount()));
 
-	UpdateShakeActor(); //!	Ä³¸¯ÅÍ Èçµé±â Ã³¸®
+	UpdateShakeActor(); //!	Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 
 	SetAppCulled(false);
 
@@ -7522,24 +7522,24 @@ void PgActor::Draw( PgRenderer* pkRenderer, NiCamera* pkCamera, float fFrameTime
 			kFrustum.m_fFar = 40000.0f;
 		pkCamera->SetViewFrustum(kFrustum);
 	}
-	pkRenderer->CullingProcess_Deprecated( pkCamera, this, pkRenderer->GetVisibleArray_Deprecated(), true ); // ±×¸± °´Ã¼ ÄÃ¸µ
+	pkRenderer->CullingProcess_Deprecated(pkCamera, this, pkRenderer->GetVisibleArray_Deprecated(), true); // ï¿½×¸ï¿½ ï¿½ï¿½Ã¼ ï¿½Ã¸ï¿½
 
-	if(g_bUseActorControllerUpdateOptimize)
+	if (g_bUseActorControllerUpdateOptimize)
 	{
-		if ( m_bLoadingComplete && GetPilot()->GetUnit()->IsUnitType(UT_PLAYER) == false )
+		if (m_bLoadingComplete && GetPilot()->GetUnit()->IsUnitType(UT_PLAYER) == false)
 		{
 			m_bVisible = !(pkRenderer->GetVisibleArray_Deprecated()->GetCount() == 0);
-			if(false==m_bVisible)
+			if (false == m_bVisible)
 			{
 				m_bVisible = IsUnderMyControl();
 			}
 		}
 	}
 
-	CullingProcessParticle( pkCamera, pkRenderer->GetVisibleArray_Deprecated(), pkRenderer ); // ±×¸± ÆÄÆ¼Å¬ ÄÃ¸µ(Z-Test¼öÇàÇÏ´Â ÆÄÆ¼Å¬)
+	CullingProcessParticle(pkCamera, pkRenderer->GetVisibleArray_Deprecated(), pkRenderer); // ï¿½×¸ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½Ã¸ï¿½(Z-Testï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ¼Å¬)
 
-    NewWare::Renderer::DrawActor( pkRenderer, this ); // À§¿¡¼­ ÄÃ¸µÇÑ °´Ã¼¿Í ÆÄÆ¼Å¬À» ±×¸²
-	
+	NewWare::Renderer::DrawActor(pkRenderer, this); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½×¸ï¿½
+
 	if (GetIgnoreCameraCulling())
 	{
 		kFrustum.m_fFar = fCameraFar;
@@ -7551,9 +7551,9 @@ void PgActor::Draw( PgRenderer* pkRenderer, NiCamera* pkCamera, float fFrameTime
 
 bool	PgActor::GetCanBatchRender()	const
 {
-	if(GetNIFRoot()->GetColorLocal() != NiColorA::WHITE)
+	if (GetNIFRoot()->GetColorLocal() != NiColorA::WHITE)
 		return	false;
-	if(m_bSpecularOn)
+	if (m_bSpecularOn)
 		return	false;
 
 	return	true;
@@ -7561,7 +7561,7 @@ bool	PgActor::GetCanBatchRender()	const
 
 bool	PgActor::CanSee()
 {
-	if(GetPilot() && GetPilot()->IsHide())
+	if (GetPilot() && GetPilot()->IsHide())
 	{
 		return false;
 	}
@@ -7582,13 +7582,13 @@ bool	PgActor::CanSee()
 
 bool PgActor::UpdateName(std::wstring const& rkName)
 {
-	PgPilot	*pPilot = GetPilot();
-	if( pPilot )
+	PgPilot* pPilot = GetPilot();
+	if (pPilot)
 	{
-		//Ä³¸¯ÅÍ ÀÌ¸§
+		//Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 		std::wstring kName = rkName.empty() ? pPilot->GetName() : rkName;
 #ifndef USE_INB
-		if(g_pkApp->VisibleClassNo())
+		if (g_pkApp->VisibleClassNo())
 		{
 			TCHAR szTemp[512] = {};
 			_sntprintf_s(szTemp, 512, 511, _T("%s\n<%d>"), kName.c_str(), pPilot->GetAbil(AT_CLASS));
@@ -7596,97 +7596,97 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 		}
 #endif
 
-		if(!IsUnderMyControl() && IsNowFollowing())
+		if (!IsUnderMyControl() && IsNowFollowing())
 		{
 			kName += _T("[Following]");
 		}
 
-		PgNpc * pNpc = dynamic_cast<PgNpc*>(pPilot->GetUnit());
-		if( pNpc && pNpc->HideMiniMap() )
-		{ // HIDE_MINIMAP ¼Ó¼ºÀ» °¡Áø NPC´Â ÀÌ¸§À» Ç¥½ÃÇÏÁö ¾ÊÀ½.
+		PgNpc* pNpc = dynamic_cast<PgNpc*>(pPilot->GetUnit());
+		if (pNpc && pNpc->HideMiniMap())
+		{ // HIDE_MINIMAP ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ NPCï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			kName.clear();
 		}
 
 		BM::vstring kvstrLevAddedName;
 		BM::vstring kvstrLevAddedNameBack;
 		CUnit* pkUnit = pPilot->GetUnit();
-		if( pkUnit )
+		if (pkUnit)
 		{
 			int const iDontShowAll = pkUnit->GetAbil(AT_DONT_DISPLAY_ALL);
-			if( 1 == iDontShowAll )
+			if (1 == iDontShowAll)
 			{
 				return true;
 			}
 			int const iDontShowLevel = pkUnit->GetAbil(AT_DONT_DISPLAY_LEVEL);
 			bool bPetName = false;
-			if(pkUnit->IsUnitType(UT_PET))
+			if (pkUnit->IsUnitType(UT_PET))
 			{
 				PgPet* pkPet = dynamic_cast<PgPet*>(pkUnit);
-				if(pkPet)
+				if (pkPet)
 				{
 					bPetName = (EPET_TYPE_2 == pkPet->GetPetType()) || (EPET_TYPE_3 == pkPet->GetPetType());
 				}
 			}
-			if(pkUnit->IsUnitType(UT_ENTITY) && 0==iDontShowLevel
-			&& ENTITY_GUARDIAN==pkUnit->GetAbil(AT_ENTITY_TYPE) )
+			if (pkUnit->IsUnitType(UT_ENTITY) && 0 == iDontShowLevel
+				&& ENTITY_GUARDIAN == pkUnit->GetAbil(AT_ENTITY_TYPE))
 			{
 				kvstrLevAddedName = TTW(224);
-				kvstrLevAddedName+=pkUnit->GetAbil(AT_LEVEL);
-				kvstrLevAddedName+=_T(" ");
+				kvstrLevAddedName += pkUnit->GetAbil(AT_LEVEL);
+				kvstrLevAddedName += _T(" ");
 			}
-			if( (pkUnit->IsUnitType(UT_MONSTER) || bPetName )
-			&&	0 == iDontShowLevel )
+			if ((pkUnit->IsUnitType(UT_MONSTER) || bPetName)
+				&& 0 == iDontShowLevel)
 			{
 				kvstrLevAddedName = TTW(224);
-				kvstrLevAddedName+=pkUnit->GetAbil(AT_LEVEL);
-				kvstrLevAddedName+=_T(" ");
+				kvstrLevAddedName += pkUnit->GetAbil(AT_LEVEL);
+				kvstrLevAddedName += _T(" ");
 
 				int const iGrade = pkUnit->GetAbil(AT_GRADE);
-				if( (EMGRADE_UPGRADED == iGrade || EMGRADE_ELITE == iGrade) && (0 == pkUnit->GetAbil(AT_DONT_DISPLAY_GRADE)) )
+				if ((EMGRADE_UPGRADED == iGrade || EMGRADE_ELITE == iGrade) && (0 == pkUnit->GetAbil(AT_DONT_DISPLAY_GRADE)))
 				{
-					kvstrLevAddedNameBack = TTW(500+iGrade);
+					kvstrLevAddedNameBack = TTW(500 + iGrade);
 				}
 
 				/////////////////////////////////
-				//Àü·«¸ðµå¿¡¼­ Á¡¼ö ÀÌÆåÆ® Ãâ·Â
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
 				/////////////////////////////////
 				int iPoint = pkUnit->GetAbil(AT_STRATEGIC_POINT);
-				if( pkUnit->GetAbil(AT_STRATEGIC_MUL_POINT) )
-				{//Æ÷ÀÎÆ® 2¹è
+				if (pkUnit->GetAbil(AT_STRATEGIC_MUL_POINT))
+				{//ï¿½ï¿½ï¿½ï¿½Æ® 2ï¿½ï¿½
 					iPoint *= 2;
 				}
 
-				if( m_iOldStrategicPoint!=iPoint )
-				{// Á¡¼ö ÀÌÆåÆ® Ç¥½Ã Á¦°Å
+				if (m_iOldStrategicPoint != iPoint)
+				{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					DetachFrom(EAPS_STRATEGIC_POINT);
 				}
 
-				if(m_iOldStrategicPoint!=iPoint && iPoint)
+				if (m_iOldStrategicPoint != iPoint && iPoint)
 				{
 					m_iOldStrategicPoint = iPoint;
 					int iNo = 0;
 					bool bError = false;
-					if(iPoint >= 40)
+					if (iPoint >= 40)
 					{
 						iNo = 40;
 						bError = (iPoint != 40);
 					}
-					else if(iPoint >= 30)
+					else if (iPoint >= 30)
 					{
 						iNo = 30;
 						bError = (iPoint != 30);
 					}
-					else if(iPoint >= 20)
+					else if (iPoint >= 20)
 					{
 						iNo = 20;
 						bError = (iPoint != 20);
 					}
-					else if(iPoint >= 15)
+					else if (iPoint >= 15)
 					{
 						iNo = 15;
 						bError = (iPoint != 15);
 					}
-					else if(iPoint >= 10)
+					else if (iPoint >= 10)
 					{
 						iNo = 10;
 						bError = (iPoint != 10);
@@ -7698,7 +7698,7 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 					}
 
 #ifndef EXTERNAL_RELEASE
-					if(bError)
+					if (bError)
 					{
 						SChatLog kChatLog(CT_ERROR);
 						BM::vstring vStr(TTW(401155));
@@ -7708,12 +7708,12 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 					}
 #endif
 					char buf[MAX_PATH];
-					sprintf_s(buf,sizeof(buf),"eff_common_defence_point_%02d",iNo);
+					sprintf_s(buf, sizeof(buf), "eff_common_defence_point_%02d", iNo);
 
-					NiAVObject *pkParticle = g_kParticleMan.GetParticle(buf,PgParticle::O_SCALE,1.f);
-					if( pkParticle )
+					NiAVObject* pkParticle = g_kParticleMan.GetParticle(buf, PgParticle::O_SCALE, 1.f);
+					if (pkParticle)
 					{
-						if( !AttachTo(EAPS_STRATEGIC_POINT, "p_ef_star", pkParticle) )
+						if (!AttachTo(EAPS_STRATEGIC_POINT, "p_ef_star", pkParticle))
 						{
 							THREAD_DELETE_PARTICLE(pkParticle);
 						}
@@ -7721,8 +7721,8 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 				}
 			}
 		}
-		kvstrLevAddedName+=kName;
-		kvstrLevAddedName+=kvstrLevAddedNameBack;
+		kvstrLevAddedName += kName;
+		kvstrLevAddedName += kvstrLevAddedNameBack;
 		//
 		std::wstring const kNameFont(_T("{T=Font_Name/}"));
 		std::wstring kNameColor, kEmoticon, kEnchantPrefix;
@@ -7730,16 +7730,16 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 		GetNameEmoticon(kEmoticon);
 		GetEnchantPrefixName(kEnchantPrefix, kNameFont, kNameColor);
 		std::wstring const kResultName = kEmoticon + kEnchantPrefix + kNameFont + kNameColor + (std::wstring)kvstrLevAddedName;
-		
-		CXUI_Font *pFont = g_kFontMgr.GetFont(FONT_NAME); // ÀÌ¸§
+
+		CXUI_Font* pFont = g_kFontMgr.GetFont(FONT_NAME); // ï¿½Ì¸ï¿½
 		float fNameWidth = 0.f;
-		if( pFont )
+		if (pFont)
 		{
-			if( !m_spNameText )
+			if (!m_spNameText)
 			{
 				//NiNode	*pkNameTargetNode = NiDynamicCast(NiNode,GetObjectByName(ATTACH_POINT_STAR));
-				NiNode	*pkNameTargetNode = GetNodePointStar();
-				if(pkNameTargetNode)
+				NiNode* pkNameTargetNode = GetNodePointStar();
+				if (pkNameTargetNode)
 				{
 					m_spNameText = NiNew PgTextObject();
 					pkNameTargetNode->AttachChild(m_spNameText, true);
@@ -7747,7 +7747,7 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 				PG_ASSERT_LOG(m_spNameText);
 			}
 
-			if( m_spNameText )
+			if (m_spNameText)
 			{
 				m_spNameText->SetText(kResultName, pFont);
 
@@ -7759,41 +7759,41 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 			}
 		}
 
-		if(pkUnit && pkUnit->IsUnitType(UT_ENTITY) )
-		{//Àü·«µðÆæ½º °¡µð¾ð °è±ÞÇ¥½Ã
+		if (pkUnit && pkUnit->IsUnitType(UT_ENTITY))
+		{//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ½º ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¥ï¿½ï¿½
 			fNameWidth = 0.0f;
-			if(m_spNameText)
+			if (m_spNameText)
 			{
 				fNameWidth = NiMax(static_cast<float>(m_spNameText->GetTextWidth()), fNameWidth);
 			}
 			int const iGuardianRank = pkUnit->GetAbil(AT_DISPLAY_LEVEL);
-			if( iGuardianRank )
+			if (iGuardianRank)
 			{
-				if( !m_spGuardianMark )
+				if (!m_spGuardianMark)
 				{
 					//NiNode* pkMarkTargetNode = NiDynamicCast(NiNode, GetObjectByName(ATTACH_POINT_STAR));
-					NiNode	*pkMarkTargetNode = GetNodePointStar();
-					if( pkMarkTargetNode )
+					NiNode* pkMarkTargetNode = GetNodePointStar();
+					if (pkMarkTargetNode)
 					{
 						m_spGuardianMark = NiNew PgGuardianMark();
 						pkMarkTargetNode->AttachChild(m_spGuardianMark, true);
 					}
 				}
-				if( m_spGuardianMark )
+				if (m_spGuardianMark)
 				{
-					m_spGuardianMark->Set( static_cast<byte>(iGuardianRank), fNameWidth + PgActorUtil::fNameWidthGap);
+					m_spGuardianMark->Set(static_cast<byte>(iGuardianRank), fNameWidth + PgActorUtil::fNameWidthGap);
 					NiPoint3 kPos = m_spGuardianMark->GetTranslate();
 					kPos.z = PgActorUtil::FindNamePosZ(this);
 					m_spGuardianMark->SetTranslate(kPos);
 				}
 			}
-			else 
+			else
 			{
-				if( m_spGuardianMark )
+				if (m_spGuardianMark)
 				{
 					//NiNode* pkTargetNode = NiDynamicCast(NiNode, GetObjectByName(ATTACH_POINT_STAR));
-					NiNode	*pkTargetNode = GetNodePointStar();
-					if( pkTargetNode )
+					NiNode* pkTargetNode = GetNodePointStar();
+					if (pkTargetNode)
 					{
 						PgActorUtil::DetachFromNode(pkTargetNode, m_spGuardianMark);
 					}
@@ -7802,44 +7802,44 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 			}
 		}
 		//
-		//±æµå ÀÌ¸§
+		//ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 		pFont = g_kFontMgr.GetFont(FONT_GUILDNAME);
 		bool bHaveGuild = false;
-		if( pFont
-		&&	pkUnit
-		&&	pkUnit->IsUnitType(UT_PLAYER) )
+		if (pFont
+			&& pkUnit
+			&& pkUnit->IsUnitType(UT_PLAYER))
 		{
-			PgPlayer *pkPC = dynamic_cast< PgPlayer* >(pkUnit);
-			if( pkPC )
+			PgPlayer* pkPC = dynamic_cast<PgPlayer*>(pkUnit);
+			if (pkPC)
 			{
-				if( BM::GUID::IsNotNull(pkPC->GuildGuid()) )//±æµå¿¡ °¡ÀÔµÇ¾î ÀÖÀ¸¸é
+				if (BM::GUID::IsNotNull(pkPC->GuildGuid()))//ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ÔµÇ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				{
 					bHaveGuild = true;
 					SGuildOtherInfo kGuildInfo;
-					if( !g_kGuildMgr.GetGuildInfo(pkPC->GuildGuid(), pkPC->GetID(), kGuildInfo) )
+					if (!g_kGuildMgr.GetGuildInfo(pkPC->GuildGuid(), pkPC->GetID(), kGuildInfo))
 					{
-						// ±æµå Á¤º¸°¡ ¾øÀ¸¸é ¼­¹ö·Î Á¤º¸¸¦ ¿äÃ»ÇÑ´Ù.
+						// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ñ´ï¿½.
 						g_kGuildMgr.ReqOtherGuildInfo(pkPC->GuildGuid(), GetGuid());
 					}
 					else
 					{
-						// ÀÖÀ¸¸é ±æµå ÀÌ¸§/¸¶Å© »ý¼º
-						// ±æµå ÀÌ¸§
-						if(!m_spGuildNameText)
+						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½/ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
+						// ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+						if (!m_spGuildNameText)
 						{
 							//NiNode	*pkNameTargetNode = NiDynamicCast(NiNode,GetObjectByName(ATTACH_POINT_STAR));
-							NiNode	*pkNameTargetNode = GetNodePointStar();
-							if( pkNameTargetNode )
+							NiNode* pkNameTargetNode = GetNodePointStar();
+							if (pkNameTargetNode)
 							{
 								m_spGuildNameText = NiNew PgTextObject();
 								pkNameTargetNode->AttachChild(m_spGuildNameText, true);
 							}
 							PG_ASSERT_LOG(m_spGuildNameText);
 						}
-						if( m_spGuildNameText )
+						if (m_spGuildNameText)
 						{
 							NiColorA kGuildNameColor;
-							GetGuildNameColor( kGuildNameColor );
+							GetGuildNameColor(kGuildNameColor);
 
 							m_spGuildNameText->SetText(kGuildInfo.kName, pFont);
 							m_spGuildNameText->SetTextColor(kGuildNameColor);
@@ -7851,34 +7851,34 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 							fNameWidth = NiMax(static_cast<float>(m_spGuildNameText->GetTextWidth()), fNameWidth);
 						}
 
-						// ±æµå ¸¶Å©
-						if( !m_spGuildMark )
+						// ï¿½ï¿½ï¿½ ï¿½ï¿½Å©
+						if (!m_spGuildMark)
 						{
 							//NiNode* pkMarkTargetNode = NiDynamicCast(NiNode, GetObjectByName(ATTACH_POINT_STAR));
 							NiNode* pkMarkTargetNode = GetNodePointStar();
-							if( pkMarkTargetNode )
+							if (pkMarkTargetNode)
 							{
 								m_spGuildMark = NiNew PgGuildMark();
 								pkMarkTargetNode->AttachChild(m_spGuildMark, true);
 							}
 						}
-						if( m_spGuildMark )
+						if (m_spGuildMark)
 						{
-							m_spGuildMark->Set( kGuildInfo.cEmblem, kGuildInfo.byEmporiaGrade, fNameWidth + PgActorUtil::fNameWidthGap);
+							m_spGuildMark->Set(kGuildInfo.cEmblem, kGuildInfo.byEmporiaGrade, fNameWidth + PgActorUtil::fNameWidthGap);
 							NiPoint3 kPos = m_spGuildMark->GetTranslate();
 							kPos.z = PgActorUtil::FindNamePosZ(this) + PgActorUtil::fAddedGuildMarkZ;
 							m_spGuildMark->SetTranslate(kPos);
 						}
 					}
 				}
-				else 
+				else
 				{
-					if( m_spGuildNameText
-					||	m_spGuildMark )
+					if (m_spGuildNameText
+						|| m_spGuildMark)
 					{
 						//NiNode* pkTargetNode = NiDynamicCast(NiNode, GetObjectByName(ATTACH_POINT_STAR));
 						NiNode* pkTargetNode = GetNodePointStar();
-						if( pkTargetNode )
+						if (pkTargetNode)
 						{
 							PgActorUtil::DetachFromNode(pkTargetNode, m_spGuildNameText);
 							PgActorUtil::DetachFromNode(pkTargetNode, m_spGuildMark);
@@ -7888,130 +7888,130 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 					}
 				}
 
-				//³ëÁ¡
-				if(pkPC->OpenVendor())
+				//ï¿½ï¿½ï¿½ï¿½
+				if (pkPC->OpenVendor())
 				{
-					if(!m_pVendorBalloon)
+					if (!m_pVendorBalloon)
 					{
 						m_pVendorBalloon = g_kVendorBalloonMgr.CreateNode();
-						if( m_pVendorBalloon )
+						if (m_pVendorBalloon)
 						{
 							m_pVendorBalloon->Init(this);
 						}
 					}
 					std::wstring kVendorTitle = pkPC->VendorTitle();
 					std::wstring const kFormStr(TTW(799439));
-					wchar_t szBuf[200] ={0,};
+					wchar_t szBuf[200] = { 0, };
 					wsprintfW(szBuf, kFormStr.c_str(), kVendorTitle.c_str());
 					kVendorTitle = szBuf;
 					m_pVendorBalloon->SetNewTitle(kVendorTitle, pkPC->GetID());
-					
+
 					std::string kActionName = "a_vendor";
 					PgAction* pkAction = this->GetAction();
-					if(!pkAction)
+					if (!pkAction)
 					{
 						BM::Stream	kPacket(PT_C_M_REQ_VENDOR_STATE);
-						kPacket.Push( pkPC->VendorGuid() );
+						kPacket.Push(pkPC->VendorGuid());
 						NETWORK_SEND(kPacket);
 					}
 				}
 				else
 				{
-					if( m_pVendorBalloon )
+					if (m_pVendorBalloon)
 					{
 						m_pVendorBalloon->SetNewTitle(_T(""));
 					}
 				}
 
-				// ÆÄÆ¼ & ¿øÁ¤´ë ¹ú·é
+				// ï¿½ï¿½Æ¼ & ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				bool bPartyMaster = false;
 				bool bExpeditionMaster = false;
 				bool const bInParty = BM::GUID::IsNotNull(pkPC->PartyGuid());
 				bool const bInExpedition = BM::GUID::IsNotNull(pkPC->ExpeditionGuid());
-				if( bInExpedition )
+				if (bInExpedition)
 				{
 					SExpeditionInfo ExpeditionInfo;
 					bool const bRet = g_kExpedition.GetExpedition(pkPC->ExpeditionGuid(), pkPC->GetID(), ExpeditionInfo);
-					if( false == bRet )	// Ã£´Â ¿øÁ¤´ë°¡ ¿øÁ¤´ë ¸ñ·Ï¿¡ ¾øÀ» ¶§
+					if (false == bRet)	// Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ë°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 					{
-						// ¿äÃ»ÇÑ´Ù.
+						// ï¿½ï¿½Ã»ï¿½Ñ´ï¿½.
 						g_kExpedition.ReqOtherExpeditionInfo(pkPC->ExpeditionGuid(), GetGuid());
 					}
 					bExpeditionMaster = pkPC->GetID() == ExpeditionInfo.MasterGuid;
-					if( bExpeditionMaster )
+					if (bExpeditionMaster)
 					{
-						// ¿øÁ¤´ë ¹ú·é
-						if( false == m_pExpeditionBalloon )
+						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+						if (false == m_pExpeditionBalloon)
 						{
 							m_pExpeditionBalloon = g_kExpeditionBalloonMgr.CreateNode();
-							if( m_pExpeditionBalloon )
+							if (m_pExpeditionBalloon)
 							{
 								m_pExpeditionBalloon->Init(this);
 							}
 						}
-						
+
 						std::wstring TempExpeditionName = ExpeditionInfo.ExpeditionName;
 						std::wstring ExpeditionTitle;
-						if( FormatTTW(ExpeditionTitle, 710045, TempExpeditionName.c_str(), ExpeditionInfo.cCurMember, ExpeditionInfo.cMaxMember)
-						&&	m_pExpeditionBalloon )
+						if (FormatTTW(ExpeditionTitle, 710045, TempExpeditionName.c_str(), ExpeditionInfo.cCurMember, ExpeditionInfo.cMaxMember)
+							&& m_pExpeditionBalloon)
 						{
 							bool const bTitlePublic = ExpeditionInfo.ExpeditionOption.GetOptionPublicTitle() == EOT_Public;
 							m_pExpeditionBalloon->SetNewTitle(ExpeditionTitle, pkPC->ExpeditionGuid(), bTitlePublic);
-							m_pExpeditionBalloon->SetMaxMember( (ExpeditionInfo.cCurMember == ExpeditionInfo.cMaxMember) );
+							m_pExpeditionBalloon->SetMaxMember((ExpeditionInfo.cCurMember == ExpeditionInfo.cMaxMember));
 						}
 					}
 				}
-				else if( bInParty )
+				else if (bInParty)
 				{
 					SClientPartyName kPartyName;
 					bool const bRetName = g_kParty.GetPartyName(pkPC->PartyGuid(), pkPC->GetID(), kPartyName);
-					if( !bRetName )
+					if (!bRetName)
 					{
 						g_kParty.ReqOtherPartyInfo(pkPC->PartyGuid(), GetGuid());
 					}
 
 					bPartyMaster = pkPC->GetID() == kPartyName.kMasterGuid;
-					if( bPartyMaster )
+					if (bPartyMaster)
 					{
-						if( !m_pPartyBalloon )
+						if (!m_pPartyBalloon)
 						{
 							m_pPartyBalloon = g_kPartyBalloonMgr.CreateNode();
-							if( m_pPartyBalloon )
+							if (m_pPartyBalloon)
 							{
 								m_pPartyBalloon->Init(this);
 							}
 						}
 
 						std::wstring kTempPartyName = kPartyName.kPartyName;
-						if( kPartyName.kPartyName.empty() )
+						if (kPartyName.kPartyName.empty())
 						{
 							kTempPartyName = g_kParty.GeneratePartyName(kPartyName.kPartyGuid);
 						}
 
 						std::wstring kPartyTitle;
-						if( FormatTTW(kPartyTitle, 401202, kTempPartyName.c_str(), kPartyName.cCurMember, kPartyName.cMaxMember)
-						&&	m_pPartyBalloon )
+						if (FormatTTW(kPartyTitle, 401202, kTempPartyName.c_str(), kPartyName.cCurMember, kPartyName.cMaxMember)
+							&& m_pPartyBalloon)
 						{
 							bool const bTitlePublic = kPartyName.kPartyOption.GetOptionPublicTitle() == POT_Public;
 							m_pPartyBalloon->SetNewTitle(kPartyTitle, pkPC->PartyGuid(), bTitlePublic);
-							m_pPartyBalloon->SetMaxMember( (kPartyName.cCurMember == kPartyName.cMaxMember) );
+							m_pPartyBalloon->SetMaxMember((kPartyName.cCurMember == kPartyName.cMaxMember));
 						}
 					}
 				}
 
-				if( !bInParty
-				||	!bPartyMaster )
+				if (!bInParty
+					|| !bPartyMaster)
 				{
-					if( m_pPartyBalloon )
+					if (m_pPartyBalloon)
 					{
 						m_pPartyBalloon->SetNewTitle(_T(""));
 					}
 				}
 
-				if( !bInExpedition
-				||	!bExpeditionMaster )
+				if (!bInExpedition
+					|| !bExpeditionMaster)
 				{
-					if( m_pExpeditionBalloon )
+					if (m_pExpeditionBalloon)
 					{
 						m_pExpeditionBalloon->SetNewTitle(_T(""));
 					}
@@ -8019,16 +8019,16 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 			}
 		}
 
-		// ¾÷Àû GIF Å¸ÀÌÆ²¿ë ÆùÆ®
+		// ï¿½ï¿½ï¿½ï¿½ GIF Å¸ï¿½ï¿½Æ²ï¿½ï¿½ ï¿½ï¿½Æ®
 		PgBase_Item kAchieveItem;
 		bool const bEquipAchieve = PgActorUtil::GetEquipAchievementItem(this, kAchieveItem);
 		int const iAchievementsTitleNo = bEquipAchieve ? PgActorUtil::GetAchievementsTitleNo(kAchieveItem) : 0;
-		if( !bEquipAchieve || 0==iAchievementsTitleNo )
+		if (!bEquipAchieve || 0 == iAchievementsTitleNo)
 		{
-			if( m_spAchievementTitle )
+			if (m_spAchievementTitle)
 			{
-//				PgActorUtil::DetachFromNode(this, ATTACH_POINT_STAR, m_spAchievementTitle);
-				if(IsRidingPet())
+				//				PgActorUtil::DetachFromNode(this, ATTACH_POINT_STAR, m_spAchievementTitle);
+				if (IsRidingPet())
 				{
 					PgActorUtil::DetachFromNode(GetMountTargetPet(), ATTACH_POINT_RIDENAME, m_spAchievementTitle);
 				}
@@ -8038,10 +8038,10 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 				}
 				m_spAchievementTitle = 0;
 			}
-			if( m_spMyhomeMark )
+			if (m_spMyhomeMark)
 			{
-//				PgActorUtil::DetachFromNode(this, ATTACH_POINT_STAR, m_spMyhomeMark);
-				if(IsRidingPet())
+				//				PgActorUtil::DetachFromNode(this, ATTACH_POINT_STAR, m_spMyhomeMark);
+				if (IsRidingPet())
 				{
 					PgActorUtil::DetachFromNode(GetMountTargetPet(), ATTACH_POINT_RIDENAME, m_spMyhomeMark);
 				}
@@ -8054,27 +8054,27 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 		}
 		else
 		{
-			if( !m_spAchievementTitle )
+			if (!m_spAchievementTitle)
 			{
 				//NiNode* pkNameTargetNode = NiDynamicCast(NiNode,GetObjectByName(ATTACH_POINT_STAR));
 				NiNode* pkNameTargetNode = GetNodePointStar();
-				if( pkNameTargetNode )
+				if (pkNameTargetNode)
 				{
 					m_spAchievementTitle = NiNew PgAchievementTitle();
 					pkNameTargetNode->AttachChild(m_spAchievementTitle, true);
 				}
 				PG_ASSERT_LOG(m_spAchievementTitle);
 			}
-			if( m_spAchievementTitle )
+			if (m_spAchievementTitle)
 			{
 				float fAddZPos = 0.0f;
 
 				int	iEmoticonID = 0;
-				// GIF¿ë Å¸ÀÌÆ²ÀÌ ÀÖ´ÂÁö Ã¼Å©
-				if( g_kEmoFontMgr.Trans_key_value(iAchievementsTitleNo, iEmoticonID) )
+				// GIFï¿½ï¿½ Å¸ï¿½ï¿½Æ²ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©
+				if (g_kEmoFontMgr.Trans_key_value(iAchievementsTitleNo, iEmoticonID))
 				{
 					pFont = g_kFontMgr.GetFont(UNI("AchievementsTitleFont"));
-					if( pFont )
+					if (pFont)
 					{
 						std::wstring kString = _T("{T=AchievementsTitleFont/}");
 
@@ -8086,17 +8086,17 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 						fAddZPos = 7.0f;
 					}
 				}
-				//¾øÀ¸¸é ÀÏ¹Ý Å¸ÀÌÆ²·Î Ãâ·Â
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹ï¿½ Å¸ï¿½ï¿½Æ²ï¿½ï¿½ ï¿½ï¿½ï¿½
 				else
 				{
 					pFont = g_kFontMgr.GetFont(FONT_TITLENAME); // È£Äª
-					if( pFont )
+					if (pFont)
 					{
 						E_ITEM_GRADE Grade = IG_NORMAL;
 
 						GET_DEF(CItemDefMgr, kItemDefMgr);
-						CItemDef const *pDef = kItemDefMgr.GetDef(kAchieveItem.ItemNo());
-						if(pDef)
+						CItemDef const* pDef = kItemDefMgr.GetDef(kAchieveItem.ItemNo());
+						if (pDef)
 						{
 							Grade = static_cast<E_ITEM_GRADE>(pDef->GetAbil(AT_GRADE));
 						}
@@ -8104,19 +8104,19 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 						{
 							Grade = GetItemGrade(kAchieveItem);
 						}
-						
+
 						DWORD dwFontColor = 0xFFFFFFFF;
 						DWORD dwBgColor = 0xFF111111;//0xFF4D1101;
-						switch( Grade )
+						switch (Grade)
 						{
-						case IG_RARE:		{ dwFontColor = 0xFF00E518; dwBgColor = 0xFF111111; }break;
-						case IG_UNIQUE:		{ dwFontColor = 0xFF66CCFF; dwBgColor = 0xFF111111; }break;
-						case IG_ARTIFACT:	{ dwFontColor = 0xFFFFBA21; dwBgColor = 0xFF111111; }break;
-						case IG_LEGEND:		{ dwFontColor = 0xFFFFD5FF; dwBgColor = 0xFF111111; }break;
+						case IG_RARE: { dwFontColor = 0xFF00E518; dwBgColor = 0xFF111111; }break;
+						case IG_UNIQUE: { dwFontColor = 0xFF66CCFF; dwBgColor = 0xFF111111; }break;
+						case IG_ARTIFACT: { dwFontColor = 0xFFFFBA21; dwBgColor = 0xFF111111; }break;
+						case IG_LEGEND: { dwFontColor = 0xFFFFD5FF; dwBgColor = 0xFF111111; }break;
 						}
 
 						std::wstring const* pkDefString = NULL;
-						if( GetDefString(iAchievementsTitleNo, pkDefString) )
+						if (GetDefString(iAchievementsTitleNo, pkDefString))
 						{
 							m_spAchievementTitle->UseBgColor(true);
 							m_spAchievementTitle->Set(pFont, (*pkDefString), dwBgColor, dwFontColor);
@@ -8126,19 +8126,19 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 				}
 
 				NiPoint3 kPos = m_spAchievementTitle->GetTranslate();
-				kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild)? PgActorUtil::fAddedGuildNameZ*2.f: PgActorUtil::fAddedGuildNameZ) + fAddZPos;
+				kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild) ? PgActorUtil::fAddedGuildNameZ * 2.f : PgActorUtil::fAddedGuildNameZ) + fAddZPos;
 				m_spAchievementTitle->SetTranslate(kPos);
 			}
 		}
 
-		// GIF Å¸ÀÌÆ²¿ë ÆùÆ®
-		if(pkUnit)
+		// GIF Å¸ï¿½ï¿½Æ²ï¿½ï¿½ ï¿½ï¿½Æ®
+		if (pkUnit)
 		{
 			int const iEmoticonID = pkUnit->GetAbil(AT_DISPLAY_GIF_TITLE);
 
-			if( 0==iEmoticonID )
+			if (0 == iEmoticonID)
 			{
-				if( m_spGIFTitle )
+				if (m_spGIFTitle)
 				{
 					PgActorUtil::DetachFromNode(this, ATTACH_POINT_STAR, m_spGIFTitle);
 					m_spGIFTitle = 0;
@@ -8146,23 +8146,23 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 			}
 			else
 			{
-				if( !m_spGIFTitle )
+				if (!m_spGIFTitle)
 				{
 					//NiNode* pkNameTargetNode = NiDynamicCast(NiNode,GetObjectByName(ATTACH_POINT_STAR));
 					NiNode* pkNameTargetNode = GetNodePointStar();
-					if( pkNameTargetNode )
+					if (pkNameTargetNode)
 					{
 						m_spGIFTitle = NiNew PgAchievementTitle();
 						pkNameTargetNode->AttachChild(m_spGIFTitle, true);
 					}
 					PG_ASSERT_LOG(m_spGIFTitle);
 				}
-				if( m_spGIFTitle )
+				if (m_spGIFTitle)
 				{
 					float fAddZPos = 0.0f;
 
 					pFont = g_kFontMgr.GetFont(UNI("GIFTitleFont"));
-					if( pFont )
+					if (pFont)
 					{
 						std::wstring kString = _T("{T=GIFTitleFont/}");
 
@@ -8172,53 +8172,53 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 						m_spGIFTitle->Set(pFont, kString);
 						m_spGIFTitle->SetScale(1.5f);
 						fAddZPos = 2.5f;
-						if(pkUnit->IsUnitType(UT_MONSTER))
+						if (pkUnit->IsUnitType(UT_MONSTER))
 						{
 							fAddZPos = 5.0f;
 						}
 					}
 
 					NiPoint3 kPos = m_spGIFTitle->GetTranslate();
-					kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild)? PgActorUtil::fAddedGuildNameZ*2.f: PgActorUtil::fAddedGuildNameZ) + fAddZPos;
+					kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild) ? PgActorUtil::fAddedGuildNameZ * 2.f : PgActorUtil::fAddedGuildNameZ) + fAddZPos;
 					m_spGIFTitle->SetTranslate(kPos);
 				}
 			}
 		}
 
-		if( g_pkWorld && !g_pkWorld->IsHaveAttr(GATTR_FLAG_BATTLESQUARE))
+		if (g_pkWorld && !g_pkWorld->IsHaveAttr(GATTR_FLAG_BATTLESQUARE))
 		{
-			UpdateCustomCount(0,false);
+			UpdateCustomCount(0, false);
 		}
 
 		RefreshCustomItemColor();
 
 
-		if(!m_spDuelTitle)
+		if (!m_spDuelTitle)
 		{
 			NiNode* pkNameTargetNode = GetNodePointStar();
-			if( pkNameTargetNode && GetUnit() && GetUnit()->IsUnitType(UT_PLAYER) )
+			if (pkNameTargetNode && GetUnit() && GetUnit()->IsUnitType(UT_PLAYER))
 			{
 				m_spDuelTitle = NiNew PgDuelTitle();
 				pkNameTargetNode->AttachChild(m_spDuelTitle, true);
 				SetDuelWinnerTitle();
 			}
 		}
-		if(m_spDuelTitle)
+		if (m_spDuelTitle)
 		{
 			NiNode* pkNameTargetNode = GetNodePointStar();
-			if( pkNameTargetNode && GetUnit() && GetUnit()->IsUnitType(UT_PLAYER) )
+			if (pkNameTargetNode && GetUnit() && GetUnit()->IsUnitType(UT_PLAYER))
 			{
 				NiPoint3 kPos = m_spDuelTitle->GetTranslate();
-				if(m_spTitleName)
+				if (m_spTitleName)
 				{
 					kPos = m_spTitleName->GetTranslate();
 				}
-				kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild)? PgActorUtil::fAddedGuildNameZ*2.f: PgActorUtil::fAddedGuildNameZ);
-				if( m_spGIFTitle )
+				kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild) ? PgActorUtil::fAddedGuildNameZ * 2.f : PgActorUtil::fAddedGuildNameZ);
+				if (m_spGIFTitle)
 				{
 					kPos.z += (m_spGIFTitle->GetTranslate().z - kPos.z) + 2.5f;
 				}
-				if(m_spAchievementTitle)
+				if (m_spAchievementTitle)
 				{
 					kPos.z += (m_spAchievementTitle->GetTranslate().z - kPos.z) + 2.5f;
 				}
@@ -8227,22 +8227,22 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 			}
 		}
 
-		//ÀÌÆåÆ® Ä«¿îµå ´Ù¿î
-		if(!m_spEffectCountDown)
+		//ï¿½ï¿½ï¿½ï¿½Æ® Ä«ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½
+		if (!m_spEffectCountDown)
 		{
 			NiNode* pkTargetNode = GetNodePointStar();
-			if( pkTargetNode && GetEffectCountDownSec() )
+			if (pkTargetNode && GetEffectCountDownSec())
 			{
 				m_spEffectCountDown = NiNew PgEffectCountDown();
 				PgActorUtil::AttachToNode(pkTargetNode, m_spEffectCountDown);
 			}
 		}
-		if(m_spEffectCountDown)
+		if (m_spEffectCountDown)
 		{
-			if( NiNode* pkTargetNode = GetNodePointStar() )
+			if (NiNode* pkTargetNode = GetNodePointStar())
 			{
 				WORD const wCountDown = GetEffectCountDownSec();
-				if(wCountDown <= 0)
+				if (wCountDown <= 0)
 				{
 					PgActorUtil::DetachFromNode(pkTargetNode, m_spEffectCountDown);
 					m_spEffectCountDown = NULL;
@@ -8250,16 +8250,16 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 				else
 				{
 					NiPoint3 kPos = m_spEffectCountDown->GetTranslate();
-					if(m_spTitleName)
+					if (m_spTitleName)
 					{
 						kPos = m_spTitleName->GetTranslate();
 					}
-					kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild)? PgActorUtil::fAddedGuildNameZ*2.f: PgActorUtil::fAddedGuildNameZ);
-					if( m_spGIFTitle )
+					kPos.z = PgActorUtil::FindNamePosZ(this) + ((bHaveGuild) ? PgActorUtil::fAddedGuildNameZ * 2.f : PgActorUtil::fAddedGuildNameZ);
+					if (m_spGIFTitle)
 					{
 						kPos.z += (m_spGIFTitle->GetTranslate().z - kPos.z) + 2.5f;
 					}
-					if(m_spAchievementTitle)
+					if (m_spAchievementTitle)
 					{
 						kPos.z += (m_spAchievementTitle->GetTranslate().z - kPos.z) + 2.5f;
 					}
@@ -8277,15 +8277,15 @@ bool PgActor::UpdateName(std::wstring const& rkName)
 bool PgActor::UpdateCustomCount(int const iCount, bool bUpdate)
 {
 	//NiNode	*pkNameTargetNode = NiDynamicCast(NiNode,GetObjectByName(ATTACH_POINT_STAR));
-	NiNode	*pkNameTargetNode = GetNodePointStar();
-	if(pkNameTargetNode)
+	NiNode* pkNameTargetNode = GetNodePointStar();
+	if (pkNameTargetNode)
 	{
-		if( !bUpdate)
+		if (!bUpdate)
 		{
-			if( m_spCustomCountText)
+			if (m_spCustomCountText)
 			{
 				//PgActorUtil::DetachFromNode(this, ATTACH_POINT_STAR, m_spCustomCountText);
-				if(IsRidingPet())
+				if (IsRidingPet())
 				{
 					PgActorUtil::DetachFromNode(GetMountTargetPet(), ATTACH_POINT_RIDENAME, m_spCustomCountText);
 				}
@@ -8298,33 +8298,33 @@ bool PgActor::UpdateCustomCount(int const iCount, bool bUpdate)
 			return false;
 		}
 		//
-		if( !m_spCustomCountText )
+		if (!m_spCustomCountText)
 		{
 			m_spCustomCountText = NiNew PgTextObject();
 			pkNameTargetNode->AttachChild(m_spCustomCountText, true);
 			PG_ASSERT_LOG(m_spCustomCountText);
 		}
 		//
-		if( m_spCustomCountText)
+		if (m_spCustomCountText)
 		{
-			if( 1 < iCount)
+			if (1 < iCount)
 			{
-				std::wstring strCount = std::wstring( BM::vstring(iCount) );
+				std::wstring strCount = std::wstring(BM::vstring(iCount));
 				std::wstring const kNameFont(_T("{T=Font_Name/}"));
 				std::wstring kNameColor = L"{C=0xFFFFFF00/}";
 				std::wstring const kResultName = kNameFont + kNameColor + strCount;
 
-				CXUI_Font *pFont = g_kFontMgr.GetFont(FONT_NAME); // ÀÌ¸§
-				if( pFont )
+				CXUI_Font* pFont = g_kFontMgr.GetFont(FONT_NAME); // ï¿½Ì¸ï¿½
+				if (pFont)
 				{
 					pFont->SetStyle2(XUI::CXUI_Font::FS_BOLD);
 					m_spCustomCountText->SetText(kResultName, pFont);
 				}
 				NiPoint3 kPos = m_spCustomCountText->GetTranslate();;
 				float fAddZPos = 30.0f;
-				kPos.z = PgActorUtil::FindNamePosZ(this) + PgActorUtil::fAddedGuildNameZ*2.f + fAddZPos;
+				kPos.z = PgActorUtil::FindNamePosZ(this) + PgActorUtil::fAddedGuildNameZ * 2.f + fAddZPos;
 				NiPoint3 kActorPos = GetLookingDir();
-				if( 0 < kActorPos.x)
+				if (0 < kActorPos.x)
 				{
 					kPos.x = -3.0f;
 				}
@@ -8338,7 +8338,7 @@ bool PgActor::UpdateCustomCount(int const iCount, bool bUpdate)
 			else
 			{
 				//PgActorUtil::DetachFromNode(this, ATTACH_POINT_STAR, m_spCustomCountText);
-				if(IsRidingPet())
+				if (IsRidingPet())
 				{
 					PgActorUtil::DetachFromNode(GetMountTargetPet(), ATTACH_POINT_RIDENAME, m_spCustomCountText);
 				}
@@ -8354,107 +8354,107 @@ bool PgActor::UpdateCustomCount(int const iCount, bool bUpdate)
 	return true;
 }
 
-bool PgActor::IsEnemy(PgActor *pkTarget)	//	³ªÀÇ ÀûÀÎ°¡?
+bool PgActor::IsEnemy(PgActor* pkTarget)	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½?
 {
-	if(!pkTarget)
+	if (!pkTarget)
 	{
 		return	false;
 	}
-	PgPilot	*pkPilot = GetPilot();
-	PgPilot	*pkTargetPilot = pkTarget->GetPilot();
+	PgPilot* pkPilot = GetPilot();
+	PgPilot* pkTargetPilot = pkTarget->GetPilot();
 
-	if(!pkPilot || !pkTargetPilot)
+	if (!pkPilot || !pkTargetPilot)
 	{
 		return	false;
 	}
 
-	if(pkPilot == pkTargetPilot) 
+	if (pkPilot == pkTargetPilot)
 	{
-		return false;	//	³ª ÀÚ½Å
+		return false;	//	ï¿½ï¿½ ï¿½Ú½ï¿½
 	}
 
 	CUnit* pkUnit = pkPilot->GetUnit();
 	PG_ASSERT_LOG(pkUnit);
-	if(!pkUnit)
+	if (!pkUnit)
 	{
 		return false;
 	}
 
 	CUnit* pkTargetUnit = pkTargetPilot->GetUnit();
 	PG_ASSERT_LOG(pkTargetUnit);
-	if(!pkTargetUnit)
+	if (!pkTargetUnit)
 	{
 		return false;
 	}
 
 	bool bIsEnemy = false;
 
-	switch(pkUnit->UnitType())
+	switch (pkUnit->UnitType())
 	{
 	case UT_PLAYER:
 	case UT_ENTITY:
 	case UT_PET:
 	case UT_SUB_PLAYER:
 	case UT_SUMMONED:
+	{
+		if (pkTargetUnit->IsUnitType(UT_MONSTER) || pkTargetUnit->IsUnitType(UT_OBJECT))	//	ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½
 		{
-			if(pkTargetUnit->IsUnitType(UT_MONSTER) || pkTargetUnit->IsUnitType(UT_OBJECT))	//	ÇÃ·¹ÀÌ¾î¶ó¸é ¸ó½ºÅÍ°¡ ÀûÀÌ´Ù
+			bIsEnemy = true;
+		}
+		else if (pkTargetUnit->IsUnitType(UT_PLAYER)
+			|| pkTargetUnit->IsUnitType(UT_SUB_PLAYER)	// SUB_PLAYERï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			|| pkTargetUnit->IsUnitType(UT_SUMMONED)
+			)
+		{
+			int iMyTeam = pkPilot->GetAbil(AT_TEAM);
+			int iTargetTeam = pkTargetPilot->GetAbil(AT_TEAM);
+			if (iMyTeam != iTargetTeam && iMyTeam != 0 && iTargetTeam != 0)
 			{
 				bIsEnemy = true;
 			}
-			else if ( pkTargetUnit->IsUnitType(UT_PLAYER) 
-					|| pkTargetUnit->IsUnitType(UT_SUB_PLAYER)	// SUB_PLAYER¸¦ Å¸°Ý ÇÏ°í ½ÍÀ»¶§
-					|| pkTargetUnit->IsUnitType(UT_SUMMONED)
-				)
-			{
-				int iMyTeam = pkPilot->GetAbil(AT_TEAM);
-				int iTargetTeam = pkTargetPilot->GetAbil(AT_TEAM);
-				if(iMyTeam!=iTargetTeam && iMyTeam!=0 && iTargetTeam!=0)
-				{
-					bIsEnemy = true;
-				}
 
-				if(pkUnit->GetAbil(AT_CALLER_TYPE)&UT_MONSTER)
-				{
-					bIsEnemy = true;
-				}
+			if (pkUnit->GetAbil(AT_CALLER_TYPE) & UT_MONSTER)
+			{
+				bIsEnemy = true;
 			}
-		}break;
+		}
+	}break;
 	case UT_MONSTER:
 	case UT_BOSSMONSTER:
+	{
+		if (pkTargetUnit->IsUnitType(UT_PLAYER)		//	ï¿½ï¿½ï¿½Í¶ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½Ì´ï¿½
+			|| pkTargetUnit->IsUnitType(UT_SUMMONED))
 		{
-			if(pkTargetUnit->IsUnitType(UT_PLAYER)		//	¸ó½ºÅÍ¶ó¸é ÇÃ·¹ÀÌ¾î°¡ ÀûÀÌ´Ù
-				|| pkTargetUnit->IsUnitType(UT_SUMMONED))
+			bIsEnemy = true;
+		}
+	}break;
+	case UT_OBJECT:
+	{
+		if (g_pkWorld
+			&& GATTR_MISSION == g_pkWorld->GetAttr())
+		{
+			if (pkTargetUnit->IsUnitType(UT_PLAYER))
 			{
 				bIsEnemy = true;
 			}
-		}break;
-	case UT_OBJECT:
-		{
-			if( g_pkWorld
-				&&  GATTR_MISSION == g_pkWorld->GetAttr() )
-			{
-				if( pkTargetUnit->IsUnitType(UT_PLAYER) )
-				{
-					bIsEnemy = true;
-				}
-			}
-		}break;
+		}
+	}break;
 	}
 
 	return	bIsEnemy;
 }
 
-void PgActor::DrawImmediate(PgRenderer *pkRenderer, NiCamera *pkCamera, float fFrameTime)
+void PgActor::DrawImmediate(PgRenderer* pkRenderer, NiCamera* pkCamera, float fFrameTime)
 {
-	//	HP °ÔÀÌÁö ¹Ù
+	//	HP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	UpdateHPGaugeBarPosition(pkCamera);
 
 	bool bEnemy = IsEnemy(g_kPilotMan.GetPlayerActor());
 
-	//·»´õ¸µ µÇÁö ¾Êµµ·Ï ¼³Á¤ ÇÑ ÈÄ
-	if(m_pHPGaugeBar)
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
+	if (m_pHPGaugeBar)
 	{
-		if(bEnemy)
+		if (bEnemy)
 		{
 			m_pHPGaugeBar->EnableDrawImmediate(false);
 		}
@@ -8464,7 +8464,7 @@ void PgActor::DrawImmediate(PgRenderer *pkRenderer, NiCamera *pkCamera, float fF
 	{
 		return;
 	}
-	if(GetPilot() && GetPilot()->IsHide())
+	if (GetPilot() && GetPilot()->IsHide())
 	{
 		return;
 	}
@@ -8476,23 +8476,23 @@ void PgActor::DrawImmediate(PgRenderer *pkRenderer, NiCamera *pkCamera, float fF
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.DrawImmediate"), g_pkApp->GetFrameCount()));
 
-	// º¸ÀÌÁö ¾Ê¾Æ¾ßÇÏ´Â ·ÎÁ÷ÀÌ ´Ù Åë°úÇÏ¸é Draw°¡´ÉÇÏµµ·Ï º¯°æ
-	if(m_pHPGaugeBar)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¾ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ Drawï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (m_pHPGaugeBar)
 	{
 		m_pHPGaugeBar->EnableDrawImmediate(true);
 	}
-	if( false == IsHideNameTitle() )
-	{//	ÀÌ¸§,±æµåÀÌ¸§ ±×¸®±â		
-		DrawNameText(pkRenderer,pkCamera);
+	if (false == IsHideNameTitle())
+	{//	ï¿½Ì¸ï¿½,ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½×¸ï¿½ï¿½ï¿½		
+		DrawNameText(pkRenderer, pkCamera);
 	}
 
-	//	¹öÇÁ ¾ÆÀÌÄÜ
-	DrawHeadBuffIconList(pkRenderer,pkCamera);
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	DrawHeadBuffIconList(pkRenderer, pkCamera);
 }
 
-void	PgActor::DrawHeadBuffIconList(PgRenderer *pkRenderer,NiCamera *pkCamera)
+void	PgActor::DrawHeadBuffIconList(PgRenderer* pkRenderer, NiCamera* pkCamera)
 {
-	if(!m_pkHeadBuffIconList)
+	if (!m_pkHeadBuffIconList)
 	{
 		return;
 	}
@@ -8503,19 +8503,19 @@ void	PgActor::DrawHeadBuffIconList(PgRenderer *pkRenderer,NiCamera *pkCamera)
 	NiAVObjectPtr	spTargetPoint = GetNodePointStar();
 
 	NiPoint3	kTargetPoint = GetPosition();
-	if(spTargetPoint)
+	if (spTargetPoint)
 	{
 		kTargetPoint = spTargetPoint->GetWorldTranslate();
-		kTargetPoint.z+=20.0f;
+		kTargetPoint.z += 20.0f;
 	}
 
 	m_pkHeadBuffIconList->SetPosition(kTargetPoint);
-	m_pkHeadBuffIconList->DrawImmediate(pkRenderer,pkCamera);
+	m_pkHeadBuffIconList->DrawImmediate(pkRenderer, pkCamera);
 }
 
 void PgActor::AddHeadBuffIcon(int const iEffectID)
 {
-	if(g_kHeadBuffIconListMgr.IsAlive() && m_pkHeadBuffIconList)
+	if (g_kHeadBuffIconListMgr.IsAlive() && m_pkHeadBuffIconList)
 	{
 		m_pkHeadBuffIconList->AddNewIcon(iEffectID);
 	}
@@ -8523,7 +8523,7 @@ void PgActor::AddHeadBuffIcon(int const iEffectID)
 
 void PgActor::RemoveHeadBuffIcon(int const iEffectID)
 {
-	if(g_kHeadBuffIconListMgr.IsAlive() && m_pkHeadBuffIconList)
+	if (g_kHeadBuffIconListMgr.IsAlive() && m_pkHeadBuffIconList)
 	{
 		m_pkHeadBuffIconList->RemoveIcon(iEffectID);
 	}
@@ -8531,13 +8531,13 @@ void PgActor::RemoveHeadBuffIcon(int const iEffectID)
 
 void PgActor::SetInstallTimerGauge(float fInstallTotalTime)
 {
-	g_kEnergyGaugeMan.DestroyGauge( m_pHPGaugeBar );
+	g_kEnergyGaugeMan.DestroyGauge(m_pHPGaugeBar);
 	m_pHPGaugeBar = g_kEnergyGaugeMan.CreateInstallNewGauge(fInstallTotalTime);
 }
 
 void PgActor::DestroyInstallTimerGauge()
 {
-	if(m_pHPGaugeBar)
+	if (m_pHPGaugeBar)
 	{
 		g_kEnergyGaugeMan.DestroyGauge(m_pHPGaugeBar);
 		m_pHPGaugeBar = NULL;
@@ -8546,40 +8546,40 @@ void PgActor::DestroyInstallTimerGauge()
 
 void PgActor::SetAliveTimeGauge(float fAliveTotalTime)
 {
-	if(fAliveTotalTime > 0.f)
+	if (fAliveTotalTime > 0.f)
 	{
-		g_kEnergyGaugeMan.DestroyGauge( m_pHPGaugeBar );
+		g_kEnergyGaugeMan.DestroyGauge(m_pHPGaugeBar);
 		m_pHPGaugeBar = g_kEnergyGaugeMan.CreateAliveTimeNewGauge(fAliveTotalTime);
 	}
 }
 
 void PgActor::DestroyAliveTimeGauge()
 {
-	if(m_pHPGaugeBar)
+	if (m_pHPGaugeBar)
 	{
 		g_kEnergyGaugeMan.DestroyGauge(m_pHPGaugeBar);
 		m_pHPGaugeBar = NULL;
 	}
 }
 
-float PgActor::GetAnimationLength(std::string &rkAnimationName)
+float PgActor::GetAnimationLength(std::string& rkAnimationName)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.GetAnimationLength"), g_pkApp->GetFrameCount()));
 	PgActionSlot* pkActionSlot = GetActionSlot();
-	if(GetActorManager() == NULL || pkActionSlot == NULL)
+	if (GetActorManager() == NULL || pkActionSlot == NULL)
 	{
 		PG_ASSERT_LOG(!"ActorSlot or ActorManager doesn't exist!");
 		return 0;
 	}
 
 	NiActorManager::SequenceID kSeqID;
-	if(!pkActionSlot->GetAnimation(rkAnimationName, kSeqID))
+	if (!pkActionSlot->GetAnimation(rkAnimationName, kSeqID))
 	{
 		return 0;
 	}
 
 	NiControllerSequence* pkSeq = GetActorManager()->GetSequence(kSeqID);
-	if(pkSeq)
+	if (pkSeq)
 	{
 		return pkSeq->GetLength();
 	}
@@ -8587,11 +8587,11 @@ float PgActor::GetAnimationLength(std::string &rkAnimationName)
 	return 0;
 }
 
-bool PgActor::GetAnimationInfo(std::string &rkInfoName, int iSeqID,std::string &rkInfoOut, PgAction* pkAction)
+bool PgActor::GetAnimationInfo(std::string& rkInfoName, int iSeqID, std::string& rkInfoOut, PgAction* pkAction)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.GetAnimationInfo"), g_pkApp->GetFrameCount()));
 	PgActionSlot* pkActionSlot = GetActionSlot();
-	if(GetActorManager() == NULL || pkActionSlot == NULL || (pkAction == NULL && m_pkAction == NULL))
+	if (GetActorManager() == NULL || pkActionSlot == NULL || (pkAction == NULL && m_pkAction == NULL))
 	{
 		PG_ASSERT_LOG(!"ActorSlot or ActorManager or Action doesn't exist!");
 		return false;
@@ -8607,16 +8607,16 @@ bool PgActor::GetAnimationInfo(std::string &rkInfoName, int iSeqID,std::string &
 		NILOG(PGLOG_LOG, "Can't found %s, %d action slot\n", animationName, m_pkAction->GetCurrentSlot());
 		return false;
 	}
-	
-	if(m_pkPilot)
-	{// ÄÁÅ×ÀÌ³Ê¿¡ µé¾î°¡ÀÖ´Â°ÍÀº ¿À¸®Áö³Î ¹øÈ£·Î µé¾î°¡ ÀÖÀ¸¹Ç·Î º¯È¯ÇØÁÖ°í
+
+	if (m_pkPilot)
+	{// ï¿½ï¿½ï¿½ï¿½ï¿½Ì³Ê¿ï¿½ ï¿½ï¿½î°¡ï¿½Ö´Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ö°ï¿½
 		iSeqID = PgActorUtil::GetOrigAniSeqID(iSeqID, m_pkPilot->GetBaseClassID(), m_byWeaponAnimFolderNumAtActionStart);
 	}
 
-	bool bFindAnimationInfo = pkActionSlot->GetAnimationInfo(animationName, iSeqID,rkInfoName, rkInfoOut);
-	if( !bFindAnimationInfo && m_pkAction )
+	bool bFindAnimationInfo = pkActionSlot->GetAnimationInfo(animationName, iSeqID, rkInfoName, rkInfoOut);
+	if (!bFindAnimationInfo && m_pkAction)
 	{
-		bFindAnimationInfo = m_pkAction->GetAnimationInfo(m_pkAction->GetCurrentSlot(),rkInfoName,rkInfoOut);
+		bFindAnimationInfo = m_pkAction->GetAnimationInfo(m_pkAction->GetCurrentSlot(), rkInfoName, rkInfoOut);
 	}
 	return bFindAnimationInfo;
 }
@@ -8671,77 +8671,77 @@ bool PgActor::SetTargetAnimation(std::string const& rkAnimationName, bool const 
 
 	DoKFMTransition();
 
-	NiActorManager *pkAM = GetActorManager();
+	NiActorManager* pkAM = GetActorManager();
 	if (pkAM == NULL || pkActionSlot == NULL)
-	{ 
+	{
 		PG_ASSERT_LOG(!"ActorSlot or ActorManager doesn't exist!");
 		return false;
 	}
 
 	NiActorManager::SequenceID kSeqID;
 	NiActorManager::SequenceID kSeqIDOrig;
-	if(!pkActionSlot->GetAnimation(rkAnimationName, kSeqID,bNoRandom))
+	if (!pkActionSlot->GetAnimation(rkAnimationName, kSeqID, bNoRandom))
 	{
 		return false;
 	}
 
-//	_PgOutputDebugString("Actor[%s] SetTargetAnimation rkAnimationName:%s kSeqID:%d\n",MB(GetPilot()->GetName()),
-//		rkAnimationName.c_str(),
-//		kSeqID);
+	//	_PgOutputDebugString("Actor[%s] SetTargetAnimation rkAnimationName:%s kSeqID:%d\n",MB(GetPilot()->GetName()),
+	//		rkAnimationName.c_str(),
+	//		kSeqID);
 
 	kSeqIDOrig = kSeqID;
-	if(m_pkPilot)
+	if (m_pkPilot)
 	{
 		kSeqID = PgActorUtil::GetCalcAniSeqID(kSeqIDOrig, m_pkPilot->GetBaseClassID(), m_byWeaponAnimFolderNumAtActionStart);
 	}
 
-	if(!pkAM->GetSequence(kSeqID))
+	if (!pkAM->GetSequence(kSeqID))
 	{
-		if(!pkActionSlot->GetDefaultAnimation(rkAnimationName, kSeqID))
+		if (!pkActionSlot->GetDefaultAnimation(rkAnimationName, kSeqID))
 		{
 			m_kSeqID = NiActorManager::INVALID_SEQUENCE_ID;
 
-			// TODO : ¾Ö´Ï°¡ ¾óÁö ¾Ê°Ô ÇØÁÖÀÚ. Áß¿äµµ ³ôÀº ÀÛ¾÷!!
+			// TODO : ï¿½Ö´Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ß¿äµµ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½!!
 			return false;
 		}
 	}
 
 	bool	bPlaySlotSound = false;
 
-	// Áï½Ã AnimationÀ» PlayÇÑ´Ù.
-	if(bActivate && m_kSeqID != kSeqID)
+	// ï¿½ï¿½ï¿½ Animationï¿½ï¿½ Playï¿½Ñ´ï¿½.
+	if (bActivate && m_kSeqID != kSeqID)
 	{
-		ResetAnimation();	//	¿ä°Å ÇØÁà¾ß Ä³¸¯ÅÍ ¸Þ½¬ ÅÍÁö´Â ¹®Á¦°¡ »ç¶óÁø´Ù.
+		ResetAnimation();	//	ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 
 		m_kSeqID = kSeqID;
-		
+
 		bPlaySlotSound = ActivateAnimation();
 	}
 	else
 	{
-		NiControllerSequence *pkController = pkAM->GetSequence(m_kSeqID);
-		if(pkController && pkController->GetCycleType() !=  NiTimeController::LOOP)
+		NiControllerSequence* pkController = pkAM->GetSequence(m_kSeqID);
+		if (pkController && pkController->GetCycleType() != NiTimeController::LOOP)
 		{
 			pkController->ResetSequence();
 
-			pkAM->RebuildTimeline();	//	leesg213 2006.12.11 ¿ä°É ÇØÁà¾ß textkey event °¡ Á¤»óÀûÀ¸·Î ¹ß»ýµÈ´Ù.
-			
+			pkAM->RebuildTimeline();	//	leesg213 2006.12.11 ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ textkey event ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½È´ï¿½.
+
 			bPlaySlotSound = true;
 		}
 	}
 
-	//Common ÀÌÆåÆ®¸¦ ºÙÀÎ´Ù
+	//Common ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½
 	std::string kCommonEffectDetachSkip;
 	pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_DETACH_SKIP, kCommonEffectDetachSkip);
-	if(kCommonEffectDetachSkip.compare("TRUE") != 0)
+	if (kCommonEffectDetachSkip.compare("TRUE") != 0)
 	{
-		if(false==m_kContCommonEffect.empty())
+		if (false == m_kContCommonEffect.empty())
 		{
-			PgActor * pkTargetActor = NULL;
+			PgActor* pkTargetActor = NULL;
 			CONT_COMMON_EFFECT::const_iterator eff_it = m_kContCommonEffect.begin();
-			while(eff_it != m_kContCommonEffect.end())
+			while (eff_it != m_kContCommonEffect.end())
 			{
-				if( pkTargetActor = g_kPilotMan.FindActor((*eff_it).first) )
+				if (pkTargetActor = g_kPilotMan.FindActor((*eff_it).first))
 				{
 					pkTargetActor->DetachFrom((*eff_it).second);
 				}
@@ -8752,71 +8752,71 @@ bool PgActor::SetTargetAnimation(std::string const& rkAnimationName, bool const 
 		}
 
 		std::string kCommonEffectID;
-		if(pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_ID, kCommonEffectID))
+		if (pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_ID, kCommonEffectID))
 		{
 			std::string kCommonEffectNode;
-			if(false==pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_NODE, kCommonEffectNode))
+			if (false == pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_NODE, kCommonEffectNode))
 			{
 				kCommonEffectNode = "char_root";
 			}
 
 			std::string kCommonEffectScale;
 			float fScale = 1.0f;
-			if(pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_SCALE, kCommonEffectScale))
+			if (pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_SCALE, kCommonEffectScale))
 			{
-				fScale = static_cast<float>( atof(kCommonEffectScale.c_str()) );
+				fScale = static_cast<float>(atof(kCommonEffectScale.c_str()));
 			}
 
-			if(NiAVObject * pkParticle = g_kParticleMan.GetParticle(kCommonEffectID.c_str(),PgParticle::O_SCALE,fScale))
+			if (NiAVObject* pkParticle = g_kParticleMan.GetParticle(kCommonEffectID.c_str(), PgParticle::O_SCALE, fScale))
 			{
 				std::string kCommonEffectTarget;
 				int iTargetType = ESTARGET_SELF;
-				if(pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_TARGET, kCommonEffectTarget))
+				if (pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, STR_COMMON_EFFECT_TARGET, kCommonEffectTarget))
 				{
 					iTargetType = atoi(kCommonEffectTarget.c_str());
 				}
 
-				if(iTargetType & ESTARGET_ENEMY)
+				if (iTargetType & ESTARGET_ENEMY)
 				{
-					if(PgAction * pkAction = GetAction())
+					if (PgAction* pkAction = GetAction())
 					{
-						PgActor * pkTargetActor = NULL;
+						PgActor* pkTargetActor = NULL;
 						ActionTargetList::const_iterator target_it = pkAction->GetTargetList()->begin();
-						while(target_it != pkAction->GetTargetList()->end())
+						while (target_it != pkAction->GetTargetList()->end())
 						{
-							if( pkTargetActor = g_kPilotMan.FindActor((*target_it).GetTargetPilotGUID()) )
+							if (pkTargetActor = g_kPilotMan.FindActor((*target_it).GetTargetPilotGUID()))
 							{
 								int const iSlotNo = pkTargetActor->GetAttachSlotNo();
-								if(pkTargetActor->AddNewParticle(kCommonEffectID.c_str(), iSlotNo, kCommonEffectNode.c_str(), fScale))
+								if (pkTargetActor->AddNewParticle(kCommonEffectID.c_str(), iSlotNo, kCommonEffectNode.c_str(), fScale))
 								{
-									m_kContCommonEffect.push_back(SCommonEffectSlotInfo(pkTargetActor->GetGuid(),iSlotNo));
+									m_kContCommonEffect.push_back(SCommonEffectSlotInfo(pkTargetActor->GetGuid(), iSlotNo));
 								}
 							}
 							++target_it;
 						}
 					}
 				}
-				if(iTargetType & ESTARGET_SELF)
+				if (iTargetType & ESTARGET_SELF)
 				{
 					int const iSlotNo = GetAttachSlotNo();
-					if( AddNewParticle(kCommonEffectID.c_str(), iSlotNo, kCommonEffectNode.c_str(), fScale) )
+					if (AddNewParticle(kCommonEffectID.c_str(), iSlotNo, kCommonEffectNode.c_str(), fScale))
 					{
-						m_kContCommonEffect.push_back(SCommonEffectSlotInfo(GetGuid(),iSlotNo));
+						m_kContCommonEffect.push_back(SCommonEffectSlotInfo(GetGuid(), iSlotNo));
 					}
 				}
 			}
 		}
 	}
 
-	// ½½·Ô¿¡ ÁöÁ¤µÈ »ç¿îµå¸¦ ÇÃ·¹ÀÌÇÏÀÚ
-	if(bPlaySlotSound)
+	// ï¿½ï¿½ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å¸¦ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	if (bPlaySlotSound)
 	{
 		PlaySlotSound(rkAnimationName);
 	}
 
 	float	fAnimSpeed = 1.0f;
 	std::string kSpeedStr;
-	if(pkActionSlot->GetAnimationInfo(rkAnimationName,kSeqIDOrig,std::string(STR_SPEED),kSpeedStr))
+	if (pkActionSlot->GetAnimationInfo(rkAnimationName, kSeqIDOrig, std::string(STR_SPEED), kSpeedStr))
 	{
 		fAnimSpeed = static_cast<float>(atof(kSpeedStr.c_str()));
 	}
@@ -8829,7 +8829,7 @@ bool PgActor::SetTargetAnimation(std::string const& rkAnimationName, bool const 
 
 bool PgActor::PlaySlotSound(std::string const& rkSlotName)
 {
-	if( !PgActorUtil::IsCanPlaySound(this) )
+	if (!PgActorUtil::IsCanPlaySound(this))
 	{
 		return true;
 	}
@@ -8840,15 +8840,15 @@ bool PgActor::PlaySlotSound(std::string const& rkSlotName)
 		return false;
 
 	NiActorManager::SequenceID kSeqID;
-	if(!pkActionSlot->GetAnimation(rkSlotName, kSeqID))
+	if (!pkActionSlot->GetAnimation(rkSlotName, kSeqID))
 	{
 		return false;
 	}
-	
+
 	PgActionSlot::stSoundInfo kSoundInfo;
-	if(pkActionSlot->GetSound(rkSlotName, kSoundInfo))
+	if (pkActionSlot->GetSound(rkSlotName, kSoundInfo))
 	{
-		g_kSoundMan.PlayAudioSourceByID(NiAudioSource::TYPE_3D,kSoundInfo.m_kSoundID.c_str(),kSoundInfo.m_fVolume,kSoundInfo.m_fMinDist,kSoundInfo.m_fMaxDist,this);
+		g_kSoundMan.PlayAudioSourceByID(NiAudioSource::TYPE_3D, kSoundInfo.m_kSoundID.c_str(), kSoundInfo.m_fVolume, kSoundInfo.m_fMinDist, kSoundInfo.m_fMaxDist, this);
 	}
 
 	return true;
@@ -8856,16 +8856,16 @@ bool PgActor::PlaySlotSound(std::string const& rkSlotName)
 
 void PgActor::ResetAnimation()
 {
-	if(!GetActorManager()) return;
+	if (!GetActorManager()) return;
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ResetAnimation"), g_pkApp->GetFrameCount()));
 
 	GetActorManager()->Reset();
 	GetActorManager()->Update(0);
 
-	// ÆÄÃ÷ ¾Ö´Ïµµ ¸®¼Â
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ïµï¿½ ï¿½ï¿½ï¿½ï¿½
 	AMContainer::iterator itr = m_kSupplementAMContainer.begin();
-	while(itr != m_kSupplementAMContainer.end())
+	while (itr != m_kSupplementAMContainer.end())
 	{
 		PG_ASSERT_LOG(itr->m_spAM);
 		if (itr->m_spAM)
@@ -8878,10 +8878,10 @@ void PgActor::ResetAnimation()
 
 	m_kSeqID = NiActorManager::INVALID_SEQUENCE_ID;
 
-	if(g_pkWorld && IsVisible() == false)
+	if (g_pkWorld && IsVisible() == false)
 	{
 		m_bVisible = true;
-		NiNode::Update(g_pkWorld->GetAccumTime(),true);
+		NiNode::Update(g_pkWorld->GetAccumTime(), true);
 		m_bVisible = false;
 	}
 }
@@ -8889,8 +8889,8 @@ void PgActor::ResetAnimation()
 bool PgActor::ActivateAnimation(bool bAllowRepeat)
 {
 	NILOG(PGLOG_LOG, "[PgActor](%d) %s ActivateAnimation(%d)\n", g_pkApp->GetFrameCount(), MB(GetGuid().str()), m_kSeqID);
-	NiActorManager *pkAM = GetActorManager();
-	if(!pkAM)
+	NiActorManager* pkAM = GetActorManager();
+	if (!pkAM)
 	{
 		return	false;
 	}
@@ -8898,19 +8898,19 @@ bool PgActor::ActivateAnimation(bool bAllowRepeat)
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ActivateAnimation"), g_pkApp->GetFrameCount()));
 
 	PG_ASSERT_LOG(pkAM);
-	if(pkAM->GetTargetAnimation() == m_kSeqID)
+	if (pkAM->GetTargetAnimation() == m_kSeqID)
 	{
-		if(bAllowRepeat)
+		if (bAllowRepeat)
 		{
 			pkAM->Reset();
 			pkAM->Update(0);
 			pkAM->SetTargetAnimation(m_kSeqID);
 			RegisterCallback(m_kSeqID);
 
-			// ÆÄÃ÷ ¾Ö´Ïµµ °°ÀÌ ÇÃ·¹ÀÌ ÇÑ´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			int	iSeqID;
 			AMContainer::iterator itr = m_kSupplementAMContainer.begin();
-			while(itr != m_kSupplementAMContainer.end())
+			while (itr != m_kSupplementAMContainer.end())
 			{
 				PG_ASSERT_LOG(itr->m_spAM);
 				if (itr->m_spAM)
@@ -8920,7 +8920,7 @@ bool PgActor::ActivateAnimation(bool bAllowRepeat)
 				}
 				iSeqID = itr->m_stCustomAniIDChangeSetting.GetChangedAniID(m_kSeqID);
 				if (itr->m_spAM)
-					itr->m_spAM->SetTargetAnimation(iSeqID);    
+					itr->m_spAM->SetTargetAnimation(iSeqID);
 				++itr;
 			}
 		}
@@ -8928,20 +8928,20 @@ bool PgActor::ActivateAnimation(bool bAllowRepeat)
 	}
 
 	bool bRet = pkAM->SetTargetAnimation(m_kSeqID);
-	if(!bRet)
+	if (!bRet)
 	{
 		return false;
 	}
 
-	// ÆÄÃ÷ ¾Ö´Ïµµ °°ÀÌ ÇÃ·¹ÀÌ ÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 	int	iSeqID;
 	AMContainer::iterator itr = m_kSupplementAMContainer.begin();
-	while(itr != m_kSupplementAMContainer.end())
+	while (itr != m_kSupplementAMContainer.end())
 	{
 		iSeqID = itr->m_stCustomAniIDChangeSetting.GetChangedAniID(m_kSeqID);
 		PG_ASSERT_LOG(itr->m_spAM);
 		if (itr->m_spAM)
-			itr->m_spAM->SetTargetAnimation(iSeqID);    
+			itr->m_spAM->SetTargetAnimation(iSeqID);
 		++itr;
 	}
 
@@ -8950,35 +8950,35 @@ bool PgActor::ActivateAnimation(bool bAllowRepeat)
 	return true;
 }
 bool	PgActor::SyncActionOnAddUnit(PgPlayer* pkPlayer)
-{ //AddUnit->·ÎµùÀÌ ³¡³¯¶§ UnitÀ¸·ÎºÎÅÍ ºê·ÎµåÄ³½ºÆÃ µÈ µ¿ÀÛÀ» ¾×ÅÍ¿¡°Ôµµ Àû¿ë½ÃÄÑ ÁÖÀÚ.
-	if(pkPlayer == NULL || pkPlayer->UnitType() != UT_PLAYER || IsMyActor())
-	{ //PC°¡ ¾Æ´Ï°Å³ª, ³» ¾×ÅÍ¿¡°Ô´Â µ¿±âÈ­ ÇØÁÙ ÇÊ¿ä°¡ ¾ø´Ù.
+{ //AddUnit->ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Unitï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½Îµï¿½Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+	if (pkPlayer == NULL || pkPlayer->UnitType() != UT_PLAYER || IsMyActor())
+	{ //PCï¿½ï¿½ ï¿½Æ´Ï°Å³ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ï¿½Ô´ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½ï¿½.
 		return false;
 	}
 
 	int iAction = pkPlayer->GetActionID();
-	CONT_DEFSKILL const *pkDefSkill = NULL;
-	g_kTblDataMgr.GetContDef( pkDefSkill );
+	CONT_DEFSKILL const* pkDefSkill = NULL;
+	g_kTblDataMgr.GetContDef(pkDefSkill);
 	if (iAction <= 0 || !pkDefSkill)
 	{
 		return false;
 	}
 	CONT_DEFSKILL::const_iterator iterSkillDef = pkDefSkill->find(iAction);
-	if(iterSkillDef == pkDefSkill->end())
+	if (iterSkillDef == pkDefSkill->end())
 	{
 		return false;
 	}
 
 	std::string strActionName(MB(iterSkillDef->second.chActionName));
-	if(strActionName.compare("a_idle") == 0 || strActionName.compare("a_battle_idle") == 0 ||
-		strActionName.compare("a_intro_idle") == 0 || strActionName.compare("a_opening") == 0 || strActionName.compare("a_rp_idle") == 0 )
-	{ //¾ÆÀÌµé ¾×¼ÇÀº µ¿±âÈ­ ÇØ ÁÙ ÇÊ¿ä°¡ ¾ø´Ù. ÀÌµ¿¸¸ µ¿±âÈ­ ÇØÁÖÀÚ.
+	if (strActionName.compare("a_idle") == 0 || strActionName.compare("a_battle_idle") == 0 ||
+		strActionName.compare("a_intro_idle") == 0 || strActionName.compare("a_opening") == 0 || strActionName.compare("a_rp_idle") == 0)
+	{ //ï¿½ï¿½ï¿½Ìµï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½ï¿½. ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		return false;
 	}
 
-	if( PgContentsBase::ms_pkContents )
-	{	// PvP Ä«¿îÆ® ´Ù¿î½Ã¿¡´Â µ¿±âÈ­ ÇÒ ÇÊ¿ä ¾ø´Ù(µ¿±âÈ­°¡ Á¦´ë·Î ÀÌ·ç¾îÁöÁö ¾ÊÀ½).
-		if( PgContentsBase::STATUS_COUNTDOWN == PgContentsBase::ms_pkContents->GetContentsStatus() )
+	if (PgContentsBase::ms_pkContents)
+	{	// PvP Ä«ï¿½ï¿½Æ® ï¿½Ù¿ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½).
+		if (PgContentsBase::STATUS_COUNTDOWN == PgContentsBase::ms_pkContents->GetContentsStatus())
 		{
 			return false;
 		}
@@ -8993,32 +8993,32 @@ bool	PgActor::SyncActionOnAddUnit(PgPlayer* pkPlayer)
 
 	return true;
 }
-bool	PgActor::StartSyncMove(PgAction *pkSyncMoveNextAction)
+bool	PgActor::StartSyncMove(PgAction* pkSyncMoveNextAction)
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return	false;
 	}
 
-	m_fSyncMoveStartTime = g_pkWorld->GetAccumTime();	//	½ÃÀÛ ½Ã°£
+	m_fSyncMoveStartTime = g_pkWorld->GetAccumTime();	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 	m_kSyncMoveStartPos = GetPosition();
-	//m_bNoFindPathNormal = true;	// ÀÓ½Ã SyncMove
+	//m_bNoFindPathNormal = true;	// ï¿½Ó½ï¿½ SyncMove
 
-	if(!pkSyncMoveNextAction) return false;
+	if (!pkSyncMoveNextAction) return false;
 
 
-	PgAction	*pkSyncMove = CreateActionForTransitAction("a_sync_move");
-	if(pkSyncMove)
+	PgAction* pkSyncMove = CreateActionForTransitAction("a_sync_move");
+	if (pkSyncMove)
 	{
-		lwAction(pkSyncMove).SetParamFloat(0,pkSyncMoveNextAction->GetActionStartPos().x);
-		lwAction(pkSyncMove).SetParamFloat(1,pkSyncMoveNextAction->GetActionStartPos().y);
-		lwAction(pkSyncMove).SetParamFloat(2,pkSyncMoveNextAction->GetActionStartPos().z);
+		lwAction(pkSyncMove).SetParamFloat(0, pkSyncMoveNextAction->GetActionStartPos().x);
+		lwAction(pkSyncMove).SetParamFloat(1, pkSyncMoveNextAction->GetActionStartPos().y);
+		lwAction(pkSyncMove).SetParamFloat(2, pkSyncMoveNextAction->GetActionStartPos().z);
 
-		_PgOutputDebugString("StartSyncMove Actor:%s StartPos : (%f,%f,%f) Target:(%f,%f,%f) Time:%f\n", MB(GetPilotGuid().str()),GetPosition().x,GetPosition().y,GetPosition().z, pkSyncMoveNextAction->GetActionStartPos().x,pkSyncMoveNextAction->GetActionStartPos().y,pkSyncMoveNextAction->GetActionStartPos().z, NiGetCurrentTimeInSec());
+		_PgOutputDebugString("StartSyncMove Actor:%s StartPos : (%f,%f,%f) Target:(%f,%f,%f) Time:%f\n", MB(GetPilotGuid().str()), GetPosition().x, GetPosition().y, GetPosition().z, pkSyncMoveNextAction->GetActionStartPos().x, pkSyncMoveNextAction->GetActionStartPos().y, pkSyncMoveNextAction->GetActionStartPos().z, NiGetCurrentTimeInSec());
 
-		if(ProcessAction(pkSyncMove,IsMyActor()))
+		if (ProcessAction(pkSyncMove, IsMyActor()))
 		{
-			if(m_pkSyncMoveNextAction)
+			if (m_pkSyncMoveNextAction)
 				g_kActionPool.ReleaseAction(m_pkSyncMoveNextAction);
 			m_pkSyncMoveNextAction = NULL;
 			m_pkSyncMoveNextAction = pkSyncMoveNextAction;
@@ -9029,48 +9029,48 @@ bool	PgActor::StartSyncMove(PgAction *pkSyncMoveNextAction)
 	return false;
 
 }
-bool	PgActor::UpdateSyncMove(float fSpeed,float fFrameTime)
+bool	PgActor::UpdateSyncMove(float fSpeed, float fFrameTime)
 {
-	if(!m_pkSyncMoveNextAction || !g_pkWorld)
+	if (!m_pkSyncMoveNextAction || !g_pkWorld)
 		return	false;
 
 	float	fElapsedTime = g_pkWorld->GetAccumTime() - m_fSyncMoveStartTime;
 
 	NiPoint3	kTargetPos = m_pkSyncMoveNextAction->GetActionStartPos();
 
-	// °øÁßÇü Ã³¸®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	if (GetPilot() && GetPilot()->GetAbil(AT_MONSTER_TYPE) == EMONTYPE_FLYING)
 	{
 		kTargetPos.z = GetPosition().z;
 	}
 
 	//	Total Distance
-	float	fTotalDistance = (kTargetPos-m_kSyncMoveStartPos).Length();
+	float	fTotalDistance = (kTargetPos - m_kSyncMoveStartPos).Length();
 
-	NiPoint3	kDir = (kTargetPos-m_kSyncMoveStartPos);
+	NiPoint3	kDir = (kTargetPos - m_kSyncMoveStartPos);
 	kDir.Unitize();
 
-	m_kMovingDir = kDir;	
+	m_kMovingDir = kDir;
 	m_kMovingDir.z = 0;
-	m_kLookingDir = kDir;	// ÀÓ½Ã SyncMove
+	m_kLookingDir = kDir;	// ï¿½Ó½ï¿½ SyncMove
 	//_PgOutputDebugString("[Set m_kMovingDir 0] Actor(%s) m_kMovingDir(%f,%f,%f)\n",MB(GetPilot()->GetGuid().str()),m_kMovingDir.x,m_kMovingDir.y,m_kMovingDir.z);
 
-	NiPoint3	kNextPos = m_kSyncMoveStartPos+kDir*fElapsedTime*fSpeed;
+	NiPoint3	kNextPos = m_kSyncMoveStartPos + kDir * fElapsedTime * fSpeed;
 
-	float	fNextDistance = (kNextPos-m_kSyncMoveStartPos).Length();
+	float	fNextDistance = (kNextPos - m_kSyncMoveStartPos).Length();
 
 	bool	bContinue = true;
 
-	if(fNextDistance>=fTotalDistance)
+	if (fNextDistance >= fTotalDistance)
 	{
 		kNextPos = kTargetPos;
 		bContinue = false;
-		//m_bNoFindPathNormal = false;	// ÀÓ½Ã SyncMove
+		//m_bNoFindPathNormal = false;	// ï¿½Ó½ï¿½ SyncMove
 	}
 
 	SetPosition(kNextPos);
 
-	if(!bContinue)
+	if (!bContinue)
 	{
 		ClearReservedAction();
 		ReserveTransitAction(m_pkSyncMoveNextAction);
@@ -9081,12 +9081,12 @@ bool	PgActor::UpdateSyncMove(float fSpeed,float fFrameTime)
 	return	bContinue;
 }
 
-void PgActor::DoReservedAction(ReservedActionType eType,bool bTransitRightAway)
+void PgActor::DoReservedAction(ReservedActionType eType, bool bTransitRightAway)
 {
-	char const *pcActionName = GetReservedAction(eType);
-	if(pcActionName)
+	char const* pcActionName = GetReservedAction(eType);
+	if (pcActionName)
 	{
-		if(bTransitRightAway)
+		if (bTransitRightAway)
 		{
 			TransitAction(pcActionName);
 		}
@@ -9097,10 +9097,10 @@ void PgActor::DoReservedAction(ReservedActionType eType,bool bTransitRightAway)
 	}
 }
 
-char const *PgActor::GetReservedAction(ReservedActionType eType)
+char const* PgActor::GetReservedAction(ReservedActionType eType)
 {
 	ReservedActionTable::const_iterator itr = m_kReservedAction.find(eType);
-	if(itr == m_kReservedAction.end())
+	if (itr == m_kReservedAction.end())
 	{
 		return NULL;
 	}
@@ -9122,10 +9122,10 @@ void PgActor::ClearActionQueue()
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ClearActionQueue"), g_pkApp->GetFrameCount()));
 	BM::CAutoMutex kLock(m_kActionQueueMutex);
 
-	for(ActionQueue::iterator itor = m_kActionQueue.begin(); itor != m_kActionQueue.end(); ++itor)
+	for (ActionQueue::iterator itor = m_kActionQueue.begin(); itor != m_kActionQueue.end(); ++itor)
 	{
-		PgAction *pkAction = itor->GetAction();
-		if(pkAction)
+		PgAction* pkAction = itor->GetAction();
+		if (pkAction)
 		{
 			g_kActionPool.ReleaseAction(pkAction);
 		}
@@ -9141,7 +9141,7 @@ void PgActor::ClearActionQueue()
 //		return fVelocity;
 //	}
 //
-//	// TODO : 1ÃÊ¸¶´Ù ÀûÀýÇÑ ¼Óµµ¸¦ ¿¹ÃøÇØ¼­ µ¹·ÁÁÖÀÚ.
+//	// TODO : 1ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 //	float fDiff = fEstimatedDist - fRealDist;
 //	float fRate = fEstimatedDist / fRealDist;
 //
@@ -9155,14 +9155,14 @@ void PgActor::ClearActionQueue()
 //	float fNewVelocity = 2.0f * (((GetPilot->GetAbil(AT_C_MOVESPEED) * fElapsedTime) / fElapsedTime - fDelayedTime) - GetPilot->GetAbil(AT_C_MOVESPEED));
 //}
 
-bool PgActor::BeginSync(PgAction *pkAction, DWORD dwOvertime)
+bool PgActor::BeginSync(PgAction* pkAction, DWORD dwOvertime)
 {
-	if(!pkAction)
+	if (!pkAction)
 	{
 		return false;
 	}
 
-	if(pkAction->AlreadySync())
+	if (pkAction->AlreadySync())
 	{
 		return true;
 	}
@@ -9170,41 +9170,41 @@ bool PgActor::BeginSync(PgAction *pkAction, DWORD dwOvertime)
 	PG_STAT(PgStatTimerF timerD(g_kActorStatGroup.GetStatInfo("PgActor.BeginSync"), g_pkApp->GetFrameCount()));
 	pkAction->AlreadySync(true);
 
-	// Action Start Pos°¡ (0, 0, 0)ÀÌ¸é Sync¸¦ ÇÒ ÇÊ¿ä°¡ ¾ø´Ù´Â °Å´Ù.
+	// Action Start Posï¿½ï¿½ (0, 0, 0)ï¿½Ì¸ï¿½ Syncï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½Ù´ï¿½ ï¿½Å´ï¿½.
 	NiPoint3 kActionStartPos = pkAction->GetActionStartPos();
-	if(kActionStartPos == NiPoint3::ZERO)
+	if (kActionStartPos == NiPoint3::ZERO)
 	{
 		return false;
 	}
 
-//	std::wstring kActionName = g_SkillDefMgr.GetActionName(pkAction->GetActionNo());
-//	char chBalloon[1024];
+	//	std::wstring kActionName = g_SkillDefMgr.GetActionName(pkAction->GetActionNo());
+	//	char chBalloon[1024];
 
 	NiPoint3 kCurPos = GetPosition();
 	float fDistance = (kCurPos - kActionStartPos).Length();
 	//PG_ASSERT_LOG(fDistance > 0.0f)
-	if(fDistance > PG_SYNC_DIST_SLIDE || fDistance < PG_SYNC_DIST_WARP)
+	if (fDistance > PG_SYNC_DIST_SLIDE || fDistance < PG_SYNC_DIST_WARP)
 	{
-		SetPosition((NiPoint3) kActionStartPos);
-		if(fDistance > PG_SYNC_DIST_SLIDE)
+		SetPosition((NiPoint3)kActionStartPos);
+		if (fDistance > PG_SYNC_DIST_SLIDE)
 		{
-			// ¸Õ °÷¿¡¼­ ¼ø°£ÀÌµ¿ ÇÒ ¶§´Â, Alpha¸¦ »«´Ù.
+			// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, Alphaï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			m_AlphaTransitInfo.m_fTargetAlpha = 0.0f;
-			SetTargetAlpha(0.0f, 1.0f, 0.15f);	
+			SetTargetAlpha(0.0f, 1.0f, 0.15f);
 		}
-		
-//		sprintf_s(chBalloon, 1024, "[%s] Warp(%.4f): %s [%s]", MB(GetPilot()->GetName().c_str()), fDistance, MB(kActionName.c_str()), (pkAction->GetActionType() == "EFFECT" ? "EFFECT" : "NON-EFFECT"));
-//		ShowChatBalloon(CT_NORMAL, chBalloon, 10000);
-//		WriteToConsole("Action : %s [Distance : %.1f => Warp] [%s]\n", pkAction->GetID().c_str(), fDistance, MB(GetGuid().str()));
+
+		//		sprintf_s(chBalloon, 1024, "[%s] Warp(%.4f): %s [%s]", MB(GetPilot()->GetName().c_str()), fDistance, MB(kActionName.c_str()), (pkAction->GetActionType() == "EFFECT" ? "EFFECT" : "NON-EFFECT"));
+		//		ShowChatBalloon(CT_NORMAL, chBalloon, 10000);
+		//		WriteToConsole("Action : %s [Distance : %.1f => Warp] [%s]\n", pkAction->GetID().c_str(), fDistance, MB(GetGuid().str()));
 		SetMovingDelta(NX_ZERO);
 		m_bSync = false;
 		return true;
 	}
 
 	// if (fDistance <= PG_SYNC_DIST_SLIDE)
-	// ½ÃÀÛ À§Ä¡¸¦ º¸°£ÇÏ¸ç ´Þ¸°´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½.
 
-	// Sync ½ÃÀÛ ½Ã°£À» Àû¾î µÐ´Ù.
+	// Sync ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½.
 //	WriteToConsole("Start Interpolating [%s, %s]\n", pkAction->GetID().c_str(), MB(GetGuid().str()));
 //	sprintf_s(chBalloon, 1024, "[%s] Start Sync : %s [%s]", MB(GetPilot()->GetName().c_str()), MB(kActionName.c_str()), (pkAction->GetActionType() == "EFFECT" ? "EFFECT" : "NON-EFFECT"));
 //	ShowChatBalloon(CT_NORMAL, chBalloon, 10000);
@@ -9217,19 +9217,19 @@ bool PgActor::BeginSync(PgAction *pkAction, DWORD dwOvertime)
 	NiPoint3 kMovingDir = (kCurPos - kActionStartPos);
 	kMovingDir.Unitize();
 
-	if(IsMeetFloor())
+	if (IsMeetFloor())
 	{
-		//	¶Ù±â ¸ð¼ÇÀ¸·Î ¹Ù²ÙÀÚ
-		NiActorManager *pkAM = GetActorManager();
-		if(pkAM)
+		//	ï¿½Ù±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½
+		NiActorManager* pkAM = GetActorManager();
+		if (pkAM)
 		{
 			NiActorManager::SequenceID kSeqID;
-			
+
 			pkAM->GetCurAnimation();
 			GetActionSlot()->GetAnimation(std::string("run"), kSeqID);
-			if(pkAM->GetCurAnimation() != kSeqID)
+			if (pkAM->GetCurAnimation() != kSeqID)
 			{
-				if(SetTargetAnimation(std::string("run")) == false)
+				if (SetTargetAnimation(std::string("run")) == false)
 				{
 					SetTargetAnimation(std::string("walk"));
 				}
@@ -9237,13 +9237,13 @@ bool PgActor::BeginSync(PgAction *pkAction, DWORD dwOvertime)
 		}
 	}
 
-//	NILOG(PGLOG_LOG,"Push To Action Stack For Sync Position  Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()),
-//		pkAction->GetID().c_str(), pkAction->GetActionNo(), pkAction->GetActionInstanceID(),
-//		pkAction->GetTargetList()->size());
-	
-	// º¸°£ÇÒ ¶§ ¼Óµµ´Â Áö¿¬½Ã°£¿¡ ÀÇÇØ °áÁ¤µÈ´Ù.
-//	DWORD dwActionBirthTime = pkAction->GetBirthTime();
-//	m_dwActionLatency = (dwActionBirthTime == 0 ? 0 : PgActor::GetSynchronizedTime() - dwActionBirthTime);
+	//	NILOG(PGLOG_LOG,"Push To Action Stack For Sync Position  Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()),
+	//		pkAction->GetID().c_str(), pkAction->GetActionNo(), pkAction->GetActionInstanceID(),
+	//		pkAction->GetTargetList()->size());
+
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½.
+	//	DWORD dwActionBirthTime = pkAction->GetBirthTime();
+	//	m_dwActionLatency = (dwActionBirthTime == 0 ? 0 : PgActor::GetSynchronizedTime() - dwActionBirthTime);
 
 	return false;
 }
@@ -9251,29 +9251,29 @@ bool PgActor::BeginSync(PgAction *pkAction, DWORD dwOvertime)
 bool PgActor::UpdateSync(float fFrameTime)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.UpdateInitPosition"), g_pkApp->GetFrameCount()));
-	
-	EUnitType eUType= GetPilot()->GetUnit()->UnitType();
 
-	// Sync ½ÃÀÛ, ³¡ ÁÂÇ¥¸¦ ¼³Á¤.
+	EUnitType eUType = GetPilot()->GetUnit()->UnitType();
+
+	// Sync ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	NiPoint3 kStartPos = m_kSyncPositionStart;
 	NiPoint3 kSyncTargetPos = m_kSyncPositionTarget;
-	if(eUType == UT_PET && IsRidingPet()) //¶óÀÌµùÆê Å¾½Â½Ã¿¡ ÆêÀÇ À§Ä¡ µ¿±âÈ­´Â »ý·«ÇØÁÖÀÚ
+	if (eUType == UT_PET && IsRidingPet()) //ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ Å¾ï¿½Â½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		kSyncTargetPos = kStartPos;
 	}
 
 	NiPoint3 kMovVector = (kSyncTargetPos - kStartPos);
 	kMovVector.Unitize();
-	
-	// ¾Æ¹«¸® ´À·Áµµ 0.5ÃÊ ¾È¿¡ º¸°£ µÇ°Ô ÇÏÀÚ
+
+	// ï¿½Æ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.5ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½
 	static float fCriticalTime = 0.05f;
 	float fDistance1 = (kStartPos - kSyncTargetPos).Length();
-	if(eUType == UT_MONSTER)
+	if (eUType == UT_MONSTER)
 	{
-		// ¸ó½ºÅÍ´Â ¾à°£ ÃµÃµÈ÷ º¸°£ÇÏÀÚ..
+		// ï¿½ï¿½ï¿½Í´ï¿½ ï¿½à°£ ÃµÃµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 		fCriticalTime *= 1.5f;
 	}
-	else if(eUType == UT_PET && IsRidingPet())
+	else if (eUType == UT_PET && IsRidingPet())
 	{
 		fCriticalTime = 0;
 	}
@@ -9281,15 +9281,15 @@ bool PgActor::UpdateSync(float fFrameTime)
 	m_fElapsedSyncTime += fFrameTime;
 
 	float fSpeed = static_cast<float>(GetPilot()->GetAbil(AT_C_MOVESPEED));
-	if(g_pkWorld)
+	if (g_pkWorld)
 	{
-		if(g_pkWorld->GetAttr() & GATTR_VILLAGE)
+		if (g_pkWorld->GetAttr() & GATTR_VILLAGE)
 		{
 			fSpeed += static_cast<float>(GetPilot()->GetAbil(AT_C_VILLAGE_MOVESPEED));
 		}
 	}
-	
-	// ÀÌµ¿ ¼Óµµ °è»ê
+
+	// ï¿½Ìµï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½
 	float fMovingSpeed = NiMax(fSpeed * 2.0f, fDistance1 / fCriticalTime);
 	float fUnitizedDiffHeight = kMovVector.z;
 
@@ -9302,46 +9302,46 @@ bool PgActor::UpdateSync(float fFrameTime)
 	float fDistance2 = (kStartPos - kNextPos).Length();
 
 	//WriteToConsole("Now Interpolating : %.1f, %.1f, %.1f\tAdjusted Speed : %.1f\tDistance %.4f[%s]\n", kMovVector.x, kMovVector.y, kMovVector.z, fMovingSpeed, fDistance2, MB(GetGuid().str()));
-	
-	// TODO : Àå¾Ö¹° ¶§¹®¿¡ ´ë°¢¼±ÀÌ³ª ÇÑ Ãþ ¾Æ·¡·Î °È°Ô µÇ¾ú´Ù¸é, ´ç¿¬È÷ Æ¤´Ù => ¼ø°£ ÀÌµ¿?
-	// ZÃà¿¡ ´ëÇÑ °ªÀ» ¾î¶»°Ô Á¶Àý ÇÒ °ÍÀÎ°¡. 
-	
-	// ½ÃÀÛÀ§Ä¡¿¡¼­ ´ÙÀ½ ÁÂÇ¥±îÁöÀÇ °Å¸®°¡, ½ÃÀÛÀ§Ä¡¿¡¼­ ¸ñÇ¥ÁÂÇ¥±îÁöÀÇ °Å¸®º¸´Ù Å©´Ù¸é, Áö³ªÄ£°ÍÀÌ´Ù.
-	// º¸°£ ½Ã°£ÀÌ Áö³µÀ¸¸é ¼ø°£ÀÌµ¿ ½ÃÅ°°í ¹Ù·Î º¸°£À» ³¡³½´Ù.
-	if(fDistance1 <= fDistance2 || (kMovVector == NiPoint3::ZERO) || m_fElapsedSyncTime >= fCriticalTime)
+
+	// TODO : ï¿½ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë°¢ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½È°ï¿½ ï¿½Ç¾ï¿½ï¿½Ù¸ï¿½, ï¿½ç¿¬ï¿½ï¿½ Æ¤ï¿½ï¿½ => ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½?
+	// Zï¿½à¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½. 
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ì´ï¿½.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	if (fDistance1 <= fDistance2 || (kMovVector == NiPoint3::ZERO) || m_fElapsedSyncTime >= fCriticalTime)
 	{
-		// ¸ñÇ¥ ÁöÁ¡ µµ´Þ, ÇØ´ç ¾×¼ÇÀ» ÇÑ´Ù.
+		// ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½Ø´ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		SetPosition(kSyncTargetPos);
 		m_fElapsedSyncTime = 0.0f;
 		m_bSync = false;
-		if(m_pkAction)
+		if (m_pkAction)
 		{
 			SetLookingDirection(m_pkAction->GetDirection(), true);
 		}
-//		if(m_pkAction)
-//		{
-//			char chBalloon[1024];
-//			
-//			ActionQueue::iterator itr = m_kActionQueue.begin();
-//			if(itr->GetAction())
-//			{
-//				sprintf_s(chBalloon, 1024, "[%s] End Sync [Next Action : %s]", MB(GetPilot()->GetName().c_str()), MB(g_SkillDefMgr.GetActionName(itr->GetAction()->GetActionNo())));
-//			}
-//			else
-//			{
-//				sprintf_s(chBalloon, 1024, "[%s] End Sync!! [NextAction Direction : %d]", MB(GetPilot()->GetName().c_str()), itr->GetDirection());
-//			}
-//			
-//			ShowChatBalloon(CT_NORMAL, chBalloon, 10000);
-//
-//			WriteToConsole("Arrived [%s]'s Start Pos Now [%.1f, %.1f, %.1f] [%s]\n", m_pkAction->GetID().c_str(), kSyncTargetPos.x, kSyncTargetPos.y, kSyncTargetPos.z, MB(GetGuid().str()));
-//		}
+		//		if(m_pkAction)
+		//		{
+		//			char chBalloon[1024];
+		//			
+		//			ActionQueue::iterator itr = m_kActionQueue.begin();
+		//			if(itr->GetAction())
+		//			{
+		//				sprintf_s(chBalloon, 1024, "[%s] End Sync [Next Action : %s]", MB(GetPilot()->GetName().c_str()), MB(g_SkillDefMgr.GetActionName(itr->GetAction()->GetActionNo())));
+		//			}
+		//			else
+		//			{
+		//				sprintf_s(chBalloon, 1024, "[%s] End Sync!! [NextAction Direction : %d]", MB(GetPilot()->GetName().c_str()), itr->GetDirection());
+		//			}
+		//			
+		//			ShowChatBalloon(CT_NORMAL, chBalloon, 10000);
+		//
+		//			WriteToConsole("Arrived [%s]'s Start Pos Now [%.1f, %.1f, %.1f] [%s]\n", m_pkAction->GetID().c_str(), kSyncTargetPos.x, kSyncTargetPos.y, kSyncTargetPos.z, MB(GetGuid().str()));
+		//		}
 
 		ProcessActionQueue();
 		return true;
 	}
-	
-	// TODO : move·Î ¿òÁ÷ÀÌ´Â °ÍÀÌ ³ªÀ»Áö, SetPositionÀ¸·Î ¿òÁ÷ÀÌ´Â°Ô ³ªÀ»Áö.
+
+	// TODO : moveï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, SetPositionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	NxVec3 kMovingDelta;
 	NxU32 collisionFlag = 0;
 	NiPhysXTypes::NiPoint3ToNxVec3(kMovVector, kMovingDelta);
@@ -9350,7 +9350,7 @@ bool PgActor::UpdateSync(float fFrameTime)
 	//WriteToConsole("[%s]'s interpolated pos : [%.1f, %.1f, %.1f]\n", m_pkAction->GetID().c_str(), m_pkController->getDebugPosition().x, m_pkController->getDebugPosition().y, m_pkController->getDebugPosition().z);
 	//_PgOutputDebugString("[Set m_kMovingDir 3] Actor(%s) m_kMovingDir(%f,%f,%f)\n", MB(GetPilot()->GetGuid().str()),m_kMovingDir.x,m_kMovingDir.y,m_kMovingDir.z);
 
-	if(eUType == UT_PLAYER)
+	if (eUType == UT_PLAYER)
 	{
 		kMovVector.Unitize();
 		m_kMovingDir = kMovVector;
@@ -9401,7 +9401,7 @@ bool PgActor::UpdateSync(float fFrameTime)
 //}
 void	PgActor::SetStun(bool const bTrue)
 {
-	if(!m_bStun && bTrue)
+	if (!m_bStun && bTrue)
 	{
 		ReserveTransitAction("a_stun");
 	}
@@ -9409,23 +9409,23 @@ void	PgActor::SetStun(bool const bTrue)
 	m_bStun = bTrue;
 }
 
-bool PgActor::ProcessAction(PgAction *pkAction,bool bInvalidateDirection,bool bForceToTransit)
+bool PgActor::ProcessAction(PgAction* pkAction, bool bInvalidateDirection, bool bForceToTransit)
 {
-	if(!pkAction)
+	if (!pkAction)
 	{
 		return	false;
 	}
 
 	bool bIsMyActor = IsMyActor();
 
-	if(pkAction && pkAction->GetEnable() && IsNowFollowing())
+	if (pkAction && pkAction->GetEnable() && IsNowFollowing())
 	{
-		//	µû¶ó°¥¼ö ¾ø´Â ¾×¼ÇÀÏ °æ¿ì, µû¶óÇÏ¸é ¾ÈµÈ´Ù.
-		if(pkAction->GetActionOptionEnable(PgAction::AO_CAN_FOLLOW) == false)
+		//	ï¿½ï¿½ï¿½ó°¥¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ÈµÈ´ï¿½.
+		if (pkAction->GetActionOptionEnable(PgAction::AO_CAN_FOLLOW) == false)
 		{
-			if(pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS) || pkAction->GetActionType() == "EFFECT" )	//	À§Ä¡ ÀÌµ¿ÇÏ´Â ¾×¼Ç ¶Ç´Â Effect¶ó¸é, µû¶ó°¡±â¸¦ ¸ØÃá´Ù
+			if (pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS) || pkAction->GetActionType() == "EFFECT")	//	ï¿½ï¿½Ä¡ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½×¼ï¿½ ï¿½Ç´ï¿½ Effectï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ó°¡±â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½
 			{
-				RequestFollowActor(GetFollowingTargetGUID(),EFollow_Cancel);
+				RequestFollowActor(GetFollowingTargetGUID(), EFollow_Cancel);
 			}
 			else
 			{
@@ -9435,20 +9435,20 @@ bool PgActor::ProcessAction(PgAction *pkAction,bool bInvalidateDirection,bool bF
 		}
 	}
 
-	if(bInvalidateDirection)
+	if (bInvalidateDirection)
 	{
 		BYTE byNewDir = pkAction->GetDirection();
-		if(byNewDir != DIR_NONE)
+		if (byNewDir != DIR_NONE)
 		{
-			if(pkAction->IsRecord())
+			if (pkAction->IsRecord())
 			{
 				InvalidateDirection();
 			}
 		}
 	}
-	else if(pkAction->AlreadySync()) // && !bIsMyActor
+	else if (pkAction->AlreadySync()) // && !bIsMyActor
 	{
-		if(pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
+		if (pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
 		{
 			//_PgOutputDebugString("[PgActor.Action] (Other Actor) Action: %s, Arrived Direction : %d, Action Term : %u\n",  pkAction->GetID().c_str(), pkAction->GetDirection(), pkAction->GetActionTerm());
 			m_kMovingDir = NiPoint3::ZERO;
@@ -9463,57 +9463,57 @@ bool PgActor::ProcessAction(PgAction *pkAction,bool bInvalidateDirection,bool bF
 		SetLookingDirection(pkAction->GetDirection(), true);
 	}
 
-	// ½ÇÁ¦ ActionÀ» ÀüÀÌÇÏ´Â °÷.
-	bool bActionReturn = DoAction(pkAction,bForceToTransit);
-	if(!bActionReturn)
+	// ï¿½ï¿½ï¿½ï¿½ Actionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½.
+	bool bActionReturn = DoAction(pkAction, bForceToTransit);
+	if (!bActionReturn)
 	{
-		if( ( bIsMyActor && IsNowFollowing() ) || IsMyPet() )
+		if ((bIsMyActor && IsNowFollowing()) || IsMyPet())
 		{
-			if( false == CheckRequirementForAction(pkAction) )
+			if (false == CheckRequirementForAction(pkAction))
 			{
-				if( pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS) )	//	À§Ä¡ ÀÌµ¿ÇÏ´Â ¾×¼Ç ½ÇÆÐ½Ã µû¶ó°¡±â¸¦ ¸ØÃá´Ù
+				if (pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))	//	ï¿½ï¿½Ä¡ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½ ï¿½ï¿½ï¿½ó°¡±â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½
 				{
-					RequestFollowActor(GetFollowingTargetGUID(),EFollow_Cancel);
+					RequestFollowActor(GetFollowingTargetGUID(), EFollow_Cancel);
 				}
 			}
 		}
 
-		if(m_pkAction && m_pkAction->IsChangeToNextActionOnNextUpdate() && m_pkAction->GetNextActionName() == pkAction->GetID())
+		if (m_pkAction && m_pkAction->IsChangeToNextActionOnNextUpdate() && m_pkAction->GetNextActionName() == pkAction->GetID())
 		{
 			m_pkAction->SetNextActionName(ACTIONNAME_IDLE);
 		}
 		bool const bIsMySubPlayer = IsMySubPlayer();
-		if( true == bIsMySubPlayer )
+		if (true == bIsMySubPlayer)
 		{
 			m_pkAction->SetNextActionName(ACTIONNAME_IDLE);
 		}
 
-		if(bIsMyActor && m_pkAction && m_pkAction->GetActionOptionEnable(PgAction::AO_DO_MONITOR))
+		if (bIsMyActor && m_pkAction && m_pkAction->GetActionOptionEnable(PgAction::AO_DO_MONITOR))
 		{
-			// MonitoringÇÏ´Â ¾×¼ÇÀÌ¶ó¸é ¹æÇâÀ» BroadcastÇÑ´Ù.
+			// Monitoringï¿½Ï´ï¿½ ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Broadcastï¿½Ñ´ï¿½.
 			g_kPilotMan.BroadcastDirection(m_pkPilot, m_byMovingDirection);
 			//_PgOutputDebugString("[PgActor.Action] Broadcasted Direction(Monitor) : %d \n", m_byMovingDirection);
 		}
 
-		// ¾×¼Ç Á¦°Å.
+		// ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		g_kActionPool.ReleaseAction(pkAction);
 	}
 
 	return bActionReturn;
 }
 
-void	PgActor::OnTargetListModified(PgAction *pkNextAction)
+void	PgActor::OnTargetListModified(PgAction* pkNextAction)
 {
-	if( m_pkAction == NULL ||
-		(pkNextAction->GetActionNo() != m_pkAction->GetActionNo()) || 
-		(m_pkAction->GetActionParam() != ESS_FIRE) ) 
+	if (m_pkAction == NULL ||
+		(pkNextAction->GetActionNo() != m_pkAction->GetActionNo()) ||
+		(m_pkAction->GetActionParam() != ESS_FIRE))
 	{
-		pkNextAction->OnTargetListModified(this,false);	//	»õ Å¸°Ù¸®½ºÆ®¿¡ ´ëÇÑ ½ºÅ©¸³Æ® Ã³¸®
-		return ;
+		pkNextAction->OnTargetListModified(this, false);	//	ï¿½ï¿½ Å¸ï¿½Ù¸ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® Ã³ï¿½ï¿½
+		return;
 	}
 
-	//	ÀÌ°ÍÀº TargetList °¡ ¹Ù²î¾úÀ½À» ÀÇ¹ÌÇÑ´Ù.
-	m_pkAction->OnTargetListModified(this,true);	//	±âÁ¸ Å¸°Ù¸®½ºÆ®¿¡ ´ëÇÑ ½ºÅ©¸³Æ® Ã³¸®
+	//	ï¿½Ì°ï¿½ï¿½ï¿½ TargetList ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½Ñ´ï¿½.
+	m_pkAction->OnTargetListModified(this, true);	//	ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ù¸ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® Ã³ï¿½ï¿½
 	m_pkAction->GetTargetList()->ApplyActionEffects();
 
 	m_pkAction->SetParamAsPacket(pkNextAction->GetParamAsPacket());
@@ -9521,271 +9521,271 @@ void	PgActor::OnTargetListModified(PgAction *pkNextAction)
 
 	m_pkAction->SetActionInstanceID(pkNextAction->GetActionInstanceID());
 	m_pkAction->SetTargetList(*pkNextAction->GetTargetList());
-	m_pkAction->OnTargetListModified(this,false);	//	»õ Å¸°Ù¸®½ºÆ®¿¡ ´ëÇÑ ½ºÅ©¸³Æ® Ã³¸®
+	m_pkAction->OnTargetListModified(this, false);	//	ï¿½ï¿½ Å¸ï¿½Ù¸ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® Ã³ï¿½ï¿½
 
 	pkNextAction->ClearTargetList();
 
 }
-bool	PgActor::ProcessToggleAction(PgAction *pkNextAction)
+bool	PgActor::ProcessToggleAction(PgAction* pkNextAction)
 {
-	//	¸¸¾à ÇöÀç»óÅÂ°¡ Activated µÈ »óÅÂ¶ó¸é, Deactivated ·Î ¹Ù²Ù°í
-	//	ºê·ÎµåÄ³½ºÆÃ¸¸ ÇÑ ÈÄ ±×³É ¸®ÅÏÇÑ´Ù.
-	if(GetActionToggleState(pkNextAction->GetActionNo()))
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ Activated ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½, Deactivated ï¿½ï¿½ ï¿½Ù²Ù°ï¿½
+	//	ï¿½ï¿½Îµï¿½Ä³ï¿½ï¿½ï¿½Ã¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	if (GetActionToggleState(pkNextAction->GetActionNo()))
 	{
-		if(!IsStun())
+		if (!IsStun())
 		{
-			ActionToggleStateChange(pkNextAction->GetActionNo(),false);
+			ActionToggleStateChange(pkNextAction->GetActionNo(), false);
 			pkNextAction->SetActionParam(ESS_TOGGLE_OFF);
 			g_kPilotMan.Broadcast(m_pkPilot, pkNextAction, true);
 
-			StartSkillCoolTime(pkNextAction->GetActionNo());	//	ÄðÅ¸ÀÓ ½ÃÀÛ
+			StartSkillCoolTime(pkNextAction->GetActionNo());	//	ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return false;
 		}
 	}
 
 	return	true;
 }
-bool	PgActor::CheckRequirementForAction(PgAction *pkNextAction, bool const bShowFailMsg)
+bool	PgActor::CheckRequirementForAction(PgAction* pkNextAction, bool const bShowFailMsg)
 {
 	PG_ASSERT_LOG(pkNextAction);
-	if(!pkNextAction)
+	if (!pkNextAction)
 	{
 		return	false;
 	}
 
 	CSkillDef const* pNextSkillDef = pkNextAction->GetSkillDef();
 	PG_ASSERT_LOG(pNextSkillDef);
-	if(!pNextSkillDef)
+	if (!pNextSkillDef)
 	{
 		return	false;
 	}
 
 #ifndef EXTERNAL_RELEASE
 	bool bIsSingleMode = g_pkApp->IsSingleMode();
-	if(bIsSingleMode)
+	if (bIsSingleMode)
 	{
-		return	true;	//	½Ì±Û¸ðµå¿¡¼­´Â ¹«Á¶°Ç true
+		return	true;	//	ï¿½Ì±Û¸ï¿½å¿¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true
 	}
 #endif
 
-	if(pkNextAction->GetActionType() != "IDLE")	//¾ÆÀÌµéÀÌ ¾Æ´Ò °æ¿ì¿¡¸¸
+	if (pkNextAction->GetActionType() != "IDLE")	//ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½
 	{
-		//	½ºÅÏ »óÅÂ¿¡¼­´Â ¾Æ¹« Çàµ¿µµ ÇÒ ¼ö ¾øÀ½.
-		if(pkNextAction->GetActionType() != "EFFECT" && IsStun())
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+		if (pkNextAction->GetActionType() != "EFFECT" && IsStun())
 		{
-			if(bShowFailMsg)
+			if (bShowFailMsg)
 			{
 				lwAddWarnDataStr(lwWString(TTW(242)), 2, true);
 			}
 			return	false;
 		}
 	}
-	
+
 	PgPilot* pkPilot = GetPilot();
-	if(!pkPilot)
+	if (!pkPilot)
 	{
 		return false;
 	}
 	CUnit* pkUnit = pkPilot->GetUnit();
-	if(!pkUnit)
+	if (!pkUnit)
 	{
 		return false;
 	}
 	bool const bIsMyPet = IsMyPet();
 	bool const bIsMyActor = IsMyActor();
 	bool const bIsMySubPlayer = IsMySubPlayer();
-	
+
 	bool bIsSubPlayer = false;
 	PgActor* pkCallerActor = NULL;
-	switch( pkUnit->UnitType() )
+	switch (pkUnit->UnitType())
 	{
 	case UT_SUB_PLAYER:
-		{// º¸Á¶ Ä³¸¯ÅÍ Å¸ÀÔÀº Caller¿¡°Ô Á¾¼ÓµÇ±â ¶§¹®¿¡
-			pkCallerActor = g_kPilotMan.FindActor( pkUnit->Caller() );
-			bIsSubPlayer = true;
-		}break;
+	{// ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ Callerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÓµÇ±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		pkCallerActor = g_kPilotMan.FindActor(pkUnit->Caller());
+		bIsSubPlayer = true;
+	}break;
 	default:
-		{
-		}break;
+	{
+	}break;
 	}
 
-	if(bIsMyActor
+	if (bIsMyActor
 		|| bIsMySubPlayer
 		)
 	{
-		if(bIsMySubPlayer && IsHide()) //½ÖµÕÀÌ ¾×ÅÍ°¡ ¼û°ÜÁø »óÅÂ¶ó¸é ¾×¼ÇÀÌ ¹ßµ¿µÇ¾î¼­´Â ¾ÈµÈ´Ù (ex: ³»°¡ Æê¿¡ Å¾½Â ÁßÀÏ ¶§)
+		if (bIsMySubPlayer && IsHide()) //ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ßµï¿½ï¿½Ç¾î¼­ï¿½ï¿½ ï¿½ÈµÈ´ï¿½ (ex: ï¿½ï¿½ï¿½ï¿½ ï¿½ê¿¡ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
 		{
 			return false;
 		}
 
-		//	¹è¿ìÁö ¾Ê¾Ò´Ù¸é »ç¿ëÇÒ ¼ö°¡ ¾ø´ç.
-		PgSkillTree::stTreeNode *pFound = g_kSkillTree.GetNode(g_kSkillTree.GetKeySkillNo(pkNextAction));
-		if(pFound)
+		//	ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+		PgSkillTree::stTreeNode* pFound = g_kSkillTree.GetNode(g_kSkillTree.GetKeySkillNo(pkNextAction));
+		if (pFound)
 		{
-			if(false == lua_tinker::call<bool>("IsActivitySkill"))
+			if (false == lua_tinker::call<bool>("IsActivitySkill"))
 			{
 				return false;
 			}
 		}
-		if(pFound && pFound->m_bLearned == false)
+		if (pFound && pFound->m_bLearned == false)
 		{
-			if(bShowFailMsg)
+			if (bShowFailMsg)
 			{
 				//lwAddWarnDataStr(lwWString(TTW(300)), 2);
-				g_kChatMgrClient.ShowNoticeUI(TTW(pNextSkillDef->GetAbil(AT_IS_COUPLE_SKILL) ? 450080 :  300), 2, true);
+				g_kChatMgrClient.ShowNoticeUI(TTW(pNextSkillDef->GetAbil(AT_IS_COUPLE_SKILL) ? 450080 : 300), 2, true);
 			}
 			return	false;
 		}
-		if(pFound && pFound->m_pkSkillDef)
+		if (pFound && pFound->m_pkSkillDef)
 		{
 			pNextSkillDef = pFound->m_pkSkillDef;
 		}
 	}
 	else
 	{
-		if(bIsMyPet)
+		if (bIsMyPet)
 		{
 			PgPet* pkPet = dynamic_cast<PgPet*>(pkUnit);
 
 			PgMySkill* pkMyPetSkill = pkPet->GetMySkill();
-			if(!pkMyPetSkill)
+			if (!pkMyPetSkill)
 			{
 				return false;
 			}
 
-			if(EST_GENERAL != pNextSkillDef->GetAbil(AT_TYPE))
+			if (EST_GENERAL != pNextSkillDef->GetAbil(AT_TYPE))
 			{
-				// 1·¹º§ÀÇ ½ºÅ³À» ¹è¿ü´ÂÁö Ã¼Å©
-				if( !pkMyPetSkill->GetLearnedSkill(pNextSkillDef->No()) )
+				// 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
+				if (!pkMyPetSkill->GetLearnedSkill(pNextSkillDef->No()))
 				{
-					if(strcmp(pkNextAction->GetID().c_str(), ACTIONNAME_RUN_PET))
+					if (strcmp(pkNextAction->GetID().c_str(), ACTIONNAME_RUN_PET))
 					{
-						return false;	
+						return false;
 					}
 				}
 			}
 		}
-		else if(!bIsSubPlayer)
+		else if (!bIsSubPlayer)
 		{
 			return false;
 		}
 	}
 
-	PgControlUnit *pkControlUnit = dynamic_cast<PgControlUnit*>(pkUnit);
-	if( bIsSubPlayer 
-		&& NULL != pkCallerActor )
+	PgControlUnit* pkControlUnit = dynamic_cast<PgControlUnit*>(pkUnit);
+	if (bIsSubPlayer
+		&& NULL != pkCallerActor)
 	{
 		PgPilot* pkCallerPilot = pkCallerActor->GetPilot();
-		if( NULL == pkCallerPilot )
+		if (NULL == pkCallerPilot)
 		{
 			return false;
 		}
 		CUnit* pkCallerUnit = pkCallerPilot->GetUnit();
-		if( NULL == pkCallerUnit )
+		if (NULL == pkCallerUnit)
 		{
 			return false;
 		}
 		pkControlUnit = dynamic_cast<PgControlUnit*>(pkCallerUnit);
 	}
 	PG_ASSERT_LOG(pkControlUnit);
-	if(!pkControlUnit)
+	if (!pkControlUnit)
 	{
 		return	false;
 	}
 
-	if(bIsMyActor
+	if (bIsMyActor
 		|| bIsMySubPlayer
 		)
 	{
-		//	»ç¿ë Á¶°Ç Ã¼Å©
+		//	ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 		{
 			int const iUnuseableGround = pkNextAction->GetAbil(AT_CANT_USE_THIS_GATTR_FLAG);
-			if(0 < iUnuseableGround)
-			{// NextActionÀÌ Æ¯Á¤ Áö¿ª¿¡¼­ »ç¿ëºÒ°¡ÇÏ°í
-				if(g_pkWorld)
+			if (0 < iUnuseableGround)
+			{// NextActionï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ò°ï¿½ï¿½Ï°ï¿½
+				if (g_pkWorld)
 				{
-					if(g_pkWorld->GetAttr() & iUnuseableGround)
-					{// ÇöÀç Àå¼Ò°¡, »ç¿ë ºÒ°¡ Áö¿ªÀÌ¶ó¸é
+					if (g_pkWorld->GetAttr() & iUnuseableGround)
+					{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò°ï¿½, ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
 						lwAddWarnDataStr(lwWString(TTW(244)), 2, true);
-						return false; // NextActionÀ¸·Î ÀüÀÌÇÒ ¼ö ¾ø´Ù
+						return false; // NextActionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					}
 				}
 			}
-			
-			if(PgItemEx::IT_JOB_TOOL == GetEquippedWeaponType())
-			{// Á÷¾÷ ½ºÅ³À» °¡Áö°í ÀÖ°í,
+
+			if (PgItemEx::IT_JOB_TOOL == GetEquippedWeaponType())
+			{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½,
 				int	const iWeaponLimit = pNextSkillDef->GetAbil(AT_WEAPON_LIMIT);
-				if(0 < iWeaponLimit)
-				{// ¹«±â Á¦ÇÑÀÌ ÀÖ´Ù¸é »ç¿ëÇÒ¼ö ¾ø´Ù.
+				if (0 < iWeaponLimit)
+				{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ ï¿½ï¿½ï¿½ï¿½.
 					lwAddWarnDataStr(lwWString(TTW(63)), 2, true);
-					return false; // NextActionÀ¸·Î ÀüÀÌÇÒ ¼ö ¾ø´Ù
+					return false; // NextActionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				}
 			}
 
-			if(pNextSkillDef->GetType()==EST_ACTIVE && pNextSkillDef->GetTargetType()&ESTARGET_SUMMONED)
+			if (pNextSkillDef->GetType() == EST_ACTIVE && pNextSkillDef->GetTargetType() & ESTARGET_SUMMONED)
 			{
-				if(0==GetTotalSummonedCount( GetUnit() ))
+				if (0 == GetTotalSummonedCount(GetUnit()))
 				{
 					lwAddWarnDataStr(lwWString(TTW(792099)), 2, true);
 					return false;
 				}
 			}
-			
+
 		}
 
 		//	Caster State Check
 		//	Only Check when this action is skill
 		if (pNextSkillDef->GetAbil(AT_SKILL_KIND) != ESK_NONE
-			|| pNextSkillDef->GetAbil(AT_ITEM_SKILL) != 0 )
+			|| pNextSkillDef->GetAbil(AT_ITEM_SKILL) != 0)
 		{
 			int kCasterState = (pNextSkillDef->GetAbil(AT_CASTER_STATE));
-			if(kCasterState == 0)
+			if (kCasterState == 0)
 			{
 				kCasterState = ECaster_State_OnGround;
 			}
 
 			const	bool	bIsMeetFloor = IsMeetFloor();
-			if(bIsMeetFloor && !(kCasterState&(((int)ECaster_State_OnGround))) )
+			if (bIsMeetFloor && !(kCasterState & (((int)ECaster_State_OnGround))))
 			{
-				if(bShowFailMsg)
+				if (bShowFailMsg)
 				{
-					lwAddWarnDataStr(lwWString(TTW(239)),2, true);
+					lwAddWarnDataStr(lwWString(TTW(239)), 2, true);
 				}
 				return	false;
 			}
-			if(!bIsMeetFloor && !(kCasterState&(((int)ECaster_State_Jumping))) )
+			if (!bIsMeetFloor && !(kCasterState & (((int)ECaster_State_Jumping))))
 			{
-				if(bShowFailMsg)
+				if (bShowFailMsg)
 				{
-					lwAddWarnDataStr(lwWString(TTW(240)),2, true);
+					lwAddWarnDataStr(lwWString(TTW(240)), 2, true);
 				}
 				return	false;
 			}
-			if(GetActorDead() && !(kCasterState&(((int)ECaster_State_Dead))) )
+			if (GetActorDead() && !(kCasterState & (((int)ECaster_State_Dead))))
 			{
-				if(bShowFailMsg)
+				if (bShowFailMsg)
 				{
-					lwAddWarnDataStr(lwWString(TTW(241)),2, true);
+					lwAddWarnDataStr(lwWString(TTW(241)), 2, true);
 				}
 				return	false;
 			}
 		}
 
-		if(IsRidingPet() && pNextSkillDef->GetAbil(AT_SKILL_ATT))
-		{ //Å¾½Â »óÅÂÀÌ°í ÀüÅõ½ºÅ³ »ç¿ëÀ» ½ÃµµÇÏ¸é ½ÇÆÐ
+		if (IsRidingPet() && pNextSkillDef->GetAbil(AT_SKILL_ATT))
+		{ //Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return false;
 		}
-		
 
-		if( !bIsSubPlayer )
+
+		if (!bIsSubPlayer)
 		{//	Class Limit Ã¼Å©
 			int	const	  iMyClassID = pkControlUnit->GetAbil(AT_CLASS);
 			__int64	const iClassLimit = pNextSkillDef->GetAbil64(AT_CLASSLIMIT);
-			if(iClassLimit>0 && IS_CLASS_LIMIT(iClassLimit,iMyClassID)==false)
+			if (iClassLimit > 0 && IS_CLASS_LIMIT(iClassLimit, iMyClassID) == false)
 			{
-				if(bShowFailMsg)
+				if (bShowFailMsg)
 				{
-					lwAddWarnDataStr(lwWString(TTW(238)),2, true);
+					lwAddWarnDataStr(lwWString(TTW(238)), 2, true);
 				}
 				return	false;
 			}
@@ -9793,266 +9793,266 @@ bool	PgActor::CheckRequirementForAction(PgAction *pkNextAction, bool const bShow
 
 		//	Level Limit Ã¼Å©
 		int	const iLevelLimit = pNextSkillDef->GetAbil(AT_LEVELLIMIT);
-		if(iLevelLimit>0 && iLevelLimit > pkControlUnit->GetAbil(AT_LEVEL))
+		if (iLevelLimit > 0 && iLevelLimit > pkControlUnit->GetAbil(AT_LEVEL))
 		{
-			if(bShowFailMsg)
+			if (bShowFailMsg)
 			{
-				lwAddWarnDataStr(lwWString(TTW(237)),2, true);
+				lwAddWarnDataStr(lwWString(TTW(237)), 2, true);
 			}
 			return	false;
 		}
 
 		//	WeaponLimit Ã¼Å©
 		unsigned int uiMyWeaponType = m_uiMyWeaponType;
-		if(bIsSubPlayer
+		if (bIsSubPlayer
 			&& pkCallerActor
 			)
 		{
 			uiMyWeaponType = pkCallerActor->GetEquippedWeaponType();
 		}
-		
+
 		int	const iWeaponLimit = pNextSkillDef->GetAbil(AT_WEAPON_LIMIT);
-		if(iWeaponLimit>0 && (iWeaponLimit&(1<<(uiMyWeaponType-1)))==0)
+		if (iWeaponLimit > 0 && (iWeaponLimit & (1 << (uiMyWeaponType - 1))) == 0)
 		{
-			if(bShowFailMsg)
+			if (bShowFailMsg)
 			{
-				lwAddWarnDataStr(lwWString(TTW(63)),2, true);
+				lwAddWarnDataStr(lwWString(TTW(63)), 2, true);
 			}
 			return	false;
 		}
 
-		//	ÇÊ¿ä½ºÅ³ Ã¼Å©(NeedSkill)
+		//	ï¿½Ê¿ä½ºÅ³ Ã¼Å©(NeedSkill)
 		int	const iMaxNeedSkill = 3;
-		for(int i = 0; i < iMaxNeedSkill; ++i)
+		for (int i = 0; i < iMaxNeedSkill; ++i)
 		{
-			int	const iNeedSkill = pNextSkillDef->GetAbil(AT_NEED_SKILL_01+i);
-			if(0 < iNeedSkill)
+			int	const iNeedSkill = pNextSkillDef->GetAbil(AT_NEED_SKILL_01 + i);
+			if (0 < iNeedSkill)
 			{
-				PgSkillTree::stTreeNode *pkSkillNode = g_kSkillTree.GetNode(g_kSkillTree.GetKeySkillNo(iNeedSkill));
-				if(pkSkillNode == NULL)
-				{
-					return	false;	
-				}
-
-				if(false == pkSkillNode->m_bLearned || (unsigned int)iNeedSkill > pkSkillNode->m_ulSkillNo + pkSkillNode->m_iOverSkillLevel)
+				PgSkillTree::stTreeNode* pkSkillNode = g_kSkillTree.GetNode(g_kSkillTree.GetKeySkillNo(iNeedSkill));
+				if (pkSkillNode == NULL)
 				{
 					return	false;
 				}
 
-				// ½ºÅ³Æ®¸®¿¡´Â ÀÓ½Ã·Î ·¹º§À» ¿Ã·ÁµÐ »óÅÂ¿¡¼­ ½ÇÁ¦ ½ºÅ³À» »ç¿ë ÇÏ´Â °æ¿ì
-				if(true == pkSkillNode->IsTemporaryLevelChanged())
-	            {
-					if(pkControlUnit)
-                    {
+				if (false == pkSkillNode->m_bLearned || (unsigned int)iNeedSkill > pkSkillNode->m_ulSkillNo + pkSkillNode->m_iOverSkillLevel)
+				{
+					return	false;
+				}
+
+				// ï¿½ï¿½Å³Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+				if (true == pkSkillNode->IsTemporaryLevelChanged())
+				{
+					if (pkControlUnit)
+					{
 						int const iLearnedSkill = pkControlUnit->GetMySkill()->GetLearnedSkill(iNeedSkill, true);
-						if(iLearnedSkill < iNeedSkill)
-                        {
-			                return false;
-		                }
-	                }
-		        }
-	        }
-	    }
-    }
+						if (iLearnedSkill < iNeedSkill)
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+	}
 
 	bool bCheckHP_MP = CheckHPMPForAction(pNextSkillDef, pkControlUnit, bShowFailMsg, true);
 
-	if(!bCheckHP_MP)
+	if (!bCheckHP_MP)
 	{
-			return false;
+		return false;
 	}
 
-	//	ÀÌµ¿ ¾×¼Ç¸¸ °¡´ÉÇÑ »óÅÂ¶ó¸é
-	if(IsOnlyMoveAction())	
+	//	ï¿½Ìµï¿½ ï¿½×¼Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½
+	if (IsOnlyMoveAction())
 	{
 		std::string kActionID = pkNextAction->GetID();
-		if(pkNextAction->GetActionType() != "IDLE" 
-			&&  pkNextAction->GetActionType() != "MOVE"
-			&&  pkNextAction->GetActionOptionEnable(PgAction::AO_KIND_OF_TRIGGER_ACTION) == false	// ¸ÊÆ®¸®°Å¿ë ¾×¼ÇÀÌ ¾Æ´Ï¶ó¸é
+		if (pkNextAction->GetActionType() != "IDLE"
+			&& pkNextAction->GetActionType() != "MOVE"
+			&& pkNextAction->GetActionOptionEnable(PgAction::AO_KIND_OF_TRIGGER_ACTION) == false	// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½Å¿ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½
 			)
 		{
-			NILOG(PGLOG_LOG,"OnlyMoveAction  Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()),pkNextAction->GetID().c_str(),pkNextAction->GetActionNo(),pkNextAction->GetActionInstanceID(),pkNextAction->GetTargetList()->size());
+			NILOG(PGLOG_LOG, "OnlyMoveAction  Actor : %s Action : %s,%d,%d,%d,%d\n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 			return false;
 		}
 	}
-	//	±âº» °ø°Ý¸¸ °¡´ÉÇÑ »óÅÂ¶ó¸é
-	if(IsOnlyDefaultAttack())
+	//	ï¿½âº» ï¿½ï¿½ï¿½Ý¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½
+	if (IsOnlyDefaultAttack())
 	{
-		if(ESK_NONE != pkNextAction->GetAbil(AT_SKILL_KIND))
+		if (ESK_NONE != pkNextAction->GetAbil(AT_SKILL_KIND))
 		{
-			NILOG(PGLOG_LOG,"OnlyDefaultAttack  Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()), pkNextAction->GetID().c_str(),pkNextAction->GetActionNo(),pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
+			NILOG(PGLOG_LOG, "OnlyDefaultAttack  Actor : %s Action : %s,%d,%d,%d,%d\n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 			ClearActionState();
 			return false;
 		}
 	}
 
 
-	// ÄðÅ¸ÀÓÀÌ ±Û·Î¹ú ÄðÅ¸ÀÓÀÎ°¡?
+	// ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Û·Î¹ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Î°ï¿½?
 	bool bIsGobalCoolTime = false;
-	
-	//	ÄðÅ¸ÀÓ Ã¼Å©
-	if(IsInCoolTime(pkNextAction->GetActionNo(), bIsGobalCoolTime))
+
+	//	ï¿½ï¿½Å¸ï¿½ï¿½ Ã¼Å©
+	if (IsInCoolTime(pkNextAction->GetActionNo(), bIsGobalCoolTime))
 	{
 		bool bSkillKind = pkNextAction->GetSkillDef()->GetAbil(AT_SKILL_KIND) != ESK_NONE;
-		
-		if(pkControlUnit->IsUnitType(UT_PET))
+
+		if (pkControlUnit->IsUnitType(UT_PET))
 		{
 			bSkillKind = true;
 		}
 
-		if( pkNextAction->GetSkillDef()->GetAbil(AT_ITEM_SKILL_EXPLAIN_ID) )
+		if (pkNextAction->GetSkillDef()->GetAbil(AT_ITEM_SKILL_EXPLAIN_ID))
 		{
 			bSkillKind = true;
 		}
 
-		if(pkNextAction->GetSkillDef()==NULL || bSkillKind)
-		{	//Æê AI°¡ µ¿ÀÛ ÁßÀÏ ¶§´Â Ç¥½ÃÇÏÁö ¾ÊÀ½
-			//ÄðÅ¸ÀÓ Ã¼Å© ¸Þ½ÃÁö // ±Û·Î¹ú ÄðÅ¸ÀÓÀÎ °æ¿ì´Â ¸Þ½ÃÁö Ãâ·Â ÇÏÁö ¾Ê´Â´Ù.
-			if(bShowFailMsg && (0==pkControlUnit->GetAbil(AT_AUTO_PET_SKILL)) )// && (false == bIsGobalCoolTime))
+		if (pkNextAction->GetSkillDef() == NULL || bSkillKind)
+		{	//ï¿½ï¿½ AIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ï¿½ï¿½Å¸ï¿½ï¿½ Ã¼Å© ï¿½Þ½ï¿½ï¿½ï¿½ // ï¿½Û·Î¹ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+			if (bShowFailMsg && (0 == pkControlUnit->GetAbil(AT_AUTO_PET_SKILL)))// && (false == bIsGobalCoolTime))
 			{
 				g_kChatMgrClient.ShowNoticeUI(TTW(235), 2, true, true);
 			}
 		}
-		if( true == bShowFailMsg )
-		{//¿©±â¼­ ÄÞº¸ ½ºÅ³ÀÏ °æ¿ì ÄðÅ¸ÀÓ ¿¡·¯ ¸Þ¼¼Áö Ãâ·ÂÇØ ÁÖÀÚ.
-			PgPilot *pkPilot = GetPilot();
-			if( NULL != pkPilot )
+		if (true == bShowFailMsg)
+		{//ï¿½ï¿½ï¿½â¼­ ï¿½Þºï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+			PgPilot* pkPilot = GetPilot();
+			if (NULL != pkPilot)
 			{
-				if( pkPilot->IsHaveComboAction( pkNextAction->GetActionNo() ) )
+				if (pkPilot->IsHaveComboAction(pkNextAction->GetActionNo()))
 				{
 					g_kChatMgrClient.ShowNoticeUI(TTW(235), 2, true, true);
 				}
 			}
 		}
-		// ÀÏ¹Ý µ¿ÀÛ ÀÌ°í ±Û·Î¹ú ÄðÅ¸ÀÓÀÌ ¾Æ´Ñ °æ¿ì
-		if(!(EST_GENERAL == pNextSkillDef->GetAbil(AT_TYPE) && bIsGobalCoolTime))
+		// ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì°ï¿½ ï¿½Û·Î¹ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½
+		if (!(EST_GENERAL == pNextSkillDef->GetAbil(AT_TYPE) && bIsGobalCoolTime))
 		{
-			NILOG(PGLOG_LOG,"CoolTime  Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()), pkNextAction->GetID().c_str(),pkNextAction->GetActionNo(),pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
+			NILOG(PGLOG_LOG, "CoolTime  Actor : %s Action : %s,%d,%d,%d,%d\n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 			return false;
 		}
 	}
 
 	SSFilter_Result	kResult;
-	if(!pkControlUnit->CheckSkillFilter(pkNextAction->GetActionNo(),&kResult))
+	if (!pkControlUnit->CheckSkillFilter(pkNextAction->GetActionNo(), &kResult))
 	{
-		const wchar_t *pkEffectNameStr = NULL;
+		const wchar_t* pkEffectNameStr = NULL;
 		GET_DEF(CEffectDefMgr, kEffectDefMgr);
-		if ( true == GetEffectName(kEffectDefMgr.GetCallEffectNum(kResult.iCauseID), pkEffectNameStr) )
+		if (true == GetEffectName(kEffectDefMgr.GetCallEffectNum(kResult.iCauseID), pkEffectNameStr))
 		{
 			std::wstring const kEffectName(pkEffectNameStr);
-			if ( kEffectName.size() )
+			if (kEffectName.size())
 			{
-				switch(kResult.eResult)
+				switch (kResult.eResult)
 				{
 				case SSFilter_Result::ESFResult_NeedEffect:
+				{
+					if (true == bShowFailMsg)
 					{
-						if( true == bShowFailMsg )
-						{
-							std::wstring wstrMsg;
-							WstringFormat( wstrMsg, MAX_PATH, TTW(93).c_str(), kEffectName.c_str() );
-							Notice_Show( wstrMsg, EL_Level2, true);
-						}
-					}break;
+						std::wstring wstrMsg;
+						WstringFormat(wstrMsg, MAX_PATH, TTW(93).c_str(), kEffectName.c_str());
+						Notice_Show(wstrMsg, EL_Level2, true);
+					}
+				}break;
 				case SSFilter_Result::ESFResult_LimitEffect:
+				{
+					if (true == bShowFailMsg)
 					{
-						if( true == bShowFailMsg )
-						{
-							std::wstring wstrMsg;
-							WstringFormat( wstrMsg, MAX_PATH, TTW(94).c_str(), kEffectName.c_str() );
-							Notice_Show( wstrMsg, EL_Level2, true );
-						}
-					}break;
+						std::wstring wstrMsg;
+						WstringFormat(wstrMsg, MAX_PATH, TTW(94).c_str(), kEffectName.c_str());
+						Notice_Show(wstrMsg, EL_Level2, true);
+					}
+				}break;
 				}
 			}
 		}
 		return	false;
-	}	
-	
-	// Å°°¡ ¶§¾îÁø °ÍÀÌ¶ó¸é Ã¼Å©ÇÏÁö ¾Ê¾Æ¾ßÇÑ´Ù.
-	if(!pkNextAction->GetEnable())
+	}
+
+	// Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¾ï¿½ï¿½Ñ´ï¿½.
+	if (!pkNextAction->GetEnable())
 	{
 		return true;
 	}
 
 	return	true;
 }
-void	PgActor::OnCastingCompleted(PgAction *pkNextAction)
+void	PgActor::OnCastingCompleted(PgAction* pkNextAction)
 {
-	//	Ä³½ºÆÃÀÌ ¿Ï·áµÇ¾î ½ÇÁ¦ ½ÃÀüÀ» ÇÏ´Â ¾×¼ÇÀÌ´Ù.
-	//	ÇöÀç ¾×¼ÇÀ» Áö¿ì°í NextAction À¸·Î ¹Ù²Û´Ù.
-	if(m_pkAction)
+	//	Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½×¼ï¿½ï¿½Ì´ï¿½.
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ NextAction ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Û´ï¿½.
+	if (m_pkAction)
 	{
 		m_pkAction->CopyParamTo(pkNextAction);
 		pkNextAction->SetSlot(m_pkAction->GetCurrentSlot());
 		g_kActionPool.ReleaseAction(m_pkAction);
 	}
 	m_pkAction = pkNextAction;
-	m_pkAction->OnCastingCompleted(this,m_pkAction);
+	m_pkAction->OnCastingCompleted(this, m_pkAction);
 
 	SetIgonreDamageEffect(m_pkAction);
 
-	NILOG(PGLOG_LOG,"Casting Complete  Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()), pkNextAction->GetID().c_str(),pkNextAction->GetActionNo(),pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
+	NILOG(PGLOG_LOG, "Casting Complete  Actor : %s Action : %s,%d,%d,%d,%d\n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 }
 
-bool	PgActor::ProcessLeaveCurrentAction(PgAction *pkNextAction)
+bool	PgActor::ProcessLeaveCurrentAction(PgAction* pkNextAction)
 {
-	if(NULL == pkNextAction
+	if (NULL == pkNextAction
 		|| NULL == m_pkAction)
 	{
 		return false;
 	}
 
 	bool	bSuccessfulLeave = false;
-	
-	if(pkNextAction->GetActionType() == "EFFECT" && m_pkAction->GetActionType() != "EFFECT")
+
+	if (pkNextAction->GetActionType() == "EFFECT" && m_pkAction->GetActionType() != "EFFECT")
 	{
 		bSuccessfulLeave = true;
 	}
 	else
 		bSuccessfulLeave = m_pkAction->LeaveFSM(this, pkNextAction);
-	
-	if(!bSuccessfulLeave && IsMyActor())
+
+	if (!bSuccessfulLeave && IsMyActor())
 	{
-		if(m_pkAction->GetActionParam() == ESS_CASTTIME)		//	ÇöÀç Ä³½ºÆÃ ÁßÀÌ¾ú´Ù¸é, ¹«Á¶°Ç ²÷À» ¼ö ÀÖ´Ù.
+		if (m_pkAction->GetActionParam() == ESS_CASTTIME)		//	ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 		{
 			bSuccessfulLeave = true;
 		}
 	}
 
 
-	if(bSuccessfulLeave)
+	if (bSuccessfulLeave)
 	{
 		PgActionTargetList* pkTargetList = m_pkAction->GetTargetList();
-		if(pkTargetList)
+		if (pkTargetList)
 		{
 			pkTargetList->ApplyActionEffects();
 		}
-		
+
 		m_pkAction->CleanUpFSM(this, pkNextAction);
 	}
 
-	if(!pkNextAction->GetEnable() || !bSuccessfulLeave)
+	if (!pkNextAction->GetEnable() || !bSuccessfulLeave)
 	{
-		// ¶¼¾îÁø Å° ÀÌ°Å³ª, Enter·Î ÁøÀÔ ºÒ°¡´É
-		NILOG(PGLOG_LOG,"Next Action GetEnable or LeaveFSM false  Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()), pkNextAction->GetID().c_str(),pkNextAction->GetActionNo(),pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å° ï¿½Ì°Å³ï¿½, Enterï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
+		NILOG(PGLOG_LOG, "Next Action GetEnable or LeaveFSM false  Actor : %s Action : %s,%d,%d,%d,%d\n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 		return false;
 	}
 
 	return	true;
 }
-void	PgActor::SetActionParam(PgAction	*pkNextAction)
+void	PgActor::SetActionParam(PgAction* pkNextAction)
 {
-	//	Ä³½ºÆÃ Å¸ÀÓÀÌ ÀÖ´Â ¾×¼ÇÀÏ °æ¿ì
-	//	ActionParam À» PgAction::AP_CASTING ·Î ¼³Á¤ÇÑ´Ù.
-	//	±âÅ¸ÀÇ °æ¿ì PgAction::AP_FIRE ·Î ¼³Á¤ÇÑ´Ù.
-	const CSkillDef	*pkSkillDef = pkNextAction->GetSkillDef();
-	if(pkSkillDef && pkSkillDef->GetAbil(AT_CASTTYPE) == E_SCAST_CASTSHOT)
+	//	Ä³ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	//	ActionParam ï¿½ï¿½ PgAction::AP_CASTING ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	//	ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ PgAction::AP_FIRE ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	const CSkillDef* pkSkillDef = pkNextAction->GetSkillDef();
+	if (pkSkillDef && pkSkillDef->GetAbil(AT_CASTTYPE) == E_SCAST_CASTSHOT)
 	{
 		pkNextAction->SetActionParam(ESS_CASTTIME);
 	}
 	else
 	{
-		if(pkSkillDef && pkSkillDef->GetType() == EST_TOGGLE)
+		if (pkSkillDef && pkSkillDef->GetType() == EST_TOGGLE)
 		{
 			pkNextAction->SetActionParam(ESS_TOGGLE_ON);
 		}
@@ -10062,17 +10062,17 @@ void	PgActor::SetActionParam(PgAction	*pkNextAction)
 		}
 	}
 }
-void	PgActor::SetIgonreDamageEffect(PgAction	*pkNextAction)
+void	PgActor::SetIgonreDamageEffect(PgAction* pkNextAction)
 {
 	ClearIgnoreEffectList();
 
 	bool bAddIgnoreDamageEffect = pkNextAction->GetActionOptionEnable(PgAction::AO_ALWAYS_IGNORE_DMG_EFFECT);
-	if( pkNextAction->GetActionParam() == ESS_FIRE )
+	if (pkNextAction->GetActionParam() == ESS_FIRE)
 	{
-		bAddIgnoreDamageEffect = pkNextAction->GetActionOptionEnable(PgAction::AO_IGNORE_DMG_EFFECT) || bAddIgnoreDamageEffect; // ´ë¹ÌÁö ÀÌÆåÆ®¸¦ ¹«½ÃÇÒ°ÍÀÎ´Ù.
+		bAddIgnoreDamageEffect = pkNextAction->GetActionOptionEnable(PgAction::AO_IGNORE_DMG_EFFECT) || bAddIgnoreDamageEffect; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò°ï¿½ï¿½Î´ï¿½.
 	}
 
-	if( bAddIgnoreDamageEffect )
+	if (bAddIgnoreDamageEffect)
 	{
 		AddIgnoreEffect(ACTIONEFFECT_DMG);
 		//AddIgnoreEffect(100002001);//a_lightning_default
@@ -10104,40 +10104,40 @@ void	PgActor::SetIgonreDamageEffect(PgAction	*pkNextAction)
 		//AddIgnoreEffect(101020101);//a_stun
 	}
 }
-void	PgActor::PlayAnimation(PgAction *pkNextAction)
+void	PgActor::PlayAnimation(PgAction* pkNextAction)
 {
-	// ¾×¼Ç¿¡ ÇØ´çÇÏ´Â ¾Ö´Ï¸¦ ÇÃ·¹ÀÌ ÇÑ´Ù.
+	// ï¿½×¼Ç¿ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½Ö´Ï¸ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 	std::string kAnimName;
-	if(pkNextAction->GetActionOptionEnable(PgAction::AO_NO_PLAY_ANIMATION) == false && 
+	if (pkNextAction->GetActionOptionEnable(PgAction::AO_NO_PLAY_ANIMATION) == false &&
 		pkNextAction->GetActionName(kAnimName))
 	{
 
 
-		if(IsVisible() == false)
-		{	
+		if (IsVisible() == false)
+		{
 			ResetAnimation();
 		}
 
-		SetTargetAnimation(kAnimName,true,pkNextAction->GetActionOptionEnable(PgAction::AO_NO_RANDOM_ANIMATION));
+		SetTargetAnimation(kAnimName, true, pkNextAction->GetActionOptionEnable(PgAction::AO_NO_RANDOM_ANIMATION));
 
-		//	¾×¼ÇÀÌ °ø¼Ó ¾îºôÀÇ ¿µÇâÀ» ¹Þ´Â ¾×¼ÇÀÌ¶ó¸é, °ø¼ÓÀ» Àû¿ëÇÏ¿© ¾Ö´Ï¸ÞÀÌ¼Ç ½ºÇÇµå¸¦ º¯°æÇÑ´Ù.
-		if(pkNextAction->GetAbil(AT_APPLY_ATTACK_SPEED) == 1)
+		//	ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½Çµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		if (pkNextAction->GetAbil(AT_APPLY_ATTACK_SPEED) == 1)
 		{
-			float	fAttackSpeed = GetPilot()->GetAbil(AT_C_ATTACK_SPEED)/ABILITY_RATE_VALUE_FLOAT;
-			SetAnimSpeed(GetAnimSpeed()*fAttackSpeed);
+			float	fAttackSpeed = GetPilot()->GetAbil(AT_C_ATTACK_SPEED) / ABILITY_RATE_VALUE_FLOAT;
+			SetAnimSpeed(GetAnimSpeed() * fAttackSpeed);
 		}
 	}
 }
 
 void	PgActor::SetSeeFrontAttribute()
 {
-	//	SEE_FRONT ¼Ó¼º Ã³¸®
+	//	SEE_FRONT ï¿½Ó¼ï¿½ Ã³ï¿½ï¿½
 	std::string kSeeFront;
-	if(GetAnimationInfo(std::string("SEE_FRONT"),GetAniSequenceID(),kSeeFront))
+	if (GetAnimationInfo(std::string("SEE_FRONT"), GetAniSequenceID(), kSeeFront))
 	{
-		if(kSeeFront == "TRUE")
+		if (kSeeFront == "TRUE")
 		{
-			//	Àü¹æÀ» º¸µµ·Ï ÇÑ´Ù.
+			//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			SetLookingDirection(DIR_DOWN, true);
 		}
 	}
@@ -10145,33 +10145,33 @@ void	PgActor::SetSeeFrontAttribute()
 void	PgActor::AddActionEntityToFollowers(PgActionEntity& kActionEntity)
 {
 
-	//	³ª¸¦ µû¶ó¿À´Â ³ÑµéÀÌ ÀÖ´Ù¸é ±×³Ñµé¿¡°Ôµµ ¾×¼ÇÀ» ³Ö¾îÁØ´Ù.
-	if(m_kFollowInfo.m_kFollowingMeActorCont.size()>0)
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñµï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½×³Ñµé¿¡ï¿½Ôµï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
+	if (m_kFollowInfo.m_kFollowingMeActorCont.size() > 0)
 	{
-		PgPilot	*pkPilot = NULL;
-		PgActor	*pkActor = NULL;
+		PgPilot* pkPilot = NULL;
+		PgActor* pkActor = NULL;
 
-		for(GUIDCont::iterator itor = m_kFollowInfo.m_kFollowingMeActorCont.begin();itor != m_kFollowInfo.m_kFollowingMeActorCont.end(); )
-		{	
+		for (GUIDCont::iterator itor = m_kFollowInfo.m_kFollowingMeActorCont.begin(); itor != m_kFollowInfo.m_kFollowingMeActorCont.end(); )
+		{
 			BM::GUID kGUID = *itor;
 
 			pkPilot = g_kPilotMan.FindPilot(kGUID);
-			if(pkPilot)
+			if (pkPilot)
 			{
 				pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
-				if(pkActor)
+				if (pkActor)
 				{
 					PgActionEntity	kNewActionEntity = kActionEntity.CreateCopy();
-					
-					PgAction *pkAction = kNewActionEntity.GetAction();
-					if(pkAction)
+
+					PgAction* pkAction = kNewActionEntity.GetAction();
+					if (pkAction)
 					{
-						//	µû¶ó°¥¼ö ¾ø´Â ¾×¼ÇÀÏ °æ¿ì, Idle ·Î ¹Ù²Û´Ù.
-						if(pkAction->GetActionOptionEnable(PgAction::AO_CAN_FOLLOW) == false)	
+						//	ï¿½ï¿½ï¿½ó°¥¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, Idle ï¿½ï¿½ ï¿½Ù²Û´ï¿½.
+						if (pkAction->GetActionOptionEnable(PgAction::AO_CAN_FOLLOW) == false)
 						{
 							NiPoint3 kActionPos = pkAction->GetActionStartPos();
 
-							PgAction *pkIdleAction = CreateActionForTransitAction(ACTIONNAME_IDLE,true,&kActionPos);
+							PgAction* pkIdleAction = CreateActionForTransitAction(ACTIONNAME_IDLE, true, &kActionPos);
 
 							pkIdleAction->SetActionTerm(pkAction->GetActionTerm());
 
@@ -10181,18 +10181,18 @@ void	PgActor::AddActionEntityToFollowers(PgActionEntity& kActionEntity)
 					}
 
 					pkActor->AddActionEntity(kNewActionEntity);
-					
+
 					++itor;
 					continue;
 				}
 			}
 
-			//	¾×ÅÍ°¡ ¾ø´ç.
+			//	ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			itor = m_kFollowInfo.m_kFollowingMeActorCont.erase(itor);
 		}
 	}
 }
-void	PgActor::AddActionEntity(PgAction *pkAction,Direction kDirection)
+void	PgActor::AddActionEntity(PgAction* pkAction, Direction kDirection)
 {
 	AddActionEntity(PgActionEntity(pkAction, kDirection));
 }
@@ -10200,34 +10200,34 @@ void	PgActor::AddActionEntity(PgActionEntity& kActionEntity)
 {
 	BM::CAutoMutex kLock(m_kActionQueueMutex);
 
-	if(kActionEntity.GetAction())
+	if (kActionEntity.GetAction())
 	{
 		kActionEntity.GetAction()->SetAddToActionEntity(false);
 	}
 
-	if(IsNowFollowing())
+	if (IsNowFollowing())
 	{
-		if(m_kFollowInfo.m_bFollowFirstActionAdded == false)
+		if (m_kFollowInfo.m_bFollowFirstActionAdded == false)
 		{
-			if(kActionEntity.GetAction() == NULL)
+			if (kActionEntity.GetAction() == NULL)
 			{
 				return;
 			}
 
-			//	Ã¹¹øÂ° ¾×¼ÇÀÌ µé¾î¿Ô´Ù.
-			//	±× ¾×¼ÇÀÇ ½ÃÀÛÀ§Ä¡·Î ÀÌµ¿ÇÑ´Ù.
+			//	Ã¹ï¿½ï¿½Â° ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô´ï¿½.
+			//	ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
 
 			m_kFollowInfo.m_bFollowFirstActionAdded = true;
 			m_kFollowInfo.m_kFollowState = stFollowInfo::FS_MOVE_TO_STARTPOS;
 
 			NiPoint3	kStartPos = GetPosition();
-			PgAction	*pkAction = CreateActionForTransitAction(ACTIONNAME_RUN,true,&kStartPos);
-			if(pkAction)
+			PgAction* pkAction = CreateActionForTransitAction(ACTIONNAME_RUN, true, &kStartPos);
+			if (pkAction)
 			{
 				NiPoint3	kTargetPos = kActionEntity.GetAction()->GetActionStartPos();
-				pkAction->SetParamAsPoint(0,kTargetPos);
+				pkAction->SetParamAsPoint(0, kTargetPos);
 			}
-			m_kActionQueue.push_back(PgActionEntity(pkAction,DIR_NONE));
+			m_kActionQueue.push_back(PgActionEntity(pkAction, DIR_NONE));
 
 		}
 	}
@@ -10238,41 +10238,41 @@ void	PgActor::AddActionEntity(PgActionEntity& kActionEntity)
 }
 void	PgActor::ClearAllActionEffect()
 {
-	if(m_pkActionEffectStack)
+	if (m_pkActionEffectStack)
 	{
 		m_pkActionEffectStack->ClearAll();
 	}
 }
 bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 {
-	if(IsMyActor())
+	if (IsMyActor())
 	{
-		//MyActor ÀÏ °æ¿ì ·£´ý ½Ãµå¸¦ ¼¼ÆÃÇÑ´Ù.
-		if(GetPilot() && GetPilot()->GetUnit())
+		//MyActor ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		if (GetPilot() && GetPilot()->GetUnit())
 		{
-			if(pkNextAction)
+			if (pkNextAction)
 			{
 				pkNextAction->StartRandomSeedCallCounter(GetPilot()->GetUnit()->RandomSeedCallCounter());
 			}
 		}
 	}
 
-	if(false == RACEEVENT::CheckSkillEvent(this, pkNextAction))
+	if (false == RACEEVENT::CheckSkillEvent(this, pkNextAction))
 	{
 		return false;
 	}
-	
 
-	if(!pkNextAction)
+
+	if (!pkNextAction)
 	{
 		return false;
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.DoAction"), g_pkApp->GetFrameCount()));
 
-	if(m_pkAction)
+	if (m_pkAction)
 	{
-		_PgOutputDebugString("[PgActor::DoAction]Actor : %s CurAction : %s NextAction %s Enable : %d\n",MB(GetPilot()->GetName()),m_pkAction->GetID().c_str(),pkNextAction->GetID().c_str(),pkNextAction->GetEnable());
+		_PgOutputDebugString("[PgActor::DoAction]Actor : %s CurAction : %s NextAction %s Enable : %d\n", MB(GetPilot()->GetName()), m_pkAction->GetID().c_str(), pkNextAction->GetID().c_str(), pkNextAction->GetEnable());
 	}
 
 	bool bIsMyActor = IsMyActor();
@@ -10280,24 +10280,24 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 	std::string actionName;
 	pkNextAction->GetActionName(actionName);
 
-	NILOG(PGLOG_LOG, "[PgActor] %s actor NextAction(%s,%d,%d,%d,%d)\n", MB(GetGuid().str()), actionName.c_str(), pkNextAction->GetActionNo(), pkNextAction->GetEnable(),pkNextAction->GetActionInstanceID(),pkNextAction->GetTargetList()->size());
+	NILOG(PGLOG_LOG, "[PgActor] %s actor NextAction(%s,%d,%d,%d,%d)\n", MB(GetGuid().str()), actionName.c_str(), pkNextAction->GetActionNo(), pkNextAction->GetEnable(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 	/*_PgOutputDebugString("[PgActor] %s actor NextAction(%s,%d,%d,%d,%d)\n", MB(GetGuid().str()), actionName.c_str(), pkNextAction->GetActionNo(), pkNextAction->GetEnable(),pkNextAction->GetActionInstanceID(),pkNextAction->GetTargetList()->size());*/
-	if(m_pkAction)
-	{ 
+	if (m_pkAction)
+	{
 		m_pkAction->GetActionName(actionName);
-		NILOG(PGLOG_LOG, "[PgActor] %s actor CurAction(%s,%d,%d)\n", MB(GetGuid().str()), actionName.c_str(), m_pkAction->GetActionNo(),m_pkAction->GetActionInstanceID());
+		NILOG(PGLOG_LOG, "[PgActor] %s actor CurAction(%s,%d,%d)\n", MB(GetGuid().str()), actionName.c_str(), m_pkAction->GetActionNo(), m_pkAction->GetActionInstanceID());
 		//WriteToConsole("[PgActor] %s actor CurAction(%s,%d,%d)\n", MB(GetGuid().str()), actionName.c_str(), m_pkAction->GetActionNo(),m_pkAction->GetActionInstanceID());
 		/*_PgOutputDebugString("[PgActor] %s actor CurAction(%s,%d,%d)\n", MB(GetGuid().str()), actionName.c_str(), m_pkAction->GetActionNo(),m_pkAction->GetActionInstanceID());*/
 	}
 
 	CSkillDef const* pkNextActionSkillDef = pkNextAction->GetSkillDef();
 	PG_ASSERT_LOG(pkNextActionSkillDef);
-	if(!pkNextActionSkillDef)
+	if (!pkNextActionSkillDef)
 	{
 		return	false;
 	}
 
-	if(!GetPilot() || !GetPilot()->GetUnit())
+	if (!GetPilot() || !GetPilot()->GetUnit())
 	{
 		return	false;
 	}
@@ -10307,151 +10307,151 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 	const	ESkillType	kNextActionType = (ESkillType)pkNextActionSkillDef->GetType();
 	const	EUnitType	kUnitType = GetPilot()->GetUnit()->UnitType();
 
-	if(m_pkAction && kNextActionParam == ESS_TARGETLISTMODIFY)
+	if (m_pkAction && kNextActionParam == ESS_TARGETLISTMODIFY)
 	{
 		OnTargetListModified(pkNextAction);
 		return false;
 	}
 
-	if(kNextActionParam == ESS_TOGGLE_OFF)
-	{		
+	if (kNextActionParam == ESS_TOGGLE_OFF)
+	{
 		return	false;
 	}
 
-	if(pkNextAction->GetActionType()=="EFFECT")
+	if (pkNextAction->GetActionType() == "EFFECT")
 	{
 		ClearActionQueue();
 	}
-	else if(!IsUnderMyControl() && (IsSync() || pkNextAction->GetAddToActionEntity()))
+	else if (!IsUnderMyControl() && (IsSync() || pkNextAction->GetAddToActionEntity()))
 	{
 		PG_ASSERT_LOG(!pkNextAction->AlreadySync());
-		NILOG(PGLOG_LOG, "[PgActor] %s actor Push Action(%s,%d,%d) To ActionStack \n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(),pkNextAction->GetActionInstanceID());
+		NILOG(PGLOG_LOG, "[PgActor] %s actor Push Action(%s,%d,%d) To ActionStack \n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID());
 		//WriteToConsole("[PushToActionQueue(Because Now Sync)] Action ID : %s, Action Term : %u, \n", pkNextAction->GetID().c_str(), pkNextAction->GetActionTerm());
 
 		AddActionEntity(pkNextAction, DIR_NONE);
 		return true;
 	}
 
-	if( kNextActionParam == ESS_MONITOR)
-	{// ´ÙÀ½ ¾×¼ÇÀÌ ¾×¼Ç Áß ÀÏ¶§ ´Ù¸¥ Å¬¶óÀÌ¾ðÆ®·Î º¸³»¾ß ÇÑ´Ù¸é
+	if (kNextActionParam == ESS_MONITOR)
+	{// ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½ï¿½ ï¿½Ï¶ï¿½ ï¿½Ù¸ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´Ù¸ï¿½
 		return false;
 	}
 
-	if( GetFreezed() )
-	{// ¾ó¾î ÀÖ´Â »óÅÂÀÎµ¥
-		if( false == CanDmgActionOnFreezed() )
-		{// µ¥¹ÌÁö ¾×¼ÇÀ» ÇÒ¼ö ¾øÀ¸¸é Á¾·á ÇÏ°í
-			if(m_pkAction
+	if (GetFreezed())
+	{// ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½
+		if (false == CanDmgActionOnFreezed())
+		{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ò¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½
+			if (m_pkAction
 				&& m_pkAction->GetActionNo() == ACTION_NO_IDLE
-				|| pkNextAction->GetActionNo() != ACTION_NO_IDLE )
+				|| pkNextAction->GetActionNo() != ACTION_NO_IDLE)
 			{
 				return false;
 			}
 		}
-		if( pkNextAction->GetActionNo() != ACTIONEFFECT_DMG
+		if (pkNextAction->GetActionNo() != ACTIONEFFECT_DMG
 			&& pkNextAction->GetActionNo() != ACTION_NO_IDLE
 			&& pkNextAction->GetActionNo() != ACTION_NO_BATTLE_IDLE
 			)
-		{// ¾ó¾îÀÖ´Â »óÅÂ¿¡¼­ µ¥¹ÌÁö ¾×¼ÇÀ» ÇØ¾ß¸é µ¥¹ÌÁö ¾×¼ÇÀ» Á¦¿ÜÇÑ ³ª¸ÓÁö ¾×¼ÇÀº ¸øÇÏ°Ô ÇÏ°í
+		{// ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ø¾ß¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ï°ï¿½
 			return false;
 		}
 	}
 
-	if(false==IsActionShift(pkNextAction))
+	if (false == IsActionShift(pkNextAction))
 	{
 		return false;
 	}
 
-	if(pkNextAction->CheckCanEnter(this, pkNextAction) == false && bForceToTransit == false)
+	if (pkNextAction->CheckCanEnter(this, pkNextAction) == false && bForceToTransit == false)
 	{
-		NILOG(PGLOG_LOG,"Check Can Enter Failed. Actor : %s Action : %s,%d,%d,%d,%d\n",MB(GetGuid().str()), pkNextAction->GetID().c_str(),pkNextAction->GetActionNo(),pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
+		NILOG(PGLOG_LOG, "Check Can Enter Failed. Actor : %s Action : %s,%d,%d,%d,%d\n", MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 		return false;
 	}
 
-	//	Åä±Û ¾×¼ÇÀÌ¶ó¸é
-	if(IsUnderMyControl() && pkNextAction->GetEnable())
+	//	ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½
+	if (IsUnderMyControl() && pkNextAction->GetEnable())
 	{
-		if(kNextActionType == EST_TOGGLE)
+		if (kNextActionType == EST_TOGGLE)
 		{
-			if(!ProcessToggleAction(pkNextAction))
+			if (!ProcessToggleAction(pkNextAction))
 			{
 				return	false;
 			}
 		}
 	}
 
-	if(pkNextAction->GetAbil(AT_SKILL_CHECK_NONE_EFFECT))
-	{ //´ë»óÀÇ ÀÌÆåÆ®¸¦ Ã¼Å©ÇÏ´Â ½ºÅ³ÀÌ¶ó¸é
+	if (pkNextAction->GetAbil(AT_SKILL_CHECK_NONE_EFFECT))
+	{ //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½ï¿½Å³ï¿½Ì¶ï¿½ï¿½
 		CSkillDef const* pkSkillDef = pkNextAction->GetSkillDef();
-		if(pkSkillDef)
+		if (pkSkillDef)
 		{
 			CUnit* pkTargetUnit = NULL;
-			switch(pkSkillDef->GetTargetType())
+			switch (pkSkillDef->GetTargetType())
 			{
 			case ESTARGET_SELF: { pkTargetUnit = GetUnit(); } break;
 			case ESTARGET_CASTER:
+			{
+				CUnit* pkUnit = GetUnit();
+				if (NULL != pkUnit)
 				{
-					CUnit* pkUnit = GetUnit();
-					if(NULL != pkUnit)
+					PgPilot* pkPilot = g_kPilotMan.FindPilot(pkUnit->Caller());
+					if (pkPilot != NULL)
 					{
-						PgPilot* pkPilot = g_kPilotMan.FindPilot(pkUnit->Caller());
-						if(pkPilot != NULL)
-						{
-							pkTargetUnit = pkPilot->GetUnit();
-						}
+						pkTargetUnit = pkPilot->GetUnit();
 					}
-				}break;
+				}
+			}break;
 			}
 
-			if(NULL != pkTargetUnit)
+			if (NULL != pkTargetUnit)
 			{
 				int iEffectNo = pkSkillDef->GetEffectNo();
-				if(NULL != pkTargetUnit->GetEffect(iEffectNo, true))
+				if (NULL != pkTargetUnit->GetEffect(iEffectNo, true))
 				{
-					::Notice_Show( TTW(790254), EL_Warning, true );
+					::Notice_Show(TTW(790254), EL_Warning, true);
 					return false;
 				}
 			}
 		}
 	}
 
-	if(bIsMyActor || IsMyPet() || IsMySubPlayer())
+	if (bIsMyActor || IsMyPet() || IsMySubPlayer())
 	{
-		if(false == CheckRequirementForAction(pkNextAction,true) && false == bForceToTransit)
+		if (false == CheckRequirementForAction(pkNextAction, true) && false == bForceToTransit)
 		{
 			SkillSetAction().ReserveActionCancel();
 			return	false;
 		}
 	}
 
-	if( "EFFECT" != pkNextAction->GetActionType() && false == m_pkActionEffectStack->IsEmpty() && false == bForceToTransit )
+	if ("EFFECT" != pkNextAction->GetActionType() && false == m_pkActionEffectStack->IsEmpty() && false == bForceToTransit)
 	{
-		if(bIsMyActor)
+		if (bIsMyActor)
 		{
-			return	false;	//	¾×¼ÇÀÌÆåÆ®¸¦ ¼öÇàÁßÀÌ¶ó¸é, ´Ù¸¥ ¾×¼ÇÀ¸·Î ÀüÀÌ½ÃÅ°Áö ¾Ê´Â´Ù.
+			return	false;	//	ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½Ù¸ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½Å°ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 		}
 
-		if(kUnitType != UT_PLAYER)
+		if (kUnitType != UT_PLAYER)
 		{
-			// TODO : ¹æÇâ BroadcastÇØ¾ß ÇÏ´ÂÁö Ã¼Å©.
-			return	m_pkActionEffectStack->SaveLastAction(pkNextAction);	//	ÇÃ·¹ÀÌ¾î°¡ ¾Æ´Ï¶ó¸é, (¸ó½ºÅÍ or NPC) ¸¶Áö¸· ¾×¼ÇÀ¸·Î ÀúÀåÇØµÎ°í, ÀÌÆåÆ®°¡ ¸ðµÎ Á¾·áµÇ¾úÀ»¶§, ¾×¼ÇÀ» ÀÚµ¿À¸·Î ½ÇÇàÇØÁØ´Ù.
+			// TODO : ï¿½ï¿½ï¿½ï¿½ Broadcastï¿½Ø¾ï¿½ ï¿½Ï´ï¿½ï¿½ï¿½ Ã¼Å©.
+			return	m_pkActionEffectStack->SaveLastAction(pkNextAction);	//	ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Æ´Ï¶ï¿½ï¿½, (ï¿½ï¿½ï¿½ï¿½ or NPC) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ØµÎ°ï¿½, ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		}
 
 		ClearAllActionEffect();
 	}
 
-	if(bIsMyActor == false)
+	if (bIsMyActor == false)
 	{
-		if(!pkNextAction->AlreadySync() && pkNextAction->GetActionTerm() != 0 && pkNextAction->GetActionType() != "EFFECT")
+		if (!pkNextAction->AlreadySync() && pkNextAction->GetActionTerm() != 0 && pkNextAction->GetActionType() != "EFFECT")
 		{
-			// ÀÚµ¿ÀüÀÌ µÇ´Â ¾×¼ÇÀº Queue¿¡ ³ÖÀ¸¸é ¾ÈµÈ´Ù. (½ÇÆÐ ÇÑ°É·Î °£ÁÖÇØ¼­, °è¼Ó ¹ß»ýµÇ¾î Queue¿¡ µé¾î°¨)
+			// ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ Queueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÈ´ï¿½. (ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°É·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½, ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ç¾ï¿½ Queueï¿½ï¿½ ï¿½ï¿½î°¨)
 			//WriteToConsole("[PushToActionQueue] Action ID : %s, Action Term : %u, \n", pkNextAction->GetID().c_str(), pkNextAction->GetActionTerm());
 			AddActionEntity(pkNextAction, DIR_NONE);
 			return true;
 		}
 	}
 
-	//	¸ó½ºÅÍÀÇ IDLE ¾×¼ÇÀÌ¶ó¸é, ÇöÀç ¾×¼ÇÀÌ ³¡³­ ´ÙÀ½¿¡ ½ÇÇàÇÏµµ·Ï ÇÑ´Ù(ºÎµå·¯¿î ¿¬°áÀ» À§ÇØ..)
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IDLE ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½(ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½..)
 	//if(m_pkAction && kUnitType != UT_PLAYER)
 	//{
 	//	if(pkNextAction->GetActionStartPos() != NiPoint3::ZERO)
@@ -10468,13 +10468,13 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 	//	}
 	//}
 
-	if(IsUnderMyControl() == false && m_pkAction)
+	if (IsUnderMyControl() == false && m_pkAction)
 	{
-		if(m_pkAction->GetSkillType() == EST_ACTIVE || m_pkAction->GetSkillType() == EST_TOGGLE)
+		if (m_pkAction->GetSkillType() == EST_ACTIVE || m_pkAction->GetSkillType() == EST_TOGGLE)
 		{
-			if(pkNextAction->GetID() == m_pkAction->GetID())
+			if (pkNextAction->GetID() == m_pkAction->GetID())
 			{
-				if((kNextActionParam == ESS_FIRE || kNextActionParam == ESS_TOGGLE_ON) && kNextActionParam != m_pkAction->GetActionParam())
+				if ((kNextActionParam == ESS_FIRE || kNextActionParam == ESS_TOGGLE_ON) && kNextActionParam != m_pkAction->GetActionParam())
 				{
 					CutSkillCasting(m_SkillCastingInfo.m_ulSkillNo);
 					OnCastingCompleted(pkNextAction);
@@ -10485,52 +10485,52 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 		}
 	}
 
-	// ÇöÀç Action¿¡¼­ ´ÙÀ½ ¾×¼ÇÀ¸·Î °¡µµ·Ï FSMÀÌ Çã¶ôÇÑ´Ù¸é
+	// ï¿½ï¿½ï¿½ï¿½ Actionï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ FSMï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½
 	bool bSuccessfulLeave = true;
-	if(m_pkAction)
+	if (m_pkAction)
 	{
 		bSuccessfulLeave = ProcessLeaveCurrentAction(pkNextAction) || (bForceToTransit == true);
-		if(!bSuccessfulLeave)
+		if (!bSuccessfulLeave)
 		{
 			return	false;
 		}
 	}
 
-	if(IsUnderMyControl())
+	if (IsUnderMyControl())
 	{
-		if(bSuccessfulLeave && pkNextAction->GetEnable())
-		{			
-			//	ÀÌ¹Ì Ä³½ºÆÃ ÁßÀÎ ½ºÅ³ÀÌ ÀÖ´Ù¸é, Ä³½ºÆÃÀ» ²÷´Â´Ù.
+		if (bSuccessfulLeave && pkNextAction->GetEnable())
+		{
+			//	ï¿½Ì¹ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½, Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½.
 			CutSkillCasting(m_SkillCastingInfo.m_ulSkillNo);
 		}
 
 		SetActionParam(pkNextAction);
-		kNextActionParam = (ESkillStatus)pkNextAction->GetActionParam();		
+		kNextActionParam = (ESkillStatus)pkNextAction->GetActionParam();
 	}
 
 	bool bSuccessfulEnter = false;
-	if(bSuccessfulLeave)
+	if (bSuccessfulLeave)
 	{
 		bSuccessfulEnter = pkNextAction->EnterFSM(this, pkNextAction) || (bForceToTransit == true);
 	}
 
-	NILOG(PGLOG_LOG,"NextActioin Enter : %d bRet : %d Actor : %s Action : %s,%d,%d,%d,%d\n", bSuccessfulEnter, bSuccessfulLeave, MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
+	NILOG(PGLOG_LOG, "NextActioin Enter : %d bRet : %d Actor : %s Action : %s,%d,%d,%d,%d\n", bSuccessfulEnter, bSuccessfulLeave, MB(GetGuid().str()), pkNextAction->GetID().c_str(), pkNextAction->GetActionNo(), pkNextAction->GetActionInstanceID(), pkNextAction->GetTargetList()->size());
 
-	if(bSuccessfulLeave && bSuccessfulEnter)
+	if (bSuccessfulLeave && bSuccessfulEnter)
 	{
 
 		m_byWeaponAnimFolderNumAtActionStart = m_byMyWeaponAnimFolderNum;
 
-		// ÀÌ ¾×ÅÍ°¡ ³» Å¬¶óÀÌ¾ðÆ®ÀÇ ¾×ÅÍÀÏ °æ¿ì ºê·Îµå Ä³½ºÆÃÇÑ´Ù.
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Îµï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		SetIgonreDamageEffect(pkNextAction);
 
-		if(IsUnderMyControl())
+		if (IsUnderMyControl())
 		{
-			if(pkNextAction->GetActionType() != "EFFECT")
+			if (pkNextAction->GetActionType() != "EFFECT")
 			{
-				if(kNextActionParam == ESS_FIRE && pkNextAction->GetActionOptionEnable(PgAction::AO_NO_BROADCAST) == false)
+				if (kNextActionParam == ESS_FIRE && pkNextAction->GetActionOptionEnable(PgAction::AO_NO_BROADCAST) == false)
 				{
-					StartSkillCoolTime(pkNextAction->GetActionNo());	//	ÄðÅ¸ÀÓ ½ÃÀÛ
+					StartSkillCoolTime(pkNextAction->GetActionNo());	//	ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				}
 
 				StartSkillCasting(pkNextAction->GetActionNo());
@@ -10539,20 +10539,20 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 
 		PlayAnimation(pkNextAction);
 
-		if(m_pkAction)
-		{			
-			// Æ®·£ÁþÀ» ¼º°øÇÏ¸é, ¿¹Àü ¾×¼ÇÀ» »èÁ¦ Å¥¿¡ Ãß°¡ÇÑ´Ù.
+		if (m_pkAction)
+		{
+			// Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¥ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½.
 			g_kActionPool.ReleaseAction(m_pkAction);
 		}
 
-		// ¾×¼ÇÀ» °»½Å.
+		// ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		m_pkAction = pkNextAction;
-		
 
-		// ActionÀ» ºê·ÎµåÄ³½ºÆ®ÇÑ´Ù.
-		if(IsUnderMyControl())
-		{			
-			if(m_pkAction->GetActionType() != "IDLE"
+
+		// Actionï¿½ï¿½ ï¿½ï¿½Îµï¿½Ä³ï¿½ï¿½Æ®ï¿½Ñ´ï¿½.
+		if (IsUnderMyControl())
+		{
+			if (m_pkAction->GetActionType() != "IDLE"
 				&& m_pkAction->GetActionType() != ACTIONTYPE_JOBSKILL
 				)
 			{
@@ -10560,27 +10560,27 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 				ConcilDirection(m_kMovingDir, false);
 			}
 
-			if( (m_pkAction->GetActionOptionEnable(PgAction::AO_NO_BROADCAST) == false && m_pkAction->GetActionType() != "EFFECT") 
+			if ((m_pkAction->GetActionOptionEnable(PgAction::AO_NO_BROADCAST) == false && m_pkAction->GetActionType() != "EFFECT")
 				|| "a_Resurrection_01" == m_pkAction->GetID() || "a_revive" == m_pkAction->GetID()
 				|| lwCommonSkillUtilFunc::IsReActionByTrapSkill(lwAction(m_pkAction))
-				) //ºÎÈ°, Æ®·¦ ½ºÅ³ ÇÇ°Ý ¸®¾×¼ÇÀº ¿¹¿Ü Ã³¸® ÇÑ´Ù.
+				) //ï¿½ï¿½È°, Æ®ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			{
 				//g_kPilotMan.Broadcast(m_pkPilot, m_pkAction, (m_pkAction->CanChangeActorPos() == false));
-				if(IsMyActor() || !IsNowFollowing())
+				if (IsMyActor() || !IsNowFollowing())
 				{
 					g_kPilotMan.Broadcast(m_pkPilot, m_pkAction, false);
 				}
-				
-				//	ÅäÅ¬ ¾×¼ÇÀÏ °æ¿ì ÅäÅ¬ »óÅÂ¸¦ º¯È¯½ÃÅ²´Ù.
+
+				//	ï¿½ï¿½Å¬ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½È¯ï¿½ï¿½Å²ï¿½ï¿½.
 				CSkillDef const* pkSkillDef = m_pkAction->GetSkillDef();
-				if(pkSkillDef)
+				if (pkSkillDef)
 				{
-					// Ä³½ºÆÃÀÌ ¾øÀÌ Áï½Ã ½ÃÀüÀÏ °æ¿ì¿¡¸¸ Åä±Û »óÅÂ·Î ÀüÈ¯ ½ÃÅ²´Ù.
+					// Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½Å²ï¿½ï¿½.
 					if (E_SCAST_INSTANT == pkSkillDef->GetAbil(AT_CASTTYPE))
 					{
-						if(EST_TOGGLE == pkSkillDef->GetType())
+						if (EST_TOGGLE == pkSkillDef->GetType())
 						{
-							ActionToggleStateChange(m_pkAction->GetActionNo(),true);
+							ActionToggleStateChange(m_pkAction->GetActionNo(), true);
 						}
 					}
 				}
@@ -10589,7 +10589,7 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 				// Writing Log
 				std::string kNextActionName;
 				std::string kCurrentActionName;
-				
+
 				if (m_pkAction)
 				{
 					m_pkAction->GetActionName(kCurrentActionName);
@@ -10606,11 +10606,11 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 		}
 
 
-		//	¾Ö´Ï¸ÞÀÌ¼Ç ½ºÇÇµå ¿ø·¡´ë·Î
+		//	ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½Çµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		SetAnimSpeedInPeriod(1, 0);
 
 		//
-		if(m_pkAction->GetActionType()=="IDLE" || m_pkAction->GetActionType()=="MOVE")
+		if (m_pkAction->GetActionType() == "IDLE" || m_pkAction->GetActionType() == "MOVE")
 		{
 			SkillSetAction().NextReservedAction(this);
 		}
@@ -10624,38 +10624,38 @@ bool PgActor::DoAction(PgAction* pkNextAction, bool bForceToTransit)
 	return true;
 }
 
-void PgActor::CancelAction(int iActionID, int iActionInstanceID, char const *pcNextActionName, bool bToggleCancel)
+void PgActor::CancelAction(int iActionID, int iActionInstanceID, char const* pcNextActionName, bool bToggleCancel)
 {
-	_PgOutputDebugString("[PgActor::CancelAction] Actor:%s(%s) ActionID:%d ActionInstanceID:%d NextActionName:%s\n", MB(GetPilot()->GetName()),MB(GetPilotGuid().str()),iActionID,iActionInstanceID,pcNextActionName);
+	_PgOutputDebugString("[PgActor::CancelAction] Actor:%s(%s) ActionID:%d ActionInstanceID:%d NextActionName:%s\n", MB(GetPilot()->GetName()), MB(GetPilotGuid().str()), iActionID, iActionInstanceID, pcNextActionName);
 
-	if(m_pkAction)
+	if (m_pkAction)
 	{
 		PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.CancelAction"), g_pkApp->GetFrameCount()));
-		if(m_pkAction->GetActionNo() == iActionID && m_pkAction->GetActionInstanceID() == iActionInstanceID)
+		if (m_pkAction->GetActionNo() == iActionID && m_pkAction->GetActionInstanceID() == iActionInstanceID)
 		{
-			//	ÇöÀç ¾×¼ÇÀ» °­Á¦·Î Áö¿ö¹ö¸°´Ù.
+			//	ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 			m_pkAction->LeaveFSM(this, m_pkAction, true);
 			m_pkAction->CleanUpFSM(this, m_pkAction);
 
 			g_kActionPool.ReleaseAction(m_pkAction);
 			m_pkAction = NULL;
 
-			//	»õ·Î¿î ¾×¼ÇÀ¸·Î °­Á¦ Æ®·£Áþ!!!
-			bool bResult = TransitAction(pcNextActionName, true,0,DIR_NONE,true);
+			//	ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½!!!
+			bool bResult = TransitAction(pcNextActionName, true, 0, DIR_NONE, true);
 			PG_ASSERT_LOG(m_pkAction != NULL);
 
 		}
 
-		if(bToggleCancel)
+		if (bToggleCancel)
 		{
-			// Åä±ÛÀÎ °æ¿ì ÇöÀçÀÇ ¾×¼Ç°ú °°Áö ¾ÊÀ¸¹Ç·Î ÀÌ·¸°Ô Ã³¸®ÇØÁÖ¾î¾ß ÇÑ´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			GET_DEF(CSkillDefMgr, kSkillDefMgr);
 			CSkillDef const* pkSkill = kSkillDefMgr.GetDef(iActionID);
-			if(pkSkill)
+			if (pkSkill)
 			{
-				if(EST_TOGGLE == pkSkill->GetType())
+				if (EST_TOGGLE == pkSkill->GetType())
 				{
-					if(GetActionToggleState(iActionID))
+					if (GetActionToggleState(iActionID))
 					{
 						ActionToggleStateChange(iActionID, false);
 					}
@@ -10669,7 +10669,7 @@ void PgActor::CancelAction(int iActionID, int iActionInstanceID, char const *pcN
 void PgActor::AddChangeAction(std::string const& rkFromAction, std::string const& rkToAction)
 {
 	std::pair<CONT_CHANGE_ACTION::iterator, bool> kRet = m_kContChangeAction.insert(std::make_pair(rkFromAction, rkToAction));
-	if(false==kRet.second)
+	if (false == kRet.second)
 	{
 		kRet.first->second = rkToAction;
 	}
@@ -10682,10 +10682,10 @@ void PgActor::DelChangeAction(std::string const& rkActionName)
 
 char const* PgActor::GetChangeAction(char const* pcActionName)const
 {
-	if(pcActionName)
+	if (pcActionName)
 	{
 		CONT_CHANGE_ACTION::const_iterator it = m_kContChangeAction.find(pcActionName);
-		if(it!=m_kContChangeAction.end())
+		if (it != m_kContChangeAction.end())
 		{
 			return (*it).second.c_str();
 		}
@@ -10696,12 +10696,12 @@ char const* PgActor::GetChangeAction(char const* pcActionName)const
 PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bool bEnable, NiPoint3* pkActionStartPos, BYTE byDirection, int iActionNo)
 {
 	char const* pkChangeAction = GetChangeAction(pcNextActionName);
-	if(!pkChangeAction)
+	if (!pkChangeAction)
 	{
 		return NULL;
 	}
 
-	char	strNextActionName[100] = {0, };
+	char	strNextActionName[100] = { 0, };
 	strncpy_s(strNextActionName, 100, pkChangeAction, 99);
 
 	//_PgOutputDebugString("CreateActionForTransitAction pcNextActionName: %s \n",pcNextActionName);
@@ -10722,45 +10722,45 @@ PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bo
 	m_dwLastTransitFrame = g_pkApp->GetFrameCount();
 #endif
 
-	PgAction *pkAction = g_kActionPool.CreateAction(strNextActionName);
-	if(!pkAction)
+	PgAction* pkAction = g_kActionPool.CreateAction(strNextActionName);
+	if (!pkAction)
 	{
-//		PgError1("[PgActor::CreateActionForTransitAction] : Failed to creating Action - %s", pcNextActionName);
+		//		PgError1("[PgActor::CreateActionForTransitAction] : Failed to creating Action - %s", pcNextActionName);
 		return NULL;
 	}
 
 	pkAction->SetEnable(bEnable);
-	pkAction->SetActionParam(ESS_FIRE);	//	µðÆúÆ® °ª
+	pkAction->SetActionParam(ESS_FIRE);	//	ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½
 	pkAction->SetDirection(byDirection);
-	
+
 	bool bIsPet = false;
 	bool bIsMySubPlayer = false;
 	bool bIsSubPlayer = false;
 	bool bIsEntity = false;
 	PgPilot* pkPilot = GetPilot();
-	if(pkPilot)
+	if (pkPilot)
 	{
 		CUnit* pkUnit = pkPilot->GetUnit();
-		if(pkUnit)
+		if (pkUnit)
 		{
-			switch(pkUnit->UnitType())
+			switch (pkUnit->UnitType())
 			{
-			case UT_PET :
-				{
-					bIsPet = true;
-				}break;
+			case UT_PET:
+			{
+				bIsPet = true;
+			}break;
 			case UT_SUB_PLAYER:
-				{
-					bIsSubPlayer = true;
-				}break;
+			{
+				bIsSubPlayer = true;
+			}break;
 			case UT_ENTITY:
-				{
-					bIsEntity = true;
-				}break;
+			{
+				bIsEntity = true;
+			}break;
 			}
-			
+
 			CSkill* pkSkill = pkUnit->GetSkill();
-			if(pkSkill)
+			if (pkSkill)
 			{
 				pkAction->SetSkillCoolTime(pkSkill->GetSkillCoolTime());
 				pkAction->SetSkillCoolTimeRate(pkSkill->GetSkillCoolTimeRate());
@@ -10769,33 +10769,33 @@ PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bo
 		}
 	}
 
-	if(IsUnderMyControl())
+	if (IsUnderMyControl())
 	{
-		//	³» ¾×ÅÍ°¡ ÇÑ ¾×¼ÇÀÏ °æ¿ì, ¾×¼Ç ÀÎ½ºÅÏ½º ID ¸¦ ÇÒ´çÇÑ´Ù.
+		//	ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½×¼ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ID ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½Ñ´ï¿½.
 		pkAction->SetActionInstanceID();
-		if(bIsSubPlayer)
+		if (bIsSubPlayer)
 		{
 			bIsMySubPlayer = true;
 		}
 	}
 
-	if(IsMyActor()
+	if (IsMyActor()
 		|| bIsMySubPlayer)
 	{
-		if(pkAction->GetSkillType() == EST_ACTIVE || pkAction->GetSkillType() == EST_TOGGLE)
+		if (pkAction->GetSkillType() == EST_ACTIVE || pkAction->GetSkillType() == EST_TOGGLE)
 		{
 			int const iKeySkillNo = g_kSkillTree.GetKeySkillNo(pkAction);
-			PgSkillTree::stTreeNode *pkNode = g_kSkillTree.GetNode(iKeySkillNo);
-			if(pkNode)
+			PgSkillTree::stTreeNode* pkNode = g_kSkillTree.GetNode(iKeySkillNo);
+			if (pkNode)
 			{
 				int iActionNo = pkNode->GetOriginalSkillNo();
 
-				// ¾ÆÀÌÅÛ¿¡ ÀÇÇØ¼­ ½ºÅ³ÀÌ ¿À¹ö·¹º§ µÇ´Â °æ¿ì
-				if(GetPilot() && GetPilot()->GetUnit())
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½
+				if (GetPilot() && GetPilot()->GetUnit())
 				{
 					PgPlayer* pkPlayer = static_cast<PgPlayer*>(GetPilot()->GetUnit());
 					int const iLearnedSkill = pkPlayer->GetMySkill()->GetLearnedSkill(iActionNo, true);
-					if(iLearnedSkill > iActionNo)
+					if (iLearnedSkill > iActionNo)
 					{
 						iActionNo = iLearnedSkill;
 					}
@@ -10803,33 +10803,33 @@ PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bo
 
 				pkAction->SetActionNo(iActionNo);
 			}
-			else // Skill Tree¿¡¼­ Ã£Áö ¸øÇÒ °æ¿ì Cast ¿Í Fire·Î ³ª´©¾îÁø ½ºÅ³ÀÏ °æ¿ì°¡ ÀÖ´Ù.
+			else // Skill Treeï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Cast ï¿½ï¿½ Fireï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ì°¡ ï¿½Ö´ï¿½.
 			{
-				if(iActionNo > 0 && iActionNo != pkAction->GetActionNo())
+				if (iActionNo > 0 && iActionNo != pkAction->GetActionNo())
 				{
 					pkAction->SetActionNo(iActionNo);
 				}
 
 				// Ex) a_Three Way_Cast / a_Three Way_Fire / a_Rapidly Shot_Cast / a_Rapidly Shot_Fire
-				// _Fire ·ù ½ºÅ³¿¡ ¿¬°áµÈ _Cast ½ºÅ³ÀÇ ID¸¦ ¾ò¾î¼­ _FireÀÇ ½ÇÁ¦ ·¹º§¿¡ ÇØ´çÇÏ´Â ID¸¦ ¼¼ÆÃÇÑ´Ù.
+				// _Fire ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ _Cast ï¿½ï¿½Å³ï¿½ï¿½ IDï¿½ï¿½ ï¿½ï¿½î¼­ _Fireï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 				int const iCastSkillNo = pkAction->GetAbil(AT_PARENT_CAST_SKILL_NO);
-				PgSkillTree::stTreeNode *pkNode2 = g_kSkillTree.GetNode(iCastSkillNo);
-				if(pkNode2)
+				PgSkillTree::stTreeNode* pkNode2 = g_kSkillTree.GetNode(iCastSkillNo);
+				if (pkNode2)
 				{
 					CSkillDef const* pkDef = pkNode2->GetSkillDef();
-					if(pkDef)
+					if (pkDef)
 					{
 						int iActionNo = pkDef->No();
 						int iLevel = 0;
 
-						// ¾ÆÀÌÅÛ¿¡ ÀÇÇØ¼­ ½ºÅ³ÀÌ ¿À¹ö·¹º§ µÇ´Â °æ¿ì
-						if(GetPilot() && GetPilot()->GetUnit())
+						// ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½
+						if (GetPilot() && GetPilot()->GetUnit())
 						{
 							PgPlayer* pkPlayer = static_cast<PgPlayer*>(GetPilot()->GetUnit());
 							iActionNo = pkPlayer->GetMySkill()->GetLearnedSkill(iActionNo, true);
 							GET_DEF(CSkillDefMgr, kSkillDefMgr);
 							CSkillDef const* pkDef2 = kSkillDefMgr.GetDef(iActionNo);
-							if(pkDef2)
+							if (pkDef2)
 							{
 								iLevel = pkDef2->GetAbil(AT_LEVEL);
 							}
@@ -10849,24 +10849,24 @@ PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bo
 			}
 		}
 	}
-	else if(IsUnderMyControl())
+	else if (IsUnderMyControl())
 	{
 		// Ex) a_Three Way_Cast / a_Three Way_Fire / a_Rapidly Shot_Cast / a_Rapidly Shot_Fire
-		// ¼³Ä¡·ù ½ºÅ³Àº ÀÌÂÊÀ» Å¸°Ô µÈ´Ù.
+		// ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½È´ï¿½.
 		int const iCastSkillNo = pkAction->GetAbil(AT_PARENT_CAST_SKILL_NO);
-		PgSkillTree::stTreeNode *pkNode2 = g_kSkillTree.GetNode(iCastSkillNo);
-		if(pkNode2)
+		PgSkillTree::stTreeNode* pkNode2 = g_kSkillTree.GetNode(iCastSkillNo);
+		if (pkNode2)
 		{
 			const CSkillDef* pkDef = pkNode2->GetSkillDef();
-			if(pkDef)
+			if (pkDef)
 			{
 				PgPlayer* pkPlayer = g_kPilotMan.GetPlayerUnit();
-				if( !pkPlayer )
+				if (!pkPlayer)
 				{
 					return NULL;
 				}
 				PgMySkill* pkSkill = pkPlayer->GetMySkill();
-				if( !pkSkill )
+				if (!pkSkill)
 				{
 					return NULL;
 				}
@@ -10875,7 +10875,7 @@ PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bo
 				pkAction->SetActionNo(pkAction->GetActionNo() + iLevel + iExtendLevel - 1);
 			}
 		}
-		else if( ( bIsEntity || bIsPet)	// Æå ½ºÅ³ÀÌ°Å³ª, ¼ÒÈ¯Ã¼ »ç¿ë ÇÏ´Â ½ºÅ³ÀÌ ¹è¿ìÁö ¾Ê¾Æµµ µÇ´Â ½ºÅ³ÀÏ °æ¿ì
+		else if ((bIsEntity || bIsPet)	// ï¿½ï¿½ ï¿½ï¿½Å³ï¿½Ì°Å³ï¿½, ï¿½ï¿½È¯Ã¼ ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æµï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½
 			&& iActionNo
 			)
 		{
@@ -10884,17 +10884,17 @@ PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bo
 	}
 	else
 	{
-		if(iActionNo)
+		if (iActionNo)
 		{
 			pkAction->SetActionNo(iActionNo);
 		}
 	}
 
 	PgActionTargetList	kTargetList;
-	kTargetList.SetActionInfo(GetPilotGuid(),pkAction->GetActionInstanceID(),pkAction->GetActionNo(),pkAction->GetTimeStamp());
+	kTargetList.SetActionInfo(GetPilotGuid(), pkAction->GetActionInstanceID(), pkAction->GetActionNo(), pkAction->GetTimeStamp());
 	pkAction->SetTargetList(kTargetList);
 
-	if(pkActionStartPos)
+	if (pkActionStartPos)
 	{
 		pkAction->SetActionStartPos(*pkActionStartPos);
 	}
@@ -10902,22 +10902,22 @@ PgAction* PgActor::CreateActionForTransitAction(char const* pcNextActionName, bo
 	return	pkAction;
 }
 
-bool PgActor::TransitAction(char const *pcNextActionName, bool bEnable, NiPoint3 *pkActionStartPos, BYTE byDirection,bool bForceToTransit)
+bool PgActor::TransitAction(char const* pcNextActionName, bool bEnable, NiPoint3* pkActionStartPos, BYTE byDirection, bool bForceToTransit)
 {
 	NILOG(PGLOG_LOG, "[PgActor] %s actor TransitAction(%s,%d)\n", MB(GetGuid().str()), pcNextActionName, bEnable);
 	//_PgOutputDebugString("TransitAction pcNextActionName:%s\n",pcNextActionName);
 
-	PgAction	*pkAction = CreateActionForTransitAction(pcNextActionName,bEnable,pkActionStartPos,byDirection);
-	if(!pkAction)
+	PgAction* pkAction = CreateActionForTransitAction(pcNextActionName, bEnable, pkActionStartPos, byDirection);
+	if (!pkAction)
 	{
 		return	false;
 	}
 
-	return ProcessAction(pkAction,IsMyActor(),bForceToTransit);
+	return ProcessAction(pkAction, IsMyActor(), bForceToTransit);
 }
-PgAction*	PgActor::ReserveTransitAction(PgAction *pkNextAction)
+PgAction* PgActor::ReserveTransitAction(PgAction* pkNextAction)
 {
-	if(!pkNextAction)
+	if (!pkNextAction)
 	{
 		return	NULL;
 	}
@@ -10926,19 +10926,19 @@ PgAction*	PgActor::ReserveTransitAction(PgAction *pkNextAction)
 
 	return	pkNextAction;
 }
-PgAction*	PgActor::ReserveTransitAction(int iActionNo, BYTE byDirection)
+PgAction* PgActor::ReserveTransitAction(int iActionNo, BYTE byDirection)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ReserveTransitAction"), g_pkApp->GetFrameCount()));
 	//_PgOutputDebugString("[PgActor.ReserveTransitAction] Reserved Action : %s\n", kNextAction);
 
 	GET_DEF(CSkillDefMgr, kSkillDefMgr);
 	std::wstring wActionID = kSkillDefMgr.GetActionName(iActionNo);
-	if(wActionID.length() == 0) return NULL;
+	if (wActionID.length() == 0) return NULL;
 
 	std::string kActionID(MB(wActionID));
 
-	PgAction	*pkAction = CreateActionForTransitAction(kActionID.c_str(),true,NULL,byDirection, iActionNo);
-	if(pkAction)
+	PgAction* pkAction = CreateActionForTransitAction(kActionID.c_str(), true, NULL, byDirection, iActionNo);
+	if (pkAction)
 	{
 		ReserveTransitAction(pkAction);
 	}
@@ -10946,12 +10946,12 @@ PgAction*	PgActor::ReserveTransitAction(int iActionNo, BYTE byDirection)
 
 	return	pkAction;
 }
-PgAction* PgActor::ReserveTransitAction(char const *kNextAction, BYTE byDirection)
+PgAction* PgActor::ReserveTransitAction(char const* kNextAction, BYTE byDirection)
 {
 #ifndef EXTERNAL_RELEASE
-	if(g_pkApp->IsSingleMode())
+	if (g_pkApp->IsSingleMode())
 	{
-		PgAction	*pkAction = CreateActionForTransitAction(kNextAction,true,NULL,byDirection);
+		PgAction* pkAction = CreateActionForTransitAction(kNextAction, true, NULL, byDirection);
 		ReserveTransitAction(pkAction);
 
 		return	pkAction;
@@ -10960,54 +10960,54 @@ PgAction* PgActor::ReserveTransitAction(char const *kNextAction, BYTE byDirectio
 
 	GET_DEF(CSkillDefMgr, kSkillDefMgr);
 	int	iActionID = kSkillDefMgr.GetSkillNoFromActionName(UNI(kNextAction));
-	if(iActionID == 0)
+	if (iActionID == 0)
 	{
-		PgAction	*pkAction = CreateActionForTransitAction(kNextAction,true,NULL,byDirection);
+		PgAction* pkAction = CreateActionForTransitAction(kNextAction, true, NULL, byDirection);
 		ReserveTransitAction(pkAction);
 
 		return	pkAction;
 	}
 
-	return	ReserveTransitAction(iActionID,byDirection);
+	return	ReserveTransitAction(iActionID, byDirection);
 }
 
 void PgActor::ClearReservedAction()
 {
-	for(ActionList::iterator itor = m_kReservedTransitAction.begin(); itor != m_kReservedTransitAction.end(); ++itor)
+	for (ActionList::iterator itor = m_kReservedTransitAction.begin(); itor != m_kReservedTransitAction.end(); ++itor)
 	{
-		PgAction *pkAction = *itor;
+		PgAction* pkAction = *itor;
 		g_kActionPool.ReleaseAction(pkAction);
 	}
-	
+
 	m_kReservedTransitAction.clear();
 }
 
-PgAction *PgActor::GetReservedTransitAction()
+PgAction* PgActor::GetReservedTransitAction()
 {
-	if(m_kReservedTransitAction.size() == 0)
+	if (m_kReservedTransitAction.size() == 0)
 	{
 		return	NULL;
 	}
-	PgAction	*pkLastReservedAction = m_kReservedTransitAction.back();
+	PgAction* pkLastReservedAction = m_kReservedTransitAction.back();
 	return pkLastReservedAction;
 }
 
 bool PgActor::DoReservedTransitAction()
 {
-	if(m_kReservedTransitAction.size() == 0)
+	if (m_kReservedTransitAction.size() == 0)
 	{
 		return	true;
 	}
 
 	ActionList kTempList;
-	kTempList.swap( m_kReservedTransitAction );
-//	ActionList	kTempList(m_kReservedTransitAction);
-//	m_kReservedTransitAction.clear();
+	kTempList.swap(m_kReservedTransitAction);
+	//	ActionList	kTempList(m_kReservedTransitAction);
+	//	m_kReservedTransitAction.clear();
 
-	for(ActionList::iterator itor = kTempList.begin(); itor != kTempList.end(); ++itor)
+	for (ActionList::iterator itor = kTempList.begin(); itor != kTempList.end(); ++itor)
 	{
-		PgAction *pkAction = *itor;
-		ProcessAction(pkAction,IsMyActor());
+		PgAction* pkAction = *itor;
+		ProcessAction(pkAction, IsMyActor());
 	}
 
 	return	true;
@@ -11016,16 +11016,16 @@ bool PgActor::DoReservedTransitAction()
 BM::GUID PgActor::CreateTempAction(int const iActionNo)
 {
 	GET_DEF(CSkillDefMgr, kSkillDefMgr);
-	std::wstring const ActionID( kSkillDefMgr.GetActionName(iActionNo) );
-	if(true == ActionID.empty()) return BM::GUID::NullData();
+	std::wstring const ActionID(kSkillDefMgr.GetActionName(iActionNo));
+	if (true == ActionID.empty()) return BM::GUID::NullData();
 
-	if(PgAction * pkAction = g_kActionPool.CreateAction(MB(ActionID)))
+	if (PgAction* pkAction = g_kActionPool.CreateAction(MB(ActionID)))
 	{
 		BM::GUID kGuid;
 		kGuid.Generate();
 
 		std::pair<CONT_TEMP_ACTION::iterator, bool> kRet = m_kContTempAction.insert(std::make_pair(kGuid, pkAction));
-		if(kRet.second)
+		if (kRet.second)
 		{
 			return kGuid;
 		}
@@ -11040,7 +11040,7 @@ BM::GUID PgActor::CreateTempAction(int const iActionNo)
 PgAction* PgActor::GetTempAction(BM::GUID const& kActionGuid)
 {
 	CONT_TEMP_ACTION::iterator it = m_kContTempAction.find(kActionGuid);
-	if(it != m_kContTempAction.end())
+	if (it != m_kContTempAction.end())
 	{
 		return (*it).second;
 	}
@@ -11050,7 +11050,7 @@ PgAction* PgActor::GetTempAction(BM::GUID const& kActionGuid)
 void PgActor::RemoveTempAction(BM::GUID const& kActionGuid)
 {
 	CONT_TEMP_ACTION::iterator it = m_kContTempAction.find(kActionGuid);
-	if(it != m_kContTempAction.end())
+	if (it != m_kContTempAction.end())
 	{
 		g_kActionPool.ReleaseAction((*it).second);
 		m_kContTempAction.erase(it);
@@ -11059,7 +11059,7 @@ void PgActor::RemoveTempAction(BM::GUID const& kActionGuid)
 
 void PgActor::ClearTempAction()
 {
-	for(CONT_TEMP_ACTION::iterator it = m_kContTempAction.begin(); it != m_kContTempAction.end(); ++it)
+	for (CONT_TEMP_ACTION::iterator it = m_kContTempAction.begin(); it != m_kContTempAction.end(); ++it)
 	{
 		g_kActionPool.ReleaseAction((*it).second);
 	}
@@ -11069,7 +11069,7 @@ void PgActor::ClearTempAction()
 bool PgActor::PlayNext()
 {
 	// short circuit evaluation
-	if(!m_pkAction || !m_pkAction->NextSlot())
+	if (!m_pkAction || !m_pkAction->NextSlot())
 	{
 		return false;
 	}
@@ -11080,7 +11080,7 @@ bool PgActor::PlayNext()
 bool PgActor::PlayPrev()
 {
 	// short circuit evaluation
-	if(!m_pkAction || !m_pkAction->PrevSlot())
+	if (!m_pkAction || !m_pkAction->PrevSlot())
 	{
 		return false;
 	}
@@ -11091,31 +11091,31 @@ bool PgActor::PlayPrev()
 bool PgActor::PlayCurrentSlot(bool bNoRandom)
 {
 	std::string kSlotName;
-	
-	if(!m_pkAction || !m_pkAction->GetActionName(kSlotName))
-	{
-		return false;
-	}
-	
-	if( !SetTargetAnimation(kSlotName,true,bNoRandom) )
+
+	if (!m_pkAction || !m_pkAction->GetActionName(kSlotName))
 	{
 		return false;
 	}
 
-	//	¾×¼ÇÀÌ °ø¼Ó ¾îºôÀÇ ¿µÇâÀ» ¹Þ´Â ¾×¼ÇÀÌ¶ó¸é, °ø¼ÓÀ» Àû¿ëÇÏ¿© ¾Ö´Ï¸ÞÀÌ¼Ç ½ºÇÇµå¸¦ º¯°æÇÑ´Ù.
-	if(m_pkAction->GetAbil(AT_APPLY_ATTACK_SPEED) == 1)
+	if (!SetTargetAnimation(kSlotName, true, bNoRandom))
 	{
-		float	fAttackSpeed = GetPilot()->GetAbil(AT_C_ATTACK_SPEED)/ABILITY_RATE_VALUE_FLOAT;
-		SetAnimSpeed(GetAnimSpeed()*fAttackSpeed);
+		return false;
+	}
+
+	//	ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½Çµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	if (m_pkAction->GetAbil(AT_APPLY_ATTACK_SPEED) == 1)
+	{
+		float	fAttackSpeed = GetPilot()->GetAbil(AT_C_ATTACK_SPEED) / ABILITY_RATE_VALUE_FLOAT;
+		SetAnimSpeed(GetAnimSpeed() * fAttackSpeed);
 	}
 	return true;
 }
 
 void PgActor::SetNormalAttackActionID(std::string const kActionID)
 {
-	if(GetPilot())
+	if (GetPilot())
 	{
-		if(kActionID.empty()) // remove key
+		if (kActionID.empty()) // remove key
 		{
 			GetPilot()->RemoveActionKey(ACTIONKEY_ATTACK);
 		}
@@ -11127,45 +11127,45 @@ void PgActor::SetNormalAttackActionID(std::string const kActionID)
 }
 char const* PgActor::GetNormalAttackActionID()
 {
-	if(GetPilot())
-	{	
-		char const *ActionID = GetPilot()->FindActionID(ACTIONKEY_ATTACK);
-		if(ActionID) return ActionID;
+	if (GetPilot())
+	{
+		char const* ActionID = GetPilot()->FindActionID(ACTIONKEY_ATTACK);
+		if (ActionID) return ActionID;
 	}
 
 	return "";
 }
 
-bool	PgActor::AddDropItem(PgDropBox *pkItemBox)	//	Ãß°¡ÇÒ ¼ö ÀÖÀ¸¸é true ¾Æ´Ï¸é false
+bool	PgActor::AddDropItem(PgDropBox* pkItemBox)	//	ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½Æ´Ï¸ï¿½ false
 {
-	if(!pkItemBox || !pkItemBox->GetPilot() || !pkItemBox->GetPilot()->GetUnit())
+	if (!pkItemBox || !pkItemBox->GetPilot() || !pkItemBox->GetPilot()->GetUnit())
 	{
 		return false;
 	}
 
-	//	ÇöÀç HP°¡ 0 ÀÌ¸é Ãß°¡ÇÒ ¼ö ¾ø´Ù.(´Ü, Á¤¿¹´Â ¿¹¿Ü)
-	if(GetPilot())
+	//	ï¿½ï¿½ï¿½ï¿½ HPï¿½ï¿½ 0 ï¿½Ì¸ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.(ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+	if (GetPilot())
 	{
-		if(GetPilot()->GetAbil(AT_GRADE) != EMGRADE_ELITE && GetPilot()->GetAbil(AT_HP) == 0)
+		if (GetPilot()->GetAbil(AT_GRADE) != EMGRADE_ELITE && GetPilot()->GetAbil(AT_HP) == 0)
 		{
 			return false;
 		}
 	}
 
-	//	ÀÌ¹Ì ÀÖ´Â GUID ÀÎÁö Ã£¾Æº¸ÀÚ.
-	stActorDropItemInfo	*pkDropItemInfo = NULL;
-	for(ActorDropItemInfoList::iterator itor = m_ActorDropItemInfoList.begin(); itor != m_ActorDropItemInfoList.end(); ++itor)
+	//	ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ GUID ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½Æºï¿½ï¿½ï¿½.
+	stActorDropItemInfo* pkDropItemInfo = NULL;
+	for (ActorDropItemInfoList::iterator itor = m_ActorDropItemInfoList.begin(); itor != m_ActorDropItemInfoList.end(); ++itor)
 	{
 		pkDropItemInfo = &(*itor);
 
-		if(pkDropItemInfo->m_kItemGUID == pkItemBox->GetGuid()) { return false; }
+		if (pkDropItemInfo->m_kItemGUID == pkItemBox->GetGuid()) { return false; }
 	}
-	PgGroundItemBox const *pkGroundItem = dynamic_cast<PgGroundItemBox*>(pkItemBox->GetPilot()->GetUnit());
-	if(pkGroundItem)
+	PgGroundItemBox const* pkGroundItem = dynamic_cast<PgGroundItemBox*>(pkItemBox->GetPilot()->GetUnit());
+	if (pkGroundItem)
 	{
-		pkItemBox->SetHide(true);	//º¯È¯ °¡´ÉÇÒ ¶§¸¸ ¼û±âÀÚ ¿¡·¯ÀÏ¶§ ¼û°Ü¹ö¸®¸é ¾ÈµÈ´Ù.
+		pkItemBox->SetHide(true);	//ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÈ´ï¿½.
 
-		//	»õ·Î Ãß°¡ÇÑ´Ù.
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½.
 		stActorDropItemInfo	kNewInfo;
 		kNewInfo.m_kItemGUID = pkItemBox->GetGuid();
 		kNewInfo.m_iActionInstanceID = pkGroundItem->ActionInstanceID();
@@ -11177,37 +11177,37 @@ bool	PgActor::AddDropItem(PgDropBox *pkItemBox)	//	Ãß°¡ÇÒ ¼ö ÀÖÀ¸¸é true ¾Æ´Ï¸é 
 	return	false;
 }
 
-void	PgActor::DoDropItems(int iActionInstanceID,int iReqCount,float fJumpHeight)	//	iActionInstanceID ¿¡ ÇØ´çÇÏ´Â ¾ÆÀÌÅÛµéÀ» ¶³±º´Ù. -1 ÀÏ °æ¿ì ¸ðµç ¾ÆÀÌÅÛÀ» ¶³±º´Ù. 
+void	PgActor::DoDropItems(int iActionInstanceID, int iReqCount, float fJumpHeight)	//	iActionInstanceID ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. -1 ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. 
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return;
 	}
 
-	PgDropBox	*pkDropBox = NULL;
-	stActorDropItemInfo	*pkDropItemInfo = NULL;
+	PgDropBox* pkDropBox = NULL;
+	stActorDropItemInfo* pkDropItemInfo = NULL;
 	int	iCount = 0;
-	for(ActorDropItemInfoList::iterator itor = m_ActorDropItemInfoList.begin(); itor != m_ActorDropItemInfoList.end();)
+	for (ActorDropItemInfoList::iterator itor = m_ActorDropItemInfoList.begin(); itor != m_ActorDropItemInfoList.end();)
 	{
 		pkDropItemInfo = &(*itor);
 
-		if(-1 == iActionInstanceID || iActionInstanceID >= pkDropItemInfo->m_iActionInstanceID)
+		if (-1 == iActionInstanceID || iActionInstanceID >= pkDropItemInfo->m_iActionInstanceID)
 		{
 			pkDropBox = (PgDropBox*)g_pkWorld->FindObject(pkDropItemInfo->m_kItemGUID);
-			if(!pkDropBox)
+			if (!pkDropBox)
 			{
 				++itor;
 				continue;
 			}
-			
+
 			//pkDropBox->StartJump(5.0f);
-			pkDropBox->SetOfferer(GetGuid(), GetWorldTranslate(),fJumpHeight);
+			pkDropBox->SetOfferer(GetGuid(), GetWorldTranslate(), fJumpHeight);
 			pkDropBox->SetHide(false);
 
 			itor = m_ActorDropItemInfoList.erase(itor);
 
 			++iCount;
-			if(iReqCount >0 && iCount == iReqCount)
+			if (iReqCount > 0 && iCount == iReqCount)
 			{
 				return;
 			}
@@ -11220,19 +11220,19 @@ void	PgActor::DoDropItems(int iActionInstanceID,int iReqCount,float fJumpHeight)
 
 void PgActor::CopyEquipItem(PgActor* pkSourceActor)
 {
-	if( !pkSourceActor )
+	if (!pkSourceActor)
 	{
 		return;
 	}
 
 	PgPilot* pkPilot = pkSourceActor->GetPilot();
-	if( !pkPilot )
+	if (!pkPilot)
 	{
 		return;
 	}
 
 	PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkPilot->GetUnit());
-	if( !pkPlayer )
+	if (!pkPlayer)
 	{
 		return;
 	}
@@ -11243,63 +11243,63 @@ void PgActor::CopyEquipItem(PgActor* pkSourceActor)
 	GET_DEF(CItemDefMgr, kItemDefMgr);
 
 	CUnit* pkUnit = pkPilot->GetUnit();
-	PgInventory *pkInven = pkPlayer->GetInven();
-	if( !pkInven )
+	PgInventory* pkInven = pkPlayer->GetInven();
+	if (!pkInven)
 	{
 		return;
 	}
 
 	PgOptionUtil::SClientDWORDOption const kOption(pkPilot->GetAbil(AT_CLIENT_OPTION_SAVE));
-	for( int iCur = 0; EQUIP_POS_MAX > iCur ; ++iCur )
+	for (int iCur = 0; EQUIP_POS_MAX > iCur; ++iCur)
 	{
 		PgBase_Item kItem;
 
 		SItemPos const kCashItemPos(IT_FIT_CASH, iCur);
-		if( S_OK == pkInven->GetItem(kCashItemPos, kItem)
-		&&	false == kItem.IsUseTimeOut()
-		&&	!kOption.IsHideCashInvenPos(static_cast< EEquipPos >(iCur)) )
-		{//! Ä³½¬ ¾ÆÀÌÅÛ º¸ÀÓ
-			CItemDef const *pkItemDef = kItemDefMgr.GetDef(kItem.ItemNo());
-			if( pkItemDef )
+		if (S_OK == pkInven->GetItem(kCashItemPos, kItem)
+			&& false == kItem.IsUseTimeOut()
+			&& !kOption.IsHideCashInvenPos(static_cast<EEquipPos>(iCur)))
+		{//! Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			CItemDef const* pkItemDef = kItemDefMgr.GetDef(kItem.ItemNo());
+			if (pkItemDef)
 			{
-				eEquipLimit const eLimit = static_cast< eEquipLimit >(pkItemDef->GetAbil(AT_EQUIP_LIMIT));
+				eEquipLimit const eLimit = static_cast<eEquipLimit>(pkItemDef->GetAbil(AT_EQUIP_LIMIT));
 				AddToDefaultItem(eLimit, kItem.ItemNo(), &kItem.EnchantInfo());
 			}
 		}
 		else
 		{
 			SItemPos const kItemPos(IT_FIT, iCur);
-			if( S_OK == pkInven->GetItem(kItemPos, kItem) 
-				&& !kOption.IsHideEquipInvenPos(static_cast< EEquipPos >(iCur)) )
-			{//! Àåºñ ¾ÆÀÌÅÛ º¸ÀÓ
-				CItemDef const *pkItemDef = kItemDefMgr.GetDef(kItem.ItemNo());
-				if( pkItemDef )
+			if (S_OK == pkInven->GetItem(kItemPos, kItem)
+				&& !kOption.IsHideEquipInvenPos(static_cast<EEquipPos>(iCur)))
+			{//! ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				CItemDef const* pkItemDef = kItemDefMgr.GetDef(kItem.ItemNo());
+				if (pkItemDef)
 				{
-					eEquipLimit const eLimit = static_cast< eEquipLimit >(pkItemDef->GetAbil(AT_EQUIP_LIMIT));
+					eEquipLimit const eLimit = static_cast<eEquipLimit>(pkItemDef->GetAbil(AT_EQUIP_LIMIT));
 					AddToDefaultItem(eLimit, kItem.ItemNo(), &kItem.EnchantInfo());
 				}
 			}
 			else
 			{
-				switch( iCur )
+				switch (iCur)
 				{
-				case EQUIP_POS_SHIRTS:		{ AddToDefaultItem(EQUIP_LIMIT_SHIRTS, kInfo.iJacket); }break;
-				case EQUIP_POS_PANTS:		{ AddToDefaultItem(EQUIP_LIMIT_PANTS, kInfo.iPants); }break;
-				case EQUIP_POS_BOOTS:		{ AddToDefaultItem(EQUIP_LIMIT_BOOTS, kInfo.iShoes); }break;
-				case EQUIP_POS_GLOVE:		{ AddToDefaultItem(EQUIP_LIMIT_GLOVE, kInfo.iGloves); }break;
-				case EQUIP_POS_FACE:		{ AddToDefaultItem(EQUIP_LIMIT_FACE, kInfo.iFace); }break;
-				case EQUIP_POS_HAIR:		{ AddToDefaultItem(EQUIP_LIMIT_HAIR, kInfo.iHairStyle); }break;
-				case EQUIP_POS_HAIR_COLOR:	{ AddToDefaultItem(EQUIP_LIMIT_HAIR_COLOR, kInfo.iHairColor); }break;
+				case EQUIP_POS_SHIRTS: { AddToDefaultItem(EQUIP_LIMIT_SHIRTS, kInfo.iJacket); }break;
+				case EQUIP_POS_PANTS: { AddToDefaultItem(EQUIP_LIMIT_PANTS, kInfo.iPants); }break;
+				case EQUIP_POS_BOOTS: { AddToDefaultItem(EQUIP_LIMIT_BOOTS, kInfo.iShoes); }break;
+				case EQUIP_POS_GLOVE: { AddToDefaultItem(EQUIP_LIMIT_GLOVE, kInfo.iGloves); }break;
+				case EQUIP_POS_FACE: { AddToDefaultItem(EQUIP_LIMIT_FACE, kInfo.iFace); }break;
+				case EQUIP_POS_HAIR: { AddToDefaultItem(EQUIP_LIMIT_HAIR, kInfo.iHairStyle); }break;
+				case EQUIP_POS_HAIR_COLOR: { AddToDefaultItem(EQUIP_LIMIT_HAIR_COLOR, kInfo.iHairColor); }break;
 				default:
+				{
+					eEquipLimit const eLimit = static_cast<eEquipLimit>(0x00000001 << iCur);
+					if (DelDefaultItem(eLimit))
 					{
-						eEquipLimit const eLimit = static_cast< eEquipLimit >(0x00000001 << iCur);
-						if( DelDefaultItem(eLimit) )
-						{
-							EInvType const eType = static_cast< EInvType >(kItemPos.x);
-							EEquipPos const ePos = static_cast< EEquipPos >(iCur);
-							UnequipItem(eType, ePos, 0, PgItemEx::LOAD_TYPE_INSTANT);
-						}
-					}break;
+						EInvType const eType = static_cast<EInvType>(kItemPos.x);
+						EEquipPos const ePos = static_cast<EEquipPos>(iCur);
+						UnequipItem(eType, ePos, 0, PgItemEx::LOAD_TYPE_INSTANT);
+					}
+				}break;
 				}
 			}
 		}
@@ -11309,13 +11309,13 @@ void PgActor::CopyEquipItem(PgActor* pkSourceActor)
 }
 
 void PgActor::EquipAllItem_SubPlayer(PgActor* pkCallerActor)
-{			
-	if( !pkCallerActor )
+{
+	if (!pkCallerActor)
 	{
 		return;
 	}
-	PgPlayer *pkCallerPlayer = dynamic_cast<PgPlayer*>(pkCallerActor->GetUnit());
-	if( !pkCallerPlayer )
+	PgPlayer* pkCallerPlayer = dynamic_cast<PgPlayer*>(pkCallerActor->GetUnit());
+	if (!pkCallerPlayer)
 	{
 		return;
 	}
@@ -11331,65 +11331,65 @@ void PgActor::EquipAllItem_SubPlayer(PgActor* pkCallerActor)
 	AddToDefaultItem(EQUIP_LIMIT_BOOTS, kInfo.iShoes);
 	AddToDefaultItem(EQUIP_LIMIT_GLOVE, kInfo.iGloves);
 
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_FACE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_HAIR_COLOR);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_HAIR);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_SHOULDER);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_CLOAK);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_GLASS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_WEAPON);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_SHEILD);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_NECKLACE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_EARRING);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_FACE);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_HAIR_COLOR);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_HAIR);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_SHOULDER);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_CLOAK);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_GLASS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_WEAPON);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_SHEILD);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_NECKLACE);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_EARRING);
 	//EquipItemByPo, IT_FIT_CASH,EQUIP_POS_EARRING_R);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_RING);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_RING_R);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_BELT);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_RING);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_RING_R);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_BELT);
 	//EquipItemByPo, IT_FIT_CASH,EQUIP_POS_ATTSTONE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_MEDAL);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_HELMET);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_SHIRTS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_PANTS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_BOOTS);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_GLOVE);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_KICKBALL);
-	EquipItemByPos(IT_FIT_CASH,EQUIP_POS_ARM);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_MEDAL);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_HELMET);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_SHIRTS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_PANTS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_BOOTS);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_GLOVE);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_KICKBALL);
+	EquipItemByPos(IT_FIT_CASH, EQUIP_POS_ARM);
 
-	//	ÀÏ¹Ý ¾ÆÀÌÅÛ ÀåÂø
-	EquipItemByPos(IT_FIT,EQUIP_POS_FACE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_HAIR_COLOR);
-	EquipItemByPos(IT_FIT,EQUIP_POS_HAIR);
-	EquipItemByPos(IT_FIT,EQUIP_POS_SHOULDER);
-	EquipItemByPos(IT_FIT,EQUIP_POS_CLOAK);
-	EquipItemByPos(IT_FIT,EQUIP_POS_GLASS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_WEAPON);
-	EquipItemByPos(IT_FIT,EQUIP_POS_SHEILD);
-	EquipItemByPos(IT_FIT,EQUIP_POS_NECKLACE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_EARRING);
+	//	ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	EquipItemByPos(IT_FIT, EQUIP_POS_FACE);
+	EquipItemByPos(IT_FIT, EQUIP_POS_HAIR_COLOR);
+	EquipItemByPos(IT_FIT, EQUIP_POS_HAIR);
+	EquipItemByPos(IT_FIT, EQUIP_POS_SHOULDER);
+	EquipItemByPos(IT_FIT, EQUIP_POS_CLOAK);
+	EquipItemByPos(IT_FIT, EQUIP_POS_GLASS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_WEAPON);
+	EquipItemByPos(IT_FIT, EQUIP_POS_SHEILD);
+	EquipItemByPos(IT_FIT, EQUIP_POS_NECKLACE);
+	EquipItemByPos(IT_FIT, EQUIP_POS_EARRING);
 	//EquipItemByPo, IT_FIT,EQUIP_POS_EARRING_R);
-	EquipItemByPos(IT_FIT,EQUIP_POS_RING);
-	EquipItemByPos(IT_FIT,EQUIP_POS_RING_R);
-	EquipItemByPos(IT_FIT,EQUIP_POS_BELT);
+	EquipItemByPos(IT_FIT, EQUIP_POS_RING);
+	EquipItemByPos(IT_FIT, EQUIP_POS_RING_R);
+	EquipItemByPos(IT_FIT, EQUIP_POS_BELT);
 	//EquipItemByPo, IT_FIT,EQUIP_POS_ATTSTONE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_MEDAL);
-	EquipItemByPos(IT_FIT,EQUIP_POS_HELMET);
-	EquipItemByPos(IT_FIT,EQUIP_POS_SHIRTS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_PANTS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_BOOTS);
-	EquipItemByPos(IT_FIT,EQUIP_POS_GLOVE);
-	EquipItemByPos(IT_FIT,EQUIP_POS_KICKBALL);
-	EquipItemByPos(IT_FIT,EQUIP_POS_ARM);
-	
+	EquipItemByPos(IT_FIT, EQUIP_POS_MEDAL);
+	EquipItemByPos(IT_FIT, EQUIP_POS_HELMET);
+	EquipItemByPos(IT_FIT, EQUIP_POS_SHIRTS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_PANTS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_BOOTS);
+	EquipItemByPos(IT_FIT, EQUIP_POS_GLOVE);
+	EquipItemByPos(IT_FIT, EQUIP_POS_KICKBALL);
+	EquipItemByPos(IT_FIT, EQUIP_POS_ARM);
+
 	int const iBaseClass = pkCallerPlayer->GetAbil(AT_BASE_CLASS);
-	if( iBaseClass == UCLASS_DOUBLE_FIGHTER )
-	{//°ÝÅõ°¡ º¸Á¶ Ä³¸¯ÅÍ ¼ÂÆÃµÈ ¹«±â ¾øÀ¸¸é ±âº» Áö±Þ ¹«±â °­Á¦ Âø¿ë
-		AddEquipItem(330100005, false, PgItemEx::LOAD_TYPE_INSTANT, false );
+	if (iBaseClass == UCLASS_DOUBLE_FIGHTER)
+	{//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		AddEquipItem(330100005, false, PgItemEx::LOAD_TYPE_INSTANT, false);
 	}
 
 }
 bool PgActor::CopyEquipItemFromMainPlayer(PgActor* pkActor, EInvType kInvType, EEquipPos kItemPos)
 {
-	if( !pkActor )
+	if (!pkActor)
 	{
 		return false;
 	}
@@ -11398,65 +11398,65 @@ bool PgActor::CopyEquipItemFromMainPlayer(PgActor* pkActor, EInvType kInvType, E
 		m_fLoadingStartTime = NiGetCurrentTimeInSec();
 	}
 
-	if ( EQUIP_POS_HAIR_COLOR == kItemPos )	// ¸Ó¸®»öÀº PgItemEx¸¦ ¸¸µé ÇÊ¿ä°¡ ¾ø´Ù. Hair¾ÆÀÌÅÛÀ» ¸¸µé¶§ ÂüÁ¶¸¸ µÊ.
+	if (EQUIP_POS_HAIR_COLOR == kItemPos)	// ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ PgItemExï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ä°¡ ï¿½ï¿½ï¿½ï¿½. Hairï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¶§ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
 	{
 		return true;
 	}
-	
+
 	PgPilot* pkPilot = pkActor->GetPilot();
-	if( pkPilot )
+	if (pkPilot)
 	{
 		PgControlUnit* pkPlayer = dynamic_cast<PgControlUnit*>(pkPilot->GetUnit());
 		if (pkPlayer)
 		{
-			int iItemNo = GetAdjustedItemNo( pkPlayer, kItemPos );
+			int iItemNo = GetAdjustedItemNo(pkPlayer, kItemPos);
 			bool bUseDefault = false;
 
-			if ( 0 == iItemNo )
+			if (0 == iItemNo)
 			{
 				PgBase_Item kItem;
 				PgOptionUtil::SClientDWORDOption const kOption(pkPilot->GetAbil(AT_CLIENT_OPTION_SAVE));
-				if ( IT_FIT_CASH == kInvType )
+				if (IT_FIT_CASH == kInvType)
 				{
-					if ( !kOption.IsHideCashInvenPos( kItemPos ) )
-					{// °¨Ãß±â ¼³Á¤ µÇ¾îÀÖÀ¸¸é °¨Ãá´Ù
-						if ( S_OK == pkPlayer->GetInven()->GetItem( kInvType, kItemPos, kItem ) )
+					if (!kOption.IsHideCashInvenPos(kItemPos))
+					{// ï¿½ï¿½ï¿½ß±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+						if (S_OK == pkPlayer->GetInven()->GetItem(kInvType, kItemPos, kItem))
 						{
 							iItemNo = kItem.ItemNo();
 						}
 					}
-					else if ( !kOption.IsHideEquipInvenPos( kItemPos ) )
-					{// Ä³½Ã ¾ÆÀÌÅÛÀÌ °¨Ãß¾îÁ® ÀÖ´Ù¸é
-						if ( S_OK == pkPlayer->GetInven()->GetItem( IT_FIT, kItemPos, kItem ) )
-						{// ¿ø·¡ ÀåÂø µÇ¾îÀÖ´Â ¾ÆÀÌÅÛÀ» Ã£¾Æ¼­ ºÙ¿©ÁÙ¼ö ÀÖ°Ô ÁØºñÇØÁØ´Ù.
+					else if (!kOption.IsHideEquipInvenPos(kItemPos))
+					{// Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½
+						if (S_OK == pkPlayer->GetInven()->GetItem(IT_FIT, kItemPos, kItem))
+						{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½Æ¼ï¿½ ï¿½Ù¿ï¿½ï¿½Ù¼ï¿½ ï¿½Ö°ï¿½ ï¿½Øºï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 							iItemNo = kItem.ItemNo();
 						}
 					}
 				}
 				else
 				{
-					if (	S_OK == pkPlayer->GetInven()->GetItem( IT_FIT_CASH, kItemPos, kItem ) 
-						&&	!kItem.IsUseTimeOut() 
-						&&	!kOption.IsHideCashInvenPos(kItemPos) )
+					if (S_OK == pkPlayer->GetInven()->GetItem(IT_FIT_CASH, kItemPos, kItem)
+						&& !kItem.IsUseTimeOut()
+						&& !kOption.IsHideCashInvenPos(kItemPos))
 					{
-						// µ¿ÀÏÇÑ À§Ä¡¿¡ Ä³½¬ ¾ÆÀÌÅÛÀÌ ÀåÂøµÇ¾îÀÖÀ¸¸é ÀåÂøÇÏÁö ¾Ê¾Æ¾ß ÇÑ´Ù.
+						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¾ï¿½ ï¿½Ñ´ï¿½.
 					}
 					else
 					{
-						if ( !kOption.IsHideEquipInvenPos(kItemPos) )
+						if (!kOption.IsHideEquipInvenPos(kItemPos))
 						{
-							if ( S_OK == pkPlayer->GetInven()->GetItem( kInvType, kItemPos, kItem ) )
+							if (S_OK == pkPlayer->GetInven()->GetItem(kInvType, kItemPos, kItem))
 							{
 								iItemNo = kItem.ItemNo();
 							}
 						}
 
-						if ( 0 == iItemNo )
+						if (0 == iItemNo)
 						{
 							DefaultItemContainer::iterator itr = std::find(m_kDefaultItem.begin(), m_kDefaultItem.end(), ItemDesc(static_cast<eEquipLimit>(1 << kItemPos)));
-							if( itr != m_kDefaultItem.end())
+							if (itr != m_kDefaultItem.end())
 							{
-								// ÀåÂøºÎÀ§¿¡ µðÆúÆ® ¾ÆÀÌÅÛÀº ÀÖ´Ù.
+								// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½.
 								bUseDefault = true;
 								iItemNo = itr->m_iItemNo;
 							}
@@ -11464,10 +11464,10 @@ bool PgActor::CopyEquipItemFromMainPlayer(PgActor* pkActor, EInvType kInvType, E
 					}
 				}
 
-				{//ÇÏÁö¸¸ ¼¼Æ®¾ÆÀÌÅÛÀº ÀåÂøµÇ¾úÀ»¼ö ÀÖÀ¸¹Ç·Î, ÇØ´ç ¼¼Æ® ¾ÆÀÌÅÛÀÌ ÀåÂøµÇ¾úÀ»´ëÀÇ È¿°ú¸¦ µî·ÏÇØÁÖ¾î¾ß ÇÑ´Ù
+				{//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½, ï¿½Ø´ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ ï¿½Ñ´ï¿½
 					int iCheckItemNo = iItemNo;
-					if(0 == iItemNo
-						&& S_OK == pkPlayer->GetInven()->GetItem( kInvType, kItemPos, kItem)
+					if (0 == iItemNo
+						&& S_OK == pkPlayer->GetInven()->GetItem(kInvType, kItemPos, kItem)
 						)
 					{
 						iCheckItemNo = kItem.ItemNo();
@@ -11476,40 +11476,40 @@ bool PgActor::CopyEquipItemFromMainPlayer(PgActor* pkActor, EInvType kInvType, E
 					//Attach Item Set Effect
 					GET_DEF(CItemSetDefMgr, kItemSetDefMgr);
 					int const iSetNo = kItemSetDefMgr.GetItemSetNo(iCheckItemNo);
-					CItemSetDef const *pSetDef = kItemSetDefMgr.GetDef(iSetNo);
-					if(pSetDef)
+					CItemSetDef const* pSetDef = kItemSetDefMgr.GetDef(iSetNo);
+					if (pSetDef)
 					{
 						CONT_HAVE_ITEM_DATA kContHaveItems;
 						CONT_HAVE_ITEM_DATA kContHaveCashItems;
 
-						if(!pkPilot){return true;}
-						if(!pkPilot->GetUnit()){return true;}
-						if(!pkPilot->GetUnit()->GetInven()){return true;}
+						if (!pkPilot) { return true; }
+						if (!pkPilot->GetUnit()) { return true; }
+						if (!pkPilot->GetUnit()->GetInven()) { return true; }
 
 						pkPilot->GetUnit()->GetInven()->GetItems(IT_FIT, kContHaveItems);
-						{// Ä³½Ã
+						{// Ä³ï¿½ï¿½
 							pkPilot->GetUnit()->GetInven()->GetItems(IT_FIT_CASH, kContHaveCashItems);
 							bool bCompleteSet = false;
-							int const iPieceSet = pSetDef->CheckNeedItem(kContHaveCashItems,pkPilot->GetUnit(), bCompleteSet);
-							if( bCompleteSet )
-							{// ¼¼Æ®¾ÆÀÌÅÛ¿¡ ÀÇÇÑ
+							int const iPieceSet = pSetDef->CheckNeedItem(kContHaveCashItems, pkPilot->GetUnit(), bCompleteSet);
+							if (bCompleteSet)
+							{// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 								SPOTParticleInfo kTemp;
-								if(g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp))
-								{// Æ¯Á¤ ½ÃÁ¡ ÆÄÆ¼Å¬ÀÌ Á¸ÀçÇÑ´Ù¸é, ÇØ´ç °ü¸® °´Ã¼¿¡ ³Ö¾î ÁÖ°í
+								if (g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp))
+								{// Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½, ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½Ö°ï¿½
 									m_kPOTParticle.AddInfo(kTemp);
 								}
 								AddCompletedItemSet(iSetNo);
 							}
 						}
-						//ÀÏ¹Ý ¼¼Æ® ¾ÆÀÌÅÛÀ» ¸ðµÎ ÀåÂø ÇÑ »óÅÂ
+						//ï¿½Ï¹ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 						bool bCompleteSet = false;
-						int const iPieceSet = pSetDef->CheckNeedItem(kContHaveItems,GetPilot()->GetUnit(), bCompleteSet);
-						if( bCompleteSet )
+						int const iPieceSet = pSetDef->CheckNeedItem(kContHaveItems, GetPilot()->GetUnit(), bCompleteSet);
+						if (bCompleteSet)
 						{
-							{// ¾ÆÀÌÅÛ¿¡, Æ¯Á¤½ÃÁ¡¿¡¸¸ ºÙ¿©ÁÙ ÆÄÆ¼Å¬ Á¤º¸°¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í
+							{// ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½, Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï°ï¿½
 								SPOTParticleInfo kTemp;
-								if(g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp))
-								{// Á¸ÀçÇÑ´Ù¸é, ÇØ´ç °ü¸® °´Ã¼¿¡ ³Ö¾î ÁÖ°í
+								if (g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp))
+								{// ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½, ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½Ö°ï¿½
 									m_kPOTParticle.AddInfo(kTemp);
 								}
 							}
@@ -11517,20 +11517,20 @@ bool PgActor::CopyEquipItemFromMainPlayer(PgActor* pkActor, EInvType kInvType, E
 						}
 					}
 
-					{// ¾ÆÀÌÅÛ¿¡, Æ¯Á¤½ÃÁ¡¿¡¸¸ ºÙ¿©ÁÙ ÆÄÆ¼Å¬ Á¤º¸°¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í
+					{// ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½, Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï°ï¿½
 						SPOTParticleInfo kTemp;
-						if(g_kItemMan.GetItemPOTParticleInfo(iCheckItemNo, kTemp))
-						{// Á¸ÀçÇÑ´Ù¸é, ÇØ´ç °ü¸® °´Ã¼¿¡ ³Ö¾î ÁÖ°í
+						if (g_kItemMan.GetItemPOTParticleInfo(iCheckItemNo, kTemp))
+						{// ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½, ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½Ö°ï¿½
 							m_kPOTParticle.AddInfo(kTemp);
 						}
 					}
 				}
 			}
-				
-			if ( 0 < iItemNo )
-			{// GetAdjustedItemNo()¿¡¼­ ¸®ÅÏ°ªÀÌ -1ÀÎ°æ¿ìµµ ÀåÂøÀ» ÇÏ¸é ¾ÈµÇ±â ¶§¹®¿¡ 0< 
+
+			if (0 < iItemNo)
+			{// GetAdjustedItemNo()ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ -1ï¿½Î°ï¿½ìµµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½ ï¿½ÈµÇ±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0< 
 				NILOG(PGLOG_LOG, "[PgActor] EquipItemByPos(%d, %d, %d)\n", kItemPos, iItemNo, bUseDefault);
-				return AddEquipItem( iItemNo, bUseDefault, PgItemEx::LOAD_TYPE_USEQUEUE , false);
+				return AddEquipItem(iItemNo, bUseDefault, PgItemEx::LOAD_TYPE_USEQUEUE, false);
 			}
 			return true;
 		}
@@ -11549,12 +11549,12 @@ void	PgActor::StopNormalAttackFreeze()
 
 int	PgActor::GetNormalAttackFreezeElapsedTime()
 {
-	if(m_ulNormalAttackFreezeStartTime == 0) return -1;
+	if (m_ulNormalAttackFreezeStartTime == 0) return -1;
 
-	return	BM::GetTime32()-m_ulNormalAttackFreezeStartTime;
+	return	BM::GetTime32() - m_ulNormalAttackFreezeStartTime;
 }
 
-//! Normal °ø°ÝÀÇ Á¾·á ½Ã°£À» ÀúÀåÇÑ´Ù
+//! Normal ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 void	PgActor::SetNormalAttackEndTime()
 {
 	m_ulNormalAttackEndTime = BM::GetTime32();
@@ -11565,10 +11565,10 @@ unsigned long PgActor::GetNormalAttackEndTime() const
 }
 bool PgActor::CanNowConnectToNextComboAttack(float const fMaxTime) const
 {
-	unsigned long const ulComboConnectionDelay = static_cast<unsigned long>(fMaxTime*1000);	//	ÄÞº¸ ÀÔ·Â °¡´É ±¸°£ ½Ã°£
+	unsigned long const ulComboConnectionDelay = static_cast<unsigned long>(fMaxTime * 1000);	//	ï¿½Þºï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
 	unsigned long const ulCurrentTime = BM::GetTime32();
-	if(ulCurrentTime - GetNormalAttackEndTime() > ulComboConnectionDelay) { return false; }
+	if (ulCurrentTime - GetNormalAttackEndTime() > ulComboConnectionDelay) { return false; }
 
 	return	true;
 }
@@ -11576,25 +11576,25 @@ bool PgActor::CanNowConnectToNextComboAttack(float const fMaxTime) const
 bool PgActor::IsAnimationDone()
 {
 	PG_ASSERT_LOG(GetActorManager());
-	if(!GetActorManager())	return	true;
+	if (!GetActorManager())	return	true;
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.IsAnimationDone"), g_pkApp->GetFrameCount()));
 
-	NiControllerSequence *pkSequence = GetActorManager()->GetSequence(m_kSeqID);
+	NiControllerSequence* pkSequence = GetActorManager()->GetSequence(m_kSeqID);
 
-	if(!pkSequence || pkSequence->GetCycleType() == NiTimeController::LOOP)
+	if (!pkSequence || pkSequence->GetCycleType() == NiTimeController::LOOP)
 	{
 		return false;
 	}
 
-	if(GetActorManager()->GetCurAnimation() != m_kSeqID)
+	if (GetActorManager()->GetCurAnimation() != m_kSeqID)
 	{
 		return false;
 	}
 
 	float fTime = GetActorManager()->GetNextEventTime(NiActorManager::END_OF_SEQUENCE, m_kSeqID);
 
-	if(fTime == NiActorManager::INVALID_TIME)
+	if (fTime == NiActorManager::INVALID_TIME)
 	{
 		return true;
 	}
@@ -11605,10 +11605,10 @@ bool PgActor::IsAnimationDone()
 bool PgActor::IsAnimationLoop() const
 {
 	PG_ASSERT_LOG(GetActorManager());
-	if(!GetActorManager())	return	false;
+	if (!GetActorManager())	return	false;
 
-	NiControllerSequence *pkSequence = GetActorManager()->GetSequence(m_kSeqID);
-	if(!pkSequence)
+	NiControllerSequence* pkSequence = GetActorManager()->GetSequence(m_kSeqID);
+	if (!pkSequence)
 	{
 		return false;
 	}
@@ -11617,16 +11617,16 @@ bool PgActor::IsAnimationLoop() const
 
 bool PgActor::HaveAnimationTextKey(char const* szKey, char const* szAnimationName) const
 {
-	if(!GetActorManager() || !GetActionSlot() || !szKey)
+	if (!GetActorManager() || !GetActionSlot() || !szKey)
 	{
 		return false;
 	}
 
 	NiActorManager::SequenceID kSeqID;
-	if(szAnimationName)
-	{	
+	if (szAnimationName)
+	{
 		PgActionSlot* pkActionSlot = GetActionSlot();
-		if(!pkActionSlot->GetAnimation(szAnimationName, kSeqID))
+		if (!pkActionSlot->GetAnimation(szAnimationName, kSeqID))
 		{
 			return false;
 		}
@@ -11636,29 +11636,29 @@ bool PgActor::HaveAnimationTextKey(char const* szKey, char const* szAnimationNam
 		kSeqID = m_kSeqID;
 	}
 
-	NiControllerSequence *pkSequence = GetActorManager()->GetSequence(kSeqID);	
-	if(!pkSequence)
+	NiControllerSequence* pkSequence = GetActorManager()->GetSequence(kSeqID);
+	if (!pkSequence)
 	{
 		return false;
 	}
 
-	NiTextKeyExtraData *pkTextKeys = pkSequence->GetTextKeys();
-	if(!pkTextKeys)
+	NiTextKeyExtraData* pkTextKeys = pkSequence->GetTextKeys();
+	if (!pkTextKeys)
 	{
 		return false;
 	}
 
 	unsigned int uiTextKeyCount = 0;
-	NiTextKey *pkTextKey = pkTextKeys->GetKeys(uiTextKeyCount);
-	if(!pkTextKey)
+	NiTextKey* pkTextKey = pkTextKeys->GetKeys(uiTextKeyCount);
+	if (!pkTextKey)
 	{
 		return false;
 	}
 
-	for(unsigned int uiTextKeyIdx = 0; uiTextKeyIdx < uiTextKeyCount; ++uiTextKeyIdx)
+	for (unsigned int uiTextKeyIdx = 0; uiTextKeyIdx < uiTextKeyCount; ++uiTextKeyIdx)
 	{
 		NiFixedString kTextKeyName = pkTextKey[uiTextKeyIdx].GetText();
-		if( 0 == strcmp(szKey, kTextKeyName) )
+		if (0 == strcmp(szKey, kTextKeyName))
 		{
 			return true;
 		}
@@ -11667,23 +11667,23 @@ bool PgActor::HaveAnimationTextKey(char const* szKey, char const* szAnimationNam
 	return false;
 }
 
-void PgActor::DrawNoZTest(PgRenderer *pkRenderer, NiCamera *pkCamera, float fFrameTime)
+void PgActor::DrawNoZTest(PgRenderer* pkRenderer, NiCamera* pkCamera, float fFrameTime)
 {
-	if (!m_bVisible || !m_bIsVisibleInFrustum) // m_bHide <- QUESTION: Ã¼Å©ÇØ¾ß ÇÏ³ª ¸»¾Æ¾ß ÇÏ³ª. Swift¼¦ °°Àº°Ç m_bHide¸¦ ÄÑ³õ´Â´Ù.
+	if (!m_bVisible || !m_bIsVisibleInFrustum) // m_bHide <- QUESTION: Ã¼Å©ï¿½Ø¾ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ ï¿½Ï³ï¿½. Swiftï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ m_bHideï¿½ï¿½ ï¿½Ñ³ï¿½ï¿½Â´ï¿½.
 		return;
 
-	if(IsHide() || (IsEnemy(g_kPilotMan.GetPlayerActor()) && IsInvisible())) return;
+	if (IsHide() || (IsEnemy(g_kPilotMan.GetPlayerActor()) && IsInvisible())) return;
 
-	if(GetPilot() && GetPilot()->IsHide())
+	if (GetPilot() && GetPilot()->IsHide())
 		return;
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.DrawNoZTest"), g_pkApp->GetFrameCount()));
 
-	DrawParticle(pkRenderer,false);	//	Z Test ÇÏÁö ¾Ê´Â ÆÄÆ¼Å¬µéÀ» ·»´õ¸µÇÑ´Ù.
+	DrawParticle(pkRenderer, false);	//	Z Test ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 }
 void PgActor::ResetABVToNewAM()
 {
-	if(!m_pkPhysXScene)
+	if (!m_pkPhysXScene)
 	{
 		return;
 	}
@@ -11698,10 +11698,10 @@ void PgActor::ResetABVToNewAM()
 		GetWorld()->LockPhysX(true);
 		PG_STAT(timerA.Stop());
 	}
-	for(int i = 0; GetABVShape(i)->IsValid() && i < PG_MAX_NB_ABV_SHAPES; ++i)
+	for (int i = 0; GetABVShape(i)->IsValid() && i < PG_MAX_NB_ABV_SHAPES; ++i)
 	{
-		NiAVObject *pkTarget = GetObjectByName(GetABVShape(i)->m_kTo);
-		if(pkTarget)
+		NiAVObject* pkTarget = GetObjectByName(GetABVShape(i)->m_kTo);
+		if (pkTarget)
 		{
 			m_pkPhysXScene->DeleteSource(m_apkPhysXCollisionSrcs[i]);
 
@@ -11761,19 +11761,19 @@ void PgActor::InitPhysX(NiPhysXScene* pkPhysXScene, int uiGroup)
 	kCtrlDesc.position.x = kLoc.x;
 	kCtrlDesc.position.y = kLoc.y;
 	kCtrlDesc.position.z = kLoc.z;
-	kCtrlDesc.extents = NxVec3(7.5f, 25.0f , 7.5f);
+	kCtrlDesc.extents = NxVec3(7.5f, 25.0f, 7.5f);
 	kCtrlDesc.upDirection = NX_Z;
 	kCtrlDesc.slopeLimit = cosf(NxMath::degToRad(30.0f));
 	kCtrlDesc.skinWidth = 0.1f;
 	kCtrlDesc.stepOffset = fRadius;
 #endif
 
-	m_kLastFloorPos = kLoc; //! ÃÊ±â À§Ä¡¸¦ ¿©±â¿¡¼­ ³Ö¾îÁØ´Ù.
+	m_kLastFloorPos = kLoc; //! ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
 
 #ifdef PG_USE_CAPSULE_CONTROLLER
 	m_pkController = (NxCapsuleController*)g_kControllerManager.createController(pkNxScene, kCtrlDesc);
 #else
-	m_pkController = (NxBoxController *)g_kControllerManager.createController(pkNxScene, kCtrlDesc);
+	m_pkController = (NxBoxController*)g_kControllerManager.createController(pkNxScene, kCtrlDesc);
 #endif
 	m_pkController->setInteraction(NXIF_INTERACTION_EXCLUDE);
 	m_pkController->setPosition(NxExtendedVec3(kLoc.x, kLoc.y, kLoc.z));
@@ -11784,62 +11784,62 @@ void PgActor::InitPhysX(NiPhysXScene* pkPhysXScene, int uiGroup)
 	m_pkPhysXActor = m_pkController->getActor();
 	m_pkPhysXActor->setCMassOffsetLocalOrientation(kMat);
 	m_pkPhysXActor->raiseActorFlag(NX_AF_DISABLE_COLLISION);
-	
+
 	SetRotation(NiQuaternion::IDENTITY);
 
 	NxShape* pkShape = m_pkPhysXActor->getShapes()[0];
 	pkShape->setLocalOrientation(kMat);
 	pkShape->setLocalPosition(NX_ZERO);
-	pkShape->setFlag(NX_SF_DISABLE_COLLISION, true); 
+	pkShape->setFlag(NX_SF_DISABLE_COLLISION, true);
 	pkShape->setFlag(NX_SF_DISABLE_RAYCASTING, true);
 
-	GetNIFRoot()->SetTranslate(NiPoint3(0.0f, 0.0f, -PG_CHARACTER_Z_ADJUST));	
-			
-	// Gamebryo --> PhysX µ¿±âÀÚ¸¦ »ý¼ºÇÑ´Ù.
+	GetNIFRoot()->SetTranslate(NiPoint3(0.0f, 0.0f, -PG_CHARACTER_Z_ADJUST));
+
+	// Gamebryo --> PhysX ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	m_pkPhysXSrc = NiNew NiPhysXKinematicSrc(this, m_pkPhysXActor);
 	m_pkPhysXSrc->SetActive(false);
 	m_pkPhysXSrc->SetInterpolate(false);
 	pkPhysXScene->AddSource(m_pkPhysXSrc);
 
-	// PhysX --> Gamebryo µ¿±âÀÚ¸¦ »ý¼ºÇÑ´Ù.
+	// PhysX --> Gamebryo ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	m_pkPhysXDest = NiNew NiPhysXTransformDest(this, m_pkPhysXActor, 0);
 	m_pkPhysXDest->SetActive(true);
 	m_pkPhysXDest->SetInterpolate(false);
 	pkPhysXScene->AddDestination(m_pkPhysXDest);
 
-/*	//DB¿¡ ÀÖ´Â AT_UNIT_SCALEÀ» Àû¿ë ½ÃÄÑ¾ßÇÒ °æ¿ì ÁÖ¼®À» ÇØÁ¦ ÇÑ´Ù.
-	float fUnitScale = 0.0f;
-	if(GetPilot() && GetPilot()->GetUnit())
-	{
-		fUnitScale = static_cast<float>(GetPilot()->GetUnit()->GetAbil(AT_UNIT_SCALE)) / ABILITY_RATE_VALUE_FLOAT;
-	}*/
+	/*	//DBï¿½ï¿½ ï¿½Ö´ï¿½ AT_UNIT_SCALEï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
+		float fUnitScale = 0.0f;
+		if(GetPilot() && GetPilot()->GetUnit())
+		{
+			fUnitScale = static_cast<float>(GetPilot()->GetUnit()->GetAbil(AT_UNIT_SCALE)) / ABILITY_RATE_VALUE_FLOAT;
+		}*/
 
-	for(int i = 0; GetABVShape(i)->IsValid() && i < PG_MAX_NB_ABV_SHAPES; ++i)
+	for (int i = 0; GetABVShape(i)->IsValid() && i < PG_MAX_NB_ABV_SHAPES; ++i)
 	{
 		NxShapeDesc* kShapeDesc = GetABVShape(i)->GetPhysXShapeDesc();
-	/*	//DB¿¡ ÀÖ´Â AT_UNIT_SCALEÀ» Àû¿ë ½ÃÄÑ¾ßÇÒ °æ¿ì ÁÖ¼®À» ÇØÁ¦ ÇÑ´Ù.
-		if(0.0f < fUnitScale)
-		{
-			NxCapsuleShapeDesc* pkCasult = dynamic_cast<NxCapsuleShapeDesc*>(kShapeDesc);
-			if(pkCasult)
+		/*	//DBï¿½ï¿½ ï¿½Ö´ï¿½ AT_UNIT_SCALEï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
+			if(0.0f < fUnitScale)
 			{
-				pkCasult->height *= fUnitScale;
-				pkCasult->radius *= fUnitScale;
-			}
+				NxCapsuleShapeDesc* pkCasult = dynamic_cast<NxCapsuleShapeDesc*>(kShapeDesc);
+				if(pkCasult)
+				{
+					pkCasult->height *= fUnitScale;
+					pkCasult->radius *= fUnitScale;
+				}
 
-			NxBoxShapeDesc* pkBox = dynamic_cast<NxBoxShapeDesc*>(kShapeDesc);
-			if(pkBox)
-			{
-				pkBox->dimensions.x *= fUnitScale;
-				pkBox->dimensions.y *= fUnitScale;
-				pkBox->dimensions.z *= fUnitScale;
-			}
-			NxSphereShapeDesc* pkSphere = dynamic_cast<NxSphereShapeDesc*>(kShapeDesc);
-			if(pkSphere)
-			{
-				pkSphere->radius *= fUnitScale;
-			}			
-		}*/
+				NxBoxShapeDesc* pkBox = dynamic_cast<NxBoxShapeDesc*>(kShapeDesc);
+				if(pkBox)
+				{
+					pkBox->dimensions.x *= fUnitScale;
+					pkBox->dimensions.y *= fUnitScale;
+					pkBox->dimensions.z *= fUnitScale;
+				}
+				NxSphereShapeDesc* pkSphere = dynamic_cast<NxSphereShapeDesc*>(kShapeDesc);
+				if(pkSphere)
+				{
+					pkSphere->radius *= fUnitScale;
+				}
+			}*/
 
 		kShapeDesc->group = uiGroup + 1;
 		kShapeDesc->userData = this;
@@ -11851,9 +11851,9 @@ void PgActor::InitPhysX(NiPhysXScene* pkPhysXScene, int uiGroup)
 		kActorDesc.shapes.push_back(kShapeDesc);
 		kActorDesc.body = &kBodyDesc;
 		kActorDesc.density = 0.1f;
-		
+
 		NiAVObject* pkTarget = GetObjectByName(GetABVShape(i)->m_kTo);
-		if(pkTarget)
+		if (pkTarget)
 		{
 			m_apkPhysXCollisionActors[i] = pkPhysXScene->GetPhysXScene()->createActor(kActorDesc);
 			m_apkPhysXCollisionActors[i]->raiseBodyFlag(NX_BF_KINEMATIC);
@@ -11861,7 +11861,7 @@ void PgActor::InitPhysX(NiPhysXScene* pkPhysXScene, int uiGroup)
 			m_apkPhysXCollisionSrcs[i] = NiNew NiPhysXKinematicSrc(pkTarget, m_apkPhysXCollisionActors[i]);
 			m_apkPhysXCollisionSrcs[i]->SetActive(true);
 			pkPhysXScene->AddSource(m_apkPhysXCollisionSrcs[i]);
-			
+
 			m_apkPhysXCollisionActors[i]->raiseBodyFlag(NX_BF_FROZEN_POS);
 			m_apkPhysXCollisionActors[i]->raiseBodyFlag(NX_BF_FROZEN_ROT);
 			m_apkPhysXCollisionActors[i]->setGroup(uiGroup + 1);
@@ -11878,7 +11878,7 @@ void PgActor::InitPhysX(NiPhysXScene* pkPhysXScene, int uiGroup)
 			PgError2("Actor [%s] ABV TargetNode [%s] Not Found.", GetID().c_str(), GetABVShape(i)->m_kTo);
 		}
 	}
-	
+
 	if (GetWorld() && 1 == g_iUseAddUnitThread)
 	{
 		GetWorld()->LockPhysX(false);
@@ -11887,7 +11887,7 @@ void PgActor::InitPhysX(NiPhysXScene* pkPhysXScene, int uiGroup)
 	m_pkPhysXScene = pkPhysXScene;
 }
 
-void PgActor::InitRidingInfo(NiPhysXScene *pkPhysXScene, int uiGroup)
+void PgActor::InitRidingInfo(NiPhysXScene* pkPhysXScene, int uiGroup)
 {
 	NiPhysXManager* pkPhysXManager = NiPhysXManager::GetPhysXManager();
 	if (pkPhysXScene == NULL || pkPhysXManager == NULL)
@@ -11897,45 +11897,45 @@ void PgActor::InitRidingInfo(NiPhysXScene *pkPhysXScene, int uiGroup)
 
 	if (GetWorld() && g_iUseAddUnitThread == 1)
 	{
-		_PgOutputDebugString("PgActor::InitRidingInfoName[%s] WaitSDKLock\n",GetID().c_str());
+		_PgOutputDebugString("PgActor::InitRidingInfoName[%s] WaitSDKLock\n", GetID().c_str());
 		GetWorld()->LockPhysX(true);
 	}
 
-	NiActorManager	*pkAM = GetActorManager();
-	if(!pkAM)
+	NiActorManager* pkAM = GetActorManager();
+	if (!pkAM)
 	{
-		_PgOutputDebugString("PgActor::InitRidingInfo Name[%s] No AM\n",GetID().c_str());
+		_PgOutputDebugString("PgActor::InitRidingInfo Name[%s] No AM\n", GetID().c_str());
 		return;
 	}
 
-	NiKFMTool	*pkKFMTool = pkAM->GetKFMTool();
-	if(!pkKFMTool)
+	NiKFMTool* pkKFMTool = pkAM->GetKFMTool();
+	if (!pkKFMTool)
 	{
-		_PgOutputDebugString("PgActor::InitRidingInfo Name[%s] No KFM Tool\n",GetID().c_str());
+		_PgOutputDebugString("PgActor::InitRidingInfo Name[%s] No KFM Tool\n", GetID().c_str());
 		return;
 	}
 
-	char	const	*pkNIFPath = pkKFMTool->GetFullModelPath();
-	if(!pkNIFPath)
+	char	const* pkNIFPath = pkKFMTool->GetFullModelPath();
+	if (!pkNIFPath)
 	{
-		_PgOutputDebugString("PgActor::InitRidingInfo Name[%s] No NIFPath\n",GetID().c_str());
+		_PgOutputDebugString("PgActor::InitRidingInfo Name[%s] No NIFPath\n", GetID().c_str());
 		return;
 	}
 
 	NiStream kStream;
-	if(kStream.Load(pkNIFPath))
+	if (kStream.Load(pkNIFPath))
 	{
 		int iCount = kStream.GetObjectCount();
-		for(int i=1;i<iCount;++i)
+		for (int i = 1; i < iCount; ++i)
 		{
 
-			NiObject *pkObject = kStream.GetObjectAt(i);
-			if(NiIsKindOf(NiPhysXScene,pkObject))
+			NiObject* pkObject = kStream.GetObjectAt(i);
+			if (NiIsKindOf(NiPhysXScene, pkObject))
 			{
-				NiPhysXScenePtr spPhysXSceneObj = NiDynamicCast(NiPhysXScene,pkObject);
+				NiPhysXScenePtr spPhysXSceneObj = NiDynamicCast(NiPhysXScene, pkObject);
 				m_kPhysXSceneObjCont.push_back(spPhysXSceneObj);
 
-				PgPhysXUtil::MakeStaticMeshNameUnique(spPhysXSceneObj,(char const*)pkNIFPath,GetID(),GetScale());
+				PgPhysXUtil::MakeStaticMeshNameUnique(spPhysXSceneObj, (char const*)pkNIFPath, GetID(), GetScale());
 
 				NxMat34 kSlaveMat;
 				NiMatrix3 kPhysXRotMat;
@@ -11947,48 +11947,48 @@ void PgActor::InitRidingInfo(NiPhysXScene *pkPhysXScene, int uiGroup)
 				spPhysXSceneObj->CreateSceneFromSnapshot(0);
 
 				unsigned	int	iSourceNum = spPhysXSceneObj->GetSourcesCount();
-				for (unsigned int iSrcCount=0 ; iSrcCount< iSourceNum ; iSrcCount++)
+				for (unsigned int iSrcCount = 0; iSrcCount < iSourceNum; iSrcCount++)
 				{
-					NiPhysXSrc *pkPhysXSrc = spPhysXSceneObj->GetSourceAt(iSrcCount);
+					NiPhysXSrc* pkPhysXSrc = spPhysXSceneObj->GetSourceAt(iSrcCount);
 
-					NiPhysXKinematicSrc *pkPhysXKinematicSrcOrg = NiDynamicCast(NiPhysXKinematicSrc,pkPhysXSrc);
-					if(!pkPhysXKinematicSrcOrg)
+					NiPhysXKinematicSrc* pkPhysXKinematicSrcOrg = NiDynamicCast(NiPhysXKinematicSrc, pkPhysXSrc);
+					if (!pkPhysXKinematicSrcOrg)
 					{
-						_PgOutputDebugString("PgObject::InitPhysX Name[%s] No pkPhysXKinematicSrcOrg\n",GetID().c_str());
+						_PgOutputDebugString("PgObject::InitPhysX Name[%s] No pkPhysXKinematicSrcOrg\n", GetID().c_str());
 						continue;
 					}
-					NiAVObject	*pkGBSource = GetObjectByName(pkPhysXKinematicSrcOrg->GetSource()->GetName());
-					if(!pkGBSource)
+					NiAVObject* pkGBSource = GetObjectByName(pkPhysXKinematicSrcOrg->GetSource()->GetName());
+					if (!pkGBSource)
 					{
-						_PgOutputDebugString("PgObject::InitPhysX Name[%s] No pkGBSource\n",GetID().c_str());
-						continue;
-					}
-
-					NxActor	*pkTarget = pkPhysXKinematicSrcOrg->GetTarget();
-					if(!pkTarget)
-					{
-						_PgOutputDebugString("PgObject::InitPhysX Name[%s] No pkTarget\n",GetID().c_str());
+						_PgOutputDebugString("PgObject::InitPhysX Name[%s] No pkGBSource\n", GetID().c_str());
 						continue;
 					}
 
-					NxShape *const *pkShapes = pkTarget->getShapes();
+					NxActor* pkTarget = pkPhysXKinematicSrcOrg->GetTarget();
+					if (!pkTarget)
+					{
+						_PgOutputDebugString("PgObject::InitPhysX Name[%s] No pkTarget\n", GetID().c_str());
+						continue;
+					}
+
+					NxShape* const* pkShapes = pkTarget->getShapes();
 					int	iNumShapes = pkTarget->getNbShapes();
 
-					for(int k=0;k<iNumShapes;k++)
+					for (int k = 0; k < iNumShapes; k++)
 					{
 
-						NxShape	*pkShape = *pkShapes;
+						NxShape* pkShape = *pkShapes;
 
-						pkShape->setGroup(uiGroup+1);
+						pkShape->setGroup(uiGroup + 1);
 						pkShape->userData = this;
 
 						pkShapes++;
 					}
 
-					pkTarget->setGroup(uiGroup+1);
+					pkTarget->setGroup(uiGroup + 1);
 					pkTarget->userData = this;
 
-					NiPhysXKinematicSrc *pkPhysXKinematicSrc = NiNew NiPhysXKinematicSrc(pkGBSource, pkTarget);
+					NiPhysXKinematicSrc* pkPhysXKinematicSrc = NiNew NiPhysXKinematicSrc(pkGBSource, pkTarget);
 					pkPhysXKinematicSrc->SetActive(true);
 					pkPhysXKinematicSrc->SetInterpolate(false);
 					pkPhysXScene->AddSource(pkPhysXKinematicSrc);
@@ -12023,7 +12023,7 @@ void PgActor::InitPhysical(bool bIsPhysical)
 
 void PgActor::ReleaseABVShapes()
 {
-	if(m_pkPhysXScene && m_pkPhysXActor)
+	if (m_pkPhysXScene && m_pkPhysXActor)
 	{
 		PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ReleasePhysX"), g_pkApp->GetFrameCount()));
 		NiPhysXManager* pkPhysXManager = NiPhysXManager::GetPhysXManager();
@@ -12035,9 +12035,9 @@ void PgActor::ReleaseABVShapes()
 			PG_STAT(timerA.Stop());
 		}
 
-		for(int i = 0; i < PG_MAX_NB_ABV_SHAPES && m_apkPhysXCollisionActors[i]; ++i)
+		for (int i = 0; i < PG_MAX_NB_ABV_SHAPES && m_apkPhysXCollisionActors[i]; ++i)
 		{
-			if(GetABVShape(i))
+			if (GetABVShape(i))
 			{
 				GetABVShape(i)->m_eType = PgIWorldObjectBase::ABVShape::ST_NONE;
 			}
@@ -12051,7 +12051,7 @@ void PgActor::ReleaseABVShapes()
 
 			m_apkPhysXCollisionActors[i] = 0;
 		}
-		
+
 		if (GetWorld())
 		{
 			GetWorld()->LockPhysX(false);
@@ -12060,7 +12060,7 @@ void PgActor::ReleaseABVShapes()
 }
 void PgActor::ReleasePhysX()
 {
-	if(m_pkPhysXScene && m_pkPhysXActor)
+	if (m_pkPhysXScene && m_pkPhysXActor)
 	{
 		PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ReleasePhysX"), g_pkApp->GetFrameCount()));
 		NiPhysXManager* pkPhysXManager = NiPhysXManager::GetPhysXManager();
@@ -12076,8 +12076,8 @@ void PgActor::ReleasePhysX()
 		m_pkPhysXScene->DeleteSource(m_pkPhysXSrc);
 		//if (m_pkPhysXScene->GetPhysXScene())
 		//	m_pkPhysXScene->GetPhysXScene()->releaseActor(*m_pkPhysXActor);	// dukguru assert : double deletion
-		
-		for(int i = 0; i < PG_MAX_NB_ABV_SHAPES && m_apkPhysXCollisionActors[i]; ++i)
+
+		for (int i = 0; i < PG_MAX_NB_ABV_SHAPES && m_apkPhysXCollisionActors[i]; ++i)
 		{
 			m_pkPhysXScene->DeleteSource(m_apkPhysXCollisionSrcs[i]);
 			if (m_pkPhysXScene->GetPhysXScene())
@@ -12086,32 +12086,32 @@ void PgActor::ReleasePhysX()
 			}
 			m_apkPhysXCollisionActors[i] = 0;
 		}
-		
-		if(m_pkController)
+
+		if (m_pkController)
 		{
 			g_kControllerManager.releaseController(*m_pkController);
 			m_pkController = 0;
 			m_pkPhysXActor = NULL;
 		}
 
-		if(m_pkPhysXActor && m_pkPhysXScene->GetPhysXScene())
+		if (m_pkPhysXActor && m_pkPhysXScene->GetPhysXScene())
 		{
 			m_pkPhysXScene->GetPhysXScene()->releaseActor(*m_pkPhysXActor);
 		}
 
 		//////////////////////////////////////////////////////////////////////
-		//RidingInfo»èÁ¦
-		for(NiPhysXSceneCont::iterator itor = m_kPhysXSceneObjCont.begin(); itor != m_kPhysXSceneObjCont.end(); ++itor)
+		//RidingInfoï¿½ï¿½ï¿½ï¿½
+		for (NiPhysXSceneCont::iterator itor = m_kPhysXSceneObjCont.begin(); itor != m_kPhysXSceneObjCont.end(); ++itor)
 		{
 			NiPhysXScenePtr	spScene = *itor;
-	
+
 			m_pkPhysXScene->RemoveSlave(spScene);
 
 		}
 		m_kPhysXSceneObjCont.clear();
 
 		int	iTotalSrc = m_vKinematicSrcCont.size();
-		for(int i=0;i<iTotalSrc;++i)
+		for (int i = 0; i < iTotalSrc; ++i)
 		{
 			m_pkPhysXScene->DeleteSource(m_vKinematicSrcCont[i]);
 		}
@@ -12148,106 +12148,106 @@ bool PgActor::BeforeUse()
 	m_pPartyBalloon = NULL;
 	m_pExpeditionBalloon = NULL;
 	m_pVendorBalloon = NULL;
-	
+
 	PgPilot* pkPilot = GetPilot();
 
-	if( pkPilot )
+	if (pkPilot)
 	{
 		CUnit* pkUnit = pkPilot->GetUnit();
-		if ( pkUnit )
+		if (pkUnit)
 		{
 			EUnitType const eUnitType = pkUnit->UnitType();
-			switch( eUnitType )
+			switch (eUnitType)
 			{
 			case UT_NPC:
-				{
-				}break;
+			{
+			}break;
 			case UT_SUMMONED:
+			{
+				if (g_kPilotMan.IsMySummoned(pkUnit))
 				{
-					if( g_kPilotMan.IsMySummoned(pkUnit) )
+					lwSummon_Info::lwShowSummonList();
+				}
+				NiAVObjectPtr	spTargetPoint = GetNodePointStar();
+				if (spTargetPoint) // p_ef_star ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¿ï¿½ HPï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+				{
+					m_pHPGaugeBar = g_kEnergyGaugeMan.CreateNewGauge(pkPilot);
+				}
+				else
+				{
+					m_pHPGaugeBar = NULL;
+				}
+			}break;
+			case UT_PLAYER:
+			{
+				//SyncMountPet();
+				g_kMarkBalloonMan.AddActor(this);
+			} // breakï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+			default:
+			{
+				if (UT_ENTITY == eUnitType && ENTITY_GUARDIAN == pkUnit->GetAbil(AT_ENTITY_TYPE))
+				{
+					PgEntity* pkEntity = dynamic_cast<PgEntity*>(pkUnit);
+					if (pkEntity && !pkEntity->IsEternalLife())
 					{
-						lwSummon_Info::lwShowSummonList();
+						float const fAliveTotalTime = pkEntity->LifeTime() / 1000.f;
+						SetAliveTimeGauge(fAliveTotalTime);
+						SetAutoDeleteActorTimer(fAliveTotalTime);
 					}
+				}
+				else
+				{
+					//NiAVObjectPtr	spTargetPoint = GetActorManager()->GetNIFRoot()->GetObjectByName(ATTACH_POINT_STAR);
 					NiAVObjectPtr	spTargetPoint = GetNodePointStar();
-					if( spTargetPoint ) // p_ef_star ³ëµå°¡ ¾øÀ¸¸é ¾Æ¿¹ HP¹Ù¸¦ »ý¼ºÇÏÁö ¾Ê´Â´Ù.
+					if (spTargetPoint) // p_ef_star ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¿ï¿½ HPï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 					{
-						m_pHPGaugeBar = g_kEnergyGaugeMan.CreateNewGauge( pkPilot );
+						m_pHPGaugeBar = g_kEnergyGaugeMan.CreateNewGauge(pkPilot);
 					}
 					else
 					{
 						m_pHPGaugeBar = NULL;
 					}
-				}break;
-			case UT_PLAYER:
-				{
-					//SyncMountPet();
-					g_kMarkBalloonMan.AddActor( this );
-				} // breakÀ» »ç¿ëÇÏÁö ¾Ê´Â´Ù.
-			default:
-				{
-					if(UT_ENTITY==eUnitType && ENTITY_GUARDIAN==pkUnit->GetAbil(AT_ENTITY_TYPE))
-					{
-						PgEntity* pkEntity = dynamic_cast<PgEntity*>(pkUnit);
-						if( pkEntity && !pkEntity->IsEternalLife() )
-						{
-							float const fAliveTotalTime = pkEntity->LifeTime()/1000.f;
-							SetAliveTimeGauge(fAliveTotalTime);
-							SetAutoDeleteActorTimer(fAliveTotalTime);
-						}
-					}
-					else
-					{
-						//NiAVObjectPtr	spTargetPoint = GetActorManager()->GetNIFRoot()->GetObjectByName(ATTACH_POINT_STAR);
-						NiAVObjectPtr	spTargetPoint = GetNodePointStar();
-						if( spTargetPoint ) // p_ef_star ³ëµå°¡ ¾øÀ¸¸é ¾Æ¿¹ HP¹Ù¸¦ »ý¼ºÇÏÁö ¾Ê´Â´Ù.
-						{
-							m_pHPGaugeBar = g_kEnergyGaugeMan.CreateNewGauge( pkPilot );
-						}
-						else
-						{
-							m_pHPGaugeBar = NULL;
-						}
-					}
-				}break;
+				}
+			}break;
 			}
 		}
 	}
 
 	m_pkHeadBuffIconList = g_kHeadBuffIconListMgr.CreateNewIconList();
-/*
-	if(GetPilot()->GetUnit()->UnitType() == UT_PLAYER)
-	{
-		PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(GetPilot()->GetUnit());
-		if(pkPlayer)
+	/*
+		if(GetPilot()->GetUnit()->UnitType() == UT_PLAYER)
 		{
-			PgActor* pkActorPet = g_kPilotMan.FindActor(pkPlayer->SelectedPetID());
-			if(pkActorPet && pkActorPet->GetPilot()->GetUnit()->GetAbil(815))
+			PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(GetPilot()->GetUnit());
+			if(pkPlayer)
 			{
-				MountPet();
+				PgActor* pkActorPet = g_kPilotMan.FindActor(pkPlayer->SelectedPetID());
+				if(pkActorPet && pkActorPet->GetPilot()->GetUnit()->GetAbil(815))
+				{
+					MountPet();
+				}
 			}
-		}
 
-	}
-*/
+		}
+	*/
 	return true;
 }
 
 bool PgActor::BeforeCleanUp()
 {
 	NILOG(PGLOG_LOG, "[PgActor] %s(%#X) actor before cleanup\n", MB(GetGuid().str()), this);
-	//Æê¿¡ Å¾½Â ÁßÀÌ¸é ³»¸°µÚ ¼Ò¸êÇØ¾ß ÇÑ´Ù. (char_root ÀÌÇÏ ³ëµå°¡ Æê¿¡ ºÙ¾îÀÖÀ¸¹Ç·Î ¿ø·¡ À§Ä¡·Î º¹±¸)
-	if(IsRidingPet()) //ÁÖÀÎ,Æê Áß ¼Ò¸ê ¼ø¼­¸¦ ¾Ë¼ö ¾øÀ¸¹Ç·Î ¸ÕÀú ¼Ò¸êµÇ´Â ³ðÀÌ Unmount ÇØÁØ´Ù.
+	//ï¿½ê¿¡ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½. (char_root ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å°¡ ï¿½ê¿¡ ï¿½Ù¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+	if (IsRidingPet()) //ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ Unmount ï¿½ï¿½ï¿½Ø´ï¿½.
 	{
 		UnmountPet();
 	}
 
-	//	»óÅÂÀÌ»ó ¸ðµÎ Å¬¸®¾î
-	g_kStatusEffectMan.RemoveAllStatusEffect(GetPilot(),true);
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
+	g_kStatusEffectMan.RemoveAllStatusEffect(GetPilot(), true);
 
-	//	¶³±Å¾ß ÇÒ ¾ÆÀÌÅÛÀÌ ³²¾ÆÀÖ´Ù¸é ´Ù ¶³±º´Ù.
+	//	ï¿½ï¿½ï¿½Å¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	DoDropItems();
 
-	DetachNameNodes(GetNIFRoot()); // ÀÌ¸§µéÀ» ¶§ÁØ´Ù.
+	DetachNameNodes(GetNIFRoot()); // ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 	m_spNameText = 0;
 	m_spTitleName = 0;
 	m_spGuildNameText = 0;
@@ -12267,7 +12267,7 @@ bool PgActor::BeforeCleanUp()
 
 	g_kHeadBuffIconListMgr.ReleaseIconList(m_pkHeadBuffIconList);
 	m_pkHeadBuffIconList = NULL;
-	
+
 	g_kEnergyGaugeMan.DestroyGauge(m_pHPGaugeBar);
 	m_pHPGaugeBar = NULL;
 
@@ -12277,16 +12277,16 @@ bool PgActor::BeforeCleanUp()
 	g_kExpeditionBalloonMgr.DestroyNode(m_pExpeditionBalloon);
 	g_kVendorBalloonMgr.DestroyNode(m_pVendorBalloon);
 
-	if(m_pkSyncMoveNextAction)
+	if (m_pkSyncMoveNextAction)
 	{
 		g_kActionPool.ReleaseAction(m_pkSyncMoveNextAction);
 	}
 
 	m_pkSyncMoveNextAction = NULL;
 
-	if(m_pkAction)
+	if (m_pkAction)
 	{
-		m_pkAction->CleanUpFSM(this,m_pkAction);
+		m_pkAction->CleanUpFSM(this, m_pkAction);
 		g_kActionPool.ReleaseAction(m_pkAction);
 		m_pkAction = NULL;
 	}
@@ -12300,25 +12300,25 @@ bool PgActor::BeforeCleanUp()
 		g_pkWorld->GetCameraMan()->NotifyActorRemove(this);
 	}
 
-	RestoreSpecular();	//	½ºÆäÅ§·¯ º¹±Í
+	RestoreSpecular();	//	ï¿½ï¿½ï¿½ï¿½Å§ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	PgCircleShadow::DetachCircleShadowRecursive(this);
 
-	if(true==IsMyActor() && g_pkLocalManager)
+	if (true == IsMyActor() && g_pkLocalManager)
 	{
-		g_pkLocalManager->ClearInputDirReverse();	//³» Ä³¸¯ÅÍ¸é ÀÎÇ² ¼³Á¤ ¹ÝµÇ·Î µÈ°Å ¹«Á¶°Ç ÃÊ±âÈ­
+		g_pkLocalManager->ClearInputDirReverse();	//ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Ç² ï¿½ï¿½ï¿½ï¿½ ï¿½ÝµÇ·ï¿½ ï¿½È°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 	}
 
-	return PgIWorldObject::BeforeCleanUp();	
+	return PgIWorldObject::BeforeCleanUp();
 }
 
 PgActor* PgActor::GetPetActor(void)
 {
 	PgActor* pkActorPet = NULL;
-	if(GetPilot()->GetUnit()->UnitType() == UT_PLAYER)
+	if (GetPilot()->GetUnit()->UnitType() == UT_PLAYER)
 	{
 		PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(GetPilot()->GetUnit());
-		if(pkPlayer)
+		if (pkPlayer)
 		{
 			pkActorPet = g_kPilotMan.FindActor(pkPlayer->SelectedPetID());
 		}
@@ -12329,7 +12329,7 @@ PgActor* PgActor::GetPetActor(void)
 //#define PG_USE_DETAIL_FIND_PATH_NORMAL
 bool PgActor::FindPathNormal(bool const bDoNotConcil)
 {
-	if(m_bNoFindPathNormal)
+	if (m_bNoFindPathNormal)
 	{
 		return false;
 	}
@@ -12353,13 +12353,13 @@ bool PgActor::FindPathNormal(bool const bDoNotConcil)
 	m_pkPick->SetTarget(m_pkPathRoot);
 	m_pkPick->ClearResultsArray();
 
-	NxVec3 ktLoc(GetPosition().x,GetPosition().y,GetPosition().z);//m_pkPhysXActor->getGlobalPosition();
+	NxVec3 ktLoc(GetPosition().x, GetPosition().y, GetPosition().z);//m_pkPhysXActor->getGlobalPosition();
 
 	NiPoint3 kPickStart = NiPoint3(ktLoc.x, ktLoc.y, ktLoc.z) + NiPoint3(0, 0, 30.0f);
 
 #ifdef PG_USE_DETAIL_FIND_PATH_NORMAL
 	NiPoint3 kNor = NiPoint3(0, 0, 1);
-	for(int i=0 ; i<16 ; ++i)
+	for (int i = 0; i < 16; ++i)
 	{
 		NiPoint3 kDir = NiPoint3(1, 0, 0);
 		float fAngle = (360 / 16) * i;
@@ -12373,8 +12373,8 @@ bool PgActor::FindPathNormal(bool const bDoNotConcil)
 		m_pkPick->PickObjects(kPickStart, kDir, true);
 	}
 #else
-	
-	for(int i = 0; i < 4; ++i)
+
+	for (int i = 0; i < 4; ++i)
 	{
 		NiPoint3 kDir = akDirs[i] * kAxisRot;
 		kDir.Unitize();
@@ -12386,26 +12386,26 @@ bool PgActor::FindPathNormal(bool const bDoNotConcil)
 
 	NiPick::Results& rkResults = m_pkPick->GetResults();
 
-	if(0 == rkResults.GetSize())
+	if (0 == rkResults.GetSize())
 	{
 		return false;
 	}
 
-	NiPick::Record *pkRecord = rkResults.GetAt(0);
+	NiPick::Record* pkRecord = rkResults.GetAt(0);
 	//if(pkRecord->GetDistance() > PG_PATHWALL_DIST_LIMIT)
 	//{
 	//	return false;
 	//}
 
-	// ÆÐ½ºÀÇ ³ë¸ÖÀ» °»½ÅÇÑ´Ù.
+	// ï¿½Ð½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	NiPoint3 kIntersection = (NiPoint3)pkRecord->GetIntersection();
 	NiPoint3 kPathNormal = pkRecord->GetNormal();
 	kPathNormal.z = 0;
 	kPathNormal.Unitize();
 	SetPathNormal(kPathNormal);
 	SetPathImpactPoint(kIntersection);
-		
-	// À§Ä¡¸¦ º¸Á¤ÇÑ´Ù
+
+	// ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	NiPoint3 kDir = kPickStart - kIntersection;
 	kDir.z = 0.0f;
 
@@ -12417,19 +12417,19 @@ bool PgActor::FindPathNormal(bool const bDoNotConcil)
 	NxVec3 kConcil;
 	NiPhysXTypes::NiPoint3ToNxVec3(kDisp, kConcil);
 
-	if(!bDoNotConcil)
+	if (!bDoNotConcil)
 	{
-		// µÎ ¹æÇâÀ¸·Î¸¸ ºÁ¾ß ÇÒ ¶§´Â, º¸´Â ¹æÇâÀ» Àç±¸¼º.
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ç±¸ï¿½ï¿½.
 		NiPoint3 kLookingDir = m_kMovingDir;
-		if(m_bLockBidirection && NiPoint3::ZERO != m_kMovingDir)
+		if (m_bLockBidirection && NiPoint3::ZERO != m_kMovingDir)
 		{
-			bool bLeft = ((m_kPathNormal.UnitCross(kLookingDir).z>0) ? true : false);
+			bool bLeft = ((m_kPathNormal.UnitCross(kLookingDir).z > 0) ? true : false);
 			kLookingDir = m_kPathNormal.UnitCross(NiPoint3::UNIT_Z * (bLeft ? -1.0f : 1.0f));
 			//kLookingDir.z = 0;
 		}
 
-		// ¹æÇâÀ» º¸Á¤ÇÑ´Ù.
-		ConcilDirection(kLookingDir);	
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		ConcilDirection(kLookingDir);
 	}
 
 	return true;
@@ -12437,12 +12437,12 @@ bool PgActor::FindPathNormal(bool const bDoNotConcil)
 
 void PgActor::ConcilDirection(NiPoint3& rkLookingDir, bool const bTurnRightAway)
 {
-	// TODO : NoConcil Á¤¸®
+	// TODO : NoConcil ï¿½ï¿½ï¿½ï¿½
 
-	// LookingDir ÀÌ ZeroÀÌ¸é ¸É¹öº¯¼ö¿¡ °ªÀ» ³Ö¾îÁÜÀ¸·Î½á ÈÄ¿¡ NPC°¡ ÆÐ½ºº® Ã£À» ¶§ ÇÊ¿äÇÏ´Ù.
-	if(m_bNoConcil || NiPoint3::ZERO == rkLookingDir)
+	// LookingDir ï¿½ï¿½ Zeroï¿½Ì¸ï¿½ ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î½ï¿½ ï¿½Ä¿ï¿½ NPCï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ï´ï¿½.
+	if (m_bNoConcil || NiPoint3::ZERO == rkLookingDir)
 	{
-		// NoConcilÀÌ°Å³ª, LookingDirÀÌ ZeroÀÌ¸é ¾Æ¹« °Íµµ ÇÏÁö ¾Ê´Â´Ù.
+		// NoConcilï¿½Ì°Å³ï¿½, LookingDirï¿½ï¿½ Zeroï¿½Ì¸ï¿½ ï¿½Æ¹ï¿½ ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 		return;
 	}
 
@@ -12451,38 +12451,38 @@ void PgActor::ConcilDirection(NiPoint3& rkLookingDir, bool const bTurnRightAway)
 		return;
 	}
 
-	if(m_pkAction && m_pkAction->GetActionOptionEnable(PgAction::AO_BIDIRECTION))
+	if (m_pkAction && m_pkAction->GetActionOptionEnable(PgAction::AO_BIDIRECTION))
 	{
-		// ÁÂ¿ì¸¸ º¸´Â ¾×¼ÇÀº ÁÂ¿ì¸¸ º¸°Ô ÇÔ
+		// ï¿½Â¿ì¸¸ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Â¿ì¸¸ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		bool bLeft = (m_kPathNormal.UnitCross(rkLookingDir).z > 0 ? true : false);
 		rkLookingDir = m_kPathNormal.UnitCross(NiPoint3::UNIT_Z * (bLeft ? -1.0f : 1.0f));
 		rkLookingDir.z = 0;
 	}
 
 	m_kLookingDir = rkLookingDir;
-	rkLookingDir.z=0;
-	rkLookingDir.Unitize();	//	leesg213 Ãß°¡ÇÔ
+	rkLookingDir.z = 0;
+	rkLookingDir.Unitize();	//	leesg213 ï¿½ß°ï¿½ï¿½ï¿½
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ConcilDirection"), g_pkApp->GetFrameCount()));
-	
-	// µÚ·Î ¹Ð¸®´Â °æ¿ì´Â ÀÌµ¿ ¹æÇâÀ» °Å²Ù·Î
+
+	// ï¿½Ú·ï¿½ ï¿½Ð¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å²Ù·ï¿½
 	NiPoint3 kLookingDir = rkLookingDir * (m_bBackMoving ? -1.0f : 1.0f);
 	NiPoint3 kCross = kLookingDir.UnitCross(NiPoint3::UNIT_Y);
-	if(kCross.SqrLength() < 0.0001f)
+	if (kCross.SqrLength() < 0.0001f)
 	{
-		// LookingDirÀÌ YÃà°ú µü ¸ÂÀ¸¸é, UnitCross´Â (0,0,0)À» ¸®ÅÏÇÑ´Ù.
-		// ÀÌ °æ¿ì MovingDirÀÇ y °ªÀ» °¡Áö°í ¹æÇâÀ» Á¤ÇØÁØ´Ù.
+		// LookingDirï¿½ï¿½ Yï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, UnitCrossï¿½ï¿½ (0,0,0)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ MovingDirï¿½ï¿½ y ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		kCross = (kLookingDir.y > 0 ? NiPoint3::UNIT_Z : -NiPoint3::UNIT_Z);
 	}
-	
+
 	//_PgOutputDebugString("ConcilDirection Actor(%s) rkLookingDir(%f,%f,%f)\n",MB(GetPilot()->GetGuid().str()),kLookingDir.x,kLookingDir.y,kLookingDir.z);
 
-	// ¹æÇâ¿¡ ¸Âµµ·Ï È¸ÀüÀ» °»½Å
+	// ï¿½ï¿½ï¿½â¿¡ ï¿½Âµï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	NiQuaternion kRot(NiACos(kLookingDir.Dot(-NiPoint3::UNIT_Y)), kCross);
-	if(m_kToRotation != kRot)
+	if (m_kToRotation != kRot)
 	{
 		m_kToRotation = kRot;
-		if(bTurnRightAway)
+		if (bTurnRightAway)
 		{
 			SetRotation(kRot);
 			m_fRotationInterpolTime = 1.0f;
@@ -12491,10 +12491,10 @@ void PgActor::ConcilDirection(NiPoint3& rkLookingDir, bool const bTurnRightAway)
 		{
 			m_fRotationInterpolTime = 0.0f;
 		}
-	}	
+	}
 
 	BYTE byLastDirection = GetDirFromMovingVector(kLookingDir);
-	if(m_bLockBidirection && (byLastDirection & DIR_HORIZONTAL) != byLastDirection)
+	if (m_bLockBidirection && (byLastDirection & DIR_HORIZONTAL) != byLastDirection)
 	{
 		return;
 	}
@@ -12503,7 +12503,7 @@ void PgActor::ConcilDirection(NiPoint3& rkLookingDir, bool const bTurnRightAway)
 	m_byLastDirection = byLastDirection;
 }
 
-void PgActor::SetLookingTarget(NiPoint3 const &rkTarget, bool bRightAway)
+void PgActor::SetLookingTarget(NiPoint3 const& rkTarget, bool bRightAway)
 {
 	SetLookingDirection(GetDirFromMovingVector(rkTarget - GetPosition()), bRightAway);
 }
@@ -12518,18 +12518,18 @@ bool	PgActor::IsReserveDieByAction()
 
 void PgActor::SetLookingDirection(BYTE byDirection, bool bRightAway)
 {
-	// TODO : 8¹æÇâ Á¦ÇÑÀÌ °É·Á ÀÖÀ» ¶§´Â 4¹æÇâ¸¸ º¸°Ô ÇÏÀÚ 
-	// (°ÉÀ» ¶§´Â 2¹æÇâÀÌÁö¸¸, ÃÄ´Ùº¸´Â ¹æÇâÀº 4¹æÇâÀÌ µÈ´Ù)
-	if(m_bLockBidirection)
+	// TODO : 8ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½â¸¸ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+	// (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ä´Ùºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½)
+	if (m_bLockBidirection)
 	{
-		if(((byDirection & DIR_HORIZONTAL) != 0) && ((byDirection & DIR_VERTICAL) != 0))
+		if (((byDirection & DIR_HORIZONTAL) != 0) && ((byDirection & DIR_VERTICAL) != 0))
 		{
-			if((byDirection & DIR_HORIZONTAL) == DIR_HORIZONTAL ||
+			if ((byDirection & DIR_HORIZONTAL) == DIR_HORIZONTAL ||
 				(byDirection & DIR_VERTICAL) == DIR_VERTICAL)
 			{
-				// Ãæµ¹µÇ´Â µÎ ¹æÇâÀ» ¸ðµÎ ¹Ù¶óº¸°Ô ÇÏ·Á¸é ¾Æ¹«°÷µµ ÃÄ´Ùº¸Áö ¾Ê´Â´Ù.
+				// ï¿½æµ¹ï¿½Ç´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸°ï¿½ ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä´Ùºï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 				return;
-			}				
+			}
 		}
 	}
 
@@ -12539,16 +12539,16 @@ void PgActor::SetLookingDirection(BYTE byDirection, bool bRightAway)
 	bool bBack = (byDirection & DIR_UP);
 
 	NiPoint3 kLookingDir(NiPoint3::ZERO);
-	if(bLeft || bRight)
+	if (bLeft || bRight)
 	{
 		kLookingDir = m_kPathNormal.Cross((bLeft ? -NiPoint3::UNIT_Z : NiPoint3::UNIT_Z));
 	}
 
-	if(!m_bLockBidirection && (bFront || bBack))
+	if (!m_bLockBidirection && (bFront || bBack))
 	{
 		kLookingDir += (bFront ? -m_kPathNormal : m_kPathNormal);
 	}
-	
+
 	kLookingDir.Unitize();
 
 	//_PgOutputDebugString("[Call ConcilDirection 2]Actor(%s) kLookingDir(%f,%f,%f)\n",MB(GetPilot()->GetGuid().str()),kLookingDir.x,kLookingDir.y,kLookingDir.z);
@@ -12575,14 +12575,14 @@ bool PgActor::ContainsDirection(BYTE byDir)
 	return (GetLastDirection() & byDir) != 0;
 }
 
-void PgActor::SetRotation(const NiQuaternion &kQuat, bool bForce)
+void PgActor::SetRotation(const NiQuaternion& kQuat, bool bForce)
 {
-	if(kQuat != NiQuaternion::IDENTITY && false == bForce && false == EnableRotation())
+	if (kQuat != NiQuaternion::IDENTITY && false == bForce && false == EnableRotation())
 	{
 		return;
 	}
 
-	if(m_pkPhysXActor)
+	if (m_pkPhysXActor)
 	{
 		NxQuat kNxQuat;
 		NiPhysXTypes::NiQuaternionToNxQuat(kQuat, kNxQuat);
@@ -12590,29 +12590,29 @@ void PgActor::SetRotation(const NiQuaternion &kQuat, bool bForce)
 	}
 
 	SetRotate(kQuat);
-	m_bIsOptimizeSleep = false;	//È¸ÀüÇßÀ¸´Ï±î ½½¸³½ÃÅ°¸é ¾ÈµÊ
+	m_bIsOptimizeSleep = false;	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Èµï¿½
 }
 
-void PgActor::SetRotation(const NxQuat &kQuat, bool bForce)
+void PgActor::SetRotation(const NxQuat& kQuat, bool bForce)
 {
-	if(false == bForce && false == EnableRotation())
+	if (false == bForce && false == EnableRotation())
 	{
 		return;
 	}
 
-	if(m_pkPhysXActor)
+	if (m_pkPhysXActor)
 		m_pkPhysXActor->setGlobalOrientationQuat(kQuat);
 
 
 	NiQuaternion kNiQuat;
 	NiPhysXTypes::NxQuatToNiQuaternion(kQuat, kNiQuat);
 	SetRotate(kNiQuat);
-	m_bIsOptimizeSleep = false;	//È¸ÀüÇßÀ¸´Ï±î ½½¸³½ÃÅ°¸é ¾ÈµÊ
+	m_bIsOptimizeSleep = false;	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Èµï¿½
 }
 
 bool PgActor::SetRotation(float m_fDegree, NiPoint3 kAxis, bool bForce)
 {
-	if(false == bForce && false == EnableRotation())
+	if (false == bForce && false == EnableRotation())
 	{
 		return false;
 	}
@@ -12622,18 +12622,18 @@ bool PgActor::SetRotation(float m_fDegree, NiPoint3 kAxis, bool bForce)
 
 	SetRotation(kRot);
 	m_kToRotation = kRot;
-	m_bIsOptimizeSleep = false;	//È¸ÀüÇßÀ¸´Ï±î ½½¸³½ÃÅ°¸é ¾ÈµÊ
-	
+	m_bIsOptimizeSleep = false;	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Èµï¿½
+
 	return true;
 }
 
 bool PgActor::EnableRotation()
 {
-	CUnit *pkUnit = GetPilot()->GetUnit();
-	if(pkUnit)
+	CUnit* pkUnit = GetPilot()->GetUnit();
+	if (pkUnit)
 	{
 		int iAngleFix = pkUnit->GetAbil(AT_MON_ANGLE_FIX);
-		if(0 != iAngleFix)
+		if (0 != iAngleFix)
 		{
 			return false;
 		}
@@ -12642,7 +12642,7 @@ bool PgActor::EnableRotation()
 	return true;
 }
 
-NiPoint3 const &PgActor::GetLookingDir()const
+NiPoint3 const& PgActor::GetLookingDir()const
 {
 	return m_kLookingDir;
 }
@@ -12653,7 +12653,7 @@ BYTE PgActor::GetLastDirection()
 	//{
 	//	return m_byMovingDirection;
 	//}
-	if(!m_bLockBidirection)
+	if (!m_bLockBidirection)
 	{
 		return m_byMovingDirection;
 	}
@@ -12666,50 +12666,50 @@ BYTE PgActor::GetDirection()
 	return m_byMovingDirection;
 }
 
-Direction	PgActor::GetDirectionInverse(Direction kDirection)	//	kDirection ÀÇ ¿ª¹æÇâÀ» ±¸ÇÑ´Ù.
+Direction	PgActor::GetDirectionInverse(Direction kDirection)	//	kDirection ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 {
 	int	kInverseDirection = DIR_NONE;
 
-	if(((int)kDirection) & DIR_LEFT)	{ kInverseDirection |= DIR_RIGHT; }
-	if(((int)kDirection) & DIR_RIGHT)	{ kInverseDirection |= DIR_LEFT; }
-	if(((int)kDirection) & DIR_UP)		{ kInverseDirection |= DIR_DOWN; }
-	if(((int)kDirection) & DIR_DOWN)	{ kInverseDirection |= DIR_UP; }
+	if (((int)kDirection) & DIR_LEFT) { kInverseDirection |= DIR_RIGHT; }
+	if (((int)kDirection) & DIR_RIGHT) { kInverseDirection |= DIR_LEFT; }
+	if (((int)kDirection) & DIR_UP) { kInverseDirection |= DIR_DOWN; }
+	if (((int)kDirection) & DIR_DOWN) { kInverseDirection |= DIR_UP; }
 
 	return	(Direction)kInverseDirection;
 }
-//½Ç¼ö Çã¿ë ¿ÀÂ÷ ¹üÀ§
+//ï¿½Ç¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 float const g_fEpsilon = 0.0001f;
 
-BYTE PgActor::GetDirFromMovingVector(NiPoint3 const &rkMovingVector)
+BYTE PgActor::GetDirFromMovingVector(NiPoint3 const& rkMovingVector)
 {
 	NiPoint3 kMovingVector = rkMovingVector;
 	kMovingVector.z = 0;
 	kMovingVector.Unitize();
 
 	NiPoint3 kCross = m_kPathNormal.UnitCross(kMovingVector);
-	if(kCross.SqrLength() < g_fEpsilon)
+	if (kCross.SqrLength() < g_fEpsilon)
 	{
 		kCross = NiPoint3::UNIT_Z;
 	}
 
-	return ( (kCross == NiPoint3::UNIT_Z) ? DIR_LEFT : DIR_RIGHT );
+	return ((kCross == NiPoint3::UNIT_Z) ? DIR_LEFT : DIR_RIGHT);
 }
 
-BYTE PgActor::GetDirFromMovingVector8Way(NiPoint3 const &rkMovingVector)
+BYTE PgActor::GetDirFromMovingVector8Way(NiPoint3 const& rkMovingVector)
 {
 	NiPoint3 kMovingVector = rkMovingVector;
 
-	// °ªÀÌ ¿ÀÂ÷°¡ »ý±æ¼ö ÀÖÀ¸¹Ç·Î == À¸·Î ºñ±³ÇÏÁö ¾Ê°í ¿ÀÂ÷·Î ºñ±³ ÇÑ´Ù.
-	// °°Àº ¹æÇâÀÇ º¤ÅÍ¸¦ - ÇÏ°Ô µÇ¸é 0ÀÌ µÇ¾î¾ß ÇÏÁö¸¸ ¿ÀÂ÷°¡ »ý±æ ¼ö ÀÖÀ¸¹Ç·Î ÃÖ¼Ò°ªÀ¸·Î ºñ±³ÇÑ´Ù.
-	
-	// À§ÂÊÀÎÁö °Ë»ç
-	if(abs((kMovingVector - m_kPathNormal).SqrLength()) < g_fEpsilon)
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ == ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ñ´ï¿½.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ - ï¿½Ï°ï¿½ ï¿½Ç¸ï¿½ 0ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½Ö¼Ò°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+	if (abs((kMovingVector - m_kPathNormal).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_UP;
 	}
 
-	// ¾Æ·¡ ÂÊÀÎÁö °Ë»ç
-	if(abs((kMovingVector + m_kPathNormal).SqrLength()) < g_fEpsilon)
+	// ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+	if (abs((kMovingVector + m_kPathNormal).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_DOWN;
 	}
@@ -12718,14 +12718,14 @@ BYTE PgActor::GetDirFromMovingVector8Way(NiPoint3 const &rkMovingVector)
 	NiMatrix3 kRot;
 	kRot.MakeZRotation(NI_HALF_PI);
 	kRotDir = kRot * m_kPathNormal;
-	
-	// PathNormalÀº À§ÂÊÀ» °¡¸®Å°¹Ç·Î È¸Àü½ÃÄÑ¼­ ¿À¸¥ÂÊÀÎÁö Ã¼Å©
-	if(abs((kMovingVector - kRotDir).SqrLength()) < g_fEpsilon)
+
+	// PathNormalï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½Ç·ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
+	if (abs((kMovingVector - kRotDir).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_RIGHT;
 	}
 
-	if(abs((kMovingVector + kRotDir).SqrLength()) < g_fEpsilon)
+	if (abs((kMovingVector + kRotDir).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_LEFT;
 	}
@@ -12734,14 +12734,14 @@ BYTE PgActor::GetDirFromMovingVector8Way(NiPoint3 const &rkMovingVector)
 	kRotDir2 += m_kPathNormal;
 	kRotDir2.Unitize();
 
-	// PathNormalÀº À§ÂÊÀ» °¡¸®Å°¹Ç·Î È¸Àü½ÃÄÑ¼­ ¿ÞÂÊÀÎÁö Ã¼Å©
-	if(abs((kMovingVector - kRotDir2).SqrLength()) < g_fEpsilon)
+	// PathNormalï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½Ç·ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
+	if (abs((kMovingVector - kRotDir2).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_RIGHT + DIR_UP;
 	}
 
-	// ¹Ý´ë ¹æÇâ
-	if(abs((kMovingVector + kRotDir2).SqrLength()) < g_fEpsilon)
+	// ï¿½Ý´ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (abs((kMovingVector + kRotDir2).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_LEFT + DIR_DOWN;
 	}
@@ -12750,12 +12750,12 @@ BYTE PgActor::GetDirFromMovingVector8Way(NiPoint3 const &rkMovingVector)
 	kRotDir2 += -m_kPathNormal;
 	kRotDir2.Unitize();
 
-	if(abs((kMovingVector - kRotDir2).SqrLength()) < g_fEpsilon)
+	if (abs((kMovingVector - kRotDir2).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_RIGHT + DIR_DOWN;
 	}
 
-	if(abs((kMovingVector + kRotDir2).SqrLength()) < g_fEpsilon)
+	if (abs((kMovingVector + kRotDir2).SqrLength()) < g_fEpsilon)
 	{
 		return DIR_LEFT + DIR_UP;
 	}
@@ -12772,15 +12772,15 @@ void PgActor::InvalidateDirection()
 
 	BYTE byNewDirection = DIR_NONE;
 	byNewDirection |= (uiSeqLeft > uiSeqRight ? DIR_LEFT :
-						uiSeqLeft < uiSeqRight ? DIR_RIGHT : DIR_NONE);
+		uiSeqLeft < uiSeqRight ? DIR_RIGHT : DIR_NONE);
 
 	byNewDirection |= (uiSeqUp > uiSeqDown ? DIR_UP :
-						uiSeqUp < uiSeqDown ? DIR_DOWN : DIR_NONE);
+		uiSeqUp < uiSeqDown ? DIR_DOWN : DIR_NONE);
 
 	SetDirection(byNewDirection);
 }
 
-void PgActor::ReserveDirection(BYTE byDirection, DWORD dwDirectionTerm, NiPoint3 &rkCurPos)
+void PgActor::ReserveDirection(BYTE byDirection, DWORD dwDirectionTerm, NiPoint3& rkCurPos)
 {
 	//WriteToConsole("[PgActor.ReserveDirection] Direction : %u, ActionTerm : %u\n", byDirection, dwDirectionTerm);
 	PgActionEntity kActionEntity(0, byDirection);
@@ -12796,7 +12796,7 @@ void PgActor::SetDirection(BYTE byDirection)
 {
 	_PgOutputDebugString("%s m_byMovingDirection : %d -> %d \n", __FUNCTIONW__, m_byMovingDirection, byDirection);
 
-	if(DIR_NONE != m_byMovingDirection)
+	if (DIR_NONE != m_byMovingDirection)
 	{
 		m_byLastMovingDirection = m_byMovingDirection;
 	}
@@ -12808,27 +12808,27 @@ void PgActor::SetDirection(BYTE byDirection)
 
 	if (GetPilot() && GetPilot()->GetUnit())
 	{
-		// ¾îµð¿¡ ¾²´Â ÄÚµåÀÎÁö~
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½~
 		GetPilot()->GetUnit()->FrontDirection((Direction)byDirection);
 	}
 }
 
-bool PgActor::AddEffectToAction(PgPilot	*pkTargetPilot,int iEffectNo,int iEffectValue,int iActionInstanceID)
+bool PgActor::AddEffectToAction(PgPilot* pkTargetPilot, int iEffectNo, int iEffectValue, int iActionInstanceID)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.AddEffectToAction"), g_pkApp->GetFrameCount()));
-	if(!m_pkAction) return	false;
-	if(m_pkAction->GetActionInstanceID()!=iActionInstanceID)
+	if (!m_pkAction) return	false;
+	if (m_pkAction->GetActionInstanceID() != iActionInstanceID)
 		return	false;
-	if(!pkTargetPilot) return false;
+	if (!pkTargetPilot) return false;
 
-	PgActionTargetList	*pkTargetList = m_pkAction->GetTargetList();
+	PgActionTargetList* pkTargetList = m_pkAction->GetTargetList();
 
-	if(pkTargetList==NULL) return	false;
-	if(pkTargetList->IsActionEffectApplied()) return false;
+	if (pkTargetList == NULL) return	false;
+	if (pkTargetList->IsActionEffectApplied()) return false;
 
 	PG_ASSERT_LOG(GetPilot());
-	PgActionTargetInfo	*pkTargetInfo = pkTargetList->GetTargetByGUID(pkTargetPilot->GetGuid());
-	if(!pkTargetInfo) return false;
+	PgActionTargetInfo* pkTargetInfo = pkTargetList->GetTargetByGUID(pkTargetPilot->GetGuid());
+	if (!pkTargetInfo) return false;
 	/*{
 		PgActionResult	kNewResult;
 		kNewResult.AddStatusEffect(iEffectNo,iEffectValue);
@@ -12843,13 +12843,13 @@ bool PgActor::AddEffectToAction(PgPilot	*pkTargetPilot,int iEffectNo,int iEffect
 		return	true;
 	}*/
 
-	pkTargetInfo->GetActionResult().AddStatusEffect(iEffectNo,iEffectValue);
+	pkTargetInfo->GetActionResult().AddStatusEffect(iEffectNo, iEffectValue);
 
 	return	true;
 }
 void	PgActor::AddIgnoreEffect(int iEffectID)
 {
-	if(IsIgnoreEffect(iEffectID))
+	if (IsIgnoreEffect(iEffectID))
 	{
 		return;
 	}
@@ -12858,9 +12858,9 @@ void	PgActor::AddIgnoreEffect(int iEffectID)
 }
 void	PgActor::RemoveIgnoreEffect(int iEffectID)
 {
-	for(IntList::iterator itor = m_IgnoreEffectList.begin(); itor != m_IgnoreEffectList.end(); ++itor)
+	for (IntList::iterator itor = m_IgnoreEffectList.begin(); itor != m_IgnoreEffectList.end(); ++itor)
 	{
-		if(*itor == iEffectID)
+		if (*itor == iEffectID)
 		{
 			m_IgnoreEffectList.erase(itor);
 			return;
@@ -12873,26 +12873,26 @@ void	PgActor::ClearIgnoreEffectList()
 }
 bool	PgActor::IsIgnoreEffect(int iEffectID)
 {
-	for(IntList::iterator itor = m_IgnoreEffectList.begin(); itor != m_IgnoreEffectList.end(); ++itor)
+	for (IntList::iterator itor = m_IgnoreEffectList.begin(); itor != m_IgnoreEffectList.end(); ++itor)
 	{
-		if(*itor == iEffectID)
+		if (*itor == iEffectID)
 		{
 			return	true;
 		}
 	}
 	PgPilot* pkPIlot = GetPilot();
-	if( !pkPIlot )
+	if (!pkPIlot)
 	{
 		return true;
 	}
 	CUnit* pkUnit = pkPIlot->GetUnit();
-	if( !pkUnit )
+	if (!pkUnit)
 	{
 		return true;
 	}
-		
+
 	SSFilter_Result kResult;
-	if( !pkUnit->CheckSkillFilter(iEffectID, NULL, ESFilter_Ignore_Action_Effect)
+	if (!pkUnit->CheckSkillFilter(iEffectID, NULL, ESFilter_Ignore_Action_Effect)
 		|| !pkUnit->CheckSkillFilter(iEffectID, &kResult)
 		)
 	{
@@ -12902,165 +12902,165 @@ bool	PgActor::IsIgnoreEffect(int iEffectID)
 	return	false;
 }
 
-bool PgActor::AddEffect(int const iEffectNo, int  const iEffectValue, float  const fElapsedTime, BM::GUID const &kCasterGUID, int  const iActionInstanceID, DWORD  const dwTimeStamp, bool  const bIsTemporaryEffect, CSkillDef const* pkSkillDef)
+bool PgActor::AddEffect(int const iEffectNo, int  const iEffectValue, float  const fElapsedTime, BM::GUID const& kCasterGUID, int  const iActionInstanceID, DWORD  const dwTimeStamp, bool  const bIsTemporaryEffect, CSkillDef const* pkSkillDef)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.AddEffect"), g_pkApp->GetFrameCount()));
 
 	int iApplyEffectNo = iEffectNo;
-	if(ACTIONEFFECT_DIE==iEffectNo && GetUnit() && GetUnit()->GetAbil(AT_VOLUNTARILY_DIE) )
+	if (ACTIONEFFECT_DIE == iEffectNo && GetUnit() && GetUnit()->GetAbil(AT_VOLUNTARILY_DIE))
 	{
 		iApplyEffectNo = ACTIONEFFECT_VOLUNTARILY_DIE;
 	}
 
-	//	¹«½ÃÇÒ ÀÌÆåÆ® ¸®½ºÆ®¿¡ µé¾îÀÖ´Ù¸é ¸®ÅÏ!
-	if(IsIgnoreEffect(iApplyEffectNo))
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½!
+	if (IsIgnoreEffect(iApplyEffectNo))
 	{
-		return false; 
+		return false;
 	}
 
-	//	leesg213 ¾×¼ÇÀÌÆåÆ® °ü·Ã ¼öÁ¤
-	NILOG(PGLOG_LOG,"PgActor::AddEffect EffectNo : %d CasterGUID : %s ActorGUID : %s ActorName : %s\n",iApplyEffectNo,MB(kCasterGUID.str()),MB(GetPilotGuid().str()),MB(GetPilot()->GetName()));
-	_PgOutputDebugString("PgActor::AddEffect EffectNo : %d CasterGUID : %s ActorGUID : %s ActorName : %s\n",iApplyEffectNo,MB(kCasterGUID.str()),MB(GetPilotGuid().str()),MB(GetPilot()->GetName()));
+	//	leesg213 ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	NILOG(PGLOG_LOG, "PgActor::AddEffect EffectNo : %d CasterGUID : %s ActorGUID : %s ActorName : %s\n", iApplyEffectNo, MB(kCasterGUID.str()), MB(GetPilotGuid().str()), MB(GetPilot()->GetName()));
+	_PgOutputDebugString("PgActor::AddEffect EffectNo : %d CasterGUID : %s ActorGUID : %s ActorName : %s\n", iApplyEffectNo, MB(kCasterGUID.str()), MB(GetPilotGuid().str()), MB(GetPilot()->GetName()));
 
 	GET_DEF(CEffectDefMgr, kEffectDefMgr);
 	CEffectDef const* pkEffectDef = kEffectDefMgr.GetDef(iApplyEffectNo);
-	if(!pkEffectDef) 
+	if (!pkEffectDef)
 	{
 		NILOG(PGLOG_ERROR, "[PgActor] %d effect no, can't find effectdef\n", iApplyEffectNo);
 		return false;
 	}
 
-	if( (pkEffectDef->GetType() != EFFECT_TYPE_CURSED)
-	 && (pkEffectDef->GetType() != EFFECT_TYPE_SYSTEM) )
-	{ //µð¹öÇÁ(°­Á¦Àû) È¿°ú ÀÌ¸é..
-		g_kStatusEffectMan.AddStatusEffect(GetPilot(),NULL,0,iApplyEffectNo,iEffectValue,false,true);
+	if ((pkEffectDef->GetType() != EFFECT_TYPE_CURSED)
+		&& (pkEffectDef->GetType() != EFFECT_TYPE_SYSTEM))
+	{ //ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) È¿ï¿½ï¿½ ï¿½Ì¸ï¿½..
+		g_kStatusEffectMan.AddStatusEffect(GetPilot(), NULL, 0, iApplyEffectNo, iEffectValue, false, true);
 		return true;
 	}
 
 	//	ActionEffect
-	switch( iApplyEffectNo )
+	switch (iApplyEffectNo)
 	{
 	case ACTIONEFFECT_REVIVE:
 	case ACTIONEFFECT_RESURRECTION01:
-		{
-			//	´Ù½Ã »ì¾Æ ³ª¸é ÀÌ¸§À» ·»´õ¸µ ÇÏÀÚ
-			m_bNoName = false;
-			UpdateName();
+	{
+		//	ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		m_bNoName = false;
+		UpdateName();
 
-			// Gauge Bar Refresh
-			int	const iCurrentHP = GetPilot()->GetAbil(AT_HP);
-			RefreshHPGaugeBar(iCurrentHP,iCurrentHP,this);
-		}break;
+		// Gauge Bar Refresh
+		int	const iCurrentHP = GetPilot()->GetAbil(AT_HP);
+		RefreshHPGaugeBar(iCurrentHP, iCurrentHP, this);
+	}break;
 	case ACTIONEFFECT_DIE:
 	case ACTIONEFFECT_VOLUNTARILY_DIE:
+	{
+		ReserveDieByActioin(true);
+
+		if (GetPilot())
 		{
-			ReserveDieByActioin(true);
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ HPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì°¡ ï¿½ï¿½ï¿½ï¿½.
+			int	const iCurrentHP = GetPilot()->GetAbil(AT_HP);
+			RefreshHPGaugeBar(iCurrentHP, 0, this);
+		}
 
-			if(GetPilot())
+		//	ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+		m_bNoName = true;
+
+		if (GetPilot())
+		{
+			PgPilot* pkPilot = GetPilot();
+			if (pkPilot->GetUnit())
 			{
-				// Á×À» ¶§ HP°¡ Á¶±Ý ³²¾Æ º¸´Â °æ¿ì°¡ ÀÖÀ½.
-				int	const iCurrentHP = GetPilot()->GetAbil(AT_HP);
-				RefreshHPGaugeBar(iCurrentHP, 0, this);
-			}
-
-			//	Á×¾úÀ» °æ¿ì ÀÌ¸§À» ·»´õ¸µÇÏÁö ¸»ÀÚ.
-			m_bNoName = true;
-
-			if( GetPilot() )
-			{
-				PgPilot *pkPilot = GetPilot();
-				if( pkPilot->GetUnit() )
+				if (pkPilot->GetUnit()->IsInUnitType(UT_PLAYER) && !IsMyActor())
 				{
-					if(pkPilot->GetUnit()->IsInUnitType( UT_PLAYER ) && !IsMyActor() )
-					{
-						SChatLog kChatLog(CT_EVENT_SYSTEM);
-						std::wstring kLog = GetPilot()->GetName() + TTW(700012);
-						g_kChatMgrClient.AddLogMessage(kChatLog, kLog);
-					}
-					else if(pkPilot->GetUnit()->IsInUnitType( UT_MONSTER ) && g_pkWorld)
-					{
-						g_pkWorld->DeleteEffectRemainTime(pkPilot->GetGuid());
-					}
+					SChatLog kChatLog(CT_EVENT_SYSTEM);
+					std::wstring kLog = GetPilot()->GetName() + TTW(700012);
+					g_kChatMgrClient.AddLogMessage(kChatLog, kLog);
 				}
-
-				//	»óÅÂÀÌ»óÀ» ¸ðµÎ ÇØÁ¦½ÃÅ²´Ù.
-				g_kStatusEffectMan.RemoveAllStatusEffect(GetPilot());
-
-				//	¶³±Å¾ß ÇÒ ¾ÆÀÌÅÛÀÌ ÀÖ´Ù¸é ¶³±º´Ù.(´Ü, Á¤¿¹´Â ´Ù¸¥ ¹æ½ÄÀ¸·Î ¶³±¼°ÍÀÌ¹Ç·Î ¿¹¿Ü·Î ÇÑ´Ù)
-				if(GetPilot()->GetAbil(AT_GRADE) != EMGRADE_ELITE)
+				else if (pkPilot->GetUnit()->IsInUnitType(UT_MONSTER) && g_pkWorld)
 				{
-					DoDropItems();
+					g_pkWorld->DeleteEffectRemainTime(pkPilot->GetGuid());
 				}
 			}
 
-			//	Á×¾úÀ» ¶§ ½ÇÇàÇÒ ÀÌº¥Æ® ½ºÅ©¸³Æ®°¡ ÀÖÀ¸¸é ½ÇÇà
-			g_kEventScriptSystem.ActivateEvent(GetEventScriptIDOnDie());
+			//	ï¿½ï¿½ï¿½ï¿½ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
+			g_kStatusEffectMan.RemoveAllStatusEffect(GetPilot());
 
-			// Á×À¸¸é ½ºÅ³¼¼Æ® Ãë¼Ò
-			SkillSetAction().ReserveActionCancel();
-		}break;
+			//	ï¿½ï¿½ï¿½Å¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.(ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½ï¿½ï¿½Ü·ï¿½ ï¿½Ñ´ï¿½)
+			if (GetPilot()->GetAbil(AT_GRADE) != EMGRADE_ELITE)
+			{
+				DoDropItems();
+			}
+		}
+
+		//	ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		g_kEventScriptSystem.ActivateEvent(GetEventScriptIDOnDie());
+
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
+		SkillSetAction().ReserveActionCancel();
+	}break;
 	case ACTIONEFFECT_BLOCK:
-		{// ºí·°½Ã
-			if( pkSkillDef )
-			{
-				PgPilot* pkPilot = GetPilot();
-				if(pkPilot)
-				{// ¹Ð¸®´Â ÀÎÀÚ °ªµéÀ» ¼¼ÆÃ
-					int const iDist = lua_tinker::call< int, int >("GetPushActorSkillInfo_Distance", pkSkillDef->No() );
-					pkPilot->SetAbil(AT_PUSH_DIST_WHEN_BLOCK, iDist );
+	{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if (pkSkillDef)
+		{
+			PgPilot* pkPilot = GetPilot();
+			if (pkPilot)
+			{// ï¿½Ð¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				int const iDist = lua_tinker::call< int, int >("GetPushActorSkillInfo_Distance", pkSkillDef->No());
+				pkPilot->SetAbil(AT_PUSH_DIST_WHEN_BLOCK, iDist);
 
-					int const iSpeed = lua_tinker::call< int, int >("GetPushActorSkillInfo_Velocity", pkSkillDef->No() );
-					pkPilot->SetAbil(AT_PUSH_SPEED_WHEN_BLOCK, iSpeed );
+				int const iSpeed = lua_tinker::call< int, int >("GetPushActorSkillInfo_Velocity", pkSkillDef->No());
+				pkPilot->SetAbil(AT_PUSH_SPEED_WHEN_BLOCK, iSpeed);
 
-					int const iAccel = lua_tinker::call< int, int >("GetPushActorSkillInfo_Accel", pkSkillDef->No() );
-					pkPilot->SetAbil(AT_PUSH_ACCEL_WHEN_BLOCK, iAccel );
-				}
+				int const iAccel = lua_tinker::call< int, int >("GetPushActorSkillInfo_Accel", pkSkillDef->No());
+				pkPilot->SetAbil(AT_PUSH_ACCEL_WHEN_BLOCK, iAccel);
 			}
-		}break;
+		}
+	}break;
 	}
 
-	m_pkActionEffectStack->AddNewEffect(kCasterGUID,iActionInstanceID,bIsTemporaryEffect,iApplyEffectNo,dwTimeStamp);
+	m_pkActionEffectStack->AddNewEffect(kCasterGUID, iActionInstanceID, bIsTemporaryEffect, iApplyEffectNo, dwTimeStamp);
 	return true;
 }
 
-void PgActor::RemoveEffectFromAction(PgPilot *pkTargetPilot, int iEffectNo)
+void PgActor::RemoveEffectFromAction(PgPilot* pkTargetPilot, int iEffectNo)
 {
-	if(!m_pkAction) return;
+	if (!m_pkAction) return;
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.RemoveEffectFromAction"), g_pkApp->GetFrameCount()));
 
-	PgActionTargetList	*pkTargetList = m_pkAction->GetTargetList();
+	PgActionTargetList* pkTargetList = m_pkAction->GetTargetList();
 
-	if(pkTargetList==NULL) return	;
-	if(pkTargetList->IsActionEffectApplied()) return ;
+	if (pkTargetList == NULL) return;
+	if (pkTargetList->IsActionEffectApplied()) return;
 
 	PG_ASSERT_LOG(GetPilot());
-	PgActionTargetInfo	*pkTargetInfo = pkTargetList->GetTargetByGUID(pkTargetPilot->GetGuid());
-	if(!pkTargetInfo)
+	PgActionTargetInfo* pkTargetInfo = pkTargetList->GetTargetByGUID(pkTargetPilot->GetGuid());
+	if (!pkTargetInfo)
 		return;
 
 	PgActionResult	kActionResult = pkTargetInfo->GetActionResult();
 
 	pkTargetInfo->GetActionResult().ClearStatusEffect();
 
-	for(size_t i = 0; i<kActionResult.GetStatusEffectNum(); ++i)
+	for (size_t i = 0; i < kActionResult.GetStatusEffectNum(); ++i)
 	{
-		PgActionResult::stStatusEffect	*pkEffectInfo = kActionResult.GetStatusEffect(i);
-		if(pkEffectInfo && pkEffectInfo->m_iEffectID != iEffectNo)
+		PgActionResult::stStatusEffect* pkEffectInfo = kActionResult.GetStatusEffect(i);
+		if (pkEffectInfo && pkEffectInfo->m_iEffectID != iEffectNo)
 		{
-			pkTargetInfo->GetActionResult().AddStatusEffect(pkEffectInfo->m_iEffectID,pkEffectInfo->m_iEffectValue);
+			pkTargetInfo->GetActionResult().AddStatusEffect(pkEffectInfo->m_iEffectID, pkEffectInfo->m_iEffectValue);
 		}
 	}
 }
 
 void PgActor::DetachNameNodes(NiAVObject* pkNIFRoot, char const* const szTargetNameNode)
 {
-	if( !pkNIFRoot )
+	if (!pkNIFRoot)
 	{
 		return;
 	}
 
-	NiNode	*pkNameTargetNode = NiDynamicCast(NiNode, pkNIFRoot->GetObjectByName(szTargetNameNode));
-	if( pkNameTargetNode )
+	NiNode* pkNameTargetNode = NiDynamicCast(NiNode, pkNIFRoot->GetObjectByName(szTargetNameNode));
+	if (pkNameTargetNode)
 	{
 		PgActorUtil::DetachFromNode(pkNameTargetNode, m_spNameText);
 		PgActorUtil::DetachFromNode(pkNameTargetNode, m_spTitleName);
@@ -13078,13 +13078,13 @@ void PgActor::DetachNameNodes(NiAVObject* pkNIFRoot, char const* const szTargetN
 
 void PgActor::AttachNameNodes(NiAVObject* pkNIFRoot, char const* const szTargetNameNode)
 {
-	if( !pkNIFRoot )
+	if (!pkNIFRoot)
 	{
 		return;
 	}
 
-	NiNode	*pkNameTargetNode = NiDynamicCast(NiNode, pkNIFRoot->GetObjectByName(szTargetNameNode));
-	if( pkNameTargetNode )
+	NiNode* pkNameTargetNode = NiDynamicCast(NiNode, pkNIFRoot->GetObjectByName(szTargetNameNode));
+	if (pkNameTargetNode)
 	{
 		PgActorUtil::AttachToNode(pkNameTargetNode, m_spNameText);
 		PgActorUtil::AttachToNode(pkNameTargetNode, m_spTitleName);
@@ -13104,34 +13104,34 @@ NiNode* PgActor::GetNodePointStar(void)
 {
 	PgPilot* pkPilot = GetPilot();
 	NiNode* pkNodeRet = NULL;
-	if(!pkPilot)
+	if (!pkPilot)
 	{
 		return NULL;
 	}
 	CUnit* pkUnit = pkPilot->GetUnit();
-	if(!pkUnit)
+	if (!pkUnit)
 	{
 		return NULL;
 	}
 
-/*	if(!pkUnit->IsUnitType(UT_PLAYER))
-	{
-		return NULL;
-	}
-*/
+	/*	if(!pkUnit->IsUnitType(UT_PLAYER))
+		{
+			return NULL;
+		}
+	*/
 	PgActor* pkActorPet = GetMountTargetPet();
-	if(pkActorPet) //Æê¿¡ Å¾½Â ÁßÀÌ¶ó¸é ÇÃ·¹ÀÌ¾îÀÇ ÀÌ¸§ ³ëµå¸¦ »ç¿ëÇÏÁö ¾Ê°í
-	{				//ÆêÀÇ ÀÌ¸§ ³ëµå¸¦ »ç¿ë. Å¾½Â ÈÄ ÇÃ·¹ÀÌ¾î ³ëµå »ç¿ë½Ã ÀÌ¸§ÀÌ ¿Ô´Ù°¬´Ù°Å¸²
+	if (pkActorPet) //ï¿½ê¿¡ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½
+	{				//ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½. Å¾ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ô´Ù°ï¿½ï¿½Ù°Å¸ï¿½
 		NiAVObject* pkRoot = pkActorPet->GetNIFRoot();
-		if(pkRoot)
+		if (pkRoot)
 		{
 			pkNodeRet = NiDynamicCast(NiNode, pkRoot->GetObjectByName(ATTACH_POINT_RIDENAME));
 		}
 	}
-	else //ÇÃ·¹ÀÌ¾îÀÇ µðÆúÆ® ÀÌ¸§ ³ëµå
+	else //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½
 	{
 		NiAVObject* pkRoot = GetNIFRoot();
-		if(pkRoot)
+		if (pkRoot)
 		{
 			pkNodeRet = NiDynamicCast(NiNode, pkRoot->GetObjectByName(ATTACH_POINT_STAR));
 		}
@@ -13139,26 +13139,26 @@ NiNode* PgActor::GetNodePointStar(void)
 	return pkNodeRet;
 }
 
-void PgActor::RestoreTransformation(char const *pcFirstAction)
+void PgActor::RestoreTransformation(char const* pcFirstAction)
 {
 	m_kTransformedActorID = "";
 
-	if(!m_bTransformed)
+	if (!m_bTransformed)
 	{
 		return;
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.RestorTransformation"), g_pkApp->GetFrameCount()));
-	NiActorManager *pkAM = GetActorManager();
-	if(!pkAM) return;
+	NiActorManager* pkAM = GetActorManager();
+	if (!pkAM) return;
 
-	NiAVObject *pkRoot = pkAM->GetNIFRoot();
+	NiAVObject* pkRoot = pkAM->GetNIFRoot();
 
-	DetachNameNodes(pkRoot); // ÀÌ¸§µé(±æµå¸í, ±æµå¸¶Å©, µî)À» º¯½ÅÇØÁ¦ Àü¿¡ Node¿¡¼­ ¶§ÁØ´Ù.
+	DetachNameNodes(pkRoot); // ï¿½Ì¸ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½å¸¶Å©, ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Nodeï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 
 #ifdef PG_USE_ACTORMANAGER_REUSE
 	pkRoot->SetAppCulled(true);
-	/*	//	ÀÌºÎºÐ ÁÖ¼®Ã³¸®ÇØ³õÀº ÈÄ Å©·¡½Ã°¡ »ç¶óÁ³´Ù. ¾ÆÁ÷ Á¤È®ÇÑ ¿øÀÎÀº Ã£À» ¼ö ¾ø´Ù.
+	/*	//	ï¿½ÌºÎºï¿½ ï¿½Ö¼ï¿½Ã³ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ ï¿½ï¿½ Å©ï¿½ï¿½ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	DetachChild(pkRoot);
 	UpdateEffects();
 	UpdateNodeBound();
@@ -13172,15 +13172,15 @@ void PgActor::RestoreTransformation(char const *pcFirstAction)
 	UpdateProperties();
 #endif
 
-	if(m_pkWorldObjectBase)
-	{		
+	if (m_pkWorldObjectBase)
+	{
 		m_pkWorldObjectBase->DetachEffects(this);
 	}
 
 	RemoveSubIWorldObjectBase();
 
 
-	// º¯½Å ÇØÁ¦!!
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!!
 
 	pkAM = GetActorManager();
 
@@ -13188,13 +13188,13 @@ void PgActor::RestoreTransformation(char const *pcFirstAction)
 	pkAM->GetNIFRoot()->SetAppCulled(false);
 	m_kSeqID = NiActorManager::INVALID_SEQUENCE_ID;
 
-	AttachNameNodes(pkAM->GetNIFRoot()); // ÀÌ¸§À» ´Ù½Ã ºÙÀÎ´Ù.
+	AttachNameNodes(pkAM->GetNIFRoot()); // ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
 
 	std::wstring kEventScript = m_pkWorldObjectBase->GetEventScript();
-	if(kEventScript.length() != 0)
+	if (kEventScript.length() != 0)
 	{
 		PG_ASSERT_LOG(m_pkActorCallback);
-		if(m_pkActorCallback)
+		if (m_pkActorCallback)
 		{
 			m_pkActorCallback->m_pkWorldObject = this;
 			m_pkActorCallback->m_kScriptName = MB(kEventScript);
@@ -13203,16 +13203,16 @@ void PgActor::RestoreTransformation(char const *pcFirstAction)
 		}
 	}
 
-	//	ÇöÀç ¾×¼ÇÀ» Äµ½½½ÃÅ²´Ù.
-	if(m_pkAction
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ Äµï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
+	if (m_pkAction
 		&& m_pkAction->GetActionType() != "IDLE"
 		)
-	{ 
-		CancelAction(m_pkAction->GetActionNo(),m_pkAction->GetActionInstanceID(),ACTIONNAME_IDLE);
+	{
+		CancelAction(m_pkAction->GetActionNo(), m_pkAction->GetActionInstanceID(), ACTIONNAME_IDLE);
 	}
 
 
-	if(pcFirstAction)
+	if (pcFirstAction)
 	{
 		TransitAction(pcFirstAction);
 	}
@@ -13222,38 +13222,38 @@ void PgActor::RestoreTransformation(char const *pcFirstAction)
 	}
 
 	m_bTransformed = false;
-	UpdateName();	//ÀÌ¸§ ¿ø·¡´ë·Î
+	UpdateName();	//ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
-void PgActor::Transformation(char const *pcNewModel, char const *pcFirstAction, int const iTransformEffectID)
+void PgActor::Transformation(char const* pcNewModel, char const* pcFirstAction, int const iTransformEffectID)
 {
-	if(m_bTransformed)
+	if (m_bTransformed)
 	{
 		return;
 	}
-	if(!GetActorManager())
+	if (!GetActorManager())
 		return;
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.Transformation"), g_pkApp->GetFrameCount()));
-	// TODO : ABV¸¦ »õ·Î »ý¼ºÇÏ±ä ÇÏ´Âµ¥, PhysX¿Í ¹°¸®Áú ¾Ê°í ÀÖ´Ù -¤µ-; ÈæÈæ ±ÍÂú¾Æ~
-	PgIWorldObjectBase *pkNewBase = NiNew PgIWorldObjectBase;
-	TiXmlDocument *pkXmlDoc = PgXmlLoader::GetXmlDocumentByID(pcNewModel);
-	if(!pkXmlDoc)
+	// TODO : ABVï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½Ï´Âµï¿½, PhysXï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½Ö´ï¿½ -ï¿½ï¿½-; ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~
+	PgIWorldObjectBase* pkNewBase = NiNew PgIWorldObjectBase;
+	TiXmlDocument* pkXmlDoc = PgXmlLoader::GetXmlDocumentByID(pcNewModel);
+	if (!pkXmlDoc)
 	{
 		//SAFE_DELETE(pkXmlDoc);
 		SAFE_DELETE_NI(pkNewBase);
 		return;
 	}
 
-	// ÃÖ»óÀ§ ³ëµå¸¦ Ã£´Â´Ù.
-	TiXmlNode *pkRootNode = pkXmlDoc->FirstChild();
-	while(pkRootNode && pkRootNode->Type() != TiXmlNode::ELEMENT)
+	// ï¿½Ö»ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦ Ã£ï¿½Â´ï¿½.
+	TiXmlNode* pkRootNode = pkXmlDoc->FirstChild();
+	while (pkRootNode && pkRootNode->Type() != TiXmlNode::ELEMENT)
 	{
 		pkRootNode = pkRootNode->NextSibling();
 	}
 
-	// ÃÖ»óÀ§ ³ëµå°¡ ¾ø´Ù¸é,
-	if(!pkRootNode)
+	// ï¿½Ö»ï¿½ï¿½ï¿½ ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½Ù¸ï¿½,
+	if (!pkRootNode)
 	{
 		//SAFE_DELETE(pkXmlDoc);
 		SAFE_DELETE_NI(pkNewBase);
@@ -13262,40 +13262,40 @@ void PgActor::Transformation(char const *pcNewModel, char const *pcFirstAction, 
 
 	bool bFindWorldTag = false;
 	pkRootNode = pkRootNode->FirstChildElement();
-	while(pkRootNode)
+	while (pkRootNode)
 	{
-		char const *pcTagName = pkRootNode->Value();
-		if(strcmp(pcTagName, "WORLDOBJECT") == 0)
+		char const* pcTagName = pkRootNode->Value();
+		if (strcmp(pcTagName, "WORLDOBJECT") == 0)
 		{
 			bFindWorldTag = true;
 			break;
 		}
-		pkRootNode = pkRootNode->NextSiblingElement();	
+		pkRootNode = pkRootNode->NextSiblingElement();
 	}
 
-	if(!bFindWorldTag)
+	if (!bFindWorldTag)
 	{
 		//SAFE_DELETE(pkXmlDoc);
 		SAFE_DELETE_NI(pkNewBase);
 		return;
 	}
 
-	NiActorManager *pkAM = GetActorManager();
+	NiActorManager* pkAM = GetActorManager();
 	PG_ASSERT_LOG(pkAM);
 
-	DetachNameNodes(pkAM->GetNIFRoot()); // ±âÁ¸¿¡¼­ ÀÌ¸§µéÀ» ¶§ÁÖ°í
+	DetachNameNodes(pkAM->GetNIFRoot()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
 
-	// º¯½Å!!
+	// ï¿½ï¿½ï¿½ï¿½!!
 	m_bTransformed = pkNewBase->ParseXml(pkRootNode, this, true);
-	if(m_bTransformed)
+	if (m_bTransformed)
 	{
-		if(0 < iTransformEffectID)
+		if (0 < iTransformEffectID)
 		{
-			// º¯½ÅÇÒ¶§ ºÙÀº ÀÌÆåÆ®(ÆÄÆ¼Å¬)µé¿¡°Ô »óÅÂ ÀÌÆåÆ® ¹øÈ£¸¦ Á¤ÇØÁØ´Ù 
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®(ï¿½ï¿½Æ¼Å¬)ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ 
 			CONT_TRANSFORM_EFFECT_ATTACH_INFO::iterator itor = m_kContTransformEffAttachInfo.begin();
-			while(m_kContTransformEffAttachInfo.end() != itor)
+			while (m_kContTransformEffAttachInfo.end() != itor)
 			{
-				if( PgActor::E_NONE_INIT == itor->iTransformEffectID)
+				if (PgActor::E_NONE_INIT == itor->iTransformEffectID)
 				{
 					itor->iTransformEffectID = iTransformEffectID;
 					break;
@@ -13303,30 +13303,30 @@ void PgActor::Transformation(char const *pcNewModel, char const *pcFirstAction, 
 				++itor;
 			}
 		}
-		
-		if(g_pkWorld)
-		{//º¯½Å½Ã¿¡ ±Û·Î¿ì Ã¼Å©
-			PgRenderer::EnableGlowMap(this,g_pkWorld->GetSpotLightOn() || AlwaysGlowMap());
+
+		if (g_pkWorld)
+		{//ï¿½ï¿½ï¿½Å½Ã¿ï¿½ ï¿½Û·Î¿ï¿½ Ã¼Å©
+			PgRenderer::EnableGlowMap(this, g_pkWorld->GetSpotLightOn() || AlwaysGlowMap());
 		}
-	
+
 		m_kSeqID = NiActorManager::INVALID_SEQUENCE_ID;
 
-		// ±âÁ¸ÀÇ AMÀ» ¼û±ä´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AMï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 		pkAM->GetNIFRoot()->SetAppCulled(true);
 
-		// »õ·Î ¸¸µç AMÀ» °¡Á®¿Â´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ AMï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 		pkAM = GetActorManager();
 		PG_ASSERT_LOG(pkAM);
 
-		AttachNameNodes(pkAM->GetNIFRoot()); // ÀÌ¸§µé(±æµå¸í, ±æµå¸¶Å©, µî)À» º¯½ÅÇÑ Node¿¡ ´Ù½Ã ºÙ¿© ÁØ´Ù.
+		AttachNameNodes(pkAM->GetNIFRoot()); // ï¿½Ì¸ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½å¸¶Å©, ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Nodeï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ù¿ï¿½ ï¿½Ø´ï¿½.
 
-		// Event CallbackÀÌ ÀÖÀ¸¸é µî·ÏÇÑ´Ù.
+		// Event Callbackï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 		std::wstring kEventScript = pkNewBase->GetEventScript();
-		if(pkAM && kEventScript.length() != 0)
+		if (pkAM && kEventScript.length() != 0)
 		{
-			if(!m_pkActorCallback)
+			if (!m_pkActorCallback)
 			{
-				m_pkActorCallback = NiNew ActorCallbackObject;	
+				m_pkActorCallback = NiNew ActorCallbackObject;
 			}
 
 			m_pkActorCallback->m_pkWorldObject = this;
@@ -13337,21 +13337,21 @@ void PgActor::Transformation(char const *pcNewModel, char const *pcFirstAction, 
 
 		pkAM->GetNIFRoot()->SetAppCulled(false);
 
-		// À§Ä¡¸¦ ¸ÂÃá´Ù.
+		// ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 #ifdef PG_USE_CAPSULE_CONTROLLER
 		pkAM->GetNIFRoot()->SetTranslate(NiPoint3(0, 0, -(m_pkController->getHeight() * 0.5f + m_pkController->getRadius())));
 #else
 		pkAM->GetNIFRoot()->SetTranslate(NiPoint3(0, 0, -(PG_CHARACTER_CAPSULE_HEIGHT * 0.5f + PG_CHARACTER_CAPSULE_RADIUS)));
 #endif
 
-		//	ÇöÀç ¾×¼ÇÀ» Äµ½½½ÃÅ²´Ù.
-		if(m_pkAction)
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ Äµï¿½ï¿½ï¿½ï¿½Å²ï¿½ï¿½.
+		if (m_pkAction)
 		{
-			CancelAction(m_pkAction->GetActionNo(),m_pkAction->GetActionInstanceID(),ACTIONNAME_IDLE);
+			CancelAction(m_pkAction->GetActionNo(), m_pkAction->GetActionInstanceID(), ACTIONNAME_IDLE);
 		}
 
-		if(pcFirstAction&& 
-			::strlen(pcFirstAction) 
+		if (pcFirstAction &&
+			::strlen(pcFirstAction)
 			)
 		{
 			TransitAction(pcFirstAction);
@@ -13361,365 +13361,365 @@ void PgActor::Transformation(char const *pcNewModel, char const *pcFirstAction, 
 			DoReservedAction(RA_IDLE);
 		}
 	}
-	switch( g_kLocal.ServiceRegion() )
+	switch (g_kLocal.ServiceRegion())
 	{
 	case LOCAL_MGR::NC_DEVELOP:
 	case LOCAL_MGR::NC_VIETNAM:
-		{// º£Æ®³²Àº
-			if(TRANSFORM_ID_NINJA == iTransformEffectID)
-			{// ´ÑÀÚ º¯½Å½Ã¿¡ ¹«±â »çÀÌÁî¸¦ ÁÙ¿© ¹ö¸®´Â ±â´ÉÀ» ¼±ÅÃÀûÀ¸·Î »ç¿ëÇÏ°í (g_fWeaponSizeÀº ini·Î ¼³Á¤)
-				lwActor kTemp(this); 
-				kTemp.SetNodeScale("Bip01 Prop1", g_fWeaponSize);
-				kTemp.SetNodeScale("Bip01 Prop2", g_fWeaponSize);
-			}
-		}break;
+	{// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½
+		if (TRANSFORM_ID_NINJA == iTransformEffectID)
+		{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î¸¦ ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ (g_fWeaponSizeï¿½ï¿½ iniï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+			lwActor kTemp(this);
+			kTemp.SetNodeScale("Bip01 Prop1", g_fWeaponSize);
+			kTemp.SetNodeScale("Bip01 Prop2", g_fWeaponSize);
+		}
+	}break;
 	}
 	//SAFE_DELETE(pkXmlDoc);
 
 	m_kTransformedActorID = std::string(pcNewModel);
 }
 
-bool PgActor::ParseXml(const TiXmlNode *pkNode, void *pArg, bool bUTF8)
-{ 
+bool PgActor::ParseXml(const TiXmlNode* pkNode, void* pArg, bool bUTF8)
+{
 	int const iType = pkNode->Type();
-	
+
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.ParseXml"), g_pkApp->GetFrameCount()));
-	switch(iType)
+	switch (iType)
 	{
 	case TiXmlNode::ELEMENT:
+	{
+		TiXmlElement* pkElement = (TiXmlElement*)pkNode;
+		PG_ASSERT_LOG(pkElement);
+
+		char const* pcTagName = pkElement->Value();
+
+		if (strcmp(pcTagName, "ACTOR") == 0)
 		{
-			TiXmlElement *pkElement = (TiXmlElement *)pkNode;
-			PG_ASSERT_LOG(pkElement);
-			
-			char const *pcTagName = pkElement->Value();
-
-			if(strcmp(pcTagName, "ACTOR") == 0)
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+			while (pkAttr)
 			{
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-				while(pkAttr)
+				char const* pcName = pkAttr->Name();
+				char const* pcValue = pkAttr->Value();
+				if (strcmp(pcName, "NAME") == 0)
 				{
-					char const *pcName = pkAttr->Name();
-					char const *pcValue = pkAttr->Value();
-					if (strcmp(pcName, "NAME") == 0)
-					{
-						SetName(pcValue);
-					}
-					else if (strcmp(pcName, "ORIGINAL_XML") == 0)
-					{
-						std::string strName = m_kName;
-						PgXmlLoader::Get()->CreateObject(pcValue, pArg, this);
-						SetName(strName.c_str());
-					}
-					else if (strcmp(pcName,"DIE_PARTICLE_ID") == 0)
-					{
-						m_kDieParticleID = std::string(pcValue);
-					}
-					else if (strcmp(pcName,"DIE_PARTICLE_NODE") == 0)
-					{
-						m_kDieParticleNode = std::string(pcValue);
-					}
-					else if (strcmp(pcName,"DIE_PARTICLE_SCALE") == 0)
-					{
-						m_fDieParticleScale = (float)atof(pcValue);
-					}
-					else if (strcmp(pcName,"DIE_SOUND_ID") == 0)
-					{
-						m_kDieSoundID = std::string(pcValue);
-					}
-					else if (strcmp(pcName,"LOADING_COMPLETE_INIT") == 0)
-					{
-						m_kLoadingCompleteInitFunc = std::string(pcValue);
-					}
-					else if (stricmp(pcName,"EVENT_SCRIPT_ON_DIE") == 0)
-					{
-						SetEventScriptIDOnDie(atoi(pcValue));
-					}
-					else  if (stricmp(pcName,"USE_BATTLE_IDLE") == 0)
-					{
-						SetUseBattleIdle(strcmp( pcValue, "TRUE" ) == 0);
-					}
-					else if (0 == stricmp(pcName,"ALWAYS_GLOWMAP"))
-					{
-						AlwaysGlowMap(strcmp( pcValue, "TRUE" ) == 0);
-					}
-					else if (0 == stricmp(pcName,"CAN_RIDE"))
-					{
-						m_bCanRide = (strcmp( pcValue, "TRUE" ) == 0);
-					}
-					else  if (stricmp(pcName,"SHOW_WARNING") == 0)
-					{
-						m_bShowWarning = (strcmp( pcValue, "TRUE" ) == 0);
-					}
-					else  if (stricmp(pcName,"INIT_SHOW_ACTOR") == 0)
-					{
-						bool const bInitShow = (strcmp( pcValue, "TRUE" ) == 0);
-						SetHide( !bInitShow );
-					}
-					else  if (stricmp(pcName,"IDLE_EFFECT_NAME") == 0)
-					{
-						IdleEffectName(pcValue);
-					}
-					else if (stricmp(pcName,"IDLE_EFFECT_NODE") == 0)
-					{
-						IdleEffectNode(pcValue);
-					}
-					else
-					{
-						//PG_ASSERT_LOG(!"Unknown Attributes!");
-					}
-					pkAttr = pkAttr->Next();
+					SetName(pcValue);
 				}
-
-				// ActorÆÄ½Ì ÇÒ ¶§ ±âº» ¾×¼ÇÀ» ³Ö¾îÁØ´Ù.
-				m_kReservedAction.insert(std::make_pair(RA_IDLE, ACTIONNAME_IDLE));
-				m_kReservedAction.insert(std::make_pair(RA_OPENING, "a_opening"));
-				m_kReservedAction.insert(std::make_pair(RA_INTRO_IDLE, "a_intro_idle"));
-
-				// ÀÚ½Ä ³ëµåµéÀ» ÆÄ½ÌÇÑ´Ù.
-				// Ã¹ ÀÚ½Ä¸¸ ¿©±â¼­ °É¾îÁÖ¸é, ³ª¸ÓÁö´Â NextSibling¿¡ ÀÇÇØ¼­ ÀÚµ¿À¸·Î ÆÄ½ÌµÈ´Ù.
-				const TiXmlNode * pkChildNode = pkNode->FirstChild();
-				if(pkChildNode != 0)
+				else if (strcmp(pcName, "ORIGINAL_XML") == 0)
 				{
-					if(!ParseXml(pkChildNode, pArg))
-					{
-						return false;
-					}
+					std::string strName = m_kName;
+					PgXmlLoader::Get()->CreateObject(pcValue, pArg, this);
+					SetName(strName.c_str());
 				}
-			}
-			else if(strcmp(pcTagName, "PILOTPATH") == 0)
-			{
-				if(!m_pkPilot)
+				else if (strcmp(pcName, "DIE_PARTICLE_ID") == 0)
 				{
-					m_pkPilot = dynamic_cast<PgPilot *>(PgXmlLoader::CreateObjectFromFile(pkElement->GetText()));
-					if(m_pkPilot)
-					{
-						m_pkPilot->SetWorldObject(this);
-					}
+					m_kDieParticleID = std::string(pcValue);
 				}
-			}
-			else if(strcmp(pcTagName, "RESERVED_ACTION") == 0)
-			{
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-				while(pkAttr)
+				else if (strcmp(pcName, "DIE_PARTICLE_NODE") == 0)
 				{
-					char const *pcName = pkAttr->Name();
-					char const *pcValue = pkAttr->Value();
-					if (strcmp(pcName, "OPENING") == 0)
-					{
-						m_kReservedAction[RA_OPENING] = pcValue;
-					}
-					else if(strcmp(pcName, "IDLE") == 0)
-					{
-						m_kReservedAction[RA_IDLE] = pcValue;
-					}
-					else
-					{
-						PG_ASSERT_LOG(!"Unknown Attributes!");
-					}
-					pkAttr = pkAttr->Next();
+					m_kDieParticleNode = std::string(pcValue);
 				}
-			}
-			else if(strcmp(pcTagName, "WORLDOBJECT") == 0)
-			{
-				PgIWorldObjectBase *pkNewBase = NiNew PgIWorldObjectBase;
-				if(pkNewBase->ParseXml(pkNode, this))
+				else if (strcmp(pcName, "DIE_PARTICLE_SCALE") == 0)
 				{
-					std::wstring kEventScript = pkNewBase->GetEventScript();
-					if(kEventScript.length() != 0)
-					{
-						m_pkActorCallback = NiNew ActorCallbackObject;
-						if(!m_pkActorCallback)
-						{
-							PG_ASSERT_LOG(!"failed to creat ActorCallbackObject");
-							return false;
-						}
-
-						m_pkActorCallback->m_pkWorldObject = this;
-						m_pkActorCallback->m_kScriptName = MB(kEventScript);
-
-						if(!GetActorManager())
-						{
-							PG_ASSERT_LOG(!"ActorCallbackObject : ActorManager must be initialized prior to Callback Object!");
-							return false;
-						}
-						GetActorManager()->SetCallbackObject(m_pkActorCallback);
-
-						if (pArg)
-						{
-							PgIXmlObject::XmlObjectID eObjectID = *((PgIXmlObject::XmlObjectID*)pArg);
-							SetObjectID(eObjectID);
-						}
-					}
+					m_fDieParticleScale = (float)atof(pcValue);
+				}
+				else if (strcmp(pcName, "DIE_SOUND_ID") == 0)
+				{
+					m_kDieSoundID = std::string(pcValue);
+				}
+				else if (strcmp(pcName, "LOADING_COMPLETE_INIT") == 0)
+				{
+					m_kLoadingCompleteInitFunc = std::string(pcValue);
+				}
+				else if (stricmp(pcName, "EVENT_SCRIPT_ON_DIE") == 0)
+				{
+					SetEventScriptIDOnDie(atoi(pcValue));
+				}
+				else  if (stricmp(pcName, "USE_BATTLE_IDLE") == 0)
+				{
+					SetUseBattleIdle(strcmp(pcValue, "TRUE") == 0);
+				}
+				else if (0 == stricmp(pcName, "ALWAYS_GLOWMAP"))
+				{
+					AlwaysGlowMap(strcmp(pcValue, "TRUE") == 0);
+				}
+				else if (0 == stricmp(pcName, "CAN_RIDE"))
+				{
+					m_bCanRide = (strcmp(pcValue, "TRUE") == 0);
+				}
+				else  if (stricmp(pcName, "SHOW_WARNING") == 0)
+				{
+					m_bShowWarning = (strcmp(pcValue, "TRUE") == 0);
+				}
+				else  if (stricmp(pcName, "INIT_SHOW_ACTOR") == 0)
+				{
+					bool const bInitShow = (strcmp(pcValue, "TRUE") == 0);
+					SetHide(!bInitShow);
+				}
+				else  if (stricmp(pcName, "IDLE_EFFECT_NAME") == 0)
+				{
+					IdleEffectName(pcValue);
+				}
+				else if (stricmp(pcName, "IDLE_EFFECT_NODE") == 0)
+				{
+					IdleEffectNode(pcValue);
 				}
 				else
+				{
+					//PG_ASSERT_LOG(!"Unknown Attributes!");
+				}
+				pkAttr = pkAttr->Next();
+			}
+
+			// Actorï¿½Ä½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½âº» ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
+			m_kReservedAction.insert(std::make_pair(RA_IDLE, ACTIONNAME_IDLE));
+			m_kReservedAction.insert(std::make_pair(RA_OPENING, "a_opening"));
+			m_kReservedAction.insert(std::make_pair(RA_INTRO_IDLE, "a_intro_idle"));
+
+			// ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ï¿½Ñ´ï¿½.
+			// Ã¹ ï¿½Ú½Ä¸ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½É¾ï¿½ï¿½Ö¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ NextSiblingï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ÌµÈ´ï¿½.
+			const TiXmlNode* pkChildNode = pkNode->FirstChild();
+			if (pkChildNode != 0)
+			{
+				if (!ParseXml(pkChildNode, pArg))
 				{
 					return false;
 				}
 			}
-			else if(strcmp(pcTagName,"APPEARANCE_CHANGE")==0)
+		}
+		else if (strcmp(pcTagName, "PILOTPATH") == 0)
+		{
+			if (!m_pkPilot)
 			{
-				SAFE_DELETE(m_pkActorAppearanceMan);
-				m_pkActorAppearanceMan = new PgActorAppearanceMan(this);
-				m_pkActorAppearanceMan->ParseXml(pkNode);
-			}
-			else if(strcmp(pcTagName, "NO_NAME") == 0)
-			{
-				if (atoi(pcTagName))
+				m_pkPilot = dynamic_cast<PgPilot*>(PgXmlLoader::CreateObjectFromFile(pkElement->GetText()));
+				if (m_pkPilot)
 				{
-					m_bNoName = true;
+					m_pkPilot->SetWorldObject(this);
 				}
 			}
-			else if(strcmp(pcTagName, "TEXTURE") == 0)
+		}
+		else if (strcmp(pcTagName, "RESERVED_ACTION") == 0)
+		{
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+			while (pkAttr)
 			{
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-				if(pkAttr)
+				char const* pcName = pkAttr->Name();
+				char const* pcValue = pkAttr->Value();
+				if (strcmp(pcName, "OPENING") == 0)
 				{
-					char const *pcName = pkAttr->Name();
-					char const *pcValue = pkAttr->Value();
+					m_kReservedAction[RA_OPENING] = pcValue;
+				}
+				else if (strcmp(pcName, "IDLE") == 0)
+				{
+					m_kReservedAction[RA_IDLE] = pcValue;
+				}
+				else
+				{
+					PG_ASSERT_LOG(!"Unknown Attributes!");
+				}
+				pkAttr = pkAttr->Next();
+			}
+		}
+		else if (strcmp(pcTagName, "WORLDOBJECT") == 0)
+		{
+			PgIWorldObjectBase* pkNewBase = NiNew PgIWorldObjectBase;
+			if (pkNewBase->ParseXml(pkNode, this))
+			{
+				std::wstring kEventScript = pkNewBase->GetEventScript();
+				if (kEventScript.length() != 0)
+				{
+					m_pkActorCallback = NiNew ActorCallbackObject;
+					if (!m_pkActorCallback)
+					{
+						PG_ASSERT_LOG(!"failed to creat ActorCallbackObject");
+						return false;
+					}
 
-					if(strcmp(pcName, "SRC") == 0)
-					{
-						char const *pcText = pkElement->GetText();
-						m_VarTextureList.insert(std::make_pair(std::string(pcValue), std::string(pcText)));
-					}
-				}
-			}
-			else if(strcmp(pcTagName, "COLORSHADOW") == 0)
-			{
-/*				if( m_pCircleShadow )
-				{
-					NiDelete m_pCircleShadow;
-				}
+					m_pkActorCallback->m_pkWorldObject = this;
+					m_pkActorCallback->m_kScriptName = MB(kEventScript);
 
-				m_pCircleShadow = NiNew PgColorShadow;*/
+					if (!GetActorManager())
+					{
+						PG_ASSERT_LOG(!"ActorCallbackObject : ActorManager must be initialized prior to Callback Object!");
+						return false;
+					}
+					GetActorManager()->SetCallbackObject(m_pkActorCallback);
 
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-
-				while(pkAttr)
-				{
-					if(strcmp(pkAttr->Name(), "SCALE") == 0)
+					if (pArg)
 					{
-				//		m_pCircleShadow->SetShadowScale( (float)atof(pkAttr->Value()) );
+						PgIXmlObject::XmlObjectID eObjectID = *((PgIXmlObject::XmlObjectID*)pArg);
+						SetObjectID(eObjectID);
 					}
-					else if(strcmp(pkAttr->Name(), "PARTICLE") == 0)
-					{
-				/*		PgColorShadow *pkColorShadow = dynamic_cast<PgColorShadow*>(m_pCircleShadow);
-						if ( pkColorShadow )
-						{
-							pkColorShadow->AttachColorShadow( pkAttr->Value() );
-						}*/
-					}
-					else if(strcmp(pkAttr->Name(), "MAX") == 0)
-					{
-				//		m_pCircleShadow->SetMaxShadowDistance( (float)atof(pkAttr->Value()) );
-					}
-					pkAttr = pkAttr->Next();
-				}
-			}
-			else if(strcmp(pcTagName, "SHADOW") == 0)
-			{
-				/*if( m_pCircleShadow )
-				{
-					NiDelete m_pCircleShadow;
-				}
-
-				m_pCircleShadow = NiNew PgCircleShadow;*/
-
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-				
-				while(pkAttr)
-				{
-					if(strcmp(pkAttr->Name(), "SCALE") == 0)
-					{
-						//m_pCircleShadow->SetShadowScale( (float)atof(pkAttr->Value()) );
-					}
-					else if(strcmp(pkAttr->Name(), "MAX") == 0)
-					{
-						//m_pCircleShadow->SetMaxShadowDistance( (float)atof(pkAttr->Value()) );
-					}
-					pkAttr = pkAttr->Next();
-				}
-			}
-			else if(strcmp(pcTagName, "NPCMARK") == 0)
-			{
-				m_kNpcMarkInfo.IsUse = true;
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-				while(pkAttr)
-				{
-					if(strcmp(pkAttr->Name(), "NAME") == 0)
-					{
-						m_kNpcMarkInfo.kEffectID = pkAttr->Value();
-					}
-					else if(strcmp(pkAttr->Name(), "ATTACH_TO") == 0)
-					{
-						m_kNpcMarkInfo.kTargetNodeName = pkAttr->Value();
-					}
-					pkAttr = pkAttr->Next();
-				}
-			}
-			else if(strcmp(pcTagName, "UIMODEL") == 0)
-			{
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-				while(pkAttr)
-				{
-					if(strcmp(pkAttr->Name(), "DRAW_HEIGHT") == 0)
-					{
-						m_kUIModelOpt.fDrawHeight = atoi(pkAttr->Value()) / 100.0f;
-					}
-					else if(strcmp(pkAttr->Name(), "INCREASE_CAM_RADIUS") == 0)
-					{
-						m_kUIModelOpt.fIncreaseCamRad = static_cast<float>( atof(pkAttr->Value()) );
-					}
-					pkAttr = pkAttr->Next();
-				}
-			}
-			else if(strcmp(pcTagName, "HEAD") == 0)
-			{
-				TiXmlAttribute *pkAttr = pkElement->FirstAttribute();
-				while(pkAttr)
-				{
-					if(strcmp(pkAttr->Name(), "DEFAULT_SIZE") == 0)
-					{
-						m_fTargetHeadSize = PgStringUtil::SafeAtof( pkAttr->Value() );
-						SetDefaultHeadSize(m_fTargetHeadSize);
-					}
-					pkAttr = pkAttr->Next();
 				}
 			}
 			else
 			{
-				PgXmlError1(pkElement, "XmlParse: Incoreect Tag '%s'", pcTagName);
-				break;
+				return false;
 			}
 		}
+		else if (strcmp(pcTagName, "APPEARANCE_CHANGE") == 0)
+		{
+			SAFE_DELETE(m_pkActorAppearanceMan);
+			m_pkActorAppearanceMan = new PgActorAppearanceMan(this);
+			m_pkActorAppearanceMan->ParseXml(pkNode);
+		}
+		else if (strcmp(pcTagName, "NO_NAME") == 0)
+		{
+			if (atoi(pcTagName))
+			{
+				m_bNoName = true;
+			}
+		}
+		else if (strcmp(pcTagName, "TEXTURE") == 0)
+		{
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+			if (pkAttr)
+			{
+				char const* pcName = pkAttr->Name();
+				char const* pcValue = pkAttr->Value();
+
+				if (strcmp(pcName, "SRC") == 0)
+				{
+					char const* pcText = pkElement->GetText();
+					m_VarTextureList.insert(std::make_pair(std::string(pcValue), std::string(pcText)));
+				}
+			}
+		}
+		else if (strcmp(pcTagName, "COLORSHADOW") == 0)
+		{
+			/*				if( m_pCircleShadow )
+							{
+								NiDelete m_pCircleShadow;
+							}
+
+							m_pCircleShadow = NiNew PgColorShadow;*/
+
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+
+			while (pkAttr)
+			{
+				if (strcmp(pkAttr->Name(), "SCALE") == 0)
+				{
+					//		m_pCircleShadow->SetShadowScale( (float)atof(pkAttr->Value()) );
+				}
+				else if (strcmp(pkAttr->Name(), "PARTICLE") == 0)
+				{
+					/*		PgColorShadow *pkColorShadow = dynamic_cast<PgColorShadow*>(m_pCircleShadow);
+							if ( pkColorShadow )
+							{
+								pkColorShadow->AttachColorShadow( pkAttr->Value() );
+							}*/
+				}
+				else if (strcmp(pkAttr->Name(), "MAX") == 0)
+				{
+					//		m_pCircleShadow->SetMaxShadowDistance( (float)atof(pkAttr->Value()) );
+				}
+				pkAttr = pkAttr->Next();
+			}
+		}
+		else if (strcmp(pcTagName, "SHADOW") == 0)
+		{
+			/*if( m_pCircleShadow )
+			{
+				NiDelete m_pCircleShadow;
+			}
+
+			m_pCircleShadow = NiNew PgCircleShadow;*/
+
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+
+			while (pkAttr)
+			{
+				if (strcmp(pkAttr->Name(), "SCALE") == 0)
+				{
+					//m_pCircleShadow->SetShadowScale( (float)atof(pkAttr->Value()) );
+				}
+				else if (strcmp(pkAttr->Name(), "MAX") == 0)
+				{
+					//m_pCircleShadow->SetMaxShadowDistance( (float)atof(pkAttr->Value()) );
+				}
+				pkAttr = pkAttr->Next();
+			}
+		}
+		else if (strcmp(pcTagName, "NPCMARK") == 0)
+		{
+			m_kNpcMarkInfo.IsUse = true;
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+			while (pkAttr)
+			{
+				if (strcmp(pkAttr->Name(), "NAME") == 0)
+				{
+					m_kNpcMarkInfo.kEffectID = pkAttr->Value();
+				}
+				else if (strcmp(pkAttr->Name(), "ATTACH_TO") == 0)
+				{
+					m_kNpcMarkInfo.kTargetNodeName = pkAttr->Value();
+				}
+				pkAttr = pkAttr->Next();
+			}
+		}
+		else if (strcmp(pcTagName, "UIMODEL") == 0)
+		{
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+			while (pkAttr)
+			{
+				if (strcmp(pkAttr->Name(), "DRAW_HEIGHT") == 0)
+				{
+					m_kUIModelOpt.fDrawHeight = atoi(pkAttr->Value()) / 100.0f;
+				}
+				else if (strcmp(pkAttr->Name(), "INCREASE_CAM_RADIUS") == 0)
+				{
+					m_kUIModelOpt.fIncreaseCamRad = static_cast<float>(atof(pkAttr->Value()));
+				}
+				pkAttr = pkAttr->Next();
+			}
+		}
+		else if (strcmp(pcTagName, "HEAD") == 0)
+		{
+			TiXmlAttribute* pkAttr = pkElement->FirstAttribute();
+			while (pkAttr)
+			{
+				if (strcmp(pkAttr->Name(), "DEFAULT_SIZE") == 0)
+				{
+					m_fTargetHeadSize = PgStringUtil::SafeAtof(pkAttr->Value());
+					SetDefaultHeadSize(m_fTargetHeadSize);
+				}
+				pkAttr = pkAttr->Next();
+			}
+		}
+		else
+		{
+			PgXmlError1(pkElement, "XmlParse: Incoreect Tag '%s'", pcTagName);
+			break;
+		}
+	}
 
 	default:
 		break;
 	}
 
-	// °°Àº ÃþÀÇ ´ÙÀ½ ³ëµå¸¦ Àç±ÍÀûÀ¸·Î ÆÄ½ÌÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ï¿½Ñ´ï¿½.
 	const TiXmlNode* pkNextNode = pkNode->NextSibling();
-	if(pkNextNode)
+	if (pkNextNode)
 	{
-		if(!ParseXml(pkNextNode, pArg))
+		if (!ParseXml(pkNextNode, pArg))
 		{
 			return false;
 		}
 	}
 
-	// ¸ðµç ÆÄ½ÌÀÌ ³¡³µ´Ù¸é Actor¸¦ ÃÊ±âÈ­ÇÑ´Ù.
-	if(strcmp(pkNode->Value(), "ACTOR") == 0)
+	// ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ Actorï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ñ´ï¿½.
+	if (strcmp(pkNode->Value(), "ACTOR") == 0)
 	{
-		NiActorManager *pkAM = GetActorManager();
-		if(!pkAM)
+		NiActorManager* pkAM = GetActorManager();
+		if (!pkAM)
 		{
 			return false;
 		}
 
 		pkAM->Update(0.0f);
-		NiTimeController::StartAnimations(GetNIFRoot(), 0.0f); //PgWorld¿¡ AttachµÉ ¶§ ¾Ë¾Æ¼­ µÈ´Ù.
+		NiTimeController::StartAnimations(GetNIFRoot(), 0.0f); //PgWorldï¿½ï¿½ Attachï¿½ï¿½ ï¿½ï¿½ ï¿½Ë¾Æ¼ï¿½ ï¿½È´ï¿½.
 		AMContainer::iterator itr = m_kSupplementAMContainer.begin();
-		while(itr != m_kSupplementAMContainer.end())
+		while (itr != m_kSupplementAMContainer.end())
 		{
 			PG_ASSERT_LOG(itr->m_spAM);
 			if (itr->m_spAM)
@@ -13727,31 +13727,31 @@ bool PgActor::ParseXml(const TiXmlNode *pkNode, void *pArg, bool bUTF8)
 			++itr;
 		}
 
-		// Actor¸¦ ºÙÀÏ ¶§´Â, ¹«Á¶°Ç ¼û±ä ´ÙÀ½ ·ÎµùÀ» ´Ù ÇÏ¸é Alpha·Î »©ÁØ´Ù.
+		// Actorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï¸ï¿½ Alphaï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 		pkAM->GetNIFRoot()->SetAppCulled(true);
 		NiNode::SetAppCulled(true);
 
-	/*	if(!m_pCircleShadow)
-		{
-			m_pCircleShadow = NiNew PgCircleShadow();
-		}*/
+		/*	if(!m_pCircleShadow)
+			{
+				m_pCircleShadow = NiNew PgCircleShadow();
+			}*/
 
-		// ¹Ù¸®¿¡ÀÌ¼Ç ÅØ½ºÃÄ¸¦ ·ÎµùÇÑ´Ù.
+			// ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½Ø½ï¿½ï¿½Ä¸ï¿½ ï¿½Îµï¿½ï¿½Ñ´ï¿½.
 		if (m_VarTextureList.size() > 0)
 		{
 			ChangeTexture(this);
 		}
 
-		if(m_kNpcMarkInfo.IsUse)
-		{// NPC Ç¥½Ã¸¦ »ç¿ëÇÑ´Ù¸é
+		if (m_kNpcMarkInfo.IsUse)
+		{// NPC Ç¥ï¿½Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½
 			static int const iSlotNo = 9812341;
-			NiAVObject *pkParticle = NULL;
+			NiAVObject* pkParticle = NULL;
 			char const* const pcEffectStr = m_kNpcMarkInfo.kEffectID.c_str();
 			char const* const pcTargetNodeName = m_kNpcMarkInfo.kTargetNodeName.c_str();
-			pkParticle = dynamic_cast<NiAVObject*>( g_kParticleMan.GetParticle(pcEffectStr, PgParticle::O_SCALE,GetEffectScale()) );
-			if ( pkParticle )
+			pkParticle = dynamic_cast<NiAVObject*>(g_kParticleMan.GetParticle(pcEffectStr, PgParticle::O_SCALE, GetEffectScale()));
+			if (pkParticle)
 			{
-				if(! AttachTo( iSlotNo, pcTargetNodeName, pkParticle ) )
+				if (!AttachTo(iSlotNo, pcTargetNodeName, pkParticle))
 				{
 					THREAD_DELETE_PARTICLE(pkParticle);
 				}
@@ -13762,28 +13762,28 @@ bool PgActor::ParseXml(const TiXmlNode *pkNode, void *pArg, bool bUTF8)
 	return true;
 }
 
-bool PgActor::AttachToSound(unsigned int uiType, char const *pcID, float fVolume, float fDistMin, float fDistMax)
+bool PgActor::AttachToSound(unsigned int uiType, char const* pcID, float fVolume, float fDistMin, float fDistMax)
 {
-	if( !PgActorUtil::IsCanPlaySound(this) )
+	if (!PgActorUtil::IsCanPlaySound(this))
 	{
 		return true;
 	}
-	return PgIWorldObject::AttachToSound(uiType,pcID,fVolume,fDistMin,fDistMax);
+	return PgIWorldObject::AttachToSound(uiType, pcID, fVolume, fDistMin, fDistMax);
 }
 
-bool PgActor::PlayNewSound(unsigned int uiType, char const *pcID, float fVolume, float fDistMin, float fDistMax)
+bool PgActor::PlayNewSound(unsigned int uiType, char const* pcID, float fVolume, float fDistMin, float fDistMax)
 {
 	return AttachToSound(uiType, pcID, fVolume, fDistMin, fDistMax);
 }
 
-bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char const *szTargetName, float const fScale, bool const bLoop, bool const bZTest, float const fSoundTime, bool const bAutoGround, bool const bUseAppAccumTime, bool bNoFollowParentRotation)
+bool PgActor::AddNewParticle(char const* szParticleID, int const iSlot, char const* szTargetName, float const fScale, bool const bLoop, bool const bZTest, float const fSoundTime, bool const bAutoGround, bool const bUseAppAccumTime, bool bNoFollowParentRotation)
 {
-	NiAVObject *pkParticle = g_kParticleMan.GetParticle(szParticleID, PgParticle::O_ALL,fScale, bLoop, bZTest, fSoundTime, bAutoGround, bUseAppAccumTime, bNoFollowParentRotation); // Effect
-	if( !pkParticle )
+	NiAVObject* pkParticle = g_kParticleMan.GetParticle(szParticleID, PgParticle::O_ALL, fScale, bLoop, bZTest, fSoundTime, bAutoGround, bUseAppAccumTime, bNoFollowParentRotation); // Effect
+	if (!pkParticle)
 	{
 		return false;
 	}
-	if(!AttachTo(iSlot, szTargetName, pkParticle))
+	if (!AttachTo(iSlot, szTargetName, pkParticle))
 	{
 		THREAD_DELETE_PARTICLE(pkParticle);
 		return	false;
@@ -13791,7 +13791,7 @@ bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char con
 	return true;
 }
 
-//!	ÁøÇàÁßÀÎ Äù½ºÆ® Á¤º¸ ¾÷µ¥ÀÌÆ®
+//!	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 //void PgActor::UpdateQuestUserInfo(const SUserQuestState& rkUpdatedState)
 //{
 //	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.UpdateQuestUserInfo"), g_pkApp->GetFrameCount()));
@@ -13817,15 +13817,15 @@ bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char con
 //	if( pkMyQuest )
 //	{
 //		int const iQuestID = rkUpdatedState.iQuestID;
-//		//Äù½ºÆ® »óÅÂ°¡ º¯°æµÇ¸é °øÁö·Î º¸¿©ÁØ´Ù.
+//		//ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 //		SUserQuestState kOldState;
 //		SUserQuestState const *pkOldState = pkMyQuest->Get(iQuestID);
 //		if( pkOldState )
 //		{
-//			kOldState = *pkOldState;//ÀÌÀü »óÅÂ ¹é¾÷
+//			kOldState = *pkOldState;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 //		}
 //
-//		//Äù½ºÆ® »óÅÂ°¡ º¯°æµÇ¸é °øÁö·Î º¸¿©ÁØ´Ù.
+//		//ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 //		g_kQuestMan.ShowQuestInfo(kOldState, rkUpdatedState);
 //
 //		BYTE const cUpdatedState = rkUpdatedState.byQuestState;
@@ -13835,7 +13835,7 @@ bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char con
 //			{
 //			case QT_Loop:
 //				{
-//					// ¹Ýº¹ Äù½ºÆ®´Â Å¬¶óÀÌ¾ðÆ®¿¡¼­ ÀúÀå ÇÃ·¡±×¸¦ ¼¼¿ìÁö ¾Ê´Â´Ù.
+//					// ï¿½Ýºï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 //					pkMyQuest->DropQuest(iQuestID);
 //				}break;
 //			default:
@@ -13844,8 +13844,8 @@ bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char con
 //				}break;
 //			}
 //
-//			g_kQuestMan.RemoveMiniQuestList(iQuestID);	// Mini Á¤º¸Ã¢¿¡¼­ Á¦°Å
-//			g_kQuestMan.DelRecentBeginQuest(iQuestID);	// ÃÖ±Ù¿¡ ½ÃÀÛÇÑ Äù½ºÆ® Á¤º¸¿¡¼­ Á¦°Å
+//			g_kQuestMan.RemoveMiniQuestList(iQuestID);	// Mini ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//			g_kQuestMan.DelRecentBeginQuest(iQuestID);	// ï¿½Ö±Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //			PlayNewSound(NiAudioSource::TYPE_3D, "QUEST_Complete2", 1.0f);
 //
 //			if( pkQuestInfo
@@ -13868,17 +13868,17 @@ bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char con
 //			g_kQuestMan.DelRecentBeginQuest(iQuestID);
 //			PlayNewSound(NiAudioSource::TYPE_3D, "QUEST_Drop", 1.0f);
 //
-//			g_kQuestMan.RemoveMiniQuestList(iQuestID);	// Mini Á¤º¸Ã¢¿¡¼­ Á¦°Å
+//			g_kQuestMan.RemoveMiniQuestList(iQuestID);	// Mini ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //		}
 //		else
 //		{
 //			if( !pkMyQuest->UpdateQuest(rkUpdatedState) )
 //			{
-//				//»õ·Î ½ÃÀÛµÈ Äù½ºÆ®¸é
+//				//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½
 //				pkMyQuest->AddIngQuest(&rkUpdatedState, pkQuestInfo->Type());
 //				
-//				g_kQuestMan.AddMiniQuestList(iQuestID);		// Mini Á¤º¸Ã¢¿¡ Ãß°¡
-//				g_kQuestMan.AddRecentBeginQuest(iQuestID);	// ÃÖ±Ù¿¡ ½ÃÀÛÇÑ Äù½ºÆ® Á¤º¸¿¡ Ãß°¡
+//				g_kQuestMan.AddMiniQuestList(iQuestID);		// Mini ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ ï¿½ß°ï¿½
+//				g_kQuestMan.AddRecentBeginQuest(iQuestID);	// ï¿½Ö±Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 //				PlayNewSound(NiAudioSource::TYPE_3D, "QUEST_Accept", 1.0f);
 //
 //				if( pkQuestInfo
@@ -13889,7 +13889,7 @@ bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char con
 //				}
 //			}
 //
-//			if( QS_End == cUpdatedState )//¸ðµç Á¶°ÇÀ» ÃæÁ· ÇßÀ» ¶§
+//			if( QS_End == cUpdatedState )//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 //			{
 //				PlayNewSound(NiAudioSource::TYPE_3D, "QUEST_Complete1", 1.0f);
 //			}
@@ -13920,62 +13920,62 @@ bool PgActor::AddNewParticle(char const *szParticleID, int const iSlot, char con
 //	m_fSyncInterpolTime = fTime;
 //}
 
-void PgActor::SetParam(char const *pcKey, char const *pcVal)
+void PgActor::SetParam(char const* pcKey, char const* pcVal)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.SetParam"), g_pkApp->GetFrameCount()));
 	ScriptParamContainer::iterator itr = m_kScriptParamContainer.find(pcKey);
-	if(itr != m_kScriptParamContainer.end())
+	if (itr != m_kScriptParamContainer.end())
 	{
 		itr->second = std::string(pcVal);
 	}
-		
+
 	m_kScriptParamContainer.insert(std::make_pair(std::string(pcKey), std::string(pcVal)));
 }
 
-char const*	PgActor::GetParam(char const *pcParamName)
+char const* PgActor::GetParam(char const* pcParamName)
 {
-	if(NULL == pcParamName)
+	if (NULL == pcParamName)
 	{
 		return NULL;
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.GetParam"), g_pkApp->GetFrameCount()));
 	ScriptParamContainer::iterator itr = m_kScriptParamContainer.find(pcParamName);
-	if(itr != m_kScriptParamContainer.end())
+	if (itr != m_kScriptParamContainer.end())
 	{
 		return itr->second.c_str();
 	}
-	
+
 	return NULL;
 }
 
 void	PgActor::AddStatusEffectInstance(PgStatusEffectInstance* pkInstance)
 {
-	if(!pkInstance)
+	if (!pkInstance)
 	{
 		return;
 	}
 	m_StatusEffectInstanceList.push_back(pkInstance);
 
-	if(GetUnit() && GetUnit()->IsUnitType(UT_PET))
-	{//Å¸°ÙÀÌ ÆêÀÎ°¡? ±×·¸´Ù¸é ÀÌ ÆÄÆ¼Å¬Àº ´Ù¸¥ ¾×ÅÍ·Î ÀÌµ¿½ÃÅ°¸é ¾ÈµÈ´Ù
+	if (GetUnit() && GetUnit()->IsUnitType(UT_PET))
+	{//Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½? ï¿½×·ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Í·ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ÈµÈ´ï¿½
 		int iSlot = pkInstance->GetInstanceID() * 1000000;
 		m_kFixedParticleList.insert(iSlot);
 	}
 
-	if(pkInstance->GetStatusEffect())
+	if (pkInstance->GetStatusEffect())
 	{
-		if(false==pkInstance->GetStatusEffect()->GetScriptName().empty())
+		if (false == pkInstance->GetStatusEffect()->GetScriptName().empty())
 		{
 			GET_DEF(CEffectDefMgr, kEffectDefMgr);
 			CEffectDef const* pEffDef = kEffectDefMgr.GetDef(pkInstance->GetEffectID());
 			std::string strScriptName = pkInstance->GetStatusEffect()->GetScriptName();
 			strScriptName += "_Begin";
-			lua_tinker::call<void,lwActor,int>( strScriptName.c_str(), lwActor(this), pkInstance->GetEffectID(), pkInstance->GetEffectKey() );
+			lua_tinker::call<void, lwActor, int>(strScriptName.c_str(), lwActor(this), pkInstance->GetEffectID(), pkInstance->GetEffectKey());
 
-			if(pEffDef && pEffDef->GetInterval())
+			if (pEffDef && pEffDef->GetInterval())
 			{
-				PgStatusEffectManUtil::SEffectUpdateInfo kInfo(pkInstance, pEffDef->GetInterval()*0.001f);
+				PgStatusEffectManUtil::SEffectUpdateInfo kInfo(pkInstance, pEffDef->GetInterval() * 0.001f);
 				m_StatusEffectInstanceListForUpdate.push_back(kInfo);
 			}
 		}
@@ -13983,16 +13983,16 @@ void	PgActor::AddStatusEffectInstance(PgStatusEffectInstance* pkInstance)
 }
 bool	PgActor::CheckStatusEffectExist(char const* strStatusEffectXMLID)
 {
-	if(!GetPilot())
+	if (!GetPilot())
 	{
 		return false;
 	}
 
 	PgStatusEffectInstance* pkInstance = NULL;
-	for(StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
+	for (StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
 	{
 		pkInstance = (*itor);
-		if(pkInstance->GetStatusEffect() && pkInstance->GetStatusEffect()->GetID() == strStatusEffectXMLID)
+		if (pkInstance->GetStatusEffect() && pkInstance->GetStatusEffect()->GetID() == strStatusEffectXMLID)
 		{
 			return	true;
 		}
@@ -14002,14 +14002,14 @@ bool	PgActor::CheckStatusEffectExist(char const* strStatusEffectXMLID)
 }
 
 bool	PgActor::CheckStatusEffectTypeExist(BYTE byType)
-{ //¾×ÅÍ°¡ ¹öÇÁ/µð¹öÇÁ..µîµîÀÇ ÀÌÆåÆ®ÀÇ °É·ÁÀÖ³ª¸¦ °Ë»ç
+{ //ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½..ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½É·ï¿½ï¿½Ö³ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 	StatusEffectInstanceList kContEffectList = GetStatusEffectInstanceList();
 	StatusEffectInstanceList::const_iterator iter = kContEffectList.begin();
 	GET_DEF(CEffectDefMgr, kEffectDefMgr);
-	for( ; iter != kContEffectList.end(); ++iter )
+	for (; iter != kContEffectList.end(); ++iter)
 	{
 		CEffectDef const* pkEffectDef = kEffectDefMgr.GetDef((*iter)->GetEffectID());
-		if(pkEffectDef && pkEffectDef->GetType() == 2)
+		if (pkEffectDef && pkEffectDef->GetType() == 2)
 		{
 			return true;
 		}
@@ -14018,20 +14018,20 @@ bool	PgActor::CheckStatusEffectTypeExist(BYTE byType)
 	return false;
 }
 
-char const* PgActor::GetStartParamID(char const *kStr)
+char const* PgActor::GetStartParamID(char const* kStr)
 {
-	if(!GetPilot())
+	if (!GetPilot())
 	{
 		return "";
 	}
 
 	PgStatusEffectInstance* pkInstance = NULL;
-	for(StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
+	for (StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
 	{
 		pkInstance = (*itor);
-		if( pkInstance )
+		if (pkInstance)
 		{
-			if( 0 == strcmp(pkInstance->GetStatusEffect()->GetStartActionID().c_str(), kStr) )
+			if (0 == strcmp(pkInstance->GetStatusEffect()->GetStartActionID().c_str(), kStr))
 			{
 				return pkInstance->GetStatusEffect()->GetParamID().c_str();
 			}
@@ -14040,20 +14040,20 @@ char const* PgActor::GetStartParamID(char const *kStr)
 	return "";
 }
 
-int const PgActor::GetStartEffectSave(char const *kStr)
+int const PgActor::GetStartEffectSave(char const* kStr)
 {
-	if(!GetPilot())
+	if (!GetPilot())
 	{
 		return 0;
 	}
 
 	PgStatusEffectInstance* pkInstance = NULL;
-	for(StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
+	for (StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
 	{
 		pkInstance = (*itor);
-		if( pkInstance )
+		if (pkInstance)
 		{
-			if( 0 == strcmp(pkInstance->GetStatusEffect()->GetStartActionID().c_str(), kStr) )
+			if (0 == strcmp(pkInstance->GetStatusEffect()->GetStartActionID().c_str(), kStr))
 			{
 				return pkInstance->GetStatusEffect()->GetEffectSave();
 			}
@@ -14065,9 +14065,9 @@ int const PgActor::GetStartEffectSave(char const *kStr)
 
 std::string PgActor::GetStatusEffectParam(int const iEffectID, std::string const& kKey)const
 {
-	for(StatusEffectInstanceList::const_iterator c_it=m_StatusEffectInstanceList.begin(); c_it!=m_StatusEffectInstanceList.end(); ++c_it)
+	for (StatusEffectInstanceList::const_iterator c_it = m_StatusEffectInstanceList.begin(); c_it != m_StatusEffectInstanceList.end(); ++c_it)
 	{
-		if((*c_it)->GetEffectID() == iEffectID)
+		if ((*c_it)->GetEffectID() == iEffectID)
 		{
 			return (*c_it)->GetParam(kKey);
 		}
@@ -14077,9 +14077,9 @@ std::string PgActor::GetStatusEffectParam(int const iEffectID, std::string const
 
 void PgActor::SetStatusEffectParam(int const iEffectID, std::string const& kKey, std::string const& kValue)
 {
-	for(StatusEffectInstanceList::const_iterator c_it=m_StatusEffectInstanceList.begin(); c_it!=m_StatusEffectInstanceList.end(); ++c_it)
+	for (StatusEffectInstanceList::const_iterator c_it = m_StatusEffectInstanceList.begin(); c_it != m_StatusEffectInstanceList.end(); ++c_it)
 	{
-		if((*c_it)->GetEffectID() == iEffectID)
+		if ((*c_it)->GetEffectID() == iEffectID)
 		{
 			(*c_it)->SetParam(kKey, kValue);
 			return;
@@ -14092,10 +14092,10 @@ StatusEffectInstanceList::iterator	PgActor::RemoveStatusEffectInstance(PgStatusE
 	int iSlot = kInstance.GetInstanceID() * 1000000;
 	m_kFixedParticleList.erase(iSlot);
 
-	for(StatusEffectUpdateList::iterator it = m_StatusEffectInstanceListForUpdate.begin(); it != m_StatusEffectInstanceListForUpdate.end(); ++it)
+	for (StatusEffectUpdateList::iterator it = m_StatusEffectInstanceListForUpdate.begin(); it != m_StatusEffectInstanceListForUpdate.end(); ++it)
 	{
-		PgStatusEffectManUtil::SEffectUpdateInfo & rkInfo = (*it);
-		if(rkInfo.m_pkInstance->GetInstanceID() == kInstance.GetInstanceID())
+		PgStatusEffectManUtil::SEffectUpdateInfo& rkInfo = (*it);
+		if (rkInfo.m_pkInstance->GetInstanceID() == kInstance.GetInstanceID())
 		{
 			m_StatusEffectInstanceListForUpdate.erase(it);
 			break;
@@ -14103,16 +14103,16 @@ StatusEffectInstanceList::iterator	PgActor::RemoveStatusEffectInstance(PgStatusE
 	}
 
 	PgStatusEffectInstance* pkInstance = NULL;
-	for(StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
+	for (StatusEffectInstanceList::iterator itor = m_StatusEffectInstanceList.begin(); itor != m_StatusEffectInstanceList.end(); ++itor)
 	{
-		pkInstance  = (*itor);
-		if(pkInstance->GetInstanceID() == kInstance.GetInstanceID())
+		pkInstance = (*itor);
+		if (pkInstance->GetInstanceID() == kInstance.GetInstanceID())
 		{
-			if ( pkInstance->GetStatusEffect()->GetScriptName().size() )
+			if (pkInstance->GetStatusEffect()->GetScriptName().size())
 			{
 				std::string strScriptName = pkInstance->GetStatusEffect()->GetScriptName();
 				strScriptName += "_End";
-				lua_tinker::call<void,lwActor,int>( strScriptName.c_str(), lwActor(this), pkInstance->GetEffectID(), pkInstance->GetEffectKey() );
+				lua_tinker::call<void, lwActor, int>(strScriptName.c_str(), lwActor(this), pkInstance->GetEffectID(), pkInstance->GetEffectKey());
 			}
 
 			delete pkInstance;
@@ -14125,11 +14125,11 @@ StatusEffectInstanceList::iterator	PgActor::RemoveStatusEffectInstance(PgStatusE
 
 bool PgActor::CheckEffectExist(int const iEffectNo, bool const bInGroup)
 {
-	if(PgPilot* pkPilot = GetPilot())
+	if (PgPilot* pkPilot = GetPilot())
 	{
-		if(CUnit* pkUnit = pkPilot->GetUnit())
+		if (CUnit* pkUnit = pkPilot->GetUnit())
 		{
-			if(CEffect* pkEffect = pkUnit->GetEffect(iEffectNo, bInGroup))
+			if (CEffect* pkEffect = pkUnit->GetEffect(iEffectNo, bInGroup))
 			{
 				return true;
 			}
@@ -14141,22 +14141,22 @@ bool PgActor::CheckEffectExist(int const iEffectNo, bool const bInGroup)
 
 int PgActor::CheckSkillExist(int const iSkillNo)
 {
-	//iSkillNo º£ÀÌ½º ½ºÅ³ ¹øÈ£
+	//iSkillNo ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½È£
 
-	//return °ªÀº ½ºÅ³À» ¹è¿üÀ» °æ¿ì ¹è¿î ½ºÅ³ ·¹º§
+	//return ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½
 
-	if(PgPilot* pkPilot = GetPilot())
+	if (PgPilot* pkPilot = GetPilot())
 	{
-		if(CUnit* pkUnit = pkPilot->GetUnit())
+		if (CUnit* pkUnit = pkPilot->GetUnit())
 		{
 			BM::GUID const& kParentGUID = pkUnit->Caller();
-			if(BM::GUID::IsNotNull(kParentGUID) && pkUnit->GetID() != kParentGUID)
+			if (BM::GUID::IsNotNull(kParentGUID) && pkUnit->GetID() != kParentGUID)
 			{
-				if(PgActor* pkParentActor = g_kPilotMan.FindActor(kParentGUID))
+				if (PgActor* pkParentActor = g_kPilotMan.FindActor(kParentGUID))
 				{
-					if(PgPilot* pkParentPilot = pkParentActor->GetPilot())
+					if (PgPilot* pkParentPilot = pkParentActor->GetPilot())
 					{
-						if(CUnit* pParentkUnit = pkParentPilot->GetUnit())
+						if (CUnit* pParentkUnit = pkParentPilot->GetUnit())
 						{
 							pkUnit = pParentkUnit;
 						}
@@ -14164,11 +14164,11 @@ int PgActor::CheckSkillExist(int const iSkillNo)
 				}
 			}
 
-			if(PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkUnit))
+			if (PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkUnit))
 			{
 				PgMySkill* pkSkill = pkPlayer->GetMySkill();
 				int const iLearnedSkill = pkSkill->GetLearnedSkill(iSkillNo);
-				if(0 < iLearnedSkill)
+				if (0 < iLearnedSkill)
 				{
 					return iLearnedSkill;
 				}
@@ -14179,7 +14179,7 @@ int PgActor::CheckSkillExist(int const iSkillNo)
 	return 0;
 }
 
-//! º¯½Å ÇÏ±â ÀüÀÇ ¿ø·¡ ¾×ÅÍ¸¦ ¼³Á¤ÇÑ´Ù.
+//! ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 void	PgActor::SetOriginalActorGUID(BM::GUID guid)
 {
 	m_OriginalActorGUID = guid;
@@ -14191,11 +14191,11 @@ BM::GUID	PgActor::GetOriginalActorGUID()
 }
 
 
-/*	// ¸Å´Þ¸®´Â ·ÎÁ÷
+/*	// ï¿½Å´Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 bool PgActor::HangItOn()
 {
 	bool bRet = false;
-	
+
 	if(m_bSide && m_pkWorld->GetPhysXRoot() != 0)
 	{
 		PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.HangItOn"), g_pkApp->GetFrameCount()));
@@ -14208,7 +14208,7 @@ bool PgActor::HangItOn()
 		//_PgOutputDebugString("=========================\n");
 		//_PgOutputDebugString("Side : OK\t");
 
-		// ´ÜÀÇ °æ»çµµ°¡ 36µµ ÀÌÇÏ¸é ¸Å´Þ¸± ¼ö ÀÖ´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½çµµï¿½ï¿½ 36ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Å´Þ¸ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 #ifdef PG_USE_CAPSULE_CONTROLLER
 		NiPoint3 kOrigin = GetTranslate() + NiPoint3::UNIT_Z * (m_pkController->getHeight() * 0.5f);
 		float const fRadius = m_pkController->getRadius();
@@ -14216,7 +14216,7 @@ bool PgActor::HangItOn()
 		NiPoint3 kOrigin = GetTranslate() + NiPoint3::UNIT_Z * (PG_CHARACTER_CAPSULE_HEIGHT * 0.5f);
 		float const fRadius = PG_CHARACTER_CAPSULE_RADIUS;
 #endif
-		float const fRadian = NI_HALF_PI * 0.4f;	
+		float const fRadian = NI_HALF_PI * 0.4f;
 		float const fHangRange = fRadius * 0.4f;
 		float const fMinDist = (1.0f/NiATan(fRadian) * fHangRange) + fRadius + 0.5f;
 
@@ -14235,7 +14235,7 @@ bool PgActor::HangItOn()
 					NiPick::Results &kResults = kPick.GetResults();
 					NiPick::Record* pkRecord = kResults.GetAt(0);
 					float kDist = pkRecord->GetDistance();
-			
+
 					//_PgOutputDebugString("HandPick : OK\t");
 					//_PgOutputDebugString("Dist : %.4f\t", kDist);
 
@@ -14263,84 +14263,84 @@ bool PgActor::HangItOn()
 bool const PgActor::IsInCoolTime(unsigned long ulSkillNo, bool& rbIsGobalCoolTime) const
 {
 	PgPilot* pkPilot = GetPilot();
-	if(pkPilot)
+	if (pkPilot)
 	{
 		CUnit* pkUnit = pkPilot->GetUnit();
-		if(pkUnit
+		if (pkUnit
 			&& pkUnit->IsUnitType(UT_SUB_PLAYER)
 			)
-		{// º¸Á¶ Ä³¸¯ÅÍ´Â
-			PgActor* pkCallerActor = g_kPilotMan.FindActor( pkUnit->Caller() );
-			if(pkCallerActor)
-			{// ¸ÞÀÎ Ä³¸¯ÅÍ(Caller)¿Í ÄðÅ¸ÀÓÀ» °øÀ¯ ÇÏ°í
+		{// ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í´ï¿½
+			PgActor* pkCallerActor = g_kPilotMan.FindActor(pkUnit->Caller());
+			if (pkCallerActor)
+			{// ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½(Caller)ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½
 				return pkCallerActor->IsInCoolTime(ulSkillNo, rbIsGobalCoolTime);
 			}
 		}
 	}
-	
+
 	rbIsGobalCoolTime = false;
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.IsInCoolTime"), g_pkApp->GetFrameCount()));
 	stSkillCoolTimeInfo::CoolTimeInfoMap::const_iterator itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.find(g_kSkillTree.GetKeySkillNo(ulSkillNo));
-	if(itor != m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end())
+	if (itor != m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end())
 	{
 		return true;
 	}
 
-	// ±Û·Î¹ú ÄðÅ¸ÀÓ ¹«½Ã ¾îºôÀÌ ÀÖÀ» °æ¿ì
+	// ï¿½Û·Î¹ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	GET_DEF(CSkillDefMgr, kSkillDefMgr);
 	CSkillDef const* pkSkillDef = kSkillDefMgr.GetDef(ulSkillNo);
-	if(pkSkillDef) 
+	if (pkSkillDef)
 	{
-		if(EST_GENERAL == pkSkillDef->GetAbil(AT_TYPE))
-		{ //ÀÏ¹Ý ¾×¼Ç¿ë ½ºÅ³ÀÌ¶ó¸é ÄðÅ¸ÀÓ Ã¼Å©¸¦ ¾ÈÇØ¾ß ÇÑ´Ù.
+		if (EST_GENERAL == pkSkillDef->GetAbil(AT_TYPE))
+		{ //ï¿½Ï¹ï¿½ ï¿½×¼Ç¿ï¿½ ï¿½ï¿½Å³ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.
 			return false;
 		}
-		if(0 < pkSkillDef->GetAbil(AT_IGNORE_GLOBAL_COOLTIME))
+		if (0 < pkSkillDef->GetAbil(AT_IGNORE_GLOBAL_COOLTIME))
 		{
 			return false;
 		}
 	}
 
-	// ±Û·Î¹ú ÄðÅ¸ÀÓÀ» ÇÑ¹ø´õ Ã¼Å© ÇÑ´Ù.
+	// ï¿½Û·Î¹ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ñ´ï¿½.
 	itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.find(SKILL_NO_GLOBAL_COOLTIME);
-	if(itor != m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end())
+	if (itor != m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end())
 	{
 		rbIsGobalCoolTime = true;
 		return true;
 	}
-	
+
 	return	false;
 }
 
 void PgActor::StartSkillCoolTime(unsigned long const ulSkillNo)
-{	
-//	if(0 < pkSkillDef->GetAbil(AT_SUB_PLAYER_ACTION))
-	{// °ÝÅõ°¡ º¸Á¶Ä³¸¯ÅÍ°¡ ¾²´Â ½ºÅ³ÀÌ¸é
+{
+	//	if(0 < pkSkillDef->GetAbil(AT_SUB_PLAYER_ACTION))
+	{// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½Ì¸ï¿½
 		CUnit* pUnit = GetUnit();
-		if(pUnit
+		if (pUnit
 			&& pUnit->IsUnitType(UT_SUB_PLAYER)
 			)
 		{
 			PgActor* pCaller = g_kPilotMan.FindActor(pUnit->Caller());
-			if(pCaller)
-			{// º»Ä³¸¯¿¡ ÄðÅ¸ÀÓ Àû¿ë½ÃÄÑÁØ´Ù
+			if (pCaller)
+			{// ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½
 				pCaller->StartSkillCoolTime(ulSkillNo);
 			}
 		}
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.StartSkillCoolTime"), g_pkApp->GetFrameCount()));
-	stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor	 = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.find(g_kSkillTree.GetKeySkillNo(ulSkillNo));
-	if(m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end() != itor)
+	stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.find(g_kSkillTree.GetKeySkillNo(ulSkillNo));
+	if (m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end() != itor)
 	{
 		itor->second.m_ulCoolStartTime = BM::GetTime32();
 		return;
 	}
-	
+
 	GET_DEF(CSkillDefMgr, kSkillDefMgr);
 	CSkillDef const* pkSkillDef = kSkillDefMgr.GetDef(ulSkillNo);
-	if(!pkSkillDef) 
+	if (!pkSkillDef)
 	{
 		return;
 	}
@@ -14348,17 +14348,17 @@ void PgActor::StartSkillCoolTime(unsigned long const ulSkillNo)
 	int	iCoolTime = pkSkillDef->GetAbil(ATS_COOL_TIME);
 	int	iAddCoolTime = 0;
 
-	// ÄðÅ¸ÀÓÀÌ ÀÖ´Â ½ºÅ³¸¸ Ãß°¡ ÄðÅ¸ÀÓÀ» Àû¿ë
-	if(0 < iCoolTime)
+	// ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (0 < iCoolTime)
 	{
-		if(m_pkPilot)
+		if (m_pkPilot)
 		{
-			if(m_pkPilot->GetUnit())
+			if (m_pkPilot->GetUnit())
 			{
 				int const iCoolTimeRate = m_pkPilot->GetUnit()->GetAbil(AT_R_COOLTIME_RATE_SKILL);
 				int const iDiffCoolTime = static_cast<int>(iCoolTime * static_cast<double>(iCoolTimeRate) / static_cast<double>(ABILITY_RATE_VALUE));
-				iCoolTime = std::max<int>(0,iCoolTime - iDiffCoolTime);
-				if(m_pkPilot->GetUnit()->GetSkill())
+				iCoolTime = std::max<int>(0, iCoolTime - iDiffCoolTime);
+				if (m_pkPilot->GetUnit()->GetSkill())
 				{
 					iAddCoolTime = m_pkPilot->GetUnit()->GetSkill()->GetSkillCoolTime();
 				}
@@ -14368,46 +14368,46 @@ void PgActor::StartSkillCoolTime(unsigned long const ulSkillNo)
 		iCoolTime += iAddCoolTime;
 	}
 
-	//¸ðµç ½ºÅ³À» »ç¿ë½Ã ±Û·Î¹ú ÄðÅ¸ÀÓÀ» Ãß°¡ ÇÑ´Ù.
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û·Î¹ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Ñ´ï¿½.
 	int iGobalCoolTime = pkSkillDef->GetAbil(AT_GLOBAL_COOLTIME);
-	if(0 < iGobalCoolTime)
+	if (0 < iGobalCoolTime)
 	{
-		m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(SKILL_NO_GLOBAL_COOLTIME, stSkillCoolTimeInfo::stCoolTimeInfoNode(SKILL_NO_GLOBAL_COOLTIME,BM::GetTime32(), iGobalCoolTime)));
-	}	
-	
-	//Äð ´Ù¿î Å¸ÀÓÀÌ 0º¸´Ù ÀÛ¾ÆÁö¸é ÄðÅ¸ÀÓÀ» µ¹¸®Áö ¾Ê´Â´Ù. 0ÀÌ¶ó´Â ÀÇ¹Ì ÀÌ´Ù.
-	if(0 >= iCoolTime)
+		m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(SKILL_NO_GLOBAL_COOLTIME, stSkillCoolTimeInfo::stCoolTimeInfoNode(SKILL_NO_GLOBAL_COOLTIME, BM::GetTime32(), iGobalCoolTime)));
+	}
+
+	//ï¿½ï¿½ ï¿½Ù¿ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½. 0ï¿½Ì¶ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½Ì´ï¿½.
+	if (0 >= iCoolTime)
 	{
 		return;
-	} 
+	}
 
-	m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(g_kSkillTree.GetKeySkillNo(ulSkillNo), stSkillCoolTimeInfo::stCoolTimeInfoNode(ulSkillNo,BM::GetTime32(),iCoolTime)));
+	m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(g_kSkillTree.GetKeySkillNo(ulSkillNo), stSkillCoolTimeInfo::stCoolTimeInfoNode(ulSkillNo, BM::GetTime32(), iCoolTime)));
 
-	for(int i = AT_JOINT_COOLTIME_SKILL_NO_1; i < AT_JOINT_COOLTIME_SKILL_NO_MAX; ++i)
-	{// ÄðÅ¸ÀÓÀ» °øÀ¯ÇÏ´Â ½ºÅ³ÀÌ Á¸Àç ÇÏ¸é
-		PgPlayer *pkPlayer = dynamic_cast<PgPlayer *>(GetPilot()->GetUnit());
-		if(!pkPlayer)
+	for (int i = AT_JOINT_COOLTIME_SKILL_NO_1; i < AT_JOINT_COOLTIME_SKILL_NO_MAX; ++i)
+	{// ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½
+		PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(GetPilot()->GetUnit());
+		if (!pkPlayer)
 		{
 			return;
 		}
 		PgMySkill* pkMySkill = pkPlayer->GetMySkill();
-		if(!pkMySkill)
+		if (!pkMySkill)
 		{
 			return;
 		}
 
-		int const iJointCoolTimeSkillNo = pkMySkill->GetLearnedSkill(pkSkillDef->GetAbil(i) , true);
-		if(0 < iJointCoolTimeSkillNo)
-		{// ÇØ´ç ½ºÅ³À» ÄðÅ¸ÀÓ Àû¿ë ½ÃÅ²´Ù
+		int const iJointCoolTimeSkillNo = pkMySkill->GetLearnedSkill(pkSkillDef->GetAbil(i), true);
+		if (0 < iJointCoolTimeSkillNo)
+		{// ï¿½Ø´ï¿½ ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å²ï¿½ï¿½
 			CSkillDef const* pkTempSkillDef = kSkillDefMgr.GetDef(iJointCoolTimeSkillNo);
 			int const iJointCoolTime = pkTempSkillDef->GetAbil(AT_JOINT_COOLTIME);
-			if(0 < iJointCoolTime)
+			if (0 < iJointCoolTime)
 			{
-				m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(g_kSkillTree.GetKeySkillNo(iJointCoolTimeSkillNo), stSkillCoolTimeInfo::stCoolTimeInfoNode(ulSkillNo,BM::GetTime32(), iJointCoolTime)));
+				m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(g_kSkillTree.GetKeySkillNo(iJointCoolTimeSkillNo), stSkillCoolTimeInfo::stCoolTimeInfoNode(ulSkillNo, BM::GetTime32(), iJointCoolTime)));
 			}
 			else
 			{
-				m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(g_kSkillTree.GetKeySkillNo(iJointCoolTimeSkillNo), stSkillCoolTimeInfo::stCoolTimeInfoNode(ulSkillNo,BM::GetTime32(),iCoolTime)));
+				m_SkillCoolTimeInfo.m_CoolTimeInfoMap.insert(std::make_pair(g_kSkillTree.GetKeySkillNo(iJointCoolTimeSkillNo), stSkillCoolTimeInfo::stCoolTimeInfoNode(ulSkillNo, BM::GetTime32(), iCoolTime)));
 			}
 		}
 	}
@@ -14417,14 +14417,14 @@ void PgActor::ReCalcCoolTime(int const iCoolTimeRate)
 {
 	unsigned long ulCurTime = BM::GetTime32();
 
-	for(stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.begin();itor != m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end();++itor)
+	for (stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.begin(); itor != m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end(); ++itor)
 	{
 		stSkillCoolTimeInfo::stCoolTimeInfoNode* pNode = &itor->second;
 
-		if(ulCurTime > pNode->m_ulCoolStartTime)
+		if (ulCurTime > pNode->m_ulCoolStartTime)
 		{
 			unsigned long ulCoolTime = pNode->m_ulTotalCoolTime - (ulCurTime - pNode->m_ulCoolStartTime);
-			unsigned long ulDiffCoolTime = static_cast<unsigned long>(ulCoolTime * static_cast<double>(iCoolTimeRate)/static_cast<double>(ABILITY_RATE_VALUE));
+			unsigned long ulDiffCoolTime = static_cast<unsigned long>(ulCoolTime * static_cast<double>(iCoolTimeRate) / static_cast<double>(ABILITY_RATE_VALUE));
 			pNode->m_ulCoolStartTime -= ulDiffCoolTime;
 		}
 	}
@@ -14433,8 +14433,8 @@ void PgActor::ReCalcCoolTime(int const iCoolTimeRate)
 void PgActor::CutSkillCoolTime(unsigned long const ulSkillNo)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.CutSkillCoolTime"), g_pkApp->GetFrameCount()));
-	stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor	 = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.find(g_kSkillTree.GetKeySkillNo(ulSkillNo));
-	if(m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end() != itor)
+	stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.find(g_kSkillTree.GetKeySkillNo(ulSkillNo));
+	if (m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end() != itor)
 	{
 		itor->second.m_ulSkillNo = 0;
 		return;
@@ -14444,20 +14444,20 @@ void PgActor::CutSkillCoolTime(unsigned long const ulSkillNo)
 void PgActor::SkillCastingConfirmed(unsigned long const ulSkillNo, short const sErrorCode)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.SkillCastingConfirmed"), g_pkApp->GetFrameCount()));
-	bool	bIsSingleMode = 
+	bool	bIsSingleMode =
 #ifndef EXTERNAL_RELEASE
 		g_pkApp->IsSingleMode();
 #else
 		false;
 #endif
 
-	if(m_pkAction && (m_pkAction->GetActionNo() == ulSkillNo || bIsSingleMode))
+	if (m_pkAction && (m_pkAction->GetActionNo() == ulSkillNo || bIsSingleMode))
 	{
-		{// Ä³½ºÆÃ Å¸ÀÓ ½Ã°£ Á¶Àý
+		{// Ä³ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
 			GET_DEF(CSkillDefMgr, kSkillDefMgr);
 			CSkillDef const* pkSkillDef = kSkillDefMgr.GetDef(ulSkillNo);
 			PG_ASSERT_LOG(pkSkillDef);
-			if(!pkSkillDef) { return; }
+			if (!pkSkillDef) { return; }
 
 			int iAddCastTime = 0;
 			int iSkillCastTime = pkSkillDef->GetAbil(AT_CAST_TIME);
@@ -14465,41 +14465,41 @@ void PgActor::SkillCastingConfirmed(unsigned long const ulSkillNo, short const s
 
 			m_SkillCastingInfo.m_ulSkillNo = ulSkillNo;
 			m_SkillCastingInfo.m_ulCastStartTime = BM::GetTime32();
-			if(0 < iSkillCastTime)
-			{// Ä³½ºÆÃ Å¸ÀÓÀÌ ÀÖ´Â °æ¿ì¿¡¸¸
-				if(m_pkPilot)
+			if (0 < iSkillCastTime)
+			{// Ä³ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½
+				if (m_pkPilot)
 				{
 					CUnit* pkUnit = m_pkPilot->GetUnit();
-					if(pkUnit)
-					{// °ªÀ» ¾ò¾î¿Í
+					if (pkUnit)
+					{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 						iDecCastTimeRate = pkUnit->GetAbil(AT_CAST_TIME_RATE);
 						CSkill* pkSkill = pkUnit->GetSkill();
-						if(pkSkill)
+						if (pkSkill)
 						{
 							iAddCastTime = pkSkill->GetSkillCastingTime();
 						}
 					}
 				}
-				
+
 			}
-			// °è»êÇÏ°í
-			m_SkillCastingInfo.m_ulTotalCastTime = lwCommonSkillUtilFunc::CalcTotalCastTime( iSkillCastTime, iAddCastTime, iDecCastTimeRate );
+			// ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+			m_SkillCastingInfo.m_ulTotalCastTime = lwCommonSkillUtilFunc::CalcTotalCastTime(iSkillCastTime, iAddCastTime, iDecCastTimeRate);
 		}
 
-		if(IsMyActor())
+		if (IsMyActor())
 		{
-			if(0 < m_SkillCastingInfo.m_ulTotalCastTime)
+			if (0 < m_SkillCastingInfo.m_ulTotalCastTime)
 			{
 				CXUI_Wnd* pkWnd = XUIMgr.Get(_T("SKILL_CASTTIME_BAR"));
-				if(!pkWnd)
+				if (!pkWnd)
 				{
 					pkWnd = XUIMgr.Call(_T("SKILL_CASTTIME_BAR"));
 				}
-				if(pkWnd)
+				if (pkWnd)
 				{
 					pkWnd->Visible(true);
-					CXUI_Wnd*		pkBGBar = pkWnd->GetControl(_T("BG_BAR"));
-					CXUI_AniBar*	pkAniBar = (CXUI_AniBar*)pkBGBar->GetControl(_T("ANIBAR"));
+					CXUI_Wnd* pkBGBar = pkWnd->GetControl(_T("BG_BAR"));
+					CXUI_AniBar* pkAniBar = (CXUI_AniBar*)pkBGBar->GetControl(_T("ANIBAR"));
 					lwUIWnd	kAniBarWnd(pkAniBar);
 					kAniBarWnd.SetStartTime(m_SkillCastingInfo.m_ulTotalCastTime);
 				}
@@ -14514,9 +14514,9 @@ void	PgActor::StartSkillCasting(unsigned long const ulSkillNo)
 	GET_DEF(CSkillDefMgr, kSkillDefMgr);
 	CSkillDef const* pkSkillDef = kSkillDefMgr.GetDef(ulSkillNo);
 
-	if(pkSkillDef && E_SCAST_CASTSHOT == pkSkillDef->GetAbil(AT_CASTTYPE))
+	if (pkSkillDef && E_SCAST_CASTSHOT == pkSkillDef->GetAbil(AT_CASTTYPE))
 	{
-		lua_tinker::call<void,int>("Net_C_M_REQ_BEGINCAST",(int)ulSkillNo);
+		lua_tinker::call<void, int>("Net_C_M_REQ_BEGINCAST", (int)ulSkillNo);
 	}
 }
 
@@ -14524,10 +14524,10 @@ void	PgActor::CutSkillCasting(unsigned long const ulSkillNo)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.CutSkillCasting"), g_pkApp->GetFrameCount()));
 	m_SkillCastingInfo.m_ulSkillNo = 0;
-	if(IsMyActor())
+	if (IsMyActor())
 	{
 		CXUI_Wnd* pkWnd = XUIMgr.Get(_T("SKILL_CASTTIME_BAR"));
-		if(pkWnd)
+		if (pkWnd)
 		{
 			pkWnd->Close();
 		}
@@ -14551,20 +14551,20 @@ void	PgActor::CutSkillToggle(unsigned long const ulSkillNo)
 void	PgActor::UpdateSkillInfos()
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.UpdateSkillInfos"), g_pkApp->GetFrameCount()));
-	if(IsUnderMyControl() == false) { return; }
+	if (IsUnderMyControl() == false) { return; }
 
 	unsigned	long	ulTime = BM::GetTime32();
 	unsigned	long	ulElapsedTime = 0;
-	if(0 < m_SkillCastingInfo.m_ulSkillNo)
+	if (0 < m_SkillCastingInfo.m_ulSkillNo)
 	{
 		ulElapsedTime = ulTime - m_SkillCastingInfo.m_ulCastStartTime;
-		if(ulElapsedTime > m_SkillCastingInfo.m_ulTotalCastTime)
+		if (ulElapsedTime > m_SkillCastingInfo.m_ulTotalCastTime)
 		{
-			if(m_pkAction)
+			if (m_pkAction)
 			{
 				NIMETRICS_EVAL(NiMetricsClockTimer a("PgMobileSuit.lua_call"));
 				NIMETRICS_STARTTIMER(a);
-				m_pkAction->OnCastingCompleted(this,m_pkAction);
+				m_pkAction->OnCastingCompleted(this, m_pkAction);
 
 				SetIgonreDamageEffect(m_pkAction);
 
@@ -14573,17 +14573,17 @@ void	PgActor::UpdateSkillInfos()
 			m_SkillCastingInfo.m_ulSkillNo = 0;
 		}
 	}
-	if(0 < m_SkillCoolTimeInfo.m_CoolTimeInfoMap.size())
+	if (0 < m_SkillCoolTimeInfo.m_CoolTimeInfoMap.size())
 	{
-		for(stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.begin();
+		for (stSkillCoolTimeInfo::CoolTimeInfoMap::iterator itor = m_SkillCoolTimeInfo.m_CoolTimeInfoMap.begin();
 			itor != m_SkillCoolTimeInfo.m_CoolTimeInfoMap.end(); )
 		{
 			stSkillCoolTimeInfo::stCoolTimeInfoNode* pNode = &itor->second;
 
-			if(ulTime>pNode->m_ulCoolStartTime)
+			if (ulTime > pNode->m_ulCoolStartTime)
 			{
 				ulElapsedTime = ulTime - pNode->m_ulCoolStartTime;
-				if(ulElapsedTime > pNode->m_ulTotalCoolTime)
+				if (ulElapsedTime > pNode->m_ulTotalCoolTime)
 				{
 
 					m_SkillCoolTimeInfo.m_CoolTimeInfoMap.erase(itor++);
@@ -14595,31 +14595,31 @@ void	PgActor::UpdateSkillInfos()
 		}
 	}
 }
-int	PgActor::GetPosChangeActionCount(const ActionQueue &kQueue)	//	Å¥¿¡ µé¾îÀÖ´Â ¾×¼Ç Áß¿¡, Ä³¸¯ÅÍÀÇ À§Ä¡¸¦ ÀÌµ¿½ÃÅ°´Â ¾×¼ÇÀÌ ¸î°³³ª ÀÖ´Â°¡?
+int	PgActor::GetPosChangeActionCount(const ActionQueue& kQueue)	//	Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½×¼ï¿½ ï¿½ß¿ï¿½, Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ ï¿½Ö´Â°ï¿½?
 {
 	int	iCount = 0;
 
 	bool	bCurrentActionCanChangeActorPos = false;
-	if(m_pkAction)
+	if (m_pkAction)
 	{
 		bCurrentActionCanChangeActorPos = m_pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS);
 	}
 
-	for(ActionQueue::const_iterator itor = kQueue.begin(); itor != kQueue.end(); ++itor)
+	for (ActionQueue::const_iterator itor = kQueue.begin(); itor != kQueue.end(); ++itor)
 	{
 		PgActionEntity const& rkActionEntity = *itor;
 
-		if(NULL == rkActionEntity.GetAction())
+		if (NULL == rkActionEntity.GetAction())
 		{
-			if(bCurrentActionCanChangeActorPos)	//	ÇöÀç ¾×¼ÇÀÌ ÀÌµ¿¾×¼ÇÀÌ¶ó¸é, ¹æÇâ ÀüÈ¯ ¿ª½Ã ÀÌµ¿°ü·Ã ¾×¼ÇÀÌ¶ó°í ºÁ¾ßÇÑ´Ù.
+			if (bCurrentActionCanChangeActorPos)	//	ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 			{
 				++iCount;
 			}
 			continue;
 		}
 
-		PgAction *pkAction = rkActionEntity.GetAction();
-		if(pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
+		PgAction* pkAction = rkActionEntity.GetAction();
+		if (pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
 		{
 			++iCount;
 		}
@@ -14632,20 +14632,20 @@ bool	PgActor::ProcessFollowingActor()
 {
 	BM::CAutoMutex kLock(m_kActionQueueMutex);
 
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return true;
 	}
-	if(!IsUnderMyControl())
+	if (!IsUnderMyControl())
 	{
 		return true;
 	}
 
 	PgAction* pkCurAction = GetAction();
 
-	if(stFollowInfo::FS_MOVE_TO_STARTPOS == m_kFollowInfo.GetFollowState())
+	if (stFollowInfo::FS_MOVE_TO_STARTPOS == m_kFollowInfo.GetFollowState())
 	{
-		if(ACTIONNAME_RUN != pkCurAction->GetID())
+		if (ACTIONNAME_RUN != pkCurAction->GetID())
 		{
 			m_dwLastActionTime = 0;
 			m_kFollowInfo.SetFollowState(stFollowInfo::FS_PROCESS_ACTION_QUEUE);
@@ -14656,7 +14656,7 @@ bool	PgActor::ProcessFollowingActor()
 		}
 	}
 
-	DWORD const dwNow = static_cast<int>(g_pkWorld->GetAccumTime()*1000.0);
+	DWORD const dwNow = static_cast<int>(g_pkWorld->GetAccumTime() * 1000.0);
 
 	int const iMinActionQueueCount = 3;
 	float const	fMaxWaitDistance = 100.0f;
@@ -14665,41 +14665,41 @@ bool	PgActor::ProcessFollowingActor()
 	PgPilot* pkTargetPilot = g_kPilotMan.FindPilot(m_kFollowInfo.m_kFollowTargetActor);
 	PgActor* pkTargetActor = NULL;
 
-	if(pkTargetPilot)
+	if (pkTargetPilot)
 	{
 		pkTargetActor = dynamic_cast<PgActor*>(pkTargetPilot->GetWorldObject());
 	}
 
-	if(!pkTargetActor)
+	if (!pkTargetActor)
 	{
-		if(m_kFollowInfo.IsTargetLost())
+		if (m_kFollowInfo.IsTargetLost())
 		{
 			float	fElapsedTime = g_pkWorld->GetAccumTime() - m_kFollowInfo.GetTargetLostStartTime();
-			if(30 < fElapsedTime)	//	30ÃÊ ÀÌ»ó Å¸°ÙÀ» ÀÒ¾ú´Ù¸é, µû¶ó´Ù´Ï±â¸¦ ÁßÁöÇÑ´Ù.
+			if (30 < fElapsedTime)	//	30ï¿½ï¿½ ï¿½Ì»ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¾ï¿½ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½Ù´Ï±â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 			{
-				RequestFollowActor(GetFollowingTargetGUID(),EFollow_Cancel);
+				RequestFollowActor(GetFollowingTargetGUID(), EFollow_Cancel);
 				return	true;
 			}
 		}
 		else
 		{
-			//	Å¸°ÙÀ» ÀÒ¾ú´Ù.
+			//	Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¾ï¿½ï¿½ï¿½.
 			m_kFollowInfo.SetTargetLostStartTime(g_pkWorld->GetAccumTime());
 			m_kFollowInfo.SetTargetLost(true);
 
 			return	true;
 		}
 
-		if(0 == m_kActionQueue.size())
+		if (0 == m_kActionQueue.size())
 		{
 			SetDirection(DIR_NONE);
 		}
 	}
 	else
 	{
-		if(m_kFollowInfo.IsTargetLost())
+		if (m_kFollowInfo.IsTargetLost())
 		{
-			RequestFollowActor(pkTargetActor->GetPilotGuid(),EFollow_Request);
+			RequestFollowActor(pkTargetActor->GetPilotGuid(), EFollow_Request);
 			return	true;
 		}
 
@@ -14707,46 +14707,46 @@ bool	PgActor::ProcessFollowingActor()
 
 
 	float fCurrentDistance = fMaxWaitDistance;
-	
-	if(pkTargetActor)
+
+	if (pkTargetActor)
 	{
-		fCurrentDistance = (pkTargetActor->GetPos()-GetPos()).Length();
+		fCurrentDistance = (pkTargetActor->GetPos() - GetPos()).Length();
 	}
 
-	if(pkCurAction)
+	if (pkCurAction)
 	{
-		if(ACTIONNAME_RUN == pkCurAction->GetID() && IsMeetFloor())
+		if (ACTIONNAME_RUN == pkCurAction->GetID() && IsMeetFloor())
 		{
-			if(stFollowInfo::FS_WAIT != m_kFollowInfo.GetFollowState() &&
-				fCurrentDistance < fMinFollowDistance && 
+			if (stFollowInfo::FS_WAIT != m_kFollowInfo.GetFollowState() &&
+				fCurrentDistance < fMinFollowDistance &&
 				GetPosChangeActionCount(m_kActionQueue) < iMinActionQueueCount)
 			{
-				//	ÀÏÁ¤ °Å¸® ÀÌÇÏ·Î °¡±õ´Ù¸é, °­Á¦·Î Idle ¸ð¼ÇÀ» ÇÏµµ·ÏÇÑ´Ù.
+				//	ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Idle ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ïµï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 				PgAction* pkAction = CreateActionForTransitAction(ACTIONNAME_IDLE);
 				pkAction->SetActionStartPos(GetPosition());
 
-				int	iActionTerm = dwNow - static_cast<int>( pkCurAction->GetActionEnterTime()*1000.0f );
+				int	iActionTerm = dwNow - static_cast<int>(pkCurAction->GetActionEnterTime() * 1000.0f);
 				pkAction->SetActionTerm(iActionTerm);
 
 				m_kFollowInfo.SaveDirection((Direction)GetDirection());
 				m_kFollowInfo.SaveActionTerm(iActionTerm);
 				m_kFollowInfo.SetFollowState(stFollowInfo::FS_WAIT);
 
-				PgActionEntity	kActionEntity(pkAction,DIR_NONE);
+				PgActionEntity	kActionEntity(pkAction, DIR_NONE);
 				m_kActionQueue.push_front(kActionEntity);
 			}
 		}
-		else if(stFollowInfo::FS_WAIT == m_kFollowInfo.GetFollowState())
+		else if (stFollowInfo::FS_WAIT == m_kFollowInfo.GetFollowState())
 		{
-			if(fCurrentDistance < fMaxWaitDistance && GetPosChangeActionCount(m_kActionQueue) < iMinActionQueueCount)
+			if (fCurrentDistance < fMaxWaitDistance && GetPosChangeActionCount(m_kActionQueue) < iMinActionQueueCount)
 			{
 				return	true;
 			}
-			//	ÀÏÁ¤ °Å¸® ÀÌ»óÀÌ¶ó¸é, ´Ù½Ã ´Þ·Á°£´Ù.
+			//	ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½Ì»ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½Ù½ï¿½ ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½.
 			PgAction* pkAction = CreateActionForTransitAction(ACTIONNAME_RUN);
 			pkAction->SetActionStartPos(GetPosition());
 
-			int	iActionTerm = dwNow - static_cast<int>( pkCurAction->GetActionEnterTime()*1000.0f );
+			int	iActionTerm = dwNow - static_cast<int>(pkCurAction->GetActionEnterTime() * 1000.0f);
 			pkAction->SetActionTerm(iActionTerm);
 
 			Direction kDirection = m_kFollowInfo.GetSavedDirection();
@@ -14755,42 +14755,42 @@ bool	PgActor::ProcessFollowingActor()
 
 			m_kFollowInfo.SetFollowState(stFollowInfo::FS_PROCESS_ACTION_QUEUE);
 
-			PgActionEntity	kActionEntity(pkAction,DIR_NONE);
+			PgActionEntity	kActionEntity(pkAction, DIR_NONE);
 			m_kActionQueue.push_front(kActionEntity);
 		}
 	}
 
-	// »õ·Î¿Â ÆÐÅ¶ÀÇ ¼Óµµ°¡, ÀÌÀü ÆÐÅ¶ÀÇ ¼Óµµº¸´Ù ºü¸¦ ¶§¸¸ ±×¸¸Å­ ½Ã°£À» ´Ê°Ô µÎ¾î¼­ ÆÐÅ¶À» Ã³¸®ÇÔ.
+	// ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½Å¶ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¶ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½Å­ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½Î¾î¼­ ï¿½ï¿½Å¶ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½.
 
 	bool bReturn = true;
 	ActionQueue::iterator itr = m_kActionQueue.begin();
-	while(itr != m_kActionQueue.end())
+	while (itr != m_kActionQueue.end())
 	{
 		PgActionEntity& rkActionEntity = *itr;
 
 		PgAction* pkAction = rkActionEntity.GetAction();
 
-		if(dwNow <= m_dwLastActionTime)
+		if (dwNow <= m_dwLastActionTime)
 		{
-			// LastActionTimeÀÌ ¼öÁ¤µÇ¸é, ¿©±â¿¡ °É¸± ¼ö ÀÖÀ¸³ª, ÀÌÁ¦ ¼öÁ¤µÉ ÀÏÀÌ ¾øÀ½.
+			// LastActionTimeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½, ï¿½ï¿½ï¿½â¿¡ ï¿½É¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			//WriteToConsole("Now[%u] <= LastAction[%u]\n", dwNow, m_dwLastActionTime);
 			return true;
 		}
 
 		DWORD dwActionTerm = rkActionEntity.GetActionTerm();
 
-		if(ACTIONNAME_RUN == m_pkAction->GetID())
+		if (ACTIONNAME_RUN == m_pkAction->GetID())
 		{
-			if(0 < m_kFollowInfo.GetSavedActionTerm())
+			if (0 < m_kFollowInfo.GetSavedActionTerm())
 			{
-				int	iAdjustedActionTerm = rkActionEntity.GetActionTerm()-m_kFollowInfo.GetSavedActionTerm();
+				int	iAdjustedActionTerm = rkActionEntity.GetActionTerm() - m_kFollowInfo.GetSavedActionTerm();
 
-				if(pkAction)
+				if (pkAction)
 				{
-					if(stFollowInfo::FS_WAIT != m_kFollowInfo.GetFollowState())
+					if (stFollowInfo::FS_WAIT != m_kFollowInfo.GetFollowState())
 					{
 						m_kFollowInfo.SetSavedActionTerm(0);
-						if(0 > iAdjustedActionTerm)
+						if (0 > iAdjustedActionTerm)
 						{
 							m_kFollowInfo.SaveActionTerm(-iAdjustedActionTerm);
 							iAdjustedActionTerm = 0;
@@ -14803,7 +14803,7 @@ bool	PgActor::ProcessFollowingActor()
 				}
 				else
 				{
-					if(0 > iAdjustedActionTerm)
+					if (0 > iAdjustedActionTerm)
 					{
 						iAdjustedActionTerm = 0;
 					}
@@ -14812,9 +14812,9 @@ bool	PgActor::ProcessFollowingActor()
 				}
 			}
 		}
-		
-		//	ÇöÀç ¾×¼ÇÀÌ ÀÌµ¿ÇÏÁö ¾Ê´Â ¾×¼ÇÀÌ¶ó¸é, ±â´Ù¸± ÇÊ¿ä ¾øÀÌ ¹Ù·Î ´ÙÀ½ ¾×¼ÇÀ¸·Î ³Ñ¾î°£´Ù.
-		if(false == m_pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
+
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½×¼ï¿½ï¿½Ì¶ï¿½ï¿½, ï¿½ï¿½Ù¸ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°£ï¿½ï¿½.
+		if (false == m_pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
 		{
 			m_dwLastActionTime = dwNow - dwActionTerm;
 		}
@@ -14822,7 +14822,7 @@ bool	PgActor::ProcessFollowingActor()
 		DWORD dwElapsedTime = (m_dwLastActionTime != 0 ? dwNow - m_dwLastActionTime : dwActionTerm);
 
 		bool bForceToProcessAction = false;
-		if(dwElapsedTime < dwActionTerm)
+		if (dwElapsedTime < dwActionTerm)
 		{
 			return true;
 		}
@@ -14830,14 +14830,14 @@ bool	PgActor::ProcessFollowingActor()
 		DWORD dwSyncTime = 0;
 		DWORD dwOverTime = dwElapsedTime - dwActionTerm;
 
-		if(pkAction)
+		if (pkAction)
 		{
-			if(NiPoint3::ZERO != pkAction->GetActionStartPos())
+			if (NiPoint3::ZERO != pkAction->GetActionStartPos())
 			{
 				SetPosition(pkAction->GetActionStartPos());
 			}
 			pkAction->AlreadySync(true);
-			ProcessAction(pkAction,false);
+			ProcessAction(pkAction, false);
 
 			bReturn = false;
 			m_dwLastActionTime = dwNow;
@@ -14846,18 +14846,18 @@ bool	PgActor::ProcessFollowingActor()
 		{
 			SetDirection(rkActionEntity.GetDirection());
 
-			if(NiPoint3::ZERO != rkActionEntity.GetDirectionStartPos())
+			if (NiPoint3::ZERO != rkActionEntity.GetDirectionStartPos())
 			{
 				SetPosition(rkActionEntity.GetDirectionStartPos());
 			}
 
-			if(IsMyActor() || (IsUnderMyControl() && !IsNowFollowing()))
+			if (IsMyActor() || (IsUnderMyControl() && !IsNowFollowing()))
 			{
 				g_kPilotMan.BroadcastDirection(m_pkPilot, rkActionEntity.GetDirection());
 			}
 		}
 
-		if(0 == m_kActionQueue.size())
+		if (0 == m_kActionQueue.size())
 		{
 			break;
 		}
@@ -14868,152 +14868,152 @@ bool	PgActor::ProcessFollowingActor()
 	return bReturn;
 
 }
-void	PgActor::RequestFollowActor(BM::GUID const& kTargetActorGUID, EPlayer_Follow_Mode const kMode, bool const bForce)	//	kTargetActorGUID¸¦ µû¶ó°¥°ÍÀ» ¼­¹ö¿¡ ¿äÃ»ÇÑ´Ù
+void	PgActor::RequestFollowActor(BM::GUID const& kTargetActorGUID, EPlayer_Follow_Mode const kMode, bool const bForce)	//	kTargetActorGUIDï¿½ï¿½ ï¿½ï¿½ï¿½ó°¥°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ñ´ï¿½
 {
-	if(!bForce)
+	if (!bForce)
 	{
-		if( (EFollow_Request == kMode) || (EFollow_TakePerson == kMode) )
+		if ((EFollow_Request == kMode) || (EFollow_TakePerson == kMode))
 		{
-			if(!CheckCanFollow(kTargetActorGUID))
+			if (!CheckCanFollow(kTargetActorGUID))
 			{
 				return;
 			}
 		}
-		if( (EFollow_Cancel == kMode) || (EFollow_CancelTakePerson == kMode) )
+		if ((EFollow_Cancel == kMode) || (EFollow_CancelTakePerson == kMode))
 		{
-			if(false == IsNowFollowing())
+			if (false == IsNowFollowing())
 			{
 				return;
 			}
 		}
 	}
 
-	lua_tinker::call<void,lwGUID,BYTE>("Net_PT_C_M_REQ_FOLLOWING",lwGUID(kTargetActorGUID),((BYTE)kMode));
+	lua_tinker::call<void, lwGUID, BYTE>("Net_PT_C_M_REQ_FOLLOWING", lwGUID(kTargetActorGUID), ((BYTE)kMode));
 }
 
-void	PgActor::ResponseFollowActor(BM::GUID const& kTargetActorGUID, EPlayer_Follow_Mode const kMode)	//	kTargetActorGUID¸¦ µû¶ó°¥°ÍÀ» ¼­¹ö¿¡ ¿äÃ»ÇÑ´Ù.
+void	PgActor::ResponseFollowActor(BM::GUID const& kTargetActorGUID, EPlayer_Follow_Mode const kMode)	//	kTargetActorGUIDï¿½ï¿½ ï¿½ï¿½ï¿½ó°¥°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ñ´ï¿½.
 {
 
-	if(kMode == EFollow_Request)
+	if (kMode == EFollow_Request)
 	{
-		if(!FollowActor(kTargetActorGUID))
+		if (!FollowActor(kTargetActorGUID))
 		{
-			if(IsMyActor())
+			if (IsMyActor())
 			{
-				RequestFollowActor(kTargetActorGUID,EFollow_Cancel,true);
+				RequestFollowActor(kTargetActorGUID, EFollow_Cancel, true);
 			}
 		}
 	}
-	else if(kMode == EFollow_Cancel)
+	else if (kMode == EFollow_Cancel)
 	{
 		StopFollowActor();
 		m_kFollowInfo.RemoveFollowingMeActor(kTargetActorGUID);
 	}
 }
 
-bool	PgActor::CheckCanFollow(const	BM::GUID &kTargetActorGUID, bool const bMsg)	//	kTargetActorGUID ¸¦ µû¶ó°¥ ¼ö ÀÖ´ÂÁö Ã¼Å©ÇÏ°í ¸Þ¼¼Áö¸¦ º¸¿©ÁØ´Ù.
+bool	PgActor::CheckCanFollow(const	BM::GUID& kTargetActorGUID, bool const bMsg)	//	kTargetActorGUID ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï°ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 {
 
-	PgPilot	*pkTargetPilot = g_kPilotMan.FindPilot(kTargetActorGUID);
-	if(!pkTargetPilot)
+	PgPilot* pkTargetPilot = g_kPilotMan.FindPilot(kTargetActorGUID);
+	if (!pkTargetPilot)
 	{
 		return	false;
 	}
-	PgPilot	*pkPilot = GetPilot();
-	if(!pkPilot)
-	{
-		return	false;
-	}
-
-	PgPlayer	*pkMyPlayer = (PgPlayer*)pkPilot->GetUnit();
-	PgPlayer	*pkTargetPlayer = (PgPlayer*)pkTargetPilot->GetUnit();
-
-	if(!pkMyPlayer || !pkTargetPlayer)
+	PgPilot* pkPilot = GetPilot();
+	if (!pkPilot)
 	{
 		return	false;
 	}
 
-	PgActor	*pkTargetActor = dynamic_cast<PgActor*>(pkTargetPilot->GetWorldObject());
-	if(!pkTargetActor)
+	PgPlayer* pkMyPlayer = (PgPlayer*)pkPilot->GetUnit();
+	PgPlayer* pkTargetPlayer = (PgPlayer*)pkTargetPilot->GetUnit();
+
+	if (!pkMyPlayer || !pkTargetPlayer)
 	{
 		return	false;
 	}
 
-	if( pkMyPlayer->GetAbil(AT_BEAR_EFFECT_SPEED_LOCK) > 0 )
-	{// ÀÌ¼Ó º¯È­ ±ÝÁö ¾îºôÀÌ °É·Á ÀÖÀ» ¶§´Â µû¶ó°¡±â ±ÝÁö
+	PgActor* pkTargetActor = dynamic_cast<PgActor*>(pkTargetPilot->GetWorldObject());
+	if (!pkTargetActor)
+	{
+		return	false;
+	}
+
+	if (pkMyPlayer->GetAbil(AT_BEAR_EFFECT_SPEED_LOCK) > 0)
+	{// ï¿½Ì¼ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡±ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return false;
 	}
 
-	//	ÆÄÆ¼¿ø,Ä£±¸,±æµå¿øÀÌ¾î¾ß¸¸ µû¶ó°¥ ¼ö ÀÖ´Ù.
+	//	ï¿½ï¿½Æ¼ï¿½ï¿½,Ä£ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ß¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 	bool	bHasCorrectRelationship = false;
-	if(pkMyPlayer->GuildGuid() != BM::GUID::NullData())
+	if (pkMyPlayer->GuildGuid() != BM::GUID::NullData())
 	{
-		if(pkMyPlayer->GuildGuid() == pkTargetPlayer->GuildGuid())
+		if (pkMyPlayer->GuildGuid() == pkTargetPlayer->GuildGuid())
 		{
-			bHasCorrectRelationship = true;	//	°°Àº ±æµå´Ù.
+			bHasCorrectRelationship = true;	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		}
 	}
-	if(!bHasCorrectRelationship)
+	if (!bHasCorrectRelationship)
 	{
-		if(pkMyPlayer->PartyGuid() != BM::GUID::NullData())
+		if (pkMyPlayer->PartyGuid() != BM::GUID::NullData())
 		{
-			if(pkMyPlayer->PartyGuid() == pkTargetPlayer->PartyGuid())
+			if (pkMyPlayer->PartyGuid() == pkTargetPlayer->PartyGuid())
 			{
-				bHasCorrectRelationship = true;	//	°°Àº ÆÄÆ¼´Ù.
+				bHasCorrectRelationship = true;	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½.
 			}
 		}
 	}
-	if(!bHasCorrectRelationship)
+	if (!bHasCorrectRelationship)
 	{
 		SFriendItem kFriendItem;
-		if(g_kFriendMgr.Friend_Find_ByGuid(pkTargetPlayer->GetID(),kFriendItem))
+		if (g_kFriendMgr.Friend_Find_ByGuid(pkTargetPlayer->GetID(), kFriendItem))
 		{
-			// ¾çÃø ¸ðµÎ Ä£±¸·Î µî·Ï µÇ¾î ÀÖ¾î¾ß °¡´ÉÇÏ´Ù.
-			if( kFriendItem.ChatStatus() & FCS_ADD_ALLOW )
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ä£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
+			if (kFriendItem.ChatStatus() & FCS_ADD_ALLOW)
 			{
 				bHasCorrectRelationship = true;
 			}
 		}
 	}
-	if(!bHasCorrectRelationship)
+	if (!bHasCorrectRelationship)
 	{
-		if(pkMyPlayer->CoupleGuid() != BM::GUID::NullData())
+		if (pkMyPlayer->CoupleGuid() != BM::GUID::NullData())
 		{
-			if(pkMyPlayer->CoupleGuid() == pkTargetPlayer->GetID())
+			if (pkMyPlayer->CoupleGuid() == pkTargetPlayer->GetID())
 			{
-				bHasCorrectRelationship = true;	//	Ä¿ÇÃ
+				bHasCorrectRelationship = true;	//	Ä¿ï¿½ï¿½
 			}
 		}
 	}
-	if(!bHasCorrectRelationship)
+	if (!bHasCorrectRelationship)
 	{
-		//	ÆÄÆ¼¿ø,Ä£±¸,±æµå¿øÀÌ¾î¾ß¸¸ µû¶ó°¥ ¼ö ÀÖ´Ù.
+		//	ï¿½ï¿½Æ¼ï¿½ï¿½,Ä£ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ß¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 		bMsg ? lwAddWarnDataStr(lwWString(TTW(418)), 2) : 0;
 		return	false;
 	}
 
-	//	°Å¸®°¡ ÀÏÁ¤°Å¸® ÀÌÇÏ¿©¾ß ÇÑ´Ù.
+	//	ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 	float	fMaxDistance = 100;
 	float	fDistance = (pkTargetActor->GetPos() - GetPos()).Length();
-	if(fMaxDistance<fDistance)
+	if (fMaxDistance < fDistance)
 	{
-		//	°Å¸®°¡ ÀÏÁ¤°Å¸® ÀÌÇÏ¿©¾ß ÇÑ´Ù.
+		//	ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		bMsg ? lwAddWarnDataStr(lwWString(TTW(404)), 2) : 0;
 		return	false;
 	}
 
-	if(IsRidingPet() || pkTargetActor->IsRidingPet())
-	{ //´ë»óÀÌ³ª ³»°¡ ÆêÀÌ Å¾½Â ÁßÀÏ ¶§´Â µû¶ó°¡±â ºÒ°¡
+	if (IsRidingPet() || pkTargetActor->IsRidingPet())
+	{ //ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡±ï¿½ ï¿½Ò°ï¿½
 		bMsg ? lwAddWarnDataStr(lwWString(TTW(451004)), 2) : 0;
 		return false;
 	}
 
-	//	´ë»óÀÌ ÀÌµ¿Áß ÀÏ¶§´Â µû¶ó°¡±â¸¦ ÇÒ ¼ö ¾ø´Ù.
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡±â¸¦ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
-	PgAction *pkTargetAction = pkTargetActor->GetAction();
-	if(!pkTargetAction || pkTargetAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
+	PgAction* pkTargetAction = pkTargetActor->GetAction();
+	if (!pkTargetAction || pkTargetAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
 	{
-		//	´ë»óÀÌ ÀÌµ¿Áß ÀÏ¶§´Â µû¶ó°¡±â¸¦ ÇÒ ¼ö ¾ø´Ù.
+		//	ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡±â¸¦ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		bMsg ? lwAddWarnDataStr(lwWString(TTW(419)), 2) : 0;
 		return	false;
 	}
@@ -15021,56 +15021,56 @@ bool	PgActor::CheckCanFollow(const	BM::GUID &kTargetActorGUID, bool const bMsg)	
 	return	true;
 }
 
-bool PgActor::FollowActor(const	BM::GUID &kTargetActorGUID)	//	kTargetActorGUID ¸¦ µû¶ó°¡µµ·Ï ÇÑ´Ù.
+bool PgActor::FollowActor(const	BM::GUID& kTargetActorGUID)	//	kTargetActorGUID ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡µï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 {
 
 
-	if(GetPilotGuid() == kTargetActorGUID)	//	³»°¡ ³ª¸¦ ¦i¾Æ°¡??? No way~
+	if (GetPilotGuid() == kTargetActorGUID)	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½iï¿½Æ°ï¿½??? No way~
 	{
 		return	false;
 	}
 
-	//	³ªÀÇ ÇöÀç ¾×¼ÇÀÌ À§Ä¡ ÀÌµ¿ÇÏÁö ¾Ê´Â ¾×¼ÇÀÌ¾î¾ß ÇÑ´Ù.
-	PgAction	*pkAction = GetAction();
-	if(IsUnderMyControl())
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½×¼ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
+	PgAction* pkAction = GetAction();
+	if (IsUnderMyControl())
 	{
-		if(!pkAction || pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
+		if (!pkAction || pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
 		{
 			return false;
 		}
 	}
 
-	if(IsUnderMyControl())
+	if (IsUnderMyControl())
 	{
-		if(m_kFollowInfo.m_kFollowTargetActor != kTargetActorGUID)
+		if (m_kFollowInfo.m_kFollowTargetActor != kTargetActorGUID)
 		{
-			StopFollowActor();	//	±âÁ¸¿¡ ¦i´ø »ç¶÷Àº ¦iÁö ¾Êµµ·Ï ÇÑ´Ù.
+			StopFollowActor();	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½iï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½iï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		}
 	}
 
-	PgPilot	*pkMyPilot = GetPilot();
-	if(!pkMyPilot)
+	PgPilot* pkMyPilot = GetPilot();
+	if (!pkMyPilot)
 	{
 		return false;
 	}
 
-	PgPilot	*pkPilot = g_kPilotMan.FindPilot(kTargetActorGUID);
-	if(!pkPilot)
+	PgPilot* pkPilot = g_kPilotMan.FindPilot(kTargetActorGUID);
+	if (!pkPilot)
 	{
 		return false;
 	}
 
-	PgActor	*pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
-	if(!pkActor)
+	PgActor* pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
+	if (!pkActor)
 	{
 		return false;
 	}
 
-	//	µû¶ó°¥ ´ë»óÀÇ ÇöÀç ¾×¼ÇÀÌ À§Ä¡ ÀÌµ¿ÇÏÁö ¾Ê´Â ¾×¼ÇÀÌ¾î¾ß ÇÑ´Ù.
-	if(IsUnderMyControl())
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½×¼ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
+	if (IsUnderMyControl())
 	{
 		pkAction = pkActor->GetAction();
-		if(!pkAction || pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
+		if (!pkAction || pkAction->GetActionOptionEnable(PgAction::AO_CAN_CHANGE_ACTOR_POS))
 		{
 			lwAddWarnDataStr(lwWString(TTW(419)), 2);
 			return false;
@@ -15089,16 +15089,16 @@ bool PgActor::FollowActor(const	BM::GUID &kTargetActorGUID)	//	kTargetActorGUID 
 		m_kFollowInfo.AddFollowingMeActor(kTargetActorGUID);
 	}
 
-	if(IsMyActor())	//	³»°¡ pkActor ¸¦ µû¶ó°¡±â·Î ¼³Á¤
+	if (IsMyActor())	//	ï¿½ï¿½ï¿½ï¿½ pkActor ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	{
 		WCHAR	kMessage[256];
-		swprintf_s(kMessage,256,TTW(401).c_str(),pkPilot->GetName().c_str());
+		swprintf_s(kMessage, 256, TTW(401).c_str(), pkPilot->GetName().c_str());
 		lwAddWarnDataStr(lwWString(std::wstring(kMessage)), 2);
 	}
-	else if(pkActor->IsMyActor() && IsUnderMyControl() == false)	//	this actor °¡ ³ª¸¦ µû¶ó°¡±â·Î ¼³Á¤
+	else if (pkActor->IsMyActor() && IsUnderMyControl() == false)	//	this actor ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ó°¡±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	{
 		WCHAR	kMessage[256];
-		swprintf_s(kMessage,256,TTW(402).c_str(),pkMyPilot->GetName().c_str());
+		swprintf_s(kMessage, 256, TTW(402).c_str(), pkMyPilot->GetName().c_str());
 		lwAddWarnDataStr(lwWString(std::wstring(kMessage)), 2);
 	}
 
@@ -15108,9 +15108,9 @@ bool PgActor::FollowActor(const	BM::GUID &kTargetActorGUID)	//	kTargetActorGUID 
 void PgActor::StopFollowActor()
 {
 
-	if(IsUnderMyControl())
+	if (IsUnderMyControl())
 	{
-		if(IsNowFollowing() == false)
+		if (IsNowFollowing() == false)
 		{
 			return;
 		}
@@ -15118,20 +15118,20 @@ void PgActor::StopFollowActor()
 
 	BM::GUID	kTargetGUID = m_kFollowInfo.m_kFollowTargetActor;
 
-	if(IsUnderMyControl())
+	if (IsUnderMyControl())
 	{
 		m_kFollowInfo.SetStopFollow();
 
 		ClearActionQueue();
 	}
 
-	PgPilot	*pkMyPilot = GetPilot();
-	if(!pkMyPilot)
+	PgPilot* pkMyPilot = GetPilot();
+	if (!pkMyPilot)
 	{
 		return;
-	}	
+	}
 
-	if(IsMyActor())
+	if (IsMyActor())
 	{
 		lwAddWarnDataStr(lwWString(TTW(417)), 2);
 
@@ -15140,25 +15140,25 @@ void PgActor::StopFollowActor()
 	else
 	{
 		WCHAR	kMessage[256];
-		swprintf_s(kMessage,256,TTW(414).c_str(),pkMyPilot->GetName().c_str());
+		swprintf_s(kMessage, 256, TTW(414).c_str(), pkMyPilot->GetName().c_str());
 		lwAddWarnDataStr(lwWString(std::wstring(kMessage)), 2);
 	}
 
-	PgPilot	*pkPilot = g_kPilotMan.FindPilot(kTargetGUID);
-	if(!pkPilot)
+	PgPilot* pkPilot = g_kPilotMan.FindPilot(kTargetGUID);
+	if (!pkPilot)
 	{
 		return;
 	}
 
-	PgActor	*pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
-	if(!pkActor)
+	PgActor* pkActor = dynamic_cast<PgActor*>(pkPilot->GetWorldObject());
+	if (!pkActor)
 	{
 		return;
 	}
 
-	if(IsUnderMyControl())
+	if (IsUnderMyControl())
 	{
-		pkActor->RemoveFollowingMeActor(GetPilotGuid());		
+		pkActor->RemoveFollowingMeActor(GetPilotGuid());
 	}
 
 	/*if(IsMyActor())
@@ -15177,25 +15177,25 @@ void PgActor::StopFollowActor()
 	InvalidateDirection();
 	ReserveTransitAction(ACTIONNAME_IDLE);
 }
-void	PgActor::AddFollowingMeActor(const	BM::GUID &kActorGUID)	//	³ª¸¦ µû¶ó¿À´Â ¾×ÅÍ¸¦ Ãß°¡ÇÑ´Ù. FollowActor() ¿¡¼­ ÀÚµ¿À¸·Î È£ÃâµÈ´Ù.
+void	PgActor::AddFollowingMeActor(const	BM::GUID& kActorGUID)	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½. FollowActor() ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½È´ï¿½.
 {
 	m_kFollowInfo.AddFollowingMeActor(kActorGUID);
 }
-bool	PgActor::FindFollowingMeActor(const	BM::GUID &kActorGUID)
+bool	PgActor::FindFollowingMeActor(const	BM::GUID& kActorGUID)
 {
 	return m_kFollowInfo.FindFollowingMeActor(kActorGUID);
 }
-void	PgActor::RemoveFollowingMeActor(const	BM::GUID &kActorGUID)	//	³ª¸¦ µû¶ó¿À´Â ¾×ÅÍ¸¦ Á¦°ÅÇÑ´Ù. StopFollowActor() ¿¡¼­ ÀÚµ¿À¸·Î È£ÃâµÈ´Ù.
+void	PgActor::RemoveFollowingMeActor(const	BM::GUID& kActorGUID)	//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. StopFollowActor() ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½È´ï¿½.
 {
 	m_kFollowInfo.RemoveFollowingMeActor(kActorGUID);
 }
-void	PgActor::SetFollowTargetActor(const	BM::GUID &kActorGUID)
+void	PgActor::SetFollowTargetActor(const	BM::GUID& kActorGUID)
 {
 	m_kFollowInfo.SetStartFollow(kActorGUID);
 }
 void PgActor::SeeLadder()
 {
-	if(GetWorld()->GetLadderRoot() == 0)
+	if (GetWorld()->GetLadderRoot() == 0)
 	{
 		return;
 	}
@@ -15211,9 +15211,9 @@ void PgActor::SeeLadder()
 
 	NiPoint3	kOrigin = GetTranslate() + NiPoint3::UNIT_Z * 9.0f;
 	NiPoint3 kOriginPt[3];
-	//	¸ÕÀú ÀÚ±â°¡ º¸°í ÀÖ´Â ¹æÇâ¿¡ »ç´Ù¸®°¡ ÀÖ´ÂÁö Ã¼Å©ÇÑ´Ù.
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ú±â°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½.
 	NiPoint3	kDelta;
-	kOriginPt[0] = kOrigin; 
+	kOriginPt[0] = kOrigin;
 
 	NiPoint3	kLookDir = GetLookingDir();
 
@@ -15225,21 +15225,21 @@ void PgActor::SeeLadder()
 	kOriginPt[1] = kOrigin - kDelta;
 	kOriginPt[2] = kOrigin + kDelta;
 	bool bLadderFound = true;
-	for(int iIndex = 0; iIndex < 3; ++iIndex)
+	for (int iIndex = 0; iIndex < 3; ++iIndex)
 	{
-		if(!kPick.PickObjects(kOriginPt[iIndex], kLookDir))
+		if (!kPick.PickObjects(kOriginPt[iIndex], kLookDir))
 		{
 			bLadderFound = false;
 			break;
 		}
-	}	
-	if(!bLadderFound)	//	ÀÚ±â ¾ÕÂÊ¿¡ ¾øÀ¸¸é, Ä«¸Þ¶ó Á¤¸éÂÊ¿¡ ÀÖ´ÂÁö ´Ù½Ã ÇÑ¹ø Ã¼Å©
+	}
+	if (!bLadderFound)	//	ï¿½Ú±ï¿½ ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ñ¹ï¿½ Ã¼Å©
 	{
 		kLookDir = m_kPathNormal;
 
 		kPick.ClearResultsArray();
 
-		// Ä³¸¯ÅÍ À§Ä¡¿¡¼­ PathÀÇ Normal¹æÇâÀ¸·Î ·¹ÀÌ¸¦ ÁØºñ.
+		// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ Pathï¿½ï¿½ Normalï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Øºï¿½.
 #ifdef PG_USE_CAPSULE_CONTROLLER
 		kDelta = GetPathNormal().UnitCross(NiPoint3::UNIT_Z) * m_pkController->getRadius() * 0.5;
 #else
@@ -15249,10 +15249,10 @@ void PgActor::SeeLadder()
 		kOriginPt[1] = kOrigin - kDelta;
 		kOriginPt[2] = kOrigin + kDelta;
 
-		// Ä³¸¯ÅÍÀÇ °¡·Î ³Êºñ¸¦ °í·ÁÇÏ¿©, 3¹øÀÇ ·¹ÀÌ¸¦ ½ð´Ù.
-		for(int iIndex = 0; iIndex < 3; ++iIndex)
+		// Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½, 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½.
+		for (int iIndex = 0; iIndex < 3; ++iIndex)
 		{
-			if(!kPick.PickObjects(kOriginPt[iIndex], m_kPathNormal))
+			if (!kPick.PickObjects(kOriginPt[iIndex], m_kPathNormal))
 			{
 				return;
 			}
@@ -15261,27 +15261,27 @@ void PgActor::SeeLadder()
 		SetLookingDirection(DIR_UP, true);
 	}
 
-	NiPick::Results &rkResults = kPick.GetResults();
-	if(rkResults.GetSize() == 0)
+	NiPick::Results& rkResults = kPick.GetResults();
+	if (rkResults.GetSize() == 0)
 	{
 		return;
 	}
 
 	float	fDistance = rkResults.GetAt(0)->GetDistance();
 
-	if(fDistance>10.0f || fDistance<8.0f)
+	if (fDistance > 10.0f || fDistance < 8.0f)
 	{
 		float	fMoveDistance = fDistance - 10;
 		NiPoint3	kMoveDir = kLookDir;
 		NiPoint3	kCurPos = GetPos();
-		NiPoint3	kNewPos = kCurPos + kMoveDir*fMoveDistance;
+		NiPoint3	kNewPos = kCurPos + kMoveDir * fMoveDistance;
 		SetPosition(kNewPos);
 	}
 
 }
 bool PgActor::ClimbUpLadder()
 {
-	if(GetWorld()->GetLadderRoot() == 0)
+	if (GetWorld()->GetLadderRoot() == 0)
 	{
 		return false;
 	}
@@ -15297,9 +15297,9 @@ bool PgActor::ClimbUpLadder()
 
 	NiPoint3	kOrigin = GetTranslate() + NiPoint3::UNIT_Z * 9.0f;
 	NiPoint3 kOriginPt[3];
-	//	¸ÕÀú ÀÚ±â°¡ º¸°í ÀÖ´Â ¹æÇâ¿¡ »ç´Ù¸®°¡ ÀÖ´ÂÁö Ã¼Å©ÇÑ´Ù.
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ú±â°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½.
 	NiPoint3	kDelta;
-	kOriginPt[0] = kOrigin; 
+	kOriginPt[0] = kOrigin;
 
 	NiPoint3	kLookDir = GetLookingDir();
 
@@ -15311,19 +15311,19 @@ bool PgActor::ClimbUpLadder()
 	kOriginPt[1] = kOrigin - kDelta;
 	kOriginPt[2] = kOrigin + kDelta;
 	bool	bLadderFound = true;
-	for(int iIndex = 0; iIndex < 3; ++iIndex)
+	for (int iIndex = 0; iIndex < 3; ++iIndex)
 	{
-		if(!kPick.PickObjects(kOriginPt[iIndex], kLookDir))
+		if (!kPick.PickObjects(kOriginPt[iIndex], kLookDir))
 		{
 			bLadderFound = false;
 			break;
 		}
-	}	
-	if(!bLadderFound)	//	ÀÚ±â ¾ÕÂÊ¿¡ ¾øÀ¸¸é, Ä«¸Þ¶ó Á¤¸éÂÊ¿¡ ÀÖ´ÂÁö ´Ù½Ã ÇÑ¹ø Ã¼Å©
+	}
+	if (!bLadderFound)	//	ï¿½Ú±ï¿½ ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ñ¹ï¿½ Ã¼Å©
 	{
 		kPick.ClearResultsArray();
 
-		// Ä³¸¯ÅÍ À§Ä¡¿¡¼­ PathÀÇ Normal¹æÇâÀ¸·Î ·¹ÀÌ¸¦ ÁØºñ.
+		// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ Pathï¿½ï¿½ Normalï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Øºï¿½.
 #ifdef PG_USE_CAPSULE_CONTROLLER
 		kDelta = GetPathNormal().UnitCross(NiPoint3::UNIT_Z) * m_pkController->getRadius() * 0.5;
 #else
@@ -15333,24 +15333,24 @@ bool PgActor::ClimbUpLadder()
 		kOriginPt[1] = kOrigin - kDelta;
 		kOriginPt[2] = kOrigin + kDelta;
 
-		// Ä³¸¯ÅÍÀÇ °¡·Î ³Êºñ¸¦ °í·ÁÇÏ¿©, 3¹øÀÇ ·¹ÀÌ¸¦ ½ð´Ù.
-		for(int iIndex = 0; iIndex < 3; ++iIndex)
+		// Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½, 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½.
+		for (int iIndex = 0; iIndex < 3; ++iIndex)
 		{
-			if(!kPick.PickObjects(kOriginPt[iIndex], m_kPathNormal))
+			if (!kPick.PickObjects(kOriginPt[iIndex], m_kPathNormal))
 			{
 				return false;
 			}
 		}
 	}
 
-	NiPick::Results &rkResults = kPick.GetResults();
-	if(rkResults.GetSize() == 0)
+	NiPick::Results& rkResults = kPick.GetResults();
+	if (rkResults.GetSize() == 0)
 	{
 		return false;
 	}
 
 	static float const fLadderMinDist = 30.0f;
-	if(rkResults.GetAt(0)->GetDistance() >= fLadderMinDist)
+	if (rkResults.GetAt(0)->GetDistance() >= fLadderMinDist)
 	{
 		return false;
 	}
@@ -15358,7 +15358,7 @@ bool PgActor::ClimbUpLadder()
 	return true;
 }
 
-/*	// ÁÙÅ¸´Â ·ÎÁ÷ 
+/*	// ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 bool PgActor::HangOnRope()
 {
@@ -15426,7 +15426,7 @@ bool PgActor::HangOnRope()
 //	}
 //}
 
-/*	// Æê °ü·Ã ÇÔ¼öµé
+/*	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½
 
 bool PgActor::OutOfSight(BM::GUID &rkTargetGuid, float fDistance, bool bConsiderZAxis)
 {
@@ -15496,7 +15496,7 @@ bool PgActor::FollowActor(BM::GUID &rkTargetGuid, float fMoveSpeed)
 }
 
 
-// Return°ªÀÌ ¾ç¼öÀÌ¸é, ÀÚ½ÅÀ» ±âÁØÀ¸·Î Target Object°¡ AxisÀÇ +¹æÇâ¿¡ ÀÖ´Ù´Â °ÍÀÌ´Ù. À½¼öÀÌ¸é ±× ¹Ý´ë 
+// Returnï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½, ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Target Objectï¿½ï¿½ Axisï¿½ï¿½ +ï¿½ï¿½ï¿½â¿¡ ï¿½Ö´Ù´ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ ï¿½Ý´ï¿½
 int PgActor::CompareActorPosition(BM::GUID &rkTargetGuid, NiPoint3 kAxis, float fRange)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.CompareActorPosition"), g_pkApp->GetFrameCount()));
@@ -15529,28 +15529,28 @@ bool PgActor::WillBeFall(bool bDown, float fDistance)
 	float fLegHeight = PG_CHARACTER_CAPSULE_RADIUS;
 #endif
 
-	// °è´ÜÀÎÁö Àýº®ÀÎÁö °Ë»çÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ñ´ï¿½.
 	NxVec3 kMovingDelta;
 	NiPhysXTypes::NiPoint3ToNxVec3(m_kMovingDir, kMovingDelta);
 	kMovingDelta *= fDistance;
 	NxExtendedVec3 kControllerPos = m_pkController->getFilteredPosition();
 
-	// Ä³¸¯ÅÍ À§Ä¡¿¡¼­ ÇÑ ¹ø, MovingDir * Distnace ¾Õ¿¡¼­ ÇÑ ¹ø Ray¸¦ ½ð´Ù.
+	// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½, MovingDir * Distnace ï¿½Õ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ Rayï¿½ï¿½ ï¿½ï¿½ï¿½.
 	NxVec3 kOriginalPos((NxReal)kControllerPos.x, (NxReal)kControllerPos.y, (NxReal)kControllerPos.z);
 	NxVec3 kOriginalFrontPos = kOriginalPos + kMovingDelta;
 	NxVec3 kDirection(0.0f, 0.0f, (bDown ? -1.0f : 1.0f));
-		
+
 	NxVec3 kDiff(0.0f, 0.0f, fCenterHeight - 10.0f);
 
-	// Ray ÃÖ´ë °Å¸®
+	// Ray ï¿½Ö´ï¿½ ï¿½Å¸ï¿½
 	NxReal fMaxDist = fLegHeight + (bDown ? 10.1f : 80.0f);
 
 	NxRay kRay(kOriginalFrontPos - kDiff, kDirection);
 	NxRaycastHit kHit;
 	NxShape *pkHitShape = m_pkPhysXScene->GetPhysXScene()->raycastClosestShape(kRay, NX_STATIC_SHAPES, kHit, 0xffffffff, fMaxDist, NX_RAYCAST_SHAPE);
 
-	// bDown == true ÀÏ ¶§´Â pkHitShape(bRet)ÀÌ falseÀÌ¸é À¯È¿, trueÀÌ¸é false ¸®ÅÏÇØ¾ß ÇÔ.
-	// bDown == false ÀÏ ¶§´Â pkHitShape(bRet)ÀÌ trueÀÌ¸é À¯È¿, falseÀÌ¸é false ¸®ÅÏÇØ¾ß ÇÔ.
+	// bDown == true ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ pkHitShape(bRet)ï¿½ï¿½ falseï¿½Ì¸ï¿½ ï¿½ï¿½È¿, trueï¿½Ì¸ï¿½ false ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
+	// bDown == false ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ pkHitShape(bRet)ï¿½ï¿½ trueï¿½Ì¸ï¿½ ï¿½ï¿½È¿, falseï¿½Ì¸ï¿½ false ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
 	bool bFirstTry = !pkHitShape == bDown;
 	bool bSecondTry = false;
 
@@ -15559,8 +15559,8 @@ bool PgActor::WillBeFall(bool bDown, float fDistance)
 		kRay.orig = kOriginalPos - kDiff;
 		pkHitShape = m_pkPhysXScene->GetPhysXScene()->raycastClosestShape(kRay, NX_STATIC_SHAPES, kHit, 0xffffffff, fMaxDist, NX_RAYCAST_SHAPE);
 
-		// bDown == trueÀÏ ¶§´Â µÎ ¹øÂ° Ray°¡ trueÀÌ¸é À¯È¿, falseÀÌ¸é false ¸®ÅÏÇØ¾ß ÇÔ.
-		// bDown == falseÀÏ ¶§´Â µÎ ¹øÂ° Ray°¡ falseÀÌ¸é À¯È¿, trueÀÌ¸é false¸¦ ¸®ÅÏÇØ¾ß ÇÔ.
+		// bDown == trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Â° Rayï¿½ï¿½ trueï¿½Ì¸ï¿½ ï¿½ï¿½È¿, falseï¿½Ì¸ï¿½ false ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
+		// bDown == falseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Â° Rayï¿½ï¿½ falseï¿½Ì¸ï¿½ ï¿½ï¿½È¿, trueï¿½Ì¸ï¿½ falseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½.
 		bSecondTry = !pkHitShape != bDown;
 	}
 
@@ -15586,10 +15586,10 @@ bool PgActor::RideMyPet(bool bRide)
 	}
 
 	NiNode* pkAttachingNode = (NiNode* ) GetNIFRoot();
-		
+
 	if(bRide)
 	{
-		NiNode* pkSyncNode = (NiNode* )GetNIFRoot()->GetObjectByName("p_pt_ride");		
+		NiNode* pkSyncNode = (NiNode* )GetNIFRoot()->GetObjectByName("p_pt_ride");
 		NiNode* pkNode = (NiNode* )pkPet->GetNIFRoot()->GetObjectByName("p_pt_ride");
 
 		if(!pkSyncNode || !pkNode)
@@ -15600,7 +15600,7 @@ bool PgActor::RideMyPet(bool bRide)
 		NiPoint3 kDelta = pkSyncNode->GetWorldTranslate() - pkAttachingNode->GetWorldTranslate();
 		NiPoint3 kTargetPos = pkNode->GetTranslate() - kDelta - NiPoint3(0,0,5.0f);
 		pkAttachingNode->SetTranslate(NiPoint3(0.0f, 0.0f, kTargetPos.z));
-		
+
 		pkNode->AttachChild(pkAttachingNode);
 		pkAttachingNode->UpdateNodeBound();
 		pkAttachingNode->UpdateProperties();
@@ -15629,18 +15629,18 @@ bool PgActor::RideMyPet(bool bRide)
 	}
 
 	m_bRiding = bRide;
-		
+
 	return true;
 }
 */
 
-NiAVObject *PgActor::GetUIModelUpdate()
+NiAVObject* PgActor::GetUIModelUpdate()
 {
-	if(!m_bNeedToUpdateUIModel)
+	if (!m_bNeedToUpdateUIModel)
 	{
-		return 0;	
+		return 0;
 	}
-	
+
 	m_bNeedToUpdateUIModel = false;
 	return GetNIFRoot();
 }
@@ -15673,29 +15673,29 @@ float PgActor::GetSpeedScale()
 //---------------------------------------------------------------------------
 PgActor::ActorCallbackObject::~ActorCallbackObject()
 {
-    // Class has virtual members. Must have virtual destructor.
+	// Class has virtual members. Must have virtual destructor.
 }
 //---------------------------------------------------------------------------
 void PgActor::ActorCallbackObject::TextKeyEvent(
-    NiActorManager* pkManager, NiActorManager::SequenceID eSequenceID,
-    const NiFixedString& kTextKey, const NiTextKeyMatch* pkMatchObject,
-    float fCurrentTime, float fEventTime)
+	NiActorManager* pkManager, NiActorManager::SequenceID eSequenceID,
+	const NiFixedString& kTextKey, const NiTextKeyMatch* pkMatchObject,
+	float fCurrentTime, float fEventTime)
 {
-	PgActor *pkActor = dynamic_cast<PgActor *>(m_pkWorldObject);
+	PgActor* pkActor = dynamic_cast<PgActor*>(m_pkWorldObject);
 
-//	if(pkActor && pkActor->IsMyActor()) 
-//	{
-//		_PgOutputDebugString("PgActor::ActorCallbackObject::TextKeyEvent iIndex:%d eSequenceID:%d kTextKey:%s fCurrentTime:%f fEventTime:%f\n", iIndex,eSequenceID,(char const*)kTextKey,fCurrentTime,fEventTime);
-//	}
+	//	if(pkActor && pkActor->IsMyActor()) 
+	//	{
+	//		_PgOutputDebugString("PgActor::ActorCallbackObject::TextKeyEvent iIndex:%d eSequenceID:%d kTextKey:%s fCurrentTime:%f fEventTime:%f\n", iIndex,eSequenceID,(char const*)kTextKey,fCurrentTime,fEventTime);
+	//	}
 
-	if(g_pkWorld && pkActor->IsVisible() == false)
+	if (g_pkWorld && pkActor->IsVisible() == false)
 	{
 		pkActor->m_bVisible = true;
 		pkActor->NiNode::Update(g_pkWorld->GetAccumTime());
-		pkActor->m_bVisible  = false;
+		pkActor->m_bVisible = false;
 	}
 
-	if(m_kLastEventName == "")
+	if (m_kLastEventName == "")
 	{
 		m_kLastEventSequenceID = NiActorManager::INVALID_SEQUENCE_ID;
 		m_fLastEventTime = -1;
@@ -15703,10 +15703,10 @@ void PgActor::ActorCallbackObject::TextKeyEvent(
 	}
 
 	//PgOutputPrint6("[%s] SequenceID( %d/ %d ), EventTime( %.3f, %.3f ), %s", __FUNCTION__, m_kLastEventSequenceID, eSequenceID, m_fLastEventTime, fEventTime, kTextKey);
-	if(m_kLastEventSequenceID == eSequenceID &&
-		strcmp(kTextKey,m_kLastEventName.c_str())==0)
+	if (m_kLastEventSequenceID == eSequenceID &&
+		strcmp(kTextKey, m_kLastEventName.c_str()) == 0)
 	{
-		if(m_fLastEventTime == fEventTime)
+		if (m_fLastEventTime == fEventTime)
 		{
 			return;
 		}
@@ -15717,7 +15717,7 @@ void PgActor::ActorCallbackObject::TextKeyEvent(
 	m_fLastEventTime = fEventTime;
 	m_kLastEventName = std::string(((char const*)kTextKey));
 
-	if(pkActor && pkActor->GetAction())
+	if (pkActor && pkActor->GetAction())
 	{
 		NIMETRICS_EVAL(NiMetricsClockTimer a("PgMobileSuit.lua_call"));
 		NIMETRICS_STARTTIMER(a);
@@ -15727,15 +15727,15 @@ void PgActor::ActorCallbackObject::TextKeyEvent(
 		//	_PgOutputDebugString("TextKeyEvent(%s) %s Event called\n", m_kScriptName.c_str(), m_kLastEventName.c_str());
 		//}
 
-		if(!pkActor->GetAction()->EventFSM(pkActor, (char const *)kTextKey,eSequenceID))
+		if (!pkActor->GetAction()->EventFSM(pkActor, (char const*)kTextKey, eSequenceID))
 		{
-			lua_tinker::call<bool, lwActor, char const*>(m_kScriptName.c_str(), lwActor(pkActor), (char const *)kTextKey);
+			lua_tinker::call<bool, lwActor, char const*>(m_kScriptName.c_str(), lwActor(pkActor), (char const*)kTextKey);
 		}
 		NIMETRICS_ENDTIMER(a);
 	}
 }
 //---------------------------------------------------------------------------
-NxControllerAction PgActor::PgControllerHitReport::onControllerHit(const NxControllersHit &hit)
+NxControllerAction PgActor::PgControllerHitReport::onControllerHit(const NxControllersHit& hit)
 {
 	//NxActor *pkActorA = hit.controller->getActor();
 	//NxActor *pkActorB = hit.other->getActor();
@@ -15763,7 +15763,7 @@ NxControllerAction PgActor::PgControllerHitReport::onControllerHit(const NxContr
 
 	//		if(pkPlayerActor->GetAction()->GetID() != "a_touch_dmg")
 	//		{
-	//			//	¶«»§ ¿¹¿Ü Ã³¸®, ¹üÆÛÄ«´Â ´ë¹ÌÁöÇÏÁö ¾Ê´Â´Ù.
+	//			//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 	//			if(strcmp(((PgIXmlObject*)pkPlayerActor)->GetID().c_str(),"c_bumpercar")!=0)
 	//			{
 	//				pkPlayerActor->TransitAction("a_touch_dmg");
@@ -15775,59 +15775,55 @@ NxControllerAction PgActor::PgControllerHitReport::onControllerHit(const NxContr
 	return NX_ACTION_NONE;
 }
 //---------------------------------------------------------------------------
-PgActor::ColorSet::ColorSet(const NiColor &rkAmbient, const NiColor &rkEmissive,const NiColor &rkSpecular,const NiColor &rkDiffuse) :
+PgActor::ColorSet::ColorSet(const NiColor& rkAmbient, const NiColor& rkEmissive, const NiColor& rkSpecular, const NiColor& rkDiffuse) :
 	m_kAmbient(rkAmbient),
 	m_kEmissive(rkEmissive),
 	m_kSpecular(rkSpecular),
 	m_kDiffuse(rkDiffuse)
-{
-}
+{}
 //---------------------------------------------------------------------------
 PgActor::ItemDesc::ItemDesc(eEquipLimit kItemPos) :
 	m_kItemPos(kItemPos),
 	m_iItemNo(0),
 	m_kEnchantInfo()
-{
-}
+{}
 
 PgActor::ItemDesc::ItemDesc(eEquipLimit kItemPos, int iItemNo, SEnchantInfo const& kEnchant) :
 	m_kItemPos(kItemPos),
 	m_iItemNo(iItemNo),
 	m_kEnchantInfo(kEnchant)
-{
-}
+{}
 //--------------------------------------------------------------------------
-bool PgActor::ItemDesc::operator==(const PgActor::ItemDesc &rhs)
+bool PgActor::ItemDesc::operator==(const PgActor::ItemDesc& rhs)
 {
 	return m_kItemPos == rhs.m_kItemPos;
 }
 //--------------------------------------------------------------------------
-PgActor::AMPair::AMPair(eEquipLimit kItemPos, NiActorManagerPtr spAM,PgItemEx::stCustomAniIDChangeSetting *pstCustomAniIDChangeSetting) :
+PgActor::AMPair::AMPair(eEquipLimit kItemPos, NiActorManagerPtr spAM, PgItemEx::stCustomAniIDChangeSetting* pstCustomAniIDChangeSetting) :
 	m_kItemPos(kItemPos),
 	m_spAM(spAM),
 	m_stCustomAniIDChangeSetting(*pstCustomAniIDChangeSetting)
-{
-}
+{}
 //--------------------------------------------------------------------------
-bool PgActor::AMPair::operator==(const PgActor::AMPair &rhs)
+bool PgActor::AMPair::operator==(const PgActor::AMPair& rhs)
 {
 	return m_kItemPos == rhs.m_kItemPos;
 }
 //--------------------------------------------------------------------------
-bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway,bool bBidirection,bool bNotCheckSameDir)
+bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway, bool bBidirection, bool bNotCheckSameDir)
 {
-	if(false == EnableRotation())
+	if (false == EnableRotation())
 	{
 		return false;
 	}
 
 	NiPoint3 kLookingDir = rkTarget - GetPosition();
 
-	kLookingDir.z=0;
+	kLookingDir.z = 0;
 	kLookingDir.Unitize();
-	if(bBidirection && kLookingDir != NiPoint3::ZERO)
+	if (bBidirection && kLookingDir != NiPoint3::ZERO)
 	{
-		bool bLeft = ((m_kPathNormal.Cross(kLookingDir).z>0) ? true : false);
+		bool bLeft = ((m_kPathNormal.Cross(kLookingDir).z > 0) ? true : false);
 		kLookingDir = m_kPathNormal.Cross(NiPoint3::UNIT_Z * (bLeft ? -1.0f : 1.0f));
 		kLookingDir.z = 0;
 
@@ -15836,13 +15832,13 @@ bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway,bool bBidirec
 
 	BYTE byDir = GetDirFromMovingVector(kLookingDir);
 
-	if(bNotCheckSameDir == false)
+	if (bNotCheckSameDir == false)
 	{
-		if(byDir == m_byLastDirection)
+		if (byDir == m_byLastDirection)
 		{
-			if(IsLockBidirection())
+			if (IsLockBidirection())
 			{
-				// º¸´Â ¹æÇâ °°À¸¸é ±¸º° ÇÊ¿ä ¾ø´Ù.
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				return false;
 			}
 		}
@@ -15851,9 +15847,9 @@ bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway,bool bBidirec
 	//_PgOutputDebugString("[Call ConcilDirection 3]Actor(%s) kLookingDir(%f,%f,%f)\n",MB(GetPilot()->GetGuid().str()),kLookingDir.x,kLookingDir.y,kLookingDir.z);
 	ConcilDirection(kLookingDir, bTurnRightAway);
 
-	if(byDir == DIR_LEFT)	
+	if (byDir == DIR_LEFT)
 	{
-		//¿ÞÂÊÀÏ¶§ true
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ true
 		return true;
 	}
 
@@ -15866,7 +15862,7 @@ bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway,bool bBidirec
 //	NiPoint3 kSub = rkTarget - GetTranslate();
 //	if(kSub.Length() <= PG_EPSILON)
 //	{
-//		return false;	//º¸´Â ¹æÇâÀÌ ÀÌÀü°ú °°À¸¸é ¿ÞÂÊ ¿À¸¥ÂÊ ±¸º°ÀÌ ÇÊ¿ä ¾øÀ½
+//		return false;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 //	}
 //
 //	NiPoint3 p3LeftOrRight = m_kMovingDir.Cross(rkTarget);
@@ -15874,7 +15870,7 @@ bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway,bool bBidirec
 //	m_kMovingDir.z = 0.0f;
 //	m_kMovingDir.Unitize();	
 //	ConcilDirection(m_kMovingDir, bTurnRightAway);
-//	if( p3LeftOrRight.z > 0 )	{ return true; }	//¿ÞÂÊÀÏ¶§ true
+//	if( p3LeftOrRight.z > 0 )	{ return true; }	//ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ true
 //
 //	return false;
 //}
@@ -15883,7 +15879,7 @@ bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway,bool bBidirec
 //	NiPoint3 kSub = rkTarget - GetTranslate();
 //	if(kSub.Length() <= PG_EPSILON)
 //	{
-//		return false;	//º¸´Â ¹æÇâÀÌ ÀÌÀü°ú °°À¸¸é ¿ÞÂÊ ¿À¸¥ÂÊ ±¸º°ÀÌ ÇÊ¿ä ¾øÀ½
+//		return false;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 //	}
 //
 //	NiPoint3 p3LeftOrRight = m_kPathNormal.Cross(kSub);
@@ -15895,13 +15891,13 @@ bool PgActor::LookAt(NiPoint3 const& rkTarget, bool bTurnRightAway,bool bBidirec
 void PgActor::IncRotate(float fRadian)
 {
 	NiQuaternion kQuat(fRadian, NiPoint3::UNIT_Z);
-	
+
 	NiMatrix3 kRot;
 	kQuat.ToRotation(kRot);
 	m_kLookingDir = kRot * m_kLookingDir;
 	m_kLookingDir.Unitize();
-	
-	if(m_kLookingDir.Length() == 0)
+
+	if (m_kLookingDir.Length() == 0)
 	{
 		m_kLookingDir = NiPoint3::UNIT_X;
 	}
@@ -15923,6 +15919,11 @@ bool PgActor::ApplyMovingObject_OnEnter(PgTrigger* pkTrigger)
 	}
 	NxMat34 kMat0 = pkPhysXRigidBodySrc->GetPose(0);
 	NxMat34 kMat1 = pkPhysXRigidBodySrc->GetPose(1);
+	NxVec3 kMoveDelta = kMat1.t - kMat0.t;
+	if (CustomCharacterJumping::ShouldTreatMovingObjectUpAsFloor(kMoveDelta.z, GetJump()))
+	{
+		SetMeetFloor(true);
+	}
 
 	//NxU32 collisionFlags = 0;
 	//m_pkController->move(kMat1.t - kMat0.t, m_uiActiveGrp, 0.000001f, collisionFlags, 1.0f);
@@ -15930,7 +15931,7 @@ bool PgActor::ApplyMovingObject_OnEnter(PgTrigger* pkTrigger)
 	//NiPoint3 kPos = GetTranslate();
 	//kPos += NiPoint3(kVec.x, kVec.y, kVec.z);
 	//SetTranslate(kPos);
-	MoveActorAbsolute(kMat1.t - kMat0.t);
+	MoveActorAbsolute(kMoveDelta);
 
 	//m_pkPhysXSrc->SetActive(true);
 	//m_pkPhysXDest->SetActive(false);
@@ -15952,6 +15953,18 @@ bool PgActor::ApplyMovingObject_OnUpdate(PgTrigger* pkTrigger)
 	{
 		return false;
 	}
+	NiPhysXRigidBodySrc* pkPhysXRigidBodySrc = pkTrigger->GetPhysXRigidBodySrc();
+	if (!pkPhysXRigidBodySrc)
+	{
+		return false;
+	}
+	NxMat34 kMat0 = pkPhysXRigidBodySrc->GetPose(0);
+	NxMat34 kMat1 = pkPhysXRigidBodySrc->GetPose(1);
+	NxVec3 kMoveDelta = kMat1.t - kMat0.t;
+	if (CustomCharacterJumping::ShouldTreatMovingObjectUpAsFloor(kMoveDelta.z, GetJump()))
+	{
+		SetMeetFloor(true);
+	}
 	return true;
 }
 
@@ -15966,39 +15979,39 @@ bool PgActor::ApplyMovingObject_OnLeave(PgTrigger* pkTrigger)
 	//m_pkPhysXDest->SetActive(true);
 	return true;
 }
-void PgActor::PlayWeaponSound(PgWeaponSoundManager::EWeaponSoundType eType, PgActor *pkPeer, char const *pcActionID, float fVolume, PgActionTargetInfo* pkTargetInfo)
+void PgActor::PlayWeaponSound(PgWeaponSoundManager::EWeaponSoundType eType, PgActor* pkPeer, char const* pcActionID, float fVolume, PgActionTargetInfo* pkTargetInfo)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.PlayWeaponSound"), g_pkApp->GetFrameCount()));
-	
-	if(!pkPeer)
+
+	if (!pkPeer)
 	{
 		return;
 	}
 
 	int iWeaponType = pkPeer->GetEquippedWeaponType();
-	std::string const &kSoundID = g_kWeaponSoundMan.GetSound(eType, iWeaponType, pcActionID, pkPeer->GetMyWeaponNo());
+	std::string const& kSoundID = g_kWeaponSoundMan.GetSound(eType, iWeaponType, pcActionID, pkPeer->GetMyWeaponNo());
 
 	NiPoint3* pkPos = NULL;
 	NiPoint3 kPos;
-	if( pkTargetInfo )
+	if (pkTargetInfo)
 	{
-		kPos = GetABVShapeWorldPos( pkTargetInfo->GetSphereIndex() ) - GetWorldTranslate();
+		kPos = GetABVShapeWorldPos(pkTargetInfo->GetSphereIndex()) - GetWorldTranslate();
 		pkPos = &kPos;
 	}
 
-	g_kSoundMan.PlayAudioSourceByID(NiAudioSource::TYPE_3D,kSoundID.c_str(), fVolume,80,330,this,pkPos);
+	g_kSoundMan.PlayAudioSourceByID(NiAudioSource::TYPE_3D, kSoundID.c_str(), fVolume, 80, 330, this, pkPos);
 
 }
 
-//! ¾×ÅÍ NIFÀÇ ³ëµå¸¦ ¼û±â°Å³ª º¸ÀÌ°Ô ÇÑ´Ù.
-void PgActor::HideNode(char const *strNodeName,bool bHide)
+//! ï¿½ï¿½ï¿½ï¿½ NIFï¿½ï¿½ ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Ñ´ï¿½.
+void PgActor::HideNode(char const* strNodeName, bool bHide)
 {
-	_PgOutputDebugString("[PgActor::HideNode] Actor:%s NodeName:%s bHide:%d\n", MB(GetPilotGuid().str()),strNodeName,bHide);
+	_PgOutputDebugString("[PgActor::HideNode] Actor:%s NodeName:%s bHide:%d\n", MB(GetPilotGuid().str()), strNodeName, bHide);
 
-	if(GetActorManager())
+	if (GetActorManager())
 	{
-		NiAVObject	*pkObj = GetCharRoot()->GetObjectByName(strNodeName);
-		if(pkObj)
+		NiAVObject* pkObj = GetCharRoot()->GetObjectByName(strNodeName);
+		if (pkObj)
 		{
 			pkObj->SetAppCulled(bHide);
 		}
@@ -16006,21 +16019,21 @@ void PgActor::HideNode(char const *strNodeName,bool bHide)
 }
 void PgActor::ApplyHidePartsAll()
 {
-	for(PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin(); itr != m_kPartsAttachInfo.end(); ++itr)
+	for (PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin(); itr != m_kPartsAttachInfo.end(); ++itr)
 	{
-		eEquipLimit	const	&kEquipLimit = itr->first;
-		PgItemEx *pkParts = itr->second;
-		if(!pkParts)
+		eEquipLimit	const& kEquipLimit = itr->first;
+		PgItemEx* pkParts = itr->second;
+		if (!pkParts)
 		{
 			continue;
 		}
 
 		bool	bHide = false;
 		IntMap::iterator itor_0 = m_kPartsHideInfo.find(kEquipLimit);
-		
-		if(itor_0 != m_kPartsHideInfo.end())
+
+		if (itor_0 != m_kPartsHideInfo.end())
 		{
-			bHide = (itor_0->second>0);
+			bHide = (itor_0->second > 0);
 		}
 
 		pkParts->Hide(bHide);
@@ -16031,20 +16044,20 @@ void PgActor::ApplyHideParts(const eEquipLimit kEquipLimit)
 {
 	bool	bHide = false;
 	IntMap::iterator itor_0 = m_kPartsHideInfo.find(kEquipLimit);
-	
-	if(itor_0 != m_kPartsHideInfo.end())
+
+	if (itor_0 != m_kPartsHideInfo.end())
 	{
-		bHide = (itor_0->second>0);
+		bHide = (itor_0->second > 0);
 	}
 
 	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kEquipLimit);
-	if(itr == m_kPartsAttachInfo.end())
+	if (itr == m_kPartsAttachInfo.end())
 	{
 		return;
 	}
 
-	PgItemEx *pkParts = itr->second;
-	if(!pkParts || pkParts->EquipLimit() != kEquipLimit)
+	PgItemEx* pkParts = itr->second;
+	if (!pkParts || pkParts->EquipLimit() != kEquipLimit)
 	{
 		return;
 	}
@@ -16058,10 +16071,10 @@ bool PgActor::HideParts(const eEquipLimit kEquipLimit, bool const bHide)
 	IntMap::iterator itor_0 = m_kPartsHideInfo.find(kEquipLimit);
 	int	iHideCount = 0;
 
-	if(itor_0 == m_kPartsHideInfo.end())
+	if (itor_0 == m_kPartsHideInfo.end())
 	{
 		iHideCount = bHide ? 1 : 0;
-		m_kPartsHideInfo.insert(std::make_pair(kEquipLimit,iHideCount));
+		m_kPartsHideInfo.insert(std::make_pair(kEquipLimit, iHideCount));
 	}
 	else
 	{
@@ -16073,26 +16086,26 @@ bool PgActor::HideParts(const eEquipLimit kEquipLimit, bool const bHide)
 
 
 	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kEquipLimit);
-	if(itr == m_kPartsAttachInfo.end())
+	if (itr == m_kPartsAttachInfo.end())
 	{
 		return true;
 	}
 
-	PgItemEx *pkParts = itr->second;
-	if(!pkParts || pkParts->EquipLimit() != kEquipLimit)
+	PgItemEx* pkParts = itr->second;
+	if (!pkParts || pkParts->EquipLimit() != kEquipLimit)
 	{
 		return true;
 	}
 
-	pkParts->Hide(iHideCount>0);
+	pkParts->Hide(iHideCount > 0);
 
 	return true;
 }
 
 bool PgActor::GetPartsHideCnt(eEquipLimit const kEquipLimit, int& iCnt_out) const
-{// ÇØ´ç ÆÄÃ÷ÀÇ HideCount°ªÀ» ¾ò¾î¿Â´Ù
-	IntMap::const_iterator itor = m_kPartsHideInfo.find(kEquipLimit);	
-	if(itor == m_kPartsHideInfo.end())
+{// ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HideCountï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½
+	IntMap::const_iterator itor = m_kPartsHideInfo.find(kEquipLimit);
+	if (itor == m_kPartsHideInfo.end())
 	{
 		return false;
 	}
@@ -16101,14 +16114,14 @@ bool PgActor::GetPartsHideCnt(eEquipLimit const kEquipLimit, int& iCnt_out) cons
 }
 
 bool PgActor::HideParts_IgnoreHideCnt(const eEquipLimit kEquipLimit, bool const bHide)
-{//ÇØ´ç ÆÄÃ÷ÀÇ HideCount¸¦ ¹«½ÃÇÏ°í µ¿ÀÛÇÑ´Ù.(½ÅÁ¾Á· °ÝÅõ°¡ º¸Á¶¹«±â¿ë)
+{//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HideCountï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	IntMap::iterator itor_0 = m_kPartsHideInfo.find(kEquipLimit);
 	int	iHideCount = 0;
 
-	if(itor_0 == m_kPartsHideInfo.end())
+	if (itor_0 == m_kPartsHideInfo.end())
 	{
 		iHideCount = bHide ? 1 : 0;
-		m_kPartsHideInfo.insert(std::make_pair(kEquipLimit,iHideCount));
+		m_kPartsHideInfo.insert(std::make_pair(kEquipLimit, iHideCount));
 	}
 	else
 	{
@@ -16119,13 +16132,13 @@ bool PgActor::HideParts_IgnoreHideCnt(const eEquipLimit kEquipLimit, bool const 
 	}
 
 	PartsAttachInfo::iterator itr = m_kPartsAttachInfo.find(kEquipLimit);
-	if(itr == m_kPartsAttachInfo.end())
+	if (itr == m_kPartsAttachInfo.end())
 	{
 		return true;
 	}
 
-	PgItemEx *pkParts = itr->second;
-	if(!pkParts || pkParts->EquipLimit() != kEquipLimit)
+	PgItemEx* pkParts = itr->second;
+	if (!pkParts || pkParts->EquipLimit() != kEquipLimit)
 	{
 		return true;
 	}
@@ -16151,11 +16164,11 @@ bool	PgActor::IsUnderMyControl()
 
 bool PgActor::IsMyPet()
 {
-	if(GetPilot())
+	if (GetPilot())
 	{
-		if(GetPilot()->GetUnit())
+		if (GetPilot()->GetUnit())
 		{
-			if(GetMySelectedPet() == GetPilot()->GetUnit())
+			if (GetMySelectedPet() == GetPilot()->GetUnit())
 			{
 				return true;
 			}
@@ -16167,17 +16180,17 @@ bool PgActor::IsMyPet()
 bool PgActor::IsMySubPlayer()
 {
 	bool bIsMySubPlayer = false;
-	PgPilot* pkPilot =   GetPilot();
-	if(!pkPilot)
+	PgPilot* pkPilot = GetPilot();
+	if (!pkPilot)
 	{
 		return false;
 	}
 	CUnit* pkUnit = pkPilot->GetUnit();
-	if(!pkUnit)
+	if (!pkUnit)
 	{
 		return false;
 	}
-	if( UT_SUB_PLAYER != pkUnit->UnitType() )
+	if (UT_SUB_PLAYER != pkUnit->UnitType())
 	{
 		return false;
 	}
@@ -16186,29 +16199,29 @@ bool PgActor::IsMySubPlayer()
 
 bool PgActor::GetCallerIsMe()
 {
-	if(GetPilot())
+	if (GetPilot())
 	{
-		if(GetPilot()->GetUnit())
+		if (GetPilot()->GetUnit())
 		{
-			if(g_kPilotMan.IsMyPlayer(GetPilot()->GetUnit()->Caller()))
+			if (g_kPilotMan.IsMyPlayer(GetPilot()->GetUnit()->Caller()))
 			{
 				return true;
 			}
 		}
-	}	
+	}
 
 	return false;
 }
 
 void PgActor::SetActiveGrp(int iGroupNo, bool bUse)
 {
-	// ¸Æ½º¿¡¼­ UserProp¿¡ NiPhysXShapeGroup = <Group No> ¿Í °°ÀÌ ÀûÀ¸¸é µÊ
-	// (±×·¡ÇÈ ÆÀ¿¡ User Properties¿¡ physX ¸Þ½¬¿¡ À§¿Í °°ÀÌ Àû¾î¼­ ÀÍ½ºÆ÷Æ® ÇØ´Þ¶ó°í ¿äÃ»ÇÏ¸é µÈ´Ù)
+	// ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ UserPropï¿½ï¿½ NiPhysXShapeGroup = <Group No> ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	// (ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ User Propertiesï¿½ï¿½ physX ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¼­ ï¿½Í½ï¿½ï¿½ï¿½Æ® ï¿½Ø´Þ¶ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ï¸ï¿½ ï¿½È´ï¿½)
 	// NiPhysXShapeGroup = <integer> can be used on an object 
 	// that will be a PhysX shape (an actor or a proxy for an actor or part of a shape group). 
 	// It specifies the shape group which is used in basic collision filtering
 
-	if(bUse)
+	if (bUse)
 	{
 		m_uiActiveGrp |= (1 << iGroupNo);
 	}
@@ -16218,69 +16231,69 @@ void PgActor::SetActiveGrp(int iGroupNo, bool bUse)
 	}
 }
 
-void PgActor::GetNameEmoticon(std::wstring &rkOut)
+void PgActor::GetNameEmoticon(std::wstring& rkOut)
 {
-	PgPilot *pkPilot = GetPilot();
-	if( !GetPilot() )
+	PgPilot* pkPilot = GetPilot();
+	if (!GetPilot())
 	{
 		return;
 	}
-	CUnit *pkUnit = pkPilot->GetUnit();
-	if( !pkUnit )
+	CUnit* pkUnit = pkPilot->GetUnit();
+	if (!pkUnit)
 	{
 		return;
 	}
 	std::wstring kTemp;
 
 	//
-	if( pkUnit->IsInUnitType(UT_MONSTER) && g_pkWorld)
+	if (pkUnit->IsInUnitType(UT_MONSTER) && g_pkWorld)
 	{
 		bool const bChaosMap = (0 != (g_pkWorld->GetAttr() & GATTR_CHAOS_F));
-		if( bChaosMap )
+		if (bChaosMap)
 		{
 			kTemp += _T("C");
 		}
 		bool const bIsDependMonster = g_kQuestMan.IsDependIngQuestMonster(pkUnit->GetAbil(AT_CLASS), g_kNowGroundKey.GroundNo());
-		if( bIsDependMonster
-		&&	!pkUnit->IsUnitType(UT_OBJECT) ) // ÆÄ±« ¿ÀºêÁ§Æ®´Â ¿©±â¼­ ¾ÈÇÔ
+		if (bIsDependMonster
+			&& !pkUnit->IsUnitType(UT_OBJECT)) // ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½
 		{
 			kTemp += L"E";
 		}
 	}
 
 	//
-	if( pkUnit->IsUnitType(UT_PLAYER) )
+	if (pkUnit->IsUnitType(UT_PLAYER))
 	{
-		PgPlayer *pkPlayer = dynamic_cast<PgPlayer*>(pkUnit);
-		if( pkPlayer )
+		PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkUnit);
+		if (pkPlayer)
 		{
-			bool const bHaveCouple = BM::GUID::IsNotNull( pkPlayer->CoupleGuid() );
-			if( bHaveCouple )
+			bool const bHaveCouple = BM::GUID::IsNotNull(pkPlayer->CoupleGuid());
+			if (bHaveCouple)
 			{
-				if( g_kPilotMan.IsMyPlayer(pkPlayer->CoupleGuid()) ) // ³» Ä¿ÇÃÀÌ ±ÙÃ³¸é
+				if (g_kPilotMan.IsMyPlayer(pkPlayer->CoupleGuid())) // ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã³ï¿½ï¿½
 				{
 					PgActor* pkMyActor = g_kPilotMan.GetPlayerActor();
-					if( pkMyActor )
+					if (pkMyActor)
 					{
-						pkMyActor->UpdateName(); // ³» ÇÏÆ®µµ µÎ±Ù¹Ý±Ù
+						pkMyActor->UpdateName(); // ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Î±Ù¹Ý±ï¿½
 					}
 				}
 				bool const bSameGroundCouple = (NULL != g_kPilotMan.FindPilot(pkPlayer->CoupleGuid()));
 				//if( true == g_kCoupleMgr.IsSweetHeart() )
-				if( (true == g_kCoupleMgr.IsSweetHeart()) || (pkPlayer->GetCoupleStatus() == (CoupleS_Normal | CoupleS_SweetHeart)) )
+				if ((true == g_kCoupleMgr.IsSweetHeart()) || (pkPlayer->GetCoupleStatus() == (CoupleS_Normal | CoupleS_SweetHeart)))
 				{
 					kTemp += _T("D");
 				}
 				else
 				{
-					kTemp += ((bSameGroundCouple)? _T("B"): _T("A"));
+					kTemp += ((bSameGroundCouple) ? _T("B") : _T("A"));
 				}
 			}
 		}
 	}
 
 	//std::wstring(_T("{T=EmoticonFont/C=0xFFFFFFFF/}ABCDEFGHIJK"))
-	if( !kTemp.empty() )
+	if (!kTemp.empty())
 	{
 		rkOut = _T("{T=EmoticonFont24x24/C=0xFFFFFFFF/}") + kTemp;
 	}
@@ -16288,15 +16301,15 @@ void PgActor::GetNameEmoticon(std::wstring &rkOut)
 void PgActor::GetEnchantPrefixName(std::wstring& rkOut, std::wstring const& rkNameFont, std::wstring const& rkNameColor)
 {
 	int const iMonEnchantGradeNo = m_pkPilot->GetAbil(AT_MON_ENCHANT_GRADE_NO);
-	if( iMonEnchantGradeNo )
+	if (iMonEnchantGradeNo)
 	{
 		CONT_DEF_MONSTER_ENCHANT_GRADE const* pkDefMonEnchantGrade = NULL;
 		g_kTblDataMgr.GetContDef(pkDefMonEnchantGrade);
 		CONT_DEF_MONSTER_ENCHANT_GRADE::const_iterator find_iter = pkDefMonEnchantGrade->find(iMonEnchantGradeNo);
-		if( pkDefMonEnchantGrade->end() != find_iter )
+		if (pkDefMonEnchantGrade->end() != find_iter)
 		{
 			CONT_DEF_MONSTER_ENCHANT_GRADE::mapped_type const& rkMonEnchantGrade = (*find_iter).second;
-			if( rkMonEnchantGrade.iPrefixNameNo )
+			if (rkMonEnchantGrade.iPrefixNameNo)
 			{
 				std::wstring kTemp(TTW(rkMonEnchantGrade.iPrefixNameNo));
 				PgStringUtil::ReplaceStr(kTemp, std::wstring(L"$ENCHANT_LEVEL$"), std::wstring(BM::vstring(rkMonEnchantGrade.iEnchantLevel)), kTemp);
@@ -16308,44 +16321,44 @@ void PgActor::GetEnchantPrefixName(std::wstring& rkOut, std::wstring const& rkNa
 	}
 	else
 	{
-		rkOut.swap( std::wstring() );
+		rkOut.swap(std::wstring());
 	}
 }
 
-bool PgActor::GetNameColor(std::wstring &rkOut)
+bool PgActor::GetNameColor(std::wstring& rkOut)
 {
-	const wchar_t * DEFAULT_COLOR = L"{C=0xFF66FF66/}";
+	const wchar_t* DEFAULT_COLOR = L"{C=0xFF66FF66/}";
 
-	if( !g_pkWorld )
+	if (!g_pkWorld)
 	{
 		return false;
 	}
 
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.GetNameColor"), g_pkApp->GetFrameCount()));
-	if(GetPilot())
+	if (GetPilot())
 	{
-		CUnit *pkUnit = GetPilot()->GetUnit();
+		CUnit* pkUnit = GetPilot()->GetUnit();
 		if (!pkUnit)
 		{
-			rkOut = std::wstring( DEFAULT_COLOR );
+			rkOut = std::wstring(DEFAULT_COLOR);
 			return true;
 		}
 
 		int const iNameColor = pkUnit->GetAbil(AT_NAME_COLOR);
-		if( iNameColor  )
+		if (iNameColor)
 		{
-			wchar_t szBuf[MAX_PATH] ={0,};
+			wchar_t szBuf[MAX_PATH] = { 0, };
 			swprintf(szBuf, MAX_PATH, L"{C=0x%08X/}", iNameColor);
 			rkOut = szBuf;
 			return true;
 		}
 
 		int iTeam = pkUnit->GetAbil(AT_TEAM);
-		if(g_pkWorld->IsHaveAttr(GATTR_EVENT_GROUND))
-		{ //Ä¿¹Â´ÏÆ¼ ÀÌº¥Æ® ´øÀüÀÌ¸é ³ª¿Í °°Àº ÆÀ¿ø¿¡°Ô ÀÌ¸§ »ö»óÀ» »¡°­À¸·Î ¼³Á¤
+		if (g_pkWorld->IsHaveAttr(GATTR_EVENT_GROUND))
+		{ //Ä¿ï¿½Â´ï¿½Æ¼ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			BM::GUID kUnitGuid = pkUnit->GetID();
-			if(kUnitGuid.IsNotNull() && PgClientPartyUtil::IsInPartyMemberGuid(kUnitGuid))
-			{ //ÀÌ À¯´ÖÀº ³» ÆÄÆ¼¿¡ ¼ÓÇÑ ³ðÀÎ°¡?
+			if (kUnitGuid.IsNotNull() && PgClientPartyUtil::IsInPartyMemberGuid(kUnitGuid))
+			{ //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½?
 				iTeam = TEAM_RED;
 			}
 			else
@@ -16353,125 +16366,125 @@ bool PgActor::GetNameColor(std::wstring &rkOut)
 				iTeam = TEAM_NONE;
 			}
 		}
-		switch( iTeam )
+		switch (iTeam)
 		{
 		case TEAM_NONE:
+		{
+			if (pkUnit->IsInUnitType(UT_MONSTER))
 			{
-				if( pkUnit->IsInUnitType(UT_MONSTER) )
+				const CUnit* pkPlayerUnit = g_kPilotMan.GetPlayerUnit();
+				if (!pkPlayerUnit)
 				{
-					const CUnit *pkPlayerUnit = g_kPilotMan.GetPlayerUnit();
-					if (!pkPlayerUnit)
-					{
-						rkOut = std::wstring( DEFAULT_COLOR );
-						return true;
-					}
-
-					int const iGrade = pkUnit->GetAbil(AT_GRADE);
-					if ( EMGRADE_BOSS == iGrade || EMGRADE_ELITE == iGrade )	//·¹º§·Î »öÀ» Á¤ÇØµµ ¸÷ µî±ÞÀÌ ¿ì¼±ÇÑ´Ù
-					{
-						/*switch(iGrade)
-						{
-						case EMGRADE_NORMAL:{	kColor = NiColorA(0.0f, 1.0f, 0.0f, 1.f);}break;
-						case EMGRADE_UPGRADED:{	kColor = NiColorA(0.047f, 0.0f, 1.0f, 1.f);}break;
-						case EMGRADE_ELITE:{	kColor = NiColorA(1.0f, 0.2f, 1.0f, 1.f);}break;
-						case EMGRADE_BOSS:{	kColor = NiColorA(1.0f, 0.2f, 1.0f, 1.f);}break;
-						default:{kColor = NiColorA(0.4f, 1.0f, 0.4f, 1.f);}break;
-						}*/
-
-						rkOut = std::wstring( _T("{C=0xFFFF00FF/}") );
-						return true;
-					}
-
-					int const iMonLevel = pkUnit->GetAbil(AT_LEVEL);
-					int const iPlayerLevel = pkPlayerUnit->GetAbil(AT_LEVEL);
-					int const iLevDelta = iMonLevel - iPlayerLevel;
-
-					if (iLevDelta >= 10)		{ rkOut = std::wstring( _T("{C=0xFFFF0000/}") );	}
-					else if (iLevDelta >= 6)	{ rkOut = std::wstring( _T("{C=0xFFFF593B/}") );	}
-					else if (iLevDelta >= 3)	{ rkOut = std::wstring( _T("{C=0xFFFFBD45/}") );	}
-					else if (iLevDelta >= -4)	{ rkOut = std::wstring( _T("{C=0xFFB7FF48/}") );	}
-					else if (iLevDelta >= -7)	{ rkOut = std::wstring( _T("{C=0xFFFFFFFF/}") );	}
-					else						{ rkOut = std::wstring( _T("{C=0xFFB2B2B2/}") );	}
+					rkOut = std::wstring(DEFAULT_COLOR);
+					return true;
 				}
-				else if( pkUnit->IsUnitType(UT_PLAYER) )
-				{
-					rkOut = std::wstring( _T("{C=0xFFFF00FF/}") );
 
-					PgPlayer* pkPC = dynamic_cast<PgPlayer*>(pkUnit);
-					if ( pkPC )
+				int const iGrade = pkUnit->GetAbil(AT_GRADE);
+				if (EMGRADE_BOSS == iGrade || EMGRADE_ELITE == iGrade)	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Øµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼±ï¿½Ñ´ï¿½
+				{
+					/*switch(iGrade)
 					{
-						BM::GUID const &rkPartyGuid = pkPC->PartyGuid();
-						bool const bNullPartyGuid = BM::GUID::NullData() == rkPartyGuid;
-						if( !bNullPartyGuid
-							&&	g_kParty.PartyGuid() == rkPartyGuid )//°°Àº ÆÄÆ¼¿øÀº
+					case EMGRADE_NORMAL:{	kColor = NiColorA(0.0f, 1.0f, 0.0f, 1.f);}break;
+					case EMGRADE_UPGRADED:{	kColor = NiColorA(0.047f, 0.0f, 1.0f, 1.f);}break;
+					case EMGRADE_ELITE:{	kColor = NiColorA(1.0f, 0.2f, 1.0f, 1.f);}break;
+					case EMGRADE_BOSS:{	kColor = NiColorA(1.0f, 0.2f, 1.0f, 1.f);}break;
+					default:{kColor = NiColorA(0.4f, 1.0f, 0.4f, 1.f);}break;
+					}*/
+
+					rkOut = std::wstring(_T("{C=0xFFFF00FF/}"));
+					return true;
+				}
+
+				int const iMonLevel = pkUnit->GetAbil(AT_LEVEL);
+				int const iPlayerLevel = pkPlayerUnit->GetAbil(AT_LEVEL);
+				int const iLevDelta = iMonLevel - iPlayerLevel;
+
+				if (iLevDelta >= 10) { rkOut = std::wstring(_T("{C=0xFFFF0000/}")); }
+				else if (iLevDelta >= 6) { rkOut = std::wstring(_T("{C=0xFFFF593B/}")); }
+				else if (iLevDelta >= 3) { rkOut = std::wstring(_T("{C=0xFFFFBD45/}")); }
+				else if (iLevDelta >= -4) { rkOut = std::wstring(_T("{C=0xFFB7FF48/}")); }
+				else if (iLevDelta >= -7) { rkOut = std::wstring(_T("{C=0xFFFFFFFF/}")); }
+				else { rkOut = std::wstring(_T("{C=0xFFB2B2B2/}")); }
+			}
+			else if (pkUnit->IsUnitType(UT_PLAYER))
+			{
+				rkOut = std::wstring(_T("{C=0xFFFF00FF/}"));
+
+				PgPlayer* pkPC = dynamic_cast<PgPlayer*>(pkUnit);
+				if (pkPC)
+				{
+					BM::GUID const& rkPartyGuid = pkPC->PartyGuid();
+					bool const bNullPartyGuid = BM::GUID::NullData() == rkPartyGuid;
+					if (!bNullPartyGuid
+						&& g_kParty.PartyGuid() == rkPartyGuid)//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½
+					{
+						rkOut = std::wstring(_T("{C=0xFF00D1FF/}"));
+					}
+					//else if( !bNullPartyGuid )//ï¿½Ù¸ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½
+					//{
+					//	kColor = NiColorA(0.13f, 0.23f, 1.f, 1.f);
+					//}
+					else
+					{
+						int const iGender = pkPC->GetAbil(AT_GENDER);
+
+						switch (iGender)
 						{
-							rkOut = std::wstring( _T("{C=0xFF00D1FF/}") );
+						case UG_MALE: { rkOut = std::wstring(_T("{C=0xFF79BEFF/}")); } break;
+						case UG_FEMALE: { rkOut = std::wstring(_T("{C=0xFFFF94D0/}")); } break;
+						default: { rkOut = std::wstring(_T("{C=0xFFFFFF00/}")); } break;
 						}
-						//else if( !bNullPartyGuid )//´Ù¸¥ ÆÄÆ¼¿ø
-						//{
-						//	kColor = NiColorA(0.13f, 0.23f, 1.f, 1.f);
-						//}
-						else
-						{
-							int const iGender = pkPC->GetAbil(AT_GENDER);
-
-							switch( iGender )
-							{
-							case UG_MALE:	{ rkOut = std::wstring( _T("{C=0xFF79BEFF/}") ); } break;
-							case UG_FEMALE:	{ rkOut = std::wstring( _T("{C=0xFFFF94D0/}") ); } break;
-							default:		{ rkOut = std::wstring( _T("{C=0xFFFFFF00/}") ); } break;
-							}
-						}	
 					}
 				}
-				else
-				{
-					//kColor = NiColorA(0.1f, 0.8f, 0.1f, 1.f);
-					rkOut = std::wstring( _T("{C=0xFF19CC19/}") );
-				}
-			}break;
-		default:
+			}
+			else
 			{
-				std::wstring const kRedTeam( _T("{C=0xFFFF0000/}") );
-				std::wstring const kBlueTeam( _T("{C=0xFF0000FF/}") );
+				//kColor = NiColorA(0.1f, 0.8f, 0.1f, 1.f);
+				rkOut = std::wstring(_T("{C=0xFF19CC19/}"));
+			}
+		}break;
+		default:
+		{
+			std::wstring const kRedTeam(_T("{C=0xFFFF0000/}"));
+			std::wstring const kBlueTeam(_T("{C=0xFF0000FF/}"));
 
-				switch( iTeam )
-				{
-				case TEAM_RED:
-					{
-						rkOut = kRedTeam;
-					}break;
-				case TEAM_BLUE:
-					{
-						rkOut = kBlueTeam;
-					}break;
-				}
+			switch (iTeam)
+			{
+			case TEAM_RED:
+			{
+				rkOut = kRedTeam;
 			}break;
-// 		default:
-// 			{
-// 				if ( IsMyActor() )
-// 				{
-// 					rkOut = std::wstring( _T("{C=0xFF0000FF/}") );
-// 				}
-// 				else
-// 				{
-// 					rkOut = std::wstring( _T("{C=0xFFFF0000/}") );
-// 				}	
-// 			}break;
+			case TEAM_BLUE:
+			{
+				rkOut = kBlueTeam;
+			}break;
+			}
+		}break;
+		// 		default:
+		// 			{
+		// 				if ( IsMyActor() )
+		// 				{
+		// 					rkOut = std::wstring( _T("{C=0xFF0000FF/}") );
+		// 				}
+		// 				else
+		// 				{
+		// 					rkOut = std::wstring( _T("{C=0xFFFF0000/}") );
+		// 				}	
+		// 			}break;
 		}
 
-		if( pkUnit->IsInUnitType(UT_PET) )
+		if (pkUnit->IsInUnitType(UT_PET))
 		{
-			PgPet *pkPet = dynamic_cast<PgPet*>(pkUnit);
-			if(pkPet)
+			PgPet* pkPet = dynamic_cast<PgPet*>(pkUnit);
+			if (pkPet)
 			{
-				if(EPET_TYPE_2==pkPet->GetPetType() || EPET_TYPE_3==pkPet->GetPetType())
+				if (EPET_TYPE_2 == pkPet->GetPetType() || EPET_TYPE_3 == pkPet->GetPetType())
 				{
 					rkOut = TTW(7515);
 				}
 				else
 				{
-					rkOut = std::wstring( DEFAULT_COLOR );
+					rkOut = std::wstring(DEFAULT_COLOR);
 				}
 			}
 		}
@@ -16479,40 +16492,40 @@ bool PgActor::GetNameColor(std::wstring &rkOut)
 	return true;
 }
 
-bool PgActor::GetGuildNameColor( NiColorA &kColor)
+bool PgActor::GetGuildNameColor(NiColorA& kColor)
 {
-	if( !m_pkPilot )
+	if (!m_pkPilot)
 	{
 		return false;
 	}
 
-	PgPlayer *pkPlayer = dynamic_cast<PgPlayer*>(m_pkPilot->GetUnit());
-	if( !pkPlayer )
+	PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(m_pkPilot->GetUnit());
+	if (!pkPlayer)
 	{
 		return false;
 	}
 
-	BM::GUID const &kGuildGuid = pkPlayer->GuildGuid();
-	if( BM::GUID::IsNull(kGuildGuid) )
+	BM::GUID const& kGuildGuid = pkPlayer->GuildGuid();
+	if (BM::GUID::IsNull(kGuildGuid))
 	{
 		return false;
 	}
 
-	if(g_pkWorld && 0 != (g_pkWorld->DynamicGndAttr()&DGATTR_FLAG_FREEPVP) )
+	if (g_pkWorld && 0 != (g_pkWorld->DynamicGndAttr() & DGATTR_FLAG_FREEPVP))
 	{
-		PgGuildMgrUtil::CalcGuidToColor( kGuildGuid, kColor );
+		PgGuildMgrUtil::CalcGuidToColor(kGuildGuid, kColor);
 		return true;
 	}
 
 	int iTeam = pkPlayer->GetAbil(AT_TEAM);
-	if( g_pkWorld && g_pkWorld->IsHaveAttr(GATTR_EVENT_GROUND) )
+	if (g_pkWorld && g_pkWorld->IsHaveAttr(GATTR_EVENT_GROUND))
 	{
 		PgPlayer* pkMyPlayer = g_kPilotMan.GetPlayerUnit();
-		if( pkMyPlayer )
+		if (pkMyPlayer)
 		{
-			if( (pkPlayer->GetPartyGuid().IsNotNull() && pkPlayer->GetPartyGuid() == pkMyPlayer->GetPartyGuid()) ||
-				(pkPlayer->GetExpeditionGuid().IsNotNull() && pkPlayer->GetExpeditionGuid() == pkMyPlayer->GetExpeditionGuid()) )
-			{ //Ä¿¹Â´ÏÆ¼ ÀÌº¥Æ® ´øÀüÀÌ°í ³ª¿Í °°Àº ÆÀ¿ø¿¡°Ô¸¸ »¡°£»ö ÀÌ¸§À¸·Î ¼³Á¤
+			if ((pkPlayer->GetPartyGuid().IsNotNull() && pkPlayer->GetPartyGuid() == pkMyPlayer->GetPartyGuid()) ||
+				(pkPlayer->GetExpeditionGuid().IsNotNull() && pkPlayer->GetExpeditionGuid() == pkMyPlayer->GetExpeditionGuid()))
+			{ //Ä¿ï¿½Â´ï¿½Æ¼ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				iTeam = TEAM_RED;
 			}
 			else
@@ -16526,20 +16539,20 @@ bool PgActor::GetGuildNameColor( NiColorA &kColor)
 		}
 	}
 
-	switch( iTeam )
+	switch (iTeam)
 	{
 	case TEAM_RED:
-		{
-			kColor = NiColorA(1.0f, 0.0f, 0.0f, 1.0f);
-		}break;
+	{
+		kColor = NiColorA(1.0f, 0.0f, 0.0f, 1.0f);
+	}break;
 	case TEAM_BLUE:
-		{
-			kColor = NiColorA(0.0f, 0.0f, 1.0f, 1.0f);
-		}break;
+	{
+		kColor = NiColorA(0.0f, 0.0f, 1.0f, 1.0f);
+	}break;
 	default:
-		{
-			PgGuildMgrUtil::CalcGuidToColor( kGuildGuid, kColor );
-		}break;
+	{
+		PgGuildMgrUtil::CalcGuidToColor(kGuildGuid, kColor);
+	}break;
 	}
 	return true;
 }
@@ -16548,27 +16561,27 @@ void	PgActor::ActionToggleStateChange(int const iActionNo, bool const bOn)
 {
 	int const iKeySkillNo = g_kSkillTree.GetKeySkillNo(iActionNo);
 
-	if(bOn)
+	if (bOn)
 	{
-		for(IntList::iterator itor = m_ActionToggleState.begin(); itor != m_ActionToggleState.end(); ++itor)
+		for (IntList::iterator itor = m_ActionToggleState.begin(); itor != m_ActionToggleState.end(); ++itor)
 		{
-			if(*itor == iKeySkillNo)
+			if (*itor == iKeySkillNo)
 			{
 				return;
 			}
 		}
 		m_ActionToggleState.push_back(iKeySkillNo);
-		
+
 		StartSkillToggle(iKeySkillNo);
-		
+
 		return;
 	}
-	for(IntList::iterator itor = m_ActionToggleState.begin(); itor != m_ActionToggleState.end(); ++itor)
+	for (IntList::iterator itor = m_ActionToggleState.begin(); itor != m_ActionToggleState.end(); ++itor)
 	{
-		if(*itor == iKeySkillNo)
+		if (*itor == iKeySkillNo)
 		{
 			m_ActionToggleState.erase(itor);
-			
+
 			CutSkillToggle(iKeySkillNo);
 			return;
 		}
@@ -16579,10 +16592,10 @@ bool	PgActor::GetActionToggleState(int const iActionNo) const	//	true : Activate
 {
 	int const iKeySkillNo = g_kSkillTree.GetKeySkillNo(iActionNo);
 
-	//	¸®½ºÆ® ³»¿¡ ÀÖÀ¸¸é Activated µÈ »óÅÂÀÌ°í, ¸®½ºÆ® ³»¿¡ ÀÖÁö ¾ÊÀ¸¸é Deactivated µÈ »óÅÂÀÌ´Ù.
-	for(IntList::const_iterator itor = m_ActionToggleState.begin(); itor != m_ActionToggleState.end(); ++itor)
+	//	ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Activated ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½, ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Deactivated ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
+	for (IntList::const_iterator itor = m_ActionToggleState.begin(); itor != m_ActionToggleState.end(); ++itor)
 	{
-		if(*itor == iKeySkillNo)
+		if (*itor == iKeySkillNo)
 		{
 			return	true;
 		}
@@ -16595,40 +16608,40 @@ NiPoint3 PgActor::GetPosition(bool bDebugPos)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.GetPosition"), g_pkApp->GetFrameCount()));
 
-	if(bDebugPos)
+	if (bDebugPos)
 	{
-		if(m_pkController)
+		if (m_pkController)
 		{
 			NxExtendedVec3 kDebugPos = m_pkController->getDebugPosition();
-			return	NiPoint3((float)kDebugPos.x,(float)kDebugPos.y,(float)kDebugPos.z);
+			return	NiPoint3((float)kDebugPos.x, (float)kDebugPos.y, (float)kDebugPos.z);
 		}
 	}
 	else
 	{
-		if(m_pkController)
+		if (m_pkController)
 		{
 			NxExtendedVec3 kDebugPos = m_pkController->getPosition();
-			return	NiPoint3((float)kDebugPos.x,(float)kDebugPos.y,(float)kDebugPos.z);
+			return	NiPoint3((float)kDebugPos.x, (float)kDebugPos.y, (float)kDebugPos.z);
 		}
-		
+
 	}
 
 	return	GetWorldTranslate();
 }
 
-void	PgActor::PickUpNearItem(bool bCheckCaller, float const fPickRange, int const iPickCount)	//	±ÙÃ³ÀÇ ¾ÆÀÌÅÛÀ» Áý´Â´Ù.
+void	PgActor::PickUpNearItem(bool bCheckCaller, float const fPickRange, int const iPickCount)	//	ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½.
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return;
 	}
 
-	if(!IsMyActor())
+	if (!IsMyActor())
 	{
-		if(bCheckCaller && GetPilot() && GetPilot()->GetUnit())
+		if (bCheckCaller && GetPilot() && GetPilot()->GetUnit())
 		{
 			BM::GUID kPlayerGuid;
-			if(g_kPilotMan.GetPlayerPilotGuid(kPlayerGuid) && kPlayerGuid != GetPilot()->GetUnit()->Caller())
+			if (g_kPilotMan.GetPlayerPilotGuid(kPlayerGuid) && kPlayerGuid != GetPilot()->GetUnit()->Caller())
 			{
 				return;
 			}
@@ -16641,8 +16654,8 @@ void	PgActor::PickUpNearItem(bool bCheckCaller, float const fPickRange, int cons
 
 	float	fNowTime = g_pkWorld->GetAccumTime();
 
-	float	fElapsedTime =  fNowTime - m_fLastItemPickUpTime;
-	if(fElapsedTime<0.1)
+	float	fElapsedTime = fNowTime - m_fLastItemPickUpTime;
+	if (fElapsedTime < 0.1)
 	{
 		return;
 	}
@@ -16651,10 +16664,10 @@ void	PgActor::PickUpNearItem(bool bCheckCaller, float const fPickRange, int cons
 
 
 	float const  fPickUpTimeLimit = 1.0f;
-	for(ActorPickUpInfoCont::iterator itor = m_kActorPickUpInfoCont.begin(); itor != m_kActorPickUpInfoCont.end();)
+	for (ActorPickUpInfoCont::iterator itor = m_kActorPickUpInfoCont.begin(); itor != m_kActorPickUpInfoCont.end();)
 	{
-		stActorItemPickupInfo *pkInfo = &(itor->second);
-		if(fNowTime - pkInfo->m_fItemPickUpTime>fPickUpTimeLimit)
+		stActorItemPickupInfo* pkInfo = &(itor->second);
+		if (fNowTime - pkInfo->m_fItemPickUpTime > fPickUpTimeLimit)
 		{
 			itor = m_kActorPickUpInfoCont.erase(itor);
 			continue;
@@ -16664,7 +16677,7 @@ void	PgActor::PickUpNearItem(bool bCheckCaller, float const fPickRange, int cons
 
 
 	NiPoint3 kCurrentPos = GetPosition();
-	if(kCurrentPos == m_kLastItemPickUpPos && false==bCheckCaller)
+	if (kCurrentPos == m_kLastItemPickUpPos && false == bCheckCaller)
 	{
 		return;
 	}
@@ -16672,71 +16685,71 @@ void	PgActor::PickUpNearItem(bool bCheckCaller, float const fPickRange, int cons
 	m_kLastItemPickUpPos = kCurrentPos;
 
 
-	NiPhysXScene	*pkPhysXScene = g_pkWorld->GetPhysXScene();
-	if(!pkPhysXScene)
+	NiPhysXScene* pkPhysXScene = g_pkWorld->GetPhysXScene();
+	if (!pkPhysXScene)
 	{
 		return;
 	}
 
 	int	nbMaxShapes = 100;
-	NxShape	*pkCollidedShapes[100];
+	NxShape* pkCollidedShapes[100];
 
-	unsigned	int	uiGroup = 1<<(OGT_GROUNDBOX+1);
+	unsigned	int	uiGroup = 1 << (OGT_GROUNDBOX + 1);
 
-	NxVec3	kCenterPos(kCurrentPos.x,kCurrentPos.y,kCurrentPos.z);
+	NxVec3	kCenterPos(kCurrentPos.x, kCurrentPos.y, kCurrentPos.z);
 
 	int iCount = GetWorld()->overlapSphereShapes(
-		NxSphere(kCenterPos,fPickRange)
-		,NX_DYNAMIC_SHAPES,nbMaxShapes,pkCollidedShapes,NULL,uiGroup,NULL,true);
+		NxSphere(kCenterPos, fPickRange)
+		, NX_DYNAMIC_SHAPES, nbMaxShapes, pkCollidedShapes, NULL, uiGroup, NULL, true);
 
-	if(iCount == 0)
+	if (iCount == 0)
 	{
 		return;
 	}
 
 	iCount = std::min(iCount, iPickCount);
 
-	for(int i = 0; i < iCount; ++i)
+	for (int i = 0; i < iCount; ++i)
 	{
-		if(pkCollidedShapes[i]->userData == NULL) continue;
+		if (pkCollidedShapes[i]->userData == NULL) continue;
 
-		PgDropBox	*pkDropBox = (PgDropBox*)pkCollidedShapes[i]->userData;
+		PgDropBox* pkDropBox = (PgDropBox*)pkCollidedShapes[i]->userData;
 		if (pkDropBox == NULL)
 		{
 			continue;
 		}
 
-		if( pkDropBox->IsMine() == false )	//	³»°ÍÀÌ ¾Æ´Ï¸é ÆÐ½º
+		if (pkDropBox->IsMine() == false)	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½Ð½ï¿½
 		{
 			float const fLimitTime = 10.f;
-			if( fLimitTime > (g_pkApp->GetAccumTime() - pkDropBox->CreateTime()) )
+			if (fLimitTime > (g_pkApp->GetAccumTime() - pkDropBox->CreateTime()))
 			{
-				// 10ÃÊ Áö³ª¸é ¾Æ¹«³ª ¸Ô´Â´Ù.
+				// 10ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½ï¿½ ï¿½Ô´Â´ï¿½.
 				continue;
 			}
 		}
 
-		if( PgDropBox::E_BOX_IDLE!=pkDropBox->GetBoxState() )
+		if (PgDropBox::E_BOX_IDLE != pkDropBox->GetBoxState())
 		{
 			continue;
 		}
 
-		if(pkDropBox->IsMoney() && !m_bAutoGetItemMoney) continue;
-		if(pkDropBox->IsEquip() && !m_bAutoGetItemEquip) continue;
-		if(pkDropBox->IsConsume() && !m_bAutoGetItemConsume) continue;
-		if(pkDropBox->IsETC() && !m_bAutoGetItemETC) continue;
+		if (pkDropBox->IsMoney() && !m_bAutoGetItemMoney) continue;
+		if (pkDropBox->IsEquip() && !m_bAutoGetItemEquip) continue;
+		if (pkDropBox->IsConsume() && !m_bAutoGetItemConsume) continue;
+		if (pkDropBox->IsETC() && !m_bAutoGetItemETC) continue;
 
-		PgPilot	*pkPilot = pkDropBox->GetPilot();
-		if(!pkPilot) continue;
+		PgPilot* pkPilot = pkDropBox->GetPilot();
+		if (!pkPilot) continue;
 
 		BM::GUID	kItemGUID = pkPilot->GetGuid();
-		
-		//	µ¿ÀÏÇÑ ¾ÆÀÌÅÛÀ» 1ÃÊ ³»¿¡ ´Ù½Ã PickUp ÇÒ ¼ö ¾ø´Ù.
+
+		//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ PickUp ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		ActorPickUpInfoCont::iterator itor = m_kActorPickUpInfoCont.find(kItemGUID);
-		if(itor != m_kActorPickUpInfoCont.end())
+		if (itor != m_kActorPickUpInfoCont.end())
 		{
-			stActorItemPickupInfo	*pkInfo = &(itor->second);
-			if(fNowTime - pkInfo->m_fItemPickUpTime<fPickUpTimeLimit)
+			stActorItemPickupInfo* pkInfo = &(itor->second);
+			if (fNowTime - pkInfo->m_fItemPickUpTime < fPickUpTimeLimit)
 			{
 				continue;
 			}
@@ -16752,24 +16765,24 @@ void	PgActor::PickUpNearItem(bool bCheckCaller, float const fPickRange, int cons
 		kInfo.m_kItemGUID = kItemGUID;
 		kInfo.m_fItemPickUpTime = fNowTime;
 
-		m_kActorPickUpInfoCont.insert(std::make_pair(kItemGUID,kInfo));
+		m_kActorPickUpInfoCont.insert(std::make_pair(kItemGUID, kInfo));
 	}
 }
 
-bool PgActor::SetPosition(NiPoint3 const &rkTranslate)
+bool PgActor::SetPosition(NiPoint3 const& rkTranslate)
 {
 	PG_STAT(PgStatTimerF timerA(g_kActorStatGroup.GetStatInfo("PgActor.SetPosition"), g_pkApp->GetFrameCount()));
-	if(!m_pkController)
+	if (!m_pkController)
 	{
 		PG_ASSERT_LOG(!"Character Controller is null!");
 		NILOG(PGLOG_ERROR, "[PgActor] SetPosition, %s(%s) actor has no Character Controller\n", GetPilot() ? MB(GetPilot()->GetName()) : "", MB(GetGuid().str()));
 		return	true;
 	}
 
-	/// Comment : PhysXµ¿±âÀÚ°¡ ´ÙÀ½ ¾÷µ¥ÀÌÆ® ½Ã¿¡ Gamebryo Object¿Í ÁÂÇ¥¸¦ ¸ÂÃç ÁÖ±â ¶§¹®¿¡ 
-	///	±× ÇÁ·¹ÀÓ¿¡ GetTranslate()À» ÇÏ¸é ÁÂÇ¥°¡ ÇÑ ÇÁ·¹ÀÓ ¾î±ß³­´Ù. ¶§¹®¿¡ AVObject::SetTranslate()À» °°ÀÌ ÇØÁØ´Ù. 
+	/// Comment : PhysXï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ã¿ï¿½ Gamebryo Objectï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	///	ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ GetTranslate()ï¿½ï¿½ ï¿½Ï¸ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ß³ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AVObject::SetTranslate()ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½. 
 
-	if(GetTranslate() == rkTranslate)
+	if (GetTranslate() == rkTranslate)
 	{
 		return	true;
 	}
@@ -16777,23 +16790,23 @@ bool PgActor::SetPosition(NiPoint3 const &rkTranslate)
 	m_pkController->setPosition(NxExtendedVec3(rkTranslate.x, rkTranslate.y, rkTranslate.z));
 	SetPositionChanged(true);
 
-	/// Comment ; NxCapsuleController::setPosition()°¡ boolÀ» ¸®ÅÏÇÏ´Âµ¥, ¸Þ´º¾ó(2.6.2)¿¡ º¸¸é ÇöÀç´Â Ç×»ó true¸¦ ¸®ÅÏÇÑ´Ù°í µÇ¾î ÀÖ´Ù.
+	/// Comment ; NxCapsuleController::setPosition()ï¿½ï¿½ boolï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Âµï¿½, ï¿½Þ´ï¿½ï¿½ï¿½(2.6.2)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×»ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù°ï¿½ ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½.
 	return true;
 }
 
 void PgActor::RestoreTexture()
 {
 	OrgTextureContainer::iterator itr;
-	for ( itr = m_OrgTextureList.begin() ;
-		itr != m_OrgTextureList.end() ;
+	for (itr = m_OrgTextureList.begin();
+		itr != m_OrgTextureList.end();
 		++itr)
 	{
 		TextureInfo orgTextInfo = *itr;
-		if(orgTextInfo.pTexturing && orgTextInfo.spTexture)
+		if (orgTextInfo.pTexturing && orgTextInfo.spTexture)
 		{
-			NiTexturingProperty::Map *pkMap = orgTextInfo.pTexturing->GetMaps().GetAt(orgTextInfo.kMapEnum);
+			NiTexturingProperty::Map* pkMap = orgTextInfo.pTexturing->GetMaps().GetAt(orgTextInfo.kMapEnum);
 
-			if(pkMap)
+			if (pkMap)
 			{
 				pkMap->SetTexture(orgTextInfo.spTexture);
 			}
@@ -16808,12 +16821,12 @@ void PgActor::ChangeTexture(NiNode* pkRoot)
 	if (g_pkWorld == NULL || pkRoot == NULL)
 		return;
 
-	// ÅØ½ºÃÄ°¡ ÀÖÀ¸¸é ÅØ½ºÃÄ¸¦ ¹Ù²Ù¾îÁØ´Ù.
+	// ï¿½Ø½ï¿½ï¿½Ä°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½Ä¸ï¿½ ï¿½Ù²Ù¾ï¿½ï¿½Ø´ï¿½.
 	NiObjectList kGeometries;
 	g_pkWorld->GetAllGeometries(pkRoot, kGeometries);
-	while(!kGeometries.IsEmpty())
+	while (!kGeometries.IsEmpty())
 	{
-		NiGeometry *pkGeo = NiDynamicCast(NiGeometry, kGeometries.GetTail());
+		NiGeometry* pkGeo = NiDynamicCast(NiGeometry, kGeometries.GetTail());
 		kGeometries.RemoveTail();
 
 		if (!pkGeo || !pkGeo->GetPropertyState())
@@ -16822,25 +16835,25 @@ void PgActor::ChangeTexture(NiNode* pkRoot)
 		}
 
 		NiTexturingProperty* pkTextureProp = pkGeo->GetPropertyState()->GetTexturing();
-		if(!pkTextureProp)
+		if (!pkTextureProp)
 		{
 			continue;
 		}
 
-		const	NiTexturingProperty::NiMapArray	&kMaps = pkTextureProp->GetMaps();
+		const	NiTexturingProperty::NiMapArray& kMaps = pkTextureProp->GetMaps();
 		const	int	iTotal = kMaps.GetSize();
 
-		for(int i = 0;i < iTotal; ++i)
+		for (int i = 0; i < iTotal; ++i)
 		{
 
-			NiTexturingProperty::Map *pkMap = kMaps.GetAt(i);
-			if(!pkMap || !pkMap->GetTexture())
+			NiTexturingProperty::Map* pkMap = kMaps.GetAt(i);
+			if (!pkMap || !pkMap->GetTexture())
 			{
 				continue;
 			}
 
 			NiSourceTexture* pkSrc = NiDynamicCast(NiSourceTexture, pkMap->GetTexture());
-			if(!pkSrc)
+			if (!pkSrc)
 			{
 				continue;
 			}
@@ -16848,7 +16861,7 @@ void PgActor::ChangeTexture(NiNode* pkRoot)
 			std::string strTexture = pkSrc->GetFilename();
 
 			VariTextureContainer::iterator itr = m_VarTextureList.find(strTexture);
-			if(itr == m_VarTextureList.end())
+			if (itr == m_VarTextureList.end())
 			{
 				continue;
 			}
@@ -16880,7 +16893,7 @@ void PgActor::ChangeTexture(NiNode* pkRoot)
 
 bool PgActor::GetActorDead()
 {
-	if(GetPilot() && GetPilot()->GetUnit())
+	if (GetPilot() && GetPilot()->GetUnit())
 	{
 		return GetPilot()->GetUnit()->IsDead();
 	}
@@ -16916,15 +16929,15 @@ NiPoint3 PgActor::GetLastFloorPos()
 #ifdef PG_SYNC_ENTIRE_TIME
 void PgActor::SyncEntireTime(DWORD dwTime)
 {
-	// ÆÐÅ¶ Àü¼Û ½Ã°£±îÁö °í·ÁÇÔ.
+	// ï¿½ï¿½Å¶ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	ms_dwSyncTime = dwTime;
 	ms_dwLocalSyncTime = BM::GetTime32();
 }
 
 DWORD PgActor::GetSynchronizedTime()
 {
-	// ¼­¹ö¿¡¼­ÀÇ Àý´ë ½Ã°£À» ¸®ÅÏÇÑ´Ù. 
-	// TODO : PgActor¸»°í ´Ù¸¥ °÷À¸·Î »©ÀÚ.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. 
+	// TODO : PgActorï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	DWORD dwNow = BM::GetTime32();
 	PG_ASSERT_LOG(dwNow >= ms_dwLocalSyncTime);
 	DWORD dwElapsedTime = dwNow - ms_dwLocalSyncTime;
@@ -16943,18 +16956,18 @@ void PgActor::SetLastSentTime(DWORD dwLastSentTime)
 
 void PgActor::SetAverageLatency(DWORD dwRecentLatency)
 {
-//	WriteToConsole("[PgRemoteManager] Before Latency : (%u)\t", ms_dwAverageLatency);
-	if(ms_dwAverageLatency == 0)
+	//	WriteToConsole("[PgRemoteManager] Before Latency : (%u)\t", ms_dwAverageLatency);
+	if (ms_dwAverageLatency == 0)
 	{
 		ms_dwAverageLatency = dwRecentLatency;
 	}
 	else
 	{
-		// ¾Æ·¡¿Í °°ÀÌ ÇØ¼­, ÃÖ±Ù ¼öÄ¡¿¡ ´õ °¡ÁßÄ¡¸¦ ¸ÔÀÎ´Ù.
+		// ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¼ï¿½, ï¿½Ö±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½.
 		ms_dwAverageLatency = (DWORD)(ms_dwAverageLatency / 2) + (dwRecentLatency / 2);
 		//ms_dwAverageLatency = (DWORD)(dwRecentLatency + (ms_dwAverageLatency - dwRecentLatency)/2);
 	}
-//	WriteToConsole("After Latency : (%u)\n", ms_dwAverageLatency);
+	//	WriteToConsole("After Latency : (%u)\n", ms_dwAverageLatency);
 }
 
 DWORD PgActor::GetAverageLatency()
@@ -16966,7 +16979,7 @@ DWORD PgActor::GetAverageLatency()
 void PgActor::PrintItemInfo()
 {
 #ifndef EXTERNAL_RELEASE
-	for(PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin();
+	for (PartsAttachInfo::iterator itr = m_kPartsAttachInfo.begin();
 		itr != m_kPartsAttachInfo.end();
 		++itr)
 	{
@@ -16991,7 +17004,7 @@ bool PgActor::checkVisible()
 
 	if (GetWorld())
 	{
-		NiCamera *pCamera = GetWorld()->m_kCameraMan.GetCamera();
+		NiCamera* pCamera = GetWorld()->m_kCameraMan.GetCamera();
 		if (pCamera)
 		{
 			if (g_bUseVariableActorUpdate == false)
@@ -17006,8 +17019,8 @@ bool PgActor::checkVisible()
 			{
 				m_bVisible = true;
 				m_eInvisibleGrade = PgActor::VISIBLE;
-				
-				if (m_kNormalizedActorPosByCamera.z >= 0.90f) // z°¡ Å¬¼ö·Ï ¸Ö¸® ÀÖ´Â °ÍÀÌ´Ù.
+
+				if (m_kNormalizedActorPosByCamera.z >= 0.90f) // zï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¸ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½.
 				{
 					m_eInvisibleGrade = PgActor::INVISIBLE_FAR;
 				}
@@ -17018,8 +17031,8 @@ bool PgActor::checkVisible()
 			}
 			else
 			{
-				// ÁÂ¿ì ¿©À¯ °ø°£À» Á» µÐ´Ù.
-				// zÀÇ °æ¿ì´Â °í·Á¾ÈÇØµµ µÉ °Í °°´Ù.
+				// ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð´ï¿½.
+				// zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				if (m_kNormalizedActorPosByCamera.x >= -NORMALIZED_EDGE_BUFFER && m_kNormalizedActorPosByCamera.x <= NORMALIZED_EDGE_BUFFER + 1.0f
 					&& m_kNormalizedActorPosByCamera.y >= -NORMALIZED_EDGE_BUFFER && m_kNormalizedActorPosByCamera.y <= NORMALIZED_EDGE_BUFFER + 1.0f)
 				{
@@ -17062,7 +17075,7 @@ bool PgActor::checkVisible()
 	int iLODCount = GetLODCount();
 	if (iLODCount > 0 && GetUseLOD())
 	{
-		switch(m_eInvisibleGrade)
+		switch (m_eInvisibleGrade)
 		{
 		case VISIBLE:
 		case INVISIBLE_NEAR:
@@ -17091,13 +17104,13 @@ bool PgActor::checkVisible()
 
 void PgActor::RestoreLockBidirection()
 {
-	if(!m_pkPilot || !g_pkWorld)
+	if (!m_pkPilot || !g_pkWorld)
 	{
 		return;
 	}
 
-	CUnit *pkUnit = m_pkPilot->GetUnit();
-	if(!pkUnit)
+	CUnit* pkUnit = m_pkPilot->GetUnit();
+	if (!pkUnit)
 	{
 		return;
 	}
@@ -17106,7 +17119,7 @@ void PgActor::RestoreLockBidirection()
 	unsigned int uiBiDirection = g_pkWorld->GetLockBidirection();
 	LockBidirection((uiBiDirection & eUnitType) != eUnitType);
 }
-void PgActor::ResetActiveGrp()						
+void PgActor::ResetActiveGrp()
 {
 	m_uiActiveGrp = DEFAULT_ACTIVE_GRP;
 }
@@ -17119,8 +17132,8 @@ void PgActor::SetUpdatePhysXFrameTime(float fFrameTime)
 //-----------------------------------------------------------------------
 // PgActionEntity
 //-----------------------------------------------------------------------
-PgActionEntity::PgActionEntity(PgAction *pkAction, BYTE byDirection) : 
-	m_pkAction(pkAction), 
+PgActionEntity::PgActionEntity(PgAction* pkAction, BYTE byDirection) :
+	m_pkAction(pkAction),
 	m_byDirection(byDirection),
 	m_dwDirectionTerm(0)
 {
@@ -17128,27 +17141,27 @@ PgActionEntity::PgActionEntity(PgAction *pkAction, BYTE byDirection) :
 	m_kDirectionStartPos.y = 0.0f;
 	m_kDirectionStartPos.z = 0.0f;
 }
-	
-PgAction *PgActionEntity::GetAction()	const
+
+PgAction* PgActionEntity::GetAction()	const
 {
 	return m_pkAction;
 }
 
-BYTE PgActionEntity::GetDirection()	
+BYTE PgActionEntity::GetDirection()
 {
 	return m_byDirection;
 }
 
-PgActionEntity	PgActionEntity::CreateCopy()	
+PgActionEntity	PgActionEntity::CreateCopy()
 {
-	PgAction	*pkNewAction = NULL;
-	if(m_pkAction)
+	PgAction* pkNewAction = NULL;
+	if (m_pkAction)
 	{
-		pkNewAction = g_kActionPool.CreateAction(m_pkAction->GetID().c_str(),true);
+		pkNewAction = g_kActionPool.CreateAction(m_pkAction->GetID().c_str(), true);
 		pkNewAction->CopyFrom(m_pkAction);
 	}
 
-	PgActionEntity	kCopy(pkNewAction,GetDirection());
+	PgActionEntity	kCopy(pkNewAction, GetDirection());
 
 	kCopy.SetDirectionTerm(m_dwDirectionTerm);
 	kCopy.SetDirectionStartPos(GetDirectionStartPos());
@@ -17161,19 +17174,19 @@ void PgActionEntity::SetDirectionTerm(DWORD dwTerm)
 	m_dwDirectionTerm = dwTerm;
 }
 
-void PgActionEntity::SetDirectionStartPos(NiPoint3 &rkPos)
+void PgActionEntity::SetDirectionStartPos(NiPoint3& rkPos)
 {
 	m_kDirectionStartPos = rkPos;
 }
 
-NiPoint3 &PgActionEntity::GetDirectionStartPos()
+NiPoint3& PgActionEntity::GetDirectionStartPos()
 {
 	return m_kDirectionStartPos;
 }
 
 DWORD PgActionEntity::GetActionTerm()
 {
-	if(m_pkAction)
+	if (m_pkAction)
 	{
 		return m_pkAction->GetActionTerm();
 	}
@@ -17244,34 +17257,34 @@ void PgActionSay::Clear()
 
 	m_pkCurSayItem = NULL;
 	m_kCurSayStatus = SAS_Delay;
-	
-	UpTime(static_cast<float>(BM::Rand_Unit())*5.0f + 1.0f);
+
+	UpTime(static_cast<float>(BM::Rand_Unit()) * 5.0f + 1.0f);
 }
 
-bool PgActionSay::AddSay(const SSayItem &rkItem)
+bool PgActionSay::AddSay(const SSayItem& rkItem)
 {
-	switch(rkItem.iActionType)
+	switch (rkItem.iActionType)
 	{
 	case SAT_Idle:
-		{
-			m_kIdleSayList.push_back(rkItem);
-		}break;
+	{
+		m_kIdleSayList.push_back(rkItem);
+	}break;
 	case SAT_Click:
-		{
-			m_kClickSayList.push_back(rkItem);
-		}break;
+	{
+		m_kClickSayList.push_back(rkItem);
+	}break;
 	case SAT_Talk:
-		{
-			m_kTalkSayList.push_back(rkItem);
-		}break;
+	{
+		m_kTalkSayList.push_back(rkItem);
+	}break;
 	case SAT_Warning:
-		{
-			m_kWarningList.push_back(rkItem);
-		}break;
+	{
+		m_kWarningList.push_back(rkItem);
+	}break;
 	case SAT_TextDialogs:
-		{
-			m_iTextDialogsID = rkItem.iTTW;
-		}break;
+	{
+		m_iTextDialogsID = rkItem.iTTW;
+	}break;
 	default:
 		return false;
 		break;
@@ -17279,9 +17292,9 @@ bool PgActionSay::AddSay(const SSayItem &rkItem)
 	return true;
 }
 
-bool PgActionSay::GetCur(SSayItem &kItem) const
+bool PgActionSay::GetCur(SSayItem& kItem) const
 {
-	if( m_pkCurSayItem )
+	if (m_pkCurSayItem)
 	{
 		kItem = *m_pkCurSayItem;
 		return true;
@@ -17289,9 +17302,9 @@ bool PgActionSay::GetCur(SSayItem &kItem) const
 	return false;
 }
 
-bool PgActionSay::GetRandomSay(ContSayItem const & rkCont, SSayItem const *pkPrev, const SSayItem* &pkOut)const
+bool PgActionSay::GetRandomSay(ContSayItem const& rkCont, SSayItem const* pkPrev, const SSayItem*& pkOut)const
 {
-	if( rkCont.empty() )
+	if (rkCont.empty())
 	{
 		return false;
 	}
@@ -17299,21 +17312,21 @@ bool PgActionSay::GetRandomSay(ContSayItem const & rkCont, SSayItem const *pkPre
 	ContSayItem kSayVec(rkCont.begin(), rkCont.end());
 	SayFilter(kSayVec);
 
-	if( kSayVec.empty() )
+	if (kSayVec.empty())
 	{
 		return false;
 	}
 
 	size_t const iMin = 0;
-	size_t const iMax = kSayVec.size()-1;
+	size_t const iMax = kSayVec.size() - 1;
 	size_t iCur = iMin;
-	if(iMin != iMax)//°°À¸¸é 1°³
+	if (iMin != iMax)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½
 	{
 		iCur = BM::Rand_Index(kSayVec.size());
-		if( pkPrev
-		&&	*pkPrev == kSayVec.at(iCur) )
+		if (pkPrev
+			&& *pkPrev == kSayVec.at(iCur))
 		{
-			if(rkCont.at(iMin) == *pkPrev)//ÀÌÀü°ú MinÀÌ °°ÀºÁö È®ÀÎ
+			if (rkCont.at(iMin) == *pkPrev)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Minï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 			{
 				iCur = iMax;
 			}
@@ -17323,10 +17336,10 @@ bool PgActionSay::GetRandomSay(ContSayItem const & rkCont, SSayItem const *pkPre
 			}
 		}
 	}
-	if( iMin <= iCur
-	&&	iMax >= iCur )//iCur°¡ ¹è¿­ ¹üÀ§¸é
+	if (iMin <= iCur
+		&& iMax >= iCur)//iCurï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
-		pkOut = &rkCont.at(iCur);//¼º°ø
+		pkOut = &rkCont.at(iCur);//ï¿½ï¿½ï¿½ï¿½
 		return true;
 	}
 	return false;
@@ -17336,74 +17349,74 @@ bool PgActionSay::GetRandomSay(ContSayItem const & rkCont, SSayItem const *pkPre
 ESayActionStatus PgActionSay::Update(float fAccumTime, float fFrameTime)
 {
 	ESayActionStatus eRet = SAS_None;
-	//SAT_None	: ·£´ýÀ¸·Î ÇÏ³ª »Ì´Â´Ù
-	//SAT_Idle	: UpTime¸¸Å­ ±â´Ù¸°´Ù.
-	//SAT_Delay	: Delay¸¸Å­ ±â´Ù¸°´Ù.
-	if(m_kIdleSayList.size() > 0)
+	//SAT_None	: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½Ì´Â´ï¿½
+	//SAT_Idle	: UpTimeï¿½ï¿½Å­ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½.
+	//SAT_Delay	: Delayï¿½ï¿½Å­ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½.
+	if (m_kIdleSayList.size() > 0)
 	{
 		UpTime(UpTime() - fFrameTime);
-		//Idle ¸¸ ¿©±â¼­ Ã³¸®ÇÑ´Ù.
-		switch(CurSayStatus())
+		//Idle ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ Ã³ï¿½ï¿½ï¿½Ñ´ï¿½.
+		switch (CurSayStatus())
 		{
 		case SAS_None:
+		{
+			const SSayItem* pkItem = NULL;
+			bool const bFindSay = GetRandomSay(m_kIdleSayList, m_pkCurSayItem, pkItem);
+			if (bFindSay)
 			{
-				const SSayItem *pkItem = NULL;
-				bool const bFindSay = GetRandomSay(m_kIdleSayList, m_pkCurSayItem, pkItem);
-				if( bFindSay )
-				{
-					UpTime(pkItem->fUpTime);
-					m_pkCurSayItem = pkItem;
-					eRet = m_kCurSayStatus = SAS_Run; //¿©±â¼­ ¸»Ç³¼± ¶ç¿î´Ù
-				}
-				else
-				{
-					//½ÇÆÐÇÒ °æ¿ì¿£ 50ÃÊ ¸¸Å­ Ä§¹¬
-					m_pkCurSayItem = NULL;
-					UpTime(5000.f);
-					eRet = m_kCurSayStatus = SAS_Delay;
-				}
-			}break;
+				UpTime(pkItem->fUpTime);
+				m_pkCurSayItem = pkItem;
+				eRet = m_kCurSayStatus = SAS_Run; //ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½Ç³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			}
+			else
+			{
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿£ 50ï¿½ï¿½ ï¿½ï¿½Å­ Ä§ï¿½ï¿½
+				m_pkCurSayItem = NULL;
+				UpTime(5000.f);
+				eRet = m_kCurSayStatus = SAS_Delay;
+			}
+		}break;
 		case SAS_Run:
-			{
-				eRet = m_kCurSayStatus = SAS_Wait; //½ÇÇà
-			}break;
+		{
+			eRet = m_kCurSayStatus = SAS_Wait; //ï¿½ï¿½ï¿½ï¿½
+		}break;
 		case SAS_Wait:
+		{
+			if (UpTime() < 0.f)
 			{
-				if(UpTime() < 0.f)
-				{
-					if(m_pkCurSayItem) UpTime(m_pkCurSayItem->fDelay);//Delay ½Ã°£ ¼³Á¤
-					eRet = m_kCurSayStatus = SAS_Delay; //½ÇÇà Áß ´ë±â
-				}
-			}break;
+				if (m_pkCurSayItem) UpTime(m_pkCurSayItem->fDelay);//Delay ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
+				eRet = m_kCurSayStatus = SAS_Delay; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
+			}
+		}break;
 		case SAS_Delay:
+		{
+			if (UpTime() < 0.f)
 			{
-				if(UpTime() < 0.f)
-				{
-					UpTime(0.f);
-					eRet = m_kCurSayStatus = SAS_None; //ÀÌÀü°ú ´ÙÀ½ ½ÇÇàÀÇ »çÀÌ ´ë±â
-				}
-			}break;
+				UpTime(0.f);
+				eRet = m_kCurSayStatus = SAS_None; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			}
+		}break;
 		default:
-			{
-			}break;
+		{
+		}break;
 		}
 	}
 
 	return eRet;
-	//SAT_Idle¿¡ CurSayItem()ÀÇ ±ÛÀ» ¶ç¿ì°í
-	//SAT_None/SAT_Delay ¿¡´Â ¾Æ¹«°Íµµ ¾ÈÇÑ´Ù
+	//SAT_Idleï¿½ï¿½ CurSayItem()ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	//SAT_None/SAT_Delay ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½
 }
 
 ESayActionStatus PgActionSay::OnClick()
 {
 	ESayActionStatus eRet = SAS_None;
-	//¸ðµçÁö Äµ½½ ÇÒ¼ö ÀÖ´Ù.
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ Äµï¿½ï¿½ ï¿½Ò¼ï¿½ ï¿½Ö´ï¿½.
 	const SSayItem* pkItem = NULL;
-	if(GetRandomSay(m_kClickSayList, m_pkCurSayItem, pkItem))
+	if (GetRandomSay(m_kClickSayList, m_pkCurSayItem, pkItem))
 	{
 		m_pkCurSayItem = pkItem;
 		UpTime(pkItem->fUpTime);
-		eRet = m_kCurSayStatus = SAS_Run; //¶ç¿ö¶ó
+		eRet = m_kCurSayStatus = SAS_Run; //ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 	return eRet;
 }
@@ -17412,11 +17425,11 @@ ESayActionStatus PgActionSay::OnTalk()
 {
 	ESayActionStatus eRet = SAS_None;
 	const SSayItem* pkItem = NULL;
-	if( GetRandomSay(m_kTalkSayList, m_pkCurSayItem, pkItem) )
+	if (GetRandomSay(m_kTalkSayList, m_pkCurSayItem, pkItem))
 	{
 		m_pkCurSayItem = pkItem;
 		UpTime(pkItem->fUpTime);
-		eRet = m_kCurSayStatus = SAS_Run; //¶ç¿ö¶ó
+		eRet = m_kCurSayStatus = SAS_Run; //ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 	return eRet;
 }
@@ -17425,11 +17438,11 @@ ESayActionStatus PgActionSay::OnWarning()
 {
 	ESayActionStatus eRet = SAS_None;
 	const SSayItem* pkItem = NULL;
-	if( GetRandomSay(m_kWarningList, m_pkCurSayItem, pkItem) )
+	if (GetRandomSay(m_kWarningList, m_pkCurSayItem, pkItem))
 	{
 		m_pkCurSayItem = pkItem;
 		UpTime(pkItem->fUpTime);
-		eRet = m_kCurSayStatus = SAS_Run; //¶ç¿ö¶ó
+		eRet = m_kCurSayStatus = SAS_Run; //ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 	return eRet;
 }
@@ -17437,7 +17450,7 @@ ESayActionStatus PgActionSay::OnWarning()
 void PgActionSay::SayFilter(ContSayItem& rkCont) const
 {
 	PgPlayer* pkPlayer = g_kPilotMan.GetPlayerUnit();
-	if( pkPlayer )
+	if (pkPlayer)
 	{
 		PgSayItemChecker kNewChecker(pkPlayer->GetAbil(AT_LEVEL), pkPlayer->GetMyQuest());
 		ContSayItem::iterator new_end = std::remove_if(rkCont.begin(), rkCont.end(), kNewChecker);
@@ -17460,13 +17473,13 @@ size_t const PgActionSay::WarningCount() const
 }
 
 void PgActor::SetUseSubActorManager(bool bUse)
-{ 
-	PgIWorldObject::SetUseSubActorManager(bUse); 
-	NiActorManager *pkAM = GetActorManager();
-	PG_ASSERT_LOG(pkAM);  
+{
+	PgIWorldObject::SetUseSubActorManager(bUse);
+	NiActorManager* pkAM = GetActorManager();
+	PG_ASSERT_LOG(pkAM);
 	if (pkAM)
 	{
-		pkAM->SetCallbackObject(m_pkActorCallback); 
+		pkAM->SetCallbackObject(m_pkActorCallback);
 	}
 }
 
@@ -17480,7 +17493,7 @@ int PgActor::GetNextSetEffectSlotIndex()
 {
 	++m_kGenerateSetEffectSlotIndex;
 
-	if(m_kGenerateSetEffectSlotIndex > 510000)
+	if (m_kGenerateSetEffectSlotIndex > 510000)
 	{
 		m_kGenerateSetEffectSlotIndex = 500000;
 	}
@@ -17489,27 +17502,25 @@ int PgActor::GetNextSetEffectSlotIndex()
 }
 
 void PgActor::OnChangeInventory()
-{
-}
+{}
 
 void PgActor::onHPChanged()
-{
-}
+{}
 
 bool PgActor::AttachAttackEffect(char const* szActionName, int const iSlot)
 {
-	if(szActionName)
+	if (szActionName)
 	{
 		PgItemEx* pkItemEx = GetEquippedWeapon();
-		if(pkItemEx)
+		if (pkItemEx)
 		{
 			PgItemEx::SAttackEffect kEffect;
-			if(pkItemEx->FindAttackEffect(szActionName, kEffect))
+			if (pkItemEx->FindAttackEffect(szActionName, kEffect))
 			{
-				NiAVObject *pkParticle = g_kParticleMan.GetParticle(kEffect.m_kEffectID.c_str(), PgParticle::O_SCALE,kEffect.m_fScale );
-				if(pkParticle)
+				NiAVObject* pkParticle = g_kParticleMan.GetParticle(kEffect.m_kEffectID.c_str(), PgParticle::O_SCALE, kEffect.m_fScale);
+				if (pkParticle)
 				{
-					if(!AttachTo(0==iSlot ? BM::Rand_Index(100000) : iSlot, kEffect.m_kNodeID.c_str(), pkParticle))
+					if (!AttachTo(0 == iSlot ? BM::Rand_Index(100000) : iSlot, kEffect.m_kNodeID.c_str(), pkParticle))
 					{
 						THREAD_DELETE_PARTICLE(pkParticle);
 						return	false;
@@ -17527,12 +17538,12 @@ void PgActor::AttachChild(NiAVObject* pkChild, bool bFirstAvail)
 	NiNode::AttachChild(pkChild, bFirstAvail);
 }
 
-void PgActor::AddTransformEffectAttachInfo(int const iTransformEffectID, PgIWorldObjectBase::stEffectAttachInfo const & kInfo)
+void PgActor::AddTransformEffectAttachInfo(int const iTransformEffectID, PgIWorldObjectBase::stEffectAttachInfo const& kInfo)
 {
 	CONT_TRANSFORM_EFFECT_ATTACH_INFO::iterator itor = m_kContTransformEffAttachInfo.begin();
-	while(m_kContTransformEffAttachInfo.end() != itor)
+	while (m_kContTransformEffAttachInfo.end() != itor)
 	{
-		if(iTransformEffectID == itor->iTransformEffectID)
+		if (iTransformEffectID == itor->iTransformEffectID)
 		{
 			itor->kContInfoList.push_back(kInfo);
 			return;
@@ -17550,14 +17561,14 @@ bool PgActor::RemoveTransformEffectAttachInfo(int const iTransformEffectID)
 {
 	bool bResult = false;
 	CONT_TRANSFORM_EFFECT_ATTACH_INFO::iterator itor = m_kContTransformEffAttachInfo.begin();
-	while(m_kContTransformEffAttachInfo.end() != itor)
+	while (m_kContTransformEffAttachInfo.end() != itor)
 	{
-		if(iTransformEffectID == itor->iTransformEffectID)
+		if (iTransformEffectID == itor->iTransformEffectID)
 		{
 			PgIWorldObjectBase::EffectAttachInfoList::iterator itor_Effect = itor->kContInfoList.begin();
-			while(itor->kContInfoList.end() != itor_Effect)
+			while (itor->kContInfoList.end() != itor_Effect)
 			{
-				if(DetachFrom(itor_Effect->m_iSlot, true) )
+				if (DetachFrom(itor_Effect->m_iSlot, true))
 				{
 					bResult = true;
 					itor_Effect = itor->kContInfoList.erase(itor_Effect);
@@ -17568,7 +17579,7 @@ bool PgActor::RemoveTransformEffectAttachInfo(int const iTransformEffectID)
 				}
 			}
 		}
-		if(itor->kContInfoList.empty())
+		if (itor->kContInfoList.empty())
 		{
 			itor = m_kContTransformEffAttachInfo.erase(itor);
 		}
@@ -17580,21 +17591,21 @@ bool PgActor::RemoveTransformEffectAttachInfo(int const iTransformEffectID)
 	return bResult;
 }
 
-void PgActor::CullingProcessParticle(NiCamera *pkCamera, NiVisibleArray *pkArray, PgRenderer *pkRenderer)
+void PgActor::CullingProcessParticle(NiCamera* pkCamera, NiVisibleArray* pkArray, PgRenderer* pkRenderer)
 {
-	if ( !pkCamera || !pkArray )
-        return;
-	if(!pkRenderer)
+	if (!pkCamera || !pkArray)
+		return;
+	if (!pkRenderer)
 		pkRenderer = PgRenderer::GetPgRenderer();
 
-	PgParticle	*pkParticle = NULL;
-	for ( AttachSlot::iterator itr = m_kAttachSlot.begin(); itr != m_kAttachSlot.end(); ++itr )
+	PgParticle* pkParticle = NULL;
+	for (AttachSlot::iterator itr = m_kAttachSlot.begin(); itr != m_kAttachSlot.end(); ++itr)
 	{
-		pkParticle = NiDynamicCast(PgParticle,itr->second);
-		if(pkParticle && pkParticle->GetZTest() == true)
+		pkParticle = NiDynamicCast(PgParticle, itr->second);
+		if (pkParticle && pkParticle->GetZTest() == true)
 		{
 			pkParticle->SetAppCulled(false);
-			pkRenderer->CullingProcess_Deprecated( pkCamera, pkParticle, pkArray, false );
+			pkRenderer->CullingProcess_Deprecated(pkCamera, pkParticle, pkArray, false);
 			pkParticle->SetAppCulled(true);
 		}
 	}
@@ -17603,7 +17614,7 @@ void PgActor::CullingProcessParticle(NiCamera *pkCamera, NiVisibleArray *pkArray
 void PgActor::SetNodeHide(char const* strNodeName, bool bHide)
 {
 	NiAVObjectPtr spNode = GetCharRoot()->GetObjectByName(strNodeName);
-	if(spNode != NULL)
+	if (spNode != NULL)
 	{
 		spNode->SetAppCulled(bHide);
 	}
@@ -17612,7 +17623,7 @@ void PgActor::SetNodeHide(char const* strNodeName, bool bHide)
 void PgActor::SetNodeAlpha(char const* strNodeName, float fAlpha)
 {
 	NiAVObjectPtr spNode = GetCharRoot()->GetObjectByName(strNodeName);
-	if(spNode != NULL)
+	if (spNode != NULL)
 	{
 		SetNodeAlphaRecursive(spNode, fAlpha);
 	}
@@ -17620,32 +17631,32 @@ void PgActor::SetNodeAlpha(char const* strNodeName, float fAlpha)
 
 void PgActor::SetNodeAlphaRecursive(NiAVObject* pkObject, float fAlpha)
 {
-	if(NiIsKindOf(NiNode,pkObject))
+	if (NiIsKindOf(NiNode, pkObject))
 	{
-		NiNode	*pkNode = NiDynamicCast(NiNode,pkObject);
-		if(pkNode)
+		NiNode* pkNode = NiDynamicCast(NiNode, pkObject);
+		if (pkNode)
 		{
 			int	iTotalChild = pkNode->GetArrayCount();
-			NiAVObject	*pkChild = NULL;
-			for(int i=0;i<iTotalChild;++i)
+			NiAVObject* pkChild = NULL;
+			for (int i = 0; i < iTotalChild; ++i)
 			{
 				pkChild = pkNode->GetAt(i);
-				if(pkChild)
+				if (pkChild)
 				{
 					SetNodeAlphaRecursive(pkChild, fAlpha);
 				}
 			}
 		}
 	}
-	else if(NiIsKindOf(NiGeometry,pkObject))
+	else if (NiIsKindOf(NiGeometry, pkObject))
 	{
-		NiGeometry	*pkGeom = NiDynamicCast(NiGeometry,pkObject);
-		if(pkGeom)
+		NiGeometry* pkGeom = NiDynamicCast(NiGeometry, pkObject);
+		if (pkGeom)
 		{
-			NiMaterialProperty	*pkMat = pkGeom->GetPropertyState()->GetMaterial();
+			NiMaterialProperty* pkMat = pkGeom->GetPropertyState()->GetMaterial();
 			pkMat->SetAlpha(fAlpha);
 
-			NiAlphaProperty	*pkAlpha = pkGeom->GetPropertyState()->GetAlpha();
+			NiAlphaProperty* pkAlpha = pkGeom->GetPropertyState()->GetAlpha();
 			pkAlpha->SetAlphaBlending(true);
 		}
 	}
@@ -17654,7 +17665,7 @@ void PgActor::SetNodeAlphaRecursive(NiAVObject* pkObject, float fAlpha)
 void PgActor::SetNodeAlphaChange(char const* strNodeName, float fAlphaStart, float fAlphaEnd, float fChangeTime)
 {
 	NiAVObject* pkObject = GetCharRoot()->GetObjectByName(strNodeName);
-	if( pkObject )
+	if (pkObject)
 	{
 		m_pAlphaNode = pkObject;
 		m_fStartAlpha = fAlphaStart;
@@ -17666,22 +17677,22 @@ void PgActor::SetNodeAlphaChange(char const* strNodeName, float fAlphaStart, flo
 
 void PgActor::UpdateNodeAlpha()
 {
-	if (m_ulAlphaChangeTime>0)
+	if (m_ulAlphaChangeTime > 0)
 	{
 		unsigned long ulElapsedTime = BM::GetTime32() - m_ulAlphaStartTime;
 		float fRate = static_cast<float>(ulElapsedTime) / static_cast<float>(m_ulAlphaChangeTime);
-		if(fRate>1)
+		if (fRate > 1)
 		{
 			fRate = 1;
 		}
-		else if(fRate<0)
+		else if (fRate < 0)
 		{
 			fRate = 0;
 		}
 
-		float fNewAlpha = m_fStartAlpha + (m_fEndAlpha-m_fStartAlpha)*fRate;
+		float fNewAlpha = m_fStartAlpha + (m_fEndAlpha - m_fStartAlpha) * fRate;
 		SetNodeAlphaRecursive(m_pAlphaNode, fNewAlpha);
-		if(fRate == 1)
+		if (fRate == 1)
 		{
 			m_ulAlphaChangeTime = 0;
 			m_pAlphaNode = NULL;
@@ -17692,19 +17703,19 @@ void PgActor::UpdateNodeAlpha()
 int GetTotalSummonedSupply(CUnit const* pkCaller)
 {
 	int iCount = 0;
-	if(NULL==pkCaller)
+	if (NULL == pkCaller)
 	{
-        return iCount;
+		return iCount;
 	}
 
 	PgPilot* pkPilot = NULL;
-	PgSummoned * pkSummoned = NULL;
+	PgSummoned* pkSummoned = NULL;
 	VEC_SUMMONUNIT const& kContSummonUnit = pkCaller->GetSummonUnit();
-	for(VEC_SUMMONUNIT::const_iterator c_it=kContSummonUnit.begin(); c_it!=kContSummonUnit.end(); ++c_it)
+	for (VEC_SUMMONUNIT::const_iterator c_it = kContSummonUnit.begin(); c_it != kContSummonUnit.end(); ++c_it)
 	{
 		pkPilot = g_kPilotMan.FindPilot((*c_it).kGuid);
-		if(pkPilot && pkPilot->GetUnit() && pkPilot->GetUnit()->IsUnitType(UT_SUMMONED) && pkPilot->GetUnit()->GetAbil(AT_HP)
-		&& (pkSummoned = dynamic_cast<PgSummoned*>(pkPilot->GetUnit())) )
+		if (pkPilot && pkPilot->GetUnit() && pkPilot->GetUnit()->IsUnitType(UT_SUMMONED) && pkPilot->GetUnit()->GetAbil(AT_HP)
+			&& (pkSummoned = dynamic_cast<PgSummoned*>(pkPilot->GetUnit())))
 		{
 			iCount += pkSummoned->Supply();
 		}
@@ -17716,18 +17727,18 @@ int GetTotalSummonedSupply(CUnit const* pkCaller)
 int GetTotalSummonedCount(CUnit const* pkCaller)
 {
 	int iCount = 0;
-	if(NULL==pkCaller)
+	if (NULL == pkCaller)
 	{
-        return iCount;
+		return iCount;
 	}
 
 	PgPilot* pkPilot = NULL;
-	PgSummoned * pkSummoned = NULL;
+	PgSummoned* pkSummoned = NULL;
 	VEC_SUMMONUNIT const& kContSummonUnit = pkCaller->GetSummonUnit();
-	for(VEC_SUMMONUNIT::const_iterator c_it=kContSummonUnit.begin(); c_it!=kContSummonUnit.end(); ++c_it)
+	for (VEC_SUMMONUNIT::const_iterator c_it = kContSummonUnit.begin(); c_it != kContSummonUnit.end(); ++c_it)
 	{
 		pkPilot = g_kPilotMan.FindPilot((*c_it).kGuid);
-		if(pkPilot && pkPilot->GetUnit() && pkPilot->GetUnit()->IsUnitType(UT_SUMMONED) && pkPilot->GetUnit()->GetAbil(AT_HP))
+		if (pkPilot && pkPilot->GetUnit() && pkPilot->GetUnit()->IsUnitType(UT_SUMMONED) && pkPilot->GetUnit()->GetAbil(AT_HP))
 		{
 			++iCount;
 		}
@@ -17739,25 +17750,25 @@ int GetTotalSummonedCount(CUnit const* pkCaller)
 bool CheckHPMPForAction(CSkillDef const* pkSkillDef, CUnit const* pkUnit, bool const bShowFailMsg, bool const bShowNILog)
 {
 	int const iNeedSupply = pkSkillDef->GetAbil(AT_CREATE_SUMMONED_SUPPLY);
-	if(iNeedSupply)
+	if (iNeedSupply)
 	{
 		int const iCount = GetTotalSummonedSupply(pkUnit);
 		int const iMaxSupply = pkUnit->GetAbil(AT_C_SUMMONED_MAX_SUPPLY);
-		if(iMaxSupply < iCount+iNeedSupply)
+		if (iMaxSupply < iCount + iNeedSupply)
 		{
-			if(bShowFailMsg)
+			if (bShowFailMsg)
 			{
 				lwAddWarnDataStr(lwWString(TTW(169)), 2, true);
 			}
 			return false;
 		}
 
-		bool const bUniqueClass = (pkSkillDef->GetAbil(AT_CREATE_UNIQUE_SUMMONED)>0);
-		if(bUniqueClass)
+		bool const bUniqueClass = (pkSkillDef->GetAbil(AT_CREATE_UNIQUE_SUMMONED) > 0);
+		if (bUniqueClass)
 		{
-			if( pkUnit->IsSummonUnitClass( pkSkillDef->GetAbil(AT_CLASS) ) ) 
+			if (pkUnit->IsSummonUnitClass(pkSkillDef->GetAbil(AT_CLASS)))
 			{
-				if(bShowFailMsg)
+				if (bShowFailMsg)
 				{
 					lwAddWarnDataStr(lwWString(TTW(792102)), 2, true);
 				}
@@ -17766,54 +17777,54 @@ bool CheckHPMPForAction(CSkillDef const* pkSkillDef, CUnit const* pkUnit, bool c
 		}
 	}
 
-	//	¸¶³ª·® Ã¼Å©
+	//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	int iNeedHP = pkSkillDef->GetAbil(AT_NEED_HP);
 	int iNeedMP = pkSkillDef->GetAbil(AT_NEED_MP);
-	int const iNeedHPPer = pkUnit->GetAbil(AT_ADD_R_NEED_HP); // ¼Ò¸ðHPÀÇ %
-	int const iNeedMPPer = pkUnit->GetAbil(AT_ADD_R_NEED_MP); // ¼Ò¸ðMPÀÇ %
-	int const iNeedHPPer2 = pkUnit->GetAbil(AT_ADD_R_NEED_HP_2); // ¼Ò¸ðHPÀÇ °¨¼Ò%
-	int const iNeedMPPer2 = pkUnit->GetAbil(AT_ADD_R_NEED_MP_2); // ¼Ò¸ðMPÀÇ °¨¼Ò%
+	int const iNeedHPPer = pkUnit->GetAbil(AT_ADD_R_NEED_HP); // ï¿½Ò¸ï¿½HPï¿½ï¿½ %
+	int const iNeedMPPer = pkUnit->GetAbil(AT_ADD_R_NEED_MP); // ï¿½Ò¸ï¿½MPï¿½ï¿½ %
+	int const iNeedHPPer2 = pkUnit->GetAbil(AT_ADD_R_NEED_HP_2); // ï¿½Ò¸ï¿½HPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½%
+	int const iNeedMPPer2 = pkUnit->GetAbil(AT_ADD_R_NEED_MP_2); // ï¿½Ò¸ï¿½MPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½%
 
 	int const iMaxHP = pkUnit->GetAbil(AT_C_MAX_HP);
 	int const iMaxMP = pkUnit->GetAbil(AT_C_MAX_MP);
 	int const iNeedMaxHPPer = pkSkillDef->GetAbil(AT_NEED_MAX_R_HP);
 	int const iNeedMaxMPPer = pkSkillDef->GetAbil(AT_NEED_MAX_R_MP);
 
-	//½ºÅ³ »ç¿ë½Ã MaxHPÀÇ %¸¦ ¼Ò¸ð ½ÃÅ°´Â °æ¿ì iNeedHp´Â »õ·Î ¼¼ÆÃ µÈ´Ù.
-	if(0 < iNeedMaxHPPer)
+	//ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ MaxHPï¿½ï¿½ %ï¿½ï¿½ ï¿½Ò¸ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ iNeedHpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½.
+	if (0 < iNeedMaxHPPer)
 	{
-		iNeedHP = static_cast<int>(iMaxHP * (static_cast<float>(iNeedMaxHPPer) / ABILITY_RATE_VALUE_FLOAT));			
+		iNeedHP = static_cast<int>(iMaxHP * (static_cast<float>(iNeedMaxHPPer) / ABILITY_RATE_VALUE_FLOAT));
 	}
-	//½ºÅ³ »ç¿ë½Ã MaxMPÀÇ %¸¦ ¼Ò¸ð ½ÃÅ°´Â °æ¿ì iNeedMp´Â »õ·Î ¼¼ÆÃ µÈ´Ù.
-	if(0 < iNeedMaxMPPer)
+	//ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ MaxMPï¿½ï¿½ %ï¿½ï¿½ ï¿½Ò¸ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ iNeedMpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½.
+	if (0 < iNeedMaxMPPer)
 	{
-		iNeedMP = static_cast<int>(iMaxMP * (static_cast<float>(iNeedMaxMPPer) / ABILITY_RATE_VALUE_FLOAT));			
+		iNeedMP = static_cast<int>(iMaxMP * (static_cast<float>(iNeedMaxMPPer) / ABILITY_RATE_VALUE_FLOAT));
 	}
 
-	if(0 < iNeedHPPer)
+	if (0 < iNeedHPPer)
 	{
 		iNeedHP -= static_cast<int>(iNeedHP * (static_cast<float>((ABILITY_RATE_VALUE - iNeedHPPer) + iNeedHPPer2) / ABILITY_RATE_VALUE_FLOAT));
 	}
-	if(0 < iNeedMPPer)
+	if (0 < iNeedMPPer)
 	{
 		iNeedMP -= static_cast<int>(iNeedMP * (static_cast<float>((ABILITY_RATE_VALUE - iNeedMPPer) + iNeedMPPer2) / ABILITY_RATE_VALUE_FLOAT));
 	}
 
 	{
-		// ½ºÅ³ »ç¿ë½Ã ÇÊ¿äÇÑ ÃÖ¼Ò °ªÀÌ ÀÖÀ» °æ¿ì Ã¼Å©ÇÑ´Ù
+		// ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½
 		int const iNeedMinValue = pkSkillDef->GetAbil(AT_NEED_MP_MIN_VALUE);
 		int const iCurrent = pkUnit->GetAbil(AT_MP);
 
-		if(0 < iNeedMinValue)
+		if (0 < iNeedMinValue)
 		{
-			if(iCurrent < iNeedMinValue)
+			if (iCurrent < iNeedMinValue)
 			{
-				if(bShowFailMsg)
+				if (bShowFailMsg)
 				{
-					lwAddWarnDataStr(lwWString(TTW(35)),2, true);
+					lwAddWarnDataStr(lwWString(TTW(35)), 2, true);
 				}
 
-				if(bShowNILog)
+				if (bShowNILog)
 				{
 					NILOG(PGLOG_LOG, "[PgActor] NextAction, ManaCheck failed(%d,%d)\n", pkUnit->GetAbil(AT_MP), iNeedMP);
 				}
@@ -17823,37 +17834,37 @@ bool CheckHPMPForAction(CSkillDef const* pkSkillDef, CUnit const* pkUnit, bool c
 		}
 	}
 
-	if(pkUnit->GetAbil(AT_MP) < iNeedMP)
+	if (pkUnit->GetAbil(AT_MP) < iNeedMP)
 	{
-		if(bShowFailMsg && (0==pkUnit->GetAbil(AT_AUTO_PET_SKILL)))
+		if (bShowFailMsg && (0 == pkUnit->GetAbil(AT_AUTO_PET_SKILL)))
 		{
-			lwAddWarnDataStr(lwWString(TTW(35)),2, true);
+			lwAddWarnDataStr(lwWString(TTW(35)), 2, true);
 		}
 
-		if(bShowNILog)
+		if (bShowNILog)
 		{
 			NILOG(PGLOG_LOG, "[PgActor] NextAction, ManaCheck failed(%d,%d)\n", pkUnit->GetAbil(AT_MP), iNeedMP);
 		}
 
 		return false;
 	}
-	//	Ã¼·Â Ã¼Å©
+	//	Ã¼ï¿½ï¿½ Ã¼Å©
 
 	{
-		// ½ºÅ³ »ç¿ë½Ã ÇÊ¿äÇÑ ÃÖ¼Ò °ªÀÌ ÀÖÀ» °æ¿ì Ã¼Å©ÇÑ´Ù
+		// ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½
 		int const iNeedMinValue = pkSkillDef->GetAbil(AT_NEED_HP_MIN_VALUE);
 		int const iCurrent = pkUnit->GetAbil(AT_HP);
 
-		if(0 < iNeedMinValue)
+		if (0 < iNeedMinValue)
 		{
-			if(iCurrent < iNeedMinValue)
+			if (iCurrent < iNeedMinValue)
 			{
-				if(bShowFailMsg)
+				if (bShowFailMsg)
 				{
-					lwAddWarnDataStr(lwWString(TTW(62)),2, true);
+					lwAddWarnDataStr(lwWString(TTW(62)), 2, true);
 				}
 
-				if(bShowNILog)
+				if (bShowNILog)
 				{
 					NILOG(PGLOG_LOG, "[PgActor] NextAction, HPCheck failed(%d,%d)\n", pkUnit->GetAbil(AT_HP), iNeedHP);
 				}
@@ -17863,14 +17874,14 @@ bool CheckHPMPForAction(CSkillDef const* pkSkillDef, CUnit const* pkUnit, bool c
 		}
 	}
 
-	if(pkUnit->GetAbil(AT_HP) < iNeedHP)
+	if (pkUnit->GetAbil(AT_HP) < iNeedHP)
 	{
-		if(bShowFailMsg)
+		if (bShowFailMsg)
 		{
-			lwAddWarnDataStr(lwWString(TTW(62)),2, true);
+			lwAddWarnDataStr(lwWString(TTW(62)), 2, true);
 		}
 
-		if(bShowNILog)
+		if (bShowNILog)
 		{
 			NILOG(PGLOG_LOG, "[PgActor] NextAction, HPCheck failed(%d,%d)\n", pkUnit->GetAbil(AT_HP), iNeedHP);
 		}
@@ -17878,26 +17889,26 @@ bool CheckHPMPForAction(CSkillDef const* pkSkillDef, CUnit const* pkUnit, bool c
 		return false;
 	}
 
-	// °¢¼º °ÔÀÌÁö
-	int iNeedAwake = pkSkillDef->GetAbil(AT_NEED_AWAKE); // °¢¼º±â °ÔÀÌÁö Àý´ë°ª °¨¼Ò
-	int const iNeedAwakePer = pkSkillDef->GetAbil(AT_NEED_MAX_R_AWAKE); // °¢¼º±â °ÔÀÌÁö¸¦ ÀüÃ¼ÀÇ %·Î ¼Ò¸ð
-	if(0 < iNeedAwakePer)
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int iNeedAwake = pkSkillDef->GetAbil(AT_NEED_AWAKE); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ë°ª ï¿½ï¿½ï¿½ï¿½
+	int const iNeedAwakePer = pkSkillDef->GetAbil(AT_NEED_MAX_R_AWAKE); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ %ï¿½ï¿½ ï¿½Ò¸ï¿½
+	if (0 < iNeedAwakePer)
 	{
 		iNeedAwake = static_cast<int>(AWAKE_VALUE_MAX * (static_cast<float>(iNeedAwakePer) / ABILITY_RATE_VALUE_FLOAT));
 	}
 
-	// °¢¼º±â °ÔÀÌÁö Áõ°¨ ¾îºô
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	int const iAddNeedAwakePer = pkUnit->GetAbil(AT_ADD_NEED_R_AWAKE);
-	if(iAddNeedAwakePer)
+	if (iAddNeedAwakePer)
 	{
 		iNeedAwake -= static_cast<int>(iNeedAwake * (static_cast<float>(iAddNeedAwakePer) / ABILITY_RATE_VALUE_FLOAT));
 	}
 
-	// ³²¾ÆÀÖ´Â ¸ðµç °¢¼º±â °ÔÀÌÁö ¼Ò¸ðÇÏ´Â ¾îºô
-	int const iAllNeedAwake = pkSkillDef->GetAbil(AT_ALL_NEED_AWAKE); 
-	if(0 < iAllNeedAwake)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+	int const iAllNeedAwake = pkSkillDef->GetAbil(AT_ALL_NEED_AWAKE);
+	if (0 < iAllNeedAwake)
 	{
-		//³²¾Æ ÀÖ´Â ¸ðµç °¢¼º±â °ÔÀÌÁö¸¦ ¼Ò¸ð ÇÑ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½ ï¿½Ñ´ï¿½.
 		iNeedAwake = pkUnit->GetAbil(AT_AWAKE_VALUE);
 	}
 
@@ -17906,27 +17917,27 @@ bool CheckHPMPForAction(CSkillDef const* pkSkillDef, CUnit const* pkUnit, bool c
 	{
 		if (iCurrent < iNeedAwake)
 		{
-			if(bShowFailMsg)
+			if (bShowFailMsg)
 			{
-				lwAddWarnDataStr(lwWString(TTW(41003)),2, true);
+				lwAddWarnDataStr(lwWString(TTW(41003)), 2, true);
 			}
 			return false;
 		}
 
-		// °¢¼º ½Ã½ºÅÛÀÌ È°¼ºÈ­ µÇ¾îÀÖÁö ¾ÊÀ» °æ¿ì
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if (!pkUnit->GetAbil(AT_ENABLE_AWAKE_SKILL))
 		{
 			return false;
-		}	
+		}
 	}
-	
-	if(0 < iAllNeedAwake)
+
+	if (0 < iAllNeedAwake)
 	{
-		if(0 == iCurrent)
+		if (0 == iCurrent)
 		{
-			if(bShowFailMsg)
+			if (bShowFailMsg)
 			{
-				lwAddWarnDataStr(lwWString(TTW(41003)),2, true);
+				lwAddWarnDataStr(lwWString(TTW(41003)), 2, true);
 			}
 			return false;
 		}
@@ -17937,46 +17948,46 @@ bool CheckHPMPForAction(CSkillDef const* pkSkillDef, CUnit const* pkUnit, bool c
 
 void PgActor::UpdateStatusEffect(float fAccumTime, float fFrameTime)
 {
-	for(StatusEffectUpdateList::iterator it = m_StatusEffectInstanceListForUpdate.begin(); it != m_StatusEffectInstanceListForUpdate.end(); ++it)
+	for (StatusEffectUpdateList::iterator it = m_StatusEffectInstanceListForUpdate.begin(); it != m_StatusEffectInstanceListForUpdate.end(); ++it)
 	{
-		PgStatusEffectManUtil::SEffectUpdateInfo & rkInfo = (*it);
-		if(rkInfo.Update(fAccumTime) && rkInfo.m_pkInstance)
+		PgStatusEffectManUtil::SEffectUpdateInfo& rkInfo = (*it);
+		if (rkInfo.Update(fAccumTime) && rkInfo.m_pkInstance)
 		{
-			lua_tinker::call<void,lwActor,int, float>((rkInfo.m_pkInstance->GetStatusEffect()->GetScriptName() + "_OnTick").c_str(), lwActor(this), rkInfo.m_pkInstance->GetEffectID(), fAccumTime);
+			lua_tinker::call<void, lwActor, int, float>((rkInfo.m_pkInstance->GetStatusEffect()->GetScriptName() + "_OnTick").c_str(), lwActor(this), rkInfo.m_pkInstance->GetEffectID(), fAccumTime);
 		}
 	}
 }
 
 PgPOTParticle PgActor::GetPOTParticleInfo() const
-{ 
-	return m_kPOTParticle; 
+{
+	return m_kPOTParticle;
 }
 
 void PgActor::SetState(EUnitState const eState)
 {
 	PgPilot* pkPilot = GetPilot();
-	if( !pkPilot ){ return; }
+	if (!pkPilot) { return; }
 
 	CUnit* pkUnit = GetPilot()->GetUnit();
-	if ( !pkUnit ){ return; }
+	if (!pkUnit) { return; }
 
 	EUnitState const eOld = pkUnit->GetState();
 
-	switch(eOld)
+	switch (eOld)
 	{
 	case US_SKILL_FIRE:
+	{
+		if (eState == US_IDLE)
 		{
-			if (eState == US_IDLE)
+			static int const siDefaultAnimTime = 550;
+			int iAnimTime = pkUnit->GetSkill()->GetAbil(AT_ANIMATION_TIME);
+			if (iAnimTime == 0)
 			{
-				static int const siDefaultAnimTime = 550;
-				int iAnimTime = pkUnit->GetSkill()->GetAbil(AT_ANIMATION_TIME);
-				if(iAnimTime == 0)
-				{
-					iAnimTime = siDefaultAnimTime;
-				}
-				pkUnit->SetDelay(iAnimTime);
+				iAnimTime = siDefaultAnimTime;
 			}
-		}break;
+			pkUnit->SetDelay(iAnimTime);
+		}
+	}break;
 	}
 
 	pkUnit->SetState(eState);
@@ -17987,15 +17998,15 @@ namespace lwSkillSet
 	extern int lwGetClassLevel(int const iClass);
 }
 
-PgSkillSetAction::PgSkillSetAction() 
-: m_byReserveSetNo(0)
-, m_eState(ES_NONE)
+PgSkillSetAction::PgSkillSetAction()
+	: m_byReserveSetNo(0)
+	, m_eState(ES_NONE)
 {}
 
-bool PgSkillSetAction::GetReservedAction(std::wstring & rkNextActionName, PgActor* pkActor, bool const bIgnoreTime)
+bool PgSkillSetAction::GetReservedAction(std::wstring& rkNextActionName, PgActor* pkActor, bool const bIgnoreTime)
 {
-	if( !IsReservedNextAction(bIgnoreTime) )
-	{ 
+	if (!IsReservedNextAction(bIgnoreTime))
+	{
 		return false;
 	}
 
@@ -18006,10 +18017,10 @@ bool PgSkillSetAction::GetReservedAction(std::wstring & rkNextActionName, PgActo
 	return true;
 }
 
-bool PgSkillSetAction::GetReservedAction(int & iNextActionNo, PgActor* pkActor, bool const bIgnoreTime)
+bool PgSkillSetAction::GetReservedAction(int& iNextActionNo, PgActor* pkActor, bool const bIgnoreTime)
 {
-	if( !IsReservedNextAction(bIgnoreTime) )
-	{ 
+	if (!IsReservedNextAction(bIgnoreTime))
+	{
 		return false;
 	}
 
@@ -18021,18 +18032,18 @@ bool PgSkillSetAction::GetReservedAction(int & iNextActionNo, PgActor* pkActor, 
 
 bool PgSkillSetAction::IsReservedNextAction(bool const bIgnoreTime)
 {
-	if(m_kContReserveSkill.empty())
+	if (m_kContReserveSkill.empty())
 	{
 		m_byReserveSetNo = 0;
-		return false; 
+		return false;
 	}
-	if(ES_READACTION==m_eState){ return false; }
-	if(!bIgnoreTime && (g_pkApp->GetAccumTime() < m_kContReserveSkill[0].fAccumDelay))
+	if (ES_READACTION == m_eState) { return false; }
+	if (!bIgnoreTime && (g_pkApp->GetAccumTime() < m_kContReserveSkill[0].fAccumDelay))
 	{
 		return false;
 	}
 
-	if(0==m_kContReserveSkill[0].iSkillNo)
+	if (0 == m_kContReserveSkill[0].iSkillNo)
 	{
 		m_kContReserveSkill.pop_front();
 		return false;
@@ -18043,7 +18054,7 @@ bool PgSkillSetAction::IsReservedNextAction(bool const bIgnoreTime)
 
 bool PgSkillSetAction::IsReserveActionEmpty()
 {
-	if(m_kContReserveSkill.empty())
+	if (m_kContReserveSkill.empty())
 	{
 		return true;
 	}
@@ -18052,26 +18063,26 @@ bool PgSkillSetAction::IsReserveActionEmpty()
 
 bool PgSkillSetAction::NextReservedAction(PgActor* pkActor)
 {
-	if( !pkActor ){ return false; }
-	if( m_kContReserveSkill.empty() )
+	if (!pkActor) { return false; }
+	if (m_kContReserveSkill.empty())
 	{
 		m_byReserveSetNo = 0;
 		return false;
 	}
-	if( ES_NEXTACTION==m_eState ){ return true; }
+	if (ES_NEXTACTION == m_eState) { return true; }
 
-	m_kContReserveSkill[0].fAccumDelay = (m_kContReserveSkill[0].byDelay/10.f) + g_pkApp->GetAccumTime();
+	m_kContReserveSkill[0].fAccumDelay = (m_kContReserveSkill[0].byDelay / 10.f) + g_pkApp->GetAccumTime();
 	m_eState = ES_NEXTACTION;
 	return true;
 }
 
 bool PgSkillSetAction::DoReservedAction(PgActor* pkActor)
 {
-	if( !pkActor ){ return false; }
+	if (!pkActor) { return false; }
 	NextReservedAction(pkActor);
 
 	int iActionNo = 0;
-	if( pkActor->SkillSetAction().GetReservedAction(iActionNo, pkActor, g_pkApp->GetAccumTime()) )
+	if (pkActor->SkillSetAction().GetReservedAction(iActionNo, pkActor, g_pkApp->GetAccumTime()))
 	{
 		pkActor->ReserveTransitAction(iActionNo);
 		return true;
@@ -18081,23 +18092,23 @@ bool PgSkillSetAction::DoReservedAction(PgActor* pkActor)
 
 bool PgSkillSetAction::ReserveAction(BYTE const iSetNo)
 {
-	if(m_byReserveSetNo){ return false; }
+	if (m_byReserveSetNo) { return false; }
 
 	CONT_USER_SKILLSET::const_iterator c_iter = m_kContSkillSet.find(iSetNo);
-	if(c_iter == m_kContSkillSet.end())
+	if (c_iter == m_kContSkillSet.end())
 	{
 		return false;
 	}
 
-	CONT_USER_SKILLSET::mapped_type const & kSkillSet = c_iter->second;
+	CONT_USER_SKILLSET::mapped_type const& kSkillSet = c_iter->second;
 
-	for(int i=0; i<MAX_SKILLSET_GROUP; ++i)
+	for (int i = 0; i < MAX_SKILLSET_GROUP; ++i)
 	{
-		if(0==kSkillSet.byDelay[i] && 0==kSkillSet.iSkillNo[i])
+		if (0 == kSkillSet.byDelay[i] && 0 == kSkillSet.iSkillNo[i])
 		{
 			continue;
 		}
-		m_kContReserveSkill.push_back(SReserveInfo(kSkillSet.iSkillNo[i],kSkillSet.byDelay[i]));
+		m_kContReserveSkill.push_back(SReserveInfo(kSkillSet.iSkillNo[i], kSkillSet.byDelay[i]));
 	}
 
 	m_byReserveSetNo = iSetNo;
@@ -18107,7 +18118,7 @@ bool PgSkillSetAction::ReserveAction(BYTE const iSetNo)
 
 bool PgSkillSetAction::ReserveActionCancel()
 {
-	if(m_kContReserveSkill.empty())
+	if (m_kContReserveSkill.empty())
 	{
 		return false;
 	}
@@ -18117,12 +18128,12 @@ bool PgSkillSetAction::ReserveActionCancel()
 	return true;
 }
 
-void PgSkillSetAction::ContSkillSet(CONT_USER_SKILLSET const & kContSkillSet)
+void PgSkillSetAction::ContSkillSet(CONT_USER_SKILLSET const& kContSkillSet)
 {
 	m_kContSkillSet = kContSkillSet;
 }
 
-void PgSkillSetAction::ContBasicSkillSet(CONT_USER_SKILLSET const & kContBasicSkillSet)
+void PgSkillSetAction::ContBasicSkillSet(CONT_USER_SKILLSET const& kContBasicSkillSet)
 {
 	m_kContBasicSkillSet = kContBasicSkillSet;
 }
@@ -18140,43 +18151,43 @@ CONT_USER_SKILLSET& PgSkillSetAction::GetBasicSkillSet()
 void PgSkillSetAction::ApplyBasicSkillSetToSkillSet()
 {
 	CONT_USER_SKILLSET::const_iterator iter_Basic = m_kContBasicSkillSet.begin();
-	while( m_kContBasicSkillSet.end() != iter_Basic )
+	while (m_kContBasicSkillSet.end() != iter_Basic)
 	{
-		if(m_kContSkillSet.end() != m_kContSkillSet.find( (*iter_Basic).first ) )
+		if (m_kContSkillSet.end() != m_kContSkillSet.find((*iter_Basic).first))
 		{
-			m_kContSkillSet.erase( (*iter_Basic).first );
+			m_kContSkillSet.erase((*iter_Basic).first);
 		}
-		m_kContSkillSet.insert( std::make_pair( (*iter_Basic).first, (*iter_Basic).second ) );
+		m_kContSkillSet.insert(std::make_pair((*iter_Basic).first, (*iter_Basic).second));
 		++iter_Basic;
 	}
 }
 
-bool PgSkillSetAction::GetMaxCoolTime(PgActor * pkActor, int const iSetNo, DWORD & dwMaxRemainTime)
+bool PgSkillSetAction::GetMaxCoolTime(PgActor* pkActor, int const iSetNo, DWORD& dwMaxRemainTime)
 {
-	if( !pkActor ){ return false; }
+	if (!pkActor) { return false; }
 
-	CONT_USER_SKILLSET::mapped_type const * kContSkillSet = find(iSetNo);
-	if( !kContSkillSet){ return false; }
+	CONT_USER_SKILLSET::mapped_type const* kContSkillSet = find(iSetNo);
+	if (!kContSkillSet) { return false; }
 
 	dwMaxRemainTime = 0;
-	PgActor::stSkillCoolTimeInfo const * pkInfo = pkActor->GetSkillCoolTimeInfo();
-	if( !pkInfo || pkInfo->m_CoolTimeInfoMap.empty() )
-	{ 
+	PgActor::stSkillCoolTimeInfo const* pkInfo = pkActor->GetSkillCoolTimeInfo();
+	if (!pkInfo || pkInfo->m_CoolTimeInfoMap.empty())
+	{
 		return true;
 	}
 
-	for(int i=0;i<MAX_SKILLSET_GROUP;++i)
+	for (int i = 0; i < MAX_SKILLSET_GROUP; ++i)
 	{
 		int const iSkillNo = kContSkillSet->iSkillNo[i];
-		if( iSkillNo<1 ){ continue; }
+		if (iSkillNo < 1) { continue; }
 
 		PgActor::stSkillCoolTimeInfo::CoolTimeInfoMap::const_iterator itor = pkInfo->m_CoolTimeInfoMap.find(iSkillNo);
-		if(itor != pkInfo->m_CoolTimeInfoMap.end())
+		if (itor != pkInfo->m_CoolTimeInfoMap.end())
 		{
 			DWORD dwTotalTime = itor->second.m_ulTotalCoolTime;
 			DWORD dwRemainTime = dwTotalTime - BM::GetTime32() - itor->second.m_ulCoolStartTime;
 
-			if(dwRemainTime > dwMaxRemainTime)
+			if (dwRemainTime > dwMaxRemainTime)
 			{
 				dwMaxRemainTime = dwRemainTime;
 			}
@@ -18185,30 +18196,30 @@ bool PgSkillSetAction::GetMaxCoolTime(PgActor * pkActor, int const iSetNo, DWORD
 	return true;
 }
 
-bool PgSkillSetAction::GetSkillText(int const iSetNo, PgSkillSetAction::CONT_SKILLTEXT & rkContSkillText)
+bool PgSkillSetAction::GetSkillText(int const iSetNo, PgSkillSetAction::CONT_SKILLTEXT& rkContSkillText)
 {
 	CONT_USER_SKILLSET::const_iterator c_iter = m_kContSkillSet.find(iSetNo);
-	if(c_iter==m_kContSkillSet.end())
+	if (c_iter == m_kContSkillSet.end())
 	{
 		return false;
 	}
 
 	BM::vstring vStr;
 	GET_DEF(CSkillDefMgr, kSkillDefMgr);
-	for(int i=0; i<MAX_SKILLSET_GROUP; ++i)
+	for (int i = 0; i < MAX_SKILLSET_GROUP; ++i)
 	{
 		int const iSkillNo = c_iter->second.iSkillNo[i];
-		if( !iSkillNo ){ continue; }
+		if (!iSkillNo) { continue; }
 
 		int const iKeySkillNo = g_kSkillTree.GetKeySkillNo(iSkillNo);
-		PgSkillTree::stTreeNode *pTreeNode = g_kSkillTree.GetNode(g_kSkillTree.GetKeySkillNo(iSkillNo));
+		PgSkillTree::stTreeNode* pTreeNode = g_kSkillTree.GetNode(g_kSkillTree.GetKeySkillNo(iSkillNo));
 		CSkillDef const* pSkillDef = NULL;
 		CSkillDef const* pSkillDef_Passive = NULL;
-		if( pTreeNode )
+		if (pTreeNode)
 		{
-			if(iKeySkillNo == iSkillNo)
+			if (iKeySkillNo == iSkillNo)
 			{
-				pSkillDef = pTreeNode->GetSkillDef();	
+				pSkillDef = pTreeNode->GetSkillDef();
 			}
 			else
 			{
@@ -18220,25 +18231,25 @@ bool PgSkillSetAction::GetSkillText(int const iSetNo, PgSkillSetAction::CONT_SKI
 			pSkillDef_Passive = kSkillDefMgr.GetDef(iSkillNo);
 			int const iNameNo = pSkillDef_Passive->NameNo();
 			pTreeNode = g_kSkillTree.GetNode(g_kSkillTree.GetKeySkillNo(iNameNo));
-			if( pTreeNode )
+			if (pTreeNode)
 			{
 				pSkillDef_Passive = pTreeNode->GetSkillDef();
 			}
 			pSkillDef = kSkillDefMgr.GetDef(iSkillNo);
 		}
 
-		if( !pSkillDef ){ continue; }
+		if (!pSkillDef) { continue; }
 
 		wchar_t const* pName = NULL;
-		GetDefString(pSkillDef->NameNo(),pName);
-		if(pName)
+		GetDefString(pSkillDef->NameNo(), pName);
+		if (pName)
 		{
 			vStr = pName;
-			if(pSkillDef->m_byLv>0)
+			if (pSkillDef->m_byLv > 0)
 			{
 				vStr += " ";
 				vStr += TTW(224);
-				if(pSkillDef_Passive)
+				if (pSkillDef_Passive)
 				{
 					vStr += pSkillDef_Passive->m_byLv;
 				}
@@ -18253,166 +18264,166 @@ bool PgSkillSetAction::GetSkillText(int const iSetNo, PgSkillSetAction::CONT_SKI
 	return true;
 }
 
-CONT_USER_SKILLSET::mapped_type const * PgSkillSetAction::find(BYTE const bySetNo)
+CONT_USER_SKILLSET::mapped_type const* PgSkillSetAction::find(BYTE const bySetNo)
 {
 	CONT_USER_SKILLSET::const_iterator c_iter = m_kContSkillSet.find(bySetNo);
-	if(c_iter == m_kContSkillSet.end())
+	if (c_iter == m_kContSkillSet.end())
 	{
 		return NULL;
 	}
 	return &c_iter->second;
 }
 
-ESkillSetResult PgSkillSetAction::CheckCanSkillSetDoAction(PgPlayer const *pkPlayer, BYTE const iSetNo)
+ESkillSetResult PgSkillSetAction::CheckCanSkillSetDoAction(PgPlayer const* pkPlayer, BYTE const iSetNo)
 {
-	if( !pkPlayer ){ return ESSR_ETC; }
+	if (!pkPlayer) { return ESSR_ETC; }
 
 	CONT_USER_SKILLSET::const_iterator cit_SkillSet = m_kContSkillSet.find(iSetNo);
-	if(cit_SkillSet == m_kContSkillSet.end()){ return ESSR_NOT_SKILLSET; }
+	if (cit_SkillSet == m_kContSkillSet.end()) { return ESSR_NOT_SKILLSET; }
 
-	const CONT_DEFSKILLSET *pkContDefMap = NULL;
+	const CONT_DEFSKILLSET* pkContDefMap = NULL;
 	g_kTblDataMgr.GetContDef(pkContDefMap);
-	if( !pkContDefMap ){ return ESSR_NOT_DEFSKILLSET; }
+	if (!pkContDefMap) { return ESSR_NOT_DEFSKILLSET; }
 
 	CONT_DEFSKILLSET::const_iterator it_defskill = pkContDefMap->find(iSetNo);
-	if(it_defskill==pkContDefMap->end()){ return ESSR_NOT_FIND_DEFSKILLSET; }
+	if (it_defskill == pkContDefMap->end()) { return ESSR_NOT_FIND_DEFSKILLSET; }
 
 	ESkillSetResult kResult = ESSR_NONE;
-	switch(it_defskill->second.byConditionType)
+	switch (it_defskill->second.byConditionType)
 	{
 	case SSCT_CLASS:
+	{
+		int const iMyClass = lwSkillSet::lwGetClassLevel(pkPlayer->GetAbil(AT_CLASS));
+		if (iMyClass < it_defskill->second.byConditionValue)
 		{
-			int const iMyClass = lwSkillSet::lwGetClassLevel(pkPlayer->GetAbil(AT_CLASS));
-			if(iMyClass < it_defskill->second.byConditionValue)
-			{
-				kResult = ESSR_NOT_CLASS;
-			}
-		}break;
+			kResult = ESSR_NOT_CLASS;
+		}
+	}break;
 	case SSCT_ITEM:
+	{
+		BYTE byMaxSkillSetNo = 0;
+		int iSkillSetUseCnt = pkPlayer->GetAbil(AT_SKILLSET_USE_COUNT);
+		VEC_INT kContTmp;
+		for (CONT_DEFSKILLSET::const_iterator c_iter = pkContDefMap->begin();
+			c_iter != pkContDefMap->end(); ++c_iter)
+		{
+			if (SSCT_ITEM == c_iter->second.byConditionType)
+			{
+				if (iSkillSetUseCnt > 0)
+				{
+					kContTmp.push_back(c_iter->second.bySetNo);
+				}
+				--iSkillSetUseCnt;
+			}
+		}
+
+		VEC_INT::const_iterator c_it = std::find(kContTmp.begin(), kContTmp.end(), iSetNo);
+		if (c_it == kContTmp.end())
+		{
+			kResult = ESSR_NOT_USE_ITEM;
+		}
+	}break;
+	case SSCT_LEVEL:
+	{
+		int const iMyLevel = pkPlayer->GetAbil(AT_LEVEL);
+		if (iMyLevel >= it_defskill->second.byConditionValue)
 		{
 			BYTE byMaxSkillSetNo = 0;
 			int iSkillSetUseCnt = pkPlayer->GetAbil(AT_SKILLSET_USE_COUNT);
 			VEC_INT kContTmp;
-			for(CONT_DEFSKILLSET::const_iterator c_iter=pkContDefMap->begin();
-				c_iter!=pkContDefMap->end(); ++c_iter)
+			for (CONT_DEFSKILLSET::const_iterator c_iter = pkContDefMap->begin();
+				0 < iSkillSetUseCnt && c_iter != pkContDefMap->end(); ++c_iter)
 			{
-				if(SSCT_ITEM == c_iter->second.byConditionType)
+				if (SSCT_ITEM == c_iter->second.byConditionType)
 				{
-					if(iSkillSetUseCnt > 0)
-					{
-						kContTmp.push_back(c_iter->second.bySetNo);
-					}
 					--iSkillSetUseCnt;
+				}
+				else if (SSCT_LEVEL == c_iter->second.byConditionType)
+				{
+					kContTmp.push_back(c_iter->second.bySetNo);
 				}
 			}
 
-			VEC_INT::const_iterator c_it = std::find(kContTmp.begin(),kContTmp.end(),iSetNo);
-			if( c_it==kContTmp.end() )
+			for (VEC_INT::const_iterator c_iter = kContTmp.begin();
+				0 < iSkillSetUseCnt && c_iter != kContTmp.end(); ++c_iter)
+			{
+				if (iSetNo == *c_iter)
+				{
+					break;
+				}
+				--iSkillSetUseCnt;
+			}
+
+			if (iSkillSetUseCnt < 1)
 			{
 				kResult = ESSR_NOT_USE_ITEM;
 			}
-		}break;
-	case SSCT_LEVEL:
-		{
-			int const iMyLevel = pkPlayer->GetAbil(AT_LEVEL);
-			if(iMyLevel >= it_defskill->second.byConditionValue)
-			{
-				BYTE byMaxSkillSetNo = 0;
-				int iSkillSetUseCnt = pkPlayer->GetAbil(AT_SKILLSET_USE_COUNT);
-				VEC_INT kContTmp;
-				for(CONT_DEFSKILLSET::const_iterator c_iter=pkContDefMap->begin();
-					0<iSkillSetUseCnt && c_iter!=pkContDefMap->end(); ++c_iter)
-				{
-					if(SSCT_ITEM == c_iter->second.byConditionType)
-					{
-						--iSkillSetUseCnt;
-					}
-					else if(SSCT_LEVEL == c_iter->second.byConditionType)
-					{
-						kContTmp.push_back(c_iter->second.bySetNo);
-					}
-				}
-
-				for(VEC_INT::const_iterator c_iter=kContTmp.begin();
-					0<iSkillSetUseCnt && c_iter!=kContTmp.end(); ++c_iter)
-				{
-					if(iSetNo == *c_iter)
-					{
-						break;
-					}
-					--iSkillSetUseCnt;
-				}
-
-				if(iSkillSetUseCnt < 1)
-				{
-					kResult = ESSR_NOT_USE_ITEM;
-				}
-			}
-		}break;
+		}
+	}break;
 	}
 	return kResult;
 }
 
 //void PgActor::DetachPOTParticle(EInvType kInvType,EEquipPos kItemPos,int iItemNo)
-void PgActor::RemoveCompletedItemSet(int const iSetNo )
+void PgActor::RemoveCompletedItemSet(int const iSetNo)
 {
-	if(!iSetNo)
+	if (!iSetNo)
 	{
 		return;
 	}
-	
+
 	CONT_SET_ITEM_SLOT::iterator set_item_slot_itor = m_kContCurSetNo.find(iSetNo);
-	if(m_kContCurSetNo.end() != set_item_slot_itor)
+	if (m_kContCurSetNo.end() != set_item_slot_itor)
 	{
 		std::vector<int>::const_iterator index_itor = (*set_item_slot_itor).second.begin();
-		while((*set_item_slot_itor).second.end() != index_itor)
+		while ((*set_item_slot_itor).second.end() != index_itor)
 		{
 			DetachFrom(*index_itor);
 			++index_itor;
 		}
 		m_kContCurSetNo.erase(set_item_slot_itor);
 
-		{// ¼¼Æ®¾ÆÀÌÅÛ¿¡, Æ¯Á¤½ÃÁ¡¿¡¸¸ ºÙ¿©ÁÙ ÆÄÆ¼Å¬ Á¤º¸°¡
+		{// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½, Æ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			SPOTParticleInfo kTemp;
-			if(g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp))
-			{//ÀÖ¾ú´Ù¸é ¶¼¾îÁØ´Ù
+			if (g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp))
+			{//ï¿½Ö¾ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½
 				m_kPOTParticle.RemoveInfo(static_cast<PgPOTParticle::eAttachPointOfTime>(kTemp.iAttachPointOfTime));
 			}
 		}
 
-		{// ÇØÃ¼µÈ ¼¼Æ® ¾ÆÀÌÅÛ
+		{// ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			CONT_ITEM_CHANGE_INFO kContChangeInfo;
-			if( g_kItemMan.GetChangeItemInfo( iSetNo, kContChangeInfo ) )
+			if (g_kItemMan.GetChangeItemInfo(iSetNo, kContChangeInfo))
 			{
 				PgActor::CONT_APPEARANCE_CHANGE_INFO kContCash;
 				PgActor::CONT_APPEARANCE_CHANGE_INFO kContNormal;
 				CONT_ITEM_CHANGE_INFO::const_iterator kItor = kContChangeInfo.begin();
-				while( kContChangeInfo.end() != kItor )
+				while (kContChangeInfo.end() != kItor)
 				{
-					if(IT_FIT_CASH == kItor->eInvType)
+					if (IT_FIT_CASH == kItor->eInvType)
 					{
-						kContCash.insert( std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)) );
+						kContCash.insert(std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)));
 					}
 					else
 					{
-						kContNormal.insert( std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)) );
+						kContNormal.insert(std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)));
 					}
 					++kItor;
 				}
-				
-				{//Ä³½Ã
+
+				{//Ä³ï¿½ï¿½
 					RemoveCashItemChanger(kContCash);
 					PgActor::CONT_APPEARANCE_CHANGE_INFO::iterator kChange_Itor = kContCash.begin();
-					while(kContCash.end() != kChange_Itor)
+					while (kContCash.end() != kChange_Itor)
 					{
 						UnequipItem(kChange_Itor->second.eInvType, static_cast<EEquipPos>(kChange_Itor->first), kChange_Itor->second.iItemNo, PgItemEx::LOAD_TYPE_INSTANT, false, false);
 						++kChange_Itor;
 					}
 				}
-				{// ³ë¸Ö
+				{// ï¿½ï¿½ï¿½
 					RemoveNormalItemChanger(kContNormal);
 					PgActor::CONT_APPEARANCE_CHANGE_INFO::iterator kChange_Itor = kContNormal.begin();
-					while(kContNormal.end() != kChange_Itor)
+					while (kContNormal.end() != kChange_Itor)
 					{
 						EquipItemByPos(kChange_Itor->second.eInvType, static_cast<EEquipPos>(kChange_Itor->first));
 						++kChange_Itor;
@@ -18423,19 +18434,19 @@ void PgActor::RemoveCompletedItemSet(int const iSetNo )
 	}
 }
 
-void PgActor::AddDivideReservedTransit(EItemDivideReservedType const eType, SItemPos const& kItemPos, int const iCalcValue, BM::Stream & kAddonPacket)
+void PgActor::AddDivideReservedTransit(EItemDivideReservedType const eType, SItemPos const& kItemPos, int const iCalcValue, BM::Stream& kAddonPacket)
 {
-	PgPilot * pkPilot = GetPilot();
-	if( !pkPilot ){ return; }
+	PgPilot* pkPilot = GetPilot();
+	if (!pkPilot) { return; }
 
-	CUnit * pkPlayer = GetPilot()->GetUnit();
-	if( !pkPlayer ){ return; }
+	CUnit* pkPlayer = GetPilot()->GetUnit();
+	if (!pkPlayer) { return; }
 
-	PgInventory * pkInv = pkPlayer->GetInven();
-	if( !pkInv ){ return; }
+	PgInventory* pkInv = pkPlayer->GetInven();
+	if (!pkInv) { return; }
 
 	PgBase_Item kItem;
-	if(S_OK != pkInv->GetItem(kItemPos, kItem))
+	if (S_OK != pkInv->GetItem(kItemPos, kItem))
 	{
 		return;
 	}
@@ -18444,58 +18455,62 @@ void PgActor::AddDivideReservedTransit(EItemDivideReservedType const eType, SIte
 	kPacket.Push(eType);
 	kPacket.Push(kAddonPacket);
 
-	m_kContItemDivideReserved.insert(std::make_pair(kItem.Guid(),kPacket));
+	m_kContItemDivideReserved.insert(std::make_pair(kItem.Guid(), kPacket));
 	Send_PT_C_M_REQ_ITEM_DIVIDE(kItemPos, kItem.ItemNo(), kItem.Guid(), iCalcValue);
 }
 
 void PgActor::DoDivideReservedTransit(BM::GUID const& kSourceGuid, BM::GUID const& kDivideGuid)
 {
-	PgPilot * pkPilot = GetPilot();
-	if( !pkPilot ){ return ; }
+	PgPilot* pkPilot = GetPilot();
+	if (!pkPilot) { return; }
 
-	CUnit * pkPlayer = GetPilot()->GetUnit();
-	if( !pkPlayer ){ return ; }
+	CUnit* pkPlayer = GetPilot()->GetUnit();
+	if (!pkPlayer) { return; }
 
-	PgInventory * pkInv = pkPlayer->GetInven();
-	if( !pkInv ){ return; }
+	PgInventory* pkInv = pkPlayer->GetInven();
+	if (!pkInv) { return; }
 
-	if( kSourceGuid.IsNull() )
-	{ return; }
+	if (kSourceGuid.IsNull())
+	{
+		return;
+	}
 
 	CONT_ITEM_DIVIDERESERVED::iterator iter = m_kContItemDivideReserved.find(kSourceGuid);
-	if(iter == m_kContItemDivideReserved.end())
-	{ return; }
+	if (iter == m_kContItemDivideReserved.end())
+	{
+		return;
+	}
 
-	CONT_ITEM_DIVIDERESERVED::mapped_type & rkPacket = (*iter).second;
+	CONT_ITEM_DIVIDERESERVED::mapped_type& rkPacket = (*iter).second;
 	EItemDivideReservedType eType = EIDRT_NONE;
 	rkPacket.Pop(eType);
-	switch(eType)
+	switch (eType)
 	{
 	case EIDRT_JOBSKILL3_CREATE:
+	{
+		XUI::CXUI_Wnd* pWnd = XUIMgr.Get(L"SFRM_JL3_ITEM_CREATE");
+		if (pWnd)
 		{
-			XUI::CXUI_Wnd* pWnd = XUIMgr.Get(L"SFRM_JL3_ITEM_CREATE");
-			if( pWnd )
-			{
-				int iNeedSlot = 0;
-				int iSrcSlot = 0;
-				rkPacket.Pop(iNeedSlot);
-				rkPacket.Pop(iSrcSlot);
-				BM::vstring vStr(L"FRM_NEED_SLOT");
-				vStr += iNeedSlot;
-				BM::vstring vSlotStr(L"ICON_SRC_SLOT");
-				vSlotStr += iSrcSlot;
+			int iNeedSlot = 0;
+			int iSrcSlot = 0;
+			rkPacket.Pop(iNeedSlot);
+			rkPacket.Pop(iSrcSlot);
+			BM::vstring vStr(L"FRM_NEED_SLOT");
+			vStr += iNeedSlot;
+			BM::vstring vSlotStr(L"ICON_SRC_SLOT");
+			vSlotStr += iSrcSlot;
 
-				XUI::CXUI_Wnd* pSlot = pWnd->GetControl(vStr);
-				pSlot = pSlot ? pSlot->GetControl(vSlotStr) : NULL;
-				
-				PgBase_Item kItem;
-				SItemPos kItemPos;
-				if( S_OK==pkInv->GetItem(kSourceGuid, kItem, kItemPos) )
-				{
-					lwJobSkillItem::JS3_AddResItem(pSlot, kItemPos, false);
-				}
+			XUI::CXUI_Wnd* pSlot = pWnd->GetControl(vStr);
+			pSlot = pSlot ? pSlot->GetControl(vSlotStr) : NULL;
+
+			PgBase_Item kItem;
+			SItemPos kItemPos;
+			if (S_OK == pkInv->GetItem(kSourceGuid, kItem, kItemPos))
+			{
+				lwJobSkillItem::JS3_AddResItem(pSlot, kItemPos, false);
 			}
-		}break;
+		}
+	}break;
 	}
 
 	m_kContItemDivideReserved.erase(iter);
@@ -18503,18 +18518,18 @@ void PgActor::DoDivideReservedTransit(BM::GUID const& kSourceGuid, BM::GUID cons
 
 int PgActor::GetCurOriginSeqID() const
 {
-	if(!m_pkPilot)
+	if (!m_pkPilot)
 	{
 		return 0;
 	}
-	
+
 	int iSeqID = PgActorUtil::GetOrigAniSeqID(m_kSeqID, m_pkPilot->GetBaseClassID(), m_byWeaponAnimFolderNumAtActionStart);
 	return iSeqID;
 }
 
 void PgActor::ViewSelectArrow(bool const bShow)
 {
-	if(bShow)
+	if (bShow)
 	{
 		AddNewParticle("eff_magic_select00", EAPS_CUSTOMUI_SUMMONED, "char_root", GetEffectScale());
 	}
@@ -18527,24 +18542,24 @@ void PgActor::ViewSelectArrow(bool const bShow)
 float PgActor::GetAnimationTime(std::string const& strActionName)
 {
 	PgActionSlot* pkActionSlot = GetActionSlot();
-	if(!pkActionSlot)
+	if (!pkActionSlot)
 	{
 		return 0;
 	}
 	NiActorManager::SequenceID kSeqID;
-	if(!pkActionSlot->GetAnimation(strActionName, kSeqID,true))
+	if (!pkActionSlot->GetAnimation(strActionName, kSeqID, true))
 	{
 		return 0;
 	}
 
-	if(m_pkPilot)
+	if (m_pkPilot)
 	{
 		kSeqID = PgActorUtil::GetCalcAniSeqID(kSeqID, m_pkPilot->GetBaseClassID(), m_byWeaponAnimFolderNumAtActionStart);
 	}
 
-	NiActorManager *pkAM = GetActorManager();
-	NiControllerSequence *pkController = pkAM->GetSequence(kSeqID);
-	if(!pkController)
+	NiActorManager* pkAM = GetActorManager();
+	NiControllerSequence* pkController = pkAM->GetSequence(kSeqID);
+	if (!pkController)
 	{
 		return 0;
 	}
@@ -18556,24 +18571,24 @@ float PgActor::GetAnimationTime(std::string const& strActionName)
 float PgActor::GetAnimationSpeed(std::string const& strActionName)
 {
 	PgActionSlot* pkActionSlot = GetActionSlot();
-	if(!pkActionSlot)
+	if (!pkActionSlot)
 	{
 		return 0;
 	}
 	NiActorManager::SequenceID kSeqID;
-	if(!pkActionSlot->GetAnimation(strActionName, kSeqID,true))
+	if (!pkActionSlot->GetAnimation(strActionName, kSeqID, true))
 	{
 		return 0;
 	}
 
-	if(m_pkPilot)
+	if (m_pkPilot)
 	{
 		kSeqID = PgActorUtil::GetCalcAniSeqID(kSeqID, m_pkPilot->GetBaseClassID(), m_byWeaponAnimFolderNumAtActionStart);
 	}
 
-	NiActorManager *pkAM = GetActorManager();
-	NiControllerSequence *pkController = pkAM->GetSequence(kSeqID);
-	if(!pkController)
+	NiActorManager* pkAM = GetActorManager();
+	NiControllerSequence* pkController = pkAM->GetSequence(kSeqID);
+	if (!pkController)
 	{
 		return 0;
 	}
@@ -18585,19 +18600,19 @@ void PgActor::SetLeaveExpedition(bool const& bValue)
 	m_bLeaveExpedition = bValue;
 }
 
-bool PgActor::CheckOutLobby(PgTrigger * pTrigger)
+bool PgActor::CheckOutLobby(PgTrigger* pTrigger)
 {
-	if(!g_pkWorld)
+	if (!g_pkWorld)
 	{
 		return false;
 	}
-	if ( false == GetLeaveExpedition() )	// ÇöÀç »óÅÂ°¡ falseÀÏ ¶§
+	if (false == GetLeaveExpedition())	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ falseï¿½ï¿½ ï¿½ï¿½
 	{
-		if( true == PgClientExpeditionUtil::IsInExpedition() )	// ¿øÁ¤´ë¿¡ ¼ÓÇØ ÀÖÀ¸¸é
+		if (true == PgClientExpeditionUtil::IsInExpedition())	// ï¿½ï¿½ï¿½ï¿½ï¿½ë¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		{
-			if( g_pkWorld->IsHaveAttr(GATTR_EXPEDITION_LOBBY) )	// ¿øÁ¤´ë ·Îºñ°¡ ¸Â´ÂÁö ºñ±³ÇÑ´Ù.
+			if (g_pkWorld->IsHaveAttr(GATTR_EXPEDITION_LOBBY))	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½Â´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 			{
-				SetCurrentTrigger(pTrigger);	// ÇöÀç Æ®¸®°Å¸¦ ÀúÀåÇÏ°í ÆË¾÷Ã¢À» ¶ç¿î´Ù.
+				SetCurrentTrigger(pTrigger);	// ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ë¾ï¿½Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				CallYesNoMsgBox(TTW(720011), BM::GUID::NullData(), MBT_CONFIRM_LEAVE_EXPEDITION_LOBBY);
 				return true;
 			}
@@ -18611,18 +18626,18 @@ void PgActor::AddCompletedItemSet(int const iSetNo)
 {
 	std::vector<int> kContTempSlot;
 	CONT_SET_ITEM_SLOT::iterator set_item_slot_itor = m_kContCurSetNo.find(iSetNo);
-	if(m_kContCurSetNo.end() == set_item_slot_itor)
-	{//¼¼Æ® ¾ÆÀÌÅÛ¿¡ ÇØ´çµÇ´Â ÀÌÆåÆ®¸¦ ¾ò¾î¿È.
-		SSetItemEffectIndexInfo const *pkSetEffectInfo = g_kItemMan.GetSetItemEffectInfo(iSetNo);
-		if(pkSetEffectInfo)
+	if (m_kContCurSetNo.end() == set_item_slot_itor)
+	{//ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½Ø´ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+		SSetItemEffectIndexInfo const* pkSetEffectInfo = g_kItemMan.GetSetItemEffectInfo(iSetNo);
+		if (pkSetEffectInfo)
 		{
 			SSetItemEffectIndexInfo::CONT_SET_EFFECT_INFO::const_iterator effect_itor = pkSetEffectInfo->m_kEffect.begin();
-			while(pkSetEffectInfo->m_kEffect.end() != effect_itor)
+			while (pkSetEffectInfo->m_kEffect.end() != effect_itor)
 			{
 				int index = GetNextSetEffectSlotIndex();
-				NiAVObject *pkParticle = g_kParticleMan.GetParticle(MB((*effect_itor).m_strEffectID.c_str()), PgParticle::O_SCALE,GetEffectScale());
+				NiAVObject* pkParticle = g_kParticleMan.GetParticle(MB((*effect_itor).m_strEffectID.c_str()), PgParticle::O_SCALE, GetEffectScale());
 
-				if(!AttachTo(index, MB((*effect_itor).m_strAttachNode.c_str()), pkParticle))
+				if (!AttachTo(index, MB((*effect_itor).m_strAttachNode.c_str()), pkParticle))
 				{
 					THREAD_DELETE_PARTICLE(pkParticle);
 				}
@@ -18630,49 +18645,49 @@ void PgActor::AddCompletedItemSet(int const iSetNo)
 
 				++effect_itor;
 			}
-			//! ÇöÀç ÀåÂøÁßÀÎ ¼ÂÆ® ¹øÈ£¿Í ¼ÂÆ® ÀÌÆåÆ®ÀÇ ÀÎµ¦½º¸¦ ÀúÀå
+			//! ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			m_kContCurSetNo.insert(std::make_pair(iSetNo, kContTempSlot));
 		}
-		
+
 		SPOTParticleInfo kTemp;
-		if( g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp) )
-		{// Æ¯Á¤ ½ÃÁ¡ ÆÄÆ¼Å¬ÀÌ Á¸ÀçÇÑ´Ù¸é, ÇØ´ç °ü¸® °´Ã¼¿¡ ³Ö¾î ÁÖ°í
+		if (g_kItemMan.GetSetItemParticleInfo(iSetNo, kTemp))
+		{// Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½, ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½Ö°ï¿½
 			m_kPOTParticle.AddInfo(kTemp);
 		}
 
-		{// ¼¼Æ® ¾ÆÀÌÅÛ ¿Ï¼º½Ã ¿Ü°ü º¯°æ ¾ÆÀÌÅÛ Ãß°¡
+		{// ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½ï¿½ï¿½ ï¿½Ü°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 			CONT_ITEM_CHANGE_INFO kContChangeInfo;
-			if( g_kItemMan.GetChangeItemInfo( iSetNo, kContChangeInfo ) )
+			if (g_kItemMan.GetChangeItemInfo(iSetNo, kContChangeInfo))
 			{
 				PgActor::CONT_APPEARANCE_CHANGE_INFO kContCash;
 				PgActor::CONT_APPEARANCE_CHANGE_INFO kContNormal;
 				CONT_ITEM_CHANGE_INFO::const_iterator kItor = kContChangeInfo.begin();
-				while( kContChangeInfo.end() != kItor )
+				while (kContChangeInfo.end() != kItor)
 				{
-					if(IT_FIT_CASH == kItor->eInvType)
+					if (IT_FIT_CASH == kItor->eInvType)
 					{
-						kContCash.insert( std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)) );
+						kContCash.insert(std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)));
 					}
 					else
 					{
-						kContNormal.insert( std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)) );
+						kContNormal.insert(std::make_pair(kItor->eEquipPos, SAppearanceChangeInfo(kItor->eInvType, kItor->iItemNo)));
 					}
 					++kItor;
 				}
-				
-				{// Ä³½Ã
+
+				{// Ä³ï¿½ï¿½
 					AddCashItemChanger(kContCash);
 					PgActor::CONT_APPEARANCE_CHANGE_INFO::iterator kChange_Itor = kContCash.begin();
-					while(kContCash.end() != kChange_Itor)
+					while (kContCash.end() != kChange_Itor)
 					{
 						EquipItemByPos(kChange_Itor->second.eInvType, static_cast<EEquipPos>(kChange_Itor->first));
 						++kChange_Itor;
 					}
 				}
-				{// ³ë¸Ö
+				{// ï¿½ï¿½ï¿½
 					AddNormalItemChanger(kContNormal);
 					PgActor::CONT_APPEARANCE_CHANGE_INFO::iterator kChange_Itor = kContNormal.begin();
-					while(kContNormal.end() != kChange_Itor)
+					while (kContNormal.end() != kChange_Itor)
 					{
 						EquipItemByPos(kChange_Itor->second.eInvType, static_cast<EEquipPos>(kChange_Itor->first));
 						++kChange_Itor;
@@ -18696,12 +18711,12 @@ WORD PgActor::GetEffectCountDownSec()const
 
 void PgActor::UpdateEffectCountDonw(float const fFrameTime)
 {
-	if (m_kEffectCountDown.fCountDown>=0)
+	if (m_kEffectCountDown.fCountDown >= 0)
 	{
 		WORD const wOldCountDown = GetEffectCountDownSec();
 		float const fOldCountDown = m_kEffectCountDown.fCountDown;
 		m_kEffectCountDown.fCountDown -= fFrameTime;
-		if(wOldCountDown != GetEffectCountDownSec())
+		if (wOldCountDown != GetEffectCountDownSec())
 		{
 			UpdateName();
 		}
@@ -18710,7 +18725,7 @@ void PgActor::UpdateEffectCountDonw(float const fFrameTime)
 
 void PgActor::DelEffectCountDown(int const iEffectNo)
 {
-	if(0<iEffectNo && iEffectNo==m_kEffectCountDown.iEffectNo)
+	if (0 < iEffectNo && iEffectNo == m_kEffectCountDown.iEffectNo)
 	{
 		m_kEffectCountDown.iEffectNo = 0;
 		m_kEffectCountDown.fCountDown = -1.f;
@@ -18719,59 +18734,59 @@ void PgActor::DelEffectCountDown(int const iEffectNo)
 }
 
 void PgActor::PreLoadAllAnimation()
-{// ¹Ì¸® ¾Ö´Ï¸ÞÀÌ¼ÇÀ» ÇÑ¹ø¿¡ ÀÐ¾î¿Â´Ù
-//  ¾Ö´Ï¸ÞÀÌ¼Ç ½½·Ô Á¤º¸°¡ ¸ðµÎ ÀÐ¾îÁø »óÅÂ¿¡¼­(actorÀÇ xml ÆÄ½ÌÀÌ ¸ðµÎ ³¡³­ ½ÃÁ¡¿¡¼­ »ç¿ëÇØ¾ß ÇÏ¸ç
-//  ÇöÀç ÇÃ·¹ÀÌ¾î¸¸ ÀÐ¾î¿À°í ÀÖÀ½.
+{// ï¿½Ì¸ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½Â´ï¿½
+//  ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½(actorï¿½ï¿½ xml ï¿½Ä½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ï¸ï¿½
+//  ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¸ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	PgActionSlot* pkSlot = GetActionSlot();
-	if(!pkSlot)
+	if (!pkSlot)
 	{
 		return;
 	}
-	NiActorManager *pkAM = GetActorManager();
-	if(!pkAM)
+	NiActorManager* pkAM = GetActorManager();
+	if (!pkAM)
 	{
 		return;
 	}
 
 	PgActionSlot::AnimationContainer const& rkCont = pkSlot->GetAnimationCont();
 	PgActionSlot::AnimationContainer::const_iterator kItor;
-	for(kItor = rkCont.begin(); rkCont.end() != kItor; ++kItor)
+	for (kItor = rkCont.begin(); rkCont.end() != kItor; ++kItor)
 	{
 		PgActionSlot::SequenceContainer const& rkSeqCont = kItor->second;
-		for(PgActionSlot::SequenceContainer::const_iterator kSeqItor = rkSeqCont.begin();
+		for (PgActionSlot::SequenceContainer::const_iterator kSeqItor = rkSeqCont.begin();
 			rkSeqCont.end() != kSeqItor;
 			++kSeqItor
 			)
 		{
 			NiActorManager::SequenceID const& rkSeqID = (*kSeqItor).first;
-			pkAM->GetSequence( rkSeqID );
+			pkAM->GetSequence(rkSeqID);
 		}
 	}
-	
+
 }
 
 void PgActor::Update_IsAbleSlide(float const fAccumTime, float const fFrameTime, bool& bDoNotSlide)
 {
-	if( IgnoreSlide() )
+	if (IgnoreSlide())
 	{
 		bDoNotSlide = true;
 		return;
 	}
 
-	if(GetFreeMove() == false)
+	if (GetFreeMove() == false)
 	{
-		if(GetSlide())
+		if (GetSlide())
 		{
-			float fTime = (fAccumTime-GetSlideStartTime());
+			float fTime = (fAccumTime - GetSlideStartTime());
 			float fAccel = -GetGravity();
-			float fSpeed = std::min(fAccel * fTime,100.0f);
+			float fSpeed = std::min(fAccel * fTime, 100.0f);
 
 			unsigned int uiActiveGroup = m_uiActiveGrp;
 
 			NxU32 collisionFlagsabs = 0;
 			m_pkController->move(m_kSlideVector * fSpeed * fFrameTime, uiActiveGroup, 0.000001f, collisionFlagsabs, 1.0f);
 
-			if(collisionFlagsabs & NXCC_COLLISION_SIDES)	
+			if (collisionFlagsabs & NXCC_COLLISION_SIDES)
 			{//	this actor hit a wall on the side while sliding and cannot slide anymore, so we stop the actor sliding.
 				bDoNotSlide = true;
 
@@ -18783,7 +18798,7 @@ void PgActor::Update_IsAbleSlide(float const fAccumTime, float const fFrameTime,
 }
 
 void PgActor::InitControllerShapeHit()
-{// m_kControllerShapeHit Áß¿äÇÑ ¸â¹öÀÇ ÃÊ±âÈ­¸¦ ¿ÜºÎ·Î »©°í ½ÍÁö ¾Ê¾Æ¼­ ³»ºÎ ÇÔ¼ö·Î ¸¸µë
+{// m_kControllerShapeHit ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ÜºÎ·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_kControllerShapeHit.controller = NULL;
 	m_kControllerShapeHit.shape = NULL;
 	m_kControllerShapeHit.worldPos.zero();
@@ -18796,45 +18811,45 @@ void PgActor::InitControllerShapeHit()
 void PgActor::SetComboCharge(float const fChargingTime)
 {
 	CXUI_Wnd* pkWnd = XUIMgr.Get(_T("FRM_COMBO_CHARGE_GAUGE"));
-	if(!pkWnd)
+	if (!pkWnd)
 	{
 		pkWnd = XUIMgr.Call(_T("FRM_COMBO_CHARGE_GAUGE"));
 	}
-	if(!pkWnd)
+	if (!pkWnd)
 	{
 		return;
 	}
-	CXUI_Wnd*		pkBGBar = pkWnd->GetControl(_T("BG_BAR"));
-	if( !pkBGBar )
+	CXUI_Wnd* pkBGBar = pkWnd->GetControl(_T("BG_BAR"));
+	if (!pkBGBar)
 	{
 		return;
 	}
-	CXUI_AniBar*	pkAniBar = (CXUI_AniBar*)pkBGBar->GetControl(_T("ANIBAR"));
-	if( !pkAniBar )
+	CXUI_AniBar* pkAniBar = (CXUI_AniBar*)pkBGBar->GetControl(_T("ANIBAR"));
+	if (!pkAniBar)
 	{
 		return;
 	}
 	lwUIWnd	kAniBarWnd(pkAniBar);
-	kAniBarWnd.SetStartTime( static_cast<int>(fChargingTime) );
+	kAniBarWnd.SetStartTime(static_cast<int>(fChargingTime));
 }
 void	PgActor::CallComboCharge()
 {
 	CXUI_Wnd* pkWnd = XUIMgr.Get(_T("FRM_COMBO_CHARGE_GAUGE"));
-	if(!pkWnd)
+	if (!pkWnd)
 	{
 		pkWnd = XUIMgr.Call(_T("FRM_COMBO_CHARGE_GAUGE"));
 	}
-	if(!pkWnd)
+	if (!pkWnd)
 	{
 		return;
 	}
-	CXUI_Wnd*		pkBGBar = pkWnd->GetControl(_T("BG_BAR"));
-	if( !pkBGBar )
+	CXUI_Wnd* pkBGBar = pkWnd->GetControl(_T("BG_BAR"));
+	if (!pkBGBar)
 	{
 		return;
 	}
-	CXUI_AniBar*	pkAniBar = (CXUI_AniBar*)pkBGBar->GetControl(_T("ANIBAR"));
-	if( !pkAniBar )
+	CXUI_AniBar* pkAniBar = (CXUI_AniBar*)pkBGBar->GetControl(_T("ANIBAR"));
+	if (!pkAniBar)
 	{
 		return;
 	}
@@ -18844,7 +18859,7 @@ void	PgActor::CallComboCharge()
 void PgActor::CutComboCharge()
 {
 	CXUI_Wnd* pkWnd = XUIMgr.Get(_T("FRM_COMBO_CHARGE_GAUGE"));
-	if(pkWnd)
+	if (pkWnd)
 	{
 		pkWnd->Close();
 	}
@@ -18853,7 +18868,7 @@ void PgActor::CutComboCharge()
 namespace PgActorUtil
 {
 	void ExpressAwakeMaxState(PgActor* pkActor)
-	{// °¢¼º °ÔÀÌÁö ¸Æ½º »óÅÂ Ç¥Çö(ÆÄÆ¼Å¬)
+	{// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½(ï¿½ï¿½Æ¼Å¬)
 		if (pkActor)
 		{
 			pkActor->AddNewParticle("ef_awake_point_max", 8386, "char_root", pkActor->GetEffectScale());
@@ -18863,31 +18878,31 @@ namespace PgActorUtil
 
 	PgActor* GetSubPlayerActor(PgActor* pkActor)
 	{
-		if(!pkActor)
+		if (!pkActor)
 		{
 			return NULL;
 		}
 
 		PgPilot* pkPilot = pkActor->GetPilot();
-		if(pkPilot
+		if (pkPilot
 			&& IsClass_OwnSubPlayer(pkPilot->GetAbil(AT_CLASS))
 			)
 		{
-			PgPlayer *pkPlayer = dynamic_cast<PgPlayer*>( pkPilot->GetUnit() );
-			if(pkPlayer)
+			PgPlayer* pkPlayer = dynamic_cast<PgPlayer*>(pkPilot->GetUnit());
+			if (pkPlayer)
 			{
-				PgActor* pkSubPlayerActor = g_kPilotMan.FindActor( pkPlayer->SubPlayerID() );
+				PgActor* pkSubPlayerActor = g_kPilotMan.FindActor(pkPlayer->SubPlayerID());
 				return pkSubPlayerActor;
 			}
 		}
 		return NULL;
 	}
-	
+
 	int const GetCalcAniSeqID(int iSeqID, int const iBaseClassID, int const iWeaponAnimFolderNum)
 	{
-		if(iSeqID < 1000000)
+		if (iSeqID < 1000000)
 		{
-			// °ø¿ë ¾Ö´Ï°¡ ¾Æ´Ï¸é, Áå ¹«±â¿Í ¾×ÅÍÀÇ Å¬·¡½º¿¡ µû¶ó¼­ ¾Ö´Ï°¡ ¹Ù²ï´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï°ï¿½ ï¿½Æ´Ï¸ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï°ï¿½ ï¿½Ù²ï¿½ï¿½.
 			int const iClass = iBaseClassID - 1;
 			iSeqID += iClass * 10000 + iWeaponAnimFolderNum * 1000;
 		}
@@ -18896,8 +18911,8 @@ namespace PgActorUtil
 
 	int const GetOrigAniSeqID(int iSeqID, int const iBaseClassID, int const iWeaponAnimFolderNum)
 	{
-		if(1000000 > iSeqID)
-		{// °ø¿ë ¾Ö´Ï°¡ ¾Æ´Ï¸é, Áå ¹«±â¿Í ¾×ÅÍÀÇ Å¬·¡½º¿¡ µû¶ó¼­ ¾Ö´Ï°¡ ¹Ù²ï´Ù.
+		if (1000000 > iSeqID)
+		{// ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï°ï¿½ ï¿½Æ´Ï¸ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï°ï¿½ ï¿½Ù²ï¿½ï¿½.
 			int iClass = iBaseClassID - 1;
 			iSeqID -= iClass * 10000 + iWeaponAnimFolderNum * 1000;
 		}
@@ -18906,21 +18921,21 @@ namespace PgActorUtil
 
 	void AdjustParticleScaleByUnitScaleAbil(CUnit* pkUnit, PgParticle* pkParticle)
 	{
-		if( !pkUnit 
+		if (!pkUnit
 			|| !pkParticle
 			)
 		{
 			return;
 		}
-		if( 0 < pkUnit->GetAbil(AT_ADJUST_PARTICLE_SCALE_BY_UNIT_SCALE) )
-		{// AT_UNIT_SCALE·Î ÀÎÇØ scaleÀÌ Ä¿Á³´Ù¸é
+		if (0 < pkUnit->GetAbil(AT_ADJUST_PARTICLE_SCALE_BY_UNIT_SCALE))
+		{// AT_UNIT_SCALEï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ scaleï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½Ù¸ï¿½
 			int const iUnitScale = pkUnit->GetAbil(AT_UNIT_SCALE);
-			if(0 < iUnitScale
+			if (0 < iUnitScale
 				&& ABILITY_RATE_VALUE != iUnitScale
 				)
-			{// ÆÄÆ¼Å¬À» ºÙÀÏ¶§ ±×¸¸Å­ ÁÙ¿©¼­ ¿ø·¡ Å©±â´ë·Î ºÙÀ»¼ö ÀÖ°Ô ÇØÁÖ°í
+			{// ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¶ï¿½ ï¿½×¸ï¿½Å­ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
 				float fScale = pkUnit->GetAbil(AT_UNIT_SCALE) / ABILITY_RATE_VALUE_FLOAT;
-				fScale = pkParticle->GetScale()/fScale;
+				fScale = pkParticle->GetScale() / fScale;
 				pkParticle->SetScale(fScale);
 				pkParticle->SetOriginalScale(fScale);
 			}
