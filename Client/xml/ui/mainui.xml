@@ -297,8 +297,11 @@
 					end
 				</HOTKEY>
 				<STATIC_FORM ID="FRM_COLOR_VIEW" X="2" Y="2" W="17" H="17" STATIC_NUM="2" CAN_COLOR_CHANGE="1" COLOR_TYPE="1" PASS_EVENT="1">
+					<SCRIPT ID="ON_CALL">
+						UISelf:SetColor(GetCurrentChatUIColor())
+					</SCRIPT>
 					<SCRIPT ID="ON_DISPLAY">
-						UISelf:SetColor(g_ChatMgrClient:GetFontColor())
+						UISelf:SetColor(GetCurrentChatUIColor())
 					</SCRIPT>
 				</STATIC_FORM>
 				<SCRIPT ID="ON_MOUSE_OVER">	CallToolTipText(0, GetTT(799328), UISelf:GetLocation())	</SCRIPT>
