@@ -38,7 +38,8 @@
 
 #include "XUI/XUI_Font.h"
 
-#include "CustomContent/Chat/CustomChatColors.h" 
+#include "CustomContent/Chat/CustomChatColors.h"
+#include "CustomContent/Chat/CustomEmoticons.h"
 
 extern char const* EVENT_EM_AD_MERCENARY;
 extern char const* EVENT_EM_START_JOIN;
@@ -48,6 +49,14 @@ extern void OnClickPvP_ReqDuel(lwGUID kCharGuid);
 
 // CT_TRADE 때문에 수정
 int const iMaxChatFilterBit = sizeof(__int64) * 8;
+
+namespace
+{
+	bool HasEnteredChatText(std::wstring const& chatText)
+	{
+		return (std::wstring::npos != chatText.find_first_not_of(L" \t\r\n"));
+	}
+}
 
 void tagChatLog::Clear()
 {
@@ -2690,7 +2699,7 @@ bool PgChatMgrClient::SendMToMChat(std::wstring& rkChat, DWORD& Color, std::wstr
 {
 	BM::CAutoMutex	kLock(m_kMutex);
 
-	if (rkChat.empty())
+	if (!HasEnteredChatText(rkChat))
 	{
 		return true;
 	}
@@ -2748,7 +2757,7 @@ bool PgChatMgrClient::SendChat(std::wstring const& rkChat, std::wstring const& r
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if (rkChat.empty())
+	if (!HasEnteredChatText(rkChat))
 	{
 		return true;
 	}
@@ -2919,6 +2928,8 @@ void PgChatMgrClient::RecvChatLog_Add(const SChatLog& rkChatLog, bool const bChe
 
 void PgChatMgrClient::Update()
 {
+	CustomEmoticons::UpdateChatBarPreview(*this);
+
 	BM::CAutoMutex kLock(m_kMutex);
 	if (m_kChatLog.empty())
 	{
@@ -4297,7 +4308,7 @@ bool PgChatMgrClient::SendChat_Check(std::wstring const& kText, bool const bChec
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if (!kText.size())
+	if (!HasEnteredChatText(kText))
 	{
 		return true;
 	}
@@ -4332,7 +4343,10 @@ bool PgChatMgrClient::SendChat_CheckSS(XUI::CXUI_Style_String const& kText, bool
 {
 	BM::CAutoMutex kLock(m_kMutex);
 
-	if (!kText.Length())
+	std::wstring const normalText = kText.GetNormalString();
+	std::wstring const originalText = kText.GetOriginalString();
+
+	if (!HasEnteredChatText(normalText)) 
 	{
 		switch (m_iChatMode)
 		{
@@ -4404,20 +4418,20 @@ bool PgChatMgrClient::SendChat_CheckSS(XUI::CXUI_Style_String const& kText, bool
 
 	if (bCheckSpamChat)
 	{// 도배 필터링 하지 않는 경우는 로그에 기억하지 않는다
-		InputChatLog_Add(kText.GetNormalString());
+		InputChatLog_Add(normalText);
 	}
-	if (CheckSysCommand(kText.GetOriginalString()))
+	if (CheckSysCommand(originalText))
 	{
 		return true;
 	}
 
-	if (CheckChatCommand(kText.GetOriginalString()))
+	if (CheckChatCommand(originalText))
 	{
 		return false;
 	}
 
 	//	커맨드
-	if (Command_UserFunction(kText.GetOriginalString()))
+	if (Command_UserFunction(originalText))
 	{
 		return true;
 	}
@@ -4429,7 +4443,7 @@ bool PgChatMgrClient::SendChat_CheckSS(XUI::CXUI_Style_String const& kText, bool
 	}
 
 	if (bCheckSpamChat
-		&& CheckSpamChat(kText.GetNormalString()))
+		&& CheckSpamChat(normalText))
 	{// 도배체크를 사용하고 도배이면
 		return true;
 	}
@@ -4439,6 +4453,11 @@ bool PgChatMgrClient::SendChat_CheckSS(XUI::CXUI_Style_String const& kText, bool
 
 bool PgChatMgrClient::SendChat_Message(int const iChatType, XUI::CXUI_Style_String const& kText, std::wstring const& kName)
 {
+	if (!HasEnteredChatText(kText.GetNormalString()))
+	{
+		return true;
+	}
+
 	if (g_pkApp->IsSingleMode())
 	{
 		AddLogMessage(SChatLog(CT_NORMAL), kText.GetOriginalString());
