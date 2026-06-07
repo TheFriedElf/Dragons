@@ -6,7 +6,7 @@
 #include "PgTask_Contents.h"
 #include "Lohengrin/PacketStructLog.h"
 #include "ChannelChatMgr.h"
-//#include <chrono>
+#include <chrono>
 
 PgChannelChatMgr::PgChannelChatMgr(void)
 {
@@ -26,7 +26,7 @@ bool PgChannelChatMgr::RecvChat_Party(SContentsUser const &rkFromUser, BM::Strea
 	kPacket.Push((BYTE)CT_PARTY);
 	kPacket.Push(rkFromUser.kCharGuid);
 	kPacket.Push(rkFromUser.Name());
-	//kPacket.Push(std::chrono::system_clock::now());
+	kPacket.Push(std::chrono::system_clock::now());
 	kPacket.Push(kContents);
 	kPacket.Push(rkPacket);
 	

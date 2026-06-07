@@ -40,6 +40,8 @@
 
 #include "CustomContent/Chat/CustomChatColors.h"
 #include "CustomContent/Chat/CustomEmoticons.h"
+#include "CustomContent/Chat/CustomTimeStamps.h"
+#include <chrono>
 
 extern char const* EVENT_EM_AD_MERCENARY;
 extern char const* EVENT_EM_START_JOIN;
@@ -66,6 +68,7 @@ void tagChatLog::Clear()
 	//iLineCount = 0;
 	bMine = false;
 	kCharName.clear();
+	kChatTime = std::chrono::system_clock::time_point{};
 	kContents.clear();
 	kCharGUID.Clear();
 	dwColor = 0;
@@ -931,7 +934,7 @@ namespace PgChatMgrUtil
 				std::wstring kText = ColorHexToString(DefaultChatInputColor(rkChatLog.ChatType()));
 				std::wstring kHeader;
 				HeaderName(rkChatLog.ChatType(), kHeader);
-
+				kText += _T("[") + CustomTimeStamps::FormatChatTimeHHMM(rkChatLog.kChatTime) + _T("]");
 				kText += _T("[") + kHeader + _T("]");
 				kText += ColorHexToString(ResolveDisplayedChatColor(rkChatLog));
 
@@ -3061,6 +3064,7 @@ bool PgChatMgrClient::RecvChat(BM::Stream* pkPacket)
 			SChatLog kChatLog((EChatType)cChatMode);
 			pkPacket->Pop(kChatLog.kCharGUID);//CharGuid
 			pkPacket->Pop(kChatLog.kCharName);
+			pkPacket->Pop(kChatLog.kChatTime);
 			pkPacket->Pop(kChatLog.kContents);
 			pkPacket->Pop(kChatLog.dwColor);
 
@@ -3246,6 +3250,7 @@ bool PgChatMgrClient::RecvChat(BM::Stream* pkPacket)
 		SChatLog kChatLog((EChatType)cChatMode);
 		pkPacket->Pop(kChatLog.kCharGUID);//CharGuid
 		pkPacket->Pop(kChatLog.kCharName);
+		pkPacket->Pop(kChatLog.kChatTime);
 		pkPacket->Pop(kChatLog.kContents);
 		pkPacket->Pop(kChatLog.dwColor);
 

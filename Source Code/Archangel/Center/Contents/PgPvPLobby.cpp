@@ -10,7 +10,7 @@
 #include "constant.h"
 #include "PgTask_Contents.h"
 #include "PgPvPLobby.h"
-//#include <chrono>
+#include <chrono>
 
 // PgPvPCell
 bool PgPvPCell::SJoinProcess::operator()( PgPvPCell &rhs )const
@@ -1245,7 +1245,7 @@ bool PgPvPLobby::Locked_Recv_PT_C_M_REQ_CHAT( BM::GUID const &kCharGuid, BM::Str
 					int iTeam = TEAM_NONE;
 
 					kPacket.Push( user_itr->second->Name() );
-					//kPacket.Push(std::chrono::system_clock::now());
+					kPacket.Push(std::chrono::system_clock::now());
 					kPacket.Push( wstrChat );
 					kPacket.Push( dwFontColor );
 					kSendExtraDataPackInfo.PushToPacket(kPacket);

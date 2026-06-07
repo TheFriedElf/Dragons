@@ -44,8 +44,7 @@
 #include "PgHackDualKeyboard.h"
 #include "PgSkillAbilHandleManager.h"
 #include "Variant/PgNpcEvent.h"
-//#include <chrono>
-
+#include <chrono>
 namespace PgGroundUtil
 {
 	inline bool IsPvpGround(T_GNDATTR const& rAttr)
@@ -7772,7 +7771,7 @@ void PgGround::RecvChat( PgPlayer *pkPlayer, BM::Stream *pkPacket )
 					BM::Stream kPacket( PT_M_C_NFY_CHAT, byChatType );
 					kPacket.Push(pkPlayer->GetID());
 					kPacket.Push(pkPlayer->Name());
-					//kPacket.Push(std::chrono::system_clock::now());
+					kPacket.Push(std::chrono::system_clock::now());
 					kPacket.Push(wstrChat);
 					kPacket.Push(dwFontColor);
 					kSendExtraDataPackInfo.PushToPacket(kPacket);
@@ -7794,7 +7793,7 @@ void PgGround::RecvChat( PgPlayer *pkPlayer, BM::Stream *pkPacket )
 					BM::Stream kPacket( PT_M_C_NFY_CHAT, byChatType );
 					kPacket.Push(pkPlayer->GetID());
 					kPacket.Push(pkPlayer->Name());
-					//kPacket.Push(std::chrono::system_clock::now());
+					kPacket.Push(std::chrono::system_clock::now());
 					kPacket.Push(wstrChat);
 					kPacket.Push(dwFontColor);
 					kSendExtraDataPackInfo.PushToPacket(kPacket);
