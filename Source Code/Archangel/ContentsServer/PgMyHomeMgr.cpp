@@ -2,7 +2,7 @@
 #include "PgMyHomeMgr.h"
 #include "JobDispatcher.h"
 #include "Global.h"
-//#include <chrono>
+#include <chrono>
 
 PgMyHomeMgrImpl::PgMyHomeMgrImpl()
 {
@@ -2745,7 +2745,7 @@ HRESULT PgMyHomeMgrImpl::Recv_PT_C_M_REQ_CHAT(BM::GUID const & kOwnerGuid, BM::S
 			BM::Stream kPacket( PT_M_C_NFY_CHAT, byChatType );
 			kPacket.Push(kGuest.kID);
 			kPacket.Push(kGuest.kName);
-			//kPacket.Push(std::chrono::system_clock::now());
+			kPacket.Push(std::chrono::system_clock::now());
 			kPacket.Push(wstrChat);
 			kPacket.Push(*pkPacket);
 			SendToRoom(kFindRoomGuid,kPacket);
@@ -2769,7 +2769,7 @@ HRESULT PgMyHomeMgrImpl::Recv_PT_C_M_REQ_CHAT(BM::GUID const & kOwnerGuid, BM::S
 			BM::Stream kPacket( PT_M_C_NFY_CHAT, byChatType );
 			kPacket.Push(kGuest.kID);
 			kPacket.Push(kGuest.kName);
-			//kPacket.Push(std::chrono::system_clock::now());
+			kPacket.Push(std::chrono::system_clock::now());
 			kPacket.Push(wstrChat);
 			kPacket.Push(*pkPacket);
 			SendToUser(kTargetGuid, kPacket, false);

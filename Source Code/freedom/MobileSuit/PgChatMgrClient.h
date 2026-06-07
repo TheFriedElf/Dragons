@@ -7,6 +7,7 @@
 #include "CreateUsingNiNew.inl"
 #include "PgIXmlObject.h"
 #include "XUI/XUI_Manager.h"
+#include <chrono>
 
 #define	MAX_WHISPER 5
 
@@ -131,6 +132,7 @@ typedef struct tagChatLog//채팅 로그
 	BM::GUID	kCharGUID;
 	std::wstring kCharName;
 	std::wstring kContents;
+	std::chrono::system_clock::time_point kChatTime;
 	DWORD		 dwColor;
 	XUI::PgExtraDataPackInfo	kExtraDataPackInfo;
 	bool bMine;

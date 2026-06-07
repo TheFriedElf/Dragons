@@ -7,7 +7,7 @@
 #include "PgTask_Contents.h"
 #include "PgGuildMgr.h"
 #include "Lohengrin/PacketStructLog.h"
-//#include <chrono>
+#include <chrono>
 
 PgRealmChatMgr::PgRealmChatMgr(void)
 {
@@ -26,7 +26,7 @@ bool PgRealmChatMgr::SendChat_Whisper(int const iChatMode, SContentsUser const &
 	kPacket.Push((BYTE)CT_WHISPER_BYGUID);//어떤 귓속말이던 상관없음
 	kPacket.Push(rkFromUser.kCharGuid);
 	kPacket.Push(rkFromUser.Name());
-	//kPacket.Push(std::chrono::system_clock::now());
+	kPacket.Push(std::chrono::system_clock::now());
 	kPacket.Push(rkAddonPacket);
 
 	bool bRet = false;
@@ -126,7 +126,7 @@ bool PgRealmChatMgr::RecvChat_Friend(SContentsUser const &rkFromUser, BM::Stream
 	kPacket.Push((BYTE)CT_FRIEND);
 	kPacket.Push(rkFromUser.kCharGuid);
 	kPacket.Push(rkFromUser.Name());
-	//kPacket.Push(std::chrono::system_clock::now());
+	kPacket.Push(std::chrono::system_clock::now());
 	kPacket.Push(kContents);
 	kPacket.Push(rkPacket);
 
@@ -150,7 +150,7 @@ bool PgRealmChatMgr::RecvChat_Guild(SContentsUser const &rkFromUser, BM::Stream&
 	kPacket.Push((BYTE)CT_GUILD);
 	kPacket.Push(rkFromUser.kCharGuid);
 	kPacket.Push(rkFromUser.Name());
-	//kPacket.Push(std::chrono::system_clock::now());
+	kPacket.Push(std::chrono::system_clock::now());
 	kPacket.Push(kContents);
 	kPacket.Push(rkPacket);
 
@@ -183,7 +183,7 @@ bool PgRealmChatMgr::RecvChat_Trade(SContentsUser const &rkFromUser, BM::Stream&
 	kPacket.Push((BYTE)CT_TRADE);
 	kPacket.Push(rkFromUser.kCharGuid);
 	kPacket.Push(rkFromUser.Name());
-	//kPacket.Push(std::chrono::system_clock::now());
+	kPacket.Push(std::chrono::system_clock::now());
 	kPacket.Push(kContents);
 	kPacket.Push(rkPacket);
 

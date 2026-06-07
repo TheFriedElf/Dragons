@@ -10,8 +10,7 @@
 #include "constant.h"
 #include "PgTask_Contents.h"
 #include "PgPvPLobby_League.h"
-//#include <chrono>
-
+#include <chrono>
 // PgPvPLobby_League_League
 PgPvPLobby_League::PgPvPLobby_League( int const iLobbyID )
 :	PgPvPLobby_Base( iLobbyID )
@@ -1057,7 +1056,7 @@ bool PgPvPLobby_League::Locked_Recv_PT_C_M_REQ_CHAT( BM::GUID const &kCharGuid, 
 					int iTeam = TEAM_NONE;
 
 					kPacket.Push( user_itr->second->Name() );
-					//kPacket.Push(std::chrono::system_clock::now());
+					kPacket.Push(std::chrono::system_clock::now());
 					kPacket.Push( wstrChat );
 					kPacket.Push( dwFontColor );
 					kSendExtraDataPackInfo.PushToPacket(kPacket);
